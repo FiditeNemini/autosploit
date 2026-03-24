@@ -1,0 +1,9 @@
+<svg width="200" height="28" viewBox="0 0 200 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="76" height="28" rx="4" fill="#27272a"/>
+  <rect x="76" width="124" height="28" rx="4" fill="#7c3aed"/>
+  <rect x="72" width="8" height="28" fill="#27272a"/>
+  <rect x="76" width="4" height="28" fill="#7c3aed"/>
+
+  <text x="38" y="18" text-anchor="middle" font-family="SF Mono, Menlo, monospace" font-size="12" font-weight="600" fill="#d4d4d8">engine</text>
+  <text x="138" y="18" text-anchor="middle" font-family="SF Mono, Menlo, monospace" font-size="12" font-weight="600" fill="#fafafa">MLX Apple Silicon</text>
+</svg>

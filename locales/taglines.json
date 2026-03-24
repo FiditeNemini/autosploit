@@ -1,0 +1,31 @@
+{
+  "app_name": "exploitbot",
+  "taglines": {
+    "en": "Autonomous Pentesting on Apple Silicon",
+    "ko": "Apple Silicon 기반 자율 모의해킹",
+    "zh": "Apple Silicon 自主渗透测试",
+    "es": "Pentesting Autónomo en Apple Silicon",
+    "ja": "Apple Silicon で自律型ペネトレーションテスト"
+  },
+  "descriptions": {
+    "en": "AI-powered penetration testing toolkit with local LLM inference. No cloud. No guardrails. Open source.",
+    "ko": "로컬 LLM 추론을 활용한 AI 기반 모의해킹 도구. 클라우드 없음. 제한 없음. 오픈 소스.",
+    "zh": "基于本地 LLM 推理的 AI 渗透测试工具包。无需云端。无限制。开源。",
+    "es": "Kit de pruebas de penetración impulsado por IA con inferencia LLM local. Sin nube. Sin restricciones. Código abierto.",
+    "ja": "ローカル LLM 推論を活用した AI 駆動ペネトレーションテストツールキット。クラウド不要。制限なし。オープンソース。"
+  },
+  "first_run_welcome": {
+    "en": "Welcome to exploitbot",
+    "ko": "exploitbot에 오신 것을 환영합니다",
+    "zh": "欢迎使用 exploitbot",
+    "es": "Bienvenido a exploitbot",
+    "ja": "exploitbot へようこそ"
+  },
+  "first_run_language_prompt": {
+    "en": "Choose your language",
+    "ko": "언어를 선택하세요",
+    "zh": "选择语言",
+    "es": "Elige tu idioma",
+    "ja": "言語を選択してください"
+  }
+}
