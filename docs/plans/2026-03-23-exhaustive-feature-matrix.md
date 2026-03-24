@@ -1013,50 +1013,119 @@
 ### F012.1: Terminal Emulator
 - [ ] SwiftTerm-based terminal (NSViewRepresentable wrapper)
 - [ ] Full interactive shell (/bin/zsh)
-- [ ] ANSI color support
+- [ ] ANSI color support (standard 16 colors)
 - [ ] 256-color and true color support
 - [ ] Unicode/emoji support
 - [ ] Scrollback buffer (10,000 lines default, configurable)
-- [ ] Selection and copy (cmd+C)
-- [ ] Paste (cmd+V)
-- [ ] Find in terminal (cmd+F)
-- [ ] Clear terminal (cmd+K)
-- [ ] Font: SF Mono or JetBrains Mono
-- [ ] Font size adjustable (cmd+/cmd+-)
-- [ ] Resizable terminal panel
-- [ ] Full-screen terminal toggle
+- [ ] Selection and copy (⌘C)
+- [ ] Paste (⌘V)
+- [ ] Find in terminal (⌘F)
+- [ ] Clear terminal (⌘K)
+- [ ] Font: JetBrains Mono (matching app theme)
+- [ ] Font size adjustable (⌘+/⌘-)
+- [ ] Blinking cursor (block style)
+- [ ] Colored prompt: user@exploitbot path ❯
 
 ### F012.2: Terminal Integration
-- [ ] PATH includes all installed tools + bundled tools
-- [ ] Working directory: ~/.exploitbot/ops/{current_op}/
-- [ ] Terminal output capturable: "Send terminal output to chat" button
-- [ ] Terminal output stashable: select + right-click + "Stash"
-- [ ] Multiple terminal tabs (like iTerm)
+- [ ] PATH includes: ~/.exploitbot/tools/ + bundled tool paths + system PATH
+- [ ] Working directory: ~/.exploitbot/ops/{current_op_id}/
+- [ ] **Header buttons:**
+  - [ ] 💬 "Send to Chat" — captures visible output, inserts into Op chatbox
+  - [ ] 📦 "Stash Selection" — stashes selected text as raw output artifact
+  - [ ] ⤢ "Full Screen" — terminal expands to full workspace area
+  - [ ] ✕ "Close" — hides terminal panel (⌘`)
+- [ ] **Multiple terminal tabs:**
+  - [ ] Tab bar in terminal header: "zsh 1", "zsh 2", etc.
+  - [ ] SSH sessions shown with hostname: "ssh · dev.acme.com"
+  - [ ] "+" button to add new tab
+  - [ ] Click tab to switch, close tab with middle-click or ✕
+  - [ ] Each tab is independent shell session
 - [ ] Terminal history persists across app restarts (per-Op)
-- [ ] SSH sessions supported (interactive)
-- [ ] tmux/screen supported
+- [ ] SSH sessions supported (full interactive PTY)
+- [ ] tmux/screen supported (pass-through)
+- [ ] Right-click context menu: Copy / Paste / Stash / Send to Chat / Search CVE DB
 
 ### F012.3: Terminal UI
-- [ ] Toggle open/close with keyboard shortcut (cmd+`)
-- [ ] Resizable height (drag handle)
-- [ ] Position: bottom panel (default) or right panel (configurable)
-- [ ] Opacity: configurable (slight transparency optional)
+- [ ] **Position:** Bottom panel overlay (default), slides up from bottom
+- [ ] **Height:** 320px default, resizable via drag handle on top border
+- [ ] **Toggle:** ⌘` keyboard shortcut (or click Terminal button in tab bar)
+- [ ] **Background:** Near-black with slight transparency (backdrop-filter: blur)
+- [ ] **Border:** Top border separating from workspace content
+- [ ] **Coexistence:** Terminal + Stash drawer can both be open simultaneously
+- [ ] **Minimized state:** When closed, "Terminal" button in toolbar shows it's available
+- [ ] **Full-screen mode:** Terminal expands to fill entire workspace area (tabs still visible above)
 - [ ] Minimized indicator when closed ("Terminal" button in bottom bar)
+
+### F012.4: Stash Drawer (Overlay)
+- [ ] **Position:** Right-side overlay (360px), slides in from right edge
+- [ ] **Trigger:** ⌘⇧S or click Stash icon in toolbar
+- [ ] **Background:** Near-black with blur (backdrop-filter), drop shadow left
+- [ ] **Header:** "📦 Stash" title + item count badge + close (✕) button
+- [ ] **Filter tabs:** All / 🔑 Creds / 🌐 Hosts / ⚠️ Vulns / 💻 Code / 📄 Raw
+- [ ] **Search input:** below filters, searches label + content
+- [ ] **Item list:** scrollable, each item shows:
+  - [ ] Type icon (colored background matching type)
+  - [ ] Label text (truncated with ellipsis)
+  - [ ] Metadata line (source + timestamp)
+  - [ ] "→" send button (appears on hover)
+  - [ ] Draggable: drag item to chatbox or tool input fields
+- [ ] **Drag hint:** "Drag items to chatbox or tool inputs" at bottom
+- [ ] **Footer buttons:** Export / Full View (opens Stash tab)
+- [ ] **Coexistence:** Can be open simultaneously with Terminal panel
+- [ ] **Close:** ✕ button or ⌘⇧S toggle or click outside
+
+### F012.5: Context Menu (Right-Click Overlay)
+- [ ] Appears on right-click over: tool output, chat messages, terminal text, results tables
+- [ ] **Menu items:**
+  - [ ] 📋 Copy (⌘C)
+  - [ ] 📦 Stash this
+  - [ ] ⚡ Create Finding
+  - [ ] — separator —
+  - [ ] 💬 Send to Chat
+  - [ ] → Send to Op... (opens Op picker submenu)
+  - [ ] — separator —
+  - [ ] 🔍 Search CVE DB (pre-fills search with selected text)
+  - [ ] 🌐 Look up on Exploit-DB (opens browser)
+- [ ] Keyboard shortcuts shown (right-aligned, monospace, dim)
+- [ ] Menu dismissed on click outside or Escape
+- [ ] Menu positioned near cursor, constrained to window bounds
+- [ ] Items grayed out when not applicable (e.g., "Create Finding" only on vuln-related content)
 
 ---
 
 ## F013: Settings
 
+### F013.0: Settings Navigation
+- [ ] Settings window: separate from main workspace (or sheet overlay)
+- [ ] Left nav sidebar (200px) with 8 pages:
+  - [ ] ⚙ General
+  - [ ] 🧠 Model
+  - [ ] ⚡ Inference
+  - [ ] 🔧 Tools
+  - [ ] 🛡 CVE Database
+  - [ ] 📄 Reports
+  - [ ] ⌨ Shortcuts
+  - [ ] ℹ About
+- [ ] Click nav item → shows corresponding page in right content area
+- [ ] Active nav item highlighted
+- [ ] Keyboard shortcut to open settings: ⌘,
+
 ### F013.1: General Settings
-- [ ] Language selection (en/ko/zh/es/ja)
-- [ ] Theme: dark only (locked), accent color customization?
-- [ ] Window behavior: close = quit or minimize to tray
-- [ ] Start on login (LaunchAtLogin)
-- [ ] Check for updates on launch
-- [ ] Auto-update (download + prompt to install)
-- [ ] Telemetry/analytics opt-in (or none — open source)
-- [ ] Data directory location (default: ~/.exploitbot/)
-- [ ] Clear all data (nuclear option, with confirmation)
+- [ ] **Language section:**
+  - [ ] Interface Language dropdown: English / 한국어 / 中文 / Español / 日本語
+  - [ ] Change takes effect immediately (no restart)
+- [ ] **Window section:**
+  - [ ] Close button behavior: dropdown (Quit app / Minimize to tray)
+  - [ ] Start on login: toggle switch
+- [ ] **Updates section:**
+  - [ ] Check for updates on launch: toggle (default on)
+  - [ ] Current version display (monospace)
+- [ ] **Data section:**
+  - [ ] Data directory display (~/.exploitbot/) + "Open in Finder" button
+  - [ ] Database size display (e.g., "124 MB")
+  - [ ] "Export all data" button + description "Ops, findings, stash, settings as ZIP backup"
+  - [ ] "Clear Everything" button (red, danger) + warning "Deletes all Ops, findings, stash. Cannot be undone."
+  - [ ] Clear confirmation dialog before executing
 
 ### F013.2: Model Settings
 - [ ] Current model display (name, size, format, architecture, path)
@@ -1157,6 +1226,36 @@
 - [ ] Auto-lock after inactivity (optional, with time setting)
 - [ ] Lock screen with password/TouchID to resume
 - [ ] Clear model context on Op pause/switch
+
+### F013.7: CVE Database Settings
+- [ ] **Status cards (3-column):**
+  - [ ] Total CVEs count (e.g., 248,714)
+  - [ ] CISA KEV count (e.g., 1,247) in red
+  - [ ] DB size on disk (e.g., 1.2 GB)
+- [ ] Last synced timestamp
+- [ ] Sync frequency: dropdown (Daily / Weekly / Manual)
+- [ ] Embedding model status: "nomic-embed-text-v1.5 (275 MB, CPU)" + loaded/unloaded indicator
+- [ ] "Update Now" button (blue, primary)
+- [ ] Update progress display during sync
+- [ ] **Custom CVEs section:**
+  - [ ] Custom CVE count display
+  - [ ] "+ Add CVE" button → opens add form
+  - [ ] "Import JSON" button → file picker
+  - [ ] "Export" button → save custom CVEs
+  - [ ] List of custom CVE IDs
+- [ ] **Test Search:**
+  - [ ] Input field with placeholder "Try: apache path traversal"
+  - [ ] "Search" button
+  - [ ] Results preview below
+
+### F013.8: About Page
+- [ ] App icon (bot emoji, large)
+- [ ] App name: "exploitbot" with thin "bot"
+- [ ] Version number (monospace)
+- [ ] Tagline: "Autonomous pentesting on Apple Silicon"
+- [ ] "Powered by vMLX engine · MLX inference"
+- [ ] Link buttons: exploit.bot / GitHub / Report Issue
+- [ ] "Open source · jjang-ai/exploitbot"
 
 ---
 
