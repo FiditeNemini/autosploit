@@ -221,6 +221,54 @@ Every technical decision, numbered for cross-reference in test matrices.
   - Input sanitization: reject shell metacharacters in tool parameters
 - **Test surface:** Injection attempts in each tool parameter, `run_shell` confirmation flow, metacharacter rejection, argument array construction
 
+### D025: Interaction Modes (Autonomous / Assisted / Manual)
+- **Decision:** Three distinct interaction modes, selectable per-Op
+- **Modes:**
+  1. **Autopilot** — User gives a starting prompt (e.g. "pentest acme.com, find everything exploitable"). Model runs autonomously — selects tools, executes them, chains results, pivots, creates Findings, generates report. No user input needed after initial prompt. `run_shell` executes without confirmation. All tool calls auto-approved.
+  2. **Copilot** — Model suggests next steps and tool invocations, user approves/modifies before execution. `run_shell` requires confirmation. Structured tool_calls auto-approved but user can override parameters.
+  3. **Manual** — User drives everything from tab UIs. Model is available in chatbox for questions/advice but doesn't auto-invoke tools. Pure human-driven pentesting with AI assist.
+- **Switching:** Mode switchable mid-Op via Op Controls. Changing to Autopilot resumes autonomous execution from current state.
+- **Default:** Copilot (safest for new users)
+- **Test surface:** Each mode independently, mode switching mid-Op, Autopilot tool chain execution, Copilot approval/rejection flow, Manual chatbox-only behavior, `run_shell` confirmation gating per mode
+
+### D026: Verbose Output / Activity Feed
+- **Decision:** Real-time verbose activity feed showing ALL model actions, tool calls, and results
+- **Implementation:**
+  - **Activity Feed** — persistent scrolling log (like a build log) showing:
+    - Model reasoning/thinking (collapsible)
+    - Tool call invocations (tool name, parameters, command being run)
+    - Tool stdout/stderr streaming in real-time
+    - Tool completion status (success/fail/timeout)
+    - Model interpretation of results
+    - Decisions ("Found X, proceeding to Y because Z")
+    - Stash/Finding creation events
+  - **Verbosity levels:**
+    1. **Minimal** — only results and decisions
+    2. **Normal** — tool calls + results + decisions
+    3. **Verbose** — everything including raw stdout/stderr, model reasoning, timing
+    4. **Debug** — all of above + HTTP requests to engine, token counts, IPC messages
+  - **Activity Feed location:** Below/alongside the chatbox on every tab. Auto-scrolls but user can scroll up to review. Filterable by type (tool calls only, errors only, etc.)
+- **In Autopilot mode:** Activity Feed is the primary UI — user watches the model work, all actions streamed in real-time
+- **Test surface:** Each verbosity level, real-time streaming of long-running tools, filter controls, auto-scroll behavior, Autopilot mode full-feed experience
+
+### D027: PDF Report Rendering
+- **Decision:** HTML → PDF via hidden WKWebView
+- **Implementation:**
+  - Generate styled HTML report from Findings data + LLM narrative
+  - Render in offscreen WKWebView with `createPDF()` API
+  - CSS handles page breaks, headers/footers, branding
+  - Company logo injected as base64 data URI
+- **Templates:** CSS template files per report type (full, bug bounty, executive, technical)
+- **Test surface:** Each template renders correctly, page breaks, images/screenshots embedded, branding, CJK font rendering, large reports (50+ pages)
+
+### D028: Data Persistence
+- **Decision:** SQLite via GRDB.swift, WAL mode
+- **Implementation:** Single `exploitbot.db` file at `~/.exploitbot/data/`
+- **Schema:** See Database Schema section below
+- **Migrations:** GRDB's built-in migration system, versioned
+- **Backup:** Auto-backup on schema migration, manual export
+- **Test surface:** CRUD for each entity, FK integrity, WAL concurrent access, migration, corruption recovery
+
 ---
 
 ## Feature Cross-Reference Matrix
