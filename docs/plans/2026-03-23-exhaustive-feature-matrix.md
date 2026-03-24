@@ -1837,3 +1837,31 @@ For each pair, specific test scenarios:
 - [x] JANG v2 models load via mmap (instant)
 - [x] Auto-detect reasoning parser from model name/config
 - [x] Auto-detect tool call parser from model name/config
+
+### F022.4: Resizable Panels
+- [x] Chat panel width resizable via drag handle (280-600px)
+- [x] Activity feed / terminal height resizable via drag handle (80-500px)
+- [x] Resize cursor on hover (NSCursor.resizeLeftRight / resizeUpDown)
+- [x] State persisted in AppState (bottomPanelHeight, chatPanelWidth)
+
+### F022.5: Context Window Management
+- [x] Sliding window: estimates ~4 chars/token
+- [x] Caps at 100K chars (~25K tokens safe for 128K context models)
+- [x] Trims oldest messages when context exceeds limit
+- [x] Always keeps at least last 5 messages
+- [x] Transparent — no user intervention needed
+- [ ] User-configurable context limit in settings
+- [ ] Token counter display in chat header (real, not estimated)
+
+### F022.6: Scope Enforcement (ScopeChecker.swift)
+- [x] ScopeChecker utility: parseScope(), isInScope(), extractTarget()
+- [x] Supports exact domain match
+- [x] Supports wildcards (*.example.com)
+- [x] Supports CIDR notation (/24 simplified)
+- [x] Op.scope field added to model + DB
+- [x] Scope synced on Op switch and creation
+- [x] Out-of-scope tool calls blocked with "⛔ blocked" message in chat
+- [x] run_shell and search_cve exempt from scope check
+- [ ] Scope display in Op header/info panel
+- [ ] Scope editing from sidebar (currently only set during creation/onboarding)
+- [ ] Scope enforcement level: strict/warn/off toggle
