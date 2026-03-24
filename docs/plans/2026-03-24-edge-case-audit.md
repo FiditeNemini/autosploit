@@ -340,3 +340,43 @@ extension String {
   - [ ] If missing files: show specific error "Missing: tokenizer.json, *.safetensors"
   - [ ] Validate BEFORE engine launch (not just in file picker — also in start())
   - [ ] Show validation result in Settings model card (✅ valid / ⚠ missing files)
+
+---
+
+## Final Review: Things To Think About
+
+### Things That Work But Could Be Better
+1. **Chat panel width is fixed 380px** — not resizable, can't be hidden to give more room to tool tabs
+2. **Activity feed height fixed 180px** — not resizable
+3. **No dark mode variants** — we're dark-only which is fine, but no accent color customization
+4. **No undo for Op delete** — delete is permanent, no trash/archive
+5. **Tab buttons send natural language to model** — works but model may interpret differently than intended. Consider sending structured tool calls directly from buttons instead
+
+### Things That Could Break in Production
+1. **Concurrent model access** — if two Ops somehow both send requests, the model will interleave. Currently prevented by send guard but could happen in edge cases
+2. **Large conversation context** — no automatic summarization or truncation. Long pentesting sessions will eventually exceed context window
+3. **Tool output encoding** — some tools output Latin-1 or other encodings, we assume UTF-8
+4. **Homebrew path on Intel Macs** — we check /opt/homebrew/bin (arm64) but not /usr/local/bin first (Intel). Actually we do check both — OK
+5. **Python version** — engine tested on 3.14, may have issues on 3.11/3.12
+
+### Things Users Will Ask About
+1. "How do I add my own tools?" — no custom tool definition UI
+2. "Can I use OpenAI/Claude instead of local?" — no remote API support
+3. "How do I export my findings to Jira/GitHub?" — no integration
+4. "Can multiple users share an engine?" — no, single-user design
+5. "Does it work on iPad?" — no, macOS only
+
+### Cache Stack Verification (from vMLX)
+- [x] prefix_cache.py — 1825 lines, identical to vMLX source
+- [x] paged_cache.py — 1370 lines, identical to vMLX source
+- [x] memory_cache.py — 778 lines, identical to vMLX source
+- [x] scheduler.py — 2576 lines (52 fewer than vMLX — stripped multi-user batching)
+- [x] disk_cache.py — present (not used in single-user but no harm)
+- [x] block_disk_store.py — present
+- [N/A] mllm_cache.py — correctly stripped (VLM only)
+- [N/A] vision_embedding_cache.py — correctly stripped (VLM only)
+- [x] KV cache quantization (none/q4/q8) — settings UI + engine support
+- [x] Paged cache block size — configurable in EngineConfig (default 64)
+- [x] Prefix cache memory % — configurable in EngineConfig (default 0.20)
+
+All cache features from vMLX are present and functional for text-only inference.

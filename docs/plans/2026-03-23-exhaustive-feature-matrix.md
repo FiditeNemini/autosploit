@@ -1811,3 +1811,29 @@ For each pair, specific test scenarios:
 - [ ] Viewport screenshot (what's visible)
 - [ ] Full-page screenshot (for web content)
 - [ ] Screenshot annotation (draw arrows, highlight boxes) — v2 feature?
+
+---
+
+## F022: Settings QoL (added 2026-03-24)
+
+### F022.1: Parser Dropdowns with Model Compatibility
+- [x] Reasoning parser shows compatible model families per option
+- [x] Tool call parser shows compatible model families per option (14 parsers)
+- [x] Both default to "🔮 Auto-detect (recommended)"
+- [x] Helper text explains when to override auto-detect
+- [x] Dropdowns widened to 340px for full descriptions
+
+### F022.2: Cache Setting Descriptions
+- [x] KV Cache Quantization options show quality/savings tradeoff
+- [x] "None — full precision (best quality)"
+- [x] "Q4 — 4-bit (2-4x memory savings, slight quality loss)"
+- [x] "Q8 — 8-bit (1.5-2x savings, minimal quality loss)"
+- [x] Helper text about prefix + paged cache always enabled
+
+### F022.3: Engine Startup Fixes
+- [x] VLM detection disabled (is_mllm_model always returns False)
+- [x] Models with vision config load as text-only LLM
+- [x] mllm.py stub prevents import crashes
+- [x] JANG v2 models load via mmap (instant)
+- [x] Auto-detect reasoning parser from model name/config
+- [x] Auto-detect tool call parser from model name/config
