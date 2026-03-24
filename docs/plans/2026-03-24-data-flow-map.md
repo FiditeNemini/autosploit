@@ -158,6 +158,58 @@ ChatService.runConversationLoop():
             └── TODO: should not auto-invoke tools, chat only
 ```
 
+## Stash Flow (StashService)
+
+```
+User actions:
+    ├── Chat "📦 Stash" button → stash selected message content
+    ├── StashTabView "+ Add" button → manual add with label
+    └── Tool output auto-stash (via onToolResult callback)
+            │
+            ▼
+StashService.stash(content, label?, type?, sourceOpId?, sourceTab?)
+    ├── Auto-detect type from content (credential, host, vuln, etc.)
+    ├── Generate label from first line if none provided
+    ├── Save to Database.saveStashItem()
+    └── Append to stashService.items[] (in-memory)
+            │
+            ▼
+StashTabView reads stashService.items
+    ├── Filter by type (All/Creds/Hosts/Vulns/Code/Raw)
+    ├── Search by label+content
+    ├── "→ Send" button → inserts content into chat
+    └── "✕" delete button → removes from DB + memory
+```
+
+## Finding Flow (FindingService)
+
+```
+Trigger:
+    ├── "⚡ Create Finding" button on VulnCard (Web tab)
+    ├── "⚡ Create Finding" button on PostExploit results
+    ├── Chat context menu → "Create Finding"
+    └── Model auto-creates in Autopilot (via system prompt)
+            │
+            ▼
+AppState.showFindingWizard = true + findingPrefill populated
+            │
+            ▼
+FindingWizardView (modal)
+    ├── Pre-filled: title, target, severity, description, CVE
+    ├── User edits: attack chain steps, evidence, impact, remediation
+    └── "Create Finding" button
+            │
+            ▼
+FindingService.createFinding(...)
+    ├── Save to Database.saveFinding()
+    └── Append to findingService.findings[]
+            │
+            ▼
+ReportTabView reads findingService.findings
+    ├── Findings list (left panel) with severity badges
+    └── Report preview (right panel) uses findings data
+```
+
 ## Engine Lifecycle
 
 ```
@@ -187,17 +239,18 @@ App Quit
 
 | View | Services Used | Data Consumed |
 |------|--------------|---------------|
-| ContentView | AppState (all) | Routes to tabs, shows settings/onboarding |
+| ContentView | AppState (all) | Routes to tabs, shows settings/onboarding/finding wizard |
 | SidebarView | AppState.ops, .interactionMode, .chatService | Op list, mode selector |
 | TabBarView | AppState.activeTab | Tab selection |
-| ChatPanelView | ChatService | messages, isStreaming, approve/reject |
+| ChatPanelView | ChatService, StashService | messages, isStreaming, approve/reject, stash |
 | ActivityFeedView | ActivityFeed | entries, filters, verbosity |
+| FindingWizardView | FindingService, AppState.findingPrefill | Create/edit findings |
 | ReconTabView | ResultsStore | subdomains, ports, webHosts |
 | WebTabView | ResultsStore | vulns |
 | NetworkTabView | ResultsStore | networkHosts (empty — no parser yet) |
 | OSINTTabView | ResultsStore | osintResults |
-| ReportTabView | ResultsStore | vulns (as findings proxy) |
-| StashTabView | StashService | items, filtered, search |
+| ReportTabView | FindingService | findings list + report preview |
+| StashTabView | StashService | items, filtered, search, add/delete |
 | CredsTabView | (none) | Local @State only |
 | ExploitTabView | (none) | Empty state |
 | PostExploitTabView | (none) | Empty state |
