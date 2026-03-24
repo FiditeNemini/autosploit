@@ -600,70 +600,62 @@
 ## F007: Tool System
 
 ### F007.1: Tool Registry
-- [ ] 38 tools defined in registry.json
-- [ ] Each tool: name, category, description, binary, parameters, cli_mapping, output_parser, result_type
-- [ ] Each parameter: type, required, default, enum, description
-- [ ] Registry loaded at app launch
+- [x] 39 tools defined in registry.json (was 38, added search_cve)
+- [x] Each tool: name, category, description, binary, parameters, cli_mapping, output_parser, result_type
+- [x] Each parameter: type, required, default, enum, description
+- [ ] Registry loaded at app launch — currently hardcoded in ToolDefinitions.swift (15 tools), not loaded from JSON
 - [ ] Registry validated (all binaries found or marked missing)
-- [ ] Tool schemas converted to OpenAI function format for model
+- [x] Tool schemas converted to OpenAI function format for model — ToolDefinitions.forModel()
+  - [ ] Only 15 of 39 tools have Swift function schemas (others in JSON only)
 
 ### F007.2: Tool Execution
-- [ ] Subprocess spawned with argument array (never shell interpolation)
-- [ ] Environment: PATH includes ~/.exploitbot/tools/ + bundled tools
-- [ ] Working directory: ~/.exploitbot/ops/{op_id}/
-- [ ] stdout captured and streamed to activity feed
-- [ ] stderr captured and streamed (separate color)
-- [ ] Exit code captured
-- [ ] Execution time tracked
-- [ ] Timeout enforcement (per-tool default, user-overridable)
-- [ ] Timeout action: SIGTERM → 3s → SIGKILL
-- [ ] Cancellation: user clicks cancel → SIGTERM → 3s → SIGKILL
-- [ ] Output truncation: results > 50KB auto-truncated for model context
-- [ ] Full output preserved in activity feed and available in Stash
-- [ ] Root-required tools: prompt for sudo password (cached per session)
-- [ ] Tool not found: clear error message + install button
+- [x] Subprocess spawned with argument array (Process + arguments, never shell interpolation)
+- [x] Environment: PATH includes /opt/homebrew/bin + /usr/local/bin + ~/.exploitbot/tools/
+- [ ] Working directory: not set per-Op yet (uses process default)
+- [x] stdout captured and streamed to activity feed — readabilityHandler + onToolStart callback
+- [x] stderr captured — stored in ToolResult.stderr
+  - [ ] Not streamed separately to activity feed (combined on completion)
+- [x] Exit code captured — process.terminationStatus
+- [x] Execution time tracked — Date interval in ToolResult.duration
+- [x] Timeout enforcement — 300s default per tool
+- [x] Timeout action: SIGTERM → 3s → SIGKILL (via DispatchQueue delay)
+- [x] Cancellation: ToolExecutor.cancel() sends SIGTERM + 3s SIGKILL
+- [x] Output truncation: 3KB for chat display, full output in tool message
+  - [ ] 50KB limit for model context not enforced separately
+- [ ] Full output preserved in Stash — Stash not implemented
+- [ ] Root-required tools: sudo prompt not implemented
+- [ ] Tool not found: returns error in ToolResult but no install button in UI
 
 ### F007.3: Tool Chaining (Piping)
-- [ ] Model can chain tools: subfinder output → dnsx input → httpx input
-- [ ] Piping via temp files (tool A output → file → tool B input)
-- [ ] Piping via stdin_support flag (tools that accept stdin)
-- [ ] Chain displayed as connected steps in activity feed
-- [ ] Chain failure: if tool B fails, model notified with both outputs
-- [ ] Parallel tool execution: model can invoke multiple tools simultaneously
-- [ ] Concurrent tool limit: configurable (default 3)
+- [x] Model can chain tools — conversation loop feeds results back, model decides next tool
+  - [ ] Not true OS-level piping (stdout→stdin), uses model context instead
+- [ ] Piping via temp files
+- [ ] Piping via stdin_support flag
+- [x] Chain displayed in activity feed — each tool logged sequentially
+- [x] Chain failure: model sees error output and can adjust strategy
+- [ ] Parallel tool execution — sequential only (one at a time)
+- [ ] Concurrent tool limit: not configurable
 
-### F007.4: Tool Output Parsing
-- [ ] Each tool has a designated output_parser
-- [ ] Parser types needed:
-  - line_per_result (subfinder, dnsx)
-  - jsonl (httpx, katana, nuclei, dalfox, feroxbuster, ffuf, trufflehog)
-  - nmap_xml (nmap)
-  - masscan_json (masscan)
-  - theharvester_xml (theHarvester)
-  - arjun_json (arjun)
-  - sqlmap_log (sqlmap)
-  - wpscan_json (wpscan)
-  - testssl_json (testssl)
-  - ffuf_json (ffuf)
-  - netexec_text (netexec)
-  - snmp_text (snmpwalk)
-  - tshark_text (tshark)
-  - bettercap_events (bettercap)
-  - hashcat_status (hashcat)
-  - hydra_text (hydra)
-  - haiti_text (haiti)
-  - msf_console (metasploit)
-  - pwncat_events (pwncat)
-  - sliver_text (sliver)
-  - linpeas_ansi (linpeas — ANSI color stripping)
-  - winpeas_ansi (winpeas)
-  - impacket_text (impacket)
-  - sherlock_csv (sherlock)
-  - holehe_csv (holehe)
-  - exiftool_json (exiftool)
-  - gowitness_db (gowitness)
-  - raw_text (graphqlmap, jwt_tool, chisel, pwntools, run_shell)
-- [ ] Each parser: raw output → structured data (JSON/arrays)
+### F007.4: Tool Output Parsing (ResultsStore.swift)
+- [x] ResultsStore @Observable ingests tool output and parses into typed collections
+- [x] Parser types IMPLEMENTED in ResultsStore.ingest():
+  - [x] line_per_result: subfinder → SubdomainEntry[] (one subdomain per line)
+  - [x] jsonl: httpx → WebHostEntry[] (url, status_code, title, webserver, tech)
+  - [x] jsonl: nuclei → VulnEntry[] (template-id, severity, matched-at, description, CVE)
+  - [x] text: nmap → PortEntry[] (port/proto, state, service, version from table output)
+  - [x] text: sherlock → OSINTEntry[] (platform, url, found from [+] lines)
+- [ ] Parser types NOT YET IMPLEMENTED (defined in registry.json but no Swift parser):
+  - [ ] dnsx, katana (line parsers needed)
+  - [ ] masscan_json, arjun_json, ffuf_json, wpscan_json, testssl_json
+  - [ ] sqlmap_log, netexec_text, snmp_text, tshark_text
+  - [ ] bettercap_events, hashcat_status, hydra_text, haiti_text
+  - [ ] msf_console, pwncat_events, sliver_text
+  - [ ] linpeas_ansi, winpeas_ansi, impacket_text
+  - [ ] holehe_csv, exiftool_json, gowitness_db
+  - [ ] theharvester_xml
+- [x] Raw output always stored in rawResults[] regardless of parser
+- [x] Parsed data feeds into tab views via @Observable binding
+- [ ] Parse failures: no fallback logging implemented
 - [ ] Structured data displayed in tab-specific UI components
 - [ ] Structured data also serialized into model context
 - [ ] Parse failures: fall back to raw_text, log warning
