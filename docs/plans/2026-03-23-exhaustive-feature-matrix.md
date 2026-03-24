@@ -1103,29 +1103,30 @@
 ## F012: Terminal
 
 ### F012.1: Terminal Emulator
-- [ ] SwiftTerm-based terminal (NSViewRepresentable wrapper)
-- [ ] Full interactive shell (/bin/zsh)
-- [ ] ANSI color support (standard 16 colors)
-- [ ] 256-color and true color support
-- [ ] Unicode/emoji support
-- [ ] Scrollback buffer (10,000 lines default, configurable)
-- [ ] Selection and copy (⌘C)
-- [ ] Paste (⌘V)
+- [x] SwiftTerm-based terminal (LocalProcessTerminalView via NSViewRepresentable)
+- [x] Full interactive shell (/bin/zsh)
+- [x] ANSI color support (standard 16 colors)
+- [x] 256-color and true color support (TERM=xterm-256color)
+- [x] Unicode/emoji support (SwiftTerm handles natively)
+- [x] Scrollback buffer (SwiftTerm default)
+- [x] Selection and copy (⌘C) — SwiftTerm built-in
+- [x] Paste (⌘V) — SwiftTerm built-in
 - [ ] Find in terminal (⌘F)
 - [ ] Clear terminal (⌘K)
-- [ ] Font: JetBrains Mono (matching app theme)
+- [x] Font: system monospaced 12pt
+  - [ ] JetBrains Mono not set (using system mono)
 - [ ] Font size adjustable (⌘+/⌘-)
-- [ ] Blinking cursor (block style)
-- [ ] Colored prompt: user@exploitbot path ❯
+- [x] Blinking cursor (SwiftTerm default)
+- [ ] Colored prompt — uses user's default zsh prompt
 
 ### F012.2: Terminal Integration
-- [ ] PATH includes: ~/.exploitbot/tools/ + bundled tool paths + system PATH
-- [ ] Working directory: ~/.exploitbot/ops/{current_op_id}/
+- [x] PATH includes: /opt/homebrew/bin + /usr/local/bin + ~/.exploitbot/tools/ + system PATH
+- [ ] Working directory: set to ~/.exploitbot/ (not per-Op yet)
 - [ ] **Header buttons:**
-  - [ ] 💬 "Send to Chat" — captures visible output, inserts into Op chatbox
-  - [ ] 📦 "Stash Selection" — stashes selected text as raw output artifact
-  - [ ] ⤢ "Full Screen" — terminal expands to full workspace area
-  - [ ] ✕ "Close" — hides terminal panel (⌘`)
+  - [ ] 💬 "Send to Chat"
+  - [ ] 📦 "Stash Selection"
+  - [ ] ⤢ "Full Screen"
+  - [x] ✕ "Close" — hides terminal panel
 - [ ] **Multiple terminal tabs:**
   - [ ] Tab bar in terminal header: "zsh 1", "zsh 2", etc.
   - [ ] SSH sessions shown with hostname: "ssh · dev.acme.com"
@@ -1138,15 +1139,15 @@
 - [ ] Right-click context menu: Copy / Paste / Stash / Send to Chat / Search CVE DB
 
 ### F012.3: Terminal UI
-- [ ] **Position:** Bottom panel overlay (default), slides up from bottom
-- [ ] **Height:** 320px default, resizable via drag handle on top border
-- [ ] **Toggle:** ⌘` keyboard shortcut (or click Terminal button in tab bar)
-- [ ] **Background:** Near-black with slight transparency (backdrop-filter: blur)
-- [ ] **Border:** Top border separating from workspace content
-- [ ] **Coexistence:** Terminal + Stash drawer can both be open simultaneously
-- [ ] **Minimized state:** When closed, "Terminal" button in toolbar shows it's available
-- [ ] **Full-screen mode:** Terminal expands to fill entire workspace area (tabs still visible above)
-- [ ] Minimized indicator when closed ("Terminal" button in bottom bar)
+- [x] **Position:** Bottom panel (replaces activity feed when open, 280px)
+- [ ] **Height:** not resizable yet (fixed 280px)
+- [x] **Toggle:** click ⌨ Terminal button in tab bar
+  - [ ] ⌘` keyboard shortcut not implemented
+- [x] **Background:** bgDeep (near-black)
+- [x] **Border:** Top border separating from workspace content
+- [ ] **Coexistence:** Terminal replaces activity feed (not simultaneous)
+- [x] **Minimized state:** ⌨ button always visible in tab bar
+- [ ] **Full-screen mode:** not implemented
 
 ### F012.4: Stash Drawer (Overlay)
 - [ ] **Position:** Right-side overlay (360px), slides in from right edge
