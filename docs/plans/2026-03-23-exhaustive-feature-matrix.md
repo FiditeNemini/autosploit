@@ -109,6 +109,29 @@
   - [ ] Placeholder: "https://huggingface.co/..."
   - [ ] URL validation on blur (check HF API for model existence)
   - [ ] Invalid URL → red border + error message
+- [ ] **"Load Local Model" button** (below custom URL):
+  - [ ] Label: "Or select a model folder already on your Mac"
+  - [ ] Opens native macOS folder picker (NSOpenPanel)
+  - [ ] Validates folder contents:
+    - [ ] Must contain: config.json + tokenizer.json/tokenizer_config.json + *.safetensors
+    - [ ] JANG detection: checks for jang_config.json → reads profile, bits, group_size
+    - [ ] Standard MLX detection: config.json model_type + safetensors
+    - [ ] Architecture detection via detectModelConfigFromDir() (same as vMLX)
+  - [ ] Shows detected model info card:
+    - [ ] Model name (from config.json model_type or folder name)
+    - [ ] Architecture (Qwen2.5, MiniMax, Llama, etc.)
+    - [ ] Format badge: "JANG 2-bit" / "JANG 4-bit" / "MLX fp16" / "MLX q4" etc.
+    - [ ] JANG profile if applicable (JANG_1L, JANG_2L, JANG_2S, JANG_4M, JANG_6M)
+    - [ ] Total size on disk
+    - [ ] Estimated RAM requirement (from model size + cache overhead)
+    - [ ] RAM warning if model exceeds detected system memory
+  - [ ] Invalid folder → error: "Not a valid MLX/JANG model. Missing: [files]"
+  - [ ] "Use This Model" button → stores path reference (not copied), proceeds
+  - [ ] Scan common paths option:
+    - [ ] ~/.cache/huggingface/hub/
+    - [ ] ~/models/
+    - [ ] Shows found JANG/MLX models in a list
+    - [ ] Click to select
 - [ ] Download progress area (appears when tier selected):
   - [ ] Progress bar: gradient fill (blue→purple), percentage width
   - [ ] Left text: model name + format
@@ -835,11 +858,42 @@
 - [ ] Clear all data (nuclear option, with confirmation)
 
 ### F013.2: Model Settings
-- [ ] Current model display (name, size, format, architecture)
+- [ ] Current model display (name, size, format, architecture, path)
 - [ ] "Change Model" → model list with switch/download
-- [ ] Model download page (curated S/M/L/XL + custom URL)
-- [ ] Downloaded models list (size, last used, delete button)
-- [ ] Model storage directory
+- [ ] Model download page (curated S/M/L + custom URL)
+- [ ] **"Load Local Model" button:**
+  - [ ] Opens native macOS folder picker (NSOpenPanel, directory mode)
+  - [ ] User selects a model folder on disk
+  - [ ] Validation: check for required files:
+    - [ ] config.json (required — architecture detection)
+    - [ ] tokenizer.json or tokenizer_config.json (required)
+    - [ ] *.safetensors files (standard MLX/JANG format)
+    - [ ] jang_config.json (optional — JANG format detection, profile info)
+    - [ ] model.safetensors.index.json (optional — sharded model index)
+  - [ ] Invalid folder: red error "Missing required files: config.json, tokenizer.json"
+  - [ ] Valid folder: show detected info:
+    - [ ] Model name (from config.json or folder name)
+    - [ ] Architecture (from model_type in config.json)
+    - [ ] Format: JANG (if jang_config.json) or standard MLX safetensors
+    - [ ] JANG profile (if applicable: JANG_1L, JANG_2L, JANG_2S, JANG_4M, etc.)
+    - [ ] Quantization info (bits, group size)
+    - [ ] Total size on disk
+    - [ ] Estimated RAM requirement
+  - [ ] "Load" button → adds to model list, starts engine with this model
+  - [ ] Path stored in DB (not copied — references original location)
+  - [ ] Model appears in model list alongside downloaded models
+  - [ ] Removable from list (removes reference, NOT the files)
+- [ ] **Scan common paths button:**
+  - [ ] Auto-scans for models in:
+    - [ ] ~/.cache/huggingface/hub/ (HuggingFace default cache)
+    - [ ] ~/models/ (common user location)
+    - [ ] ~/.exploitbot/models/ (app download location)
+    - [ ] /Volumes/*/ (external drives)
+  - [ ] Shows found models with format/size/architecture
+  - [ ] User picks which to add to model list
+- [ ] Downloaded models list (size, last used, path, delete button)
+- [ ] Local models list (size, path, format, remove-from-list button)
+- [ ] Model storage directory (configurable default download location)
 - [ ] Inference settings (D015):
   - Temperature (slider 0.0–2.0, default 0.7)
   - Top-p (slider 0.0–1.0, default 0.9)
