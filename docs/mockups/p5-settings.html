@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>exploitbot — P5: Settings Mockup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-deep: #050507; --bg-base: #09090b; --bg-raised: #111114;
+      --bg-surface: #1c1c21; --bg-input: #0f0f12;
+      --border-subtle: #1e1e23; --border-medium: #2a2a32; --border-strong: #3f3f46;
+      --text-primary: #f4f4f5; --text-secondary: #a1a1aa; --text-muted: #71717a;
+      --text-subtle: #52525b; --text-dim: #3f3f46;
+      --accent-red: #ef4444; --accent-blue: #3b82f6; --accent-orange: #f97316;
+      --accent-cyan: #06b6d4; --accent-amber: #f59e0b; --accent-purple: #a855f7;
+      --accent-green: #22c55e;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--bg-deep); color: var(--text-primary); height: 100vh; overflow: hidden; -webkit-font-smoothing: antialiased; font-size: 13px; }
+    .phase-label { position: fixed; top: 8px; right: 16px; font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); background: var(--bg-surface); padding: 3px 8px; border-radius: 4px; z-index: 99; }
+    .app { display: flex; height: 100vh; }
+
+    /* SETTINGS SIDEBAR */
+    .settings-nav { width: 200px; background: var(--bg-base); border-right: 1px solid var(--border-subtle); padding: 20px 0; flex-shrink: 0; }
+    .settings-nav-title { padding: 0 16px 16px; font-size: 16px; font-weight: 700; }
+    .settings-nav-item { display: flex; align-items: center; gap: 8px; padding: 8px 16px; font-size: 12px; color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
+    .settings-nav-item:hover { color: var(--text-secondary); background: rgba(255,255,255,0.02); }
+    .settings-nav-item.active { color: var(--text-primary); background: var(--bg-surface); font-weight: 500; }
+    .settings-nav-icon { width: 18px; text-align: center; }
+
+    /* SETTINGS CONTENT */
+    .settings-content { flex: 1; overflow-y: auto; }
+    .settings-page { display: none; padding: 28px 36px; max-width: 700px; }
+    .settings-page.active { display: block; }
+    .settings-page-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+    .settings-page-desc { font-size: 12px; color: var(--text-dim); margin-bottom: 28px; }
+    .settings-section { margin-bottom: 28px; }
+    .settings-section-title { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--border-subtle); }
+    .setting-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border-subtle); }
+    .setting-row:last-child { border-bottom: none; }
+    .setting-label { font-size: 12px; color: var(--text-secondary); }
+    .setting-sublabel { font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+    .setting-control { display: flex; align-items: center; gap: 8px; }
+    .s-input { height: 28px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 0 10px; color: var(--text-primary); font-family: var(--font-mono); font-size: 12px; outline: none; text-align: right; }
+    .s-select { height: 28px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 0 8px; color: var(--text-primary); font-size: 12px; outline: none; min-width: 140px; }
+    .s-toggle { width: 36px; height: 20px; background: var(--border-medium); border-radius: 10px; position: relative; cursor: pointer; transition: background 0.2s; }
+    .s-toggle.on { background: var(--accent-green); }
+    .s-toggle-thumb { width: 16px; height: 16px; background: white; border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: left 0.2s; }
+    .s-toggle.on .s-toggle-thumb { left: 18px; }
+    .s-slider-row { display: flex; align-items: center; gap: 10px; }
+    .s-slider { flex: 1; }
+    .s-slider-val { font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); width: 40px; text-align: right; }
+    .s-btn { padding: 6px 14px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; border: 1px solid var(--border-subtle); background: transparent; color: var(--text-muted); font-family: var(--font-mono); }
+    .s-btn:hover { border-color: var(--border-medium); color: var(--text-primary); }
+    .s-btn.primary { background: var(--accent-blue); color: white; border: none; }
+    .s-btn.danger { color: var(--accent-red); border-color: rgba(239,68,68,0.3); }
+    .s-btn.danger:hover { background: rgba(239,68,68,0.1); }
+
+    /* MODEL CARD */
+    .model-card { background: var(--bg-raised); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 14px; }
+    .model-card.active { border-color: var(--accent-green); }
+    .model-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--bg-surface); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .model-info { flex: 1; min-width: 0; }
+    .model-name { font-size: 13px; font-weight: 600; }
+    .model-meta { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+    .model-actions { display: flex; gap: 6px; }
+
+    /* TOOL LIST */
+    .tool-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border-subtle); }
+    .tool-status { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .tool-status.ok { background: var(--accent-green); }
+    .tool-status.miss { background: var(--text-dim); }
+    .tool-name-col { font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); width: 120px; }
+    .tool-ver { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); width: 80px; }
+    .tool-method { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); width: 60px; }
+    .tool-path-col { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .tool-actions-col { display: flex; gap: 4px; }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<div class="phase-label">P5: Settings</div>
+
+<div class="app">
+  <div class="settings-nav">
+    <div class="settings-nav-title">Settings</div>
+    <div class="settings-nav-item active" onclick="showSettings('general')"><span class="settings-nav-icon">⚙</span> General</div>
+    <div class="settings-nav-item" onclick="showSettings('model')"><span class="settings-nav-icon">🧠</span> Model</div>
+    <div class="settings-nav-item" onclick="showSettings('inference')"><span class="settings-nav-icon">⚡</span> Inference</div>
+    <div class="settings-nav-item" onclick="showSettings('tools')"><span class="settings-nav-icon">🔧</span> Tools</div>
+    <div class="settings-nav-item" onclick="showSettings('cve')"><span class="settings-nav-icon">🛡</span> CVE Database</div>
+    <div class="settings-nav-item" onclick="showSettings('reports')"><span class="settings-nav-icon">📄</span> Reports</div>
+    <div class="settings-nav-item" onclick="showSettings('shortcuts')"><span class="settings-nav-icon">⌨</span> Shortcuts</div>
+    <div class="settings-nav-item" onclick="showSettings('about')"><span class="settings-nav-icon">ℹ</span> About</div>
+  </div>
+
+  <div class="settings-content">
+
+    <!-- GENERAL -->
+    <div class="settings-page active" id="page-general">
+      <div class="settings-page-title">General</div>
+      <div class="settings-page-desc">App behavior, language, and data management</div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Language</div>
+        <div class="setting-row">
+          <div><div class="setting-label">Interface Language</div><div class="setting-sublabel">All menus, tools, and reports will use this language</div></div>
+          <select class="s-select"><option selected>English</option><option>한국어</option><option>中文</option><option>Español</option><option>日本語</option></select>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Window</div>
+        <div class="setting-row">
+          <div><div class="setting-label">Close button behavior</div></div>
+          <select class="s-select"><option selected>Quit app</option><option>Minimize to tray</option></select>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Start on login</div></div>
+          <div class="s-toggle" onclick="this.classList.toggle('on')"><div class="s-toggle-thumb"></div></div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Updates</div>
+        <div class="setting-row">
+          <div><div class="setting-label">Check for updates on launch</div></div>
+          <div class="s-toggle on" onclick="this.classList.toggle('on')"><div class="s-toggle-thumb"></div></div>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Current version</div></div>
+          <span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted)">1.0.0</span>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Data</div>
+        <div class="setting-row">
+          <div><div class="setting-label">Data directory</div><div class="setting-sublabel">~/.exploitbot/</div></div>
+          <button class="s-btn">Open in Finder</button>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Database size</div></div>
+          <span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted)">124 MB</span>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Export all data</div><div class="setting-sublabel">Ops, findings, stash, settings as ZIP backup</div></div>
+          <button class="s-btn">Export</button>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Clear all data</div><div class="setting-sublabel" style="color:var(--accent-red)">Deletes all Ops, findings, stash. Cannot be undone.</div></div>
+          <button class="s-btn danger">Clear Everything</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODEL -->
+    <div class="settings-page" id="page-model">
+      <div class="settings-page-title">Model</div>
+      <div class="settings-page-desc">Manage downloaded and local models</div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Active Model</div>
+        <div class="model-card active">
+          <div class="model-icon">🤖</div>
+          <div class="model-info">
+            <div class="model-name">Qwen3.5-VL-122B-A10B-UNCENSORED-JANG_2S</div>
+            <div class="model-meta">JANG 2-bit · 30.2 GB · Vision · dealignai · loaded</div>
+          </div>
+          <div class="model-actions"><button class="s-btn" style="color:var(--accent-green);border-color:rgba(34,197,94,0.3)">● Active</button></div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Downloaded Models</div>
+        <div class="model-card">
+          <div class="model-icon">📦</div>
+          <div class="model-info">
+            <div class="model-name">MiniMax-M2.5-UNCENSORED-JANG_2L</div>
+            <div class="model-meta">JANG 2-bit · 60.1 GB · dealignai</div>
+          </div>
+          <div class="model-actions"><button class="s-btn">Load</button> <button class="s-btn danger">Delete</button></div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Local Models</div>
+        <div class="model-card">
+          <div class="model-icon">📁</div>
+          <div class="model-info">
+            <div class="model-name">Qwen3-30B-A3B (custom)</div>
+            <div class="model-meta">MLX fp16 · 62 GB · ~/models/qwen3-30b/</div>
+          </div>
+          <div class="model-actions"><button class="s-btn">Load</button> <button class="s-btn">Remove</button></div>
+        </div>
+        <div style="margin-top:10px;display:flex;gap:8px">
+          <button class="s-btn primary">📁 Load Local Model</button>
+          <button class="s-btn">🔍 Scan Common Paths</button>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Download</div>
+        <div style="display:flex;gap:8px">
+          <button class="s-btn primary">⬇ Download New Model</button>
+        </div>
+        <div class="setting-sublabel" style="margin-top:6px">Opens curated model downloader (S/M/L tiers + custom HuggingFace URL)</div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Storage</div>
+        <div class="setting-row">
+          <div><div class="setting-label">Model storage directory</div><div class="setting-sublabel">~/.exploitbot/models/</div></div>
+          <button class="s-btn">Change</button>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Total model storage</div></div>
+          <span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted)">90.3 GB</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- INFERENCE -->
+    <div class="settings-page" id="page-inference">
+      <div class="settings-page-title">Inference</div>
+      <div class="settings-page-desc">Sampling, cache, reasoning, and tool calling settings</div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Sampling</div>
+        <div class="setting-row">
+          <div class="setting-label">Temperature</div>
+          <div class="s-slider-row"><input type="range" class="s-slider" min="0" max="200" value="70"><span class="s-slider-val">0.70</span></div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Top-p</div>
+          <div class="s-slider-row"><input type="range" class="s-slider" min="0" max="100" value="90"><span class="s-slider-val">0.90</span></div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Top-k</div>
+          <input class="s-input" value="40" style="width:60px">
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Min-p</div>
+          <div class="s-slider-row"><input type="range" class="s-slider" min="0" max="100" value="5"><span class="s-slider-val">0.05</span></div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Repetition penalty</div>
+          <div class="s-slider-row"><input type="range" class="s-slider" min="100" max="200" value="110"><span class="s-slider-val">1.10</span></div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Max tokens</div>
+          <input class="s-input" value="4096" style="width:80px">
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Stop sequences</div>
+          <input class="s-input" placeholder="comma-separated" style="width:200px">
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Cache Stack</div>
+        <div class="setting-row">
+          <div><div class="setting-label">Prefix cache</div><div class="setting-sublabel">Caches prompt token KV state for faster re-inference</div></div>
+          <div class="setting-control"><div class="s-toggle on" onclick="this.classList.toggle('on')"><div class="s-toggle-thumb"></div></div></div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Prefix cache memory %</div>
+          <div class="s-slider-row"><input type="range" class="s-slider" min="0" max="100" value="20"><span class="s-slider-val">20%</span></div>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Paged cache</div><div class="setting-sublabel">Block-aware KV cache for reduced memory fragmentation</div></div>
+          <div class="setting-control"><div class="s-toggle on" onclick="this.classList.toggle('on')"><div class="s-toggle-thumb"></div></div></div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Paged cache block size</div>
+          <select class="s-select" style="width:80px"><option>32</option><option selected>64</option><option>128</option></select>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">KV cache quantization</div><div class="setting-sublabel">Compress stored KV cache (2-4x memory savings)</div></div>
+          <select class="s-select" style="width:100px"><option selected>None</option><option>Q4 (4-bit)</option><option>Q8 (8-bit)</option></select>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">KV cache group size</div>
+          <select class="s-select" style="width:80px"><option selected>64</option><option>128</option></select>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Reasoning</div>
+        <div class="setting-row">
+          <div><div class="setting-label">Enable thinking</div><div class="setting-sublabel">Show model's reasoning process in thinking blocks</div></div>
+          <select class="s-select" style="width:100px"><option selected>Auto</option><option>On</option><option>Off</option></select>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Reasoning parser</div>
+          <select class="s-select" style="width:140px"><option selected>Auto-detect</option><option>Qwen3</option><option>DeepSeek-R1</option><option>OpenAI GPT-OSS</option></select>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Tool Calling</div>
+        <div class="setting-row">
+          <div class="setting-label">Tool call parser</div>
+          <select class="s-select" style="width:140px"><option selected>Auto-detect</option><option>Qwen</option><option>Mistral</option><option>Llama</option><option>Hermes</option><option>DeepSeek</option><option>GLM-4.7</option></select>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Auto tool choice</div><div class="setting-sublabel">Allow model to decide when to call tools</div></div>
+          <div class="s-toggle on" onclick="this.classList.toggle('on')"><div class="s-toggle-thumb"></div></div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Context Management</div>
+        <div class="setting-row">
+          <div><div class="setting-label">Strategy</div><div class="setting-sublabel">What to do when context window fills up</div></div>
+          <select class="s-select" style="width:160px"><option selected>None (rely on cache)</option><option>Auto-summarize</option><option>Sliding window + pins</option><option>Manual checkpoint</option></select>
+        </div>
+      </div>
+
+      <div style="margin-top:16px"><button class="s-btn">Reset to Detected Defaults</button></div>
+    </div>
+
+    <!-- TOOLS -->
+    <div class="settings-page" id="page-tools">
+      <div class="settings-page-title">Tools</div>
+      <div class="settings-page-desc">Manage pentesting tool installations</div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Status: 22 bundled · 12 installed · 5 missing</div>
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <button class="s-btn primary">Install All Missing</button>
+          <button class="s-btn">Update All</button>
+        </div>
+
+        <div class="tool-row" style="border-bottom:2px solid var(--border-subtle)">
+          <div class="tool-status"></div>
+          <div class="tool-name-col" style="font-weight:600;color:var(--text-muted)">Tool</div>
+          <div class="tool-ver" style="font-weight:600;color:var(--text-muted)">Version</div>
+          <div class="tool-method" style="font-weight:600;color:var(--text-muted)">Source</div>
+          <div class="tool-path-col" style="font-weight:600;color:var(--text-muted)">Path</div>
+          <div class="tool-actions-col"></div>
+        </div>
+        <div class="tool-row"><div class="tool-status ok"></div><div class="tool-name-col">subfinder</div><div class="tool-ver">2.6.7</div><div class="tool-method">bundled</div><div class="tool-path-col">/Applications/exploitbot.app/.../subfinder</div><div class="tool-actions-col"></div></div>
+        <div class="tool-row"><div class="tool-status ok"></div><div class="tool-name-col">nuclei</div><div class="tool-ver">3.3.7</div><div class="tool-method">bundled</div><div class="tool-path-col">/Applications/exploitbot.app/.../nuclei</div><div class="tool-actions-col"></div></div>
+        <div class="tool-row"><div class="tool-status ok"></div><div class="tool-name-col">httpx</div><div class="tool-ver">1.6.9</div><div class="tool-method">bundled</div><div class="tool-path-col">/Applications/exploitbot.app/.../httpx</div><div class="tool-actions-col"></div></div>
+        <div class="tool-row"><div class="tool-status ok"></div><div class="tool-name-col">nmap</div><div class="tool-ver">7.95</div><div class="tool-method">brew</div><div class="tool-path-col">/opt/homebrew/bin/nmap</div><div class="tool-actions-col"><button class="s-btn" style="padding:2px 8px;font-size:9px">Update</button></div></div>
+        <div class="tool-row"><div class="tool-status ok"></div><div class="tool-name-col">sqlmap</div><div class="tool-ver">1.8.12</div><div class="tool-method">pip</div><div class="tool-path-col">~/.exploitbot/tools/sqlmap</div><div class="tool-actions-col"><button class="s-btn" style="padding:2px 8px;font-size:9px">Update</button></div></div>
+        <div class="tool-row"><div class="tool-status ok"></div><div class="tool-name-col">hashcat</div><div class="tool-ver">6.2.6</div><div class="tool-method">brew</div><div class="tool-path-col">/opt/homebrew/bin/hashcat</div><div class="tool-actions-col"><button class="s-btn" style="padding:2px 8px;font-size:9px">Update</button></div></div>
+        <div class="tool-row"><div class="tool-status miss"></div><div class="tool-name-col" style="color:var(--text-dim)">metasploit</div><div class="tool-ver" style="color:var(--text-dim)">—</div><div class="tool-method" style="color:var(--text-dim)">—</div><div class="tool-path-col" style="color:var(--text-dim)">not installed</div><div class="tool-actions-col"><button class="s-btn primary" style="padding:2px 8px;font-size:9px">Install</button></div></div>
+        <div class="tool-row"><div class="tool-status miss"></div><div class="tool-name-col" style="color:var(--text-dim)">sliver</div><div class="tool-ver" style="color:var(--text-dim)">—</div><div class="tool-method" style="color:var(--text-dim)">—</div><div class="tool-path-col" style="color:var(--text-dim)">not installed</div><div class="tool-actions-col"><button class="s-btn primary" style="padding:2px 8px;font-size:9px">Install</button></div></div>
+        <div class="tool-row"><div class="tool-status miss"></div><div class="tool-name-col" style="color:var(--text-dim)">bettercap</div><div class="tool-ver" style="color:var(--text-dim)">—</div><div class="tool-method" style="color:var(--text-dim)">—</div><div class="tool-path-col" style="color:var(--text-dim)">not installed</div><div class="tool-actions-col"><button class="s-btn primary" style="padding:2px 8px;font-size:9px">Install</button></div></div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Tool Settings</div>
+        <div class="setting-row">
+          <div><div class="setting-label">Concurrent tool limit</div><div class="setting-sublabel">Max tools running simultaneously</div></div>
+          <div class="s-slider-row"><input type="range" class="s-slider" min="1" max="10" value="3"><span class="s-slider-val">3</span></div>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Nuclei template updates</div></div>
+          <select class="s-select" style="width:120px"><option selected>Weekly</option><option>Daily</option><option>Manual</option></select>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Seclists path</div><div class="setting-sublabel">~/.exploitbot/wordlists/seclists/</div></div>
+          <button class="s-btn">Update Seclists</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CVE DATABASE -->
+    <div class="settings-page" id="page-cve">
+      <div class="settings-page-title">CVE Database</div>
+      <div class="settings-page-desc">Local vulnerability knowledge base with semantic search</div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Database Status</div>
+        <div style="display:flex;gap:12px;margin-bottom:16px">
+          <div style="background:var(--bg-raised);border:1px solid var(--border-subtle);border-radius:8px;padding:12px;flex:1;text-align:center">
+            <div style="font-size:24px;font-weight:700;color:var(--text-primary)">248,714</div>
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim)">Total CVEs</div>
+          </div>
+          <div style="background:var(--bg-raised);border:1px solid var(--border-subtle);border-radius:8px;padding:12px;flex:1;text-align:center">
+            <div style="font-size:24px;font-weight:700;color:var(--accent-red)">1,247</div>
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim)">CISA KEV</div>
+          </div>
+          <div style="background:var(--bg-raised);border:1px solid var(--border-subtle);border-radius:8px;padding:12px;flex:1;text-align:center">
+            <div style="font-size:24px;font-weight:700;color:var(--text-secondary)">1.2 GB</div>
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim)">DB Size</div>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Last synced</div></div>
+          <span class="mono" style="font-size:11px;color:var(--text-muted)">2026-03-23 08:00 UTC</span>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Sync frequency</div></div>
+          <select class="s-select" style="width:100px"><option>Daily</option><option selected>Weekly</option><option>Manual</option></select>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Embedding model</div><div class="setting-sublabel">nomic-embed-text-v1.5 (275 MB, CPU)</div></div>
+          <span class="mono" style="font-size:11px;color:var(--accent-green)">loaded</span>
+        </div>
+        <div style="margin-top:10px"><button class="s-btn primary">🔄 Update Now</button></div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Custom CVEs (7 entries)</div>
+        <div style="display:flex;gap:8px;margin-bottom:8px">
+          <button class="s-btn primary">+ Add CVE</button>
+          <button class="s-btn">📥 Import JSON</button>
+          <button class="s-btn">📤 Export</button>
+        </div>
+        <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-dim)">CUSTOM-2026-0001 ... CUSTOM-2026-0007</div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Test Search</div>
+        <div style="display:flex;gap:8px">
+          <input class="s-input" placeholder="Try: apache path traversal" style="flex:1;text-align:left">
+          <button class="s-btn">Search</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- REPORTS -->
+    <div class="settings-page" id="page-reports">
+      <div class="settings-page-title">Reports</div>
+      <div class="settings-page-desc">Default templates and company branding</div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Default Template</div>
+        <div class="setting-row">
+          <div class="setting-label">Template</div>
+          <select class="s-select"><option selected>Full Pentest Report</option><option>Bug Bounty Submission</option><option>Executive Brief</option><option>Technical Writeup</option></select>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Default export format</div>
+          <select class="s-select"><option selected>PDF</option><option>Markdown</option><option>HTML</option><option>JSON</option></select>
+        </div>
+        <div class="setting-row">
+          <div><div class="setting-label">Report language</div><div class="setting-sublabel">Separate from UI language — reports can be in a different language</div></div>
+          <select class="s-select"><option selected>Same as UI</option><option>English</option><option>한국어</option><option>中文</option><option>Español</option><option>日本語</option></select>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-section-title">Company Branding</div>
+        <div class="setting-row">
+          <div class="setting-label">Company name</div>
+          <input class="s-input" value="ShieldStack LLC" style="width:200px;text-align:left">
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Company logo</div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="width:40px;height:40px;background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px">🏢</div>
+            <button class="s-btn">Upload Logo</button>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Header text</div>
+          <input class="s-input" value="CONFIDENTIAL" style="width:200px;text-align:left">
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Assessor name</div>
+          <input class="s-input" value="" placeholder="Your name" style="width:200px;text-align:left">
+        </div>
+        <div class="setting-row">
+          <div class="setting-label">Contact email</div>
+          <input class="s-input" value="" placeholder="email@company.com" style="width:200px;text-align:left">
+        </div>
+      </div>
+    </div>
+
+    <!-- SHORTCUTS -->
+    <div class="settings-page" id="page-shortcuts">
+      <div class="settings-page-title">Keyboard Shortcuts</div>
+      <div class="settings-page-desc">Quick reference for all keyboard shortcuts</div>
+      <div class="settings-section">
+        <div class="settings-section-title">Navigation</div>
+        <div class="setting-row"><div class="setting-label">New Op</div><span class="mono xs muted">⌘ N</span></div>
+        <div class="setting-row"><div class="setting-label">Toggle Terminal</div><span class="mono xs muted">⌘ `</span></div>
+        <div class="setting-row"><div class="setting-label">Toggle Stash</div><span class="mono xs muted">⌘ ⇧ S</span></div>
+        <div class="setting-row"><div class="setting-label">Settings</div><span class="mono xs muted">⌘ ,</span></div>
+        <div class="setting-row"><div class="setting-label">Tab 1–9</div><span class="mono xs muted">⌘ 1–9</span></div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title">Chat</div>
+        <div class="setting-row"><div class="setting-label">Send message</div><span class="mono xs muted">⌘ ↩</span></div>
+        <div class="setting-row"><div class="setting-label">Stop generation</div><span class="mono xs muted">⌘ .</span></div>
+        <div class="setting-row"><div class="setting-label">Clear context</div><span class="mono xs muted">⌘ K</span></div>
+        <div class="setting-row"><div class="setting-label">Search in chat</div><span class="mono xs muted">⌘ F</span></div>
+      </div>
+      <div class="settings-section">
+        <div class="settings-section-title">Tools</div>
+        <div class="setting-row"><div class="setting-label">Run current tool</div><span class="mono xs muted">⌘ ↩</span></div>
+        <div class="setting-row"><div class="setting-label">Cancel running tool</div><span class="mono xs muted">⌘ .</span></div>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="settings-page" id="page-about">
+      <div class="settings-page-title">About exploitbot</div>
+      <div style="margin-top:20px;text-align:center">
+        <div style="font-size:48px;margin-bottom:12px">🤖</div>
+        <div style="font-size:20px;font-weight:700">exploit<span style="font-weight:300;color:var(--text-muted)">bot</span></div>
+        <div style="font-family:var(--font-mono);font-size:12px;color:var(--text-dim);margin-top:4px">Version 1.0.0</div>
+        <div style="font-size:12px;color:var(--text-dim);margin-top:12px">Autonomous pentesting on Apple Silicon</div>
+        <div style="font-size:12px;color:var(--text-dim);margin-top:4px">Powered by vMLX engine · MLX inference</div>
+        <div style="margin-top:20px;display:flex;gap:8px;justify-content:center">
+          <button class="s-btn">exploit.bot</button>
+          <button class="s-btn">GitHub</button>
+          <button class="s-btn">Report Issue</button>
+        </div>
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim);margin-top:20px">Open source · jjang-ai/exploitbot</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function showSettings(name) {
+    document.querySelectorAll('.settings-nav-item').forEach(i => i.classList.remove('active'));
+    document.querySelectorAll('.settings-page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    event.target.closest('.settings-nav-item').classList.add('active');
+  }
+</script>
+
+</body>
+</html>
