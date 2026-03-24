@@ -380,3 +380,23 @@ extension String {
 - [x] Prefix cache memory % — configurable in EngineConfig (default 0.20)
 
 All cache features from vMLX are present and functional for text-only inference.
+
+---
+
+## v1.0 Polish Items (Pre-Ship)
+
+### QUICK FIXES
+- [ ] Wire "Create Finding" buttons on VulnCards → findingPrefill + showFindingWizard
+- [ ] Inference logs button (lazy — only captures when user has panel open)
+- [ ] Chat panel resizable (drag handle on left edge)
+- [ ] Activity feed resizable (drag handle on top edge)
+
+### MEDIUM FEATURES
+- [ ] Context window management (auto-summarize when approaching limit)
+- [ ] Custom tool definitions (user adds JSON tool schemas via Settings)
+- [ ] Scope enforcement (check tool targets against Op scope)
+
+### NICE-TO-HAVE (post v1.0)
+- [ ] Remote API support (OpenAI/Claude as alternative to local)
+- [ ] Jira/GitHub issue integration for findings export
+- [ ] Custom tool UI (visual tool builder)
