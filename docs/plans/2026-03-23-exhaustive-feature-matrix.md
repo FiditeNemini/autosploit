@@ -545,35 +545,36 @@
   - [ ] Affects: Tab bar should show "new results" indicator when user has tracking disabled
 
 ### F006.6: Pentesting Phase System (Scan → Detect → Breach)
-- [ ] **Three explicit phases:**
-  - [ ] **Phase 1: SCAN** — Context gathering via tools
-    - [ ] Objective: map attack surface (subdomains, ports, services, tech stacks)
-    - [ ] Tools used: subfinder, dnsx, nmap, masscan, httpx, katana, theHarvester
-    - [ ] Auto-tabs: Recon
-    - [ ] Completion criteria: model determines sufficient coverage
-    - [ ] Output: populated Recon tab with all discovered assets
-  - [ ] **Phase 2: DETECT** — Vulnerability identification from context
-    - [ ] Objective: find exploitable vulnerabilities in discovered services
-    - [ ] Tools used: nuclei, sqlmap, dalfox, feroxbuster, arjun, wpscan, testssl, search_cve
-    - [ ] Auto-tabs: Web, Network
-    - [ ] Completion criteria: all high-value targets scanned, CVEs matched
-    - [ ] Output: populated Web tab with vuln cards, CVE matches
-  - [ ] **Phase 3: BREACH** — Exploitation and post-exploitation
-    - [ ] Objective: exploit confirmed vulns, establish access, escalate, exfiltrate
-    - [ ] Tools used: metasploit, pwncat, pwntools, sliver, linpeas, winpeas, impacket, hashcat, hydra
-    - [ ] Auto-tabs: Exploit, Post, Creds
-    - [ ] Completion criteria: access obtained or all exploitation paths exhausted
-    - [ ] Output: active sessions, cracked credentials, privilege escalation results
-- [ ] **Phase indicator UI:**
-  - [ ] Displayed in controls bar: "Phase 1: SCAN" / "Phase 2: DETECT" / "Phase 3: BREACH"
-  - [ ] Phase progress: filled dots (●●○) showing current phase
-  - [ ] Phase stats: "12 hosts found" / "3 vulns confirmed" / "1 shell established"
-  - [ ] Color per phase: SCAN=blue, DETECT=orange, BREACH=red
-  - [ ] Phase transition logged in activity feed with section header
-- [ ] **Phase control:**
-  - [ ] Phases auto-advance in Autopilot mode (model decides when to move on)
-  - [ ] User can manually advance phase ("Skip to Detect", "Skip to Breach")
-  - [ ] User can go back to previous phase ("Return to Scan")
+- [x] **Three explicit phases (PentestPhase enum):**
+  - [x] **Phase 1: SCAN** — Context gathering via tools
+    - [x] Objective defined in promptGuidance
+    - [x] Tools listed in primaryTools array
+    - [ ] Auto-tabs: model + auto-tab tracking handles this
+    - [ ] Completion criteria: model says "SCAN COMPLETE" (in prompt but not auto-detected yet)
+    - [ ] Output: populated Recon tab (works via ResultsStore)
+  - [x] **Phase 2: DETECT** — Vulnerability identification from context
+    - [x] Objective defined in promptGuidance
+    - [x] Tools listed in primaryTools array
+    - [ ] Completion criteria: model says "DETECT COMPLETE" (not auto-detected)
+    - [ ] Output: populated Web tab (works via ResultsStore)
+  - [x] **Phase 3: BREACH** — Exploitation and post-exploitation
+    - [x] Objective defined in promptGuidance
+    - [x] Tools listed in primaryTools array
+    - [ ] Completion criteria: model decides (not auto-detected)
+    - [ ] Output: active sessions, credentials
+- [x] **Phase indicator UI (PhaseIndicatorView):**
+  - [x] Displayed between tab bar and tool content
+  - [x] Phase progress: colored dots (●●○) showing current phase
+  - [x] Phase stats: tools run count + findings count
+  - [x] Color per phase: SCAN=blue, DETECT=orange, BREACH=red
+  - [x] Phase transition logged in activity feed
+  - [x] Phase icon + label for current phase
+  - [x] Phase description on right side
+- [x] **Phase control:**
+  - [ ] Phases auto-advance in Autopilot mode — model says "COMPLETE" but app doesn't auto-detect
+  - [x] User can manually advance phase ("Next Phase →" button)
+  - [x] User can jump to any phase (click phase name)
+  - [ ] Phase restart button
   - [ ] Phase restart: re-run current phase with new parameters
   - [ ] Phase can be skipped entirely (e.g., user already has recon data)
 - [ ] **System prompt integration:**
