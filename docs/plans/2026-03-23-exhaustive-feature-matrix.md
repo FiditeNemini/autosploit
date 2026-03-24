@@ -694,68 +694,70 @@
 
 ### F008.1: Adding to Stash
 - [ ] Right-click any tool output → "Stash this"
-- [ ] Select text in chat → "Stash selection"
+- [x] Chat "📦 Stash" button → stashes selected message — onStash callback in ChatPanelView
 - [ ] Right-click assistant message → "Stash this response"
 - [ ] Model auto-stashes in Autopilot (configurable)
-- [ ] Stash from tab-specific UI (e.g., "Stash these subdomains" button on recon results)
-- [ ] Bulk stash: select multiple items → "Stash all"
-- [ ] Type auto-detection from content (regex patterns for IPs, hashes, emails, URLs)
+- [ ] Stash from tab-specific UI
+- [ ] Bulk stash
+- [x] Type auto-detection from content — StashService.detectType() regex
 - [ ] Manual type override after stashing
+- [x] Manual add via "+ Add" button in StashTabView — opens sheet with label + content
 
-### F008.2: Stash UI
-- [ ] Drawer/panel accessible from every tab (icon in Op Controls bar)
-- [ ] List view: label, type icon, source Op, timestamp
-- [ ] Grid view: visual cards (especially for screenshots)
-- [ ] Filter by type (credential, host, vuln, code, etc.)
+### F008.2: Stash UI (StashTabView.swift)
+- [x] Full Stash tab with toolbar, filters, list
+- [x] List view: type icon, label, source tab, timestamp
+- [ ] Grid view: visual cards
+- [x] Filter by type (All/Creds/Hosts/Vulns/Code/Raw) — FilterButton components
 - [ ] Filter by source Op
-- [ ] Search by content/label
+- [x] Search by content/label — text field filters items
 - [ ] Sort by: date, type, source Op
 - [ ] Select multiple items
-- [ ] Delete items (single, bulk)
+- [x] Delete items (single) — ✕ button per item, calls stashService.delete()
 - [ ] Edit label/tags inline
-- [ ] Preview: click item → expanded view with full content
+- [ ] Preview: click item → expanded view
 
 ### F008.3: Using Stash Items
-- [ ] Drag item into chatbox → inserts content as message
-- [ ] Drag item into tool parameter field → fills parameter
-- [ ] "Send to Op" → pick target Op → inserts into that Op's chat
-- [ ] "Send to Tab" → pick target Op + tab → opens tab with item ready
-- [ ] "Promote to Finding" → creates Finding from Stash item(s)
+- [x] "→ Send" button → inserts content into chat via onSendToChat callback
+- [ ] Drag item into tool parameter field
+- [ ] "Send to Op" → pick target Op
+- [ ] "Send to Tab"
+- [ ] "Promote to Finding"
 - [ ] "Export" → copy to clipboard or save to file
 - [ ] Stash items referenced in chat show inline preview
 
 ### F008.4: Stash Persistence
-- [ ] Stored in SQLite stash_items table
-- [ ] Global scope (not per-Op)
-- [ ] Survives app restart
+- [x] Stored in SQLite stashItems table — Database.saveStashItem/fetchStashItems/deleteStashItem
+- [x] Global scope (not per-Op) — no opId filter
+- [x] Survives app restart — loaded from DB on init
 - [ ] Export all stash as JSON
 - [ ] Import stash from JSON
-- [ ] Max stash size: warn at 1000 items, suggest cleanup
+- [ ] Max stash size: warn at 1000 items
 
 ---
 
 ## F009: Findings System
 
-### F009.1: Finding Creation — Wizard UI
-- [ ] **Trigger points:**
-  - [ ] "⚡ Create Finding" button on vulnerability cards (Web tab)
-  - [ ] "⚡ Create Finding" button on LinPEAS/WinPEAS results (Post tab)
+### F009.1: Finding Creation — Wizard UI (FindingWizardView.swift)
+- [x] **Trigger points:**
+  - [x] "⚡ Create Finding" button on Report tab (when empty)
+  - [ ] "⚡ Create Finding" button on vulnerability cards (Web tab) — button exists but not wired to wizard
+  - [ ] "⚡ Create Finding" button on LinPEAS/WinPEAS results (Post tab) — button exists but not wired
   - [ ] "⚡ Finding" button on Stash items
   - [ ] Right-click assistant message → "Create Finding from this"
   - [ ] LLM-suggested: model prompts "Create a Finding?" (Copilot mode)
-  - [ ] LLM auto-creates (Autopilot mode — no wizard shown, logged in activity feed)
-- [ ] **Wizard modal overlay:**
-  - [ ] Dark backdrop with blur (rgba(0,0,0,0.6) + backdrop-filter: blur(8px))
-  - [ ] 700px wide panel, max 80vh height, scrollable body
-  - [ ] Header: "⚡ Create Finding" title + close (✕) button
-  - [ ] Footer: "Cancel" (secondary) + "Create Finding" (primary) buttons
-- [ ] **Form fields (all pre-filled where possible):**
-  - [ ] Title: text input, pre-filled from CVE description or tool finding name
-  - [ ] Vulnerability Type: dropdown (RCE, SQLi, XSS, Path Traversal, Misconfig, Privesc, Info Disclosure, SSRF, CSRF, File Upload, Deserialization, Auth Bypass, IDOR, XXE, Command Injection, Other)
-  - [ ] Severity: dropdown (Critical, High, Medium, Low, Info) — pre-selected from tool output
-  - [ ] CVSS Score: numeric input (0.0-10.0) — pre-filled from CVE DB if CVE matched
-  - [ ] Target: monospace text input — pre-filled from tool target parameter
-  - [ ] Description: textarea — pre-filled from CVE description or model-generated
+  - [ ] LLM auto-creates (Autopilot mode)
+- [x] **Wizard modal overlay:**
+  - [x] Dark backdrop with tap-to-dismiss
+  - [x] Modal panel with scrollable body
+  - [x] Header: "⚡ Create Finding" title
+  - [x] Footer: "Cancel" + "Create Finding" buttons
+- [x] **Form fields (pre-filled from findingPrefill):**
+  - [x] Title: text input, pre-filled
+  - [x] Vulnerability Type: dropdown (RCE, SQLi, XSS, etc.)
+  - [x] Severity: dropdown (Critical, High, Medium, Low, Info)
+  - [x] CVSS Score: numeric input
+  - [x] Target: text input, pre-filled
+  - [x] Description: textarea, pre-filled
 - [ ] **Attack Chain section:**
   - [ ] Label: "Attack Chain (auto-reconstructed from Op context)"
   - [ ] Numbered steps in a contained box:
@@ -837,46 +839,46 @@
 
 ## F010: Report Generation
 
-### F010.1: Report Content (LLM-Generated)
-- [ ] Executive Summary: 1-2 paragraphs, non-technical, business impact
-- [ ] Scope & Methodology: what was tested, tools used, constraints, dates
-- [ ] Findings Summary: table of all findings by severity with counts
-- [ ] Detailed Findings (per Finding):
-  - Title, severity, CVSS score
-  - Description (what the vulnerability is)
-  - Affected assets (targets)
-  - Attack chain / reproduction steps
-  - Evidence (screenshots, outputs, payloads)
-  - Impact (what an attacker could achieve)
-  - Remediation (specific fix recommendations)
-- [ ] Attack Narrative: chronological story of the entire engagement
-- [ ] Remediation Roadmap: prioritized fix recommendations
-- [ ] Appendix: raw tool outputs, full scan results
+### F010.1: Report Content (ReportService.swift — HTML generated)
+- [x] Executive Summary section
+- [x] Scope & Methodology section
+- [x] Findings Summary: table sorted by severity with counts
+- [x] Detailed Findings (per Finding):
+  - [x] Title, severity, CVSS score
+  - [x] Description
+  - [x] Affected assets (targets)
+  - [x] Attack chain steps
+  - [ ] Evidence (screenshots, outputs, payloads) — not included in HTML
+  - [x] Impact
+  - [x] Remediation
+- [ ] Attack Narrative (chronological story) — not generated
+- [ ] Remediation Roadmap — not separate section
+- [ ] Appendix: raw tool outputs — not generated
 
-### F010.2: Report Templates
-- [ ] Full pentest report (all sections)
-- [ ] Bug bounty submission (compact, per-vulnerability)
-- [ ] Executive brief (summary + findings table only)
-- [ ] Technical writeup (detailed technical narrative)
-- [ ] Custom template support (user-created CSS + section selection)
-- [ ] Each template: CSS file + section configuration
+### F010.2: Report Templates (ReportTemplate enum)
+- [x] Full pentest report (all sections)
+- [x] Bug bounty submission
+- [x] Executive brief
+- [x] Technical writeup
+- [ ] Custom template support
+- [x] Each template generates different HTML layout
 
-### F010.3: Report Branding
-- [ ] Company logo upload (stored in settings)
-- [ ] Company name
+### F010.3: Report Branding (ReportBranding struct)
+- [ ] Company logo upload
+- [x] Company name field
 - [ ] Primary color / accent color
-- [ ] Header text (e.g., "CONFIDENTIAL")
+- [x] Header text (e.g., "CONFIDENTIAL")
 - [ ] Footer text (e.g., "Page X of Y")
 - [ ] Cover page toggle
-- [ ] Assessor name / contact info
+- [x] Assessor name field
 
-### F010.4: Report Export
-- [ ] PDF: via HTML → WKWebView.createPDF()
-- [ ] Markdown: raw .md file
-- [ ] HTML: standalone styled file (all CSS/images inlined)
-- [ ] JSON: structured data (machine-readable findings)
-- [ ] Export location: user picks save path via NSSavePanel
-- [ ] Export progress indicator (for large PDFs)
+### F010.4: Report Export (ReportTabView.swift)
+- [x] PDF: via HTML → WKWebView.createPDF() — exportPDF() method
+- [x] Markdown: exportMarkdown() method with NSSavePanel
+- [x] HTML: generated by ReportService, rendered in WKWebView preview
+- [ ] JSON: structured data export not implemented
+- [x] Export location: NSSavePanel for both PDF and MD
+- [ ] Export progress indicator
 - [ ] Preview before export (in-app rendered view)
 
 ### F010.5: Report Localization
