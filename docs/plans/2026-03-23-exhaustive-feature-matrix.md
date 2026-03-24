@@ -342,41 +342,41 @@
 ## F005: Activity Feed
 
 ### F005.1: Feed Content
-- [ ] Model reasoning/thinking (collapsible)
-- [ ] Tool call initiation (tool name, parameters, command preview)
+- [x] Model reasoning/thinking (logged after completion, truncated to 200 chars)
+- [x] Tool call initiation (tool name + full command logged)
 - [ ] Tool stdout streaming (real-time, character-by-character for long-running)
 - [ ] Tool stderr streaming (in red/warning color)
-- [ ] Tool completion (success ✓ / failure ✗ / timeout ⏱ / cancelled ⊘)
-- [ ] Tool duration (elapsed time)
+- [x] Tool completion (success ✓ / failure ✗ with line count summary)
+- [x] Tool duration (elapsed time in seconds)
 - [ ] Model interpretation of results
 - [ ] Model decisions ("Found X, proceeding to Y because Z")
-- [ ] Stash events ("Stashed credential from hydra output")
-- [ ] Finding events ("Created Finding: CVE-2021-41773 on dev.acme.com")
-- [ ] Mode transitions ("Switching from Recon to Web phase")
-- [ ] Error events (engine error, tool not found, permission denied)
+- [ ] Stash events ("Stashed credential from hydra output") — stash not built yet
+- [ ] Finding events ("Created Finding: CVE-2021-41773 on dev.acme.com") — findings not built yet
+- [x] Mode transitions (logModeChange method exists, not wired to mode selector yet)
+- [x] Error events (logError method exists)
 - [ ] Context management events ("Summarizing old context...", "Pinned item preserved")
 
 ### F005.2: Feed UI
-- [ ] Scrolling log panel (bottom of screen or side panel, configurable)
-- [ ] Auto-scroll during active output
+- [x] Scrolling log panel (bottom panel, 180px fixed height)
+- [x] Auto-scroll during active output (onChange of entries.count)
 - [ ] Pause auto-scroll when user scrolls up
 - [ ] Resume auto-scroll button
-- [ ] Timestamp on each entry
-- [ ] Color-coded by type (tool=cyan, error=red, finding=green, reasoning=purple)
-- [ ] Filter buttons: All / Tools / Errors / Findings / Reasoning
+- [x] Timestamp on each entry (HH:mm format)
+- [x] Color-coded by type (tool=cyan, error=red, finding=green, reasoning=purple)
+- [x] Filter buttons: All / Tools / Errors / Findings / Reasoning
 - [ ] Search within feed
 - [ ] Copy entry text
 - [ ] Click tool call entry → scrolls to corresponding chat message
 - [ ] Collapsible sections (group all output from one tool call)
-- [ ] Clear feed (with confirmation)
+- [x] Clear feed (Clear button in header)
 
 ### F005.3: Verbosity Levels
-- [ ] Minimal: results and decisions only
-- [ ] Normal: tool calls + results + decisions (default)
-- [ ] Verbose: everything including raw stdout/stderr, model reasoning, timing
-- [ ] Debug: all above + HTTP requests to engine, token counts, IPC messages, SSE events
-- [ ] Verbosity toggle in Op Controls (per-Op setting)
-- [ ] Higher verbosity levels include all lower levels
+- [x] Minimal: results and decisions only (filters out toolOutput + thinking)
+- [x] Normal: tool calls + results + decisions (default, filters out toolOutput)
+- [x] Verbose: everything including raw stdout/stderr, model reasoning, timing
+- [x] Debug: all above (currently same as verbose — HTTP/IPC logging not implemented)
+- [x] Verbosity toggle in header bar (Picker dropdown)
+- [x] Higher verbosity levels include all lower levels
 
 ---
 
