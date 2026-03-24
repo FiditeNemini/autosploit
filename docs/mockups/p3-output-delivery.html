@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>exploitbot — P3: Output & Delivery Mockup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-deep: #050507; --bg-base: #09090b; --bg-raised: #111114;
+      --bg-surface: #1c1c21; --bg-input: #0f0f12;
+      --border-subtle: #1e1e23; --border-medium: #2a2a32; --border-strong: #3f3f46;
+      --text-primary: #f4f4f5; --text-secondary: #a1a1aa; --text-muted: #71717a;
+      --text-subtle: #52525b; --text-dim: #3f3f46;
+      --accent-red: #ef4444; --accent-blue: #3b82f6; --accent-orange: #f97316;
+      --accent-cyan: #06b6d4; --accent-amber: #f59e0b; --accent-purple: #a855f7;
+      --accent-green: #22c55e;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--bg-deep); color: var(--text-primary); height: 100vh; overflow: hidden; -webkit-font-smoothing: antialiased; font-size: 13px; }
+    .phase-label { position: fixed; top: 8px; right: 16px; font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); background: var(--bg-surface); padding: 3px 8px; border-radius: 4px; z-index: 99; }
+    .app { display: flex; flex-direction: column; height: 100vh; }
+    .titlebar { height: 28px; background: var(--bg-raised); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; padding: 0 12px; flex-shrink: 0; }
+    .tl-group { display: flex; gap: 8px; }
+    .tl { width: 12px; height: 12px; border-radius: 50%; }
+    .tl.r { background: #ff5f57; } .tl.y { background: #febc2e; } .tl.g { background: #28c840; }
+    .titlebar-t { flex: 1; text-align: center; font-size: 12px; color: var(--text-muted); font-weight: 500; }
+    .tab-bar { height: 36px; display: flex; align-items: center; padding: 0 12px; gap: 2px; background: var(--bg-base); border-bottom: 1px solid var(--border-subtle); flex-shrink: 0; }
+    .tab { padding: 6px 14px; font-size: 11px; font-family: var(--font-mono); font-weight: 500; color: var(--text-muted); border-radius: 6px; cursor: pointer; white-space: nowrap; position: relative; transition: all 0.15s; border: none; background: transparent; }
+    .tab:hover { color: var(--text-secondary); background: rgba(255,255,255,0.03); }
+    .tab.active { color: var(--text-primary); background: var(--bg-surface); }
+    .tab.active::after { content: ''; position: absolute; bottom: -1px; left: 8px; right: 8px; height: 2px; border-radius: 1px; }
+    .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .toolbar { height: 38px; display: flex; align-items: center; padding: 0 16px; gap: 8px; background: var(--bg-raised); border-bottom: 1px solid var(--border-subtle); flex-shrink: 0; }
+    .content-area { flex: 1; overflow-y: auto; padding: 16px; }
+    .panel-screen { display: none; height: 100%; }
+    .panel-screen.active { display: flex; flex-direction: column; }
+    .inp { height: 28px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 0 10px; color: var(--text-primary); font-family: var(--font-mono); font-size: 12px; outline: none; }
+    .inp:focus { border-color: var(--accent-blue); }
+    .btn-run { height: 28px; padding: 0 14px; border: none; border-radius: 6px; font-family: var(--font-mono); font-size: 11px; font-weight: 600; cursor: pointer; color: white; white-space: nowrap; }
+    .subtab { padding: 4px 10px; font-size: 10px; font-family: var(--font-mono); color: var(--text-muted); border-radius: 4px; cursor: pointer; background: transparent; border: none; }
+    .subtab.active { color: var(--text-primary); background: var(--bg-surface); }
+    .badge { display: inline-block; padding: 1px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; font-family: var(--font-mono); }
+    .badge.crit { background: rgba(239,68,68,0.15); color: var(--accent-red); }
+    .badge.high { background: rgba(249,115,22,0.15); color: var(--accent-orange); }
+    .badge.med { background: rgba(245,158,11,0.15); color: var(--accent-amber); }
+    .badge.low { background: rgba(59,130,246,0.15); color: var(--accent-blue); }
+    .badge.info { background: rgba(113,113,122,0.15); color: var(--text-muted); }
+    .card { background: var(--bg-raised); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; }
+    .card:hover { border-color: var(--border-medium); }
+    .mono { font-family: var(--font-mono); }
+    .dim { color: var(--text-dim); }
+    .muted { color: var(--text-muted); }
+    .sec { color: var(--text-secondary); }
+    .sm { font-size: 11px; }
+    .xs { font-size: 10px; }
+    .mt { margin-top: 12px; }
+    .mb { margin-bottom: 12px; }
+    .tag { font-family: var(--font-mono); font-size: 10px; padding: 2px 7px; border-radius: 4px; background: var(--bg-surface); color: var(--text-muted); display: inline-block; margin: 2px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th { text-align: left; font-family: var(--font-mono); font-size: 10px; font-weight: 600; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; padding: 6px 12px; border-bottom: 1px solid var(--border-subtle); background: var(--bg-deep); position: sticky; top: 0; }
+    td { padding: 8px 12px; border-bottom: 1px solid var(--border-subtle); color: var(--text-secondary); font-family: var(--font-mono); font-size: 11px; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .vuln-act { font-size: 10px; font-family: var(--font-mono); padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border-subtle); background: transparent; color: var(--text-muted); cursor: pointer; }
+    .vuln-act:hover { border-color: var(--border-medium); color: var(--text-primary); }
+
+    /* REPORT PREVIEW */
+    .report-preview { background: #fafafa; color: #1a1a1a; border-radius: 8px; padding: 40px; font-family: 'Georgia', serif; font-size: 13px; line-height: 1.7; max-height: 100%; overflow-y: auto; }
+    .report-preview h1 { font-size: 22px; margin-bottom: 4px; color: #111; font-family: var(--font-sans); }
+    .report-preview h2 { font-size: 16px; margin-top: 24px; margin-bottom: 8px; color: #333; font-family: var(--font-sans); border-bottom: 1px solid #ddd; padding-bottom: 4px; }
+    .report-preview h3 { font-size: 14px; margin-top: 16px; margin-bottom: 4px; color: #444; font-family: var(--font-sans); }
+    .report-preview p { margin-bottom: 8px; }
+    .report-preview .report-meta { font-size: 11px; color: #888; font-family: var(--font-mono); margin-bottom: 20px; }
+    .report-preview .finding-box { border: 1px solid #ddd; border-radius: 6px; padding: 12px; margin: 10px 0; background: #fff; }
+    .report-preview .finding-box.critical { border-left: 4px solid #ef4444; }
+    .report-preview .finding-box.high { border-left: 4px solid #f97316; }
+    .report-preview .sev-label { font-family: var(--font-mono); font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 3px; }
+    .report-preview .sev-label.critical { background: #fef2f2; color: #dc2626; }
+    .report-preview .sev-label.high { background: #fff7ed; color: #ea580c; }
+    .report-preview table { font-family: var(--font-sans); font-size: 12px; }
+    .report-preview th { background: #f5f5f5; color: #555; border-bottom: 2px solid #ddd; text-transform: none; letter-spacing: 0; font-size: 12px; }
+    .report-preview td { color: #333; border-bottom: 1px solid #eee; font-family: var(--font-sans); font-size: 12px; }
+    .report-preview code { font-family: var(--font-mono); font-size: 11px; background: #f0f0f0; padding: 1px 4px; border-radius: 2px; }
+    .report-preview .confidential { text-align: center; font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; color: #999; text-transform: uppercase; margin-bottom: 30px; }
+
+    /* STASH */
+    .stash-item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: var(--bg-raised); border: 1px solid var(--border-subtle); border-radius: 8px; margin-bottom: 6px; cursor: pointer; transition: border-color 0.15s; }
+    .stash-item:hover { border-color: var(--border-medium); }
+    .stash-type { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+    .stash-type.cred { background: rgba(245,158,11,0.1); }
+    .stash-type.host { background: rgba(59,130,246,0.1); }
+    .stash-type.vuln { background: rgba(239,68,68,0.1); }
+    .stash-type.code { background: rgba(168,85,247,0.1); }
+    .stash-type.raw { background: rgba(113,113,122,0.1); }
+    .stash-type.note { background: rgba(34,197,94,0.1); }
+    .stash-body { flex: 1; min-width: 0; }
+    .stash-label { font-size: 12px; font-weight: 500; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .stash-meta { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); margin-top: 2px; }
+    .stash-actions { display: flex; gap: 4px; flex-shrink: 0; }
+
+    /* FINDING WIZARD */
+    .wizard-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 100; }
+    .wizard-panel { width: 700px; max-height: 80vh; background: var(--bg-base); border: 1px solid var(--border-subtle); border-radius: 16px; overflow: hidden; box-shadow: 0 40px 120px rgba(0,0,0,0.6); display: flex; flex-direction: column; }
+    .wizard-header { padding: 16px 20px; border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; }
+    .wizard-title { font-size: 16px; font-weight: 700; }
+    .wizard-close { width: 28px; height: 28px; border-radius: 6px; border: none; background: var(--bg-surface); color: var(--text-muted); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+    .wizard-body { flex: 1; overflow-y: auto; padding: 20px; }
+    .wizard-footer { padding: 14px 20px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: flex-end; gap: 8px; }
+    .wizard-btn { padding: 8px 20px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; border: none; font-family: var(--font-sans); }
+    .wizard-btn.primary { background: var(--text-primary); color: var(--bg-deep); }
+    .wizard-btn.secondary { background: transparent; color: var(--text-muted); border: 1px solid var(--border-medium); }
+    .form-group { margin-bottom: 14px; }
+    .form-label { font-size: 11px; font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; display: block; }
+    .form-input { width: 100%; height: 32px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 0 10px; color: var(--text-primary); font-size: 12px; outline: none; font-family: var(--font-sans); }
+    .form-textarea { width: 100%; min-height: 60px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 8px 10px; color: var(--text-primary); font-size: 12px; outline: none; resize: vertical; font-family: var(--font-sans); line-height: 1.5; }
+    .form-select { width: 100%; height: 32px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 0 10px; color: var(--text-primary); font-size: 12px; outline: none; }
+    .form-row { display: flex; gap: 10px; }
+    .form-row > * { flex: 1; }
+    .evidence-item { display: flex; align-items: center; gap: 8px; padding: 6px 8px; background: var(--bg-surface); border-radius: 4px; margin-bottom: 4px; font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); }
+    .evidence-item .ev-icon { color: var(--accent-cyan); }
+    .evidence-item .ev-remove { margin-left: auto; color: var(--text-dim); cursor: pointer; }
+    .chain-step { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; }
+    .chain-num { width: 22px; height: 22px; border-radius: 50%; background: var(--bg-surface); border: 1px solid var(--border-medium); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); flex-shrink: 0; }
+    .chain-text { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<div class="phase-label">P3: Output & Delivery</div>
+
+<div class="app">
+  <div class="titlebar">
+    <div class="tl-group"><div class="tl r"></div><div class="tl y"></div><div class="tl g"></div></div>
+    <div class="titlebar-t">exploitbot — Acme Corp External</div>
+  </div>
+
+  <div class="tab-bar">
+    <div class="tab" onclick="showTab('report')" id="tab-report">Report</div>
+    <div class="tab" onclick="showTab('stash')" id="tab-stash">Stash</div>
+    <div class="tab" onclick="showTab('wizard')" id="tab-wizard">Finding Wizard</div>
+  </div>
+
+  <div class="main">
+
+    <!-- ═══════════ REPORTING TAB ═══════════ -->
+    <div class="panel-screen" id="panel-report">
+      <div class="toolbar">
+        <div style="display:flex;gap:2px">
+          <button class="subtab active">Findings</button>
+          <button class="subtab">Preview</button>
+          <button class="subtab">Branding</button>
+        </div>
+        <div style="flex:1"></div>
+        <select class="inp" style="width:160px"><option>Full Pentest Report</option><option>Bug Bounty</option><option>Executive Brief</option><option>Technical Writeup</option></select>
+        <button class="btn-run" style="background:var(--text-muted)">📄 Generate Report</button>
+        <button class="btn-run" style="background:var(--accent-blue)">⬇ Export PDF</button>
+      </div>
+
+      <div style="flex:1;display:flex;overflow:hidden;">
+        <!-- LEFT: Findings list -->
+        <div style="width:380px;border-right:1px solid var(--border-subtle);overflow-y:auto;padding:12px;">
+          <div style="display:flex;gap:8px;margin-bottom:12px;">
+            <div class="card" style="flex:1;text-align:center;padding:8px;border-left:3px solid var(--accent-red)"><div class="mono xs dim">CRIT</div><div style="font-size:20px;font-weight:700;color:var(--accent-red)">2</div></div>
+            <div class="card" style="flex:1;text-align:center;padding:8px;border-left:3px solid var(--accent-orange)"><div class="mono xs dim">HIGH</div><div style="font-size:20px;font-weight:700;color:var(--accent-orange)">5</div></div>
+            <div class="card" style="flex:1;text-align:center;padding:8px;border-left:3px solid var(--accent-amber)"><div class="mono xs dim">MED</div><div style="font-size:20px;font-weight:700;color:var(--accent-amber)">12</div></div>
+            <div class="card" style="flex:1;text-align:center;padding:8px;border-left:3px solid var(--accent-blue)"><div class="mono xs dim">LOW</div><div style="font-size:20px;font-weight:700;color:var(--accent-blue)">8</div></div>
+          </div>
+
+          <div class="card" style="cursor:pointer;border-left:3px solid var(--accent-red)">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+              <span class="badge crit">CRITICAL</span>
+              <span class="mono xs dim">CVSS 9.8</span>
+              <span class="mono xs" style="color:var(--accent-green);margin-left:auto">confirmed</span>
+            </div>
+            <div style="font-size:13px;font-weight:600">CVE-2021-41773 — Apache Path Traversal + RCE</div>
+            <div class="mono xs dim mt" style="margin-top:4px">dev.acme.com · nuclei + manual verification</div>
+          </div>
+
+          <div class="card" style="cursor:pointer;border-left:3px solid var(--accent-red)">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+              <span class="badge crit">CRITICAL</span>
+              <span class="mono xs dim">CVSS 9.1</span>
+              <span class="mono xs" style="color:var(--accent-green);margin-left:auto">confirmed</span>
+            </div>
+            <div style="font-size:13px;font-weight:600">Jenkins Dashboard — Unauthenticated RCE</div>
+            <div class="mono xs dim mt" style="margin-top:4px">jenkins.acme.com · nuclei</div>
+          </div>
+
+          <div class="card" style="cursor:pointer;border-left:3px solid var(--accent-orange)">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+              <span class="badge high">HIGH</span>
+              <span class="mono xs dim">CVSS 7.5</span>
+              <span class="mono xs" style="color:var(--accent-green);margin-left:auto">confirmed</span>
+            </div>
+            <div style="font-size:13px;font-weight:600">Exposed .git Directory</div>
+            <div class="mono xs dim mt" style="margin-top:4px">staging.acme.com · nuclei</div>
+          </div>
+
+          <div class="card" style="cursor:pointer;border-left:3px solid var(--accent-orange)">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+              <span class="badge high">HIGH</span>
+              <span class="mono xs dim">CVSS 7.2</span>
+              <span class="mono xs" style="color:var(--accent-green);margin-left:auto">confirmed</span>
+            </div>
+            <div style="font-size:13px;font-weight:600">SQL Injection — login parameter</div>
+            <div class="mono xs dim mt" style="margin-top:4px">old.acme.com · sqlmap</div>
+          </div>
+
+          <div class="card" style="cursor:pointer;border-left:3px solid var(--accent-orange)">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+              <span class="badge high">HIGH</span>
+              <span class="mono xs dim">CVSS 7.0</span>
+              <span class="mono xs" style="color:var(--accent-amber);margin-left:auto">unconfirmed</span>
+            </div>
+            <div style="font-size:13px;font-weight:600">SUID pkexec — PwnKit (CVE-2021-4034)</div>
+            <div class="mono xs dim mt" style="margin-top:4px">dev.acme.com · linpeas</div>
+          </div>
+
+          <div class="card" style="cursor:pointer;border-left:3px solid var(--accent-amber)">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+              <span class="badge med">MEDIUM</span>
+              <span class="mono xs dim">CVSS 6.1</span>
+              <span class="mono xs" style="color:var(--accent-green);margin-left:auto">confirmed</span>
+            </div>
+            <div style="font-size:13px;font-weight:600">Reflected XSS — search parameter</div>
+            <div class="mono xs dim mt" style="margin-top:4px">old.acme.com · dalfox</div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Report Preview -->
+        <div style="flex:1;overflow-y:auto;padding:16px;">
+          <div class="report-preview">
+            <div class="confidential">CONFIDENTIAL — ACME CORP</div>
+            <h1>Penetration Test Report</h1>
+            <div class="report-meta">
+              Client: Acme Corporation<br>
+              Assessment Date: March 23, 2026<br>
+              Assessor: exploitbot (autonomous)<br>
+              Classification: Confidential
+            </div>
+
+            <h2>1. Executive Summary</h2>
+            <p>An external penetration test was conducted against Acme Corporation's internet-facing infrastructure. The assessment identified <strong>27 vulnerabilities</strong> including 2 critical, 5 high, 12 medium, and 8 low severity findings. Two critical vulnerabilities allow remote code execution on production systems, posing an immediate risk of full infrastructure compromise.</p>
+            <p>The most severe finding — CVE-2021-41773 on dev.acme.com — allows unauthenticated attackers to execute arbitrary commands on the web server. Combined with the unauthenticated Jenkins dashboard, an attacker could achieve persistent access to the internal network within minutes.</p>
+
+            <h2>2. Findings Summary</h2>
+            <table>
+              <thead>
+                <tr><th>#</th><th>Finding</th><th>Severity</th><th>CVSS</th><th>Target</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>Apache Path Traversal + RCE</td><td><span class="sev-label critical">CRITICAL</span></td><td>9.8</td><td>dev.acme.com</td><td>Confirmed</td></tr>
+                <tr><td>2</td><td>Jenkins Unauthenticated RCE</td><td><span class="sev-label critical">CRITICAL</span></td><td>9.1</td><td>jenkins.acme.com</td><td>Confirmed</td></tr>
+                <tr><td>3</td><td>Exposed .git Directory</td><td><span class="sev-label high">HIGH</span></td><td>7.5</td><td>staging.acme.com</td><td>Confirmed</td></tr>
+                <tr><td>4</td><td>SQL Injection</td><td><span class="sev-label high">HIGH</span></td><td>7.2</td><td>old.acme.com</td><td>Confirmed</td></tr>
+                <tr><td>5</td><td>SUID pkexec PwnKit</td><td><span class="sev-label high">HIGH</span></td><td>7.0</td><td>dev.acme.com</td><td>Unconfirmed</td></tr>
+                <tr><td>6</td><td>Reflected XSS</td><td style="color:#ea580c">MEDIUM</td><td>6.1</td><td>old.acme.com</td><td>Confirmed</td></tr>
+              </tbody>
+            </table>
+
+            <h2>3. Detailed Findings</h2>
+
+            <div class="finding-box critical">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+                <span class="sev-label critical">CRITICAL</span>
+                <strong>Finding #1: CVE-2021-41773 — Apache Path Traversal + RCE</strong>
+              </div>
+              <p><strong>Target:</strong> <code>dev.acme.com:443</code></p>
+              <p><strong>CVSS:</strong> 9.8 (AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H)</p>
+              <p><strong>Description:</strong> Apache HTTP Server 2.4.49 contains a path traversal vulnerability that allows reading arbitrary files. When mod_cgi is enabled, this escalates to remote code execution.</p>
+              <h3>Attack Chain</h3>
+              <p>1. subfinder discovered dev.acme.com → 2. httpx identified Apache/2.4.49 → 3. nuclei confirmed CVE-2021-41773 → 4. Manual curl verified /etc/passwd readable → 5. CGI-bin RCE confirmed via reverse shell</p>
+              <h3>Impact</h3>
+              <p>An unauthenticated attacker can execute arbitrary commands on the web server, leading to full server compromise, lateral movement, and data exfiltration.</p>
+              <h3>Remediation</h3>
+              <p>Upgrade Apache HTTP Server to version 2.4.51 or later. As an immediate mitigation, disable mod_cgi and restrict access to the server.</p>
+            </div>
+
+            <div class="finding-box high">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+                <span class="sev-label high">HIGH</span>
+                <strong>Finding #3: Exposed .git Directory</strong>
+              </div>
+              <p><strong>Target:</strong> <code>staging.acme.com:443/.git/</code></p>
+              <p><strong>CVSS:</strong> 7.5</p>
+              <p><strong>Description:</strong> The .git directory is publicly accessible, allowing anyone to download the complete source code repository including commit history, configuration files, and potentially embedded credentials.</p>
+              <h3>Remediation</h3>
+              <p>Block access to .git directories in the web server configuration. Audit the repository for embedded credentials and rotate any found.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ STASH TAB ═══════════ -->
+    <div class="panel-screen" id="panel-stash">
+      <div class="toolbar">
+        <div style="display:flex;gap:2px">
+          <button class="subtab active">All</button>
+          <button class="subtab">Credentials</button>
+          <button class="subtab">Hosts</button>
+          <button class="subtab">Vulns</button>
+          <button class="subtab">Code</button>
+          <button class="subtab">Raw</button>
+        </div>
+        <div style="flex:1"></div>
+        <input class="inp" placeholder="Search stash..." style="max-width:200px">
+        <select class="inp" style="width:120px"><option>All Ops</option><option>Acme Corp</option><option>AD Pivot</option></select>
+        <button class="btn-run" style="background:var(--bg-surface);color:var(--text-muted);border:1px solid var(--border-subtle)">⬇ Export</button>
+      </div>
+      <div class="content-area">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim);margin-bottom:12px">14 items · 3 credentials · 4 hosts · 3 vulns · 2 code · 2 raw</div>
+
+        <div class="stash-item">
+          <div class="stash-type cred">🔑</div>
+          <div class="stash-body">
+            <div class="stash-label">admin : Summer2024! (NTLM cracked)</div>
+            <div class="stash-meta">Credential · from Creds tab · Acme Corp External · 14:32</div>
+          </div>
+          <div class="stash-actions">
+            <button class="vuln-act">→ Send</button>
+            <button class="vuln-act">⚡ Finding</button>
+          </div>
+        </div>
+
+        <div class="stash-item">
+          <div class="stash-type cred">🔑</div>
+          <div class="stash-body">
+            <div class="stash-label">svc_sql : SQLadmin123# (Kerberoast cracked)</div>
+            <div class="stash-meta">Credential · from Creds tab · Acme Corp External · 14:32</div>
+          </div>
+          <div class="stash-actions">
+            <button class="vuln-act">→ Send</button>
+            <button class="vuln-act">⚡ Finding</button>
+          </div>
+        </div>
+
+        <div class="stash-item">
+          <div class="stash-type cred">🔑</div>
+          <div class="stash-body">
+            <div class="stash-label">root : Acm3_Pr0d_2024! (found in /var/www/.env)</div>
+            <div class="stash-meta">Credential · from Post tab · Acme Corp External · 14:38</div>
+          </div>
+          <div class="stash-actions">
+            <button class="vuln-act">→ Send</button>
+            <button class="vuln-act">⚡ Finding</button>
+          </div>
+        </div>
+
+        <div class="stash-item">
+          <div class="stash-type host">🌐</div>
+          <div class="stash-body">
+            <div class="stash-label">47 subdomains — acme.com (subfinder results)</div>
+            <div class="stash-meta">Subdomain list · from Recon tab · Acme Corp External · 14:23</div>
+          </div>
+          <div class="stash-actions">
+            <button class="vuln-act">→ Send</button>
+          </div>
+        </div>
+
+        <div class="stash-item">
+          <div class="stash-type host">🌐</div>
+          <div class="stash-body">
+            <div class="stash-label">12 live web hosts — httpx results</div>
+            <div class="stash-meta">Host list · from Recon tab · Acme Corp External · 14:24</div>
+          </div>
+          <div class="stash-actions">
+            <button class="vuln-act">→ Send</button>
+          </div>
+        </div>
+
+        <div class="stash-item">
+          <div class="stash-type host">🌐</div>
+          <div class="stash-body">
+            <div class="stash-label">DC01 (10.0.0.10) — Domain Controller, SMB signing disabled</div>
+            <div class="stash-meta">Host · from Network tab · Internal AD Pivot · 15:01</div>
+          </div>
+          <div class="stash-actions">
+            <button class="vuln-act">→ Send</button>
+          </div>
+        </div>
+
+        <div class="stash-item">
+          <div class="stash-type host">🌐</div>
+          <div class="stash-body">
+            <div class="stash-label">5 SMB hosts — netexec scan results</div>
+            <div class="stash-meta">Host list · from Network tab · Internal AD Pivot · 15:02</div>
+          </div>
+          <div class="stash-actions">
+            <button class="vuln-act">→ Send</button>
+          </div>
+        </div>
+
+        <div class="stash-item">
+          <div class="stash-type vuln">⚠️</div>
+          <div class="stash-body">
+            <div class="stash-label">CVE-2021-41773 — Apache 2.4.49 RCE on dev.acme.com</div>
+            <div class="stash-meta">Vulnerability · from Web tab · Acme Corp External · 14:25</div>
+          </div>
+          <div class="stash-actions">
+            <button class="vuln-act">→ Send</button>
+            <button class="vuln-act">⚡ Finding</button>
+          </div>
+        </div>
+
+        <div class="stash-item">
+          <div class="stash-type vuln">⚠️</div>
+          <div class="stash-body">
+            <div class="stash-label">Jenkins unauthenticated — Script Console RCE</div>
+            <div class="stash-meta">Vulnerability · from Web tab · Acme Corp External · 14:26</div>
+          </div>
+          <div class="stash-actions">
+            <button class="vuln-act">→ Send</button>
+            <button class="vuln-act">⚡ Finding</button>
+          </div>
+        </div>
+
+        <div class="stash-item">
+          <div class="stash-type vuln">⚠️</div>
+          <div class="stash-body">
+            <div class="stash-label">SQL Injection — old.acme.com/login.php?user= (MySQL blind)</div>
+            <div class="stash-meta">Vulnerability · from Web tab · Acme Corp External · 14:28</div>
+          </div>
+          <div class="stash-actions">
+            <button class="vuln-act">→ Send</button>
+            <button class="vuln-act">⚡ Finding</button>
+          </div>
+        </div>
+
+        <div class="stash-item">
+          <div class="stash-type code">💻</div>
+          <div class="stash-body">
+            <div class="stash-label">curl payload — CVE-2021-41773 /etc/passwd read</div>
+            <div class="stash-meta">Code snippet · from Chat · Acme Corp External · 14:30</div>
+          </div>
+          <div class="stash-actions">
+            <button class="vuln-act">📋 Copy</button>
+            <button class="vuln-act">→ Send</button>
+          </div>
+        </div>
+
+        <div class="stash-item">
+          <div class="stash-type code">💻</div>
+          <div class="stash-body">
+            <div class="stash-label">Reverse shell one-liner — bash TCP to 10.0.0.100:4444</div>
+            <div class="stash-meta">Code snippet · from Exploit tab · Acme Corp External · 14:35</div>
+          </div>
+          <div class="stash-actions">
+            <button class="vuln-act">📋 Copy</button>
+            <button class="vuln-act">→ Send</button>
+          </div>
+        </div>
+
+        <div class="stash-item">
+          <div class="stash-type raw">📄</div>
+          <div class="stash-body">
+            <div class="stash-label">/etc/passwd contents from dev.acme.com</div>
+            <div class="stash-meta">Raw output · from Chat · Acme Corp External · 14:30</div>
+          </div>
+          <div class="stash-actions">
+            <button class="vuln-act">→ Send</button>
+          </div>
+        </div>
+
+        <div class="stash-item">
+          <div class="stash-type raw">📄</div>
+          <div class="stash-body">
+            <div class="stash-label">nuclei full scan output — 50 results</div>
+            <div class="stash-meta">Raw output · from Web tab · Acme Corp External · 14:27</div>
+          </div>
+          <div class="stash-actions">
+            <button class="vuln-act">→ Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ FINDING WIZARD ═══════════ -->
+    <div class="panel-screen" id="panel-wizard" style="position:relative">
+      <div class="wizard-overlay">
+        <div class="wizard-panel">
+          <div class="wizard-header">
+            <div class="wizard-title">⚡ Create Finding</div>
+            <button class="wizard-close">✕</button>
+          </div>
+          <div class="wizard-body">
+            <div class="form-group">
+              <label class="form-label">Title</label>
+              <input class="form-input" value="CVE-2021-41773 — Apache Path Traversal + Remote Code Execution">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Vulnerability Type</label>
+                <select class="form-select"><option>RCE</option><option>SQLi</option><option>XSS</option><option>Path Traversal</option><option>Misconfig</option><option>Privesc</option><option>Info Disclosure</option></select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Severity</label>
+                <select class="form-select"><option selected>Critical</option><option>High</option><option>Medium</option><option>Low</option><option>Info</option></select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">CVSS Score</label>
+                <input class="form-input" value="9.8" style="font-family:var(--font-mono)">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Target</label>
+              <input class="form-input" value="dev.acme.com:443" style="font-family:var(--font-mono)">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Description</label>
+              <textarea class="form-textarea" style="min-height:50px">Apache HTTP Server 2.4.49 contains a path traversal vulnerability (CVE-2021-41773) that allows reading arbitrary files outside the document root. When mod_cgi is enabled, this escalates to remote code execution via crafted URL-encoded path traversal sequences.</textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Attack Chain <span class="dim xs">(auto-reconstructed from Op context)</span></label>
+              <div style="background:var(--bg-input);border:1px solid var(--border-subtle);border-radius:6px;padding:10px">
+                <div class="chain-step"><div class="chain-num">1</div><div class="chain-text">Subdomain enumeration via <strong>subfinder</strong> discovered dev.acme.com</div></div>
+                <div class="chain-step"><div class="chain-num">2</div><div class="chain-text"><strong>httpx</strong> identified Apache/2.4.49 on dev.acme.com:443</div></div>
+                <div class="chain-step"><div class="chain-num">3</div><div class="chain-text"><strong>nuclei</strong> CVE-2021-41773 template confirmed path traversal</div></div>
+                <div class="chain-step"><div class="chain-num">4</div><div class="chain-text">Manual <strong>curl</strong> request read /etc/passwd via URL-encoded dots</div></div>
+                <div class="chain-step"><div class="chain-num">5</div><div class="chain-text">CGI-bin execution confirmed — reverse shell established via <strong>pwncat</strong></div></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Evidence <span class="dim xs">(auto-attached from tool outputs)</span></label>
+              <div class="evidence-item"><span class="ev-icon">📄</span> nuclei output — CVE-2021-41773 confirmed <span class="ev-remove">✕</span></div>
+              <div class="evidence-item"><span class="ev-icon">📄</span> curl response — /etc/passwd contents <span class="ev-remove">✕</span></div>
+              <div class="evidence-item"><span class="ev-icon">💻</span> Exploit payload — path traversal + CGI <span class="ev-remove">✕</span></div>
+              <div class="evidence-item"><span class="ev-icon">🖥</span> Reverse shell session log <span class="ev-remove">✕</span></div>
+              <div style="margin-top:6px"><button class="vuln-act">+ Add Evidence</button> <button class="vuln-act">📦 From Stash</button></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Impact <span class="dim xs">(model-generated)</span></label>
+              <textarea class="form-textarea" style="min-height:40px">Unauthenticated remote code execution allows full server compromise. Attacker can read sensitive files, execute commands, install backdoors, and pivot to internal network. Combined with the discovered MySQL credentials, database compromise is also achievable.</textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Remediation <span class="dim xs">(model-generated)</span></label>
+              <textarea class="form-textarea" style="min-height:40px">1. Upgrade Apache to 2.4.51+ immediately. 2. Disable mod_cgi if not required. 3. Implement WAF rules for path traversal patterns. 4. Audit server for indicators of compromise. 5. Rotate all credentials accessible from the server.</textarea>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">CVE ID</label>
+                <input class="form-input" value="CVE-2021-41773" style="font-family:var(--font-mono)">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Status</label>
+                <select class="form-select"><option selected>Confirmed</option><option>Unconfirmed</option><option>False Positive</option></select>
+              </div>
+            </div>
+          </div>
+          <div class="wizard-footer">
+            <button class="wizard-btn secondary">Cancel</button>
+            <button class="wizard-btn primary">Create Finding</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function showTab(name) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel-screen').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    document.getElementById('panel-' + name).classList.add('active');
+  }
+  showTab('report');
+
+  const style = document.createElement('style');
+  style.textContent = `
+    .tab[data-c="report"].active::after { background: var(--text-muted); }
+    .tab[data-c="stash"].active::after { background: var(--accent-cyan); }
+    .tab[data-c="wizard"].active::after { background: var(--accent-green); }
+  `;
+  document.head.appendChild(style);
+  document.getElementById('tab-report').setAttribute('data-c','report');
+  document.getElementById('tab-stash').setAttribute('data-c','stash');
+  document.getElementById('tab-wizard').setAttribute('data-c','wizard');
+</script>
+
+</body>
+</html>
