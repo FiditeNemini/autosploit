@@ -52,54 +52,163 @@
 ## F002: Onboarding (First Run)
 
 ### F002.1: Language Selection
-- [ ] Screen shows "Choose your language" in all 5 languages simultaneously
-- [ ] Flag + native language name for each (🇺🇸 English, 🇰🇷 한국어, 🇨🇳 中文, 🇪🇸 Español, 🇯🇵 日本語)
-- [ ] Selection immediately switches all UI text
-- [ ] Language stored in settings
-- [ ] Back button disabled (first screen)
+- [ ] Step indicator: dot 1 active, dots 2-4 inactive
+- [ ] Title: "Choose your language" displayed in current language
+- [ ] Description text: explains what language affects (menus, tools, reports)
+- [ ] 5 language cards in grid:
+  - [ ] 🇺🇸 English card (default selected)
+  - [ ] 🇰🇷 한국어 (Korean) card
+  - [ ] 🇨🇳 中文 (Chinese) card
+  - [ ] 🇪🇸 Español (Spanish) card
+  - [ ] 🇯🇵 日本語 (Japanese) card
+- [ ] Each card shows: flag emoji, native name, English name
+- [ ] Click card → selected border style (white border)
+- [ ] Click card → ALL UI text immediately translates:
+  - [ ] Screen title translates
+  - [ ] Screen description translates
+  - [ ] Step labels translate (Language/Model/Tools/First Op → 언어/모델/도구/첫 Op etc.)
+  - [ ] Button text translates (Continue → 계속 etc.)
+  - [ ] All subsequent screens pre-translated
+- [ ] Only one card selectable at a time
+- [ ] Back button: hidden (first screen)
+- [ ] Skip button: hidden (language required)
+- [ ] Continue button: enabled always (default English)
+- [ ] Language stored in settings DB
+- [ ] Language persists across app restarts
 
 ### F002.2: Model Download
-- [ ] Auto-detect system RAM via ProcessInfo.processInfo.physicalMemory
-- [ ] Highlight compatible tiers based on RAM
-- [ ] Show S/M/L/XL tier cards with model names, sizes, MMLU scores
-- [ ] Download progress bar (bytes downloaded / total, speed, ETA)
-- [ ] Pause button during download
-- [ ] Resume button (HTTP range requests)
-- [ ] Cancel button with confirmation ("Are you sure? Progress will be lost")
-- [ ] Disk space check before download starts
-- [ ] Insufficient disk space warning with needed vs available
-- [ ] Download failure → retry button + error details
-- [ ] Network disconnection during download → pause + notification
-- [ ] "Skip for now" option (user can download later from settings)
-- [ ] Custom HuggingFace URL input field
-- [ ] HF URL validation (exists, has model files)
-- [ ] Show model architecture + format detection after download
-- [ ] JANG format auto-detected
-- [ ] Safetensors format auto-detected
-- [ ] GGUF format detected + warning (not native, slower)
+- [ ] Step indicator: dot 1 done (✓), dot 2 active
+- [ ] Title: "Download a model" (translated)
+- [ ] Description: explains tier selection (translated)
+- [ ] RAM detection banner:
+  - [ ] Auto-detect via ProcessInfo.processInfo.physicalMemory
+  - [ ] Display: "Detected: X GB Unified Memory"
+  - [ ] Tiers exceeding RAM are dimmed/disabled
+  - [ ] Banner color: blue info style
+- [ ] 3 tier cards (S/M/L):
+  - [ ] **S card** (~30 GB, 32+ GB RAM):
+    - [ ] Model: Qwen3.5-VL-122B-A10B-UNCENSORED-JANG_2S
+    - [ ] HF link: dealignai org (clickable, opens browser)
+    - [ ] "UNCENSORED" badge in green
+    - [ ] Vision capable indicator
+  - [ ] **M card** (~60 GB, 64+ GB RAM):
+    - [ ] Model: MiniMax-M2.5-UNCENSORED-JANG_2L
+    - [ ] "REC" recommended badge (top-right)
+    - [ ] HF link: dealignai org
+    - [ ] "UNCENSORED" badge in green
+  - [ ] **L card** (~112 GB, 128+ GB RAM):
+    - [ ] Model: Qwen3.5-VL-397B-A17B-UNCENSORED-JANG_1L
+    - [ ] HF link: dealignai org
+    - [ ] "UNCENSORED" badge in green
+    - [ ] Vision capable indicator
+- [ ] Click tier card → selected border, starts download
+- [ ] Only one tier selectable at a time
+- [ ] Custom HuggingFace URL input:
+  - [ ] Text field below tier cards
+  - [ ] Label: "Or paste a HuggingFace model URL:"
+  - [ ] Placeholder: "https://huggingface.co/..."
+  - [ ] URL validation on blur (check HF API for model existence)
+  - [ ] Invalid URL → red border + error message
+- [ ] Download progress area (appears when tier selected):
+  - [ ] Progress bar: gradient fill (blue→purple), percentage width
+  - [ ] Left text: model name + format
+  - [ ] Right text: "X.X GB / Y GB · Z MB/s · ~N min left"
+  - [ ] Pause button: ⏸ toggles to ▶ Resume
+  - [ ] Cancel button: ✕ with red text
+  - [ ] Pause state: progress bar frozen, speed shows "paused"
+  - [ ] Cancel: hides progress area, resets selection
+  - [ ] Complete state: bar turns green, text shows "Complete ✓"
+  - [ ] Download uses HTTP range requests for resume after pause
+- [ ] Disk space check:
+  - [ ] Before download starts: compare needed vs available
+  - [ ] Insufficient: warning banner "Need X GB, only Y GB available"
+  - [ ] Download blocked until space freed
+- [ ] Network failure during download:
+  - [ ] Auto-pause with notification
+  - [ ] "Retry" button appears
+  - [ ] Already-downloaded bytes preserved for resume
+- [ ] "Skip for now" button visible
+- [ ] Back button: returns to language selection
+- [ ] Continue button: disabled until download complete or skipped
 
 ### F002.3: Tool Installation
-- [ ] Status grid showing all 38 tools
-- [ ] Bundled tools → green checkmark, already installed
-- [ ] Lazy-install tools → gray, "Install" button
-- [ ] "Install All" button for lazy tools
-- [ ] Per-tool install progress (homebrew/pip/go output)
-- [ ] Install failure → red X + error log + retry button
-- [ ] "Skip for now" option (tools installable from tab UIs later)
-- [ ] Homebrew detection (is brew installed?)
-- [ ] Homebrew missing → install instructions or auto-install prompt
-- [ ] Python detection (is python3 available?)
-- [ ] Go detection (is go available?) — only if Go tools need building
-- [ ] Xcode CLI tools detection (needed for some compilations)
-- [ ] PATH verification: each installed tool executable from app's PATH
+- [ ] Step indicator: dots 1-2 done (✓), dot 3 active
+- [ ] Title: "Tool status" (translated)
+- [ ] Description: explains bundled vs installable (translated)
+- [ ] Summary bar: "22 bundled ✓" (green) + "16 need install" (gray)
+- [ ] Tool grid (3 columns, scrollable):
+  - [ ] Each tool item shows:
+    - [ ] Status icon: green ✓ (installed), gray — (missing), blue ⟳ (installing)
+    - [ ] Tool name (monospace)
+    - [ ] Tag: "bundled" (green) or "install" (blue, clickable)
+  - [ ] 22 bundled tools listed with green status:
+    - [ ] subfinder, dnsx, httpx, nuclei, katana, feroxbuster, ffuf, dalfox, arjun, chisel, haiti, trufflehog, testssl.sh, sherlock, holehe, exiftool, gowitness, jwt_tool, graphqlmap, linpeas, winpeas, seclists
+  - [ ] 16 installable tools listed with gray status:
+    - [ ] nmap, masscan, sqlmap, wpscan, theHarvester, hashcat, hydra, netexec, snmpwalk, tshark, bettercap, impacket, metasploit, pwncat, pwntools, sliver
+- [ ] Click "install" tag on individual tool:
+  - [ ] Status changes to blue ⟳ (installing)
+  - [ ] Install command runs (homebrew/pip/go)
+  - [ ] Success: changes to green ✓ + "bundled" → "installed" tag
+  - [ ] Failure: changes to red ✗ + "retry" tag + error tooltip
+- [ ] "Install All" button:
+  - [ ] Installs all missing tools sequentially
+  - [ ] Progress shown per tool
+  - [ ] Partial failure: shows which failed, others continue
+- [ ] Dependency detection:
+  - [ ] Homebrew: check `which brew`, prompt install if missing
+  - [ ] Python3: check `which python3`
+  - [ ] Go: check `which go` (only if needed)
+  - [ ] Xcode CLI: check `xcode-select -p`
+  - [ ] Missing dependency: banner "Homebrew required for some tools. Install?"
+- [ ] PATH verification:
+  - [ ] After each install: verify binary executable from app's PATH
+  - [ ] PATH includes: ~/.exploitbot/tools/ + bundled tool paths
+- [ ] "Skip for now" button visible
+- [ ] Back button: returns to model download
+- [ ] Continue button: always enabled (tools optional for basic use)
 
 ### F002.4: First Op Creation
-- [ ] Name input field
-- [ ] Optional target/scope description textarea
-- [ ] Optional scope definition (in-scope domains/IPs, out-of-scope)
-- [ ] Interaction mode selection (Autopilot/Copilot/Manual) with descriptions
-- [ ] "Create Op" button → transitions to main workspace
-- [ ] Op appears in sidebar immediately
+- [ ] Step indicator: dots 1-3 done (✓), dot 4 active
+- [ ] Title: "Create your first Op" (translated)
+- [ ] Description: explains what an Op is (translated)
+- [ ] Op Name field:
+  - [ ] Text input, required
+  - [ ] Placeholder: "e.g. Acme Corp External, Bug Bounty H1, Lab Practice"
+  - [ ] Validation: non-empty, max 100 chars
+  - [ ] Empty on submit: red border + "Name required" message
+- [ ] Scope textarea:
+  - [ ] Label: "Scope (optional)"
+  - [ ] Sublabel: "In-scope targets — one per line. Domains, IPs, CIDR ranges."
+  - [ ] Monospace font
+  - [ ] Placeholder: "acme.com\n*.acme.com\n104.21.32.0/24"
+  - [ ] Resizable vertically
+  - [ ] Supports: domains, wildcards (*.domain.com), IPs, CIDR notation
+  - [ ] Validation: each line checked for valid format
+- [ ] Interaction Mode selector (3 cards):
+  - [ ] **Autopilot card** (🤖):
+    - [ ] Name: "Autopilot"
+    - [ ] Description: "Full autonomous. Give a prompt, watch it work."
+    - [ ] Selected by default
+    - [ ] Selected state: white border
+  - [ ] **Copilot card** (🤝):
+    - [ ] Name: "Copilot"
+    - [ ] Description: "AI suggests, you approve. Safer for live targets."
+  - [ ] **Manual card** (🎯):
+    - [ ] Name: "Manual"
+    - [ ] Description: "You drive. AI assists in chat only."
+  - [ ] Only one selectable at a time
+- [ ] Scope enforcement toggle:
+  - [ ] Toggle switch + label: "Enforce scope (block out-of-scope targets)"
+  - [ ] Default: on (checked)
+  - [ ] Toggle track: green when on, gray when off
+- [ ] Back button: returns to tool installation
+- [ ] Skip button: hidden (Op required to proceed)
+- [ ] "Start Op →" button:
+  - [ ] Validates Op name
+  - [ ] Creates Op in database
+  - [ ] Sets as active Op
+  - [ ] Transitions to main workspace
+  - [ ] Op appears in sidebar immediately
 
 ---
 
