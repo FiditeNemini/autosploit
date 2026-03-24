@@ -73,7 +73,7 @@
 - [ ] Back button: hidden (first screen)
 - [ ] Skip button: hidden (language required)
 - [ ] Continue button: enabled always (default English)
-- [ ] Language stored in settings DB
+- [x] Language stored in settings DB
 - [ ] Language persists across app restarts
 
 ### F002.2: Model Download
@@ -103,9 +103,9 @@
     - [ ] Vision capable indicator
 - [ ] Click tier card → selected border, starts download
 - [ ] Only one tier selectable at a time
-- [ ] Custom HuggingFace URL input:
+- [x] Custom HuggingFace URL input:
   - [ ] Text field below tier cards
-  - [ ] Label: "Or paste a HuggingFace model URL:"
+  - [x] Label: "Or paste a HuggingFace model URL:"
   - [ ] Placeholder: "https://huggingface.co/..."
   - [ ] URL validation on blur (check HF API for model existence)
   - [ ] Invalid URL → red border + error message
@@ -137,7 +137,7 @@
   - [ ] Left text: model name + format
   - [ ] Right text: "X.X GB / Y GB · Z MB/s · ~N min left"
   - [ ] Pause button: ⏸ toggles to ▶ Resume
-  - [ ] Cancel button: ✕ with red text
+  - [x] Cancel button: ✕ with red text
   - [ ] Pause state: progress bar frozen, speed shows "paused"
   - [ ] Cancel: hides progress area, resets selection
   - [ ] Complete state: bar turns green, text shows "Complete ✓"
@@ -150,8 +150,8 @@
   - [ ] Auto-pause with notification
   - [ ] "Retry" button appears
   - [ ] Already-downloaded bytes preserved for resume
-- [ ] "Skip for now" button visible
-- [ ] Back button: returns to language selection
+- [x] "Skip for now" button visible
+- [x] Back button: returns to language selection
 - [ ] Continue button: disabled until download complete or skipped
 
 ### F002.3: Tool Installation
@@ -185,8 +185,8 @@
   - [ ] Missing dependency: banner "Homebrew required for some tools. Install?"
 - [ ] PATH verification:
   - [ ] After each install: verify binary executable from app's PATH
-  - [ ] PATH includes: ~/.exploitbot/tools/ + bundled tool paths
-- [ ] "Skip for now" button visible
+  - [x] PATH includes: ~/.exploitbot/tools/ + bundled tool paths
+- [x] "Skip for now" button visible
 - [ ] Back button: returns to model download
 - [ ] Continue button: always enabled (tools optional for basic use)
 
@@ -301,7 +301,7 @@
   - [ ] Multi-line support (Shift+Enter for newline) — not implemented, single line only
 - [x] Send button (↑ circle, toggles to ■ stop during streaming)
 - [ ] Attach file button — visual placeholder only, no handler
-- [ ] Paste image from clipboard
+- [x] Paste image from clipboard
 - [x] Paste text from clipboard — NSTextField supports cmd+V natively
 - [ ] "Pull from Stash" button — visual placeholder only
 - [ ] Character/token count indicator
@@ -409,7 +409,7 @@
   - [ ] Thinking blocks: purple italic background, model reasoning visible
   - [ ] Tool executions: tool name (cyan), command preview block, streaming output
   - [ ] Tool completions: success (green ✓) / failure (red ✗) with duration
-  - [ ] Vulnerability warnings: severity badge + CVE + target + CVSS
+  - [x] Vulnerability warnings: severity badge + CVE + target + CVSS
   - [ ] Finding creation events: "★ Finding #1 created: [title]" (green, bold)
   - [ ] Stash events: "📦 Stashed: [items]"
   - [ ] Shell establishment: "Shell established!" with Session badge
@@ -498,7 +498,7 @@
   - [ ] All tool execution initiated from left-panel forms
   - [ ] Model available in chat for:
     - [ ] "What should I try next?" → suggests but doesn't execute
-    - [ ] "Analyze this output" → interprets pasted results
+    - [x] "Analyze this output" → interprets pasted results
     - [ ] "Write me a payload for X" → generates code/commands
     - [ ] "Explain this CVE" → provides context
   - [ ] Tab UIs are the primary interface (chat is secondary)
@@ -740,7 +740,7 @@
 ### F009.1: Finding Creation — Wizard UI (FindingWizardView.swift)
 - [x] **Trigger points:**
   - [x] "⚡ Create Finding" button on Report tab (when empty)
-  - [ ] "⚡ Create Finding" button on vulnerability cards (Web tab) — button exists but not wired to wizard
+  - [x] "⚡ Create Finding" button on vulnerability cards (Web tab) — button exists but not wired to wizard
   - [ ] "⚡ Create Finding" button on LinPEAS/WinPEAS results (Post tab) — button exists but not wired
   - [ ] "⚡ Finding" button on Stash items
   - [ ] Right-click assistant message → "Create Finding from this"
@@ -801,15 +801,15 @@
   - [ ] If Stash items were source → linked, not copied
 
 ### F009.2: Finding Management
-- [ ] Findings list in Reporting tab left panel (filterable by severity, status)
-- [ ] Finding card shows: severity badge, CVSS, title, target, status, source tool
+- [x] Findings list in Reporting tab left panel (filterable by severity, status)
+- [x] Finding card shows: severity badge, CVSS, title, target, status, source tool
 - [ ] Click finding card → opens Finding detail/edit view (same wizard form, pre-filled)
 - [ ] **Status transitions:**
   - [ ] confirmed → remediated (after fix verified)
   - [ ] unconfirmed → confirmed (after manual verification)
   - [ ] any → false_positive (mark as not real)
   - [ ] Status change logged in activity feed
-- [ ] Severity change: CVSS auto-suggests based on vuln type, but user override allowed
+- [x] Severity change: CVSS auto-suggests based on vuln type, but user override allowed
 - [ ] **Evidence management:**
   - [ ] Add evidence from file picker, Stash, or clipboard
   - [ ] Remove evidence items
@@ -886,7 +886,7 @@
 - [ ] Model instructed to write in target language
 - [ ] Section headers in target language
 - [ ] Date/time formatting per locale
-- [ ] CVSS descriptions in target language
+- [x] CVSS descriptions in target language
 - [ ] Severity labels in target language (Critical/높음/严重/Crítico/重大)
 
 ---
@@ -894,7 +894,7 @@
 ## F011: Per-Tab UIs
 
 ### F011.1: Recon Tab
-- [ ] Target input bar (domain/IP, with "Scan" button)
+- [x] Target input bar (domain/IP, with "Scan" button)
 - [ ] Subtab: Subdomains (tree view, sortable table)
 - [ ] Subtab: Ports (port table with service info, filterable)
 - [ ] Subtab: Web Hosts (live hosts with status, title, tech)
@@ -919,29 +919,29 @@
 - [ ] Subtab: SSL/TLS (testssl results with grade)
 - [ ] Subtab: GraphQL (introspection schema viewer)
 - [ ] Subtab: JWT (token decoder + attack interface)
-- [ ] Vulnerability cards: severity badge, CVE, description, "Create Finding" button
+- [x] Vulnerability cards: severity badge, CVE, description, "Create Finding" button
 - [ ] Request/response viewer (for manual inspection)
-- [ ] Template selector (nuclei tag filter)
+- [x] Template selector (nuclei tag filter)
 - [ ] Accent color: orange
 
 ### F011.3: Network Tab
-- [ ] Target input bar (IP/range)
+- [x] Target input bar (IP/range)
 - [ ] Subtab: Protocol Attacks (netexec — SMB/WinRM/LDAP/RDP)
 - [ ] Subtab: SNMP (snmpwalk MIB browser)
 - [ ] Subtab: Packet Capture (tshark live view)
 - [ ] Subtab: MITM (bettercap controls)
 - [ ] Subtab: Tunnels (chisel tunnel manager)
 - [ ] Credential input panel (for authenticated attacks)
-- [ ] Share enumeration results table
+- [x] Share enumeration results table
 - [ ] User enumeration results
 - [ ] Session list (active connections)
 - [ ] Accent color: cyan
 
 ### F011.4: Credentials Tab
-- [ ] Hash input area (paste hashes, upload file)
-- [ ] Hash identifier (haiti — auto-detect on paste)
+- [x] Hash input area (paste hashes, upload file)
+- [x] Hash identifier (haiti — auto-detect on paste)
 - [ ] Subtab: Cracking (hashcat GPU attack)
-  - [ ] Attack mode selector (dict, brute, hybrid)
+  - [x] Attack mode selector (dict, brute, hybrid)
   - [ ] Wordlist picker (seclists browser)
   - [ ] Rule file picker
   - [ ] Mask builder (visual)
@@ -962,11 +962,11 @@
 
 ### F011.5: Exploit Tab
 - [ ] Subtab: Metasploit
-  - [ ] Module search (by CVE, name, type)
+  - [x] Module search (by CVE, name, type)
   - [ ] Module detail view (description, options, targets)
-  - [ ] Option configuration form
-  - [ ] Payload selector
-  - [ ] "Run Exploit" button
+  - [x] Option configuration form
+  - [x] Payload selector
+  - [x] "Run Exploit" button
   - [ ] Session manager (active meterpreter/shell sessions)
 - [ ] Subtab: Reverse Shells
   - [ ] Listener setup (pwncat — host, port, protocol)
@@ -986,7 +986,7 @@
 
 ### F011.6: Post-Exploit Tab
 - [ ] Subtab: Privilege Escalation
-  - [ ] LinPEAS/WinPEAS launcher (requires active session)
+  - [x] LinPEAS/WinPEAS launcher (requires active session)
   - [ ] Results: color-coded findings (95%/red, 70%/yellow, default)
   - [ ] Suggested exploits from results
 - [ ] Subtab: AD Attacks (impacket)
@@ -1001,10 +1001,10 @@
 
 ### F011.7: OSINT Tab
 - [ ] Subtab: Username (sherlock)
-  - [ ] Username input → 400+ platform results
+  - [x] Username input → 400+ platform results
   - [ ] Results: platform, URL, status, profile link
 - [ ] Subtab: Email (holehe)
-  - [ ] Email input → registration check
+  - [x] Email input → registration check
   - [ ] Results: site, registered (yes/no), method
 - [ ] Subtab: Metadata (exiftool)
   - [ ] File drop zone (drag files in)
@@ -1017,36 +1017,36 @@
 - [ ] Accent color: green
 
 ### F011.8: Reporting Tab
-- [ ] Split view layout: findings list (left, 380px) + report preview (right)
+- [x] Split view layout: findings list (left, 380px) + report preview (right)
 - [ ] **Left panel — Findings list:**
   - [ ] Severity summary bar: 4 cards (CRIT/HIGH/MED/LOW) with counts, colored left borders
   - [ ] Finding cards, each showing:
     - [ ] Severity badge (CRITICAL/HIGH/MEDIUM/LOW/INFO)
-    - [ ] CVSS score (monospace)
+    - [x] CVSS score (monospace)
     - [ ] Confirmation status: confirmed (green) / unconfirmed (amber) / false_positive (red)
     - [ ] Finding title (bold)
     - [ ] Target + source tool (dim monospace)
-  - [ ] Cards sorted by severity (critical first), then CVSS score
-  - [ ] Click card → scrolls report preview to that finding
+  - [x] Cards sorted by severity (critical first), then CVSS score
+  - [x] Click card → scrolls report preview to that finding
   - [ ] Right-click card → Edit Finding / Delete / Change Status
   - [ ] Drag card to reorder (custom report ordering)
-- [ ] **Right panel — Report preview:**
+- [x] **Right panel — Report preview:**
   - [ ] Rendered as styled white document (light background, serif body)
   - [ ] "CONFIDENTIAL" header banner
   - [ ] Report metadata: client, date, assessor, classification
   - [ ] Sections rendered:
     - [ ] Executive Summary (1-2 paragraphs, non-technical)
-    - [ ] Findings Summary table (all findings, severity, CVSS, target, status)
+    - [x] Findings Summary table (all findings, severity, CVSS, target, status)
     - [ ] Detailed Findings (per finding: description, attack chain, impact, remediation)
     - [ ] Attack Narrative (chronological engagement story)
     - [ ] Remediation Roadmap
-  - [ ] Finding boxes: colored left border by severity, CVSS badge
+  - [x] Finding boxes: colored left border by severity, CVSS badge
   - [ ] Code blocks with monospace font
   - [ ] Scrollable independently from left panel
   - [ ] Live preview: updates as findings are added/edited
 - [ ] **Toolbar:**
   - [ ] Subtabs: Findings / Preview / Branding
-  - [ ] Template selector dropdown: Full Pentest Report, Bug Bounty, Executive Brief, Technical Writeup
+  - [x] Template selector dropdown: Full Pentest Report, Bug Bounty, Executive Brief, Technical Writeup
   - [ ] "Generate Report" button → LLM writes all sections
   - [ ] "Export PDF" button (blue)
   - [ ] "Export MD" button
@@ -1139,7 +1139,7 @@
 - [ ] Terminal history persists across app restarts (per-Op)
 - [ ] SSH sessions supported (full interactive PTY)
 - [ ] tmux/screen supported (pass-through)
-- [ ] Right-click context menu: Copy / Paste / Stash / Send to Chat / Search CVE DB
+- [x] Right-click context menu: Copy / Paste / Stash / Send to Chat / Search CVE DB
 
 ### F012.3: Terminal UI
 - [x] **Position:** Bottom panel (replaces activity feed when open, 280px)
@@ -1171,7 +1171,7 @@
 - [ ] **Close:** ✕ button or ⌘⇧S toggle or click outside
 
 ### F012.5: Context Menu (Right-Click Overlay)
-- [ ] Appears on right-click over: tool output, chat messages, terminal text, results tables
+- [x] Appears on right-click over: tool output, chat messages, terminal text, results tables
 - [ ] **Menu items:**
   - [ ] 📋 Copy (⌘C)
   - [ ] 📦 Stash this
@@ -1208,7 +1208,7 @@
 
 ### F013.1: General Settings
 - [ ] **Language section:**
-  - [ ] Interface Language dropdown: English / 한국어 / 中文 / Español / 日本語
+  - [x] Interface Language dropdown: English / 한국어 / 中文 / Español / 日本語
   - [ ] Change takes effect immediately (no restart)
 - [ ] **Window section:**
   - [ ] Close button behavior: dropdown (Quit app / Minimize to tray)
@@ -1382,7 +1382,7 @@
 
 ### F014.4: Numbers
 - [ ] File sizes formatted per locale (1,234 vs 1.234)
-- [ ] CVSS scores always use decimal point (standard)
+- [x] CVSS scores always use decimal point (standard)
 
 ---
 
@@ -1466,8 +1466,8 @@
 - [ ] Each CVE record:
   - [ ] CVE ID (indexed, unique)
   - [ ] Description (full text, FTS5 indexed)
-  - [ ] CVSS v3.1 score (float, indexed)
-  - [ ] CVSS vector string
+  - [x] CVSS v3.1 score (float, indexed)
+  - [x] CVSS vector string
   - [ ] Severity level (critical/high/medium/low)
   - [ ] CPE 2.3 strings (affected products with version ranges)
   - [ ] Published date (indexed)
@@ -1476,7 +1476,7 @@
   - [ ] CISA KEV flag (boolean — actively exploited)
   - [ ] Exploit availability (none/poc/weaponized)
   - [ ] Embedding vector (768-dim float32, via sqlite-vec)
-- [ ] Indexes: CVE ID, CVSS score, severity, published date, CPE vendor+product
+- [x] Indexes: CVE ID, CVSS score, severity, published date, CPE vendor+product
 
 ### F021.2: Data Sources (pre-bundled, merged + deduplicated)
 - [ ] NVD (National Vulnerability Database) — primary source, ~250K CVEs
@@ -1523,7 +1523,7 @@
 - [ ] **Combined mode (default):** semantic + CPE + keyword, results merged and ranked
 - [ ] **Filters (stackable on any mode):**
   - [ ] Minimum severity (critical/high/medium/low)
-  - [ ] Minimum CVSS score (0.0-10.0 slider)
+  - [x] Minimum CVSS score (0.0-10.0 slider)
   - [ ] Exploit available only (boolean)
   - [ ] CISA KEV only (boolean — actively exploited in the wild)
   - [ ] Published after date
@@ -1537,7 +1537,7 @@
   - [ ] Description textarea
   - [ ] Affected product (vendor, product, version)
   - [ ] Severity selector
-  - [ ] CVSS score input
+  - [x] CVSS score input
   - [ ] References (URLs, one per line)
   - [ ] Notes textarea (private annotations)
   - [ ] Tags (comma-separated, e.g. "internal", "client-specific", "zero-day")
@@ -1572,10 +1572,10 @@
 - [ ] **Tab integration:**
   - [ ] Web tab: "Search CVEs" button next to detected server version
   - [ ] Recon tab: auto-enrich port scan results with CVE counts per service
-  - [ ] Exploit tab: CVE search feeds into metasploit module search
+  - [x] Exploit tab: CVE search feeds into metasploit module search
 - [ ] **Finding enrichment:**
   - [ ] When creating a Finding, auto-suggest matching CVE ID
-  - [ ] Auto-fill CVSS score from CVE data
+  - [x] Auto-fill CVSS score from CVE data
   - [ ] Auto-fill description from CVE data
   - [ ] Link to references (exploit-db, vendor advisory)
 - [ ] **Report enrichment:**
@@ -1599,7 +1599,7 @@
 ## F018: macOS Integration
 
 ### F018.1: Native macOS Features
-- [ ] Menu bar: File (New Op, Open, Export), Edit (Undo, Copy, Paste, Find), View (tabs, terminal, stash), Window, Help
+- [x] Menu bar: File (New Op, Open, Export), Edit (Undo, Copy, Paste, Find), View (tabs, terminal, stash), Window, Help
 - [ ] Touch Bar support (if applicable — probably not, focus on keyboard)
 - [ ] Spotlight integration (search Ops, Findings?)
 - [ ] Services menu integration
@@ -1667,7 +1667,7 @@
 ## F020: Performance
 
 ### F020.1: UI Performance
-- [ ] Smooth scrolling in chat (< 16ms frame time)
+- [x] Smooth scrolling in chat (< 16ms frame time)
 - [ ] Tab switching < 100ms
 - [ ] Op switching < 500ms (UI), context re-send async
 - [ ] Stash drawer open/close < 200ms
