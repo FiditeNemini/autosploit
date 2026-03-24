@@ -443,34 +443,38 @@
   - [ ] Mode badge: "🤝 COPILOT" (blue badge with border)
   - [ ] Phase indicator + stats
   - [ ] "Switch to Autopilot" button
-- [ ] **Approval cards** (inline in feed, not modal):
-  - [ ] Card background: raised, blue border (safe tools) or red border (dangerous tools)
-  - [ ] Header: tool icon + "Tool Request: [name]" + safety tag
-  - [ ] Safety tags:
-    - [ ] "safe · passive" (green) — subfinder, dnsx, theHarvester
-    - [ ] "safe · active recon" (green) — httpx, katana
-    - [ ] "active · sends payloads" (amber) — nuclei, sqlmap, dalfox
-    - [ ] "dangerous · modifies target" (red) — metasploit exploits, run_shell
-  - [ ] Description: what the tool does and why the model wants to run it
-  - [ ] Command preview: full command in monospace block
-  - [ ] Editable parameters: key-value pairs, some editable (input fields)
-  - [ ] **3 action buttons:**
-    - [ ] ✓ Approve (green) → executes immediately
-    - [ ] ✎ Modify (gray) → expands all parameters as editable, then approve
-    - [ ] ✕ Reject (red outline) → model notified, suggests alternative
-  - [ ] Tool chain approval: multiple chained tools shown in one card
-  - [ ] Approval timeout: card stays until user acts (no auto-approve)
-- [ ] **Behavior:**
-  - [ ] Model suggests next actions, awaits approval
-  - [ ] Safe tools (passive recon) may be auto-approved (configurable setting)
-  - [ ] Dangerous tools always require approval
-  - [ ] `run_shell` always requires approval with full command visible
-  - [ ] User can type in chatbox anytime (interrupt model's flow)
-  - [ ] User can also invoke tools manually from tab UIs
-  - [ ] Multiple pending approvals can queue up
+- [x] **Approval cards** (inline in chat, not modal):
+  - [x] Card background: blue border with blue tint
+  - [x] Header: tool icon + "Tool Request: [name]" + safety tag
+  - [x] Safety tags (computed from tool name):
+    - [x] "safe · passive" (green) — subfinder, dnsx, theHarvester, sherlock, holehe, etc.
+    - [x] "safe · active recon" (green) — httpx, katana, gowitness
+    - [x] "active · sends probes" (amber) — nuclei, sqlmap, dalfox, nmap, etc.
+    - [x] "dangerous · exploitation" (red) — metasploit, pwncat, sliver, run_shell, etc.
+  - [ ] Description: what the tool does and why — not shown, only command
+  - [x] Command preview: full command in monospace block
+  - [ ] Editable parameters: not implemented, approve/reject only
+  - [x] **2 action buttons (Modify not implemented):**
+    - [x] ✓ Approve (green) → resumes execution via CheckedContinuation
+    - [ ] ✎ Modify → not implemented
+    - [x] ✕ Reject (red outline) → logged as rejected, model sees rejection message
+  - [ ] Tool chain approval: each tool approved individually (no batching)
+  - [x] Approval stays until user acts (pauses conversation loop via async continuation)
+- [x] **Behavior:**
+  - [x] Model proposes tool → approval card shown → execution paused
+  - [ ] Safe tools auto-approved (configurable) — all tools require approval currently
+  - [x] All tools require approval in Copilot mode
+  - [x] `run_shell` requires approval with full command visible
+  - [x] User can type in chatbox while waiting for approval (but no parallel flows)
+  - [ ] User can invoke tools manually from tab UIs
+  - [ ] Multiple pending approvals queue — currently one at a time
 - [ ] **Status bar:**
-  - [ ] Blue dot + "Copilot · awaiting approval" (or "running")
+  - [ ] Blue dot + "Copilot · awaiting approval"
   - [ ] Pending approval count
+- [x] **Cross-feature:**
+  - [x] Mode synced from sidebar selector to ChatService.interactionMode
+  - [x] Mode change logged to activity feed
+  - [x] Auto-tab tracking fires on approve (not on propose)
 
 ### F006.3: Manual Mode
 - [ ] **Controls bar:**
