@@ -383,49 +383,121 @@
 ## F006: Interaction Modes
 
 ### F006.1: Autopilot Mode
-- [ ] User provides starting prompt → model takes over completely
-- [ ] Model selects tools autonomously based on findings
-- [ ] All tool calls auto-approved (no confirmation dialogs)
-- [ ] `run_shell` auto-approved (no confirmation)
-- [ ] Model chains tool results: recon → scanning → exploitation → post-exploit
-- [ ] Model creates Findings automatically when vulns confirmed
-- [ ] Model creates Stash items for interesting artifacts
-- [ ] Model generates report when it believes Op is complete (or user requests)
-- [ ] "Pause" button → suspends Autopilot, preserves state
-- [ ] "Resume" button → continues from where paused
-- [ ] "Stop" button → terminates current tool + stops Autopilot
-- [ ] Scope enforcement: model warned/blocked from out-of-scope targets
-- [ ] Activity feed is the primary UI (user watches the model work)
-- [ ] Estimated progress indicator (qualitative: "Recon phase", "Exploitation phase")
-- [ ] Background mode: Autopilot continues if user switches to another Op
+- [ ] **Controls bar:**
+  - [ ] Mode badge: "🤖 AUTOPILOT" (green badge with border)
+  - [ ] Phase indicator: "Exploitation Phase" + stats ("14 tools run · 23 findings")
+  - [ ] Pause button (⏸) → suspends after current tool finishes
+  - [ ] Stop button (⏹, red) → terminates current tool + stops Autopilot
+  - [ ] Resume button (appears when paused)
+- [ ] **Activity feed as primary UI:**
+  - [ ] Full-height scrolling feed (no separate tool area — feed IS the interface)
+  - [ ] Phase section headers: "Phase 1 — Reconnaissance (14:23 – 14:25)" (sticky)
+  - [ ] Thinking blocks: purple italic background, model reasoning visible
+  - [ ] Tool executions: tool name (cyan), command preview block, streaming output
+  - [ ] Tool completions: success (green ✓) / failure (red ✗) with duration
+  - [ ] Vulnerability warnings: severity badge + CVE + target + CVSS
+  - [ ] Finding creation events: "★ Finding #1 created: [title]" (green, bold)
+  - [ ] Stash events: "📦 Stashed: [items]"
+  - [ ] Shell establishment: "Shell established!" with Session badge
+  - [ ] Assessment completion: "📊 Assessment complete" with View Report / View Stash / Export PDF buttons
+  - [ ] Verbose mode: raw tool stdout in collapsible code blocks
+- [ ] **Behavior:**
+  - [ ] User provides starting prompt → model takes over completely
+  - [ ] Model selects tools autonomously, chains results
+  - [ ] All tool calls auto-approved (no confirmation dialogs)
+  - [ ] `run_shell` auto-approved (no confirmation)
+  - [ ] Model chains phases: recon → scanning → exploitation → post-exploit → report
+  - [ ] Model creates Findings automatically when vulns confirmed
+  - [ ] Model creates Stash items for interesting artifacts
+  - [ ] Model generates report when assessment complete (or user requests)
+  - [ ] Scope enforcement: model warned/blocked from out-of-scope targets
+  - [ ] Loop detection: after 3 identical tool calls, pause and notify user
+- [ ] **Background mode:**
+  - [ ] Autopilot continues if user switches to another Op
+  - [ ] Sidebar shows "running" indicator for background Autopilot Op
+  - [ ] macOS notification when background Autopilot finds critical vuln
+- [ ] **Status bar (bottom):**
+  - [ ] Green dot + "Autopilot running" (or "Paused")
+  - [ ] Model name
+  - [ ] Token count
+  - [ ] Tools run count
+  - [ ] Findings count
+  - [ ] Active sessions list
 
 ### F006.2: Copilot Mode
-- [ ] Model suggests next actions in chat
-- [ ] Structured tool calls: model proposes, app shows "Run [nmap -sV target]?" with Approve/Modify/Reject
-- [ ] Approve → executes immediately
-- [ ] Modify → opens tool parameters for editing, then execute
-- [ ] Reject → model notified, suggests alternative
-- [ ] `run_shell` requires explicit confirmation with command preview
-- [ ] Model can suggest multiple tools (user picks which to run)
-- [ ] User can also invoke tools manually from tab UIs
-- [ ] User can type in chatbox anytime (interrupt model's flow)
+- [ ] **Controls bar:**
+  - [ ] Mode badge: "🤝 COPILOT" (blue badge with border)
+  - [ ] Phase indicator + stats
+  - [ ] "Switch to Autopilot" button
+- [ ] **Approval cards** (inline in feed, not modal):
+  - [ ] Card background: raised, blue border (safe tools) or red border (dangerous tools)
+  - [ ] Header: tool icon + "Tool Request: [name]" + safety tag
+  - [ ] Safety tags:
+    - [ ] "safe · passive" (green) — subfinder, dnsx, theHarvester
+    - [ ] "safe · active recon" (green) — httpx, katana
+    - [ ] "active · sends payloads" (amber) — nuclei, sqlmap, dalfox
+    - [ ] "dangerous · modifies target" (red) — metasploit exploits, run_shell
+  - [ ] Description: what the tool does and why the model wants to run it
+  - [ ] Command preview: full command in monospace block
+  - [ ] Editable parameters: key-value pairs, some editable (input fields)
+  - [ ] **3 action buttons:**
+    - [ ] ✓ Approve (green) → executes immediately
+    - [ ] ✎ Modify (gray) → expands all parameters as editable, then approve
+    - [ ] ✕ Reject (red outline) → model notified, suggests alternative
+  - [ ] Tool chain approval: multiple chained tools shown in one card
+  - [ ] Approval timeout: card stays until user acts (no auto-approve)
+- [ ] **Behavior:**
+  - [ ] Model suggests next actions, awaits approval
+  - [ ] Safe tools (passive recon) may be auto-approved (configurable setting)
+  - [ ] Dangerous tools always require approval
+  - [ ] `run_shell` always requires approval with full command visible
+  - [ ] User can type in chatbox anytime (interrupt model's flow)
+  - [ ] User can also invoke tools manually from tab UIs
+  - [ ] Multiple pending approvals can queue up
+- [ ] **Status bar:**
+  - [ ] Blue dot + "Copilot · awaiting approval" (or "running")
+  - [ ] Pending approval count
 
 ### F006.3: Manual Mode
-- [ ] Model does NOT auto-invoke tools
-- [ ] All tool execution initiated from tab UIs (buttons, forms)
-- [ ] Chatbox available for questions, explanations, advice
-- [ ] User can ask model: "What should I try next?" → model suggests but doesn't execute
-- [ ] User can ask model to analyze tool output pasted into chat
-- [ ] User can ask model to generate payloads, scripts, dorks
-- [ ] Tab UIs are the primary interface (chatbox is secondary)
+- [ ] **Controls bar:**
+  - [ ] Mode badge: "🎯 MANUAL" (gray badge)
+  - [ ] Active tab + tool indicator
+  - [ ] "Switch to Copilot" button
+- [ ] **Split view layout:**
+  - [ ] Left: full tool parameter form (every option for the selected tool)
+    - [ ] Tool name + description header
+    - [ ] Form fields matching tool schema: text inputs, dropdowns, toggles
+    - [ ] Command preview (monospace block, updates live as form changes)
+    - [ ] "▶ Run [tool]" button
+    - [ ] Results area below (table, cards, or raw output depending on tool)
+  - [ ] Right: chat panel (advisor only, 380px)
+    - [ ] Header: "Chat (advisor only)"
+    - [ ] Message history (user questions, model advice)
+    - [ ] Input: "Ask for advice..." placeholder
+    - [ ] Send button
+- [ ] **Behavior:**
+  - [ ] Model does NOT auto-invoke tools
+  - [ ] All tool execution initiated from left-panel forms
+  - [ ] Model available in chat for:
+    - [ ] "What should I try next?" → suggests but doesn't execute
+    - [ ] "Analyze this output" → interprets pasted results
+    - [ ] "Write me a payload for X" → generates code/commands
+    - [ ] "Explain this CVE" → provides context
+  - [ ] Tab UIs are the primary interface (chat is secondary)
+  - [ ] Tool results auto-sent to chat context (model sees what you ran)
+- [ ] **Status bar:**
+  - [ ] Gray dot + "Manual mode"
+  - [ ] "Chat only — no auto tool execution"
 
 ### F006.4: Mode Switching
-- [ ] Mode selector in Op Controls (dropdown or segmented control)
-- [ ] Switching mid-Op preserves all state
-- [ ] Switching to Autopilot: model reviews current findings and continues
-- [ ] Switching from Autopilot to Copilot: current tool finishes, then model proposes next step
-- [ ] Switching to Manual: model stops all pending actions
-- [ ] Notification: "Interaction mode changed to [X]"
+- [ ] Mode selector: segmented control in sidebar footer (Autopilot/Copilot/Manual)
+- [ ] Also accessible from controls bar ("Switch to X" button)
+- [ ] Switching mid-Op preserves all state (messages, findings, stash, tool results)
+- [ ] Switching to Autopilot: model reviews current findings and continues from current state
+- [ ] Switching from Autopilot to Copilot: current tool finishes, then model proposes next step as approval card
+- [ ] Switching to Manual: model stops all pending actions, UI switches to tool form view
+- [ ] Notification toast: "Mode changed to [X]"
+- [ ] Activity feed logs mode change event
 
 ---
 
