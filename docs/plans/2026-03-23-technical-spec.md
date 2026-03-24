@@ -414,11 +414,44 @@ D024                                                                            
 
 ---
 
-## Open Decisions (still in brainstorming)
+## Decisions Made During Implementation
 
-- [ ] D019: Persistence technology (SQLite vs CoreData vs JSON)
-- [ ] Per-tab bespoke UI detailed wireframes (D017)
-- [ ] Report PDF rendering technology in Swift
-- [ ] Terminal emulator library choice (D018)
+### D031: App Bundle Packaging
+- **Decision:** Build via SPM, copy binary into hand-crafted .app bundle with Info.plist
+- **Rationale:** SPM debug executables lack macOS entitlements for keyboard input
+- **Future:** Migrate to Xcode project or xcodegen for proper build pipeline
+
+### D032: Chat Input — NSTextField Wrapper
+- **Decision:** NSViewRepresentable wrapping NSTextField instead of SwiftUI TextField
+- **Rationale:** SwiftUI TextField unreliable for keyboard input in complex layouts
+- **Implementation:** ChatInputField.swift, delegates Enter-to-send via NSTextFieldDelegate
+
+### D033: Tool Results as User Messages
+- **Decision:** Tool results sent as `role: "user"` with `[Tool Result: name]` prefix instead of `role: "tool"`
+- **Rationale:** vMLX engine requires tool messages to follow assistant messages with tool_calls — proper format needs tool_call ID tracking across conversation turns
+- **Future:** Implement native tool role support with full tool_call ID tracking
+
+### D034: Thinking Block Lifecycle
+- **Decision:** Thinking messages appear during streaming, collapse after completion
+- **Implementation:** After streamCompletion(), remove thinking message from array, store content as reasoningContent on assistant message
+
+### D035: Stop Mechanism — isStopped Flag
+- **Decision:** Boolean `isStopped` flag checked at every async boundary, plus SIGTERM to running process
+- **Rationale:** Task.cancel() alone insufficient — doesn't stop subprocess execution or mid-SSE streaming
+
+---
+
+## Resolved Decisions
+
+- [x] D019: Persistence → **SQLite via GRDB.swift** (decided, not yet implemented)
+- [x] D017: Per-tab wireframes → **Completed as HTML mockups** (P1-P6, 22 screens)
+- [x] D027: Report PDF → **HTML → WKWebView.createPDF()** (decided, not yet implemented)
+- [x] D018: Terminal → **SwiftTerm** (decided, not yet implemented)
+- [x] Default model → **Qwen3.5-VL-122B-A10B-UNCENSORED-JANG_2S** (S tier) / **MiniMax-M2.5-UNCENSORED-JANG_2L** (M tier) / **Qwen3.5-VL-397B-A17B-UNCENSORED-JANG_1L** (L tier)
+
+## Open Decisions
+
 - [ ] License (MIT? Apache 2.0? GPL?)
-- [ ] Specific default model recommendation for first-run
+- [ ] Xcode project migration (from SPM + manual .app bundle)
+- [ ] Code signing for distribution builds
+- [ ] CVE database initial bundling vs download-on-first-run

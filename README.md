@@ -89,9 +89,21 @@ Requires **macOS 14+** and **Apple Silicon** (M1/M2/M3/M4).
 
 ```bash
 git clone https://github.com/jjang-ai/exploitbot.git
-cd exploitbot
-# Build instructions coming soon
+cd exploitbot/ExploitBot
+
+# Build
+swift build
+
+# Create .app bundle and launch
+cp .build/debug/ExploitBot ../ExploitBotXcode/ExploitBot.app/Contents/MacOS/ExploitBot
+open ../ExploitBotXcode/ExploitBot.app
 ```
+
+**Prerequisites:**
+- macOS 14+ on Apple Silicon
+- Xcode 16+ (Swift toolchain)
+- A vMLX-compatible model running on localhost:8000 (see [vMLX](https://github.com/jjang-ai/vmlx))
+- Pentesting tools installed via homebrew/pip for tool execution
 
 <a name="models"></a>
 ## Models
