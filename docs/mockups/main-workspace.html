@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>exploitbot — Main Workspace Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-deep: #050507;
+      --bg-base: #09090b;
+      --bg-raised: #111114;
+      --bg-surface: #1c1c21;
+      --bg-surface-hover: #232329;
+      --bg-input: #0f0f12;
+      --border-subtle: #1e1e23;
+      --border-medium: #2a2a32;
+      --border-strong: #3f3f46;
+      --text-primary: #f4f4f5;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --text-subtle: #52525b;
+      --text-dim: #3f3f46;
+      --accent-red: #ef4444;
+      --accent-blue: #3b82f6;
+      --accent-orange: #f97316;
+      --accent-cyan: #06b6d4;
+      --accent-amber: #f59e0b;
+      --accent-purple: #a855f7;
+      --accent-green: #22c55e;
+      --font-sans: 'Inter', -apple-system, 'SF Pro Display', sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', 'Menlo', monospace;
+      --sidebar-w: 220px;
+      --toolbar-h: 38px;
+      --tab-h: 36px;
+      --chat-w: 380px;
+      --feed-h: 200px;
+      --titlebar-h: 28px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      height: 100vh;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      font-size: 13px;
+    }
+
+    /* ── TITLEBAR ── */
+    .titlebar {
+      height: var(--titlebar-h);
+      background: var(--bg-raised);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      -webkit-app-region: drag;
+      position: relative;
+    }
+
+    .traffic-lights {
+      display: flex;
+      gap: 8px;
+      position: absolute;
+      left: 12px;
+    }
+
+    .traffic-light {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .traffic-light.red { background: #ff5f57; }
+    .traffic-light.yellow { background: #febc2e; }
+    .traffic-light.green { background: #28c840; }
+
+    .titlebar-title {
+      flex: 1;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .app-layout {
+      display: flex;
+      height: calc(100vh - var(--titlebar-h));
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--bg-base);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .sidebar-header {
+      padding: 12px 14px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sidebar-brand img {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+    }
+
+    .sidebar-brand span {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .sidebar-brand .thin {
+      font-weight: 300;
+      color: var(--text-muted);
+    }
+
+    .new-op-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      border: 1px solid var(--border-medium);
+      background: transparent;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .new-op-btn:hover {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+    }
+
+    .sidebar-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-dim);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 12px 14px 6px;
+    }
+
+    .ops-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 8px;
+    }
+
+    .op-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 1px;
+      transition: background 0.15s;
+    }
+
+    .op-item:hover { background: var(--bg-surface); }
+
+    .op-item.active {
+      background: var(--bg-surface);
+    }
+
+    .op-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .op-dot.live { background: var(--accent-green); box-shadow: 0 0 6px rgba(34,197,94,0.4); }
+    .op-dot.paused { background: var(--accent-amber); }
+    .op-dot.done { background: var(--text-dim); }
+
+    .op-info { flex: 1; min-width: 0; }
+
+    .op-name {
+      font-size: 12px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .op-item.active .op-name { color: var(--text-primary); font-weight: 500; }
+
+    .op-meta {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-dim);
+      margin-top: 1px;
+    }
+
+    .sidebar-footer {
+      padding: 10px 14px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .mode-selector {
+      display: flex;
+      gap: 2px;
+      background: var(--bg-raised);
+      border-radius: 6px;
+      padding: 2px;
+    }
+
+    .mode-btn {
+      flex: 1;
+      padding: 4px 0;
+      text-align: center;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      transition: all 0.15s;
+    }
+
+    .mode-btn.active {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .mode-btn:hover:not(.active) {
+      color: var(--text-secondary);
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    /* ── TOOL TABS ── */
+    .tool-tabs {
+      height: var(--tab-h);
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 2px;
+      background: var(--bg-base);
+      border-bottom: 1px solid var(--border-subtle);
+      flex-shrink: 0;
+    }
+
+    .tool-tab {
+      padding: 6px 14px;
+      font-size: 11px;
+      font-family: var(--font-mono);
+      font-weight: 500;
+      color: var(--text-muted);
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all 0.15s;
+      position: relative;
+    }
+
+    .tool-tab:hover {
+      color: var(--text-secondary);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .tool-tab.active {
+      color: var(--text-primary);
+      background: var(--bg-surface);
+    }
+
+    .tool-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 8px;
+      right: 8px;
+      height: 2px;
+      border-radius: 1px;
+    }
+
+    .tool-tab.active.recon::after { background: var(--accent-blue); }
+    .tool-tab.active.web::after { background: var(--accent-orange); }
+    .tool-tab.active.network::after { background: var(--accent-cyan); }
+    .tool-tab.active.creds::after { background: var(--accent-amber); }
+    .tool-tab.active.exploit::after { background: var(--accent-red); }
+    .tool-tab.active.post::after { background: var(--accent-purple); }
+    .tool-tab.active.osint::after { background: var(--accent-green); }
+    .tool-tab.active.report::after { background: var(--text-muted); }
+    .tool-tab.active.stash::after { background: var(--accent-cyan); }
+
+    .tab-spacer { flex: 1; }
+
+    .tab-controls {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .tab-ctrl-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border-subtle);
+      background: transparent;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .tab-ctrl-btn:hover {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      border-color: var(--border-medium);
+    }
+
+    /* ── WORKSPACE SPLIT ── */
+    .workspace {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* ── TOOL AREA ── */
+    .tool-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    /* ── TOOL TOOLBAR ── */
+    .tool-toolbar {
+      height: var(--toolbar-h);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 8px;
+      background: var(--bg-raised);
+      border-bottom: 1px solid var(--border-subtle);
+      flex-shrink: 0;
+    }
+
+    .tool-input {
+      flex: 1;
+      height: 28px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 0 10px;
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      outline: none;
+    }
+
+    .tool-input:focus {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 2px rgba(59,130,246,0.15);
+    }
+
+    .tool-input::placeholder { color: var(--text-dim); }
+
+    .tool-run-btn {
+      height: 28px;
+      padding: 0 14px;
+      background: var(--accent-blue);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .tool-run-btn:hover { filter: brightness(1.1); }
+
+    .tool-subtabs {
+      display: flex;
+      gap: 1px;
+    }
+
+    .tool-subtab {
+      padding: 4px 10px;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      border-radius: 4px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+    }
+
+    .tool-subtab.active {
+      color: var(--text-primary);
+      background: var(--bg-surface);
+    }
+
+    /* ── TOOL RESULTS ── */
+    .tool-results {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 16px;
+    }
+
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .results-table th {
+      text-align: left;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 6px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      background: var(--bg-deep);
+    }
+
+    .results-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .results-table tr:hover td {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .severity-badge {
+      display: inline-block;
+      padding: 1px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+    }
+
+    .severity-badge.critical { background: rgba(239,68,68,0.15); color: var(--accent-red); }
+    .severity-badge.high { background: rgba(249,115,22,0.15); color: var(--accent-orange); }
+    .severity-badge.medium { background: rgba(245,158,11,0.15); color: var(--accent-amber); }
+    .severity-badge.low { background: rgba(59,130,246,0.15); color: var(--accent-blue); }
+    .severity-badge.info { background: rgba(113,113,122,0.15); color: var(--text-muted); }
+
+    .status-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+
+    .status-dot.live { background: var(--accent-green); }
+
+    /* ── ACTIVITY FEED ── */
+    .activity-feed {
+      height: var(--feed-h);
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-base);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .feed-header {
+      display: flex;
+      align-items: center;
+      padding: 6px 12px;
+      gap: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+      flex-shrink: 0;
+    }
+
+    .feed-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .feed-filter {
+      font-size: 10px;
+      color: var(--text-dim);
+      padding: 2px 6px;
+      border-radius: 3px;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      font-family: var(--font-mono);
+    }
+
+    .feed-filter.active { color: var(--text-secondary); background: var(--bg-surface); }
+    .feed-filter:hover { color: var(--text-secondary); }
+
+    .feed-spacer { flex: 1; }
+
+    .verbosity-select {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 4px;
+      padding: 1px 6px;
+      outline: none;
+    }
+
+    .feed-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 6px 12px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .feed-entry {
+      display: flex;
+      gap: 8px;
+      padding: 2px 0;
+    }
+
+    .feed-time {
+      color: var(--text-dim);
+      font-size: 10px;
+      flex-shrink: 0;
+      width: 50px;
+    }
+
+    .feed-icon {
+      flex-shrink: 0;
+      width: 14px;
+      text-align: center;
+    }
+
+    .feed-text { color: var(--text-secondary); }
+    .feed-tool { color: var(--accent-cyan); }
+    .feed-success { color: var(--accent-green); }
+    .feed-warning { color: var(--accent-amber); }
+    .feed-error { color: var(--accent-red); }
+    .feed-decision { color: var(--accent-purple); }
+
+    /* ── CHAT PANEL ── */
+    .chat-panel {
+      width: var(--chat-w);
+      background: var(--bg-raised);
+      border-left: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .chat-header {
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .chat-header-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .chat-header-subtitle {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-dim);
+    }
+
+    .chat-spacer { flex: 1; }
+
+    .chat-settings-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .chat-settings-btn:hover { color: var(--text-primary); background: var(--bg-surface); }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .message {
+      max-width: 95%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .message.user {
+      align-self: flex-end;
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      border-bottom-right-radius: 4px;
+    }
+
+    .message.assistant {
+      align-self: flex-start;
+      background: var(--bg-input);
+      color: var(--text-secondary);
+      border-bottom-left-radius: 4px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .message.thinking {
+      align-self: flex-start;
+      background: rgba(168,85,247,0.06);
+      border: 1px solid rgba(168,85,247,0.15);
+      color: var(--text-muted);
+      font-size: 11px;
+      font-style: italic;
+    }
+
+    .message.thinking::before {
+      content: '💭 Thinking...';
+      display: block;
+      font-size: 10px;
+      color: var(--accent-purple);
+      margin-bottom: 4px;
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    .message.tool-call {
+      align-self: flex-start;
+      background: rgba(6,182,212,0.06);
+      border: 1px solid rgba(6,182,212,0.15);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      width: 95%;
+    }
+
+    .tool-call-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .tool-call-name {
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+
+    .tool-call-status {
+      font-size: 10px;
+      color: var(--accent-green);
+    }
+
+    .tool-call-cmd {
+      color: var(--text-dim);
+      font-size: 10px;
+    }
+
+    .message code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      background: rgba(255,255,255,0.06);
+      padding: 1px 5px;
+      border-radius: 3px;
+    }
+
+    /* ── CHAT INPUT ── */
+    .chat-input-area {
+      padding: 10px 14px;
+      border-top: 1px solid var(--border-subtle);
+      flex-shrink: 0;
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    .chat-textarea {
+      flex: 1;
+      min-height: 36px;
+      max-height: 120px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 8px 12px;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      resize: none;
+      outline: none;
+      line-height: 1.4;
+    }
+
+    .chat-textarea:focus {
+      border-color: var(--border-medium);
+    }
+
+    .chat-textarea::placeholder { color: var(--text-dim); }
+
+    .chat-send-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--text-primary);
+      color: var(--bg-deep);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .chat-send-btn:hover { background: #d4d4d8; }
+
+    .chat-actions {
+      display: flex;
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    .chat-action-btn {
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .chat-action-btn:hover { color: var(--text-muted); background: var(--bg-surface); }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-medium); }
+
+    /* ── ANNOTATIONS ── */
+    .annotation {
+      position: fixed;
+      background: rgba(239,68,68,0.9);
+      color: white;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      pointer-events: none;
+      z-index: 999;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+
+<!-- TITLEBAR -->
+<div class="titlebar">
+  <div class="traffic-lights">
+    <div class="traffic-light red"></div>
+    <div class="traffic-light yellow"></div>
+    <div class="traffic-light green"></div>
+  </div>
+  <div class="titlebar-title">exploitbot — Acme Corp External</div>
+</div>
+
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div style="width:22px;height:22px;border-radius:6px;background:var(--bg-surface);border:1px solid var(--border-medium);display:flex;align-items:center;justify-content:center;font-size:12px;">🤖</div>
+        <span>exploit<span class="thin">bot</span></span>
+      </div>
+      <button class="new-op-btn" title="New Op">+</button>
+    </div>
+
+    <div class="sidebar-label">Ops</div>
+    <div class="ops-list">
+      <div class="op-item active">
+        <span class="op-dot live"></span>
+        <div class="op-info">
+          <div class="op-name">Acme Corp External</div>
+          <div class="op-meta">Autopilot · 23 findings</div>
+        </div>
+      </div>
+      <div class="op-item">
+        <span class="op-dot live"></span>
+        <div class="op-info">
+          <div class="op-name">Internal AD Pivot</div>
+          <div class="op-meta">Copilot · 7 findings</div>
+        </div>
+      </div>
+      <div class="op-item">
+        <span class="op-dot paused"></span>
+        <div class="op-info">
+          <div class="op-name">Bug Bounty — H1</div>
+          <div class="op-meta">Paused · 3 findings</div>
+        </div>
+      </div>
+      <div class="op-item">
+        <span class="op-dot done"></span>
+        <div class="op-info">
+          <div class="op-name">Q4 Compliance</div>
+          <div class="op-meta">Complete · 41 findings</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="mode-selector">
+        <button class="mode-btn active">Autopilot</button>
+        <button class="mode-btn">Copilot</button>
+        <button class="mode-btn">Manual</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+
+    <!-- TOOL TABS -->
+    <div class="tool-tabs">
+      <div class="tool-tab active recon">Recon</div>
+      <div class="tool-tab web">Web</div>
+      <div class="tool-tab network">Network</div>
+      <div class="tool-tab creds">Creds</div>
+      <div class="tool-tab exploit">Exploit</div>
+      <div class="tool-tab post">Post</div>
+      <div class="tool-tab osint">OSINT</div>
+      <div class="tool-tab report">Report</div>
+      <div class="tool-tab stash">Stash</div>
+      <div class="tab-spacer"></div>
+      <div class="tab-controls">
+        <button class="tab-ctrl-btn" title="Terminal">⌨</button>
+        <button class="tab-ctrl-btn" title="Settings">⚙</button>
+      </div>
+    </div>
+
+    <!-- WORKSPACE -->
+    <div class="workspace">
+
+      <!-- TOOL AREA -->
+      <div class="tool-area">
+
+        <!-- TOOL TOOLBAR -->
+        <div class="tool-toolbar">
+          <div class="tool-subtabs">
+            <button class="tool-subtab active">Subdomains</button>
+            <button class="tool-subtab">Ports</button>
+            <button class="tool-subtab">Web Hosts</button>
+            <button class="tool-subtab">Crawl</button>
+            <button class="tool-subtab">OSINT</button>
+          </div>
+          <div style="flex:1"></div>
+          <input class="tool-input" placeholder="Target domain or IP..." value="acme.com" style="max-width:260px;">
+          <button class="tool-run-btn">▶ Full Recon</button>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="tool-results">
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Subdomain</th>
+                <th>IP</th>
+                <th>Status</th>
+                <th>Server</th>
+                <th>Title</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="color:var(--text-primary)">dev.acme.com</td>
+                <td>104.21.32.7</td>
+                <td><span class="severity-badge critical">200</span></td>
+                <td>Apache/2.4.49</td>
+                <td>Development Portal</td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-primary)">staging.acme.com</td>
+                <td>104.21.32.8</td>
+                <td><span class="severity-badge medium">403</span></td>
+                <td>nginx/1.21</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-primary)">api.acme.com</td>
+                <td>172.67.143.12</td>
+                <td><span class="severity-badge low">200</span></td>
+                <td>Express</td>
+                <td>Acme API v3</td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-primary)">mail.acme.com</td>
+                <td>104.21.32.15</td>
+                <td><span class="severity-badge low">200</span></td>
+                <td>Microsoft-IIS/10.0</td>
+                <td>Outlook Web App</td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-primary)">vpn.acme.com</td>
+                <td>104.21.32.20</td>
+                <td><span class="severity-badge info">302</span></td>
+                <td>—</td>
+                <td>Redirect → SSO</td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-primary)">jenkins.acme.com</td>
+                <td>104.21.32.22</td>
+                <td><span class="severity-badge high">200</span></td>
+                <td>Jetty/9.4</td>
+                <td>Dashboard [Jenkins]</td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-primary)">grafana.acme.com</td>
+                <td>104.21.32.25</td>
+                <td><span class="severity-badge medium">200</span></td>
+                <td>Grafana</td>
+                <td>Grafana</td>
+              </tr>
+              <tr>
+                <td style="color:var(--text-primary)">old.acme.com</td>
+                <td>104.21.32.30</td>
+                <td><span class="severity-badge critical">200</span></td>
+                <td>Apache/2.2.15</td>
+                <td>Legacy Portal</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ACTIVITY FEED -->
+        <div class="activity-feed">
+          <div class="feed-header">
+            <span class="feed-title">Activity</span>
+            <button class="feed-filter active">All</button>
+            <button class="feed-filter">Tools</button>
+            <button class="feed-filter">Errors</button>
+            <button class="feed-filter">Findings</button>
+            <div class="feed-spacer"></div>
+            <select class="verbosity-select">
+              <option>Normal</option>
+              <option>Minimal</option>
+              <option selected>Verbose</option>
+              <option>Debug</option>
+            </select>
+          </div>
+          <div class="feed-body">
+            <div class="feed-entry">
+              <span class="feed-time">14:23</span>
+              <span class="feed-icon feed-tool">▶</span>
+              <span class="feed-text">Running <span class="feed-tool">subfinder</span> -d acme.com -silent</span>
+            </div>
+            <div class="feed-entry">
+              <span class="feed-time">14:23</span>
+              <span class="feed-icon feed-success">✓</span>
+              <span class="feed-text feed-success">subfinder: 47 subdomains found (12.3s)</span>
+            </div>
+            <div class="feed-entry">
+              <span class="feed-time">14:23</span>
+              <span class="feed-icon feed-tool">▶</span>
+              <span class="feed-text">Piping to <span class="feed-tool">dnsx</span> -resp -silent</span>
+            </div>
+            <div class="feed-entry">
+              <span class="feed-time">14:24</span>
+              <span class="feed-icon feed-success">✓</span>
+              <span class="feed-text feed-success">dnsx: 42 resolved, 5 NXDOMAIN (4.1s)</span>
+            </div>
+            <div class="feed-entry">
+              <span class="feed-time">14:24</span>
+              <span class="feed-icon feed-tool">▶</span>
+              <span class="feed-text">Running <span class="feed-tool">httpx</span> -sc -title -tech-detect -json</span>
+            </div>
+            <div class="feed-entry">
+              <span class="feed-time">14:24</span>
+              <span class="feed-icon feed-success">✓</span>
+              <span class="feed-text feed-success">httpx: 12 live web hosts (8.7s)</span>
+            </div>
+            <div class="feed-entry">
+              <span class="feed-time">14:24</span>
+              <span class="feed-icon feed-decision">⚡</span>
+              <span class="feed-text feed-decision">Found Apache/2.4.49 on dev.acme.com — known CVE-2021-41773. Proceeding to nuclei scan.</span>
+            </div>
+            <div class="feed-entry">
+              <span class="feed-time">14:25</span>
+              <span class="feed-icon feed-tool">▶</span>
+              <span class="feed-text">Running <span class="feed-tool">nuclei</span> -u dev.acme.com -severity critical,high -jsonl</span>
+            </div>
+            <div class="feed-entry">
+              <span class="feed-time">14:25</span>
+              <span class="feed-icon feed-warning">⚠</span>
+              <span class="feed-text feed-warning">nuclei: CVE-2021-41773 CONFIRMED on dev.acme.com (Critical)</span>
+            </div>
+            <div class="feed-entry">
+              <span class="feed-time">14:25</span>
+              <span class="feed-icon feed-success">★</span>
+              <span class="feed-text feed-success">Finding created: CVE-2021-41773 Path Traversal → Stash</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHAT PANEL -->
+      <div class="chat-panel">
+        <div class="chat-header">
+          <div>
+            <div class="chat-header-title">exploitbot</div>
+            <div class="chat-header-subtitle">Qwen 3 235B · 47K tokens used</div>
+          </div>
+          <div class="chat-spacer"></div>
+          <button class="chat-settings-btn" title="Model Settings">⚙</button>
+          <button class="chat-settings-btn" title="Clear Context">⌫</button>
+        </div>
+
+        <div class="chat-messages">
+          <div class="message user">
+            Pentest acme.com. Find everything exploitable. Full autonomous scan.
+          </div>
+
+          <div class="message thinking">
+            Target: acme.com. Starting with passive recon — subdomain enumeration, then DNS resolution, then probing live hosts for tech stack. Will chain subfinder → dnsx → httpx pipeline.
+          </div>
+
+          <div class="message tool-call">
+            <div class="tool-call-header">
+              <span class="tool-call-name">subfinder</span>
+              <span class="tool-call-status">✓ 47 results</span>
+            </div>
+            <div class="tool-call-cmd">subfinder -d acme.com -silent</div>
+          </div>
+
+          <div class="message tool-call">
+            <div class="tool-call-header">
+              <span class="tool-call-name">httpx</span>
+              <span class="tool-call-status">✓ 12 live</span>
+            </div>
+            <div class="tool-call-cmd">httpx -sc -title -tech-detect -json</div>
+          </div>
+
+          <div class="message assistant">
+            Found <strong>12 live web hosts</strong> across 47 subdomains. Key findings:
+            <br><br>
+            ⚠️ <code>dev.acme.com</code> — Apache 2.4.49 (known CVE-2021-41773)<br>
+            ⚠️ <code>jenkins.acme.com</code> — Jenkins exposed, no auth required<br>
+            ⚠️ <code>old.acme.com</code> — Apache 2.2.15 (severely outdated)
+            <br><br>
+            Running nuclei against high-priority targets now. Starting with dev.acme.com due to known critical CVE.
+          </div>
+
+          <div class="message tool-call">
+            <div class="tool-call-header">
+              <span class="tool-call-name">nuclei</span>
+              <span class="tool-call-status" style="color:var(--accent-amber)">⟳ running...</span>
+            </div>
+            <div class="tool-call-cmd">nuclei -u dev.acme.com -severity critical,high -jsonl</div>
+          </div>
+        </div>
+
+        <div class="chat-input-area">
+          <div class="chat-input-row">
+            <textarea class="chat-textarea" placeholder="Ask exploitbot anything..." rows="1"></textarea>
+            <button class="chat-send-btn">↑</button>
+          </div>
+          <div class="chat-actions">
+            <button class="chat-action-btn">📎 Attach</button>
+            <button class="chat-action-btn">📦 Stash</button>
+            <button class="chat-action-btn">⏹ Stop</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
