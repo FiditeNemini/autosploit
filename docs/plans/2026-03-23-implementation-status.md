@@ -2,8 +2,8 @@
 
 **Last updated:** 2026-03-24
 **Total feature matrix items:** 1,307
-**Swift source files:** 17
-**Lines of Swift:** ~2,200
+**Swift source files:** 29
+**Lines of Swift:** ~3,252
 
 ---
 
