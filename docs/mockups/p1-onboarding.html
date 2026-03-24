@@ -644,30 +644,30 @@
   <!-- SCREEN 1: LANGUAGE -->
   <div class="content">
     <div class="screen active" id="screen1">
-      <div class="screen-title">Choose your language</div>
-      <div class="screen-desc">exploitbot will display all menus, tools, and reports in your selected language. You can change this later in Settings.</div>
+      <div class="screen-title" id="langTitle">Choose your language</div>
+      <div class="screen-desc" id="langDesc">exploitbot will display all menus, tools, and reports in your selected language. You can change this later in Settings.</div>
       <div class="lang-grid">
-        <div class="lang-card selected" onclick="selectLang(this)">
+        <div class="lang-card selected" onclick="selectLang(this, 'en')">
           <div class="lang-flag">🇺🇸</div>
           <div class="lang-native">English</div>
           <div class="lang-english">English</div>
         </div>
-        <div class="lang-card" onclick="selectLang(this)">
+        <div class="lang-card" onclick="selectLang(this, 'ko')">
           <div class="lang-flag">🇰🇷</div>
           <div class="lang-native">한국어</div>
           <div class="lang-english">Korean</div>
         </div>
-        <div class="lang-card" onclick="selectLang(this)">
+        <div class="lang-card" onclick="selectLang(this, 'zh')">
           <div class="lang-flag">🇨🇳</div>
           <div class="lang-native">中文</div>
           <div class="lang-english">Chinese</div>
         </div>
-        <div class="lang-card" onclick="selectLang(this)">
+        <div class="lang-card" onclick="selectLang(this, 'es')">
           <div class="lang-flag">🇪🇸</div>
           <div class="lang-native">Español</div>
           <div class="lang-english">Spanish</div>
         </div>
-        <div class="lang-card" onclick="selectLang(this)">
+        <div class="lang-card" onclick="selectLang(this, 'ja')">
           <div class="lang-flag">🇯🇵</div>
           <div class="lang-native">日本語</div>
           <div class="lang-english">Japanese</div>
@@ -680,43 +680,59 @@
       <div class="screen-title">Download a model</div>
       <div class="screen-desc">Select a model tier based on your Mac's memory. Larger models are more capable but require more RAM.</div>
       <div class="ram-banner">💻 Detected: 192 GB Unified Memory — All tiers available</div>
-      <div class="tier-grid">
-        <div class="tier-card" onclick="selectTier(this)">
+      <div class="tier-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="tier-card selected" onclick="selectTier(this, 'small')">
           <div class="tier-size">S</div>
           <div class="tier-label">Small</div>
-          <div class="tier-range">Sub-30B</div>
-          <div class="tier-ram">8–16 GB</div>
-          <div class="tier-model-name">Nemotron-Cascade 14B<br>Qwen 3 30B<br>Mistral Small 24B</div>
+          <div class="tier-range">~30 GB</div>
+          <div class="tier-ram">32+ GB RAM</div>
+          <div class="tier-model-name" style="margin-top:8px;">
+            <strong style="color:var(--text-secondary)">Qwen3.5-VL-122B</strong><br>
+            <span style="color:var(--text-dim)">A10B · Vision · JANG_2S</span><br>
+            <span style="color:var(--accent-green);font-size:9px">UNCENSORED</span>
+          </div>
+          <a href="https://huggingface.co/dealignai/Qwen3.5-VL-122B-A10B-UNCENSORED-JANG_2S" target="_blank" style="font-size:9px;color:var(--accent-blue);text-decoration:none;display:block;margin-top:6px">dealignai ↗</a>
         </div>
-        <div class="tier-card recommended selected" onclick="selectTier(this)">
+        <div class="tier-card recommended" onclick="selectTier(this, 'medium')">
           <div class="tier-size">M</div>
           <div class="tier-label">Medium</div>
-          <div class="tier-range">30–120B</div>
-          <div class="tier-ram">16–64 GB</div>
-          <div class="tier-model-name">Qwen 3 235B MoE<br>Nemotron-Super 120B<br>GLM-4.7 82B</div>
+          <div class="tier-range">~60 GB</div>
+          <div class="tier-ram">64+ GB RAM</div>
+          <div class="tier-model-name" style="margin-top:8px;">
+            <strong style="color:var(--text-secondary)">MiniMax-M2.5</strong><br>
+            <span style="color:var(--text-dim)">456B MoE · JANG_2L</span><br>
+            <span style="color:var(--accent-green);font-size:9px">UNCENSORED</span>
+          </div>
+          <a href="https://huggingface.co/dealignai/MiniMax-M2.5-UNCENSORED-JANG_2L" target="_blank" style="font-size:9px;color:var(--accent-blue);text-decoration:none;display:block;margin-top:6px">dealignai ↗</a>
         </div>
-        <div class="tier-card" onclick="selectTier(this)">
+        <div class="tier-card" onclick="selectTier(this, 'large')">
           <div class="tier-size">L</div>
           <div class="tier-label">Large</div>
-          <div class="tier-range">120–400B</div>
-          <div class="tier-ram">64–192 GB</div>
-          <div class="tier-model-name">Qwen 3.5 397B<br>MiniMax-M2.5<br>DeepSeek-V3</div>
-        </div>
-        <div class="tier-card" onclick="selectTier(this)">
-          <div class="tier-size">XL</div>
-          <div class="tier-label">Extra Large</div>
-          <div class="tier-range">400B+</div>
-          <div class="tier-ram">192 GB+</div>
-          <div class="tier-model-name">DeepSeek-V3 671B<br>Future models<br>&nbsp;</div>
+          <div class="tier-range">~112 GB</div>
+          <div class="tier-ram">128+ GB RAM</div>
+          <div class="tier-model-name" style="margin-top:8px;">
+            <strong style="color:var(--text-secondary)">Qwen3.5-VL-397B</strong><br>
+            <span style="color:var(--text-dim)">A17B · Vision · JANG_1L</span><br>
+            <span style="color:var(--accent-green);font-size:9px">UNCENSORED</span>
+          </div>
+          <a href="https://huggingface.co/dealignai/Qwen3.5-VL-397B-A17B-UNCENSORED-JANG_1L" target="_blank" style="font-size:9px;color:var(--accent-blue);text-decoration:none;display:block;margin-top:6px">dealignai ↗</a>
         </div>
       </div>
-      <div class="download-progress show">
+      <div style="width:100%;max-width:640px;text-align:center;margin-top:12px;">
+        <div style="font-size:11px;color:var(--text-dim);margin-bottom:8px;">Or paste a HuggingFace model URL:</div>
+        <input class="tool-input" id="customModelInput" placeholder="https://huggingface.co/..." style="max-width:500px;width:100%;height:32px;font-size:12px;">
+      </div>
+      <div class="download-progress" id="downloadProgress">
         <div class="progress-bar-outer">
-          <div class="progress-bar-inner"></div>
+          <div class="progress-bar-inner" id="progressBar"></div>
         </div>
         <div class="progress-text">
-          <span>Qwen 3 235B MoE — JANG_4M</span>
-          <span>12.4 GB / 36.2 GB · 48 MB/s · ~8 min left</span>
+          <span id="downloadModelName">Qwen3.5-VL-122B-A10B — JANG_2S</span>
+          <span id="downloadStats">0 GB / 30 GB · waiting...</span>
+        </div>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;">
+          <button class="btn btn-secondary" style="padding:4px 14px;font-size:11px;" onclick="togglePause()">⏸ Pause</button>
+          <button class="btn btn-ghost" style="padding:4px 14px;font-size:11px;color:var(--accent-red);" onclick="cancelDownload()">✕ Cancel</button>
         </div>
       </div>
     </div>
@@ -871,14 +887,177 @@
     }
   }
 
-  function selectLang(el) {
-    document.querySelectorAll('.lang-card').forEach(c => c.classList.remove('selected'));
-    el.classList.add('selected');
+  // ── i18n translations ──
+  const i18n = {
+    en: {
+      title: 'Choose your language',
+      desc: 'exploitbot will display all menus, tools, and reports in your selected language. You can change this later in Settings.',
+      continue: 'Continue →',
+      back: '← Back',
+      skip: 'Skip for now',
+      startOp: 'Start Op →',
+      s2title: 'Download a model',
+      s2desc: 'Select a model tier based on your Mac\'s memory. Larger models are more capable but require more RAM.',
+      s3title: 'Tool status',
+      s3desc: 'These tools power exploitbot\'s scanning and exploitation capabilities. Bundled tools are ready. Others can be installed now or later.',
+      s4title: 'Create your first Op',
+      s4desc: 'An Op is a named workspace for a pentest engagement. All tools, findings, and context live inside it.',
+      stepLabels: ['Language', 'Model', 'Tools', 'First Op']
+    },
+    ko: {
+      title: '언어를 선택하세요',
+      desc: 'exploitbot의 모든 메뉴, 도구, 보고서가 선택한 언어로 표시됩니다. 설정에서 나중에 변경할 수 있습니다.',
+      continue: '계속 →',
+      back: '← 뒤로',
+      skip: '나중에',
+      startOp: 'Op 시작 →',
+      s2title: '모델 다운로드',
+      s2desc: 'Mac 메모리에 맞는 모델 티어를 선택하세요. 큰 모델이 더 성능이 좋지만 더 많은 RAM이 필요합니다.',
+      s3title: '도구 상태',
+      s3desc: '이 도구들이 exploitbot의 스캐닝 및 공격 기능을 제공합니다. 번들 도구는 준비되었습니다.',
+      s4title: '첫 번째 Op 만들기',
+      s4desc: 'Op는 모의해킹 작업을 위한 이름이 있는 작업 공간입니다. 모든 도구, 발견, 컨텍스트가 여기에 저장됩니다.',
+      stepLabels: ['언어', '모델', '도구', '첫 Op']
+    },
+    zh: {
+      title: '选择语言',
+      desc: 'exploitbot 将以您选择的语言显示所有菜单、工具和报告。您可以稍后在设置中更改。',
+      continue: '继续 →',
+      back: '← 返回',
+      skip: '稍后再说',
+      startOp: '开始 Op →',
+      s2title: '下载模型',
+      s2desc: '根据 Mac 内存选择模型层级。更大的模型能力更强，但需要更多 RAM。',
+      s3title: '工具状态',
+      s3desc: '这些工具为 exploitbot 的扫描和渗透能力提供支持。捆绑工具已就绪。',
+      s4title: '创建第一个 Op',
+      s4desc: 'Op 是渗透测试任务的命名工作区。所有工具、发现和上下文都在其中。',
+      stepLabels: ['语言', '模型', '工具', '首个 Op']
+    },
+    es: {
+      title: 'Elige tu idioma',
+      desc: 'exploitbot mostrará todos los menús, herramientas e informes en el idioma seleccionado. Puedes cambiarlo después en Configuración.',
+      continue: 'Continuar →',
+      back: '← Atrás',
+      skip: 'Omitir',
+      startOp: 'Iniciar Op →',
+      s2title: 'Descargar modelo',
+      s2desc: 'Selecciona un nivel de modelo según la memoria de tu Mac. Los modelos más grandes son más capaces pero requieren más RAM.',
+      s3title: 'Estado de herramientas',
+      s3desc: 'Estas herramientas impulsan las capacidades de escaneo y explotación de exploitbot.',
+      s4title: 'Crea tu primer Op',
+      s4desc: 'Un Op es un espacio de trabajo con nombre para una prueba de penetración. Todas las herramientas, hallazgos y contexto viven dentro.',
+      stepLabels: ['Idioma', 'Modelo', 'Herramientas', 'Primer Op']
+    },
+    ja: {
+      title: '言語を選択してください',
+      desc: 'exploitbot のすべてのメニュー、ツール、レポートが選択した言語で表示されます。後で設定から変更できます。',
+      continue: '続行 →',
+      back: '← 戻る',
+      skip: 'スキップ',
+      startOp: 'Op を開始 →',
+      s2title: 'モデルをダウンロード',
+      s2desc: 'Mac のメモリに基づいてモデル層を選択してください。大きなモデルはより高性能ですが、より多くの RAM が必要です。',
+      s3title: 'ツールの状態',
+      s3desc: 'これらのツールが exploitbot のスキャンおよび攻撃機能を提供します。',
+      s4title: '最初の Op を作成',
+      s4desc: 'Op はペネトレーションテストのための名前付きワークスペースです。すべてのツール、発見、コンテキストがここに格納されます。',
+      stepLabels: ['言語', 'モデル', 'ツール', '最初の Op']
+    }
+  };
+
+  let selectedLang = 'en';
+
+  function applyLanguage(lang) {
+    selectedLang = lang;
+    const t = i18n[lang];
+    document.getElementById('langTitle').textContent = t.title;
+    document.getElementById('langDesc').textContent = t.desc;
+    document.getElementById('nextBtn').textContent = currentStep === totalSteps ? t.startOp : t.continue;
+    document.getElementById('backBtn').textContent = t.back;
+    document.getElementById('skipBtn').textContent = t.skip;
+    // Update step labels
+    t.stepLabels.forEach((label, idx) => {
+      const el = document.querySelector(`#si${idx+1} .step-label`);
+      if (el) el.textContent = label;
+    });
+    // Update other screen titles
+    const s2t = document.querySelector('#screen2 .screen-title');
+    const s2d = document.querySelector('#screen2 .screen-desc');
+    const s3t = document.querySelector('#screen3 .screen-title');
+    const s3d = document.querySelector('#screen3 .screen-desc');
+    const s4t = document.querySelector('#screen4 .screen-title');
+    const s4d = document.querySelector('#screen4 .screen-desc');
+    if (s2t) s2t.textContent = t.s2title;
+    if (s2d) s2d.textContent = t.s2desc;
+    if (s3t) s3t.textContent = t.s3title;
+    if (s3d) s3d.textContent = t.s3desc;
+    if (s4t) s4t.textContent = t.s4title;
+    if (s4d) s4d.textContent = t.s4desc;
   }
 
-  function selectTier(el) {
+  function selectLang(el, lang) {
+    document.querySelectorAll('.lang-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    applyLanguage(lang);
+  }
+
+  // ── Model selection + download sim ──
+  const modelInfo = {
+    small: { name: 'Qwen3.5-VL-122B-A10B — JANG_2S', size: 30 },
+    medium: { name: 'MiniMax-M2.5 — JANG_2L', size: 60 },
+    large: { name: 'Qwen3.5-VL-397B-A17B — JANG_1L', size: 112 }
+  };
+  let selectedModel = 'small';
+  let downloadInterval = null;
+  let downloadProgress = 0;
+  let downloadPaused = false;
+
+  function selectTier(el, tier) {
     document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
     el.classList.add('selected');
+    selectedModel = tier;
+    // Reset and start download sim
+    downloadProgress = 0;
+    downloadPaused = false;
+    const dp = document.getElementById('downloadProgress');
+    dp.classList.add('show');
+    document.getElementById('downloadModelName').textContent = modelInfo[tier].name;
+    updateDownloadDisplay();
+    if (downloadInterval) clearInterval(downloadInterval);
+    downloadInterval = setInterval(() => {
+      if (!downloadPaused) {
+        downloadProgress += Math.random() * 3 + 1;
+        if (downloadProgress > 100) downloadProgress = 100;
+        updateDownloadDisplay();
+        if (downloadProgress >= 100) {
+          clearInterval(downloadInterval);
+          document.getElementById('downloadStats').textContent = `${modelInfo[selectedModel].size} GB / ${modelInfo[selectedModel].size} GB · Complete ✓`;
+          document.getElementById('progressBar').style.background = 'var(--accent-green)';
+        }
+      }
+    }, 300);
+  }
+
+  function updateDownloadDisplay() {
+    const total = modelInfo[selectedModel].size;
+    const done = (total * downloadProgress / 100).toFixed(1);
+    const speed = (Math.random() * 30 + 40).toFixed(0);
+    const remaining = downloadProgress >= 100 ? 'done' : `${speed} MB/s · ~${Math.ceil((100 - downloadProgress) / 4)} min left`;
+    document.getElementById('progressBar').style.width = downloadProgress + '%';
+    document.getElementById('progressBar').style.background = '';
+    document.getElementById('downloadStats').textContent = `${done} GB / ${total} GB · ${remaining}`;
+  }
+
+  function togglePause() {
+    downloadPaused = !downloadPaused;
+    event.target.textContent = downloadPaused ? '▶ Resume' : '⏸ Pause';
+  }
+
+  function cancelDownload() {
+    if (downloadInterval) clearInterval(downloadInterval);
+    downloadProgress = 0;
+    document.getElementById('downloadProgress').classList.remove('show');
   }
 
   function selectMode(el) {
