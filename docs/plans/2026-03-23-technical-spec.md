@@ -439,6 +439,32 @@ D024                                                                            
 - **Decision:** Boolean `isStopped` flag checked at every async boundary, plus SIGTERM to running process
 - **Rationale:** Task.cancel() alone insufficient — doesn't stop subprocess execution or mid-SSE streaming
 
+### D036: Auto-Tab Tracking During Agent Execution
+- **Decision:** UI auto-switches to relevant tab when model invokes a tool
+- **Implementation:**
+  - Tool name → ToolTab mapping function in AppState or ToolDefinitions
+  - onToolStart callback sets state.activeTab based on mapping
+  - "Follow agent" toggle in controls bar (default on in Autopilot, off in Manual)
+  - When disabled, tab badges show "● N new" for tabs with unseen results
+- **Test surface:** Each tool correctly maps to tab, toggle works, badge counts, no switch for run_shell/search_cve
+
+### D037: Pentesting Phase System (Scan → Detect → Breach)
+- **Decision:** Three explicit phases that structure the Autopilot workflow
+- **Phases:**
+  1. SCAN (blue) — recon tools, map attack surface, populate Recon tab
+  2. DETECT (orange) — vuln scanning tools, CVE matching, populate Web tab
+  3. BREACH (red) — exploitation, post-exploit, cred cracking, populate Exploit/Post/Creds tabs
+- **Implementation:**
+  - `PentestPhase` enum in AppState (scan/detect/breach)
+  - Phase stored per-Op in DB (new column or setting)
+  - Phase indicator in controls bar with progress dots + stats
+  - Phase-specific system prompt injection (emphasize recon vs detection vs exploitation)
+  - Phase transition: model decides when to advance (Autopilot) or user manually advances
+  - Activity feed shows phase transitions as sticky section headers
+  - Report organized by phase
+- **Rationale:** Makes Autopilot behavior structured and predictable. Users see progress. Report narratives are clearer.
+- **Test surface:** Phase auto-advance logic, manual skip/back, prompt injection per phase, report phase grouping, activity feed headers
+
 ---
 
 ## Resolved Decisions

@@ -513,6 +513,88 @@
 - [ ] Notification toast: "Mode changed to [X]"
 - [ ] Activity feed logs mode change event
 
+### F006.5: Auto-Tab Tracking (Agent Execution)
+- [ ] When model invokes a tool, UI auto-switches to the relevant tab
+- [ ] **Tool → Tab mapping:**
+  - [ ] subfinder, dnsx, nmap, masscan, httpx, katana, theHarvester → Recon tab
+  - [ ] nuclei, sqlmap, dalfox, feroxbuster, ffuf, arjun, wpscan, testssl, graphqlmap, jwt_tool → Web tab
+  - [ ] netexec, snmpwalk, tshark, bettercap, chisel → Network tab
+  - [ ] hashcat, hydra, haiti, trufflehog → Creds tab
+  - [ ] metasploit, pwncat, pwntools, sliver → Exploit tab
+  - [ ] linpeas, winpeas, impacket → Post tab
+  - [ ] sherlock, holehe, exiftool, gowitness → OSINT tab
+  - [ ] run_shell → stays on current tab (no switch)
+  - [ ] search_cve → stays on current tab (no switch)
+- [ ] **Behavior:**
+  - [ ] Auto-tracking enabled by default in Autopilot mode
+  - [ ] Auto-tracking optional in Copilot mode (toggle in settings)
+  - [ ] Auto-tracking disabled in Manual mode (user controls tabs)
+  - [ ] Tab switch happens when tool START is logged (not on completion)
+  - [ ] Tab switch is visual only — does not interrupt user if they manually switch away
+  - [ ] "Follow agent" toggle button in controls bar — user can disable mid-session
+  - [ ] When disabled, a subtle indicator shows which tab has new results ("● 3 new" badge on tab)
+- [ ] **Cross-feature dependencies:**
+  - [ ] Requires: onToolStart callback (F005 Activity Feed) — already implemented
+  - [ ] Requires: ToolTab mapping from tool name — new lookup function needed
+  - [ ] Requires: state.activeTab binding (F011 Tabs) — already implemented
+  - [ ] Affects: ActivityFeedView should highlight which tab is being auto-tracked
+  - [ ] Affects: Tab bar should show "new results" indicator when user has tracking disabled
+
+### F006.6: Pentesting Phase System (Scan → Detect → Breach)
+- [ ] **Three explicit phases:**
+  - [ ] **Phase 1: SCAN** — Context gathering via tools
+    - [ ] Objective: map attack surface (subdomains, ports, services, tech stacks)
+    - [ ] Tools used: subfinder, dnsx, nmap, masscan, httpx, katana, theHarvester
+    - [ ] Auto-tabs: Recon
+    - [ ] Completion criteria: model determines sufficient coverage
+    - [ ] Output: populated Recon tab with all discovered assets
+  - [ ] **Phase 2: DETECT** — Vulnerability identification from context
+    - [ ] Objective: find exploitable vulnerabilities in discovered services
+    - [ ] Tools used: nuclei, sqlmap, dalfox, feroxbuster, arjun, wpscan, testssl, search_cve
+    - [ ] Auto-tabs: Web, Network
+    - [ ] Completion criteria: all high-value targets scanned, CVEs matched
+    - [ ] Output: populated Web tab with vuln cards, CVE matches
+  - [ ] **Phase 3: BREACH** — Exploitation and post-exploitation
+    - [ ] Objective: exploit confirmed vulns, establish access, escalate, exfiltrate
+    - [ ] Tools used: metasploit, pwncat, pwntools, sliver, linpeas, winpeas, impacket, hashcat, hydra
+    - [ ] Auto-tabs: Exploit, Post, Creds
+    - [ ] Completion criteria: access obtained or all exploitation paths exhausted
+    - [ ] Output: active sessions, cracked credentials, privilege escalation results
+- [ ] **Phase indicator UI:**
+  - [ ] Displayed in controls bar: "Phase 1: SCAN" / "Phase 2: DETECT" / "Phase 3: BREACH"
+  - [ ] Phase progress: filled dots (●●○) showing current phase
+  - [ ] Phase stats: "12 hosts found" / "3 vulns confirmed" / "1 shell established"
+  - [ ] Color per phase: SCAN=blue, DETECT=orange, BREACH=red
+  - [ ] Phase transition logged in activity feed with section header
+- [ ] **Phase control:**
+  - [ ] Phases auto-advance in Autopilot mode (model decides when to move on)
+  - [ ] User can manually advance phase ("Skip to Detect", "Skip to Breach")
+  - [ ] User can go back to previous phase ("Return to Scan")
+  - [ ] Phase restart: re-run current phase with new parameters
+  - [ ] Phase can be skipped entirely (e.g., user already has recon data)
+- [ ] **System prompt integration:**
+  - [ ] Phase-specific instructions injected into system prompt
+  - [ ] Phase 1 prompt emphasizes: completeness, no exploitation, passive first then active
+  - [ ] Phase 2 prompt emphasizes: matching CVEs, testing all entry points, risk assessment
+  - [ ] Phase 3 prompt emphasizes: exploit selection, shell stabilization, persistence, evidence collection
+  - [ ] Phase transition prompt: "Recon complete. Moving to vulnerability detection. You found: [summary]"
+- [ ] **Cross-feature dependencies:**
+  - [ ] Requires: Activity Feed phase section headers (F005.1) — partially implemented
+  - [ ] Requires: Auto-tab tracking (F006.5) — new feature
+  - [ ] Requires: System prompt template variables (base.md {{PHASE}}) — needs addition
+  - [ ] Affects: ResultsStore should track which phase produced each result
+  - [ ] Affects: Findings should record which phase they were discovered in
+  - [ ] Affects: Report generation should group findings by phase
+  - [ ] Affects: Stash items should tag with source phase
+  - [ ] Affects: Activity Feed should show phase transitions as sticky headers
+  - [ ] Requires: ChatService needs phase state + transition logic
+  - [ ] Requires: AppState needs currentPhase property
+  - [ ] Requires: Op model needs phase field in DB (which phase is active/last)
+- [ ] **Report integration:**
+  - [ ] Attack Narrative section organized by phase
+  - [ ] Phase timeline in report: "Scan: 14:23-14:25, Detect: 14:25-14:30, Breach: 14:30-14:45"
+  - [ ] Phase-specific findings grouping in report summary
+
 ---
 
 ## F007: Tool System
