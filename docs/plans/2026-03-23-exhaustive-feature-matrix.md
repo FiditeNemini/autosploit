@@ -1,0 +1,1115 @@
+# exploitbot — Exhaustive Feature Matrix
+
+**Purpose:** Complete enumeration of every feature, sub-feature, setting, interaction, edge case, and cross-cutting concern. Used for test matrix generation and implementation tracking.
+
+---
+
+## F001: App Lifecycle
+
+### F001.1: Launch Sequence
+- [ ] App opens to last active Op (or onboarding if first run)
+- [ ] vMLX engine spawned on random localhost port
+- [ ] Engine health check (HTTP ping to /v1/models)
+- [ ] Health check retry with backoff (3 attempts, 2s/4s/8s)
+- [ ] Model auto-loaded if previously selected
+- [ ] Orphan vMLX process detection on launch (PID file check)
+- [ ] Orphan adoption or kill decision
+- [ ] Port collision detection (another app on chosen port)
+- [ ] Port re-selection on collision
+- [ ] Single instance lock (prevent double-launch)
+- [ ] Second launch attempt shows "already running" and focuses existing window
+- [ ] Restore window position/size from last session
+- [ ] Restore active tab within active Op
+
+### F001.2: Shutdown Sequence
+- [ ] Save all Op state (messages, stash, findings)
+- [ ] Save window position/size
+- [ ] Send SIGTERM to vMLX engine
+- [ ] Wait up to 5s for graceful shutdown
+- [ ] SIGKILL if still alive after timeout
+- [ ] Kill all active tool subprocesses
+- [ ] Remove PID file
+- [ ] Cleanup temp files (/tmp/exploitbot_*)
+- [ ] Database WAL checkpoint on exit
+
+### F001.3: Crash Recovery
+- [ ] Detect unclean shutdown on next launch (PID file exists but process dead)
+- [ ] Database integrity check (PRAGMA integrity_check)
+- [ ] Corrupt DB → rename to .corrupt.timestamp, recreate, show dialog
+- [ ] Recover in-flight Op state from WAL journal
+- [ ] Show "Recovered from crash" banner with details
+
+### F001.4: Background Behavior
+- [ ] Menu bar tray icon (optional, configurable)
+- [ ] Close window = minimize to tray (if enabled) or quit
+- [ ] Tray menu: Show/Quit/Current Op status
+- [ ] Long-running tools continue when window minimized
+- [ ] Autopilot continues when window minimized
+- [ ] macOS notification when Autopilot finds a vulnerability (if minimized)
+
+---
+
+## F002: Onboarding (First Run)
+
+### F002.1: Language Selection
+- [ ] Screen shows "Choose your language" in all 5 languages simultaneously
+- [ ] Flag + native language name for each (🇺🇸 English, 🇰🇷 한국어, 🇨🇳 中文, 🇪🇸 Español, 🇯🇵 日本語)
+- [ ] Selection immediately switches all UI text
+- [ ] Language stored in settings
+- [ ] Back button disabled (first screen)
+
+### F002.2: Model Download
+- [ ] Auto-detect system RAM via ProcessInfo.processInfo.physicalMemory
+- [ ] Highlight compatible tiers based on RAM
+- [ ] Show S/M/L/XL tier cards with model names, sizes, MMLU scores
+- [ ] Download progress bar (bytes downloaded / total, speed, ETA)
+- [ ] Pause button during download
+- [ ] Resume button (HTTP range requests)
+- [ ] Cancel button with confirmation ("Are you sure? Progress will be lost")
+- [ ] Disk space check before download starts
+- [ ] Insufficient disk space warning with needed vs available
+- [ ] Download failure → retry button + error details
+- [ ] Network disconnection during download → pause + notification
+- [ ] "Skip for now" option (user can download later from settings)
+- [ ] Custom HuggingFace URL input field
+- [ ] HF URL validation (exists, has model files)
+- [ ] Show model architecture + format detection after download
+- [ ] JANG format auto-detected
+- [ ] Safetensors format auto-detected
+- [ ] GGUF format detected + warning (not native, slower)
+
+### F002.3: Tool Installation
+- [ ] Status grid showing all 38 tools
+- [ ] Bundled tools → green checkmark, already installed
+- [ ] Lazy-install tools → gray, "Install" button
+- [ ] "Install All" button for lazy tools
+- [ ] Per-tool install progress (homebrew/pip/go output)
+- [ ] Install failure → red X + error log + retry button
+- [ ] "Skip for now" option (tools installable from tab UIs later)
+- [ ] Homebrew detection (is brew installed?)
+- [ ] Homebrew missing → install instructions or auto-install prompt
+- [ ] Python detection (is python3 available?)
+- [ ] Go detection (is go available?) — only if Go tools need building
+- [ ] Xcode CLI tools detection (needed for some compilations)
+- [ ] PATH verification: each installed tool executable from app's PATH
+
+### F002.4: First Op Creation
+- [ ] Name input field
+- [ ] Optional target/scope description textarea
+- [ ] Optional scope definition (in-scope domains/IPs, out-of-scope)
+- [ ] Interaction mode selection (Autopilot/Copilot/Manual) with descriptions
+- [ ] "Create Op" button → transitions to main workspace
+- [ ] Op appears in sidebar immediately
+
+---
+
+## F003: Ops System
+
+### F003.1: Op CRUD
+- [ ] Create new Op (name required, optional: scope, mode, description)
+- [ ] Rename Op (inline edit in sidebar)
+- [ ] Duplicate Op (copies settings, not conversation)
+- [ ] Delete Op with confirmation ("This will delete all messages, findings, and evidence")
+- [ ] Archive Op (hides from sidebar, retrievable)
+- [ ] Unarchive Op
+
+### F003.2: Op State
+- [ ] Status: active / paused / complete
+- [ ] Active = currently interacting with model
+- [ ] Paused = model context preserved but not active
+- [ ] Complete = Op marked done, read-only unless reopened
+- [ ] Status auto-set: active when user interacts, paused when switching to another Op
+- [ ] Manual status change via Op Controls
+
+### F003.3: Op Scope Definition
+- [ ] In-scope targets: domains, IPs, CIDR ranges
+- [ ] Out-of-scope targets: specific IPs/domains to never touch
+- [ ] Scope displayed in Op header/info panel
+- [ ] Model receives scope in system prompt
+- [ ] Tool invocations validated against scope in Copilot/Manual mode
+- [ ] Autopilot mode: scope enforced, model warned if attempting out-of-scope
+
+### F003.4: Op Context Persistence
+- [ ] Full message history stored in SQLite
+- [ ] Messages include: role, content, reasoning_content, tool_calls, tool_results, tab_context, timestamp, token_count
+- [ ] Context rebuilt from DB when switching back to Op
+- [ ] Context token count tracked and displayed
+- [ ] Context limit warning (approaching model's max context)
+- [ ] Context management strategy applied per D007 setting
+
+### F003.5: Op Switching
+- [ ] Click Op in sidebar → switches to that Op
+- [ ] Previous Op auto-paused
+- [ ] New Op's last active tab restored
+- [ ] Chatbox shows new Op's conversation history
+- [ ] Activity feed shows new Op's activity
+- [ ] Stash remains global (doesn't switch)
+- [ ] Engine context switch: new system prompt + conversation sent to model
+- [ ] Switching speed: should feel instant (< 500ms for UI), model context re-sent in background
+
+### F003.6: Concurrent Ops
+- [ ] Multiple Ops can be "active" but only one is "focused" (visible in UI)
+- [ ] Background Op's Autopilot continues running
+- [ ] Background Op tool results accumulated
+- [ ] Notification when background Op finds something
+- [ ] "Op is running in background" indicator in sidebar
+
+---
+
+## F004: Chat System
+
+### F004.1: Message Input
+- [ ] Multi-line text input (shift+enter for newline, enter to send)
+- [ ] Send button
+- [ ] Attach file button (images, pcap files, text files, etc.)
+- [ ] Paste image from clipboard
+- [ ] Paste text from clipboard
+- [ ] "Pull from Stash" button (opens Stash picker)
+- [ ] Character/token count indicator
+- [ ] Input disabled while model is generating
+- [ ] Stop generation button (cancel current response)
+- [ ] Input history (up arrow for previous messages)
+
+### F004.2: Message Display
+- [ ] User messages: right-aligned, distinct background
+- [ ] Assistant messages: left-aligned, different background
+- [ ] Tool call messages: inline cards showing tool name, parameters, status
+- [ ] Tool result messages: collapsible output blocks
+- [ ] Reasoning blocks: collapsible "Thinking..." section above response
+- [ ] Code blocks: syntax-highlighted, copy button
+- [ ] Markdown rendering (headers, lists, tables, links, bold, italic)
+- [ ] Image display (screenshots, evidence)
+- [ ] Long messages: "Show more" truncation for huge tool outputs
+- [ ] Timestamp on each message (hover or always, configurable)
+- [ ] "Copy" button on each message
+- [ ] "Stash this" button on each assistant message
+- [ ] "Create Finding" button on relevant messages
+- [ ] Scroll to bottom button when scrolled up
+- [ ] Auto-scroll during streaming (unless user has scrolled up)
+- [ ] Message streaming: tokens appear as received (SSE)
+- [ ] Streaming reasoning: thinking block populates in real-time
+
+### F004.3: Chat Context Awareness
+- [ ] System prompt includes: Op name, scope, interaction mode, language preference, active tab, installed tools list
+- [ ] Tab switch appended to context: "User switched to [Web] tab"
+- [ ] Tool results appended to context automatically
+- [ ] Stash items pulled into chat appended to context
+- [ ] Finding creation noted in context
+- [ ] Context continuity across tab switches (same conversation thread)
+
+### F004.4: Chat Actions
+- [ ] Clear context (with confirmation — "This will reset the model's memory for this Op")
+- [ ] Export chat as Markdown
+- [ ] Search within chat (cmd+F)
+- [ ] Jump to message by timestamp or tool call
+- [ ] Regenerate last response (re-send with same input)
+- [ ] Edit and re-send a previous user message (forks conversation)
+
+---
+
+## F005: Activity Feed
+
+### F005.1: Feed Content
+- [ ] Model reasoning/thinking (collapsible)
+- [ ] Tool call initiation (tool name, parameters, command preview)
+- [ ] Tool stdout streaming (real-time, character-by-character for long-running)
+- [ ] Tool stderr streaming (in red/warning color)
+- [ ] Tool completion (success ✓ / failure ✗ / timeout ⏱ / cancelled ⊘)
+- [ ] Tool duration (elapsed time)
+- [ ] Model interpretation of results
+- [ ] Model decisions ("Found X, proceeding to Y because Z")
+- [ ] Stash events ("Stashed credential from hydra output")
+- [ ] Finding events ("Created Finding: CVE-2021-41773 on dev.acme.com")
+- [ ] Mode transitions ("Switching from Recon to Web phase")
+- [ ] Error events (engine error, tool not found, permission denied)
+- [ ] Context management events ("Summarizing old context...", "Pinned item preserved")
+
+### F005.2: Feed UI
+- [ ] Scrolling log panel (bottom of screen or side panel, configurable)
+- [ ] Auto-scroll during active output
+- [ ] Pause auto-scroll when user scrolls up
+- [ ] Resume auto-scroll button
+- [ ] Timestamp on each entry
+- [ ] Color-coded by type (tool=cyan, error=red, finding=green, reasoning=purple)
+- [ ] Filter buttons: All / Tools / Errors / Findings / Reasoning
+- [ ] Search within feed
+- [ ] Copy entry text
+- [ ] Click tool call entry → scrolls to corresponding chat message
+- [ ] Collapsible sections (group all output from one tool call)
+- [ ] Clear feed (with confirmation)
+
+### F005.3: Verbosity Levels
+- [ ] Minimal: results and decisions only
+- [ ] Normal: tool calls + results + decisions (default)
+- [ ] Verbose: everything including raw stdout/stderr, model reasoning, timing
+- [ ] Debug: all above + HTTP requests to engine, token counts, IPC messages, SSE events
+- [ ] Verbosity toggle in Op Controls (per-Op setting)
+- [ ] Higher verbosity levels include all lower levels
+
+---
+
+## F006: Interaction Modes
+
+### F006.1: Autopilot Mode
+- [ ] User provides starting prompt → model takes over completely
+- [ ] Model selects tools autonomously based on findings
+- [ ] All tool calls auto-approved (no confirmation dialogs)
+- [ ] `run_shell` auto-approved (no confirmation)
+- [ ] Model chains tool results: recon → scanning → exploitation → post-exploit
+- [ ] Model creates Findings automatically when vulns confirmed
+- [ ] Model creates Stash items for interesting artifacts
+- [ ] Model generates report when it believes Op is complete (or user requests)
+- [ ] "Pause" button → suspends Autopilot, preserves state
+- [ ] "Resume" button → continues from where paused
+- [ ] "Stop" button → terminates current tool + stops Autopilot
+- [ ] Scope enforcement: model warned/blocked from out-of-scope targets
+- [ ] Activity feed is the primary UI (user watches the model work)
+- [ ] Estimated progress indicator (qualitative: "Recon phase", "Exploitation phase")
+- [ ] Background mode: Autopilot continues if user switches to another Op
+
+### F006.2: Copilot Mode
+- [ ] Model suggests next actions in chat
+- [ ] Structured tool calls: model proposes, app shows "Run [nmap -sV target]?" with Approve/Modify/Reject
+- [ ] Approve → executes immediately
+- [ ] Modify → opens tool parameters for editing, then execute
+- [ ] Reject → model notified, suggests alternative
+- [ ] `run_shell` requires explicit confirmation with command preview
+- [ ] Model can suggest multiple tools (user picks which to run)
+- [ ] User can also invoke tools manually from tab UIs
+- [ ] User can type in chatbox anytime (interrupt model's flow)
+
+### F006.3: Manual Mode
+- [ ] Model does NOT auto-invoke tools
+- [ ] All tool execution initiated from tab UIs (buttons, forms)
+- [ ] Chatbox available for questions, explanations, advice
+- [ ] User can ask model: "What should I try next?" → model suggests but doesn't execute
+- [ ] User can ask model to analyze tool output pasted into chat
+- [ ] User can ask model to generate payloads, scripts, dorks
+- [ ] Tab UIs are the primary interface (chatbox is secondary)
+
+### F006.4: Mode Switching
+- [ ] Mode selector in Op Controls (dropdown or segmented control)
+- [ ] Switching mid-Op preserves all state
+- [ ] Switching to Autopilot: model reviews current findings and continues
+- [ ] Switching from Autopilot to Copilot: current tool finishes, then model proposes next step
+- [ ] Switching to Manual: model stops all pending actions
+- [ ] Notification: "Interaction mode changed to [X]"
+
+---
+
+## F007: Tool System
+
+### F007.1: Tool Registry
+- [ ] 38 tools defined in registry.json
+- [ ] Each tool: name, category, description, binary, parameters, cli_mapping, output_parser, result_type
+- [ ] Each parameter: type, required, default, enum, description
+- [ ] Registry loaded at app launch
+- [ ] Registry validated (all binaries found or marked missing)
+- [ ] Tool schemas converted to OpenAI function format for model
+
+### F007.2: Tool Execution
+- [ ] Subprocess spawned with argument array (never shell interpolation)
+- [ ] Environment: PATH includes ~/.exploitbot/tools/ + bundled tools
+- [ ] Working directory: ~/.exploitbot/ops/{op_id}/
+- [ ] stdout captured and streamed to activity feed
+- [ ] stderr captured and streamed (separate color)
+- [ ] Exit code captured
+- [ ] Execution time tracked
+- [ ] Timeout enforcement (per-tool default, user-overridable)
+- [ ] Timeout action: SIGTERM → 3s → SIGKILL
+- [ ] Cancellation: user clicks cancel → SIGTERM → 3s → SIGKILL
+- [ ] Output truncation: results > 50KB auto-truncated for model context
+- [ ] Full output preserved in activity feed and available in Stash
+- [ ] Root-required tools: prompt for sudo password (cached per session)
+- [ ] Tool not found: clear error message + install button
+
+### F007.3: Tool Chaining (Piping)
+- [ ] Model can chain tools: subfinder output → dnsx input → httpx input
+- [ ] Piping via temp files (tool A output → file → tool B input)
+- [ ] Piping via stdin_support flag (tools that accept stdin)
+- [ ] Chain displayed as connected steps in activity feed
+- [ ] Chain failure: if tool B fails, model notified with both outputs
+- [ ] Parallel tool execution: model can invoke multiple tools simultaneously
+- [ ] Concurrent tool limit: configurable (default 3)
+
+### F007.4: Tool Output Parsing
+- [ ] Each tool has a designated output_parser
+- [ ] Parser types needed:
+  - line_per_result (subfinder, dnsx)
+  - jsonl (httpx, katana, nuclei, dalfox, feroxbuster, ffuf, trufflehog)
+  - nmap_xml (nmap)
+  - masscan_json (masscan)
+  - theharvester_xml (theHarvester)
+  - arjun_json (arjun)
+  - sqlmap_log (sqlmap)
+  - wpscan_json (wpscan)
+  - testssl_json (testssl)
+  - ffuf_json (ffuf)
+  - netexec_text (netexec)
+  - snmp_text (snmpwalk)
+  - tshark_text (tshark)
+  - bettercap_events (bettercap)
+  - hashcat_status (hashcat)
+  - hydra_text (hydra)
+  - haiti_text (haiti)
+  - msf_console (metasploit)
+  - pwncat_events (pwncat)
+  - sliver_text (sliver)
+  - linpeas_ansi (linpeas — ANSI color stripping)
+  - winpeas_ansi (winpeas)
+  - impacket_text (impacket)
+  - sherlock_csv (sherlock)
+  - holehe_csv (holehe)
+  - exiftool_json (exiftool)
+  - gowitness_db (gowitness)
+  - raw_text (graphqlmap, jwt_tool, chisel, pwntools, run_shell)
+- [ ] Each parser: raw output → structured data (JSON/arrays)
+- [ ] Structured data displayed in tab-specific UI components
+- [ ] Structured data also serialized into model context
+- [ ] Parse failures: fall back to raw_text, log warning
+
+### F007.5: Tool Installation Management
+- [ ] Tool status tracked in DB: installed/missing/outdated/installing
+- [ ] Version detection: run tool --version or equivalent
+- [ ] Update check: compare installed vs latest (homebrew/pip/go)
+- [ ] Update button per tool in Settings → Tools
+- [ ] "Update All" button
+- [ ] Uninstall button (for lazy-installed tools only)
+- [ ] Bundled tools: not uninstallable, auto-updated with app updates
+- [ ] Seclists: downloaded to ~/.exploitbot/wordlists/
+- [ ] Seclists version/update management
+- [ ] Nuclei templates: auto-update on app launch (nuclei -ut)
+- [ ] Nuclei template update frequency: configurable (daily/weekly/manual)
+
+### F007.6: Tool Security
+- [ ] Parameter validation against schema before execution
+- [ ] Shell metacharacter rejection in all parameters
+- [ ] Argument array construction (no shell expansion)
+- [ ] Scope validation: target params checked against Op scope
+- [ ] Dangerous tool warnings (tools that modify target: sqlmap --os-shell, metasploit exploits)
+- [ ] Copilot mode: dangerous tools require extra confirmation
+- [ ] Autopilot mode: dangerous tools logged prominently in activity feed
+- [ ] No tool can write to app directories or system paths
+
+---
+
+## F008: Stash System
+
+### F008.1: Adding to Stash
+- [ ] Right-click any tool output → "Stash this"
+- [ ] Select text in chat → "Stash selection"
+- [ ] Right-click assistant message → "Stash this response"
+- [ ] Model auto-stashes in Autopilot (configurable)
+- [ ] Stash from tab-specific UI (e.g., "Stash these subdomains" button on recon results)
+- [ ] Bulk stash: select multiple items → "Stash all"
+- [ ] Type auto-detection from content (regex patterns for IPs, hashes, emails, URLs)
+- [ ] Manual type override after stashing
+
+### F008.2: Stash UI
+- [ ] Drawer/panel accessible from every tab (icon in Op Controls bar)
+- [ ] List view: label, type icon, source Op, timestamp
+- [ ] Grid view: visual cards (especially for screenshots)
+- [ ] Filter by type (credential, host, vuln, code, etc.)
+- [ ] Filter by source Op
+- [ ] Search by content/label
+- [ ] Sort by: date, type, source Op
+- [ ] Select multiple items
+- [ ] Delete items (single, bulk)
+- [ ] Edit label/tags inline
+- [ ] Preview: click item → expanded view with full content
+
+### F008.3: Using Stash Items
+- [ ] Drag item into chatbox → inserts content as message
+- [ ] Drag item into tool parameter field → fills parameter
+- [ ] "Send to Op" → pick target Op → inserts into that Op's chat
+- [ ] "Send to Tab" → pick target Op + tab → opens tab with item ready
+- [ ] "Promote to Finding" → creates Finding from Stash item(s)
+- [ ] "Export" → copy to clipboard or save to file
+- [ ] Stash items referenced in chat show inline preview
+
+### F008.4: Stash Persistence
+- [ ] Stored in SQLite stash_items table
+- [ ] Global scope (not per-Op)
+- [ ] Survives app restart
+- [ ] Export all stash as JSON
+- [ ] Import stash from JSON
+- [ ] Max stash size: warn at 1000 items, suggest cleanup
+
+---
+
+## F009: Findings System
+
+### F009.1: Finding Creation
+- [ ] Manual: user clicks "Create Finding" on a message or tool output
+- [ ] Creation wizard: pre-filled from source data, user confirms/edits
+- [ ] LLM-suggested: model detects confirmed vuln → prompts user (in Copilot mode) or auto-creates (in Autopilot)
+- [ ] From Stash: select items → "Promote to Finding"
+- [ ] Fields: title, vuln_type, severity, CVSS, target, description
+- [ ] Attack chain: auto-populated from Op conversation history (model reconstructs)
+- [ ] Evidence: auto-attached from relevant tool outputs and Stash items
+- [ ] Reproduction steps: model-generated from attack chain
+- [ ] Impact: model-generated assessment
+- [ ] Remediation: model-generated recommendations
+- [ ] All auto-generated fields editable by user
+
+### F009.2: Finding Management
+- [ ] Findings list in Reporting tab (filterable by severity, status)
+- [ ] Finding detail view: all fields, editable
+- [ ] Status: confirmed / unconfirmed / false_positive / remediated
+- [ ] Severity change with CVSS recalculation
+- [ ] Evidence management: add/remove evidence items
+- [ ] Attack chain editor: reorder/add/remove steps
+- [ ] Duplicate finding detection (same CVE + target)
+- [ ] Link findings (related vulns that form an attack chain)
+- [ ] Delete finding with confirmation
+
+### F009.3: Finding Evidence
+- [ ] Tool outputs (structured JSON from parsers)
+- [ ] Screenshots (from gowitness or manual capture)
+- [ ] Request/response pairs (HTTP traffic)
+- [ ] Payloads used (exploit code, injection strings)
+- [ ] Command outputs (raw terminal output)
+- [ ] Files (downloaded from target, configs, etc.)
+- [ ] Each evidence item: type, timestamp, source tool, content
+- [ ] Evidence viewable inline in Finding detail
+- [ ] Evidence exportable individually
+
+---
+
+## F010: Report Generation
+
+### F010.1: Report Content (LLM-Generated)
+- [ ] Executive Summary: 1-2 paragraphs, non-technical, business impact
+- [ ] Scope & Methodology: what was tested, tools used, constraints, dates
+- [ ] Findings Summary: table of all findings by severity with counts
+- [ ] Detailed Findings (per Finding):
+  - Title, severity, CVSS score
+  - Description (what the vulnerability is)
+  - Affected assets (targets)
+  - Attack chain / reproduction steps
+  - Evidence (screenshots, outputs, payloads)
+  - Impact (what an attacker could achieve)
+  - Remediation (specific fix recommendations)
+- [ ] Attack Narrative: chronological story of the entire engagement
+- [ ] Remediation Roadmap: prioritized fix recommendations
+- [ ] Appendix: raw tool outputs, full scan results
+
+### F010.2: Report Templates
+- [ ] Full pentest report (all sections)
+- [ ] Bug bounty submission (compact, per-vulnerability)
+- [ ] Executive brief (summary + findings table only)
+- [ ] Technical writeup (detailed technical narrative)
+- [ ] Custom template support (user-created CSS + section selection)
+- [ ] Each template: CSS file + section configuration
+
+### F010.3: Report Branding
+- [ ] Company logo upload (stored in settings)
+- [ ] Company name
+- [ ] Primary color / accent color
+- [ ] Header text (e.g., "CONFIDENTIAL")
+- [ ] Footer text (e.g., "Page X of Y")
+- [ ] Cover page toggle
+- [ ] Assessor name / contact info
+
+### F010.4: Report Export
+- [ ] PDF: via HTML → WKWebView.createPDF()
+- [ ] Markdown: raw .md file
+- [ ] HTML: standalone styled file (all CSS/images inlined)
+- [ ] JSON: structured data (machine-readable findings)
+- [ ] Export location: user picks save path via NSSavePanel
+- [ ] Export progress indicator (for large PDFs)
+- [ ] Preview before export (in-app rendered view)
+
+### F010.5: Report Localization
+- [ ] Report generated in app's selected language
+- [ ] Model instructed to write in target language
+- [ ] Section headers in target language
+- [ ] Date/time formatting per locale
+- [ ] CVSS descriptions in target language
+- [ ] Severity labels in target language (Critical/높음/严重/Crítico/重大)
+
+---
+
+## F011: Per-Tab UIs
+
+### F011.1: Recon Tab
+- [ ] Target input bar (domain/IP, with "Scan" button)
+- [ ] Subtab: Subdomains (tree view, sortable table)
+- [ ] Subtab: Ports (port table with service info, filterable)
+- [ ] Subtab: Web Hosts (live hosts with status, title, tech)
+- [ ] Subtab: Crawl Results (URL tree from katana)
+- [ ] Subtab: OSINT Harvest (emails, IPs, metadata)
+- [ ] Quick actions: "Full Recon" button (runs subfinder → dnsx → httpx → katana pipeline)
+- [ ] Manual tool controls: per-tool parameter forms
+- [ ] Results displayed in structured tables/trees
+- [ ] Export results button (CSV, JSON)
+- [ ] "Stash all subdomains" / "Stash all live hosts" bulk action
+- [ ] Network graph visualization (optional, D3-like)
+- [ ] Accent color: blue
+
+### F011.2: Web Tab
+- [ ] URL input bar (target URL)
+- [ ] Subtab: Vuln Scanner (nuclei results by severity)
+- [ ] Subtab: SQLi (sqlmap interface + results)
+- [ ] Subtab: XSS (dalfox interface + results)
+- [ ] Subtab: Directories (feroxbuster/ffuf results tree)
+- [ ] Subtab: Parameters (arjun discovered params)
+- [ ] Subtab: CMS (wpscan results)
+- [ ] Subtab: SSL/TLS (testssl results with grade)
+- [ ] Subtab: GraphQL (introspection schema viewer)
+- [ ] Subtab: JWT (token decoder + attack interface)
+- [ ] Vulnerability cards: severity badge, CVE, description, "Create Finding" button
+- [ ] Request/response viewer (for manual inspection)
+- [ ] Template selector (nuclei tag filter)
+- [ ] Accent color: orange
+
+### F011.3: Network Tab
+- [ ] Target input bar (IP/range)
+- [ ] Subtab: Protocol Attacks (netexec — SMB/WinRM/LDAP/RDP)
+- [ ] Subtab: SNMP (snmpwalk MIB browser)
+- [ ] Subtab: Packet Capture (tshark live view)
+- [ ] Subtab: MITM (bettercap controls)
+- [ ] Subtab: Tunnels (chisel tunnel manager)
+- [ ] Credential input panel (for authenticated attacks)
+- [ ] Share enumeration results table
+- [ ] User enumeration results
+- [ ] Session list (active connections)
+- [ ] Accent color: cyan
+
+### F011.4: Credentials Tab
+- [ ] Hash input area (paste hashes, upload file)
+- [ ] Hash identifier (haiti — auto-detect on paste)
+- [ ] Subtab: Cracking (hashcat GPU attack)
+  - [ ] Attack mode selector (dict, brute, hybrid)
+  - [ ] Wordlist picker (seclists browser)
+  - [ ] Rule file picker
+  - [ ] Mask builder (visual)
+  - [ ] GPU utilization graph (Metal performance)
+  - [ ] Cracking progress (speed, estimated time, cracked count)
+  - [ ] Cracked hashes table
+- [ ] Subtab: Online Brute (hydra)
+  - [ ] Target + protocol selector
+  - [ ] Username/password lists
+  - [ ] Live progress (attempts, found)
+- [ ] Subtab: Secret Scanning (trufflehog)
+  - [ ] Repo/path input
+  - [ ] Results: secret type, file, line, snippet
+- [ ] Credential vault: all found credentials stored
+- [ ] Vault entries: username, password/hash, source tool, target, timestamp
+- [ ] Vault entries linkable to Findings as evidence
+- [ ] Accent color: amber
+
+### F011.5: Exploit Tab
+- [ ] Subtab: Metasploit
+  - [ ] Module search (by CVE, name, type)
+  - [ ] Module detail view (description, options, targets)
+  - [ ] Option configuration form
+  - [ ] Payload selector
+  - [ ] "Run Exploit" button
+  - [ ] Session manager (active meterpreter/shell sessions)
+- [ ] Subtab: Reverse Shells
+  - [ ] Listener setup (pwncat — host, port, protocol)
+  - [ ] Payload generator (one-liners for bash, python, powershell, etc.)
+  - [ ] Active listeners list
+  - [ ] Connected sessions
+- [ ] Subtab: Custom Exploits
+  - [ ] Code editor (syntax highlighted)
+  - [ ] LLM assist: "Generate exploit for [CVE/description]"
+  - [ ] Execute button with confirmation
+  - [ ] Output panel
+- [ ] Subtab: C2 (sliver)
+  - [ ] Implant generator
+  - [ ] Listener management
+  - [ ] Session interaction
+- [ ] Accent color: red
+
+### F011.6: Post-Exploit Tab
+- [ ] Subtab: Privilege Escalation
+  - [ ] LinPEAS/WinPEAS launcher (requires active session)
+  - [ ] Results: color-coded findings (95%/red, 70%/yellow, default)
+  - [ ] Suggested exploits from results
+- [ ] Subtab: AD Attacks (impacket)
+  - [ ] Script selector (secretsdump, psexec, GetUserSPNs, etc.)
+  - [ ] Target + credential input
+  - [ ] Results panel
+- [ ] Subtab: Lateral Movement
+  - [ ] Network map of compromised hosts
+  - [ ] Move from session A to target B
+  - [ ] Credential reuse across hosts
+- [ ] Accent color: purple
+
+### F011.7: OSINT Tab
+- [ ] Subtab: Username (sherlock)
+  - [ ] Username input → 400+ platform results
+  - [ ] Results: platform, URL, status, profile link
+- [ ] Subtab: Email (holehe)
+  - [ ] Email input → registration check
+  - [ ] Results: site, registered (yes/no), method
+- [ ] Subtab: Metadata (exiftool)
+  - [ ] File drop zone (drag files in)
+  - [ ] Metadata table (all tags)
+  - [ ] GPS map (if location data present)
+- [ ] Subtab: Screenshots (gowitness)
+  - [ ] Gallery grid of captured screenshots
+  - [ ] Click → full-size view
+  - [ ] Bulk screenshot trigger
+- [ ] Accent color: green
+
+### F011.8: Reporting Tab
+- [ ] Findings list (severity, target, status)
+- [ ] Findings statistics (pie chart by severity, timeline)
+- [ ] Report preview panel (live rendered HTML)
+- [ ] Template selector
+- [ ] Branding configuration
+- [ ] "Generate Report" button → LLM writes all sections
+- [ ] Per-section regenerate button
+- [ ] Section editor (edit LLM output)
+- [ ] Export buttons (PDF, MD, HTML, JSON)
+- [ ] Report history (previous generated reports)
+- [ ] Accent color: gray/neutral
+
+### F011.9: Stash Tab (also accessible as drawer from any tab)
+- [ ] Full Stash UI (F008.2)
+- [ ] Larger view than the drawer (more screen real estate)
+- [ ] Accent color: matches Stash icon color
+
+---
+
+## F012: Terminal
+
+### F012.1: Terminal Emulator
+- [ ] SwiftTerm-based terminal (NSViewRepresentable wrapper)
+- [ ] Full interactive shell (/bin/zsh)
+- [ ] ANSI color support
+- [ ] 256-color and true color support
+- [ ] Unicode/emoji support
+- [ ] Scrollback buffer (10,000 lines default, configurable)
+- [ ] Selection and copy (cmd+C)
+- [ ] Paste (cmd+V)
+- [ ] Find in terminal (cmd+F)
+- [ ] Clear terminal (cmd+K)
+- [ ] Font: SF Mono or JetBrains Mono
+- [ ] Font size adjustable (cmd+/cmd+-)
+- [ ] Resizable terminal panel
+- [ ] Full-screen terminal toggle
+
+### F012.2: Terminal Integration
+- [ ] PATH includes all installed tools + bundled tools
+- [ ] Working directory: ~/.exploitbot/ops/{current_op}/
+- [ ] Terminal output capturable: "Send terminal output to chat" button
+- [ ] Terminal output stashable: select + right-click + "Stash"
+- [ ] Multiple terminal tabs (like iTerm)
+- [ ] Terminal history persists across app restarts (per-Op)
+- [ ] SSH sessions supported (interactive)
+- [ ] tmux/screen supported
+
+### F012.3: Terminal UI
+- [ ] Toggle open/close with keyboard shortcut (cmd+`)
+- [ ] Resizable height (drag handle)
+- [ ] Position: bottom panel (default) or right panel (configurable)
+- [ ] Opacity: configurable (slight transparency optional)
+- [ ] Minimized indicator when closed ("Terminal" button in bottom bar)
+
+---
+
+## F013: Settings
+
+### F013.1: General Settings
+- [ ] Language selection (en/ko/zh/es/ja)
+- [ ] Theme: dark only (locked), accent color customization?
+- [ ] Window behavior: close = quit or minimize to tray
+- [ ] Start on login (LaunchAtLogin)
+- [ ] Check for updates on launch
+- [ ] Auto-update (download + prompt to install)
+- [ ] Telemetry/analytics opt-in (or none — open source)
+- [ ] Data directory location (default: ~/.exploitbot/)
+- [ ] Clear all data (nuclear option, with confirmation)
+
+### F013.2: Model Settings
+- [ ] Current model display (name, size, format, architecture)
+- [ ] "Change Model" → model list with switch/download
+- [ ] Model download page (curated S/M/L/XL + custom URL)
+- [ ] Downloaded models list (size, last used, delete button)
+- [ ] Model storage directory
+- [ ] Inference settings (D015):
+  - Temperature (slider 0.0–2.0, default 0.7)
+  - Top-p (slider 0.0–1.0, default 0.9)
+  - Top-k (integer, default 40)
+  - Min-p (slider 0.0–1.0, default 0.05)
+  - Repetition penalty (slider 1.0–2.0, default 1.1)
+  - Max tokens (integer, default 4096)
+  - Stop sequences (text input, comma-separated)
+- [ ] Cache settings:
+  - Prefix cache: toggle + memory % slider
+  - Paged cache: toggle + block size
+  - KV cache quantization: none/q4/q8 + group size
+- [ ] Reasoning settings:
+  - Enable thinking: auto/on/off
+  - Reasoning parser: auto/qwen3/deepseek_r1/openai_gptoss
+- [ ] Tool calling settings:
+  - Tool call parser: auto (or manual selection)
+  - Enable auto tool choice: toggle
+- [ ] Context management strategy: none/auto_summarize/sliding_window/checkpoint
+- [ ] Reset to detected defaults button
+- [ ] Per-Op overrides indicator ("This Op overrides: temperature, max_tokens")
+
+### F013.3: Tool Settings
+- [ ] Installed tools list with version, path, status
+- [ ] Per-tool: update button, reinstall button, uninstall button (lazy only)
+- [ ] "Install All Missing" button
+- [ ] "Update All" button
+- [ ] Tool binary path overrides (custom paths)
+- [ ] Seclists management (download, update, path)
+- [ ] Nuclei template management (update, path, custom templates)
+- [ ] Default timeout per tool category
+- [ ] Concurrent tool execution limit (slider 1–10)
+
+### F013.4: Report Settings
+- [ ] Default template
+- [ ] Company branding (logo, name, colors, header/footer)
+- [ ] Default export format
+- [ ] Assessor name / contact info
+- [ ] Custom CSS for reports (advanced)
+- [ ] Report language override (separate from UI language)
+
+### F013.5: Keyboard Shortcuts
+- [ ] Customizable keybindings (or fixed with reference)
+- [ ] Defaults:
+  - Cmd+N: New Op
+  - Cmd+T: New terminal tab
+  - Cmd+`: Toggle terminal
+  - Cmd+1-8: Switch tool tabs
+  - Cmd+Shift+S: Open Stash
+  - Cmd+Enter: Send chat message
+  - Cmd+.: Stop generation
+  - Cmd+K: Clear chat
+  - Cmd+,: Settings
+  - Cmd+F: Search in chat/terminal
+
+### F013.6: Privacy & Security Settings
+- [ ] Autopilot: require scope definition (enforce, warn, or off)
+- [ ] Tool execution logging (always log every command to audit file)
+- [ ] Audit log location
+- [ ] Auto-lock after inactivity (optional, with time setting)
+- [ ] Lock screen with password/TouchID to resume
+- [ ] Clear model context on Op pause/switch
+
+---
+
+## F014: Internationalization (Detailed)
+
+### F014.1: UI Strings
+- [ ] Every user-visible string in String Catalog
+- [ ] Pluralization rules per language
+- [ ] String interpolation (e.g., "Found {count} subdomains")
+- [ ] Accessibility labels localized
+- [ ] Menu items localized
+- [ ] Error messages localized
+- [ ] Tool names NOT localized (they're proper nouns)
+- [ ] Tool descriptions localized
+
+### F014.2: CJK Considerations
+- [ ] Korean, Chinese, Japanese text rendering correct
+- [ ] Font fallbacks for CJK characters (PingFang SC, Hiragino, Apple SD Gothic Neo)
+- [ ] Input method support (IME for CJK)
+- [ ] Text wrapping correct for CJK (no mid-character breaks)
+- [ ] Search works with CJK input
+- [ ] Sorting considers locale-appropriate collation
+
+### F014.3: Date/Time
+- [ ] Timestamps in locale-appropriate format
+- [ ] Relative time ("5 minutes ago") in each language
+- [ ] Date pickers in locale format
+
+### F014.4: Numbers
+- [ ] File sizes formatted per locale (1,234 vs 1.234)
+- [ ] CVSS scores always use decimal point (standard)
+
+---
+
+## F015: Data Management
+
+### F015.1: Storage Locations
+- [ ] ~/.exploitbot/data/exploitbot.db (SQLite database)
+- [ ] ~/.exploitbot/models/ (downloaded models)
+- [ ] ~/.exploitbot/tools/ (lazy-installed tool binaries)
+- [ ] ~/.exploitbot/wordlists/ (seclists, custom wordlists)
+- [ ] ~/.exploitbot/evidence/ (screenshots, captured files)
+- [ ] ~/.exploitbot/reports/ (generated reports)
+- [ ] ~/.exploitbot/templates/ (nuclei custom templates)
+- [ ] ~/.exploitbot/logs/ (app logs, audit logs)
+- [ ] ~/.exploitbot/config.json (settings that don't go in DB)
+- [ ] /tmp/exploitbot_* (ephemeral tool outputs)
+
+### F015.2: Database Operations
+- [ ] WAL mode for concurrent access
+- [ ] Auto-vacuum (incremental)
+- [ ] Backup on schema migration
+- [ ] Manual backup (Settings → Export Data)
+- [ ] Import data from backup
+- [ ] Database size monitoring (warn if > 1GB)
+- [ ] Periodic temp file cleanup
+
+### F015.3: Model Storage
+- [ ] Models stored as downloaded (safetensors/JANG files)
+- [ ] Model metadata tracked in DB (path, size, format, architecture)
+- [ ] Delete model button (with confirmation, shows freed space)
+- [ ] Model storage disk usage indicator
+- [ ] Auto-detect models already downloaded to common paths (~/.cache/huggingface/)
+
+---
+
+## F016: Notifications
+
+### F016.1: In-App Notifications
+- [ ] Toast notifications for: Finding created, tool completed, tool failed, model error, download complete
+- [ ] Toast position: top-right
+- [ ] Toast duration: 5 seconds (configurable)
+- [ ] Toast actions: "View", "Dismiss"
+- [ ] Click toast → navigates to relevant Op/tab/finding
+
+### F016.2: System Notifications
+- [ ] macOS notification center integration
+- [ ] Notify when: Autopilot finds critical vuln, tool completed (background), report generated
+- [ ] Notification only when app is minimized/background
+- [ ] Notification click → brings app to front, navigates to context
+- [ ] Notification sound: optional (configurable)
+
+---
+
+## F017: Import/Export
+
+### F017.1: Import
+- [ ] Import target list (text file: one target per line)
+- [ ] Import nmap XML results
+- [ ] Import scope definition file
+- [ ] Import Stash from JSON
+- [ ] Import Op from backup file
+- [ ] Drag-and-drop file into app → auto-detect type
+
+### F017.2: Export
+- [ ] Export Op as JSON/ZIP (messages, findings, stash items, evidence)
+- [ ] Export all Stash as JSON
+- [ ] Export findings as CSV
+- [ ] Export findings as JSON
+- [ ] Export tool results (per-tool, per-scan)
+- [ ] Export report (F010.4)
+- [ ] Export audit log
+
+---
+
+## F018: macOS Integration
+
+### F018.1: Native macOS Features
+- [ ] Menu bar: File (New Op, Open, Export), Edit (Undo, Copy, Paste, Find), View (tabs, terminal, stash), Window, Help
+- [ ] Touch Bar support (if applicable — probably not, focus on keyboard)
+- [ ] Spotlight integration (search Ops, Findings?)
+- [ ] Services menu integration
+- [ ] Dock badge: number of critical findings found
+- [ ] Full-screen mode support
+- [ ] Split view support (two exploitbot windows side by side)
+- [ ] Appearance: follows system dark mode (but we're always dark)
+
+### F018.2: Code Signing & Entitlements
+- [ ] Developer ID Application: ShieldStack LLC
+- [ ] Hardened runtime
+- [ ] Entitlements:
+  - com.apple.security.cs.allow-unsigned-executable-memory (for Python/tool execution)
+  - com.apple.security.network.client (outbound connections)
+  - com.apple.security.network.server (localhost server)
+  - com.apple.security.files.user-selected.read-write (file access)
+  - com.apple.security.files.downloads.read-write (downloads)
+  - com.apple.security.process.exec (spawn tools)
+- [ ] NOT sandboxed (needs full system access for tools)
+- [ ] Notarization (if Apple service is working)
+
+### F018.3: Distribution
+- [ ] DMG with app + drag-to-Applications
+- [ ] DMG background image (branded)
+- [ ] Universal binary (arm64 only? or arm64+x86_64?)
+- [ ] Minimum macOS version: 14.0
+- [ ] GitHub Releases page
+- [ ] Auto-update: check GitHub releases API for newer version
+- [ ] Auto-update download + "Restart to update" prompt
+
+---
+
+## F019: Error Handling (Cross-Cutting)
+
+### F019.1: Engine Errors
+- [ ] Engine fails to start → dialog with error details + "Retry" + "Settings" buttons
+- [ ] Engine crashes mid-session → auto-restart attempt, notify user, preserve context
+- [ ] Engine OOM → model too large for RAM warning + suggest smaller model
+- [ ] Engine port in use → auto-select different port
+- [ ] Engine unresponsive → health check timeout → restart
+
+### F019.2: Tool Errors
+- [ ] Tool not found → "Install [tool]?" prompt with install button
+- [ ] Tool permission denied → explain root requirement, offer sudo
+- [ ] Tool timeout → show partial output, offer retry with longer timeout
+- [ ] Tool crash/segfault → show exit code, stderr, suggest retry
+- [ ] Tool output parse failure → show raw output, warn about parser
+- [ ] Network error (tool can't reach target) → connection refused / timeout messages
+
+### F019.3: Model Errors
+- [ ] Model generates invalid tool call (bad parameters) → validate, show error, ask model to retry
+- [ ] Model enters loop (repeating same action) → detect after 3 identical calls, pause and notify user
+- [ ] Model exceeds context window → apply context management strategy
+- [ ] Model generates harmful suggestion → scope enforcement catches it
+- [ ] Streaming error (SSE disconnect) → auto-reconnect, append partial response
+
+### F019.4: Data Errors
+- [ ] Database corruption → detection, backup, recovery (F001.3)
+- [ ] Settings file corruption → reset to defaults, notify user
+- [ ] Model file corruption → re-download prompt
+- [ ] Evidence file missing → warning icon, "Re-capture" button
+
+---
+
+## F020: Performance
+
+### F020.1: UI Performance
+- [ ] Smooth scrolling in chat (< 16ms frame time)
+- [ ] Tab switching < 100ms
+- [ ] Op switching < 500ms (UI), context re-send async
+- [ ] Stash drawer open/close < 200ms
+- [ ] Terminal typing latency < 50ms
+- [ ] Activity feed handles 10,000+ entries without lag (virtualized list)
+- [ ] Chat handles 1,000+ messages without lag (virtualized list)
+
+### F020.2: Memory
+- [ ] App memory usage monitoring (shown in debug verbosity)
+- [ ] Model memory usage monitoring (GPU memory via vMLX /v1/stats)
+- [ ] Memory pressure warning (system memory low)
+- [ ] Aggressive model unload if system memory critical
+
+### F020.3: Disk
+- [ ] Disk usage by category (models, evidence, DB, tools, wordlists)
+- [ ] Disk usage visible in Settings
+- [ ] Temp file cleanup on app launch (stale /tmp/exploitbot_* older than 24h)
+- [ ] Evidence auto-cleanup: warn if evidence dir > 5GB
+
+---
+
+## Cross-Feature Interaction Matrix (Expanded)
+
+For each pair, specific test scenarios:
+
+### Engine × Ops
+- Engine crash while Op is in Autopilot → Op pauses, activity feed shows error, Autopilot resumes after engine restart
+- Switch Op while tool is running → tool continues for previous Op (background)
+
+### Stash × Findings
+- Promote multiple Stash items to Finding → wizard pre-fills from items
+- Delete Stash item that's referenced by Finding → warning, evidence preserved (copied, not linked)
+
+### Autopilot × Tool Security
+- Autopilot mode: model tries to scan out-of-scope target → scope enforcement blocks, model notified
+- Autopilot mode: model tries `run_shell rm -rf /` → parameter validation catches dangerous commands (configurable blocklist)
+
+### i18n × Reports
+- Generate report in Korean for English Op → model translates findings
+- CVSS labels in Chinese → proper translation, not transliterated
+
+### Terminal × Tool Execution
+- User runs tool manually in terminal → output NOT auto-captured into Op context (separate from structured tool calls)
+- User runs tool in terminal → can manually "Send to chat" → then model sees it
+
+### Chat × Activity Feed
+- Same event appears in both (chat shows message, feed shows tool invocation)
+- Scroll position independent between chat and feed
+- Click event in feed → scrolls to corresponding chat message
+
+### Model Detection × Inference Settings
+- Load JANG model → auto-detect architecture → pre-fill reasoning parser + tool parser + cache settings
+- User overrides detected settings → warning "Overriding detected [X] with [Y]"
+- Reset button restores detected defaults
+
+### Findings × Report
+- Delete Finding after report generated → report references orphaned finding → re-generate warning
+- Edit Finding after report generated → "Report is stale, regenerate?" prompt
+- Zero findings → report generation grayed out or generates "No vulnerabilities found" report
+
+---
+
+## Supplementary Concerns
+
+### S001: Audit Trail
+- [ ] Every tool execution logged: timestamp, tool, parameters, target, exit code, duration
+- [ ] Audit log separate from app DB (plain text or structured log file)
+- [ ] Audit log location: ~/.exploitbot/logs/audit.log
+- [ ] Audit log rotation (daily, keep 90 days)
+- [ ] Audit log exportable
+- [ ] Audit log includes: who started the Op, what mode, scope definition
+
+### S002: Credential Handling
+- [ ] Found credentials stored encrypted in DB (at-rest encryption)
+- [ ] Credential display: masked by default, click to reveal
+- [ ] Credential copy: copies to clipboard, auto-clears after 30s
+- [ ] Never log credentials in plain text to audit log
+- [ ] Never send credentials to model as plain text? (or do, since it's local)
+- [ ] Actually: model IS local, so credentials in model context is fine
+
+### S003: Evidence Integrity
+- [ ] Evidence hash (SHA-256) stored with each evidence item
+- [ ] Evidence immutable after creation (modifications = new version)
+- [ ] Evidence chain: timestamp + hash proves when captured
+- [ ] Evidence export includes hashes for verification
+
+### S004: Auto-Update System
+- [ ] Check GitHub releases API for latest version
+- [ ] Compare semver: current vs latest
+- [ ] Show "Update available" banner with changelog
+- [ ] "Download Update" → downloads DMG in background
+- [ ] "Install Update" → closes app, opens DMG, runs installer
+- [ ] Skip version option ("Don't remind me about this version")
+- [ ] Check frequency: daily (configurable)
+
+### S005: Crash Reporting
+- [ ] Crash log written to ~/.exploitbot/logs/crash.log
+- [ ] Crash dialog: "exploitbot crashed. Send report?" (opt-in)
+- [ ] Crash report includes: stack trace, OS version, app version, last 50 activity feed entries (no credentials/targets)
+- [ ] Or: no crash reporting (open source, users file GitHub issues)
+
+### S006: Accessibility
+- [ ] VoiceOver support for all UI elements
+- [ ] Keyboard navigation for all controls
+- [ ] Focus indicators visible
+- [ ] High contrast mode support (system-level)
+- [ ] Reduced motion support (system-level, disable animations)
+- [ ] Font scaling support (system text size)
+- [ ] Screen reader labels on tool status icons, severity badges
+
+### S007: Dangerous Command Blocklist
+- [ ] Configurable blocklist for `run_shell` (even in Autopilot)
+- [ ] Default blocked patterns: `rm -rf /`, `mkfs`, `dd if=/dev/zero`, `:(){ :|:& };:`, format/wipe commands
+- [ ] Model-generated `run_shell` validated against blocklist before execution
+- [ ] Bypass: user can override in Copilot/Manual mode
+- [ ] Bypass NOT available in Autopilot (safety net)
+
+### S008: Scope Enforcement Details
+- [ ] Scope defined as: included_targets (domains, IPs, CIDRs) + excluded_targets
+- [ ] Wildcard support: *.acme.com
+- [ ] Tool parameter validation: target/url/host params checked against scope
+- [ ] DNS resolution check: resolved IP checked against scope
+- [ ] Enforcement levels (per-Op setting):
+  - Strict: block all out-of-scope tool calls
+  - Warn: allow but flag prominently in activity feed
+  - Off: no enforcement (CTF/lab mode)
+- [ ] System prompt includes scope for model awareness
+
+### S009: Wordlist Management
+- [ ] Seclists auto-download location: ~/.exploitbot/wordlists/seclists/
+- [ ] Custom wordlist upload/import
+- [ ] Wordlist browser (tree view of seclists directory)
+- [ ] Wordlist picker in tool parameter forms (file browser)
+- [ ] Wordlist size preview (line count)
+- [ ] Frequently used wordlists: quick-access list
+
+### S010: Evidence Screenshot Capture
+- [ ] Manual screenshot: button to capture current tool output as image
+- [ ] Screenshot stored as PNG in evidence directory
+- [ ] Screenshot auto-attached to relevant Finding
+- [ ] Viewport screenshot (what's visible)
+- [ ] Full-page screenshot (for web content)
+- [ ] Screenshot annotation (draw arrows, highlight boxes) — v2 feature?
