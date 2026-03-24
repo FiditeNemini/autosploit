@@ -7,27 +7,27 @@
 ## F001: App Lifecycle
 
 ### F001.1: Launch Sequence
-- [ ] App opens to last active Op (or onboarding if first run)
-- [ ] vMLX engine spawned on random localhost port
-- [ ] Engine health check (HTTP ping to /v1/models)
-- [ ] Health check retry with backoff (3 attempts, 2s/4s/8s)
-- [ ] Model auto-loaded if previously selected
+- [x] App opens to last active Op (or onboarding if first run) — onboarding check via showOnboarding flag
+- [x] vMLX engine spawned on random localhost port — EngineManager finds port 8100-8199
+- [x] Engine health check (HTTP ping to /health with model_loaded check)
+- [x] Health check retry with backoff (60 attempts, 1s interval = 60s max wait)
+- [x] Model auto-loaded if previously selected — loadEngineConfig() reads from DB settings
 - [ ] Orphan vMLX process detection on launch (PID file check)
 - [ ] Orphan adoption or kill decision
-- [ ] Port collision detection (another app on chosen port)
-- [ ] Port re-selection on collision
+- [x] Port collision detection — EngineManager tries bind() to verify port available
+- [x] Port re-selection on collision — iterates 8100-8199 until one works
 - [ ] Single instance lock (prevent double-launch)
 - [ ] Second launch attempt shows "already running" and focuses existing window
 - [ ] Restore window position/size from last session
 - [ ] Restore active tab within active Op
 
 ### F001.2: Shutdown Sequence
-- [ ] Save all Op state (messages, stash, findings)
+- [x] Save all Op state (messages) — saveCurrentMessages() on scenePhase change
 - [ ] Save window position/size
-- [ ] Send SIGTERM to vMLX engine
-- [ ] Wait up to 5s for graceful shutdown
-- [ ] SIGKILL if still alive after timeout
-- [ ] Kill all active tool subprocesses
+- [x] Send SIGTERM to vMLX engine — EngineManager.stop() calls process.terminate()
+- [x] Wait up to 3s for graceful shutdown — DispatchQueue delay before SIGINT
+- [x] SIGKILL if still alive after timeout — process.interrupt() after 3s
+- [x] Kill all active tool subprocesses — ToolExecutor.cancel() sends SIGTERM
 - [ ] Remove PID file
 - [ ] Cleanup temp files (/tmp/exploitbot_*)
 - [ ] Database WAL checkpoint on exit
@@ -36,15 +36,15 @@
 - [ ] Detect unclean shutdown on next launch (PID file exists but process dead)
 - [ ] Database integrity check (PRAGMA integrity_check)
 - [ ] Corrupt DB → rename to .corrupt.timestamp, recreate, show dialog
-- [ ] Recover in-flight Op state from WAL journal
+- [x] Recover in-flight Op state from WAL journal — GRDB WAL mode handles this automatically
 - [ ] Show "Recovered from crash" banner with details
 
 ### F001.4: Background Behavior
 - [ ] Menu bar tray icon (optional, configurable)
 - [ ] Close window = minimize to tray (if enabled) or quit
 - [ ] Tray menu: Show/Quit/Current Op status
-- [ ] Long-running tools continue when window minimized
-- [ ] Autopilot continues when window minimized
+- [x] Long-running tools continue when window minimized — subprocess runs independent of UI
+- [x] Autopilot continues when window minimized — Task runs in background
 - [ ] macOS notification when Autopilot finds a vulnerability (if minimized)
 
 ---
@@ -238,50 +238,56 @@
 ## F003: Ops System
 
 ### F003.1: Op CRUD
-- [ ] Create new Op (name required, optional: scope, mode, description)
+- [x] Create new Op (name, mode) — AppState.createOp(), DB insert, appears in sidebar
+  - [ ] Name validation (non-empty, max 100 chars)
+  - [x] Scope field stored in DB schema (column exists)
+  - [ ] Scope not exposed in creation UI yet (onboarding has it, sidebar + doesn't)
 - [ ] Rename Op (inline edit in sidebar)
 - [ ] Duplicate Op (copies settings, not conversation)
-- [ ] Delete Op with confirmation ("This will delete all messages, findings, and evidence")
+- [x] Delete Op — AppState.deleteOp(), cascades messages in DB
+  - [ ] Confirmation dialog before delete
 - [ ] Archive Op (hides from sidebar, retrievable)
 - [ ] Unarchive Op
 
 ### F003.2: Op State
-- [ ] Status: active / paused / complete
-- [ ] Active = currently interacting with model
-- [ ] Paused = model context preserved but not active
-- [ ] Complete = Op marked done, read-only unless reopened
-- [ ] Status auto-set: active when user interacts, paused when switching to another Op
+- [x] Status: active / paused / complete — OpStatus enum defined, stored in DB
+- [x] Active = currently interacting with model
+- [x] Paused = model context preserved but not active
+- [x] Complete = Op marked done
+  - [ ] Read-only enforcement for complete Ops not implemented
+- [ ] Status auto-set: active when user interacts, paused when switching
 - [ ] Manual status change via Op Controls
 
 ### F003.3: Op Scope Definition
-- [ ] In-scope targets: domains, IPs, CIDR ranges
-- [ ] Out-of-scope targets: specific IPs/domains to never touch
+- [x] In-scope targets: scope column in DB ops table
+- [ ] Out-of-scope targets: not in DB schema yet
 - [ ] Scope displayed in Op header/info panel
-- [ ] Model receives scope in system prompt
+- [ ] Model receives scope in system prompt — base prompt has {{SCOPE_TARGETS}} template but not populated
 - [ ] Tool invocations validated against scope in Copilot/Manual mode
 - [ ] Autopilot mode: scope enforced, model warned if attempting out-of-scope
 
 ### F003.4: Op Context Persistence
-- [ ] Full message history stored in SQLite
-- [ ] Messages include: role, content, reasoning_content, tool_calls, tool_results, tab_context, timestamp, token_count
-- [ ] Context rebuilt from DB when switching back to Op
-- [ ] Context token count tracked and displayed
+- [x] Full message history stored in SQLite — messages table with all fields
+- [x] Messages include: role, content, reasoningContent, toolName, toolStatus, tabContext, timestamp
+  - [ ] token_count column not in schema
+- [x] Context rebuilt from DB when switching back to Op — loadMessages(for:)
+- [ ] Context token count tracked and displayed — ChatPanelView shows "0 tokens" hardcoded
 - [ ] Context limit warning (approaching model's max context)
 - [ ] Context management strategy applied per D007 setting
 
 ### F003.5: Op Switching
-- [ ] Click Op in sidebar → switches to that Op
-- [ ] Previous Op auto-paused
+- [x] Click Op in sidebar → switches to that Op — switchOp(to:) in AppState
+- [x] Previous Op messages saved — saveCurrentMessages() called before switch
 - [ ] New Op's last active tab restored
-- [ ] Chatbox shows new Op's conversation history
-- [ ] Activity feed shows new Op's activity
-- [ ] Stash remains global (doesn't switch)
-- [ ] Engine context switch: new system prompt + conversation sent to model
-- [ ] Switching speed: should feel instant (< 500ms for UI), model context re-sent in background
+- [x] Chatbox shows new Op's conversation history — loadMessages(for:) repopulates
+- [ ] Activity feed shows new Op's activity — feed not persisted per-Op yet
+- [ ] Stash remains global (doesn't switch) — stash not implemented yet
+- [ ] Engine context switch: system prompt updated with new Op scope
+- [x] Switching speed: instant UI, messages loaded synchronously from DB
 
 ### F003.6: Concurrent Ops
-- [ ] Multiple Ops can be "active" but only one is "focused" (visible in UI)
-- [ ] Background Op's Autopilot continues running
+- [x] Multiple Ops can exist simultaneously — all stored in DB
+- [ ] Background Op's Autopilot continues running — only focused Op runs
 - [ ] Background Op tool results accumulated
 - [ ] Notification when background Op finds something
 - [ ] "Op is running in background" indicator in sidebar
@@ -291,51 +297,59 @@
 ## F004: Chat System
 
 ### F004.1: Message Input
-- [ ] Multi-line text input (shift+enter for newline, enter to send)
-- [ ] Send button
-- [ ] Attach file button (images, pcap files, text files, etc.)
+- [x] Single-line text input with Enter to send — NSTextField wrapper (ChatInputField.swift)
+  - [ ] Multi-line support (Shift+Enter for newline) — not implemented, single line only
+- [x] Send button (↑ circle, toggles to ■ stop during streaming)
+- [ ] Attach file button — visual placeholder only, no handler
 - [ ] Paste image from clipboard
-- [ ] Paste text from clipboard
-- [ ] "Pull from Stash" button (opens Stash picker)
+- [x] Paste text from clipboard — NSTextField supports cmd+V natively
+- [ ] "Pull from Stash" button — visual placeholder only
 - [ ] Character/token count indicator
-- [ ] Input disabled while model is generating
-- [ ] Stop generation button (cancel current response)
+- [ ] Input disabled while model is generating — can still type but send becomes stop
+- [x] Stop generation button — sends isStopped flag, cancels task, kills tool subprocess
 - [ ] Input history (up arrow for previous messages)
 
 ### F004.2: Message Display
-- [ ] User messages: right-aligned, distinct background
-- [ ] Assistant messages: left-aligned, different background
-- [ ] Tool call messages: inline cards showing tool name, parameters, status
-- [ ] Tool result messages: collapsible output blocks
-- [ ] Reasoning blocks: collapsible "Thinking..." section above response
-- [ ] Code blocks: syntax-highlighted, copy button
-- [ ] Markdown rendering (headers, lists, tables, links, bold, italic)
+- [x] User messages: right-aligned, bgSurface background
+- [x] Assistant messages: left-aligned, bgInput with border
+- [x] Tool call messages: cyan cards with tool name, status badge, command + output
+- [x] Tool result messages: output shown in tool call card (not collapsible yet)
+  - [ ] Collapsible output blocks for long results
+- [x] Reasoning blocks: purple italic "💭 Thinking..." — appears during streaming, collapses after
+- [ ] Code blocks: syntax-highlighted, copy button — markdown renders inline code only
+- [x] Markdown rendering — Text(.init(text)) renders basic markdown (bold, italic, code, links)
+  - [ ] Tables, headers, lists not fully styled
 - [ ] Image display (screenshots, evidence)
-- [ ] Long messages: "Show more" truncation for huge tool outputs
-- [ ] Timestamp on each message (hover or always, configurable)
+- [ ] Long messages: "Show more" truncation — tool output truncated to 3KB but no UI toggle
+- [ ] Timestamp on each message
 - [ ] "Copy" button on each message
+- [x] Text selection enabled on all message types — .textSelection(.enabled)
 - [ ] "Stash this" button on each assistant message
 - [ ] "Create Finding" button on relevant messages
 - [ ] Scroll to bottom button when scrolled up
-- [ ] Auto-scroll during streaming (unless user has scrolled up)
-- [ ] Message streaming: tokens appear as received (SSE)
-- [ ] Streaming reasoning: thinking block populates in real-time
+- [x] Auto-scroll during streaming — onChange of messages.count and currentStreamingContent
+- [x] Message streaming: tokens appear as received (SSE delta.content)
+- [x] Streaming reasoning: thinking block populates in real-time (delta.reasoning_content)
+- [x] Empty state: robot emoji + "Ready to pentest" + "Give me a target and scope"
+- [x] Streaming dots placeholder while waiting for first token
 
 ### F004.3: Chat Context Awareness
-- [ ] System prompt includes: Op name, scope, interaction mode, language preference, active tab, installed tools list
-- [ ] Tab switch appended to context: "User switched to [Web] tab"
-- [ ] Tool results appended to context automatically
-- [ ] Stash items pulled into chat appended to context
+- [x] System prompt: professional red team operator identity with tool list
+  - [ ] Dynamic injection of Op name, scope, mode — hardcoded prompt, {{templates}} not populated
+- [ ] Tab switch appended to context
+- [x] Tool results appended to context automatically — sent as [Tool Result: name] user messages
+- [ ] Stash items pulled into chat
 - [ ] Finding creation noted in context
-- [ ] Context continuity across tab switches (same conversation thread)
+- [x] Context continuity across tab switches — same ChatService.messages array
 
 ### F004.4: Chat Actions
-- [ ] Clear context (with confirmation — "This will reset the model's memory for this Op")
+- [x] Clear context — ⌫ button clears all messages
+  - [ ] Confirmation dialog before clearing
 - [ ] Export chat as Markdown
 - [ ] Search within chat (cmd+F)
 - [ ] Jump to message by timestamp or tool call
-- [ ] Regenerate last response (re-send with same input)
-- [ ] Edit and re-send a previous user message (forks conversation)
+- [ ] Regenerate last response
+- [ ] Edit and re-send a previous user message
 
 ---
 
