@@ -1007,6 +1007,145 @@
 
 ---
 
+## F021: CVE Knowledge Base
+
+### F021.1: CVE Database
+- [ ] SQLite database with sqlite-vec extension for vector search
+- [ ] Separate file: ~/.exploitbot/data/cve.db (or same DB, separate tables)
+- [ ] ~250K CVEs from merged sources
+- [ ] Each CVE record:
+  - [ ] CVE ID (indexed, unique)
+  - [ ] Description (full text, FTS5 indexed)
+  - [ ] CVSS v3.1 score (float, indexed)
+  - [ ] CVSS vector string
+  - [ ] Severity level (critical/high/medium/low)
+  - [ ] CPE 2.3 strings (affected products with version ranges)
+  - [ ] Published date (indexed)
+  - [ ] Modified date
+  - [ ] References array (exploit-db, PoC, vendor advisory, patch URL)
+  - [ ] CISA KEV flag (boolean — actively exploited)
+  - [ ] Exploit availability (none/poc/weaponized)
+  - [ ] Embedding vector (768-dim float32, via sqlite-vec)
+- [ ] Indexes: CVE ID, CVSS score, severity, published date, CPE vendor+product
+
+### F021.2: Data Sources (pre-bundled, merged + deduplicated)
+- [ ] NVD (National Vulnerability Database) — primary source, ~250K CVEs
+- [ ] Exploit-DB — CVE→exploit mapping, PoC availability
+- [ ] CISA KEV (Known Exploited Vulnerabilities) — actively exploited flag
+- [ ] GitHub Advisory Database — open source package vulnerabilities
+- [ ] VulnCheck / OSV — modern package ecosystem coverage
+
+### F021.3: Product Coverage (prioritized for real pentesting)
+- [ ] Web servers: Apache, nginx, IIS, Tomcat, Jetty, LiteSpeed, Caddy
+- [ ] CMS: WordPress (core + top 500 plugins), Drupal, Joomla, Magento, Ghost
+- [ ] Frameworks: Spring, Django, Rails, Laravel, Express, Next.js, ASP.NET
+- [ ] CI/CD: Jenkins, GitLab CI, GitHub Actions, TeamCity, Bamboo, ArgoCD
+- [ ] Containers: Docker, Kubernetes, Helm, containerd, Podman, OpenShift
+- [ ] Databases: MySQL, PostgreSQL, MongoDB, Redis, MSSQL, Oracle, Elasticsearch, CouchDB
+- [ ] Mail: Exchange, Postfix, Dovecot, Zimbra, Roundcube
+- [ ] VPN/Remote: OpenVPN, Fortinet, Pulse Secure, Citrix, PAN-OS, SonicWall, WireGuard
+- [ ] Network equipment: Cisco IOS/ASA, Juniper, MikroTik, Ubiquiti, pfSense
+- [ ] OS: Windows (Server 2016-2025, 10, 11), Linux kernel, macOS, FreeBSD
+- [ ] Active Directory: AD CS, ADFS, Kerberos, LDAP, Group Policy, NTLM
+- [ ] Cloud: AWS (IAM, S3, Lambda, EC2), Azure (AD, Storage, Functions), GCP
+- [ ] Languages/runtimes: Node.js, Python packages, Java (Maven), Ruby (gems), PHP, Go, Rust
+- [ ] Monitoring: Grafana, Prometheus, Zabbix, Nagios, Splunk, ELK stack
+- [ ] File sharing: Samba, NFS, FTP (vsftpd, ProFTPD), WebDAV, SharePoint
+- [ ] Virtualization: VMware (vCenter, ESXi), Proxmox, Hyper-V, QEMU/KVM
+- [ ] IoT/embedded: common router/camera firmware, MQTT, CoAP, BLE stacks
+- [ ] Auth: OAuth libraries, SAML, JWT libraries, Keycloak, Okta, Auth0
+- [ ] Crypto/TLS: OpenSSL, GnuTLS, NSS, certificate handling libs
+- [ ] Desktop: Electron apps, Chrome, Firefox, Office, Acrobat
+
+### F021.4: Search Modes
+- [ ] **Semantic search:** natural language query → sqlite-vec cosine similarity
+  - [ ] "remote code execution in web servers" → matching CVEs ranked by relevance
+  - [ ] "privilege escalation linux kernel" → kernel privesc CVEs
+  - [ ] Uses nomic-embed-text-v1.5 embedding model (bundled, ~275MB, CPU)
+  - [ ] Embedding model loaded on-demand (not always in memory)
+- [ ] **CPE match:** structured vendor:product:version query
+  - [ ] Exact version match + version range evaluation
+  - [ ] "apache:http_server:2.4.49" → CVE-2021-41773, CVE-2021-42013
+  - [ ] Version range logic: versionStartIncluding, versionEndExcluding
+- [ ] **Keyword search:** FTS5 full-text search on description
+  - [ ] Boolean operators: AND, OR, NOT
+  - [ ] Prefix matching: "overflow*"
+- [ ] **Combined mode (default):** semantic + CPE + keyword, results merged and ranked
+- [ ] **Filters (stackable on any mode):**
+  - [ ] Minimum severity (critical/high/medium/low)
+  - [ ] Minimum CVSS score (0.0-10.0 slider)
+  - [ ] Exploit available only (boolean)
+  - [ ] CISA KEV only (boolean — actively exploited in the wild)
+  - [ ] Published after date
+  - [ ] Vendor filter
+  - [ ] Product filter
+  - [ ] Max results (default 20)
+
+### F021.5: User Custom CVEs
+- [ ] "Add CVE" form accessible from Settings → CVE Database
+  - [ ] CVE ID field (auto-generate if internal: "CUSTOM-YYYY-NNNN")
+  - [ ] Description textarea
+  - [ ] Affected product (vendor, product, version)
+  - [ ] Severity selector
+  - [ ] CVSS score input
+  - [ ] References (URLs, one per line)
+  - [ ] Notes textarea (private annotations)
+  - [ ] Tags (comma-separated, e.g. "internal", "client-specific", "zero-day")
+- [ ] Import custom CVEs from JSON or CSV file
+- [ ] Custom CVEs stored in separate table (user_cves)
+- [ ] Custom CVEs merged into search results alongside NVD data
+- [ ] Custom CVEs auto-embedded on save (using bundled embedding model)
+- [ ] Custom CVEs editable and deletable
+- [ ] Export custom CVEs as JSON
+- [ ] Custom CVE count shown in Settings
+
+### F021.6: CVE Database Updates
+- [ ] Auto-sync frequency: configurable (daily/weekly/manual), default weekly
+- [ ] Delta updates: only download new/modified CVEs since last sync timestamp
+- [ ] NVD API 2.0: paginated requests with resultsPerPage + startIndex
+- [ ] CISA KEV: single JSON file, ~50KB, check weekly
+- [ ] Incremental embedding: only embed newly added CVEs
+- [ ] Update progress: "Syncing CVEs... 1,247 new, 89 modified"
+- [ ] Update notification toast: "CVE database updated: 47 new CVEs"
+- [ ] Manual trigger: Settings → CVE Database → "Update Now" button
+- [ ] Last sync timestamp displayed in Settings
+- [ ] Update errors: retry with backoff, show error in Settings
+- [ ] Offline mode: gracefully handle no internet (use stale data with warning)
+
+### F021.7: CVE Integration with Tools
+- [ ] `search_cve` tool in registry (model can invoke like any other tool)
+- [ ] System prompt tells model: "You have a local CVE database with 250K+ CVEs. Use search_cve to find vulnerabilities for detected services."
+- [ ] **Autopilot integration:**
+  - [ ] After httpx/nmap service detection → auto-search CVE DB for matching versions
+  - [ ] Prioritize CISA KEV (actively exploited) and weaponized exploit CVEs
+  - [ ] Cross-reference multiple CVEs for attack chain planning
+- [ ] **Tab integration:**
+  - [ ] Web tab: "Search CVEs" button next to detected server version
+  - [ ] Recon tab: auto-enrich port scan results with CVE counts per service
+  - [ ] Exploit tab: CVE search feeds into metasploit module search
+- [ ] **Finding enrichment:**
+  - [ ] When creating a Finding, auto-suggest matching CVE ID
+  - [ ] Auto-fill CVSS score from CVE data
+  - [ ] Auto-fill description from CVE data
+  - [ ] Link to references (exploit-db, vendor advisory)
+- [ ] **Report enrichment:**
+  - [ ] Findings in reports include CVE links
+  - [ ] "Exploited in the wild" (CISA KEV) badge on findings
+  - [ ] Remediation auto-populated from vendor advisory links
+
+### F021.8: CVE Database UI (Settings page)
+- [ ] Database statistics: total CVEs, last sync, DB size on disk
+- [ ] Breakdown by severity: pie chart or bar (critical/high/medium/low)
+- [ ] Top affected vendors (bar chart)
+- [ ] Recent additions (list of last 20 new CVEs)
+- [ ] "Update Now" button with progress
+- [ ] Sync frequency selector (daily/weekly/manual)
+- [ ] Custom CVEs section: list, add, import, export
+- [ ] Search test: input field to test queries against the DB
+- [ ] Embedding model status: loaded/unloaded, size, version
+
+---
+
 ## F018: macOS Integration
 
 ### F018.1: Native macOS Features

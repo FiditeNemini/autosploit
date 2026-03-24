@@ -261,6 +261,81 @@ Every technical decision, numbered for cross-reference in test matrices.
 - **Templates:** CSS template files per report type (full, bug bounty, executive, technical)
 - **Test surface:** Each template renders correctly, page breaks, images/screenshots embedded, branding, CJK font rendering, large reports (50+ pages)
 
+### D029: CVE Knowledge Base (Local Vector DB)
+- **Decision:** Bundled CVE database with semantic search + structured CPE matching
+- **Storage:** SQLite with `sqlite-vec` extension (same DB file or separate `cve.db`)
+- **Data sources (pre-bundled, merged + deduplicated):**
+  - NVD (National Vulnerability Database) — ~250K CVEs, CVSS scores, CPE data
+  - Exploit-DB — mapped CVE→exploit links, PoC availability flags
+  - CISA KEV (Known Exploited Vulnerabilities) — actively exploited CVEs flagged
+  - GitHub Advisory Database — open source package vulns
+  - VulnCheck / OSV — additional coverage for modern packages
+- **Target coverage (prioritized for real-world pentesting):**
+  - **Web servers:** Apache, nginx, IIS, Tomcat, Jetty, LiteSpeed, Caddy
+  - **CMS:** WordPress (core + top 500 plugins), Drupal, Joomla, Magento, Ghost
+  - **Frameworks:** Spring, Django, Rails, Laravel, Express, Next.js, ASP.NET
+  - **CI/CD:** Jenkins, GitLab CI, GitHub Actions, TeamCity, Bamboo, ArgoCD
+  - **Containers:** Docker, Kubernetes, Helm, containerd, Podman, OpenShift
+  - **Databases:** MySQL, PostgreSQL, MongoDB, Redis, MSSQL, Oracle, Elasticsearch, CouchDB
+  - **Mail:** Exchange, Postfix, Dovecot, Zimbra, Roundcube
+  - **VPN/Remote:** OpenVPN, Fortinet, Pulse Secure, Citrix, PAN-OS, SonicWall, WireGuard
+  - **Network equipment:** Cisco IOS/ASA, Juniper, MikroTik, Ubiquiti, pfSense
+  - **Operating systems:** Windows (Server 2016-2025, 10, 11), Linux kernel, macOS, FreeBSD
+  - **Active Directory:** AD CS, ADFS, Kerberos, LDAP, Group Policy, NTLM
+  - **Cloud:** AWS (IAM, S3, Lambda, EC2), Azure (AD, Storage, Functions), GCP
+  - **Programming languages/runtimes:** Node.js, Python (pip packages), Java (Maven), Ruby (gems), PHP (Composer), Go, Rust (crates)
+  - **Monitoring/Observability:** Grafana, Prometheus, Zabbix, Nagios, Splunk, ELK
+  - **File sharing:** Samba, NFS, FTP (vsftpd, ProFTPD), WebDAV, SharePoint
+  - **Virtualization:** VMware (vCenter, ESXi), Proxmox, Hyper-V, QEMU/KVM
+  - **IoT/embedded:** Firmware (common routers, cameras), MQTT, CoAP, BLE
+  - **Authentication:** OAuth, SAML, JWT libraries, Keycloak, Okta, Auth0
+  - **Crypto/TLS:** OpenSSL, GnuTLS, NSS, Let's Encrypt, certificate handling
+  - **Desktop apps:** Electron apps, Chrome, Firefox, Office, Acrobat
+- **Data per CVE:**
+  - CVE ID (string, indexed)
+  - Description (text)
+  - CVSS v3.1 score (float) + vector string
+  - Severity (critical/high/medium/low)
+  - Affected products: CPE 2.3 strings (vendor:product:version_range)
+  - Published date, modified date
+  - References: exploit-db link, PoC URL, vendor advisory, patch URL
+  - CISA KEV flag (boolean — actively exploited in the wild)
+  - Exploit availability (none/poc/weaponized)
+  - Embedding vector (float32[], from description + product names)
+- **Search modes:**
+  1. **Semantic:** "remote code execution in web servers" → vector cosine similarity via sqlite-vec
+  2. **CPE match:** "apache:http_server:2.4.49" → version range matching
+  3. **Keyword:** full-text search via FTS5 on description
+  4. **CVSS filter:** "show all critical CVEs for nginx"
+  5. **Combined:** semantic + CPE + severity filter
+- **Embedding model:** Bundled small model — `nomic-embed-text-v1.5` (~275MB, runs on CPU, 768-dim vectors). Separate from the main inference model. Loaded on-demand for search, not always in memory.
+- **User custom CVEs:**
+  - "Add CVE" form: ID, description, affected product, severity, notes
+  - Import from JSON/CSV
+  - Custom CVEs stored in separate table, merged into search results
+  - Custom CVEs can include private/internal vulnerability findings
+  - Custom entries auto-embedded on save (using bundled embedding model)
+  - Tag system for custom CVEs (e.g., "internal", "client-specific")
+- **Updates:**
+  - Auto-sync: check NVD/CISA KEV for new CVEs (configurable: daily/weekly/manual)
+  - Delta updates: only download new/modified CVEs since last sync
+  - Incremental embedding: only embed new CVEs (not re-embed entire DB)
+  - Update notification: "47 new CVEs added" toast
+  - Manual trigger: Settings → CVE Database → "Update Now"
+  - Last sync timestamp displayed in Settings
+- **Model integration:**
+  - Tool `search_cve` added to tool registry (model can invoke)
+  - System prompt tells model about CVE DB availability
+  - Autopilot: after service detection (httpx/nmap), auto-searches CVE DB for matching versions
+  - Results include: CVE ID, severity, description, exploit availability, CISA KEV status
+  - Model can cross-reference multiple CVEs for attack chain planning
+- **Size estimates:**
+  - CVE data: ~500MB (250K CVEs with descriptions + CPE)
+  - Embedding vectors: ~750MB (250K × 768 dims × 4 bytes)
+  - Total: ~1.25 GB on disk (compressed ~600MB in app bundle, expanded on first run)
+  - Or: download on first run instead of bundling (saves app size)
+- **Test surface:** Semantic search accuracy, CPE version matching, FTS5 keyword search, custom CVE CRUD, embedding generation, delta updates, model invocation of search_cve tool, combined filter queries, CISA KEV flag filtering, exploit availability sorting
+
 ### D028: Data Persistence
 - **Decision:** SQLite via GRDB.swift, WAL mode
 - **Implementation:** Single `exploitbot.db` file at `~/.exploitbot/data/`
