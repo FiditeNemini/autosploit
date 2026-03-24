@@ -571,29 +571,91 @@
 
 ## F009: Findings System
 
-### F009.1: Finding Creation
-- [ ] Manual: user clicks "Create Finding" on a message or tool output
-- [ ] Creation wizard: pre-filled from source data, user confirms/edits
-- [ ] LLM-suggested: model detects confirmed vuln → prompts user (in Copilot mode) or auto-creates (in Autopilot)
-- [ ] From Stash: select items → "Promote to Finding"
-- [ ] Fields: title, vuln_type, severity, CVSS, target, description
-- [ ] Attack chain: auto-populated from Op conversation history (model reconstructs)
-- [ ] Evidence: auto-attached from relevant tool outputs and Stash items
-- [ ] Reproduction steps: model-generated from attack chain
-- [ ] Impact: model-generated assessment
-- [ ] Remediation: model-generated recommendations
-- [ ] All auto-generated fields editable by user
+### F009.1: Finding Creation — Wizard UI
+- [ ] **Trigger points:**
+  - [ ] "⚡ Create Finding" button on vulnerability cards (Web tab)
+  - [ ] "⚡ Create Finding" button on LinPEAS/WinPEAS results (Post tab)
+  - [ ] "⚡ Finding" button on Stash items
+  - [ ] Right-click assistant message → "Create Finding from this"
+  - [ ] LLM-suggested: model prompts "Create a Finding?" (Copilot mode)
+  - [ ] LLM auto-creates (Autopilot mode — no wizard shown, logged in activity feed)
+- [ ] **Wizard modal overlay:**
+  - [ ] Dark backdrop with blur (rgba(0,0,0,0.6) + backdrop-filter: blur(8px))
+  - [ ] 700px wide panel, max 80vh height, scrollable body
+  - [ ] Header: "⚡ Create Finding" title + close (✕) button
+  - [ ] Footer: "Cancel" (secondary) + "Create Finding" (primary) buttons
+- [ ] **Form fields (all pre-filled where possible):**
+  - [ ] Title: text input, pre-filled from CVE description or tool finding name
+  - [ ] Vulnerability Type: dropdown (RCE, SQLi, XSS, Path Traversal, Misconfig, Privesc, Info Disclosure, SSRF, CSRF, File Upload, Deserialization, Auth Bypass, IDOR, XXE, Command Injection, Other)
+  - [ ] Severity: dropdown (Critical, High, Medium, Low, Info) — pre-selected from tool output
+  - [ ] CVSS Score: numeric input (0.0-10.0) — pre-filled from CVE DB if CVE matched
+  - [ ] Target: monospace text input — pre-filled from tool target parameter
+  - [ ] Description: textarea — pre-filled from CVE description or model-generated
+- [ ] **Attack Chain section:**
+  - [ ] Label: "Attack Chain (auto-reconstructed from Op context)"
+  - [ ] Numbered steps in a contained box:
+    - [ ] Each step: circle number + description text
+    - [ ] Tool names in bold within step text
+    - [ ] Steps auto-populated by model from Op conversation history
+    - [ ] Add step button (+)
+    - [ ] Remove step button (✕ per step)
+    - [ ] Drag to reorder steps
+    - [ ] Edit step text inline
+- [ ] **Evidence section:**
+  - [ ] Label: "Evidence (auto-attached from tool outputs)"
+  - [ ] Evidence items list, each showing:
+    - [ ] Icon by type (📄 output, 💻 code, 🖥 session, 📸 screenshot)
+    - [ ] Description text
+    - [ ] Remove button (✕)
+  - [ ] "Add Evidence" button → file picker
+  - [ ] "From Stash" button → Stash picker (select items to attach)
+  - [ ] Auto-attached: relevant tool outputs from the Op that led to this finding
+- [ ] **Impact textarea:**
+  - [ ] Label: "Impact (model-generated)"
+  - [ ] Pre-filled by model: what an attacker can achieve
+  - [ ] Editable by user
+- [ ] **Remediation textarea:**
+  - [ ] Label: "Remediation (model-generated)"
+  - [ ] Pre-filled by model: numbered fix steps
+  - [ ] Editable by user
+- [ ] **Bottom row:**
+  - [ ] CVE ID: monospace input — pre-filled if CVE detected, auto-suggest from CVE DB
+  - [ ] Status: dropdown (Confirmed, Unconfirmed, False Positive) — default based on tool confidence
+- [ ] **Validation:**
+  - [ ] Title required
+  - [ ] Target required
+  - [ ] Severity required
+  - [ ] Empty fields highlighted with warning (not blocking)
+- [ ] **On "Create Finding":**
+  - [ ] Saved to findings table in SQLite
+  - [ ] Appears in Reporting tab findings list
+  - [ ] Notification toast: "Finding created: [title]"
+  - [ ] Activity feed event logged
+  - [ ] If Stash items were source → linked, not copied
 
 ### F009.2: Finding Management
-- [ ] Findings list in Reporting tab (filterable by severity, status)
-- [ ] Finding detail view: all fields, editable
-- [ ] Status: confirmed / unconfirmed / false_positive / remediated
-- [ ] Severity change with CVSS recalculation
-- [ ] Evidence management: add/remove evidence items
-- [ ] Attack chain editor: reorder/add/remove steps
-- [ ] Duplicate finding detection (same CVE + target)
-- [ ] Link findings (related vulns that form an attack chain)
-- [ ] Delete finding with confirmation
+- [ ] Findings list in Reporting tab left panel (filterable by severity, status)
+- [ ] Finding card shows: severity badge, CVSS, title, target, status, source tool
+- [ ] Click finding card → opens Finding detail/edit view (same wizard form, pre-filled)
+- [ ] **Status transitions:**
+  - [ ] confirmed → remediated (after fix verified)
+  - [ ] unconfirmed → confirmed (after manual verification)
+  - [ ] any → false_positive (mark as not real)
+  - [ ] Status change logged in activity feed
+- [ ] Severity change: CVSS auto-suggests based on vuln type, but user override allowed
+- [ ] **Evidence management:**
+  - [ ] Add evidence from file picker, Stash, or clipboard
+  - [ ] Remove evidence items
+  - [ ] Reorder evidence
+  - [ ] Preview evidence inline
+- [ ] **Attack chain editor:**
+  - [ ] Add/remove/reorder steps
+  - [ ] Edit step descriptions
+  - [ ] Model "Regenerate chain" button (re-analyzes Op context)
+- [ ] Duplicate detection: warn if same CVE ID + target already exists as a Finding
+- [ ] Link findings: select related findings that form a multi-step attack chain
+- [ ] Delete finding with confirmation ("This cannot be undone")
+- [ ] Finding edit history (last modified timestamp)
 
 ### F009.3: Finding Evidence
 - [ ] Tool outputs (structured JSON from parsers)
@@ -788,22 +850,89 @@
 - [ ] Accent color: green
 
 ### F011.8: Reporting Tab
-- [ ] Findings list (severity, target, status)
-- [ ] Findings statistics (pie chart by severity, timeline)
-- [ ] Report preview panel (live rendered HTML)
-- [ ] Template selector
-- [ ] Branding configuration
-- [ ] "Generate Report" button → LLM writes all sections
-- [ ] Per-section regenerate button
-- [ ] Section editor (edit LLM output)
-- [ ] Export buttons (PDF, MD, HTML, JSON)
-- [ ] Report history (previous generated reports)
+- [ ] Split view layout: findings list (left, 380px) + report preview (right)
+- [ ] **Left panel — Findings list:**
+  - [ ] Severity summary bar: 4 cards (CRIT/HIGH/MED/LOW) with counts, colored left borders
+  - [ ] Finding cards, each showing:
+    - [ ] Severity badge (CRITICAL/HIGH/MEDIUM/LOW/INFO)
+    - [ ] CVSS score (monospace)
+    - [ ] Confirmation status: confirmed (green) / unconfirmed (amber) / false_positive (red)
+    - [ ] Finding title (bold)
+    - [ ] Target + source tool (dim monospace)
+  - [ ] Cards sorted by severity (critical first), then CVSS score
+  - [ ] Click card → scrolls report preview to that finding
+  - [ ] Right-click card → Edit Finding / Delete / Change Status
+  - [ ] Drag card to reorder (custom report ordering)
+- [ ] **Right panel — Report preview:**
+  - [ ] Rendered as styled white document (light background, serif body)
+  - [ ] "CONFIDENTIAL" header banner
+  - [ ] Report metadata: client, date, assessor, classification
+  - [ ] Sections rendered:
+    - [ ] Executive Summary (1-2 paragraphs, non-technical)
+    - [ ] Findings Summary table (all findings, severity, CVSS, target, status)
+    - [ ] Detailed Findings (per finding: description, attack chain, impact, remediation)
+    - [ ] Attack Narrative (chronological engagement story)
+    - [ ] Remediation Roadmap
+  - [ ] Finding boxes: colored left border by severity, CVSS badge
+  - [ ] Code blocks with monospace font
+  - [ ] Scrollable independently from left panel
+  - [ ] Live preview: updates as findings are added/edited
+- [ ] **Toolbar:**
+  - [ ] Subtabs: Findings / Preview / Branding
+  - [ ] Template selector dropdown: Full Pentest Report, Bug Bounty, Executive Brief, Technical Writeup
+  - [ ] "Generate Report" button → LLM writes all sections
+  - [ ] "Export PDF" button (blue)
+  - [ ] "Export MD" button
+  - [ ] "Export HTML" button
+  - [ ] "Export JSON" button
+- [ ] **Branding subtab:**
+  - [ ] Company logo upload (drag or click to browse)
+  - [ ] Company name text input
+  - [ ] Primary color picker
+  - [ ] Header text (e.g., "CONFIDENTIAL")
+  - [ ] Footer text (e.g., "Page X of Y")
+  - [ ] Assessor name / contact info
+  - [ ] Preview updates live with branding changes
+- [ ] **Generation features:**
+  - [ ] "Generate Report" sends all Findings + Op context to model
+  - [ ] Model writes executive summary, attack narrative, remediation roadmap
+  - [ ] Per-section regenerate button (re-generate just that section)
+  - [ ] Section editor: click any section text to edit inline
+  - [ ] Report language matches app language setting
+  - [ ] Generation progress indicator
+  - [ ] Cancel generation button
+- [ ] **Report history:**
+  - [ ] Previously generated reports stored with timestamp
+  - [ ] "History" button → list of past reports
+  - [ ] Re-export any historical report
 - [ ] Accent color: gray/neutral
 
-### F011.9: Stash Tab (also accessible as drawer from any tab)
-- [ ] Full Stash UI (F008.2)
-- [ ] Larger view than the drawer (more screen real estate)
-- [ ] Accent color: matches Stash icon color
+### F011.9: Stash Tab (full view)
+- [ ] Full-width layout (no split — Stash gets full content area)
+- [ ] **Toolbar:**
+  - [ ] Type filter tabs: All / Credentials / Hosts / Vulns / Code / Raw
+  - [ ] Search input (searches label + content)
+  - [ ] Op filter dropdown: All Ops / specific Op names
+  - [ ] Export button (exports filtered set as JSON)
+- [ ] **Item count summary:** "14 items · 3 credentials · 4 hosts · 3 vulns · 2 code · 2 raw"
+- [ ] **Stash item list:** each item shows:
+  - [ ] Type icon: 🔑 (credential), 🌐 (host/IP), ⚠️ (vulnerability), 💻 (code), 📄 (raw), 📝 (note)
+  - [ ] Type icon background: amber (cred), blue (host), red (vuln), purple (code), gray (raw), green (note)
+  - [ ] Label text (primary, bold)
+  - [ ] Metadata line: type name · source tab · source Op · timestamp
+  - [ ] Action buttons (right side):
+    - [ ] "→ Send" — opens picker: which Op + which tab's chatbox
+    - [ ] "⚡ Finding" — opens Finding wizard pre-filled from this item (for vuln/cred types)
+    - [ ] "📋 Copy" — copies content to clipboard (for code types)
+  - [ ] Click item → expanded view with full content
+  - [ ] Hover → subtle border highlight
+- [ ] **Bulk actions:**
+  - [ ] Select multiple items (checkbox or shift+click)
+  - [ ] Bulk delete
+  - [ ] Bulk export
+  - [ ] Bulk promote to Finding
+- [ ] **Empty state:** "Stash is empty. Stash items from tool outputs, chat, or right-click menus."
+- [ ] Accent color: cyan
 
 ---
 
