@@ -252,3 +252,91 @@ extension String {
 8. **Model path validation** — check safetensors exist before engine launch
 9. **Terminal cleanup on app exit** — kill terminal process
 
+
+---
+
+## TODO: Remaining Edge Case Fixes
+
+### TODO-1: Scope Enforcement on Tool Targets
+- **Files:** ToolDefinitions.swift (buildCliArgs), ChatService.swift (tool execution loop), AppState.swift (Op scope)
+- **What:** Before executing any tool, extract the target parameter and check against the Op's scope field
+- **Dependencies:** Op.scope must be parsed into allowed domains/IPs/CIDRs. Need a ScopeChecker utility.
+- **Sub-items:**
+  - [ ] Parse Op.scope text into structured allowed targets (domains, wildcards, CIDRs)
+  - [ ] ScopeChecker.isInScope(target: String, scope: ParsedScope) → Bool
+  - [ ] Check target param from tool_call arguments before execution
+  - [ ] In Autopilot: block out-of-scope, log warning to activity feed
+  - [ ] In Copilot: show warning on approval card "⚠ Target may be out of scope"
+  - [ ] In Manual: no enforcement (user controls)
+  - [ ] Scope enforcement toggle in Op settings (strict/warn/off)
+
+### TODO-2: Engine Reconnection Context After Crash
+- **Files:** EngineManager.swift (onCrash handler), ChatService.swift (system prompt), AppState.swift
+- **What:** After engine crash+restart, re-send system prompt + phase guidance + last N messages so model has context
+- **Dependencies:** Engine must be healthy before re-sending. ChatService.baseURL must be updated.
+- **Sub-items:**
+  - [ ] EngineManager.onCrash callback already exists — wire to AppState
+  - [ ] After restart confirmed healthy, set chatService.baseURL
+  - [ ] Re-inject phaseGuidance into chatService
+  - [ ] Send last 10 messages as context (not full history — may exceed context window)
+  - [ ] Show "Engine reconnected — context restored" banner in activity feed
+  - [ ] If Autopilot was running, resume from where it left off
+
+### TODO-3: RAM Check Before Model Load
+- **Files:** EngineManager.swift (start method), SettingsView.swift, OnboardingView.swift
+- **What:** Check ProcessInfo.processInfo.physicalMemory against estimated model RAM before launching engine
+- **Dependencies:** Model size estimation from folder size or jang_config.json
+- **Sub-items:**
+  - [ ] Read model folder size (sum of .safetensors files)
+  - [ ] Estimate RAM needed: folder size × 1.2 (overhead for KV cache, tokenizer, etc.)
+  - [ ] Compare against physicalMemory
+  - [ ] If insufficient: show warning dialog "Model needs ~X GB but you have Y GB. Continue anyway?"
+  - [ ] User can override (some models fit in less than file size suggests due to quantization)
+  - [ ] Show RAM estimate in model selection UI (Settings + Onboarding)
+
+### TODO-4: Copilot Approval Timeout
+- **Files:** ChatService.swift (approval continuation)
+- **What:** Auto-reject approval after configurable timeout (default 5 minutes) to prevent infinite suspension
+- **Dependencies:** None — self-contained in ChatService
+- **Sub-items:**
+  - [ ] Add timeout task alongside withCheckedContinuation
+  - [ ] After timeout: auto-resume with .reject
+  - [ ] Show "Approval timed out — tool call rejected" in chat
+  - [ ] Configurable timeout in settings (1min, 5min, 15min, never)
+  - [ ] Visual countdown on approval card (optional)
+
+### TODO-5: Phase Persistence Per-Op in DB
+- **Files:** AppState.swift, Database.swift, Op.swift
+- **What:** Save current phase to DB when it changes, restore when Op is loaded
+- **Dependencies:** Need new column in ops table or use settings table with op-scoped key
+- **Sub-items:**
+  - [ ] Add DB migration: ALTER TABLE ops ADD COLUMN currentPhase TEXT DEFAULT 'scan'
+  - [ ] AppState.advancePhase() → save to DB
+  - [ ] AppState.setPhase() → save to DB
+  - [ ] AppState.switchOp() → load phase from DB
+  - [ ] AppState.createOp() → initialize phase to 'scan' in DB
+  - [ ] Also persist phaseToolsRun per-Op (or accept it resets on switch)
+
+### TODO-6: Terminal Process Cleanup on App Exit
+- **Files:** ExploitBotApp.swift, TerminalPanelView.swift
+- **What:** Kill the terminal's shell process when the app quits
+- **Dependencies:** Need reference to the LocalProcessTerminalView's process
+- **Sub-items:**
+  - [ ] Store terminal process reference in AppState or TerminalPanelView
+  - [ ] On app willTerminate / scenePhase .background: send SIGTERM to terminal process
+  - [ ] SwiftTerm's LocalProcessTerminalView may handle this automatically — verify
+  - [ ] If multiple terminal tabs (future): kill all terminal processes
+  - [ ] Also kill on window close if "minimize to tray" is disabled
+
+### TODO-7: Model Path Validation (Check Safetensors Exist)
+- **Files:** SettingsView.swift (pickModelFolder), OnboardingView.swift, EngineManager.swift (start)
+- **What:** Before launching engine, verify model folder contains required files
+- **Dependencies:** None — file system check
+- **Sub-items:**
+  - [ ] Check for config.json (already done in pickModelFolder)
+  - [ ] Check for at least one .safetensors file
+  - [ ] Check for tokenizer.json or tokenizer_config.json
+  - [ ] Optional: check for jang_config.json → show "JANG format detected" badge
+  - [ ] If missing files: show specific error "Missing: tokenizer.json, *.safetensors"
+  - [ ] Validate BEFORE engine launch (not just in file picker — also in start())
+  - [ ] Show validation result in Settings model card (✅ valid / ⚠ missing files)
