@@ -5,21 +5,55 @@
 
 ---
 
-## PRIORITY 1: Tool Bundling & Installation
+## PRIORITY 0: Inference Metrics + Logs Visibility
 
-Bundle arm64 tool binaries in .app Resources for zero-config experience.
+### Token Speed Display
+- [ ] Tokens per second (tok/s) shown during streaming in chat header
+- [ ] Time to first token (TTFT) displayed after first token arrives
+- [ ] Prompt processing speed (prompt tokens/sec) shown during prefill
+- [ ] Parse from SSE `usage` field: `prompt_tokens`, `completion_tokens`, `prompt_tokens_details.cached_tokens`
+- [ ] Display format: "12.3 tok/s · TTFT 1.2s · 150 prompt (64 cached)"
+- [ ] Only shown during/after streaming (not when idle)
 
-**Bundle (~150MB):** subfinder, dnsx, httpx, nuclei, katana, feroxbuster, ffuf, dalfox, arjun, haiti, chisel, trufflehog, sherlock, holehe, testssl.sh, jwt_tool, graphqlmap, exiftool, gowitness, linpeas.sh, winpeas.exe
+### Inference Log Access
+- [ ] Inference log button should be visible from main UI (not buried in Settings)
+- [ ] Add log icon button (📋) in chat header next to reasoning toggle
+- [ ] Click opens a slide-out panel or sheet showing real-time engine logs
+- [ ] InferenceLogView already built — just needs to be accessible from chat, not just Settings
+- [ ] Auto-scroll, copy, clear buttons already implemented
 
-**User-install:** nmap, masscan, hashcat, metasploit, sqlmap, impacket, pwntools, pwncat, netexec, hydra, bettercap, tshark, sliver
+## PRIORITY 1: Ship ALL Tools With The App
+
+**Philosophy:** Bundle EVERYTHING. Users should not need homebrew, pip, or any deps. App works out of the box. Users with their own installs don't get conflicts — our tools are sandboxed in the .app bundle.
+
+**Bundle ALL as arm64 in .app/Contents/Resources/tools/:**
+
+Go/Rust (single binary): subfinder, dnsx, httpx, nuclei, katana, feroxbuster, ffuf, dalfox, arjun, haiti, chisel, trufflehog, gowitness, netexec
+
+Python (bundle with embedded Python or PyInstaller): sqlmap, impacket, sherlock, holehe, pwncat, pwntools
+
+C/system (static arm64 builds): nmap, masscan, hashcat (Metal), hydra, tshark
+
+Scripts (tiny, always bundle): testssl.sh, linpeas.sh, winpeas.exe, jwt_tool.py, graphqlmap.py
+
+**Heavy/Optional (download on first use, NOT bundled):**
+- metasploit (~1GB) — download button in Settings
+- sliver C2 (~100MB) — download button
+- seclists wordlists (~200MB) — download button
+- bettercap — download button
+
+**User custom tools:** Settings → Tools → "Add Custom Tool" → point to any binary, define schema
+
+**CVE embeddings:** Ship small starter set (~5K critical CVEs). Full 250K DB available via "Import" button. Users can add custom CVEs.
 
 **Steps:**
-1. Download arm64 binaries for each bundled tool
-2. Add to ExploitBot/Resources/tools/
-3. Update ToolExecutor.findBinary() to check bundle Resources first
-4. Update project.yml to include tools
-5. Test each tool executes from bundle
-6. Rebuild DMG
+1. Download/compile arm64 binaries for all bundled tools
+2. Create Resources/tools/ directory in Xcode project
+3. Update ToolExecutor.findBinary() to check bundle FIRST
+4. Update project.yml extraResources
+5. Test each tool from bundle path
+6. Add custom tool UI in Settings
+7. Rebuild DMG (~300-500MB with all tools)
 
 ## PRIORITY 2: Test All Tools Against DVWA/Juice Shop
 
