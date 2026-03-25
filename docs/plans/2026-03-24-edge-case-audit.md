@@ -400,3 +400,37 @@ All cache features from vMLX are present and functional for text-only inference.
 - [ ] Remote API support (OpenAI/Claude as alternative to local)
 - [ ] Jira/GitHub issue integration for findings export
 - [ ] Custom tool UI (visual tool builder)
+
+---
+
+## NEXT SESSION: Tool Bundling & Installation
+
+### Plan
+Bundle lightweight Go/Rust tools as arm64 binaries in .app Resources.
+Heavy tools stay as user-installed via homebrew/pip.
+
+### Bundle list (~150MB total):
+- subfinder, dnsx, httpx, nuclei, katana (ProjectDiscovery suite)
+- feroxbuster, ffuf, dalfox, arjun
+- haiti, chisel, trufflehog
+- sherlock, holehe
+- testssl.sh, jwt_tool, graphqlmap
+- exiftool, gowitness
+- linpeas.sh, winpeas.exe (scripts, not binaries)
+- seclists (wordlists, ~200MB — optional download)
+
+### User-install list:
+- nmap, masscan (brew install)
+- hashcat (brew install)
+- metasploit (brew install --cask metasploit)
+- sqlmap, impacket, pwntools, pwncat (pip install)
+- netexec, hydra (brew/pip)
+- bettercap, tshark, sliver (brew)
+
+### Steps for next session:
+1. Download arm64 binaries for each bundled tool
+2. Add to ExploitBot/Resources/tools/
+3. Update ToolExecutor.findBinary() to check bundle Resources first
+4. Update project.yml to include tools in extraResources
+5. Test each tool executes from bundle
+6. Rebuild DMG with bundled tools
