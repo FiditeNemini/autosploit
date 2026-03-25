@@ -361,7 +361,7 @@ extension String {
 
 ### Things Users Will Ask About
 1. "How do I add my own tools?" — no custom tool definition UI
-2. "Can I use OpenAI/Claude instead of local?" — no remote API support
+2. "Can I use OpenAI/other cloud APIs instead of local?" — no remote API support
 3. "How do I export my findings to Jira/GitHub?" — no integration
 4. "Can multiple users share an engine?" — no, single-user design
 5. "Does it work on iPad?" — no, macOS only
@@ -397,7 +397,7 @@ All cache features from vMLX are present and functional for text-only inference.
 - [ ] Scope enforcement (check tool targets against Op scope)
 
 ### NICE-TO-HAVE (post v1.0)
-- [ ] Remote API support (OpenAI/Claude as alternative to local)
+- [ ] Remote API support (OpenAI/other cloud APIs as alternative to local)
 - [ ] Jira/GitHub issue integration for findings export
 - [ ] Custom tool UI (visual tool builder)
 
