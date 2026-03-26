@@ -309,9 +309,9 @@ def main():
     start_time = time.time()
 
     if args.force:
-        query = "SELECT id, description FROM cves ORDER BY id"
+        query = "SELECT id, description, severity, cpeVendor, cpeProduct, cpeVersionStart, cpeVersionEnd, tags FROM cves ORDER BY id"
     else:
-        query = "SELECT id, description FROM cves WHERE embedding IS NULL ORDER BY id"
+        query = "SELECT id, description, severity, cpeVendor, cpeProduct, cpeVersionStart, cpeVersionEnd, tags FROM cves WHERE embedding IS NULL ORDER BY id"
 
     cursor = conn.execute(query)
     processed = 0
@@ -324,7 +324,32 @@ def main():
             break
 
         batch_ids = [row[0] for row in rows]
-        batch_texts = [row[1] or "" for row in rows]
+        # Build composite embedding text:
+        # "{cve_id} | {severity} | {vendor} {product} {version_range} | {tags} | {description}"
+        batch_texts = []
+        for row in rows:
+            cve_id = row[0] or ""
+            desc = row[1] or ""
+            severity = row[2] or ""
+            vendor = row[3] or ""
+            product = row[4] or ""
+            ver_start = row[5] or ""
+            ver_end = row[6] or ""
+            tags = row[7] or ""
+
+            version_range = ""
+            if ver_start and ver_end:
+                version_range = f"{ver_start} through {ver_end}"
+            elif ver_start:
+                version_range = ver_start
+            elif ver_end:
+                version_range = f"up to {ver_end}"
+
+            # Replace tag abbreviations with searchable phrases
+            tag_phrases = tags.replace(",", " ") if tags else ""
+
+            composite = f"{cve_id} | {severity} | {vendor} {product} {version_range} | {tag_phrases} | {desc}"
+            batch_texts.append(composite.strip())
 
         # Generate embeddings
         try:
