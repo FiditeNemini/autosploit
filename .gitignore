@@ -44,3 +44,17 @@ release/
 .env
 *.key
 *.pem
+
+# Internal dev docs (not for public repo)
+docs/plans/
+tests/
+# Screenshots with test data
+assets/creds.png
+assets/exploit.png
+assets/network.png
+assets/osint.png
+assets/post.png
+assets/recon.png
+assets/report.png
+assets/stash.png
+assets/web.png
