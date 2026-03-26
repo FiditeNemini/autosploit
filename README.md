@@ -16,12 +16,17 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/jjang-ai/exploitbot/releases/latest/download/ExploitBot-1.4.1.dmg">
+    <img src="https://img.shields.io/badge/Download-DMG%20(v1.4.1)-blue?style=for-the-badge&logo=apple" alt="Download DMG">
+  </a>
+</p>
+
+<p align="center">
   <a href="https://exploit.bot">Website</a> •
   <a href="#features">Features</a> •
   <a href="#install">Install</a> •
   <a href="#models">Models</a> •
-  <a href="#tools">Tools</a> •
-  <a href="docs/plans/2026-03-23-exploitbot-design.md">Design Doc</a>
+  <a href="#tools">Tools</a>
 </p>
 
 ---
