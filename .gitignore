@@ -58,3 +58,5 @@ assets/recon.png
 assets/report.png
 assets/stash.png
 assets/web.png
+# Bundled tool binaries (too large for git, distributed via DMG)
+ExploitBot/Resources/tools/
