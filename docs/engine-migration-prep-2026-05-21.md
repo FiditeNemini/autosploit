@@ -317,6 +317,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 39: Added a repeatable SwiftPM app-bundle run script plus Codex
   Run action, then visually verified a darker, squared onboarding language
   screen without flag emoji or bright filled controls.
+- Checkpoint 40: Replaced main-surface sidebar glyph controls and bright Recon
+  toolbar actions with SF Symbol/dark bordered controls, then visually verified
+  the main app window after restoring the temporary QA database state.
 
 ## Known Risk Areas
 
