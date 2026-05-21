@@ -331,6 +331,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   cache in the Python launcher's default path, keeping the Swift Settings
   default in sync, and adding a regression test for the default paged + Block
   L2 topology.
+- Checkpoint 44: Aligned the direct server entrypoint with the same default
+  cache topology by enabling prompt L2, paged cache, and Block L2 defaults in
+  `vmlx_engine.server`, then extracting and testing scheduler config creation.
 
 ## Known Risk Areas
 
