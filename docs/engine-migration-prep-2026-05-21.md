@@ -241,6 +241,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 15: App-level `top_p` override wiring is now complete when model
   defaults are disabled: Settings exposes it, active and multi-agent chats carry
   it, and request bodies send `top_p` with temperature/max-token overrides.
+- Checkpoint 16: Captured a current-build Settings visual proof showing the
+  polished dark theme, model-default toggle, and disabled temperature/top-p/max
+  token app overrides while model defaults are enabled.
 
 ## Known Risk Areas
 
