@@ -200,6 +200,8 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 03: `effective_config` API metadata added to `/health` and
   `/v1/models`, covering selected parsers, generation defaults, prefix/paged
   cache settings, KV cache quantization, and prompt/block L2 disk cache config.
+- Checkpoint 04: Swift `EngineManager` parses `/health.effective_config`, and
+  Settings displays the live selected parser/generation/cache summary.
 
 ## Known Risk Areas
 
