@@ -213,6 +213,8 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 08: SSM companion config is included in `/health.effective_config`,
   richer SSM stats are exposed through `/v1/cache/stats`, and Settings displays
   SSM runtime status.
+- Checkpoint 09: Multi-agent monitor task moved onto `MainActor`, removing the
+  Swift 6 sendability warnings from `swift build`.
 
 ## Known Risk Areas
 
