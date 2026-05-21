@@ -215,6 +215,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   SSM runtime status.
 - Checkpoint 09: Multi-agent monitor task moved onto `MainActor`, removing the
   Swift 6 sendability warnings from `swift build`.
+- Checkpoint 10: Added repeatable bundled-Python no-model API smoke covering
+  `/health.effective_config`, `/v1/cache/stats`, and `/v1/models`; real
+  MiniMax/Qwen cache proof remains gated on clearing the existing heavy vMLX
+  process or otherwise reserving memory for a safe run.
 
 ## Known Risk Areas
 
