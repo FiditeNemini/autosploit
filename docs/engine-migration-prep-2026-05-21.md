@@ -256,6 +256,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 20: Added no-model regression coverage for nested
   `text_config.model_type` autodetection so Qwen wrapper models can still
   resolve parser defaults and inner SSM/Mamba cache-family metadata.
+- Checkpoint 21: Extended effective runtime metadata with chat-template
+  generation settings, proved `/health` and `/v1/models` expose the same
+  parser/generation/cache contract under the bundled runtime, and updated the
+  no-model API smoke to require those generation metadata keys.
 
 ## Known Risk Areas
 

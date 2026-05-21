@@ -63,6 +63,7 @@ models = json.loads(sys.argv[3])
 
 effective = health.get("effective_config") or {}
 cache_config = effective.get("cache") or {}
+generation_config = effective.get("generation") or {}
 required_cache_keys = {
     "prefix_cache",
     "paged_cache",
@@ -73,6 +74,9 @@ required_cache_keys = {
 missing = sorted(required_cache_keys - set(cache_config))
 if missing:
     raise SystemExit(f"missing effective cache keys: {missing}")
+for key in ("chat_template_kwargs", "custom_chat_template"):
+    if key not in generation_config:
+        raise SystemExit(f"missing effective generation key: {key}")
 if health.get("status") != "no_model":
     raise SystemExit(f"expected no_model status, got {health.get('status')!r}")
 if "memory" not in cache:
@@ -82,6 +86,7 @@ if models.get("object") != "list" or not isinstance(models.get("data"), list):
 
 print("health.status=", health["status"], sep="")
 print("effective.cache.keys=", ",".join(sorted(cache_config)), sep="")
+print("effective.generation.keys=", ",".join(sorted(generation_config)), sep="")
 print("cache.keys=", ",".join(sorted(cache)), sep="")
 print("models.count=", len(models["data"]), sep="")
 PY
