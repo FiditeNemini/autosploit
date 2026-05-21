@@ -308,6 +308,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   config, marking MiniMax as full-KV attention and Qwen3-next as hybrid
   SSM/attention with SSM companion requirements, and surfaced the topology in
   Settings.
+- Checkpoint 37: Added Qwen hybrid-SSM and MiniMax full-KV topology warning
+  regressions, surfaced cache topology warnings as a selectable Settings row,
+  and made runtime config cells directly copyable.
 
 ## Known Risk Areas
 
