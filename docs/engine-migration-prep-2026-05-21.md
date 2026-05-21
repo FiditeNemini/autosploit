@@ -334,6 +334,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 44: Aligned the direct server entrypoint with the same default
   cache topology by enabling prompt L2, paged cache, and Block L2 defaults in
   `vmlx_engine.server`, then extracting and testing scheduler config creation.
+- Checkpoint 45: Extended model-folder generation defaults to include
+  `enable_thinking` and `chat_template_kwargs`, passed those through the
+  launcher/server path, and covered the behavior with launcher and server
+  regressions.
 
 ## Known Risk Areas
 
