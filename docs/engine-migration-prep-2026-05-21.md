@@ -302,6 +302,8 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 34: Removed the remaining emoji/text-symbol chrome emitted from
   service/model computed labels, tool statuses, activity feed exports, stash
   rows, phase logs, and localized onboarding navigation text.
+- Checkpoint 35: Replaced tab toolbar text-glyph buttons with SF Symbols and
+  stable icon-button sizing.
 
 ## Known Risk Areas
 
