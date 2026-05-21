@@ -304,6 +304,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   rows, phase logs, and localized onboarding navigation text.
 - Checkpoint 35: Replaced tab toolbar text-glyph buttons with SF Symbols and
   stable icon-button sizing.
+- Checkpoint 36: Added explicit cache topology metadata to effective runtime
+  config, marking MiniMax as full-KV attention and Qwen3-next as hybrid
+  SSM/attention with SSM companion requirements, and surfaced the topology in
+  Settings.
 
 ## Known Risk Areas
 
