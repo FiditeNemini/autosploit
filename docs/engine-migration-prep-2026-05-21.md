@@ -276,6 +276,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 26: Added Swift polling/parsing for `/v1/cache/stats` and a
   selectable Settings `Cache Runtime` panel covering TurboQuant, prompt/block
   L2, SSM companion, and memory diagnostics.
+- Checkpoint 27: Replaced the main Activity Feed verbosity picker with a dark
+  segmented selector and captured visual proof of the main app surface without
+  that native popup control.
 
 ## Known Risk Areas
 
