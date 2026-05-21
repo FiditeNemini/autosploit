@@ -283,6 +283,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   severity, and status native pickers with dark selectable controls, removed
   emoji-styled modal chrome, and squared the modal action backgrounds while
   preserving the existing stored finding values.
+- Checkpoint 29: Replaced native picker controls in the network, report,
+  post-exploitation, and credentials tabs with dark segmented controls while
+  preserving the command/report values that those selectors feed.
 
 ## Known Risk Areas
 
