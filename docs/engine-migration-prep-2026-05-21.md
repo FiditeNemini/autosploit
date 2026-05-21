@@ -344,6 +344,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 47: Centralized nested resize bounds for the chat and
   activity/terminal panels, raised their minimums, and updated drag handlers to
   render through clamped dimensions.
+- Checkpoint 48: Added a shared dark semantic action button and replaced the
+  remaining saturated filled actions in Network, Creds, Exploit, Post, and
+  Report tabs with dark outlined controls.
 
 ## Known Risk Areas
 
