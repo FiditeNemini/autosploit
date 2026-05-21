@@ -279,6 +279,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 27: Replaced the main Activity Feed verbosity picker with a dark
   segmented selector and captured visual proof of the main app surface without
   that native popup control.
+- Checkpoint 28: Replaced the finding creation wizard's vulnerability type,
+  severity, and status native pickers with dark selectable controls, removed
+  emoji-styled modal chrome, and squared the modal action backgrounds while
+  preserving the existing stored finding values.
 
 ## Known Risk Areas
 
