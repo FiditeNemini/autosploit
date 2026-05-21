@@ -204,6 +204,8 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   Settings displays the live selected parser/generation/cache summary.
 - Checkpoint 05: Prompt L2 disk cache stub replaced with current vMLX
   `DiskCacheManager`, TQ-native disk serializer, and cache-record validator.
+- Checkpoint 06: Prompt L2 and block L2 disk cache flags wired through Swift
+  settings, `launch.py`, `server.py`, and `SchedulerConfig`.
 
 ## Known Risk Areas
 
