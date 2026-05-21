@@ -341,6 +341,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 46: Darkened remaining bright filled action controls, added darker
   sheet presentation backgrounds/minimum sizing for key sheets, removed the CVE
   sync emoji label, and visually checked onboarding, main, and Settings.
+- Checkpoint 47: Centralized nested resize bounds for the chat and
+  activity/terminal panels, raised their minimums, and updated drag handlers to
+  render through clamped dimensions.
 
 ## Known Risk Areas
 
