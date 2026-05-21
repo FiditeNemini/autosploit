@@ -210,6 +210,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   Qwen hybrid TurboQuant helper imported from current vMLX; LLM scheduler now
   reports SSM companion stats and rejects KV-only hybrid restores without a
   complete companion entry.
+- Checkpoint 08: SSM companion config is included in `/health.effective_config`,
+  richer SSM stats are exposed through `/v1/cache/stats`, and Settings displays
+  SSM runtime status.
 
 ## Known Risk Areas
 
