@@ -270,6 +270,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   model profile, parser selection, KV cache mode, and max agent count with a
   dark selectable/copyable option grid that matches the squared Graphite Ops
   theme and protects minimum layout width.
+- Checkpoint 25: Updated Swift effective-config parsing and the Settings
+  runtime summary so chat-template kwargs and custom-template state exposed by
+  the engine are visible in the app.
 
 ## Known Risk Areas
 
