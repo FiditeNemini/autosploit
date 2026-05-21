@@ -219,6 +219,11 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   `/health.effective_config`, `/v1/cache/stats`, and `/v1/models`; real
   MiniMax/Qwen cache proof remains gated on clearing the existing heavy vMLX
   process or otherwise reserving memory for a safe run.
+- Checkpoint 11: Tightened the Graphite Ops visual pass by removing explicit
+  white foreground usage, replacing white onboarding selection indicators with
+  accent-blue state, reducing visible rounded surfaces to the 8px theme radius,
+  locking window resizing to content minimum size, and matching the chat drag
+  handle minimum to the chat panel frame.
 
 ## Known Risk Areas
 
