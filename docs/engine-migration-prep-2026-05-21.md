@@ -238,6 +238,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   policy to chat requests and multi-agent chats, displays broader effective
   sampling metadata, and expands selectable-text/minimum-size coverage across
   onboarding, settings, sheets, and modal panels.
+- Checkpoint 15: App-level `top_p` override wiring is now complete when model
+  defaults are disabled: Settings exposes it, active and multi-agent chats carry
+  it, and request bodies send `top_p` with temperature/max-token overrides.
 
 ## Known Risk Areas
 
