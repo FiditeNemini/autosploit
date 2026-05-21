@@ -347,6 +347,8 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 48: Added a shared dark semantic action button and replaced the
   remaining saturated filled actions in Network, Creds, Exploit, Post, and
   Report tabs with dark outlined controls.
+- Checkpoint 49: Replaced the remaining SwiftUI alert confirmations with
+  reusable dark in-app confirmation overlays for clear-chat and delete-op flows.
 
 ## Known Risk Areas
 
