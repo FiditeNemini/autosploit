@@ -286,6 +286,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 29: Replaced native picker controls in the network, report,
   post-exploitation, and credentials tabs with dark segmented controls while
   preserving the command/report values that those selectors feed.
+- Checkpoint 30: Replaced the chat deploy-agent type menu and custom CVE
+  severity picker with dark selectable controls, clearing the current native
+  `Picker` scan under the SwiftUI `Views` tree.
 
 ## Known Risk Areas
 
