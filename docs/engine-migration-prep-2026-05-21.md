@@ -263,6 +263,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 22: Updated `/v1/cache/stats` TurboQuant detection for the current
   JANG and hybrid make-cache wrappers, exposing hybrid attention and companion
   layer metadata for future Qwen SSM cache debugging.
+- Checkpoint 23: Added regression coverage proving non-streaming and streaming
+  chat payloads expose separated reasoning through public `reasoning_content`
+  while keeping the internal `reasoning` field out of serialized API output.
 
 ## Known Risk Areas
 
