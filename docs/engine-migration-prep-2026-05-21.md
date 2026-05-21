@@ -323,6 +323,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 41: Added parser/generation provenance from launch defaults into
   `effective_config.sources`, covered model-folder versus CLI source reporting
   in tests, and surfaced selectable Sampling/Parser source rows in Settings.
+- Checkpoint 42: Made TurboQuant KV modes first-class by accepting
+  `turboquant-q4/q8` and `tq-q4/q8` through launcher/server/CLI paths,
+  normalizing scheduler bit mapping, and adding TurboQuant Q4/Q8 Settings
+  options.
 
 ## Known Risk Areas
 
