@@ -233,6 +233,11 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   `repetition_penalty`, and stop sequences in addition to temperature/top-p/max
   tokens, flow through launch/server flags, appear in effective runtime
   metadata, apply across API paths, and preserve per-request override priority.
+- Checkpoint 14: Swift now preserves model-folder generation defaults by
+  default instead of always overriding them from app settings, propagates that
+  policy to chat requests and multi-agent chats, displays broader effective
+  sampling metadata, and expands selectable-text/minimum-size coverage across
+  onboarding, settings, sheets, and modal panels.
 
 ## Known Risk Areas
 
