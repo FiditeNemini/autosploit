@@ -349,6 +349,15 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   Report tabs with dark outlined controls.
 - Checkpoint 49: Replaced the remaining SwiftUI alert confirmations with
   reusable dark in-app confirmation overlays for clear-chat and delete-op flows.
+- Checkpoint 50: Removed the app's small/medium/large model-profile path from
+  Settings, Onboarding, ChatService, AgentManager, AppState, and the local model
+  selector. Users now select a model folder only; Swift inspects the folder for
+  Qwen/MiniMax support and config files, warns that only Qwen and MiniMax are
+  supported in the beta lane, and forces runtime autodetect for generation,
+  reasoning parser, tool parser, TurboQuant KV cache, prefix cache, prompt L2,
+  paged cache, and block L2 defaults. Added the app-flow inventory covering tab
+  wiring, chat/session/context paths, dynamic catalogue requirements, visual
+  tool-status requirements, and proof gates.
 
 ## Known Risk Areas
 
