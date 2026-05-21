@@ -260,6 +260,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   generation settings, proved `/health` and `/v1/models` expose the same
   parser/generation/cache contract under the bundled runtime, and updated the
   no-model API smoke to require those generation metadata keys.
+- Checkpoint 22: Updated `/v1/cache/stats` TurboQuant detection for the current
+  JANG and hybrid make-cache wrappers, exposing hybrid attention and companion
+  layer metadata for future Qwen SSM cache debugging.
 
 ## Known Risk Areas
 
