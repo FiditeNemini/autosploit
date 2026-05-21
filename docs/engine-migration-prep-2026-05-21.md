@@ -250,6 +250,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 18: Tightened Settings row layout for the app minimum size by
   giving labels a stable selectable column and controls a protected content
   width so rows scroll instead of squishing.
+- Checkpoint 19: Hardened lower Settings subpanels by darkening CVE/model/tool
+  action buttons, enabling more selectable text, allowing CVE/model text to
+  wrap, and protecting the tool table with horizontal scrolling.
 
 ## Known Risk Areas
 
