@@ -320,6 +320,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 40: Replaced main-surface sidebar glyph controls and bright Recon
   toolbar actions with SF Symbol/dark bordered controls, then visually verified
   the main app window after restoring the temporary QA database state.
+- Checkpoint 41: Added parser/generation provenance from launch defaults into
+  `effective_config.sources`, covered model-folder versus CLI source reporting
+  in tests, and surfaced selectable Sampling/Parser source rows in Settings.
 
 ## Known Risk Areas
 
