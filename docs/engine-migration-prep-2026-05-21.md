@@ -358,6 +358,14 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   paged cache, and block L2 defaults. Added the app-flow inventory covering tab
   wiring, chat/session/context paths, dynamic catalogue requirements, visual
   tool-status requirements, and proof gates.
+- Checkpoint 51: Added a Swift-side dynamic context catalogue for the app flow.
+  Chat turns now ask `ContextCatalogService` for a prompt-aware packet that ranks
+  assets, findings, recent tool output, stash entries, and CVE results before
+  injection, instead of using a fixed ResultsStore summary. Settings gained a
+  Context Catalog section controlling dynamic context, max snippets, source
+  inclusion, and CVE assist mode (`off`, current results, or semantic embedding
+  search with fallback). The settings persist locally and are wired to main chat
+  plus newly deployed agents.
 
 ## Known Risk Areas
 

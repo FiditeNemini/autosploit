@@ -77,7 +77,7 @@ injection with dynamic retrieval rather than reintroducing model-size guesses.
 
 Current context sources:
 
-- `ResultsStore.contextSummary()` via `ChatService.onContextUpdate`.
+- `ContextCatalogService.contextPacket(...)` via `ChatService.onContextUpdate`.
 - CVE full-text/CPE/severity lookup through `CVEService`.
 - CVE semantic search support exists inside `CVEService`, backed by stored
   embeddings when available.
@@ -85,16 +85,28 @@ Current context sources:
 - Active phase guidance comes from `PentestPhase`.
 - Active op, scope, findings, and stash are persisted through `DatabaseManager`.
 
+Implemented dynamic catalogue lane:
+
+- `ContextCatalogService` indexes parsed assets, findings, recent raw tool
+  output, stash items, and CVE results for the active chat turn.
+- The catalogue ranks items against the latest user prompt, active tab, current
+  phase, severity, and source type.
+- Only the configured top snippets are injected into the chat API request as a
+  system note. The full stash/results/raw output set is not force-fed.
+- The injected packet includes source labels such as `asset.port`, `finding`,
+  `tool.output`, `stash.raw`, and `cve` so the model can see provenance.
+- CVE assist is controlled by Settings: off, current visible CVE results, or
+  semantic embedding search. Semantic mode calls the local CVE embedder path
+  when available and falls back through `CVEService` when embeddings are absent.
+
 Required next catalog lane:
 
-- Build a durable catalogue for tools, CVEs, techniques, findings, assets,
-  commands, prior outputs, and model/runtime capabilities.
-- Store compact embeddings and structured metadata per catalogue item.
-- Let the model see a catalogue index and request specific slices through tools.
-- Retrieve dynamically by task, active tab, phase, target, recent outputs, and
-  explicit model/tool intent.
-- Preserve provenance so every injected item can show why it was selected.
-- Never force-feed the whole catalogue to every request.
+- Add a model-callable catalogue search tool so the model can request additional
+  slices after seeing the compact index.
+- Add durable embeddings for tools, techniques, findings, assets, commands,
+  prior outputs, and stash items, not only CVEs.
+- Store retrieval decisions with the chat turn for later audit.
+- Add visible "context used" inspection in the chat/tool panel.
 
 ## Tab Functions
 
@@ -191,6 +203,15 @@ Agents:
 
 - Multi-agent mode remains available.
 - Active agents inherit the same model-folder defaults and parser/cache policy.
+
+Context Catalog:
+
+- Dynamic context can be enabled or disabled.
+- User can choose max injected snippets.
+- User can include/exclude assets, findings, recent tool output, and stash.
+- CVE assist can be off, current-result only, or semantic embedding ranked.
+- These settings are stored in the local settings database and applied to main
+  chat plus newly deployed agents.
 
 CVE Database and Tools:
 
