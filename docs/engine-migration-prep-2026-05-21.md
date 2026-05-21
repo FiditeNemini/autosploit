@@ -371,6 +371,12 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   for final agentic behavior. Tightened chat scroll behavior with an explicit
   lock/unlock control: locked mode follows streamed output, user dragging pauses
   auto-scroll, and the "Latest/New output" control relocks to the newest message.
+- Checkpoint 53: Added `scripts/live-turn-harness.py`, a proof-driven mock model
+  harness for app-level live turns. It launches a deterministic OpenAI-compatible
+  streaming mock engine, connects the running app through QA server endpoints,
+  seeds context, verifies outbound dynamic-context/tool-schema payloads, consumes
+  streamed reasoning/content/usage metrics, and proves `search_cve` tool-call
+  behavior across autopilot, manual, and copilot approval modes.
 
 ## Known Risk Areas
 

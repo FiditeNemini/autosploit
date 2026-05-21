@@ -190,14 +190,25 @@ Automated no-model gates:
 - TestServer `/state`, `/messages`, `/results` smoke.
 - Context catalogue seeded-state smoke.
 - Chat scroll lock visual smoke.
+- `scripts/live-turn-harness.py` mock-engine proof:
+  - attaches a mock OpenAI-compatible stream endpoint;
+  - seeds session context through the QA server;
+  - proves outbound requests include the dynamic context packet and tools schema;
+  - proves streamed reasoning/content/usage metrics are consumed;
+  - proves `search_cve` tool calls execute under autopilot;
+  - proves manual mode converts tool calls into suggestions;
+  - proves copilot mode pauses for approval and executes after approval.
 
 Mock-model gates:
 
-- Streaming text with usage metrics.
-- Streaming reasoning with reasoning on and no reasoning with reasoning off.
-- Tool-call loop under manual/copilot/autopilot.
+- Streaming text with usage metrics. Covered by `scripts/live-turn-harness.py`.
+- Streaming reasoning with reasoning on. Covered by `scripts/live-turn-harness.py`.
+- No-reasoning request path still needs a second mock assertion.
+- Tool-call loop under manual/copilot/autopilot. Covered by
+  `scripts/live-turn-harness.py`.
 - Stop/cancel during stream and during tool execution.
-- Context packet observed in the outbound request body.
+- Context packet observed in the outbound request body. Covered by
+  `scripts/live-turn-harness.py`.
 
 Real-model gates:
 
