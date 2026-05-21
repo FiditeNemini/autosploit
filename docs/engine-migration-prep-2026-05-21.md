@@ -295,6 +295,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 32: Fixed the Python engine dependency contract by declaring
   `python-multipart`, added a `dev` test extra, locked engine dependencies with
   `uv.lock`, and proved the current engine suite with `22 passed`.
+- Checkpoint 33: Added registry-derived model family/cache-type metadata to
+  `/health` and `/v1/models`, parsed it in Swift, and displayed the effective
+  family/topology in Settings so MiniMax KV and Qwen hybrid/Mamba cache paths
+  are auditable without name guessing.
 
 ## Known Risk Areas
 
