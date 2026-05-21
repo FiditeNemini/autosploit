@@ -338,6 +338,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   `enable_thinking` and `chat_template_kwargs`, passed those through the
   launcher/server path, and covered the behavior with launcher and server
   regressions.
+- Checkpoint 46: Darkened remaining bright filled action controls, added darker
+  sheet presentation backgrounds/minimum sizing for key sheets, removed the CVE
+  sync emoji label, and visually checked onboarding, main, and Settings.
 
 ## Known Risk Areas
 
