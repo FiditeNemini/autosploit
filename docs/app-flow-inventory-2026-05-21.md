@@ -58,9 +58,17 @@ main session.
 `ChatService` owns the OpenAI-compatible chat loop:
 
 - Builds the system prompt with phase guidance, tool catalog, and context.
-- Injects a ResultsStore summary through `onContextUpdate`.
+- Injects a prompt-ranked context catalogue through `onContextUpdate`.
 - Sends streaming and non-streaming requests to the local engine.
 - Keeps reasoning content separate when the engine parser exposes it.
+- Reasoning can be toggled on/off from the chat header. Reasoning blocks expand
+  while streaming and collapse after completion unless the user manually toggles
+  the block.
+- Metrics show token/s, TTFT, prompt tokens, cached prompt tokens, and
+  completion tokens when the engine returns usage.
+- Chat scroll lock is explicit: locked mode follows the latest output, dragging
+  pauses auto-scroll, and the "Latest/New output" control relocks to the newest
+  message.
 - Parses `tool_calls` from the API response.
 - In manual mode, tools require explicit user approval.
 - In copilot/autopilot modes, the loop can execute approved tool calls up to

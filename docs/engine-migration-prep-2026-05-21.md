@@ -366,6 +366,11 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   inclusion, and CVE assist mode (`off`, current results, or semantic embedding
   search with fallback). The settings persist locally and are wired to main chat
   plus newly deployed agents.
+- Checkpoint 52: Added a whole-app system review matrix covering runtime/chat,
+  context, tool loop, every tab's button wiring, and the proof matrix required
+  for final agentic behavior. Tightened chat scroll behavior with an explicit
+  lock/unlock control: locked mode follows streamed output, user dragging pauses
+  auto-scroll, and the "Latest/New output" control relocks to the newest message.
 
 ## Known Risk Areas
 
