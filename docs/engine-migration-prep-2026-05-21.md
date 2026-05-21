@@ -273,6 +273,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 25: Updated Swift effective-config parsing and the Settings
   runtime summary so chat-template kwargs and custom-template state exposed by
   the engine are visible in the app.
+- Checkpoint 26: Added Swift polling/parsing for `/v1/cache/stats` and a
+  selectable Settings `Cache Runtime` panel covering TurboQuant, prompt/block
+  L2, SSM companion, and memory diagnostics.
 
 ## Known Risk Areas
 
