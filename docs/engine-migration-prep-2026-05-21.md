@@ -247,6 +247,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 17: Replaced bright native Settings/Onboarding switches and
   Settings sliders with dark custom controls, and converted Settings primary
   actions from filled blue blocks to darker stroked buttons.
+- Checkpoint 18: Tightened Settings row layout for the app minimum size by
+  giving labels a stable selectable column and controls a protected content
+  width so rows scroll instead of squishing.
 
 ## Known Risk Areas
 
