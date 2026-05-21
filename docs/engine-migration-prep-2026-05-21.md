@@ -266,6 +266,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 23: Added regression coverage proving non-streaming and streaming
   chat payloads expose separated reasoning through public `reasoning_content`
   while keeping the internal `reasoning` field out of serialized API output.
+- Checkpoint 24: Replaced remaining native Settings picker/radio controls for
+  model profile, parser selection, KV cache mode, and max agent count with a
+  dark selectable/copyable option grid that matches the squared Graphite Ops
+  theme and protects minimum layout width.
 
 ## Known Risk Areas
 
