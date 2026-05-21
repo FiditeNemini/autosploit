@@ -327,6 +327,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   `turboquant-q4/q8` and `tq-q4/q8` through launcher/server/CLI paths,
   normalizing scheduler bit mapping, and adding TurboQuant Q4/Q8 Settings
   options.
+- Checkpoint 43: Aligned Block L2 defaults with paged cache by enabling paged
+  cache in the Python launcher's default path, keeping the Swift Settings
+  default in sync, and adding a regression test for the default paged + Block
+  L2 topology.
 
 ## Known Risk Areas
 
