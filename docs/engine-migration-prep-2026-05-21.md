@@ -289,6 +289,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 30: Replaced the chat deploy-agent type menu and custom CVE
   severity picker with dark selectable controls, clearing the current native
   `Picker` scan under the SwiftUI `Views` tree.
+- Checkpoint 31: Removed emoji-heavy action labels and empty-state marks across
+  the main SwiftUI views, replacing them with plain text or SF Symbols while
+  preserving command/action behavior.
 
 ## Known Risk Areas
 
