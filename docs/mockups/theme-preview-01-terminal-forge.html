@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>exploitbot theme preview 01</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --bg: #070808;
+      --panel: #101111;
+      --panel-2: #151716;
+      --line: #2a2d2b;
+      --line-2: #3b403d;
+      --text: #eef0ec;
+      --muted: #9aa098;
+      --dim: #666d67;
+      --green: #46d782;
+      --amber: #d9aa48;
+      --red: #e2635d;
+      --blue: #63a9ff;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "SF Mono", "JetBrains Mono", Menlo, monospace;
+    }
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 13px;
+    }
+    .frame { height: 100vh; display: grid; grid-template-rows: 32px 1fr; }
+    .titlebar {
+      border-bottom: 1px solid var(--line);
+      background: #0c0d0d;
+      display: grid;
+      grid-template-columns: 160px 1fr 260px;
+      align-items: center;
+      padding: 0 12px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+    .lights { display: flex; gap: 7px; }
+    .light { width: 11px; height: 11px; border-radius: 50%; background: var(--line-2); }
+    .light:nth-child(1) { background: #e1574f; }
+    .light:nth-child(2) { background: #d4a23f; }
+    .light:nth-child(3) { background: #43bd72; }
+    .title { text-align: center; letter-spacing: .04em; }
+    .status { text-align: right; color: var(--green); }
+    .workspace {
+      display: grid;
+      grid-template-columns: 236px 1fr 386px;
+      min-height: 0;
+    }
+    aside, main, .chat { min-height: 0; }
+    aside {
+      background: #0b0c0c;
+      border-right: 1px solid var(--line);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+    .brand {
+      padding: 18px 16px 14px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brandmark { font-family: var(--mono); font-weight: 700; letter-spacing: .02em; }
+    .brandmark span { color: var(--muted); font-weight: 400; }
+    .square-btn {
+      width: 26px; height: 26px; border: 1px solid var(--line-2); background: #101211; color: var(--text);
+      display: grid; place-items: center; border-radius: 3px;
+    }
+    .nav { padding: 12px 8px; overflow: auto; }
+    .nav-label { padding: 10px 8px 7px; font: 10px var(--mono); color: var(--dim); text-transform: uppercase; letter-spacing: .12em; }
+    .op {
+      display: grid; grid-template-columns: 8px 1fr auto; gap: 10px; align-items: center;
+      padding: 9px 8px; border: 1px solid transparent; border-radius: 3px; color: var(--muted);
+    }
+    .op.active { background: var(--panel); border-color: var(--line); color: var(--text); }
+    .dot { width: 7px; height: 7px; background: var(--dim); }
+    .dot.live { background: var(--green); }
+    .dot.warn { background: var(--amber); }
+    .op small { font-family: var(--mono); color: var(--dim); }
+    .side-foot { border-top: 1px solid var(--line); padding: 12px 14px; color: var(--muted); font-family: var(--mono); font-size: 11px; }
+    main { display: grid; grid-template-rows: 46px 42px 1fr 188px; background: #090a0a; }
+    .tabs, .phase, .activity-head { border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 6px; padding: 0 12px; }
+    .tab {
+      height: 28px; padding: 0 11px; display: flex; align-items: center; border: 1px solid transparent;
+      border-radius: 3px; color: var(--muted); font-weight: 600;
+    }
+    .tab.active { color: var(--text); background: var(--panel); border-color: var(--line-2); }
+    .phase { justify-content: space-between; color: var(--muted); font-family: var(--mono); font-size: 11px; }
+    .meter { width: 210px; height: 8px; background: #151716; border: 1px solid var(--line); }
+    .meter div { width: 58%; height: 100%; background: linear-gradient(90deg, var(--green), var(--amber)); }
+    .content { padding: 14px; overflow: auto; display: grid; grid-template-columns: 1.2fr .8fr; gap: 12px; }
+    .panel {
+      background: var(--panel); border: 1px solid var(--line); border-radius: 4px; min-height: 0;
+    }
+    .panel h2 {
+      margin: 0; padding: 11px 12px; border-bottom: 1px solid var(--line); font-size: 12px;
+      text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-family: var(--mono);
+    }
+    .table { display: grid; }
+    .row { display: grid; grid-template-columns: 1fr 88px 78px; gap: 10px; padding: 10px 12px; border-bottom: 1px solid #1d201e; align-items: center; }
+    .host { font-family: var(--mono); }
+    .pill { border: 1px solid var(--line-2); padding: 3px 6px; border-radius: 2px; color: var(--muted); text-align: center; font-family: var(--mono); font-size: 10px; }
+    .sev { color: var(--amber); }
+    .terminal { padding: 12px; font-family: var(--mono); line-height: 1.65; color: #cfd8ce; }
+    .terminal b { color: var(--green); font-weight: 500; }
+    .activity { border-top: 1px solid var(--line); background: #0c0d0d; display: grid; grid-template-rows: 34px 1fr; }
+    .activity-head { border-bottom: 1px solid var(--line); font-family: var(--mono); color: var(--muted); justify-content: space-between; }
+    .logs { padding: 10px 12px; font-family: var(--mono); color: var(--muted); line-height: 1.7; overflow: auto; }
+    .chat { border-left: 1px solid var(--line); background: #0b0c0c; display: grid; grid-template-rows: 46px 1fr 86px; }
+    .chat-head { border-bottom: 1px solid var(--line); padding: 0 14px; display: flex; align-items: center; justify-content: space-between; }
+    .agent { font-weight: 700; }
+    .model { font-family: var(--mono); color: var(--green); font-size: 11px; }
+    .messages { padding: 14px; overflow: auto; display: flex; flex-direction: column; gap: 12px; }
+    .msg { border: 1px solid var(--line); background: var(--panel); padding: 11px 12px; border-radius: 4px; line-height: 1.5; }
+    .msg.user { background: #111716; border-color: #264337; }
+    .msg .by { font-family: var(--mono); color: var(--dim); font-size: 10px; margin-bottom: 5px; }
+    .composer { border-top: 1px solid var(--line); padding: 12px; display: grid; grid-template-columns: 1fr 34px; gap: 8px; }
+    .input { border: 1px solid var(--line-2); background: #080909; padding: 10px; color: var(--muted); font-family: var(--mono); border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <div class="titlebar">
+      <div class="lights"><div class="light"></div><div class="light"></div><div class="light"></div></div>
+      <div class="title">TERMINAL FORGE / THEME PACK 01</div>
+      <div class="status">ENGINE ONLINE · MINIMAX JANGTQ_K</div>
+    </div>
+    <div class="workspace">
+      <aside>
+        <div class="brand"><div class="brandmark">exploit<span>bot</span></div><button class="square-btn">+</button></div>
+        <div class="nav">
+          <div class="nav-label">Operations</div>
+          <div class="op active"><div class="dot live"></div><div>acme perimeter</div><small>LIVE</small></div>
+          <div class="op"><div class="dot warn"></div><div>staging audit</div><small>HOLD</small></div>
+          <div class="op"><div class="dot"></div><div>vpn review</div><small>DONE</small></div>
+          <div class="nav-label">Assets</div>
+          <div class="op"><div class="dot live"></div><div>targets</div><small>128</small></div>
+          <div class="op"><div class="dot warn"></div><div>findings</div><small>7</small></div>
+          <div class="op"><div class="dot"></div><div>stash</div><small>24</small></div>
+        </div>
+        <div class="side-foot">127.0.0.1:8005<br>cache: paged+tq+l2</div>
+      </aside>
+      <main>
+        <div class="tabs"><div class="tab active">Recon</div><div class="tab">Web</div><div class="tab">Network</div><div class="tab">Exploit</div><div class="tab">Report</div></div>
+        <div class="phase"><span>PHASE 02 / SERVICE ENUMERATION</span><div class="meter"><div></div></div><span>18 TOOLS · 7 FINDINGS</span></div>
+        <div class="content">
+          <section class="panel">
+            <h2>Live Target Surface</h2>
+            <div class="table">
+              <div class="row"><div class="host">api.acme.test</div><div class="pill">443/tcp</div><div class="pill sev">HIGH</div></div>
+              <div class="row"><div class="host">vpn.acme.test</div><div class="pill">500/udp</div><div class="pill">INFO</div></div>
+              <div class="row"><div class="host">dev.acme.test</div><div class="pill">8080/tcp</div><div class="pill sev">MED</div></div>
+              <div class="row"><div class="host">cdn.acme.test</div><div class="pill">443/tcp</div><div class="pill">LOW</div></div>
+            </div>
+          </section>
+          <section class="panel">
+            <h2>Command Stream</h2>
+            <div class="terminal"><b>$</b> nuclei -l live.txt -severity high<br><b>+</b> CVE-2024-34102 match<br><b>$</b> httpx -tech-detect<br><b>+</b> nginx, php-fpm, grafana<br><b>$</b> sqlmap -r request.txt --batch</div>
+          </section>
+        </div>
+        <div class="activity">
+          <div class="activity-head"><span>ACTIVITY FEED</span><span>42ms scheduler tick</span></div>
+          <div class="logs">02:41:18 prefix hit: 768 tokens<br>02:41:19 tool approved: nuclei<br>02:41:24 finding promoted: unauthenticated dashboard<br>02:41:31 l2 write: 12 blocks / tq encoded</div>
+        </div>
+      </main>
+      <section class="chat">
+        <div class="chat-head"><div class="agent">operator copilot</div><div class="model">qwen hybrid · reasoning on</div></div>
+        <div class="messages">
+          <div class="msg user"><div class="by">YOU</div>Probe the high-signal hosts first. Keep the scan tight.</div>
+          <div class="msg"><div class="by">ENGINE</div>I found one exposed Grafana path and a likely stale API gateway. I queued nuclei with high severity templates only and held exploit attempts for approval.</div>
+          <div class="msg"><div class="by">TOOL CALL</div>run_shell {"cmd":"nuclei -l live.txt -severity high"}</div>
+        </div>
+        <div class="composer"><div class="input">approve next tool or type instruction...</div><button class="square-btn">↵</button></div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

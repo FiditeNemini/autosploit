@@ -1,0 +1,213 @@
+# ExploitBot vMLX Engine Migration Prep — 2026-05-21
+
+## Source Of Truth
+
+- ExploitBot checkout: `/Users/eric/exploitbot`
+- Fresh vMLX clone for import comparison: `/tmp/exploitbot-vmlx-latest`
+- vMLX upstream: `jjang-ai/vmlx`
+- Fresh clone commit: `f2b42ed778ae9aedb47a5f7b269e19485e3173f2`
+- ExploitBot embedded engine path: `ExploitBotEngine/vmlx_engine`
+
+The current ExploitBot copy is a stripped engine snapshot. The current vMLX engine has newer cache, loader, reasoning, parser, native-MTP, JANG/JANGTQ, and runtime patch surfaces. The migration should copy only runtime files needed by ExploitBot's local Python engine and keep app-irrelevant surfaces out.
+
+## Keep Out Of ExploitBot For Now
+
+- Electron panel code
+- vMLX distributed mesh code
+- MCP server/client code
+- Gradio apps
+- image generation, reranking, embeddings endpoints
+- audio/TTS/STT paths
+- broad release tooling and benchmarks except focused smoke scripts
+
+These can be reintroduced later only if the app has a concrete workflow for them.
+
+## Import Lanes
+
+### Lane 1: Core Server And Engine
+
+Bring current versions of:
+
+- `vmlx_engine/server.py`
+- `vmlx_engine/cli.py`
+- `vmlx_engine/request.py`
+- `vmlx_engine/scheduler.py`
+- `vmlx_engine/engine/`
+- `vmlx_engine/engine_core.py`
+- `vmlx_engine/model_config_registry.py`
+- `vmlx_engine/model_configs.py`
+- `vmlx_engine/model_registry.py`
+- `vmlx_engine/model_runner.py`
+- `vmlx_engine/output_collector.py`
+- `vmlx_engine/sampling.py`
+- `vmlx_engine/logprobs.py`
+- `vmlx_engine/errors.py`
+
+ExploitBot-specific launch behavior should stay in `ExploitBotEngine/launch.py`: localhost-only default, PID file, and narrow CLI surface.
+
+### Lane 2: JANG And JANGTQ Loading
+
+Bring current versions of:
+
+- `vmlx_engine/loaders/`
+- `vmlx_engine/models/codebook.py`
+- `vmlx_engine/models/codebook_expert_loader.py`
+- `vmlx_engine/models/codebook_moe_integration.py`
+- `vmlx_engine/models/flash_moe_integration.py`
+- `vmlx_engine/models/zaya.py`
+- `vmlx_engine/models/zaya1_vl.py` only if Qwen/ZAYA VL support is explicitly kept
+- `vmlx_engine/cache/codebook_cache.py`
+- `vmlx_engine/cache_record_validator.py`
+- `vmlx_engine/metal/`
+- `vmlx_engine/runtime_patches/`
+- `vmlx_engine/utils/jang_loader.py`
+- `vmlx_engine/utils/quant_shape_inference.py`
+- `vmlx_engine/utils/head_dim_detection.py`
+- `vmlx_engine/utils/flash_moe_loader.py`
+- `vmlx_engine/utils/tokenizer.py`
+- `vmlx_engine/utils/chat_templates.py`
+- `vmlx_engine/utils/chat_template_kwargs.py`
+- `vmlx_engine/utils/multi_eos.py`
+
+The goal is load support for JANG affine and JANGTQ/JANGTQ_K artifacts, not a generic all-vMLX feature import.
+
+### Lane 3: Prefix, Paged, L2 Disk, And TurboQuant KV
+
+Bring current versions of:
+
+- `vmlx_engine/prefix_cache.py`
+- `vmlx_engine/paged_cache.py`
+- `vmlx_engine/memory_cache.py`
+- `vmlx_engine/block_disk_store.py`
+- `vmlx_engine/disk_cache.py`
+- `vmlx_engine/tq_disk_store.py`
+- `vmlx_engine/utils/hybrid_tq_cache.py`
+- `vmlx_engine/utils/cache_types.py`
+- `vmlx_engine/utils/mamba_cache.py`
+- `vmlx_engine/utils/memory_limits.py`
+- `vmlx_engine/utils/ssm_companion_cache.py`
+- `vmlx_engine/utils/ssm_companion_disk_store.py`
+- `vmlx_engine/utils/single_batch_generator.py`
+- `vmlx_engine/utils/dsv4_batch_generator.py`
+
+MiniMax is KV-only topology, so its target path is full KV cache attention with prefix cache, paged cache, block L2, and TurboQuant encode/decode at storage boundaries. Qwen3.5/Qwen3.6 hybrid SSM must require matching KV pages plus companion SSM state; KV-only hits for hybrid models must be rejected or downgraded to a shorter complete checkpoint.
+
+### Lane 4: Reasoning And Tool Parsers
+
+Bring current versions of:
+
+- `vmlx_engine/reasoning/`
+- `vmlx_engine/tool_parsers/`
+- `vmlx_engine/api/`
+
+Reasoning parser targets to preserve: Qwen3, DeepSeek-R1, MiniMax M2, Mistral, GPT-OSS/GLM, Gemma4, and generic think tags.
+
+Tool parser targets to preserve: Qwen, MiniMax, DeepSeek, DSML, Hermes, Llama, Mistral, Kimi, Hunyuan, ZAYA, Nemotron, GLM, Granite, Functionary, xLAM, Step3.5, Gemma3/4, and auto routing.
+
+Autodetection requirements:
+
+- The selected model folder is the source of truth for parser defaults.
+- Parser lookup order:
+  1. `jang_config.json` capability fields, when present.
+  2. `config.json` / nested `text_config` architecture and `model_type`.
+  3. tokenizer/chat-template hints.
+  4. family registry fallback.
+  5. explicit CLI/app override wins last.
+- The API must expose the effective parser choices in `/health` and `/v1/models`
+  so the Swift app can show what is actually active.
+- Chat completions must use the effective reasoning parser for streaming and
+  non-streaming responses. Thinking/reasoning text must be separated from
+  visible content when the parser supports it.
+- Tool calls must use the effective tool parser for streaming and non-streaming
+  responses. Parsed tool calls must be returned through the OpenAI-compatible
+  `tool_calls` API shape and must not be left as raw model text when a parser
+  successfully extracts them.
+
+### Lane 4B: Generation Config Loading And Application
+
+Bring or preserve support for reading generation defaults from the selected
+model folder:
+
+- `generation_config.json`
+- tokenizer-level chat-template defaults where applicable
+- `jang_config.json` generation/capability fields where present
+- model config defaults from `model_config_registry.py`
+
+Application requirements:
+
+- Load generation config during model startup, not lazily after the first
+  request.
+- Merge order:
+  1. engine hard safety defaults
+  2. model family defaults
+  3. model-folder `generation_config.json`
+  4. JANG capability defaults
+  5. app/server CLI defaults
+  6. per-request API fields
+- Apply effective values to actual sampling/generation, including
+  `temperature`, `top_p`, `top_k`, `min_p`, `repetition_penalty`, stop/eos
+  tokens, max token defaults, and thinking/template kwargs when supported.
+- Preserve per-request override behavior. A request that explicitly sets
+  `temperature` or `max_tokens` must override folder defaults for that request
+  only.
+- Include the effective generation config, or at least a stable summary, in
+  `/health` and `/v1/models` for debugging.
+- Add a smoke test using a temporary model folder with `generation_config.json`
+  to prove defaults are picked up and request overrides win.
+
+### Lane 5: Native MTP Boundary
+
+Bring only if needed for Qwen MTP proof:
+
+- `vmlx_engine/native_mtp.py`
+- `vmlx_engine/native_mtp_policy_suite.py`
+- `vmlx_engine/patches/mlx_lm_mtp/`
+- `vmlx_engine/patches/mlx_vlm_mtp/`
+
+Do not enable MTP from metadata alone. Runtime activation must require config support, tensor evidence, loader support, and a real generation smoke.
+
+## Correctness Gates
+
+1. `python3 -m compileall -q ExploitBotEngine`
+2. Import smoke: `PYTHONPATH=ExploitBotEngine python3 -c 'from vmlx_engine.server import app; print(len(app.routes))'`
+3. CLI smoke: `python3 ExploitBotEngine/launch.py --help`
+4. Server no-model health smoke if supported by the imported server.
+5. MiniMax JANGTQ real generation smoke with:
+   - prefix cache enabled
+   - paged cache enabled
+   - block L2 enabled
+   - TurboQuant KV active
+   - usage reporting cached tokens and cache detail
+6. Qwen hybrid SSM smoke with:
+   - first prompt cold
+   - second prompt prefix hit only if SSM companion state exists
+   - missing companion state rejected as KV-only unsafe
+   - idle rederive queue counters visible
+7. Tool-call smoke against a harmless local tool schema.
+8. Reasoning parser smoke with thinking content separated from visible content.
+9. Parser autodetect smoke for at least MiniMax and Qwen-family folders:
+   `/health` reports the effective reasoning and tool parsers, and chat
+   responses use them.
+10. Generation config smoke with a temp model folder:
+   folder defaults are loaded at startup, used by a request that omits those
+   fields, and overridden by a request that supplies explicit values.
+
+## Known Risk Areas
+
+- ExploitBot currently has a custom stripped server contract. Replacing `server.py` wholesale may expose endpoints the app does not need.
+- vMLX cache code has schema and runtime fingerprinting. Cache schema mismatches must invalidate old L2 entries rather than replaying them.
+- Qwen hybrid SSM cache restore is correctness-sensitive. Do not trim recurrent state by slicing KV arrays.
+- MiniMax public MTP is not available from released weights; do not represent MiniMax MTP as supported unless tensor evidence exists.
+- JANGTQ2 can be quality-limited on some families. The app UI should label it as a memory tier rather than default premium tier.
+
+## Next Implementation Shape
+
+Do this in small commits:
+
+1. Copy/import core support modules and make imports compile.
+2. Restore ExploitBot launch/server contract.
+3. Wire JANG/JANGTQ loaders.
+4. Wire cache stack and health fields.
+5. Wire parsers and API streaming.
+6. Run real MiniMax JANGTQ and Qwen hybrid cache proofs.
+7. Only then revise Swift UI around the chosen theme.

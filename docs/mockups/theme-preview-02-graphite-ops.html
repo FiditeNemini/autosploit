@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>exploitbot theme preview 02</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --bg: #080908;
+      --paper: #111411;
+      --ink: #eceadd;
+      --muted: #a8afa5;
+      --line: #2d302b;
+      --line-2: #464b42;
+      --rail: #171a16;
+      --black: #070807;
+      --green: #1f8b56;
+      --red: #b8473b;
+      --blue: #265f8f;
+      --amber: #9a6b1f;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "SF Mono", "JetBrains Mono", Menlo, monospace;
+    }
+    body { margin: 0; height: 100vh; overflow: hidden; background: var(--bg); color: var(--ink); font: 13px var(--font); }
+    .frame { height: 100vh; display: grid; grid-template-columns: 228px 1fr; }
+    aside { background: var(--black); color: #f3f0e7; display: grid; grid-template-rows: 72px 1fr 124px; }
+    .brand { padding: 20px 18px; border-bottom: 1px solid #313734; font: 700 18px var(--mono); }
+    .brand span { color: #a7ada8; font-weight: 400; }
+    .nav { padding: 14px 10px; }
+    .nav-title { color: #777f78; font: 10px var(--mono); letter-spacing: .14em; text-transform: uppercase; padding: 10px 8px; }
+    .item { display: grid; grid-template-columns: 18px 1fr auto; gap: 8px; align-items: center; padding: 9px 8px; border-radius: 2px; color: #c8cec7; }
+    .item.active { background: #e2dccf; color: var(--black); }
+    .icon { width: 14px; height: 14px; border: 1.5px solid currentColor; display: inline-block; }
+    .item small { font: 10px var(--mono); color: currentColor; opacity: .65; }
+    .engine-card { margin: 10px; padding: 12px; border: 1px solid #343a37; background: #171b19; color: #c8cec7; font-family: var(--mono); line-height: 1.65; }
+    .shell { color: #57c181; }
+    .work { display: grid; grid-template-rows: 44px 1fr; min-width: 0; }
+    .topbar { border-bottom: 1px solid var(--line); background: var(--paper); display: grid; grid-template-columns: 1fr auto; align-items: center; padding: 0 18px; }
+    .crumb { font-weight: 700; }
+    .actions { display: flex; gap: 8px; }
+    button { height: 28px; border: 1px solid var(--line-2); background: #161a16; color: var(--ink); border-radius: 2px; padding: 0 10px; font-weight: 700; }
+    button.primary { background: #e2dccf; color: var(--black); border-color: #e2dccf; }
+    .layout { display: grid; grid-template-columns: 1fr 384px; min-height: 0; }
+    main { min-width: 0; display: grid; grid-template-rows: 56px 1fr 170px; }
+    .tabs { border-bottom: 1px solid var(--line); background: var(--rail); display: flex; align-items: end; padding: 0 16px; gap: 4px; }
+    .tab { height: 34px; padding: 0 13px; display: flex; align-items: center; border: 1px solid transparent; border-bottom: none; font-weight: 700; color: var(--muted); }
+    .tab.active { background: var(--paper); border-color: var(--line); color: var(--ink); }
+    .canvas { min-height: 0; overflow: auto; padding: 16px; display: grid; grid-template-columns: 1fr 300px; gap: 14px; }
+    .panel { background: var(--paper); border: 1px solid var(--line); border-radius: 2px; }
+    .panel h2 { margin: 0; border-bottom: 1px solid var(--line); padding: 12px 14px; font-size: 13px; }
+    .finding { display: grid; grid-template-columns: 52px 1fr 88px; gap: 12px; padding: 13px 14px; border-bottom: 1px solid var(--line); align-items: center; }
+    .score { height: 34px; border: 1px solid var(--line-2); display: grid; place-items: center; font: 700 13px var(--mono); color: var(--red); }
+    .finding b { display: block; margin-bottom: 3px; }
+    .finding p { margin: 0; color: var(--muted); font-size: 12px; }
+    .tag { border: 1px solid var(--line-2); padding: 4px 6px; text-align: center; font: 10px var(--mono); color: var(--muted); }
+    .metric-grid { padding: 12px; display: grid; gap: 10px; }
+    .metric { border: 1px solid var(--line); padding: 10px; background: #151914; }
+    .metric .num { font: 700 20px var(--mono); }
+    .metric .lbl { color: var(--muted); font-size: 11px; margin-top: 3px; }
+    .bottom { border-top: 1px solid var(--line); background: var(--paper); display: grid; grid-template-rows: 34px 1fr; }
+    .bottom-head { display: flex; align-items: center; justify-content: space-between; padding: 0 14px; border-bottom: 1px solid var(--line); font: 11px var(--mono); color: var(--muted); }
+    .timeline { padding: 11px 14px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .event { border-left: 3px solid var(--green); padding-left: 9px; color: var(--muted); line-height: 1.45; }
+    .event b { color: var(--ink); display: block; }
+    .chat { border-left: 1px solid var(--line); background: #0c0e0c; display: grid; grid-template-rows: 52px 1fr 88px; min-height: 0; }
+    .chat-head { border-bottom: 1px solid var(--line); padding: 0 14px; display: flex; align-items: center; justify-content: space-between; }
+    .mode { font: 10px var(--mono); color: var(--blue); }
+    .messages { padding: 14px; display: flex; flex-direction: column; gap: 10px; overflow: auto; }
+    .msg { border: 1px solid var(--line); background: var(--paper); padding: 12px; line-height: 1.5; border-radius: 2px; }
+    .msg.tool { border-left: 4px solid var(--black); font-family: var(--mono); font-size: 12px; }
+    .composer { border-top: 1px solid var(--line); padding: 12px; display: grid; grid-template-columns: 1fr 34px; gap: 8px; }
+    .input { border: 1px solid var(--line-2); background: var(--paper); color: var(--muted); padding: 10px; font-family: var(--mono); }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <aside>
+      <div class="brand">exploit<span>bot</span></div>
+      <div class="nav">
+        <div class="nav-title">Workspace</div>
+        <div class="item active"><span class="icon"></span><span>Command</span><small>⌘1</small></div>
+        <div class="item"><span class="icon"></span><span>Targets</span><small>128</small></div>
+        <div class="item"><span class="icon"></span><span>Evidence</span><small>44</small></div>
+        <div class="item"><span class="icon"></span><span>Reports</span><small>3</small></div>
+        <div class="nav-title">Operations</div>
+        <div class="item"><span class="icon"></span><span>Acme perimeter</span><small>live</small></div>
+        <div class="item"><span class="icon"></span><span>Staging audit</span><small>hold</small></div>
+      </div>
+      <div class="engine-card"><span class="shell">engine</span> qwen hybrid<br><span class="shell">cache</span> prefix + ssm l2<br><span class="shell">tools</span> 39 installed</div>
+    </aside>
+    <section class="work">
+      <div class="topbar"><div class="crumb">Acme perimeter / authorized scope</div><div class="actions"><button>Hold</button><button class="primary">Approve</button></div></div>
+      <div class="layout">
+        <main>
+          <div class="tabs"><div class="tab active">Findings</div><div class="tab">Recon</div><div class="tab">Web</div><div class="tab">Network</div><div class="tab">Report</div></div>
+          <div class="canvas">
+            <section class="panel">
+              <h2>Prioritized Findings</h2>
+              <div class="finding"><div class="score">8.6</div><div><b>Exposed Grafana admin route</b><p>Unauthenticated panel found on dev host with plugin inventory exposed.</p></div><div class="tag">HIGH</div></div>
+              <div class="finding"><div class="score">7.4</div><div><b>Legacy gateway path traversal</b><p>Template match requires manual confirmation before exploitation.</p></div><div class="tag">REVIEW</div></div>
+              <div class="finding"><div class="score">5.1</div><div><b>Verbose TLS service metadata</b><p>Certificate SANs reveal internal hostnames and staging naming scheme.</p></div><div class="tag">MED</div></div>
+            </section>
+            <section class="panel">
+              <h2>Run State</h2>
+              <div class="metric-grid">
+                <div class="metric"><div class="num">34.8</div><div class="lbl">decode tok/s</div></div>
+                <div class="metric"><div class="num">1,311</div><div class="lbl">cached prompt tokens</div></div>
+                <div class="metric"><div class="num">12</div><div class="lbl">L2 blocks written</div></div>
+                <div class="metric"><div class="num">0</div><div class="lbl">scope violations</div></div>
+              </div>
+            </section>
+          </div>
+          <div class="bottom">
+            <div class="bottom-head"><span>OPERATION TIMELINE</span><span>copilot mode · manual approval</span></div>
+            <div class="timeline">
+              <div class="event"><b>Subdomain sweep</b>128 assets collected</div>
+              <div class="event"><b>HTTP probe</b>42 live services</div>
+              <div class="event"><b>Template scan</b>7 review items</div>
+              <div class="event"><b>Report draft</b>3 findings ready</div>
+            </div>
+          </div>
+        </main>
+        <section class="chat">
+          <div class="chat-head"><b>Decision Queue</b><span class="mode">COPILOT</span></div>
+          <div class="messages">
+            <div class="msg">The Grafana host has enough evidence for a finding. I recommend confirming auth bypass manually before running exploit modules.</div>
+            <div class="msg tool">queued: nuclei -id CVE-2024-34102 -target dev.acme.test</div>
+            <div class="msg">I will keep scans inside the imported CIDR and domain scope.</div>
+          </div>
+          <div class="composer"><div class="input">type approval, correction, or next target...</div><button class="primary">↵</button></div>
+        </section>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

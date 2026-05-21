@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>exploitbot theme preview 03</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --bg: #050608;
+      --surface: #0d1014;
+      --surface-2: #141922;
+      --surface-3: #1a202b;
+      --line: #252d39;
+      --line-2: #354153;
+      --text: #edf2f8;
+      --muted: #9aa7b8;
+      --dim: #5e6a7a;
+      --cyan: #39c7d3;
+      --lime: #9ad95b;
+      --red: #ff6b61;
+      --amber: #d9b45b;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "SF Mono", "JetBrains Mono", Menlo, monospace;
+    }
+    body { margin: 0; height: 100vh; overflow: hidden; background: var(--bg); color: var(--text); font: 13px var(--font); }
+    .app { height: 100vh; display: grid; grid-template-rows: 34px 1fr; }
+    .bar { background: #080a0e; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 240px 1fr 320px; align-items: center; padding: 0 14px; }
+    .brand { font: 700 13px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .brand span { color: var(--cyan); }
+    .center { text-align: center; color: var(--muted); font: 11px var(--mono); }
+    .right { text-align: right; color: var(--lime); font: 11px var(--mono); }
+    .shell { display: grid; grid-template-columns: 72px 220px 1fr 378px; min-height: 0; }
+    .rail { background: #080a0e; border-right: 1px solid var(--line); padding: 10px 8px; display: flex; flex-direction: column; gap: 8px; }
+    .railbtn { width: 54px; height: 46px; border: 1px solid var(--line); background: var(--surface); display: grid; place-items: center; color: var(--muted); border-radius: 4px; font: 10px var(--mono); }
+    .railbtn.active { border-color: var(--cyan); color: var(--cyan); background: #0e1820; }
+    aside { background: var(--surface); border-right: 1px solid var(--line); display: grid; grid-template-rows: auto 1fr auto; }
+    .side-head { padding: 16px 14px; border-bottom: 1px solid var(--line); }
+    .side-head b { display: block; margin-bottom: 4px; }
+    .side-head span { color: var(--muted); font: 11px var(--mono); }
+    .scope { padding: 12px 10px; overflow: auto; }
+    .scope-title { color: var(--dim); font: 10px var(--mono); letter-spacing: .12em; text-transform: uppercase; padding: 10px 4px; }
+    .scope-row { padding: 9px 8px; border: 1px solid transparent; display: flex; justify-content: space-between; gap: 8px; color: var(--muted); border-radius: 4px; }
+    .scope-row.active { background: var(--surface-2); border-color: var(--line); color: var(--text); }
+    .scope-row code { color: var(--dim); font-family: var(--mono); font-size: 10px; }
+    .health { border-top: 1px solid var(--line); padding: 12px 14px; display: grid; gap: 8px; }
+    .health-line { display: flex; justify-content: space-between; font: 11px var(--mono); color: var(--muted); }
+    .health-line strong { color: var(--lime); font-weight: 500; }
+    main { min-width: 0; display: grid; grid-template-rows: 48px 1fr 186px; }
+    .tabs { display: flex; align-items: center; gap: 8px; padding: 0 14px; border-bottom: 1px solid var(--line); background: #090c10; }
+    .tab { height: 30px; padding: 0 12px; display: flex; align-items: center; border: 1px solid var(--line); color: var(--muted); border-radius: 4px; font-weight: 700; }
+    .tab.active { color: var(--text); border-color: var(--cyan); background: #0e1820; }
+    .stage { min-height: 0; overflow: auto; padding: 14px; display: grid; grid-template-columns: 1fr 330px; grid-template-rows: 1fr 1fr; gap: 12px; }
+    .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 5px; min-height: 0; overflow: hidden; }
+    .panel.wide { grid-row: span 2; }
+    .panel h2 { margin: 0; padding: 11px 12px; border-bottom: 1px solid var(--line); font: 700 11px var(--mono); color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+    .matrix { padding: 12px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .tile { border: 1px solid var(--line); background: var(--surface-2); padding: 12px; min-height: 88px; border-radius: 4px; }
+    .tile .num { font: 700 24px var(--mono); color: var(--text); }
+    .tile .label { color: var(--muted); margin-top: 6px; }
+    .tile.hot { border-color: #5a4430; }
+    .tile.hot .num { color: var(--amber); }
+    .map { padding: 12px; font-family: var(--mono); color: var(--muted); line-height: 1.75; }
+    .map b { color: var(--cyan); font-weight: 500; }
+    .queue { display: grid; }
+    .qrow { display: grid; grid-template-columns: 90px 1fr 74px; gap: 10px; align-items: center; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+    .qrow code { color: var(--cyan); font-family: var(--mono); }
+    .badge { border: 1px solid var(--line-2); color: var(--muted); padding: 4px 6px; border-radius: 3px; text-align: center; font: 10px var(--mono); }
+    .terminal { border-top: 1px solid var(--line); background: #07090c; display: grid; grid-template-rows: 34px 1fr; }
+    .term-head { border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; padding: 0 12px; font: 11px var(--mono); color: var(--muted); }
+    .term-body { padding: 10px 12px; font: 12px/1.65 var(--mono); color: #b9c4d1; overflow: auto; }
+    .term-body span { color: var(--lime); }
+    .chat { border-left: 1px solid var(--line); background: #080a0e; display: grid; grid-template-rows: 52px 1fr 92px; min-height: 0; }
+    .chat-head { border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; padding: 0 14px; }
+    .chat-head b { font-size: 14px; }
+    .chip { border: 1px solid var(--line-2); color: var(--cyan); padding: 4px 7px; border-radius: 3px; font: 10px var(--mono); }
+    .msgs { padding: 14px; overflow: auto; display: flex; flex-direction: column; gap: 10px; }
+    .msg { border: 1px solid var(--line); background: var(--surface); border-radius: 5px; padding: 12px; line-height: 1.5; }
+    .msg .meta { color: var(--dim); font: 10px var(--mono); margin-bottom: 6px; }
+    .msg.call { border-color: #2f5660; background: #0b1419; }
+    .compose { border-top: 1px solid var(--line); padding: 12px; display: grid; grid-template-columns: 1fr 36px; gap: 8px; }
+    .input { border: 1px solid var(--line-2); background: var(--surface); color: var(--muted); border-radius: 4px; padding: 10px; font-family: var(--mono); }
+    .send { border: 1px solid var(--cyan); background: #0e1820; color: var(--cyan); border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="bar">
+      <div class="brand">exploit<span>bot</span></div>
+      <div class="center">BLACKSITE PRO / THEME PACK 03</div>
+      <div class="right">PREFIX HIT · SSM COMPANION READY</div>
+    </div>
+    <div class="shell">
+      <nav class="rail">
+        <div class="railbtn active">OPS</div><div class="railbtn">NET</div><div class="railbtn">WEB</div><div class="railbtn">CVEs</div><div class="railbtn">LOG</div>
+      </nav>
+      <aside>
+        <div class="side-head"><b>Acme perimeter</b><span>authorized / copilot</span></div>
+        <div class="scope">
+          <div class="scope-title">Scope</div>
+          <div class="scope-row active"><span>acme.test</span><code>root</code></div>
+          <div class="scope-row"><span>10.14.0.0/16</span><code>cidr</code></div>
+          <div class="scope-row"><span>staging.acme.test</span><code>host</code></div>
+          <div class="scope-title">Agents</div>
+          <div class="scope-row"><span>recon lead</span><code>run</code></div>
+          <div class="scope-row"><span>web analyst</span><code>idle</code></div>
+          <div class="scope-row"><span>reporter</span><code>idle</code></div>
+        </div>
+        <div class="health">
+          <div class="health-line"><span>model</span><strong>qwen3.5 hybrid</strong></div>
+          <div class="health-line"><span>cache</span><strong>paged+ssm+l2</strong></div>
+          <div class="health-line"><span>decode</span><strong>52.3 tok/s</strong></div>
+        </div>
+      </aside>
+      <main>
+        <div class="tabs"><div class="tab active">Overview</div><div class="tab">Recon</div><div class="tab">Exploit</div><div class="tab">Evidence</div><div class="tab">Report</div></div>
+        <div class="stage">
+          <section class="panel wide">
+            <h2>Operation Matrix</h2>
+            <div class="matrix">
+              <div class="tile"><div class="num">128</div><div class="label">targets</div></div>
+              <div class="tile"><div class="num">42</div><div class="label">live services</div></div>
+              <div class="tile hot"><div class="num">7</div><div class="label">findings</div></div>
+              <div class="tile"><div class="num">24</div><div class="label">stash items</div></div>
+              <div class="tile"><div class="num">5</div><div class="label">cache hits</div></div>
+              <div class="tile"><div class="num">0</div><div class="label">scope blocks</div></div>
+            </div>
+            <div class="map"><b>api</b> → auth gateway → grafana panel → plugin inventory<br><b>vpn</b> → ike probe → vendor fingerprint → no exploit<br><b>dev</b> → php-fpm → traversal template → manual verify<br><b>cdn</b> → tls metadata → hostname leak → report note</div>
+          </section>
+          <section class="panel">
+            <h2>Tool Queue</h2>
+            <div class="queue">
+              <div class="qrow"><code>nuclei</code><span>high severity sweep</span><div class="badge">queued</div></div>
+              <div class="qrow"><code>httpx</code><span>tech detect refresh</span><div class="badge">done</div></div>
+              <div class="qrow"><code>sqlmap</code><span>manual request probe</span><div class="badge">hold</div></div>
+            </div>
+          </section>
+          <section class="panel">
+            <h2>Evidence</h2>
+            <div class="queue">
+              <div class="qrow"><code>REQ-14</code><span>dashboard response</span><div class="badge">saved</div></div>
+              <div class="qrow"><code>SCR-02</code><span>plugin list</span><div class="badge">saved</div></div>
+            </div>
+          </section>
+        </div>
+        <div class="terminal">
+          <div class="term-head"><span>TERMINAL</span><span>l2 write: 12 blocks / turboquant encoded</span></div>
+          <div class="term-body"><span>$</span> subfinder -d acme.test -silent<br><span>$</span> httpx -l subs.txt -json<br><span>$</span> nuclei -l live.txt -severity high -jsonl<br>[+] CVE candidate captured: dev.acme.test / gateway traversal</div>
+        </div>
+      </main>
+      <section class="chat">
+        <div class="chat-head"><b>Engine</b><span class="chip">reasoning separated</span></div>
+        <div class="msgs">
+          <div class="msg"><div class="meta">VISIBLE</div>I found one high-priority validation path. The next action should be a constrained template run against the dev gateway only.</div>
+          <div class="msg call"><div class="meta">TOOL CALL</div>nuclei {"target":"dev.acme.test","severity":"high","scope_guard":true}</div>
+          <div class="msg"><div class="meta">CACHE</div>Prompt prefix restored from paged cache with matching SSM companion checkpoint.</div>
+        </div>
+        <div class="compose"><div class="input">enter approval, target, or correction...</div><button class="send">↵</button></div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
