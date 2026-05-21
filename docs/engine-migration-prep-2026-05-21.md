@@ -192,6 +192,15 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
    folder defaults are loaded at startup, used by a request that omits those
    fields, and overridden by a request that supplies explicit values.
 
+## Implemented Checkpoints
+
+- Checkpoint 01: UI theme preview/assets and initial Graphite Ops app theme.
+- Checkpoint 02: MiniMax M2 and Gemma4 reasoning parsers imported/registered
+  from current vMLX, with MiniMax config autodetect using `minimax_m2`.
+- Checkpoint 03: `effective_config` API metadata added to `/health` and
+  `/v1/models`, covering selected parsers, generation defaults, prefix/paged
+  cache settings, KV cache quantization, and prompt/block L2 disk cache config.
+
 ## Known Risk Areas
 
 - ExploitBot currently has a custom stripped server contract. Replacing `server.py` wholesale may expose endpoints the app does not need.
