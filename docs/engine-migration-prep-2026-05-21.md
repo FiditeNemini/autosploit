@@ -253,6 +253,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 19: Hardened lower Settings subpanels by darkening CVE/model/tool
   action buttons, enabling more selectable text, allowing CVE/model text to
   wrap, and protecting the tool table with horizontal scrolling.
+- Checkpoint 20: Added no-model regression coverage for nested
+  `text_config.model_type` autodetection so Qwen wrapper models can still
+  resolve parser defaults and inner SSM/Mamba cache-family metadata.
 
 ## Known Risk Areas
 
