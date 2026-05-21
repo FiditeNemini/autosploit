@@ -314,6 +314,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 38: Replaced remaining chat-panel emoji/text-glyph controls with
   SF Symbols and stable square icon buttons, including reasoning, clear,
   send/stop, agent status, deploy-add, and tool-output expand/collapse.
+- Checkpoint 39: Added a repeatable SwiftPM app-bundle run script plus Codex
+  Run action, then visually verified a darker, squared onboarding language
+  screen without flag emoji or bright filled controls.
 
 ## Known Risk Areas
 
