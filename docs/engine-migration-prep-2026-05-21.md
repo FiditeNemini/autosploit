@@ -311,6 +311,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 37: Added Qwen hybrid-SSM and MiniMax full-KV topology warning
   regressions, surfaced cache topology warnings as a selectable Settings row,
   and made runtime config cells directly copyable.
+- Checkpoint 38: Replaced remaining chat-panel emoji/text-glyph controls with
+  SF Symbols and stable square icon buttons, including reasoning, clear,
+  send/stop, agent status, deploy-add, and tool-output expand/collapse.
 
 ## Known Risk Areas
 
