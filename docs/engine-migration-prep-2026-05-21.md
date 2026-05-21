@@ -244,6 +244,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 16: Captured a current-build Settings visual proof showing the
   polished dark theme, model-default toggle, and disabled temperature/top-p/max
   token app overrides while model defaults are enabled.
+- Checkpoint 17: Replaced bright native Settings/Onboarding switches and
+  Settings sliders with dark custom controls, and converted Settings primary
+  actions from filled blue blocks to darker stroked buttons.
 
 ## Known Risk Areas
 
