@@ -206,6 +206,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   `DiskCacheManager`, TQ-native disk serializer, and cache-record validator.
 - Checkpoint 06: Prompt L2 and block L2 disk cache flags wired through Swift
   settings, `launch.py`, `server.py`, and `SchedulerConfig`.
+- Checkpoint 07: Standalone hybrid SSM companion cache, SSM L2 disk store, and
+  Qwen hybrid TurboQuant helper imported from current vMLX; LLM scheduler now
+  reports SSM companion stats and rejects KV-only hybrid restores without a
+  complete companion entry.
 
 ## Known Risk Areas
 
