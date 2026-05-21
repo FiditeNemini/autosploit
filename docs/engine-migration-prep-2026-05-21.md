@@ -229,6 +229,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   after JANG capability fields, the registry has a direct JSON fallback when
   `mlx_lm` is unavailable, and tests prove configured tool parsers produce
   OpenAI-compatible `tool_calls`.
+- Checkpoint 13: Model-folder generation defaults now cover `top_k`, `min_p`,
+  `repetition_penalty`, and stop sequences in addition to temperature/top-p/max
+  tokens, flow through launch/server flags, appear in effective runtime
+  metadata, apply across API paths, and preserve per-request override priority.
 
 ## Known Risk Areas
 
