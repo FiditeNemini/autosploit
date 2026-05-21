@@ -224,6 +224,11 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   accent-blue state, reducing visible rounded surfaces to the 8px theme radius,
   locking window resizing to content minimum size, and matching the chat drag
   handle minimum to the chat panel frame.
+- Checkpoint 12: Launch-time parser autodetection now uses model-folder
+  `config.json` / `text_config.model_type` through the model config registry
+  after JANG capability fields, the registry has a direct JSON fallback when
+  `mlx_lm` is unavailable, and tests prove configured tool parsers produce
+  OpenAI-compatible `tool_calls`.
 
 ## Known Risk Areas
 
