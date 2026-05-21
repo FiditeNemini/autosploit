@@ -292,6 +292,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 31: Removed emoji-heavy action labels and empty-state marks across
   the main SwiftUI views, replacing them with plain text or SF Symbols while
   preserving command/action behavior.
+- Checkpoint 32: Fixed the Python engine dependency contract by declaring
+  `python-multipart`, added a `dev` test extra, locked engine dependencies with
+  `uv.lock`, and proved the current engine suite with `22 passed`.
 
 ## Known Risk Areas
 
