@@ -299,6 +299,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   `/health` and `/v1/models`, parsed it in Swift, and displayed the effective
   family/topology in Settings so MiniMax KV and Qwen hybrid/Mamba cache paths
   are auditable without name guessing.
+- Checkpoint 34: Removed the remaining emoji/text-symbol chrome emitted from
+  service/model computed labels, tool statuses, activity feed exports, stash
+  rows, phase logs, and localized onboarding navigation text.
 
 ## Known Risk Areas
 
