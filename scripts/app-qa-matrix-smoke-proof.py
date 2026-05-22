@@ -480,6 +480,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index audit visual capture count mismatch: {coverage_index}")
     if app_state_group.get("auditMissingVisualCaptureCount") != audit_ledger.get("missingVisualCaptureCount"):
         raise AssertionError(f"/qa/coverage-index audit missing visual capture count mismatch: {coverage_index}")
+    if app_state_group.get("auditMissingVisualCaptures") != audit_ledger.get("missingVisualCaptures"):
+        raise AssertionError(f"/qa/coverage-index audit missing visual capture list mismatch: {coverage_index}")
     if app_state_group.get("auditLiveProofCount") != audit_ledger.get("liveProofCount"):
         raise AssertionError(f"/qa/coverage-index audit live proof count mismatch: {coverage_index}")
     if app_state_group.get("auditLiveProofOkCount") != audit_ledger.get("liveProofOkCount"):
@@ -492,10 +494,20 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index audit checkpoint count mismatch: {coverage_index}")
     if app_state_group.get("auditCompleteCheckpointCount") != audit_ledger.get("completeCheckpointCount"):
         raise AssertionError(f"/qa/coverage-index audit complete checkpoint count mismatch: {coverage_index}")
+    if app_state_group.get("auditCompleteCheckpoints") != audit_ledger.get("completeCheckpoints"):
+        raise AssertionError(f"/qa/coverage-index audit complete checkpoint list mismatch: {coverage_index}")
     if app_state_group.get("auditIncompleteCheckpointCount") != audit_ledger.get("incompleteCheckpointCount"):
         raise AssertionError(f"/qa/coverage-index audit incomplete checkpoint count mismatch: {coverage_index}")
+    if app_state_group.get("auditIncompleteCheckpoints") != audit_ledger.get("incompleteCheckpoints"):
+        raise AssertionError(f"/qa/coverage-index audit incomplete checkpoint list mismatch: {coverage_index}")
     if app_state_group.get("auditCurrentGapCount") != audit_ledger.get("currentGapCount"):
         raise AssertionError(f"/qa/coverage-index audit current gap count mismatch: {coverage_index}")
+    if app_state_group.get("auditNextGap") != audit_ledger.get("nextGap"):
+        raise AssertionError(f"/qa/coverage-index audit next gap mismatch: {coverage_index}")
+    if app_state_group.get("auditOpenGapIds") != audit_ledger.get("openGapIds"):
+        raise AssertionError(f"/qa/coverage-index audit open gap ids mismatch: {coverage_index}")
+    if app_state_group.get("auditGapContracts") != audit_ledger.get("gapContracts"):
+        raise AssertionError(f"/qa/coverage-index audit gap contracts mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerVisualManifests") != artifact_ledger.get("visualManifests"):
         raise AssertionError(f"/qa/coverage-index artifact visual manifest list mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerVisualCaptureStatus") != artifact_ledger.get("visualCaptureStatus"):
