@@ -292,6 +292,13 @@ Stash:
 
 ## Settings Functions
 
+- Settings are split into Engine, Model, Runtime, Context, Cache, Agents, CVE
+  Database, Tools, and Logs pages through the left category sidebar.
+- `/state.settingsCategoryCoverage` exposes the same category/page structure for
+  proof, including title/subtitle/detail/icon metadata and expected page
+  sections; `scripts/settings-category-coverage-proof.py` verifies every
+  category can be selected through the QA route.
+
 Model:
 
 - User selects a model folder by path or browse panel.
@@ -366,6 +373,7 @@ Current repeatable gates:
 - `cd ExploitBotEngine && uv run --extra dev ../scripts/prove-parser-api.py --output ../docs/live-proofs/checkpoint-79-parser-api-proof.json`
 - `python3 scripts/app-qa-matrix-smoke-proof.py`
 - `python3 scripts/context-catalog-proof.py`
+- `python3 scripts/settings-category-coverage-proof.py`
 - `python3 scripts/catalog-embedding-audit-proof.py`
 - `python3 scripts/tool-catalog-proof.py`
 - `python3 scripts/tool-registry-coverage-proof.py`

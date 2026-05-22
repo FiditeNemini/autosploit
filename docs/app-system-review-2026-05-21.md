@@ -341,6 +341,11 @@ Settings:
 - Cache budgets/topology.
 - Agent count/mode settings.
 - CVE database and tool installer panels.
+- Split Settings category/page coverage is exposed through
+  `/state.settingsCategoryCoverage` and covered by
+  `scripts/settings-category-coverage-proof.py`, which verifies all Settings
+  pages can be selected through the QA route and have title/subtitle/detail/icon
+  and page-section metadata.
 - App-only settings can now be applied without restarting the engine; model,
   cache, and engine runtime changes still use Apply & Restart Engine.
 - App-only apply is covered by `scripts/settings-apply-proof.py`.
@@ -369,6 +374,8 @@ Automated no-model gates:
 - Context catalogue seeded-state smoke.
 - Context catalogue source inclusion/exclusion and active-op stash scoping via
   `scripts/context-catalog-proof.py`.
+- Settings category split-page coverage via
+  `scripts/settings-category-coverage-proof.py`.
 - App-only settings apply without engine restart via
   `scripts/settings-apply-proof.py`.
 - Chat scroll lock visual smoke.
