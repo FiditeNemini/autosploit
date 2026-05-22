@@ -152,6 +152,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state checkpoint ledger count mismatch: {app_state_group}")
     if app_state_group.get("checkpointCompletionRatio") != checkpoint.get("checkpointCompletionRatio"):
         raise AssertionError(f"coverage index app state checkpoint ratio mismatch: {app_state_group}")
+    if app_state_group.get("latestCheckpoint") != checkpoint.get("latestCheckpoint"):
+        raise AssertionError(f"coverage index app state latest checkpoint mismatch: {app_state_group}")
+    if app_state_group.get("latestCheckpointNumber") != checkpoint.get("latestCheckpointNumber"):
+        raise AssertionError(f"coverage index app state latest checkpoint number mismatch: {app_state_group}")
     if app_state_group.get("auditLedgerCount", 0) < 300:
         raise AssertionError(f"coverage index app state audit ledger count mismatch: {app_state_group}")
     if app_state_group.get("currentGapCount", -1) != 1:

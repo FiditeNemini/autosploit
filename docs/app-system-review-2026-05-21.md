@@ -593,7 +593,9 @@ Automated no-model gates:
   against the coverage-index app-state group. The coverage-index app-state
   group also carries `/qa/checkpoint-ledger.checkpointCompletionRatio`, so the
   top-level QA summary reports checkpoint documentation completeness, not just
-  checkpoint count. It also carries `/qa/gap-ledger.openGapIds` and a
+  checkpoint count. It also carries `/qa/checkpoint-ledger.latestCheckpoint`
+  and `latestCheckpointNumber`, so the same aggregate identifies the current
+  documentation frontier. It also carries `/qa/gap-ledger.openGapIds` and a
   `gapContractCount`, so the top-level QA summary names the remaining gap and
   proves a structured contract exists. `/qa/gap-ledger` reads this
   document's current-gap section and exposes the currently documented gap, the
