@@ -574,9 +574,11 @@ Automated no-model gates:
   sessions; `scripts/coverage-index-proof.py` verifies each group has endpoint
   and proof counts, endpoints, and proofs and that every named proof file
   exists. The runtime/cache group also exposes `liveProofArtifactCount` for the
-  checked-in Qwen/MiniMax live replay artifact set. Chat/context, tools/parsers,
-  and tabs/sessions groups expose state-key counts, and tabs/sessions also
-  exposes `actionStateKeyCount`.
+  checked-in Qwen/MiniMax live replay artifact set. The settings/visuals group
+  exposes settings visual manifest count, full visual manifest count, and actual
+  screenshot capture count. Chat/context, tools/parsers, and tabs/sessions
+  groups expose state-key counts, and tabs/sessions also exposes
+  `actionStateKeyCount`.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.
@@ -861,6 +863,9 @@ Visual gates:
 - Settings-specific screenshot-backed UI proof coverage is also exposed through
   `/qa/settings-coverage.visualManifests` and verified by
   `scripts/settings-coverage-proof.py`.
+- The top-level `/qa/coverage-index.groups.settingsAndVisuals` aggregate now
+  rolls up settings visual manifest count, full visual manifest count, and
+  actual screenshot capture count for matrix-level proof accounting.
 - Chat control action state for reasoning, context inspector, and new context
   is covered by `scripts/chat-control-actions-proof.py`.
 - Chat copy/stash action state is covered by `scripts/chat-actions-proof.py`.

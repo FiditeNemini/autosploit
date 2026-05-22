@@ -126,6 +126,13 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime live artifact count mismatch: {runtime_group}")
     if (groups.get("chatAndContext") or {}).get("stateKeyCount", 0) < 19:
         raise AssertionError(f"coverage index chat/context state key count mismatch: {groups.get('chatAndContext')}")
+    settings_visuals_group = groups.get("settingsAndVisuals") or {}
+    if settings_visuals_group.get("settingsVisualManifestCount", 0) < 6:
+        raise AssertionError(f"coverage index settings visual manifest count mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("visualManifestCount", 0) < 22:
+        raise AssertionError(f"coverage index visual manifest count mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("actualCaptureCount", 0) < 48:
+        raise AssertionError(f"coverage index visual capture count mismatch: {settings_visuals_group}")
     if (groups.get("toolsAndParsers") or {}).get("stateKeyCount", 0) < 5:
         raise AssertionError(f"coverage index tools/parsers state key count mismatch: {groups.get('toolsAndParsers')}")
     if (groups.get("tabsAndSessions") or {}).get("stateKeyCount", 0) < 12:

@@ -650,9 +650,11 @@ Current repeatable gates:
   Each group also exposes `endpointCount` and `proofCount` for machine-readable
   coverage accounting. The runtime/cache group additionally exposes
   `liveProofArtifactCount`, so the checked-in Qwen/MiniMax live replay
-  artifacts remain visible from the top-level QA index. Chat/context,
-  tools/parsers, and tabs/sessions groups also expose state-key counts, with
-  `actionStateKeyCount` on tabs/sessions.
+  artifacts remain visible from the top-level QA index. The settings/visuals
+  group exposes settings visual manifest count, full visual manifest count, and
+  actual screenshot capture count. Chat/context, tools/parsers, and
+  tabs/sessions groups also expose state-key counts, with `actionStateKeyCount`
+  on tabs/sessions.
 - Visual QA through the local app run script plus screenshots.
 
 Required future proof gates:
