@@ -121,6 +121,13 @@ def assert_coverage_index() -> None:
             raise AssertionError(f"coverage index group endpoint count mismatch {name}: {group}")
         if group.get("proofCount") != len(proofs_for_group):
             raise AssertionError(f"coverage index group proof count mismatch {name}: {group}")
+    app_state_group = groups.get("appState") or {}
+    if app_state_group.get("stateRouteCount", 0) < 14:
+        raise AssertionError(f"coverage index app state route count mismatch: {app_state_group}")
+    if app_state_group.get("subtabStateTabCount", 0) < 8:
+        raise AssertionError(f"coverage index app state subtab count mismatch: {app_state_group}")
+    if app_state_group.get("subtabStateProofCount", 0) < 8:
+        raise AssertionError(f"coverage index app state subtab proof count mismatch: {app_state_group}")
     runtime_group = groups.get("runtimeAndCache") or {}
     if runtime_group.get("liveProofArtifactCount", 0) < 6:
         raise AssertionError(f"coverage index runtime live artifact count mismatch: {runtime_group}")
