@@ -166,7 +166,10 @@ main session.
   behind those proofs, and `/qa/tool-flow-coverage.tabActivityStatuses` names
   the visible tab indicator states (`running`, `done`, `failed`, `canceled`)
   plus a status count, parity flag, and `status-dot-running-ring` indicator
-  contract. It also exposes `toolVisualSurfaces`, `toolVisualSurfaceCount`, and
+  contract. It also exposes `tabActivityStatusProofs`,
+  `tabActivityStatusProofCount`, and `tabActivityStatusProofParity`, tying each
+  visible tab status to the scripts that prove it. It also exposes
+  `toolVisualSurfaces`, `toolVisualSurfaceCount`, and
   `toolVisualSurfaceParity`, plus visual-surface proof map/count/parity, for
   chat tool cards, activity-feed status, tab status indicators, parsed result
   rows, context-catalog hits, and expandable tool output.
@@ -790,15 +793,16 @@ Current repeatable gates:
   group exposes registry tool count, callback count, representative family
   fanout count, state-key count, dynamic tool-schema cap/policy/route,
   structured/raw result-mode counts, visible tab activity statuses, the tab
-  activity status parity/indicator contract, and the model-tool visual surface
-  list/count/parity plus proof count/parity mirrored from `/qa/tool-flow-coverage`.
+  activity status parity/indicator contract, tab activity status proof
+  count/parity, and the model-tool visual surface list/count/parity plus proof
+  count/parity mirrored from `/qa/tool-flow-coverage`.
   The tabs/sessions group exposes
   interaction-mode count, covered tab count, session state-key count, and
   action-state-key count, mirrors session workflow surface list/count/parity,
   mirrors tab action surface list/count/parity, mirrors agent-loop phase
   list/count/parity and phase-proof count/parity,
   and now mirrors the visible tab activity status list/count/parity plus
-  indicator contract because the tab bar is owned by the
+  indicator contract and status proof count/parity because the tab bar is owned by the
   tabs/session surface. Chat/context also exposes state-key count.
 - Visual QA through the local app run script plus screenshots.
 

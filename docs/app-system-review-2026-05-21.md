@@ -219,7 +219,10 @@ Result fanout:
   catalogue state. `/qa/tool-flow-coverage.tabActivityStatuses` names the
   visible tab indicator states (`running`, `done`, `failed`, `canceled`) and
   exposes status count/parity plus the `status-dot-running-ring` indicator
-  contract. It also exposes `toolVisualSurfaces`, `toolVisualSurfaceCount`, and
+  contract. It also exposes `tabActivityStatusProofs`,
+  `tabActivityStatusProofCount`, and `tabActivityStatusProofParity`, tying each
+  status to its proof scripts. It also exposes `toolVisualSurfaces`,
+  `toolVisualSurfaceCount`, and
   `toolVisualSurfaceParity`, plus visual-surface proof map/count/parity, for
   chat tool cards, activity-feed status, tab status indicators, parsed result
   rows, context-catalog hits, and expandable tool output. Parser and
@@ -676,15 +679,15 @@ Automated no-model gates:
   count, full visual manifest count, and actual screenshot capture count. The
   tools/parsers group exposes registry tool
   count, callback count, representative family fanout count, state-key count,
-  dynamic tool-schema cap/policy/route, structured/raw result-mode counts, and
-  model-tool visual surface list/count/parity plus proof count/parity from
-  `/qa/tool-flow-coverage`.
+  dynamic tool-schema cap/policy/route, structured/raw result-mode counts,
+  tab activity status proof count/parity, and model-tool visual surface
+  list/count/parity plus proof count/parity from `/qa/tool-flow-coverage`.
   The tabs/sessions group exposes
   interaction-mode count, covered tab
   count, session state-key count, session workflow surface list/count/parity,
   tab action surface list/count/parity, action-state-key count, agent-loop
-  state-key count, and agent-loop visual state keys. Chat/context also exposes state-key
-  count.
+  state-key count, agent-loop visual state keys, and tab activity status proof
+  count/parity. Chat/context also exposes state-key count.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.

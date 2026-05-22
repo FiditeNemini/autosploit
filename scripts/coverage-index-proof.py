@@ -331,6 +331,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers tab activity status parity mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("tabActivityIndicatorContract") != tool_flow.get("tabActivityIndicatorContract"):
         raise AssertionError(f"coverage index tools/parsers tab activity indicator contract mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("tabActivityStatusProofCount") != tool_flow.get("tabActivityStatusProofCount"):
+        raise AssertionError(f"coverage index tools/parsers tab activity status proof count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("tabActivityStatusProofParity") != tool_flow.get("tabActivityStatusProofParity"):
+        raise AssertionError(f"coverage index tools/parsers tab activity status proof parity mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolVisualSurfaces") != tool_flow.get("toolVisualSurfaces"):
         raise AssertionError(f"coverage index tools/parsers visual surfaces mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolVisualSurfaceCount") != tool_flow.get("toolVisualSurfaceCount"):
@@ -373,6 +377,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions tab activity status parity mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActivityIndicatorContract") != tool_flow.get("tabActivityIndicatorContract"):
         raise AssertionError(f"coverage index tabs/sessions tab activity indicator contract mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActivityStatusProofCount") != tool_flow.get("tabActivityStatusProofCount"):
+        raise AssertionError(f"coverage index tabs/sessions tab activity status proof count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActivityStatusProofParity") != tool_flow.get("tabActivityStatusProofParity"):
+        raise AssertionError(f"coverage index tabs/sessions tab activity status proof parity mismatch: {tabs_sessions_group}")
     session_coverage = request("GET", "/qa/session-coverage")
     if tabs_sessions_group.get("sessionWorkflowSurfaces") != session_coverage.get("sessionWorkflowSurfaces"):
         raise AssertionError(f"coverage index tabs/sessions workflow surfaces mismatch: {tabs_sessions_group}")

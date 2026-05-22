@@ -62,6 +62,13 @@ EXPECTED_VISUAL_SURFACE_PROOFS = {
     "toolOutputExpansion": ["chat-tool-output-expand-proof.py", "visual-chat-interaction-proof.py"],
 }
 
+EXPECTED_TAB_ACTIVITY_STATUS_PROOFS = {
+    "running": ["tool-fanout-status-proof.py", "visual-tab-proof.py"],
+    "done": ["tool-family-fanout-coverage-proof.py", "tool-fanout-status-proof.py"],
+    "failed": ["visual-tab-proof.py", "activity-feed-actions-proof.py"],
+    "canceled": ["chat-turn-controls-proof.py", "visual-chat-interaction-proof.py"],
+}
+
 
 def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
     if isinstance(body, dict):
@@ -136,6 +143,16 @@ def run() -> None:
             raise AssertionError(f"tool flow tab activity status parity mismatch: {coverage}")
         if coverage.get("tabActivityIndicatorContract") != "status-dot-running-ring":
             raise AssertionError(f"tool flow tab activity indicator contract mismatch: {coverage}")
+        if coverage.get("tabActivityStatusProofs") != EXPECTED_TAB_ACTIVITY_STATUS_PROOFS:
+            raise AssertionError(f"tool flow tab activity status proof map mismatch: {coverage}")
+        if coverage.get("tabActivityStatusProofCount") != len(EXPECTED_TAB_ACTIVITY_STATUS_PROOFS):
+            raise AssertionError(f"tool flow tab activity status proof count mismatch: {coverage}")
+        if coverage.get("tabActivityStatusProofParity") is not True:
+            raise AssertionError(f"tool flow tab activity status proof parity mismatch: {coverage}")
+        for status, proof_names in EXPECTED_TAB_ACTIVITY_STATUS_PROOFS.items():
+            missing_status_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
+            if missing_status_files:
+                raise AssertionError(f"tool tab activity status {status} names missing proof files {missing_status_files}: {coverage}")
         if coverage.get("toolVisualSurfaces") != EXPECTED_VISUAL_SURFACES:
             raise AssertionError(f"tool flow visual surfaces mismatch: {coverage}")
         if coverage.get("toolVisualSurfaceCount") != len(EXPECTED_VISUAL_SURFACES):
