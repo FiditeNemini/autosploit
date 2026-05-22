@@ -508,6 +508,8 @@ Automated no-model gates:
     route through AppState and expose `/state.toolSettingsActions`;
   - proves Inference Log clear routes through AppState and exposes
     `/state.inferenceLogActions`;
+  - proves Chat send, stop, approve, reject, and clear/new-context controls
+    route through AppState and expose `/state.chatControlActions`;
   - proves model-issued `search_context` returns targeted catalogue facts;
   - proves automatic context injection stays at 4 snippets or fewer and tells
     the model to use `search_context` for more targeted retrieval;

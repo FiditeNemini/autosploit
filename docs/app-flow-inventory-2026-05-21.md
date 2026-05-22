@@ -71,6 +71,9 @@ main session.
   the block. Header reasoning, context-inspector, and new-context controls now
   route through AppState and expose `/state.chatControlActions`; covered by
   `scripts/chat-control-actions-proof.py`.
+- Chat send, stop, approve, reject, and clear/new-context controls also route
+  through AppState and expose `/state.chatControlActions`; covered by
+  `scripts/chat-turn-controls-proof.py`.
 - Metrics show token/s, TTFT, prompt tokens, cached prompt tokens, and
   completion tokens when the engine returns usage.
 - The same strip shows the last request's selected context count and exposed
