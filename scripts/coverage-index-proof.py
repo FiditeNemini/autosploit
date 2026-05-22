@@ -232,6 +232,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context header cache badges mismatch: {chat_context_group}")
     if chat_context_group.get("headerCacheBadgeCount") != chat_coverage.get("headerCacheBadgeCount"):
         raise AssertionError(f"coverage index chat/context header cache badge count mismatch: {chat_context_group}")
+    if chat_context_group.get("headerCacheBadgeParity") != chat_coverage.get("headerCacheBadgeParity"):
+        raise AssertionError(f"coverage index chat/context header cache badge parity mismatch: {chat_context_group}")
     if chat_context_group.get("cacheSessionIndicator") != chat_coverage.get("cacheSessionIndicator"):
         raise AssertionError(f"coverage index chat/context cache session indicator mismatch: {chat_context_group}")
     if chat_context_group.get("newContextSessionBoundary") != chat_coverage.get("newContextSessionBoundary"):

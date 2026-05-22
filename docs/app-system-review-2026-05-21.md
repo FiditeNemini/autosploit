@@ -593,9 +593,10 @@ Automated no-model gates:
   visual manifest and live-proof counts so screenshot and live JSON evidence
   stay machine-auditable, including missing visual capture count.
   The chat/context group mirrors `/qa/chat-coverage.headerCacheBadges`,
-  `headerCacheBadgeCount`, `cacheSessionIndicator`, and
+  `headerCacheBadgeCount`, `headerCacheBadgeParity`, `cacheSessionIndicator`, and
   `newContextSessionBoundary`, so the aggregate coverage map carries the same
-  visible cache-session contract and badge count as the chat coverage endpoint.
+  visible cache-session contract, badge count, and badge parity as the chat
+  coverage endpoint.
   `/qa/checkpoint-ledger` exposes checkpoint documentation count,
   completeness count, completion ratio, complete checkpoint paths, incomplete
   checkpoint paths, latest checkpoint, and latest checkpoint number using numeric checkpoint ordering; the checkpoint,
