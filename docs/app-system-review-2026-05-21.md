@@ -715,7 +715,7 @@ Automated no-model gates:
   `prefix-cache-l2-turboquant` response path, cache-preserving new-context
   boundary, and the checked-in Qwen/MiniMax
   live replay artifact set. The chat/context group exposes chat route
-  list/count, contract map/count, proof list/count, state-key list/count,
+  list/count, contract map/count, proof list/count/file parity, state-key list/count,
   context search tool name, automatic/current injection caps, context route
   list/count, contract map/count, proof list/count, state-key list/count,
   retrieval-source proof map/count/parity, and delivery-mode proof

@@ -231,6 +231,8 @@ def assert_chat_coverage() -> None:
     missing_files = sorted(name for name in REQUIRED_PROOFS if not (ROOT / "scripts" / name).is_file())
     if missing_files:
         raise AssertionError(f"chat coverage names non-existent proof files: {missing_files}")
+    if coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"chat coverage proof file parity mismatch: {coverage}")
 
     manifests = set(coverage.get("visualManifests") or [])
     missing_manifests = sorted(REQUIRED_VISUAL_MANIFESTS.difference(manifests))

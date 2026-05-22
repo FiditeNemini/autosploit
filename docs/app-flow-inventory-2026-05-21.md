@@ -828,7 +828,7 @@ Current repeatable gates:
   also mirrors `/qa/chat-coverage.cacheResponsesInferenceMethod`,
   `newModelSessionBehavior`, header cache badge proof count/parity,
   cache-session field proof count/parity, chat route list/count, contract
-  map/count, proof list/count, and state-key list/count. It mirrors
+  map/count, proof list/count/file parity, and state-key list/count. It mirrors
   `/qa/context-coverage` search tool name, automatic/current injection caps,
   context route list/count, contract map/count, proof list/count, state-key
   list/count, context retrieval source list/count/parity,
