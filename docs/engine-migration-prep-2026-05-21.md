@@ -658,6 +658,11 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   SSM companion L2: `block_l2_hits_delta=3`,
   `scheduler_tokens_saved_delta=168`, `ssm_l2_hits_delta=1`,
   `cached_tokens=168`, `prompt_l2_hits_delta=0`, and `no_rederive=true`.
+- Checkpoint 195: Fixed Responses API continuation storage so a stored child
+  response preserves the fully resolved parent context when it is later used as
+  `previous_response_id`. `testsuite/test_responses_session_store.py` now covers
+  parent -> child -> grandchild chaining and proves the grandchild engine input
+  still includes the parent catalogue context plus both assistant outputs.
 
 ## Known Risk Areas
 

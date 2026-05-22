@@ -792,6 +792,11 @@ Real-model gates:
   metadata, and repeat prompt reuse with `cached_tokens=51`.
 - Reasoning/tool parser API shaping is covered by
   `scripts/prove-parser-api.py` and `testsuite/test_tool_parser_api.py`.
+- Responses API continuation storage is covered by
+  `ExploitBotEngine/testsuite/test_responses_session_store.py`, including a
+  parent -> child -> grandchild chain that proves stored child responses carry
+  the fully resolved ancestor context into the next `previous_response_id`
+  request.
 - Settings/message/result-store persistence is covered by
   `scripts/persistence-proof.py`.
 - Per-turn request context/tool-schema audit persistence is covered by
