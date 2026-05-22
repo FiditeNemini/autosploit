@@ -151,7 +151,9 @@ main session.
   tab-activity, parsed-result, and context-catalog coverage. The route now
   returns a standard `ok` aggregate status. `/qa/tool-flow-coverage.stateKeys`
   exposes the message, tab activity, feed, result, and context-catalog surfaces
-  behind those proofs.
+  behind those proofs, and `/qa/tool-flow-coverage.tabActivityStatuses` names
+  the visible tab indicator states (`running`, `done`, `failed`, `canceled`)
+  plus a `status-dot-running-ring` indicator contract.
 
 The full tool catalog is no longer force-sent to the engine. `ChatService`
 passes the latest user prompt plus active tab into `ToolDefinitions.forModel`,
@@ -614,8 +616,9 @@ Current repeatable gates:
   the tool registry, parser routing, representative family fanout, and
   context-catalog tool-output proofs into one auditable contract. It now lists
   the parser and family-fanout fixture seed routes as part of that contract.
-  The aggregate also exposes `proofCount` and `stateKeys` for machine-readable
-  proof accounting.
+  The aggregate also exposes `proofCount`, visible tab activity statuses, tab
+  activity status count, indicator contract, and `stateKeys` for
+  machine-readable proof accounting.
   Runtime and cache invariants are also summarized through
   `/qa/runtime-coverage`, including
   Qwen/MiniMax support, parser autodetect, model-folder generation defaults,
@@ -729,7 +732,8 @@ Current repeatable gates:
   index. The settings/visuals group exposes settings visual manifest count, full
   visual manifest count, and actual screenshot capture count. The tools/parsers
   group exposes registry tool count, callback count, representative family
-  fanout count, and state-key count. The tabs/sessions group exposes
+  fanout count, state-key count, visible tab activity statuses, and the tab
+  activity indicator contract. The tabs/sessions group exposes
   interaction-mode count, covered tab count, session state-key count, and
   action-state-key count. Chat/context also exposes state-key count.
 - Visual QA through the local app run script plus screenshots.

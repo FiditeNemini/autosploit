@@ -91,6 +91,13 @@ def run() -> None:
             raise AssertionError(f"tool flow did not expose registry count: {coverage}")
         if coverage.get("callbackCount") != 3:
             raise AssertionError(f"tool flow did not expose callback count: {coverage}")
+        expected_activity_statuses = ["running", "done", "failed", "canceled"]
+        if coverage.get("tabActivityStatuses") != expected_activity_statuses:
+            raise AssertionError(f"tool flow tab activity statuses mismatch: {coverage}")
+        if coverage.get("tabActivityStatusCount") != len(expected_activity_statuses):
+            raise AssertionError(f"tool flow tab activity status count mismatch: {coverage}")
+        if coverage.get("tabActivityIndicatorContract") != "status-dot-running-ring":
+            raise AssertionError(f"tool flow tab activity indicator contract mismatch: {coverage}")
         state_keys = set(coverage.get("stateKeys") or [])
         missing_state_keys = sorted(EXPECTED_STATE_KEYS.difference(state_keys))
         if missing_state_keys:

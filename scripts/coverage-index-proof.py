@@ -254,6 +254,13 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers family fanout count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("stateKeyCount", 0) < 5:
         raise AssertionError(f"coverage index tools/parsers state key count mismatch: {tools_parsers_group}")
+    tool_flow = request("GET", "/qa/tool-flow-coverage")
+    if tools_parsers_group.get("tabActivityStatuses") != tool_flow.get("tabActivityStatuses"):
+        raise AssertionError(f"coverage index tools/parsers tab activity statuses mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("tabActivityStatusCount") != tool_flow.get("tabActivityStatusCount"):
+        raise AssertionError(f"coverage index tools/parsers tab activity status count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("tabActivityIndicatorContract") != tool_flow.get("tabActivityIndicatorContract"):
+        raise AssertionError(f"coverage index tools/parsers tab activity indicator contract mismatch: {tools_parsers_group}")
     tabs_sessions_group = groups.get("tabsAndSessions") or {}
     if tabs_sessions_group.get("interactionModeCount", 0) < 3:
         raise AssertionError(f"coverage index tabs/sessions mode count mismatch: {tabs_sessions_group}")
