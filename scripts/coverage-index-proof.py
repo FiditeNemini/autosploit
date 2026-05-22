@@ -95,6 +95,7 @@ def wait_for_app(timeout: float = 15.0) -> None:
 def assert_coverage_index() -> None:
     state = request("GET", "/state")
     index = request("GET", "/qa/coverage-index")
+    checkpoint = request("GET", "/qa/checkpoint-ledger")
 
     if index.get("ok") is not True:
         raise AssertionError(f"/qa/coverage-index failed: {index}")
@@ -148,6 +149,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state missing visual captures: {app_state_group}")
     if app_state_group.get("checkpointLedgerCount", 0) < 200:
         raise AssertionError(f"coverage index app state checkpoint ledger count mismatch: {app_state_group}")
+    if app_state_group.get("checkpointCompletionRatio") != checkpoint.get("checkpointCompletionRatio"):
+        raise AssertionError(f"coverage index app state checkpoint ratio mismatch: {app_state_group}")
     if app_state_group.get("auditLedgerCount", 0) < 300:
         raise AssertionError(f"coverage index app state audit ledger count mismatch: {app_state_group}")
     if app_state_group.get("currentGapCount", -1) != 1:
