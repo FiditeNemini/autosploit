@@ -778,6 +778,10 @@ def assert_testserver_smoke() -> None:
     proof_files_exist = all((ROOT / "scripts" / name).is_file() for name in (tool_flow_coverage.get("proofs") or []))
     if tools_parsers_group.get("toolFlowProofFileParity") is not proof_files_exist:
         raise AssertionError(f"/qa/coverage-index tool-flow proof-file parity mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolFlowToolCount") != tool_flow_coverage.get("toolCount"):
+        raise AssertionError(f"/qa/coverage-index tool-flow tool count mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolFlowCallbackCount") != tool_flow_coverage.get("callbackCount"):
+        raise AssertionError(f"/qa/coverage-index tool-flow callback count mismatch: {coverage_index}")
     if tools_parsers_group.get("toolFlowRoutes") != tool_flow_coverage.get("routes"):
         raise AssertionError(f"/qa/coverage-index tool-flow routes mismatch: {coverage_index}")
     if tools_parsers_group.get("toolFlowRouteCount") != len(tool_flow_coverage.get("routes") or []):

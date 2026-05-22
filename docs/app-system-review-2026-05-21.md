@@ -735,7 +735,7 @@ Automated no-model gates:
   result-parser artifact lists for subdomains, URLs, vulnerability
   sources/titles, ports, network hosts, OSINT platforms, post labels, and raw
   tools, parser failure list/count, state-key count, tool-flow proof count,
-  proof list/file parity, route
+  proof list/file parity, tool/callback counters, route
   list/count, family list/count, state-key list, contract map/count,
   dynamic tool-schema cap/policy/route, structured/raw result-mode counts,
   tab activity status proof map/count/parity, and model-tool visual surface

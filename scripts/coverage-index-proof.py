@@ -670,6 +670,10 @@ def assert_coverage_index() -> None:
     proof_files_exist = all((ROOT / "scripts" / name).is_file() for name in (tool_flow.get("proofs") or []))
     if tools_parsers_group.get("toolFlowProofFileParity") is not proof_files_exist:
         raise AssertionError(f"coverage index tools/parsers tool-flow proof-file parity mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolFlowToolCount") != tool_flow.get("toolCount"):
+        raise AssertionError(f"coverage index tools/parsers tool-flow tool count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolFlowCallbackCount") != tool_flow.get("callbackCount"):
+        raise AssertionError(f"coverage index tools/parsers tool-flow callback count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolFlowRoutes") != tool_flow.get("routes"):
         raise AssertionError(f"coverage index tools/parsers tool-flow routes mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolFlowRouteCount") != len(tool_flow.get("routes") or []):
