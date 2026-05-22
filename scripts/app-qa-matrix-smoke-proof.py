@@ -330,6 +330,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/visual-coverage surface count mismatch: {visual_coverage}")
     if visual_coverage.get("visualSurfaceParity") is not True:
         raise AssertionError(f"/qa/visual-coverage surface parity mismatch: {visual_coverage}")
+    if visual_coverage.get("visualSurfaceProofCount") != len(expected_visual_surfaces):
+        raise AssertionError(f"/qa/visual-coverage surface proof count mismatch: {visual_coverage}")
+    if visual_coverage.get("visualSurfaceProofParity") is not True:
+        raise AssertionError(f"/qa/visual-coverage surface proof parity mismatch: {visual_coverage}")
     if session_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/session-coverage failed: {session_coverage}")
     if session_coverage.get("interactionModes") != ["autopilot", "copilot", "manual"]:

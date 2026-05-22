@@ -120,6 +120,28 @@ REQUIRED_VISUAL_SURFACES = [
     "cveAndToolSettings",
 ]
 
+REQUIRED_VISUAL_SURFACE_PROOFS = {
+    "chatAndScroll": ["visual-chat-proof.py", "visual-chat-interaction-proof.py"],
+    "settingsAndCache": ["visual-settings-proof.py", "visual-live-cache-stats-proof.py"],
+    "contextInspectorAndAudit": ["visual-context-inspector-proof.py", "visual-request-audit-proof.py"],
+    "tabAndSubtabActivity": ["visual-tab-proof.py"],
+    "osintScreenshots": ["visual-osint-screenshot-proof.py"],
+    "reportAndStash": [
+        "visual-report-export-proof.py",
+        "visual-report-agent-proof.py",
+        "visual-stash-retrieval-proof.py",
+    ],
+    "unsupportedAndPost": ["visual-unsupported-model-proof.py", "visual-post-attribution-proof.py"],
+    "toolActionPanels": [
+        "visual-web-verify-proof.py",
+        "visual-recon-action-proof.py",
+        "visual-network-protocol-proof.py",
+        "visual-creds-action-proof.py",
+        "visual-exploit-action-proof.py",
+    ],
+    "cveAndToolSettings": ["visual-cve-settings-status-proof.py", "visual-tool-settings-status-proof.py"],
+}
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -202,6 +224,16 @@ def assert_visual_coverage() -> None:
         raise AssertionError(f"visual coverage surface count mismatch: {coverage}")
     if coverage.get("visualSurfaceParity") is not True:
         raise AssertionError(f"visual coverage surface parity mismatch: {coverage}")
+    if coverage.get("visualSurfaceProofs") != REQUIRED_VISUAL_SURFACE_PROOFS:
+        raise AssertionError(f"visual coverage surface proof map mismatch: {coverage}")
+    if coverage.get("visualSurfaceProofCount") != len(REQUIRED_VISUAL_SURFACE_PROOFS):
+        raise AssertionError(f"visual coverage surface proof count mismatch: {coverage}")
+    if coverage.get("visualSurfaceProofParity") is not True:
+        raise AssertionError(f"visual coverage surface proof parity mismatch: {coverage}")
+    for surface, proof_names in REQUIRED_VISUAL_SURFACE_PROOFS.items():
+        missing_surface_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
+        if missing_surface_files:
+            raise AssertionError(f"visual surface {surface} names missing proof files {missing_surface_files}: {coverage}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/visual-coverage" not in qa.get("stateRoutes", []):

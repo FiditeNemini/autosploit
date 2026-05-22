@@ -693,9 +693,10 @@ Current repeatable gates:
   strips, OSINT screenshots, report export, stash retrieval, unsupported model
   states, post attribution, tool action panels, live cache stats, and
   CVE/tool-settings proof manifests. The aggregate exposes visual surface
-  list/count/parity, `proofCount`, `manifestCount`, minimum capture count, and
-  `actualCaptureCount` so visual proof breadth is machine-checkable. It also
-  lists the visual QA seed/switch routes used by the screenshot proofs.
+  list/count/parity, visual surface proof map/count/parity, `proofCount`,
+  `manifestCount`, minimum capture count, and `actualCaptureCount` so visual
+  proof breadth is machine-checkable. It also lists the visual QA seed/switch
+  routes used by the screenshot proofs.
   Chat/control invariants are summarized through `/qa/chat-coverage`, including
   streaming usage metrics, token counters, reasoning controls, tool-output
   expansion, approval controls, copy/stash actions, request-audit badges,
@@ -791,7 +792,7 @@ Current repeatable gates:
   visible from the aggregate QA index. The
   settings/visuals group exposes Settings surface list/count/parity, Settings
   surface proof count/parity, settings
-  visual surface list/count/parity, visual manifest count, full visual manifest
+  visual surface list/count/parity, visual surface proof count/parity, visual manifest count, full visual manifest
   count, and actual screenshot capture count. The tools/parsers
   group exposes registry tool count, callback count, representative family
   fanout count, state-key count, dynamic tool-schema cap/policy/route,
@@ -909,7 +910,8 @@ Required future proof gates:
 - Settings model warning, engine live cache status, cache topology, CVE/tool
   status, live cache metrics, and split category screenshots are exposed through
   `/qa/settings-coverage.visualManifests`; full visual surface coverage is
-  summarized through `/qa/visual-coverage.visualSurfaces`.
+  summarized through `/qa/visual-coverage.visualSurfaces` plus visual surface
+  proof map/count/parity.
 - Chat token metrics, active tool header, cache-session badges, approval card,
   running tool card, failed tool card, and streaming reasoning state are captured under
   `docs/visual-proofs/checkpoint-71`.

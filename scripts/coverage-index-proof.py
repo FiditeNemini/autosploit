@@ -305,6 +305,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index visual surface count mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("visualSurfaceParity") != visual_coverage.get("visualSurfaceParity"):
         raise AssertionError(f"coverage index visual surface parity mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("visualSurfaceProofCount") != visual_coverage.get("visualSurfaceProofCount"):
+        raise AssertionError(f"coverage index visual surface proof count mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("visualSurfaceProofParity") != visual_coverage.get("visualSurfaceProofParity"):
+        raise AssertionError(f"coverage index visual surface proof parity mismatch: {settings_visuals_group}")
     tools_parsers_group = groups.get("toolsAndParsers") or {}
     if tools_parsers_group.get("toolCount", 0) < 38:
         raise AssertionError(f"coverage index tools/parsers tool count mismatch: {tools_parsers_group}")
