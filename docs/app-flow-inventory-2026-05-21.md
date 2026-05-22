@@ -154,11 +154,16 @@ Network:
 
 - Covers protocol enumeration, SMB/WinRM/SSH-style netexec prompts, SNMP,
   capture, MITM, and tunnels.
-- Buttons send structured prompts to chat.
+- Protocol Scan creates Network action state, then sends the generated prompt to
+  chat. Other buttons send structured prompts to chat.
 - Displays parsed network host and raw tool output.
+- Protocol Scan action status is represented by `/state.networkAction` and the
+  active Scan button. `scripts/network-protocol-action-proof.py` verifies a
+  seeded SMB netexec scan target, credential context, generated command, and
+  running tab activity; the visible state is captured under
+  `docs/visual-proofs/checkpoint-98`.
 - Capture, MITM, and Tunnels lifecycle strip screenshots are captured under
   `docs/visual-proofs/checkpoint-70`.
-- Still needs per-action visual state for protocol scan buttons.
 
 Creds:
 
@@ -302,8 +307,10 @@ Current repeatable gates:
 - `python3 scripts/osint-screenshot-artifact-proof.py`
 - `python3 scripts/persistence-proof.py`
 - `python3 scripts/request-audit-proof.py`
+- `python3 scripts/network-protocol-action-proof.py`
 - `python3 scripts/verify-live-models.py --metadata-only --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --minimax /Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit`
 - `python3 scripts/visual-tab-proof.py`
+- `python3 scripts/visual-network-protocol-proof.py`
 - `python3 scripts/visual-chat-proof.py`
 - `python3 scripts/visual-chat-interaction-proof.py`
 - `python3 scripts/visual-request-audit-proof.py`
@@ -389,5 +396,7 @@ Required future proof gates:
   `docs/visual-proofs/checkpoint-96`.
 - Recon Full Recon running state is captured under
   `docs/visual-proofs/checkpoint-97`.
+- Network Protocol Scan running state is captured under
+  `docs/visual-proofs/checkpoint-98`.
 - Unsupported model-folder warning and blocked engine states are captured under
   `docs/visual-proofs/checkpoint-93`.

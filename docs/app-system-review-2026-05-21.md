@@ -165,8 +165,16 @@ Network:
 
 - Buttons: Scan, SMB shares/users/sessions/SAM/LSA/whoami, SNMP Walk, Start
   Capture, Start MITM, Create Tunnel.
-- Chat path: every action sends a prompt to chat.
-- State: network hosts plus raw output.
+- Chat path: Protocol Scan records a Network action state, then sends the
+  generated prompt to chat. Other actions send prompts to chat.
+- State: network hosts, raw output, `/state.networkAction` for the latest
+  protocol scan, and long-running lifecycle state for Capture/MITM/Tunnel.
+- Protocol Scan action state is covered by
+  `scripts/network-protocol-action-proof.py`: a seeded SMB netexec scan records
+  target, protocol, credential context, generated command, running status, and
+  Network tab activity with `lastTool=netexec`.
+- Visible Protocol Scan running state is captured under
+  `docs/visual-proofs/checkpoint-98`.
 - Long-running lifecycle state now tracks capture/MITM/tunnel status as idle,
   running, done, failed, or canceled and is visible inside the relevant Network
   subtab.
@@ -432,6 +440,8 @@ Visual gates:
   `docs/visual-proofs/checkpoint-69`.
 - Nested lifecycle strip states are captured under
   `docs/visual-proofs/checkpoint-70`.
+- Network Protocol Scan running state is captured under
+  `docs/visual-proofs/checkpoint-98`.
 - OSINT screenshot artifact preview is captured under
   `docs/visual-proofs/checkpoint-90`.
 - Report export status and generated finding state are captured under
