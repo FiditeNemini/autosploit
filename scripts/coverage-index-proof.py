@@ -550,6 +550,18 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions agent loop phase proof count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopPhaseProofParity") != agent_loop.get("loopPhaseProofParity"):
         raise AssertionError(f"coverage index tabs/sessions agent loop phase proof parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("agentLoopModes") != agent_loop.get("modes"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop modes mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("agentLoopAgents") != agent_loop.get("agents"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop agent contract mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("agentLoopRoutes") != agent_loop.get("routes"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop routes mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("agentLoopContracts") != agent_loop.get("contracts"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop contracts mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("agentLoopActionTelemetryFields") != agent_loop.get("actionTelemetryFields"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop telemetry fields mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("agentLoopActionTelemetryFieldCount") != len(agent_loop.get("actionTelemetryFields") or []):
+        raise AssertionError(f"coverage index tabs/sessions agent loop telemetry count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActivityStatuses") != tool_flow.get("tabActivityStatuses"):
         raise AssertionError(f"coverage index tabs/sessions tab activity statuses mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActivityStatusCount") != tool_flow.get("tabActivityStatusCount"):

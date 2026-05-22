@@ -722,7 +722,9 @@ Automated no-model gates:
   tab action surface list/count/parity, tab action surface proof map/count/parity,
   action-state-key count, agent-loop
   state-key count, agent-loop visual state keys, agent-loop phase-proof
-  map/count/parity, and tab activity status proof count/parity. Chat/context
+  map/count/parity, agent-loop mode behavior, deployed-agent
+  inheritance/status contract, route list, contract flags, action telemetry
+  field list/count, and tab activity status proof count/parity. Chat/context
   also exposes state-key count.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
