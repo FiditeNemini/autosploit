@@ -543,6 +543,9 @@ Current repeatable gates:
   that `/state.qaCoverage` advertises the shared AppState subtab proof gates for
   Recon, Web, Network, Creds, Exploit, Post, OSINT, and Report, and checks the
   machine-readable `/qa/subtab-coverage` route against the live subtab registry.
+  The same matrix also checks `/qa/agent-loop-coverage` for manual suggestion,
+  copilot approval, autopilot execution, and deployed-agent forced-autopilot
+  inheritance coverage.
 - Visual QA through the local app run script plus screenshots.
 
 Required future proof gates:
