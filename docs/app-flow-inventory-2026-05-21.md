@@ -202,6 +202,10 @@ Implemented dynamic catalogue lane:
   asset/finding/tool-output/stash records, verifies the persisted embedding
   catalogue, sends a bounded prompt through a mock engine, relaunches the app,
   and verifies both catalogue records and assistant retrieval selections survive.
+- `/qa/context-coverage.stateKeys` exposes the AppState/message audit surfaces
+  used by these context proofs: context catalogue config, request context,
+  context-window reset policy, catalog embeddings, stash retrieval, semantic CVE,
+  and assistant-turn selected source/tool-schema audits.
 
 ## Tab Functions
 
@@ -610,7 +614,8 @@ Current repeatable gates:
   routing, deployed-agent context search, durable embeddings, stash retrieval,
   and new-context cache preservation proof gates. It now exposes `proofCount`
   and `/context/new` so cache-preserving context resets stay visible in the
-  aggregate. Tab action coverage also exposes `actionStateKeys`, so the matrix
+  aggregate, plus `stateKeys` for context audit surfaces. Tab action coverage
+  also exposes `actionStateKeys`, so the matrix
   can verify the AppState surfaces behind per-tab copy/stash/export/tool
   actions. Visual screenshot coverage is summarized through
   `/qa/visual-coverage`, including chat/tool states, scroll lock, Settings,

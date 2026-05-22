@@ -185,6 +185,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/context-coverage context cap mismatch: {context_coverage}")
     if not 1 <= context_coverage.get("currentInjectedContextLimit", 0) <= 4:
         raise AssertionError(f"/qa/context-coverage current context limit mismatch: {context_coverage}")
+    if "requestContext" not in (context_coverage.get("stateKeys") or []):
+        raise AssertionError(f"/qa/context-coverage state key mismatch: {context_coverage}")
     if settings_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/settings-coverage failed: {settings_coverage}")
     if settings_coverage.get("categoryCount") != 9:

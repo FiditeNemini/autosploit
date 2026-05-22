@@ -155,6 +155,10 @@ Dynamic context:
   and exposes candidate/returned/top-score audit state.
 - Durable non-CVE catalogue embedding and assistant-turn retrieval selection
   persistence are covered by `scripts/catalog-embedding-audit-proof.py`.
+- `/qa/context-coverage.stateKeys` ties that aggregate back to
+  `/state.contextCatalog`, `/state.requestContext`, `/state.contextWindow`,
+  `/state.catalogEmbeddings`, `/state.stashRetrieval`, `/state.cveSemantic`,
+  and persisted message context/tool-schema audits.
 - Semantic CVE mode invocation is covered by `scripts/semantic-cve-proof.py`,
   which launches the app with a deterministic fake embedder, seeds tiny stored
   vectors, verifies the embedder subprocess was called, and asserts
@@ -533,7 +537,7 @@ Automated no-model gates:
   catalogue injection, `search_context`, request-audit persistence, parsed
   result-to-context routing, deployed-agent retrieval, durable embeddings,
   targeted stash retrieval, new-context cache preservation, the `/context/new`
-  route, and proof-count metadata.
+  route, proof-count metadata, and `stateKeys` for the context audit surfaces.
   `/qa/visual-coverage` exposes screenshot-backed UI proof coverage for chat,
   scroll lock, Settings, context inspector, request-audit badges, tab activity,
   subtab lifecycle strips, OSINT screenshots, reports, stash retrieval,

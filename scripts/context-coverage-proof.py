@@ -45,6 +45,17 @@ REQUIRED_PROOFS = {
     "context-window-cache-proof.py",
 }
 
+REQUIRED_STATE_KEYS = {
+    "contextCatalog",
+    "requestContext",
+    "contextWindow",
+    "catalogEmbeddings",
+    "stashRetrieval",
+    "cveSemantic",
+    "messages.contextSelections",
+    "messages.toolSchemas",
+}
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -102,6 +113,10 @@ def assert_context_coverage() -> None:
         raise AssertionError(f"context coverage should expose automatic context cap: {coverage}")
     if not 1 <= coverage.get("currentInjectedContextLimit", 0) <= 4:
         raise AssertionError(f"context coverage should expose bounded current context limit: {coverage}")
+    state_keys = set(coverage.get("stateKeys") or [])
+    missing_state_keys = sorted(REQUIRED_STATE_KEYS.difference(state_keys))
+    if missing_state_keys:
+        raise AssertionError(f"context coverage missing state keys {missing_state_keys}: {coverage}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/context-coverage" not in qa.get("stateRoutes", []):
