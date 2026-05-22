@@ -271,6 +271,11 @@ Post:
   `/results.postAttribution`; the Post tab shows the same rows above raw output.
 - Attribution parsing is covered by `scripts/post-attribution-proof.py`, and the
   visible Post tab state is captured under `docs/visual-proofs/checkpoint-94`.
+- Copy controls now route through AppState for PrivEsc, AD Attacks, Lateral, and
+  Attribution rows. `/state.postCopyActions` exposes the last kind, copied
+  count, clipboard preview, and summary, with tab activity recorded as
+  `lastTool=copy_post`; `scripts/post-copy-actions-proof.py` covers the live
+  seed/copy/state path.
 
 OSINT:
 

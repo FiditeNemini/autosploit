@@ -309,12 +309,18 @@ Post:
 - Buttons: Run LinPEAS, impacket Run, Pivot.
 - Chat path: sends prompts to chat.
 - State: raw post-exploitation output, network hosts, and structured
-  per-host/session output attribution.
+  per-host/session output attribution, plus `/state.postCopyActions` for the
+  latest copy operation.
 - Privilege escalation, AD/impacket, and lateral movement lifecycle state now
   tracks idle, running, done, failed, and canceled and is visible in the
   relevant Post subtab.
 - Live UI screenshot coverage for PrivEsc, AD Attacks, and Lateral lifecycle
   strips is captured by `scripts/visual-tab-proof.py`.
+- Post copy controls are covered by `scripts/post-copy-actions-proof.py`: the
+  proof seeds LinPEAS output, impacket output, a compromised lateral host, and
+  attribution rows, then verifies PrivEsc, AD Attacks, Lateral, and Attribution
+  copy paths record clipboard preview, count, kind, and Post tab activity with
+  `lastTool=copy_post`.
 - Per-host/session attribution is covered by `scripts/post-attribution-proof.py`:
   seeded linpeas, impacket secretsdump, and metasploit session output produce
   structured host/user/session rows through `/state.postAttribution` and
