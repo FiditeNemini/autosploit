@@ -152,6 +152,14 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state proof category counts mismatch: {app_state_group}")
     if app_state_group.get("proofCategorySurfaceCount") != len(expected_categories):
         raise AssertionError(f"coverage index app state proof category surface count mismatch: {app_state_group}")
+    expected_category_total = sum(
+        category.get("count", 0)
+        for category in (proof.get("categories") or {}).values()
+    )
+    if app_state_group.get("proofCategoryTotalCount") != expected_category_total:
+        raise AssertionError(f"coverage index app state proof category total mismatch: {app_state_group}")
+    if app_state_group.get("proofCategoryTotalCount") != proof.get("proofCount"):
+        raise AssertionError(f"coverage index app state proof category total does not match proof ledger: {app_state_group}")
     if app_state_group.get("artifactLedgerVisualManifestCount", 0) < 22:
         raise AssertionError(f"coverage index app state artifact visual count mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerLiveProofCount", 0) < 18:

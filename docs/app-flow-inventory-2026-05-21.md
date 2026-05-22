@@ -657,7 +657,9 @@ Current repeatable gates:
   `/qa/proof-ledger` proof count across all local proof scripts. It also exposes
   proof category counts for agent, chat, context, runtime, settings, tabs,
   tools, and visual proof surfaces, plus a proof-category surface count consumed
-  by the broad app QA matrix. It also exposes `/qa/artifact-ledger`
+  by the broad app QA matrix and a total category count that must match the
+  proof ledger count, including the `other` bucket. It also exposes
+  `/qa/artifact-ledger`
   visual manifest and live-proof counts so screenshot and live JSON evidence
   stay machine-auditable, including missing visual capture count.
   `/qa/checkpoint-ledger` exposes checkpoint documentation count,
