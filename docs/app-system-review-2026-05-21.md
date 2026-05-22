@@ -534,7 +534,8 @@ Automated no-model gates:
   subtab lifecycle strips, OSINT screenshots, reports, stash retrieval,
   unsupported models, post attribution, tool action panels, live cache stats,
   CVE/tool settings pages, visual manifests, capture-count minimums, and
-  proof-count metadata.
+  proof-count metadata, plus the QA routes used to seed or switch each visual
+  proof state.
   `/qa/session-coverage` exposes cross-app session workflow proof coverage for
   onboarding/mode selection, Sidebar operations, overlays, model-folder pickers,
   persistence/relaunch, saved messages, result rebuild, finding wizard submit,

@@ -81,6 +81,33 @@ REQUIRED_MANIFESTS = {
     "docs/visual-proofs/checkpoint-109/manifest.json",
 }
 
+REQUIRED_ROUTES = {
+    "/qa/seed-chat-visual-states",
+    "/qa/chat-visual-mode",
+    "/qa/chat-context-inspector",
+    "/qa/seed-chat-request-audit-visual",
+    "/qa/seed-visual-activity",
+    "/qa/visual-subtab",
+    "/qa/seed-settings-visual-state",
+    "/qa/settings-category",
+    "/qa/model-folder",
+    "/qa/seed-live-cache-stats",
+    "/qa/seed-cve-settings-status",
+    "/qa/seed-tool-settings-status",
+    "/qa/seed-osint-screenshot-artifact",
+    "/qa/osint-artifact-action",
+    "/qa/seed-post-attribution",
+    "/qa/seed-web-verify-action",
+    "/qa/seed-recon-action-status",
+    "/qa/seed-network-protocol-action",
+    "/qa/seed-creds-action-results",
+    "/qa/seed-exploit-action-differentiation",
+    "/qa/seed-report-export",
+    "/qa/seed-report-agent-action",
+    "/qa/seed-stash-retrieval",
+    "/qa/context-packet",
+}
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -142,6 +169,9 @@ def assert_visual_coverage() -> None:
         raise AssertionError(f"visual coverage names non-existent proof files: {missing_files}")
     if coverage.get("proofCount", 0) < len(REQUIRED_PROOFS):
         raise AssertionError(f"visual coverage proof count mismatch: {coverage}")
+    missing_routes = sorted(REQUIRED_ROUTES.difference(set(coverage.get("routes") or [])))
+    if missing_routes:
+        raise AssertionError(f"visual coverage missing routes {missing_routes}: {coverage}")
 
     manifests = set(coverage.get("manifests") or [])
     missing_manifests = sorted(REQUIRED_MANIFESTS.difference(manifests))
