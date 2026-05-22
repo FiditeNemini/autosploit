@@ -3,5 +3,5 @@
   "captures": [
     "docs/visual-proofs/checkpoint-95/osint-artifact-actions.png"
   ],
-  "note": "Cropped macOS capture of OSINT screenshot artifact row showing open, reveal, and copy-path action buttons."
+  "note": "Cropped macOS capture of OSINT screenshot artifact row showing open, reveal, copy-path action buttons, and opened-artifact status feedback."
 }

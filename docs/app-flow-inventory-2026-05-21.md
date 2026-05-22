@@ -247,7 +247,9 @@ OSINT:
   captured under `docs/visual-proofs/checkpoint-90`.
 - Screenshot artifact rows now expose open, reveal, and copy-path actions when
   the backing file exists. Action metadata and state are exposed through
-  `/state.osintArtifacts[*].actions` and `/state.osintArtifactAction`.
+  `/state.osintArtifacts[*].actions`, `/state.osintArtifacts[*].actionLabels`,
+  and `/state.osintArtifactAction`. The row now shows the last artifact action
+  summary inline after open/reveal/copy-path.
 - Artifact action behavior is covered by `scripts/osint-artifact-actions-proof.py`,
   and visible row controls are captured under
   `docs/visual-proofs/checkpoint-95`.

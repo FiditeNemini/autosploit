@@ -63,6 +63,8 @@ def run() -> None:
         action = state.get("osintArtifactAction") or {}
         if action.get("lastAction") != "open":
             raise AssertionError(f"last artifact action was not tracked: {state}")
+        if action.get("status") != "done" or action.get("summary") != "opened artifact":
+            raise AssertionError(f"artifact action status was not surfaced: {action}")
         if action.get("pathExists") is not True or action.get("bytes", 0) <= 0:
             raise AssertionError(f"artifact action did not validate file: {state}")
         history = action.get("history") or []
@@ -72,6 +74,10 @@ def run() -> None:
         for expected in ("open", "reveal", "copyPath"):
             if expected not in actions:
                 raise AssertionError(f"artifact row missing action {expected}: {state}")
+        action_labels = (state.get("osintArtifacts") or [{}])[0].get("actionLabels") or {}
+        expected_labels = {"open": "Open", "reveal": "Reveal", "copyPath": "Copy Path"}
+        if action_labels != expected_labels:
+            raise AssertionError(f"artifact row missing action labels: {state}")
 
         print("osint-artifact-actions proof passed")
     finally:

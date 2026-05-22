@@ -84,16 +84,22 @@ def run() -> None:
         seeded = request("POST", "/qa/seed-osint-screenshot-artifact")
         if seeded.get("ok") is not True:
             raise AssertionError(f"seed failed: {seeded}")
+        opened = request("POST", "/qa/osint-artifact-action", "open")
+        if opened.get("ok") is not True:
+            raise AssertionError(f"open action failed: {opened}")
         state = request("GET", "/state")
         actions = (state.get("osintArtifacts") or [{}])[0].get("actions") or []
         if actions != ["open", "reveal", "copyPath"]:
             raise AssertionError(f"expected artifact action metadata: {state}")
+        artifact_action = state.get("osintArtifactAction") or {}
+        if artifact_action.get("summary") != "opened artifact":
+            raise AssertionError(f"expected visible artifact action summary: {state}")
         target = OUT_DIR / "osint-artifact-actions.png"
         capture(target)
         manifest = {
             "ok": True,
             "captures": [str(target.relative_to(ROOT))],
-            "note": "Cropped macOS capture of OSINT screenshot artifact row showing open, reveal, and copy-path action buttons.",
+            "note": "Cropped macOS capture of OSINT screenshot artifact row showing open, reveal, copy-path action buttons, and opened-artifact status feedback.",
         }
         (OUT_DIR / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
         print("visual-osint-artifact-actions proof passed")

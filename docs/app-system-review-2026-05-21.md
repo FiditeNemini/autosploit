@@ -293,7 +293,9 @@ OSINT:
 - Screenshot artifact row actions are covered by
   `scripts/osint-artifact-actions-proof.py`: artifact rows expose open, reveal,
   and copy-path actions when the file exists, and `/state.osintArtifactAction`
-  tracks last action, validated path, byte count, and action history.
+  tracks status, summary, last action, validated path, byte count, and action
+  history. `/state.osintArtifacts[*].actionLabels` exposes the user-facing row
+  action labels.
 - Visible artifact action controls are captured under
   `docs/visual-proofs/checkpoint-95`.
 
