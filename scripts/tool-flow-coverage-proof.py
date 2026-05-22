@@ -17,6 +17,7 @@ APP_API = "http://127.0.0.1:9999"
 
 EXPECTED_ROUTES = {
     "/qa/tool-coverage",
+    "/qa/tool-catalog",
     "/qa/seed-result-parser-fixture",
     "/qa/result-parser-coverage",
     "/qa/seed-tool-family-fanout-fixture",
@@ -24,6 +25,7 @@ EXPECTED_ROUTES = {
 }
 EXPECTED_PROOFS = {
     "tool-registry-coverage-proof.py",
+    "tool-catalog-proof.py",
     "result-parser-routing-proof.py",
     "result-context-catalog-proof.py",
     "tool-fanout-status-proof.py",
@@ -91,6 +93,12 @@ def run() -> None:
             raise AssertionError(f"tool flow did not expose registry count: {coverage}")
         if coverage.get("callbackCount") != 3:
             raise AssertionError(f"tool flow did not expose callback count: {coverage}")
+        if coverage.get("toolSchemaCap") != 12:
+            raise AssertionError(f"tool flow did not expose schema cap: {coverage}")
+        if coverage.get("toolSchemaPolicy") != "prompt-tab-ranked-installed-cap":
+            raise AssertionError(f"tool flow did not expose schema policy: {coverage}")
+        if coverage.get("toolCatalogRoute") != "/qa/tool-catalog":
+            raise AssertionError(f"tool flow did not expose tool catalog route: {coverage}")
         expected_activity_statuses = ["running", "done", "failed", "canceled"]
         if coverage.get("tabActivityStatuses") != expected_activity_statuses:
             raise AssertionError(f"tool flow tab activity statuses mismatch: {coverage}")

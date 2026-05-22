@@ -275,6 +275,12 @@ def assert_coverage_index() -> None:
     if tools_parsers_group.get("stateKeyCount", 0) < 5:
         raise AssertionError(f"coverage index tools/parsers state key count mismatch: {tools_parsers_group}")
     tool_flow = request("GET", "/qa/tool-flow-coverage")
+    if tools_parsers_group.get("toolSchemaCap") != tool_flow.get("toolSchemaCap"):
+        raise AssertionError(f"coverage index tools/parsers schema cap mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolSchemaPolicy") != tool_flow.get("toolSchemaPolicy"):
+        raise AssertionError(f"coverage index tools/parsers schema policy mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolCatalogRoute") != tool_flow.get("toolCatalogRoute"):
+        raise AssertionError(f"coverage index tools/parsers catalog route mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("tabActivityStatuses") != tool_flow.get("tabActivityStatuses"):
         raise AssertionError(f"coverage index tools/parsers tab activity statuses mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("tabActivityStatusCount") != tool_flow.get("tabActivityStatusCount"):

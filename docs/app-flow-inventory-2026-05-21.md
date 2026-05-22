@@ -171,6 +171,10 @@ callback-vs-subprocess execution, sample CLI routing, tab ownership, global
 visibility, and structured-vs-raw result mode so tool-loop coverage can be
 checked without relying on a live model to enumerate the catalogue. The route
 returns a standard `ok` aggregate status.
+`/qa/tool-flow-coverage` now also exposes the `/qa/tool-catalog` route, the
+`tool-catalog-proof.py` proof, `toolSchemaCap=12`, and
+`toolSchemaPolicy=prompt-tab-ranked-installed-cap`, so the aggregate proves
+prompt/tab-ranked schema selection is capped and not a full catalogue dump.
 
 ## Context And Catalog State
 
@@ -751,8 +755,9 @@ Current repeatable gates:
   settings/visuals group exposes settings visual manifest count, full
   visual manifest count, and actual screenshot capture count. The tools/parsers
   group exposes registry tool count, callback count, representative family
-  fanout count, state-key count, visible tab activity statuses, and the tab
-  activity status parity/indicator contract. The tabs/sessions group exposes
+  fanout count, state-key count, dynamic tool-schema cap/policy/route, visible
+  tab activity statuses, and the tab activity status parity/indicator contract.
+  The tabs/sessions group exposes
   interaction-mode count, covered tab count, session state-key count, and
   action-state-key count, and now mirrors the visible tab activity status
   list/count/parity plus indicator contract because the tab bar is owned by the
