@@ -55,18 +55,24 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit visual capture count mismatch: {audit}")
     if audit.get("missingVisualCaptureCount") != len(artifact.get("missingVisualCaptures") or []):
         raise AssertionError(f"audit missing visual count mismatch: {audit}")
+    if audit.get("missingVisualCaptures") != artifact.get("missingVisualCaptures"):
+        raise AssertionError(f"audit missing visual list mismatch: {audit}")
     if audit.get("liveProofCount") != artifact.get("liveProofCount"):
         raise AssertionError(f"audit live proof count mismatch: {audit}")
     if audit.get("liveProofOkCount") != artifact.get("liveProofOkCount"):
         raise AssertionError(f"audit live proof ok count mismatch: {audit}")
     if audit.get("failedLiveProofCount") != len(artifact.get("failedLiveProofs") or []):
         raise AssertionError(f"audit failed live proof count mismatch: {audit}")
+    if audit.get("failedLiveProofs") != artifact.get("failedLiveProofs"):
+        raise AssertionError(f"audit failed live proof list mismatch: {audit}")
     if audit.get("checkpointCount") != checkpoint.get("checkpointCount"):
         raise AssertionError(f"audit checkpoint count mismatch: {audit}")
     if audit.get("completeCheckpointCount") != checkpoint.get("completeCheckpointCount"):
         raise AssertionError(f"audit complete checkpoint count mismatch: {audit}")
     if audit.get("incompleteCheckpointCount") != len(checkpoint.get("incompleteCheckpoints") or []):
         raise AssertionError(f"audit incomplete checkpoint count mismatch: {audit}")
+    if audit.get("incompleteCheckpoints") != checkpoint.get("incompleteCheckpoints"):
+        raise AssertionError(f"audit incomplete checkpoint list mismatch: {audit}")
     if audit.get("latestCheckpoint") != checkpoint.get("latestCheckpoint"):
         raise AssertionError(f"audit latest checkpoint mismatch: {audit}")
     if audit.get("currentGapCount") != gap.get("currentGapCount"):
