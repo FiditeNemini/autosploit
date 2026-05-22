@@ -567,6 +567,10 @@ Required future proof gates:
 - Chat token metrics, active tool header, approval card, running tool card,
   failed tool card, and streaming reasoning state are captured under
   `docs/visual-proofs/checkpoint-71`.
+- Activity Feed header copy, row copy, row copy-with-timestamp,
+  copy-visible, and clear actions now route through AppState and expose
+  `/state.activityFeedActions` with last action, status, count, summary, and
+  clipboard preview. Covered by `scripts/activity-feed-actions-proof.py`.
 - Per-turn request-audit badges are captured under
   `docs/visual-proofs/checkpoint-87`.
 - Chat scroll locked/paused and reasoning expanded/collapsed states are captured
@@ -589,6 +593,8 @@ Required future proof gates:
 - OSINT screenshot artifact actions are captured under
   `docs/visual-proofs/checkpoint-95`.
 - OSINT copy actions are covered by `scripts/osint-copy-actions-proof.py`.
+- Activity Feed copy and clear actions are covered by
+  `scripts/activity-feed-actions-proof.py`.
 - Web Verify queued/progress state is captured under
   `docs/visual-proofs/checkpoint-96`.
 - Recon Full Recon running state is captured under

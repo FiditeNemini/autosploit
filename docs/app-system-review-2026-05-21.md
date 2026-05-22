@@ -170,6 +170,10 @@ Result fanout:
   Network, Creds, Exploit, Post, and OSINT fixtures each prove a visible chat
   tool card, activity-feed entry, tab activity status, parsed tab result, and
   context-catalog hit.
+- Activity Feed copy and clear controls now route through AppState. The header
+  copy, row copy, row copy-with-timestamp, copy-visible, and clear actions
+  expose `/state.activityFeedActions` with last action, status, count, summary,
+  and clipboard preview. Covered by `scripts/activity-feed-actions-proof.py`.
 - Representative parser routing is covered by
   `scripts/result-parser-routing-proof.py`: it seeds outputs for structured
   recon, web, network, creds, exploit, post, OSINT, screenshot, and raw-only
@@ -718,6 +722,8 @@ Visual gates:
   `docs/visual-proofs/checkpoint-95`.
 - OSINT copy action state for username/email/metadata/screenshots/all rows is
   covered by `scripts/osint-copy-actions-proof.py`.
+- Activity Feed copy-entry/copy-timestamp/copy-visible/clear state is covered
+  by `scripts/activity-feed-actions-proof.py`.
 - Web Verify queued/progress state is captured under
   `docs/visual-proofs/checkpoint-96`.
 - Recon Full Recon running state is captured under
