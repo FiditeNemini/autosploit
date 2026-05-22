@@ -285,6 +285,11 @@ OSINT:
   idle/running/done/failed/canceled status on the active search mode and are
   covered by the live-turn Sherlock-style cancellation proof plus checkpoint-70
   visual screenshots.
+- Toolbar and row copy controls for username, email, metadata, screenshot, and
+  all-row OSINT output are routed through AppState. `/state.osintCopyActions`
+  exposes copied kind, count, clipboard preview, and summary, while the OSINT
+  tab activity reports `copy_osint`. Covered by
+  `scripts/osint-copy-actions-proof.py`.
 - Screenshot artifact preview validation is covered by
   `scripts/osint-screenshot-artifact-proof.py`, and the visible preview row is
   captured under `docs/visual-proofs/checkpoint-90`.
@@ -583,6 +588,7 @@ Required future proof gates:
   `docs/visual-proofs/checkpoint-94`.
 - OSINT screenshot artifact actions are captured under
   `docs/visual-proofs/checkpoint-95`.
+- OSINT copy actions are covered by `scripts/osint-copy-actions-proof.py`.
 - Web Verify queued/progress state is captured under
   `docs/visual-proofs/checkpoint-96`.
 - Recon Full Recon running state is captured under
