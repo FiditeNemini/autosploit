@@ -867,7 +867,7 @@ mirrors session route list/count, contract map/count, proof list/count/file pari
   mirrors session workflow surface list/count/parity,
   session workflow surface proof map/count/parity,
   mirrors tab action tab list, route list/count, contract map/count, proof
-  list/count, and action-state-key list/count,
+  list/count/file parity, and action-state-key list/count,
   mirrors tab action surface list/count/parity and proof map/count/parity, mirrors
   agent-loop phase list/count/parity and phase-proof map/count/parity,
   mirrors agent-loop state-key list/count, current mode, max-iteration guard,

@@ -838,6 +838,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index tab action proof list mismatch: {coverage_index}")
     if tabs_sessions_group.get("tabActionProofCount") != tab_action_coverage.get("proofCount"):
         raise AssertionError(f"/qa/coverage-index tab action proof count mismatch: {coverage_index}")
+    if tab_action_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/tab-action-coverage proof-file parity mismatch: {tab_action_coverage}")
+    if tabs_sessions_group.get("tabActionProofFileParity") != tab_action_coverage.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index tab action proof-file parity mismatch: {coverage_index}")
     if tabs_sessions_group.get("tabActionStateKeys") != tab_action_coverage.get("actionStateKeys"):
         raise AssertionError(f"/qa/coverage-index tab action state-key list mismatch: {coverage_index}")
     if tabs_sessions_group.get("tabActionStateKeyCount") != len(tab_action_coverage.get("actionStateKeys") or []):

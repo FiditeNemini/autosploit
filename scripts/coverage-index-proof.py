@@ -850,6 +850,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions tab action proof list mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActionProofCount") != tab_action_coverage.get("proofCount"):
         raise AssertionError(f"coverage index tabs/sessions tab action proof count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActionProofFileParity") != tab_action_coverage.get("proofFileParity"):
+        raise AssertionError(f"coverage index tabs/sessions tab action proof-file parity mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActionStateKeys") != tab_action_coverage.get("actionStateKeys"):
         raise AssertionError(f"coverage index tabs/sessions tab action state-key list mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActionStateKeyCount") != len(tab_action_coverage.get("actionStateKeys") or []):
