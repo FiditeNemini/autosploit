@@ -230,6 +230,10 @@ Web:
   opens the finding wizard with prefilled fields, stashes the finding, copies
   the finding text, queues a related CVE search through chat, and verifies Web
   tab activity exposes `search_related_cve`.
+- Web row context-menu copy actions for title, target, and details now route
+  through AppState and `/state.webDirectActions`; context-menu stash updates
+  both Web direct-action state and `/state.stashActions`. Covered by
+  `scripts/web-row-context-actions-proof.py`.
 - Verify action state is covered by `scripts/web-verify-action-proof.py`: a
   seeded finding records `/state.webAction`, preserves the exact verification
   prompt, and marks the Web tab activity state as running/verify.
@@ -728,6 +732,8 @@ Visual gates:
   `docs/visual-proofs/checkpoint-95`.
 - OSINT copy action state for username/email/metadata/screenshots/all rows is
   covered by `scripts/osint-copy-actions-proof.py`.
+- Web row context copy/stash action state is covered by
+  `scripts/web-row-context-actions-proof.py`.
 - Activity Feed copy-entry/copy-timestamp/copy-visible/clear state is covered
   by `scripts/activity-feed-actions-proof.py`.
 - Web Verify queued/progress state is captured under

@@ -190,6 +190,10 @@ Web:
 - Direct action state is covered by `scripts/web-direct-actions-proof.py`,
   which verifies finding prefill, stash creation, copy preview, related-CVE chat
   prompt, and Web tab activity.
+- Row context-menu copy actions for title, target, and details now route
+  through AppState and `/state.webDirectActions`; context-menu stash uses the
+  same `recordStashAdd` path as Stash tab additions, so `/state.stashActions`
+  records the item. Covered by `scripts/web-row-context-actions-proof.py`.
 - Verify rows now expose queued progress state tied to `/state.webAction` and
   Web tab activity. `scripts/web-verify-action-proof.py` verifies the target,
   finding title, prompt, and running tab badge; the visible queued button state
@@ -602,6 +606,8 @@ Required future proof gates:
 - OSINT copy actions are covered by `scripts/osint-copy-actions-proof.py`.
 - Activity Feed copy and clear actions are covered by
   `scripts/activity-feed-actions-proof.py`.
+- Web row context copy/stash actions are covered by
+  `scripts/web-row-context-actions-proof.py`.
 - Web Verify queued/progress state is captured under
   `docs/visual-proofs/checkpoint-96`.
 - Recon Full Recon running state is captured under
