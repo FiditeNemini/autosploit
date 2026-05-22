@@ -817,6 +817,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions session proof list mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("sessionProofCount") != session_coverage.get("proofCount"):
         raise AssertionError(f"coverage index tabs/sessions session proof count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("sessionProofFileParity") != session_coverage.get("proofFileParity"):
+        raise AssertionError(f"coverage index tabs/sessions session proof-file parity mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("sessionStateKeys") != session_coverage.get("stateKeys"):
         raise AssertionError(f"coverage index tabs/sessions session state-key list mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("sessionStateKeyCount") != len(session_coverage.get("stateKeys") or []):

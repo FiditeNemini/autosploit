@@ -816,6 +816,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index session proof list mismatch: {coverage_index}")
     if tabs_sessions_group.get("sessionProofCount") != session_coverage.get("proofCount"):
         raise AssertionError(f"/qa/coverage-index session proof count mismatch: {coverage_index}")
+    if session_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/session-coverage proof-file parity mismatch: {session_coverage}")
+    if tabs_sessions_group.get("sessionProofFileParity") != session_coverage.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index session proof-file parity mismatch: {coverage_index}")
     if tabs_sessions_group.get("sessionStateKeys") != session_coverage.get("stateKeys"):
         raise AssertionError(f"/qa/coverage-index session state-key list mismatch: {coverage_index}")
     if tabs_sessions_group.get("sessionStateKeyCount") != len(session_coverage.get("stateKeys") or []):

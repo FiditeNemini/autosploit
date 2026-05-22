@@ -150,6 +150,8 @@ def assert_session_coverage() -> None:
     missing_files = sorted(name for name in REQUIRED_PROOFS if not (ROOT / "scripts" / name).is_file())
     if missing_files:
         raise AssertionError(f"session coverage names non-existent proof files: {missing_files}")
+    if coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"session coverage proof file parity mismatch: {coverage}")
 
     if coverage.get("interactionModes") != ["autopilot", "copilot", "manual"]:
         raise AssertionError(f"session coverage mode order mismatch: {coverage}")
