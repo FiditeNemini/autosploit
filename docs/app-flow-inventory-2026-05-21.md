@@ -662,7 +662,8 @@ Current repeatable gates:
   `/qa/proof-ledger` category counts/surfaces/surface-count/other-count/total/parity
   rollup, proof-category surface count consumed by the broad app QA matrix, and a total
   category count that must match the proof ledger count, including the `other`
-  bucket. It also exposes an explicit proof-category parity flag consumed by
+  bucket, and mirrors the source proof-ledger `other` count as
+  `proofLedgerCategoryOtherCount`. It also exposes an explicit proof-category parity flag consumed by
   both the coverage-index proof and the broad app QA matrix. It also exposes
   `/qa/artifact-ledger`
   visual manifest and live-proof counts so screenshot and live JSON evidence
