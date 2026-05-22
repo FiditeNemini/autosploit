@@ -684,7 +684,9 @@ Current repeatable gates:
   from `/qa/checkpoint-ledger`, plus `/qa/checkpoint-ledger.latestCheckpoint`
   and `latestCheckpointNumber`, so the same aggregate identifies the current
   documentation frontier and its completion breakdown. It also carries
-  `/qa/gap-ledger.openGapIds` and a
+  `/qa/audit-ledger.proofCategorySurfaceCount`, so the top-level index proves
+  the audit rollup is exposing proof-surface breadth, not just total ledger
+  size. It also carries `/qa/gap-ledger.openGapIds` and a
   `gapContractCount`, so the top-level QA summary names the remaining gap and
   proves a structured contract exists. `/qa/gap-ledger` reads the
   current-gap section from `docs/app-system-review-2026-05-21.md` and exposes

@@ -97,6 +97,7 @@ def assert_coverage_index() -> None:
     index = request("GET", "/qa/coverage-index")
     proof = request("GET", "/qa/proof-ledger")
     checkpoint = request("GET", "/qa/checkpoint-ledger")
+    audit = request("GET", "/qa/audit-ledger")
     gap = request("GET", "/qa/gap-ledger")
 
     if index.get("ok") is not True:
@@ -182,6 +183,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state latest checkpoint number mismatch: {app_state_group}")
     if app_state_group.get("auditLedgerCount", 0) < 300:
         raise AssertionError(f"coverage index app state audit ledger count mismatch: {app_state_group}")
+    if app_state_group.get("auditProofCategorySurfaceCount") != audit.get("proofCategorySurfaceCount"):
+        raise AssertionError(f"coverage index app state audit proof surface count mismatch: {app_state_group}")
     if app_state_group.get("currentGapCount", -1) != 1:
         raise AssertionError(f"coverage index app state current gap count mismatch: {app_state_group}")
     if app_state_group.get("openGapIds") != gap.get("openGapIds"):
