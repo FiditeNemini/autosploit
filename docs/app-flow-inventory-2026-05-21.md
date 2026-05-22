@@ -779,6 +779,7 @@ Current repeatable gates:
   artifacts remain visible from the top-level QA index. The chat/context group
   also mirrors `/qa/chat-coverage.cacheResponsesInferenceMethod`,
   `newModelSessionBehavior`, context retrieval source list/count/parity,
+  retrieval-source proof count/parity,
   context delivery mode list/count/parity, and delivery-mode proof
   count/parity, so
   bounded dynamic catalogue source coverage and cache-session preservation remain

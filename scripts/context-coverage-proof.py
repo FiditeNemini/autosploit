@@ -41,6 +41,8 @@ REQUIRED_PROOFS = {
     "agent-search-context-proof.py",
     "catalog-embedding-audit-proof.py",
     "stash-retrieval-proof.py",
+    "semantic-cve-proof.py",
+    "tool-fanout-status-proof.py",
     "request-audit-proof.py",
     "context-window-cache-proof.py",
     "persistence-proof.py",
@@ -64,6 +66,14 @@ REQUIRED_RETRIEVAL_SOURCES = [
     "stash.note",
     "cve",
 ]
+
+REQUIRED_RETRIEVAL_SOURCE_PROOFS = {
+    "asset.port": ["context-catalog-proof.py", "result-context-catalog-proof.py"],
+    "finding": ["context-catalog-proof.py"],
+    "tool.output": ["result-context-catalog-proof.py", "tool-fanout-status-proof.py"],
+    "stash.note": ["context-catalog-proof.py", "stash-retrieval-proof.py"],
+    "cve": ["semantic-cve-proof.py", "agent-search-context-proof.py"],
+}
 
 REQUIRED_DELIVERY_MODES = [
     "automaticBoundedInjection",
@@ -144,6 +154,16 @@ def assert_context_coverage() -> None:
         raise AssertionError(f"context coverage retrieval source count mismatch: {coverage}")
     if coverage.get("retrievalSourceParity") is not True:
         raise AssertionError(f"context coverage retrieval source parity mismatch: {coverage}")
+    if coverage.get("retrievalSourceProofs") != REQUIRED_RETRIEVAL_SOURCE_PROOFS:
+        raise AssertionError(f"context coverage retrieval source proof map mismatch: {coverage}")
+    if coverage.get("retrievalSourceProofCount") != len(REQUIRED_RETRIEVAL_SOURCE_PROOFS):
+        raise AssertionError(f"context coverage retrieval source proof count mismatch: {coverage}")
+    if coverage.get("retrievalSourceProofParity") is not True:
+        raise AssertionError(f"context coverage retrieval source proof parity mismatch: {coverage}")
+    for source, proof_names in REQUIRED_RETRIEVAL_SOURCE_PROOFS.items():
+        missing_source_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
+        if missing_source_files:
+            raise AssertionError(f"context retrieval source {source} names missing proof files {missing_source_files}: {coverage}")
     if coverage.get("contextDeliveryModes") != REQUIRED_DELIVERY_MODES:
         raise AssertionError(f"context coverage delivery modes mismatch: {coverage}")
     if coverage.get("contextDeliveryModeCount") != len(REQUIRED_DELIVERY_MODES):

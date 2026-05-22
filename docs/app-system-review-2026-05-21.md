@@ -558,8 +558,9 @@ Automated no-model gates:
   result-to-context routing, deployed-agent retrieval, durable embeddings,
   targeted stash retrieval, new-context cache preservation, the `/context/new`
   route, proof-count metadata, `stateKeys`, and retrieval source
-  list/count/parity for the context audit surfaces. It also exposes
-  `contextDeliveryModes`, `contextDeliveryModeCount`, and
+  list/count/parity plus retrieval-source proof map/count/parity for the
+  context audit surfaces. It also exposes `contextDeliveryModes`,
+  `contextDeliveryModeCount`, and
   `contextDeliveryModeParity`, plus delivery-mode proof map/count/parity, so
   automatic bounded injection, on-demand `search_context`, persisted turn audit,
   durable embeddings, and active-scope stash retrieval are visible as separate

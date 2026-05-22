@@ -266,6 +266,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context retrieval source count mismatch: {chat_context_group}")
     if chat_context_group.get("retrievalSourceParity") != context_coverage.get("retrievalSourceParity"):
         raise AssertionError(f"coverage index chat/context retrieval source parity mismatch: {chat_context_group}")
+    if chat_context_group.get("retrievalSourceProofCount") != context_coverage.get("retrievalSourceProofCount"):
+        raise AssertionError(f"coverage index chat/context retrieval source proof count mismatch: {chat_context_group}")
+    if chat_context_group.get("retrievalSourceProofParity") != context_coverage.get("retrievalSourceProofParity"):
+        raise AssertionError(f"coverage index chat/context retrieval source proof parity mismatch: {chat_context_group}")
     if chat_context_group.get("contextDeliveryModes") != context_coverage.get("contextDeliveryModes"):
         raise AssertionError(f"coverage index chat/context delivery modes mismatch: {chat_context_group}")
     if chat_context_group.get("contextDeliveryModeCount") != context_coverage.get("contextDeliveryModeCount"):
