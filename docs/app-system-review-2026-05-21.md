@@ -488,6 +488,12 @@ Real-model gates:
   plus `scripts/live-cache-stats-ui-proof.py` for TurboQuant, prefix-cache
   hits/tokens saved, prompt L2, block L2, SSM companion disk, and memory
   counters.
+- MiniMax real-model restart replay is covered by
+  `scripts/verify-live-models.py --restart-replay` and
+  `docs/live-proofs/checkpoint-110-minimax-restart-replay-live.json`: the first
+  process writes prompt/block L2 entries, the second process reloads the same
+  cache root, and the replay request reports 55 cached prompt tokens plus
+  `disk_cache.hits=1`.
 - Reasoning/tool parser API shaping is covered by
   `scripts/prove-parser-api.py` and `testsuite/test_tool_parser_api.py`.
 - Settings/message/result-store persistence is covered by
@@ -551,5 +557,11 @@ Visual gates:
 ## Current Gaps To Close Next
 
 1. Debug MiniMax forced no-thinking decode/API output separately from the
-   supported thinking-enabled smoke path; the strict live proof now passes with
-   non-empty assistant content and cache reuse.
+   supported thinking-enabled smoke path; the strict live proof and restart
+   replay proof now pass with non-empty assistant content and cache reuse.
+2. Add a real-model block-L2-hit proof or a block-L2-specific replay prompt
+   path. Checkpoint 110 proves block-L2 writes/persistence under MiniMax, but
+   replay was satisfied by prompt L2.
+3. Run true Qwen hybrid async SSM rederive execution against a loaded Qwen
+   hybrid model; current proof covers status visibility, not full background
+   execution.

@@ -255,6 +255,33 @@ def _assert_repeat_cache_behavior(
         raise RuntimeError("repeat cache check failed: no cached usage or cache-hit counter increment")
 
 
+def _assert_restart_replay_cache_behavior(
+    report: dict[str, Any],
+    first_run_cache: dict[str, Any],
+    replay_run_cache: dict[str, Any],
+    replay_completion: dict[str, Any],
+) -> None:
+    cached_tokens = _cached_tokens_from_completion(replay_completion)
+    counters = {
+        "scheduler_disk_hits_delta": _int_at(replay_run_cache, ("scheduler_cache", "disk_hits")) - _int_at(first_run_cache, ("scheduler_cache", "disk_hits")),
+        "scheduler_tokens_saved_delta": _int_at(replay_run_cache, ("scheduler_cache", "tokens_saved")) - _int_at(first_run_cache, ("scheduler_cache", "tokens_saved")),
+        "prompt_l2_hits_delta": _int_at(replay_run_cache, ("disk_cache", "hits")) - _int_at(first_run_cache, ("disk_cache", "hits")),
+        "block_l2_hits_delta": _int_at(replay_run_cache, ("block_disk_cache", "disk_hits")) - _int_at(first_run_cache, ("block_disk_cache", "disk_hits")),
+        "ssm_l2_hits_delta": _int_at(replay_run_cache, ("ssm_companion", "disk", "hits")) - _int_at(first_run_cache, ("ssm_companion", "disk", "hits")),
+    }
+    checks = {
+        "cached_usage": cached_tokens > 0,
+        "l2_disk_hit": any(value > 0 for value in counters.values()),
+    }
+    report["restart_replay_cache_checks"] = {
+        **checks,
+        "cached_tokens": cached_tokens,
+        **counters,
+    }
+    if not checks["cached_usage"] and not checks["l2_disk_hit"]:
+        raise RuntimeError("restart replay cache check failed: no cached usage or cross-process L2 disk-hit counter increment")
+
+
 def _chat_completion(
     base_url: str,
     model_name: str,
@@ -279,11 +306,104 @@ def _chat_completion(
     )
 
 
-def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float, metadata_only: bool = False) -> dict[str, Any]:
+def _launch_and_complete_once(
+    *,
+    path: Path,
+    family: str,
+    prompt: str,
+    timeout: float,
+    cache_root: Path,
+    phase: str,
+) -> dict[str, Any]:
+    port = _find_free_port()
+    report: dict[str, Any] = {
+        "phase": phase,
+        "base_url": f"http://127.0.0.1:{port}",
+        "launch_args": build_launch_args(path, port, cache_root=cache_root),
+    }
+
+    cmd = [
+        _engine_python(),
+        str(LAUNCH_PY),
+        "--model",
+        str(path),
+        "--port",
+        str(port),
+        "--reasoning-parser",
+        "auto",
+        "--tool-call-parser",
+        "auto",
+        "--kv-cache-quantization",
+        "turboquant-q4",
+        "--enable-prefix-cache",
+        "true",
+        "--enable-disk-cache",
+        "true",
+        "--disk-cache-dir",
+        str(cache_root / "prompt"),
+        "--use-paged-cache",
+        "true",
+        "--enable-block-disk-cache",
+        "true",
+        "--block-disk-cache-dir",
+        str(cache_root / "block"),
+        "--max-tokens",
+        "64",
+        "--verbose",
+    ]
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(ENGINE_DIR) + (":" + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
+    proc = subprocess.Popen(cmd, cwd=ROOT, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    report["launch_command"] = cmd
+    try:
+        health = _wait_health(report["base_url"], timeout, proc=proc, report=report)
+        models = _request_json("GET", f"{report['base_url']}/v1/models")
+        model_name = health.get("model_name") or path.name
+        smoke_thinking = family == "minimax"
+        report["smoke_enable_thinking"] = smoke_thinking
+        completion = _chat_completion(
+            report["base_url"],
+            model_name,
+            prompt,
+            timeout,
+            enable_thinking=smoke_thinking,
+        )
+        cache = _request_json("GET", f"{report['base_url']}/v1/cache/stats")
+        _assert_runtime_metadata(report, health, models, cache)
+        _assert_completion(completion)
+        report.update({
+            "health": health,
+            "models": models,
+            "completion_usage": completion.get("usage", {}),
+            "completion_preview": json.dumps(completion.get("choices", []))[:500],
+            "cache_stats": cache,
+            "completion": completion,
+        })
+        return report
+    finally:
+        if proc.poll() is None:
+            proc.terminate()
+            try:
+                proc.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                proc.kill()
+        if proc.stdout and "engine_log_tail" not in report:
+            report["engine_log_tail"] = "".join(proc.stdout.readlines()[-60:])
+
+
+def verify_live_model(
+    path: str | Path,
+    family: str,
+    prompt: str,
+    timeout: float,
+    metadata_only: bool = False,
+    restart_replay: bool = False,
+) -> dict[str, Any]:
     port = _find_free_port()
     path = Path(path).expanduser().resolve()
     report = inspect_model_folder(path, expected_family=family)
     report["metadata_only"] = metadata_only
+    report["restart_replay"] = restart_replay
 
     if not report["expected_ok"]:
         raise RuntimeError(f"{path} is {report['family']}, expected {family}")
@@ -297,6 +417,44 @@ def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float
     cache_root = Path(cache_tmp.name)
     report["cache_root"] = "temporary"
     report["launch_args"] = build_launch_args(path, port, cache_root=cache_root)
+
+    if restart_replay:
+        try:
+            first_run = _launch_and_complete_once(
+                path=path,
+                family=family,
+                prompt=prompt,
+                timeout=timeout,
+                cache_root=cache_root,
+                phase="populate",
+            )
+            replay_run = _launch_and_complete_once(
+                path=path,
+                family=family,
+                prompt=prompt,
+                timeout=timeout,
+                cache_root=cache_root,
+                phase="replay",
+            )
+            report.update({
+                "first_run": first_run,
+                "replay_run": replay_run,
+                "completion_usage": first_run.get("completion_usage", {}),
+                "cache_stats": first_run.get("cache_stats", {}),
+                "replay_completion_usage": replay_run.get("completion_usage", {}),
+                "replay_cache_stats": replay_run.get("cache_stats", {}),
+            })
+            _assert_restart_replay_cache_behavior(
+                report,
+                first_run_cache=first_run.get("cache_stats", {}),
+                replay_run_cache=replay_run.get("cache_stats", {}),
+                replay_completion=replay_run.get("completion", {}),
+            )
+            return report
+        except Exception as exc:
+            raise VerificationError(f"{family} restart replay verification failed: {exc}", {family: report}) from exc
+        finally:
+            cache_tmp.cleanup()
 
     cmd = [
         _engine_python(),
@@ -387,9 +545,9 @@ def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float
 def run(args: argparse.Namespace) -> dict[str, Any]:
     reports: dict[str, Any] = {}
     if args.qwen:
-        reports["qwen"] = verify_live_model(args.qwen, "qwen", args.prompt, args.timeout, args.metadata_only)
+        reports["qwen"] = verify_live_model(args.qwen, "qwen", args.prompt, args.timeout, args.metadata_only, args.restart_replay)
     if args.minimax:
-        reports["minimax"] = verify_live_model(args.minimax, "minimax", args.prompt, args.timeout, args.metadata_only)
+        reports["minimax"] = verify_live_model(args.minimax, "minimax", args.prompt, args.timeout, args.metadata_only, args.restart_replay)
     if args.unsupported:
         reports["unsupported"] = inspect_model_folder(args.unsupported, expected_family="unsupported")
         if reports["unsupported"]["supported"]:
@@ -405,6 +563,7 @@ def main() -> int:
     parser.add_argument("--minimax", help="MiniMax model folder to verify")
     parser.add_argument("--unsupported", help="Unsupported model folder expected to be rejected by family preflight")
     parser.add_argument("--metadata-only", action="store_true", help="Only inspect folders and launch arguments; do not start the engine")
+    parser.add_argument("--restart-replay", action="store_true", help="Run two engine processes against the same cache root and require cross-process L2 cache-hit evidence")
     parser.add_argument("--timeout", type=float, default=900.0, help="Seconds to wait for each live model to load/respond")
     parser.add_argument("--prompt", default="Reply with one short sentence for an ExploitBot cache/parser smoke test.")
     parser.add_argument("--output", help="Optional JSON report path")

@@ -601,15 +601,29 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   exposes installed, missing, installing, and error counts, install log, active
   settings category, and per-tool status rows, with deterministic QA seeding and
   visual proof under `docs/visual-proofs/checkpoint-109`.
+- Checkpoint 110: Added a real MiniMax restart-replay cache proof. The live
+  verifier now has `--restart-replay`, which runs two engine processes against
+  the same isolated cache root and requires cached-token or L2 disk-hit evidence
+  on the replay request. Artifact
+  `docs/live-proofs/checkpoint-110-minimax-restart-replay-live.json` loaded
+  `/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ` twice, proved
+  `prompt_tokens_details.cached_tokens=55`, `disk_cache.hits=1`,
+  `prompt_l2_hits_delta=1`, model-folder generation defaults, MiniMax
+  reasoning/tool parser autodetect, prefix cache, prompt L2, paged cache, block
+  L2, and TurboQuant Q4 metadata. The same run wrote/preserved block L2 entries,
+  but replay was satisfied by prompt L2, so it is not claimed as a real-model
+  block-L2 hit.
 
 ## Known Risk Areas
 
 - ExploitBot currently has a custom stripped server contract. Replacing `server.py` wholesale may expose endpoints the app does not need.
 - vMLX cache code has schema and runtime fingerprinting. Cache schema mismatches must invalidate old L2 entries rather than replaying them.
 - Qwen hybrid SSM cache restore is correctness-sensitive. Do not trim recurrent state by slicing KV arrays.
-- Full and final-partial block L2 promotion are proven with direct quantized KV
-  cache data. Real-model cross-run block-L2 hits still need a long enough live
-  run or an explicit restart/replay proof under the actual model path.
+- MiniMax real-model cross-process prompt L2 replay is proven with cached-token
+  evidence. Full and final-partial block L2 promotion are proven with direct
+  quantized KV cache data, but real-model cross-run block-L2 hits still need a
+  long enough live run or a block-L2-specific replay path under the actual model
+  path.
 - New visible context windows are proven to preserve the running engine cache
   topology, but this is app/session-state proof and does not replace real-model
   cross-run disk replay proof.
