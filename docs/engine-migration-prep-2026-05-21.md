@@ -393,6 +393,11 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   tab activity snapshots, the live-turn harness proves the Web/CVE path updates
   that state, and `WebTabView` no longer mutates CVE search state while
   rendering cards.
+- Checkpoint 57: Reorganized Settings from a single flat scroll into a split
+  category layout with pages for Engine, Model, Runtime, Context, Cache,
+  Agents, CVE Database, Tools, and Logs. The footer apply action remains
+  persistent, and the engine/model/runtime/context/cache controls keep their
+  existing save and restart behavior.
 
 ## Known Risk Areas
 
