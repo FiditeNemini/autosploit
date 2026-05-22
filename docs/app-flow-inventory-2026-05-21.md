@@ -852,7 +852,7 @@ Current repeatable gates:
   tool list, representative result-parser artifact lists for subdomains, URLs,
   vulnerability sources/titles, ports, network hosts, OSINT platforms, post
   labels, and raw tools, parser failure list/count, state-key count,
-  tool-flow proof count, proof list/file parity, tool/callback counters, route
+  tool-flow proof count, route-owned proof list/file parity, tool/callback counters, route
   list/count, family list/count, state-key list, contract map/count, dynamic
   tool-schema cap/policy/route,
   structured/raw result-mode counts, visible tab activity statuses, the tab

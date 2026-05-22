@@ -116,6 +116,8 @@ def run() -> None:
         missing_files = sorted(name for name in EXPECTED_PROOFS if not (ROOT / "scripts" / name).is_file())
         if missing_files:
             raise AssertionError(f"tool flow names non-existent proof files: {missing_files}")
+        if coverage.get("proofFileParity") is not True:
+            raise AssertionError(f"tool flow proof file parity mismatch: {coverage}")
         if set(coverage.get("families") or []) != EXPECTED_FAMILIES:
             raise AssertionError(f"tool flow family coverage mismatch: {coverage}")
         if coverage.get("toolCount") != 38:
