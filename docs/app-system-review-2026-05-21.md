@@ -100,9 +100,9 @@ Interaction modes:
   `/state.agentActions`, and clear active agents when disabling full-auto
   multi-agent mode.
 - `/qa/agent-loop-coverage` now exposes the agent route list, contract flags,
-  action telemetry field list, proof count, and deploy-sheet/task-send proof
-  references so the full agentic-loop surface is auditable from one aggregate
-  endpoint.
+  action telemetry field list, proof count, deploy-sheet/task-send proof
+  references, and loop-phase list/count/parity so the full agentic-loop surface
+  is auditable from one aggregate endpoint.
 - Deployed-agent on-demand context retrieval is covered by
   `scripts/agent-search-context-proof.py`: an agent autonomously calls
   `search_context`, receives shared parsed-result catalogue facts from the main
@@ -538,8 +538,8 @@ Automated no-model gates:
   autopilot, deployed-agent loop guarantees, agent action/settings/deploy
   routes, deploy-sheet/task-send controls, action telemetry fields, and the
   agent-loop state-key list/count plus visual state keys for active agent
-  chat/results/feed routing, context snippets, and exposed tool-schema audit
-  state. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
+  chat/results/feed routing, context snippets, exposed tool-schema audit state,
+  and loop-phase list/count/parity. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
   context-catalog proof contract for model-issued tool calls, including the
   parser, tool-catalog, and family-fanout fixture seed routes, proof-count
   metadata, `stateKeys`, tool-schema cap/policy/route, structured/raw
@@ -767,6 +767,9 @@ Automated no-model gates:
   - proves `search_cve` tool calls execute under autopilot;
   - proves manual mode converts tool calls into suggestions;
   - proves copilot mode pauses for approval and executes after approval.
+  - proves `/qa/agent-loop-coverage` names the model/tool loop phases from user
+    prompt through dynamic context, schema selection, streaming, mode/scope
+    policy, execution, result storage, and loop re-entry.
   - proves a deployed typed agent runs in forced autopilot, inherits runtime
     defaults, uses bounded dynamic context/tool schemas, preserves its type
     prompt override, executes a tool, and completes autonomously through

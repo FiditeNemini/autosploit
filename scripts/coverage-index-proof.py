@@ -343,6 +343,12 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions agent loop state key count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopVisualStateKeys") != agent_loop.get("visualStateKeys"):
         raise AssertionError(f"coverage index tabs/sessions agent loop visual state keys mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("agentLoopPhases") != agent_loop.get("loopPhases"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop phases mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("agentLoopPhaseCount") != agent_loop.get("loopPhaseCount"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop phase count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("agentLoopPhaseParity") != agent_loop.get("loopPhaseParity"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop phase parity mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActivityStatuses") != tool_flow.get("tabActivityStatuses"):
         raise AssertionError(f"coverage index tabs/sessions tab activity statuses mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActivityStatusCount") != tool_flow.get("tabActivityStatusCount"):

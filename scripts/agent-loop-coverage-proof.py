@@ -83,6 +83,19 @@ EXPECTED_STATE_KEYS = {
     "chatService.lastToolSchemaNames",
 }
 
+EXPECTED_LOOP_PHASES = [
+    "receiveUserPrompt",
+    "retrieveDynamicContext",
+    "selectToolSchemas",
+    "streamReasoningAndContent",
+    "parseToolCalls",
+    "applyModePolicy",
+    "enforceScope",
+    "executeToolOrBuiltin",
+    "parseAndStoreToolResult",
+    "reenterModelUntilStopOrMaxIterations",
+]
+
 
 def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
     if isinstance(body, dict):
@@ -164,6 +177,12 @@ def run() -> None:
             raise AssertionError(f"agent loop state keys missing {missing_state_keys}: {coverage}")
         if coverage.get("stateKeyCount") != len(coverage.get("stateKeys") or []):
             raise AssertionError(f"agent loop state key count mismatch: {coverage}")
+        if coverage.get("loopPhases") != EXPECTED_LOOP_PHASES:
+            raise AssertionError(f"agent loop phase list mismatch: {coverage}")
+        if coverage.get("loopPhaseCount") != len(EXPECTED_LOOP_PHASES):
+            raise AssertionError(f"agent loop phase count mismatch: {coverage}")
+        if coverage.get("loopPhaseParity") is not True:
+            raise AssertionError(f"agent loop phase parity mismatch: {coverage}")
         visual_state_keys = set(coverage.get("visualStateKeys") or [])
         for key in ("agents", "agentActions", "displayChatService", "displayResultsStore", "displayActivityFeed"):
             if key not in visual_state_keys:
