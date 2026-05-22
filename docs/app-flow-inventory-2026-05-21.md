@@ -490,8 +490,9 @@ Stash:
   parser/generation autodetect, `prefix-cache-l2-turboquant` cache policy,
   app-only apply without engine restart, engine Start/Stop action state,
   context controls, cache topology, agent controls, CVE/tool/inference-log
-  actions, visual Settings proof gates, proof-count metadata, checked-in
-  Settings visual manifests, and `visualManifestCount`.
+  actions, visual Settings proof gates, Settings surface list/count/parity,
+  proof-count metadata, checked-in Settings visual manifests, and
+  `visualManifestCount`.
 
 Model:
 
@@ -772,8 +773,9 @@ Current repeatable gates:
   context delivery mode list/count/parity, so
   bounded dynamic catalogue source coverage and cache-session preservation remain
   visible from the aggregate QA index. The
-  settings/visuals group exposes settings visual manifest count, full
-  visual manifest count, and actual screenshot capture count. The tools/parsers
+  settings/visuals group exposes Settings surface list/count/parity, settings
+  visual manifest count, full visual manifest count, and actual screenshot
+  capture count. The tools/parsers
   group exposes registry tool count, callback count, representative family
   fanout count, state-key count, dynamic tool-schema cap/policy/route,
   structured/raw result-mode counts, visible tab activity statuses, the tab

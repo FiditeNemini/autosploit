@@ -510,8 +510,10 @@ Settings:
   model-family warnings, parser/generation autodetect, cache-response method,
   app-only apply, engine Start/Stop actions, context/cache/agent controls,
   CVE/tool/log action coverage, visual Settings proof scripts, and proof-count
-  metadata. It now also exposes the checked-in Settings visual manifest paths
-  and `visualManifestCount` for matrix-level visual accounting.
+  metadata. It also exposes Settings surface list/count/parity for engine/model/
+  runtime, context/cache, agents, CVEs, tools, inference logs, and visual status
+  proofs. It now also exposes the checked-in Settings visual manifest paths and
+  `visualManifestCount` for matrix-level visual accounting.
 - App-only settings can now be applied without restarting the engine; model,
   cache, and engine runtime changes still use Apply & Restart Engine.
 - App-only apply is covered by `scripts/settings-apply-proof.py`.
@@ -665,9 +667,9 @@ Automated no-model gates:
   `liveProofArtifactCount` for Qwen/MiniMax-only support, the
   `prefix-cache-l2-turboquant` response path, cache-preserving new-context
   boundary, and the checked-in Qwen/MiniMax
-  live replay artifact set. The settings/visuals group exposes
-  settings visual manifest count, full visual manifest count, and actual
-  screenshot capture count. The tools/parsers group exposes registry tool
+  live replay artifact set. The settings/visuals group exposes Settings surface
+  list/count/parity, settings visual manifest count, full visual manifest count,
+  and actual screenshot capture count. The tools/parsers group exposes registry tool
   count, callback count, representative family fanout count, state-key count,
   dynamic tool-schema cap/policy/route, structured/raw result-mode counts, and
   model-tool visual surface list/count/parity from `/qa/tool-flow-coverage`.

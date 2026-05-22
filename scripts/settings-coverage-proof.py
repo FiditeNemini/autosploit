@@ -86,6 +86,16 @@ REQUIRED_VISUAL_MANIFESTS = {
     "docs/visual-proofs/checkpoint-109/manifest.json",
 }
 
+REQUIRED_SETTINGS_SURFACES = [
+    "engineModelRuntime",
+    "contextAndCache",
+    "agentControls",
+    "cveDatabase",
+    "toolInventory",
+    "inferenceLogs",
+    "visualStatusProofs",
+]
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -170,6 +180,12 @@ def assert_settings_coverage() -> None:
         raise AssertionError(f"settings coverage cache method mismatch: {coverage}")
     if coverage.get("supportedFamilies") != ["qwen", "minimax"]:
         raise AssertionError(f"settings coverage supported family mismatch: {coverage}")
+    if coverage.get("settingsSurfaces") != REQUIRED_SETTINGS_SURFACES:
+        raise AssertionError(f"settings coverage surface list mismatch: {coverage}")
+    if coverage.get("settingsSurfaceCount") != len(REQUIRED_SETTINGS_SURFACES):
+        raise AssertionError(f"settings coverage surface count mismatch: {coverage}")
+    if coverage.get("settingsSurfaceParity") is not True:
+        raise AssertionError(f"settings coverage surface parity mismatch: {coverage}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/settings-coverage" not in qa.get("stateRoutes", []):

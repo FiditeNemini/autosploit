@@ -286,6 +286,21 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/settings-coverage cache method mismatch: {settings_coverage}")
     if settings_coverage.get("visualManifestCount", 0) < 6:
         raise AssertionError(f"/qa/settings-coverage visual manifest count mismatch: {settings_coverage}")
+    expected_settings_surfaces = [
+        "engineModelRuntime",
+        "contextAndCache",
+        "agentControls",
+        "cveDatabase",
+        "toolInventory",
+        "inferenceLogs",
+        "visualStatusProofs",
+    ]
+    if settings_coverage.get("settingsSurfaces") != expected_settings_surfaces:
+        raise AssertionError(f"/qa/settings-coverage surface list mismatch: {settings_coverage}")
+    if settings_coverage.get("settingsSurfaceCount") != len(expected_settings_surfaces):
+        raise AssertionError(f"/qa/settings-coverage surface count mismatch: {settings_coverage}")
+    if settings_coverage.get("settingsSurfaceParity") is not True:
+        raise AssertionError(f"/qa/settings-coverage surface parity mismatch: {settings_coverage}")
     if visual_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/visual-coverage failed: {visual_coverage}")
     if visual_coverage.get("manifestCount", 0) < 22:

@@ -273,6 +273,13 @@ def assert_coverage_index() -> None:
     if chat_context_group.get("contextDeliveryModeParity") != context_coverage.get("contextDeliveryModeParity"):
         raise AssertionError(f"coverage index chat/context delivery mode parity mismatch: {chat_context_group}")
     settings_visuals_group = groups.get("settingsAndVisuals") or {}
+    settings_coverage = request("GET", "/qa/settings-coverage")
+    if settings_visuals_group.get("settingsSurfaces") != settings_coverage.get("settingsSurfaces"):
+        raise AssertionError(f"coverage index settings surface list mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("settingsSurfaceCount") != settings_coverage.get("settingsSurfaceCount"):
+        raise AssertionError(f"coverage index settings surface count mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("settingsSurfaceParity") != settings_coverage.get("settingsSurfaceParity"):
+        raise AssertionError(f"coverage index settings surface parity mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("settingsVisualManifestCount", 0) < 6:
         raise AssertionError(f"coverage index settings visual manifest count mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("visualManifestCount", 0) < 22:
