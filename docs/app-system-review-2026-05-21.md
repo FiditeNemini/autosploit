@@ -579,7 +579,9 @@ Automated no-model gates:
   proof category counts for agent, chat, context, runtime, settings, tabs,
   tools, and visual proof surfaces, plus a proof-category surface count consumed
   by the broad app QA matrix and a total category count that must match the
-  proof ledger count, including the `other` bucket. It also exposes
+  proof ledger count, including the `other` bucket. It also exposes an explicit
+  proof-category parity flag consumed by both the coverage-index proof and the
+  broad app QA matrix. It also exposes
   `/qa/artifact-ledger`
   visual manifest and live-proof counts so screenshot and live JSON evidence
   stay machine-auditable, including missing visual capture count.

@@ -160,6 +160,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state proof category total mismatch: {app_state_group}")
     if app_state_group.get("proofCategoryTotalCount") != proof.get("proofCount"):
         raise AssertionError(f"coverage index app state proof category total does not match proof ledger: {app_state_group}")
+    if app_state_group.get("proofCategoryParity") is not True:
+        raise AssertionError(f"coverage index app state proof category parity flag mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerVisualManifestCount", 0) < 22:
         raise AssertionError(f"coverage index app state artifact visual count mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerLiveProofCount", 0) < 18:

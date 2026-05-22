@@ -258,6 +258,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index proof ledger count mismatch: {coverage_index}")
     if app_state_group.get("proofCategorySurfaceCount") != 8:
         raise AssertionError(f"/qa/coverage-index proof category surface count mismatch: {coverage_index}")
+    if app_state_group.get("proofCategoryTotalCount") != proof_ledger.get("proofCount"):
+        raise AssertionError(f"/qa/coverage-index proof category total mismatch: {coverage_index}")
+    if app_state_group.get("proofCategoryParity") is not True:
+        raise AssertionError(f"/qa/coverage-index proof category parity flag mismatch: {coverage_index}")
     if app_state_group.get("checkpointLedgerCount", 0) < 200:
         raise AssertionError(f"/qa/coverage-index checkpoint ledger count mismatch: {coverage_index}")
     if app_state_group.get("auditLedgerCount", 0) < 300:
