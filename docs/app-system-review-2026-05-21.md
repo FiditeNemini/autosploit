@@ -605,10 +605,10 @@ Automated no-model gates:
   from `/qa/checkpoint-ledger`, plus `/qa/checkpoint-ledger.latestCheckpoint`
   and `latestCheckpointNumber`, so the same aggregate identifies the current
   documentation frontier and its completion breakdown. It also carries
-  `/qa/audit-ledger.proofCategorySurfaceCount` and proof-category parity, so
-  the top-level index proves the audit rollup is exposing proof-surface breadth
-  and validated all-category accounting, not just total ledger size. It also
-  carries `/qa/gap-ledger.openGapIds` and a
+  `/qa/audit-ledger.proofCategorySurfaceCount`, proof-category total count,
+  and proof-category parity, so the top-level index proves the audit rollup is
+  exposing proof-surface breadth and validated all-category accounting, not
+  just total ledger size. It also carries `/qa/gap-ledger.openGapIds` and a
   `gapContractCount`, so the top-level QA summary names the remaining gap and
   proves a structured contract exists. `/qa/gap-ledger` reads this
   document's current-gap section and exposes the currently documented gap, the
