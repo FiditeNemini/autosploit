@@ -547,7 +547,11 @@ Current repeatable gates:
   copilot approval, autopilot execution, and deployed-agent forced-autopilot
   inheritance coverage. It now also checks `/qa/tool-flow-coverage`, which ties
   the tool registry, parser routing, representative family fanout, and
-  context-catalog tool-output proofs into one auditable contract.
+  context-catalog tool-output proofs into one auditable contract. Runtime and
+  cache invariants are also summarized through `/qa/runtime-coverage`, including
+  Qwen/MiniMax support, parser autodetect, model-folder generation defaults,
+  prefix-cache/L2/TurboQuant response mode, unsupported-start blocking, and
+  live-proof cache gates.
 - Visual QA through the local app run script plus screenshots.
 
 Required future proof gates:

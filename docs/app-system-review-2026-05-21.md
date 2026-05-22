@@ -491,6 +491,9 @@ Automated no-model gates:
   autopilot, and deployed-agent loop guarantees plus the proof scripts that
   cover them. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
   context-catalog proof contract for model-issued tool calls.
+  `/qa/runtime-coverage` exposes the runtime/model/cache proof contract for
+  Qwen/MiniMax support, parser autodetect, model-folder generation defaults,
+  prefix-cache/L2/TurboQuant response mode, and unsupported-start blocking.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.
