@@ -224,8 +224,16 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime supported family mismatch: {runtime_group}")
     if runtime_group.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"coverage index runtime cache response method mismatch: {runtime_group}")
-    if (groups.get("chatAndContext") or {}).get("stateKeyCount", 0) < 19:
-        raise AssertionError(f"coverage index chat/context state key count mismatch: {groups.get('chatAndContext')}")
+    chat_context_group = groups.get("chatAndContext") or {}
+    chat_coverage = request("GET", "/qa/chat-coverage")
+    if chat_context_group.get("stateKeyCount", 0) < 19:
+        raise AssertionError(f"coverage index chat/context state key count mismatch: {chat_context_group}")
+    if chat_context_group.get("headerCacheBadges") != chat_coverage.get("headerCacheBadges"):
+        raise AssertionError(f"coverage index chat/context header cache badges mismatch: {chat_context_group}")
+    if chat_context_group.get("cacheSessionIndicator") != chat_coverage.get("cacheSessionIndicator"):
+        raise AssertionError(f"coverage index chat/context cache session indicator mismatch: {chat_context_group}")
+    if chat_context_group.get("newContextSessionBoundary") != chat_coverage.get("newContextSessionBoundary"):
+        raise AssertionError(f"coverage index chat/context new context boundary mismatch: {chat_context_group}")
     settings_visuals_group = groups.get("settingsAndVisuals") or {}
     if settings_visuals_group.get("settingsVisualManifestCount", 0) < 6:
         raise AssertionError(f"coverage index settings visual manifest count mismatch: {settings_visuals_group}")
