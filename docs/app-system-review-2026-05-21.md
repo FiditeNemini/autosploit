@@ -157,7 +157,9 @@ Exploit:
 - Buttons: Search, Start Listener, Run Script, Generate Implant, Sliver listener.
 - Chat path: sends prompts to chat.
 - State: raw metasploit/sliver/session output.
-- Missing proof: listeners/sessions need lifecycle state and stop controls.
+- Listener, custom script, and implant lifecycle state now tracks idle, running,
+  done, failed, and canceled and is visible in the relevant Exploit subtab.
+- Missing proof: live UI screenshot coverage for the Exploit lifecycle strips.
 
 Post:
 
@@ -222,6 +224,8 @@ Automated no-model gates:
     long-running capture-style tool is stopped;
   - proves Creds cracking lifecycle moves to running and then canceled when a
     long-running hashcat-style tool is stopped;
+  - proves Exploit listener lifecycle moves to running and then canceled when a
+    long-running listener-style tool is stopped;
   - proves tool callbacks update per-tab activity state that the tab bar can
     render as running/done/failed/canceled indicators;
   - proves model-issued `search_context` returns targeted catalogue facts;
@@ -268,9 +272,7 @@ Visual gates:
 
 ## Current Gaps To Close Next
 
-1. Add a model-callable catalogue search tool.
-2. Add visual screenshot coverage for per-tab tool action indicators.
-3. Add mock model server tests for streaming, metrics, reasoning, and tool calls.
-4. Add test fixtures for context catalogue source inclusion/exclusion.
-5. Split app-only Settings apply from engine restart.
-6. Add live model verification scripts for Qwen and MiniMax folders.
+1. Add visual screenshot coverage for per-tab tool action indicators.
+2. Add test fixtures for context catalogue source inclusion/exclusion.
+3. Split app-only Settings apply from engine restart.
+4. Add live model verification scripts for Qwen and MiniMax folders.

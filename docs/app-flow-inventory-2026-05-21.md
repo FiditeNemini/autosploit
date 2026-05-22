@@ -154,8 +154,11 @@ Exploit:
 - Covers exploit search, listeners, custom script execution, and Sliver helper
   prompts.
 - Buttons route prompts through chat and display raw execution output.
-- Needs listener/session state, tool activity badges, and safer visual
-  differentiation between search, prepare, and execute actions.
+- Listener, custom script, and implant actions expose lifecycle strips for
+  idle/running/done/failed/canceled status and are covered by the live-turn
+  listener cancellation proof.
+- Still needs live UI screenshot coverage and safer visual differentiation
+  between search, prepare, and execute actions.
 
 Post:
 

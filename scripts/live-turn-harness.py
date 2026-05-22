@@ -174,6 +174,42 @@ class MockEngineHandler(BaseHTTPRequestHandler):
                     ]
                 },
             ]
+        elif "Run exploit listener lifecycle proof" in user_text:
+            events = [
+                {"choices": [{"delta": {"content": "Starting exploit listener lifecycle proof."}}]},
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "id": "call_exploit_listener",
+                                        "type": "function",
+                                        "function": {"name": "run_shell", "arguments": ""},
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "function": {
+                                            "arguments": "{\"command\":\"printf listener-start; sleep 10; printf listener-final-marker\"}"
+                                        },
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+            ]
         elif "Run web tab status proof" in user_text:
             events = [
                 {"choices": [{"delta": {"content": "Starting web tool status proof."}}]},
@@ -553,6 +589,26 @@ def run() -> None:
             "creds cracking lifecycle canceled",
         )
         assert "stopped" in creds_canceled["credsLifecycle"]["cracking"]["summary"], creds_canceled
+
+        request("POST", "/clear")
+        request("POST", "/mode", "autopilot")
+        request("POST", "/tab", "exploit")
+        request("POST", "/send", "Run exploit listener lifecycle proof")
+        exploit_running = wait_until(
+            lambda: request("GET", "/state")
+            if request("GET", "/state").get("exploitLifecycle", {}).get("listener", {}).get("status") == "running"
+            else None,
+            "exploit listener lifecycle running",
+        )
+        assert exploit_running["exploitLifecycle"]["listener"]["tool"] == "run_shell", exploit_running
+        request("POST", "/stop")
+        exploit_canceled = wait_until(
+            lambda: request("GET", "/state")
+            if request("GET", "/state").get("exploitLifecycle", {}).get("listener", {}).get("status") == "canceled"
+            else None,
+            "exploit listener lifecycle canceled",
+        )
+        assert "stopped" in exploit_canceled["exploitLifecycle"]["listener"]["summary"], exploit_canceled
 
         request("POST", "/clear")
         request("POST", "/mode", "autopilot")

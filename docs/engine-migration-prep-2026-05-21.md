@@ -420,6 +420,11 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   bruteforce, and secret scanning. The Creds panel now shows lifecycle strips,
   and the live-turn harness proves a long-running hashcat-style command moves
   to running and then canceled through `/stop`.
+- Checkpoint 63: Added Exploit lifecycle state for listeners, custom scripts,
+  and implants. The Exploit panel now shows lifecycle strips in Reverse Shells,
+  Custom, and C2 subviews, `/state` exposes `exploitLifecycle`, and the
+  live-turn harness proves a long-running listener-style command moves to
+  running and then canceled through `/stop`.
 
 ## Known Risk Areas
 
