@@ -360,6 +360,7 @@ Current repeatable gates:
 - `cd ExploitBotEngine && PYTHONPATH=. uv run --extra dev pytest -q`
 - `python3 scripts/live-turn-harness.py`
 - `cd ExploitBotEngine && uv run --extra dev ../scripts/prove-parser-api.py --output ../docs/live-proofs/checkpoint-79-parser-api-proof.json`
+- `python3 scripts/app-qa-matrix-smoke-proof.py`
 - `python3 scripts/context-catalog-proof.py`
 - `python3 scripts/catalog-embedding-audit-proof.py`
 - `python3 scripts/tool-catalog-proof.py`
@@ -396,7 +397,10 @@ Current repeatable gates:
 - `cd ExploitBotEngine && uv run --extra dev ../scripts/prove-block-l2-cache.py --output ../docs/live-proofs/checkpoint-102-block-l2-partial-proof.json`
 - `cd ExploitBotEngine && uv run --extra dev ../scripts/prove-ssm-rederive-status.py --output ../docs/live-proofs/checkpoint-103-ssm-rederive-status-proof.json`
 - `git diff --check`
-- Static scans proving no S/M/L profile selectors or `ModelProfile` code remain.
+- Static scans proving no S/M/L profile selectors or `ModelProfile` code remain
+  are covered by `scripts/app-qa-matrix-smoke-proof.py`; the same proof verifies
+  required context hooks and the TestServer `/state`, `/messages`, and
+  `/results` smoke contract through `/state.qaCoverage`.
 - Visual QA through the local app run script plus screenshots.
 
 Required future proof gates:

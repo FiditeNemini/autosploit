@@ -345,8 +345,11 @@ Automated no-model gates:
 
 - Swift build.
 - Engine pytest.
-- Static scans for removed zombie profile code and required context hooks.
-- TestServer `/state`, `/messages`, `/results` smoke.
+- Static scans for removed zombie profile code and required context hooks via
+  `scripts/app-qa-matrix-smoke-proof.py`.
+- TestServer `/state`, `/messages`, `/results` smoke via
+  `scripts/app-qa-matrix-smoke-proof.py`; `/state.qaCoverage` exposes the
+  profile-removal, context-hook, and route-coverage contract.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.
