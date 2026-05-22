@@ -324,6 +324,23 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/tab-action-coverage tabs mismatch: {tab_action_coverage}")
     if tab_action_coverage.get("proofCount", 0) < 27:
         raise AssertionError(f"/qa/tab-action-coverage proof count mismatch: {tab_action_coverage}")
+    expected_tab_action_surfaces = [
+        "reconActions",
+        "webActions",
+        "networkActions",
+        "credsActions",
+        "exploitActions",
+        "postActions",
+        "osintActions",
+        "reportActions",
+        "stashActions",
+    ]
+    if tab_action_coverage.get("tabActionSurfaces") != expected_tab_action_surfaces:
+        raise AssertionError(f"/qa/tab-action-coverage surface list mismatch: {tab_action_coverage}")
+    if tab_action_coverage.get("tabActionSurfaceCount") != len(expected_tab_action_surfaces):
+        raise AssertionError(f"/qa/tab-action-coverage surface count mismatch: {tab_action_coverage}")
+    if tab_action_coverage.get("tabActionSurfaceParity") is not True:
+        raise AssertionError(f"/qa/tab-action-coverage surface parity mismatch: {tab_action_coverage}")
     if "stashActions" not in (tab_action_coverage.get("actionStateKeys") or []):
         raise AssertionError(f"/qa/tab-action-coverage action state keys mismatch: {tab_action_coverage}")
     if chat_coverage.get("ok") is not True:

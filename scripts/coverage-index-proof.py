@@ -344,6 +344,13 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions workflow surface count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("sessionWorkflowSurfaceParity") != session_coverage.get("sessionWorkflowSurfaceParity"):
         raise AssertionError(f"coverage index tabs/sessions workflow surface parity mismatch: {tabs_sessions_group}")
+    tab_action_coverage = request("GET", "/qa/tab-action-coverage")
+    if tabs_sessions_group.get("tabActionSurfaces") != tab_action_coverage.get("tabActionSurfaces"):
+        raise AssertionError(f"coverage index tabs/sessions tab action surfaces mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActionSurfaceCount") != tab_action_coverage.get("tabActionSurfaceCount"):
+        raise AssertionError(f"coverage index tabs/sessions tab action surface count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActionSurfaceParity") != tab_action_coverage.get("tabActionSurfaceParity"):
+        raise AssertionError(f"coverage index tabs/sessions tab action surface parity mismatch: {tabs_sessions_group}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/coverage-index" not in qa.get("stateRoutes", []):

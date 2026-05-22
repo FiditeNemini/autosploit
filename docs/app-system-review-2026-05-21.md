@@ -474,7 +474,8 @@ Stash:
   `/qa/tab-action-coverage` and verified by
   `scripts/tab-action-coverage-proof.py`, which checks the route, action seed/
   action route list, copy/export/agent seed routes, contracts, focused proof
-  scripts, covered tabs, action-state keys, and proof file existence.
+  scripts, covered tabs, tab action surface list/count/parity, action-state
+  keys, and proof file existence.
 - Aggregate chat/control coverage is exposed through `/qa/chat-coverage` and
   verified by `scripts/chat-coverage-proof.py`, which checks Send/Stop,
   reasoning, approval, copy/stash, tool-output expansion, request-audit,
@@ -578,7 +579,8 @@ Automated no-model gates:
   copy buttons, row context actions, verify/protocol/hash/exploit/post/OSINT
   actions, report generation/finding/export/agent actions, Stash controls, and
   the seed routes behind those focused proofs, including OSINT screenshot
-  artifact setup. It also exposes `actionStateKeys`, tying the aggregate to the
+  artifact setup. It also exposes tab action surface list/count/parity and
+  `actionStateKeys`, tying the aggregate to the
   `/state` surfaces each proof validates.
   `/qa/chat-coverage` exposes chat/control proof coverage for streaming usage
   metrics, token counters, reasoning controls, approval controls, tool-output
@@ -672,8 +674,8 @@ Automated no-model gates:
   The tabs/sessions group exposes
   interaction-mode count, covered tab
   count, session state-key count, session workflow surface list/count/parity,
-  action-state-key count, agent-loop state-key count, and agent-loop visual state
-  keys. Chat/context also exposes state-key
+  tab action surface list/count/parity, action-state-key count, agent-loop
+  state-key count, and agent-loop visual state keys. Chat/context also exposes state-key
   count.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via

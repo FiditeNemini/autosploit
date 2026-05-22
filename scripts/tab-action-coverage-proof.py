@@ -150,6 +150,18 @@ REQUIRED_ACTION_STATE_KEYS = {
     "stashActions",
 }
 
+REQUIRED_ACTION_SURFACES = [
+    "reconActions",
+    "webActions",
+    "networkActions",
+    "credsActions",
+    "exploitActions",
+    "postActions",
+    "osintActions",
+    "reportActions",
+    "stashActions",
+]
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -201,6 +213,12 @@ def assert_tab_action_coverage() -> None:
 
     if coverage.get("proofCount", 0) < len(REQUIRED_PROOFS):
         raise AssertionError(f"tab action coverage proof count mismatch: {coverage}")
+    if coverage.get("tabActionSurfaces") != REQUIRED_ACTION_SURFACES:
+        raise AssertionError(f"tab action coverage surface list mismatch: {coverage}")
+    if coverage.get("tabActionSurfaceCount") != len(REQUIRED_ACTION_SURFACES):
+        raise AssertionError(f"tab action coverage surface count mismatch: {coverage}")
+    if coverage.get("tabActionSurfaceParity") is not True:
+        raise AssertionError(f"tab action coverage surface parity mismatch: {coverage}")
     state_keys = set(coverage.get("actionStateKeys") or [])
     missing_state_keys = sorted(REQUIRED_ACTION_STATE_KEYS.difference(state_keys))
     if missing_state_keys:
