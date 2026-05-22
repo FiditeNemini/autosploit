@@ -55,6 +55,8 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit source proof category surfaces mismatch: {audit}")
     if audit.get("proofLedgerCategorySurfaceCount") != proof.get("categorySurfaceCount"):
         raise AssertionError(f"audit source proof category surface count mismatch: {audit}")
+    if audit.get("proofLedgerCategoryOtherCount") != proof.get("categoryOtherCount"):
+        raise AssertionError(f"audit source proof category other count mismatch: {audit}")
     if audit.get("proofLedgerCategoryTotalCount") != proof.get("categoryTotalCount"):
         raise AssertionError(f"audit source proof category total count mismatch: {audit}")
     if audit.get("proofLedgerCategoryParity") != proof.get("categoryParity"):

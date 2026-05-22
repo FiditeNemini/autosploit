@@ -665,6 +665,9 @@ Current repeatable gates:
   bucket, and mirrors the source proof-ledger `other` count as
   `proofLedgerCategoryOtherCount`. It also exposes an explicit proof-category parity flag consumed by
   both the coverage-index proof and the broad app QA matrix. It also exposes
+  `/qa/audit-ledger` source proof-ledger category other count, so the audit
+  rollup preserves the same uncategorized proof accounting as the source ledger.
+  It also exposes
   `/qa/artifact-ledger`
   visual manifest and live-proof counts so screenshot and live JSON evidence
   stay machine-auditable, including missing visual capture count.
