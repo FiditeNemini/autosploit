@@ -392,7 +392,9 @@ Report:
   verifies the row delete action label, deletes the row, and checks Report tab
   activity exposes `delete_finding` completion. Visible Report row delete
   wiring is covered by `scripts/report-visible-delete-wiring-proof.py`, which
-  prevents the delete button from bypassing AppState.
+  prevents the delete button from bypassing AppState. The visible finding
+  wizard submit button now routes through AppState and is covered by
+  `scripts/finding-wizard-submit-proof.py`.
 - Render/export artifact validation is covered by
   `scripts/report-export-proof.py`: it seeds a deterministic critical finding,
   exports HTML, Markdown, JSON, and PDF into a QA directory, validates paths,
