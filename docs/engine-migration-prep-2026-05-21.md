@@ -567,6 +567,15 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   Scheduler cache stats expose the `rederive` object, and the app parser renders
   the same counters in Settings Engine. Proof artifact:
   `docs/live-proofs/checkpoint-103-ssm-rederive-status-proof.json`.
+- Checkpoint 104: Made new context-window cache preservation explicit.
+  `ChatService` now increments a context-window generation when the user starts
+  a fresh visible chat context, while `/state.contextWindow` reports that the
+  engine session, model-folder generation defaults, prefix cache, prompt L2,
+  paged cache, block L2, and TurboQuant KV cache response path remain active.
+  `scripts/context-window-cache-proof.py` proves `/context/new` clears visible
+  messages, request-context preview, and chat-local token counters without
+  changing engine config or parsed cache stats. Proof artifact:
+  `docs/live-proofs/checkpoint-104-context-window-cache-proof.json`.
 
 ## Known Risk Areas
 
@@ -576,6 +585,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Full and final-partial block L2 promotion are proven with direct quantized KV
   cache data. Real-model cross-run block-L2 hits still need a long enough live
   run or an explicit restart/replay proof under the actual model path.
+- New visible context windows are proven to preserve the running engine cache
+  topology, but this is app/session-state proof and does not replace real-model
+  cross-run disk replay proof.
 - Hybrid SSM re-derive status is observable, but true background async rederive
   execution against a loaded Qwen hybrid model still needs real-model proof
   before production-ready claims.

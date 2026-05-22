@@ -360,6 +360,8 @@ Automated no-model gates:
     model-folder generation defaults remain enabled in runtime config;
   - proves the new-context route clears chat state and token/cached counters
     without changing model or cache defaults;
+  - proves `/state.contextWindow` increments the visible context generation and
+    reports the preserved prefix-cache/L2/TurboQuant cache-response path;
   - proves `search_cve` tool calls execute under autopilot;
   - proves manual mode converts tool calls into suggestions;
   - proves copilot mode pauses for approval and executes after approval.
@@ -448,10 +450,12 @@ Real-model gates:
 - Full-block block L2 quantized write/read/promotion is covered by
   `scripts/prove-block-l2-cache.py`; a full real-model cross-run block L2 hit
   remains open.
-- New-context reset semantics are covered by `scripts/live-turn-harness.py`:
-  the mock-engine app clears chat plus prompt/completion/cached counters while
-  preserving prefix, prompt L2, paged, block L2, TurboQuant Q4, and
-  model-folder generation-default flags.
+- New-context reset semantics are covered by `scripts/live-turn-harness.py` and
+  `scripts/context-window-cache-proof.py`: the mock-engine app clears chat plus
+  prompt/completion/cached counters while preserving prefix, prompt L2, paged,
+  block L2, TurboQuant Q4, model-folder generation-default flags, and parsed
+  engine cache stats. `/state.contextWindow` exposes the context generation and
+  `prefix-cache-l2-turboquant` response method marker.
 - Parsed engine cache runtime counters are exposed through
   `/state.engineCacheStats` and covered by `scripts/cache-stats-state-proof.py`
   plus `scripts/live-cache-stats-ui-proof.py` for TurboQuant, prefix-cache

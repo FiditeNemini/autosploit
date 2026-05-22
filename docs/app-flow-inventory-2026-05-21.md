@@ -386,6 +386,11 @@ Required future proof gates:
   verifies the parser against checked-in real Qwen and MiniMax live
   `/v1/cache/stats` payloads: Qwen covers prefix reuse and SSM companion disk,
   while MiniMax covers prefix reuse plus prompt L2 and block L2 counters.
+- New context-window cache preservation: covered by
+  `scripts/context-window-cache-proof.py`, which verifies `/context/new`
+  increments `/state.contextWindow.generation`, clears visible chat state and
+  chat-local token counters, and preserves the engine config plus parsed cache
+  stats for the prefix-cache/L2/TurboQuant response path.
 - Quantized block L2 proof: covered by
   `docs/live-proofs/checkpoint-77-block-l2-quantized-proof.json`, which proves
   real MLX safetensors write/read plus full-block disk promotion for
