@@ -230,6 +230,13 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/context-coverage context cap mismatch: {context_coverage}")
     if not 1 <= context_coverage.get("currentInjectedContextLimit", 0) <= 4:
         raise AssertionError(f"/qa/context-coverage current context limit mismatch: {context_coverage}")
+    expected_retrieval_sources = ["asset.port", "finding", "tool.output", "stash.note", "cve"]
+    if context_coverage.get("retrievalSources") != expected_retrieval_sources:
+        raise AssertionError(f"/qa/context-coverage retrieval source list mismatch: {context_coverage}")
+    if context_coverage.get("retrievalSourceCount") != len(expected_retrieval_sources):
+        raise AssertionError(f"/qa/context-coverage retrieval source count mismatch: {context_coverage}")
+    if context_coverage.get("retrievalSourceParity") is not True:
+        raise AssertionError(f"/qa/context-coverage retrieval source parity mismatch: {context_coverage}")
     if "requestContext" not in (context_coverage.get("stateKeys") or []):
         raise AssertionError(f"/qa/context-coverage state key mismatch: {context_coverage}")
     if settings_coverage.get("ok") is not True:

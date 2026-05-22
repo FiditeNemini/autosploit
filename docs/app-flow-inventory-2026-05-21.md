@@ -650,8 +650,10 @@ Current repeatable gates:
   routing, deployed-agent context search, durable embeddings, stash retrieval,
   and new-context cache preservation proof gates. It now exposes `proofCount`
   and `/context/new` so cache-preserving context resets stay visible in the
-  aggregate, plus `stateKeys` for context audit surfaces. Tab action coverage
-  also exposes `actionStateKeys`, so the matrix
+  aggregate, plus `stateKeys` and retrieval source list/count/parity for
+  context audit surfaces. The source list names asset ports, findings, raw tool
+  output, stash notes, and CVEs as bounded dynamic catalogue inputs. Tab action
+  coverage also exposes `actionStateKeys`, so the matrix
   can verify the AppState surfaces behind per-tab copy/stash/export/tool
   actions. Visual screenshot coverage is summarized through
   `/qa/visual-coverage`, including chat/tool states, scroll lock, Settings,
@@ -743,8 +745,10 @@ Current repeatable gates:
   `supportedFamilies`, `cacheResponseMethod`, runtime cache component
   list/count/parity, and `liveProofArtifactCount`, so Qwen/MiniMax-only support,
   the `prefix-cache-l2-turboquant` response path, and the checked-in live replay
-  artifacts remain visible from the top-level QA index. The settings/visuals
-  group exposes settings visual manifest count, full
+  artifacts remain visible from the top-level QA index. The chat/context group
+  also mirrors context retrieval source list/count/parity, so bounded dynamic
+  catalogue source coverage remains visible from the aggregate QA index. The
+  settings/visuals group exposes settings visual manifest count, full
   visual manifest count, and actual screenshot capture count. The tools/parsers
   group exposes registry tool count, callback count, representative family
   fanout count, state-key count, visible tab activity statuses, and the tab

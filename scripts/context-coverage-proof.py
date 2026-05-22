@@ -56,6 +56,14 @@ REQUIRED_STATE_KEYS = {
     "messages.toolSchemas",
 }
 
+REQUIRED_RETRIEVAL_SOURCES = [
+    "asset.port",
+    "finding",
+    "tool.output",
+    "stash.note",
+    "cve",
+]
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -113,6 +121,12 @@ def assert_context_coverage() -> None:
         raise AssertionError(f"context coverage should expose automatic context cap: {coverage}")
     if not 1 <= coverage.get("currentInjectedContextLimit", 0) <= 4:
         raise AssertionError(f"context coverage should expose bounded current context limit: {coverage}")
+    if coverage.get("retrievalSources") != REQUIRED_RETRIEVAL_SOURCES:
+        raise AssertionError(f"context coverage retrieval sources mismatch: {coverage}")
+    if coverage.get("retrievalSourceCount") != len(REQUIRED_RETRIEVAL_SOURCES):
+        raise AssertionError(f"context coverage retrieval source count mismatch: {coverage}")
+    if coverage.get("retrievalSourceParity") is not True:
+        raise AssertionError(f"context coverage retrieval source parity mismatch: {coverage}")
     state_keys = set(coverage.get("stateKeys") or [])
     missing_state_keys = sorted(REQUIRED_STATE_KEYS.difference(state_keys))
     if missing_state_keys:

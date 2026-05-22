@@ -251,6 +251,13 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context cache session field count mismatch: {chat_context_group}")
     if chat_context_group.get("cacheSessionFieldParity") != chat_coverage.get("cacheSessionFieldParity"):
         raise AssertionError(f"coverage index chat/context cache session field parity mismatch: {chat_context_group}")
+    context_coverage = request("GET", "/qa/context-coverage")
+    if chat_context_group.get("retrievalSources") != context_coverage.get("retrievalSources"):
+        raise AssertionError(f"coverage index chat/context retrieval sources mismatch: {chat_context_group}")
+    if chat_context_group.get("retrievalSourceCount") != context_coverage.get("retrievalSourceCount"):
+        raise AssertionError(f"coverage index chat/context retrieval source count mismatch: {chat_context_group}")
+    if chat_context_group.get("retrievalSourceParity") != context_coverage.get("retrievalSourceParity"):
+        raise AssertionError(f"coverage index chat/context retrieval source parity mismatch: {chat_context_group}")
     settings_visuals_group = groups.get("settingsAndVisuals") or {}
     if settings_visuals_group.get("settingsVisualManifestCount", 0) < 6:
         raise AssertionError(f"coverage index settings visual manifest count mismatch: {settings_visuals_group}")

@@ -550,7 +550,8 @@ Automated no-model gates:
   catalogue injection, `search_context`, request-audit persistence, parsed
   result-to-context routing, deployed-agent retrieval, durable embeddings,
   targeted stash retrieval, new-context cache preservation, the `/context/new`
-  route, proof-count metadata, and `stateKeys` for the context audit surfaces.
+  route, proof-count metadata, `stateKeys`, and retrieval source
+  list/count/parity for the context audit surfaces.
   `/qa/visual-coverage` exposes screenshot-backed UI proof coverage for chat,
   scroll lock, Settings, context inspector, request-audit badges, tab activity,
   subtab lifecycle strips, OSINT screenshots, reports, stash retrieval,
@@ -607,8 +608,9 @@ Automated no-model gates:
   The chat/context group mirrors `/qa/chat-coverage.headerCacheBadges`,
   `headerCacheBadgeCount`, `headerCacheBadgeParity`, `cacheSessionIndicator`, and
   `newContextSessionBoundary`, plus the cache-session field list/count/parity,
-  so the aggregate coverage map carries the same visible and structural
-  cache-session contract as the chat coverage endpoint.
+  and it mirrors `/qa/context-coverage` retrieval source list/count/parity, so
+  the aggregate coverage map carries the same visible cache-session and bounded
+  dynamic-context source contracts as the detailed endpoints.
   `/qa/checkpoint-ledger` exposes checkpoint documentation count,
   completeness count, completion ratio, complete checkpoint paths, incomplete
   checkpoint paths, latest checkpoint, and latest checkpoint number using numeric checkpoint ordering; the checkpoint,
