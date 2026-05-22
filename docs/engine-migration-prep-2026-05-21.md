@@ -622,6 +622,16 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   replayed with `prompt_l2_active=false`, `block_disk_cache.disk_hits=1`,
   `scheduler_cache.disk_hits=1`, `tokens_saved=64`, `cached_tokens=64`, and
   `prompt_l2_hits_delta=0`.
+- Checkpoint 112: Added a real Qwen hybrid block-L2 and SSM re-derive proof.
+  `--require-ssm-rederive` now fails live verification unless replay stats show
+  SSM re-derive requested and completed without failures. Artifact
+  `docs/live-proofs/checkpoint-112-qwen-hybrid-block-l2-ssm-restart-replay-live.json`
+  loaded `/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP` twice with prompt L2
+  disabled, proved `block_l2_hits_delta=1`, `scheduler_tokens_saved_delta=64`,
+  parser autodetect `qwen3`/`qwen`, generation defaults from the model folder,
+  TurboQuant Q4 metadata, and SSM re-derive `requested=true`,
+  `completed=true`, `reason=missing_companion`, `state=completed`, with no
+  failures.
 
 ## Known Risk Areas
 
@@ -633,9 +643,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - New visible context windows are proven to preserve the running engine cache
   topology, but this is app/session-state proof and does not replace real-model
   cross-run disk replay proof.
-- Hybrid SSM re-derive status is observable, but true background async rederive
-  execution against a loaded Qwen hybrid model still needs real-model proof
-  before production-ready claims.
+- Qwen hybrid SSM re-derive is live-proven for the missing-companion fallback
+  path. A full hybrid prefix skip from KV plus a matching SSM companion remains
+  a separate proof because SSM state is cumulative and cannot be sliced from a
+  longer checkpoint.
 - MiniMax public MTP is not available from released weights; do not represent MiniMax MTP as supported unless tensor evidence exists.
 - JANGTQ2 can be quality-limited on some families. The app UI should label it as a memory tier rather than default premium tier.
 

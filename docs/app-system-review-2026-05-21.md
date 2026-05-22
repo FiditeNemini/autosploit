@@ -500,6 +500,14 @@ Real-model gates:
   prompt L2 is disabled, the first process writes two block L2 entries, and the
   replay process reports 64 cached prompt tokens, `block_disk_cache.disk_hits=1`,
   and `scheduler_cache.tokens_saved=64`.
+- Qwen hybrid real-model block-L2 replay plus SSM re-derive fallback is covered
+  by `scripts/verify-live-models.py --block-l2-only-replay
+  --require-ssm-rederive` and
+  `docs/live-proofs/checkpoint-112-qwen-hybrid-block-l2-ssm-restart-replay-live.json`:
+  prompt L2 is disabled, the replay process reports `block_l2_hits_delta=1`
+  and `scheduler_tokens_saved_delta=64`, then records SSM re-derive
+  `requested=true`, `completed=true`, `reason=missing_companion`, and no
+  failures.
 - Reasoning/tool parser API shaping is covered by
   `scripts/prove-parser-api.py` and `testsuite/test_tool_parser_api.py`.
 - Settings/message/result-store persistence is covered by
@@ -565,6 +573,6 @@ Visual gates:
 1. Debug MiniMax forced no-thinking decode/API output separately from the
    supported thinking-enabled smoke path; the strict live proof and restart
    replay proof now pass with non-empty assistant content and cache reuse.
-2. Run true Qwen hybrid async SSM rederive execution against a loaded Qwen
-   hybrid model; current proof covers status visibility, not full background
-   execution.
+2. Add a full hybrid prefix-skip proof where the replayed KV prefix has a
+   matching SSM companion checkpoint. Checkpoint 112 proves the live
+   missing-companion re-derive fallback, not a KV+SSM full skip.
