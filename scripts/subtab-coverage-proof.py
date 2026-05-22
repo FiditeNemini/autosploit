@@ -26,6 +26,11 @@ EXPECTED = {
     "report": ("Findings", ["Findings", "Preview"], "report-subtab-state-proof.py"),
 }
 
+EXPECTED_ROUTES = {
+    "/qa/tool-subtab",
+    "/qa/visual-subtab",
+}
+
 
 def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
     if isinstance(body, dict):
@@ -69,6 +74,11 @@ def run() -> None:
             raise AssertionError(f"subtab coverage tabs mismatch: {tabs}")
         if sorted(coverage.get("proofs") or []) != sorted(proof for _, _, proof in EXPECTED.values()):
             raise AssertionError(f"subtab coverage proof list mismatch: {coverage}")
+        if coverage.get("proofCount", 0) < len(EXPECTED):
+            raise AssertionError(f"subtab coverage proof count mismatch: {coverage}")
+        missing_routes = sorted(EXPECTED_ROUTES.difference(set(coverage.get("routes") or [])))
+        if missing_routes:
+            raise AssertionError(f"subtab coverage missing routes {missing_routes}: {coverage}")
 
         for tab, (default, valid, proof) in EXPECTED.items():
             entry = tabs.get(tab) or {}

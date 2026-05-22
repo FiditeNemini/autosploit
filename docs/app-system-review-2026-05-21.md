@@ -513,7 +513,8 @@ Automated no-model gates:
   `scripts/app-qa-matrix-smoke-proof.py`; `/state.qaCoverage` exposes the
   profile-removal, context-hook, route-coverage, and shared subtab-state proof
   contract. `/qa/subtab-coverage` exposes the live registry/default/active
-  subtab state for audit. `/qa/agent-loop-coverage` exposes manual, copilot,
+  subtab state, subtab QA routes, and proof-count metadata for audit.
+  `/qa/agent-loop-coverage` exposes manual, copilot,
   autopilot, deployed-agent loop guarantees, agent action/settings/deploy
   routes, deploy-sheet/task-send controls, and the proof scripts that cover
   them. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
