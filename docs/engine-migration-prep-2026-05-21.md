@@ -409,6 +409,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   clamped to 1-8, the packet instructs the model to use `search_context` for
   deeper retrieval, and live QA proves the lean packet plus targeted
   `search_context` retrieval both work.
+- Checkpoint 60: Wired the Web vulnerability card `Verify` button into the
+  chat/tool loop with a focused verification prompt, replacing the previous
+  placeholder control.
 
 ## Known Risk Areas
 

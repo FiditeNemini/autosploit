@@ -125,8 +125,11 @@ Web:
   details, related CVE search.
 - Chat path: scan/related CVE routes through chat; finding/stash are direct app
   state actions.
+- Verify now routes through chat with a focused prompt containing target,
+  finding title, source, CVE, and description for minimal safe evidence
+  collection.
 - State: web hosts, vulns, CVE lookup details.
-- Missing work: "Verify" needs a real action or removal; tool progress badges.
+- Missing work: visual proof for Verify and tool progress badges.
 
 Network:
 
