@@ -825,9 +825,12 @@ Current repeatable gates:
   bounded dynamic catalogue source coverage and cache-session preservation remain
   visible from the aggregate QA index. The
   settings/visuals group exposes Settings surface list/count/parity, Settings
-  surface proof map/count/parity, settings
-  visual surface list/count/parity, visual surface proof map/count/parity, visual manifest count, full visual manifest
-  count, and actual screenshot capture count. The tools/parsers
+  surface proof map/count/parity, Settings category list/count/current
+  category, Settings route list/count, contract map/count, proof list/count,
+  and visual manifest list/count. It also exposes visual surface
+  list/count/parity, visual surface proof map/count/parity, visual route
+  list/count, contract map/count, proof list/count, manifest list/count,
+  minimum capture count, and actual screenshot capture count. The tools/parsers
   group exposes registry tool count, callback count, representative family
   fanout count and family-to-tool map, structured/raw parser tool sets,
   seeded result-parser counts, parsed structured tool list, raw-only preserved

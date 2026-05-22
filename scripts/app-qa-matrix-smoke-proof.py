@@ -583,8 +583,44 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index context delivery mode proof map mismatch: {coverage_index}")
     if settings_visuals_group.get("settingsSurfaceProofs") != settings_coverage.get("settingsSurfaceProofs"):
         raise AssertionError(f"/qa/coverage-index settings surface proof map mismatch: {coverage_index}")
+    if settings_visuals_group.get("settingsCategories") != settings_coverage.get("categories"):
+        raise AssertionError(f"/qa/coverage-index settings category list mismatch: {coverage_index}")
+    if settings_visuals_group.get("settingsCategoryCount") != settings_coverage.get("categoryCount"):
+        raise AssertionError(f"/qa/coverage-index settings category count mismatch: {coverage_index}")
+    if settings_visuals_group.get("settingsCurrentCategory") != settings_coverage.get("currentCategory"):
+        raise AssertionError(f"/qa/coverage-index settings current category mismatch: {coverage_index}")
+    if settings_visuals_group.get("settingsRoutes") != settings_coverage.get("routes"):
+        raise AssertionError(f"/qa/coverage-index settings route list mismatch: {coverage_index}")
+    if settings_visuals_group.get("settingsRouteCount") != len(settings_coverage.get("routes") or []):
+        raise AssertionError(f"/qa/coverage-index settings route count mismatch: {coverage_index}")
+    if settings_visuals_group.get("settingsContracts") != settings_coverage.get("contracts"):
+        raise AssertionError(f"/qa/coverage-index settings contract map mismatch: {coverage_index}")
+    if settings_visuals_group.get("settingsContractCount") != len(settings_coverage.get("contracts") or {}):
+        raise AssertionError(f"/qa/coverage-index settings contract count mismatch: {coverage_index}")
+    if settings_visuals_group.get("settingsProofs") != settings_coverage.get("proofs"):
+        raise AssertionError(f"/qa/coverage-index settings proof list mismatch: {coverage_index}")
+    if settings_visuals_group.get("settingsProofCount") != settings_coverage.get("proofCount"):
+        raise AssertionError(f"/qa/coverage-index settings proof count mismatch: {coverage_index}")
+    if settings_visuals_group.get("settingsVisualManifests") != settings_coverage.get("visualManifests"):
+        raise AssertionError(f"/qa/coverage-index settings visual manifest list mismatch: {coverage_index}")
     if settings_visuals_group.get("visualSurfaceProofs") != visual_coverage.get("visualSurfaceProofs"):
         raise AssertionError(f"/qa/coverage-index visual surface proof map mismatch: {coverage_index}")
+    if settings_visuals_group.get("visualRoutes") != visual_coverage.get("routes"):
+        raise AssertionError(f"/qa/coverage-index visual route list mismatch: {coverage_index}")
+    if settings_visuals_group.get("visualRouteCount") != len(visual_coverage.get("routes") or []):
+        raise AssertionError(f"/qa/coverage-index visual route count mismatch: {coverage_index}")
+    if settings_visuals_group.get("visualContracts") != visual_coverage.get("contracts"):
+        raise AssertionError(f"/qa/coverage-index visual contract map mismatch: {coverage_index}")
+    if settings_visuals_group.get("visualContractCount") != len(visual_coverage.get("contracts") or {}):
+        raise AssertionError(f"/qa/coverage-index visual contract count mismatch: {coverage_index}")
+    if settings_visuals_group.get("visualProofs") != visual_coverage.get("proofs"):
+        raise AssertionError(f"/qa/coverage-index visual proof list mismatch: {coverage_index}")
+    if settings_visuals_group.get("visualProofCount") != visual_coverage.get("proofCount"):
+        raise AssertionError(f"/qa/coverage-index visual proof count mismatch: {coverage_index}")
+    if settings_visuals_group.get("visualManifests") != visual_coverage.get("manifests"):
+        raise AssertionError(f"/qa/coverage-index visual manifest list mismatch: {coverage_index}")
+    if settings_visuals_group.get("minimumCaptureCount") != visual_coverage.get("minimumCaptureCount"):
+        raise AssertionError(f"/qa/coverage-index visual minimum capture count mismatch: {coverage_index}")
     tools_parsers_group = index_groups.get("toolsAndParsers") or {}
     if tools_parsers_group.get("tabActivityStatusProofs") != tool_flow_coverage.get("tabActivityStatusProofs"):
         raise AssertionError(f"/qa/coverage-index tool tab activity proof map mismatch: {coverage_index}")
