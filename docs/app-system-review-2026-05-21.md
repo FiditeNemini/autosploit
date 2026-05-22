@@ -717,7 +717,7 @@ Automated no-model gates:
   live replay artifact set. The chat/context group exposes chat route
   list/count, contract map/count, proof list/count/file parity, state-key list/count,
   context search tool name, automatic/current injection caps, context route
-  list/count, contract map/count, proof list/count, state-key list/count,
+  list/count, contract map/count, proof list/count/file parity, state-key list/count,
   retrieval-source proof map/count/parity, and delivery-mode proof
   map/count/parity. The settings/visuals group exposes Settings surface
   list/count/parity, Settings surface proof map/count/parity, visual surface list/count/parity,

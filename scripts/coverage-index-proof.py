@@ -514,6 +514,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context context proof list mismatch: {chat_context_group}")
     if chat_context_group.get("contextProofCount") != context_coverage.get("proofCount"):
         raise AssertionError(f"coverage index chat/context context proof count mismatch: {chat_context_group}")
+    if chat_context_group.get("contextProofFileParity") != context_coverage.get("proofFileParity"):
+        raise AssertionError(f"coverage index chat/context context proof-file parity mismatch: {chat_context_group}")
     if chat_context_group.get("contextStateKeys") != context_coverage.get("stateKeys"):
         raise AssertionError(f"coverage index chat/context context state-key list mismatch: {chat_context_group}")
     if chat_context_group.get("contextStateKeyCount") != len(context_coverage.get("stateKeys") or []):

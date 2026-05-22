@@ -664,6 +664,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index context proof list mismatch: {coverage_index}")
     if chat_context_group.get("contextProofCount") != context_coverage.get("proofCount"):
         raise AssertionError(f"/qa/coverage-index context proof count mismatch: {coverage_index}")
+    if context_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/context-coverage proof-file parity mismatch: {context_coverage}")
+    if chat_context_group.get("contextProofFileParity") != context_coverage.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index context proof-file parity mismatch: {coverage_index}")
     if chat_context_group.get("contextStateKeys") != context_coverage.get("stateKeys"):
         raise AssertionError(f"/qa/coverage-index context state-key list mismatch: {coverage_index}")
     if chat_context_group.get("contextStateKeyCount") != len(context_coverage.get("stateKeys") or []):
