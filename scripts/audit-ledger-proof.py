@@ -110,8 +110,20 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit latest checkpoint number mismatch: {audit}")
     if audit.get("currentGapCount") != gap.get("currentGapCount"):
         raise AssertionError(f"audit current gap count mismatch: {audit}")
+    if audit.get("gapSource") != gap.get("source"):
+        raise AssertionError(f"audit gap source mismatch: {audit}")
+    if audit.get("gapSourceDerived") != gap.get("sourceDerived"):
+        raise AssertionError(f"audit gap source-derived flag mismatch: {audit}")
+    if audit.get("gapSourcePathExists") != gap.get("sourcePathExists"):
+        raise AssertionError(f"audit gap source path flag mismatch: {audit}")
+    if audit.get("currentGaps") != gap.get("currentGaps"):
+        raise AssertionError(f"audit current gap list mismatch: {audit}")
     if audit.get("nextGap") != gap.get("nextGap"):
         raise AssertionError(f"audit next gap mismatch: {audit}")
+    if audit.get("gapSupportedFamilies") != gap.get("supportedFamilies"):
+        raise AssertionError(f"audit gap supported families mismatch: {audit}")
+    if audit.get("unsupportedMultimodalBlocked") != gap.get("unsupportedMultimodalBlocked"):
+        raise AssertionError(f"audit unsupported multimodal block mismatch: {audit}")
     if audit.get("openGapIds") != gap.get("openGapIds"):
         raise AssertionError(f"audit open gap ids mismatch: {audit}")
     if audit.get("gapContracts") != gap.get("gapContracts"):

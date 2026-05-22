@@ -653,8 +653,10 @@ Automated no-model gates:
   counts, missing/failed artifact counts, and checkpoint completeness counts/
   ratio plus the current gap count into one machine-readable audit rollup.
   It also exposes the missing visual capture paths, failed live-proof paths,
-  complete and incomplete checkpoint paths, latest checkpoint number, open gap
-  IDs, and structured gap contracts directly for triage.
+  complete and incomplete checkpoint paths, latest checkpoint number, gap
+  source/path flags, current-gap list, supported-family list,
+  unsupported-multimodal block flag, open gap IDs, and structured gap contracts
+  directly for triage.
   `scripts/app-qa-matrix-smoke-proof.py`
   now fetches all four ledger routes directly and cross-checks their counts
   against the coverage-index app-state group. The coverage-index app-state
@@ -677,8 +679,9 @@ Automated no-model gates:
   `/qa/audit-ledger` artifact, checkpoint, and current-gap rollup counts, so the
   same top-level QA index cross-checks audit totals against source ledger
   domains. It also carries audit missing-capture, complete/incomplete
-  checkpoint, open-gap, next-gap, and gap-contract lists/maps, so audit detail
-  is not reduced to counts in the aggregate. It also carries
+  checkpoint, gap source/path, current-gap, open-gap, next-gap, supported-family,
+  unsupported-multimodal block, and gap-contract lists/maps, so audit detail is
+  not reduced to counts in the aggregate. It also carries
   `/qa/audit-ledger.liveProofOkCount`, `failedLiveProofCount`, and
   `failedLiveProofs`, so failed live JSON evidence remains visible from the
   top-level QA index. It also carries
