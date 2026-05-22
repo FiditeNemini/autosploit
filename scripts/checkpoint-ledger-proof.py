@@ -77,6 +77,8 @@ def assert_checkpoint_ledger() -> None:
         raise AssertionError(f"checkpoint ledger path list mismatch: {ledger}")
     if ledger.get("completeCheckpointCount") != len(expected_complete):
         raise AssertionError(f"checkpoint ledger complete count mismatch: {ledger}")
+    if ledger.get("completeCheckpoints") != expected_complete:
+        raise AssertionError(f"checkpoint ledger complete list mismatch expected {expected_complete}: {ledger}")
     if ledger.get("incompleteCheckpoints") != expected_incomplete:
         raise AssertionError(f"checkpoint ledger incomplete list mismatch expected {expected_incomplete}: {ledger}")
     if ledger.get("latestCheckpoint") != expected_latest:
