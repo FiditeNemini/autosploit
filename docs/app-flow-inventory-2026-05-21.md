@@ -48,6 +48,12 @@ through AppState and expose `/state.windowOverlayActions`; covered by
 Phase dot and Next Phase controls route through AppState and expose
 `/state.phaseActions` with from/to phase, reset tool count, phase guidance, and
 activity-feed visibility; covered by `scripts/phase-action-proof.py`.
+Cross-app session workflows are summarized through `/qa/session-coverage`,
+including onboarding and Sidebar mode selection, pending-approval rejection,
+sidebar create/rename/switch/delete, create-op stop behavior, overlays,
+model-folder pickers, persistence across relaunch, saved messages, restored
+results, finding-wizard submit, tab switch actions, phase actions, and Activity
+Feed controls.
 
 Every actionable tool-tab button currently flows through
 `ContentView.sendToChat(_:)`, which calls `state.sendChatMessage(...)` so the

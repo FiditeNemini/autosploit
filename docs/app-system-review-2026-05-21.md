@@ -64,6 +64,11 @@ Interaction modes:
   / `completeOnboarding` wiring, and `/state.modeSelection` exposes available
   mode IDs/labels, selected mode, active op mode, source, onboarding visibility,
   and whether a pending copilot approval was rejected during a mode switch.
+- `/qa/session-coverage` aggregates onboarding, Sidebar mode selection,
+  pending-approval rejection, sidebar CRUD, create-op stop behavior, overlays,
+  model-folder pickers, persistence/relaunch, saved messages, result rebuild,
+  finding wizard submit, tab switch actions, phase actions, and Activity Feed
+  controls.
 - Autopilot executes model tool calls directly.
 - Copilot shows an approval card before tool execution.
 - Manual converts model tool calls into suggested commands and stops.
@@ -507,6 +512,10 @@ Automated no-model gates:
   subtab lifecycle strips, OSINT screenshots, reports, stash retrieval,
   unsupported models, post attribution, tool action panels, live cache stats,
   and CVE/tool settings pages.
+  `/qa/session-coverage` exposes cross-app session workflow proof coverage for
+  onboarding/mode selection, Sidebar operations, overlays, model-folder pickers,
+  persistence/relaunch, saved messages, result rebuild, finding wizard submit,
+  tab switching, phase changes, and Activity Feed controls.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.

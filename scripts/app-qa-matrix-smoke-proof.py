@@ -99,6 +99,7 @@ def assert_testserver_smoke() -> None:
     context_coverage = request("GET", "/qa/context-coverage")
     settings_coverage = request("GET", "/qa/settings-coverage")
     visual_coverage = request("GET", "/qa/visual-coverage")
+    session_coverage = request("GET", "/qa/session-coverage")
 
     required_state_keys = {
         "activeTab",
@@ -145,6 +146,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing settings coverage route contract: {qa}")
     if "/qa/visual-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing visual coverage route contract: {qa}")
+    if "/qa/session-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing session coverage route contract: {qa}")
     if subtab_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/subtab-coverage failed: {subtab_coverage}")
     if sorted((subtab_coverage.get("tabs") or {}).keys()) != expected_subtab_tabs:
@@ -181,6 +184,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/visual-coverage manifest count mismatch: {visual_coverage}")
     if visual_coverage.get("minimumCaptureCount", 0) < 30:
         raise AssertionError(f"/qa/visual-coverage capture count mismatch: {visual_coverage}")
+    if session_coverage.get("ok") is not True:
+        raise AssertionError(f"/qa/session-coverage failed: {session_coverage}")
+    if session_coverage.get("interactionModes") != ["autopilot", "copilot", "manual"]:
+        raise AssertionError(f"/qa/session-coverage mode order mismatch: {session_coverage}")
+    if session_coverage.get("sidebarActions") != ["createOp", "renameOp", "switchOp", "deleteOp"]:
+        raise AssertionError(f"/qa/session-coverage sidebar action mismatch: {session_coverage}")
 
 
 def run() -> None:
