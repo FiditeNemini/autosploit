@@ -563,7 +563,12 @@ Current repeatable gates:
   snippet limit, context seed/query QA routes, bounded catalogue injection,
   request-audit persistence, parsed result-to-context routing, deployed-agent
   context search, durable embeddings, stash retrieval, and new-context cache
-  preservation proof gates.
+  preservation proof gates. Visual screenshot coverage is summarized through
+  `/qa/visual-coverage`, including chat/tool states, scroll lock, Settings,
+  context inspector, request-audit badges, tab activity, subtab lifecycle
+  strips, OSINT screenshots, report export, stash retrieval, unsupported model
+  states, post attribution, tool action panels, live cache stats, and
+  CVE/tool-settings proof manifests.
 - Visual QA through the local app run script plus screenshots.
 
 Required future proof gates:

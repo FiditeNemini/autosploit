@@ -98,6 +98,7 @@ def assert_testserver_smoke() -> None:
     runtime_coverage = request("GET", "/qa/runtime-coverage")
     context_coverage = request("GET", "/qa/context-coverage")
     settings_coverage = request("GET", "/qa/settings-coverage")
+    visual_coverage = request("GET", "/qa/visual-coverage")
 
     required_state_keys = {
         "activeTab",
@@ -142,6 +143,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing context coverage route contract: {qa}")
     if "/qa/settings-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing settings coverage route contract: {qa}")
+    if "/qa/visual-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing visual coverage route contract: {qa}")
     if subtab_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/subtab-coverage failed: {subtab_coverage}")
     if sorted((subtab_coverage.get("tabs") or {}).keys()) != expected_subtab_tabs:
@@ -172,6 +175,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/settings-coverage category count mismatch: {settings_coverage}")
     if settings_coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"/qa/settings-coverage cache method mismatch: {settings_coverage}")
+    if visual_coverage.get("ok") is not True:
+        raise AssertionError(f"/qa/visual-coverage failed: {visual_coverage}")
+    if visual_coverage.get("manifestCount", 0) < 22:
+        raise AssertionError(f"/qa/visual-coverage manifest count mismatch: {visual_coverage}")
+    if visual_coverage.get("minimumCaptureCount", 0) < 30:
+        raise AssertionError(f"/qa/visual-coverage capture count mismatch: {visual_coverage}")
 
 
 def run() -> None:

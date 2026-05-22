@@ -502,6 +502,11 @@ Automated no-model gates:
   catalogue injection, `search_context`, request-audit persistence, parsed
   result-to-context routing, deployed-agent retrieval, durable embeddings,
   targeted stash retrieval, and new-context cache preservation.
+  `/qa/visual-coverage` exposes screenshot-backed UI proof coverage for chat,
+  scroll lock, Settings, context inspector, request-audit badges, tab activity,
+  subtab lifecycle strips, OSINT screenshots, reports, stash retrieval,
+  unsupported models, post attribution, tool action panels, live cache stats,
+  and CVE/tool settings pages.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.
@@ -774,6 +779,10 @@ Visual gates:
   `docs/visual-proofs/checkpoint-109`.
 - Chat scroll locked, paused/new-output, and relock-ready states are captured
   under `docs/visual-proofs/checkpoint-72`.
+- Aggregate screenshot-backed UI proof coverage is exposed through
+  `/qa/visual-coverage` and verified by `scripts/visual-coverage-proof.py`,
+  which checks the route, required visual proof scripts, required manifests,
+  and listed capture artifact existence.
 - Chat control action state for reasoning, context inspector, and new context
   is covered by `scripts/chat-control-actions-proof.py`.
 - Chat copy/stash action state is covered by `scripts/chat-actions-proof.py`.
