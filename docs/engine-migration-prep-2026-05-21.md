@@ -454,6 +454,11 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   `/v1/chat/completions`, and `/v1/cache/stats`. Added
   `testsuite/test_live_model_verifier.py` plus a metadata-only run against
   local Qwen, MiniMax, and Gemma folders.
+- Checkpoint 69: Added `scripts/visual-tab-proof.py` and a QA visual seed route.
+  The proof launches the macOS app, seeds tab-bar activity states and lifecycle
+  lanes, cycles Web/Network/Creds/Exploit/Post/OSINT tabs, captures cropped app
+  screenshots, verifies image dimensions, and writes artifacts under
+  `docs/visual-proofs/checkpoint-69`.
 
 ## Known Risk Areas
 

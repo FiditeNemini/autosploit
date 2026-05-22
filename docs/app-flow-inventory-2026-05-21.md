@@ -252,6 +252,7 @@ Current repeatable gates:
 - `python3 scripts/context-catalog-proof.py`
 - `python3 scripts/settings-apply-proof.py`
 - `python3 scripts/verify-live-models.py --metadata-only --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --minimax /Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit`
+- `python3 scripts/visual-tab-proof.py`
 - `git diff --check`
 - Static scans proving no S/M/L profile selectors or `ModelProfile` code remain.
 - Visual QA through the local app run script plus screenshots.
@@ -269,4 +270,6 @@ Required future proof gates:
 - Reasoning parser smoke proving thinking text is separated from visible output.
 - Tool parser smoke proving parsed API `tool_calls`, not raw text only.
 - UI proof screenshots for Settings model warnings, live cache status,
-  reasoning blocks, tool-call cards, and tab/button progress states.
+  reasoning blocks, tool-call cards, and nested lifecycle strips.
+- Tab-bar activity screenshots are captured under
+  `docs/visual-proofs/checkpoint-69`.

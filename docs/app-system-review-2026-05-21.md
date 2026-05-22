@@ -271,7 +271,8 @@ Mock-model gates:
 - Context packet observed in the outbound request body. Covered by
   `scripts/live-turn-harness.py`.
 - Per-tab tool activity state. Covered by `scripts/live-turn-harness.py` for
-  the Web/CVE path; visual screenshot coverage still needed.
+  the Web/CVE path; tab-bar visual screenshot coverage is now captured by
+  `scripts/visual-tab-proof.py`.
 
 Real-model gates:
 
@@ -297,10 +298,14 @@ Visual gates:
 - Reasoning expanded, streaming, collapsed, and manually reopened.
 - Token metrics bar.
 - Tool approval card, running tool card, failed tool card.
-- Tab action running/progress/done/error states.
+- Tab-bar action running/done/failed/canceled states are captured under
+  `docs/visual-proofs/checkpoint-69`.
+- Remaining visual gap: lifecycle strips inside each nested subtab and chat
+  approval/tool-card states.
 
 ## Current Gaps To Close Next
 
-1. Add visual screenshot coverage for per-tab tool action indicators.
+1. Add visual screenshot coverage for nested lifecycle strips and chat
+   approval/tool-card states.
 2. Run real Qwen and MiniMax model verification with
    `scripts/verify-live-models.py` and capture the report.
