@@ -115,6 +115,10 @@ def run() -> None:
                 raise AssertionError(f"runtime contract missing {key}: {coverage}")
         if coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
             raise AssertionError(f"wrong cache response method: {coverage}")
+        if coverage.get("cacheResponsesInferenceMethod") != "prefix-cache-l2-turboquant":
+            raise AssertionError(f"wrong cache responses inference method: {coverage}")
+        if coverage.get("newModelSessionBehavior") != "new-context-window-preserve-engine-cache-session":
+            raise AssertionError(f"wrong new model session behavior: {coverage}")
         if coverage.get("cacheComponents") != EXPECTED_CACHE_COMPONENTS:
             raise AssertionError(f"runtime cache component list mismatch: {coverage}")
         if coverage.get("cacheComponentCount") != len(EXPECTED_CACHE_COMPONENTS):

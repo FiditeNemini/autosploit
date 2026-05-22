@@ -151,8 +151,12 @@ def assert_chat_coverage() -> None:
         raise AssertionError(f"/qa/chat-coverage failed: {coverage}")
     if coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"chat coverage cache method mismatch: {coverage}")
+    if coverage.get("cacheResponsesInferenceMethod") != "prefix-cache-l2-turboquant":
+        raise AssertionError(f"chat coverage cache responses inference method mismatch: {coverage}")
     if coverage.get("newContextBehavior") != "clear-visible-chat-preserve-engine-cache-session":
         raise AssertionError(f"chat coverage new-context behavior mismatch: {coverage}")
+    if coverage.get("newModelSessionBehavior") != "new-context-window-preserve-engine-cache-session":
+        raise AssertionError(f"chat coverage new model session behavior mismatch: {coverage}")
     expected_header_badges = ["ctx", "cache preserved", "prefix/l2/tq", "new ctx keeps cache"]
     if coverage.get("headerCacheBadges") != expected_header_badges:
         raise AssertionError(f"chat coverage header cache badges mismatch: {coverage}")

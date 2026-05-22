@@ -287,8 +287,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/chat-coverage failed: {chat_coverage}")
     if chat_coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"/qa/chat-coverage cache method mismatch: {chat_coverage}")
+    if chat_coverage.get("cacheResponsesInferenceMethod") != "prefix-cache-l2-turboquant":
+        raise AssertionError(f"/qa/chat-coverage cache responses inference method mismatch: {chat_coverage}")
     if chat_coverage.get("newContextBehavior") != "clear-visible-chat-preserve-engine-cache-session":
         raise AssertionError(f"/qa/chat-coverage context behavior mismatch: {chat_coverage}")
+    if chat_coverage.get("newModelSessionBehavior") != "new-context-window-preserve-engine-cache-session":
+        raise AssertionError(f"/qa/chat-coverage new model session behavior mismatch: {chat_coverage}")
     if chat_coverage.get("headerCacheBadges") != ["ctx", "cache preserved", "prefix/l2/tq", "new ctx keeps cache"]:
         raise AssertionError(f"/qa/chat-coverage header cache badges mismatch: {chat_coverage}")
     if chat_coverage.get("headerCacheBadgeCount") != 4:

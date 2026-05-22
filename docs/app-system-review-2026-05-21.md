@@ -576,7 +576,8 @@ Automated no-model gates:
   metrics, token counters, reasoning controls, approval controls, tool-output
   expansion, request-audit badges, context inspector state, scroll-lock visuals,
   tool-action/Stash chat handoff, visible cache-session header badges,
-  cache-session field list/count/parity, and cache-preserving new-context
+  `cacheResponsesInferenceMethod`, `newModelSessionBehavior`, cache-session
+  field list/count/parity, and cache-preserving new-context
   behavior for the `prefix-cache-l2-turboquant` response path. It also exposes `stateKeys`
   for `chatActions`, `chatControlActions`, chat/message storage, request
   context, context-window state, QA chat visual state, stash handoff, and the
@@ -608,8 +609,9 @@ Automated no-model gates:
   stay machine-auditable, including missing visual capture count.
   The chat/context group mirrors `/qa/chat-coverage.headerCacheBadges`,
   `headerCacheBadgeCount`, `headerCacheBadgeParity`, `cacheSessionIndicator`, and
-  `newContextSessionBoundary`, plus the cache-session field list/count/parity,
-  and it mirrors `/qa/context-coverage` retrieval source list/count/parity, so
+  `newContextSessionBoundary`, plus `cacheResponsesInferenceMethod`,
+  `newModelSessionBehavior`, cache-session field list/count/parity, and it
+  mirrors `/qa/context-coverage` retrieval source list/count/parity, so
   the aggregate coverage map carries the same visible cache-session and bounded
   dynamic-context source contracts as the detailed endpoints.
   `/qa/checkpoint-ledger` exposes checkpoint documentation count,
@@ -647,9 +649,11 @@ Automated no-model gates:
   Qwen/MiniMax support boundary, the Qwen VL block state, `openGapIds`, and the
   `qwenMultimodalRuntime` contract with blocked model kinds plus enforcement
   proofs. The runtime/cache group also exposes `supportedFamilies`,
-  `cacheResponseMethod`, cache component list/count/parity, and
+  `cacheResponseMethod`, `cacheResponsesInferenceMethod`,
+  `newModelSessionBehavior`, cache component list/count/parity, and
   `liveProofArtifactCount` for Qwen/MiniMax-only support, the
-  `prefix-cache-l2-turboquant` response path, and the checked-in Qwen/MiniMax
+  `prefix-cache-l2-turboquant` response path, cache-preserving new-context
+  boundary, and the checked-in Qwen/MiniMax
   live replay artifact set. The settings/visuals group exposes
   settings visual manifest count, full visual manifest count, and actual
   screenshot capture count. The tools/parsers group exposes registry tool

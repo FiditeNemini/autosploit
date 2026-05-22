@@ -225,6 +225,10 @@ def assert_coverage_index() -> None:
     if runtime_group.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"coverage index runtime cache response method mismatch: {runtime_group}")
     runtime_coverage = request("GET", "/qa/runtime-coverage")
+    if runtime_group.get("cacheResponsesInferenceMethod") != runtime_coverage.get("cacheResponsesInferenceMethod"):
+        raise AssertionError(f"coverage index runtime cache responses inference method mismatch: {runtime_group}")
+    if runtime_group.get("newModelSessionBehavior") != runtime_coverage.get("newModelSessionBehavior"):
+        raise AssertionError(f"coverage index runtime new model session behavior mismatch: {runtime_group}")
     if runtime_group.get("cacheComponents") != runtime_coverage.get("cacheComponents"):
         raise AssertionError(f"coverage index runtime cache components mismatch: {runtime_group}")
     if runtime_group.get("cacheComponentCount") != runtime_coverage.get("cacheComponentCount"):
@@ -243,6 +247,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context header cache badge parity mismatch: {chat_context_group}")
     if chat_context_group.get("cacheSessionIndicator") != chat_coverage.get("cacheSessionIndicator"):
         raise AssertionError(f"coverage index chat/context cache session indicator mismatch: {chat_context_group}")
+    if chat_context_group.get("cacheResponsesInferenceMethod") != chat_coverage.get("cacheResponsesInferenceMethod"):
+        raise AssertionError(f"coverage index chat/context cache responses inference method mismatch: {chat_context_group}")
+    if chat_context_group.get("newModelSessionBehavior") != chat_coverage.get("newModelSessionBehavior"):
+        raise AssertionError(f"coverage index chat/context new model session behavior mismatch: {chat_context_group}")
     if chat_context_group.get("newContextSessionBoundary") != chat_coverage.get("newContextSessionBoundary"):
         raise AssertionError(f"coverage index chat/context new context boundary mismatch: {chat_context_group}")
     if chat_context_group.get("cacheSessionFields") != chat_coverage.get("cacheSessionFields"):

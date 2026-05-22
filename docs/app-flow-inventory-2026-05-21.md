@@ -286,7 +286,8 @@ through `/state.qaChatVisual.headerBadges` and the seeded visual chat proof;
 `headerCacheBadgeCount`, `headerCacheBadgeParity`, `cacheSessionIndicator`, and
 `newContextSessionBoundary` so the broad app QA matrix locks the visible
 cache-session contract, badge cardinality, and list/count parity. It now also
-advertises the exact cache-session field list/count/parity for
+advertises the exact `cacheResponsesInferenceMethod`,
+`newModelSessionBehavior`, and cache-session field list/count/parity for
 `cacheResponsesMethod`, `cacheResponsesInferenceMethod`, `sessionBoundaryMode`,
 `newModelSessionBehavior`, prefix cache, prompt L2 disk, paged cache, block L2
 disk, and TurboQuant KV so chat coverage can audit the same preserved-session
@@ -748,12 +749,16 @@ Current repeatable gates:
   block state, `openGapIds`, and the `qwenMultimodalRuntime` contract with
   blocked model kinds plus enforcement proofs. The runtime/cache group
   additionally exposes
-  `supportedFamilies`, `cacheResponseMethod`, runtime cache component
-  list/count/parity, and `liveProofArtifactCount`, so Qwen/MiniMax-only support,
-  the `prefix-cache-l2-turboquant` response path, and the checked-in live replay
+  `supportedFamilies`, `cacheResponseMethod`, `cacheResponsesInferenceMethod`,
+  `newModelSessionBehavior`, runtime cache component list/count/parity, and
+  `liveProofArtifactCount`, so Qwen/MiniMax-only support,
+  the `prefix-cache-l2-turboquant` response path, cache-preserving new-context
+  session boundary, and the checked-in live replay
   artifacts remain visible from the top-level QA index. The chat/context group
-  also mirrors context retrieval source list/count/parity, so bounded dynamic
-  catalogue source coverage remains visible from the aggregate QA index. The
+  also mirrors `/qa/chat-coverage.cacheResponsesInferenceMethod`,
+  `newModelSessionBehavior`, and context retrieval source list/count/parity, so
+  bounded dynamic catalogue source coverage and cache-session preservation remain
+  visible from the aggregate QA index. The
   settings/visuals group exposes settings visual manifest count, full
   visual manifest count, and actual screenshot capture count. The tools/parsers
   group exposes registry tool count, callback count, representative family
