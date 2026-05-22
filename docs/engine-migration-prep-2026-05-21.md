@@ -576,6 +576,12 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   messages, request-context preview, and chat-local token counters without
   changing engine config or parsed cache stats. Proof artifact:
   `docs/live-proofs/checkpoint-104-context-window-cache-proof.json`.
+- Checkpoint 105: Surfaced the context/cache state in the chat panel. The chat
+  header now shows `ctx N` and, when the running engine reports TurboQuant cache
+  stats, `cache preserved`. `scripts/visual-chat-proof.py` seeds this running
+  cache-ready state, asserts `/state.contextWindow` generation/session/cache
+  markers, and refreshes
+  `docs/visual-proofs/checkpoint-71/chat-tool-states.png`.
 
 ## Known Risk Areas
 

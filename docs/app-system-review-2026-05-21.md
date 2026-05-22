@@ -362,6 +362,8 @@ Automated no-model gates:
     without changing model or cache defaults;
   - proves `/state.contextWindow` increments the visible context generation and
     reports the preserved prefix-cache/L2/TurboQuant cache-response path;
+  - proves the chat header surfaces that context generation and cache-preserved
+    state in the visual chat screenshot;
   - proves `search_cve` tool calls execute under autopilot;
   - proves manual mode converts tool calls into suggestions;
   - proves copilot mode pauses for approval and executes after approval.
@@ -456,6 +458,9 @@ Real-model gates:
   block L2, TurboQuant Q4, model-folder generation-default flags, and parsed
   engine cache stats. `/state.contextWindow` exposes the context generation and
   `prefix-cache-l2-turboquant` response method marker.
+- Chat-panel visual context/cache status is covered by
+  `scripts/visual-chat-proof.py`, which seeds a running cache-ready engine state
+  and captures the `ctx N` plus `cache preserved` header indicators.
 - Parsed engine cache runtime counters are exposed through
   `/state.engineCacheStats` and covered by `scripts/cache-stats-state-proof.py`
   plus `scripts/live-cache-stats-ui-proof.py` for TurboQuant, prefix-cache

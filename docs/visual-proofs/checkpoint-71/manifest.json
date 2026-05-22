@@ -3,5 +3,5 @@
   "captures": [
     "docs/visual-proofs/checkpoint-71/chat-tool-states.png"
   ],
-  "note": "Cropped macOS capture of seeded chat approval, running tool, failed tool, reasoning, token metric, context count, and exposed tool-schema count states."
+  "note": "Cropped macOS capture of seeded chat approval, running tool, failed tool, reasoning, token metric, context generation, cache-preserved status, context count, and exposed tool-schema count states."
 }

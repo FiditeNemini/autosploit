@@ -85,6 +85,13 @@ def assert_seeded_chat_state() -> None:
     request_context = state.get("requestContext") or {}
     if request_context.get("contextSnippetCount") != 3 or request_context.get("toolSchemaCount") != 6:
         raise AssertionError(f"expected visible request context counters in seeded chat state: {state}")
+    context_window = state.get("contextWindow") or {}
+    if context_window.get("generation") != 2:
+        raise AssertionError(f"expected visible context-window generation in seeded chat state: {state}")
+    if context_window.get("engineSessionPreserved") is not True:
+        raise AssertionError(f"expected preserved engine session in seeded chat state: {state}")
+    if context_window.get("cacheResponsesMethod") != "prefix-cache-l2-turboquant":
+        raise AssertionError(f"expected cache-response marker in seeded chat state: {state}")
 
     messages = request("GET", "/messages")
     required = {
@@ -123,7 +130,7 @@ def run() -> None:
         manifest = {
             "ok": True,
             "captures": [str(target.relative_to(ROOT))],
-            "note": "Cropped macOS capture of seeded chat approval, running tool, failed tool, reasoning, token metric, context count, and exposed tool-schema count states.",
+            "note": "Cropped macOS capture of seeded chat approval, running tool, failed tool, reasoning, token metric, context generation, cache-preserved status, context count, and exposed tool-schema count states.",
         }
         (OUT_DIR / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
         print("visual-chat proof passed")

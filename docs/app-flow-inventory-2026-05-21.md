@@ -391,6 +391,10 @@ Required future proof gates:
   increments `/state.contextWindow.generation`, clears visible chat state and
   chat-local token counters, and preserves the engine config plus parsed cache
   stats for the prefix-cache/L2/TurboQuant response path.
+- Visible context/cache header status: covered by
+  `scripts/visual-chat-proof.py`, which captures the chat header showing the
+  active context generation and cache-preserved status next to live tool,
+  reasoning, token, context, and tool-schema states.
 - Quantized block L2 proof: covered by
   `docs/live-proofs/checkpoint-77-block-l2-quantized-proof.json`, which proves
   real MLX safetensors write/read plus full-block disk promotion for
