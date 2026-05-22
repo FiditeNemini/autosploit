@@ -367,6 +367,8 @@ Visual gates:
   `docs/visual-proofs/checkpoint-71`.
 - Expanded request-context inspector state is captured under
   `docs/visual-proofs/checkpoint-84`.
+- Per-assistant-turn request audit badges are captured under
+  `docs/visual-proofs/checkpoint-87`.
 - Tool approval card, running tool card, and failed tool card states are
   captured under `docs/visual-proofs/checkpoint-71`.
 - Tab-bar action running/done/failed/canceled states are captured under

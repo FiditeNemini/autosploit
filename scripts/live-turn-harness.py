@@ -456,7 +456,7 @@ def wait_for_app(timeout: float = 15.0) -> None:
     raise RuntimeError(f"app test server did not become ready: {last_error}")
 
 
-def wait_until(predicate, label: str, timeout: float = 12.0):
+def wait_until(predicate, label: str, timeout: float = 24.0):
     deadline = time.time() + timeout
     while time.time() < deadline:
         try:

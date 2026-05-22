@@ -271,6 +271,7 @@ Current repeatable gates:
 - `python3 scripts/visual-tab-proof.py`
 - `python3 scripts/visual-chat-proof.py`
 - `python3 scripts/visual-chat-interaction-proof.py`
+- `python3 scripts/visual-request-audit-proof.py`
 - `python3 scripts/visual-settings-proof.py`
 - `python3 scripts/verify-live-models.py --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit --output docs/live-proofs/checkpoint-76-qwen-repeat-cache-live.json`
 - `cd ExploitBotEngine && uv run --extra dev ../scripts/prove-block-l2-cache.py --output ../docs/live-proofs/checkpoint-77-block-l2-quantized-proof.json`
@@ -315,6 +316,8 @@ Required future proof gates:
 - Chat token metrics, active tool header, approval card, running tool card,
   failed tool card, and streaming reasoning state are captured under
   `docs/visual-proofs/checkpoint-71`.
+- Per-turn request-audit badges are captured under
+  `docs/visual-proofs/checkpoint-87`.
 - Chat scroll locked/paused and reasoning expanded/collapsed states are captured
   under `docs/visual-proofs/checkpoint-72`.
 - Tab-bar activity screenshots are captured under
