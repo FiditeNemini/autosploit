@@ -458,8 +458,8 @@ Stash:
 - Aggregate per-tab direct action coverage is exposed through
   `/qa/tab-action-coverage` and verified by
   `scripts/tab-action-coverage-proof.py`, which checks the route, action seed/
-  action route list, contracts, focused proof scripts, covered tabs, and proof
-  file existence.
+  action route list, copy/export/agent seed routes, contracts, focused proof
+  scripts, covered tabs, and proof file existence.
 - Aggregate chat/control coverage is exposed through `/qa/chat-coverage` and
   verified by `scripts/chat-coverage-proof.py`, which checks Send/Stop,
   reasoning, approval, copy/stash, tool-output expansion, request-audit,
@@ -541,7 +541,8 @@ Automated no-model gates:
   proof-count metadata.
   `/qa/tab-action-coverage` exposes per-tab direct action proof coverage for
   copy buttons, row context actions, verify/protocol/hash/exploit/post/OSINT
-  actions, report generation/finding/export/agent actions, and Stash controls.
+  actions, report generation/finding/export/agent actions, Stash controls, and
+  the seed routes behind those focused proofs.
   `/qa/chat-coverage` exposes chat/control proof coverage for streaming usage
   metrics, token counters, reasoning controls, approval controls, tool-output
   expansion, request-audit badges, context inspector state, scroll-lock visuals,
