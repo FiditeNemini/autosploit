@@ -182,6 +182,8 @@ def assert_visual_coverage() -> None:
         raise AssertionError(f"visual coverage manifest count mismatch: {coverage}")
     if coverage.get("minimumCaptureCount", 0) > capture_count:
         raise AssertionError(f"visual coverage minimum capture count exceeds artifacts: {coverage}")
+    if coverage.get("actualCaptureCount") != capture_count:
+        raise AssertionError(f"visual coverage actual capture count mismatch: expected {capture_count}: {coverage}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/visual-coverage" not in qa.get("stateRoutes", []):

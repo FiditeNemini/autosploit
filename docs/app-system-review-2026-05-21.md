@@ -853,7 +853,7 @@ Visual gates:
 - Aggregate screenshot-backed UI proof coverage is exposed through
   `/qa/visual-coverage` and verified by `scripts/visual-coverage-proof.py`,
   which checks the route, required visual proof scripts, required manifests,
-  and listed capture artifact existence.
+  listed capture artifact existence, and `actualCaptureCount`.
 - Settings-specific screenshot-backed UI proof coverage is also exposed through
   `/qa/settings-coverage.visualManifests` and verified by
   `scripts/settings-coverage-proof.py`.

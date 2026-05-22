@@ -203,6 +203,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/visual-coverage manifest count mismatch: {visual_coverage}")
     if visual_coverage.get("minimumCaptureCount", 0) < 30:
         raise AssertionError(f"/qa/visual-coverage capture count mismatch: {visual_coverage}")
+    if visual_coverage.get("actualCaptureCount", 0) < 48:
+        raise AssertionError(f"/qa/visual-coverage actual capture count mismatch: {visual_coverage}")
     if session_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/session-coverage failed: {session_coverage}")
     if session_coverage.get("interactionModes") != ["autopilot", "copilot", "manual"]:

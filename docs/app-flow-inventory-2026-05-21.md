@@ -626,9 +626,9 @@ Current repeatable gates:
   strips, OSINT screenshots, report export, stash retrieval, unsupported model
   states, post attribution, tool action panels, live cache stats, and
   CVE/tool-settings proof manifests. The aggregate exposes `proofCount`,
-  `manifestCount`, and minimum capture count so visual proof breadth is
-  machine-checkable. It also lists the visual QA seed/switch routes used by the
-  screenshot proofs.
+  `manifestCount`, minimum capture count, and `actualCaptureCount` so visual
+  proof breadth is machine-checkable. It also lists the visual QA seed/switch
+  routes used by the screenshot proofs.
   Chat/control invariants are summarized through `/qa/chat-coverage`, including
   streaming usage metrics, token counters, reasoning controls, tool-output
   expansion, approval controls, copy/stash actions, request-audit badges,
