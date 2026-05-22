@@ -321,7 +321,8 @@ Report:
 - Opens finding creation and deletes findings. `/state.reportFindingActions`
   exposes Create Finding/Delete finding labels, wizard visibility, last action,
   current finding rows, and the last created/deleted IDs so Report CRUD actions
-  are auditable like tool-tab action states.
+  are auditable like tool-tab action states. Visible row delete wiring is
+  guarded by `scripts/report-visible-delete-wiring-proof.py`.
 - Deterministic Generate/Export remains direct, while `Agent Draft` now routes
   a bounded report drafting prompt through the chat/agent loop.
 - `/state.reportAction` exposes the active report-agent draft status, template,
