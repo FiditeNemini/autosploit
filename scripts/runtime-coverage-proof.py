@@ -28,6 +28,14 @@ EXPECTED_PROOFS = {
     "prove-ssm-rederive-status.py",
 }
 
+EXPECTED_ROUTES = {
+    "/qa/model-folder",
+    "/engine/start",
+    "/context/new",
+    "/qa/seed-settings-visual-state",
+    "/qa/seed-live-cache-stats",
+}
+
 
 def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
     if isinstance(body, dict):
@@ -90,6 +98,10 @@ def run() -> None:
             raise AssertionError(f"wrong cache response method: {coverage}")
         if not EXPECTED_PROOFS.issubset(set(coverage.get("proofs") or [])):
             raise AssertionError(f"runtime proof list missing entries: {coverage}")
+        if coverage.get("proofCount", 0) < len(EXPECTED_PROOFS):
+            raise AssertionError(f"runtime proof count mismatch: {coverage}")
+        if not EXPECTED_ROUTES.issubset(set(coverage.get("routes") or [])):
+            raise AssertionError(f"runtime route list missing entries: {coverage}")
 
         live = coverage.get("liveProofs") or {}
         for family in ("qwen", "minimax"):
