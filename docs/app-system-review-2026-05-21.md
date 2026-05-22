@@ -236,6 +236,10 @@ Stash:
 Settings:
 
 - Model folder only; Qwen/MiniMax warning.
+- Unsupported folders are blocked before engine launch. `AppState.startEngine()`
+  inspects the selected folder, refuses non-Qwen/non-MiniMax families, sets
+  `healthStatus=blocked`, exposes `/state.engineError`, and the Settings engine
+  control shows a disabled `Blocked` state.
 - Runtime autodetect for generation/parser/cache.
 - Context catalogue settings.
 - Cache budgets/topology.
@@ -333,6 +337,10 @@ Real-model gates:
   `scripts/model-folder-warning-proof.py`: temporary Qwen and MiniMax fixtures
   are accepted, and an unsupported fixture exposes the required Qwen/MiniMax
   parser/cache warning through `/state.modelFolderInfo`.
+- Unsupported folder start-blocking is covered by
+  `scripts/unsupported-model-start-proof.py`: an unsupported fixture cannot
+  start the engine, `engineRunning` remains false, `/state.engineError` carries
+  the Qwen/MiniMax blocking message, and `healthStatus` becomes `blocked`.
 - Qwen live proof is captured at
   `docs/live-proofs/checkpoint-76-qwen-repeat-cache-live.json`. It proves
   actual engine startup, JANG folder load, non-empty chat completion,
@@ -359,8 +367,6 @@ Real-model gates:
   request with thinking-enabled template kwargs, returns non-empty assistant
   content on first and repeat turns, and proves repeat prefix-cache reuse with
   `cached_tokens=40` and `scheduler_cache.tokens_saved_delta=40`.
-- Unsupported folder start-blocking/clear app UI behavior still needs a live UI
-  proof.
 - Full prompt -> context catalogue -> stream -> tool call -> tab result loop is
   covered with the mock engine; real-model repetition remains open.
 - Prefix/L2/cache metrics visibility is script-checkable after real engine load
@@ -410,6 +416,8 @@ Visual gates:
   `docs/visual-proofs/checkpoint-91`.
 - Stash retrieval audit state is captured under
   `docs/visual-proofs/checkpoint-92`.
+- Unsupported model-folder warning and engine blocked states are captured under
+  `docs/visual-proofs/checkpoint-93`.
 - Remaining visual gap: real-engine cache metrics state.
 
 ## Current Gaps To Close Next

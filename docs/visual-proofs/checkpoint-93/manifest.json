@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "captures": [
+    "docs/visual-proofs/checkpoint-93/unsupported-engine-blocked.png",
+    "docs/visual-proofs/checkpoint-93/unsupported-model-warning.png"
+  ],
+  "note": "Cropped macOS captures of Settings engine blocked state and model-folder Qwen/MiniMax warning for unsupported folders."
+}

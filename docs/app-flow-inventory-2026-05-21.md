@@ -10,7 +10,8 @@ Python engine autodetects the effective runtime config.
 
 Supported model warning: only Qwen and MiniMax families are supported in this
 beta path. Unknown folders can still be selected for inspection, but the app
-warns that runtime behavior is unsupported.
+warns that runtime behavior is unsupported and blocks engine start before
+launching the Python process.
 
 Required engine defaults for this lane:
 
@@ -226,7 +227,8 @@ Model:
 
 - User selects a model folder by path or browse panel.
 - `ModelFolderInspector` detects family, model type, and config files.
-- UI warns when the folder is not Qwen or MiniMax.
+- UI warns when the folder is not Qwen or MiniMax, and the Engine settings page
+  shows a disabled `Blocked` control after an unsupported start attempt.
 - Curated S/M/L profile selection is removed.
 
 Runtime Autodetect:
@@ -304,6 +306,10 @@ Required future proof gates:
   `scripts/model-folder-warning-proof.py`, which uses temporary fixtures and
   verifies Qwen/MiniMax support plus unsupported parser/cache warning text
   through `/state.modelFolderInfo`.
+- Unsupported folder start-blocking: covered by
+  `scripts/unsupported-model-start-proof.py`, which verifies the engine remains
+  stopped, `healthStatus=blocked`, and `/state.engineError` explains the
+  Qwen/MiniMax-only constraint.
 - Engine no-model smoke proving `/health` and `/v1/models` report parser,
   generation, topology, and cache metadata.
 - MiniMax real generation smoke proving full KV attention with prefix hits,
@@ -358,3 +364,5 @@ Required future proof gates:
   `docs/visual-proofs/checkpoint-91`.
 - Stash retrieval audit state is captured under
   `docs/visual-proofs/checkpoint-92`.
+- Unsupported model-folder warning and blocked engine states are captured under
+  `docs/visual-proofs/checkpoint-93`.
