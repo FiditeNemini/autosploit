@@ -753,7 +753,7 @@ Automated no-model gates:
   action-state-key count, agent-loop
   state-key list/count, agent-loop visual state keys, agent-loop phase-proof
   map/count/parity, agent-loop current mode, max-iteration guard, proof count/list,
-  visual-state-key count, mode behavior, deployed-agent inheritance/status
+  visual-state-key count, mode behavior/count, deployed-agent inheritance/status
   contract, route list/count, contract flags/count, action telemetry field
   list/count, and tab activity status proof count/parity. Chat/context
   also exposes state-key count.

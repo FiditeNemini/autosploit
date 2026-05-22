@@ -149,6 +149,8 @@ def run() -> None:
             raise AssertionError(f"agent loop coverage route failed: {coverage}")
         if coverage.get("modes") != EXPECTED_MODES:
             raise AssertionError(f"mode behavior contract mismatch: {coverage}")
+        if coverage.get("modeCount") != len(EXPECTED_MODES):
+            raise AssertionError(f"mode count mismatch: {coverage}")
         if coverage.get("currentMode") not in EXPECTED_MODES:
             raise AssertionError(f"current mode missing from contract: {coverage}")
         if coverage.get("maxIterations", 0) < 1:
