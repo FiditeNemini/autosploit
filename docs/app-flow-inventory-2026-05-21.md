@@ -584,6 +584,7 @@ Current repeatable gates:
   the tool registry, parser routing, representative family fanout, and
   context-catalog tool-output proofs into one auditable contract. It now lists
   the parser and family-fanout fixture seed routes as part of that contract.
+  The aggregate also exposes `proofCount` for machine-readable proof accounting.
   Runtime and cache invariants are also summarized through
   `/qa/runtime-coverage`, including
   Qwen/MiniMax support, parser autodetect, model-folder generation defaults,

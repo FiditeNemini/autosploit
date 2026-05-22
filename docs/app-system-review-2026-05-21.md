@@ -518,7 +518,7 @@ Automated no-model gates:
   routes, deploy-sheet/task-send controls, and the proof scripts that cover
   them. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
   context-catalog proof contract for model-issued tool calls, including the
-  parser and family-fanout fixture seed routes.
+  parser and family-fanout fixture seed routes and proof-count metadata.
   `/qa/runtime-coverage` exposes the runtime/model/cache proof contract for
   Qwen/MiniMax support, parser autodetect, model-folder generation defaults,
   prefix-cache/L2/TurboQuant response mode, unsupported-start blocking, the

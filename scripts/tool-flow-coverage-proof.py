@@ -73,6 +73,8 @@ def run() -> None:
             raise AssertionError(f"tool flow route contract mismatch: {coverage}")
         if not EXPECTED_PROOFS.issubset(set(coverage.get("proofs") or [])):
             raise AssertionError(f"tool flow proofs missing: {coverage}")
+        if coverage.get("proofCount", 0) < len(EXPECTED_PROOFS):
+            raise AssertionError(f"tool flow proof count mismatch: {coverage}")
         missing_files = sorted(name for name in EXPECTED_PROOFS if not (ROOT / "scripts" / name).is_file())
         if missing_files:
             raise AssertionError(f"tool flow names non-existent proof files: {missing_files}")
