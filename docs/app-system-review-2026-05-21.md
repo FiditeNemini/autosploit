@@ -517,7 +517,7 @@ Settings:
   CVE/tool/log action coverage, visual Settings proof scripts, and proof-count
   metadata. It also exposes Settings surface list/count/parity for engine/model/
   runtime, context/cache, agents, CVEs, tools, inference logs, and visual status
-  proofs. It now also exposes the checked-in Settings visual manifest paths and
+  proofs, plus Settings surface proof map/count/parity. It now also exposes the checked-in Settings visual manifest paths and
   `visualManifestCount` for matrix-level visual accounting.
 - App-only settings can now be applied without restarting the engine; model,
   cache, and engine runtime changes still use Apply & Restart Engine.
@@ -676,7 +676,7 @@ Automated no-model gates:
   `prefix-cache-l2-turboquant` response path, cache-preserving new-context
   boundary, and the checked-in Qwen/MiniMax
   live replay artifact set. The settings/visuals group exposes Settings surface
-  list/count/parity, visual surface list/count/parity, settings visual manifest
+  list/count/parity, Settings surface proof count/parity, visual surface list/count/parity, settings visual manifest
   count, full visual manifest count, and actual screenshot capture count. The
   tools/parsers group exposes registry tool
   count, callback count, representative family fanout count, state-key count,
@@ -990,8 +990,8 @@ Visual gates:
   `/qa/settings-coverage.visualManifests` and verified by
   `scripts/settings-coverage-proof.py`.
 - The top-level `/qa/coverage-index.groups.settingsAndVisuals` aggregate now
-  rolls up Settings surface list/count/parity, visual surface list/count/parity,
-  settings visual manifest count, full visual manifest count, and
+  rolls up Settings surface list/count/parity, Settings surface proof
+  count/parity, visual surface list/count/parity, settings visual manifest count, full visual manifest count, and
   actual screenshot capture count for matrix-level proof accounting.
 - Chat control action state for reasoning, context inspector, and new context
   is covered by `scripts/chat-control-actions-proof.py`.

@@ -288,6 +288,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index settings surface count mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("settingsSurfaceParity") != settings_coverage.get("settingsSurfaceParity"):
         raise AssertionError(f"coverage index settings surface parity mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("settingsSurfaceProofCount") != settings_coverage.get("settingsSurfaceProofCount"):
+        raise AssertionError(f"coverage index settings surface proof count mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("settingsSurfaceProofParity") != settings_coverage.get("settingsSurfaceProofParity"):
+        raise AssertionError(f"coverage index settings surface proof parity mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("settingsVisualManifestCount", 0) < 6:
         raise AssertionError(f"coverage index settings visual manifest count mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("visualManifestCount", 0) < 22:

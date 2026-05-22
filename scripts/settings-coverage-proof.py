@@ -96,6 +96,30 @@ REQUIRED_SETTINGS_SURFACES = [
     "visualStatusProofs",
 ]
 
+REQUIRED_SETTINGS_SURFACE_PROOFS = {
+    "engineModelRuntime": [
+        "settings-category-coverage-proof.py",
+        "settings-apply-proof.py",
+        "settings-engine-actions-proof.py",
+        "model-folder-warning-proof.py",
+    ],
+    "contextAndCache": ["cache-stats-state-proof.py", "live-cache-stats-ui-proof.py"],
+    "agentControls": ["agent-settings-actions-proof.py"],
+    "cveDatabase": [
+        "cve-settings-status-proof.py",
+        "cve-settings-actions-proof.py",
+        "cve-settings-add-panel-proof.py",
+    ],
+    "toolInventory": ["tool-settings-status-proof.py", "tool-settings-actions-proof.py"],
+    "inferenceLogs": ["inference-log-actions-proof.py"],
+    "visualStatusProofs": [
+        "visual-settings-proof.py",
+        "visual-cve-settings-status-proof.py",
+        "visual-tool-settings-status-proof.py",
+        "visual-live-cache-stats-proof.py",
+    ],
+}
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -186,6 +210,16 @@ def assert_settings_coverage() -> None:
         raise AssertionError(f"settings coverage surface count mismatch: {coverage}")
     if coverage.get("settingsSurfaceParity") is not True:
         raise AssertionError(f"settings coverage surface parity mismatch: {coverage}")
+    if coverage.get("settingsSurfaceProofs") != REQUIRED_SETTINGS_SURFACE_PROOFS:
+        raise AssertionError(f"settings coverage surface proof map mismatch: {coverage}")
+    if coverage.get("settingsSurfaceProofCount") != len(REQUIRED_SETTINGS_SURFACE_PROOFS):
+        raise AssertionError(f"settings coverage surface proof count mismatch: {coverage}")
+    if coverage.get("settingsSurfaceProofParity") is not True:
+        raise AssertionError(f"settings coverage surface proof parity mismatch: {coverage}")
+    for surface, proof_names in REQUIRED_SETTINGS_SURFACE_PROOFS.items():
+        missing_surface_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
+        if missing_surface_files:
+            raise AssertionError(f"settings surface {surface} names missing proof files {missing_surface_files}: {coverage}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/settings-coverage" not in qa.get("stateRoutes", []):

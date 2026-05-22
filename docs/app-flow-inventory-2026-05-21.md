@@ -502,7 +502,7 @@ Stash:
   app-only apply without engine restart, engine Start/Stop action state,
   context controls, cache topology, agent controls, CVE/tool/inference-log
   actions, visual Settings proof gates, Settings surface list/count/parity,
-  proof-count metadata, checked-in Settings visual manifests, and
+  Settings surface proof map/count/parity, proof-count metadata, checked-in Settings visual manifests, and
   `visualManifestCount`.
 
 Model:
@@ -789,7 +789,8 @@ Current repeatable gates:
   count/parity, so
   bounded dynamic catalogue source coverage and cache-session preservation remain
   visible from the aggregate QA index. The
-  settings/visuals group exposes Settings surface list/count/parity, settings
+  settings/visuals group exposes Settings surface list/count/parity, Settings
+  surface proof count/parity, settings
   visual surface list/count/parity, visual manifest count, full visual manifest
   count, and actual screenshot capture count. The tools/parsers
   group exposes registry tool count, callback count, representative family

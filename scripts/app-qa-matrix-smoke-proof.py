@@ -301,6 +301,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/settings-coverage surface count mismatch: {settings_coverage}")
     if settings_coverage.get("settingsSurfaceParity") is not True:
         raise AssertionError(f"/qa/settings-coverage surface parity mismatch: {settings_coverage}")
+    if settings_coverage.get("settingsSurfaceProofCount") != len(expected_settings_surfaces):
+        raise AssertionError(f"/qa/settings-coverage surface proof count mismatch: {settings_coverage}")
+    if settings_coverage.get("settingsSurfaceProofParity") is not True:
+        raise AssertionError(f"/qa/settings-coverage surface proof parity mismatch: {settings_coverage}")
     if visual_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/visual-coverage failed: {visual_coverage}")
     if visual_coverage.get("manifestCount", 0) < 22:
