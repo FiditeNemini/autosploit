@@ -66,6 +66,10 @@ Dynamic context:
 - CVE assist mode can be off, current visible results, or semantic embedding
   ranked. Semantic mode uses `CVEService.semanticSearch(...)` and falls back
   through local CVE search behavior when embeddings are unavailable.
+- `search_context` is exposed as a model-callable built-in tool. It queries the
+  same ranked catalogue on demand with a bounded `max_snippets` limit so the
+  model can pull targeted notes/assets/findings/CVEs without forcing all context
+  into every prompt.
 - Required proof: prompt with seeded assets/stash/CVEs injects only configured
   top snippets; disabling a source removes that source; semantic CVE mode calls
   the embedder when available.
@@ -87,7 +91,8 @@ Tool API:
 - `ToolDefinitions.forModel()` exposes 34 tools plus `run_shell`.
 - `ToolDefinitions.buildCliArgs(...)` maps parsed model tool calls to CLI
   binaries/arguments.
-- Built-ins `search_cve` and `lookup_cve` route to `CVEService` callbacks.
+- Built-ins `search_context`, `search_cve`, and `lookup_cve` route to app
+  callbacks instead of subprocesses.
 - External tools route through `ToolExecutor.execute(...)`.
 
 Result fanout:
@@ -203,6 +208,11 @@ Automated no-model gates:
     tool card canceled, and prevents post-sleep output from landing;
   - proves tool callbacks update per-tab activity state that the tab bar can
     render as running/done/failed/canceled indicators;
+  - proves model-issued `search_context` returns targeted catalogue facts;
+  - proves prefix cache, prompt L2, paged cache, block L2, TurboQuant Q4, and
+    model-folder generation defaults remain enabled in runtime config;
+  - proves the new-context route clears chat state without changing model or
+    cache defaults;
   - proves `search_cve` tool calls execute under autopilot;
   - proves manual mode converts tool calls into suggestions;
   - proves copilot mode pauses for approval and executes after approval.

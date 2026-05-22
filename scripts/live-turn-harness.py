@@ -138,6 +138,42 @@ class MockEngineHandler(BaseHTTPRequestHandler):
                     ]
                 },
             ]
+        elif "Ask catalogue tool for Apache" in user_text:
+            events = [
+                {"choices": [{"delta": {"content": "Pulling targeted catalogue context."}}]},
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "id": "call_context_lookup",
+                                        "type": "function",
+                                        "function": {"name": "search_context", "arguments": ""},
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "function": {
+                                            "arguments": "{\"query\":\"Apache 2.4.49 CVE path traversal\",\"max_snippets\":4}"
+                                        },
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+            ]
         elif turn == 1 or "Suggest the next Apache check" in user_text or "Ask approval before checking Apache" in user_text:
             events = [
                 {"choices": [{"delta": {"content": "I will check the seeded service context."}}]},
@@ -416,6 +452,40 @@ def run() -> None:
         assert web_activity_state["activeTab"] == "web", web_activity_state
         assert web_activity["status"] in {"running", "failed", "done"}, web_activity_state
         assert web_activity["count"] >= 1, web_activity_state
+
+        with MockState.lock:
+            tool_names = [
+                tool.get("function", {}).get("name")
+                for tool in MockState.requests[-1].get("tools", [])
+            ]
+        assert "search_context" in tool_names, tool_names
+
+        request("POST", "/clear")
+        request("POST", "/mode", "autopilot")
+        request("POST", "/tab", "recon")
+        request("POST", "/send", "Ask catalogue tool for Apache")
+        context_messages = wait_until(
+            lambda: request("GET", "/messages") if any(m.get("tool") == "search_context" and "ok" in m.get("status", "") for m in request("GET", "/messages")) else None,
+            "search_context tool result",
+        )
+        context_cards = [m for m in context_messages if m.get("tool") == "search_context"]
+        assert context_cards and "ok" in context_cards[-1].get("status", ""), context_messages
+        context_output = context_cards[-1]["content"]
+        assert_contains(context_output, "Dynamic Context Catalogue", "catalogue tool header")
+        assert_contains(context_output, "Apache 2.4.49", "catalogue Apache fact")
+        assert_contains(context_output, "CVE-2021-41773", "catalogue CVE fact")
+
+        cache_state = request("GET", "/state")
+        assert cache_state["engineConfig"]["prefixCache"] is True, cache_state
+        assert cache_state["engineConfig"]["promptL2Disk"] is True, cache_state
+        assert cache_state["engineConfig"]["pagedCache"] is True, cache_state
+        assert cache_state["engineConfig"]["blockL2Disk"] is True, cache_state
+        assert cache_state["engineConfig"]["kvCacheQuantization"] == "turboquant-q4", cache_state
+        request("POST", "/context/new")
+        new_context_state = request("GET", "/state")
+        assert new_context_state["msgs"] == 0, new_context_state
+        assert new_context_state["model"] == "mock-qwen-jang", new_context_state
+        assert new_context_state["engineConfig"]["prefixCache"] is True, new_context_state
 
         print("live-turn harness passed")
     finally:

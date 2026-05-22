@@ -398,6 +398,12 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   Agents, CVE Database, Tools, and Logs. The footer apply action remains
   persistent, and the engine/model/runtime/context/cache controls keep their
   existing save and restart behavior.
+- Checkpoint 58: Added the model-callable `search_context` tool backed by the
+  ranked dynamic context catalogue, capped to bounded snippets for on-demand
+  retrieval instead of prompt flooding. Added a tested new-context window path
+  that clears chat state without restarting the engine, and live QA now asserts
+  prefix cache, prompt L2, paged cache, block L2, TurboQuant Q4, and
+  model-folder generation defaults stay enabled.
 
 ## Known Risk Areas
 
