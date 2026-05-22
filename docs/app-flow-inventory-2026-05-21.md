@@ -657,7 +657,9 @@ Current repeatable gates:
   `/qa/proof-ledger` proof count across all local proof scripts. It also exposes
   `/qa/artifact-ledger` visual manifest and live-proof counts so screenshot and
   live JSON evidence stay machine-auditable, including missing visual capture
-  count. The runtime/cache group additionally exposes
+  count. `/qa/checkpoint-ledger` exposes checkpoint documentation count,
+  completeness count, incomplete checkpoint paths, and latest checkpoint. The
+  runtime/cache group additionally exposes
   `supportedFamilies`, `cacheResponseMethod`, and `liveProofArtifactCount`, so
   Qwen/MiniMax-only support, the `prefix-cache-l2-turboquant` response path, and
   the checked-in live replay artifacts remain visible from the top-level QA
