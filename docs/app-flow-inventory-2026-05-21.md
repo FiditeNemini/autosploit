@@ -649,13 +649,14 @@ Current repeatable gates:
   `scripts/coverage-index-proof.py` verifies every named proof file exists.
   Each group also exposes `endpointCount` and `proofCount` for machine-readable
   coverage accounting. The runtime/cache group additionally exposes
-  `liveProofArtifactCount`, so the checked-in Qwen/MiniMax live replay
-  artifacts remain visible from the top-level QA index. The settings/visuals
-  group exposes settings visual manifest count, full visual manifest count, and
-  actual screenshot capture count. The tools/parsers group exposes registry
-  tool count, callback count, representative family fanout count, and state-key
-  count. Chat/context and tabs/sessions groups also expose state-key counts,
-  with `actionStateKeyCount` on tabs/sessions.
+  `supportedFamilies`, `cacheResponseMethod`, and `liveProofArtifactCount`, so
+  Qwen/MiniMax-only support, the `prefix-cache-l2-turboquant` response path, and
+  the checked-in live replay artifacts remain visible from the top-level QA
+  index. The settings/visuals group exposes settings visual manifest count, full
+  visual manifest count, and actual screenshot capture count. The tools/parsers
+  group exposes registry tool count, callback count, representative family
+  fanout count, and state-key count. Chat/context and tabs/sessions groups also
+  expose state-key counts, with `actionStateKeyCount` on tabs/sessions.
 - Visual QA through the local app run script plus screenshots.
 
 Required future proof gates:

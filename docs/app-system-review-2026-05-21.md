@@ -573,9 +573,11 @@ Automated no-model gates:
   chat/context, runtime/cache, settings/visuals, tools/parsers, and tabs/
   sessions; `scripts/coverage-index-proof.py` verifies each group has endpoint
   and proof counts, endpoints, and proofs and that every named proof file
-  exists. The runtime/cache group also exposes `liveProofArtifactCount` for the
-  checked-in Qwen/MiniMax live replay artifact set. The settings/visuals group
-  exposes settings visual manifest count, full visual manifest count, and actual
+  exists. The runtime/cache group also exposes `supportedFamilies`,
+  `cacheResponseMethod`, and `liveProofArtifactCount` for Qwen/MiniMax-only
+  support, the `prefix-cache-l2-turboquant` response path, and the checked-in
+  Qwen/MiniMax live replay artifact set. The settings/visuals group exposes
+  settings visual manifest count, full visual manifest count, and actual
   screenshot capture count. The tools/parsers group exposes registry tool
   count, callback count, representative family fanout count, and state-key
   count. Chat/context and tabs/sessions groups expose state-key counts, and
