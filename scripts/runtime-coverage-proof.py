@@ -19,6 +19,7 @@ EXPECTED_PROOFS = {
     "engine-no-model-metadata-proof.py",
     "model-folder-warning-proof.py",
     "unsupported-model-start-proof.py",
+    "qwen-multimodal-start-proof.py",
     "cache-stats-state-proof.py",
     "live-cache-stats-ui-proof.py",
     "context-window-cache-proof.py",

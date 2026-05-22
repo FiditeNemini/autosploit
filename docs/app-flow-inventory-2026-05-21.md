@@ -760,7 +760,8 @@ Current repeatable gates:
   current-gap section from `docs/app-system-review-2026-05-21.md` and exposes
   the currently documented gap, the Qwen/MiniMax support boundary, the Qwen VL
   block state, `openGapIds`, and the `qwenMultimodalRuntime` contract with
-  blocked model kinds plus enforcement proofs. The runtime/cache group
+  blocked model kinds plus enforcement proofs, including a dedicated Qwen
+  multimodal engine-start block proof. The runtime/cache group
   additionally exposes
   `supportedFamilies`, `cacheResponseMethod`, `cacheResponsesInferenceMethod`,
   `newModelSessionBehavior`, runtime cache component list/count/parity, and
@@ -802,6 +803,10 @@ Required future proof gates:
   `scripts/unsupported-model-start-proof.py`, which verifies the engine remains
   stopped, `healthStatus=blocked`, and `/state.engineError` explains the
   Qwen/MiniMax-only constraint.
+- Qwen multimodal/VL start-blocking: covered by
+  `scripts/qwen-multimodal-start-proof.py`, which verifies a Qwen VL/JANGTQ
+  fixture remains `family=Qwen`, exposes `isMultimodal=true`, is blocked before
+  engine start, and reports the multimodal-not-yet-supported boundary.
 - Engine no-model smoke proving `/health` and `/v1/models` report parser,
   generation, topology, and cache metadata: covered by
   `scripts/engine-no-model-metadata-proof.py`, including the

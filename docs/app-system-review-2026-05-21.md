@@ -661,7 +661,8 @@ Automated no-model gates:
   document's current-gap section and exposes the currently documented gap, the
   Qwen/MiniMax support boundary, the Qwen VL block state, `openGapIds`, and the
   `qwenMultimodalRuntime` contract with blocked model kinds plus enforcement
-  proofs. The runtime/cache group also exposes `supportedFamilies`,
+  proofs, including a dedicated Qwen multimodal engine-start block proof. The
+  runtime/cache group also exposes `supportedFamilies`,
   `cacheResponseMethod`, `cacheResponsesInferenceMethod`,
   `newModelSessionBehavior`, cache component list/count/parity, and
   `liveProofArtifactCount` for Qwen/MiniMax-only support, the
@@ -825,6 +826,11 @@ Real-model gates:
   `scripts/unsupported-model-start-proof.py`: an unsupported fixture cannot
   start the engine, `engineRunning` remains false, `/state.engineError` carries
   the Qwen/MiniMax blocking message, and `healthStatus` becomes `blocked`.
+- Qwen multimodal/VL start-blocking is covered by
+  `scripts/qwen-multimodal-start-proof.py`: a Qwen VL/JANGTQ fixture keeps
+  `family=Qwen`, exposes `isMultimodal=true`, remains unsupported, leaves the
+  engine stopped, sets `healthStatus=blocked`, and reports the multimodal-not-yet-supported
+  error instead of applying text-only parser/cache assumptions.
 - Engine no-model metadata is covered by
   `scripts/engine-no-model-metadata-proof.py`: a fixture-backed no-model Qwen
   hybrid server reports `status=no_model`; `/health.effective_config` and
