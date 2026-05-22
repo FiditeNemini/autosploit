@@ -58,6 +58,16 @@ def run() -> None:
         if logs.get("engineLogChars", 0) <= 0:
             raise AssertionError(f"seed did not expose engine log chars: {logs}")
 
+        response = request("POST", "/qa/inference-log-action", {"action": "copy"})
+        if response.get("ok") is not True:
+            raise AssertionError(f"inference log copy action failed: {response}")
+        state = request("GET", "/state")
+        logs = state.get("inferenceLogActions") or {}
+        if logs.get("lastAction") != "copy" or logs.get("status") != "done":
+            raise AssertionError(f"inference log copy action state missing: {logs}")
+        if "QA engine log line 1" not in logs.get("clipboardPreview", ""):
+            raise AssertionError(f"inference log copy preview missing: {logs}")
+
         response = request("POST", "/qa/inference-log-action", {"action": "clear"})
         if response.get("ok") is not True:
             raise AssertionError(f"inference log clear action failed: {response}")

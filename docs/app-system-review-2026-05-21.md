@@ -512,7 +512,7 @@ Automated no-model gates:
     through `/state.toolSettings`;
   - proves Tools settings Refresh, Install, and Install All Missing controls
     route through AppState and expose `/state.toolSettingsActions`;
-  - proves Inference Log clear routes through AppState and exposes
+  - proves Inference Log copy/clear routes through AppState and expose
     `/state.inferenceLogActions`;
   - proves Chat send, stop, approve, reject, and clear/new-context controls
     route through AppState and expose `/state.chatControlActions`;
