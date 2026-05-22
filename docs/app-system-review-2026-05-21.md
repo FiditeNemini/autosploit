@@ -846,7 +846,9 @@ Real-model gates:
   The visible header route is covered by `scripts/chat-control-actions-proof.py`.
 - Chat-panel visual context/cache status is covered by
   `scripts/visual-chat-proof.py`, which seeds a running cache-ready engine state
-  and captures the `ctx N` plus `cache preserved` header indicators.
+  and captures the `ctx N`, `cache preserved`, `prefix/l2/tq`, and
+  `new ctx keeps cache` header indicators through `/state.qaChatVisual.headerBadges`
+  and the checkpoint-71 screenshot.
 - Parsed engine cache runtime counters are exposed through
   `/state.engineCacheStats` and covered by `scripts/cache-stats-state-proof.py`
   plus `scripts/live-cache-stats-ui-proof.py` for TurboQuant, prefix-cache

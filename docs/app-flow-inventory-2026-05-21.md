@@ -266,7 +266,9 @@ and visible-new-context behavior while preserving the engine cache session for
 the `prefix-cache-l2-turboquant` response path. `/state.contextWindow` also
 exposes `cacheResponsesInferenceMethod`, `sessionBoundaryMode`, and
 `newModelSessionBehavior` so clients can distinguish a new model context window
-from destroying the prefix/L2/TurboQuant cache session.
+from destroying the prefix/L2/TurboQuant cache session. The chat header also
+surfaces `cache preserved`, `prefix/l2/tq`, and `new ctx keeps cache` badges
+through `/state.qaChatVisual.headerBadges` and the seeded visual chat proof.
 - CVE-bearing rows now expose per-row status through `/state.webCVERows` and a
   visible chip on each vulnerability card. The same proof verifies `pending`,
   `enriched`, and active `CVE verifying` row semantics for the seeded Web
@@ -816,8 +818,8 @@ Required future proof gates:
 - Settings model warning, engine live cache status, cache topology, CVE/tool
   status, live cache metrics, and split category screenshots are exposed through
   `/qa/settings-coverage.visualManifests`.
-- Chat token metrics, active tool header, approval card, running tool card,
-  failed tool card, and streaming reasoning state are captured under
+- Chat token metrics, active tool header, cache-session badges, approval card,
+  running tool card, failed tool card, and streaming reasoning state are captured under
   `docs/visual-proofs/checkpoint-71`.
 - Chat transcript copy, assistant-message copy, message stash, and
   latest-assistant stash are covered by `scripts/chat-actions-proof.py`.

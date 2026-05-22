@@ -92,6 +92,21 @@ def assert_seeded_chat_state() -> None:
         raise AssertionError(f"expected preserved engine session in seeded chat state: {state}")
     if context_window.get("cacheResponsesMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"expected cache-response marker in seeded chat state: {state}")
+    qa_visual = state.get("qaChatVisual") or {}
+    header_badges = qa_visual.get("headerBadges") or []
+    required_header_badges = {
+        "ctx 2",
+        "cache preserved",
+        "prefix/l2/tq",
+        "new ctx keeps cache",
+    }
+    missing_badges = sorted(required_header_badges.difference(header_badges))
+    if missing_badges:
+        raise AssertionError(f"missing visible chat header cache badges {missing_badges}: {qa_visual}")
+    if qa_visual.get("cacheSessionIndicator") != "prefix/l2/tq":
+        raise AssertionError(f"missing visible cache-session indicator: {qa_visual}")
+    if qa_visual.get("newContextSessionBoundary") != "new ctx keeps cache":
+        raise AssertionError(f"missing visible new-context cache boundary: {qa_visual}")
 
     messages = request("GET", "/messages")
     required = {
@@ -130,7 +145,7 @@ def run() -> None:
         manifest = {
             "ok": True,
             "captures": [str(target.relative_to(ROOT))],
-            "note": "Cropped macOS capture of seeded chat approval, running tool, failed tool, reasoning, token metric, context generation, cache-preserved status, context count, and exposed tool-schema count states.",
+            "note": "Cropped macOS capture of seeded chat approval, running tool, failed tool, reasoning, token metric, context generation, cache-preserved status, prefix/l2/tq cache-session badge, new-context-keeps-cache boundary, context count, and exposed tool-schema count states.",
         }
         (OUT_DIR / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
         print("visual-chat proof passed")
