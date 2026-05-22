@@ -45,6 +45,12 @@ def assert_cache_policy(policy: dict, expected_generation: int) -> None:
         raise AssertionError(f"new context must preserve engine session: {policy}")
     if policy.get("cacheResponsesMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"missing cache-response inference marker: {policy}")
+    if policy.get("cacheResponsesInferenceMethod") != "prefix-cache-l2-turboquant":
+        raise AssertionError(f"missing explicit cache-response inference method: {policy}")
+    if policy.get("sessionBoundaryMode") != "new-context-window":
+        raise AssertionError(f"missing new context-window session boundary: {policy}")
+    if policy.get("newModelSessionBehavior") != "new-context-window-preserve-engine-cache-session":
+        raise AssertionError(f"missing new model session behavior: {policy}")
     required = {
         "prefixCache": True,
         "promptL2Disk": True,

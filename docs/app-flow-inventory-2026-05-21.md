@@ -263,7 +263,10 @@ ties together Send/Stop, reasoning enable/collapse, approvals, copy/stash
 actions, tool-output expansion, request-audit badges, context inspector state,
 scroll-lock visual captures, tool-action/Stash chat handoff, token counters,
 and visible-new-context behavior while preserving the engine cache session for
-the `prefix-cache-l2-turboquant` response path.
+the `prefix-cache-l2-turboquant` response path. `/state.contextWindow` also
+exposes `cacheResponsesInferenceMethod`, `sessionBoundaryMode`, and
+`newModelSessionBehavior` so clients can distinguish a new model context window
+from destroying the prefix/L2/TurboQuant cache session.
 - CVE-bearing rows now expose per-row status through `/state.webCVERows` and a
   visible chip on each vulnerability card. The same proof verifies `pending`,
   `enriched`, and active `CVE verifying` row semantics for the seeded Web
@@ -733,7 +736,8 @@ Required future proof gates:
 - Engine no-model smoke proving `/health` and `/v1/models` report parser,
   generation, topology, and cache metadata: covered by
   `scripts/engine-no-model-metadata-proof.py`, including the
-  `prefix-cache-l2-turboquant` cache-response method and new-context cache
+  `prefix-cache-l2-turboquant` cache-response method, explicit cache-response
+  inference method, new-context session boundary, and new-context cache
   preservation metadata.
 - MiniMax real generation smoke proving full KV attention with prefix hits,
   prompt/block L2 cache metadata, and TurboQuant encode/decode cache stats.

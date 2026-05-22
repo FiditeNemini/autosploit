@@ -841,8 +841,9 @@ Real-model gates:
   prompt/completion/cached counters while preserving prefix, prompt L2, paged,
   block L2, TurboQuant Q4, model-folder generation-default flags, and parsed
   engine cache stats. `/state.contextWindow` exposes the context generation and
-  `prefix-cache-l2-turboquant` response method marker. The visible header
-  route is covered by `scripts/chat-control-actions-proof.py`.
+  `prefix-cache-l2-turboquant` response method marker, explicit cache-response
+  inference method, new-context session boundary, and new-model-session behavior.
+  The visible header route is covered by `scripts/chat-control-actions-proof.py`.
 - Chat-panel visual context/cache status is covered by
   `scripts/visual-chat-proof.py`, which seeds a running cache-ready engine state
   and captures the `ctx N` plus `cache preserved` header indicators.

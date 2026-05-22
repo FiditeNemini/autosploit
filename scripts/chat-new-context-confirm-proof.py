@@ -97,6 +97,12 @@ def run() -> None:
         context = state.get("contextWindow") or {}
         if context.get("cacheResponsesMethod") != "prefix-cache-l2-turboquant":
             raise AssertionError(f"confirm did not preserve cache response method: {context}")
+        if context.get("cacheResponsesInferenceMethod") != "prefix-cache-l2-turboquant":
+            raise AssertionError(f"confirm did not preserve explicit cache inference method: {context}")
+        if context.get("sessionBoundaryMode") != "new-context-window":
+            raise AssertionError(f"confirm did not expose new context-window boundary: {context}")
+        if context.get("newModelSessionBehavior") != "new-context-window-preserve-engine-cache-session":
+            raise AssertionError(f"confirm did not expose new model session behavior: {context}")
         if context.get("engineSessionPreserved") is not True:
             raise AssertionError(f"confirm did not preserve engine session: {context}")
 
@@ -117,4 +123,3 @@ if __name__ == "__main__":
     except (AssertionError, RuntimeError, urllib.error.URLError, TimeoutError, socket.timeout, subprocess.CalledProcessError) as exc:
         print(f"chat-new-context-confirm proof failed: {exc}", flush=True)
         raise SystemExit(1)
-
