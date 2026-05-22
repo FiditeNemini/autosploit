@@ -132,6 +132,8 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit open gap count mismatch: {audit}")
     if audit.get("gapContracts") != gap.get("gapContracts"):
         raise AssertionError(f"audit gap contracts mismatch: {audit}")
+    if audit.get("gapContractCount") != len(gap.get("gapContracts") or {}):
+        raise AssertionError(f"audit gap contract count mismatch: {audit}")
     if audit.get("qwenMultimodalBlockedModelKindCount") != gap.get("qwenMultimodalBlockedModelKindCount"):
         raise AssertionError(f"audit qwen multimodal blocked kind count mismatch: {audit}")
     if audit.get("qwenMultimodalRequiredRuntimeWorkCount") != gap.get("qwenMultimodalRequiredRuntimeWorkCount"):

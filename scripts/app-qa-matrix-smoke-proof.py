@@ -543,7 +543,7 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index audit open gap ids mismatch: {coverage_index}")
     if app_state_group.get("auditGapContracts") != audit_ledger.get("gapContracts"):
         raise AssertionError(f"/qa/coverage-index audit gap contracts mismatch: {coverage_index}")
-    if app_state_group.get("auditGapContractCount") != len(audit_ledger.get("gapContracts") or {}):
+    if app_state_group.get("auditGapContractCount") != audit_ledger.get("gapContractCount"):
         raise AssertionError(f"/qa/coverage-index audit gap contract count mismatch: {coverage_index}")
     if app_state_group.get("auditProofCount") != audit_ledger.get("proofCount"):
         raise AssertionError(f"/qa/coverage-index audit proof count mismatch: {coverage_index}")
@@ -593,6 +593,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index open gap count mismatch: {coverage_index}")
     if app_state_group.get("gapContracts") != gap_ledger.get("gapContracts"):
         raise AssertionError(f"/qa/coverage-index gap contract map mismatch: {coverage_index}")
+    if app_state_group.get("gapContractCount") != gap_ledger.get("gapContractCount"):
+        raise AssertionError(f"/qa/coverage-index gap contract count mismatch: {coverage_index}")
     if app_state_group.get("qwenMultimodalBlockedModelKindCount") != gap_ledger.get("qwenMultimodalBlockedModelKindCount"):
         raise AssertionError(f"/qa/coverage-index qwen blocked kind count mismatch: {coverage_index}")
     if app_state_group.get("qwenMultimodalRequiredRuntimeWorkCount") != gap_ledger.get("qwenMultimodalRequiredRuntimeWorkCount"):
