@@ -40,7 +40,7 @@ def wait_for_app(timeout: float = 15.0) -> None:
 
 
 def expected_checkpoints() -> list[Path]:
-    return sorted((ROOT / "docs" / "checkpoints").glob("*.md"))
+    return sorted((ROOT / "docs" / "checkpoints").glob("*.md"), key=checkpoint_number)
 
 
 def checkpoint_number(path: Path) -> int:
@@ -61,12 +61,13 @@ def assert_checkpoint_ledger() -> None:
     checkpoints = expected_checkpoints()
     expected_paths = [str(path.relative_to(ROOT)) for path in checkpoints]
     expected_latest = str(max(checkpoints, key=checkpoint_number).relative_to(ROOT))
-    expected_complete = sorted(
+    expected_complete = [
         str(path.relative_to(ROOT))
         for path in checkpoints
         if checkpoint_has_required_sections(path)
-    )
-    expected_incomplete = sorted(set(expected_paths).difference(expected_complete))
+    ]
+    expected_complete_set = set(expected_complete)
+    expected_incomplete = [path for path in expected_paths if path not in expected_complete_set]
 
     if ledger.get("ok") is not True:
         raise AssertionError(f"/qa/checkpoint-ledger failed: {ledger}")

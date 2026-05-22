@@ -580,7 +580,8 @@ Automated no-model gates:
   live JSON evidence stay machine-auditable, including missing visual capture
   count. `/qa/checkpoint-ledger` exposes checkpoint documentation count,
   completeness count, incomplete checkpoint paths, latest checkpoint, and
-  latest checkpoint number using numeric checkpoint ordering. The
+  latest checkpoint number using numeric checkpoint ordering; the checkpoint,
+  complete, and incomplete path lists also use that numeric order. The
   `/qa/audit-ledger` route combines proof counts, live artifact counts, visual
   capture counts, missing/failed artifact counts, and checkpoint completeness
   counts plus the current gap count into one machine-readable audit rollup.
