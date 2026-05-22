@@ -96,6 +96,19 @@ EXPECTED_LOOP_PHASES = [
     "reenterModelUntilStopOrMaxIterations",
 ]
 
+EXPECTED_PHASE_PROOFS = {
+    "receiveUserPrompt": ["live-turn-harness.py", "tool-fanout-status-proof.py"],
+    "retrieveDynamicContext": ["agent-search-context-proof.py", "live-turn-harness.py"],
+    "selectToolSchemas": ["live-turn-harness.py", "agent-autopilot-proof.py"],
+    "streamReasoningAndContent": ["live-turn-harness.py", "agent-autopilot-proof.py"],
+    "parseToolCalls": ["live-turn-harness.py", "tool-fanout-status-proof.py"],
+    "applyModePolicy": ["mode-selection-flow-proof.py", "live-turn-harness.py"],
+    "enforceScope": ["live-turn-harness.py"],
+    "executeToolOrBuiltin": ["tool-fanout-status-proof.py", "agent-autopilot-proof.py"],
+    "parseAndStoreToolResult": ["tool-fanout-status-proof.py", "result-parser-routing-proof.py"],
+    "reenterModelUntilStopOrMaxIterations": ["live-turn-harness.py", "agent-autopilot-proof.py"],
+}
+
 
 def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
     if isinstance(body, dict):
@@ -183,6 +196,16 @@ def run() -> None:
             raise AssertionError(f"agent loop phase count mismatch: {coverage}")
         if coverage.get("loopPhaseParity") is not True:
             raise AssertionError(f"agent loop phase parity mismatch: {coverage}")
+        if coverage.get("loopPhaseProofs") != EXPECTED_PHASE_PROOFS:
+            raise AssertionError(f"agent loop phase proof map mismatch: {coverage}")
+        if coverage.get("loopPhaseProofCount") != len(EXPECTED_PHASE_PROOFS):
+            raise AssertionError(f"agent loop phase proof count mismatch: {coverage}")
+        if coverage.get("loopPhaseProofParity") is not True:
+            raise AssertionError(f"agent loop phase proof parity mismatch: {coverage}")
+        for phase, proof_names in EXPECTED_PHASE_PROOFS.items():
+            missing_phase_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
+            if missing_phase_files:
+                raise AssertionError(f"agent loop phase {phase} names missing proof files {missing_phase_files}: {coverage}")
         visual_state_keys = set(coverage.get("visualStateKeys") or [])
         for key in ("agents", "agentActions", "displayChatService", "displayResultsStore", "displayActivityFeed"):
             if key not in visual_state_keys:

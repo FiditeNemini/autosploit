@@ -123,7 +123,8 @@ main session.
   reasoning/content, parse tool calls, apply mode policy, enforce scope,
   execute builtins or external tools, parse/store tool results, and re-enter
   the model until stop or `maxIterations`. The endpoint also exposes
-  loop-phase count/parity.
+  loop-phase count/parity plus a phase-to-proof map tying each phase to the
+  scripts that exercise it.
 - Mode surface wiring is covered by `scripts/mode-selection-flow-proof.py`,
   which proves onboarding-created Manual mode, Sidebar mode switching,
   active-op persistence, pending approval rejection, and activity logging.
@@ -642,8 +643,8 @@ Current repeatable gates:
   `/qa/visual-subtab` route coverage for state and visual subtab switching.
   The same matrix also checks `/qa/agent-loop-coverage` for manual suggestion,
   copilot approval, autopilot execution, and deployed-agent forced-autopilot
-  inheritance coverage. It also checks the agent-loop phase list/count/parity
-  and the agent action telemetry fields needed to prove deploy-sheet,
+  inheritance coverage. It also checks the agent-loop phase list/count/parity,
+  phase-proof count/parity, and the agent action telemetry fields needed to prove deploy-sheet,
   task-send, progress, and status behavior. It now also
   checks `/qa/tool-flow-coverage`, which ties
   the tool registry, parser routing, representative family fanout, and
@@ -793,7 +794,7 @@ Current repeatable gates:
   interaction-mode count, covered tab count, session state-key count, and
   action-state-key count, mirrors session workflow surface list/count/parity,
   mirrors tab action surface list/count/parity, mirrors agent-loop phase
-  list/count/parity,
+  list/count/parity and phase-proof count/parity,
   and now mirrors the visible tab activity status list/count/parity plus
   indicator contract because the tab bar is owned by the
   tabs/session surface. Chat/context also exposes state-key count.
