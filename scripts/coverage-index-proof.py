@@ -150,6 +150,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state missing visual captures: {app_state_group}")
     if app_state_group.get("checkpointLedgerCount", 0) < 200:
         raise AssertionError(f"coverage index app state checkpoint ledger count mismatch: {app_state_group}")
+    if app_state_group.get("completeCheckpointCount") != checkpoint.get("completeCheckpointCount"):
+        raise AssertionError(f"coverage index app state complete checkpoint count mismatch: {app_state_group}")
+    if app_state_group.get("incompleteCheckpointCount") != len(checkpoint.get("incompleteCheckpoints") or []):
+        raise AssertionError(f"coverage index app state incomplete checkpoint count mismatch: {app_state_group}")
     if app_state_group.get("checkpointCompletionRatio") != checkpoint.get("checkpointCompletionRatio"):
         raise AssertionError(f"coverage index app state checkpoint ratio mismatch: {app_state_group}")
     if app_state_group.get("latestCheckpoint") != checkpoint.get("latestCheckpoint"):
