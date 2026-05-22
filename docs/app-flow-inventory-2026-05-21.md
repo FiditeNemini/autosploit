@@ -437,7 +437,10 @@ CVE Database and Tools:
   and active settings category. `scripts/cve-settings-status-proof.py` verifies
   the state contract, and `scripts/visual-cve-settings-status-proof.py` captures
   the visible CVE import/status page under
-  `docs/visual-proofs/checkpoint-108`.
+  `docs/visual-proofs/checkpoint-108`. Quick Import, Full Sync, Search, and
+  custom CVE Save controls route through AppState and expose
+  `/state.cveSettingsActions`; covered by
+  `scripts/cve-settings-actions-proof.py`.
 - Tools settings status is exposed through `/state.toolSettings`, including
   installed/missing/installing/error counts, install log, and per-tool status
   rows. `scripts/tool-settings-status-proof.py` verifies the state contract, and

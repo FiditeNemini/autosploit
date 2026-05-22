@@ -500,6 +500,8 @@ Automated no-model gates:
     through `/state.reportAction` and Report tab activity;
   - proves CVE Database settings expose import/count/search status through
     `/state.cveDatabase`;
+  - proves CVE Database Quick Import, Full Sync, Search, and custom-save
+    controls route through AppState and expose `/state.cveSettingsActions`;
   - proves Tools settings expose installed/missing/installing/error status
     through `/state.toolSettings`;
   - proves Tools settings Refresh, Install, and Install All Missing controls
