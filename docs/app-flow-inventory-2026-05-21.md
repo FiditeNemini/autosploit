@@ -661,7 +661,8 @@ Current repeatable gates:
   completeness count, incomplete checkpoint paths, and latest checkpoint. The
   `/qa/audit-ledger` route combines proof counts, live artifact counts, visual
   capture counts, missing/failed artifact counts, and checkpoint completeness
-  counts into one machine-readable audit rollup. `scripts/app-qa-matrix-smoke-proof.py`
+  counts plus the current gap count into one machine-readable audit rollup.
+  `scripts/app-qa-matrix-smoke-proof.py`
   now fetches all four ledger routes directly and cross-checks their counts
   against the coverage-index app-state group. `/qa/gap-ledger` reads the
   current-gap section from `docs/app-system-review-2026-05-21.md` and exposes

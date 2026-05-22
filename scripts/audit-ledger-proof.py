@@ -42,6 +42,7 @@ def assert_audit_ledger() -> None:
     proof = request("GET", "/qa/proof-ledger")
     artifact = request("GET", "/qa/artifact-ledger")
     checkpoint = request("GET", "/qa/checkpoint-ledger")
+    gap = request("GET", "/qa/gap-ledger")
     audit = request("GET", "/qa/audit-ledger")
 
     if audit.get("ok") is not True:
@@ -68,6 +69,10 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit incomplete checkpoint count mismatch: {audit}")
     if audit.get("latestCheckpoint") != checkpoint.get("latestCheckpoint"):
         raise AssertionError(f"audit latest checkpoint mismatch: {audit}")
+    if audit.get("currentGapCount") != gap.get("currentGapCount"):
+        raise AssertionError(f"audit current gap count mismatch: {audit}")
+    if audit.get("nextGap") != gap.get("nextGap"):
+        raise AssertionError(f"audit next gap mismatch: {audit}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/audit-ledger" not in qa.get("stateRoutes", []):
