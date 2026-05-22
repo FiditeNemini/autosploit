@@ -30,6 +30,11 @@ EXPECTED_PROOFS = {
     "result-context-catalog-proof.py",
     "tool-fanout-status-proof.py",
     "tool-family-fanout-coverage-proof.py",
+    "visual-chat-interaction-proof.py",
+    "activity-feed-actions-proof.py",
+    "visual-tab-proof.py",
+    "visual-context-inspector-proof.py",
+    "chat-tool-output-expand-proof.py",
 }
 EXPECTED_FAMILIES = {"recon", "web", "network", "creds", "exploit", "post", "osint"}
 EXPECTED_STATE_KEYS = {
@@ -47,6 +52,15 @@ EXPECTED_VISUAL_SURFACES = [
     "contextCatalogHit",
     "toolOutputExpansion",
 ]
+
+EXPECTED_VISUAL_SURFACE_PROOFS = {
+    "chatToolCard": ["visual-chat-interaction-proof.py", "tool-fanout-status-proof.py"],
+    "activityFeedStatus": ["activity-feed-actions-proof.py", "tool-fanout-status-proof.py"],
+    "tabStatusIndicator": ["visual-tab-proof.py", "tool-family-fanout-coverage-proof.py"],
+    "parsedResultRow": ["result-parser-routing-proof.py", "tool-family-fanout-coverage-proof.py"],
+    "contextCatalogHit": ["result-context-catalog-proof.py", "visual-context-inspector-proof.py"],
+    "toolOutputExpansion": ["chat-tool-output-expand-proof.py", "visual-chat-interaction-proof.py"],
+}
 
 
 def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
@@ -128,6 +142,16 @@ def run() -> None:
             raise AssertionError(f"tool flow visual surface count mismatch: {coverage}")
         if coverage.get("toolVisualSurfaceParity") is not True:
             raise AssertionError(f"tool flow visual surface parity mismatch: {coverage}")
+        if coverage.get("toolVisualSurfaceProofs") != EXPECTED_VISUAL_SURFACE_PROOFS:
+            raise AssertionError(f"tool flow visual surface proof map mismatch: {coverage}")
+        if coverage.get("toolVisualSurfaceProofCount") != len(EXPECTED_VISUAL_SURFACE_PROOFS):
+            raise AssertionError(f"tool flow visual surface proof count mismatch: {coverage}")
+        if coverage.get("toolVisualSurfaceProofParity") is not True:
+            raise AssertionError(f"tool flow visual surface proof parity mismatch: {coverage}")
+        for surface, proof_names in EXPECTED_VISUAL_SURFACE_PROOFS.items():
+            missing_surface_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
+            if missing_surface_files:
+                raise AssertionError(f"tool visual surface {surface} names missing proof files {missing_surface_files}: {coverage}")
         state_keys = set(coverage.get("stateKeys") or [])
         missing_state_keys = sorted(EXPECTED_STATE_KEYS.difference(state_keys))
         if missing_state_keys:

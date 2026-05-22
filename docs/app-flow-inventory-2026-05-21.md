@@ -167,9 +167,9 @@ main session.
   the visible tab indicator states (`running`, `done`, `failed`, `canceled`)
   plus a status count, parity flag, and `status-dot-running-ring` indicator
   contract. It also exposes `toolVisualSurfaces`, `toolVisualSurfaceCount`, and
-  `toolVisualSurfaceParity` for chat tool cards, activity-feed status, tab
-  status indicators, parsed result rows, context-catalog hits, and expandable
-  tool output.
+  `toolVisualSurfaceParity`, plus visual-surface proof map/count/parity, for
+  chat tool cards, activity-feed status, tab status indicators, parsed result
+  rows, context-catalog hits, and expandable tool output.
 
 The full tool catalog is no longer force-sent to the engine. `ChatService`
 passes the latest user prompt plus active tab into `ToolDefinitions.forModel`,
@@ -791,7 +791,7 @@ Current repeatable gates:
   fanout count, state-key count, dynamic tool-schema cap/policy/route,
   structured/raw result-mode counts, visible tab activity statuses, the tab
   activity status parity/indicator contract, and the model-tool visual surface
-  list/count/parity mirrored from `/qa/tool-flow-coverage`.
+  list/count/parity plus proof count/parity mirrored from `/qa/tool-flow-coverage`.
   The tabs/sessions group exposes
   interaction-mode count, covered tab count, session state-key count, and
   action-state-key count, mirrors session workflow surface list/count/parity,

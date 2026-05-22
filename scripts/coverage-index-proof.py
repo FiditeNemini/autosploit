@@ -337,6 +337,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers visual surface count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolVisualSurfaceParity") != tool_flow.get("toolVisualSurfaceParity"):
         raise AssertionError(f"coverage index tools/parsers visual surface parity mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolVisualSurfaceProofCount") != tool_flow.get("toolVisualSurfaceProofCount"):
+        raise AssertionError(f"coverage index tools/parsers visual surface proof count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolVisualSurfaceProofParity") != tool_flow.get("toolVisualSurfaceProofParity"):
+        raise AssertionError(f"coverage index tools/parsers visual surface proof parity mismatch: {tools_parsers_group}")
     tabs_sessions_group = groups.get("tabsAndSessions") or {}
     if tabs_sessions_group.get("interactionModeCount", 0) < 3:
         raise AssertionError(f"coverage index tabs/sessions mode count mismatch: {tabs_sessions_group}")

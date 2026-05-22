@@ -220,9 +220,10 @@ Result fanout:
   visible tab indicator states (`running`, `done`, `failed`, `canceled`) and
   exposes status count/parity plus the `status-dot-running-ring` indicator
   contract. It also exposes `toolVisualSurfaces`, `toolVisualSurfaceCount`, and
-  `toolVisualSurfaceParity` for chat tool cards, activity-feed status, tab
-  status indicators, parsed result rows, context-catalog hits, and expandable
-  tool output. Parser and family-fanout aggregate routes now also
+  `toolVisualSurfaceParity`, plus visual-surface proof map/count/parity, for
+  chat tool cards, activity-feed status, tab status indicators, parsed result
+  rows, context-catalog hits, and expandable tool output. Parser and
+  family-fanout aggregate routes now also
   expose a standard `ok` status, covered by
   `scripts/parser-fanout-aggregate-proof.py`.
 - Activity Feed copy and clear controls now route through AppState. The header
@@ -676,7 +677,8 @@ Automated no-model gates:
   tools/parsers group exposes registry tool
   count, callback count, representative family fanout count, state-key count,
   dynamic tool-schema cap/policy/route, structured/raw result-mode counts, and
-  model-tool visual surface list/count/parity from `/qa/tool-flow-coverage`.
+  model-tool visual surface list/count/parity plus proof count/parity from
+  `/qa/tool-flow-coverage`.
   The tabs/sessions group exposes
   interaction-mode count, covered tab
   count, session state-key count, session workflow surface list/count/parity,
