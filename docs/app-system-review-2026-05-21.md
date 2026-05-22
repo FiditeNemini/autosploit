@@ -502,6 +502,8 @@ Automated no-model gates:
     `/state.cveDatabase`;
   - proves Tools settings expose installed/missing/installing/error status
     through `/state.toolSettings`;
+  - proves Tools settings Refresh, Install, and Install All Missing controls
+    route through AppState and expose `/state.toolSettingsActions`;
   - proves model-issued `search_context` returns targeted catalogue facts;
   - proves automatic context injection stays at 4 snippets or fewer and tells
     the model to use `search_context` for more targeted retrieval;

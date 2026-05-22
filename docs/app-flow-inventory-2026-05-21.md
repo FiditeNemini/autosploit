@@ -442,7 +442,10 @@ CVE Database and Tools:
   installed/missing/installing/error counts, install log, and per-tool status
   rows. `scripts/tool-settings-status-proof.py` verifies the state contract, and
   `scripts/visual-tool-settings-status-proof.py` captures the visible status
-  page under `docs/visual-proofs/checkpoint-109`.
+  page under `docs/visual-proofs/checkpoint-109`. Refresh, Install, and Install
+  All Missing controls route through AppState and expose
+  `/state.toolSettingsActions`; covered by
+  `scripts/tool-settings-actions-proof.py`.
 
 ## Test And Proof Requirements
 
