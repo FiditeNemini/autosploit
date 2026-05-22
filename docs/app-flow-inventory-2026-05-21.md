@@ -197,7 +197,12 @@ OSINT:
 - Screenshot artifact preview validation is covered by
   `scripts/osint-screenshot-artifact-proof.py`, and the visible preview row is
   captured under `docs/visual-proofs/checkpoint-90`.
-- Still needs richer result-row actions for opening/revealing artifacts.
+- Screenshot artifact rows now expose open, reveal, and copy-path actions when
+  the backing file exists. Action metadata and state are exposed through
+  `/state.osintArtifacts[*].actions` and `/state.osintArtifactAction`.
+- Artifact action behavior is covered by `scripts/osint-artifact-actions-proof.py`,
+  and visible row controls are captured under
+  `docs/visual-proofs/checkpoint-95`.
 
 Report:
 
@@ -370,5 +375,7 @@ Required future proof gates:
   `docs/visual-proofs/checkpoint-92`.
 - Post-exploitation output attribution is captured under
   `docs/visual-proofs/checkpoint-94`.
+- OSINT screenshot artifact actions are captured under
+  `docs/visual-proofs/checkpoint-95`.
 - Unsupported model-folder warning and blocked engine states are captured under
   `docs/visual-proofs/checkpoint-93`.

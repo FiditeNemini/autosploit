@@ -214,6 +214,12 @@ OSINT:
 - Screenshot artifact path validation and preview metadata are covered by
   `scripts/osint-screenshot-artifact-proof.py`; visible preview state is
   captured under `docs/visual-proofs/checkpoint-90`.
+- Screenshot artifact row actions are covered by
+  `scripts/osint-artifact-actions-proof.py`: artifact rows expose open, reveal,
+  and copy-path actions when the file exists, and `/state.osintArtifactAction`
+  tracks last action, validated path, byte count, and action history.
+- Visible artifact action controls are captured under
+  `docs/visual-proofs/checkpoint-95`.
 
 Report:
 
@@ -426,6 +432,8 @@ Visual gates:
   `docs/visual-proofs/checkpoint-93`.
 - Post-exploitation output attribution is captured under
   `docs/visual-proofs/checkpoint-94`.
+- OSINT screenshot artifact actions are captured under
+  `docs/visual-proofs/checkpoint-95`.
 - Remaining visual gap: real-engine cache metrics state.
 
 ## Current Gaps To Close Next
