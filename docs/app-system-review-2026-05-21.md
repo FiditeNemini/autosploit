@@ -772,7 +772,9 @@ Visual gates:
   by `scripts/activity-feed-actions-proof.py`.
 - Sidebar create/switch/rename/delete operation actions route through AppState
   and expose `/state.sidebarActions`; covered by
-  `scripts/sidebar-actions-proof.py`.
+  `scripts/sidebar-actions-proof.py`. The sidebar create path also routes
+  active generation stop through AppState before creating the new op; covered
+  by `scripts/sidebar-create-stops-proof.py`.
 - Web Verify queued/progress state is captured under
   `docs/visual-proofs/checkpoint-96`.
 - Recon Full Recon running state is captured under

@@ -619,8 +619,9 @@ Required future proof gates:
   clipboard preview. Covered by `scripts/activity-feed-actions-proof.py`.
 - Sidebar create, switch, rename, and delete operation actions now route
   through AppState and expose `/state.sidebarActions` with last action,
-  operation id/name, count, and summary. Covered by
-  `scripts/sidebar-actions-proof.py`.
+  operation id/name, count, whether create stopped active generation, and
+  summary. Covered by `scripts/sidebar-actions-proof.py` and
+  `scripts/sidebar-create-stops-proof.py`.
 - Per-turn request-audit badges are captured under
   `docs/visual-proofs/checkpoint-87`.
 - Chat scroll locked/paused and reasoning expanded/collapsed states are captured
