@@ -595,7 +595,8 @@ Current repeatable gates:
   model-folder, engine-start, new-context, settings cache seed, and live cache
   seed routes that back those contracts. It also exposes checked-in live proof
   artifact paths for MiniMax replay/no-thinking and Qwen hybrid replay,
-  full-prefix-skip, and catalogue-prefix-shape gates. Dynamic context and catalogue
+  full-prefix-skip, and catalogue-prefix-shape gates, plus
+  `liveProofArtifactCount` for matrix-level artifact accounting. Dynamic context and catalogue
   invariants are now summarized through `/qa/context-coverage`, including the
   `search_context` retrieval tool, the fixed automatic context-injection cap,
   current effective snippet limit, context seed/query QA routes, bounded

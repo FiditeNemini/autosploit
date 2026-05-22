@@ -118,6 +118,8 @@ def run() -> None:
             if item.get("metadata") is not True or item.get("repeatCache") is not True:
                 raise AssertionError(f"runtime live proof missing {family} metadata/cache checks: {coverage}")
         artifacts = coverage.get("liveProofArtifacts") or {}
+        if coverage.get("liveProofArtifactCount") != len(EXPECTED_LIVE_ARTIFACTS):
+            raise AssertionError(f"runtime live artifact count mismatch: {coverage}")
         for name, (path, family) in EXPECTED_LIVE_ARTIFACTS.items():
             if artifacts.get(name) != path:
                 raise AssertionError(f"runtime live artifact {name} mismatch: {coverage}")

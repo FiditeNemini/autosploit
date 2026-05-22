@@ -173,6 +173,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/runtime-coverage failed: {runtime_coverage}")
     if runtime_coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"/qa/runtime-coverage cache method mismatch: {runtime_coverage}")
+    if runtime_coverage.get("liveProofArtifactCount", 0) < 6:
+        raise AssertionError(f"/qa/runtime-coverage live artifact count mismatch: {runtime_coverage}")
     if context_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/context-coverage failed: {context_coverage}")
     if context_coverage.get("searchToolName") != "search_context":
