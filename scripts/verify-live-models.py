@@ -132,6 +132,52 @@ def build_launch_args(path: str | Path, port: int, cache_root: str | Path | None
     )
 
 
+def build_live_engine_command(
+    path: str | Path,
+    *,
+    port: int,
+    cache_root: str | Path,
+    enable_prompt_disk: bool = True,
+) -> list[str]:
+    path = Path(path).expanduser().resolve()
+    cache_root = Path(cache_root)
+    cmd = [
+        _engine_python(),
+        str(LAUNCH_PY),
+        "--model",
+        str(path),
+        "--port",
+        str(port),
+        "--reasoning-parser",
+        "auto",
+        "--tool-call-parser",
+        "auto",
+        "--kv-cache-quantization",
+        "turboquant-q4",
+        "--enable-prefix-cache",
+        "true",
+        "--enable-disk-cache",
+        "true" if enable_prompt_disk else "false",
+    ]
+    if enable_prompt_disk:
+        cmd.extend([
+            "--disk-cache-dir",
+            str(cache_root / "prompt"),
+        ])
+    cmd.extend([
+        "--use-paged-cache",
+        "true",
+        "--enable-block-disk-cache",
+        "true",
+        "--block-disk-cache-dir",
+        str(cache_root / "block"),
+        "--max-tokens",
+        "64",
+        "--verbose",
+    ])
+    return cmd
+
+
 def _find_free_port() -> int:
     with socket.socket() as sock:
         sock.bind(("127.0.0.1", 0))
@@ -260,6 +306,8 @@ def _assert_restart_replay_cache_behavior(
     first_run_cache: dict[str, Any],
     replay_run_cache: dict[str, Any],
     replay_completion: dict[str, Any],
+    *,
+    require_block_l2: bool = False,
 ) -> None:
     cached_tokens = _cached_tokens_from_completion(replay_completion)
     counters = {
@@ -280,6 +328,8 @@ def _assert_restart_replay_cache_behavior(
     }
     if not checks["cached_usage"] and not checks["l2_disk_hit"]:
         raise RuntimeError("restart replay cache check failed: no cached usage or cross-process L2 disk-hit counter increment")
+    if require_block_l2 and counters["block_l2_hits_delta"] <= 0:
+        raise RuntimeError("restart replay cache check failed: no cross-process block L2 disk-hit counter increment")
 
 
 def _chat_completion(
@@ -314,6 +364,7 @@ def _launch_and_complete_once(
     timeout: float,
     cache_root: Path,
     phase: str,
+    enable_prompt_disk: bool = True,
 ) -> dict[str, Any]:
     port = _find_free_port()
     report: dict[str, Any] = {
@@ -322,35 +373,12 @@ def _launch_and_complete_once(
         "launch_args": build_launch_args(path, port, cache_root=cache_root),
     }
 
-    cmd = [
-        _engine_python(),
-        str(LAUNCH_PY),
-        "--model",
-        str(path),
-        "--port",
-        str(port),
-        "--reasoning-parser",
-        "auto",
-        "--tool-call-parser",
-        "auto",
-        "--kv-cache-quantization",
-        "turboquant-q4",
-        "--enable-prefix-cache",
-        "true",
-        "--enable-disk-cache",
-        "true",
-        "--disk-cache-dir",
-        str(cache_root / "prompt"),
-        "--use-paged-cache",
-        "true",
-        "--enable-block-disk-cache",
-        "true",
-        "--block-disk-cache-dir",
-        str(cache_root / "block"),
-        "--max-tokens",
-        "64",
-        "--verbose",
-    ]
+    cmd = build_live_engine_command(
+        path,
+        port=port,
+        cache_root=cache_root,
+        enable_prompt_disk=enable_prompt_disk,
+    )
     env = os.environ.copy()
     env["PYTHONPATH"] = str(ENGINE_DIR) + (":" + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
     proc = subprocess.Popen(cmd, cwd=ROOT, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
@@ -398,12 +426,14 @@ def verify_live_model(
     timeout: float,
     metadata_only: bool = False,
     restart_replay: bool = False,
+    block_l2_only_replay: bool = False,
 ) -> dict[str, Any]:
     port = _find_free_port()
     path = Path(path).expanduser().resolve()
     report = inspect_model_folder(path, expected_family=family)
     report["metadata_only"] = metadata_only
     report["restart_replay"] = restart_replay
+    report["block_l2_only_replay"] = block_l2_only_replay
 
     if not report["expected_ok"]:
         raise RuntimeError(f"{path} is {report['family']}, expected {family}")
@@ -418,7 +448,7 @@ def verify_live_model(
     report["cache_root"] = "temporary"
     report["launch_args"] = build_launch_args(path, port, cache_root=cache_root)
 
-    if restart_replay:
+    if restart_replay or block_l2_only_replay:
         try:
             first_run = _launch_and_complete_once(
                 path=path,
@@ -427,6 +457,7 @@ def verify_live_model(
                 timeout=timeout,
                 cache_root=cache_root,
                 phase="populate",
+                enable_prompt_disk=not block_l2_only_replay,
             )
             replay_run = _launch_and_complete_once(
                 path=path,
@@ -435,6 +466,7 @@ def verify_live_model(
                 timeout=timeout,
                 cache_root=cache_root,
                 phase="replay",
+                enable_prompt_disk=not block_l2_only_replay,
             )
             report.update({
                 "first_run": first_run,
@@ -449,6 +481,7 @@ def verify_live_model(
                 first_run_cache=first_run.get("cache_stats", {}),
                 replay_run_cache=replay_run.get("cache_stats", {}),
                 replay_completion=replay_run.get("completion", {}),
+                require_block_l2=block_l2_only_replay,
             )
             return report
         except Exception as exc:
@@ -545,9 +578,9 @@ def verify_live_model(
 def run(args: argparse.Namespace) -> dict[str, Any]:
     reports: dict[str, Any] = {}
     if args.qwen:
-        reports["qwen"] = verify_live_model(args.qwen, "qwen", args.prompt, args.timeout, args.metadata_only, args.restart_replay)
+        reports["qwen"] = verify_live_model(args.qwen, "qwen", args.prompt, args.timeout, args.metadata_only, args.restart_replay, args.block_l2_only_replay)
     if args.minimax:
-        reports["minimax"] = verify_live_model(args.minimax, "minimax", args.prompt, args.timeout, args.metadata_only, args.restart_replay)
+        reports["minimax"] = verify_live_model(args.minimax, "minimax", args.prompt, args.timeout, args.metadata_only, args.restart_replay, args.block_l2_only_replay)
     if args.unsupported:
         reports["unsupported"] = inspect_model_folder(args.unsupported, expected_family="unsupported")
         if reports["unsupported"]["supported"]:
@@ -564,6 +597,7 @@ def main() -> int:
     parser.add_argument("--unsupported", help="Unsupported model folder expected to be rejected by family preflight")
     parser.add_argument("--metadata-only", action="store_true", help="Only inspect folders and launch arguments; do not start the engine")
     parser.add_argument("--restart-replay", action="store_true", help="Run two engine processes against the same cache root and require cross-process L2 cache-hit evidence")
+    parser.add_argument("--block-l2-only-replay", action="store_true", help="Run restart replay with prompt L2 disabled so replay must hit block L2 disk cache")
     parser.add_argument("--timeout", type=float, default=900.0, help="Seconds to wait for each live model to load/respond")
     parser.add_argument("--prompt", default="Reply with one short sentence for an ExploitBot cache/parser smoke test.")
     parser.add_argument("--output", help="Optional JSON report path")

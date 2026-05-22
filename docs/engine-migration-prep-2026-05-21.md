@@ -613,17 +613,23 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   L2, and TurboQuant Q4 metadata. The same run wrote/preserved block L2 entries,
   but replay was satisfied by prompt L2, so it is not claimed as a real-model
   block-L2 hit.
+- Checkpoint 111: Added a real MiniMax block-L2-only restart replay proof. The
+  live verifier now has `--block-l2-only-replay`, which disables prompt L2 while
+  keeping prefix cache, paged cache, block L2, and TurboQuant Q4 enabled.
+  Artifact
+  `docs/live-proofs/checkpoint-111-minimax-block-l2-restart-replay-live.json`
+  loaded MiniMax twice, wrote two block L2 entries in the first process, then
+  replayed with `prompt_l2_active=false`, `block_disk_cache.disk_hits=1`,
+  `scheduler_cache.disk_hits=1`, `tokens_saved=64`, `cached_tokens=64`, and
+  `prompt_l2_hits_delta=0`.
 
 ## Known Risk Areas
 
 - ExploitBot currently has a custom stripped server contract. Replacing `server.py` wholesale may expose endpoints the app does not need.
 - vMLX cache code has schema and runtime fingerprinting. Cache schema mismatches must invalidate old L2 entries rather than replaying them.
 - Qwen hybrid SSM cache restore is correctness-sensitive. Do not trim recurrent state by slicing KV arrays.
-- MiniMax real-model cross-process prompt L2 replay is proven with cached-token
-  evidence. Full and final-partial block L2 promotion are proven with direct
-  quantized KV cache data, but real-model cross-run block-L2 hits still need a
-  long enough live run or a block-L2-specific replay path under the actual model
-  path.
+- MiniMax real-model cross-process prompt L2 replay and block-L2-only replay
+  are proven with cached-token and disk-hit evidence.
 - New visible context windows are proven to preserve the running engine cache
   topology, but this is app/session-state proof and does not replace real-model
   cross-run disk replay proof.
