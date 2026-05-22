@@ -17,7 +17,9 @@ APP_API = "http://127.0.0.1:9999"
 
 EXPECTED_ROUTES = {
     "/qa/tool-coverage",
+    "/qa/seed-result-parser-fixture",
     "/qa/result-parser-coverage",
+    "/qa/seed-tool-family-fanout-fixture",
     "/qa/tool-family-fanout-coverage",
 }
 EXPECTED_PROOFS = {
