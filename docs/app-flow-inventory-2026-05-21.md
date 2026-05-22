@@ -171,8 +171,15 @@ Recon:
 Web:
 
 - Shows web hosts, vulnerabilities, CVE data, and finding creation entrypoints.
-- Can stash selected content and prefill the finding wizard.
+- Can stash selected content and prefill the finding wizard. Create Finding,
+  Stash, Copy, and Search Related CVEs now route through AppState action
+  handlers, and `/state.webDirectActions` exposes labels, prefill state, stash
+  preview/count, clipboard preview, queued related-CVE prompt, and action
+  status.
 - Uses `CVEService` directly for visible CVE search/lookup.
+- Direct action state is covered by `scripts/web-direct-actions-proof.py`,
+  which verifies finding prefill, stash creation, copy preview, related-CVE chat
+  prompt, and Web tab activity.
 - Verify rows now expose queued progress state tied to `/state.webAction` and
   Web tab activity. `scripts/web-verify-action-proof.py` verifies the target,
   finding title, prompt, and running tab badge; the visible queued button state

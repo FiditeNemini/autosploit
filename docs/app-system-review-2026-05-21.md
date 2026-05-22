@@ -207,7 +207,15 @@ Web:
 - Verify now routes through chat with a focused prompt containing target,
   finding title, source, CVE, and description for minimal safe evidence
   collection.
-- State: web hosts, vulns, CVE lookup details, and queued Verify action state.
+- State: web hosts, vulns, CVE lookup details, queued Verify action state, and
+  `/state.webDirectActions` for Create Finding/Stash/Copy/Search Related CVEs
+  labels, finding prefill, stash count/preview, clipboard preview, and queued
+  related-CVE prompt.
+- Direct Web action coverage is handled by
+  `scripts/web-direct-actions-proof.py`: it seeds an Apache CVE finding,
+  opens the finding wizard with prefilled fields, stashes the finding, copies
+  the finding text, queues a related CVE search through chat, and verifies Web
+  tab activity exposes `search_related_cve`.
 - Verify action state is covered by `scripts/web-verify-action-proof.py`: a
   seeded finding records `/state.webAction`, preserves the exact verification
   prompt, and marks the Web tab activity state as running/verify.
