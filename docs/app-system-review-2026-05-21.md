@@ -89,11 +89,13 @@ Storage:
 
 - Ops, messages, settings, stash, findings, and CVEs persist through
   `DatabaseManager`.
-- ResultsStore state is session-ephemeral and rebuilt from tool output, not from
-  stored chat history.
-- Required proof: settings persist across relaunch; messages persist per op;
-  context catalogue uses active session state and does not leak inactive op
-  state.
+- ResultsStore state is rebuilt from restored tool-call messages when operation
+  messages load.
+- Settings, per-op messages, and result-store rebuild after relaunch are
+  covered by `scripts/persistence-proof.py`: it uses an isolated temporary home
+  directory, seeds context/chat settings plus a persisted `nmap` tool message,
+  relaunches the app, and verifies the restored message reparses into the
+  visible `443/https` port result.
 
 ## Tool Loop And Result Routing
 
@@ -345,6 +347,8 @@ Real-model gates:
   model-folder generation-default flags.
 - Reasoning/tool parser API shaping is covered by
   `scripts/prove-parser-api.py` and `testsuite/test_tool_parser_api.py`.
+- Settings/message/result-store persistence is covered by
+  `scripts/persistence-proof.py`.
 
 Visual gates:
 

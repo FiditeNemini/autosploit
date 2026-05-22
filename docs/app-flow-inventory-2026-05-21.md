@@ -265,6 +265,7 @@ Current repeatable gates:
 - `python3 scripts/tool-catalog-proof.py`
 - `python3 scripts/semantic-cve-proof.py`
 - `python3 scripts/settings-apply-proof.py`
+- `python3 scripts/persistence-proof.py`
 - `python3 scripts/verify-live-models.py --metadata-only --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --minimax /Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit`
 - `python3 scripts/visual-tab-proof.py`
 - `python3 scripts/visual-chat-proof.py`
@@ -301,6 +302,10 @@ Required future proof gates:
   covered by `docs/live-proofs/checkpoint-79-parser-api-proof.json`.
 - Tool parser smoke proving parsed API `tool_calls`, not raw text only:
   covered by `docs/live-proofs/checkpoint-79-parser-api-proof.json`.
+- Settings, per-op messages, and result-store rebuild after app relaunch:
+  covered by `scripts/persistence-proof.py`, which seeds an isolated app home
+  and verifies a persisted `nmap` tool message reparses into the restored
+  `443/https` tab result.
 - Settings model warning, engine live cache status, and cache topology
   screenshots are captured under `docs/visual-proofs/checkpoint-73`.
 - Chat token metrics, active tool header, approval card, running tool card,

@@ -516,7 +516,9 @@ def run() -> None:
 
         try:
             messages = wait_until(
-                lambda: messages_when_at_least(4),
+                lambda: request("GET", "/messages")
+                if any("CVE lookup complete" in m["content"] for m in request("GET", "/messages"))
+                else None,
                 "autopilot chat/tool loop",
             )
         except AssertionError as exc:
