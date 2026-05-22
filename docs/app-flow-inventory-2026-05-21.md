@@ -870,7 +870,7 @@ Current repeatable gates:
   list/count, and action-state-key list/count,
   mirrors tab action surface list/count/parity and proof map/count/parity, mirrors
   agent-loop phase list/count/parity and phase-proof map/count/parity,
-  mirrors agent-loop current mode, max-iteration guard, proof count,
+  mirrors agent-loop current mode, max-iteration guard, proof count/list,
   visual-state-key count, mode behavior, deployed-agent inheritance/status
   contract, route list/count, contract flags/count, and action telemetry field
   list/count,
