@@ -138,6 +138,42 @@ class MockEngineHandler(BaseHTTPRequestHandler):
                     ]
                 },
             ]
+        elif "Run creds cracking lifecycle proof" in user_text:
+            events = [
+                {"choices": [{"delta": {"content": "Starting credential cracking lifecycle proof."}}]},
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "id": "call_creds_crack",
+                                        "type": "function",
+                                        "function": {"name": "run_shell", "arguments": ""},
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "function": {
+                                            "arguments": "{\"command\":\"printf hashcat-start; sleep 10; printf hashcat-final-marker\"}"
+                                        },
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+            ]
         elif "Run web tab status proof" in user_text:
             events = [
                 {"choices": [{"delta": {"content": "Starting web tool status proof."}}]},
@@ -497,6 +533,26 @@ def run() -> None:
             "network capture lifecycle canceled",
         )
         assert "stopped" in network_canceled["networkLifecycle"]["capture"]["summary"], network_canceled
+
+        request("POST", "/clear")
+        request("POST", "/mode", "autopilot")
+        request("POST", "/tab", "creds")
+        request("POST", "/send", "Run creds cracking lifecycle proof")
+        creds_running = wait_until(
+            lambda: request("GET", "/state")
+            if request("GET", "/state").get("credsLifecycle", {}).get("cracking", {}).get("status") == "running"
+            else None,
+            "creds cracking lifecycle running",
+        )
+        assert creds_running["credsLifecycle"]["cracking"]["tool"] == "run_shell", creds_running
+        request("POST", "/stop")
+        creds_canceled = wait_until(
+            lambda: request("GET", "/state")
+            if request("GET", "/state").get("credsLifecycle", {}).get("cracking", {}).get("status") == "canceled"
+            else None,
+            "creds cracking lifecycle canceled",
+        )
+        assert "stopped" in creds_canceled["credsLifecycle"]["cracking"]["summary"], creds_canceled
 
         request("POST", "/clear")
         request("POST", "/mode", "autopilot")

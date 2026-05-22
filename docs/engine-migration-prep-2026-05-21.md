@@ -416,6 +416,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   actions. The Network panel now shows lifecycle strips for idle/running/done/
   failed/canceled state, and the live-turn harness proves a long-running
   capture-style command moves to running and then canceled through `/stop`.
+- Checkpoint 62: Added Creds lifecycle state for hash cracking, online
+  bruteforce, and secret scanning. The Creds panel now shows lifecycle strips,
+  and the live-turn harness proves a long-running hashcat-style command moves
+  to running and then canceled through `/stop`.
 
 ## Known Risk Areas
 

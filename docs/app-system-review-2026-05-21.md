@@ -147,7 +147,10 @@ Creds:
 - Buttons: Start Crack, Brute Force, Scan Secrets.
 - Chat path: sends prompts to chat.
 - State: parsed credential/hash/secret findings.
-- Missing proof: progress state for hashcat/hydra and safe stop behavior.
+- Cracking, brute force, and secret scan lifecycle state now tracks idle,
+  running, done, failed, and canceled and is visible in the relevant Creds
+  subtab.
+- Missing proof: live UI screenshot coverage for the Creds lifecycle strips.
 
 Exploit:
 
@@ -217,6 +220,8 @@ Automated no-model gates:
     tool card canceled, and prevents post-sleep output from landing;
   - proves Network capture lifecycle moves to running and then canceled when a
     long-running capture-style tool is stopped;
+  - proves Creds cracking lifecycle moves to running and then canceled when a
+    long-running hashcat-style tool is stopped;
   - proves tool callbacks update per-tab activity state that the tab bar can
     render as running/done/failed/canceled indicators;
   - proves model-issued `search_context` returns targeted catalogue facts;
