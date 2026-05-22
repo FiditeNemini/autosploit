@@ -139,7 +139,9 @@ Network:
   capture, MITM, and tunnels.
 - Buttons send structured prompts to chat.
 - Displays parsed network host and raw tool output.
-- Needs per-action visual state for scan/capture/MITM/tunnel operations.
+- Capture, MITM, and Tunnels lifecycle strip screenshots are captured under
+  `docs/visual-proofs/checkpoint-70`.
+- Still needs per-action visual state for protocol scan buttons.
 
 Creds:
 
@@ -156,9 +158,9 @@ Exploit:
 - Buttons route prompts through chat and display raw execution output.
 - Listener, custom script, and implant actions expose lifecycle strips for
   idle/running/done/failed/canceled status and are covered by the live-turn
-  listener cancellation proof.
-- Still needs live UI screenshot coverage and safer visual differentiation
-  between search, prepare, and execute actions.
+  listener cancellation proof plus checkpoint-70 visual screenshots.
+- Still needs safer visual differentiation between search, prepare, and execute
+  actions.
 
 Post:
 
@@ -167,9 +169,9 @@ Post:
 - Buttons route prompts through chat and display raw results.
 - Privilege escalation, AD/impacket, and lateral movement actions expose
   lifecycle strips for idle/running/done/failed/canceled status and are covered
-  by the live-turn LinPEAS-style cancellation proof.
-- Still needs progress tied to host/session context and screenshot proof for
-  visible output status.
+  by the live-turn LinPEAS-style cancellation proof plus checkpoint-70 visual
+  screenshots.
+- Still needs progress tied to host/session context and visible output status.
 
 OSINT:
 
@@ -177,7 +179,8 @@ OSINT:
 - Displays parsed `sherlock` results and raw output.
 - Username, email, metadata, and screenshot actions expose lifecycle state for
   idle/running/done/failed/canceled status on the active search mode and are
-  covered by the live-turn Sherlock-style cancellation proof.
+  covered by the live-turn Sherlock-style cancellation proof plus checkpoint-70
+  visual screenshots.
 - Still needs screenshot artifact preview validation and richer result-row
   status.
 
@@ -270,6 +273,8 @@ Required future proof gates:
 - Reasoning parser smoke proving thinking text is separated from visible output.
 - Tool parser smoke proving parsed API `tool_calls`, not raw text only.
 - UI proof screenshots for Settings model warnings, live cache status,
-  reasoning blocks, tool-call cards, and nested lifecycle strips.
+  reasoning blocks, and tool-call cards.
 - Tab-bar activity screenshots are captured under
   `docs/visual-proofs/checkpoint-69`.
+- Nested lifecycle strip screenshots are captured under
+  `docs/visual-proofs/checkpoint-70`.

@@ -142,7 +142,8 @@ Network:
 - Long-running lifecycle state now tracks capture/MITM/tunnel status as idle,
   running, done, failed, or canceled and is visible inside the relevant Network
   subtab.
-- Missing proof: live UI screenshot coverage for the lifecycle strip.
+- Live UI screenshot coverage for Capture, MITM, and Tunnels lifecycle strips
+  is captured by `scripts/visual-tab-proof.py`.
 
 Creds:
 
@@ -152,7 +153,8 @@ Creds:
 - Cracking, brute force, and secret scan lifecycle state now tracks idle,
   running, done, failed, and canceled and is visible in the relevant Creds
   subtab.
-- Missing proof: live UI screenshot coverage for the Creds lifecycle strips.
+- Live UI screenshot coverage for Cracking, Online Brute, and Secrets lifecycle
+  strips is captured by `scripts/visual-tab-proof.py`.
 
 Exploit:
 
@@ -161,7 +163,8 @@ Exploit:
 - State: raw metasploit/sliver/session output.
 - Listener, custom script, and implant lifecycle state now tracks idle, running,
   done, failed, and canceled and is visible in the relevant Exploit subtab.
-- Missing proof: live UI screenshot coverage for the Exploit lifecycle strips.
+- Live UI screenshot coverage for Reverse Shells, Custom, and C2 lifecycle
+  strips is captured by `scripts/visual-tab-proof.py`.
 
 Post:
 
@@ -171,8 +174,9 @@ Post:
 - Privilege escalation, AD/impacket, and lateral movement lifecycle state now
   tracks idle, running, done, failed, and canceled and is visible in the
   relevant Post subtab.
-- Missing proof: live UI screenshot coverage and per-host/session output
-  attribution.
+- Live UI screenshot coverage for PrivEsc, AD Attacks, and Lateral lifecycle
+  strips is captured by `scripts/visual-tab-proof.py`.
+- Missing proof: per-host/session output attribution.
 
 OSINT:
 
@@ -181,8 +185,9 @@ OSINT:
 - State: parsed OSINT rows and screenshots.
 - Username, email, metadata, and screenshot lifecycle state now tracks idle,
   running, done, failed, and canceled and is visible in the active OSINT subtab.
-- Missing proof: file path validation, screenshot artifact preview, and live UI
-  screenshot coverage.
+- Live UI screenshot coverage for Username, Email, Metadata, and Screenshots
+  lifecycle strips is captured by `scripts/visual-tab-proof.py`.
+- Missing proof: file path validation and screenshot artifact preview.
 
 Report:
 
@@ -273,6 +278,9 @@ Mock-model gates:
 - Per-tab tool activity state. Covered by `scripts/live-turn-harness.py` for
   the Web/CVE path; tab-bar visual screenshot coverage is now captured by
   `scripts/visual-tab-proof.py`.
+- Nested lifecycle strip visual state. Covered by
+  `scripts/visual-tab-proof.py` with cropped captures under
+  `docs/visual-proofs/checkpoint-70`.
 
 Real-model gates:
 
@@ -300,12 +308,12 @@ Visual gates:
 - Tool approval card, running tool card, failed tool card.
 - Tab-bar action running/done/failed/canceled states are captured under
   `docs/visual-proofs/checkpoint-69`.
-- Remaining visual gap: lifecycle strips inside each nested subtab and chat
-  approval/tool-card states.
+- Nested lifecycle strip states are captured under
+  `docs/visual-proofs/checkpoint-70`.
+- Remaining visual gap: chat approval/tool-card states.
 
 ## Current Gaps To Close Next
 
-1. Add visual screenshot coverage for nested lifecycle strips and chat
-   approval/tool-card states.
+1. Add visual screenshot coverage for chat approval/tool-card states.
 2. Run real Qwen and MiniMax model verification with
    `scripts/verify-live-models.py` and capture the report.

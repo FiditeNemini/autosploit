@@ -15,7 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
-OUT_DIR = ROOT / "docs" / "visual-proofs" / "checkpoint-69"
+OUT_DIR = ROOT / "docs" / "visual-proofs" / "checkpoint-70"
 
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
@@ -91,19 +91,42 @@ def run() -> None:
             raise AssertionError(f"visual activity seed failed: {seeded}")
 
         captures = []
-        for tab in ["web", "network", "creds", "exploit", "post", "osint"]:
-            request("POST", "/tab", tab)
+        lifecycle_cases = [
+            ("network", "Capture", "network-capture-lifecycle.png"),
+            ("network", "MITM", "network-mitm-lifecycle.png"),
+            ("network", "Tunnels", "network-tunnels-lifecycle.png"),
+            ("creds", "Cracking", "creds-cracking-lifecycle.png"),
+            ("creds", "Online Brute", "creds-online-brute-lifecycle.png"),
+            ("creds", "Secrets", "creds-secrets-lifecycle.png"),
+            ("exploit", "Reverse Shells", "exploit-reverse-shells-lifecycle.png"),
+            ("exploit", "Custom", "exploit-custom-lifecycle.png"),
+            ("exploit", "C2 (Sliver)", "exploit-c2-lifecycle.png"),
+            ("post", "PrivEsc", "post-privesc-lifecycle.png"),
+            ("post", "AD Attacks", "post-ad-attacks-lifecycle.png"),
+            ("post", "Lateral", "post-lateral-lifecycle.png"),
+            ("osint", "Username", "osint-username-lifecycle.png"),
+            ("osint", "Email", "osint-email-lifecycle.png"),
+            ("osint", "Metadata", "osint-metadata-lifecycle.png"),
+            ("osint", "Screenshots", "osint-screenshots-lifecycle.png"),
+        ]
+        for tab, subtab, filename in lifecycle_cases:
+            switched = request("POST", "/qa/visual-subtab", f"{tab}|{subtab}")
+            if switched.get("ok") is not True:
+                raise AssertionError(f"visual subtab switch failed for {tab}/{subtab}: {switched}")
             state = request("GET", "/state")
             if state.get("activeTab") != tab:
                 raise AssertionError(f"active tab did not switch to {tab}: {state}")
-            target = OUT_DIR / f"{tab}-activity.png"
+            visual_subtabs = state.get("qaVisualSubtabs") or {}
+            if visual_subtabs.get(tab) != subtab:
+                raise AssertionError(f"visual subtab was not recorded for {tab}/{subtab}: {state}")
+            target = OUT_DIR / filename
             capture(target)
             captures.append(str(target.relative_to(ROOT)))
 
         manifest = {
             "ok": True,
             "captures": captures,
-            "note": "Cropped macOS captures of the ExploitBot window. QA state seeds tab bar activity plus lifecycle lanes before each tab capture.",
+            "note": "Cropped macOS captures of the ExploitBot window with QA-selected nested lifecycle subtabs for each tool surface.",
         }
         (OUT_DIR / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
         print("visual-tab proof passed")

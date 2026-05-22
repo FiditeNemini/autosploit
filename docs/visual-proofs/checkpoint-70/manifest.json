@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "captures": [
+    "docs/visual-proofs/checkpoint-70/network-capture-lifecycle.png",
+    "docs/visual-proofs/checkpoint-70/network-mitm-lifecycle.png",
+    "docs/visual-proofs/checkpoint-70/network-tunnels-lifecycle.png",
+    "docs/visual-proofs/checkpoint-70/creds-cracking-lifecycle.png",
+    "docs/visual-proofs/checkpoint-70/creds-online-brute-lifecycle.png",
+    "docs/visual-proofs/checkpoint-70/creds-secrets-lifecycle.png",
+    "docs/visual-proofs/checkpoint-70/exploit-reverse-shells-lifecycle.png",
+    "docs/visual-proofs/checkpoint-70/exploit-custom-lifecycle.png",
+    "docs/visual-proofs/checkpoint-70/exploit-c2-lifecycle.png",
+    "docs/visual-proofs/checkpoint-70/post-privesc-lifecycle.png",
+    "docs/visual-proofs/checkpoint-70/post-ad-attacks-lifecycle.png",
+    "docs/visual-proofs/checkpoint-70/post-lateral-lifecycle.png",
+    "docs/visual-proofs/checkpoint-70/osint-username-lifecycle.png",
+    "docs/visual-proofs/checkpoint-70/osint-email-lifecycle.png",
+    "docs/visual-proofs/checkpoint-70/osint-metadata-lifecycle.png",
+    "docs/visual-proofs/checkpoint-70/osint-screenshots-lifecycle.png"
+  ],
+  "note": "Cropped macOS captures of the ExploitBot window with QA-selected nested lifecycle subtabs for each tool surface."
+}

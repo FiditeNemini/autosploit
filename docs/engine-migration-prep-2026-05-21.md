@@ -459,6 +459,12 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   lanes, cycles Web/Network/Creds/Exploit/Post/OSINT tabs, captures cropped app
   screenshots, verifies image dimensions, and writes artifacts under
   `docs/visual-proofs/checkpoint-69`.
+- Checkpoint 70: Extended `scripts/visual-tab-proof.py` with QA-only nested
+  subtab selection. The proof now captures cropped lifecycle-strip screenshots
+  for Network Capture/MITM/Tunnels, Creds Cracking/Online Brute/Secrets,
+  Exploit Reverse Shells/Custom/C2, Post PrivEsc/AD/Lateral, and OSINT
+  Username/Email/Metadata/Screenshots under
+  `docs/visual-proofs/checkpoint-70`.
 
 ## Known Risk Areas
 
