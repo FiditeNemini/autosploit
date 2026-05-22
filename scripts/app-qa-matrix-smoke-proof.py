@@ -103,6 +103,10 @@ def assert_testserver_smoke() -> None:
     tab_action_coverage = request("GET", "/qa/tab-action-coverage")
     chat_coverage = request("GET", "/qa/chat-coverage")
     coverage_index = request("GET", "/qa/coverage-index")
+    proof_ledger = request("GET", "/qa/proof-ledger")
+    artifact_ledger = request("GET", "/qa/artifact-ledger")
+    checkpoint_ledger = request("GET", "/qa/checkpoint-ledger")
+    audit_ledger = request("GET", "/qa/audit-ledger")
 
     required_state_keys = {
         "activeTab",
@@ -157,6 +161,14 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing chat coverage route contract: {qa}")
     if "/qa/coverage-index" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing coverage-index route contract: {qa}")
+    if "/qa/proof-ledger" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing proof-ledger route contract: {qa}")
+    if "/qa/artifact-ledger" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing artifact-ledger route contract: {qa}")
+    if "/qa/checkpoint-ledger" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing checkpoint-ledger route contract: {qa}")
+    if "/qa/audit-ledger" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing audit-ledger route contract: {qa}")
     if subtab_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/subtab-coverage failed: {subtab_coverage}")
     if sorted((subtab_coverage.get("tabs") or {}).keys()) != expected_subtab_tabs:
@@ -238,8 +250,37 @@ def assert_testserver_smoke() -> None:
     if coverage_index.get("proofCount", 0) < 14:
         raise AssertionError(f"/qa/coverage-index proof count mismatch: {coverage_index}")
     index_groups = coverage_index.get("groups") or {}
+    app_state_group = index_groups.get("appState") or {}
+    if app_state_group.get("proofLedgerCount", 0) < 120:
+        raise AssertionError(f"/qa/coverage-index proof ledger count mismatch: {coverage_index}")
+    if app_state_group.get("checkpointLedgerCount", 0) < 200:
+        raise AssertionError(f"/qa/coverage-index checkpoint ledger count mismatch: {coverage_index}")
+    if app_state_group.get("auditLedgerCount", 0) < 300:
+        raise AssertionError(f"/qa/coverage-index audit ledger count mismatch: {coverage_index}")
     if ((index_groups.get("tabsAndSessions") or {}).get("actionStateKeyCount", 0)) < 26:
         raise AssertionError(f"/qa/coverage-index action state key count mismatch: {coverage_index}")
+    if proof_ledger.get("ok") is not True or proof_ledger.get("proofCount", 0) < 120:
+        raise AssertionError(f"/qa/proof-ledger count mismatch: {proof_ledger}")
+    if artifact_ledger.get("ok") is not True:
+        raise AssertionError(f"/qa/artifact-ledger failed: {artifact_ledger}")
+    if artifact_ledger.get("visualManifestCount", 0) < 22:
+        raise AssertionError(f"/qa/artifact-ledger visual manifest count mismatch: {artifact_ledger}")
+    if artifact_ledger.get("missingVisualCaptures") != []:
+        raise AssertionError(f"/qa/artifact-ledger reports missing captures: {artifact_ledger}")
+    if checkpoint_ledger.get("ok") is not True or checkpoint_ledger.get("checkpointCount", 0) < 200:
+        raise AssertionError(f"/qa/checkpoint-ledger count mismatch: {checkpoint_ledger}")
+    if not checkpoint_ledger.get("latestCheckpoint", "").endswith(".md"):
+        raise AssertionError(f"/qa/checkpoint-ledger latest checkpoint mismatch: {checkpoint_ledger}")
+    if audit_ledger.get("ok") is not True:
+        raise AssertionError(f"/qa/audit-ledger failed: {audit_ledger}")
+    if audit_ledger.get("proofCount") != proof_ledger.get("proofCount"):
+        raise AssertionError(f"/qa/audit-ledger proof count mismatch: {audit_ledger}")
+    if audit_ledger.get("visualManifestCount") != artifact_ledger.get("visualManifestCount"):
+        raise AssertionError(f"/qa/audit-ledger visual manifest count mismatch: {audit_ledger}")
+    if audit_ledger.get("checkpointCount") != checkpoint_ledger.get("checkpointCount"):
+        raise AssertionError(f"/qa/audit-ledger checkpoint count mismatch: {audit_ledger}")
+    if audit_ledger.get("totalLedgerItemCount", 0) < 300:
+        raise AssertionError(f"/qa/audit-ledger total count mismatch: {audit_ledger}")
 
 
 def run() -> None:

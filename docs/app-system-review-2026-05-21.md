@@ -582,7 +582,9 @@ Automated no-model gates:
   completeness count, incomplete checkpoint paths, and latest checkpoint. The
   `/qa/audit-ledger` route combines proof counts, live artifact counts, visual
   capture counts, missing/failed artifact counts, and checkpoint completeness
-  counts into one machine-readable audit rollup. The runtime/cache group also exposes `supportedFamilies`,
+  counts into one machine-readable audit rollup. `scripts/app-qa-matrix-smoke-proof.py`
+  now fetches all four ledger routes directly and cross-checks their counts
+  against the coverage-index app-state group. The runtime/cache group also exposes `supportedFamilies`,
   `cacheResponseMethod`, and `liveProofArtifactCount` for Qwen/MiniMax-only
   support, the `prefix-cache-l2-turboquant` response path, and the checked-in
   Qwen/MiniMax live replay artifact set. The settings/visuals group exposes
