@@ -46,6 +46,9 @@ through AppState and expose `/state.windowOverlayActions`; covered by
 Every actionable tool-tab button currently flows through
 `ContentView.sendToChat(_:)`, which calls `state.sendChatMessage(...)` so the
 send is visible in `/state.chatControlActions`.
+AppState tool-action helpers that queue prompts also use `sendChatMessage(...)`
+instead of calling `ChatService` directly; covered by
+`scripts/tool-action-chat-control-proof.py`.
 In multi-agent mode, `displayChatService`, `displayResultsStore`, and
 `displayActivityFeed` point at the selected agent; otherwise they point at the
 main session.

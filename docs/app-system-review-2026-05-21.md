@@ -514,6 +514,8 @@ Automated no-model gates:
     `/state.inferenceLogActions`;
   - proves Chat send, stop, approve, reject, and clear/new-context controls
     route through AppState and expose `/state.chatControlActions`;
+  - proves AppState tool-action prompt queues route through chat-control send
+    telemetry instead of bypassing it;
   - proves terminal, settings, and finding-wizard overlay actions route through
     AppState and expose `/state.windowOverlayActions`;
   - proves model-issued `search_context` returns targeted catalogue facts;
