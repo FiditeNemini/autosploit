@@ -106,6 +106,18 @@ REQUIRED_CACHE_SESSION_FIELDS = [
     "turboQuantKV",
 ]
 
+REQUIRED_CACHE_SESSION_FIELD_PROOFS = {
+    "cacheResponsesMethod": ["context-window-cache-proof.py", "chat-new-context-confirm-proof.py"],
+    "cacheResponsesInferenceMethod": ["context-window-cache-proof.py", "chat-new-context-confirm-proof.py"],
+    "sessionBoundaryMode": ["context-window-cache-proof.py", "chat-new-context-confirm-proof.py"],
+    "newModelSessionBehavior": ["context-window-cache-proof.py", "chat-new-context-confirm-proof.py"],
+    "prefixCache": ["context-window-cache-proof.py", "visual-chat-proof.py"],
+    "promptL2Disk": ["context-window-cache-proof.py"],
+    "pagedCache": ["context-window-cache-proof.py"],
+    "blockL2Disk": ["context-window-cache-proof.py"],
+    "turboQuantKV": ["context-window-cache-proof.py", "visual-chat-proof.py"],
+}
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -174,6 +186,16 @@ def assert_chat_coverage() -> None:
         raise AssertionError(f"chat coverage cache session field count mismatch: {coverage}")
     if coverage.get("cacheSessionFieldParity") is not True:
         raise AssertionError(f"chat coverage cache session field parity mismatch: {coverage}")
+    if coverage.get("cacheSessionFieldProofs") != REQUIRED_CACHE_SESSION_FIELD_PROOFS:
+        raise AssertionError(f"chat coverage cache session field proof map mismatch: {coverage}")
+    if coverage.get("cacheSessionFieldProofCount") != len(REQUIRED_CACHE_SESSION_FIELD_PROOFS):
+        raise AssertionError(f"chat coverage cache session field proof count mismatch: {coverage}")
+    if coverage.get("cacheSessionFieldProofParity") is not True:
+        raise AssertionError(f"chat coverage cache session field proof parity mismatch: {coverage}")
+    for field, proof_names in REQUIRED_CACHE_SESSION_FIELD_PROOFS.items():
+        missing_field_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
+        if missing_field_files:
+            raise AssertionError(f"chat cache session field {field} names missing proof files {missing_field_files}: {coverage}")
 
     contracts = coverage.get("contracts") or {}
     missing_contracts = sorted(name for name in REQUIRED_CONTRACTS if contracts.get(name) is not True)

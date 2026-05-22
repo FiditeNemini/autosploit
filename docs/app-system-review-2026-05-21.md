@@ -485,7 +485,8 @@ Stash:
   verified by `scripts/chat-coverage-proof.py`, which checks Send/Stop,
   reasoning, approval, copy/stash, tool-output expansion, request-audit,
   context inspector, scroll-lock visual, token counter, tool-action/Stash chat
-  handoff, visible cache-session header badges, and cache-preserving visible-new-context contracts for the
+  handoff, visible cache-session header badges, cache-session field proof
+  map/count/parity, and cache-preserving visible-new-context contracts for the
   `prefix-cache-l2-turboquant` response path. The broad app QA matrix also
   checks the chat cache badge list, count, and parity.
 - Source/op scoping and catalogue inclusion/exclusion are covered by
@@ -598,7 +599,7 @@ Automated no-model gates:
   expansion, request-audit badges, context inspector state, scroll-lock visuals,
   tool-action/Stash chat handoff, visible cache-session header badges,
   `cacheResponsesInferenceMethod`, `newModelSessionBehavior`, cache-session
-  field list/count/parity, and cache-preserving new-context
+  field list/count/parity, cache-session field proof map/count/parity, and cache-preserving new-context
   behavior for the `prefix-cache-l2-turboquant` response path. It also exposes `stateKeys`
   for `chatActions`, `chatControlActions`, chat/message storage, request
   context, context-window state, QA chat visual state, stash handoff, and the
@@ -631,7 +632,8 @@ Automated no-model gates:
   The chat/context group mirrors `/qa/chat-coverage.headerCacheBadges`,
   `headerCacheBadgeCount`, `headerCacheBadgeParity`, `cacheSessionIndicator`, and
   `newContextSessionBoundary`, plus `cacheResponsesInferenceMethod`,
-  `newModelSessionBehavior`, cache-session field list/count/parity, and it
+  `newModelSessionBehavior`, cache-session field list/count/parity, cache-session
+  field proof count/parity, and it
   mirrors `/qa/context-coverage` retrieval source list/count/parity plus
   context delivery mode list/count/parity, so
   the aggregate coverage map carries the same visible cache-session and bounded

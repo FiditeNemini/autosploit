@@ -263,6 +263,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context cache session field count mismatch: {chat_context_group}")
     if chat_context_group.get("cacheSessionFieldParity") != chat_coverage.get("cacheSessionFieldParity"):
         raise AssertionError(f"coverage index chat/context cache session field parity mismatch: {chat_context_group}")
+    if chat_context_group.get("cacheSessionFieldProofCount") != chat_coverage.get("cacheSessionFieldProofCount"):
+        raise AssertionError(f"coverage index chat/context cache session field proof count mismatch: {chat_context_group}")
+    if chat_context_group.get("cacheSessionFieldProofParity") != chat_coverage.get("cacheSessionFieldProofParity"):
+        raise AssertionError(f"coverage index chat/context cache session field proof parity mismatch: {chat_context_group}")
     context_coverage = request("GET", "/qa/context-coverage")
     if chat_context_group.get("retrievalSources") != context_coverage.get("retrievalSources"):
         raise AssertionError(f"coverage index chat/context retrieval sources mismatch: {chat_context_group}")

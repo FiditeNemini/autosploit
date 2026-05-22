@@ -306,7 +306,8 @@ through `/state.qaChatVisual.headerBadges` and the seeded visual chat proof;
 `newContextSessionBoundary` so the broad app QA matrix locks the visible
 cache-session contract, badge cardinality, and list/count parity. It now also
 advertises the exact `cacheResponsesInferenceMethod`,
-`newModelSessionBehavior`, and cache-session field list/count/parity for
+`newModelSessionBehavior`, cache-session field list/count/parity, and
+cache-session field proof map/count/parity for
 `cacheResponsesMethod`, `cacheResponsesInferenceMethod`, `sessionBoundaryMode`,
 `newModelSessionBehavior`, prefix cache, prompt L2 disk, paged cache, block L2
 disk, and TurboQuant KV so chat coverage can audit the same preserved-session
@@ -786,7 +787,8 @@ Current repeatable gates:
   session boundary, and the checked-in live replay
   artifacts remain visible from the top-level QA index. The chat/context group
   also mirrors `/qa/chat-coverage.cacheResponsesInferenceMethod`,
-  `newModelSessionBehavior`, context retrieval source list/count/parity,
+  `newModelSessionBehavior`, cache-session field proof count/parity,
+  context retrieval source list/count/parity,
   retrieval-source proof count/parity,
   context delivery mode list/count/parity, and delivery-mode proof
   count/parity, so

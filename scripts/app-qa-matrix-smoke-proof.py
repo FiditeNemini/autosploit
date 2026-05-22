@@ -432,6 +432,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/chat-coverage cache session field count mismatch: {chat_coverage}")
     if chat_coverage.get("cacheSessionFieldParity") is not True:
         raise AssertionError(f"/qa/chat-coverage cache session field parity mismatch: {chat_coverage}")
+    if chat_coverage.get("cacheSessionFieldProofCount") != len(expected_cache_session_fields):
+        raise AssertionError(f"/qa/chat-coverage cache session field proof count mismatch: {chat_coverage}")
+    if chat_coverage.get("cacheSessionFieldProofParity") is not True:
+        raise AssertionError(f"/qa/chat-coverage cache session field proof parity mismatch: {chat_coverage}")
     if chat_coverage.get("proofCount", 0) < 15:
         raise AssertionError(f"/qa/chat-coverage proof count mismatch: {chat_coverage}")
     if "chatActions" not in (chat_coverage.get("stateKeys") or []):
