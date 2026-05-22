@@ -67,6 +67,9 @@ Interaction modes:
   setting, context catalogue wiring, prompt-ranked tool schemas, and typed
   prompt override, then autonomously runs a `search_cve` tool loop to
   completion.
+- Agent header/settings actions are covered by `scripts/agent-actions-proof.py`:
+  deploy, switch, remove, and clear actions route through AppState and expose
+  `/state.agentActions` with agent id/name/type, count, summary, and activity.
 - Deployed-agent on-demand context retrieval is covered by
   `scripts/agent-search-context-proof.py`: an agent autonomously calls
   `search_context`, receives shared parsed-result catalogue facts from the main

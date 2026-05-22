@@ -91,6 +91,10 @@ main session.
 - Mode surface wiring is covered by `scripts/mode-selection-flow-proof.py`,
   which proves onboarding-created Manual mode, Sidebar mode switching,
   active-op persistence, pending approval rejection, and activity logging.
+- Multi-agent header/settings controls are covered by
+  `scripts/agent-actions-proof.py`, which proves deploy, switch, remove, and
+  clear route through AppState, update `/state.agentActions`, preserve the
+  active-agent selection, and log visible activity.
 - Built-in CVE calls use callbacks instead of shell subprocesses.
 - Shell-backed tools run through `ToolExecutor`.
 - Tool output is appended to chat, activity feed, and `ResultsStore.ingest`.
