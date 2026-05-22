@@ -35,6 +35,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/proof-ledger",
     "/qa/artifact-ledger",
     "/qa/checkpoint-ledger",
+    "/qa/audit-ledger",
 }
 
 REQUIRED_PROOFS = {
@@ -55,6 +56,7 @@ REQUIRED_PROOFS = {
     "proof-ledger-proof.py",
     "artifact-ledger-proof.py",
     "checkpoint-ledger-proof.py",
+    "audit-ledger-proof.py",
 }
 
 REQUIRED_GROUPS = {
@@ -144,6 +146,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state missing visual captures: {app_state_group}")
     if app_state_group.get("checkpointLedgerCount", 0) < 200:
         raise AssertionError(f"coverage index app state checkpoint ledger count mismatch: {app_state_group}")
+    if app_state_group.get("auditLedgerCount", 0) < 300:
+        raise AssertionError(f"coverage index app state audit ledger count mismatch: {app_state_group}")
     runtime_group = groups.get("runtimeAndCache") or {}
     if runtime_group.get("liveProofArtifactCount", 0) < 6:
         raise AssertionError(f"coverage index runtime live artifact count mismatch: {runtime_group}")

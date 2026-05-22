@@ -580,7 +580,9 @@ Automated no-model gates:
   live JSON evidence stay machine-auditable, including missing visual capture
   count. `/qa/checkpoint-ledger` exposes checkpoint documentation count,
   completeness count, incomplete checkpoint paths, and latest checkpoint. The
-  runtime/cache group also exposes `supportedFamilies`,
+  `/qa/audit-ledger` route combines proof counts, live artifact counts, visual
+  capture counts, missing/failed artifact counts, and checkpoint completeness
+  counts into one machine-readable audit rollup. The runtime/cache group also exposes `supportedFamilies`,
   `cacheResponseMethod`, and `liveProofArtifactCount` for Qwen/MiniMax-only
   support, the `prefix-cache-l2-turboquant` response path, and the checked-in
   Qwen/MiniMax live replay artifact set. The settings/visuals group exposes
