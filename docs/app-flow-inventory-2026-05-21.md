@@ -189,8 +189,10 @@ OSINT:
   idle/running/done/failed/canceled status on the active search mode and are
   covered by the live-turn Sherlock-style cancellation proof plus checkpoint-70
   visual screenshots.
-- Still needs screenshot artifact preview validation and richer result-row
-  status.
+- Screenshot artifact preview validation is covered by
+  `scripts/osint-screenshot-artifact-proof.py`, and the visible preview row is
+  captured under `docs/visual-proofs/checkpoint-90`.
+- Still needs richer result-row actions for opening/revealing artifacts.
 
 Report:
 
@@ -267,6 +269,7 @@ Current repeatable gates:
 - `python3 scripts/settings-apply-proof.py`
 - `python3 scripts/cache-stats-state-proof.py`
 - `python3 scripts/model-folder-warning-proof.py`
+- `python3 scripts/osint-screenshot-artifact-proof.py`
 - `python3 scripts/persistence-proof.py`
 - `python3 scripts/request-audit-proof.py`
 - `python3 scripts/verify-live-models.py --metadata-only --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --minimax /Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit`
@@ -274,6 +277,7 @@ Current repeatable gates:
 - `python3 scripts/visual-chat-proof.py`
 - `python3 scripts/visual-chat-interaction-proof.py`
 - `python3 scripts/visual-request-audit-proof.py`
+- `python3 scripts/visual-osint-screenshot-proof.py`
 - `python3 scripts/visual-settings-proof.py`
 - `python3 scripts/verify-live-models.py --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit --output docs/live-proofs/checkpoint-76-qwen-repeat-cache-live.json`
 - `cd ExploitBotEngine && uv run --extra dev ../scripts/prove-block-l2-cache.py --output ../docs/live-proofs/checkpoint-77-block-l2-quantized-proof.json`
@@ -337,3 +341,5 @@ Required future proof gates:
   `docs/visual-proofs/checkpoint-69`.
 - Nested lifecycle strip screenshots are captured under
   `docs/visual-proofs/checkpoint-70`.
+- OSINT screenshot artifact preview is captured under
+  `docs/visual-proofs/checkpoint-90`.

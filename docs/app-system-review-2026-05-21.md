@@ -197,7 +197,9 @@ OSINT:
   running, done, failed, and canceled and is visible in the active OSINT subtab.
 - Live UI screenshot coverage for Username, Email, Metadata, and Screenshots
   lifecycle strips is captured by `scripts/visual-tab-proof.py`.
-- Missing proof: file path validation and screenshot artifact preview.
+- Screenshot artifact path validation and preview metadata are covered by
+  `scripts/osint-screenshot-artifact-proof.py`; visible preview state is
+  captured under `docs/visual-proofs/checkpoint-90`.
 
 Report:
 
@@ -385,6 +387,8 @@ Visual gates:
   `docs/visual-proofs/checkpoint-69`.
 - Nested lifecycle strip states are captured under
   `docs/visual-proofs/checkpoint-70`.
+- OSINT screenshot artifact preview is captured under
+  `docs/visual-proofs/checkpoint-90`.
 - Remaining visual gap: real-engine cache metrics state.
 
 ## Current Gaps To Close Next
