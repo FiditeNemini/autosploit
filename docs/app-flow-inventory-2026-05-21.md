@@ -445,7 +445,8 @@ Stash:
   parser/generation autodetect, `prefix-cache-l2-turboquant` cache policy,
   app-only apply without engine restart, engine Start/Stop action state,
   context controls, cache topology, agent controls, CVE/tool/inference-log
-  actions, visual Settings proof gates, and proof-count metadata.
+  actions, visual Settings proof gates, proof-count metadata, checked-in
+  Settings visual manifests, and `visualManifestCount`.
 
 Model:
 
@@ -724,8 +725,9 @@ Required future proof gates:
   `scripts/agent-search-context-proof.py`, which proves an autonomous agent can
   call `search_context`, retrieve shared parsed-result catalogue facts, and feed
   those facts back into the next model request.
-- Settings model warning, engine live cache status, and cache topology
-  screenshots are captured under `docs/visual-proofs/checkpoint-73`.
+- Settings model warning, engine live cache status, cache topology, CVE/tool
+  status, live cache metrics, and split category screenshots are exposed through
+  `/qa/settings-coverage.visualManifests`.
 - Chat token metrics, active tool header, approval card, running tool card,
   failed tool card, and streaming reasoning state are captured under
   `docs/visual-proofs/checkpoint-71`.

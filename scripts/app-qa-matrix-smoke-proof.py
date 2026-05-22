@@ -189,6 +189,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/settings-coverage category count mismatch: {settings_coverage}")
     if settings_coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"/qa/settings-coverage cache method mismatch: {settings_coverage}")
+    if settings_coverage.get("visualManifestCount", 0) < 6:
+        raise AssertionError(f"/qa/settings-coverage visual manifest count mismatch: {settings_coverage}")
     if visual_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/visual-coverage failed: {visual_coverage}")
     if visual_coverage.get("manifestCount", 0) < 22:

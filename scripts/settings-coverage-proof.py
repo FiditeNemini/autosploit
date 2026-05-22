@@ -77,6 +77,15 @@ REQUIRED_PROOFS = {
     "visual-live-cache-stats-proof.py",
 }
 
+REQUIRED_VISUAL_MANIFESTS = {
+    "docs/visual-proofs/checkpoint-69/manifest.json",
+    "docs/visual-proofs/checkpoint-90/manifest.json",
+    "docs/visual-proofs/checkpoint-101/manifest.json",
+    "docs/visual-proofs/checkpoint-107/manifest.json",
+    "docs/visual-proofs/checkpoint-108/manifest.json",
+    "docs/visual-proofs/checkpoint-109/manifest.json",
+}
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -97,6 +106,21 @@ def wait_for_app(timeout: float = 15.0) -> None:
             last_error = exc
             time.sleep(0.25)
     raise RuntimeError(f"app test server did not become ready: {last_error}")
+
+
+def assert_manifest_has_captures(manifest_path: str) -> None:
+    path = ROOT / manifest_path
+    if not path.is_file():
+        raise AssertionError(f"settings coverage names missing visual manifest: {manifest_path}")
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    if manifest.get("ok") is not True:
+        raise AssertionError(f"settings coverage visual manifest is not ok: {manifest_path}")
+    captures = manifest.get("captures") or []
+    if not captures:
+        raise AssertionError(f"settings coverage visual manifest has no captures: {manifest_path}")
+    missing = [capture for capture in captures if not (ROOT / capture).is_file()]
+    if missing:
+        raise AssertionError(f"settings coverage visual manifest names missing captures: {missing}")
 
 
 def assert_settings_coverage() -> None:
@@ -133,6 +157,12 @@ def assert_settings_coverage() -> None:
     missing_files = sorted(name for name in REQUIRED_PROOFS if not (ROOT / "scripts" / name).is_file())
     if missing_files:
         raise AssertionError(f"settings coverage names non-existent proof files: {missing_files}")
+    manifests = set(coverage.get("visualManifests") or [])
+    missing_manifests = sorted(REQUIRED_VISUAL_MANIFESTS.difference(manifests))
+    if missing_manifests:
+        raise AssertionError(f"settings coverage missing visual manifests {missing_manifests}: {coverage}")
+    for manifest in REQUIRED_VISUAL_MANIFESTS:
+        assert_manifest_has_captures(manifest)
 
     if coverage.get("categoryCount") != len(EXPECTED_CATEGORIES):
         raise AssertionError(f"settings coverage category count mismatch: {coverage}")

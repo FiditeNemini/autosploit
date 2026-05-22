@@ -493,7 +493,8 @@ Settings:
   model-family warnings, parser/generation autodetect, cache-response method,
   app-only apply, engine Start/Stop actions, context/cache/agent controls,
   CVE/tool/log action coverage, visual Settings proof scripts, and proof-count
-  metadata.
+  metadata. It now also exposes the checked-in Settings visual manifest paths
+  and `visualManifestCount` for matrix-level visual accounting.
 - App-only settings can now be applied without restarting the engine; model,
   cache, and engine runtime changes still use Apply & Restart Engine.
 - App-only apply is covered by `scripts/settings-apply-proof.py`.
@@ -841,6 +842,9 @@ Visual gates:
   `/qa/visual-coverage` and verified by `scripts/visual-coverage-proof.py`,
   which checks the route, required visual proof scripts, required manifests,
   and listed capture artifact existence.
+- Settings-specific screenshot-backed UI proof coverage is also exposed through
+  `/qa/settings-coverage.visualManifests` and verified by
+  `scripts/settings-coverage-proof.py`.
 - Chat control action state for reasoning, context inspector, and new context
   is covered by `scripts/chat-control-actions-proof.py`.
 - Chat copy/stash action state is covered by `scripts/chat-actions-proof.py`.
