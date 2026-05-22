@@ -522,10 +522,11 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   `docs/live-proofs/checkpoint-79-parser-api-proof.json`.
 - Checkpoint 80: Tightened MiniMax live verification after memory pressure
   cleared. The verifier now rejects token usage without assistant
-  content/reasoning/tool calls and records failure evidence before assertions.
-  MiniMax now loads, warms up, reports full-KV/prefix/prompt-L2/paged/block-L2/
-  TurboQuant Q4 metadata, and shows cache reuse, but still fails generation
-  proof because the assistant message is empty. Artifact:
+  content/reasoning/tool calls, isolates live proof prompt/block L2 cache roots,
+  and uses thinking-enabled template kwargs for MiniMax smoke requests. MiniMax
+  now loads, warms up, reports full-KV/prefix/prompt-L2/paged/block-L2/
+  TurboQuant Q4 metadata, returns non-empty assistant content on first and
+  repeat turns, and proves repeat cached-token reuse. Artifact:
   `docs/live-proofs/checkpoint-80-minimax-strict-live.json`.
 
 ## Known Risk Areas
@@ -548,5 +549,6 @@ Do this in small commits:
 3. Wire JANG/JANGTQ loaders.
 4. Wire cache stack and health fields.
 5. Wire parsers and API streaming.
-6. Run real MiniMax JANGTQ and Qwen hybrid cache proofs.
+6. Extend real MiniMax JANGTQ and Qwen hybrid cache proofs into UI-visible
+   real-engine screenshot gates.
 7. Only then revise Swift UI around the chosen theme.

@@ -273,11 +273,12 @@ Required future proof gates:
 - Engine no-model smoke proving `/health` and `/v1/models` report parser,
   generation, topology, and cache metadata.
 - MiniMax real generation smoke proving full KV attention with prefix hits,
-  prompt/block L2 hits, and TurboQuant encode/decode cache stats. Current strict
-  live proof at `docs/live-proofs/checkpoint-80-minimax-strict-live.json`
-  reaches model load, warmup, health, runtime metadata, prompt L2, paged cache,
-  and cached-token reuse, but fails generation proof because the assistant
-  payload is empty despite token usage.
+  prompt/block L2 cache metadata, and TurboQuant encode/decode cache stats.
+  Current strict live proof at
+  `docs/live-proofs/checkpoint-80-minimax-strict-live.json` reaches model load,
+  warmup, health, runtime metadata, isolated prompt/block L2 cache roots,
+  thinking-enabled MiniMax template kwargs, non-empty first/repeat assistant
+  content, and repeat cached-token reuse.
 - Qwen hybrid SSM smoke proving KV prefix hits only when companion SSM state is
   present, plus async rederive status. Current Qwen live proof verifies load,
   generation, cache metadata, SSM companion L2 storage, and a repeat paged-cache

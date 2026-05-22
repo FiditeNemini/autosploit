@@ -1,80 +1,78 @@
 {
-  "error": "minimax live verification failed: empty assistant message: token usage reported without content/reasoning/tool_calls",
-  "ok": false,
+  "ok": true,
   "reports": {
     "minimax": {
-      "base_url": "http://127.0.0.1:57137",
+      "base_url": "http://127.0.0.1:57684",
+      "cache_root": "temporary",
       "cache_stats": {
         "block_disk_cache": {
-          "blocks_on_disk": 2,
+          "blocks_on_disk": 1,
           "disk_evictions": 0,
           "disk_hits": 0,
           "disk_misses": 0,
-          "disk_size_bytes": 7932060,
-          "disk_size_gb": 0.007,
-          "disk_writes": 0,
+          "disk_size_bytes": 3132699,
+          "disk_size_gb": 0.003,
+          "disk_writes": 1,
           "total_accesses": 0
         },
         "disk_cache": {
           "entries": 1,
-          "hit_rate": 1.0,
-          "hits": 1,
+          "hit_rate": 0.0,
+          "hits": 0,
           "max_size_gb": 10.0,
-          "misses": 0,
+          "misses": 1,
           "pending_writes": 0,
-          "stores": 0,
-          "total_cached_tokens": 52,
-          "total_size_mb": 24.71,
-          "total_tokens_on_disk": 52
+          "stores": 1,
+          "total_cached_tokens": 45,
+          "total_size_mb": 21.32,
+          "total_tokens_on_disk": 45
         },
         "kv_cache_quantization": {
           "bits": 4,
           "group_size": 64
         },
         "memory": {
-          "active_mb": 39590.0,
-          "cache_mb": 1437.7,
-          "peak_mb": 39789.0
+          "active_mb": 39587.9,
+          "cache_mb": 219.2,
+          "peak_mb": 39873.5
         },
         "scheduler_cache": {
           "active_requests": 1,
-          "allocated_blocks": 3,
+          "allocated_blocks": 2,
           "block_size": 64,
           "cache_hit_rate": 0.0,
           "cache_hits": 0,
-          "cache_misses": 2,
+          "cache_misses": 1,
           "cow_copies": 0,
           "disk_hits": 0,
           "disk_misses": 0,
           "evictions": 0,
-          "free_blocks": 997,
+          "free_blocks": 998,
           "hit_rate": 0.0,
           "hits": 0,
           "max_blocks": 1000,
           "misses": 1,
           "shared_blocks": 0,
           "tokens_saved": 0,
-          "total_tokens_cached": 101,
-          "utilization": 0.003
+          "total_tokens_cached": 40,
+          "utilization": 0.002
         },
         "scheduler_stats": {
           "num_requests_processed": 1,
           "num_running": 0,
           "num_waiting": 0,
           "total_completion_tokens": 16,
-          "total_prompt_tokens": 52
+          "total_prompt_tokens": 45
         }
       },
-      "completion_preview": "[{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": null, \"tool_calls\": null, \"reasoning_content\": null}, \"finish_reason\": \"length\"}]",
+      "completion_preview": "[{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": \"The user asks: \\\"Say hello in exactly three words.\\\" That means produce a\", \"tool_calls\": null, \"reasoning_content\": null}, \"finish_reason\": \"length\"}]",
       "completion_usage": {
         "completion_tokens": 16,
-        "prompt_tokens": 52,
-        "prompt_tokens_details": {
-          "cached_tokens": 51
-        },
-        "total_tokens": 68
+        "prompt_tokens": 45,
+        "prompt_tokens_details": null,
+        "total_tokens": 61
       },
-      "engine_log_tail": "  [hydrate] inference mode enabled\n  Hydration complete\n  [load_jangtq] merged eos_token_id from generation_config.json: +[200020] \u2192 [200020]\n  [warmup] layer-by-layer 1-token forward (62 layers, H=3072) ...\n    layer 0/61 compiled  (0.0s)\n    layer 10/61 compiled  (0.0s)\n    layer 20/61 compiled  (0.0s)\n    layer 30/61 compiled  (0.1s)\n    layer 40/61 compiled  (0.1s)\n    layer 50/61 compiled  (0.1s)\n    layer 60/61 compiled  (0.1s)\n    layer 61/61 compiled  (0.1s)\n  [warmup] full-model 16-token prefill shape ...\n    ok  (0.2s)\n  [warmup] done in 0.3s (Metal kernels now JIT-cached)\n  Done (eos_token_ids=[200020])\nINFO:vmlx_engine.scheduler:KV cache quantization validated: head_dim=128, group_size=64\nINFO:vmlx_engine.scheduler:KV cache quantization round-trip test passed: bits=4, group_size=64, test_shape=(1, 4, 8, 128)\nINFO:vmlx_engine.scheduler:KV cache quantization enabled: turboquant-q4 (bits=4, group_size=64)\nINFO:vmlx_engine.scheduler:Prefix cache requires continuous batching \u2014 enabled automatically\nINFO:vmlx_engine.block_disk_store:BlockDiskStore initialized: dir=/Users/eric/.cache/vmlx-engine/block-cache/483258dab7eb, max_size=10.0GB, entries=2, size=0.01GB\nINFO:vmlx_engine.scheduler:Block disk cache enabled: dir=/Users/eric/.cache/vmlx-engine/block-cache/483258dab7eb, max=10.0GB\nINFO:vmlx_engine.paged_cache:PagedCacheManager initialized: block_size=64, max_blocks=1000, max_tokens=64000\nINFO:vmlx_engine.scheduler:Paged cache enabled: block_size=64, max_blocks=1000\nINFO:vmlx_engine.disk_cache:Disk cache initialized: dir=/Users/eric/.cache/vmlx-engine/prompt-cache/MiniMax-M2.7-Small-JANGTQ_3c330eb23c88, max_size=10.0GB, entries=1\nINFO:vmlx_engine.scheduler:Disk cache enabled with paged cache backend \u2014 L2 writes happen during cache extraction (pre-quantization)\nINFO:vmlx_engine.engine_core:Engine started\nINFO:vmlx_engine.engine.batched:BatchedEngine loaded: /Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ (mllm=False)\nINFO:     Application startup complete.\nINFO:     Uvicorn running on http://127.0.0.1:57137 (Press CTRL+C to quit)\nINFO:     127.0.0.1:57197 - \"GET /health HTTP/1.1\" 200 OK\nWARNING:__main__:SECURITY WARNING: Server running without API key authentication. Anyone can access the API. Use --api-key to enable authentication.\nINFO:     127.0.0.1:57198 - \"GET /v1/models HTTP/1.1\" 200 OK\nINFO:vmlx_engine.scheduler:Request e6e1cce1-3bb5-4393-83ab-579ab26ef542: paged cache miss, processing all 52 tokens\nINFO:vmlx_engine.disk_cache:Disk cache hit (standard): 52 tokens, file=cache_230337549ce798ef_52tok.safetensors (24.7MB)\nINFO:vmlx_engine.scheduler:Request e6e1cce1-3bb5-4393-83ab-579ab26ef542: disk cache hit (L2), 51 tokens restored from disk\nINFO:vmlx_engine.scheduler:Extracted 62 layer states for request e6e1cce1-3bb5-4393-83ab-579ab26ef542\nINFO:vmlx_engine.scheduler:Stored paged cache for request e6e1cce1-3bb5-4393-83ab-579ab26ef542 (49 prompt tokens, 62 layers, cache truncated to 48 tokens)\nINFO:__main__:Chat completion: 16 tokens in 0.99s (16.2 tok/s)\nINFO:     127.0.0.1:57199 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:57200 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nINFO:vmlx_engine.scheduler:Request d5751582-625b-41f5-8268-6fcbb18f6c7c: paged cache hit, 52 tokens in 1 blocks, 0 remaining to process\nINFO:__main__:Chat completion: 16 tokens in 0.85s (18.9 tok/s)\nINFO:     127.0.0.1:57201 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:57202 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nINFO:     Shutting down\nINFO:     Waiting for application shutdown.\nINFO:vmlx_engine.scheduler:Shutting down prompt disk cache...\nINFO:vmlx_engine.disk_cache:Disk cache shut down\nINFO:vmlx_engine.scheduler:Prompt disk cache shutdown complete\nINFO:vmlx_engine.scheduler:Shutting down block disk cache...\nINFO:vmlx_engine.scheduler:Block disk cache shutdown complete\nINFO:vmlx_engine.engine_core:Engine stopped\nINFO:vmlx_engine.paged_cache:PagedCacheManager cleared\nINFO:vmlx_engine.scheduler:Deep reset completed - all caches cleared\nINFO:vmlx_engine.engine.batched:BatchedEngine stopped\nINFO:__main__:Engine stopped\nINFO:__main__:Caffeinate process terminated\nINFO:     Application shutdown complete.\nINFO:     Finished server process [7957]\n",
+      "engine_log_tail": "  Hydration complete\n  [load_jangtq] merged eos_token_id from generation_config.json: +[200020] \u2192 [200020]\n  [warmup] layer-by-layer 1-token forward (62 layers, H=3072) ...\n    layer 0/61 compiled  (0.0s)\n    layer 10/61 compiled  (0.0s)\n    layer 20/61 compiled  (0.1s)\n    layer 30/61 compiled  (0.1s)\n    layer 40/61 compiled  (0.1s)\n    layer 50/61 compiled  (0.1s)\n    layer 60/61 compiled  (0.1s)\n    layer 61/61 compiled  (0.1s)\n  [warmup] full-model 16-token prefill shape ...\n    ok  (0.1s)\n  [warmup] done in 0.3s (Metal kernels now JIT-cached)\n  Done (eos_token_ids=[200020])\nINFO:vmlx_engine.scheduler:KV cache quantization validated: head_dim=128, group_size=64\nINFO:vmlx_engine.scheduler:KV cache quantization round-trip test passed: bits=4, group_size=64, test_shape=(1, 4, 8, 128)\nINFO:vmlx_engine.scheduler:KV cache quantization enabled: turboquant-q4 (bits=4, group_size=64)\nINFO:vmlx_engine.scheduler:Prefix cache requires continuous batching \u2014 enabled automatically\nINFO:vmlx_engine.block_disk_store:BlockDiskStore initialized: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-1n63gf5c/block, max_size=10.0GB, entries=0, size=0.00GB\nINFO:vmlx_engine.scheduler:Block disk cache enabled: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-1n63gf5c/block, max=10.0GB\nINFO:vmlx_engine.paged_cache:PagedCacheManager initialized: block_size=64, max_blocks=1000, max_tokens=64000\nINFO:vmlx_engine.scheduler:Paged cache enabled: block_size=64, max_blocks=1000\nINFO:vmlx_engine.disk_cache:Disk cache initialized: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-1n63gf5c/prompt/MiniMax-M2.7-Small-JANGTQ_3c330eb23c88, max_size=10.0GB, entries=0\nINFO:vmlx_engine.scheduler:Disk cache enabled with paged cache backend \u2014 L2 writes happen during cache extraction (pre-quantization)\nINFO:vmlx_engine.engine_core:Engine started\nINFO:vmlx_engine.engine.batched:BatchedEngine loaded: /Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ (mllm=False)\nINFO:     Application startup complete.\nINFO:     Uvicorn running on http://127.0.0.1:57684 (Press CTRL+C to quit)\nINFO:     127.0.0.1:57699 - \"GET /health HTTP/1.1\" 200 OK\nWARNING:__main__:SECURITY WARNING: Server running without API key authentication. Anyone can access the API. Use --api-key to enable authentication.\nINFO:     127.0.0.1:57700 - \"GET /v1/models HTTP/1.1\" 200 OK\nINFO:vmlx_engine.scheduler:Request 0947c7fc-b0fb-404d-8afe-b8744791ce06: paged cache miss, processing all 45 tokens\nINFO:vmlx_engine.scheduler:Extracted 62 layer states for request 0947c7fc-b0fb-404d-8afe-b8744791ce06\nINFO:vmlx_engine.disk_cache:Disk cache stored: 45 tokens, 21.3MB \u2192 cache_c37f16471d7a9b72_45tok.safetensors\nINFO:vmlx_engine.scheduler:Stored paged cache for request 0947c7fc-b0fb-404d-8afe-b8744791ce06 (40 prompt tokens, 62 layers, cache truncated to 39 tokens)\nINFO:__main__:Chat completion: 16 tokens in 0.83s (19.4 tok/s)\nINFO:     127.0.0.1:57701 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:57702 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nINFO:vmlx_engine.scheduler:Request a38553fc-1fb2-4316-b0b7-5d445c5c797d: paged cache hit, 40 tokens in 1 blocks, 5 remaining to process\nINFO:vmlx_engine.scheduler:Extracted 62 layer states for request a38553fc-1fb2-4316-b0b7-5d445c5c797d\nINFO:vmlx_engine.scheduler:Stored paged cache for request a38553fc-1fb2-4316-b0b7-5d445c5c797d (40 prompt tokens, 62 layers, cache truncated to 39 tokens)\nINFO:__main__:Chat completion: 16 tokens in 0.52s (30.8 tok/s)\nINFO:     127.0.0.1:57703 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:57704 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nINFO:     Shutting down\nINFO:     Waiting for application shutdown.\nINFO:vmlx_engine.scheduler:Shutting down prompt disk cache...\nINFO:vmlx_engine.disk_cache:Disk cache shut down\nINFO:vmlx_engine.scheduler:Prompt disk cache shutdown complete\nINFO:vmlx_engine.scheduler:Shutting down block disk cache...\nINFO:vmlx_engine.scheduler:Block disk cache shutdown complete\nINFO:vmlx_engine.engine_core:Engine stopped\nINFO:vmlx_engine.paged_cache:PagedCacheManager cleared\nINFO:vmlx_engine.scheduler:Deep reset completed - all caches cleared\nINFO:vmlx_engine.engine.batched:BatchedEngine stopped\nINFO:__main__:Engine stopped\nINFO:__main__:Caffeinate process terminated\nINFO:     Application shutdown complete.\nINFO:     Finished server process [18469]\n",
       "errors": [],
       "exists": true,
       "expected_family": "minimax",
@@ -99,12 +97,12 @@
           "cache": {
             "disk_cache": {
               "block_l2": {
-                "dir": null,
+                "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-1n63gf5c/block",
                 "enabled": true,
                 "max_gb": 10.0
               },
               "prompt_l2": {
-                "dir": null,
+                "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-1n63gf5c/prompt",
                 "enabled": true,
                 "max_gb": 10.0
               }
@@ -203,7 +201,7 @@
         "mcp": null,
         "memory": {
           "active_mb": 39579.1,
-          "cache_mb": 1187.3,
+          "cache_mb": 1187.0,
           "peak_mb": 39789.0
         },
         "model_loaded": true,
@@ -222,7 +220,7 @@
         "--model",
         "/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ",
         "--port",
-        "57137",
+        "57684",
         "--host",
         "127.0.0.1",
         "--timeout",
@@ -247,6 +245,8 @@
         "true",
         "--enable-disk-cache",
         "true",
+        "--disk-cache-dir",
+        "/private/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-1n63gf5c/prompt",
         "--disk-cache-max-gb",
         "10.0",
         "--cache-memory-percent",
@@ -257,6 +257,8 @@
         "64",
         "--enable-block-disk-cache",
         "true",
+        "--block-disk-cache-dir",
+        "/private/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-1n63gf5c/block",
         "--block-disk-cache-max-gb",
         "10.0",
         "--kv-cache-quantization",
@@ -270,7 +272,7 @@
         "--model",
         "/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ",
         "--port",
-        "57137",
+        "57684",
         "--reasoning-parser",
         "auto",
         "--tool-call-parser",
@@ -281,10 +283,14 @@
         "true",
         "--enable-disk-cache",
         "true",
+        "--disk-cache-dir",
+        "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-1n63gf5c/prompt",
         "--use-paged-cache",
         "true",
         "--enable-block-disk-cache",
         "true",
+        "--block-disk-cache-dir",
+        "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-1n63gf5c/block",
         "--max-tokens",
         "64",
         "--verbose"
@@ -294,18 +300,18 @@
       "models": {
         "data": [
           {
-            "created": 1779430307,
+            "created": 1779430878,
             "id": "JANGQ/MiniMax-M2.7-Small-JANGTQ",
             "metadata": {
               "cache": {
                 "disk_cache": {
                   "block_l2": {
-                    "dir": null,
+                    "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-1n63gf5c/block",
                     "enabled": true,
                     "max_gb": 10.0
                   },
                   "prompt_l2": {
-                    "dir": null,
+                    "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-1n63gf5c/prompt",
                     "enabled": true,
                     "max_gb": 10.0
                   }
@@ -401,75 +407,87 @@
         "object": "list"
       },
       "path": "/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ",
+      "repeat_cache_checks": {
+        "block_l2_hits_delta": 0,
+        "cache_hit_counter": true,
+        "cached_tokens": 40,
+        "cached_usage": true,
+        "prompt_l2_hits_delta": 0,
+        "scheduler_cache_hits_delta": 1,
+        "scheduler_disk_hits_delta": 0,
+        "scheduler_hits_delta": 1,
+        "scheduler_tokens_saved_delta": 40,
+        "ssm_l2_hits_delta": 0
+      },
       "repeat_cache_stats": {
         "block_disk_cache": {
-          "blocks_on_disk": 2,
+          "blocks_on_disk": 1,
           "disk_evictions": 0,
           "disk_hits": 0,
           "disk_misses": 0,
-          "disk_size_bytes": 7932060,
-          "disk_size_gb": 0.007,
-          "disk_writes": 0,
+          "disk_size_bytes": 3132699,
+          "disk_size_gb": 0.003,
+          "disk_writes": 1,
           "total_accesses": 0
         },
         "disk_cache": {
           "entries": 1,
-          "hit_rate": 1.0,
-          "hits": 1,
+          "hit_rate": 0.0,
+          "hits": 0,
           "max_size_gb": 10.0,
-          "misses": 0,
+          "misses": 1,
           "pending_writes": 0,
-          "stores": 0,
-          "total_cached_tokens": 52,
-          "total_size_mb": 24.71,
-          "total_tokens_on_disk": 52
+          "stores": 1,
+          "total_cached_tokens": 45,
+          "total_size_mb": 21.32,
+          "total_tokens_on_disk": 45
         },
         "kv_cache_quantization": {
           "bits": 4,
           "group_size": 64
         },
         "memory": {
-          "active_mb": 39590.0,
-          "cache_mb": 1437.7,
-          "peak_mb": 39799.3
+          "active_mb": 39607.8,
+          "cache_mb": 235.2,
+          "peak_mb": 39873.5
         },
         "scheduler_cache": {
-          "active_requests": 1,
-          "allocated_blocks": 3,
+          "active_requests": 2,
+          "allocated_blocks": 2,
           "block_size": 64,
-          "cache_hit_rate": 0.3333333333333333,
+          "cache_hit_rate": 0.5,
           "cache_hits": 1,
-          "cache_misses": 2,
+          "cache_misses": 1,
           "cow_copies": 0,
           "disk_hits": 0,
           "disk_misses": 0,
           "evictions": 0,
-          "free_blocks": 997,
+          "free_blocks": 998,
           "hit_rate": 0.5,
           "hits": 1,
           "max_blocks": 1000,
           "misses": 1,
           "shared_blocks": 1,
-          "tokens_saved": 52,
-          "total_tokens_cached": 101,
-          "utilization": 0.003
+          "tokens_saved": 40,
+          "total_tokens_cached": 80,
+          "utilization": 0.002
         },
         "scheduler_stats": {
           "num_requests_processed": 2,
           "num_running": 0,
           "num_waiting": 0,
           "total_completion_tokens": 32,
-          "total_prompt_tokens": 104
+          "total_prompt_tokens": 90
         }
       },
-      "repeat_completion_preview": "[{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": null, \"tool_calls\": null, \"reasoning_content\": null}, \"finish_reason\": \"length\"}]",
+      "repeat_completion_preview": "[{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": \"The user says: \\\"Say hello in exactly three words.\\\"\\n\\nWe need to produce\", \"tool_calls\": null, \"reasoning_content\": null}, \"finish_reason\": \"length\"}]",
       "repeat_completion_usage": {
         "completion_tokens": 16,
-        "prompt_tokens": 52,
+        "prompt_tokens": 45,
         "prompt_tokens_details": {
-          "cached_tokens": 52
+          "cached_tokens": 40
         },
-        "total_tokens": 68
+        "total_tokens": 61
       },
       "runtime_checks": {
         "block_l2_disk": true,
@@ -480,6 +498,7 @@
         "prompt_l2_disk": true,
         "turboquant": true
       },
+      "smoke_enable_thinking": true,
       "supported": true
     }
   }

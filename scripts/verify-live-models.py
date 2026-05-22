@@ -8,6 +8,7 @@ import os
 import socket
 import subprocess
 import sys
+import tempfile
 import time
 import urllib.error
 import urllib.request
@@ -105,10 +106,11 @@ def inspect_model_folder(path: str | Path, expected_family: str | None = None) -
     }
 
 
-def build_launch_args(path: str | Path, port: int) -> list[str]:
+def build_launch_args(path: str | Path, port: int, cache_root: str | Path | None = None) -> list[str]:
     launch = _load_launch_module()
     path = Path(path).expanduser().resolve()
     defaults = launch.load_model_folder_defaults(str(path))
+    cache_root_path = Path(cache_root).expanduser().resolve() if cache_root else None
     return launch.build_args(
         str(path),
         port=port,
@@ -119,11 +121,13 @@ def build_launch_args(path: str | Path, port: int) -> list[str]:
         kv_cache_group_size=64,
         enable_prefix_cache=True,
         enable_disk_cache=True,
+        disk_cache_dir=(cache_root_path / "prompt") if cache_root_path else None,
         disk_cache_max_gb=10.0,
         cache_memory_percent=0.30,
         use_paged_cache=True,
         paged_cache_block_size=64,
         enable_block_disk_cache=True,
+        block_disk_cache_dir=(cache_root_path / "block") if cache_root_path else None,
         block_disk_cache_max_gb=10.0,
     )
 
@@ -251,7 +255,14 @@ def _assert_repeat_cache_behavior(
         raise RuntimeError("repeat cache check failed: no cached usage or cache-hit counter increment")
 
 
-def _chat_completion(base_url: str, model_name: str, prompt: str, timeout: float) -> dict[str, Any]:
+def _chat_completion(
+    base_url: str,
+    model_name: str,
+    prompt: str,
+    timeout: float,
+    *,
+    enable_thinking: bool,
+) -> dict[str, Any]:
     return _request_json(
         "POST",
         f"{base_url}/v1/chat/completions",
@@ -260,7 +271,8 @@ def _chat_completion(base_url: str, model_name: str, prompt: str, timeout: float
             "messages": [{"role": "user", "content": prompt}],
             "max_tokens": 16,
             "stream": False,
-            "enable_thinking": False,
+            "enable_thinking": enable_thinking,
+            "chat_template_kwargs": {"enable_thinking": enable_thinking},
             "stream_options": {"include_usage": True},
         },
         timeout=timeout,
@@ -271,7 +283,6 @@ def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float
     port = _find_free_port()
     path = Path(path).expanduser().resolve()
     report = inspect_model_folder(path, expected_family=family)
-    report["launch_args"] = build_launch_args(path, port)
     report["metadata_only"] = metadata_only
 
     if not report["expected_ok"]:
@@ -279,7 +290,13 @@ def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float
     if family in {"qwen", "minimax"} and not report["supported"]:
         raise RuntimeError(f"{path} is not a supported Qwen/MiniMax folder")
     if metadata_only:
+        report["launch_args"] = build_launch_args(path, port)
         return report
+
+    cache_tmp = tempfile.TemporaryDirectory(prefix=f"exploitbot-{family}-live-cache-")
+    cache_root = Path(cache_tmp.name)
+    report["cache_root"] = "temporary"
+    report["launch_args"] = build_launch_args(path, port, cache_root=cache_root)
 
     cmd = [
         _engine_python(),
@@ -298,10 +315,14 @@ def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float
         "true",
         "--enable-disk-cache",
         "true",
+        "--disk-cache-dir",
+        str(cache_root / "prompt"),
         "--use-paged-cache",
         "true",
         "--enable-block-disk-cache",
         "true",
+        "--block-disk-cache-dir",
+        str(cache_root / "block"),
         "--max-tokens",
         "64",
         "--verbose",
@@ -316,9 +337,23 @@ def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float
         health = _wait_health(base_url, timeout, proc=proc, report=report)
         models = _request_json("GET", f"{base_url}/v1/models")
         model_name = health.get("model_name") or path.name
-        completion = _chat_completion(base_url, model_name, prompt, timeout)
+        smoke_thinking = family == "minimax"
+        report["smoke_enable_thinking"] = smoke_thinking
+        completion = _chat_completion(
+            base_url,
+            model_name,
+            prompt,
+            timeout,
+            enable_thinking=smoke_thinking,
+        )
         cache = _request_json("GET", f"{base_url}/v1/cache/stats")
-        repeat_completion = _chat_completion(base_url, model_name, prompt, timeout)
+        repeat_completion = _chat_completion(
+            base_url,
+            model_name,
+            prompt,
+            timeout,
+            enable_thinking=smoke_thinking,
+        )
         repeat_cache = _request_json("GET", f"{base_url}/v1/cache/stats")
         _assert_runtime_metadata(report, health, models, cache)
         report.update({
@@ -346,6 +381,7 @@ def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float
                 proc.kill()
         if proc.stdout and "engine_log_tail" not in report:
             report["engine_log_tail"] = "".join(proc.stdout.readlines()[-60:])
+        cache_tmp.cleanup()
 
 
 def run(args: argparse.Namespace) -> dict[str, Any]:
