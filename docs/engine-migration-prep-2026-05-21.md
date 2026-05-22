@@ -546,6 +546,12 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   `scripts/semantic-cve-proof.py` proves the embedder subprocess is called and
   a vector-ranked CVE enters the context packet without fallback. This also
   fixed quoted insertion of the SQLite `"references"` column in CVE writes.
+- Checkpoint 84: Added an expandable chat request-context inspector. The chat
+  metrics strip can toggle a panel showing the bounded context packet preview
+  and exposed tool schema names for the last request. QA endpoint
+  `/qa/chat-context-inspector` and `scripts/visual-context-inspector-proof.py`
+  prove the expanded state with screenshot artifact
+  `docs/visual-proofs/checkpoint-84/chat-context-inspector.png`.
 
 ## Known Risk Areas
 

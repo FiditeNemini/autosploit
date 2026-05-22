@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "captures": [
+    "docs/visual-proofs/checkpoint-84/chat-context-inspector.png"
+  ],
+  "note": "Cropped macOS capture of expanded chat request-context inspector with context preview and exposed tool schema names."
+}

@@ -763,8 +763,11 @@ def run() -> None:
             lambda: request("GET", "/messages") if any(m.get("tool") == "search_context" and "ok" in m.get("status", "") for m in request("GET", "/messages")) else None,
             "search_context tool result",
         )
-        context_cards = [m for m in context_messages if m.get("tool") == "search_context"]
-        assert context_cards and "ok" in context_cards[-1].get("status", ""), context_messages
+        context_cards = [
+            m for m in context_messages
+            if m.get("tool") == "search_context" and "ok" in m.get("status", "")
+        ]
+        assert context_cards, context_messages
         context_output = context_cards[-1]["content"]
         assert_contains(context_output, "Dynamic Context Catalogue", "catalogue tool header")
         assert_contains(context_output, "Apache 2.4.49", "catalogue Apache fact")

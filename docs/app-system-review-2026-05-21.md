@@ -266,6 +266,8 @@ Automated no-model gates:
     OSINT/exploit schemas in the request body;
   - proves `/state.requestContext` exposes whether context was injected, how
     many snippets were selected, and which tool schemas were exposed;
+  - proves the expandable chat request-context inspector can show the bounded
+    context packet preview and exposed tool schema names;
   - proves semantic CVE mode invokes the embedder path when stored embeddings
     are available and exposes semantic state through `/state.cveSemantic`;
   - proves prefix cache, prompt L2, paged cache, block L2, TurboQuant Q4, and
@@ -355,6 +357,8 @@ Visual gates:
   expanded forced state.
 - Token metrics plus context/tool-schema count seeded state is captured under
   `docs/visual-proofs/checkpoint-71`.
+- Expanded request-context inspector state is captured under
+  `docs/visual-proofs/checkpoint-84`.
 - Tool approval card, running tool card, and failed tool card states are
   captured under `docs/visual-proofs/checkpoint-71`.
 - Tab-bar action running/done/failed/canceled states are captured under

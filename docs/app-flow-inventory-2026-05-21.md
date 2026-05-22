@@ -68,6 +68,9 @@ main session.
   completion tokens when the engine returns usage.
 - The same strip shows the last request's selected context count and exposed
   tool-schema count, with hover details for context preview and tool names.
+- The request-context inspector expands below the metrics strip and shows the
+  bounded context packet preview plus exposed tool schema names for the last
+  model request.
 - Chat scroll lock is explicit: locked mode follows the latest output, dragging
   pauses auto-scroll, and the "Latest/New output" control relocks to the newest
   message.
@@ -120,8 +123,6 @@ Required next catalog lane:
 - Add durable embeddings for tools, techniques, findings, assets, commands,
   prior outputs, and stash items, not only CVEs.
 - Store retrieval decisions with the chat turn for later audit.
-- Add a full expandable "context used" inspection panel; compact context/tool
-  counters are visible now.
 
 ## Tab Functions
 
