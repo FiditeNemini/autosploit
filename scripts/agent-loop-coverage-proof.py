@@ -180,6 +180,8 @@ def run() -> None:
         missing_contracts = sorted(name for name in EXPECTED_CONTRACTS if contracts.get(name) is not True)
         if missing_contracts:
             raise AssertionError(f"agent loop contracts missing {missing_contracts}: {coverage}")
+        if coverage.get("contractCount") != len(EXPECTED_CONTRACTS):
+            raise AssertionError(f"agent loop contract count mismatch: {coverage}")
         if coverage.get("proofCount", 0) < len(EXPECTED_PROOFS):
             raise AssertionError(f"agent loop proof count mismatch: {coverage}")
         telemetry_fields = set(coverage.get("actionTelemetryFields") or [])
