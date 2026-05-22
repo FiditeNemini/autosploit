@@ -20,6 +20,32 @@ ENGINE_DIR = ROOT / "ExploitBotEngine"
 LAUNCH_PY = ENGINE_DIR / "launch.py"
 
 
+class VerificationError(RuntimeError):
+    def __init__(self, message: str, reports: dict[str, Any] | None = None):
+        super().__init__(message)
+        self.reports = reports or {}
+
+
+def _read_output_tail(stream: Any, max_lines: int = 80) -> str:
+    if stream is None:
+        return ""
+    try:
+        lines = stream.readlines() if hasattr(stream, "readlines") else list(stream)
+    except Exception as exc:
+        return f"<unable to read engine output: {exc}>"
+    return "".join(lines[-max_lines:])
+
+
+def _engine_python() -> str:
+    override = os.environ.get("EXPLOITBOT_ENGINE_PYTHON")
+    if override:
+        return override
+    venv_python = ENGINE_DIR / ".venv" / "bin" / "python3"
+    if venv_python.exists():
+        return str(venv_python)
+    return sys.executable
+
+
 def _load_launch_module():
     spec = importlib.util.spec_from_file_location("exploitbot_launch", LAUNCH_PY)
     module = importlib.util.module_from_spec(spec)
@@ -119,10 +145,20 @@ def _request_json(method: str, url: str, body: dict[str, Any] | None = None, tim
         return json.loads(resp.read().decode("utf-8"))
 
 
-def _wait_health(base_url: str, timeout: float) -> dict[str, Any]:
+def _wait_health(
+    base_url: str,
+    timeout: float,
+    proc: subprocess.Popen[str] | None = None,
+    report: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     deadline = time.time() + timeout
     last_error: Exception | None = None
     while time.time() < deadline:
+        if proc is not None and proc.poll() is not None:
+            if report is not None:
+                report["engine_exit_code"] = proc.returncode
+                report["engine_log_tail"] = _read_output_tail(proc.stdout)
+            raise RuntimeError(f"engine exited before health check passed: exit {proc.returncode}")
         try:
             health = _request_json("GET", f"{base_url}/health", timeout=5.0)
             if health.get("status") == "healthy":
@@ -155,6 +191,20 @@ def _assert_runtime_metadata(report: dict[str, Any], health: dict[str, Any], mod
         raise RuntimeError(f"missing runtime metadata checks: {', '.join(missing)}")
 
 
+def _assert_completion(completion: dict[str, Any]) -> None:
+    usage = completion.get("usage") or {}
+    choices = completion.get("choices") or []
+    token_count = usage.get("completion_tokens") or 0
+    has_content = False
+    for choice in choices:
+        message = choice.get("message") or {}
+        if message.get("content") or message.get("reasoning_content") or message.get("tool_calls"):
+            has_content = True
+            break
+    if token_count <= 0 and not has_content:
+        raise RuntimeError("empty completion: model returned no tokens/content")
+
+
 def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float, metadata_only: bool = False) -> dict[str, Any]:
     port = _find_free_port()
     path = Path(path).expanduser().resolve()
@@ -170,7 +220,7 @@ def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float
         return report
 
     cmd = [
-        sys.executable,
+        _engine_python(),
         str(LAUNCH_PY),
         "--model",
         str(path),
@@ -198,8 +248,10 @@ def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float
     env["PYTHONPATH"] = str(ENGINE_DIR) + (":" + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
     proc = subprocess.Popen(cmd, cwd=ROOT, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
     base_url = f"http://127.0.0.1:{port}"
+    report["base_url"] = base_url
+    report["launch_command"] = cmd
     try:
-        health = _wait_health(base_url, timeout)
+        health = _wait_health(base_url, timeout, proc=proc, report=report)
         models = _request_json("GET", f"{base_url}/v1/models")
         completion = _request_json(
             "POST",
@@ -216,6 +268,7 @@ def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float
         )
         cache = _request_json("GET", f"{base_url}/v1/cache/stats")
         _assert_runtime_metadata(report, health, models, cache)
+        _assert_completion(completion)
         report.update({
             "health": health,
             "models": models,
@@ -224,13 +277,16 @@ def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float
             "cache_stats": cache,
         })
         return report
+    except Exception as exc:
+        raise VerificationError(f"{family} live verification failed: {exc}", {family: report}) from exc
     finally:
-        proc.terminate()
-        try:
-            proc.wait(timeout=10)
-        except subprocess.TimeoutExpired:
-            proc.kill()
-        if proc.stdout:
+        if proc.poll() is None:
+            proc.terminate()
+            try:
+                proc.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                proc.kill()
+        if proc.stdout and "engine_log_tail" not in report:
             report["engine_log_tail"] = "".join(proc.stdout.readlines()[-60:])
 
 
@@ -262,7 +318,16 @@ def main() -> int:
 
     try:
         reports = run(args)
+    except VerificationError as exc:
+        if args.output:
+            text = json.dumps({"ok": False, "error": str(exc), "reports": exc.reports}, indent=2, sort_keys=True)
+            Path(args.output).write_text(text + "\n", encoding="utf-8")
+        print(f"verify-live-models failed: {exc}", file=sys.stderr)
+        return 1
     except Exception as exc:
+        if args.output:
+            text = json.dumps({"ok": False, "error": str(exc), "reports": {}}, indent=2, sort_keys=True)
+            Path(args.output).write_text(text + "\n", encoding="utf-8")
         print(f"verify-live-models failed: {exc}", file=sys.stderr)
         return 1
 

@@ -289,9 +289,18 @@ Real-model gates:
   `testsuite/test_live_model_verifier.py`. The script proves supported-family
   detection and launcher args for model-folder generation defaults, parser
   defaults, prefix cache, prompt L2, paged cache, block L2, and TurboQuant Q4.
-- Remaining expensive proof: run `scripts/verify-live-models.py` without
-  `--metadata-only` against selected Qwen and MiniMax folders to prove actual
-  load, generation, `/health`, `/v1/models`, and `/v1/cache/stats`.
+- Qwen live proof is captured at
+  `docs/live-proofs/checkpoint-74-qwen-live.json`. It proves actual engine
+  startup, JANG folder load, non-empty chat completion, `/health`,
+  `/v1/models`, `/v1/cache/stats`, parser autodetect, generation defaults from
+  the model folder, prefix cache, prompt L2, paged cache, block L2,
+  TurboQuant Q4 metadata, and Qwen hybrid SSM companion L2 storage.
+- MiniMax live proof is captured at
+  `docs/live-proofs/checkpoint-75-minimax-live.json`. It now routes through
+  `jang_tools.load_jangtq_model` and reaches JANGTQ hydration, but the current
+  run failed before health with Metal out-of-memory while the machine was under
+  high memory pressure. A clear-memory rerun is still required for MiniMax
+  generation and cache-hit proof.
 - Unsupported folder warning and blocked/clear app UI handling still needs a
   live UI proof.
 - Full prompt -> context catalogue -> stream -> tool call -> tab result loop is
@@ -321,5 +330,6 @@ Visual gates:
 
 ## Current Gaps To Close Next
 
-1. Run real Qwen and MiniMax model verification with
-   `scripts/verify-live-models.py` and capture the report.
+1. Rerun MiniMax real-model verification after clearing competing MLX memory
+   pressure, then capture non-empty generation plus prefix/paged/L2/TurboQuant
+   cache stats.

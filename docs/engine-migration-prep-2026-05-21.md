@@ -477,6 +477,22 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   visual-state controls. The proof captures unsupported model-folder warning,
   effective runtime/cache status, and required TurboQuant/prefix/L2 cache
   controls under `docs/visual-proofs/checkpoint-73`.
+- Checkpoint 74: Hardened `scripts/verify-live-models.py` for live model proof.
+  The verifier now launches the engine with `ExploitBotEngine/.venv/bin/python3`
+  by default, fails fast when the child exits before `/health`, writes `ok:false`
+  JSON reports with launch command/log tail, and rejects empty completions.
+  Fixed stale `resolve_to_local_path`, empty Mamba cache merge, and mlx-lm
+  prompt/generation response shape handling. Qwen live proof is captured at
+  `docs/live-proofs/checkpoint-74-qwen-live.json` with non-empty generation,
+  effective parser/generation metadata, prefix/paged/prompt-L2/block-L2 cache
+  metadata, TurboQuant Q4 metadata, and SSM companion L2 storage.
+- Checkpoint 75: Added JANGTQ/MXTQ routing for model folders whose
+  `jang_config.json` declares `weight_format=mxtq` or `mxtq_bits`. These now
+  route to `jang_tools.load_jangtq_model` through an installed `jang_tools`,
+  `JANG_TOOLS_PATH`, or the local `~/jang/jang-tools` checkout. MiniMax live
+  proof reaches JANGTQ hydration but fails with Metal OOM while the machine is
+  under high memory pressure; report captured at
+  `docs/live-proofs/checkpoint-75-minimax-live.json`.
 
 ## Known Risk Areas
 
