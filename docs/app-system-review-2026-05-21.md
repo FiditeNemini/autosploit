@@ -347,6 +347,8 @@ Automated no-model gates:
     `/state.webCVERows` and the visible card chip;
   - proves Report can queue an agent-draft prompt from confirmed findings
     through `/state.reportAction` and Report tab activity;
+  - proves CVE Database settings expose import/count/search status through
+    `/state.cveDatabase`;
   - proves model-issued `search_context` returns targeted catalogue facts;
   - proves automatic context injection stays at 4 snippets or fewer and tells
     the model to use `search_context` for more targeted retrieval;
@@ -396,6 +398,10 @@ Mock-model gates:
   and `scripts/visual-report-agent-proof.py`, which verify the report prompt,
   queued action state, Report tab activity, and visible agent-report status
   strip.
+- CVE settings status. Covered by `scripts/cve-settings-status-proof.py` and
+  `scripts/visual-cve-settings-status-proof.py`, which verify deterministic
+  import progress, total/KEV counts, last sync, search-result count, and visible
+  CVE Database settings state.
 - Nested lifecycle strip visual state. Covered by
   `scripts/visual-tab-proof.py` with cropped captures under
   `docs/visual-proofs/checkpoint-70`.
@@ -488,6 +494,8 @@ Visual gates:
 
 - Settings model warning, engine live cache status, and cache topology sections
   are captured under `docs/visual-proofs/checkpoint-73`.
+- CVE Database import/status state is captured under
+  `docs/visual-proofs/checkpoint-108`.
 - Chat scroll locked, paused/new-output, and relock-ready states are captured
   under `docs/visual-proofs/checkpoint-72`.
 - Reasoning expanded/streaming and collapsed states are captured under

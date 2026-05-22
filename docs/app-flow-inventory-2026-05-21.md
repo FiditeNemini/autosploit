@@ -315,8 +315,14 @@ Context Catalog:
 CVE Database and Tools:
 
 - Existing settings panels remain in place.
-- They should later feed the dynamic catalogue index and visible tool-status
-  indicators.
+- CVE Database settings status is exposed through `/state.cveDatabase`,
+  including import progress, total/KEV counts, last sync, search-result count,
+  and active settings category. `scripts/cve-settings-status-proof.py` verifies
+  the state contract, and `scripts/visual-cve-settings-status-proof.py` captures
+  the visible CVE import/status page under
+  `docs/visual-proofs/checkpoint-108`.
+- Tools settings still need a matching install/detection status contract beyond
+  the existing panel.
 
 ## Test And Proof Requirements
 

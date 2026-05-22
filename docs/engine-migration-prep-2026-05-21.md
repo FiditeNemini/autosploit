@@ -593,6 +593,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   report prompt from confirmed findings, records `/state.reportAction`, updates
   Report tab activity, and can send the prompt into chat. Proofs:
   `scripts/report-agent-action-proof.py` and `scripts/visual-report-agent-proof.py`.
+- Checkpoint 108: Added CVE Database settings status proof. `/state.cveDatabase`
+  now exposes import progress, total/KEV counts, last sync, search-result count,
+  and active settings category, with deterministic QA seeding and visual proof
+  under `docs/visual-proofs/checkpoint-108`.
 
 ## Known Risk Areas
 
