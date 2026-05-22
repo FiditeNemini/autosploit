@@ -252,6 +252,7 @@ Current repeatable gates:
 - `swift build --package-path ExploitBot`
 - `cd ExploitBotEngine && PYTHONPATH=. uv run --extra dev pytest -q`
 - `python3 scripts/live-turn-harness.py`
+- `cd ExploitBotEngine && uv run --extra dev ../scripts/prove-parser-api.py --output ../docs/live-proofs/checkpoint-79-parser-api-proof.json`
 - `python3 scripts/context-catalog-proof.py`
 - `python3 scripts/settings-apply-proof.py`
 - `python3 scripts/verify-live-models.py --metadata-only --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --minimax /Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit`
@@ -283,8 +284,10 @@ Required future proof gates:
   `docs/live-proofs/checkpoint-77-block-l2-quantized-proof.json`, which proves
   real MLX safetensors write/read plus full-block disk promotion for
   `quantized_kv` cache data.
-- Reasoning parser smoke proving thinking text is separated from visible output.
-- Tool parser smoke proving parsed API `tool_calls`, not raw text only.
+- Reasoning parser smoke proving thinking text is separated from visible output:
+  covered by `docs/live-proofs/checkpoint-79-parser-api-proof.json`.
+- Tool parser smoke proving parsed API `tool_calls`, not raw text only:
+  covered by `docs/live-proofs/checkpoint-79-parser-api-proof.json`.
 - Settings model warning, engine live cache status, and cache topology
   screenshots are captured under `docs/visual-proofs/checkpoint-73`.
 - Chat token metrics, active tool header, approval card, running tool card,

@@ -514,6 +514,12 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   `scripts/live-turn-harness.py` proves `/context/new` clears chat/counters
   while preserving prefix cache, prompt L2, paged cache, block L2, TurboQuant
   Q4 KV cache, and model-folder generation defaults.
+- Checkpoint 79: Added parser API proof. `testsuite/test_tool_parser_api.py`
+  and `scripts/prove-parser-api.py` now prove a mixed Qwen output with
+  `<think>...</think>` plus `<tool_call>...</tool_call>` becomes API-safe
+  `reasoning_content`, cleaned assistant content, structured OpenAI
+  `tool_calls`, and `finish_reason=tool_calls`. Proof artifact:
+  `docs/live-proofs/checkpoint-79-parser-api-proof.json`.
 
 ## Known Risk Areas
 

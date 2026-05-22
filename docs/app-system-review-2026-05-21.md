@@ -302,6 +302,11 @@ Real-model gates:
   reopen the disk store, and promote the full block through
   `BlockAwarePrefixCache.fetch_cache()` with `disk_writes=1`, `disk_hits=1`,
   and `promoted_block.type=quantized_kv`.
+- Parser API proof is captured at
+  `docs/live-proofs/checkpoint-79-parser-api-proof.json`. It proves configured
+  Qwen reasoning/tool parsers convert one mixed output into cleaned assistant
+  content, `reasoning_content`, structured OpenAI `tool_calls`, and
+  `finish_reason=tool_calls` without leaking raw parser tags into content.
 - MiniMax live proof is captured at
   `docs/live-proofs/checkpoint-75-minimax-live.json`. It now routes through
   `jang_tools.load_jangtq_model` and reaches JANGTQ hydration, but the current
@@ -322,6 +327,8 @@ Real-model gates:
   the mock-engine app clears chat plus prompt/completion/cached counters while
   preserving prefix, prompt L2, paged, block L2, TurboQuant Q4, and
   model-folder generation-default flags.
+- Reasoning/tool parser API shaping is covered by
+  `scripts/prove-parser-api.py` and `testsuite/test_tool_parser_api.py`.
 
 Visual gates:
 
