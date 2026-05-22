@@ -531,7 +531,9 @@ Automated no-model gates:
   `/qa/agent-loop-coverage` exposes manual, copilot,
   autopilot, deployed-agent loop guarantees, agent action/settings/deploy
   routes, deploy-sheet/task-send controls, action telemetry fields, and the
-  proof scripts that cover them. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
+  agent-loop state-key list/count plus visual state keys for active agent
+  chat/results/feed routing, context snippets, and exposed tool-schema audit
+  state. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
   context-catalog proof contract for model-issued tool calls, including the
   parser and family-fanout fixture seed routes, proof-count metadata, and
   `stateKeys`, plus the visible tab activity status count/parity and indicator
@@ -647,8 +649,9 @@ Automated no-model gates:
   screenshot capture count. The tools/parsers group exposes registry tool
   count, callback count, representative family fanout count, and state-key
   count. The tabs/sessions group exposes interaction-mode count, covered tab
-  count, session state-key count, and action-state-key count. Chat/context also
-  exposes state-key count.
+  count, session state-key count, action-state-key count, agent-loop state-key
+  count, and agent-loop visual state keys. Chat/context also exposes state-key
+  count.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.

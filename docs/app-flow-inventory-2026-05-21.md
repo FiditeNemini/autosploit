@@ -131,8 +131,12 @@ main session.
   max-concurrent controls route through AppState, persist config, clear agents
   on disable, and expose visible action telemetry.
 - `/qa/agent-loop-coverage` now exposes the mode, route, contract, action
-  telemetry fields, proof count, deploy-sheet, task-send, and settings-control
-  proof surface for the agentic loop.
+  telemetry fields, proof count, deploy-sheet, task-send, settings-control,
+  state-key list/count, and visual state-key list for the agentic loop. The
+  state contract names `/state.agents`, `/state.agentActions`, active
+  agent chat/results/feed display routing, context-snippet count, and exposed
+  tool-schema names so full-auto agent behavior is auditable from UI state and
+  request audit state.
 - Built-in CVE calls use callbacks instead of shell subprocesses.
 - Shell-backed tools run through `ToolExecutor`.
 - Tool output is appended to chat, activity feed, and `ResultsStore.ingest`.

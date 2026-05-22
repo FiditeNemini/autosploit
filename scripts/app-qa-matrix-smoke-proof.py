@@ -182,6 +182,11 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/agent-loop-coverage mode contract mismatch: {agent_loop_coverage}")
     if "taskSent" not in (agent_loop_coverage.get("actionTelemetryFields") or []):
         raise AssertionError(f"/qa/agent-loop-coverage telemetry fields mismatch: {agent_loop_coverage}")
+    if agent_loop_coverage.get("stateKeyCount") != len(agent_loop_coverage.get("stateKeys") or []):
+        raise AssertionError(f"/qa/agent-loop-coverage state key count mismatch: {agent_loop_coverage}")
+    for key in ("agents", "agentActions", "displayChatService", "displayResultsStore", "displayActivityFeed"):
+        if key not in (agent_loop_coverage.get("visualStateKeys") or []):
+            raise AssertionError(f"/qa/agent-loop-coverage visual state key missing {key}: {agent_loop_coverage}")
     if tool_flow_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/tool-flow-coverage failed: {tool_flow_coverage}")
     if tool_flow_coverage.get("toolCount") != 38 or tool_flow_coverage.get("callbackCount") != 3:

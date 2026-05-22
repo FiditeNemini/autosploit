@@ -71,6 +71,18 @@ EXPECTED_ACTION_TELEMETRY_FIELDS = {
     "summary",
 }
 
+EXPECTED_STATE_KEYS = {
+    "agents",
+    "agentActions",
+    "displayChatService",
+    "displayResultsStore",
+    "displayActivityFeed",
+    "chatService.interactionMode",
+    "chatService.maxIterations",
+    "chatService.lastContextSnippetCount",
+    "chatService.lastToolSchemaNames",
+}
+
 
 def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
     if isinstance(body, dict):
@@ -146,6 +158,16 @@ def run() -> None:
         missing_telemetry = sorted(EXPECTED_ACTION_TELEMETRY_FIELDS.difference(telemetry_fields))
         if missing_telemetry:
             raise AssertionError(f"agent loop telemetry fields missing {missing_telemetry}: {coverage}")
+        state_keys = set(coverage.get("stateKeys") or [])
+        missing_state_keys = sorted(EXPECTED_STATE_KEYS.difference(state_keys))
+        if missing_state_keys:
+            raise AssertionError(f"agent loop state keys missing {missing_state_keys}: {coverage}")
+        if coverage.get("stateKeyCount") != len(coverage.get("stateKeys") or []):
+            raise AssertionError(f"agent loop state key count mismatch: {coverage}")
+        visual_state_keys = set(coverage.get("visualStateKeys") or [])
+        for key in ("agents", "agentActions", "displayChatService", "displayResultsStore", "displayActivityFeed"):
+            if key not in visual_state_keys:
+                raise AssertionError(f"agent loop visual state key missing {key}: {coverage}")
 
         request("POST", "/mode", "manual")
         manual = request("GET", "/qa/agent-loop-coverage")
