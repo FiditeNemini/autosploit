@@ -532,7 +532,9 @@ Automated no-model gates:
   `/qa/session-coverage` exposes cross-app session workflow proof coverage for
   onboarding/mode selection, Sidebar operations, overlays, model-folder pickers,
   persistence/relaunch, saved messages, result rebuild, finding wizard submit,
-  tab switching, phase changes, and Activity Feed controls.
+  tab switching, phase changes, and Activity Feed controls, and lists the
+  `/phase`, `/qa/seed-activity-actions`, and `/qa/activity-action` routes with
+  proof-count metadata.
   `/qa/tab-action-coverage` exposes per-tab direct action proof coverage for
   copy buttons, row context actions, verify/protocol/hash/exploit/post/OSINT
   actions, report generation/finding/export/agent actions, and Stash controls.

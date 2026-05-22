@@ -48,6 +48,9 @@ REQUIRED_ROUTES = {
     "/qa/save-current-messages",
     "/qa/finding-wizard-submit",
     "/qa/manual-tab-switch",
+    "/phase",
+    "/qa/seed-activity-actions",
+    "/qa/activity-action",
 }
 
 REQUIRED_PROOFS = {
@@ -117,6 +120,8 @@ def assert_session_coverage() -> None:
         raise AssertionError(f"session coverage overlay actions mismatch: {coverage}")
     if coverage.get("sidebarActions") != ["createOp", "renameOp", "switchOp", "deleteOp"]:
         raise AssertionError(f"session coverage sidebar actions mismatch: {coverage}")
+    if coverage.get("proofCount", 0) < len(REQUIRED_PROOFS):
+        raise AssertionError(f"session coverage proof count mismatch: {coverage}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/session-coverage" not in qa.get("stateRoutes", []):
