@@ -686,8 +686,9 @@ Automated no-model gates:
   domains. It also carries audit missing-capture, complete/incomplete
   checkpoint, checkpoint completion ratio, latest checkpoint path/number, gap
   source/path, current-gap, open-gap, next-gap, supported-family,
-  unsupported-multimodal block, and gap-contract lists/maps, so audit detail is
-  not reduced to counts in the aggregate. It also carries
+  unsupported-multimodal block, gap-contract lists/maps, and
+  `auditGapContractCount`, so audit detail is not reduced to counts while the
+  audit contract count remains machine-checkable in the aggregate. It also carries
   `/qa/audit-ledger.liveProofOkCount`, `failedLiveProofCount`, and
   `failedLiveProofs`, so failed live JSON evidence remains visible from the
   top-level QA index. It also carries

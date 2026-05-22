@@ -543,6 +543,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index audit open gap ids mismatch: {coverage_index}")
     if app_state_group.get("auditGapContracts") != audit_ledger.get("gapContracts"):
         raise AssertionError(f"/qa/coverage-index audit gap contracts mismatch: {coverage_index}")
+    if app_state_group.get("auditGapContractCount") != len(audit_ledger.get("gapContracts") or {}):
+        raise AssertionError(f"/qa/coverage-index audit gap contract count mismatch: {coverage_index}")
     if app_state_group.get("auditProofCount") != audit_ledger.get("proofCount"):
         raise AssertionError(f"/qa/coverage-index audit proof count mismatch: {coverage_index}")
     if app_state_group.get("auditProofLedgerCategoryCounts") != audit_ledger.get("proofLedgerCategoryCounts"):
