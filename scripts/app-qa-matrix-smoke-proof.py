@@ -470,6 +470,11 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index audit ledger count mismatch: {coverage_index}")
     if app_state_group.get("currentGapCount", -1) != 1:
         raise AssertionError(f"/qa/coverage-index current gap count mismatch: {coverage_index}")
+    settings_visuals_group = index_groups.get("settingsAndVisuals") or {}
+    if settings_visuals_group.get("settingsSurfaceProofs") != settings_coverage.get("settingsSurfaceProofs"):
+        raise AssertionError(f"/qa/coverage-index settings surface proof map mismatch: {coverage_index}")
+    if settings_visuals_group.get("visualSurfaceProofs") != visual_coverage.get("visualSurfaceProofs"):
+        raise AssertionError(f"/qa/coverage-index visual surface proof map mismatch: {coverage_index}")
     if ((index_groups.get("tabsAndSessions") or {}).get("actionStateKeyCount", 0)) < 26:
         raise AssertionError(f"/qa/coverage-index action state key count mismatch: {coverage_index}")
     tabs_sessions_group = index_groups.get("tabsAndSessions") or {}

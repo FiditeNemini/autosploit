@@ -300,6 +300,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index settings surface count mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("settingsSurfaceParity") != settings_coverage.get("settingsSurfaceParity"):
         raise AssertionError(f"coverage index settings surface parity mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("settingsSurfaceProofs") != settings_coverage.get("settingsSurfaceProofs"):
+        raise AssertionError(f"coverage index settings surface proof map mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("settingsSurfaceProofCount") != settings_coverage.get("settingsSurfaceProofCount"):
         raise AssertionError(f"coverage index settings surface proof count mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("settingsSurfaceProofParity") != settings_coverage.get("settingsSurfaceProofParity"):
@@ -317,6 +319,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index visual surface count mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("visualSurfaceParity") != visual_coverage.get("visualSurfaceParity"):
         raise AssertionError(f"coverage index visual surface parity mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("visualSurfaceProofs") != visual_coverage.get("visualSurfaceProofs"):
+        raise AssertionError(f"coverage index visual surface proof map mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("visualSurfaceProofCount") != visual_coverage.get("visualSurfaceProofCount"):
         raise AssertionError(f"coverage index visual surface proof count mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("visualSurfaceProofParity") != visual_coverage.get("visualSurfaceProofParity"):

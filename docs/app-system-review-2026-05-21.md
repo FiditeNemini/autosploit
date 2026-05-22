@@ -686,8 +686,8 @@ Automated no-model gates:
   `prefix-cache-l2-turboquant` response path, cache-preserving new-context
   boundary, and the checked-in Qwen/MiniMax
   live replay artifact set. The settings/visuals group exposes Settings surface
-  list/count/parity, Settings surface proof count/parity, visual surface list/count/parity,
-  visual surface proof count/parity, settings visual manifest
+  list/count/parity, Settings surface proof map/count/parity, visual surface list/count/parity,
+  visual surface proof map/count/parity, settings visual manifest
   count, full visual manifest count, and actual screenshot capture count. The
   tools/parsers group exposes registry tool
   count, callback count, representative family fanout count, state-key count,
