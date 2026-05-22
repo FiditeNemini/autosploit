@@ -7,6 +7,7 @@ import signal
 import socket
 import subprocess
 import sys
+import tempfile
 import threading
 import time
 import urllib.error
@@ -498,12 +499,16 @@ def run() -> None:
     mock_thread = threading.Thread(target=mock.serve_forever, daemon=True)
     mock_thread.start()
 
-    env = os.environ.copy()
-    env["EXPLOITBOT_TESTING"] = "1"
-    subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    app = subprocess.Popen([str(ROOT / "script" / "build_and_run.sh"), "--verify"], cwd=ROOT, env=env)
-
+    app = None
+    temp_home = tempfile.TemporaryDirectory(prefix="exploitbot-live-turn-home-")
     try:
+        env = os.environ.copy()
+        env["EXPLOITBOT_TESTING"] = "1"
+        env["HOME"] = temp_home.name
+        env["EXPLOITBOT_DATA_DIR"] = str(Path(temp_home.name) / ".exploitbot" / "data")
+        subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        app = subprocess.Popen([str(ROOT / "script" / "build_and_run.sh"), "--verify"], cwd=ROOT, env=env)
+
         if app.wait(timeout=30) != 0:
             raise RuntimeError("build_and_run --verify failed")
         wait_for_app()
@@ -527,7 +532,10 @@ def run() -> None:
         assert_contains(joined, "CVE lookup complete", "second streamed assistant response")
         assert any(m.get("tool") == "search_cve" and "ok" in m.get("status", "") for m in messages), messages
 
-        state = request("GET", "/state")
+        state = wait_until(
+            lambda: request("GET", "/state") if request("GET", "/state").get("metrics", {}).get("tokPerSec", 0) > 0 else None,
+            "usage metrics after streamed completion",
+        )
         assert state["metrics"]["tokPerSec"] > 0, state
         assert state["metrics"]["ttft"] > 0, state
         request_context = state.get("requestContext") or {}
@@ -803,8 +811,9 @@ def run() -> None:
     finally:
         mock.shutdown()
         subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        if app.poll() is None:
+        if app is not None and app.poll() is None:
             app.send_signal(signal.SIGTERM)
+        temp_home.cleanup()
 
 
 if __name__ == "__main__":

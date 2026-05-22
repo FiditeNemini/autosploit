@@ -265,6 +265,7 @@ Current repeatable gates:
 - `python3 scripts/tool-catalog-proof.py`
 - `python3 scripts/semantic-cve-proof.py`
 - `python3 scripts/settings-apply-proof.py`
+- `python3 scripts/cache-stats-state-proof.py`
 - `python3 scripts/persistence-proof.py`
 - `python3 scripts/request-audit-proof.py`
 - `python3 scripts/verify-live-models.py --metadata-only --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --minimax /Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit`
@@ -296,6 +297,10 @@ Required future proof gates:
   present, plus async rederive status. Current Qwen live proof verifies load,
   generation, cache metadata, SSM companion L2 storage, and a repeat paged-cache
   hit with 20 cached tokens. Async rederive status remains open.
+- Parsed app-level cache stats visibility: covered by
+  `scripts/cache-stats-state-proof.py`, which verifies `/state.engineCacheStats`
+  exposes TurboQuant, prompt L2, block L2, SSM companion disk, and cache memory
+  counters from the app parser.
 - Quantized block L2 proof: covered by
   `docs/live-proofs/checkpoint-77-block-l2-quantized-proof.json`, which proves
   real MLX safetensors write/read plus full-block disk promotion for

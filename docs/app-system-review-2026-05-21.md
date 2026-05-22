@@ -347,6 +347,9 @@ Real-model gates:
   the mock-engine app clears chat plus prompt/completion/cached counters while
   preserving prefix, prompt L2, paged, block L2, TurboQuant Q4, and
   model-folder generation-default flags.
+- Parsed engine cache runtime counters are exposed through
+  `/state.engineCacheStats` and covered by `scripts/cache-stats-state-proof.py`
+  for TurboQuant, prompt L2, block L2, SSM companion disk, and memory counters.
 - Reasoning/tool parser API shaping is covered by
   `scripts/prove-parser-api.py` and `testsuite/test_tool_parser_api.py`.
 - Settings/message/result-store persistence is covered by
