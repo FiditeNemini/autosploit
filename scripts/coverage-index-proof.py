@@ -257,6 +257,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state artifact live proofs mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerLiveProofStatus") != artifact.get("liveProofStatus"):
         raise AssertionError(f"coverage index app state artifact live proof status mismatch: {app_state_group}")
+    if app_state_group.get("artifactLedgerFailedLiveProofCount") != artifact.get("failedLiveProofCount"):
+        raise AssertionError(f"coverage index app state artifact failed live proof count mismatch: {app_state_group}")
+    if app_state_group.get("artifactLedgerFailedLiveProofs") != artifact.get("failedLiveProofs"):
+        raise AssertionError(f"coverage index app state artifact failed live proofs mismatch: {app_state_group}")
     if app_state_group.get("missingVisualCaptureCount", 1) != 0:
         raise AssertionError(f"coverage index app state missing visual captures: {app_state_group}")
     if app_state_group.get("missingVisualCaptures") != artifact.get("missingVisualCaptures"):

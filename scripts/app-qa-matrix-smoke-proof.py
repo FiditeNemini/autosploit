@@ -545,6 +545,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index artifact live proof list mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerLiveProofStatus") != artifact_ledger.get("liveProofStatus"):
         raise AssertionError(f"/qa/coverage-index artifact live proof status mismatch: {coverage_index}")
+    if app_state_group.get("artifactLedgerFailedLiveProofCount") != artifact_ledger.get("failedLiveProofCount"):
+        raise AssertionError(f"/qa/coverage-index artifact failed live proof count mismatch: {coverage_index}")
+    if app_state_group.get("artifactLedgerFailedLiveProofs") != artifact_ledger.get("failedLiveProofs"):
+        raise AssertionError(f"/qa/coverage-index artifact failed live proof list mismatch: {coverage_index}")
     if app_state_group.get("missingVisualCaptures") != artifact_ledger.get("missingVisualCaptures"):
         raise AssertionError(f"/qa/coverage-index missing visual capture list mismatch: {coverage_index}")
     if app_state_group.get("currentGapCount", -1) != 1:

@@ -108,6 +108,8 @@ def assert_artifact_ledger() -> None:
     if ledger.get("liveProofOkCount") != sum(1 for ok in expected_live_ok.values() if ok):
         raise AssertionError(f"artifact ledger live ok count mismatch: {ledger}")
     expected_failed = sorted(path for path, ok in expected_live_ok.items() if not ok)
+    if ledger.get("failedLiveProofCount") != len(expected_failed):
+        raise AssertionError(f"artifact ledger failed live proof count mismatch expected {len(expected_failed)}: {ledger}")
     if ledger.get("failedLiveProofs") != expected_failed:
         raise AssertionError(f"artifact ledger failed live proof list mismatch expected {expected_failed}: {ledger}")
 
