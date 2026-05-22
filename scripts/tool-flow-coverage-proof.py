@@ -71,6 +71,9 @@ def run() -> None:
             raise AssertionError(f"tool flow route contract mismatch: {coverage}")
         if not EXPECTED_PROOFS.issubset(set(coverage.get("proofs") or [])):
             raise AssertionError(f"tool flow proofs missing: {coverage}")
+        missing_files = sorted(name for name in EXPECTED_PROOFS if not (ROOT / "scripts" / name).is_file())
+        if missing_files:
+            raise AssertionError(f"tool flow names non-existent proof files: {missing_files}")
         if set(coverage.get("families") or []) != EXPECTED_FAMILIES:
             raise AssertionError(f"tool flow family coverage mismatch: {coverage}")
         if coverage.get("toolCount") != 38:
@@ -82,6 +85,8 @@ def run() -> None:
                 raise AssertionError(f"tool flow contract missing {key}: {coverage}")
 
         registry = request("GET", "/qa/tool-coverage")
+        if registry.get("ok") is not True:
+            raise AssertionError(f"tool registry did not expose ok=true: {registry}")
         if registry.get("toolCount") != coverage.get("toolCount"):
             raise AssertionError(f"tool flow registry count disagrees with tool coverage: {coverage} {registry}")
 

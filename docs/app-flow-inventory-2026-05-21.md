@@ -156,7 +156,8 @@ visibility is now prompt/tab based rather than small/medium/large model based.
 The exposed registry is auditable through `/qa/tool-coverage`: each tool reports
 callback-vs-subprocess execution, sample CLI routing, tab ownership, global
 visibility, and structured-vs-raw result mode so tool-loop coverage can be
-checked without relying on a live model to enumerate the catalogue.
+checked without relying on a live model to enumerate the catalogue. The route
+returns a standard `ok` aggregate status.
 
 ## Context And Catalog State
 

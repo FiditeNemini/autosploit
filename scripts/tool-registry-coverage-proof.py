@@ -51,6 +51,8 @@ def run() -> None:
         wait_for_app()
 
         coverage = request("GET", "/qa/tool-coverage")
+        if coverage.get("ok") is not True:
+            raise AssertionError(f"tool coverage did not expose ok=true: {coverage}")
         failures = coverage.get("failures", [])
         if failures:
             raise AssertionError(f"tool coverage failures: {failures}")

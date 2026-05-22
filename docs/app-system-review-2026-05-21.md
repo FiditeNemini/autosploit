@@ -187,7 +187,7 @@ Tool API:
 - Full registry coverage is exposed through `/qa/tool-coverage` and covered by
   `scripts/tool-registry-coverage-proof.py`: every model-visible tool has an
   execution type, tab ownership unless intentionally global, CLI routing sample,
-  and structured-vs-raw result mode.
+  structured-vs-raw result mode, and a standard `ok` aggregate status.
 
 Result fanout:
 
