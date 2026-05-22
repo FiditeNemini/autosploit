@@ -167,9 +167,8 @@ main session.
   behind those proofs, and `/qa/tool-flow-coverage.tabActivityStatuses` names
   the visible tab indicator states (`running`, `done`, `failed`, `canceled`)
   plus a status count, parity flag, and `status-dot-running-ring` indicator
-  contract. It also exposes `tabActivityStatusProofs`,
-  `tabActivityStatusProofCount`, and `tabActivityStatusProofParity`, tying each
-  visible tab status to the scripts that prove it. It also exposes
+  contract. It also exposes tab activity status proof map/count/parity, tying
+  each visible tab status to the scripts that prove it. It also exposes
   `toolVisualSurfaces`, `toolVisualSurfaceCount`, and
   `toolVisualSurfaceParity`, plus visual-surface proof map/count/parity, for
   chat tool cards, activity-feed status, tab status indicators, parsed result

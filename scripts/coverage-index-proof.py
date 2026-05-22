@@ -469,6 +469,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions tab activity status parity mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActivityIndicatorContract") != tool_flow.get("tabActivityIndicatorContract"):
         raise AssertionError(f"coverage index tabs/sessions tab activity indicator contract mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActivityStatusProofs") != tool_flow.get("tabActivityStatusProofs"):
+        raise AssertionError(f"coverage index tabs/sessions tab activity status proof map mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActivityStatusProofCount") != tool_flow.get("tabActivityStatusProofCount"):
         raise AssertionError(f"coverage index tabs/sessions tab activity status proof count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActivityStatusProofParity") != tool_flow.get("tabActivityStatusProofParity"):

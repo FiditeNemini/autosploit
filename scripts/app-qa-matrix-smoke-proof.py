@@ -515,6 +515,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index tab action proof map mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopPhaseProofs") != agent_loop_coverage.get("loopPhaseProofs"):
         raise AssertionError(f"/qa/coverage-index agent loop phase proof map mismatch: {coverage_index}")
+    if tabs_sessions_group.get("tabActivityStatusProofs") != tool_flow_coverage.get("tabActivityStatusProofs"):
+        raise AssertionError(f"/qa/coverage-index tab activity status proof map mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopPhaseProofCount") != agent_loop_coverage.get("loopPhaseProofCount"):
         raise AssertionError(f"/qa/coverage-index agent loop phase proof count mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopPhaseProofParity") != agent_loop_coverage.get("loopPhaseProofParity"):

@@ -220,9 +220,8 @@ Result fanout:
   catalogue state. `/qa/tool-flow-coverage.tabActivityStatuses` names the
   visible tab indicator states (`running`, `done`, `failed`, `canceled`) and
   exposes status count/parity plus the `status-dot-running-ring` indicator
-  contract. It also exposes `tabActivityStatusProofs`,
-  `tabActivityStatusProofCount`, and `tabActivityStatusProofParity`, tying each
-  status to its proof scripts. It also exposes `toolVisualSurfaces`,
+  contract. It also exposes tab activity status proof map/count/parity, tying
+  each status to its proof scripts. It also exposes `toolVisualSurfaces`,
   `toolVisualSurfaceCount`, and
   `toolVisualSurfaceParity`, plus visual-surface proof map/count/parity, for
   chat tool cards, activity-feed status, tab status indicators, parsed result
