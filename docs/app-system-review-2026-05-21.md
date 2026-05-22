@@ -53,6 +53,10 @@ Interaction modes:
   setting, context catalogue wiring, prompt-ranked tool schemas, and typed
   prompt override, then autonomously runs a `search_cve` tool loop to
   completion.
+- Deployed-agent on-demand context retrieval is covered by
+  `scripts/agent-search-context-proof.py`: an agent autonomously calls
+  `search_context`, receives shared parsed-result catalogue facts from the main
+  session, and sends that tool result back into the next model request.
 
 ## Context Flow
 
@@ -405,6 +409,9 @@ Automated no-model gates:
     defaults, uses bounded dynamic context/tool schemas, preserves its type
     prompt override, executes a tool, and completes autonomously through
     `scripts/agent-autopilot-proof.py`.
+  - proves a deployed agent can use `search_context` to pull parsed main-session
+    catalogue facts into its own autonomous tool loop through
+    `scripts/agent-search-context-proof.py`.
 
 Mock-model gates:
 

@@ -313,6 +313,10 @@ Agents:
   mode, start their task prompt when the engine is running, and keep their own
   messages, activity feed, result store, context catalogue wiring, and tool-loop
   counters.
+- Agent context retrieval uses the agent's own result store plus the main
+  session's parsed catalogue as shared operation knowledge, so new agents can
+  pull existing parsed assets/findings/attributions through `search_context`
+  without forcing the entire catalogue into the prompt.
 - Typed agents select the matching active tool lane for prompt-ranked schemas
   and preserve the type-specific prompt override after phase guidance is set.
 - App-only Settings apply updates agent and loop controls without restarting the
@@ -361,6 +365,7 @@ Current repeatable gates:
 - `python3 scripts/semantic-cve-proof.py`
 - `python3 scripts/settings-apply-proof.py`
 - `python3 scripts/agent-autopilot-proof.py`
+- `python3 scripts/agent-search-context-proof.py`
 - `python3 scripts/cache-stats-state-proof.py`
 - `python3 scripts/live-cache-stats-ui-proof.py`
 - `python3 scripts/model-folder-warning-proof.py`
@@ -462,6 +467,10 @@ Required future proof gates:
   proves parsed credential findings, nmap assets, nuclei CVE findings, and
   post-exploitation attribution rows are retrievable as bounded catalogue
   snippets with non-CVE embedding records.
+- Deployed-agent on-demand context retrieval: covered by
+  `scripts/agent-search-context-proof.py`, which proves an autonomous agent can
+  call `search_context`, retrieve shared parsed-result catalogue facts, and feed
+  those facts back into the next model request.
 - Settings model warning, engine live cache status, and cache topology
   screenshots are captured under `docs/visual-proofs/checkpoint-73`.
 - Chat token metrics, active tool header, approval card, running tool card,
