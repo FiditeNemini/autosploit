@@ -543,6 +543,14 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index audit open gap ids mismatch: {coverage_index}")
     if app_state_group.get("auditGapContracts") != audit_ledger.get("gapContracts"):
         raise AssertionError(f"/qa/coverage-index audit gap contracts mismatch: {coverage_index}")
+    if app_state_group.get("auditProofCount") != audit_ledger.get("proofCount"):
+        raise AssertionError(f"/qa/coverage-index audit proof count mismatch: {coverage_index}")
+    if app_state_group.get("auditProofLedgerCategoryCounts") != audit_ledger.get("proofLedgerCategoryCounts"):
+        raise AssertionError(f"/qa/coverage-index audit source proof category counts mismatch: {coverage_index}")
+    if app_state_group.get("auditProofLedgerCategorySurfaces") != audit_ledger.get("proofLedgerCategorySurfaces"):
+        raise AssertionError(f"/qa/coverage-index audit source proof category surfaces mismatch: {coverage_index}")
+    if app_state_group.get("auditProofLedgerCategorySurfaceCount") != audit_ledger.get("proofLedgerCategorySurfaceCount"):
+        raise AssertionError(f"/qa/coverage-index audit source proof category surface count mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerVisualManifests") != artifact_ledger.get("visualManifests"):
         raise AssertionError(f"/qa/coverage-index artifact visual manifest list mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerVisualCaptureCount") != artifact_ledger.get("visualCaptureCount"):

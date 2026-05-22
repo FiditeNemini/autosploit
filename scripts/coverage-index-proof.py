@@ -341,6 +341,14 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state audit open gap ids mismatch: {app_state_group}")
     if app_state_group.get("auditGapContracts") != audit.get("gapContracts"):
         raise AssertionError(f"coverage index app state audit gap contracts mismatch: {app_state_group}")
+    if app_state_group.get("auditProofCount") != audit.get("proofCount"):
+        raise AssertionError(f"coverage index app state audit proof count mismatch: {app_state_group}")
+    if app_state_group.get("auditProofLedgerCategoryCounts") != audit.get("proofLedgerCategoryCounts"):
+        raise AssertionError(f"coverage index app state audit source proof category counts mismatch: {app_state_group}")
+    if app_state_group.get("auditProofLedgerCategorySurfaces") != audit.get("proofLedgerCategorySurfaces"):
+        raise AssertionError(f"coverage index app state audit source proof category surfaces mismatch: {app_state_group}")
+    if app_state_group.get("auditProofLedgerCategorySurfaceCount") != audit.get("proofLedgerCategorySurfaceCount"):
+        raise AssertionError(f"coverage index app state audit source proof category surface count mismatch: {app_state_group}")
     if app_state_group.get("auditProofCategoryCounts") != audit.get("proofCategoryCounts"):
         raise AssertionError(f"coverage index app state audit proof category counts mismatch: {app_state_group}")
     if app_state_group.get("auditProofCategorySurfaces") != audit.get("proofCategorySurfaces"):
@@ -349,6 +357,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state audit proof surface count mismatch: {app_state_group}")
     if app_state_group.get("auditProofLedgerCategoryOtherCount") != audit.get("proofLedgerCategoryOtherCount"):
         raise AssertionError(f"coverage index app state audit source proof other count mismatch: {app_state_group}")
+    if app_state_group.get("auditProofLedgerCategoryTotalCount") != audit.get("proofLedgerCategoryTotalCount"):
+        raise AssertionError(f"coverage index app state audit source proof total count mismatch: {app_state_group}")
+    if app_state_group.get("auditProofLedgerCategoryParity") != audit.get("proofLedgerCategoryParity"):
+        raise AssertionError(f"coverage index app state audit source proof parity mismatch: {app_state_group}")
     if app_state_group.get("auditProofCategoryTotalCount") != audit.get("proofCategoryTotalCount"):
         raise AssertionError(f"coverage index app state audit proof total count mismatch: {app_state_group}")
     if app_state_group.get("auditProofCategoryParity") != audit.get("proofCategoryParity"):
