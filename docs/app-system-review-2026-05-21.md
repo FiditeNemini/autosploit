@@ -42,6 +42,9 @@ Chat streaming:
   now route through AppState. `/state.chatControlActions` exposes last action,
   reasoning state, inspector visibility, context generation, and summary;
   covered by `scripts/chat-control-actions-proof.py`.
+- Activity Feed copy, filter, and clear actions route through AppState.
+  `/state.activityFeedActions` exposes status, last action, count, summary, and
+  preview/filter label; covered by `scripts/activity-feed-actions-proof.py`.
 - Manual tab switching now routes through AppState instead of only mutating the
   active-tab binding. `/state.tabSwitchActions` exposes from/to tab,
   follow-agent pause state, and summary; covered by

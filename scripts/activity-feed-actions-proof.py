@@ -52,6 +52,23 @@ def assert_action(action: str, expected_count: int, expected_preview: str) -> No
         raise AssertionError(f"activity action preview wrong for {action}: {activity}")
 
 
+def assert_filter(filter_name: str, expected_count: int) -> None:
+    response = request("POST", "/qa/activity-action", f"filter:{filter_name}")
+    if response.get("ok") is not True:
+        raise AssertionError(f"activity filter failed for {filter_name}: {response}")
+
+    state = request("GET", "/state")
+    activity = state.get("activityFeedActions") or {}
+    if activity.get("lastAction") != "filter" or activity.get("status") != "done":
+        raise AssertionError(f"activity filter state missing: {activity}")
+    if activity.get("summary") != f"filter activity {filter_name}":
+        raise AssertionError(f"activity filter summary wrong: {activity}")
+    if activity.get("count") != expected_count:
+        raise AssertionError(f"activity filter count wrong: {activity}")
+    if activity.get("clipboardPreview") != filter_name:
+        raise AssertionError(f"activity filter preview wrong: {activity}")
+
+
 def run() -> None:
     env = os.environ.copy()
     env["EXPLOITBOT_TESTING"] = "1"
@@ -69,7 +86,10 @@ def run() -> None:
 
         assert_action("copyEntry", 1, "Running nmap")
         assert_action("copyEntryTimestamp", 1, "Running nmap")
-        assert_action("copyVisible", 3, "Finding created")
+        assert_filter("Errors", 1)
+        assert_filter("Tools", 1)
+        assert_filter("All", 5)
+        assert_action("copyVisible", 6, "Finding created")
         assert_action("clear", 0, "")
 
         state = request("GET", "/state")

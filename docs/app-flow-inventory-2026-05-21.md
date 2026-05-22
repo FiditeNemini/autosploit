@@ -638,7 +638,7 @@ Required future proof gates:
   `docs/visual-proofs/checkpoint-71`.
 - Chat transcript copy, assistant-message copy, message stash, and
   latest-assistant stash are covered by `scripts/chat-actions-proof.py`.
-- Activity Feed header copy, row copy, row copy-with-timestamp,
+- Activity Feed header copy, row copy, row copy-with-timestamp, filter changes,
   copy-visible, and clear actions now route through AppState and expose
   `/state.activityFeedActions` with last action, status, count, summary, and
   clipboard preview. Covered by `scripts/activity-feed-actions-proof.py`.
