@@ -474,12 +474,28 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index incomplete checkpoint list mismatch: {coverage_index}")
     if app_state_group.get("auditLedgerCount", 0) < 300:
         raise AssertionError(f"/qa/coverage-index audit ledger count mismatch: {coverage_index}")
+    if app_state_group.get("auditVisualManifestCount") != audit_ledger.get("visualManifestCount"):
+        raise AssertionError(f"/qa/coverage-index audit visual manifest count mismatch: {coverage_index}")
+    if app_state_group.get("auditVisualCaptureCount") != audit_ledger.get("visualCaptureCount"):
+        raise AssertionError(f"/qa/coverage-index audit visual capture count mismatch: {coverage_index}")
+    if app_state_group.get("auditMissingVisualCaptureCount") != audit_ledger.get("missingVisualCaptureCount"):
+        raise AssertionError(f"/qa/coverage-index audit missing visual capture count mismatch: {coverage_index}")
+    if app_state_group.get("auditLiveProofCount") != audit_ledger.get("liveProofCount"):
+        raise AssertionError(f"/qa/coverage-index audit live proof count mismatch: {coverage_index}")
     if app_state_group.get("auditLiveProofOkCount") != audit_ledger.get("liveProofOkCount"):
         raise AssertionError(f"/qa/coverage-index audit live proof ok count mismatch: {coverage_index}")
     if app_state_group.get("auditFailedLiveProofCount") != audit_ledger.get("failedLiveProofCount"):
         raise AssertionError(f"/qa/coverage-index audit failed live proof count mismatch: {coverage_index}")
     if app_state_group.get("auditFailedLiveProofs") != audit_ledger.get("failedLiveProofs"):
         raise AssertionError(f"/qa/coverage-index audit failed live proof list mismatch: {coverage_index}")
+    if app_state_group.get("auditCheckpointCount") != audit_ledger.get("checkpointCount"):
+        raise AssertionError(f"/qa/coverage-index audit checkpoint count mismatch: {coverage_index}")
+    if app_state_group.get("auditCompleteCheckpointCount") != audit_ledger.get("completeCheckpointCount"):
+        raise AssertionError(f"/qa/coverage-index audit complete checkpoint count mismatch: {coverage_index}")
+    if app_state_group.get("auditIncompleteCheckpointCount") != audit_ledger.get("incompleteCheckpointCount"):
+        raise AssertionError(f"/qa/coverage-index audit incomplete checkpoint count mismatch: {coverage_index}")
+    if app_state_group.get("auditCurrentGapCount") != audit_ledger.get("currentGapCount"):
+        raise AssertionError(f"/qa/coverage-index audit current gap count mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerVisualManifests") != artifact_ledger.get("visualManifests"):
         raise AssertionError(f"/qa/coverage-index artifact visual manifest list mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerVisualCaptureStatus") != artifact_ledger.get("visualCaptureStatus"):

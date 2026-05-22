@@ -265,12 +265,28 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state latest checkpoint number mismatch: {app_state_group}")
     if app_state_group.get("auditLedgerCount", 0) < 300:
         raise AssertionError(f"coverage index app state audit ledger count mismatch: {app_state_group}")
+    if app_state_group.get("auditVisualManifestCount") != audit.get("visualManifestCount"):
+        raise AssertionError(f"coverage index app state audit visual manifest count mismatch: {app_state_group}")
+    if app_state_group.get("auditVisualCaptureCount") != audit.get("visualCaptureCount"):
+        raise AssertionError(f"coverage index app state audit visual capture count mismatch: {app_state_group}")
+    if app_state_group.get("auditMissingVisualCaptureCount") != audit.get("missingVisualCaptureCount"):
+        raise AssertionError(f"coverage index app state audit missing visual capture count mismatch: {app_state_group}")
+    if app_state_group.get("auditLiveProofCount") != audit.get("liveProofCount"):
+        raise AssertionError(f"coverage index app state audit live proof count mismatch: {app_state_group}")
     if app_state_group.get("auditLiveProofOkCount") != audit.get("liveProofOkCount"):
         raise AssertionError(f"coverage index app state audit live proof ok count mismatch: {app_state_group}")
     if app_state_group.get("auditFailedLiveProofCount") != audit.get("failedLiveProofCount"):
         raise AssertionError(f"coverage index app state audit failed live proof count mismatch: {app_state_group}")
     if app_state_group.get("auditFailedLiveProofs") != audit.get("failedLiveProofs"):
         raise AssertionError(f"coverage index app state audit failed live proof list mismatch: {app_state_group}")
+    if app_state_group.get("auditCheckpointCount") != audit.get("checkpointCount"):
+        raise AssertionError(f"coverage index app state audit checkpoint count mismatch: {app_state_group}")
+    if app_state_group.get("auditCompleteCheckpointCount") != audit.get("completeCheckpointCount"):
+        raise AssertionError(f"coverage index app state audit complete checkpoint count mismatch: {app_state_group}")
+    if app_state_group.get("auditIncompleteCheckpointCount") != audit.get("incompleteCheckpointCount"):
+        raise AssertionError(f"coverage index app state audit incomplete checkpoint count mismatch: {app_state_group}")
+    if app_state_group.get("auditCurrentGapCount") != audit.get("currentGapCount"):
+        raise AssertionError(f"coverage index app state audit current gap count mismatch: {app_state_group}")
     if app_state_group.get("auditProofCategoryCounts") != audit.get("proofCategoryCounts"):
         raise AssertionError(f"coverage index app state audit proof category counts mismatch: {app_state_group}")
     if app_state_group.get("auditProofCategorySurfaces") != audit.get("proofCategorySurfaces"):
