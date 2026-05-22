@@ -107,6 +107,7 @@ def assert_testserver_smoke() -> None:
     artifact_ledger = request("GET", "/qa/artifact-ledger")
     checkpoint_ledger = request("GET", "/qa/checkpoint-ledger")
     audit_ledger = request("GET", "/qa/audit-ledger")
+    gap_ledger = request("GET", "/qa/gap-ledger")
 
     required_state_keys = {
         "activeTab",
@@ -169,6 +170,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing checkpoint-ledger route contract: {qa}")
     if "/qa/audit-ledger" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing audit-ledger route contract: {qa}")
+    if "/qa/gap-ledger" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing gap-ledger route contract: {qa}")
     if subtab_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/subtab-coverage failed: {subtab_coverage}")
     if sorted((subtab_coverage.get("tabs") or {}).keys()) != expected_subtab_tabs:
@@ -257,6 +260,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index checkpoint ledger count mismatch: {coverage_index}")
     if app_state_group.get("auditLedgerCount", 0) < 300:
         raise AssertionError(f"/qa/coverage-index audit ledger count mismatch: {coverage_index}")
+    if app_state_group.get("currentGapCount", -1) != 1:
+        raise AssertionError(f"/qa/coverage-index current gap count mismatch: {coverage_index}")
     if ((index_groups.get("tabsAndSessions") or {}).get("actionStateKeyCount", 0)) < 26:
         raise AssertionError(f"/qa/coverage-index action state key count mismatch: {coverage_index}")
     if proof_ledger.get("ok") is not True or proof_ledger.get("proofCount", 0) < 120:
@@ -281,6 +286,14 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/audit-ledger checkpoint count mismatch: {audit_ledger}")
     if audit_ledger.get("totalLedgerItemCount", 0) < 300:
         raise AssertionError(f"/qa/audit-ledger total count mismatch: {audit_ledger}")
+    if gap_ledger.get("ok") is not True:
+        raise AssertionError(f"/qa/gap-ledger failed: {gap_ledger}")
+    if gap_ledger.get("currentGapCount") != 1:
+        raise AssertionError(f"/qa/gap-ledger current gap count mismatch: {gap_ledger}")
+    if set(gap_ledger.get("supportedFamilies") or []) != {"qwen", "minimax"}:
+        raise AssertionError(f"/qa/gap-ledger supported families mismatch: {gap_ledger}")
+    if gap_ledger.get("unsupportedMultimodalBlocked") is not True:
+        raise AssertionError(f"/qa/gap-ledger Qwen VL block mismatch: {gap_ledger}")
 
 
 def run() -> None:
