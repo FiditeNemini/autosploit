@@ -125,12 +125,18 @@ Storage:
 
 Tool API:
 
-- `ToolDefinitions.forModel()` exposes 34 tools plus `run_shell`.
+- `ToolDefinitions.forModel()` exposes 38 prompt-ranked tool schemas, with
+  built-in callbacks always visible and external tools selected by prompt/tab
+  relevance.
 - `ToolDefinitions.buildCliArgs(...)` maps parsed model tool calls to CLI
   binaries/arguments.
 - Built-ins `search_context`, `search_cve`, and `lookup_cve` route to app
   callbacks instead of subprocesses.
 - External tools route through `ToolExecutor.execute(...)`.
+- Full registry coverage is exposed through `/qa/tool-coverage` and covered by
+  `scripts/tool-registry-coverage-proof.py`: every model-visible tool has an
+  execution type, tab ownership unless intentionally global, CLI routing sample,
+  and structured-vs-raw result mode.
 
 Result fanout:
 
@@ -321,6 +327,7 @@ Automated no-model gates:
 - Engine pytest.
 - Static scans for removed zombie profile code and required context hooks.
 - TestServer `/state`, `/messages`, `/results` smoke.
+- Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Context catalogue seeded-state smoke.
 - Context catalogue source inclusion/exclusion and active-op stash scoping via
   `scripts/context-catalog-proof.py`.

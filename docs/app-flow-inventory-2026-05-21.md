@@ -89,6 +89,10 @@ which always keeps the built-in retrieval/CVE/shell callbacks visible and then
 adds only the highest-ranked installed tools for the current lane, capped at 12
 schemas by default. The old profile-dependent tool reduction is removed; tool
 visibility is now prompt/tab based rather than small/medium/large model based.
+The exposed registry is auditable through `/qa/tool-coverage`: each tool reports
+callback-vs-subprocess execution, sample CLI routing, tab ownership, global
+visibility, and structured-vs-raw result mode so tool-loop coverage can be
+checked without relying on a live model to enumerate the catalogue.
 
 ## Context And Catalog State
 
@@ -344,6 +348,7 @@ Current repeatable gates:
 - `python3 scripts/context-catalog-proof.py`
 - `python3 scripts/catalog-embedding-audit-proof.py`
 - `python3 scripts/tool-catalog-proof.py`
+- `python3 scripts/tool-registry-coverage-proof.py`
 - `python3 scripts/semantic-cve-proof.py`
 - `python3 scripts/settings-apply-proof.py`
 - `python3 scripts/agent-autopilot-proof.py`
@@ -434,6 +439,10 @@ Required future proof gates:
 - Per-assistant-turn request context/tool-schema audit persistence: covered by
   `scripts/request-audit-proof.py`, which verifies bounded context and selected
   tool schemas are attached to the assistant turn and survive app relaunch.
+- Full tool registry execution/result coverage: covered by
+  `scripts/tool-registry-coverage-proof.py`, which verifies all 38 exposed
+  schemas have declared execution mode, bounded catalogue policy, tab coverage,
+  sample CLI routing, and result parser mode.
 - Settings model warning, engine live cache status, and cache topology
   screenshots are captured under `docs/visual-proofs/checkpoint-73`.
 - Chat token metrics, active tool header, approval card, running tool card,
