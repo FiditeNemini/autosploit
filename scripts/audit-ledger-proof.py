@@ -55,6 +55,9 @@ def assert_audit_ledger() -> None:
     }
     if audit.get("proofCategoryCounts") != expected_proof_categories:
         raise AssertionError(f"audit proof category counts mismatch: {audit}")
+    core_proof_categories = {"agent", "chat", "context", "runtime", "settings", "tabs", "tools", "visual"}
+    if audit.get("proofCategorySurfaceCount") != len(core_proof_categories):
+        raise AssertionError(f"audit proof category surface count mismatch: {audit}")
     if audit.get("proofCategoryTotalCount") != proof.get("proofCount"):
         raise AssertionError(f"audit proof category total mismatch: {audit}")
     if audit.get("proofCategoryParity") is not True:
