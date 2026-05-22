@@ -211,6 +211,20 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/tool-flow-coverage tab activity status parity mismatch: {tool_flow_coverage}")
     if tool_flow_coverage.get("tabActivityIndicatorContract") != "status-dot-running-ring":
         raise AssertionError(f"/qa/tool-flow-coverage tab activity indicator contract mismatch: {tool_flow_coverage}")
+    expected_tool_visual_surfaces = [
+        "chatToolCard",
+        "activityFeedStatus",
+        "tabStatusIndicator",
+        "parsedResultRow",
+        "contextCatalogHit",
+        "toolOutputExpansion",
+    ]
+    if tool_flow_coverage.get("toolVisualSurfaces") != expected_tool_visual_surfaces:
+        raise AssertionError(f"/qa/tool-flow-coverage visual surfaces mismatch: {tool_flow_coverage}")
+    if tool_flow_coverage.get("toolVisualSurfaceCount") != len(expected_tool_visual_surfaces):
+        raise AssertionError(f"/qa/tool-flow-coverage visual surface count mismatch: {tool_flow_coverage}")
+    if tool_flow_coverage.get("toolVisualSurfaceParity") is not True:
+        raise AssertionError(f"/qa/tool-flow-coverage visual surface parity mismatch: {tool_flow_coverage}")
     if "messages.toolCards" not in (tool_flow_coverage.get("stateKeys") or []):
         raise AssertionError(f"/qa/tool-flow-coverage state key mismatch: {tool_flow_coverage}")
     if runtime_coverage.get("ok") is not True:

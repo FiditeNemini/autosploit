@@ -39,6 +39,14 @@ EXPECTED_STATE_KEYS = {
     "contextCatalog",
     "results",
 }
+EXPECTED_VISUAL_SURFACES = [
+    "chatToolCard",
+    "activityFeedStatus",
+    "tabStatusIndicator",
+    "parsedResultRow",
+    "contextCatalogHit",
+    "toolOutputExpansion",
+]
 
 
 def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
@@ -114,6 +122,12 @@ def run() -> None:
             raise AssertionError(f"tool flow tab activity status parity mismatch: {coverage}")
         if coverage.get("tabActivityIndicatorContract") != "status-dot-running-ring":
             raise AssertionError(f"tool flow tab activity indicator contract mismatch: {coverage}")
+        if coverage.get("toolVisualSurfaces") != EXPECTED_VISUAL_SURFACES:
+            raise AssertionError(f"tool flow visual surfaces mismatch: {coverage}")
+        if coverage.get("toolVisualSurfaceCount") != len(EXPECTED_VISUAL_SURFACES):
+            raise AssertionError(f"tool flow visual surface count mismatch: {coverage}")
+        if coverage.get("toolVisualSurfaceParity") is not True:
+            raise AssertionError(f"tool flow visual surface parity mismatch: {coverage}")
         state_keys = set(coverage.get("stateKeys") or [])
         missing_state_keys = sorted(EXPECTED_STATE_KEYS.difference(state_keys))
         if missing_state_keys:

@@ -158,7 +158,10 @@ main session.
   behind those proofs, and `/qa/tool-flow-coverage.tabActivityStatuses` names
   the visible tab indicator states (`running`, `done`, `failed`, `canceled`)
   plus a status count, parity flag, and `status-dot-running-ring` indicator
-  contract.
+  contract. It also exposes `toolVisualSurfaces`, `toolVisualSurfaceCount`, and
+  `toolVisualSurfaceParity` for chat tool cards, activity-feed status, tab
+  status indicators, parsed result rows, context-catalog hits, and expandable
+  tool output.
 
 The full tool catalog is no longer force-sent to the engine. `ChatService`
 passes the latest user prompt plus active tab into `ToolDefinitions.forModel`,
@@ -176,7 +179,10 @@ returns a standard `ok` aggregate status.
 `toolSchemaPolicy=prompt-tab-ranked-installed-cap`, so the aggregate proves
 prompt/tab-ranked schema selection is capped and not a full catalogue dump. It
 also exposes structured/raw result-mode counts and parity from the registry, so
-parser breadth and raw-only preservation are visible from the same aggregate.
+parser breadth and raw-only preservation are visible from the same aggregate. It
+also names the visible surfaces that prove a model tool action is shown in the
+chat, Activity Feed, active tab, parsed results, context catalogue, and
+tool-output expander.
 
 ## Context And Catalog State
 
@@ -763,8 +769,9 @@ Current repeatable gates:
   visual manifest count, and actual screenshot capture count. The tools/parsers
   group exposes registry tool count, callback count, representative family
   fanout count, state-key count, dynamic tool-schema cap/policy/route,
-  structured/raw result-mode counts, visible tab activity statuses, and the tab
-  activity status parity/indicator contract.
+  structured/raw result-mode counts, visible tab activity statuses, the tab
+  activity status parity/indicator contract, and the model-tool visual surface
+  list/count/parity mirrored from `/qa/tool-flow-coverage`.
   The tabs/sessions group exposes
   interaction-mode count, covered tab count, session state-key count, and
   action-state-key count, and now mirrors the visible tab activity status
