@@ -530,7 +530,8 @@ Automated no-model gates:
   scroll lock, Settings, context inspector, request-audit badges, tab activity,
   subtab lifecycle strips, OSINT screenshots, reports, stash retrieval,
   unsupported models, post attribution, tool action panels, live cache stats,
-  and CVE/tool settings pages.
+  CVE/tool settings pages, visual manifests, capture-count minimums, and
+  proof-count metadata.
   `/qa/session-coverage` exposes cross-app session workflow proof coverage for
   onboarding/mode selection, Sidebar operations, overlays, model-folder pickers,
   persistence/relaunch, saved messages, result rebuild, finding wizard submit,

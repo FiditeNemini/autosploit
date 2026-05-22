@@ -140,6 +140,8 @@ def assert_visual_coverage() -> None:
     missing_files = sorted(name for name in REQUIRED_PROOFS if not (ROOT / "scripts" / name).is_file())
     if missing_files:
         raise AssertionError(f"visual coverage names non-existent proof files: {missing_files}")
+    if coverage.get("proofCount", 0) < len(REQUIRED_PROOFS):
+        raise AssertionError(f"visual coverage proof count mismatch: {coverage}")
 
     manifests = set(coverage.get("manifests") or [])
     missing_manifests = sorted(REQUIRED_MANIFESTS.difference(manifests))
