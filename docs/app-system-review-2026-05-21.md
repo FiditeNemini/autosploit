@@ -407,6 +407,8 @@ Stash:
 
 - Buttons: filters, search, add, copy, send to chat, delete.
 - Chat path: send-to-chat injects bounded stash content into the active chat.
+  It routes through AppState chat-control send telemetry; covered by
+  `scripts/stash-send-chat-control-proof.py`.
 - State: persisted stash rows, query-scored context catalogue source, and
   `/state.stashActions` for Add/Copy All/Copy/Send/Delete labels, item rows,
   clipboard preview, last action, and last item/deleted IDs.

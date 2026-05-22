@@ -44,7 +44,8 @@ through AppState and expose `/state.windowOverlayActions`; covered by
 `scripts/window-overlay-actions-proof.py`.
 
 Every actionable tool-tab button currently flows through
-`ContentView.sendToChat(_:)`, which calls `state.displayChatService.send(...)`.
+`ContentView.sendToChat(_:)`, which calls `state.sendChatMessage(...)` so the
+send is visible in `/state.chatControlActions`.
 In multi-agent mode, `displayChatService`, `displayResultsStore`, and
 `displayActivityFeed` point at the selected agent; otherwise they point at the
 main session.
@@ -366,7 +367,8 @@ Stash:
   path instead of direct clipboard calls; covered by
   `scripts/stash-row-context-actions-proof.py`.
 - Can send a bounded item into chat context through the same 5 KB truncation
-  path used by the Stash tab.
+  path used by the Stash tab. Stash send-to-chat routes through AppState chat
+  control telemetry; covered by `scripts/stash-send-chat-control-proof.py`.
 - Query-scored retrieval now feeds the dynamic context catalogue without forcing
   all stash items into each prompt. Active-op and global stash are eligible,
   inactive-op stash is excluded, and label/tag/content/source-tab matches affect
