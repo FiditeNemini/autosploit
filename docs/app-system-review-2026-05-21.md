@@ -700,7 +700,7 @@ Automated no-model gates:
   count, session state-key count, subtab tab maps and proof count,
   session workflow surface list/count/parity,
   session workflow surface proof map/count/parity,
-  tab action surface list/count/parity, tab action surface proof count/parity,
+  tab action surface list/count/parity, tab action surface proof map/count/parity,
   action-state-key count, agent-loop
   state-key count, agent-loop visual state keys, agent-loop phase-proof
   map/count/parity, and tab activity status proof count/parity. Chat/context

@@ -814,7 +814,7 @@ Current repeatable gates:
   action-state-key count, mirrors subtab tab maps and proof count,
   mirrors session workflow surface list/count/parity,
   session workflow surface proof map/count/parity,
-  mirrors tab action surface list/count/parity and proof count/parity, mirrors
+  mirrors tab action surface list/count/parity and proof map/count/parity, mirrors
   agent-loop phase list/count/parity and phase-proof map/count/parity,
   and now mirrors the visible tab activity status list/count/parity plus
   indicator contract and status proof count/parity because the tab bar is owned by the
