@@ -443,7 +443,7 @@ Stash:
   parser/generation autodetect, `prefix-cache-l2-turboquant` cache policy,
   app-only apply without engine restart, engine Start/Stop action state,
   context controls, cache topology, agent controls, CVE/tool/inference-log
-  actions, and visual Settings proof gates.
+  actions, visual Settings proof gates, and proof-count metadata.
 
 Model:
 

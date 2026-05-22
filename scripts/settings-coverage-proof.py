@@ -128,6 +128,8 @@ def assert_settings_coverage() -> None:
     missing_proofs = sorted(REQUIRED_PROOFS.difference(proofs))
     if missing_proofs:
         raise AssertionError(f"settings coverage missing proofs {missing_proofs}: {coverage}")
+    if coverage.get("proofCount", 0) < len(REQUIRED_PROOFS):
+        raise AssertionError(f"settings coverage proof count mismatch: {coverage}")
     missing_files = sorted(name for name in REQUIRED_PROOFS if not (ROOT / "scripts" / name).is_file())
     if missing_files:
         raise AssertionError(f"settings coverage names non-existent proof files: {missing_files}")

@@ -492,7 +492,8 @@ Settings:
 - `/qa/settings-coverage` aggregates Settings category structure, supported
   model-family warnings, parser/generation autodetect, cache-response method,
   app-only apply, engine Start/Stop actions, context/cache/agent controls,
-  CVE/tool/log action coverage, and visual Settings proof scripts.
+  CVE/tool/log action coverage, visual Settings proof scripts, and proof-count
+  metadata.
 - App-only settings can now be applied without restarting the engine; model,
   cache, and engine runtime changes still use Apply & Restart Engine.
 - App-only apply is covered by `scripts/settings-apply-proof.py`.
