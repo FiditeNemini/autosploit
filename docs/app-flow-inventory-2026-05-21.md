@@ -794,8 +794,10 @@ Current repeatable gates:
   `auditProofLedgerCategoryOtherCount`, and the broad app QA matrix cross-checks
   both source and audit `other` proof counts through `/qa/coverage-index`. It also carries
   `/qa/gap-ledger.openGapIds`, `gapContracts`, and a
-  `gapContractCount`, so the top-level QA summary names the remaining gap and
-  preserves the structured contract map. `/qa/gap-ledger` reads the
+  `gapContractCount`, plus gap source/path flags, current-gap list, next-gap
+  text, supported-family list, and unsupported-multimodal block flag, so the
+  top-level QA summary names the remaining gap and preserves both the
+  source-derived warning boundary and the structured contract map. `/qa/gap-ledger` reads the
   current-gap section from `docs/app-system-review-2026-05-21.md` and exposes
   the currently documented gap, the Qwen/MiniMax support boundary, the Qwen VL
   block state, `openGapIds`, and the `qwenMultimodalRuntime` contract with

@@ -520,6 +520,20 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index missing visual capture list mismatch: {coverage_index}")
     if app_state_group.get("currentGapCount", -1) != 1:
         raise AssertionError(f"/qa/coverage-index current gap count mismatch: {coverage_index}")
+    if app_state_group.get("gapSource") != gap_ledger.get("source"):
+        raise AssertionError(f"/qa/coverage-index gap source mismatch: {coverage_index}")
+    if app_state_group.get("gapSourceDerived") != gap_ledger.get("sourceDerived"):
+        raise AssertionError(f"/qa/coverage-index gap source-derived flag mismatch: {coverage_index}")
+    if app_state_group.get("gapSourcePathExists") != gap_ledger.get("sourcePathExists"):
+        raise AssertionError(f"/qa/coverage-index gap source path flag mismatch: {coverage_index}")
+    if app_state_group.get("currentGaps") != gap_ledger.get("currentGaps"):
+        raise AssertionError(f"/qa/coverage-index current gap list mismatch: {coverage_index}")
+    if app_state_group.get("nextGap") != gap_ledger.get("nextGap"):
+        raise AssertionError(f"/qa/coverage-index next gap mismatch: {coverage_index}")
+    if app_state_group.get("gapSupportedFamilies") != gap_ledger.get("supportedFamilies"):
+        raise AssertionError(f"/qa/coverage-index gap supported families mismatch: {coverage_index}")
+    if app_state_group.get("unsupportedMultimodalBlocked") != gap_ledger.get("unsupportedMultimodalBlocked"):
+        raise AssertionError(f"/qa/coverage-index unsupported multimodal block mismatch: {coverage_index}")
     if app_state_group.get("gapContracts") != gap_ledger.get("gapContracts"):
         raise AssertionError(f"/qa/coverage-index gap contract map mismatch: {coverage_index}")
     runtime_group = index_groups.get("runtimeAndCache") or {}

@@ -313,6 +313,20 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state audit proof parity mismatch: {app_state_group}")
     if app_state_group.get("currentGapCount", -1) != 1:
         raise AssertionError(f"coverage index app state current gap count mismatch: {app_state_group}")
+    if app_state_group.get("gapSource") != gap.get("source"):
+        raise AssertionError(f"coverage index app state gap source mismatch: {app_state_group}")
+    if app_state_group.get("gapSourceDerived") != gap.get("sourceDerived"):
+        raise AssertionError(f"coverage index app state gap source-derived flag mismatch: {app_state_group}")
+    if app_state_group.get("gapSourcePathExists") != gap.get("sourcePathExists"):
+        raise AssertionError(f"coverage index app state gap source path flag mismatch: {app_state_group}")
+    if app_state_group.get("currentGaps") != gap.get("currentGaps"):
+        raise AssertionError(f"coverage index app state current gap list mismatch: {app_state_group}")
+    if app_state_group.get("nextGap") != gap.get("nextGap"):
+        raise AssertionError(f"coverage index app state next gap mismatch: {app_state_group}")
+    if app_state_group.get("gapSupportedFamilies") != gap.get("supportedFamilies"):
+        raise AssertionError(f"coverage index app state gap supported families mismatch: {app_state_group}")
+    if app_state_group.get("unsupportedMultimodalBlocked") != gap.get("unsupportedMultimodalBlocked"):
+        raise AssertionError(f"coverage index app state unsupported multimodal block mismatch: {app_state_group}")
     if app_state_group.get("openGapIds") != gap.get("openGapIds"):
         raise AssertionError(f"coverage index app state open gap ids mismatch: {app_state_group}")
     if app_state_group.get("gapContracts") != gap.get("gapContracts"):
