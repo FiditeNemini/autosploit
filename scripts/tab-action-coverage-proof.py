@@ -162,6 +162,39 @@ REQUIRED_ACTION_SURFACES = [
     "stashActions",
 ]
 
+REQUIRED_ACTION_SURFACE_PROOFS = {
+    "reconActions": ["recon-action-status-proof.py", "recon-copy-actions-proof.py"],
+    "webActions": [
+        "web-direct-actions-proof.py",
+        "web-header-copy-proof.py",
+        "web-row-context-actions-proof.py",
+        "web-verify-action-proof.py",
+    ],
+    "networkActions": ["network-protocol-action-proof.py", "network-copy-actions-proof.py"],
+    "credsActions": ["creds-action-results-proof.py", "creds-copy-actions-proof.py"],
+    "exploitActions": ["exploit-action-differentiation-proof.py", "exploit-copy-actions-proof.py"],
+    "postActions": ["post-attribution-proof.py", "post-copy-actions-proof.py"],
+    "osintActions": [
+        "osint-copy-actions-proof.py",
+        "osint-screenshot-artifact-proof.py",
+        "osint-artifact-actions-proof.py",
+    ],
+    "reportActions": [
+        "report-generate-action-proof.py",
+        "report-finding-actions-proof.py",
+        "report-visible-delete-wiring-proof.py",
+        "report-export-proof.py",
+        "report-visible-export-actions-proof.py",
+        "report-agent-action-proof.py",
+    ],
+    "stashActions": [
+        "stash-actions-proof.py",
+        "stash-row-context-actions-proof.py",
+        "stash-add-sheet-proof.py",
+        "stash-send-chat-control-proof.py",
+    ],
+}
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -219,6 +252,16 @@ def assert_tab_action_coverage() -> None:
         raise AssertionError(f"tab action coverage surface count mismatch: {coverage}")
     if coverage.get("tabActionSurfaceParity") is not True:
         raise AssertionError(f"tab action coverage surface parity mismatch: {coverage}")
+    if coverage.get("tabActionSurfaceProofs") != REQUIRED_ACTION_SURFACE_PROOFS:
+        raise AssertionError(f"tab action coverage surface proof map mismatch: {coverage}")
+    if coverage.get("tabActionSurfaceProofCount") != len(REQUIRED_ACTION_SURFACE_PROOFS):
+        raise AssertionError(f"tab action coverage surface proof count mismatch: {coverage}")
+    if coverage.get("tabActionSurfaceProofParity") is not True:
+        raise AssertionError(f"tab action coverage surface proof parity mismatch: {coverage}")
+    for surface, proof_names in REQUIRED_ACTION_SURFACE_PROOFS.items():
+        missing_surface_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
+        if missing_surface_files:
+            raise AssertionError(f"tab action surface {surface} names missing proof files {missing_surface_files}: {coverage}")
     state_keys = set(coverage.get("actionStateKeys") or [])
     missing_state_keys = sorted(REQUIRED_ACTION_STATE_KEYS.difference(state_keys))
     if missing_state_keys:

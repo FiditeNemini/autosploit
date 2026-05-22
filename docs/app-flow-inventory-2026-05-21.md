@@ -287,8 +287,8 @@ Exploit, Post, OSINT, Report, and Stash is summarized through
 copy routes, row context actions, verify/protocol/hash/exploit/post/OSINT
 actions, report generation/finding/export/agent actions, and Stash add/filter/
 copy/send/delete controls with the focused proof scripts for each lane. It also
-advertises tab action surface list/count/parity plus the copy/export/agent and
-OSINT screenshot seed routes used by those
+advertises tab action surface list/count/parity, tab action surface proof
+map/count/parity, plus the copy/export/agent and OSINT screenshot seed routes used by those
 proof fixtures.
 Chat/control coverage is summarized through `/qa/chat-coverage`. The aggregate
 ties together Send/Stop, reasoning enable/collapse, approvals, copy/stash
@@ -586,8 +586,9 @@ CVE Database and Tools:
   `/state.inferenceLogActions`; covered by
   `scripts/inference-log-actions-proof.py`.
 - `/qa/tab-action-coverage` exposes the per-tab action routes, proof scripts,
-  contracts, tab action surface list/count/parity, and `actionStateKeys` for
-  Recon/Web/Network/Creds/Exploit/Post/OSINT/Report/Stash action state surfaces.
+  contracts, tab action surface list/count/parity, tab action surface proof
+  map/count/parity, and `actionStateKeys` for Recon/Web/Network/Creds/Exploit/
+  Post/OSINT/Report/Stash action state surfaces.
 
 ## Test And Proof Requirements
 
@@ -801,7 +802,7 @@ Current repeatable gates:
   interaction-mode count, covered tab count, session state-key count, and
   action-state-key count, mirrors session workflow surface list/count/parity,
   session workflow surface proof count/parity,
-  mirrors tab action surface list/count/parity, mirrors agent-loop phase
+  mirrors tab action surface list/count/parity and proof count/parity, mirrors agent-loop phase
   list/count/parity and phase-proof count/parity,
   and now mirrors the visible tab activity status list/count/parity plus
   indicator contract and status proof count/parity because the tab bar is owned by the

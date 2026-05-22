@@ -399,6 +399,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions tab action surface count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActionSurfaceParity") != tab_action_coverage.get("tabActionSurfaceParity"):
         raise AssertionError(f"coverage index tabs/sessions tab action surface parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActionSurfaceProofCount") != tab_action_coverage.get("tabActionSurfaceProofCount"):
+        raise AssertionError(f"coverage index tabs/sessions tab action surface proof count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActionSurfaceProofParity") != tab_action_coverage.get("tabActionSurfaceProofParity"):
+        raise AssertionError(f"coverage index tabs/sessions tab action surface proof parity mismatch: {tabs_sessions_group}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/coverage-index" not in qa.get("stateRoutes", []):
