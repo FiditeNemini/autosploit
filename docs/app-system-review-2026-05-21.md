@@ -191,10 +191,15 @@ Recon:
 - Chat path: run buttons record a Recon action state, then send the generated
   prompt to chat.
 - State: subdomains, ports, web hosts, crawl URLs from `ResultsStore`, plus
-  `/state.reconAction` for the latest Full Recon/Crawl/Harvest action.
+  `/state.reconAction` for the latest Full Recon/Crawl/Harvest action and
+  `/state.reconCopyActions` for the latest copy operation.
 - Recon action status is covered by `scripts/recon-action-status-proof.py`: a
   seeded Full Recon records target, generated command, running status, and Recon
   tab activity with `lastTool=full_recon`.
+- Recon copy controls are covered by `scripts/recon-copy-actions-proof.py`: the
+  proof seeds subdomains, ports, web hosts, crawl URLs, and OSINT rows, then
+  verifies each copy path records clipboard preview, count, kind, and Recon tab
+  activity with `lastTool=copy_recon`.
 - Visible Full Recon running state is captured under
   `docs/visual-proofs/checkpoint-97`.
 

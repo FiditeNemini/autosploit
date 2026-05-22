@@ -167,6 +167,11 @@ Recon:
   and the active toolbar button. `scripts/recon-action-status-proof.py` verifies
   a seeded Full Recon target, generated command, and running tab activity; the
   visible state is captured under `docs/visual-proofs/checkpoint-97`.
+- Copy controls now route through AppState for Subdomains, Ports, Web Hosts,
+  Crawl, and OSINT. `/state.reconCopyActions` exposes the last kind, copied
+  count, clipboard preview, and summary, with tab activity recorded as
+  `lastTool=copy_recon`; `scripts/recon-copy-actions-proof.py` covers the live
+  seed/copy/state path.
 
 Web:
 
