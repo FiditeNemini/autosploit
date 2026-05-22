@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "captures": [
+    "docs/visual-proofs/checkpoint-101/settings-live-cache-runtime.png"
+  ],
+  "note": "Cropped macOS capture of Settings Engine tab showing real MiniMax live-proof cache metrics parsed from /v1/cache/stats."
+}

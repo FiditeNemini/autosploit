@@ -317,6 +317,7 @@ Current repeatable gates:
 - `python3 scripts/semantic-cve-proof.py`
 - `python3 scripts/settings-apply-proof.py`
 - `python3 scripts/cache-stats-state-proof.py`
+- `python3 scripts/live-cache-stats-ui-proof.py`
 - `python3 scripts/model-folder-warning-proof.py`
 - `python3 scripts/osint-screenshot-artifact-proof.py`
 - `python3 scripts/persistence-proof.py`
@@ -329,6 +330,7 @@ Current repeatable gates:
 - `python3 scripts/visual-network-protocol-proof.py`
 - `python3 scripts/visual-creds-action-proof.py`
 - `python3 scripts/visual-exploit-action-proof.py`
+- `python3 scripts/visual-live-cache-stats-proof.py`
 - `python3 scripts/visual-chat-proof.py`
 - `python3 scripts/visual-chat-interaction-proof.py`
 - `python3 scripts/visual-request-audit-proof.py`
@@ -368,7 +370,10 @@ Required future proof gates:
 - Parsed app-level cache stats visibility: covered by
   `scripts/cache-stats-state-proof.py`, which verifies `/state.engineCacheStats`
   exposes TurboQuant, prompt L2, block L2, SSM companion disk, and cache memory
-  counters from the app parser.
+  counters from the app parser. `scripts/live-cache-stats-ui-proof.py` also
+  verifies the parser against checked-in real Qwen and MiniMax live
+  `/v1/cache/stats` payloads: Qwen covers prefix reuse and SSM companion disk,
+  while MiniMax covers prefix reuse plus prompt L2 and block L2 counters.
 - Quantized block L2 proof: covered by
   `docs/live-proofs/checkpoint-77-block-l2-quantized-proof.json`, which proves
   real MLX safetensors write/read plus full-block disk promotion for
@@ -420,5 +425,7 @@ Required future proof gates:
   `docs/visual-proofs/checkpoint-99`.
 - Exploit search/prepare/execute stage badges are captured under
   `docs/visual-proofs/checkpoint-100`.
+- Real MiniMax live-proof cache metrics parsed into Settings Engine are captured
+  under `docs/visual-proofs/checkpoint-101`.
 - Unsupported model-folder warning and blocked engine states are captured under
   `docs/visual-proofs/checkpoint-93`.

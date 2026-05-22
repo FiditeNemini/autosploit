@@ -419,9 +419,13 @@ Real-model gates:
   `cached_tokens=40` and `scheduler_cache.tokens_saved_delta=40`.
 - Full prompt -> context catalogue -> stream -> tool call -> tab result loop is
   covered with the mock engine; real-model repetition remains open.
-- Prefix/L2/cache metrics visibility is script-checkable after real engine load
-  and still needs real-engine UI screenshot proof. Seeded token metric UI is
-  captured by `scripts/visual-chat-proof.py`.
+- Prefix/L2/cache metrics visibility is script-checkable after real engine load,
+  and the Settings UI now has a real-cache-payload visual proof. `scripts/live-cache-stats-ui-proof.py`
+  replays checked-in Qwen and MiniMax live `/v1/cache/stats` payloads into the
+  app parser: Qwen proves prefix reuse plus SSM companion disk counters, and
+  MiniMax proves prefix reuse plus prompt L2 and block L2 counters. The visual
+  Settings capture is generated from the MiniMax strict live-proof payload by
+  `scripts/visual-live-cache-stats-proof.py`.
 - Full-block block L2 quantized write/read/promotion is covered by
   `scripts/prove-block-l2-cache.py`; a full real-model cross-run block L2 hit
   remains open.
@@ -431,7 +435,9 @@ Real-model gates:
   model-folder generation-default flags.
 - Parsed engine cache runtime counters are exposed through
   `/state.engineCacheStats` and covered by `scripts/cache-stats-state-proof.py`
-  for TurboQuant, prompt L2, block L2, SSM companion disk, and memory counters.
+  plus `scripts/live-cache-stats-ui-proof.py` for TurboQuant, prefix-cache
+  hits/tokens saved, prompt L2, block L2, SSM companion disk, and memory
+  counters.
 - Reasoning/tool parser API shaping is covered by
   `scripts/prove-parser-api.py` and `testsuite/test_tool_parser_api.py`.
 - Settings/message/result-store persistence is covered by
@@ -466,6 +472,8 @@ Visual gates:
   `docs/visual-proofs/checkpoint-99`.
 - Exploit search/prepare/execute stage badges are captured under
   `docs/visual-proofs/checkpoint-100`.
+- Real live-proof cache metrics parsed into the Settings Engine tab are captured
+  under `docs/visual-proofs/checkpoint-101`.
 - OSINT screenshot artifact preview is captured under
   `docs/visual-proofs/checkpoint-90`.
 - Report export status and generated finding state are captured under
@@ -482,7 +490,9 @@ Visual gates:
   `docs/visual-proofs/checkpoint-96`.
 - Recon Full Recon running state is captured under
   `docs/visual-proofs/checkpoint-97`.
-- Remaining visual gap: real-engine cache metrics state.
+- Remaining visual gap: none currently listed here; real live-proof cache
+  metrics UI state is covered by checkpoint-101. Fresh real-model UI attachment
+  can still be rerun when the user wants an expensive full-load screenshot.
 
 ## Current Gaps To Close Next
 
