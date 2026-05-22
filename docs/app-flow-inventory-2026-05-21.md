@@ -45,6 +45,9 @@ activity-feed visibility, and is covered by `scripts/tab-switch-action-proof.py`
 Terminal, settings, and finding-wizard overlay open/close controls route
 through AppState and expose `/state.windowOverlayActions`; covered by
 `scripts/window-overlay-actions-proof.py`.
+Phase dot and Next Phase controls route through AppState and expose
+`/state.phaseActions` with from/to phase, reset tool count, phase guidance, and
+activity-feed visibility; covered by `scripts/phase-action-proof.py`.
 
 Every actionable tool-tab button currently flows through
 `ContentView.sendToChat(_:)`, which calls `state.sendChatMessage(...)` so the

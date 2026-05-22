@@ -46,6 +46,9 @@ Chat streaming:
   active-tab binding. `/state.tabSwitchActions` exposes from/to tab,
   follow-agent pause state, and summary; covered by
   `scripts/tab-switch-action-proof.py`.
+- Phase controls now route through AppState with `/state.phaseActions` exposing
+  from/to phase, reset tool count, active phase guidance, and summary; covered
+  by `scripts/phase-action-proof.py`.
 - Required proof: stream with reasoning on/off, metrics visible after usage,
   manual scroll pause while output streams, relock jump, stop button cancels the
   stream session.
