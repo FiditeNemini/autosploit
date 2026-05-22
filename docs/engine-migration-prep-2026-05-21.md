@@ -473,6 +473,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   chat visual-mode controls. The proof captures locked/paused chat scroll
   states plus expanded/collapsed reasoning states under
   `docs/visual-proofs/checkpoint-72`.
+- Checkpoint 73: Added `scripts/visual-settings-proof.py` and QA Settings
+  visual-state controls. The proof captures unsupported model-folder warning,
+  effective runtime/cache status, and required TurboQuant/prefix/L2 cache
+  controls under `docs/visual-proofs/checkpoint-73`.
 
 ## Known Risk Areas
 

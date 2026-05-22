@@ -258,6 +258,7 @@ Current repeatable gates:
 - `python3 scripts/visual-tab-proof.py`
 - `python3 scripts/visual-chat-proof.py`
 - `python3 scripts/visual-chat-interaction-proof.py`
+- `python3 scripts/visual-settings-proof.py`
 - `git diff --check`
 - Static scans proving no S/M/L profile selectors or `ModelProfile` code remain.
 - Visual QA through the local app run script plus screenshots.
@@ -274,7 +275,8 @@ Required future proof gates:
   present, plus async rederive status.
 - Reasoning parser smoke proving thinking text is separated from visible output.
 - Tool parser smoke proving parsed API `tool_calls`, not raw text only.
-- UI proof screenshots for Settings model warnings and live cache status.
+- Settings model warning, engine live cache status, and cache topology
+  screenshots are captured under `docs/visual-proofs/checkpoint-73`.
 - Chat token metrics, active tool header, approval card, running tool card,
   failed tool card, and streaming reasoning state are captured under
   `docs/visual-proofs/checkpoint-71`.

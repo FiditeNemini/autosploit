@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "captures": [
+    "docs/visual-proofs/checkpoint-73/settings-model-warning.png",
+    "docs/visual-proofs/checkpoint-73/settings-engine-cache-status.png",
+    "docs/visual-proofs/checkpoint-73/settings-cache-topology.png"
+  ],
+  "note": "Cropped macOS captures of Settings model unsupported warning, engine live cache runtime status, and cache topology controls."
+}

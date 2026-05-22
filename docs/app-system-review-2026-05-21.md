@@ -302,7 +302,8 @@ Real-model gates:
 
 Visual gates:
 
-- Settings model and context sections.
+- Settings model warning, engine live cache status, and cache topology sections
+  are captured under `docs/visual-proofs/checkpoint-73`.
 - Chat scroll locked, paused/new-output, and relock-ready states are captured
   under `docs/visual-proofs/checkpoint-72`.
 - Reasoning expanded/streaming and collapsed states are captured under
@@ -316,11 +317,9 @@ Visual gates:
   `docs/visual-proofs/checkpoint-69`.
 - Nested lifecycle strip states are captured under
   `docs/visual-proofs/checkpoint-70`.
-- Remaining visual gaps: Settings model warnings/live cache status and
-  real-engine cache metrics state.
+- Remaining visual gap: real-engine cache metrics state.
 
 ## Current Gaps To Close Next
 
-1. Add visual screenshot coverage for Settings model warnings/live cache status.
-2. Run real Qwen and MiniMax model verification with
+1. Run real Qwen and MiniMax model verification with
    `scripts/verify-live-models.py` and capture the report.
