@@ -303,8 +303,11 @@ Real-model gates:
 Visual gates:
 
 - Settings model and context sections.
-- Chat scroll locked, paused, and relocked states.
-- Reasoning expanded, streaming, collapsed, and manually reopened.
+- Chat scroll locked, paused/new-output, and relock-ready states are captured
+  under `docs/visual-proofs/checkpoint-72`.
+- Reasoning expanded/streaming and collapsed states are captured under
+  `docs/visual-proofs/checkpoint-72`; manually reopened is represented by the
+  expanded forced state.
 - Token metrics bar seeded state is captured under
   `docs/visual-proofs/checkpoint-71`.
 - Tool approval card, running tool card, and failed tool card states are
@@ -313,12 +316,11 @@ Visual gates:
   `docs/visual-proofs/checkpoint-69`.
 - Nested lifecycle strip states are captured under
   `docs/visual-proofs/checkpoint-70`.
-- Remaining visual gaps: Settings model warnings/live cache status, chat scroll
-  paused/relock states, and reasoning collapsed/reopened states.
+- Remaining visual gaps: Settings model warnings/live cache status and
+  real-engine cache metrics state.
 
 ## Current Gaps To Close Next
 
-1. Add visual screenshot coverage for chat scroll paused/relock and reasoning
-   collapsed/reopened states.
+1. Add visual screenshot coverage for Settings model warnings/live cache status.
 2. Run real Qwen and MiniMax model verification with
    `scripts/verify-live-models.py` and capture the report.

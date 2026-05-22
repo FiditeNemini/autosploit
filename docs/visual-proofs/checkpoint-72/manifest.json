@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "captures": [
+    "docs/visual-proofs/checkpoint-72/chat-scroll-locked-reasoning-expanded.png",
+    "docs/visual-proofs/checkpoint-72/chat-scroll-paused-reasoning-expanded.png",
+    "docs/visual-proofs/checkpoint-72/chat-scroll-locked-reasoning-collapsed.png",
+    "docs/visual-proofs/checkpoint-72/chat-scroll-paused-reasoning-collapsed.png"
+  ],
+  "note": "Cropped macOS captures of chat scroll locked/paused and reasoning expanded/collapsed QA states."
+}

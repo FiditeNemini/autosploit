@@ -469,6 +469,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   The proof captures the chat panel with token metrics, running-tool header,
   streaming reasoning block, copilot approval card, running tool card, failed
   tool card, and Stop action under `docs/visual-proofs/checkpoint-71`.
+- Checkpoint 72: Added `scripts/visual-chat-interaction-proof.py` and QA
+  chat visual-mode controls. The proof captures locked/paused chat scroll
+  states plus expanded/collapsed reasoning states under
+  `docs/visual-proofs/checkpoint-72`.
 
 ## Known Risk Areas
 
