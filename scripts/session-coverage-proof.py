@@ -93,6 +93,17 @@ REQUIRED_WORKFLOW_SURFACES = [
     "activityFeedControls",
 ]
 
+REQUIRED_WORKFLOW_SURFACE_PROOFS = {
+    "onboardingModeSelection": ["mode-selection-flow-proof.py", "onboarding-model-picker-proof.py"],
+    "sidebarOperationLifecycle": ["sidebar-actions-proof.py", "sidebar-create-stops-proof.py"],
+    "windowOverlayControls": ["window-overlay-actions-proof.py"],
+    "modelFolderSelection": ["model-folder-picker-proof.py", "onboarding-model-picker-proof.py"],
+    "persistenceAndResultRebuild": ["persistence-proof.py"],
+    "findingWizardSubmit": ["finding-wizard-submit-proof.py"],
+    "tabAndPhaseNavigation": ["tab-switch-action-proof.py", "phase-action-proof.py"],
+    "activityFeedControls": ["activity-feed-actions-proof.py"],
+}
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -152,6 +163,16 @@ def assert_session_coverage() -> None:
         raise AssertionError(f"session coverage workflow surface count mismatch: {coverage}")
     if coverage.get("sessionWorkflowSurfaceParity") is not True:
         raise AssertionError(f"session coverage workflow surface parity mismatch: {coverage}")
+    if coverage.get("sessionWorkflowSurfaceProofs") != REQUIRED_WORKFLOW_SURFACE_PROOFS:
+        raise AssertionError(f"session coverage workflow surface proof map mismatch: {coverage}")
+    if coverage.get("sessionWorkflowSurfaceProofCount") != len(REQUIRED_WORKFLOW_SURFACE_PROOFS):
+        raise AssertionError(f"session coverage workflow surface proof count mismatch: {coverage}")
+    if coverage.get("sessionWorkflowSurfaceProofParity") is not True:
+        raise AssertionError(f"session coverage workflow surface proof parity mismatch: {coverage}")
+    for surface, proof_names in REQUIRED_WORKFLOW_SURFACE_PROOFS.items():
+        missing_surface_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
+        if missing_surface_files:
+            raise AssertionError(f"session workflow surface {surface} names missing proof files {missing_surface_files}: {coverage}")
     if coverage.get("proofCount", 0) < len(REQUIRED_PROOFS):
         raise AssertionError(f"session coverage proof count mismatch: {coverage}")
     state_keys = set(coverage.get("stateKeys") or [])

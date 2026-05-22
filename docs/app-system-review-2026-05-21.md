@@ -70,7 +70,8 @@ Interaction modes:
   model-folder pickers, persistence/relaunch, saved messages, result rebuild,
   finding wizard submit, tab switch actions, phase actions, and Activity Feed
   controls. It also exposes session workflow surface list/count/parity and
-  `stateKeys` for the `/state` surfaces used by those workflow proofs.
+  workflow surface proof map/count/parity plus `stateKeys` for the `/state`
+  surfaces used by those workflow proofs.
 - Autopilot executes model tool calls directly.
 - Copilot shows an approval card before tool execution.
 - Manual converts model tool calls into suggested commands and stops.
@@ -581,8 +582,8 @@ Automated no-model gates:
   persistence/relaunch, saved messages, result rebuild, finding wizard submit,
   tab switching, phase changes, and Activity Feed controls, and lists the
   `/phase`, `/qa/seed-activity-actions`, and `/qa/activity-action` routes with
-  proof-count metadata, session workflow surface list/count/parity, plus
-  `stateKeys`.
+  proof-count metadata, session workflow surface list/count/parity, workflow
+  surface proof map/count/parity, plus `stateKeys`.
   `/qa/tab-action-coverage` exposes per-tab direct action proof coverage for
   copy buttons, row context actions, verify/protocol/hash/exploit/post/OSINT
   actions, report generation/finding/export/agent actions, Stash controls, and
@@ -685,6 +686,7 @@ Automated no-model gates:
   The tabs/sessions group exposes
   interaction-mode count, covered tab
   count, session state-key count, session workflow surface list/count/parity,
+  session workflow surface proof count/parity,
   tab action surface list/count/parity, action-state-key count, agent-loop
   state-key count, agent-loop visual state keys, and tab activity status proof
   count/parity. Chat/context also exposes state-key count.
