@@ -69,6 +69,10 @@ def assert_gap_ledger() -> None:
         raise AssertionError(f"/qa/gap-ledger failed: {ledger}")
     if ledger.get("source") != "docs/app-system-review-2026-05-21.md#current-gaps-to-close-next":
         raise AssertionError(f"gap ledger source mismatch: {ledger}")
+    if ledger.get("sourceDerived") is not True:
+        raise AssertionError(f"gap ledger should be derived from the source document: {ledger}")
+    if ledger.get("sourcePathExists") is not True:
+        raise AssertionError(f"gap ledger source path should exist: {ledger}")
     if ledger.get("currentGapCount") != len(expected_gaps):
         raise AssertionError(f"gap ledger count mismatch expected {len(expected_gaps)}: {ledger}")
     if ledger.get("currentGaps") != expected_gaps:

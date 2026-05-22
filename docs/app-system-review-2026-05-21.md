@@ -584,9 +584,9 @@ Automated no-model gates:
   capture counts, missing/failed artifact counts, and checkpoint completeness
   counts into one machine-readable audit rollup. `scripts/app-qa-matrix-smoke-proof.py`
   now fetches all four ledger routes directly and cross-checks their counts
-  against the coverage-index app-state group. `/qa/gap-ledger` exposes the
-  currently documented gap, the Qwen/MiniMax support boundary, and the Qwen VL
-  block state. The runtime/cache group also exposes `supportedFamilies`,
+  against the coverage-index app-state group. `/qa/gap-ledger` reads this
+  document's current-gap section and exposes the currently documented gap, the
+  Qwen/MiniMax support boundary, and the Qwen VL block state. The runtime/cache group also exposes `supportedFamilies`,
   `cacheResponseMethod`, and `liveProofArtifactCount` for Qwen/MiniMax-only
   support, the `prefix-cache-l2-turboquant` response path, and the checked-in
   Qwen/MiniMax live replay artifact set. The settings/visuals group exposes
