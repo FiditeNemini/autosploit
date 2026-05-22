@@ -233,6 +233,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state artifact visual count mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerVisualManifests") != artifact.get("visualManifests"):
         raise AssertionError(f"coverage index app state artifact visual manifests mismatch: {app_state_group}")
+    if app_state_group.get("artifactLedgerVisualCaptureStatus") != artifact.get("visualCaptureStatus"):
+        raise AssertionError(f"coverage index app state artifact visual capture status mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerLiveProofCount", 0) < 18:
         raise AssertionError(f"coverage index app state artifact live count mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerLiveProofs") != artifact.get("liveProofs"):
@@ -241,6 +243,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state artifact live proof status mismatch: {app_state_group}")
     if app_state_group.get("missingVisualCaptureCount", 1) != 0:
         raise AssertionError(f"coverage index app state missing visual captures: {app_state_group}")
+    if app_state_group.get("missingVisualCaptures") != artifact.get("missingVisualCaptures"):
+        raise AssertionError(f"coverage index app state missing visual capture list mismatch: {app_state_group}")
     if app_state_group.get("checkpointLedgerCount", 0) < 200:
         raise AssertionError(f"coverage index app state checkpoint ledger count mismatch: {app_state_group}")
     if app_state_group.get("completeCheckpointCount") != checkpoint.get("completeCheckpointCount"):
