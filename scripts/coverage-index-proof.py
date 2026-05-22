@@ -147,6 +147,7 @@ def assert_coverage_index() -> None:
     state = request("GET", "/state")
     index = request("GET", "/qa/coverage-index")
     proof = request("GET", "/qa/proof-ledger")
+    artifact = request("GET", "/qa/artifact-ledger")
     checkpoint = request("GET", "/qa/checkpoint-ledger")
     audit = request("GET", "/qa/audit-ledger")
     gap = request("GET", "/qa/gap-ledger")
@@ -230,8 +231,14 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state proof category parity flag mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerVisualManifestCount", 0) < 22:
         raise AssertionError(f"coverage index app state artifact visual count mismatch: {app_state_group}")
+    if app_state_group.get("artifactLedgerVisualManifests") != artifact.get("visualManifests"):
+        raise AssertionError(f"coverage index app state artifact visual manifests mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerLiveProofCount", 0) < 18:
         raise AssertionError(f"coverage index app state artifact live count mismatch: {app_state_group}")
+    if app_state_group.get("artifactLedgerLiveProofs") != artifact.get("liveProofs"):
+        raise AssertionError(f"coverage index app state artifact live proofs mismatch: {app_state_group}")
+    if app_state_group.get("artifactLedgerLiveProofStatus") != artifact.get("liveProofStatus"):
+        raise AssertionError(f"coverage index app state artifact live proof status mismatch: {app_state_group}")
     if app_state_group.get("missingVisualCaptureCount", 1) != 0:
         raise AssertionError(f"coverage index app state missing visual captures: {app_state_group}")
     if app_state_group.get("checkpointLedgerCount", 0) < 200:

@@ -772,6 +772,9 @@ Current repeatable gates:
   from `/qa/checkpoint-ledger`, plus `/qa/checkpoint-ledger.latestCheckpoint`
   and `latestCheckpointNumber`, so the same aggregate identifies the current
   documentation frontier and its completion breakdown. It also carries
+  `/qa/artifact-ledger.visualManifests`, `/qa/artifact-ledger.liveProofs`, and
+  `/qa/artifact-ledger.liveProofStatus`, so the aggregate preserves artifact
+  evidence paths and pass/fail status instead of only artifact counts. It also carries
   `/qa/audit-ledger.proofCategoryCounts`, proof-category surface names/surface
   count, proof-category total count, and proof-category parity, so the top-level
   index proves the audit rollup is exposing named proof-surface breadth and

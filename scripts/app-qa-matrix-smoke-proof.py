@@ -468,6 +468,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index checkpoint ledger count mismatch: {coverage_index}")
     if app_state_group.get("auditLedgerCount", 0) < 300:
         raise AssertionError(f"/qa/coverage-index audit ledger count mismatch: {coverage_index}")
+    if app_state_group.get("artifactLedgerVisualManifests") != artifact_ledger.get("visualManifests"):
+        raise AssertionError(f"/qa/coverage-index artifact visual manifest list mismatch: {coverage_index}")
+    if app_state_group.get("artifactLedgerLiveProofs") != artifact_ledger.get("liveProofs"):
+        raise AssertionError(f"/qa/coverage-index artifact live proof list mismatch: {coverage_index}")
+    if app_state_group.get("artifactLedgerLiveProofStatus") != artifact_ledger.get("liveProofStatus"):
+        raise AssertionError(f"/qa/coverage-index artifact live proof status mismatch: {coverage_index}")
     if app_state_group.get("currentGapCount", -1) != 1:
         raise AssertionError(f"/qa/coverage-index current gap count mismatch: {coverage_index}")
     if app_state_group.get("gapContracts") != gap_ledger.get("gapContracts"):
