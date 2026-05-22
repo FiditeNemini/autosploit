@@ -286,6 +286,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime cache component count mismatch: {runtime_group}")
     if runtime_group.get("cacheComponentParity") != runtime_coverage.get("cacheComponentParity"):
         raise AssertionError(f"coverage index runtime cache component parity mismatch: {runtime_group}")
+    if runtime_group.get("cacheComponentProofs") != runtime_coverage.get("cacheComponentProofs"):
+        raise AssertionError(f"coverage index runtime cache component proof map mismatch: {runtime_group}")
     if runtime_group.get("cacheComponentProofCount") != runtime_coverage.get("cacheComponentProofCount"):
         raise AssertionError(f"coverage index runtime cache component proof count mismatch: {runtime_group}")
     if runtime_group.get("cacheComponentProofParity") != runtime_coverage.get("cacheComponentProofParity"):

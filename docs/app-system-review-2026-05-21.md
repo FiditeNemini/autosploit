@@ -681,7 +681,7 @@ Automated no-model gates:
   runtime/cache group also exposes `supportedFamilies`,
   `cacheResponseMethod`, `cacheResponsesInferenceMethod`,
   `newModelSessionBehavior`, cache component list/count/parity, cache component
-  proof count/parity, and
+  proof map/count/parity, and
   `liveProofArtifactCount` for Qwen/MiniMax-only support, the
   `prefix-cache-l2-turboquant` response path, cache-preserving new-context
   boundary, and the checked-in Qwen/MiniMax

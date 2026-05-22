@@ -470,6 +470,9 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index audit ledger count mismatch: {coverage_index}")
     if app_state_group.get("currentGapCount", -1) != 1:
         raise AssertionError(f"/qa/coverage-index current gap count mismatch: {coverage_index}")
+    runtime_group = index_groups.get("runtimeAndCache") or {}
+    if runtime_group.get("cacheComponentProofs") != runtime_coverage.get("cacheComponentProofs"):
+        raise AssertionError(f"/qa/coverage-index runtime cache component proof map mismatch: {coverage_index}")
     settings_visuals_group = index_groups.get("settingsAndVisuals") or {}
     chat_context_group = index_groups.get("chatAndContext") or {}
     if chat_context_group.get("headerCacheBadgeProofs") != chat_coverage.get("headerCacheBadgeProofs"):
