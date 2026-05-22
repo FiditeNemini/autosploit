@@ -349,6 +349,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state audit source proof category surfaces mismatch: {app_state_group}")
     if app_state_group.get("auditProofLedgerCategorySurfaceCount") != audit.get("proofLedgerCategorySurfaceCount"):
         raise AssertionError(f"coverage index app state audit source proof category surface count mismatch: {app_state_group}")
+    if app_state_group.get("auditProofLedgerCategories") != audit.get("proofLedgerCategories"):
+        raise AssertionError(f"coverage index app state audit source proof category map mismatch: {app_state_group}")
     if app_state_group.get("auditProofCategoryCounts") != audit.get("proofCategoryCounts"):
         raise AssertionError(f"coverage index app state audit proof category counts mismatch: {app_state_group}")
     if app_state_group.get("auditProofCategorySurfaces") != audit.get("proofCategorySurfaces"):

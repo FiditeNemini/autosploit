@@ -61,6 +61,8 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit source proof category total count mismatch: {audit}")
     if audit.get("proofLedgerCategoryParity") != proof.get("categoryParity"):
         raise AssertionError(f"audit source proof category parity mismatch: {audit}")
+    if audit.get("proofLedgerCategories") != proof.get("categories"):
+        raise AssertionError(f"audit source proof category map mismatch: {audit}")
     expected_proof_categories = {
         name: category.get("count")
         for name, category in (proof.get("categories") or {}).items()

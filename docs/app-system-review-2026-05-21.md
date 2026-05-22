@@ -676,11 +676,11 @@ Automated no-model gates:
   artifact evidence paths and pass/fail status instead of only artifact counts.
   It also carries
   `/qa/audit-ledger.proofCount`, source proof-ledger category counts/surfaces/
-  surface-count/other-count/total/parity, normalized proof-category counts,
-  proof-category surface names/surface count, proof-category total count, and
-  proof-category parity, so the top-level index proves the audit rollup is
-  exposing named proof-surface breadth and validated all-category accounting,
-  not just total ledger size. It also carries
+  surface-count/category-map/other-count/total/parity, normalized
+  proof-category counts, proof-category surface names/surface count,
+  proof-category total count, and proof-category parity, so the top-level index
+  proves the audit rollup is exposing named proof-surface breadth and validated
+  all-category accounting, not just total ledger size. It also carries
   `/qa/audit-ledger` artifact, checkpoint, and current-gap rollup counts, so the
   same top-level QA index cross-checks audit totals against source ledger
   domains. It also carries audit missing-capture, complete/incomplete

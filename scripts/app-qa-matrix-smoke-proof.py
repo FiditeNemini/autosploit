@@ -551,6 +551,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index audit source proof category surfaces mismatch: {coverage_index}")
     if app_state_group.get("auditProofLedgerCategorySurfaceCount") != audit_ledger.get("proofLedgerCategorySurfaceCount"):
         raise AssertionError(f"/qa/coverage-index audit source proof category surface count mismatch: {coverage_index}")
+    if app_state_group.get("auditProofLedgerCategories") != audit_ledger.get("proofLedgerCategories"):
+        raise AssertionError(f"/qa/coverage-index audit source proof category map mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerVisualManifests") != artifact_ledger.get("visualManifests"):
         raise AssertionError(f"/qa/coverage-index artifact visual manifest list mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerVisualCaptureCount") != artifact_ledger.get("visualCaptureCount"):
