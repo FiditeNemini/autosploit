@@ -210,6 +210,42 @@ class MockEngineHandler(BaseHTTPRequestHandler):
                     ]
                 },
             ]
+        elif "Run post privesc lifecycle proof" in user_text:
+            events = [
+                {"choices": [{"delta": {"content": "Starting post-exploitation privilege escalation proof."}}]},
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "id": "call_post_privesc",
+                                        "type": "function",
+                                        "function": {"name": "run_shell", "arguments": ""},
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "function": {
+                                            "arguments": "{\"command\":\"printf linpeas-start; sleep 10; printf linpeas-final-marker\"}"
+                                        },
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+            ]
         elif "Run web tab status proof" in user_text:
             events = [
                 {"choices": [{"delta": {"content": "Starting web tool status proof."}}]},
@@ -609,6 +645,26 @@ def run() -> None:
             "exploit listener lifecycle canceled",
         )
         assert "stopped" in exploit_canceled["exploitLifecycle"]["listener"]["summary"], exploit_canceled
+
+        request("POST", "/clear")
+        request("POST", "/mode", "autopilot")
+        request("POST", "/tab", "post")
+        request("POST", "/send", "Run post privesc lifecycle proof")
+        post_running = wait_until(
+            lambda: request("GET", "/state")
+            if request("GET", "/state").get("postLifecycle", {}).get("privesc", {}).get("status") == "running"
+            else None,
+            "post privesc lifecycle running",
+        )
+        assert post_running["postLifecycle"]["privesc"]["tool"] == "run_shell", post_running
+        request("POST", "/stop")
+        post_canceled = wait_until(
+            lambda: request("GET", "/state")
+            if request("GET", "/state").get("postLifecycle", {}).get("privesc", {}).get("status") == "canceled"
+            else None,
+            "post privesc lifecycle canceled",
+        )
+        assert "stopped" in post_canceled["postLifecycle"]["privesc"]["summary"], post_canceled
 
         request("POST", "/clear")
         request("POST", "/mode", "autopilot")

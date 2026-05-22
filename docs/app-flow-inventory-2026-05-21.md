@@ -165,7 +165,11 @@ Post:
 - Covers privilege escalation, impacket/netexec-style post-exploitation, and
   pivot prompts.
 - Buttons route prompts through chat and display raw results.
-- Needs progress tied to host/session context and visible output status.
+- Privilege escalation, AD/impacket, and lateral movement actions expose
+  lifecycle strips for idle/running/done/failed/canceled status and are covered
+  by the live-turn LinPEAS-style cancellation proof.
+- Still needs progress tied to host/session context and screenshot proof for
+  visible output status.
 
 OSINT:
 

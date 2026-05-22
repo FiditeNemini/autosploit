@@ -425,6 +425,11 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   Custom, and C2 subviews, `/state` exposes `exploitLifecycle`, and the
   live-turn harness proves a long-running listener-style command moves to
   running and then canceled through `/stop`.
+- Checkpoint 64: Added Post lifecycle state for privilege escalation,
+  AD/impacket actions, and lateral movement. The Post panel now shows lifecycle
+  strips in PrivEsc, AD Attacks, and Lateral subviews, `/state` exposes
+  `postLifecycle`, and the live-turn harness proves a long-running
+  LinPEAS-style command moves to running and then canceled through `/stop`.
 
 ## Known Risk Areas
 

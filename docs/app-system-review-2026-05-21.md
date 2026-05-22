@@ -166,7 +166,11 @@ Post:
 - Buttons: Run LinPEAS, impacket Run, Pivot.
 - Chat path: sends prompts to chat.
 - State: raw post-exploitation output and network hosts.
-- Missing proof: per-host/session status and output attribution.
+- Privilege escalation, AD/impacket, and lateral movement lifecycle state now
+  tracks idle, running, done, failed, and canceled and is visible in the
+  relevant Post subtab.
+- Missing proof: live UI screenshot coverage and per-host/session output
+  attribution.
 
 OSINT:
 
@@ -226,6 +230,8 @@ Automated no-model gates:
     long-running hashcat-style tool is stopped;
   - proves Exploit listener lifecycle moves to running and then canceled when a
     long-running listener-style tool is stopped;
+  - proves Post privilege-escalation lifecycle moves to running and then
+    canceled when a long-running LinPEAS-style tool is stopped;
   - proves tool callbacks update per-tab activity state that the tab bar can
     render as running/done/failed/canceled indicators;
   - proves model-issued `search_context` returns targeted catalogue facts;
