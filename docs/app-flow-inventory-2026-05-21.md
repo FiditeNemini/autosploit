@@ -298,6 +298,12 @@ Agents:
 
 - Multi-agent mode remains available.
 - Active agents inherit the same model-folder defaults and parser/cache policy.
+- Deployed agents force autopilot mode regardless of the main chat interaction
+  mode, start their task prompt when the engine is running, and keep their own
+  messages, activity feed, result store, context catalogue wiring, and tool-loop
+  counters.
+- Typed agents select the matching active tool lane for prompt-ranked schemas
+  and preserve the type-specific prompt override after phase guidance is set.
 - App-only Settings apply updates agent and loop controls without restarting the
   engine.
 
@@ -340,6 +346,7 @@ Current repeatable gates:
 - `python3 scripts/tool-catalog-proof.py`
 - `python3 scripts/semantic-cve-proof.py`
 - `python3 scripts/settings-apply-proof.py`
+- `python3 scripts/agent-autopilot-proof.py`
 - `python3 scripts/cache-stats-state-proof.py`
 - `python3 scripts/live-cache-stats-ui-proof.py`
 - `python3 scripts/model-folder-warning-proof.py`

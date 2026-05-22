@@ -44,8 +44,15 @@ Interaction modes:
 - Copilot shows an approval card before tool execution.
 - Manual converts model tool calls into suggested commands and stops.
 - Agents always run as autopilot after deployment.
-- Required proof: same mock tool call under all three modes with expected
-  execute/approve/suggest behavior.
+- Main-chat mode proof is covered by `scripts/live-turn-harness.py`: the same
+  mock tool call executes in autopilot, becomes a suggestion in manual mode, and
+  pauses behind an approval card in copilot before execution.
+- Deployed-agent autopilot proof is covered by
+  `scripts/agent-autopilot-proof.py`: a typed Web agent inherits the mock engine
+  connection, model-folder generation-default policy, loop limit, reasoning
+  setting, context catalogue wiring, prompt-ranked tool schemas, and typed
+  prompt override, then autonomously runs a `search_cve` tool loop to
+  completion.
 
 ## Context Flow
 
@@ -375,6 +382,10 @@ Automated no-model gates:
   - proves `search_cve` tool calls execute under autopilot;
   - proves manual mode converts tool calls into suggestions;
   - proves copilot mode pauses for approval and executes after approval.
+  - proves a deployed typed agent runs in forced autopilot, inherits runtime
+    defaults, uses bounded dynamic context/tool schemas, preserves its type
+    prompt override, executes a tool, and completes autonomously through
+    `scripts/agent-autopilot-proof.py`.
 
 Mock-model gates:
 
