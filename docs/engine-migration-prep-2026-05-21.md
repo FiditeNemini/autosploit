@@ -560,6 +560,13 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   proof artifact `docs/live-proofs/checkpoint-102-block-l2-partial-proof.json`
   shows `disk_writes=2`, `disk_hits=2`, and both promoted blocks returning no
   remaining prompt tokens.
+- Checkpoint 103: Added visible hybrid SSM re-derive status. `SSMCompanionCache`
+  now records queued/running/completed/failed status when the scheduler
+  downgrades a KV-only hybrid cache hit due to missing or incomplete companion
+  state and when fallback full-prefill storage refreshes the companion.
+  Scheduler cache stats expose the `rederive` object, and the app parser renders
+  the same counters in Settings Engine. Proof artifact:
+  `docs/live-proofs/checkpoint-103-ssm-rederive-status-proof.json`.
 
 ## Known Risk Areas
 
@@ -569,6 +576,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Full and final-partial block L2 promotion are proven with direct quantized KV
   cache data. Real-model cross-run block-L2 hits still need a long enough live
   run or an explicit restart/replay proof under the actual model path.
+- Hybrid SSM re-derive status is observable, but true background async rederive
+  execution against a loaded Qwen hybrid model still needs real-model proof
+  before production-ready claims.
 - MiniMax public MTP is not available from released weights; do not represent MiniMax MTP as supported unless tensor evidence exists.
 - JANGTQ2 can be quality-limited on some families. The app UI should label it as a memory tier rather than default premium tier.
 

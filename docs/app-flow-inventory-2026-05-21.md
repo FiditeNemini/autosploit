@@ -346,6 +346,7 @@ Current repeatable gates:
 - `python3 scripts/verify-live-models.py --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit --output docs/live-proofs/checkpoint-76-qwen-repeat-cache-live.json`
 - `cd ExploitBotEngine && uv run --extra dev ../scripts/prove-block-l2-cache.py --output ../docs/live-proofs/checkpoint-77-block-l2-quantized-proof.json`
 - `cd ExploitBotEngine && uv run --extra dev ../scripts/prove-block-l2-cache.py --output ../docs/live-proofs/checkpoint-102-block-l2-partial-proof.json`
+- `cd ExploitBotEngine && uv run --extra dev ../scripts/prove-ssm-rederive-status.py --output ../docs/live-proofs/checkpoint-103-ssm-rederive-status-proof.json`
 - `git diff --check`
 - Static scans proving no S/M/L profile selectors or `ModelProfile` code remain.
 - Visual QA through the local app run script plus screenshots.
@@ -372,9 +373,12 @@ Required future proof gates:
   thinking-enabled MiniMax template kwargs, non-empty first/repeat assistant
   content, and repeat cached-token reuse.
 - Qwen hybrid SSM smoke proving KV prefix hits only when companion SSM state is
-  present, plus async rederive status. Current Qwen live proof verifies load,
+  present, plus rederive status. Current Qwen live proof verifies load,
   generation, cache metadata, SSM companion L2 storage, and a repeat paged-cache
-  hit with 20 cached tokens. Async rederive status remains open.
+  hit with 20 cached tokens. Re-derive status is now exposed through
+  `/v1/cache/stats` and `/state.engineCacheStats`; checkpoint-103 proves queued
+  and completed states without loading a model. Real-model async rederive
+  execution remains a separate correctness gate.
 - Parsed app-level cache stats visibility: covered by
   `scripts/cache-stats-state-proof.py`, which verifies `/state.engineCacheStats`
   exposes TurboQuant, prompt L2, block L2, SSM companion disk, and cache memory

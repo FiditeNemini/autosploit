@@ -52,6 +52,8 @@ def assert_cache_stats_state() -> None:
         raise AssertionError(f"missing block L2 counters: {stats}")
     if stats.get("ssmDiskEnabled") is not True or stats.get("ssmDiskEntries") != 64:
         raise AssertionError(f"missing SSM companion disk counters: {stats}")
+    if stats.get("ssmReDeriveState") != "queued" or stats.get("ssmReDeriveQueued") != 2:
+        raise AssertionError(f"missing SSM async rederive status: {stats}")
     if stats.get("memoryCacheMB") != 8192.0:
         raise AssertionError(f"missing cache memory counter: {stats}")
 

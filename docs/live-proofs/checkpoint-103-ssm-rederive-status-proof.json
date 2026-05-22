@@ -1,0 +1,33 @@
+{
+  "ok": true,
+  "queued": {
+    "enabled": true,
+    "state": "queued",
+    "reason": "missing_companion",
+    "queued": 1,
+    "running": 0,
+    "requested": 1,
+    "completed": 0,
+    "failed": 0,
+    "last_request_id": "proof-ssm",
+    "last_num_tokens": 4,
+    "last_key": "2786edccd53a",
+    "last_error": null,
+    "updated_at": 1779439763.825851
+  },
+  "completed": {
+    "enabled": true,
+    "state": "completed",
+    "reason": "missing_companion",
+    "queued": 0,
+    "running": 0,
+    "requested": 1,
+    "completed": 1,
+    "failed": 0,
+    "last_request_id": "proof-ssm",
+    "last_num_tokens": 4,
+    "last_key": "2786edccd53a",
+    "last_error": null,
+    "updated_at": 1779439763.82586
+  }
+}

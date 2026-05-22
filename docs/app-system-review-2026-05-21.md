@@ -418,6 +418,11 @@ Real-model gates:
   direct MLX proof now writes, reopens, and promotes both a full 4-token
   quantized KV block and a 3-token final partial block with `disk_writes=2`,
   `disk_hits=2`, and empty remaining prompts for both.
+- SSM re-derive status proof is captured at
+  `docs/live-proofs/checkpoint-103-ssm-rederive-status-proof.json`. It proves
+  the hybrid SSM companion path records queued and completed rederive states,
+  scheduler cache stats include the `rederive` object, and the Swift app parser
+  exposes the same counters through `/state.engineCacheStats`.
 - Parser API proof is captured at
   `docs/live-proofs/checkpoint-79-parser-api-proof.json`. It proves configured
   Qwen reasoning/tool parsers convert one mixed output into cleaned assistant
