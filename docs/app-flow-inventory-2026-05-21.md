@@ -126,6 +126,9 @@ main session.
   `scripts/agent-settings-actions-proof.py`, which proves enable/disable and
   max-concurrent controls route through AppState, persist config, clear agents
   on disable, and expose visible action telemetry.
+- `/qa/agent-loop-coverage` now exposes the mode, route, contract, proof count,
+  deploy-sheet, task-send, and settings-control proof surface for the agentic
+  loop.
 - Built-in CVE calls use callbacks instead of shell subprocesses.
 - Shell-backed tools run through `ToolExecutor`.
 - Tool output is appended to chat, activity feed, and `ResultsStore.ingest`.

@@ -97,6 +97,9 @@ Interaction modes:
   max-concurrent changes route through AppState, persist settings, update
   `/state.agentActions`, and clear active agents when disabling full-auto
   multi-agent mode.
+- `/qa/agent-loop-coverage` now exposes the agent route list, contract flags,
+  proof count, and deploy-sheet/task-send proof references so the full
+  agentic-loop surface is auditable from one aggregate endpoint.
 - Deployed-agent on-demand context retrieval is covered by
   `scripts/agent-search-context-proof.py`: an agent autonomously calls
   `search_context`, receives shared parsed-result catalogue facts from the main
@@ -510,8 +513,9 @@ Automated no-model gates:
   profile-removal, context-hook, route-coverage, and shared subtab-state proof
   contract. `/qa/subtab-coverage` exposes the live registry/default/active
   subtab state for audit. `/qa/agent-loop-coverage` exposes manual, copilot,
-  autopilot, and deployed-agent loop guarantees plus the proof scripts that
-  cover them. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
+  autopilot, deployed-agent loop guarantees, agent action/settings/deploy
+  routes, deploy-sheet/task-send controls, and the proof scripts that cover
+  them. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
   context-catalog proof contract for model-issued tool calls.
   `/qa/runtime-coverage` exposes the runtime/model/cache proof contract for
   Qwen/MiniMax support, parser autodetect, model-folder generation defaults,

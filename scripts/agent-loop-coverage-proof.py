@@ -27,7 +27,34 @@ EXPECTED_PROOFS = {
     "agent-autopilot-proof.py",
     "agent-search-context-proof.py",
     "agent-actions-proof.py",
+    "agent-deploy-sheet-proof.py",
+    "agent-deploy-task-send-proof.py",
     "agent-settings-actions-proof.py",
+}
+
+EXPECTED_ROUTES = {
+    "/mode",
+    "/qa/deploy-agent",
+    "/qa/seed-agent-actions",
+    "/qa/agent-action",
+    "/qa/agent-deploy-sheet",
+    "/qa/agent-settings-action",
+    "/qa/apply-app-settings",
+}
+
+EXPECTED_CONTRACTS = {
+    "manualModeSuggests",
+    "copilotModeRequiresApproval",
+    "autopilotModeExecutes",
+    "deployedAgentsForceAutopilot",
+    "agentRuntimeInheritance",
+    "agentGenerationDefaultsInheritance",
+    "agentReasoningInheritance",
+    "agentMaxIterationsInheritance",
+    "agentSearchContextTool",
+    "agentDeploySheet",
+    "agentTaskSend",
+    "agentSettingsControls",
 }
 
 
@@ -86,6 +113,21 @@ def run() -> None:
         missing = sorted(EXPECTED_PROOFS.difference(proofs))
         if missing:
             raise AssertionError(f"agent loop proofs missing {missing}: {coverage}")
+        missing_files = sorted(name for name in EXPECTED_PROOFS if not (ROOT / "scripts" / name).is_file())
+        if missing_files:
+            raise AssertionError(f"agent loop names non-existent proof files: {missing_files}")
+
+        routes = set(coverage.get("routes") or [])
+        missing_routes = sorted(EXPECTED_ROUTES.difference(routes))
+        if missing_routes:
+            raise AssertionError(f"agent loop routes missing {missing_routes}: {coverage}")
+
+        contracts = coverage.get("contracts") or {}
+        missing_contracts = sorted(name for name in EXPECTED_CONTRACTS if contracts.get(name) is not True)
+        if missing_contracts:
+            raise AssertionError(f"agent loop contracts missing {missing_contracts}: {coverage}")
+        if coverage.get("proofCount", 0) < len(EXPECTED_PROOFS):
+            raise AssertionError(f"agent loop proof count mismatch: {coverage}")
 
         request("POST", "/mode", "manual")
         manual = request("GET", "/qa/agent-loop-coverage")
