@@ -77,6 +77,14 @@ def assert_artifact_ledger() -> None:
         raise AssertionError(f"artifact ledger visual manifest count mismatch: {ledger}")
     if ledger.get("visualCaptureCount") != capture_count:
         raise AssertionError(f"artifact ledger visual capture count mismatch expected {capture_count}: {ledger}")
+    if ledger.get("missingVisualCaptures") != []:
+        raise AssertionError(f"artifact ledger reports missing visual captures: {ledger}")
+    capture_status = ledger.get("visualCaptureStatus") or {}
+    for manifest in manifests:
+        payload = json.loads(manifest.read_text(encoding="utf-8"))
+        for capture in payload.get("captures") or []:
+            if capture_status.get(capture) is not True:
+                raise AssertionError(f"artifact ledger missing capture status for {capture}: {ledger}")
     if ledger.get("liveProofCount") != len(live_proofs):
         raise AssertionError(f"artifact ledger live proof count mismatch: {ledger}")
 

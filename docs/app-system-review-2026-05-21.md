@@ -577,7 +577,8 @@ Automated no-model gates:
   count, subtab state tab count, subtab state proof count, and the
   `/qa/proof-ledger` proof count across all local proof scripts. It also exposes
   `/qa/artifact-ledger` visual manifest and live-proof counts so screenshot and
-  live JSON evidence stay machine-auditable. The runtime/cache group also exposes `supportedFamilies`,
+  live JSON evidence stay machine-auditable, including missing visual capture
+  count. The runtime/cache group also exposes `supportedFamilies`,
   `cacheResponseMethod`, and `liveProofArtifactCount` for Qwen/MiniMax-only
   support, the `prefix-cache-l2-turboquant` response path, and the checked-in
   Qwen/MiniMax live replay artifact set. The settings/visuals group exposes

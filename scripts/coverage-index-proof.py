@@ -138,6 +138,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state artifact visual count mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerLiveProofCount", 0) < 18:
         raise AssertionError(f"coverage index app state artifact live count mismatch: {app_state_group}")
+    if app_state_group.get("missingVisualCaptureCount", 1) != 0:
+        raise AssertionError(f"coverage index app state missing visual captures: {app_state_group}")
     runtime_group = groups.get("runtimeAndCache") or {}
     if runtime_group.get("liveProofArtifactCount", 0) < 6:
         raise AssertionError(f"coverage index runtime live artifact count mismatch: {runtime_group}")
