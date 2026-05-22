@@ -144,6 +144,8 @@ def assert_chat_coverage() -> None:
     expected_header_badges = ["ctx", "cache preserved", "prefix/l2/tq", "new ctx keeps cache"]
     if coverage.get("headerCacheBadges") != expected_header_badges:
         raise AssertionError(f"chat coverage header cache badges mismatch: {coverage}")
+    if coverage.get("headerCacheBadgeCount") != len(expected_header_badges):
+        raise AssertionError(f"chat coverage header cache badge count mismatch: {coverage}")
     if coverage.get("cacheSessionIndicator") != "prefix/l2/tq":
         raise AssertionError(f"chat coverage cache session indicator mismatch: {coverage}")
     if coverage.get("newContextSessionBoundary") != "new ctx keeps cache":
