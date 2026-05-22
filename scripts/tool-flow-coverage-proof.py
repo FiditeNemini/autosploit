@@ -96,6 +96,8 @@ def run() -> None:
             raise AssertionError(f"tool flow tab activity statuses mismatch: {coverage}")
         if coverage.get("tabActivityStatusCount") != len(expected_activity_statuses):
             raise AssertionError(f"tool flow tab activity status count mismatch: {coverage}")
+        if coverage.get("tabActivityStatusParity") is not True:
+            raise AssertionError(f"tool flow tab activity status parity mismatch: {coverage}")
         if coverage.get("tabActivityIndicatorContract") != "status-dot-running-ring":
             raise AssertionError(f"tool flow tab activity indicator contract mismatch: {coverage}")
         state_keys = set(coverage.get("stateKeys") or [])

@@ -259,6 +259,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers tab activity statuses mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("tabActivityStatusCount") != tool_flow.get("tabActivityStatusCount"):
         raise AssertionError(f"coverage index tools/parsers tab activity status count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("tabActivityStatusParity") != tool_flow.get("tabActivityStatusParity"):
+        raise AssertionError(f"coverage index tools/parsers tab activity status parity mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("tabActivityIndicatorContract") != tool_flow.get("tabActivityIndicatorContract"):
         raise AssertionError(f"coverage index tools/parsers tab activity indicator contract mismatch: {tools_parsers_group}")
     tabs_sessions_group = groups.get("tabsAndSessions") or {}

@@ -218,7 +218,8 @@ Result fanout:
   message tool cards, tab activity, activity feed, result rows, and context
   catalogue state. `/qa/tool-flow-coverage.tabActivityStatuses` names the
   visible tab indicator states (`running`, `done`, `failed`, `canceled`) and
-  the `status-dot-running-ring` indicator contract. Parser and family-fanout aggregate routes now also
+  exposes status count/parity plus the `status-dot-running-ring` indicator
+  contract. Parser and family-fanout aggregate routes now also
   expose a standard `ok` status, covered by
   `scripts/parser-fanout-aggregate-proof.py`.
 - Activity Feed copy and clear controls now route through AppState. The header
@@ -533,7 +534,8 @@ Automated no-model gates:
   proof scripts that cover them. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
   context-catalog proof contract for model-issued tool calls, including the
   parser and family-fanout fixture seed routes, proof-count metadata, and
-  `stateKeys`, plus the visible tab activity status and indicator contract.
+  `stateKeys`, plus the visible tab activity status count/parity and indicator
+  contract.
   `/qa/runtime-coverage` exposes the runtime/model/cache proof contract for
   Qwen/MiniMax support, parser autodetect, model-folder generation defaults,
   prefix-cache/L2/TurboQuant response mode, unsupported-start blocking, the

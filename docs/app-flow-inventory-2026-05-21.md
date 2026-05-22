@@ -153,7 +153,8 @@ main session.
   exposes the message, tab activity, feed, result, and context-catalog surfaces
   behind those proofs, and `/qa/tool-flow-coverage.tabActivityStatuses` names
   the visible tab indicator states (`running`, `done`, `failed`, `canceled`)
-  plus a `status-dot-running-ring` indicator contract.
+  plus a status count, parity flag, and `status-dot-running-ring` indicator
+  contract.
 
 The full tool catalog is no longer force-sent to the engine. `ChatService`
 passes the latest user prompt plus active tab into `ToolDefinitions.forModel`,
@@ -617,7 +618,7 @@ Current repeatable gates:
   context-catalog tool-output proofs into one auditable contract. It now lists
   the parser and family-fanout fixture seed routes as part of that contract.
   The aggregate also exposes `proofCount`, visible tab activity statuses, tab
-  activity status count, indicator contract, and `stateKeys` for
+  activity status count/parity, indicator contract, and `stateKeys` for
   machine-readable proof accounting.
   Runtime and cache invariants are also summarized through
   `/qa/runtime-coverage`, including
@@ -733,7 +734,7 @@ Current repeatable gates:
   visual manifest count, and actual screenshot capture count. The tools/parsers
   group exposes registry tool count, callback count, representative family
   fanout count, state-key count, visible tab activity statuses, and the tab
-  activity indicator contract. The tabs/sessions group exposes
+  activity status parity/indicator contract. The tabs/sessions group exposes
   interaction-mode count, covered tab count, session state-key count, and
   action-state-key count. Chat/context also exposes state-key count.
 - Visual QA through the local app run script plus screenshots.
