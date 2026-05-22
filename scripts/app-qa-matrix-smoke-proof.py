@@ -491,6 +491,17 @@ def assert_testserver_smoke() -> None:
     }
     if tools_parsers_group.get("familyFanoutTools") != expected_family_fanout_tools:
         raise AssertionError(f"/qa/coverage-index family fanout tool map mismatch: {coverage_index}")
+    expected_structured_parser_tools = [
+        "arjun", "dalfox", "dnsx", "exiftool", "feroxbuster", "ffuf",
+        "gowitness", "graphqlmap", "haiti", "hashcat", "holehe", "httpx",
+        "hydra", "impacket", "jwt_tool", "katana", "linpeas", "masscan",
+        "metasploit", "netexec", "nmap", "nuclei", "sherlock", "snmpwalk",
+        "sqlmap", "subfinder", "testssl", "theharvester", "trufflehog", "wpscan",
+    ]
+    if tools_parsers_group.get("resultParserStructuredTools") != expected_structured_parser_tools:
+        raise AssertionError(f"/qa/coverage-index structured parser tool set mismatch: {coverage_index}")
+    if tools_parsers_group.get("resultParserRawOnlyTools") != ["bettercap", "chisel", "pwncat", "sliver", "tshark"]:
+        raise AssertionError(f"/qa/coverage-index raw-only parser tool set mismatch: {coverage_index}")
     if ((index_groups.get("tabsAndSessions") or {}).get("actionStateKeyCount", 0)) < 26:
         raise AssertionError(f"/qa/coverage-index action state key count mismatch: {coverage_index}")
     tabs_sessions_group = index_groups.get("tabsAndSessions") or {}

@@ -80,6 +80,47 @@ EXPECTED_FAMILY_FANOUT_TOOLS = {
     "osint": "gowitness",
 }
 
+EXPECTED_RESULT_PARSER_STRUCTURED_TOOLS = [
+    "arjun",
+    "dalfox",
+    "dnsx",
+    "exiftool",
+    "feroxbuster",
+    "ffuf",
+    "gowitness",
+    "graphqlmap",
+    "haiti",
+    "hashcat",
+    "holehe",
+    "httpx",
+    "hydra",
+    "impacket",
+    "jwt_tool",
+    "katana",
+    "linpeas",
+    "masscan",
+    "metasploit",
+    "netexec",
+    "nmap",
+    "nuclei",
+    "sherlock",
+    "snmpwalk",
+    "sqlmap",
+    "subfinder",
+    "testssl",
+    "theharvester",
+    "trufflehog",
+    "wpscan",
+]
+
+EXPECTED_RESULT_PARSER_RAW_ONLY_TOOLS = [
+    "bettercap",
+    "chisel",
+    "pwncat",
+    "sliver",
+    "tshark",
+]
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -344,6 +385,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers family fanout count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("familyFanoutTools") != EXPECTED_FAMILY_FANOUT_TOOLS:
         raise AssertionError(f"coverage index tools/parsers family fanout tool map mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("resultParserStructuredTools") != EXPECTED_RESULT_PARSER_STRUCTURED_TOOLS:
+        raise AssertionError(f"coverage index tools/parsers structured parser tool set mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("resultParserRawOnlyTools") != EXPECTED_RESULT_PARSER_RAW_ONLY_TOOLS:
+        raise AssertionError(f"coverage index tools/parsers raw-only parser tool set mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("stateKeyCount", 0) < 5:
         raise AssertionError(f"coverage index tools/parsers state key count mismatch: {tools_parsers_group}")
     tool_flow = request("GET", "/qa/tool-flow-coverage")
