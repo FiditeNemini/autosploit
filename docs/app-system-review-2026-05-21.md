@@ -409,6 +409,10 @@ Report:
   exports HTML, Markdown, JSON, and PDF into a QA directory, validates paths,
   bytes, expected content markers, and `%PDF`, and exposes the metadata through
   `/state.reportExport`.
+- Visible PDF/Markdown export button coverage is handled by
+  `scripts/report-visible-export-actions-proof.py`: it drives the AppState
+  export action route for both toolbar actions, verifies generated artifact
+  metadata through `/state.reportExport`, and checks activity-feed visibility.
 - Visible report export state is captured under
   `docs/visual-proofs/checkpoint-91`.
 

@@ -348,14 +348,18 @@ Report:
   guarded by `scripts/report-visible-delete-wiring-proof.py`. The modal submit
   button routes through AppState and is covered by
   `scripts/finding-wizard-submit-proof.py`.
-- Deterministic Generate/Export remains direct, while `Agent Draft` now routes
-  a bounded report drafting prompt through the chat/agent loop.
+- Deterministic Generate and visible PDF/Markdown exports route through
+  AppState, while `Agent Draft` routes a bounded report drafting prompt
+  through the chat/agent loop.
 - `/state.reportAction` exposes the active report-agent draft status, template,
   finding count, and prompt.
 - Exposes proof-oriented export status with artifact format/path/byte metadata
   through `/state.reportExport`.
 - Export validation is covered by `scripts/report-export-proof.py` for HTML,
-  Markdown, JSON, and PDF artifacts; visible report status is captured under
+  Markdown, JSON, and PDF artifacts. Visible PDF/Markdown export button
+  behavior is covered by `scripts/report-visible-export-actions-proof.py`,
+  which uses `/qa/report-export-action`, checks `/state.reportExport`, and
+  confirms activity-feed visibility. Visible report status is captured under
   `docs/visual-proofs/checkpoint-91`.
 - Create/delete finding action state is covered by
   `scripts/report-finding-actions-proof.py`, which opens the Report finding
