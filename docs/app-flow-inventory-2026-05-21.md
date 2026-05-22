@@ -342,6 +342,9 @@ Stash:
 - Add, Copy All, per-row Copy, Send, and Delete actions now route through
   AppState action handlers. `/state.stashActions` exposes action labels, current
   item rows, clipboard preview, last action, and last item/deleted IDs.
+- Row context-menu Copy Content and Copy Label now use the same AppState copy
+  path instead of direct clipboard calls; covered by
+  `scripts/stash-row-context-actions-proof.py`.
 - Can send a bounded item into chat context through the same 5 KB truncation
   path used by the Stash tab.
 - Query-scored retrieval now feeds the dynamic context catalogue without forcing
@@ -608,6 +611,8 @@ Required future proof gates:
   `scripts/activity-feed-actions-proof.py`.
 - Web row context copy/stash actions are covered by
   `scripts/web-row-context-actions-proof.py`.
+- Stash row context copy content/label actions are covered by
+  `scripts/stash-row-context-actions-proof.py`.
 - Web Verify queued/progress state is captured under
   `docs/visual-proofs/checkpoint-96`.
 - Recon Full Recon running state is captured under

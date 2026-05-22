@@ -394,6 +394,9 @@ Stash:
 - State: persisted stash rows, query-scored context catalogue source, and
   `/state.stashActions` for Add/Copy All/Copy/Send/Delete labels, item rows,
   clipboard preview, last action, and last item/deleted IDs.
+- Row context-menu Copy Content and Copy Label now route through the same
+  AppState copy handler and update `/state.stashActions`; covered by
+  `scripts/stash-row-context-actions-proof.py`.
 - Stash action coverage is handled by `scripts/stash-actions-proof.py`: it
   seeds a stash row, adds a deterministic item, copies all rows, copies one row,
   sends one row into chat with the bounded stash-content path, deletes that row,
@@ -734,6 +737,8 @@ Visual gates:
   covered by `scripts/osint-copy-actions-proof.py`.
 - Web row context copy/stash action state is covered by
   `scripts/web-row-context-actions-proof.py`.
+- Stash row context copy content/label action state is covered by
+  `scripts/stash-row-context-actions-proof.py`.
 - Activity Feed copy-entry/copy-timestamp/copy-visible/clear state is covered
   by `scripts/activity-feed-actions-proof.py`.
 - Web Verify queued/progress state is captured under
