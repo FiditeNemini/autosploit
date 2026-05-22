@@ -80,6 +80,20 @@ REQUIRED_VISUAL_MANIFESTS = {
     "docs/visual-proofs/checkpoint-87/manifest.json",
 }
 
+REQUIRED_STATE_KEYS = {
+    "chatActions",
+    "chatControlActions",
+    "chat",
+    "messages",
+    "requestContext",
+    "contextWindow",
+    "qaChatVisual.toolOutputExpansion",
+    "qaChatVisual.reasoningBlock",
+    "qaChatVisual.newContextConfirm",
+    "stashActions",
+    "feedRecent",
+}
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -155,6 +169,10 @@ def assert_chat_coverage() -> None:
 
     if coverage.get("proofCount", 0) < len(REQUIRED_PROOFS):
         raise AssertionError(f"chat coverage proof count mismatch: {coverage}")
+    state_keys = set(coverage.get("stateKeys") or [])
+    missing_state_keys = sorted(REQUIRED_STATE_KEYS.difference(state_keys))
+    if missing_state_keys:
+        raise AssertionError(f"chat coverage missing state keys {missing_state_keys}: {coverage}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/chat-coverage" not in qa.get("stateRoutes", []):

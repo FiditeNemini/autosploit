@@ -124,7 +124,7 @@ def assert_coverage_index() -> None:
     runtime_group = groups.get("runtimeAndCache") or {}
     if runtime_group.get("liveProofArtifactCount", 0) < 6:
         raise AssertionError(f"coverage index runtime live artifact count mismatch: {runtime_group}")
-    if (groups.get("chatAndContext") or {}).get("stateKeyCount", 0) < 8:
+    if (groups.get("chatAndContext") or {}).get("stateKeyCount", 0) < 19:
         raise AssertionError(f"coverage index chat/context state key count mismatch: {groups.get('chatAndContext')}")
     if (groups.get("toolsAndParsers") or {}).get("stateKeyCount", 0) < 5:
         raise AssertionError(f"coverage index tools/parsers state key count mismatch: {groups.get('toolsAndParsers')}")

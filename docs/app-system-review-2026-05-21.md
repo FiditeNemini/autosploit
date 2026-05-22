@@ -37,7 +37,8 @@ Chat streaming:
   and latest-assistant stash now route through AppState. `/state.chatActions`
   exposes action status, role, count, clipboard preview, and last stash item;
   stash actions update `/state.stashActions` through `recordStashAdd`.
-  Covered by `scripts/chat-actions-proof.py`.
+  Covered by `scripts/chat-actions-proof.py`; `/qa/chat-coverage.stateKeys`
+  now lists the chat, control, context, visual, stash, and feed state surfaces.
 - Chat header reasoning, request-context inspector, and new-context controls
   now route through AppState. `/state.chatControlActions` exposes last action,
   reasoning state, inspector visibility, context generation, and summary;
@@ -564,7 +565,10 @@ Automated no-model gates:
   metrics, token counters, reasoning controls, approval controls, tool-output
   expansion, request-audit badges, context inspector state, scroll-lock visuals,
   tool-action/Stash chat handoff, and cache-preserving new-context behavior for
-  the `prefix-cache-l2-turboquant` response path.
+  the `prefix-cache-l2-turboquant` response path. It also exposes `stateKeys`
+  for `chatActions`, `chatControlActions`, chat/message storage, request
+  context, context-window state, QA chat visual state, stash handoff, and the
+  activity feed.
   `/qa/coverage-index` exposes the aggregate QA map across app state,
   chat/context, runtime/cache, settings/visuals, tools/parsers, and tabs/
   sessions; `scripts/coverage-index-proof.py` verifies each group has endpoint

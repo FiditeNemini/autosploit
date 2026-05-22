@@ -111,7 +111,8 @@ main session.
   per-message copy, tool-output copy, per-message stash, and latest-assistant
   stash expose `/state.chatActions`; chat stash also updates
   `/state.stashActions` through the same `recordStashAdd` path used by the
-  Stash tab. Covered by `scripts/chat-actions-proof.py`.
+  Stash tab. Covered by `scripts/chat-actions-proof.py`; `/qa/chat-coverage`
+  exposes `stateKeys` for the chat/control/context/visual/stash/feed surfaces.
 - Parses `tool_calls` from the API response.
 - In manual mode, tools require explicit user approval.
 - In copilot/autopilot modes, the loop can execute approved tool calls up to
@@ -634,7 +635,10 @@ Current repeatable gates:
   expansion, approval controls, copy/stash actions, request-audit badges,
   context inspector state, scroll-lock visuals, tool-action/Stash chat control,
   and cache-preserving new-context behavior for the
-  `prefix-cache-l2-turboquant` response path.
+  `prefix-cache-l2-turboquant` response path. It also exposes `stateKeys` for
+  `chatActions`, `chatControlActions`, chat/message storage, request context,
+  context-window state, QA chat visual state, stash handoff, and the activity
+  feed.
   Session workflow invariants are summarized through `/qa/session-coverage`,
   including onboarding, Sidebar operations, overlays, model-folder pickers,
   persistence, finding-wizard submit, tab switching, phase actions, Activity

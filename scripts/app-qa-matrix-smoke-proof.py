@@ -229,6 +229,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/chat-coverage context behavior mismatch: {chat_coverage}")
     if chat_coverage.get("proofCount", 0) < 15:
         raise AssertionError(f"/qa/chat-coverage proof count mismatch: {chat_coverage}")
+    if "chatActions" not in (chat_coverage.get("stateKeys") or []):
+        raise AssertionError(f"/qa/chat-coverage state key mismatch: {chat_coverage}")
     if coverage_index.get("ok") is not True:
         raise AssertionError(f"/qa/coverage-index failed: {coverage_index}")
     if coverage_index.get("endpointCount", 0) < 16:
