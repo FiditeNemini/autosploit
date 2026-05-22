@@ -671,7 +671,8 @@ Current repeatable gates:
   completeness count, completion ratio, complete checkpoint paths, incomplete
   checkpoint paths, latest checkpoint, and latest checkpoint number using numeric checkpoint ordering; the checkpoint,
   complete, and incomplete path lists also use that numeric order. The
-  `/qa/audit-ledger` route combines proof counts, proof category counts/surface
+  `/qa/audit-ledger` route combines proof counts, source proof-ledger category
+  counts/surfaces/surface-count/total/parity, proof category counts/surface
   names/surface count/total/parity, live artifact counts, visual capture
   counts, missing/failed artifact counts, and checkpoint completeness counts/
   ratio plus the current gap count into one machine-readable audit rollup.
