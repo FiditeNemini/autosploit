@@ -49,6 +49,16 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"/qa/audit-ledger failed: {audit}")
     if audit.get("proofCount") != proof.get("proofCount"):
         raise AssertionError(f"audit proof count mismatch: {audit}")
+    expected_proof_categories = {
+        name: category.get("count")
+        for name, category in (proof.get("categories") or {}).items()
+    }
+    if audit.get("proofCategoryCounts") != expected_proof_categories:
+        raise AssertionError(f"audit proof category counts mismatch: {audit}")
+    if audit.get("proofCategoryTotalCount") != proof.get("proofCount"):
+        raise AssertionError(f"audit proof category total mismatch: {audit}")
+    if audit.get("proofCategoryParity") is not True:
+        raise AssertionError(f"audit proof category parity mismatch: {audit}")
     if audit.get("visualManifestCount") != artifact.get("visualManifestCount"):
         raise AssertionError(f"audit visual manifest count mismatch: {audit}")
     if audit.get("visualCaptureCount") != artifact.get("visualCaptureCount"):
