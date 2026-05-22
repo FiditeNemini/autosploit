@@ -256,6 +256,8 @@ def assert_testserver_smoke() -> None:
     app_state_group = index_groups.get("appState") or {}
     if app_state_group.get("proofLedgerCount", 0) < 120:
         raise AssertionError(f"/qa/coverage-index proof ledger count mismatch: {coverage_index}")
+    if app_state_group.get("proofCategorySurfaceCount") != 8:
+        raise AssertionError(f"/qa/coverage-index proof category surface count mismatch: {coverage_index}")
     if app_state_group.get("checkpointLedgerCount", 0) < 200:
         raise AssertionError(f"/qa/coverage-index checkpoint ledger count mismatch: {coverage_index}")
     if app_state_group.get("auditLedgerCount", 0) < 300:

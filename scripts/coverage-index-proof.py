@@ -150,6 +150,8 @@ def assert_coverage_index() -> None:
     }
     if app_state_group.get("proofCategoryCounts") != expected_categories:
         raise AssertionError(f"coverage index app state proof category counts mismatch: {app_state_group}")
+    if app_state_group.get("proofCategorySurfaceCount") != len(expected_categories):
+        raise AssertionError(f"coverage index app state proof category surface count mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerVisualManifestCount", 0) < 22:
         raise AssertionError(f"coverage index app state artifact visual count mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerLiveProofCount", 0) < 18:
