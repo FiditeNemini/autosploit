@@ -259,7 +259,7 @@ Current repeatable gates:
 - `python3 scripts/visual-chat-proof.py`
 - `python3 scripts/visual-chat-interaction-proof.py`
 - `python3 scripts/visual-settings-proof.py`
-- `python3 scripts/verify-live-models.py --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit --output docs/live-proofs/checkpoint-74-qwen-live.json`
+- `python3 scripts/verify-live-models.py --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit --output docs/live-proofs/checkpoint-76-qwen-repeat-cache-live.json`
 - `git diff --check`
 - Static scans proving no S/M/L profile selectors or `ModelProfile` code remain.
 - Visual QA through the local app run script plus screenshots.
@@ -276,8 +276,8 @@ Required future proof gates:
   OOM under high memory pressure; rerun after freeing memory.
 - Qwen hybrid SSM smoke proving KV prefix hits only when companion SSM state is
   present, plus async rederive status. Current Qwen live proof verifies load,
-  generation, cache metadata, and SSM companion L2 storage; repeat-hit proof is
-  still open.
+  generation, cache metadata, SSM companion L2 storage, and a repeat paged-cache
+  hit with 20 cached tokens. Async rederive status remains open.
 - Reasoning parser smoke proving thinking text is separated from visible output.
 - Tool parser smoke proving parsed API `tool_calls`, not raw text only.
 - Settings model warning, engine live cache status, and cache topology

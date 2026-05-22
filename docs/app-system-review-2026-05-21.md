@@ -290,11 +290,12 @@ Real-model gates:
   detection and launcher args for model-folder generation defaults, parser
   defaults, prefix cache, prompt L2, paged cache, block L2, and TurboQuant Q4.
 - Qwen live proof is captured at
-  `docs/live-proofs/checkpoint-74-qwen-live.json`. It proves actual engine
-  startup, JANG folder load, non-empty chat completion, `/health`,
-  `/v1/models`, `/v1/cache/stats`, parser autodetect, generation defaults from
-  the model folder, prefix cache, prompt L2, paged cache, block L2,
-  TurboQuant Q4 metadata, and Qwen hybrid SSM companion L2 storage.
+  `docs/live-proofs/checkpoint-76-qwen-repeat-cache-live.json`. It proves
+  actual engine startup, JANG folder load, non-empty chat completion,
+  `/health`, `/v1/models`, `/v1/cache/stats`, parser autodetect, generation
+  defaults from the model folder, prefix cache, prompt L2, paged cache, block
+  L2, TurboQuant Q4 metadata, Qwen hybrid SSM companion L2 storage, and a
+  repeated prompt hit with 20 cached tokens and 20 tokens saved.
 - MiniMax live proof is captured at
   `docs/live-proofs/checkpoint-75-minimax-live.json`. It now routes through
   `jang_tools.load_jangtq_model` and reaches JANGTQ hydration, but the current

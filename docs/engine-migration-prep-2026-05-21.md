@@ -493,6 +493,13 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   proof reaches JANGTQ hydration but fails with Metal OOM while the machine is
   under high memory pressure; report captured at
   `docs/live-proofs/checkpoint-75-minimax-live.json`.
+- Checkpoint 76: Strengthened live model proof to send a repeated prompt and
+  require cached-token usage or cache-hit counter movement. Qwen repeat-cache
+  proof is captured at
+  `docs/live-proofs/checkpoint-76-qwen-repeat-cache-live.json`: first turn is a
+  paged miss, second turn is a hybrid paged hit with KV plus 48 SSM companion
+  layers, `cached_tokens=20`, `scheduler_hits_delta=1`, and
+  `scheduler_tokens_saved_delta=20`.
 
 ## Known Risk Areas
 

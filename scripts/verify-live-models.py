@@ -205,6 +205,66 @@ def _assert_completion(completion: dict[str, Any]) -> None:
         raise RuntimeError("empty completion: model returned no tokens/content")
 
 
+def _int_at(data: dict[str, Any], path: tuple[str, ...]) -> int:
+    value: Any = data
+    for key in path:
+        if not isinstance(value, dict):
+            return 0
+        value = value.get(key)
+    return int(value or 0) if isinstance(value, (int, float)) else 0
+
+
+def _cached_tokens_from_completion(completion: dict[str, Any]) -> int:
+    usage = completion.get("usage") or {}
+    details = usage.get("prompt_tokens_details") or {}
+    return _int_at({"details": details}, ("details", "cached_tokens"))
+
+
+def _assert_repeat_cache_behavior(
+    report: dict[str, Any],
+    first_cache: dict[str, Any],
+    second_cache: dict[str, Any],
+    second_completion: dict[str, Any],
+) -> None:
+    cached_tokens = _cached_tokens_from_completion(second_completion)
+    counters = {
+        "scheduler_hits_delta": _int_at(second_cache, ("scheduler_cache", "hits")) - _int_at(first_cache, ("scheduler_cache", "hits")),
+        "scheduler_cache_hits_delta": _int_at(second_cache, ("scheduler_cache", "cache_hits")) - _int_at(first_cache, ("scheduler_cache", "cache_hits")),
+        "scheduler_disk_hits_delta": _int_at(second_cache, ("scheduler_cache", "disk_hits")) - _int_at(first_cache, ("scheduler_cache", "disk_hits")),
+        "scheduler_tokens_saved_delta": _int_at(second_cache, ("scheduler_cache", "tokens_saved")) - _int_at(first_cache, ("scheduler_cache", "tokens_saved")),
+        "prompt_l2_hits_delta": _int_at(second_cache, ("disk_cache", "hits")) - _int_at(first_cache, ("disk_cache", "hits")),
+        "block_l2_hits_delta": _int_at(second_cache, ("block_disk_cache", "disk_hits")) - _int_at(first_cache, ("block_disk_cache", "disk_hits")),
+        "ssm_l2_hits_delta": _int_at(second_cache, ("ssm_companion", "disk", "hits")) - _int_at(first_cache, ("ssm_companion", "disk", "hits")),
+    }
+    checks = {
+        "cached_usage": cached_tokens > 0,
+        "cache_hit_counter": any(value > 0 for value in counters.values()),
+    }
+    report["repeat_cache_checks"] = {
+        **checks,
+        "cached_tokens": cached_tokens,
+        **counters,
+    }
+    if not checks["cached_usage"] and not checks["cache_hit_counter"]:
+        raise RuntimeError("repeat cache check failed: no cached usage or cache-hit counter increment")
+
+
+def _chat_completion(base_url: str, model_name: str, prompt: str, timeout: float) -> dict[str, Any]:
+    return _request_json(
+        "POST",
+        f"{base_url}/v1/chat/completions",
+        {
+            "model": model_name,
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": 16,
+            "stream": False,
+            "enable_thinking": False,
+            "stream_options": {"include_usage": True},
+        },
+        timeout=timeout,
+    )
+
+
 def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float, metadata_only: bool = False) -> dict[str, Any]:
     port = _find_free_port()
     path = Path(path).expanduser().resolve()
@@ -253,28 +313,24 @@ def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float
     try:
         health = _wait_health(base_url, timeout, proc=proc, report=report)
         models = _request_json("GET", f"{base_url}/v1/models")
-        completion = _request_json(
-            "POST",
-            f"{base_url}/v1/chat/completions",
-            {
-                "model": health.get("model_name") or path.name,
-                "messages": [{"role": "user", "content": prompt}],
-                "max_tokens": 16,
-                "stream": False,
-                "enable_thinking": False,
-                "stream_options": {"include_usage": True},
-            },
-            timeout=timeout,
-        )
+        model_name = health.get("model_name") or path.name
+        completion = _chat_completion(base_url, model_name, prompt, timeout)
         cache = _request_json("GET", f"{base_url}/v1/cache/stats")
+        repeat_completion = _chat_completion(base_url, model_name, prompt, timeout)
+        repeat_cache = _request_json("GET", f"{base_url}/v1/cache/stats")
         _assert_runtime_metadata(report, health, models, cache)
         _assert_completion(completion)
+        _assert_completion(repeat_completion)
+        _assert_repeat_cache_behavior(report, cache, repeat_cache, repeat_completion)
         report.update({
             "health": health,
             "models": models,
             "completion_usage": completion.get("usage", {}),
             "completion_preview": json.dumps(completion.get("choices", []))[:500],
             "cache_stats": cache,
+            "repeat_completion_usage": repeat_completion.get("usage", {}),
+            "repeat_completion_preview": json.dumps(repeat_completion.get("choices", []))[:500],
+            "repeat_cache_stats": repeat_cache,
         })
         return report
     except Exception as exc:
