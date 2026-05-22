@@ -473,7 +473,7 @@ Stash:
   verified by `scripts/chat-coverage-proof.py`, which checks Send/Stop,
   reasoning, approval, copy/stash, tool-output expansion, request-audit,
   context inspector, scroll-lock visual, token counter, tool-action/Stash chat
-  handoff, and cache-preserving visible-new-context contracts for the
+  handoff, visible cache-session header badges, and cache-preserving visible-new-context contracts for the
   `prefix-cache-l2-turboquant` response path.
 - Source/op scoping and catalogue inclusion/exclusion are covered by
   `scripts/context-catalog-proof.py`; scored targeted retrieval is covered by
@@ -564,7 +564,7 @@ Automated no-model gates:
   `/qa/chat-coverage` exposes chat/control proof coverage for streaming usage
   metrics, token counters, reasoning controls, approval controls, tool-output
   expansion, request-audit badges, context inspector state, scroll-lock visuals,
-  tool-action/Stash chat handoff, and cache-preserving new-context behavior for
+  tool-action/Stash chat handoff, visible cache-session header badges, and cache-preserving new-context behavior for
   the `prefix-cache-l2-turboquant` response path. It also exposes `stateKeys`
   for `chatActions`, `chatControlActions`, chat/message storage, request
   context, context-window state, QA chat visual state, stash handoff, and the

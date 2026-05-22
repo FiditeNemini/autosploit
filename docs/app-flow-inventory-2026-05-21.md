@@ -268,7 +268,10 @@ exposes `cacheResponsesInferenceMethod`, `sessionBoundaryMode`, and
 `newModelSessionBehavior` so clients can distinguish a new model context window
 from destroying the prefix/L2/TurboQuant cache session. The chat header also
 surfaces `cache preserved`, `prefix/l2/tq`, and `new ctx keeps cache` badges
-through `/state.qaChatVisual.headerBadges` and the seeded visual chat proof.
+through `/state.qaChatVisual.headerBadges` and the seeded visual chat proof;
+`/qa/chat-coverage` also advertises `headerCacheBadges`,
+`cacheSessionIndicator`, and `newContextSessionBoundary` so the broad app QA
+matrix locks the visible cache-session contract.
 - CVE-bearing rows now expose per-row status through `/state.webCVERows` and a
   visible chip on each vulnerability card. The same proof verifies `pending`,
   `enriched`, and active `CVE verifying` row semantics for the seeded Web
@@ -643,7 +646,7 @@ Current repeatable gates:
   streaming usage metrics, token counters, reasoning controls, tool-output
   expansion, approval controls, copy/stash actions, request-audit badges,
   context inspector state, scroll-lock visuals, tool-action/Stash chat control,
-  and cache-preserving new-context behavior for the
+  visible cache-session header badges, and cache-preserving new-context behavior for the
   `prefix-cache-l2-turboquant` response path. It also exposes `stateKeys` for
   `chatActions`, `chatControlActions`, chat/message storage, request context,
   context-window state, QA chat visual state, stash handoff, and the activity

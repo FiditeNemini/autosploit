@@ -141,6 +141,13 @@ def assert_chat_coverage() -> None:
         raise AssertionError(f"chat coverage cache method mismatch: {coverage}")
     if coverage.get("newContextBehavior") != "clear-visible-chat-preserve-engine-cache-session":
         raise AssertionError(f"chat coverage new-context behavior mismatch: {coverage}")
+    expected_header_badges = ["ctx", "cache preserved", "prefix/l2/tq", "new ctx keeps cache"]
+    if coverage.get("headerCacheBadges") != expected_header_badges:
+        raise AssertionError(f"chat coverage header cache badges mismatch: {coverage}")
+    if coverage.get("cacheSessionIndicator") != "prefix/l2/tq":
+        raise AssertionError(f"chat coverage cache session indicator mismatch: {coverage}")
+    if coverage.get("newContextSessionBoundary") != "new ctx keeps cache":
+        raise AssertionError(f"chat coverage new context boundary mismatch: {coverage}")
 
     contracts = coverage.get("contracts") or {}
     missing_contracts = sorted(name for name in REQUIRED_CONTRACTS if contracts.get(name) is not True)
