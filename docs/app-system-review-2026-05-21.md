@@ -524,7 +524,8 @@ Automated no-model gates:
   `/qa/context-coverage` exposes the dynamic context proof contract for bounded
   catalogue injection, `search_context`, request-audit persistence, parsed
   result-to-context routing, deployed-agent retrieval, durable embeddings,
-  targeted stash retrieval, and new-context cache preservation.
+  targeted stash retrieval, new-context cache preservation, the `/context/new`
+  route, and proof-count metadata.
   `/qa/visual-coverage` exposes screenshot-backed UI proof coverage for chat,
   scroll lock, Settings, context inspector, request-audit badges, tab activity,
   subtab lifecycle strips, OSINT screenshots, reports, stash retrieval,

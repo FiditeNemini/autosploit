@@ -587,12 +587,14 @@ Current repeatable gates:
   live-proof cache gates. The aggregate now exposes `proofCount` plus the
   model-folder, engine-start, new-context, settings cache seed, and live cache
   seed routes that back those contracts. Dynamic context and catalogue
-  invariants are now summarized through `/qa/context-coverage`, including the `search_context`
-  retrieval tool, the fixed automatic context-injection cap, current effective
-  snippet limit, context seed/query QA routes, bounded catalogue injection,
-  request-audit persistence, parsed result-to-context routing, deployed-agent
-  context search, durable embeddings, stash retrieval, and new-context cache
-  preservation proof gates. Visual screenshot coverage is summarized through
+  invariants are now summarized through `/qa/context-coverage`, including the
+  `search_context` retrieval tool, the fixed automatic context-injection cap,
+  current effective snippet limit, context seed/query QA routes, bounded
+  catalogue injection, request-audit persistence, parsed result-to-context
+  routing, deployed-agent context search, durable embeddings, stash retrieval,
+  and new-context cache preservation proof gates. It now exposes `proofCount`
+  and `/context/new` so cache-preserving context resets stay visible in the
+  aggregate. Visual screenshot coverage is summarized through
   `/qa/visual-coverage`, including chat/tool states, scroll lock, Settings,
   context inspector, request-audit badges, tab activity, subtab lifecycle
   strips, OSINT screenshots, report export, stash retrieval, unsupported model
