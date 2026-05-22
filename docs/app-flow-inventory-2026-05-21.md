@@ -175,7 +175,11 @@ OSINT:
 
 - Covers username, email, metadata, screenshot, and general OSINT prompts.
 - Displays parsed `sherlock` results and raw output.
-- Needs visible tool state on the selected search mode and result rows.
+- Username, email, metadata, and screenshot actions expose lifecycle state for
+  idle/running/done/failed/canceled status on the active search mode and are
+  covered by the live-turn Sherlock-style cancellation proof.
+- Still needs screenshot artifact preview validation and richer result-row
+  status.
 
 Report:
 

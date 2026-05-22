@@ -177,7 +177,10 @@ OSINT:
 - Buttons: Search for username/email/metadata/screenshot.
 - Chat path: sends prompts to chat.
 - State: parsed OSINT rows and screenshots.
-- Missing proof: file path validation and screenshot artifact preview.
+- Username, email, metadata, and screenshot lifecycle state now tracks idle,
+  running, done, failed, and canceled and is visible in the active OSINT subtab.
+- Missing proof: file path validation, screenshot artifact preview, and live UI
+  screenshot coverage.
 
 Report:
 
@@ -232,6 +235,8 @@ Automated no-model gates:
     long-running listener-style tool is stopped;
   - proves Post privilege-escalation lifecycle moves to running and then
     canceled when a long-running LinPEAS-style tool is stopped;
+  - proves OSINT username lifecycle moves to running and then canceled when a
+    long-running Sherlock-style tool is stopped;
   - proves tool callbacks update per-tab activity state that the tab bar can
     render as running/done/failed/canceled indicators;
   - proves model-issued `search_context` returns targeted catalogue facts;

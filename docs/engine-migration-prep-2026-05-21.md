@@ -430,6 +430,11 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   strips in PrivEsc, AD Attacks, and Lateral subviews, `/state` exposes
   `postLifecycle`, and the live-turn harness proves a long-running
   LinPEAS-style command moves to running and then canceled through `/stop`.
+- Checkpoint 65: Added OSINT lifecycle state for username, email, metadata, and
+  screenshot actions. The OSINT panel now shows a lifecycle strip for the active
+  search mode, `/state` exposes `osintLifecycle`, and the live-turn harness
+  proves a long-running Sherlock-style command moves to running and then
+  canceled through `/stop`.
 
 ## Known Risk Areas
 

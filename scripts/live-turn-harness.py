@@ -246,6 +246,42 @@ class MockEngineHandler(BaseHTTPRequestHandler):
                     ]
                 },
             ]
+        elif "Run osint username lifecycle proof" in user_text:
+            events = [
+                {"choices": [{"delta": {"content": "Starting OSINT username lifecycle proof."}}]},
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "id": "call_osint_username",
+                                        "type": "function",
+                                        "function": {"name": "run_shell", "arguments": ""},
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "function": {
+                                            "arguments": "{\"command\":\"printf sherlock-start; sleep 10; printf sherlock-final-marker\"}"
+                                        },
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+            ]
         elif "Run web tab status proof" in user_text:
             events = [
                 {"choices": [{"delta": {"content": "Starting web tool status proof."}}]},
@@ -665,6 +701,26 @@ def run() -> None:
             "post privesc lifecycle canceled",
         )
         assert "stopped" in post_canceled["postLifecycle"]["privesc"]["summary"], post_canceled
+
+        request("POST", "/clear")
+        request("POST", "/mode", "autopilot")
+        request("POST", "/tab", "osint")
+        request("POST", "/send", "Run osint username lifecycle proof")
+        osint_running = wait_until(
+            lambda: request("GET", "/state")
+            if request("GET", "/state").get("osintLifecycle", {}).get("username", {}).get("status") == "running"
+            else None,
+            "osint username lifecycle running",
+        )
+        assert osint_running["osintLifecycle"]["username"]["tool"] == "run_shell", osint_running
+        request("POST", "/stop")
+        osint_canceled = wait_until(
+            lambda: request("GET", "/state")
+            if request("GET", "/state").get("osintLifecycle", {}).get("username", {}).get("status") == "canceled"
+            else None,
+            "osint username lifecycle canceled",
+        )
+        assert "stopped" in osint_canceled["osintLifecycle"]["username"]["summary"], osint_canceled
 
         request("POST", "/clear")
         request("POST", "/mode", "autopilot")
