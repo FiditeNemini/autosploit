@@ -536,9 +536,10 @@ Automated no-model gates:
   state. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
   context-catalog proof contract for model-issued tool calls, including the
   parser, tool-catalog, and family-fanout fixture seed routes, proof-count
-  metadata, `stateKeys`, tool-schema cap/policy/route, plus the visible tab
-  activity status count/parity and indicator contract. The broad app QA matrix
-  also checks that tab activity status contract.
+  metadata, `stateKeys`, tool-schema cap/policy/route, structured/raw
+  result-mode counts, plus the visible tab activity status count/parity and
+  indicator contract. The broad app QA matrix also checks that tab activity
+  status contract.
   `/qa/runtime-coverage` exposes the runtime/model/cache proof contract for
   Qwen/MiniMax support, parser autodetect, model-folder generation defaults,
   prefix-cache/L2/TurboQuant response mode, unsupported-start blocking, the
@@ -653,7 +654,8 @@ Automated no-model gates:
   settings visual manifest count, full visual manifest count, and actual
   screenshot capture count. The tools/parsers group exposes registry tool
   count, callback count, representative family fanout count, state-key count,
-  and dynamic tool-schema cap/policy/route. The tabs/sessions group exposes
+  dynamic tool-schema cap/policy/route, and structured/raw result-mode counts.
+  The tabs/sessions group exposes
   interaction-mode count, covered tab
   count, session state-key count, action-state-key count, agent-loop state-key
   count, and agent-loop visual state keys. Chat/context also exposes state-key

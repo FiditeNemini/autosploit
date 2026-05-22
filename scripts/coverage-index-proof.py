@@ -281,6 +281,12 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers schema policy mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolCatalogRoute") != tool_flow.get("toolCatalogRoute"):
         raise AssertionError(f"coverage index tools/parsers catalog route mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("structuredResultModeCount") != tool_flow.get("structuredResultModeCount"):
+        raise AssertionError(f"coverage index tools/parsers structured result mode count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("rawResultModeCount") != tool_flow.get("rawResultModeCount"):
+        raise AssertionError(f"coverage index tools/parsers raw result mode count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("resultModeCountParity") != tool_flow.get("resultModeCountParity"):
+        raise AssertionError(f"coverage index tools/parsers result mode parity mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("tabActivityStatuses") != tool_flow.get("tabActivityStatuses"):
         raise AssertionError(f"coverage index tools/parsers tab activity statuses mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("tabActivityStatusCount") != tool_flow.get("tabActivityStatusCount"):

@@ -99,6 +99,12 @@ def run() -> None:
             raise AssertionError(f"tool flow did not expose schema policy: {coverage}")
         if coverage.get("toolCatalogRoute") != "/qa/tool-catalog":
             raise AssertionError(f"tool flow did not expose tool catalog route: {coverage}")
+        if coverage.get("structuredResultModeCount", 0) < 29:
+            raise AssertionError(f"tool flow structured result mode count too low: {coverage}")
+        if coverage.get("rawResultModeCount", 0) < 9:
+            raise AssertionError(f"tool flow raw result mode count too low: {coverage}")
+        if coverage.get("resultModeCountParity") is not True:
+            raise AssertionError(f"tool flow result mode count parity mismatch: {coverage}")
         expected_activity_statuses = ["running", "done", "failed", "canceled"]
         if coverage.get("tabActivityStatuses") != expected_activity_statuses:
             raise AssertionError(f"tool flow tab activity statuses mismatch: {coverage}")

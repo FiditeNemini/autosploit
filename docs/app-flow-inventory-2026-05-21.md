@@ -174,7 +174,9 @@ returns a standard `ok` aggregate status.
 `/qa/tool-flow-coverage` now also exposes the `/qa/tool-catalog` route, the
 `tool-catalog-proof.py` proof, `toolSchemaCap=12`, and
 `toolSchemaPolicy=prompt-tab-ranked-installed-cap`, so the aggregate proves
-prompt/tab-ranked schema selection is capped and not a full catalogue dump.
+prompt/tab-ranked schema selection is capped and not a full catalogue dump. It
+also exposes structured/raw result-mode counts and parity from the registry, so
+parser breadth and raw-only preservation are visible from the same aggregate.
 
 ## Context And Catalog State
 
@@ -755,8 +757,9 @@ Current repeatable gates:
   settings/visuals group exposes settings visual manifest count, full
   visual manifest count, and actual screenshot capture count. The tools/parsers
   group exposes registry tool count, callback count, representative family
-  fanout count, state-key count, dynamic tool-schema cap/policy/route, visible
-  tab activity statuses, and the tab activity status parity/indicator contract.
+  fanout count, state-key count, dynamic tool-schema cap/policy/route,
+  structured/raw result-mode counts, visible tab activity statuses, and the tab
+  activity status parity/indicator contract.
   The tabs/sessions group exposes
   interaction-mode count, covered tab count, session state-key count, and
   action-state-key count, and now mirrors the visible tab activity status

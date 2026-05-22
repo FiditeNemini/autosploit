@@ -197,6 +197,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/tool-flow-coverage schema policy mismatch: {tool_flow_coverage}")
     if tool_flow_coverage.get("toolCatalogRoute") != "/qa/tool-catalog":
         raise AssertionError(f"/qa/tool-flow-coverage catalog route mismatch: {tool_flow_coverage}")
+    if tool_flow_coverage.get("structuredResultModeCount", 0) < 29:
+        raise AssertionError(f"/qa/tool-flow-coverage structured mode count mismatch: {tool_flow_coverage}")
+    if tool_flow_coverage.get("rawResultModeCount", 0) < 9:
+        raise AssertionError(f"/qa/tool-flow-coverage raw mode count mismatch: {tool_flow_coverage}")
+    if tool_flow_coverage.get("resultModeCountParity") is not True:
+        raise AssertionError(f"/qa/tool-flow-coverage result mode parity mismatch: {tool_flow_coverage}")
     if tool_flow_coverage.get("tabActivityStatuses") != ["running", "done", "failed", "canceled"]:
         raise AssertionError(f"/qa/tool-flow-coverage tab activity statuses mismatch: {tool_flow_coverage}")
     if tool_flow_coverage.get("tabActivityStatusCount") != 4:
