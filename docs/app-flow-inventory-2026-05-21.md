@@ -82,6 +82,8 @@ main session.
 - Built-in CVE calls use callbacks instead of shell subprocesses.
 - Shell-backed tools run through `ToolExecutor`.
 - Tool output is appended to chat, activity feed, and `ResultsStore.ingest`.
+  `/state.feedRecent` exposes the latest activity records so model tool actions
+  can be audited as visible start/complete status, not just counted.
   Representative outputs across the structured and raw-only tool families are
   now provable through `/qa/result-parser-coverage`, which verifies that parser
   output reaches the tab collections and `/results` rather than staying as raw
@@ -360,6 +362,7 @@ Current repeatable gates:
 - `python3 scripts/catalog-embedding-audit-proof.py`
 - `python3 scripts/tool-catalog-proof.py`
 - `python3 scripts/tool-registry-coverage-proof.py`
+- `python3 scripts/tool-fanout-status-proof.py`
 - `python3 scripts/result-parser-routing-proof.py`
 - `python3 scripts/result-context-catalog-proof.py`
 - `python3 scripts/semantic-cve-proof.py`
@@ -457,6 +460,10 @@ Required future proof gates:
   `scripts/tool-registry-coverage-proof.py`, which verifies all 38 exposed
   schemas have declared execution mode, bounded catalogue policy, tab coverage,
   sample CLI routing, and result parser mode.
+- End-to-end external tool fanout: covered by
+  `scripts/tool-fanout-status-proof.py`, which proves a model-issued `nmap`
+  call produces a chat card, activity feed start/complete entries, Recon tab
+  status, parsed `/results` port data, and a retrievable context catalogue item.
 - Representative parser-to-tab routing: covered by
   `scripts/result-parser-routing-proof.py`, which seeds representative outputs
   for structured and raw-only tools, checks all expected parser branches emit

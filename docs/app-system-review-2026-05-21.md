@@ -151,6 +151,11 @@ Result fanout:
 - `onToolResult` feeds `ResultsStore.ingest(...)`.
 - `ResultsStore` parses known tool output into tab state and fires auto-CVE
   callbacks for service versions and CVE IDs.
+- End-to-end fanout for a model-issued external tool call is covered by
+  `scripts/tool-fanout-status-proof.py`: a mock model calls `nmap`, a fake
+  binary returns service output, and the proof verifies the chat tool card,
+  recent activity-feed entries, Recon tab status, parsed `/results` port, and
+  context-catalog retrieval.
 - Representative parser routing is covered by
   `scripts/result-parser-routing-proof.py`: it seeds outputs for structured
   recon, web, network, creds, exploit, post, OSINT, screenshot, and raw-only
@@ -344,6 +349,7 @@ Automated no-model gates:
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.
 - Parsed result-to-context retrieval via `scripts/result-context-catalog-proof.py`.
+- Model tool fanout status via `scripts/tool-fanout-status-proof.py`.
 - Context catalogue seeded-state smoke.
 - Context catalogue source inclusion/exclusion and active-op stash scoping via
   `scripts/context-catalog-proof.py`.
