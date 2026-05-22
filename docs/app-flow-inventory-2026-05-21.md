@@ -410,7 +410,10 @@ Required future proof gates:
   stopped, `healthStatus=blocked`, and `/state.engineError` explains the
   Qwen/MiniMax-only constraint.
 - Engine no-model smoke proving `/health` and `/v1/models` report parser,
-  generation, topology, and cache metadata.
+  generation, topology, and cache metadata: covered by
+  `scripts/engine-no-model-metadata-proof.py`, including the
+  `prefix-cache-l2-turboquant` cache-response method and new-context cache
+  preservation metadata.
 - MiniMax real generation smoke proving full KV attention with prefix hits,
   prompt/block L2 cache metadata, and TurboQuant encode/decode cache stats.
   Current strict live proof at

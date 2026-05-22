@@ -350,6 +350,9 @@ Automated no-model gates:
   `scripts/result-parser-routing-proof.py`.
 - Parsed result-to-context retrieval via `scripts/result-context-catalog-proof.py`.
 - Model tool fanout status via `scripts/tool-fanout-status-proof.py`.
+- Engine no-model metadata via `scripts/engine-no-model-metadata-proof.py`,
+  proving `/health` and `/v1/models` share parser, generation, topology,
+  prefix/cache L2, TurboQuant, SSM companion, and cache-response method fields.
 - Context catalogue seeded-state smoke.
 - Context catalogue source inclusion/exclusion and active-op stash scoping via
   `scripts/context-catalog-proof.py`.
@@ -469,6 +472,13 @@ Real-model gates:
   `scripts/unsupported-model-start-proof.py`: an unsupported fixture cannot
   start the engine, `engineRunning` remains false, `/state.engineError` carries
   the Qwen/MiniMax blocking message, and `healthStatus` becomes `blocked`.
+- Engine no-model metadata is covered by
+  `scripts/engine-no-model-metadata-proof.py`: a fixture-backed no-model Qwen
+  hybrid server reports `status=no_model`; `/health.effective_config` and
+  `/v1/models[].metadata` agree on parser autodetect, generation defaults and
+  provenance, hybrid SSM topology, prefix cache, prompt L2, paged cache, block
+  L2, TurboQuant Q4, SSM companion L2, and the
+  `prefix-cache-l2-turboquant` response method used for long-context sessions.
 - Qwen live proof is captured at
   `docs/live-proofs/checkpoint-76-qwen-repeat-cache-live.json`. It proves
   actual engine startup, JANG folder load, non-empty chat completion,
