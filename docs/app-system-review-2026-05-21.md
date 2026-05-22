@@ -137,7 +137,10 @@ Network:
   Capture, Start MITM, Create Tunnel.
 - Chat path: every action sends a prompt to chat.
 - State: network hosts plus raw output.
-- Missing proof: long-running capture/MITM/tunnel lifecycle state.
+- Long-running lifecycle state now tracks capture/MITM/tunnel status as idle,
+  running, done, failed, or canceled and is visible inside the relevant Network
+  subtab.
+- Missing proof: live UI screenshot coverage for the lifecycle strip.
 
 Creds:
 
@@ -212,6 +215,8 @@ Automated no-model gates:
     marker reaches chat;
   - proves `/stop` interrupts a long-running `run_shell` subprocess, marks the
     tool card canceled, and prevents post-sleep output from landing;
+  - proves Network capture lifecycle moves to running and then canceled when a
+    long-running capture-style tool is stopped;
   - proves tool callbacks update per-tab activity state that the tab bar can
     render as running/done/failed/canceled indicators;
   - proves model-issued `search_context` returns targeted catalogue facts;

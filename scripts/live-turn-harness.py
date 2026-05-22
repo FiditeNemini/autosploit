@@ -102,6 +102,42 @@ class MockEngineHandler(BaseHTTPRequestHandler):
                     ]
                 },
             ]
+        elif "Run network capture lifecycle proof" in user_text:
+            events = [
+                {"choices": [{"delta": {"content": "Starting network capture lifecycle proof."}}]},
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "id": "call_network_capture",
+                                        "type": "function",
+                                        "function": {"name": "run_shell", "arguments": ""},
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "function": {
+                                            "arguments": "{\"command\":\"printf capture-start; sleep 10; printf capture-final-marker\"}"
+                                        },
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+            ]
         elif "Run web tab status proof" in user_text:
             events = [
                 {"choices": [{"delta": {"content": "Starting web tool status proof."}}]},
@@ -441,6 +477,26 @@ def run() -> None:
         shell_output = latest_shell["content"].split("\n", 1)[1] if "\n" in latest_shell["content"] else latest_shell["content"]
         if "tool-final-marker" in shell_output:
             raise AssertionError(f"stop did not interrupt shell tool: {latest_shell}")
+
+        request("POST", "/clear")
+        request("POST", "/mode", "autopilot")
+        request("POST", "/tab", "network")
+        request("POST", "/send", "Run network capture lifecycle proof")
+        network_running = wait_until(
+            lambda: request("GET", "/state")
+            if request("GET", "/state").get("networkLifecycle", {}).get("capture", {}).get("status") == "running"
+            else None,
+            "network capture lifecycle running",
+        )
+        assert network_running["networkLifecycle"]["capture"]["tool"] == "run_shell", network_running
+        request("POST", "/stop")
+        network_canceled = wait_until(
+            lambda: request("GET", "/state")
+            if request("GET", "/state").get("networkLifecycle", {}).get("capture", {}).get("status") == "canceled"
+            else None,
+            "network capture lifecycle canceled",
+        )
+        assert "stopped" in network_canceled["networkLifecycle"]["capture"]["summary"], network_canceled
 
         request("POST", "/clear")
         request("POST", "/mode", "autopilot")

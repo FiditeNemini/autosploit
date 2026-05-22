@@ -412,6 +412,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - Checkpoint 60: Wired the Web vulnerability card `Verify` button into the
   chat/tool loop with a focused verification prompt, replacing the previous
   placeholder control.
+- Checkpoint 61: Added Network lifecycle state for capture, MITM, and tunnel
+  actions. The Network panel now shows lifecycle strips for idle/running/done/
+  failed/canceled state, and the live-turn harness proves a long-running
+  capture-style command moves to running and then canceled through `/stop`.
 
 ## Known Risk Areas
 
