@@ -379,9 +379,10 @@ Stash:
 
 - Stores reusable raw/context items by type.
 - Filters and searches stash.
-- Add, Copy All, per-row Copy, Send, and Delete actions now route through
+- Filter, Add, Copy All, per-row Copy, Send, and Delete actions now route through
   AppState action handlers. `/state.stashActions` exposes action labels, current
-  item rows, clipboard preview, last action, and last item/deleted IDs.
+  item rows, active filter, filtered count, clipboard preview, last action, and
+  last item/deleted IDs.
 - Row context-menu Copy Content and Copy Label now use the same AppState copy
   path instead of direct clipboard calls; covered by
   `scripts/stash-row-context-actions-proof.py`.
@@ -395,9 +396,10 @@ Stash:
 - `/state.stashRetrieval` exposes the latest retrieval query, candidate count,
   returned count, top score, and top labels. The Stash tab shows the same compact
   audit strip after catalogue retrieval.
-- Add/copy/send/delete action state is covered by
+- Filter/add/copy/send/delete action state is covered by
   `scripts/stash-actions-proof.py`, which verifies item creation, clipboard
-  preview, bounded chat send, deletion, and Stash tab activity state.
+  preview, filter state, bounded chat send, deletion, and Stash tab activity
+  state.
 - Targeted retrieval is covered by `scripts/stash-retrieval-proof.py`, and the
   visible audit strip is captured under `docs/visual-proofs/checkpoint-92`.
 

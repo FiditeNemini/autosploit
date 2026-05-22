@@ -79,6 +79,14 @@ def run() -> None:
         if actions.get("lastAction") != "add" or actions.get("itemCount") != 2:
             raise AssertionError(f"stash add state mismatch: {actions}")
 
+        filtered = request("POST", "/qa/stash-filter", "note")
+        if filtered.get("ok") is not True:
+            raise AssertionError(f"stash filter failed: {filtered}")
+        state = request("GET", "/state")
+        actions = stash_actions(state)
+        if actions.get("lastAction") != "filter" or actions.get("activeFilter") != "note" or actions.get("filteredCount") != 2:
+            raise AssertionError(f"stash filter state mismatch: {actions}")
+
         copied_all = request("POST", "/qa/stash-copy-all")
         if copied_all.get("ok") is not True:
             raise AssertionError(f"stash copy all failed: {copied_all}")
