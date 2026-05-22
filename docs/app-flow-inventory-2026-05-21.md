@@ -107,7 +107,9 @@ main session.
 - Multi-agent header/settings controls are covered by
   `scripts/agent-actions-proof.py`, which proves deploy, switch, remove, and
   clear route through AppState, update `/state.agentActions`, preserve the
-  active-agent selection, and log visible activity.
+  active-agent selection, and log visible activity. Deploy task-send telemetry
+  exposes `taskSent` and `messageCount`; covered by
+  `scripts/agent-deploy-task-send-proof.py`.
 - Multi-agent Settings toggles are covered by
   `scripts/agent-settings-actions-proof.py`, which proves enable/disable and
   max-concurrent controls route through AppState, persist config, clear agents

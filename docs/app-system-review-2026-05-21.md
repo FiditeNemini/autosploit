@@ -73,7 +73,9 @@ Interaction modes:
   completion.
 - Agent header/settings actions are covered by `scripts/agent-actions-proof.py`:
   deploy, switch, remove, and clear actions route through AppState and expose
-  `/state.agentActions` with agent id/name/type, count, summary, and activity.
+  `/state.agentActions` with agent id/name/type, count, task-send/message-count
+  telemetry, summary, and activity. Deploy task-send telemetry is covered by
+  `scripts/agent-deploy-task-send-proof.py`.
 - Agent Settings controls are covered by
   `scripts/agent-settings-actions-proof.py`: multi-agent enable/disable and
   max-concurrent changes route through AppState, persist settings, update
