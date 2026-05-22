@@ -309,12 +309,18 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state audit checkpoint count mismatch: {app_state_group}")
     if app_state_group.get("auditCompleteCheckpointCount") != audit.get("completeCheckpointCount"):
         raise AssertionError(f"coverage index app state audit complete checkpoint count mismatch: {app_state_group}")
+    if app_state_group.get("auditCheckpointCompletionRatio") != audit.get("checkpointCompletionRatio"):
+        raise AssertionError(f"coverage index app state audit checkpoint completion ratio mismatch: {app_state_group}")
     if app_state_group.get("auditCompleteCheckpoints") != audit.get("completeCheckpoints"):
         raise AssertionError(f"coverage index app state audit complete checkpoint list mismatch: {app_state_group}")
     if app_state_group.get("auditIncompleteCheckpointCount") != audit.get("incompleteCheckpointCount"):
         raise AssertionError(f"coverage index app state audit incomplete checkpoint count mismatch: {app_state_group}")
     if app_state_group.get("auditIncompleteCheckpoints") != audit.get("incompleteCheckpoints"):
         raise AssertionError(f"coverage index app state audit incomplete checkpoint list mismatch: {app_state_group}")
+    if app_state_group.get("auditLatestCheckpoint") != audit.get("latestCheckpoint"):
+        raise AssertionError(f"coverage index app state audit latest checkpoint mismatch: {app_state_group}")
+    if app_state_group.get("auditLatestCheckpointNumber") != audit.get("latestCheckpointNumber"):
+        raise AssertionError(f"coverage index app state audit latest checkpoint number mismatch: {app_state_group}")
     if app_state_group.get("auditCurrentGapCount") != audit.get("currentGapCount"):
         raise AssertionError(f"coverage index app state audit current gap count mismatch: {app_state_group}")
     if app_state_group.get("auditGapSource") != audit.get("gapSource"):

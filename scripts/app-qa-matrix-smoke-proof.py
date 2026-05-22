@@ -511,12 +511,18 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index audit checkpoint count mismatch: {coverage_index}")
     if app_state_group.get("auditCompleteCheckpointCount") != audit_ledger.get("completeCheckpointCount"):
         raise AssertionError(f"/qa/coverage-index audit complete checkpoint count mismatch: {coverage_index}")
+    if app_state_group.get("auditCheckpointCompletionRatio") != audit_ledger.get("checkpointCompletionRatio"):
+        raise AssertionError(f"/qa/coverage-index audit checkpoint completion ratio mismatch: {coverage_index}")
     if app_state_group.get("auditCompleteCheckpoints") != audit_ledger.get("completeCheckpoints"):
         raise AssertionError(f"/qa/coverage-index audit complete checkpoint list mismatch: {coverage_index}")
     if app_state_group.get("auditIncompleteCheckpointCount") != audit_ledger.get("incompleteCheckpointCount"):
         raise AssertionError(f"/qa/coverage-index audit incomplete checkpoint count mismatch: {coverage_index}")
     if app_state_group.get("auditIncompleteCheckpoints") != audit_ledger.get("incompleteCheckpoints"):
         raise AssertionError(f"/qa/coverage-index audit incomplete checkpoint list mismatch: {coverage_index}")
+    if app_state_group.get("auditLatestCheckpoint") != audit_ledger.get("latestCheckpoint"):
+        raise AssertionError(f"/qa/coverage-index audit latest checkpoint mismatch: {coverage_index}")
+    if app_state_group.get("auditLatestCheckpointNumber") != audit_ledger.get("latestCheckpointNumber"):
+        raise AssertionError(f"/qa/coverage-index audit latest checkpoint number mismatch: {coverage_index}")
     if app_state_group.get("auditCurrentGapCount") != audit_ledger.get("currentGapCount"):
         raise AssertionError(f"/qa/coverage-index audit current gap count mismatch: {coverage_index}")
     if app_state_group.get("auditGapSource") != audit_ledger.get("gapSource"):

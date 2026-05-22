@@ -682,7 +682,8 @@ Automated no-model gates:
   `/qa/audit-ledger` artifact, checkpoint, and current-gap rollup counts, so the
   same top-level QA index cross-checks audit totals against source ledger
   domains. It also carries audit missing-capture, complete/incomplete
-  checkpoint, gap source/path, current-gap, open-gap, next-gap, supported-family,
+  checkpoint, checkpoint completion ratio, latest checkpoint path/number, gap
+  source/path, current-gap, open-gap, next-gap, supported-family,
   unsupported-multimodal block, and gap-contract lists/maps, so audit detail is
   not reduced to counts in the aggregate. It also carries
   `/qa/audit-ledger.liveProofOkCount`, `failedLiveProofCount`, and
