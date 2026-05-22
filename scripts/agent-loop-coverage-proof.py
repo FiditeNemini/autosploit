@@ -190,6 +190,8 @@ def run() -> None:
         missing_telemetry = sorted(EXPECTED_ACTION_TELEMETRY_FIELDS.difference(telemetry_fields))
         if missing_telemetry:
             raise AssertionError(f"agent loop telemetry fields missing {missing_telemetry}: {coverage}")
+        if coverage.get("actionTelemetryFieldCount") != len(EXPECTED_ACTION_TELEMETRY_FIELDS):
+            raise AssertionError(f"agent loop telemetry field count mismatch: {coverage}")
         state_keys = set(coverage.get("stateKeys") or [])
         missing_state_keys = sorted(EXPECTED_STATE_KEYS.difference(state_keys))
         if missing_state_keys:
