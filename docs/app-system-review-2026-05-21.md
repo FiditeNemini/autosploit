@@ -474,7 +474,8 @@ Stash:
   reasoning, approval, copy/stash, tool-output expansion, request-audit,
   context inspector, scroll-lock visual, token counter, tool-action/Stash chat
   handoff, visible cache-session header badges, and cache-preserving visible-new-context contracts for the
-  `prefix-cache-l2-turboquant` response path.
+  `prefix-cache-l2-turboquant` response path. The broad app QA matrix also
+  checks the chat cache badge list, count, and parity.
 - Source/op scoping and catalogue inclusion/exclusion are covered by
   `scripts/context-catalog-proof.py`; scored targeted retrieval is covered by
   `scripts/stash-retrieval-proof.py`.

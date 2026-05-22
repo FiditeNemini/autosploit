@@ -273,6 +273,8 @@ through `/state.qaChatVisual.headerBadges` and the seeded visual chat proof;
 `headerCacheBadgeCount`, `headerCacheBadgeParity`, `cacheSessionIndicator`, and
 `newContextSessionBoundary` so the broad app QA matrix locks the visible
 cache-session contract, badge cardinality, and list/count parity.
+`scripts/app-qa-matrix-smoke-proof.py` now checks the same badge list, count,
+and parity as part of the broad app smoke gate.
 - CVE-bearing rows now expose per-row status through `/state.webCVERows` and a
   visible chip on each vulnerability card. The same proof verifies `pending`,
   `enriched`, and active `CVE verifying` row semantics for the seeded Web
