@@ -79,6 +79,11 @@ main session.
 - Chat scroll lock is explicit: locked mode follows the latest output, dragging
   pauses auto-scroll, and the "Latest/New output" control relocks to the newest
   message.
+- Chat copy and stash controls route through AppState: transcript copy,
+  per-message copy, tool-output copy, per-message stash, and latest-assistant
+  stash expose `/state.chatActions`; chat stash also updates
+  `/state.stashActions` through the same `recordStashAdd` path used by the
+  Stash tab. Covered by `scripts/chat-actions-proof.py`.
 - Parses `tool_calls` from the API response.
 - In manual mode, tools require explicit user approval.
 - In copilot/autopilot modes, the loop can execute approved tool calls up to
@@ -567,6 +572,8 @@ Required future proof gates:
 - Chat token metrics, active tool header, approval card, running tool card,
   failed tool card, and streaming reasoning state are captured under
   `docs/visual-proofs/checkpoint-71`.
+- Chat transcript copy, assistant-message copy, message stash, and
+  latest-assistant stash are covered by `scripts/chat-actions-proof.py`.
 - Activity Feed header copy, row copy, row copy-with-timestamp,
   copy-visible, and clear actions now route through AppState and expose
   `/state.activityFeedActions` with last action, status, count, summary, and

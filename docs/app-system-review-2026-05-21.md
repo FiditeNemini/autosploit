@@ -33,6 +33,11 @@ Chat streaming:
   after completion unless the user toggled it.
 - Scroll lock is now explicit: locked mode follows the latest message, dragging
   pauses auto-scroll, and the "Latest/New output" control relocks to bottom.
+- Chat transcript copy, per-message copy, tool-output copy, per-message stash,
+  and latest-assistant stash now route through AppState. `/state.chatActions`
+  exposes action status, role, count, clipboard preview, and last stash item;
+  stash actions update `/state.stashActions` through `recordStashAdd`.
+  Covered by `scripts/chat-actions-proof.py`.
 - Required proof: stream with reasoning on/off, metrics visible after usage,
   manual scroll pause while output streams, relock jump, stop button cancels the
   stream session.
@@ -685,6 +690,7 @@ Visual gates:
   `docs/visual-proofs/checkpoint-109`.
 - Chat scroll locked, paused/new-output, and relock-ready states are captured
   under `docs/visual-proofs/checkpoint-72`.
+- Chat copy/stash action state is covered by `scripts/chat-actions-proof.py`.
 - Reasoning expanded/streaming and collapsed states are captured under
   `docs/visual-proofs/checkpoint-72`; manually reopened is represented by the
   expanded forced state.
