@@ -210,8 +210,15 @@ Stash:
 - Stores reusable raw/context items by type.
 - Filters and searches stash.
 - Can send a bounded item into chat context.
-- Needs retrieval scoring and catalogue integration before it becomes the
-  dynamic context memory layer.
+- Query-scored retrieval now feeds the dynamic context catalogue without forcing
+  all stash items into each prompt. Active-op and global stash are eligible,
+  inactive-op stash is excluded, and label/tag/content/source-tab matches affect
+  rank.
+- `/state.stashRetrieval` exposes the latest retrieval query, candidate count,
+  returned count, top score, and top labels. The Stash tab shows the same compact
+  audit strip after catalogue retrieval.
+- Targeted retrieval is covered by `scripts/stash-retrieval-proof.py`, and the
+  visible audit strip is captured under `docs/visual-proofs/checkpoint-92`.
 
 ## Settings Functions
 
@@ -349,3 +356,5 @@ Required future proof gates:
   `docs/visual-proofs/checkpoint-90`.
 - Report export status and seeded finding state are captured under
   `docs/visual-proofs/checkpoint-91`.
+- Stash retrieval audit state is captured under
+  `docs/visual-proofs/checkpoint-92`.

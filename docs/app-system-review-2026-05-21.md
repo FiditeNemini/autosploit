@@ -73,6 +73,10 @@ Dynamic context:
   same ranked catalogue on demand with a bounded `max_snippets` limit so the
   model can pull targeted notes/assets/findings/CVEs without forcing all context
   into every prompt.
+- Stash retrieval is now query-scored before it enters the dynamic catalogue:
+  active-operation and global stash can be considered, inactive-operation stash
+  is excluded, labels/tags/content/source tab influence score, and the latest
+  retrieval audit is exposed through `/state.stashRetrieval`.
 - Automatic context injection is capped to 4 snippets. Settings stores a bounded
   maximum, but routine model turns stay lean and rely on `search_context` for
   deeper retrieval.
@@ -80,6 +84,10 @@ Dynamic context:
   `scripts/context-catalog-proof.py`: disabled asset/finding/recent-output/stash
   sources stay out of selected snippets, active-op stash and global stash remain
   visible, and inactive-op stash is excluded.
+- Targeted stash retrieval is covered by `scripts/stash-retrieval-proof.py`: a
+  kerberos/golden-ticket query selects the matching active-op note first, keeps
+  unrelated noise out of the bounded context packet, excludes inactive-op stash,
+  and exposes candidate/returned/top-score audit state.
 - Semantic CVE mode invocation is covered by `scripts/semantic-cve-proof.py`,
   which launches the app with a deterministic fake embedder, seeds tiny stored
   vectors, verifies the embedder subprocess was called, and asserts
@@ -218,9 +226,12 @@ Stash:
 
 - Buttons: filters, search, add, copy, send to chat, delete.
 - Chat path: send-to-chat injects bounded stash content into the active chat.
-- State: persisted stash rows plus context catalogue source.
+- State: persisted stash rows plus query-scored context catalogue source.
 - Source/op scoping and catalogue inclusion/exclusion are covered by
-  `scripts/context-catalog-proof.py`.
+  `scripts/context-catalog-proof.py`; scored targeted retrieval is covered by
+  `scripts/stash-retrieval-proof.py`.
+- Visible retrieval audit state is captured under
+  `docs/visual-proofs/checkpoint-92`.
 
 Settings:
 
@@ -397,6 +408,8 @@ Visual gates:
   `docs/visual-proofs/checkpoint-90`.
 - Report export status and generated finding state are captured under
   `docs/visual-proofs/checkpoint-91`.
+- Stash retrieval audit state is captured under
+  `docs/visual-proofs/checkpoint-92`.
 - Remaining visual gap: real-engine cache metrics state.
 
 ## Current Gaps To Close Next
