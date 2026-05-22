@@ -775,6 +775,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions agent loop mode count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopAgents") != agent_loop.get("agents"):
         raise AssertionError(f"coverage index tabs/sessions agent loop agent contract mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("agentLoopAgentContractCount") != agent_loop.get("agentContractCount"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop agent contract count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopRoutes") != agent_loop.get("routes"):
         raise AssertionError(f"coverage index tabs/sessions agent loop routes mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopRouteCount") != agent_loop.get("routeCount"):

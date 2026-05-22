@@ -861,6 +861,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index agent loop mode count mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopAgents") != agent_loop_coverage.get("agents"):
         raise AssertionError(f"/qa/coverage-index agent loop agent contract mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentLoopAgentContractCount") != agent_loop_coverage.get("agentContractCount"):
+        raise AssertionError(f"/qa/coverage-index agent loop agent contract count mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopRoutes") != agent_loop_coverage.get("routes"):
         raise AssertionError(f"/qa/coverage-index agent loop routes mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopRouteCount") != agent_loop_coverage.get("routeCount"):

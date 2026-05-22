@@ -162,6 +162,8 @@ def run() -> None:
         for key in ("inheritsEngine", "inheritsGenerationDefaults", "inheritsReasoning", "inheritsMaxIterations", "searchContextTool"):
             if agent_contract.get(key) is not True:
                 raise AssertionError(f"agent contract missing {key}: {coverage}")
+        if coverage.get("agentContractCount") != len(agent_contract):
+            raise AssertionError(f"agent contract count mismatch: {coverage}")
 
         proofs = set(coverage.get("proofs") or [])
         missing = sorted(EXPECTED_PROOFS.difference(proofs))
