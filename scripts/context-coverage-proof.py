@@ -1,0 +1,131 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import os
+import signal
+import socket
+import subprocess
+import time
+import urllib.error
+import urllib.request
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+APP_API = "http://127.0.0.1:9999"
+
+REQUIRED_CONTRACTS = {
+    "boundedCatalog",
+    "requestAudit",
+    "resultToContext",
+    "agentSearchContext",
+    "embeddingAudit",
+    "stashRetrieval",
+    "newContextCachePreservation",
+}
+
+REQUIRED_ROUTES = {
+    "/qa/context-packet",
+    "/qa/seed-context",
+    "/qa/seed-context-scope",
+    "/qa/seed-catalog-embeddings",
+    "/qa/seed-stash-retrieval",
+    "/qa/seed-semantic-cves",
+}
+
+REQUIRED_PROOFS = {
+    "context-catalog-proof.py",
+    "result-context-catalog-proof.py",
+    "agent-search-context-proof.py",
+    "catalog-embedding-audit-proof.py",
+    "stash-retrieval-proof.py",
+    "request-audit-proof.py",
+    "context-window-cache-proof.py",
+}
+
+
+def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
+    data = None if body is None else body.encode("utf-8")
+    req = urllib.request.Request(f"{APP_API}{path}", data=data, method=method)
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        raw = resp.read().decode("utf-8")
+    return json.loads(raw)
+
+
+def wait_for_app(timeout: float = 15.0) -> None:
+    deadline = time.time() + timeout
+    last_error: Exception | None = None
+    while time.time() < deadline:
+        try:
+            request("GET", "/state", timeout=1.0)
+            return
+        except Exception as exc:
+            last_error = exc
+            time.sleep(0.25)
+    raise RuntimeError(f"app test server did not become ready: {last_error}")
+
+
+def assert_context_coverage() -> None:
+    state = request("GET", "/state")
+    coverage = request("GET", "/qa/context-coverage")
+
+    if coverage.get("ok") is not True:
+        raise AssertionError(f"/qa/context-coverage failed: {coverage}")
+
+    contracts = coverage.get("contracts") or {}
+    missing_contracts = sorted(name for name in REQUIRED_CONTRACTS if contracts.get(name) is not True)
+    if missing_contracts:
+        raise AssertionError(f"context coverage missing contracts {missing_contracts}: {coverage}")
+
+    routes = set(coverage.get("routes") or [])
+    missing_routes = sorted(REQUIRED_ROUTES.difference(routes))
+    if missing_routes:
+        raise AssertionError(f"context coverage missing routes {missing_routes}: {coverage}")
+
+    proofs = set(coverage.get("proofs") or [])
+    missing_proofs = sorted(REQUIRED_PROOFS.difference(proofs))
+    if missing_proofs:
+        raise AssertionError(f"context coverage missing proofs {missing_proofs}: {coverage}")
+    missing_files = sorted(name for name in REQUIRED_PROOFS if not (ROOT / "scripts" / name).is_file())
+    if missing_files:
+        raise AssertionError(f"context coverage names non-existent proof files: {missing_files}")
+
+    if coverage.get("maxSnippetsDefault") != 4:
+        raise AssertionError(f"context coverage should expose bounded default snippets: {coverage}")
+    if coverage.get("searchToolName") != "search_context":
+        raise AssertionError(f"context coverage should expose search_context tool name: {coverage}")
+    if coverage.get("automaticInjectedContextCap") != 4:
+        raise AssertionError(f"context coverage should expose automatic context cap: {coverage}")
+    if not 1 <= coverage.get("currentInjectedContextLimit", 0) <= 4:
+        raise AssertionError(f"context coverage should expose bounded current context limit: {coverage}")
+
+    qa = state.get("qaCoverage") or {}
+    if "/qa/context-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing context coverage route contract: {qa}")
+
+
+def run() -> None:
+    env = os.environ.copy()
+    env["EXPLOITBOT_TESTING"] = "1"
+    subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    app = subprocess.Popen([str(ROOT / "script" / "build_and_run.sh"), "--verify"], cwd=ROOT, env=env)
+
+    try:
+        if app.wait(timeout=30) != 0:
+            raise RuntimeError("build_and_run --verify failed")
+        wait_for_app()
+        assert_context_coverage()
+        print("context-coverage proof passed")
+    finally:
+        subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        if app.poll() is None:
+            app.send_signal(signal.SIGTERM)
+
+
+if __name__ == "__main__":
+    try:
+        run()
+    except (AssertionError, RuntimeError, urllib.error.URLError, TimeoutError, socket.timeout) as exc:
+        print(f"context-coverage proof failed: {exc}", flush=True)
+        raise SystemExit(1)

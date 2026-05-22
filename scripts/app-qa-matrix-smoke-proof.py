@@ -96,6 +96,7 @@ def assert_testserver_smoke() -> None:
     agent_loop_coverage = request("GET", "/qa/agent-loop-coverage")
     tool_flow_coverage = request("GET", "/qa/tool-flow-coverage")
     runtime_coverage = request("GET", "/qa/runtime-coverage")
+    context_coverage = request("GET", "/qa/context-coverage")
 
     required_state_keys = {
         "activeTab",
@@ -136,6 +137,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing tool flow coverage route contract: {qa}")
     if "/qa/runtime-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing runtime coverage route contract: {qa}")
+    if "/qa/context-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing context coverage route contract: {qa}")
     if subtab_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/subtab-coverage failed: {subtab_coverage}")
     if sorted((subtab_coverage.get("tabs") or {}).keys()) != expected_subtab_tabs:
@@ -152,6 +155,14 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/runtime-coverage failed: {runtime_coverage}")
     if runtime_coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"/qa/runtime-coverage cache method mismatch: {runtime_coverage}")
+    if context_coverage.get("ok") is not True:
+        raise AssertionError(f"/qa/context-coverage failed: {context_coverage}")
+    if context_coverage.get("searchToolName") != "search_context":
+        raise AssertionError(f"/qa/context-coverage search tool mismatch: {context_coverage}")
+    if context_coverage.get("automaticInjectedContextCap") != 4:
+        raise AssertionError(f"/qa/context-coverage context cap mismatch: {context_coverage}")
+    if not 1 <= context_coverage.get("currentInjectedContextLimit", 0) <= 4:
+        raise AssertionError(f"/qa/context-coverage current context limit mismatch: {context_coverage}")
 
 
 def run() -> None:

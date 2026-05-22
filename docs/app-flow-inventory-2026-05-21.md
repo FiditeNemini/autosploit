@@ -551,7 +551,13 @@ Current repeatable gates:
   cache invariants are also summarized through `/qa/runtime-coverage`, including
   Qwen/MiniMax support, parser autodetect, model-folder generation defaults,
   prefix-cache/L2/TurboQuant response mode, unsupported-start blocking, and
-  live-proof cache gates.
+  live-proof cache gates. Dynamic context and catalogue invariants are now
+  summarized through `/qa/context-coverage`, including the `search_context`
+  retrieval tool, the fixed automatic context-injection cap, current effective
+  snippet limit, context seed/query QA routes, bounded catalogue injection,
+  request-audit persistence, parsed result-to-context routing, deployed-agent
+  context search, durable embeddings, stash retrieval, and new-context cache
+  preservation proof gates.
 - Visual QA through the local app run script plus screenshots.
 
 Required future proof gates:
