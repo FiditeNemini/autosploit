@@ -474,6 +474,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index incomplete checkpoint list mismatch: {coverage_index}")
     if app_state_group.get("auditLedgerCount", 0) < 300:
         raise AssertionError(f"/qa/coverage-index audit ledger count mismatch: {coverage_index}")
+    if app_state_group.get("auditLiveProofOkCount") != audit_ledger.get("liveProofOkCount"):
+        raise AssertionError(f"/qa/coverage-index audit live proof ok count mismatch: {coverage_index}")
+    if app_state_group.get("auditFailedLiveProofCount") != audit_ledger.get("failedLiveProofCount"):
+        raise AssertionError(f"/qa/coverage-index audit failed live proof count mismatch: {coverage_index}")
+    if app_state_group.get("auditFailedLiveProofs") != audit_ledger.get("failedLiveProofs"):
+        raise AssertionError(f"/qa/coverage-index audit failed live proof list mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerVisualManifests") != artifact_ledger.get("visualManifests"):
         raise AssertionError(f"/qa/coverage-index artifact visual manifest list mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerVisualCaptureStatus") != artifact_ledger.get("visualCaptureStatus"):

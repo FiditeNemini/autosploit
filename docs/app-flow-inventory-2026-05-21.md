@@ -782,6 +782,9 @@ Current repeatable gates:
   count, proof-category total count, and proof-category parity, so the top-level
   index proves the audit rollup is exposing named proof-surface breadth and
   validated all-category accounting, not just total ledger size. It also carries
+  `/qa/audit-ledger.liveProofOkCount`, `failedLiveProofCount`, and
+  `failedLiveProofs`, so failed live JSON evidence remains visible from the
+  top-level QA index. It also carries
   `/qa/audit-ledger.proofLedgerCategoryOtherCount` as
   `auditProofLedgerCategoryOtherCount`, and the broad app QA matrix cross-checks
   both source and audit `other` proof counts through `/qa/coverage-index`. It also carries
