@@ -144,6 +144,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state subtab proof count mismatch: {app_state_group}")
     if app_state_group.get("proofLedgerCount", 0) < 120:
         raise AssertionError(f"coverage index app state proof ledger count mismatch: {app_state_group}")
+    if app_state_group.get("proofLedgerCategoryCounts") != proof.get("categoryCounts"):
+        raise AssertionError(f"coverage index app state proof ledger category counts mismatch: {app_state_group}")
     expected_categories = {
         name: category.get("count")
         for name, category in (proof.get("categories") or {}).items()
