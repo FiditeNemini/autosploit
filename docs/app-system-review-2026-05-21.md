@@ -575,9 +575,9 @@ Automated no-model gates:
   and proof counts, endpoints, and proofs and that every named proof file
   exists. The app-state group also exposes `/state.qaCoverage` state-route
   count, subtab state tab count, subtab state proof count, and the
-  `/qa/proof-ledger` proof count and source proof-ledger category surfaces
-  across all local proof scripts. It also exposes proof category counts and
-  normalized surface names for agent, chat, context,
+  `/qa/proof-ledger` proof count, source proof-ledger category surfaces, and
+  source category-surface count across all local proof scripts. It also exposes
+  proof category counts and normalized surface names for agent, chat, context,
   runtime, settings, tabs, tools, and visual proof surfaces, plus a
   proof-category surface count consumed by the broad app QA matrix and a total
   category count that must match the proof ledger count, including the `other`
