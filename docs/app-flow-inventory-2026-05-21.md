@@ -817,8 +817,11 @@ Current repeatable gates:
   artifacts remain visible from the top-level QA index. The chat/context group
   also mirrors `/qa/chat-coverage.cacheResponsesInferenceMethod`,
   `newModelSessionBehavior`, header cache badge proof count/parity,
-  cache-session field proof count/parity,
-  context retrieval source list/count/parity,
+  cache-session field proof count/parity, chat route list/count, contract
+  map/count, proof list/count, and state-key list/count. It mirrors
+  `/qa/context-coverage` search tool name, automatic/current injection caps,
+  context route list/count, contract map/count, proof list/count, state-key
+  list/count, context retrieval source list/count/parity,
   retrieval-source proof count/parity,
   context delivery mode list/count/parity, and delivery-mode proof
   count/parity, so

@@ -705,7 +705,12 @@ Automated no-model gates:
   map/count for Qwen/MiniMax-only support, the
   `prefix-cache-l2-turboquant` response path, cache-preserving new-context
   boundary, and the checked-in Qwen/MiniMax
-  live replay artifact set. The settings/visuals group exposes Settings surface
+  live replay artifact set. The chat/context group exposes chat route
+  list/count, contract map/count, proof list/count, state-key list/count,
+  context search tool name, automatic/current injection caps, context route
+  list/count, contract map/count, proof list/count, state-key list/count,
+  retrieval-source proof map/count/parity, and delivery-mode proof
+  map/count/parity. The settings/visuals group exposes Settings surface
   list/count/parity, Settings surface proof map/count/parity, visual surface list/count/parity,
   Settings category list/count/current category, Settings route list/count,
   contract map/count, proof list/count, settings visual manifest list/count,

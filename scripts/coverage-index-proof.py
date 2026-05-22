@@ -426,7 +426,45 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context cache session field proof count mismatch: {chat_context_group}")
     if chat_context_group.get("cacheSessionFieldProofParity") != chat_coverage.get("cacheSessionFieldProofParity"):
         raise AssertionError(f"coverage index chat/context cache session field proof parity mismatch: {chat_context_group}")
+    if chat_context_group.get("chatRoutes") != chat_coverage.get("routes"):
+        raise AssertionError(f"coverage index chat/context chat route list mismatch: {chat_context_group}")
+    if chat_context_group.get("chatRouteCount") != len(chat_coverage.get("routes") or []):
+        raise AssertionError(f"coverage index chat/context chat route count mismatch: {chat_context_group}")
+    if chat_context_group.get("chatContracts") != chat_coverage.get("contracts"):
+        raise AssertionError(f"coverage index chat/context chat contract map mismatch: {chat_context_group}")
+    if chat_context_group.get("chatContractCount") != len(chat_coverage.get("contracts") or {}):
+        raise AssertionError(f"coverage index chat/context chat contract count mismatch: {chat_context_group}")
+    if chat_context_group.get("chatProofs") != chat_coverage.get("proofs"):
+        raise AssertionError(f"coverage index chat/context chat proof list mismatch: {chat_context_group}")
+    if chat_context_group.get("chatProofCount") != chat_coverage.get("proofCount"):
+        raise AssertionError(f"coverage index chat/context chat proof count mismatch: {chat_context_group}")
+    if chat_context_group.get("chatStateKeys") != chat_coverage.get("stateKeys"):
+        raise AssertionError(f"coverage index chat/context chat state-key list mismatch: {chat_context_group}")
+    if chat_context_group.get("chatStateKeyCount") != len(chat_coverage.get("stateKeys") or []):
+        raise AssertionError(f"coverage index chat/context chat state-key count mismatch: {chat_context_group}")
     context_coverage = request("GET", "/qa/context-coverage")
+    if chat_context_group.get("searchToolName") != context_coverage.get("searchToolName"):
+        raise AssertionError(f"coverage index chat/context search tool mismatch: {chat_context_group}")
+    if chat_context_group.get("automaticInjectedContextCap") != context_coverage.get("automaticInjectedContextCap"):
+        raise AssertionError(f"coverage index chat/context automatic context cap mismatch: {chat_context_group}")
+    if chat_context_group.get("currentInjectedContextLimit") != context_coverage.get("currentInjectedContextLimit"):
+        raise AssertionError(f"coverage index chat/context current context limit mismatch: {chat_context_group}")
+    if chat_context_group.get("contextRoutes") != context_coverage.get("routes"):
+        raise AssertionError(f"coverage index chat/context context route list mismatch: {chat_context_group}")
+    if chat_context_group.get("contextRouteCount") != len(context_coverage.get("routes") or []):
+        raise AssertionError(f"coverage index chat/context context route count mismatch: {chat_context_group}")
+    if chat_context_group.get("contextContracts") != context_coverage.get("contracts"):
+        raise AssertionError(f"coverage index chat/context context contract map mismatch: {chat_context_group}")
+    if chat_context_group.get("contextContractCount") != len(context_coverage.get("contracts") or {}):
+        raise AssertionError(f"coverage index chat/context context contract count mismatch: {chat_context_group}")
+    if chat_context_group.get("contextProofs") != context_coverage.get("proofs"):
+        raise AssertionError(f"coverage index chat/context context proof list mismatch: {chat_context_group}")
+    if chat_context_group.get("contextProofCount") != context_coverage.get("proofCount"):
+        raise AssertionError(f"coverage index chat/context context proof count mismatch: {chat_context_group}")
+    if chat_context_group.get("contextStateKeys") != context_coverage.get("stateKeys"):
+        raise AssertionError(f"coverage index chat/context context state-key list mismatch: {chat_context_group}")
+    if chat_context_group.get("contextStateKeyCount") != len(context_coverage.get("stateKeys") or []):
+        raise AssertionError(f"coverage index chat/context context state-key count mismatch: {chat_context_group}")
     if chat_context_group.get("retrievalSources") != context_coverage.get("retrievalSources"):
         raise AssertionError(f"coverage index chat/context retrieval sources mismatch: {chat_context_group}")
     if chat_context_group.get("retrievalSourceCount") != context_coverage.get("retrievalSourceCount"):
