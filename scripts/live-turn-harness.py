@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import os
 import signal
+import socket
 import subprocess
 import sys
 import threading
@@ -93,6 +94,42 @@ class MockEngineHandler(BaseHTTPRequestHandler):
                                         "index": 0,
                                         "function": {
                                             "arguments": "{\"command\":\"printf tool-start; sleep 10; printf tool-final-marker\"}"
+                                        },
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+            ]
+        elif "Run web tab status proof" in user_text:
+            events = [
+                {"choices": [{"delta": {"content": "Starting web tool status proof."}}]},
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "id": "call_web_status",
+                                        "type": "function",
+                                        "function": {"name": "search_cve", "arguments": ""},
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "function": {
+                                            "arguments": "{\"query\":\"Apache 2.4.49\",\"max_results\":3}"
                                         },
                                     }
                                 ]
@@ -206,7 +243,10 @@ def wait_for_app(timeout: float = 15.0) -> None:
 def wait_until(predicate, label: str, timeout: float = 12.0):
     deadline = time.time() + timeout
     while time.time() < deadline:
-        value = predicate()
+        try:
+            value = predicate()
+        except (urllib.error.URLError, TimeoutError, socket.timeout):
+            value = None
         if value:
             return value
         time.sleep(0.25)
@@ -218,6 +258,18 @@ def latest_request() -> dict:
         if not MockState.requests:
             raise AssertionError("mock engine did not receive any requests")
         return MockState.requests[-1]
+
+
+def state_when_web_activity():
+    state = request("GET", "/state")
+    if state.get("tabActivities", {}).get("web", {}).get("lastTool") == "search_cve":
+        return state
+    return None
+
+
+def messages_when_at_least(count: int):
+    messages = request("GET", "/messages")
+    return messages if len(messages) >= count else None
 
 
 def assert_contains(haystack: str, needle: str, label: str) -> None:
@@ -246,10 +298,13 @@ def run() -> None:
         request("POST", "/reasoning", "on")
         request("POST", "/send", "Use the context catalogue and check Apache risk")
 
-        messages = wait_until(
-            lambda: request("GET", "/messages") if len(request("GET", "/messages")) >= 4 else None,
-            "autopilot chat/tool loop",
-        )
+        try:
+            messages = wait_until(
+                lambda: messages_when_at_least(4),
+                "autopilot chat/tool loop",
+            )
+        except AssertionError as exc:
+            raise AssertionError(f"{exc}; state={request('GET', '/state')}; messages={request('GET', '/messages')}")
         joined = "\n".join(m["content"] for m in messages)
         assert_contains(joined, "CVE lookup complete", "second streamed assistant response")
         assert any(m.get("tool") == "search_cve" and "ok" in m.get("status", "") for m in messages), messages
@@ -332,6 +387,10 @@ def run() -> None:
             lambda: request("GET", "/state") if not request("GET", "/state").get("isWorking") else None,
             "tool cancellation",
         )
+        wait_until(
+            lambda: request("GET", "/state") if not request("GET", "/state").get("toolExecutor", {}).get("isRunning") else None,
+            "tool subprocess teardown",
+        )
         tool_cancel_messages = request("GET", "/messages")
         shell_cards = [m for m in tool_cancel_messages if m.get("tool") == "run_shell"]
         if not shell_cards:
@@ -341,6 +400,22 @@ def run() -> None:
         shell_output = latest_shell["content"].split("\n", 1)[1] if "\n" in latest_shell["content"] else latest_shell["content"]
         if "tool-final-marker" in shell_output:
             raise AssertionError(f"stop did not interrupt shell tool: {latest_shell}")
+
+        request("POST", "/clear")
+        request("POST", "/mode", "autopilot")
+        request("POST", "/tab", "web")
+        request("POST", "/send", "Run web tab status proof")
+        try:
+            web_activity_state = wait_until(
+                state_when_web_activity,
+                "web tab activity",
+            )
+        except AssertionError as exc:
+            raise AssertionError(f"{exc}; state={request('GET', '/state')}; messages={request('GET', '/messages')}")
+        web_activity = web_activity_state["tabActivities"]["web"]
+        assert web_activity_state["activeTab"] == "web", web_activity_state
+        assert web_activity["status"] in {"running", "failed", "done"}, web_activity_state
+        assert web_activity["count"] >= 1, web_activity_state
 
         print("live-turn harness passed")
     finally:

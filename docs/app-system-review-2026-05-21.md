@@ -201,6 +201,8 @@ Automated no-model gates:
     marker reaches chat;
   - proves `/stop` interrupts a long-running `run_shell` subprocess, marks the
     tool card canceled, and prevents post-sleep output from landing;
+  - proves tool callbacks update per-tab activity state that the tab bar can
+    render as running/done/failed/canceled indicators;
   - proves `search_cve` tool calls execute under autopilot;
   - proves manual mode converts tool calls into suggestions;
   - proves copilot mode pauses for approval and executes after approval.
@@ -216,6 +218,8 @@ Mock-model gates:
 - Stop/cancel during tool execution. Covered by `scripts/live-turn-harness.py`.
 - Context packet observed in the outbound request body. Covered by
   `scripts/live-turn-harness.py`.
+- Per-tab tool activity state. Covered by `scripts/live-turn-harness.py` for
+  the Web/CVE path; visual screenshot coverage still needed.
 
 Real-model gates:
 
@@ -237,7 +241,7 @@ Visual gates:
 ## Current Gaps To Close Next
 
 1. Add a model-callable catalogue search tool.
-2. Add per-tab tool action state from `onToolStart`/`onToolComplete`.
+2. Add visual screenshot coverage for per-tab tool action indicators.
 3. Add mock model server tests for streaming, metrics, reasoning, and tool calls.
 4. Add test fixtures for context catalogue source inclusion/exclusion.
 5. Split app-only Settings apply from engine restart.

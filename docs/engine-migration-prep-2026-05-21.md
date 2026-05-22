@@ -388,6 +388,11 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   `ToolExecutor` status, `ChatService.stop()` marks active tool cards as
   canceled, and the harness proves post-sleep process output does not reach the
   canceled card.
+- Checkpoint 56: Added per-tab tool activity state and a tab-bar indicator for
+  running/done/failed/canceled tool callbacks. TestServer `/state` now exposes
+  tab activity snapshots, the live-turn harness proves the Web/CVE path updates
+  that state, and `WebTabView` no longer mutates CVE search state while
+  rendering cards.
 
 ## Known Risk Areas
 
