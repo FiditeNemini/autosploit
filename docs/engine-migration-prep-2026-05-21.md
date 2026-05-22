@@ -465,6 +465,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   Exploit Reverse Shells/Custom/C2, Post PrivEsc/AD/Lateral, and OSINT
   Username/Email/Metadata/Screenshots under
   `docs/visual-proofs/checkpoint-70`.
+- Checkpoint 71: Added `scripts/visual-chat-proof.py` and QA chat state seeding.
+  The proof captures the chat panel with token metrics, running-tool header,
+  streaming reasoning block, copilot approval card, running tool card, failed
+  tool card, and Stop action under `docs/visual-proofs/checkpoint-71`.
 
 ## Known Risk Areas
 
