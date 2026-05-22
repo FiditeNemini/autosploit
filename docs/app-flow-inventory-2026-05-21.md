@@ -249,7 +249,8 @@ Exploit, Post, OSINT, Report, and Stash is summarized through
 copy routes, row context actions, verify/protocol/hash/exploit/post/OSINT
 actions, report generation/finding/export/agent actions, and Stash add/filter/
 copy/send/delete controls with the focused proof scripts for each lane. It also
-advertises the copy/export/agent seed routes used by those proof fixtures.
+advertises the copy/export/agent and OSINT screenshot seed routes used by those
+proof fixtures.
 Chat/control coverage is summarized through `/qa/chat-coverage`. The aggregate
 ties together Send/Stop, reasoning enable/collapse, approvals, copy/stash
 actions, tool-output expansion, request-audit badges, context inspector state,

@@ -67,6 +67,7 @@ REQUIRED_ROUTES = {
     "/qa/seed-post-attribution",
     "/qa/seed-post-copy-actions",
     "/qa/post-copy",
+    "/qa/seed-osint-screenshot-artifact",
     "/qa/seed-osint-copy-actions",
     "/qa/osint-copy",
     "/qa/osint-artifact-action",
