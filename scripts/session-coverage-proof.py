@@ -82,6 +82,17 @@ REQUIRED_STATE_KEYS = {
     "feedRecent",
 }
 
+REQUIRED_WORKFLOW_SURFACES = [
+    "onboardingModeSelection",
+    "sidebarOperationLifecycle",
+    "windowOverlayControls",
+    "modelFolderSelection",
+    "persistenceAndResultRebuild",
+    "findingWizardSubmit",
+    "tabAndPhaseNavigation",
+    "activityFeedControls",
+]
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -135,6 +146,12 @@ def assert_session_coverage() -> None:
         raise AssertionError(f"session coverage overlay actions mismatch: {coverage}")
     if coverage.get("sidebarActions") != ["createOp", "renameOp", "switchOp", "deleteOp"]:
         raise AssertionError(f"session coverage sidebar actions mismatch: {coverage}")
+    if coverage.get("sessionWorkflowSurfaces") != REQUIRED_WORKFLOW_SURFACES:
+        raise AssertionError(f"session coverage workflow surfaces mismatch: {coverage}")
+    if coverage.get("sessionWorkflowSurfaceCount") != len(REQUIRED_WORKFLOW_SURFACES):
+        raise AssertionError(f"session coverage workflow surface count mismatch: {coverage}")
+    if coverage.get("sessionWorkflowSurfaceParity") is not True:
+        raise AssertionError(f"session coverage workflow surface parity mismatch: {coverage}")
     if coverage.get("proofCount", 0) < len(REQUIRED_PROOFS):
         raise AssertionError(f"session coverage proof count mismatch: {coverage}")
     state_keys = set(coverage.get("stateKeys") or [])

@@ -300,6 +300,22 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/session-coverage mode order mismatch: {session_coverage}")
     if session_coverage.get("sidebarActions") != ["createOp", "renameOp", "switchOp", "deleteOp"]:
         raise AssertionError(f"/qa/session-coverage sidebar action mismatch: {session_coverage}")
+    expected_session_workflow_surfaces = [
+        "onboardingModeSelection",
+        "sidebarOperationLifecycle",
+        "windowOverlayControls",
+        "modelFolderSelection",
+        "persistenceAndResultRebuild",
+        "findingWizardSubmit",
+        "tabAndPhaseNavigation",
+        "activityFeedControls",
+    ]
+    if session_coverage.get("sessionWorkflowSurfaces") != expected_session_workflow_surfaces:
+        raise AssertionError(f"/qa/session-coverage workflow surfaces mismatch: {session_coverage}")
+    if session_coverage.get("sessionWorkflowSurfaceCount") != len(expected_session_workflow_surfaces):
+        raise AssertionError(f"/qa/session-coverage workflow surface count mismatch: {session_coverage}")
+    if session_coverage.get("sessionWorkflowSurfaceParity") is not True:
+        raise AssertionError(f"/qa/session-coverage workflow surface parity mismatch: {session_coverage}")
     if "modeSelection" not in (session_coverage.get("stateKeys") or []):
         raise AssertionError(f"/qa/session-coverage state key mismatch: {session_coverage}")
     if tab_action_coverage.get("ok") is not True:

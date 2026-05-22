@@ -53,7 +53,8 @@ including onboarding and Sidebar mode selection, pending-approval rejection,
 sidebar create/rename/switch/delete, create-op stop behavior, overlays,
 model-folder pickers, persistence across relaunch, saved messages, restored
 results, finding wizard submit, tab switching, phase actions, Activity Feed
-actions, proof-count metadata, and the `stateKeys` those proofs validate.
+actions, proof-count metadata, session workflow surface list/count/parity, and
+the `stateKeys` those proofs validate.
 The coverage payload now lists the phase and Activity Feed QA routes (`/phase`,
 `/qa/seed-activity-actions`, `/qa/activity-action`) plus `proofCount`, so the
 aggregate cannot claim those contracts without exposing the routes.
@@ -692,7 +693,8 @@ Current repeatable gates:
   Session workflow invariants are summarized through `/qa/session-coverage`,
   including onboarding, Sidebar operations, overlays, model-folder pickers,
   persistence, finding-wizard submit, tab switching, phase actions, Activity
-  Feed actions, proof-count metadata, and `stateKeys`.
+  Feed actions, proof-count metadata, session workflow surface list/count/
+  parity, and `stateKeys`.
   The aggregate QA map is exposed through `/qa/coverage-index`; it groups app
   state, chat/context, runtime/cache, settings/visuals, tools/parsers, and
   tabs/sessions endpoints with their proof scripts, and
@@ -778,8 +780,9 @@ Current repeatable gates:
   list/count/parity mirrored from `/qa/tool-flow-coverage`.
   The tabs/sessions group exposes
   interaction-mode count, covered tab count, session state-key count, and
-  action-state-key count, and now mirrors the visible tab activity status
-  list/count/parity plus indicator contract because the tab bar is owned by the
+  action-state-key count, mirrors session workflow surface list/count/parity,
+  and now mirrors the visible tab activity status list/count/parity plus
+  indicator contract because the tab bar is owned by the
   tabs/session surface. Chat/context also exposes state-key count.
 - Visual QA through the local app run script plus screenshots.
 
