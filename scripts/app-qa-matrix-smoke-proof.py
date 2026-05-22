@@ -205,6 +205,21 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/runtime-coverage failed: {runtime_coverage}")
     if runtime_coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"/qa/runtime-coverage cache method mismatch: {runtime_coverage}")
+    expected_runtime_cache_components = [
+        "prefixCache",
+        "promptL2Disk",
+        "pagedKVCache",
+        "blockL2Disk",
+        "turboQuantKV",
+        "ssmCompanionL2",
+        "newContextPreservesEngineSession",
+    ]
+    if runtime_coverage.get("cacheComponents") != expected_runtime_cache_components:
+        raise AssertionError(f"/qa/runtime-coverage cache component list mismatch: {runtime_coverage}")
+    if runtime_coverage.get("cacheComponentCount") != len(expected_runtime_cache_components):
+        raise AssertionError(f"/qa/runtime-coverage cache component count mismatch: {runtime_coverage}")
+    if runtime_coverage.get("cacheComponentParity") is not True:
+        raise AssertionError(f"/qa/runtime-coverage cache component parity mismatch: {runtime_coverage}")
     if runtime_coverage.get("liveProofArtifactCount", 0) < 6:
         raise AssertionError(f"/qa/runtime-coverage live artifact count mismatch: {runtime_coverage}")
     if context_coverage.get("ok") is not True:

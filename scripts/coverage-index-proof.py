@@ -224,6 +224,13 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime supported family mismatch: {runtime_group}")
     if runtime_group.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"coverage index runtime cache response method mismatch: {runtime_group}")
+    runtime_coverage = request("GET", "/qa/runtime-coverage")
+    if runtime_group.get("cacheComponents") != runtime_coverage.get("cacheComponents"):
+        raise AssertionError(f"coverage index runtime cache components mismatch: {runtime_group}")
+    if runtime_group.get("cacheComponentCount") != runtime_coverage.get("cacheComponentCount"):
+        raise AssertionError(f"coverage index runtime cache component count mismatch: {runtime_group}")
+    if runtime_group.get("cacheComponentParity") != runtime_coverage.get("cacheComponentParity"):
+        raise AssertionError(f"coverage index runtime cache component parity mismatch: {runtime_group}")
     chat_context_group = groups.get("chatAndContext") or {}
     chat_coverage = request("GET", "/qa/chat-coverage")
     if chat_context_group.get("stateKeyCount", 0) < 19:

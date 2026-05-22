@@ -542,9 +542,10 @@ Automated no-model gates:
   `/qa/runtime-coverage` exposes the runtime/model/cache proof contract for
   Qwen/MiniMax support, parser autodetect, model-folder generation defaults,
   prefix-cache/L2/TurboQuant response mode, unsupported-start blocking, the
-  runtime route list, proof-count metadata, and checked-in live proof artifact
-  paths for Qwen/MiniMax replay, prefix-skip, no-thinking, and catalogue-shape
-  gates, plus `liveProofArtifactCount` for top-level matrix assertions.
+  runtime route list, proof-count metadata, runtime cache component
+  list/count/parity, and checked-in live proof artifact paths for Qwen/MiniMax
+  replay, prefix-skip, no-thinking, and catalogue-shape gates, plus
+  `liveProofArtifactCount` for top-level matrix assertions.
   `/qa/context-coverage` exposes the dynamic context proof contract for bounded
   catalogue injection, `search_context`, request-audit persistence, parsed
   result-to-context routing, deployed-agent retrieval, durable embeddings,
@@ -643,9 +644,10 @@ Automated no-model gates:
   Qwen/MiniMax support boundary, the Qwen VL block state, `openGapIds`, and the
   `qwenMultimodalRuntime` contract with blocked model kinds plus enforcement
   proofs. The runtime/cache group also exposes `supportedFamilies`,
-  `cacheResponseMethod`, and `liveProofArtifactCount` for Qwen/MiniMax-only
-  support, the `prefix-cache-l2-turboquant` response path, and the checked-in
-  Qwen/MiniMax live replay artifact set. The settings/visuals group exposes
+  `cacheResponseMethod`, cache component list/count/parity, and
+  `liveProofArtifactCount` for Qwen/MiniMax-only support, the
+  `prefix-cache-l2-turboquant` response path, and the checked-in Qwen/MiniMax
+  live replay artifact set. The settings/visuals group exposes
   settings visual manifest count, full visual manifest count, and actual
   screenshot capture count. The tools/parsers group exposes registry tool
   count, callback count, representative family fanout count, and state-key

@@ -639,7 +639,10 @@ Current repeatable gates:
   seed routes that back those contracts. It also exposes checked-in live proof
   artifact paths for MiniMax replay/no-thinking and Qwen hybrid replay,
   full-prefix-skip, and catalogue-prefix-shape gates, plus
-  `liveProofArtifactCount` for matrix-level artifact accounting. Dynamic context and catalogue
+  `liveProofArtifactCount` for matrix-level artifact accounting. It now also
+  exposes runtime cache component list/count/parity for prefix cache, prompt L2
+  disk, paged KV cache, block L2 disk, TurboQuant KV, SSM companion L2, and
+  new-context engine-session preservation. Dynamic context and catalogue
   invariants are now summarized through `/qa/context-coverage`, including the
   `search_context` retrieval tool, the fixed automatic context-injection cap,
   current effective snippet limit, context seed/query QA routes, bounded
@@ -737,10 +740,11 @@ Current repeatable gates:
   block state, `openGapIds`, and the `qwenMultimodalRuntime` contract with
   blocked model kinds plus enforcement proofs. The runtime/cache group
   additionally exposes
-  `supportedFamilies`, `cacheResponseMethod`, and `liveProofArtifactCount`, so
-  Qwen/MiniMax-only support, the `prefix-cache-l2-turboquant` response path, and
-  the checked-in live replay artifacts remain visible from the top-level QA
-  index. The settings/visuals group exposes settings visual manifest count, full
+  `supportedFamilies`, `cacheResponseMethod`, runtime cache component
+  list/count/parity, and `liveProofArtifactCount`, so Qwen/MiniMax-only support,
+  the `prefix-cache-l2-turboquant` response path, and the checked-in live replay
+  artifacts remain visible from the top-level QA index. The settings/visuals
+  group exposes settings visual manifest count, full
   visual manifest count, and actual screenshot capture count. The tools/parsers
   group exposes registry tool count, callback count, representative family
   fanout count, state-key count, visible tab activity statuses, and the tab

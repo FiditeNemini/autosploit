@@ -45,6 +45,16 @@ EXPECTED_LIVE_ARTIFACTS = {
     "qwenHybridCataloguePrefixShape": ("docs/live-proofs/checkpoint-115-qwen-hybrid-catalogue-prefix-shape-live.json", "qwen"),
 }
 
+EXPECTED_CACHE_COMPONENTS = [
+    "prefixCache",
+    "promptL2Disk",
+    "pagedKVCache",
+    "blockL2Disk",
+    "turboQuantKV",
+    "ssmCompanionL2",
+    "newContextPreservesEngineSession",
+]
+
 
 def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
     if isinstance(body, dict):
@@ -105,6 +115,12 @@ def run() -> None:
                 raise AssertionError(f"runtime contract missing {key}: {coverage}")
         if coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
             raise AssertionError(f"wrong cache response method: {coverage}")
+        if coverage.get("cacheComponents") != EXPECTED_CACHE_COMPONENTS:
+            raise AssertionError(f"runtime cache component list mismatch: {coverage}")
+        if coverage.get("cacheComponentCount") != len(EXPECTED_CACHE_COMPONENTS):
+            raise AssertionError(f"runtime cache component count mismatch: {coverage}")
+        if coverage.get("cacheComponentParity") is not True:
+            raise AssertionError(f"runtime cache component parity mismatch: {coverage}")
         if not EXPECTED_PROOFS.issubset(set(coverage.get("proofs") or [])):
             raise AssertionError(f"runtime proof list missing entries: {coverage}")
         if coverage.get("proofCount", 0) < len(EXPECTED_PROOFS):
