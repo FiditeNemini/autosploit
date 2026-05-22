@@ -655,12 +655,12 @@ Current repeatable gates:
   coverage accounting. The app-state group also exposes `/state.qaCoverage`
   state-route count, subtab state tab count, subtab state proof count, and the
   `/qa/proof-ledger` proof count across all local proof scripts. It also exposes
-  proof category counts for agent, chat, context, runtime, settings, tabs,
-  tools, and visual proof surfaces, plus a proof-category surface count consumed
-  by the broad app QA matrix and a total category count that must match the
-  proof ledger count, including the `other` bucket. It also exposes an explicit
-  proof-category parity flag consumed by both the coverage-index proof and the
-  broad app QA matrix. It also exposes
+  proof category counts and normalized surface names for agent, chat, context,
+  runtime, settings, tabs, tools, and visual proof surfaces, plus a
+  proof-category surface count consumed by the broad app QA matrix and a total
+  category count that must match the proof ledger count, including the `other`
+  bucket. It also exposes an explicit proof-category parity flag consumed by
+  both the coverage-index proof and the broad app QA matrix. It also exposes
   `/qa/artifact-ledger`
   visual manifest and live-proof counts so screenshot and live JSON evidence
   stay machine-auditable, including missing visual capture count.
