@@ -528,6 +528,11 @@ def run() -> None:
         state = request("GET", "/state")
         assert state["metrics"]["tokPerSec"] > 0, state
         assert state["metrics"]["ttft"] > 0, state
+        request_context = state.get("requestContext") or {}
+        assert request_context.get("contextInjected") is True, state
+        assert request_context.get("contextSnippetCount", 0) <= 4, state
+        assert request_context.get("toolSchemaCount", 99) <= 12, state
+        assert "search_context" in request_context.get("toolSchemas", []), state
 
         with MockState.lock:
             first_request = MockState.requests[0]

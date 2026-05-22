@@ -534,6 +534,12 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   stay visible, installed external schemas are capped at 12 by default, and
   `scripts/tool-catalog-proof.py` plus `scripts/live-turn-harness.py` prove the
   web lane does not carry unrelated OSINT/exploit schemas.
+- Checkpoint 82: Added request-context visibility. `ChatService` records the
+  last context packet preview, selected snippet count, and exposed tool schema
+  names; `/state.requestContext` exposes them for proof; the chat metrics strip
+  renders compact `ctx` and `tools` counters. `scripts/live-turn-harness.py`
+  proves the state contract and `scripts/visual-chat-proof.py` refreshes the
+  screenshot under `docs/visual-proofs/checkpoint-71`.
 
 ## Known Risk Areas
 

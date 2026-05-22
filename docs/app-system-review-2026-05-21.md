@@ -261,6 +261,8 @@ Automated no-model gates:
     the model to use `search_context` for more targeted retrieval;
   - proves web-tab tool schemas are query bounded and do not include unrelated
     OSINT/exploit schemas in the request body;
+  - proves `/state.requestContext` exposes whether context was injected, how
+    many snippets were selected, and which tool schemas were exposed;
   - proves prefix cache, prompt L2, paged cache, block L2, TurboQuant Q4, and
     model-folder generation defaults remain enabled in runtime config;
   - proves the new-context route clears chat state and token/cached counters
@@ -346,7 +348,7 @@ Visual gates:
 - Reasoning expanded/streaming and collapsed states are captured under
   `docs/visual-proofs/checkpoint-72`; manually reopened is represented by the
   expanded forced state.
-- Token metrics bar seeded state is captured under
+- Token metrics plus context/tool-schema count seeded state is captured under
   `docs/visual-proofs/checkpoint-71`.
 - Tool approval card, running tool card, and failed tool card states are
   captured under `docs/visual-proofs/checkpoint-71`.

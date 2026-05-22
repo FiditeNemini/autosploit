@@ -82,6 +82,9 @@ def assert_seeded_chat_state() -> None:
     metrics = state.get("metrics") or {}
     if metrics.get("tokPerSec", 0) <= 0 or metrics.get("ttft", 0) <= 0:
         raise AssertionError(f"expected visible token metrics in seeded chat state: {state}")
+    request_context = state.get("requestContext") or {}
+    if request_context.get("contextSnippetCount") != 3 or request_context.get("toolSchemaCount") != 6:
+        raise AssertionError(f"expected visible request context counters in seeded chat state: {state}")
 
     messages = request("GET", "/messages")
     required = {
@@ -120,7 +123,7 @@ def run() -> None:
         manifest = {
             "ok": True,
             "captures": [str(target.relative_to(ROOT))],
-            "note": "Cropped macOS capture of seeded chat approval, running tool, failed tool, reasoning, and token metric states.",
+            "note": "Cropped macOS capture of seeded chat approval, running tool, failed tool, reasoning, token metric, context count, and exposed tool-schema count states.",
         }
         (OUT_DIR / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
         print("visual-chat proof passed")
