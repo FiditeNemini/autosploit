@@ -195,6 +195,10 @@ Automated no-model gates:
   - seeds session context through the QA server;
   - proves outbound requests include the dynamic context packet and tools schema;
   - proves streamed reasoning/content/usage metrics are consumed;
+  - proves reasoning-off requests disable both `enable_thinking` and
+    `chat_template_kwargs.enable_thinking`, with no thinking messages emitted;
+  - proves `/stop` interrupts a deliberately slow stream before the final
+    marker reaches chat;
   - proves `search_cve` tool calls execute under autopilot;
   - proves manual mode converts tool calls into suggestions;
   - proves copilot mode pauses for approval and executes after approval.
@@ -203,10 +207,11 @@ Mock-model gates:
 
 - Streaming text with usage metrics. Covered by `scripts/live-turn-harness.py`.
 - Streaming reasoning with reasoning on. Covered by `scripts/live-turn-harness.py`.
-- No-reasoning request path still needs a second mock assertion.
+- No-reasoning request path. Covered by `scripts/live-turn-harness.py`.
 - Tool-call loop under manual/copilot/autopilot. Covered by
   `scripts/live-turn-harness.py`.
-- Stop/cancel during stream and during tool execution.
+- Stop/cancel during stream. Covered by `scripts/live-turn-harness.py`.
+- Stop/cancel during tool execution.
 - Context packet observed in the outbound request body. Covered by
   `scripts/live-turn-harness.py`.
 

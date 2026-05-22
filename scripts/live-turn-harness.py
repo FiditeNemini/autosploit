@@ -51,6 +51,7 @@ class MockEngineHandler(BaseHTTPRequestHandler):
             for message in payload.get("messages", [])
             if message.get("role") == "user"
         )
+        thinking_enabled = bool(payload.get("enable_thinking"))
 
         self.send_response(200)
         self.send_header("Content-Type", "text/event-stream")
@@ -58,9 +59,14 @@ class MockEngineHandler(BaseHTTPRequestHandler):
         self.send_header("Connection", "close")
         self.end_headers()
 
-        if turn == 1 or "Suggest the next Apache check" in user_text or "Ask approval before checking Apache" in user_text:
+        if "Slow stream for cancel" in user_text:
             events = [
-                {"choices": [{"delta": {"reasoning_content": "Need context, then query CVEs."}}]},
+                {"choices": [{"delta": {"content": "slow-start "}}]},
+                {"choices": [{"delta": {"content": "slow-middle "}}]},
+                {"choices": [{"delta": {"content": "slow-final-marker"}}]},
+            ]
+        elif turn == 1 or "Suggest the next Apache check" in user_text or "Ask approval before checking Apache" in user_text:
+            events = [
                 {"choices": [{"delta": {"content": "I will check the seeded service context."}}]},
                 {
                     "choices": [
@@ -103,6 +109,8 @@ class MockEngineHandler(BaseHTTPRequestHandler):
                     "choices": [{"delta": {}}],
                 },
             ]
+            if thinking_enabled:
+                events.insert(0, {"choices": [{"delta": {"reasoning_content": "Need context, then query CVEs."}}]})
         else:
             events = [
                 {"choices": [{"delta": {"content": "CVE lookup complete. Document the finding."}}]},
@@ -117,11 +125,17 @@ class MockEngineHandler(BaseHTTPRequestHandler):
             ]
 
         for event in events:
-            self.wfile.write(f"data: {json.dumps(event)}\n\n".encode("utf-8"))
+            try:
+                self.wfile.write(f"data: {json.dumps(event)}\n\n".encode("utf-8"))
+                self.wfile.flush()
+            except (BrokenPipeError, ConnectionResetError):
+                return
+            time.sleep(0.4 if "Slow stream for cancel" in user_text else 0.05)
+        try:
+            self.wfile.write(b"data: [DONE]\n\n")
             self.wfile.flush()
-            time.sleep(0.05)
-        self.wfile.write(b"data: [DONE]\n\n")
-        self.wfile.flush()
+        except (BrokenPipeError, ConnectionResetError):
+            return
 
     def _json(self, payload: dict) -> None:
         raw = json.dumps(payload).encode("utf-8")
@@ -161,6 +175,13 @@ def wait_until(predicate, label: str, timeout: float = 12.0):
             return value
         time.sleep(0.25)
     raise AssertionError(f"timed out waiting for {label}")
+
+
+def latest_request() -> dict:
+    with MockState.lock:
+        if not MockState.requests:
+            raise AssertionError("mock engine did not receive any requests")
+        return MockState.requests[-1]
 
 
 def assert_contains(haystack: str, needle: str, label: str) -> None:
@@ -231,6 +252,37 @@ def run() -> None:
             "copilot approved tool execution",
         )
         assert any(m.get("tool") == "search_cve" for m in copilot_messages), copilot_messages
+
+        request("POST", "/clear")
+        request("POST", "/mode", "autopilot")
+        request("POST", "/reasoning", "off")
+        request("POST", "/send", "No reasoning path Apache check")
+        no_reasoning_messages = wait_until(
+            lambda: request("GET", "/messages") if any("CVE lookup complete" in m["content"] for m in request("GET", "/messages")) else None,
+            "reasoning-off streamed response",
+        )
+        assert all(m["role"] != "thinking" for m in no_reasoning_messages), no_reasoning_messages
+        no_reasoning_request = latest_request()
+        assert no_reasoning_request["enable_thinking"] is False, no_reasoning_request
+        assert no_reasoning_request["chat_template_kwargs"]["enable_thinking"] is False, no_reasoning_request
+
+        request("POST", "/clear")
+        request("POST", "/reasoning", "on")
+        request("POST", "/send", "Slow stream for cancel")
+        wait_until(
+            lambda: request("GET", "/state") if request("GET", "/state").get("isStreaming") else None,
+            "slow stream start",
+        )
+        request("POST", "/stop")
+        stopped_state = wait_until(
+            lambda: request("GET", "/state") if not request("GET", "/state").get("isWorking") else None,
+            "stream cancellation",
+        )
+        stopped_messages = request("GET", "/messages")
+        stopped_joined = "\n".join(m["content"] for m in stopped_messages)
+        assert not stopped_state["isStreaming"], stopped_state
+        if "slow-final-marker" in stopped_joined:
+            raise AssertionError(f"stop did not interrupt slow stream: {stopped_messages}")
 
         print("live-turn harness passed")
     finally:

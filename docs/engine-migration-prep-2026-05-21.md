@@ -377,6 +377,12 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   seeds context, verifies outbound dynamic-context/tool-schema payloads, consumes
   streamed reasoning/content/usage metrics, and proves `search_cve` tool-call
   behavior across autopilot, manual, and copilot approval modes.
+- Checkpoint 54: Extended the live-turn harness with reasoning-off and
+  stream-cancel proof. The mock now emits reasoning only when
+  `enable_thinking` is requested, asserts both request-level thinking flags are
+  false when reasoning is off, exposes `isWorking` through `/state`, and proves
+  `/stop` interrupts a deliberately slow stream before the final marker lands
+  in chat.
 
 ## Known Risk Areas
 
