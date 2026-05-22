@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import signal
 import socket
 import subprocess
@@ -42,6 +43,13 @@ def expected_checkpoints() -> list[Path]:
     return sorted((ROOT / "docs" / "checkpoints").glob("*.md"))
 
 
+def checkpoint_number(path: Path) -> int:
+    match = re.search(r"checkpoint-(\d+)\.md$", path.name)
+    if not match:
+        raise AssertionError(f"checkpoint doc missing numeric suffix: {path.relative_to(ROOT)}")
+    return int(match.group(1))
+
+
 def checkpoint_has_required_sections(path: Path) -> bool:
     text = path.read_text(encoding="utf-8")
     return all(section in text for section in REQUIRED_SECTIONS)
@@ -52,6 +60,7 @@ def assert_checkpoint_ledger() -> None:
     ledger = request("GET", "/qa/checkpoint-ledger")
     checkpoints = expected_checkpoints()
     expected_paths = [str(path.relative_to(ROOT)) for path in checkpoints]
+    expected_latest = str(max(checkpoints, key=checkpoint_number).relative_to(ROOT))
     expected_complete = sorted(
         str(path.relative_to(ROOT))
         for path in checkpoints
@@ -69,8 +78,10 @@ def assert_checkpoint_ledger() -> None:
         raise AssertionError(f"checkpoint ledger complete count mismatch: {ledger}")
     if ledger.get("incompleteCheckpoints") != expected_incomplete:
         raise AssertionError(f"checkpoint ledger incomplete list mismatch expected {expected_incomplete}: {ledger}")
-    if ledger.get("latestCheckpoint") != expected_paths[-1]:
-        raise AssertionError(f"checkpoint ledger latest checkpoint mismatch: {ledger}")
+    if ledger.get("latestCheckpoint") != expected_latest:
+        raise AssertionError(f"checkpoint ledger latest checkpoint mismatch expected {expected_latest}: {ledger}")
+    if ledger.get("latestCheckpointNumber") != checkpoint_number(max(checkpoints, key=checkpoint_number)):
+        raise AssertionError(f"checkpoint ledger latest number mismatch: {ledger}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/checkpoint-ledger" not in qa.get("stateRoutes", []):
