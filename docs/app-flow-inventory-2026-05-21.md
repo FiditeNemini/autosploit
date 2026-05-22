@@ -616,6 +616,8 @@ Current repeatable gates:
   state, chat/context, runtime/cache, settings/visuals, tools/parsers, and
   tabs/sessions endpoints with their proof scripts, and
   `scripts/coverage-index-proof.py` verifies every named proof file exists.
+  Each group also exposes `endpointCount` and `proofCount` for machine-readable
+  coverage accounting.
 - Visual QA through the local app run script plus screenshots.
 
 Required future proof gates:

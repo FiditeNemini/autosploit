@@ -111,10 +111,16 @@ def assert_coverage_index() -> None:
     if missing_groups:
         raise AssertionError(f"coverage index missing groups {missing_groups}: {index}")
     for name, group in groups.items():
-        if not group.get("endpoints"):
+        endpoints_for_group = group.get("endpoints") or []
+        proofs_for_group = group.get("proofs") or []
+        if not endpoints_for_group:
             raise AssertionError(f"coverage index group has no endpoints {name}: {group}")
-        if not group.get("proofs"):
+        if not proofs_for_group:
             raise AssertionError(f"coverage index group has no proofs {name}: {group}")
+        if group.get("endpointCount") != len(endpoints_for_group):
+            raise AssertionError(f"coverage index group endpoint count mismatch {name}: {group}")
+        if group.get("proofCount") != len(proofs_for_group):
+            raise AssertionError(f"coverage index group proof count mismatch {name}: {group}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/coverage-index" not in qa.get("stateRoutes", []):

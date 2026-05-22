@@ -548,8 +548,9 @@ Automated no-model gates:
   the `prefix-cache-l2-turboquant` response path.
   `/qa/coverage-index` exposes the aggregate QA map across app state,
   chat/context, runtime/cache, settings/visuals, tools/parsers, and tabs/
-  sessions; `scripts/coverage-index-proof.py` verifies each group has endpoints
-  and proofs and that every named proof file exists.
+  sessions; `scripts/coverage-index-proof.py` verifies each group has endpoint
+  and proof counts, endpoints, and proofs and that every named proof file
+  exists.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.
