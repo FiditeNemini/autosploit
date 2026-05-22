@@ -489,7 +489,8 @@ Automated no-model gates:
   contract. `/qa/subtab-coverage` exposes the live registry/default/active
   subtab state for audit. `/qa/agent-loop-coverage` exposes manual, copilot,
   autopilot, and deployed-agent loop guarantees plus the proof scripts that
-  cover them.
+  cover them. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
+  context-catalog proof contract for model-issued tool calls.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.

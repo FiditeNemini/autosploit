@@ -94,6 +94,7 @@ def assert_testserver_smoke() -> None:
     results = request("GET", "/results")
     subtab_coverage = request("GET", "/qa/subtab-coverage")
     agent_loop_coverage = request("GET", "/qa/agent-loop-coverage")
+    tool_flow_coverage = request("GET", "/qa/tool-flow-coverage")
 
     required_state_keys = {
         "activeTab",
@@ -130,6 +131,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing subtab coverage route contract: {qa}")
     if "/qa/agent-loop-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing agent loop coverage route contract: {qa}")
+    if "/qa/tool-flow-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing tool flow coverage route contract: {qa}")
     if subtab_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/subtab-coverage failed: {subtab_coverage}")
     if sorted((subtab_coverage.get("tabs") or {}).keys()) != expected_subtab_tabs:
@@ -138,6 +141,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/agent-loop-coverage failed: {agent_loop_coverage}")
     if agent_loop_coverage.get("modes") != {"autopilot": "execute", "copilot": "approval", "manual": "suggest"}:
         raise AssertionError(f"/qa/agent-loop-coverage mode contract mismatch: {agent_loop_coverage}")
+    if tool_flow_coverage.get("ok") is not True:
+        raise AssertionError(f"/qa/tool-flow-coverage failed: {tool_flow_coverage}")
+    if tool_flow_coverage.get("toolCount") != 38 or tool_flow_coverage.get("callbackCount") != 3:
+        raise AssertionError(f"/qa/tool-flow-coverage registry counters mismatch: {tool_flow_coverage}")
 
 
 def run() -> None:

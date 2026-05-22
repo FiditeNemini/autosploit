@@ -545,7 +545,9 @@ Current repeatable gates:
   machine-readable `/qa/subtab-coverage` route against the live subtab registry.
   The same matrix also checks `/qa/agent-loop-coverage` for manual suggestion,
   copilot approval, autopilot execution, and deployed-agent forced-autopilot
-  inheritance coverage.
+  inheritance coverage. It now also checks `/qa/tool-flow-coverage`, which ties
+  the tool registry, parser routing, representative family fanout, and
+  context-catalog tool-output proofs into one auditable contract.
 - Visual QA through the local app run script plus screenshots.
 
 Required future proof gates:
