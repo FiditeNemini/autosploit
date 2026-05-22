@@ -505,6 +505,10 @@ def assert_testserver_smoke() -> None:
     if ((index_groups.get("tabsAndSessions") or {}).get("actionStateKeyCount", 0)) < 26:
         raise AssertionError(f"/qa/coverage-index action state key count mismatch: {coverage_index}")
     tabs_sessions_group = index_groups.get("tabsAndSessions") or {}
+    if tabs_sessions_group.get("subtabTabs") != subtab_coverage.get("tabs"):
+        raise AssertionError(f"/qa/coverage-index subtab tab map mismatch: {coverage_index}")
+    if tabs_sessions_group.get("subtabProofCount") != subtab_coverage.get("proofCount"):
+        raise AssertionError(f"/qa/coverage-index subtab proof count mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopPhaseProofs") != agent_loop_coverage.get("loopPhaseProofs"):
         raise AssertionError(f"/qa/coverage-index agent loop phase proof map mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopPhaseProofCount") != agent_loop_coverage.get("loopPhaseProofCount"):

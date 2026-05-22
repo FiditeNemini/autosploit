@@ -697,7 +697,8 @@ Automated no-model gates:
   list/count/parity plus proof map/count/parity from `/qa/tool-flow-coverage`.
   The tabs/sessions group exposes
   interaction-mode count, covered tab
-  count, session state-key count, session workflow surface list/count/parity,
+  count, session state-key count, subtab tab maps and proof count,
+  session workflow surface list/count/parity,
   session workflow surface proof count/parity,
   tab action surface list/count/parity, tab action surface proof count/parity,
   action-state-key count, agent-loop
