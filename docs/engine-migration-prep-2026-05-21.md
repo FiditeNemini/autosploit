@@ -552,15 +552,23 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   `/qa/chat-context-inspector` and `scripts/visual-context-inspector-proof.py`
   prove the expanded state with screenshot artifact
   `docs/visual-proofs/checkpoint-84/chat-context-inspector.png`.
+- Checkpoint 102: Closed the partial-block block-L2 lookup gap. `PagedCacheManager`
+  now checks the final short block against `BlockDiskStore` after all preceding
+  full blocks match, so short prompts and final partial prefixes can promote
+  from L2 after restart. `scripts/prove-block-l2-cache.py` now writes and
+  reopens both a full 4-token quantized KV block and a 3-token partial block;
+  proof artifact `docs/live-proofs/checkpoint-102-block-l2-partial-proof.json`
+  shows `disk_writes=2`, `disk_hits=2`, and both promoted blocks returning no
+  remaining prompt tokens.
 
 ## Known Risk Areas
 
 - ExploitBot currently has a custom stripped server contract. Replacing `server.py` wholesale may expose endpoints the app does not need.
 - vMLX cache code has schema and runtime fingerprinting. Cache schema mismatches must invalidate old L2 entries rather than replaying them.
 - Qwen hybrid SSM cache restore is correctness-sensitive. Do not trim recurrent state by slicing KV arrays.
-- Full-block block L2 promotion is proven with direct quantized KV cache data;
-  partial-block cross-run lookup still needs a persisted partial-size index or
-  a model prompt long enough to produce complete 64-token blocks.
+- Full and final-partial block L2 promotion are proven with direct quantized KV
+  cache data. Real-model cross-run block-L2 hits still need a long enough live
+  run or an explicit restart/replay proof under the actual model path.
 - MiniMax public MTP is not available from released weights; do not represent MiniMax MTP as supported unless tensor evidence exists.
 - JANGTQ2 can be quality-limited on some families. The app UI should label it as a memory tier rather than default premium tier.
 

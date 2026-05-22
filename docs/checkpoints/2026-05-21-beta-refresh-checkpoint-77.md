@@ -36,11 +36,18 @@ The proof report shows:
 - `promoted_block.type=quantized_kv`
 - `promoted_table.num_tokens=4`
 - `promoted_table.remaining=[]`
+- Checkpoint 102 extends this same direct proof to final partial blocks:
+  `docs/live-proofs/checkpoint-102-block-l2-partial-proof.json` proves a
+  3-token quantized KV block can be promoted from block L2 after reopening the
+  disk store.
 
 ## Remaining
 
 - This is a direct cache proof, not a full model-generation proof.
-- MiniMax still needs a clear-memory live run to prove full KV attention,
-  TurboQuant cache encode/decode, and L2 hits under the actual model path.
+- MiniMax strict live proof now covers full KV attention, TurboQuant cache
+  metadata, and repeat prefix-cache reuse. A restart/replay live proof under
+  the actual model path is still needed before claiming cross-run block-L2 hits
+  in production.
 - Qwen live proof already shows repeated-prompt in-memory prefix reuse and SSM
-  companion storage; async rederive and cross-run disk hit proof remain open.
+  companion storage; async rederive and real-model restart/replay disk hit
+  proof remain open.

@@ -1,0 +1,56 @@
+{
+  "ok": true,
+  "stored_tokens": {
+    "full": 4,
+    "partial": 3
+  },
+  "write_stats": {
+    "blocks_on_disk": 2,
+    "disk_size_bytes": 1808,
+    "disk_size_gb": 0.0,
+    "total_accesses": 0,
+    "disk_hits": 0,
+    "disk_misses": 0,
+    "disk_writes": 2,
+    "disk_evictions": 0
+  },
+  "promoted_full_table": {
+    "block_ids": [
+      1
+    ],
+    "num_tokens": 4,
+    "remaining": []
+  },
+  "promoted_partial_table": {
+    "block_ids": [
+      2
+    ],
+    "num_tokens": 3,
+    "remaining": []
+  },
+  "paged_stats": {
+    "cache_hits": 2,
+    "cache_misses": 1,
+    "disk_hits": 2,
+    "disk_misses": 0
+  },
+  "read_stats": {
+    "blocks_on_disk": 2,
+    "disk_size_bytes": 1808,
+    "disk_size_gb": 0.0,
+    "total_accesses": 1,
+    "disk_hits": 2,
+    "disk_misses": 0,
+    "disk_writes": 0,
+    "disk_evictions": 0
+  },
+  "promoted_full_block": {
+    "type": "quantized_kv",
+    "token_count": 4
+  },
+  "promoted_partial_block": {
+    "type": "quantized_kv",
+    "token_count": 3
+  },
+  "cache_dir": "temporary"
+}

@@ -413,6 +413,11 @@ Real-model gates:
   reopen the disk store, and promote the full block through
   `BlockAwarePrefixCache.fetch_cache()` with `disk_writes=1`, `disk_hits=1`,
   and `promoted_block.type=quantized_kv`.
+- Partial-block block L2 proof is captured at
+  `docs/live-proofs/checkpoint-102-block-l2-partial-proof.json`. The same
+  direct MLX proof now writes, reopens, and promotes both a full 4-token
+  quantized KV block and a 3-token final partial block with `disk_writes=2`,
+  `disk_hits=2`, and empty remaining prompts for both.
 - Parser API proof is captured at
   `docs/live-proofs/checkpoint-79-parser-api-proof.json`. It proves configured
   Qwen reasoning/tool parsers convert one mixed output into cleaned assistant
