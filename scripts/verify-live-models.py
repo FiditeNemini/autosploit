@@ -365,6 +365,34 @@ def _assert_ssm_rederive_behavior(
         raise RuntimeError("ssm rederive check failed: expected requested/completed status without failures")
 
 
+def _assert_ssm_companion_hit_behavior(
+    report: dict[str, Any],
+    replay_run_cache: dict[str, Any],
+) -> None:
+    rederive = _ssm_rederive_stats(replay_run_cache)
+    checks = report.get("restart_replay_cache_checks") or {}
+    requested = _int_at({"rederive": rederive}, ("rederive", "requested"))
+    failed = _int_at({"rederive": rederive}, ("rederive", "failed"))
+    disk_hits = _int_at(replay_run_cache, ("ssm_companion", "disk", "hits"))
+    if disk_hits <= 0:
+        disk_hits = _int_at(
+            replay_run_cache,
+            ("scheduler_cache", "ssm_companion_cache", "disk", "hits"),
+        )
+    ssm_delta = int(checks.get("ssm_l2_hits_delta") or 0)
+    result = {
+        "disk_hit": disk_hits > 0 or ssm_delta > 0,
+        "disk_hits": disk_hits,
+        "ssm_l2_hits_delta": ssm_delta,
+        "no_rederive": requested == 0,
+        "no_failures": failed == 0,
+        "rederive_state": rederive.get("state"),
+    }
+    report["ssm_companion_hit_checks"] = result
+    if not result["disk_hit"] or not result["no_rederive"] or not result["no_failures"]:
+        raise RuntimeError("ssm companion hit check failed: expected SSM L2 disk hit without rederive fallback")
+
+
 def _chat_completion(
     base_url: str,
     model_name: str,
@@ -461,6 +489,7 @@ def verify_live_model(
     restart_replay: bool = False,
     block_l2_only_replay: bool = False,
     require_ssm_rederive: bool = False,
+    require_ssm_companion_hit: bool = False,
 ) -> dict[str, Any]:
     port = _find_free_port()
     path = Path(path).expanduser().resolve()
@@ -469,6 +498,7 @@ def verify_live_model(
     report["restart_replay"] = restart_replay
     report["block_l2_only_replay"] = block_l2_only_replay
     report["require_ssm_rederive"] = require_ssm_rederive
+    report["require_ssm_companion_hit"] = require_ssm_companion_hit
 
     if not report["expected_ok"]:
         raise RuntimeError(f"{path} is {report['family']}, expected {family}")
@@ -520,6 +550,11 @@ def verify_live_model(
             )
             if require_ssm_rederive:
                 _assert_ssm_rederive_behavior(
+                    report,
+                    replay_run_cache=replay_run.get("cache_stats", {}),
+                )
+            if require_ssm_companion_hit:
+                _assert_ssm_companion_hit_behavior(
                     report,
                     replay_run_cache=replay_run.get("cache_stats", {}),
                 )
@@ -618,9 +653,9 @@ def verify_live_model(
 def run(args: argparse.Namespace) -> dict[str, Any]:
     reports: dict[str, Any] = {}
     if args.qwen:
-        reports["qwen"] = verify_live_model(args.qwen, "qwen", args.prompt, args.timeout, args.metadata_only, args.restart_replay, args.block_l2_only_replay, args.require_ssm_rederive)
+        reports["qwen"] = verify_live_model(args.qwen, "qwen", args.prompt, args.timeout, args.metadata_only, args.restart_replay, args.block_l2_only_replay, args.require_ssm_rederive, args.require_ssm_companion_hit)
     if args.minimax:
-        reports["minimax"] = verify_live_model(args.minimax, "minimax", args.prompt, args.timeout, args.metadata_only, args.restart_replay, args.block_l2_only_replay, args.require_ssm_rederive)
+        reports["minimax"] = verify_live_model(args.minimax, "minimax", args.prompt, args.timeout, args.metadata_only, args.restart_replay, args.block_l2_only_replay, args.require_ssm_rederive, args.require_ssm_companion_hit)
     if args.unsupported:
         reports["unsupported"] = inspect_model_folder(args.unsupported, expected_family="unsupported")
         if reports["unsupported"]["supported"]:
@@ -639,6 +674,7 @@ def main() -> int:
     parser.add_argument("--restart-replay", action="store_true", help="Run two engine processes against the same cache root and require cross-process L2 cache-hit evidence")
     parser.add_argument("--block-l2-only-replay", action="store_true", help="Run restart replay with prompt L2 disabled so replay must hit block L2 disk cache")
     parser.add_argument("--require-ssm-rederive", action="store_true", help="Require replay cache stats to show SSM rederive requested and completed without failures")
+    parser.add_argument("--require-ssm-companion-hit", action="store_true", help="Require replay cache stats to show an SSM companion L2 hit without rederive fallback")
     parser.add_argument("--timeout", type=float, default=900.0, help="Seconds to wait for each live model to load/respond")
     parser.add_argument("--prompt", default="Reply with one short sentence for an ExploitBot cache/parser smoke test.")
     parser.add_argument("--output", help="Optional JSON report path")

@@ -508,6 +508,13 @@ Real-model gates:
   and `scheduler_tokens_saved_delta=64`, then records SSM re-derive
   `requested=true`, `completed=true`, `reason=missing_companion`, and no
   failures.
+- Qwen hybrid full prefix skip is covered by
+  `scripts/verify-live-models.py --block-l2-only-replay
+  --require-ssm-companion-hit` and
+  `docs/live-proofs/checkpoint-113-qwen-hybrid-full-prefix-skip-live.json`:
+  prompt L2 is disabled, replay reports `block_l2_hits_delta=2`,
+  `ssm_l2_hits_delta=1`, `scheduler_tokens_saved_delta=112`, `cached_tokens=112`,
+  and no rederive fallback.
 - Reasoning/tool parser API shaping is covered by
   `scripts/prove-parser-api.py` and `testsuite/test_tool_parser_api.py`.
 - Settings/message/result-store persistence is covered by
@@ -573,6 +580,5 @@ Visual gates:
 1. Debug MiniMax forced no-thinking decode/API output separately from the
    supported thinking-enabled smoke path; the strict live proof and restart
    replay proof now pass with non-empty assistant content and cache reuse.
-2. Add a full hybrid prefix-skip proof where the replayed KV prefix has a
-   matching SSM companion checkpoint. Checkpoint 112 proves the live
-   missing-companion re-derive fallback, not a KV+SSM full skip.
+2. Expand the full hybrid prefix-skip proof to more prompt shapes and any
+   multimodal Qwen path that needs the same key discipline.

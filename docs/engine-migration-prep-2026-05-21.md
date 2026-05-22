@@ -632,6 +632,15 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   TurboQuant Q4 metadata, and SSM re-derive `requested=true`,
   `completed=true`, `reason=missing_companion`, `state=completed`, with no
   failures.
+- Checkpoint 113: Fixed text scheduler prefix-cache lookup keys to strip
+  `_gen_prompt_len`, matching the store path and the multimodal scheduler. Added
+  `--require-ssm-companion-hit` and proved a full Qwen hybrid prefix skip with
+  prompt L2 disabled. Artifact
+  `docs/live-proofs/checkpoint-113-qwen-hybrid-full-prefix-skip-live.json`
+  loaded Qwen twice and replayed through block L2 plus SSM companion L2:
+  `block_l2_hits_delta=2`, `scheduler_tokens_saved_delta=112`,
+  `ssm_l2_hits_delta=1`, `cached_tokens=112`, `prompt_l2_hits_delta=0`, and
+  `no_rederive=true`.
 
 ## Known Risk Areas
 
@@ -643,10 +652,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
 - New visible context windows are proven to preserve the running engine cache
   topology, but this is app/session-state proof and does not replace real-model
   cross-run disk replay proof.
-- Qwen hybrid SSM re-derive is live-proven for the missing-companion fallback
-  path. A full hybrid prefix skip from KV plus a matching SSM companion remains
-  a separate proof because SSM state is cumulative and cannot be sliced from a
-  longer checkpoint.
+- Qwen hybrid SSM behavior is live-proven for both the missing-companion
+  re-derive fallback and a full KV+SSM companion prefix skip under a repeated
+  text prompt. SSM state is cumulative; do not slice longer checkpoints for
+  shorter prefixes.
 - MiniMax public MTP is not available from released weights; do not represent MiniMax MTP as supported unless tensor evidence exists.
 - JANGTQ2 can be quality-limited on some families. The app UI should label it as a memory tier rather than default premium tier.
 
