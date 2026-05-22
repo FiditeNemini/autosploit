@@ -723,8 +723,9 @@ Real-model gates:
   defaults, prefix cache, prompt L2, paged cache, block L2, and TurboQuant Q4.
 - App-level model-folder warning state is covered by
   `scripts/model-folder-warning-proof.py`: temporary Qwen and MiniMax fixtures
-  are accepted, and an unsupported fixture exposes the required Qwen/MiniMax
-  parser/cache warning through `/state.modelFolderInfo`.
+  are accepted, Qwen VL/multimodal fixtures expose `isMultimodal=true` and are
+  blocked as not yet supported, and an unsupported fixture exposes the required
+  Qwen/MiniMax parser/cache warning through `/state.modelFolderInfo`.
 - Unsupported folder start-blocking is covered by
   `scripts/unsupported-model-start-proof.py`: an unsupported fixture cannot
   start the engine, `engineRunning` remains false, `/state.engineError` carries
@@ -933,5 +934,6 @@ Visual gates:
 
 ## Current Gaps To Close Next
 
-1. Add any Qwen multimodal path that needs the same prefix-cache key discipline
-   once the app keeps a multimodal Qwen model in the supported beta lane.
+1. Add the real Qwen multimodal runtime path and prefix-cache key discipline
+   once the app intentionally promotes a multimodal Qwen model into the
+   supported beta lane. Until then, Qwen VL folders are detected but blocked.

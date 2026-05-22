@@ -458,9 +458,13 @@ Stash:
 Model:
 
 - User selects a model folder by path or browse panel.
-- `ModelFolderInspector` detects family, model type, and config files.
+- `ModelFolderInspector` detects family, model type, config files, and
+  multimodal/VL shape.
 - UI warns when the folder is not Qwen or MiniMax, and the Engine settings page
   shows a disabled `Blocked` control after an unsupported start attempt.
+- Qwen VL/multimodal folders are explicitly flagged as not yet supported in the
+  beta lane even though their family is Qwen, preventing text-only parser/cache
+  assumptions from being applied to image-token models.
 - Curated S/M/L profile selection is removed.
 
 Runtime Autodetect:
@@ -668,8 +672,8 @@ Required future proof gates:
   detection. Covered by `testsuite/test_live_model_verifier.py`.
 - App-level model-folder warning state: covered by
   `scripts/model-folder-warning-proof.py`, which uses temporary fixtures and
-  verifies Qwen/MiniMax support plus unsupported parser/cache warning text
-  through `/state.modelFolderInfo`.
+  verifies Qwen/MiniMax support, Qwen VL/multimodal blocking, and unsupported
+  parser/cache warning text through `/state.modelFolderInfo`.
 - Unsupported folder start-blocking: covered by
   `scripts/unsupported-model-start-proof.py`, which verifies the engine remains
   stopped, `healthStatus=blocked`, and `/state.engineError` explains the
