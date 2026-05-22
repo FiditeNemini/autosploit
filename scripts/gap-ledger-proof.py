@@ -81,6 +81,18 @@ def assert_gap_ledger() -> None:
         raise AssertionError(f"gap ledger should record Qwen VL is blocked: {ledger}")
     if set(ledger.get("supportedFamilies") or []) != {"qwen", "minimax"}:
         raise AssertionError(f"gap ledger supported families mismatch: {ledger}")
+    if "qwenMultimodalRuntime" not in (ledger.get("openGapIds") or []):
+        raise AssertionError(f"gap ledger missing qwen multimodal gap id: {ledger}")
+    qwen_gap = (ledger.get("gapContracts") or {}).get("qwenMultimodalRuntime") or {}
+    if qwen_gap.get("status") != "blocked":
+        raise AssertionError(f"qwen multimodal gap should be blocked: {ledger}")
+    if qwen_gap.get("supportedFamilies") != ["qwen", "minimax"]:
+        raise AssertionError(f"qwen multimodal gap supported families mismatch: {qwen_gap}")
+    if set(qwen_gap.get("blockedModelKinds") or []) != {"qwen-vl", "qwen-multimodal"}:
+        raise AssertionError(f"qwen multimodal blocked kinds mismatch: {qwen_gap}")
+    required_proofs = {"model-folder-warning-proof.py", "unsupported-model-start-proof.py"}
+    if not required_proofs.issubset(set(qwen_gap.get("proofs") or [])):
+        raise AssertionError(f"qwen multimodal gap missing enforcement proofs: {qwen_gap}")
     if ledger.get("nextGap") != expected_gaps[0]:
         raise AssertionError(f"gap ledger next gap mismatch: {ledger}")
 
