@@ -146,6 +146,14 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state proof ledger count mismatch: {app_state_group}")
     if app_state_group.get("proofLedgerCategoryCounts") != proof.get("categoryCounts"):
         raise AssertionError(f"coverage index app state proof ledger category counts mismatch: {app_state_group}")
+    if app_state_group.get("proofLedgerCategorySurfaces") != proof.get("categorySurfaces"):
+        raise AssertionError(f"coverage index app state proof ledger category surfaces mismatch: {app_state_group}")
+    if app_state_group.get("proofLedgerCategorySurfaceCount") != proof.get("categorySurfaceCount"):
+        raise AssertionError(f"coverage index app state proof ledger category surface count mismatch: {app_state_group}")
+    if app_state_group.get("proofLedgerCategoryTotalCount") != proof.get("categoryTotalCount"):
+        raise AssertionError(f"coverage index app state proof ledger category total count mismatch: {app_state_group}")
+    if app_state_group.get("proofLedgerCategoryParity") != proof.get("categoryParity"):
+        raise AssertionError(f"coverage index app state proof ledger category parity mismatch: {app_state_group}")
     expected_categories = {
         name: category.get("count")
         for name, category in (proof.get("categories") or {}).items()

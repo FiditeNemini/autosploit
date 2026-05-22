@@ -580,8 +580,8 @@ Automated no-model gates:
   parity across all local proof scripts. It also exposes proof category counts
   and normalized surface names for agent, chat, context, runtime, settings,
   tabs, tools, and visual proof surfaces, plus a direct
-  `/qa/proof-ledger.categoryCounts` rollup, proof-category surface count
-  consumed by the broad app QA matrix, and a total
+  `/qa/proof-ledger` category counts/surfaces/surface-count/total/parity
+  rollup, proof-category surface count consumed by the broad app QA matrix, and a total
   category count that must match the proof ledger count, including the `other`
   bucket. It also exposes an explicit proof-category parity flag consumed by
   both the coverage-index proof and the broad app QA matrix. It also exposes
