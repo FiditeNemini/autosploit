@@ -133,8 +133,15 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index visual manifest count mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("actualCaptureCount", 0) < 48:
         raise AssertionError(f"coverage index visual capture count mismatch: {settings_visuals_group}")
-    if (groups.get("toolsAndParsers") or {}).get("stateKeyCount", 0) < 5:
-        raise AssertionError(f"coverage index tools/parsers state key count mismatch: {groups.get('toolsAndParsers')}")
+    tools_parsers_group = groups.get("toolsAndParsers") or {}
+    if tools_parsers_group.get("toolCount", 0) < 38:
+        raise AssertionError(f"coverage index tools/parsers tool count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("callbackCount", 0) < 3:
+        raise AssertionError(f"coverage index tools/parsers callback count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("familyFanoutCount", 0) < 7:
+        raise AssertionError(f"coverage index tools/parsers family fanout count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("stateKeyCount", 0) < 5:
+        raise AssertionError(f"coverage index tools/parsers state key count mismatch: {tools_parsers_group}")
     if (groups.get("tabsAndSessions") or {}).get("stateKeyCount", 0) < 12:
         raise AssertionError(f"coverage index tabs/sessions state key count mismatch: {groups.get('tabsAndSessions')}")
     if (groups.get("tabsAndSessions") or {}).get("actionStateKeyCount", 0) < 26:

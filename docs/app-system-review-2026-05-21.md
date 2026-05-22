@@ -576,9 +576,10 @@ Automated no-model gates:
   exists. The runtime/cache group also exposes `liveProofArtifactCount` for the
   checked-in Qwen/MiniMax live replay artifact set. The settings/visuals group
   exposes settings visual manifest count, full visual manifest count, and actual
-  screenshot capture count. Chat/context, tools/parsers, and tabs/sessions
-  groups expose state-key counts, and tabs/sessions also exposes
-  `actionStateKeyCount`.
+  screenshot capture count. The tools/parsers group exposes registry tool
+  count, callback count, representative family fanout count, and state-key
+  count. Chat/context and tabs/sessions groups expose state-key counts, and
+  tabs/sessions also exposes `actionStateKeyCount`.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.
