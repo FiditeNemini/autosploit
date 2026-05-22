@@ -664,7 +664,10 @@ Current repeatable gates:
   and new-context cache preservation proof gates. It now exposes `proofCount`
   and `/context/new` so cache-preserving context resets stay visible in the
   aggregate, plus `stateKeys` and retrieval source list/count/parity for
-  context audit surfaces. The source list names asset ports, findings, raw tool
+  context audit surfaces. It also exposes context delivery mode list/count/
+  parity for automatic bounded injection, on-demand `search_context`, persisted
+  turn audit, durable embeddings, and active-scope stash retrieval. The source
+  list names asset ports, findings, raw tool
   output, stash notes, and CVEs as bounded dynamic catalogue inputs. Tab action
   coverage also exposes `actionStateKeys`, so the matrix
   can verify the AppState surfaces behind per-tab copy/stash/export/tool
@@ -762,7 +765,8 @@ Current repeatable gates:
   session boundary, and the checked-in live replay
   artifacts remain visible from the top-level QA index. The chat/context group
   also mirrors `/qa/chat-coverage.cacheResponsesInferenceMethod`,
-  `newModelSessionBehavior`, and context retrieval source list/count/parity, so
+  `newModelSessionBehavior`, context retrieval source list/count/parity, and
+  context delivery mode list/count/parity, so
   bounded dynamic catalogue source coverage and cache-session preservation remain
   visible from the aggregate QA index. The
   settings/visuals group exposes settings visual manifest count, full

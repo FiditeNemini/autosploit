@@ -555,7 +555,11 @@ Automated no-model gates:
   result-to-context routing, deployed-agent retrieval, durable embeddings,
   targeted stash retrieval, new-context cache preservation, the `/context/new`
   route, proof-count metadata, `stateKeys`, and retrieval source
-  list/count/parity for the context audit surfaces.
+  list/count/parity for the context audit surfaces. It also exposes
+  `contextDeliveryModes`, `contextDeliveryModeCount`, and
+  `contextDeliveryModeParity` so automatic bounded injection, on-demand
+  `search_context`, persisted turn audit, durable embeddings, and active-scope
+  stash retrieval are visible as separate anti-context-flooding paths.
   `/qa/visual-coverage` exposes screenshot-backed UI proof coverage for chat,
   scroll lock, Settings, context inspector, request-audit badges, tab activity,
   subtab lifecycle strips, OSINT screenshots, reports, stash retrieval,
@@ -614,7 +618,8 @@ Automated no-model gates:
   `headerCacheBadgeCount`, `headerCacheBadgeParity`, `cacheSessionIndicator`, and
   `newContextSessionBoundary`, plus `cacheResponsesInferenceMethod`,
   `newModelSessionBehavior`, cache-session field list/count/parity, and it
-  mirrors `/qa/context-coverage` retrieval source list/count/parity, so
+  mirrors `/qa/context-coverage` retrieval source list/count/parity plus
+  context delivery mode list/count/parity, so
   the aggregate coverage map carries the same visible cache-session and bounded
   dynamic-context source contracts as the detailed endpoints.
   `/qa/checkpoint-ledger` exposes checkpoint documentation count,

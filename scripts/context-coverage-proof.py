@@ -64,6 +64,14 @@ REQUIRED_RETRIEVAL_SOURCES = [
     "cve",
 ]
 
+REQUIRED_DELIVERY_MODES = [
+    "automaticBoundedInjection",
+    "onDemandSearchContext",
+    "persistedTurnAudit",
+    "durableEmbeddingIndex",
+    "activeScopeStashRetrieval",
+]
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -127,6 +135,12 @@ def assert_context_coverage() -> None:
         raise AssertionError(f"context coverage retrieval source count mismatch: {coverage}")
     if coverage.get("retrievalSourceParity") is not True:
         raise AssertionError(f"context coverage retrieval source parity mismatch: {coverage}")
+    if coverage.get("contextDeliveryModes") != REQUIRED_DELIVERY_MODES:
+        raise AssertionError(f"context coverage delivery modes mismatch: {coverage}")
+    if coverage.get("contextDeliveryModeCount") != len(REQUIRED_DELIVERY_MODES):
+        raise AssertionError(f"context coverage delivery mode count mismatch: {coverage}")
+    if coverage.get("contextDeliveryModeParity") is not True:
+        raise AssertionError(f"context coverage delivery mode parity mismatch: {coverage}")
     state_keys = set(coverage.get("stateKeys") or [])
     missing_state_keys = sorted(REQUIRED_STATE_KEYS.difference(state_keys))
     if missing_state_keys:

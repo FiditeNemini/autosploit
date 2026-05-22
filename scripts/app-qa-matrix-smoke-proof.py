@@ -263,6 +263,19 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/context-coverage retrieval source count mismatch: {context_coverage}")
     if context_coverage.get("retrievalSourceParity") is not True:
         raise AssertionError(f"/qa/context-coverage retrieval source parity mismatch: {context_coverage}")
+    expected_context_delivery_modes = [
+        "automaticBoundedInjection",
+        "onDemandSearchContext",
+        "persistedTurnAudit",
+        "durableEmbeddingIndex",
+        "activeScopeStashRetrieval",
+    ]
+    if context_coverage.get("contextDeliveryModes") != expected_context_delivery_modes:
+        raise AssertionError(f"/qa/context-coverage delivery modes mismatch: {context_coverage}")
+    if context_coverage.get("contextDeliveryModeCount") != len(expected_context_delivery_modes):
+        raise AssertionError(f"/qa/context-coverage delivery mode count mismatch: {context_coverage}")
+    if context_coverage.get("contextDeliveryModeParity") is not True:
+        raise AssertionError(f"/qa/context-coverage delivery mode parity mismatch: {context_coverage}")
     if "requestContext" not in (context_coverage.get("stateKeys") or []):
         raise AssertionError(f"/qa/context-coverage state key mismatch: {context_coverage}")
     if settings_coverage.get("ok") is not True:

@@ -266,6 +266,12 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context retrieval source count mismatch: {chat_context_group}")
     if chat_context_group.get("retrievalSourceParity") != context_coverage.get("retrievalSourceParity"):
         raise AssertionError(f"coverage index chat/context retrieval source parity mismatch: {chat_context_group}")
+    if chat_context_group.get("contextDeliveryModes") != context_coverage.get("contextDeliveryModes"):
+        raise AssertionError(f"coverage index chat/context delivery modes mismatch: {chat_context_group}")
+    if chat_context_group.get("contextDeliveryModeCount") != context_coverage.get("contextDeliveryModeCount"):
+        raise AssertionError(f"coverage index chat/context delivery mode count mismatch: {chat_context_group}")
+    if chat_context_group.get("contextDeliveryModeParity") != context_coverage.get("contextDeliveryModeParity"):
+        raise AssertionError(f"coverage index chat/context delivery mode parity mismatch: {chat_context_group}")
     settings_visuals_group = groups.get("settingsAndVisuals") or {}
     if settings_visuals_group.get("settingsVisualManifestCount", 0) < 6:
         raise AssertionError(f"coverage index settings visual manifest count mismatch: {settings_visuals_group}")
