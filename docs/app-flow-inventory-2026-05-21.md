@@ -140,7 +140,12 @@ Web:
 - Shows web hosts, vulnerabilities, CVE data, and finding creation entrypoints.
 - Can stash selected content and prefill the finding wizard.
 - Uses `CVEService` directly for visible CVE search/lookup.
-- Needs CVE/tool progress indicators on the related buttons and rows.
+- Verify rows now expose queued progress state tied to `/state.webAction` and
+  Web tab activity. `scripts/web-verify-action-proof.py` verifies the target,
+  finding title, prompt, and running tab badge; the visible queued button state
+  is captured under `docs/visual-proofs/checkpoint-96`.
+- CVE search/lookup still uses direct service state; broader per-row CVE
+  progress remains part of the remaining tool-progress polish.
 
 Network:
 
@@ -377,5 +382,7 @@ Required future proof gates:
   `docs/visual-proofs/checkpoint-94`.
 - OSINT screenshot artifact actions are captured under
   `docs/visual-proofs/checkpoint-95`.
+- Web Verify queued/progress state is captured under
+  `docs/visual-proofs/checkpoint-96`.
 - Unsupported model-folder warning and blocked engine states are captured under
   `docs/visual-proofs/checkpoint-93`.

@@ -148,8 +148,12 @@ Web:
 - Verify now routes through chat with a focused prompt containing target,
   finding title, source, CVE, and description for minimal safe evidence
   collection.
-- State: web hosts, vulns, CVE lookup details.
-- Missing work: visual proof for Verify and tool progress badges.
+- State: web hosts, vulns, CVE lookup details, and queued Verify action state.
+- Verify action state is covered by `scripts/web-verify-action-proof.py`: a
+  seeded finding records `/state.webAction`, preserves the exact verification
+  prompt, and marks the Web tab activity state as running/verify.
+- Visible Verify button progress state is captured under
+  `docs/visual-proofs/checkpoint-96`.
 
 Network:
 
@@ -434,6 +438,8 @@ Visual gates:
   `docs/visual-proofs/checkpoint-94`.
 - OSINT screenshot artifact actions are captured under
   `docs/visual-proofs/checkpoint-95`.
+- Web Verify queued/progress state is captured under
+  `docs/visual-proofs/checkpoint-96`.
 - Remaining visual gap: real-engine cache metrics state.
 
 ## Current Gaps To Close Next
