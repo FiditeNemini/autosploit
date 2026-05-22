@@ -264,6 +264,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state current gap count mismatch: {app_state_group}")
     if app_state_group.get("openGapIds") != gap.get("openGapIds"):
         raise AssertionError(f"coverage index app state open gap ids mismatch: {app_state_group}")
+    if app_state_group.get("gapContracts") != gap.get("gapContracts"):
+        raise AssertionError(f"coverage index app state gap contracts mismatch: {app_state_group}")
     if app_state_group.get("gapContractCount") != len(gap.get("gapContracts") or {}):
         raise AssertionError(f"coverage index app state gap contract count mismatch: {app_state_group}")
     if "qwenMultimodalRuntime" not in (app_state_group.get("openGapIds") or []):
