@@ -766,11 +766,23 @@ def run() -> None:
         assert cache_state["engineConfig"]["pagedCache"] is True, cache_state
         assert cache_state["engineConfig"]["blockL2Disk"] is True, cache_state
         assert cache_state["engineConfig"]["kvCacheQuantization"] == "turboquant-q4", cache_state
+        assert cache_state["engineConfig"]["useModelGenerationDefaults"] is True, cache_state
+        assert "promptTokens" in cache_state["metrics"], cache_state
+        assert "completionTokens" in cache_state["metrics"], cache_state
+        assert "cachedTokens" in cache_state["metrics"], cache_state
         request("POST", "/context/new")
         new_context_state = request("GET", "/state")
         assert new_context_state["msgs"] == 0, new_context_state
         assert new_context_state["model"] == "mock-qwen-jang", new_context_state
         assert new_context_state["engineConfig"]["prefixCache"] is True, new_context_state
+        assert new_context_state["engineConfig"]["promptL2Disk"] is True, new_context_state
+        assert new_context_state["engineConfig"]["pagedCache"] is True, new_context_state
+        assert new_context_state["engineConfig"]["blockL2Disk"] is True, new_context_state
+        assert new_context_state["engineConfig"]["kvCacheQuantization"] == "turboquant-q4", new_context_state
+        assert new_context_state["engineConfig"]["useModelGenerationDefaults"] is True, new_context_state
+        assert new_context_state["metrics"]["promptTokens"] == 0, new_context_state
+        assert new_context_state["metrics"]["completionTokens"] == 0, new_context_state
+        assert new_context_state["metrics"]["cachedTokens"] == 0, new_context_state
 
         print("live-turn harness passed")
     finally:

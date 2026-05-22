@@ -509,6 +509,11 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   `docs/live-proofs/checkpoint-77-block-l2-quantized-proof.json` with
   `disk_writes=1`, `disk_hits=1`, `promoted_block.type=quantized_kv`, and no
   remaining prompt tokens.
+- Checkpoint 78: Tightened the new-context proof. The QA `/state` payload now
+  exposes prompt, completion, and cached token counters, and
+  `scripts/live-turn-harness.py` proves `/context/new` clears chat/counters
+  while preserving prefix cache, prompt L2, paged cache, block L2, TurboQuant
+  Q4 KV cache, and model-folder generation defaults.
 
 ## Known Risk Areas
 

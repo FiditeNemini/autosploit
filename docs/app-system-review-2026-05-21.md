@@ -258,8 +258,8 @@ Automated no-model gates:
     the model to use `search_context` for more targeted retrieval;
   - proves prefix cache, prompt L2, paged cache, block L2, TurboQuant Q4, and
     model-folder generation defaults remain enabled in runtime config;
-  - proves the new-context route clears chat state without changing model or
-    cache defaults;
+  - proves the new-context route clears chat state and token/cached counters
+    without changing model or cache defaults;
   - proves `search_cve` tool calls execute under autopilot;
   - proves manual mode converts tool calls into suggestions;
   - proves copilot mode pauses for approval and executes after approval.
@@ -318,6 +318,10 @@ Real-model gates:
 - Full-block block L2 quantized write/read/promotion is covered by
   `scripts/prove-block-l2-cache.py`; a full real-model cross-run block L2 hit
   remains open.
+- New-context reset semantics are covered by `scripts/live-turn-harness.py`:
+  the mock-engine app clears chat plus prompt/completion/cached counters while
+  preserving prefix, prompt L2, paged, block L2, TurboQuant Q4, and
+  model-folder generation-default flags.
 
 Visual gates:
 
