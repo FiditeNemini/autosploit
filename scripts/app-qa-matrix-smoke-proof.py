@@ -89,12 +89,16 @@ def assert_required_context_hooks() -> None:
 
 
 def assert_testserver_smoke() -> None:
+    seeded = request("POST", "/qa/seed-result-parser-fixture")
+    if seeded.get("ok") is not True:
+        raise AssertionError(f"result parser fixture seed failed: {seeded}")
     state = request("GET", "/state")
     messages = request("GET", "/messages")
     results = request("GET", "/results")
     subtab_coverage = request("GET", "/qa/subtab-coverage")
     agent_loop_coverage = request("GET", "/qa/agent-loop-coverage")
     tool_flow_coverage = request("GET", "/qa/tool-flow-coverage")
+    result_parser_coverage = request("GET", "/qa/result-parser-coverage")
     runtime_coverage = request("GET", "/qa/runtime-coverage")
     context_coverage = request("GET", "/qa/context-coverage")
     settings_coverage = request("GET", "/qa/settings-coverage")
@@ -592,6 +596,16 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index structured parser tool set mismatch: {coverage_index}")
     if tools_parsers_group.get("resultParserRawOnlyTools") != ["bettercap", "chisel", "pwncat", "sliver", "tshark"]:
         raise AssertionError(f"/qa/coverage-index raw-only parser tool set mismatch: {coverage_index}")
+    if tools_parsers_group.get("resultParserCounts") != result_parser_coverage.get("counts"):
+        raise AssertionError(f"/qa/coverage-index result-parser counts mismatch: {coverage_index}")
+    if tools_parsers_group.get("resultParserParsedTools") != result_parser_coverage.get("parsedTools"):
+        raise AssertionError(f"/qa/coverage-index result-parser parsed tools mismatch: {coverage_index}")
+    if tools_parsers_group.get("resultParserRawOnlyParsedTools") != result_parser_coverage.get("rawOnlyTools"):
+        raise AssertionError(f"/qa/coverage-index result-parser raw-only parsed tools mismatch: {coverage_index}")
+    if tools_parsers_group.get("resultParserFailures") != result_parser_coverage.get("failures"):
+        raise AssertionError(f"/qa/coverage-index result-parser failures mismatch: {coverage_index}")
+    if tools_parsers_group.get("resultParserFailureCount") != len(result_parser_coverage.get("failures") or []):
+        raise AssertionError(f"/qa/coverage-index result-parser failure count mismatch: {coverage_index}")
     if tools_parsers_group.get("toolFlowProofCount") != tool_flow_coverage.get("proofCount"):
         raise AssertionError(f"/qa/coverage-index tool-flow proof count mismatch: {coverage_index}")
     if tools_parsers_group.get("toolFlowProofs") != tool_flow_coverage.get("proofs"):

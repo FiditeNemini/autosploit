@@ -144,6 +144,9 @@ def wait_for_app(timeout: float = 15.0) -> None:
 
 
 def assert_coverage_index() -> None:
+    seeded = request("POST", "/qa/seed-result-parser-fixture")
+    if seeded.get("ok") is not True:
+        raise AssertionError(f"result parser fixture seed failed: {seeded}")
     state = request("GET", "/state")
     index = request("GET", "/qa/coverage-index")
     proof = request("GET", "/qa/proof-ledger")
@@ -481,6 +484,17 @@ def assert_coverage_index() -> None:
     if tools_parsers_group.get("stateKeyCount", 0) < 5:
         raise AssertionError(f"coverage index tools/parsers state key count mismatch: {tools_parsers_group}")
     tool_flow = request("GET", "/qa/tool-flow-coverage")
+    result_parser = request("GET", "/qa/result-parser-coverage")
+    if tools_parsers_group.get("resultParserCounts") != result_parser.get("counts"):
+        raise AssertionError(f"coverage index tools/parsers result-parser counts mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("resultParserParsedTools") != result_parser.get("parsedTools"):
+        raise AssertionError(f"coverage index tools/parsers result-parser parsed tools mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("resultParserRawOnlyParsedTools") != result_parser.get("rawOnlyTools"):
+        raise AssertionError(f"coverage index tools/parsers result-parser raw-only tools mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("resultParserFailures") != result_parser.get("failures"):
+        raise AssertionError(f"coverage index tools/parsers result-parser failures mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("resultParserFailureCount") != len(result_parser.get("failures") or []):
+        raise AssertionError(f"coverage index tools/parsers result-parser failure count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolFlowProofCount") != tool_flow.get("proofCount"):
         raise AssertionError(f"coverage index tools/parsers tool-flow proof count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolFlowProofs") != tool_flow.get("proofs"):
