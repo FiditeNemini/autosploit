@@ -435,6 +435,11 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   search mode, `/state` exposes `osintLifecycle`, and the live-turn harness
   proves a long-running Sherlock-style command moves to running and then
   canceled through `/stop`.
+- Checkpoint 66: Added `scripts/context-catalog-proof.py` and QA routes for
+  source/scope context verification. Dynamic context now passes active operation
+  identity into `ContextCatalogService`, stash context is limited to global
+  entries plus the active operation, and the proof script verifies disabled
+  assets/findings/recent-output/stash sources do not enter selected snippets.
 
 ## Known Risk Areas
 

@@ -244,6 +244,8 @@ Current repeatable gates:
 
 - `swift build --package-path ExploitBot`
 - `cd ExploitBotEngine && PYTHONPATH=. uv run --extra dev pytest -q`
+- `python3 scripts/live-turn-harness.py`
+- `python3 scripts/context-catalog-proof.py`
 - `git diff --check`
 - Static scans proving no S/M/L profile selectors or `ModelProfile` code remain.
 - Visual QA through the local app run script plus screenshots.

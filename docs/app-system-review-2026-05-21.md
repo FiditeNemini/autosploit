@@ -73,9 +73,11 @@ Dynamic context:
 - Automatic context injection is capped to 4 snippets. Settings stores a bounded
   maximum, but routine model turns stay lean and rely on `search_context` for
   deeper retrieval.
-- Required proof: prompt with seeded assets/stash/CVEs injects only configured
-  top snippets; disabling a source removes that source; semantic CVE mode calls
-  the embedder when available.
+- Source controls and operation scoping are covered by
+  `scripts/context-catalog-proof.py`: disabled asset/finding/recent-output/stash
+  sources stay out of selected snippets, active-op stash and global stash remain
+  visible, and inactive-op stash is excluded.
+- Required proof still open: semantic CVE mode calls the embedder when available.
 
 Storage:
 
@@ -215,6 +217,8 @@ Automated no-model gates:
 - Static scans for removed zombie profile code and required context hooks.
 - TestServer `/state`, `/messages`, `/results` smoke.
 - Context catalogue seeded-state smoke.
+- Context catalogue source inclusion/exclusion and active-op stash scoping via
+  `scripts/context-catalog-proof.py`.
 - Chat scroll lock visual smoke.
 - `scripts/live-turn-harness.py` mock-engine proof:
   - attaches a mock OpenAI-compatible stream endpoint;
@@ -284,6 +288,5 @@ Visual gates:
 ## Current Gaps To Close Next
 
 1. Add visual screenshot coverage for per-tab tool action indicators.
-2. Add test fixtures for context catalogue source inclusion/exclusion.
-3. Split app-only Settings apply from engine restart.
+2. Split app-only Settings apply from engine restart.
 4. Add live model verification scripts for Qwen and MiniMax folders.
