@@ -146,10 +146,15 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers family fanout count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("stateKeyCount", 0) < 5:
         raise AssertionError(f"coverage index tools/parsers state key count mismatch: {tools_parsers_group}")
-    if (groups.get("tabsAndSessions") or {}).get("stateKeyCount", 0) < 12:
-        raise AssertionError(f"coverage index tabs/sessions state key count mismatch: {groups.get('tabsAndSessions')}")
-    if (groups.get("tabsAndSessions") or {}).get("actionStateKeyCount", 0) < 26:
-        raise AssertionError(f"coverage index tabs/sessions action state key count mismatch: {groups.get('tabsAndSessions')}")
+    tabs_sessions_group = groups.get("tabsAndSessions") or {}
+    if tabs_sessions_group.get("interactionModeCount", 0) < 3:
+        raise AssertionError(f"coverage index tabs/sessions mode count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("coveredTabCount", 0) < 9:
+        raise AssertionError(f"coverage index tabs/sessions tab count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("stateKeyCount", 0) < 12:
+        raise AssertionError(f"coverage index tabs/sessions state key count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("actionStateKeyCount", 0) < 26:
+        raise AssertionError(f"coverage index tabs/sessions action state key count mismatch: {tabs_sessions_group}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/coverage-index" not in qa.get("stateRoutes", []):

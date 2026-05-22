@@ -655,8 +655,9 @@ Current repeatable gates:
   index. The settings/visuals group exposes settings visual manifest count, full
   visual manifest count, and actual screenshot capture count. The tools/parsers
   group exposes registry tool count, callback count, representative family
-  fanout count, and state-key count. Chat/context and tabs/sessions groups also
-  expose state-key counts, with `actionStateKeyCount` on tabs/sessions.
+  fanout count, and state-key count. The tabs/sessions group exposes
+  interaction-mode count, covered tab count, session state-key count, and
+  action-state-key count. Chat/context also exposes state-key count.
 - Visual QA through the local app run script plus screenshots.
 
 Required future proof gates:

@@ -580,8 +580,9 @@ Automated no-model gates:
   settings visual manifest count, full visual manifest count, and actual
   screenshot capture count. The tools/parsers group exposes registry tool
   count, callback count, representative family fanout count, and state-key
-  count. Chat/context and tabs/sessions groups expose state-key counts, and
-  tabs/sessions also exposes `actionStateKeyCount`.
+  count. The tabs/sessions group exposes interaction-mode count, covered tab
+  count, session state-key count, and action-state-key count. Chat/context also
+  exposes state-key count.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.
