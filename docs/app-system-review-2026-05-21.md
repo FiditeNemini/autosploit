@@ -741,6 +741,9 @@ Visual gates:
   `scripts/stash-row-context-actions-proof.py`.
 - Activity Feed copy-entry/copy-timestamp/copy-visible/clear state is covered
   by `scripts/activity-feed-actions-proof.py`.
+- Sidebar create/switch/rename/delete operation actions route through AppState
+  and expose `/state.sidebarActions`; covered by
+  `scripts/sidebar-actions-proof.py`.
 - Web Verify queued/progress state is captured under
   `docs/visual-proofs/checkpoint-96`.
 - Recon Full Recon running state is captured under
