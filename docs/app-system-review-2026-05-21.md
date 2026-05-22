@@ -523,7 +523,9 @@ Automated no-model gates:
   `/qa/runtime-coverage` exposes the runtime/model/cache proof contract for
   Qwen/MiniMax support, parser autodetect, model-folder generation defaults,
   prefix-cache/L2/TurboQuant response mode, unsupported-start blocking, the
-  runtime route list, and proof-count metadata.
+  runtime route list, proof-count metadata, and checked-in live proof artifact
+  paths for Qwen/MiniMax replay, prefix-skip, no-thinking, and catalogue-shape
+  gates.
   `/qa/context-coverage` exposes the dynamic context proof contract for bounded
   catalogue injection, `search_context`, request-audit persistence, parsed
   result-to-context routing, deployed-agent retrieval, durable embeddings,

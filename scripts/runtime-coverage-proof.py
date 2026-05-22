@@ -36,6 +36,15 @@ EXPECTED_ROUTES = {
     "/qa/seed-live-cache-stats",
 }
 
+EXPECTED_LIVE_ARTIFACTS = {
+    "minimaxRestartReplay": ("docs/live-proofs/checkpoint-110-minimax-restart-replay-live.json", "minimax"),
+    "minimaxBlockL2Replay": ("docs/live-proofs/checkpoint-111-minimax-block-l2-restart-replay-live.json", "minimax"),
+    "qwenHybridBlockL2SSMReplay": ("docs/live-proofs/checkpoint-112-qwen-hybrid-block-l2-ssm-restart-replay-live.json", "qwen"),
+    "qwenHybridFullPrefixSkip": ("docs/live-proofs/checkpoint-113-qwen-hybrid-full-prefix-skip-live.json", "qwen"),
+    "minimaxNoThinking": ("docs/live-proofs/checkpoint-114-minimax-no-thinking-live.json", "minimax"),
+    "qwenHybridCataloguePrefixShape": ("docs/live-proofs/checkpoint-115-qwen-hybrid-catalogue-prefix-shape-live.json", "qwen"),
+}
+
 
 def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
     if isinstance(body, dict):
@@ -108,6 +117,18 @@ def run() -> None:
             item = live.get(family) or {}
             if item.get("metadata") is not True or item.get("repeatCache") is not True:
                 raise AssertionError(f"runtime live proof missing {family} metadata/cache checks: {coverage}")
+        artifacts = coverage.get("liveProofArtifacts") or {}
+        for name, (path, family) in EXPECTED_LIVE_ARTIFACTS.items():
+            if artifacts.get(name) != path:
+                raise AssertionError(f"runtime live artifact {name} mismatch: {coverage}")
+            artifact_path = ROOT / path
+            if not artifact_path.is_file():
+                raise AssertionError(f"runtime live artifact missing on disk: {path}")
+            payload = json.loads(artifact_path.read_text(encoding="utf-8"))
+            if payload.get("ok") is not True:
+                raise AssertionError(f"runtime live artifact not ok: {path} {payload}")
+            if family not in (payload.get("reports") or {}):
+                raise AssertionError(f"runtime live artifact missing {family} report: {path} {payload}")
 
         print("runtime-coverage proof passed")
     finally:
