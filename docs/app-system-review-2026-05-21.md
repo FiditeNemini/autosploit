@@ -329,7 +329,13 @@ Stash:
 
 - Buttons: filters, search, add, copy, send to chat, delete.
 - Chat path: send-to-chat injects bounded stash content into the active chat.
-- State: persisted stash rows plus query-scored context catalogue source.
+- State: persisted stash rows, query-scored context catalogue source, and
+  `/state.stashActions` for Add/Copy All/Copy/Send/Delete labels, item rows,
+  clipboard preview, last action, and last item/deleted IDs.
+- Stash action coverage is handled by `scripts/stash-actions-proof.py`: it
+  seeds a stash row, adds a deterministic item, copies all rows, copies one row,
+  sends one row into chat with the bounded stash-content path, deletes that row,
+  and verifies Stash tab activity exposes `delete_stash` completion.
 - Source/op scoping and catalogue inclusion/exclusion are covered by
   `scripts/context-catalog-proof.py`; scored targeted retrieval is covered by
   `scripts/stash-retrieval-proof.py`.

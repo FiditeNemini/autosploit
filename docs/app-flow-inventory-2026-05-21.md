@@ -286,7 +286,11 @@ Stash:
 
 - Stores reusable raw/context items by type.
 - Filters and searches stash.
-- Can send a bounded item into chat context.
+- Add, Copy All, per-row Copy, Send, and Delete actions now route through
+  AppState action handlers. `/state.stashActions` exposes action labels, current
+  item rows, clipboard preview, last action, and last item/deleted IDs.
+- Can send a bounded item into chat context through the same 5 KB truncation
+  path used by the Stash tab.
 - Query-scored retrieval now feeds the dynamic context catalogue without forcing
   all stash items into each prompt. Active-op and global stash are eligible,
   inactive-op stash is excluded, and label/tag/content/source-tab matches affect
@@ -294,6 +298,9 @@ Stash:
 - `/state.stashRetrieval` exposes the latest retrieval query, candidate count,
   returned count, top score, and top labels. The Stash tab shows the same compact
   audit strip after catalogue retrieval.
+- Add/copy/send/delete action state is covered by
+  `scripts/stash-actions-proof.py`, which verifies item creation, clipboard
+  preview, bounded chat send, deletion, and Stash tab activity state.
 - Targeted retrieval is covered by `scripts/stash-retrieval-proof.py`, and the
   visible audit strip is captured under `docs/visual-proofs/checkpoint-92`.
 
