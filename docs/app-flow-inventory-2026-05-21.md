@@ -251,6 +251,7 @@ Current repeatable gates:
 - `python3 scripts/live-turn-harness.py`
 - `python3 scripts/context-catalog-proof.py`
 - `python3 scripts/settings-apply-proof.py`
+- `python3 scripts/verify-live-models.py --metadata-only --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --minimax /Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit`
 - `git diff --check`
 - Static scans proving no S/M/L profile selectors or `ModelProfile` code remain.
 - Visual QA through the local app run script plus screenshots.
@@ -258,7 +259,7 @@ Current repeatable gates:
 Required future proof gates:
 
 - Model-folder fixture test: Qwen folder, MiniMax folder, and unsupported folder
-  detection.
+  detection. Covered by `testsuite/test_live_model_verifier.py`.
 - Engine no-model smoke proving `/health` and `/v1/models` report parser,
   generation, topology, and cache metadata.
 - MiniMax real generation smoke proving full KV attention with prefix hits,

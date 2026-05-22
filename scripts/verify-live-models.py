@@ -1,0 +1,277 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import importlib.util
+import json
+import os
+import socket
+import subprocess
+import sys
+import time
+import urllib.error
+import urllib.request
+from pathlib import Path
+from typing import Any
+
+
+ROOT = Path(__file__).resolve().parents[1]
+ENGINE_DIR = ROOT / "ExploitBotEngine"
+LAUNCH_PY = ENGINE_DIR / "launch.py"
+
+
+def _load_launch_module():
+    spec = importlib.util.spec_from_file_location("exploitbot_launch", LAUNCH_PY)
+    module = importlib.util.module_from_spec(spec)
+    old_path = list(sys.path)
+    sys.path.insert(0, str(ENGINE_DIR))
+    try:
+        spec.loader.exec_module(module)
+    finally:
+        sys.path[:] = old_path
+    return module
+
+
+def _read_json(path: Path) -> dict[str, Any]:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        return {}
+    except json.JSONDecodeError as exc:
+        return {"__error": f"invalid json: {exc}"}
+
+
+def _family_for(path: Path, config: dict[str, Any]) -> str:
+    haystack = f"{path} {config.get('model_type', '')} {config.get('architectures', '')}".lower()
+    if "qwen" in haystack:
+        return "qwen"
+    if "minimax" in haystack:
+        return "minimax"
+    return "unknown" if not config else "unsupported"
+
+
+def inspect_model_folder(path: str | Path, expected_family: str | None = None) -> dict[str, Any]:
+    path = Path(path).expanduser().resolve()
+    config = _read_json(path / "config.json")
+    jang = _read_json(path / "jang_config.json")
+    jangtq = _read_json(path / "jangtq_config.json")
+    generation = _read_json(path / "generation_config.json")
+    family = _family_for(path, config)
+    supported = family in {"qwen", "minimax"}
+    expected_ok = expected_family in (None, family) or (expected_family == "unsupported" and not supported)
+
+    return {
+        "path": str(path),
+        "exists": path.exists(),
+        "family": family,
+        "expected_family": expected_family,
+        "expected_ok": expected_ok,
+        "supported": supported,
+        "model_type": config.get("model_type"),
+        "has_config": bool(config) and "__error" not in config,
+        "has_jang_config": bool(jang) and "__error" not in jang,
+        "has_jangtq_config": bool(jangtq) and "__error" not in jangtq,
+        "has_generation_config": bool(generation) and "__error" not in generation,
+        "has_tokenizer_config": (path / "tokenizer_config.json").exists(),
+        "generation_keys": sorted(k for k in generation.keys() if not k.startswith("__")),
+        "jang_capabilities": jang.get("capabilities", {}) if isinstance(jang.get("capabilities"), dict) else {},
+        "errors": [v["__error"] for v in (config, jang, jangtq, generation) if "__error" in v],
+    }
+
+
+def build_launch_args(path: str | Path, port: int) -> list[str]:
+    launch = _load_launch_module()
+    path = Path(path).expanduser().resolve()
+    defaults = launch.load_model_folder_defaults(str(path))
+    return launch.build_args(
+        str(path),
+        port=port,
+        model_defaults=defaults,
+        reasoning_parser="auto",
+        tool_call_parser="auto",
+        kv_cache_quantization="turboquant-q4",
+        kv_cache_group_size=64,
+        enable_prefix_cache=True,
+        enable_disk_cache=True,
+        disk_cache_max_gb=10.0,
+        cache_memory_percent=0.30,
+        use_paged_cache=True,
+        paged_cache_block_size=64,
+        enable_block_disk_cache=True,
+        block_disk_cache_max_gb=10.0,
+    )
+
+
+def _find_free_port() -> int:
+    with socket.socket() as sock:
+        sock.bind(("127.0.0.1", 0))
+        return int(sock.getsockname()[1])
+
+
+def _request_json(method: str, url: str, body: dict[str, Any] | None = None, timeout: float = 10.0) -> dict[str, Any]:
+    data = None if body is None else json.dumps(body).encode("utf-8")
+    req = urllib.request.Request(url, data=data, method=method)
+    req.add_header("Content-Type", "application/json")
+    api_key = os.environ.get("VMLX_API_KEY") or os.environ.get("OPENAI_API_KEY")
+    if api_key:
+        req.add_header("Authorization", f"Bearer {api_key}")
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        return json.loads(resp.read().decode("utf-8"))
+
+
+def _wait_health(base_url: str, timeout: float) -> dict[str, Any]:
+    deadline = time.time() + timeout
+    last_error: Exception | None = None
+    while time.time() < deadline:
+        try:
+            health = _request_json("GET", f"{base_url}/health", timeout=5.0)
+            if health.get("status") == "healthy":
+                return health
+            last_error = RuntimeError(json.dumps(health, sort_keys=True)[:1000])
+        except Exception as exc:
+            last_error = exc
+        time.sleep(1.0)
+    raise RuntimeError(f"engine did not become healthy: {last_error}")
+
+
+def _assert_runtime_metadata(report: dict[str, Any], health: dict[str, Any], models: dict[str, Any], cache: dict[str, Any]) -> None:
+    effective = health.get("effective_config") or {}
+    effective_text = json.dumps(effective, sort_keys=True).lower()
+    cache_text = json.dumps(cache, sort_keys=True).lower()
+    model_text = json.dumps(models, sort_keys=True).lower()
+
+    required = {
+        "effective_config": bool(effective),
+        "models_metadata": "metadata" in model_text,
+        "prefix_cache": "prefix" in effective_text or "prefix" in cache_text,
+        "prompt_l2_disk": "disk" in effective_text or "disk_cache" in cache,
+        "paged_cache": "paged" in effective_text or "paged" in cache_text,
+        "block_l2_disk": "block" in effective_text or "block_disk_cache" in cache,
+        "turboquant": "turbo" in effective_text or "turbo" in cache_text or health.get("kv_cache_quantization") is not None,
+    }
+    report["runtime_checks"] = required
+    missing = [name for name, ok in required.items() if not ok]
+    if missing:
+        raise RuntimeError(f"missing runtime metadata checks: {', '.join(missing)}")
+
+
+def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float, metadata_only: bool = False) -> dict[str, Any]:
+    port = _find_free_port()
+    path = Path(path).expanduser().resolve()
+    report = inspect_model_folder(path, expected_family=family)
+    report["launch_args"] = build_launch_args(path, port)
+    report["metadata_only"] = metadata_only
+
+    if not report["expected_ok"]:
+        raise RuntimeError(f"{path} is {report['family']}, expected {family}")
+    if family in {"qwen", "minimax"} and not report["supported"]:
+        raise RuntimeError(f"{path} is not a supported Qwen/MiniMax folder")
+    if metadata_only:
+        return report
+
+    cmd = [
+        sys.executable,
+        str(LAUNCH_PY),
+        "--model",
+        str(path),
+        "--port",
+        str(port),
+        "--reasoning-parser",
+        "auto",
+        "--tool-call-parser",
+        "auto",
+        "--kv-cache-quantization",
+        "turboquant-q4",
+        "--enable-prefix-cache",
+        "true",
+        "--enable-disk-cache",
+        "true",
+        "--use-paged-cache",
+        "true",
+        "--enable-block-disk-cache",
+        "true",
+        "--max-tokens",
+        "64",
+        "--verbose",
+    ]
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(ENGINE_DIR) + (":" + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
+    proc = subprocess.Popen(cmd, cwd=ROOT, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    base_url = f"http://127.0.0.1:{port}"
+    try:
+        health = _wait_health(base_url, timeout)
+        models = _request_json("GET", f"{base_url}/v1/models")
+        completion = _request_json(
+            "POST",
+            f"{base_url}/v1/chat/completions",
+            {
+                "model": health.get("model_name") or path.name,
+                "messages": [{"role": "user", "content": prompt}],
+                "max_tokens": 16,
+                "stream": False,
+                "enable_thinking": False,
+                "stream_options": {"include_usage": True},
+            },
+            timeout=timeout,
+        )
+        cache = _request_json("GET", f"{base_url}/v1/cache/stats")
+        _assert_runtime_metadata(report, health, models, cache)
+        report.update({
+            "health": health,
+            "models": models,
+            "completion_usage": completion.get("usage", {}),
+            "completion_preview": json.dumps(completion.get("choices", []))[:500],
+            "cache_stats": cache,
+        })
+        return report
+    finally:
+        proc.terminate()
+        try:
+            proc.wait(timeout=10)
+        except subprocess.TimeoutExpired:
+            proc.kill()
+        if proc.stdout:
+            report["engine_log_tail"] = "".join(proc.stdout.readlines()[-60:])
+
+
+def run(args: argparse.Namespace) -> dict[str, Any]:
+    reports: dict[str, Any] = {}
+    if args.qwen:
+        reports["qwen"] = verify_live_model(args.qwen, "qwen", args.prompt, args.timeout, args.metadata_only)
+    if args.minimax:
+        reports["minimax"] = verify_live_model(args.minimax, "minimax", args.prompt, args.timeout, args.metadata_only)
+    if args.unsupported:
+        reports["unsupported"] = inspect_model_folder(args.unsupported, expected_family="unsupported")
+        if reports["unsupported"]["supported"]:
+            raise RuntimeError(f"unsupported fixture is supported: {args.unsupported}")
+    if not reports:
+        raise RuntimeError("provide --qwen, --minimax, and/or --unsupported")
+    return reports
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Verify ExploitBot Qwen/MiniMax model folders against the embedded vMLX engine.")
+    parser.add_argument("--qwen", help="Qwen model folder to verify")
+    parser.add_argument("--minimax", help="MiniMax model folder to verify")
+    parser.add_argument("--unsupported", help="Unsupported model folder expected to be rejected by family preflight")
+    parser.add_argument("--metadata-only", action="store_true", help="Only inspect folders and launch arguments; do not start the engine")
+    parser.add_argument("--timeout", type=float, default=900.0, help="Seconds to wait for each live model to load/respond")
+    parser.add_argument("--prompt", default="Reply with one short sentence for an ExploitBot cache/parser smoke test.")
+    parser.add_argument("--output", help="Optional JSON report path")
+    args = parser.parse_args()
+
+    try:
+        reports = run(args)
+    except Exception as exc:
+        print(f"verify-live-models failed: {exc}", file=sys.stderr)
+        return 1
+
+    text = json.dumps({"ok": True, "reports": reports}, indent=2, sort_keys=True)
+    if args.output:
+        Path(args.output).write_text(text + "\n", encoding="utf-8")
+    print(text)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

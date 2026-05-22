@@ -275,11 +275,20 @@ Mock-model gates:
 
 Real-model gates:
 
-- Qwen supported folder load.
-- MiniMax supported folder load.
-- Unsupported folder warning and blocked/clear error handling.
-- Full prompt -> context catalogue -> stream -> tool call -> tab result loop.
-- Prefix/L2/cache metrics visible when engine reports cached tokens.
+- Qwen, MiniMax, and unsupported-folder metadata/dry-run verification is now
+  covered by `scripts/verify-live-models.py` and
+  `testsuite/test_live_model_verifier.py`. The script proves supported-family
+  detection and launcher args for model-folder generation defaults, parser
+  defaults, prefix cache, prompt L2, paged cache, block L2, and TurboQuant Q4.
+- Remaining expensive proof: run `scripts/verify-live-models.py` without
+  `--metadata-only` against selected Qwen and MiniMax folders to prove actual
+  load, generation, `/health`, `/v1/models`, and `/v1/cache/stats`.
+- Unsupported folder warning and blocked/clear app UI handling still needs a
+  live UI proof.
+- Full prompt -> context catalogue -> stream -> tool call -> tab result loop is
+  covered with the mock engine; real-model repetition remains open.
+- Prefix/L2/cache metrics visibility is script-checkable after real engine load
+  and still needs UI screenshot proof.
 
 Visual gates:
 
@@ -293,4 +302,5 @@ Visual gates:
 ## Current Gaps To Close Next
 
 1. Add visual screenshot coverage for per-tab tool action indicators.
-2. Add live model verification scripts for Qwen and MiniMax folders.
+2. Run real Qwen and MiniMax model verification with
+   `scripts/verify-live-models.py` and capture the report.

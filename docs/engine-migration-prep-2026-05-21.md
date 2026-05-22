@@ -446,6 +446,14 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   runtime engine changes still use `Apply & Restart Engine`. Added
   `scripts/settings-apply-proof.py` to verify app-only settings update without
   changing engine connection state.
+- Checkpoint 68: Added `scripts/verify-live-models.py` for Qwen/MiniMax model
+  verification. The script inspects supported and unsupported folders, proves
+  launch arguments pick up model-folder generation/parser defaults, requests
+  prefix cache, prompt L2, paged cache, block L2, and TurboQuant Q4, and can
+  optionally launch the embedded engine to check `/health`, `/v1/models`,
+  `/v1/chat/completions`, and `/v1/cache/stats`. Added
+  `testsuite/test_live_model_verifier.py` plus a metadata-only run against
+  local Qwen, MiniMax, and Gemma folders.
 
 ## Known Risk Areas
 
