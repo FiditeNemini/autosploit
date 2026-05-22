@@ -616,8 +616,8 @@ Automated no-model gates:
   list/count, context hook list/count, subtab state tab list/count, subtab
   state proof list/count, and the
   `/qa/proof-ledger` proof count, source proof-ledger category counts/category
-  surfaces, source category-surface count, category other count, category total count, and category
-  parity across all local proof scripts. It also exposes proof category counts
+  surfaces, source proof-ledger category map, source category-surface count,
+  category other count, category total count, and category parity across all local proof scripts. It also exposes proof category counts
   and normalized surface names for agent, chat, context, runtime, settings,
   tabs, tools, and visual proof surfaces, plus a direct
   `/qa/proof-ledger` category counts/surfaces/surface-count/other-count/total/parity

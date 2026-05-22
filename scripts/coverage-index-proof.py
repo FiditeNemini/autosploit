@@ -222,6 +222,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state proof ledger category total count mismatch: {app_state_group}")
     if app_state_group.get("proofLedgerCategoryParity") != proof.get("categoryParity"):
         raise AssertionError(f"coverage index app state proof ledger category parity mismatch: {app_state_group}")
+    if app_state_group.get("proofLedgerCategories") != proof.get("categories"):
+        raise AssertionError(f"coverage index app state proof ledger category map mismatch: {app_state_group}")
     expected_categories = {
         name: category.get("count")
         for name, category in (proof.get("categories") or {}).items()
