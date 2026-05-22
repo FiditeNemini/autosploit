@@ -111,6 +111,9 @@ Implemented dynamic catalogue lane:
 - CVE assist is controlled by Settings: off, current visible CVE results, or
   semantic embedding search. Semantic mode calls the local CVE embedder path
   when available and falls back through `CVEService` when embeddings are absent.
+- Semantic mode is covered by `scripts/semantic-cve-proof.py`: the proof injects
+  a deterministic fake embedder, seeds stored vectors, and verifies the context
+  packet uses the vector-ranked CVE rather than silent text fallback.
 
 Required next catalog lane:
 
@@ -259,6 +262,7 @@ Current repeatable gates:
 - `cd ExploitBotEngine && uv run --extra dev ../scripts/prove-parser-api.py --output ../docs/live-proofs/checkpoint-79-parser-api-proof.json`
 - `python3 scripts/context-catalog-proof.py`
 - `python3 scripts/tool-catalog-proof.py`
+- `python3 scripts/semantic-cve-proof.py`
 - `python3 scripts/settings-apply-proof.py`
 - `python3 scripts/verify-live-models.py --metadata-only --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --minimax /Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit`
 - `python3 scripts/visual-tab-proof.py`

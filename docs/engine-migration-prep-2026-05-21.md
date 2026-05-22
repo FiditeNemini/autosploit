@@ -540,6 +540,12 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   renders compact `ctx` and `tools` counters. `scripts/live-turn-harness.py`
   proves the state contract and `scripts/visual-chat-proof.py` refreshes the
   screenshot under `docs/visual-proofs/checkpoint-71`.
+- Checkpoint 83: Closed the semantic CVE embedder proof gap.
+  `CVEService` now honors `EXPLOITBOT_CVE_EMBEDDER_PATH` for deterministic QA,
+  records semantic search state in `/state.cveSemantic`, and
+  `scripts/semantic-cve-proof.py` proves the embedder subprocess is called and
+  a vector-ranked CVE enters the context packet without fallback. This also
+  fixed quoted insertion of the SQLite `"references"` column in CVE writes.
 
 ## Known Risk Areas
 

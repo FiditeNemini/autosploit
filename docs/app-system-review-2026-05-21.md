@@ -80,7 +80,10 @@ Dynamic context:
   `scripts/context-catalog-proof.py`: disabled asset/finding/recent-output/stash
   sources stay out of selected snippets, active-op stash and global stash remain
   visible, and inactive-op stash is excluded.
-- Required proof still open: semantic CVE mode calls the embedder when available.
+- Semantic CVE mode invocation is covered by `scripts/semantic-cve-proof.py`,
+  which launches the app with a deterministic fake embedder, seeds tiny stored
+  vectors, verifies the embedder subprocess was called, and asserts
+  `/state.cveSemantic.usedEmbedding=true` with no fallback.
 
 Storage:
 
@@ -263,6 +266,8 @@ Automated no-model gates:
     OSINT/exploit schemas in the request body;
   - proves `/state.requestContext` exposes whether context was injected, how
     many snippets were selected, and which tool schemas were exposed;
+  - proves semantic CVE mode invokes the embedder path when stored embeddings
+    are available and exposes semantic state through `/state.cveSemantic`;
   - proves prefix cache, prompt L2, paged cache, block L2, TurboQuant Q4, and
     model-folder generation defaults remain enabled in runtime config;
   - proves the new-context route clears chat state and token/cached counters
