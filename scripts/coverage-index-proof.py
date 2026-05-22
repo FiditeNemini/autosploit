@@ -495,6 +495,20 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers result-parser failures mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("resultParserFailureCount") != len(result_parser.get("failures") or []):
         raise AssertionError(f"coverage index tools/parsers result-parser failure count mismatch: {tools_parsers_group}")
+    for field in (
+        "subdomains",
+        "webUrls",
+        "vulnSources",
+        "vulnTitles",
+        "ports",
+        "networkHosts",
+        "osintPlatforms",
+        "postLabels",
+        "rawTools",
+    ):
+        aggregate_field = "resultParser" + field[:1].upper() + field[1:]
+        if tools_parsers_group.get(aggregate_field) != result_parser.get(field):
+            raise AssertionError(f"coverage index tools/parsers {aggregate_field} mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolFlowProofCount") != tool_flow.get("proofCount"):
         raise AssertionError(f"coverage index tools/parsers tool-flow proof count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolFlowProofs") != tool_flow.get("proofs"):

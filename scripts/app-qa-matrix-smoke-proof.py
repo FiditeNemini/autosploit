@@ -606,6 +606,20 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index result-parser failures mismatch: {coverage_index}")
     if tools_parsers_group.get("resultParserFailureCount") != len(result_parser_coverage.get("failures") or []):
         raise AssertionError(f"/qa/coverage-index result-parser failure count mismatch: {coverage_index}")
+    for field in (
+        "subdomains",
+        "webUrls",
+        "vulnSources",
+        "vulnTitles",
+        "ports",
+        "networkHosts",
+        "osintPlatforms",
+        "postLabels",
+        "rawTools",
+    ):
+        aggregate_field = "resultParser" + field[:1].upper() + field[1:]
+        if tools_parsers_group.get(aggregate_field) != result_parser_coverage.get(field):
+            raise AssertionError(f"/qa/coverage-index {aggregate_field} mismatch: {coverage_index}")
     if tools_parsers_group.get("toolFlowProofCount") != tool_flow_coverage.get("proofCount"):
         raise AssertionError(f"/qa/coverage-index tool-flow proof count mismatch: {coverage_index}")
     if tools_parsers_group.get("toolFlowProofs") != tool_flow_coverage.get("proofs"):
