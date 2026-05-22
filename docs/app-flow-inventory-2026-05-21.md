@@ -829,7 +829,8 @@ Current repeatable gates:
   count, and actual screenshot capture count. The tools/parsers
   group exposes registry tool count, callback count, representative family
   fanout count and family-to-tool map, structured/raw parser tool sets,
-  state-key count, dynamic tool-schema cap/policy/route,
+  state-key count, tool-flow proof count, route list/count, family list/count,
+  state-key list, contract map/count, dynamic tool-schema cap/policy/route,
   structured/raw result-mode counts, visible tab activity statuses, the tab
   activity status parity/indicator contract, tab activity status proof
   map/count/parity, and the model-tool visual surface list/count/parity plus proof

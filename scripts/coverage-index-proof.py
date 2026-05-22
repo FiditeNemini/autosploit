@@ -481,6 +481,22 @@ def assert_coverage_index() -> None:
     if tools_parsers_group.get("stateKeyCount", 0) < 5:
         raise AssertionError(f"coverage index tools/parsers state key count mismatch: {tools_parsers_group}")
     tool_flow = request("GET", "/qa/tool-flow-coverage")
+    if tools_parsers_group.get("toolFlowProofCount") != tool_flow.get("proofCount"):
+        raise AssertionError(f"coverage index tools/parsers tool-flow proof count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolFlowRoutes") != tool_flow.get("routes"):
+        raise AssertionError(f"coverage index tools/parsers tool-flow routes mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolFlowRouteCount") != len(tool_flow.get("routes") or []):
+        raise AssertionError(f"coverage index tools/parsers tool-flow route count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolFlowFamilies") != tool_flow.get("families"):
+        raise AssertionError(f"coverage index tools/parsers tool-flow families mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolFlowFamilyCount") != len(tool_flow.get("families") or []):
+        raise AssertionError(f"coverage index tools/parsers tool-flow family count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolFlowStateKeys") != tool_flow.get("stateKeys"):
+        raise AssertionError(f"coverage index tools/parsers tool-flow state keys mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolFlowContracts") != tool_flow.get("contracts"):
+        raise AssertionError(f"coverage index tools/parsers tool-flow contracts mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolFlowContractCount") != len(tool_flow.get("contracts") or {}):
+        raise AssertionError(f"coverage index tools/parsers tool-flow contract count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolSchemaCap") != tool_flow.get("toolSchemaCap"):
         raise AssertionError(f"coverage index tools/parsers schema cap mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolSchemaPolicy") != tool_flow.get("toolSchemaPolicy"):

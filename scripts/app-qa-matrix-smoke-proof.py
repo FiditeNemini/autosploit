@@ -592,6 +592,22 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index structured parser tool set mismatch: {coverage_index}")
     if tools_parsers_group.get("resultParserRawOnlyTools") != ["bettercap", "chisel", "pwncat", "sliver", "tshark"]:
         raise AssertionError(f"/qa/coverage-index raw-only parser tool set mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolFlowProofCount") != tool_flow_coverage.get("proofCount"):
+        raise AssertionError(f"/qa/coverage-index tool-flow proof count mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolFlowRoutes") != tool_flow_coverage.get("routes"):
+        raise AssertionError(f"/qa/coverage-index tool-flow routes mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolFlowRouteCount") != len(tool_flow_coverage.get("routes") or []):
+        raise AssertionError(f"/qa/coverage-index tool-flow route count mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolFlowFamilies") != tool_flow_coverage.get("families"):
+        raise AssertionError(f"/qa/coverage-index tool-flow families mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolFlowFamilyCount") != len(tool_flow_coverage.get("families") or []):
+        raise AssertionError(f"/qa/coverage-index tool-flow family count mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolFlowStateKeys") != tool_flow_coverage.get("stateKeys"):
+        raise AssertionError(f"/qa/coverage-index tool-flow state keys mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolFlowContracts") != tool_flow_coverage.get("contracts"):
+        raise AssertionError(f"/qa/coverage-index tool-flow contracts mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolFlowContractCount") != len(tool_flow_coverage.get("contracts") or {}):
+        raise AssertionError(f"/qa/coverage-index tool-flow contract count mismatch: {coverage_index}")
     if ((index_groups.get("tabsAndSessions") or {}).get("actionStateKeyCount", 0)) < 26:
         raise AssertionError(f"/qa/coverage-index action state key count mismatch: {coverage_index}")
     tabs_sessions_group = index_groups.get("tabsAndSessions") or {}
