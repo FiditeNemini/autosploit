@@ -257,6 +257,17 @@ def _assert_completion(completion: dict[str, Any]) -> None:
         raise RuntimeError("empty completion: model returned no tokens/content")
 
 
+def _resolve_smoke_thinking(family: str, mode: str = "auto") -> bool:
+    normalized = (mode or "auto").strip().lower()
+    if normalized == "auto":
+        return family == "minimax"
+    if normalized in {"true", "on", "yes", "1"}:
+        return True
+    if normalized in {"false", "off", "no", "0"}:
+        return False
+    raise ValueError(f"unsupported enable thinking mode: {mode}")
+
+
 def _int_at(data: dict[str, Any], path: tuple[str, ...]) -> int:
     value: Any = data
     for key in path:
@@ -426,6 +437,7 @@ def _launch_and_complete_once(
     cache_root: Path,
     phase: str,
     enable_prompt_disk: bool = True,
+    enable_thinking_mode: str = "auto",
 ) -> dict[str, Any]:
     port = _find_free_port()
     report: dict[str, Any] = {
@@ -448,8 +460,9 @@ def _launch_and_complete_once(
         health = _wait_health(report["base_url"], timeout, proc=proc, report=report)
         models = _request_json("GET", f"{report['base_url']}/v1/models")
         model_name = health.get("model_name") or path.name
-        smoke_thinking = family == "minimax"
+        smoke_thinking = _resolve_smoke_thinking(family, enable_thinking_mode)
         report["smoke_enable_thinking"] = smoke_thinking
+        report["smoke_enable_thinking_mode"] = enable_thinking_mode
         completion = _chat_completion(
             report["base_url"],
             model_name,
@@ -490,6 +503,7 @@ def verify_live_model(
     block_l2_only_replay: bool = False,
     require_ssm_rederive: bool = False,
     require_ssm_companion_hit: bool = False,
+    enable_thinking_mode: str = "auto",
 ) -> dict[str, Any]:
     port = _find_free_port()
     path = Path(path).expanduser().resolve()
@@ -499,6 +513,7 @@ def verify_live_model(
     report["block_l2_only_replay"] = block_l2_only_replay
     report["require_ssm_rederive"] = require_ssm_rederive
     report["require_ssm_companion_hit"] = require_ssm_companion_hit
+    report["smoke_enable_thinking_mode"] = enable_thinking_mode
 
     if not report["expected_ok"]:
         raise RuntimeError(f"{path} is {report['family']}, expected {family}")
@@ -523,6 +538,7 @@ def verify_live_model(
                 cache_root=cache_root,
                 phase="populate",
                 enable_prompt_disk=not block_l2_only_replay,
+                enable_thinking_mode=enable_thinking_mode,
             )
             replay_run = _launch_and_complete_once(
                 path=path,
@@ -532,6 +548,7 @@ def verify_live_model(
                 cache_root=cache_root,
                 phase="replay",
                 enable_prompt_disk=not block_l2_only_replay,
+                enable_thinking_mode=enable_thinking_mode,
             )
             report.update({
                 "first_run": first_run,
@@ -603,7 +620,7 @@ def verify_live_model(
         health = _wait_health(base_url, timeout, proc=proc, report=report)
         models = _request_json("GET", f"{base_url}/v1/models")
         model_name = health.get("model_name") or path.name
-        smoke_thinking = family == "minimax"
+        smoke_thinking = _resolve_smoke_thinking(family, enable_thinking_mode)
         report["smoke_enable_thinking"] = smoke_thinking
         completion = _chat_completion(
             base_url,
@@ -653,9 +670,9 @@ def verify_live_model(
 def run(args: argparse.Namespace) -> dict[str, Any]:
     reports: dict[str, Any] = {}
     if args.qwen:
-        reports["qwen"] = verify_live_model(args.qwen, "qwen", args.prompt, args.timeout, args.metadata_only, args.restart_replay, args.block_l2_only_replay, args.require_ssm_rederive, args.require_ssm_companion_hit)
+        reports["qwen"] = verify_live_model(args.qwen, "qwen", args.prompt, args.timeout, args.metadata_only, args.restart_replay, args.block_l2_only_replay, args.require_ssm_rederive, args.require_ssm_companion_hit, args.enable_thinking)
     if args.minimax:
-        reports["minimax"] = verify_live_model(args.minimax, "minimax", args.prompt, args.timeout, args.metadata_only, args.restart_replay, args.block_l2_only_replay, args.require_ssm_rederive, args.require_ssm_companion_hit)
+        reports["minimax"] = verify_live_model(args.minimax, "minimax", args.prompt, args.timeout, args.metadata_only, args.restart_replay, args.block_l2_only_replay, args.require_ssm_rederive, args.require_ssm_companion_hit, args.enable_thinking)
     if args.unsupported:
         reports["unsupported"] = inspect_model_folder(args.unsupported, expected_family="unsupported")
         if reports["unsupported"]["supported"]:
@@ -675,6 +692,7 @@ def main() -> int:
     parser.add_argument("--block-l2-only-replay", action="store_true", help="Run restart replay with prompt L2 disabled so replay must hit block L2 disk cache")
     parser.add_argument("--require-ssm-rederive", action="store_true", help="Require replay cache stats to show SSM rederive requested and completed without failures")
     parser.add_argument("--require-ssm-companion-hit", action="store_true", help="Require replay cache stats to show an SSM companion L2 hit without rederive fallback")
+    parser.add_argument("--enable-thinking", choices=("auto", "true", "false"), default="auto", help="Chat-completion thinking flag for live smoke requests; auto enables it for MiniMax only")
     parser.add_argument("--timeout", type=float, default=900.0, help="Seconds to wait for each live model to load/respond")
     parser.add_argument("--prompt", default="Reply with one short sentence for an ExploitBot cache/parser smoke test.")
     parser.add_argument("--output", help="Optional JSON report path")

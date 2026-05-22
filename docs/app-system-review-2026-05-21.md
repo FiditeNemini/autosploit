@@ -515,6 +515,13 @@ Real-model gates:
   prompt L2 is disabled, replay reports `block_l2_hits_delta=2`,
   `ssm_l2_hits_delta=1`, `scheduler_tokens_saved_delta=112`, `cached_tokens=112`,
   and no rederive fallback.
+- MiniMax forced no-thinking API output is covered by
+  `scripts/verify-live-models.py --enable-thinking false` and
+  `docs/live-proofs/checkpoint-114-minimax-no-thinking-live.json`: the request
+  explicitly sends `enable_thinking=false`, the response has non-empty
+  assistant `content`, no `reasoning_content`, model-folder generation/parser
+  metadata, TurboQuant Q4 KV metadata, prefix/paged/prompt-L2/block-L2 cache
+  metadata, and repeat prompt reuse with `cached_tokens=51`.
 - Reasoning/tool parser API shaping is covered by
   `scripts/prove-parser-api.py` and `testsuite/test_tool_parser_api.py`.
 - Settings/message/result-store persistence is covered by
@@ -577,8 +584,5 @@ Visual gates:
 
 ## Current Gaps To Close Next
 
-1. Debug MiniMax forced no-thinking decode/API output separately from the
-   supported thinking-enabled smoke path; the strict live proof and restart
-   replay proof now pass with non-empty assistant content and cache reuse.
-2. Expand the full hybrid prefix-skip proof to more prompt shapes and any
+1. Expand the full hybrid prefix-skip proof to more prompt shapes and any
    multimodal Qwen path that needs the same key discipline.

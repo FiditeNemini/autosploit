@@ -641,6 +641,15 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   `block_l2_hits_delta=2`, `scheduler_tokens_saved_delta=112`,
   `ssm_l2_hits_delta=1`, `cached_tokens=112`, `prompt_l2_hits_delta=0`, and
   `no_rederive=true`.
+- Checkpoint 114: Added explicit live-verifier control for `enable_thinking`
+  (`auto`, `true`, `false`) and fixed non-streaming chat response shaping when
+  reasoning is explicitly disabled. Artifact
+  `docs/live-proofs/checkpoint-114-minimax-no-thinking-live.json` loaded
+  MiniMax with `enable_thinking=false`, returned non-empty assistant content
+  without `reasoning_content`, preserved MiniMax parser/generation autodetect,
+  showed TurboQuant Q4 plus prefix/paged/prompt-L2/block-L2 metadata, and proved
+  same-process prefix reuse with `cached_tokens=51` and
+  `scheduler_tokens_saved_delta=51`.
 
 ## Known Risk Areas
 
@@ -656,6 +665,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   re-derive fallback and a full KV+SSM companion prefix skip under a repeated
   text prompt. SSM state is cumulative; do not slice longer checkpoints for
   shorter prefixes.
+- MiniMax forced no-thinking now has a live proof for non-empty API output and
+  no `reasoning_content`. The model can still begin by paraphrasing the prompt
+  under a tiny `max_tokens=16` verifier cap, so quality evaluation remains
+  separate from parser/API correctness.
 - MiniMax public MTP is not available from released weights; do not represent MiniMax MTP as supported unless tensor evidence exists.
 - JANGTQ2 can be quality-limited on some families. The app UI should label it as a memory tier rather than default premium tier.
 
