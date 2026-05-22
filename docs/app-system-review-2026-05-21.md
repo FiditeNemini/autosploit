@@ -96,6 +96,8 @@ Storage:
   directory, seeds context/chat settings plus a persisted `nmap` tool message,
   relaunches the app, and verifies the restored message reparses into the
   visible `443/https` port result.
+- Per-assistant-turn request context/tool-schema audit metadata is persisted in
+  the `messages` table and covered by `scripts/request-audit-proof.py`.
 
 ## Tool Loop And Result Routing
 
@@ -349,6 +351,8 @@ Real-model gates:
   `scripts/prove-parser-api.py` and `testsuite/test_tool_parser_api.py`.
 - Settings/message/result-store persistence is covered by
   `scripts/persistence-proof.py`.
+- Per-turn request context/tool-schema audit persistence is covered by
+  `scripts/request-audit-proof.py`.
 
 Visual gates:
 
