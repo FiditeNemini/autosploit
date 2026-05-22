@@ -57,6 +57,16 @@ def run() -> None:
         logs = state.get("inferenceLogActions") or {}
         if logs.get("engineLogChars", 0) <= 0:
             raise AssertionError(f"seed did not expose engine log chars: {logs}")
+        if logs.get("isVisible") is not False:
+            raise AssertionError(f"inference log should start hidden: {logs}")
+
+        response = request("POST", "/qa/inference-log-action", {"action": "toggleVisible"})
+        if response.get("ok") is not True:
+            raise AssertionError(f"inference log visibility action failed: {response}")
+        state = request("GET", "/state")
+        logs = state.get("inferenceLogActions") or {}
+        if logs.get("lastAction") != "toggleVisible" or logs.get("isVisible") is not True:
+            raise AssertionError(f"inference log visibility state missing: {logs}")
 
         response = request("POST", "/qa/inference-log-action", {"action": "copy"})
         if response.get("ok") is not True:
