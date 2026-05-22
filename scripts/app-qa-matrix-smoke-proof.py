@@ -205,6 +205,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/session-coverage mode order mismatch: {session_coverage}")
     if session_coverage.get("sidebarActions") != ["createOp", "renameOp", "switchOp", "deleteOp"]:
         raise AssertionError(f"/qa/session-coverage sidebar action mismatch: {session_coverage}")
+    if "modeSelection" not in (session_coverage.get("stateKeys") or []):
+        raise AssertionError(f"/qa/session-coverage state key mismatch: {session_coverage}")
     if tab_action_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/tab-action-coverage failed: {tab_action_coverage}")
     if tab_action_coverage.get("tabs") != ["recon", "web", "network", "creds", "exploit", "post", "osint", "report", "stash"]:

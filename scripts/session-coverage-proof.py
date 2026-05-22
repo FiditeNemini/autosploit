@@ -67,6 +67,21 @@ REQUIRED_PROOFS = {
     "activity-feed-actions-proof.py",
 }
 
+REQUIRED_STATE_KEYS = {
+    "modeSelection",
+    "modelFolderInfo",
+    "modelFolderPicker",
+    "windowOverlayActions",
+    "tabSwitchActions",
+    "subtabActions",
+    "phaseActions",
+    "sidebarActions",
+    "activityFeedActions",
+    "chatControlActions",
+    "activeSubtabs",
+    "feedRecent",
+}
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -122,6 +137,10 @@ def assert_session_coverage() -> None:
         raise AssertionError(f"session coverage sidebar actions mismatch: {coverage}")
     if coverage.get("proofCount", 0) < len(REQUIRED_PROOFS):
         raise AssertionError(f"session coverage proof count mismatch: {coverage}")
+    state_keys = set(coverage.get("stateKeys") or [])
+    missing_state_keys = sorted(REQUIRED_STATE_KEYS.difference(state_keys))
+    if missing_state_keys:
+        raise AssertionError(f"session coverage missing state keys {missing_state_keys}: {coverage}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/session-coverage" not in qa.get("stateRoutes", []):

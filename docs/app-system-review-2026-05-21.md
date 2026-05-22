@@ -68,7 +68,8 @@ Interaction modes:
   pending-approval rejection, sidebar CRUD, create-op stop behavior, overlays,
   model-folder pickers, persistence/relaunch, saved messages, result rebuild,
   finding wizard submit, tab switch actions, phase actions, and Activity Feed
-  controls.
+  controls. It also exposes `stateKeys` for the `/state` surfaces used by those
+  workflow proofs.
 - Autopilot executes model tool calls directly.
 - Copilot shows an approval card before tool execution.
 - Manual converts model tool calls into suggested commands and stops.
@@ -545,7 +546,7 @@ Automated no-model gates:
   persistence/relaunch, saved messages, result rebuild, finding wizard submit,
   tab switching, phase changes, and Activity Feed controls, and lists the
   `/phase`, `/qa/seed-activity-actions`, and `/qa/activity-action` routes with
-  proof-count metadata.
+  proof-count metadata plus `stateKeys`.
   `/qa/tab-action-coverage` exposes per-tab direct action proof coverage for
   copy buttons, row context actions, verify/protocol/hash/exploit/post/OSINT
   actions, report generation/finding/export/agent actions, Stash controls, and

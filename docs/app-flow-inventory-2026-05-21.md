@@ -52,11 +52,11 @@ Cross-app session workflows are summarized through `/qa/session-coverage`,
 including onboarding and Sidebar mode selection, pending-approval rejection,
 sidebar create/rename/switch/delete, create-op stop behavior, overlays,
 model-folder pickers, persistence across relaunch, saved messages, restored
-results, finding-wizard submit, tab switch actions, phase actions, and Activity
-Feed controls. The coverage payload now lists the phase and Activity Feed QA
-routes (`/phase`, `/qa/seed-activity-actions`, `/qa/activity-action`) plus
-`proofCount`, so the aggregate cannot claim those contracts without exposing
-the routes.
+results, finding wizard submit, tab switching, phase actions, Activity Feed
+actions, proof-count metadata, and the `stateKeys` those proofs validate.
+The coverage payload now lists the phase and Activity Feed QA routes (`/phase`,
+`/qa/seed-activity-actions`, `/qa/activity-action`) plus `proofCount`, so the
+aggregate cannot claim those contracts without exposing the routes.
 
 Every actionable tool-tab button currently flows through
 `ContentView.sendToChat(_:)`, which calls `state.sendChatMessage(...)` so the
@@ -630,7 +630,7 @@ Current repeatable gates:
   Session workflow invariants are summarized through `/qa/session-coverage`,
   including onboarding, Sidebar operations, overlays, model-folder pickers,
   persistence, finding-wizard submit, tab switching, phase actions, Activity
-  Feed actions, and proof-count metadata.
+  Feed actions, proof-count metadata, and `stateKeys`.
   The aggregate QA map is exposed through `/qa/coverage-index`; it groups app
   state, chat/context, runtime/cache, settings/visuals, tools/parsers, and
   tabs/sessions endpoints with their proof scripts, and
