@@ -69,6 +69,23 @@ def assert_filter(filter_name: str, expected_count: int) -> None:
         raise AssertionError(f"activity filter preview wrong: {activity}")
 
 
+def assert_verbosity(verbosity: str, expected_count: int) -> None:
+    response = request("POST", "/qa/activity-action", f"verbosity:{verbosity}")
+    if response.get("ok") is not True:
+        raise AssertionError(f"activity verbosity failed for {verbosity}: {response}")
+
+    state = request("GET", "/state")
+    activity = state.get("activityFeedActions") or {}
+    if activity.get("lastAction") != "verbosity" or activity.get("status") != "done":
+        raise AssertionError(f"activity verbosity state missing: {activity}")
+    if activity.get("summary") != f"verbosity activity {verbosity}":
+        raise AssertionError(f"activity verbosity summary wrong: {activity}")
+    if activity.get("count") != expected_count:
+        raise AssertionError(f"activity verbosity count wrong: {activity}")
+    if activity.get("clipboardPreview") != verbosity:
+        raise AssertionError(f"activity verbosity preview wrong: {activity}")
+
+
 def run() -> None:
     env = os.environ.copy()
     env["EXPLOITBOT_TESTING"] = "1"
@@ -89,7 +106,9 @@ def run() -> None:
         assert_filter("Errors", 1)
         assert_filter("Tools", 1)
         assert_filter("All", 5)
-        assert_action("copyVisible", 6, "Finding created")
+        assert_verbosity("Minimal", 2)
+        assert_verbosity("Debug", 8)
+        assert_action("copyVisible", 9, "Finding created")
         assert_action("clear", 0, "")
 
         state = request("GET", "/state")
