@@ -124,6 +124,14 @@ def assert_coverage_index() -> None:
     runtime_group = groups.get("runtimeAndCache") or {}
     if runtime_group.get("liveProofArtifactCount", 0) < 6:
         raise AssertionError(f"coverage index runtime live artifact count mismatch: {runtime_group}")
+    if (groups.get("chatAndContext") or {}).get("stateKeyCount", 0) < 8:
+        raise AssertionError(f"coverage index chat/context state key count mismatch: {groups.get('chatAndContext')}")
+    if (groups.get("toolsAndParsers") or {}).get("stateKeyCount", 0) < 5:
+        raise AssertionError(f"coverage index tools/parsers state key count mismatch: {groups.get('toolsAndParsers')}")
+    if (groups.get("tabsAndSessions") or {}).get("stateKeyCount", 0) < 12:
+        raise AssertionError(f"coverage index tabs/sessions state key count mismatch: {groups.get('tabsAndSessions')}")
+    if (groups.get("tabsAndSessions") or {}).get("actionStateKeyCount", 0) < 26:
+        raise AssertionError(f"coverage index tabs/sessions action state key count mismatch: {groups.get('tabsAndSessions')}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/coverage-index" not in qa.get("stateRoutes", []):

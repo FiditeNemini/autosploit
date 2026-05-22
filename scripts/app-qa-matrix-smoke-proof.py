@@ -233,6 +233,9 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index endpoint count mismatch: {coverage_index}")
     if coverage_index.get("proofCount", 0) < 14:
         raise AssertionError(f"/qa/coverage-index proof count mismatch: {coverage_index}")
+    index_groups = coverage_index.get("groups") or {}
+    if ((index_groups.get("tabsAndSessions") or {}).get("actionStateKeyCount", 0)) < 26:
+        raise AssertionError(f"/qa/coverage-index action state key count mismatch: {coverage_index}")
 
 
 def run() -> None:
