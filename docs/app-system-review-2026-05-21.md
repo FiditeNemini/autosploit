@@ -617,6 +617,9 @@ Automated no-model gates:
   count, proof-category total count, and proof-category parity, so the top-level
   index proves the audit rollup is exposing named proof-surface breadth and
   validated all-category accounting, not just total ledger size. It also carries
+  `/qa/audit-ledger.proofLedgerCategoryOtherCount` as
+  `auditProofLedgerCategoryOtherCount`, and the broad app QA matrix cross-checks
+  both source and audit `other` proof counts through `/qa/coverage-index`. It also carries
   `/qa/gap-ledger.openGapIds` and a
   `gapContractCount`, so the top-level QA summary names the remaining gap and
   proves a structured contract exists. `/qa/gap-ledger` reads this
