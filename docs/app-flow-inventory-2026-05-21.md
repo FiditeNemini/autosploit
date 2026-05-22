@@ -653,7 +653,8 @@ Current repeatable gates:
   `scripts/coverage-index-proof.py` verifies every named proof file exists.
   Each group also exposes `endpointCount` and `proofCount` for machine-readable
   coverage accounting. The app-state group also exposes `/state.qaCoverage`
-  state-route count, subtab state tab count, and subtab state proof count. The
+  state-route count, subtab state tab count, subtab state proof count, and the
+  `/qa/proof-ledger` proof count across all local proof scripts. The
   runtime/cache group additionally exposes
   `supportedFamilies`, `cacheResponseMethod`, and `liveProofArtifactCount`, so
   Qwen/MiniMax-only support, the `prefix-cache-l2-turboquant` response path, and

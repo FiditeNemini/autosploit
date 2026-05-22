@@ -32,6 +32,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/chat-coverage",
     "/qa/result-parser-coverage",
     "/qa/tool-family-fanout-coverage",
+    "/qa/proof-ledger",
 }
 
 REQUIRED_PROOFS = {
@@ -49,6 +50,7 @@ REQUIRED_PROOFS = {
     "chat-coverage-proof.py",
     "result-parser-routing-proof.py",
     "tool-family-fanout-coverage-proof.py",
+    "proof-ledger-proof.py",
 }
 
 REQUIRED_GROUPS = {
@@ -128,6 +130,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state subtab count mismatch: {app_state_group}")
     if app_state_group.get("subtabStateProofCount", 0) < 8:
         raise AssertionError(f"coverage index app state subtab proof count mismatch: {app_state_group}")
+    if app_state_group.get("proofLedgerCount", 0) < 120:
+        raise AssertionError(f"coverage index app state proof ledger count mismatch: {app_state_group}")
     runtime_group = groups.get("runtimeAndCache") or {}
     if runtime_group.get("liveProofArtifactCount", 0) < 6:
         raise AssertionError(f"coverage index runtime live artifact count mismatch: {runtime_group}")

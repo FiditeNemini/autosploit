@@ -574,8 +574,9 @@ Automated no-model gates:
   sessions; `scripts/coverage-index-proof.py` verifies each group has endpoint
   and proof counts, endpoints, and proofs and that every named proof file
   exists. The app-state group also exposes `/state.qaCoverage` state-route
-  count, subtab state tab count, and subtab state proof count. The runtime/cache
-  group also exposes `supportedFamilies`,
+  count, subtab state tab count, subtab state proof count, and the
+  `/qa/proof-ledger` proof count across all local proof scripts. The
+  runtime/cache group also exposes `supportedFamilies`,
   `cacheResponseMethod`, and `liveProofArtifactCount` for Qwen/MiniMax-only
   support, the `prefix-cache-l2-turboquant` response path, and the checked-in
   Qwen/MiniMax live replay artifact set. The settings/visuals group exposes
