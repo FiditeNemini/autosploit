@@ -43,6 +43,7 @@ REQUIRED_PROOFS = {
     "stash-retrieval-proof.py",
     "request-audit-proof.py",
     "context-window-cache-proof.py",
+    "persistence-proof.py",
 }
 
 REQUIRED_STATE_KEYS = {
@@ -71,6 +72,14 @@ REQUIRED_DELIVERY_MODES = [
     "durableEmbeddingIndex",
     "activeScopeStashRetrieval",
 ]
+
+REQUIRED_DELIVERY_MODE_PROOFS = {
+    "automaticBoundedInjection": ["context-catalog-proof.py", "request-audit-proof.py"],
+    "onDemandSearchContext": ["agent-search-context-proof.py"],
+    "persistedTurnAudit": ["request-audit-proof.py", "persistence-proof.py"],
+    "durableEmbeddingIndex": ["catalog-embedding-audit-proof.py"],
+    "activeScopeStashRetrieval": ["stash-retrieval-proof.py"],
+}
 
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
@@ -141,6 +150,16 @@ def assert_context_coverage() -> None:
         raise AssertionError(f"context coverage delivery mode count mismatch: {coverage}")
     if coverage.get("contextDeliveryModeParity") is not True:
         raise AssertionError(f"context coverage delivery mode parity mismatch: {coverage}")
+    if coverage.get("contextDeliveryModeProofs") != REQUIRED_DELIVERY_MODE_PROOFS:
+        raise AssertionError(f"context coverage delivery mode proof map mismatch: {coverage}")
+    if coverage.get("contextDeliveryModeProofCount") != len(REQUIRED_DELIVERY_MODE_PROOFS):
+        raise AssertionError(f"context coverage delivery mode proof count mismatch: {coverage}")
+    if coverage.get("contextDeliveryModeProofParity") is not True:
+        raise AssertionError(f"context coverage delivery mode proof parity mismatch: {coverage}")
+    for mode, proof_names in REQUIRED_DELIVERY_MODE_PROOFS.items():
+        missing_mode_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
+        if missing_mode_files:
+            raise AssertionError(f"context delivery mode {mode} names missing proof files {missing_mode_files}: {coverage}")
     state_keys = set(coverage.get("stateKeys") or [])
     missing_state_keys = sorted(REQUIRED_STATE_KEYS.difference(state_keys))
     if missing_state_keys:

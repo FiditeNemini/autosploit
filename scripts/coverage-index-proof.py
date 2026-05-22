@@ -272,6 +272,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context delivery mode count mismatch: {chat_context_group}")
     if chat_context_group.get("contextDeliveryModeParity") != context_coverage.get("contextDeliveryModeParity"):
         raise AssertionError(f"coverage index chat/context delivery mode parity mismatch: {chat_context_group}")
+    if chat_context_group.get("contextDeliveryModeProofCount") != context_coverage.get("contextDeliveryModeProofCount"):
+        raise AssertionError(f"coverage index chat/context delivery mode proof count mismatch: {chat_context_group}")
+    if chat_context_group.get("contextDeliveryModeProofParity") != context_coverage.get("contextDeliveryModeProofParity"):
+        raise AssertionError(f"coverage index chat/context delivery mode proof parity mismatch: {chat_context_group}")
     settings_visuals_group = groups.get("settingsAndVisuals") or {}
     settings_coverage = request("GET", "/qa/settings-coverage")
     if settings_visuals_group.get("settingsSurfaces") != settings_coverage.get("settingsSurfaces"):

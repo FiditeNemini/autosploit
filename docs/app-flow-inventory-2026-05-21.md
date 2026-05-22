@@ -778,8 +778,9 @@ Current repeatable gates:
   session boundary, and the checked-in live replay
   artifacts remain visible from the top-level QA index. The chat/context group
   also mirrors `/qa/chat-coverage.cacheResponsesInferenceMethod`,
-  `newModelSessionBehavior`, context retrieval source list/count/parity, and
-  context delivery mode list/count/parity, so
+  `newModelSessionBehavior`, context retrieval source list/count/parity,
+  context delivery mode list/count/parity, and delivery-mode proof
+  count/parity, so
   bounded dynamic catalogue source coverage and cache-session preservation remain
   visible from the aggregate QA index. The
   settings/visuals group exposes Settings surface list/count/parity, settings

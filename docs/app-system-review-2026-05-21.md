@@ -560,9 +560,10 @@ Automated no-model gates:
   route, proof-count metadata, `stateKeys`, and retrieval source
   list/count/parity for the context audit surfaces. It also exposes
   `contextDeliveryModes`, `contextDeliveryModeCount`, and
-  `contextDeliveryModeParity` so automatic bounded injection, on-demand
-  `search_context`, persisted turn audit, durable embeddings, and active-scope
-  stash retrieval are visible as separate anti-context-flooding paths.
+  `contextDeliveryModeParity`, plus delivery-mode proof map/count/parity, so
+  automatic bounded injection, on-demand `search_context`, persisted turn audit,
+  durable embeddings, and active-scope stash retrieval are visible as separate
+  anti-context-flooding paths tied to concrete proof scripts.
   `/qa/visual-coverage` exposes screenshot-backed UI proof coverage for chat,
   scroll lock, Settings, context inspector, request-audit badges, tab activity,
   subtab lifecycle strips, OSINT screenshots, reports, stash retrieval,
