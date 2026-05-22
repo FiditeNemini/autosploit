@@ -279,7 +279,12 @@ through `/state.qaChatVisual.headerBadges` and the seeded visual chat proof;
 `/qa/chat-coverage` also advertises `headerCacheBadges`,
 `headerCacheBadgeCount`, `headerCacheBadgeParity`, `cacheSessionIndicator`, and
 `newContextSessionBoundary` so the broad app QA matrix locks the visible
-cache-session contract, badge cardinality, and list/count parity.
+cache-session contract, badge cardinality, and list/count parity. It now also
+advertises the exact cache-session field list/count/parity for
+`cacheResponsesMethod`, `cacheResponsesInferenceMethod`, `sessionBoundaryMode`,
+`newModelSessionBehavior`, prefix cache, prompt L2 disk, paged cache, block L2
+disk, and TurboQuant KV so chat coverage can audit the same preserved-session
+contract as `/state.contextWindow`.
 `scripts/app-qa-matrix-smoke-proof.py` now checks the same badge list, count,
 and parity as part of the broad app smoke gate.
 - CVE-bearing rows now expose per-row status through `/state.webCVERows` and a

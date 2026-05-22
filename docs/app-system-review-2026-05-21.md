@@ -572,8 +572,9 @@ Automated no-model gates:
   `/qa/chat-coverage` exposes chat/control proof coverage for streaming usage
   metrics, token counters, reasoning controls, approval controls, tool-output
   expansion, request-audit badges, context inspector state, scroll-lock visuals,
-  tool-action/Stash chat handoff, visible cache-session header badges, and cache-preserving new-context behavior for
-  the `prefix-cache-l2-turboquant` response path. It also exposes `stateKeys`
+  tool-action/Stash chat handoff, visible cache-session header badges,
+  cache-session field list/count/parity, and cache-preserving new-context
+  behavior for the `prefix-cache-l2-turboquant` response path. It also exposes `stateKeys`
   for `chatActions`, `chatControlActions`, chat/message storage, request
   context, context-window state, QA chat visual state, stash handoff, and the
   activity feed.
@@ -604,9 +605,9 @@ Automated no-model gates:
   stay machine-auditable, including missing visual capture count.
   The chat/context group mirrors `/qa/chat-coverage.headerCacheBadges`,
   `headerCacheBadgeCount`, `headerCacheBadgeParity`, `cacheSessionIndicator`, and
-  `newContextSessionBoundary`, so the aggregate coverage map carries the same
-  visible cache-session contract, badge count, and badge parity as the chat
-  coverage endpoint.
+  `newContextSessionBoundary`, plus the cache-session field list/count/parity,
+  so the aggregate coverage map carries the same visible and structural
+  cache-session contract as the chat coverage endpoint.
   `/qa/checkpoint-ledger` exposes checkpoint documentation count,
   completeness count, completion ratio, complete checkpoint paths, incomplete
   checkpoint paths, latest checkpoint, and latest checkpoint number using numeric checkpoint ordering; the checkpoint,

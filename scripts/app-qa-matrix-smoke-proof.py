@@ -265,6 +265,23 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/chat-coverage cache session indicator mismatch: {chat_coverage}")
     if chat_coverage.get("newContextSessionBoundary") != "new ctx keeps cache":
         raise AssertionError(f"/qa/chat-coverage new context boundary mismatch: {chat_coverage}")
+    expected_cache_session_fields = [
+        "cacheResponsesMethod",
+        "cacheResponsesInferenceMethod",
+        "sessionBoundaryMode",
+        "newModelSessionBehavior",
+        "prefixCache",
+        "promptL2Disk",
+        "pagedCache",
+        "blockL2Disk",
+        "turboQuantKV",
+    ]
+    if chat_coverage.get("cacheSessionFields") != expected_cache_session_fields:
+        raise AssertionError(f"/qa/chat-coverage cache session fields mismatch: {chat_coverage}")
+    if chat_coverage.get("cacheSessionFieldCount") != len(expected_cache_session_fields):
+        raise AssertionError(f"/qa/chat-coverage cache session field count mismatch: {chat_coverage}")
+    if chat_coverage.get("cacheSessionFieldParity") is not True:
+        raise AssertionError(f"/qa/chat-coverage cache session field parity mismatch: {chat_coverage}")
     if chat_coverage.get("proofCount", 0) < 15:
         raise AssertionError(f"/qa/chat-coverage proof count mismatch: {chat_coverage}")
     if "chatActions" not in (chat_coverage.get("stateKeys") or []):

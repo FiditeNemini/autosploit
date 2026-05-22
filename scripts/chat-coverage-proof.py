@@ -94,6 +94,18 @@ REQUIRED_STATE_KEYS = {
     "feedRecent",
 }
 
+REQUIRED_CACHE_SESSION_FIELDS = [
+    "cacheResponsesMethod",
+    "cacheResponsesInferenceMethod",
+    "sessionBoundaryMode",
+    "newModelSessionBehavior",
+    "prefixCache",
+    "promptL2Disk",
+    "pagedCache",
+    "blockL2Disk",
+    "turboQuantKV",
+]
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -152,6 +164,12 @@ def assert_chat_coverage() -> None:
         raise AssertionError(f"chat coverage cache session indicator mismatch: {coverage}")
     if coverage.get("newContextSessionBoundary") != "new ctx keeps cache":
         raise AssertionError(f"chat coverage new context boundary mismatch: {coverage}")
+    if coverage.get("cacheSessionFields") != REQUIRED_CACHE_SESSION_FIELDS:
+        raise AssertionError(f"chat coverage cache session fields mismatch: {coverage}")
+    if coverage.get("cacheSessionFieldCount") != len(REQUIRED_CACHE_SESSION_FIELDS):
+        raise AssertionError(f"chat coverage cache session field count mismatch: {coverage}")
+    if coverage.get("cacheSessionFieldParity") is not True:
+        raise AssertionError(f"chat coverage cache session field parity mismatch: {coverage}")
 
     contracts = coverage.get("contracts") or {}
     missing_contracts = sorted(name for name in REQUIRED_CONTRACTS if contracts.get(name) is not True)
