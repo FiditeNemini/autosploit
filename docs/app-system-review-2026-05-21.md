@@ -77,6 +77,11 @@ Dynamic context:
   active-operation and global stash can be considered, inactive-operation stash
   is excluded, labels/tags/content/source tab influence score, and the latest
   retrieval audit is exposed through `/state.stashRetrieval`.
+- Non-CVE catalogue records are durably embedded with a deterministic local
+  vector signature in `catalogEmbeddings` for assets, findings, raw tool output,
+  and stash items. The selected sources for each automatic context packet are
+  persisted on the assistant turn through `messages.contextSelections`, so later
+  audits can see what was retrieved without replaying the ranker.
 - Automatic context injection is capped to 4 snippets. Settings stores a bounded
   maximum, but routine model turns stay lean and rely on `search_context` for
   deeper retrieval.
@@ -88,6 +93,8 @@ Dynamic context:
   kerberos/golden-ticket query selects the matching active-op note first, keeps
   unrelated noise out of the bounded context packet, excludes inactive-op stash,
   and exposes candidate/returned/top-score audit state.
+- Durable non-CVE catalogue embedding and assistant-turn retrieval selection
+  persistence are covered by `scripts/catalog-embedding-audit-proof.py`.
 - Semantic CVE mode invocation is covered by `scripts/semantic-cve-proof.py`,
   which launches the app with a deterministic fake embedder, seeds tiny stored
   vectors, verifies the embedder subprocess was called, and asserts
@@ -343,6 +350,8 @@ Automated no-model gates:
     OSINT/exploit schemas in the request body;
   - proves `/state.requestContext` exposes whether context was injected, how
     many snippets were selected, and which tool schemas were exposed;
+  - proves `/state.catalogEmbeddings` exposes durable non-CVE catalogue vectors
+    and assistant turns persist bounded selected-source retrieval audits;
   - proves the expandable chat request-context inspector can show the bounded
     context packet preview and exposed tool schema names;
   - proves semantic CVE mode invokes the embedder path when stored embeddings

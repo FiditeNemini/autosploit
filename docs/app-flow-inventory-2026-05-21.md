@@ -118,12 +118,18 @@ Implemented dynamic catalogue lane:
 - Semantic mode is covered by `scripts/semantic-cve-proof.py`: the proof injects
   a deterministic fake embedder, seeds stored vectors, and verifies the context
   packet uses the vector-ranked CVE rather than silent text fallback.
-
-Required next catalog lane:
-
-- Add durable embeddings for tools, techniques, findings, assets, commands,
-  prior outputs, and stash items, not only CVEs.
-- Store retrieval decisions with the chat turn for later audit.
+- Non-CVE catalogue indexing now persists deterministic embedding records in
+  `catalogEmbeddings` for assets, findings, raw tool output, and stash items.
+  `/state.catalogEmbeddings` exposes record count, source list, per-source
+  counts, and vector dimensions for QA and Settings-adjacent diagnostics.
+- Each selected context packet includes a compact selected-source audit, and
+  assistant turns persist that audit in `messages.contextSelections` alongside
+  the context summary and tool-schema list.
+- Durable non-CVE catalogue indexing and per-turn selected-source persistence
+  are covered by `scripts/catalog-embedding-audit-proof.py`: it seeds
+  asset/finding/tool-output/stash records, verifies the persisted embedding
+  catalogue, sends a bounded prompt through a mock engine, relaunches the app,
+  and verifies both catalogue records and assistant retrieval selections survive.
 
 ## Tab Functions
 
@@ -313,6 +319,7 @@ Current repeatable gates:
 - `python3 scripts/live-turn-harness.py`
 - `cd ExploitBotEngine && uv run --extra dev ../scripts/prove-parser-api.py --output ../docs/live-proofs/checkpoint-79-parser-api-proof.json`
 - `python3 scripts/context-catalog-proof.py`
+- `python3 scripts/catalog-embedding-audit-proof.py`
 - `python3 scripts/tool-catalog-proof.py`
 - `python3 scripts/semantic-cve-proof.py`
 - `python3 scripts/settings-apply-proof.py`
