@@ -594,6 +594,10 @@ Current repeatable gates:
   context inspector state, scroll-lock visuals, tool-action/Stash chat control,
   and cache-preserving new-context behavior for the
   `prefix-cache-l2-turboquant` response path.
+  The aggregate QA map is exposed through `/qa/coverage-index`; it groups app
+  state, chat/context, runtime/cache, settings/visuals, tools/parsers, and
+  tabs/sessions endpoints with their proof scripts, and
+  `scripts/coverage-index-proof.py` verifies every named proof file exists.
 - Visual QA through the local app run script plus screenshots.
 
 Required future proof gates:

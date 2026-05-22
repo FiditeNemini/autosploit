@@ -102,6 +102,7 @@ def assert_testserver_smoke() -> None:
     session_coverage = request("GET", "/qa/session-coverage")
     tab_action_coverage = request("GET", "/qa/tab-action-coverage")
     chat_coverage = request("GET", "/qa/chat-coverage")
+    coverage_index = request("GET", "/qa/coverage-index")
 
     required_state_keys = {
         "activeTab",
@@ -154,6 +155,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing tab action coverage route contract: {qa}")
     if "/qa/chat-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing chat coverage route contract: {qa}")
+    if "/qa/coverage-index" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing coverage-index route contract: {qa}")
     if subtab_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/subtab-coverage failed: {subtab_coverage}")
     if sorted((subtab_coverage.get("tabs") or {}).keys()) != expected_subtab_tabs:
@@ -210,6 +213,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/chat-coverage context behavior mismatch: {chat_coverage}")
     if chat_coverage.get("proofCount", 0) < 15:
         raise AssertionError(f"/qa/chat-coverage proof count mismatch: {chat_coverage}")
+    if coverage_index.get("ok") is not True:
+        raise AssertionError(f"/qa/coverage-index failed: {coverage_index}")
+    if coverage_index.get("endpointCount", 0) < 16:
+        raise AssertionError(f"/qa/coverage-index endpoint count mismatch: {coverage_index}")
+    if coverage_index.get("proofCount", 0) < 14:
+        raise AssertionError(f"/qa/coverage-index proof count mismatch: {coverage_index}")
 
 
 def run() -> None:
