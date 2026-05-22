@@ -637,9 +637,10 @@ Automated no-model gates:
   `cacheSessionIndicator`, and `newContextSessionBoundary`, plus
   `cacheResponsesInferenceMethod`,
   `newModelSessionBehavior`, cache-session field list/count/parity, cache-session
-  field proof count/parity, and it
+  field proof map/count/parity, and it
   mirrors `/qa/context-coverage` retrieval source list/count/parity plus
-  context delivery mode list/count/parity, so
+  retrieval source proof map/count/parity and context delivery mode
+  list/count/parity plus delivery proof map/count/parity, so
   the aggregate coverage map carries the same visible cache-session and bounded
   dynamic-context source contracts as the detailed endpoints.
   `/qa/checkpoint-ledger` exposes checkpoint documentation count,

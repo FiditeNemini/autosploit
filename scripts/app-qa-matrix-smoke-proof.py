@@ -471,6 +471,15 @@ def assert_testserver_smoke() -> None:
     if app_state_group.get("currentGapCount", -1) != 1:
         raise AssertionError(f"/qa/coverage-index current gap count mismatch: {coverage_index}")
     settings_visuals_group = index_groups.get("settingsAndVisuals") or {}
+    chat_context_group = index_groups.get("chatAndContext") or {}
+    if chat_context_group.get("headerCacheBadgeProofs") != chat_coverage.get("headerCacheBadgeProofs"):
+        raise AssertionError(f"/qa/coverage-index header cache badge proof map mismatch: {coverage_index}")
+    if chat_context_group.get("cacheSessionFieldProofs") != chat_coverage.get("cacheSessionFieldProofs"):
+        raise AssertionError(f"/qa/coverage-index cache session field proof map mismatch: {coverage_index}")
+    if chat_context_group.get("retrievalSourceProofs") != context_coverage.get("retrievalSourceProofs"):
+        raise AssertionError(f"/qa/coverage-index retrieval source proof map mismatch: {coverage_index}")
+    if chat_context_group.get("contextDeliveryModeProofs") != context_coverage.get("contextDeliveryModeProofs"):
+        raise AssertionError(f"/qa/coverage-index context delivery mode proof map mismatch: {coverage_index}")
     if settings_visuals_group.get("settingsSurfaceProofs") != settings_coverage.get("settingsSurfaceProofs"):
         raise AssertionError(f"/qa/coverage-index settings surface proof map mismatch: {coverage_index}")
     if settings_visuals_group.get("visualSurfaceProofs") != visual_coverage.get("visualSurfaceProofs"):

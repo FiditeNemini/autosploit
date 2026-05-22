@@ -305,7 +305,8 @@ through `/state.qaChatVisual.headerBadges` and the seeded visual chat proof;
 `headerCacheBadgeProofs`, header badge proof count/parity,
 `cacheSessionIndicator`, and
 `newContextSessionBoundary` so the broad app QA matrix locks the visible
-cache-session contract, badge cardinality, list/count parity, and proof parity. It now also
+cache-session contract, badge cardinality, list/count parity, and proof
+map/count/parity. It now also
 advertises the exact `cacheResponsesInferenceMethod`,
 `newModelSessionBehavior`, cache-session field list/count/parity, and
 cache-session field proof map/count/parity for
@@ -740,10 +741,16 @@ Current repeatable gates:
   stay machine-auditable, including missing visual capture count.
   The chat/context group mirrors `/qa/chat-coverage.headerCacheBadges`,
   `headerCacheBadgeCount`, `headerCacheBadgeParity`,
-  `headerCacheBadgeProofCount`, `headerCacheBadgeProofParity`,
-  `cacheSessionIndicator`, and `newContextSessionBoundary`, so the aggregate
-  coverage map carries the same visible cache-session contract, badge count,
-  badge parity, and proof-map parity as the chat coverage endpoint.
+  `headerCacheBadgeProofs`, `headerCacheBadgeProofCount`,
+  `headerCacheBadgeProofParity`, `cacheSessionIndicator`, and
+  `newContextSessionBoundary`, plus `cacheResponsesInferenceMethod`,
+  `newModelSessionBehavior`, cache-session field list/count/parity, and
+  cache-session field proof map/count/parity. It also mirrors
+  `/qa/context-coverage` retrieval source list/count/parity plus retrieval
+  source proof map/count/parity and context delivery mode list/count/parity
+  plus delivery proof map/count/parity, so the aggregate coverage map carries
+  the same visible cache-session and bounded dynamic-context source contracts as
+  the detailed endpoints.
   `/qa/checkpoint-ledger` exposes checkpoint documentation count,
   completeness count, completion ratio, complete checkpoint paths, incomplete
   checkpoint paths, latest checkpoint, and latest checkpoint number using numeric checkpoint ordering; the checkpoint,

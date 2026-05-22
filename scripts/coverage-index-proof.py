@@ -300,6 +300,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context header cache badge count mismatch: {chat_context_group}")
     if chat_context_group.get("headerCacheBadgeParity") != chat_coverage.get("headerCacheBadgeParity"):
         raise AssertionError(f"coverage index chat/context header cache badge parity mismatch: {chat_context_group}")
+    if chat_context_group.get("headerCacheBadgeProofs") != chat_coverage.get("headerCacheBadgeProofs"):
+        raise AssertionError(f"coverage index chat/context header cache badge proof map mismatch: {chat_context_group}")
     if chat_context_group.get("headerCacheBadgeProofCount") != chat_coverage.get("headerCacheBadgeProofCount"):
         raise AssertionError(f"coverage index chat/context header cache badge proof count mismatch: {chat_context_group}")
     if chat_context_group.get("headerCacheBadgeProofParity") != chat_coverage.get("headerCacheBadgeProofParity"):
@@ -318,6 +320,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context cache session field count mismatch: {chat_context_group}")
     if chat_context_group.get("cacheSessionFieldParity") != chat_coverage.get("cacheSessionFieldParity"):
         raise AssertionError(f"coverage index chat/context cache session field parity mismatch: {chat_context_group}")
+    if chat_context_group.get("cacheSessionFieldProofs") != chat_coverage.get("cacheSessionFieldProofs"):
+        raise AssertionError(f"coverage index chat/context cache session field proof map mismatch: {chat_context_group}")
     if chat_context_group.get("cacheSessionFieldProofCount") != chat_coverage.get("cacheSessionFieldProofCount"):
         raise AssertionError(f"coverage index chat/context cache session field proof count mismatch: {chat_context_group}")
     if chat_context_group.get("cacheSessionFieldProofParity") != chat_coverage.get("cacheSessionFieldProofParity"):
@@ -329,6 +333,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context retrieval source count mismatch: {chat_context_group}")
     if chat_context_group.get("retrievalSourceParity") != context_coverage.get("retrievalSourceParity"):
         raise AssertionError(f"coverage index chat/context retrieval source parity mismatch: {chat_context_group}")
+    if chat_context_group.get("retrievalSourceProofs") != context_coverage.get("retrievalSourceProofs"):
+        raise AssertionError(f"coverage index chat/context retrieval source proof map mismatch: {chat_context_group}")
     if chat_context_group.get("retrievalSourceProofCount") != context_coverage.get("retrievalSourceProofCount"):
         raise AssertionError(f"coverage index chat/context retrieval source proof count mismatch: {chat_context_group}")
     if chat_context_group.get("retrievalSourceProofParity") != context_coverage.get("retrievalSourceProofParity"):
@@ -339,6 +345,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context delivery mode count mismatch: {chat_context_group}")
     if chat_context_group.get("contextDeliveryModeParity") != context_coverage.get("contextDeliveryModeParity"):
         raise AssertionError(f"coverage index chat/context delivery mode parity mismatch: {chat_context_group}")
+    if chat_context_group.get("contextDeliveryModeProofs") != context_coverage.get("contextDeliveryModeProofs"):
+        raise AssertionError(f"coverage index chat/context delivery mode proof map mismatch: {chat_context_group}")
     if chat_context_group.get("contextDeliveryModeProofCount") != context_coverage.get("contextDeliveryModeProofCount"):
         raise AssertionError(f"coverage index chat/context delivery mode proof count mismatch: {chat_context_group}")
     if chat_context_group.get("contextDeliveryModeProofParity") != context_coverage.get("contextDeliveryModeProofParity"):
