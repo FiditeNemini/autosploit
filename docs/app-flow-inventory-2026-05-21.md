@@ -261,7 +261,10 @@ OSINT:
 Report:
 
 - Generates markdown/HTML/PDF from stored findings.
-- Opens finding creation and deletes findings.
+- Opens finding creation and deletes findings. `/state.reportFindingActions`
+  exposes Create Finding/Delete finding labels, wizard visibility, last action,
+  current finding rows, and the last created/deleted IDs so Report CRUD actions
+  are auditable like tool-tab action states.
 - Deterministic Generate/Export remains direct, while `Agent Draft` now routes
   a bounded report drafting prompt through the chat/agent loop.
 - `/state.reportAction` exposes the active report-agent draft status, template,
@@ -271,6 +274,10 @@ Report:
 - Export validation is covered by `scripts/report-export-proof.py` for HTML,
   Markdown, JSON, and PDF artifacts; visible report status is captured under
   `docs/visual-proofs/checkpoint-91`.
+- Create/delete finding action state is covered by
+  `scripts/report-finding-actions-proof.py`, which opens the Report finding
+  wizard, submits a deterministic finding, verifies the row delete action
+  label, deletes the row, and checks Report tab activity state.
 - Agent-draft routing is covered by `scripts/report-agent-action-proof.py`, and
   the visible queued report-agent strip is captured under
   `docs/visual-proofs/checkpoint-107`.
