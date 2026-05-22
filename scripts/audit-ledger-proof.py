@@ -126,6 +126,8 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit unsupported multimodal block mismatch: {audit}")
     if audit.get("openGapIds") != gap.get("openGapIds"):
         raise AssertionError(f"audit open gap ids mismatch: {audit}")
+    if audit.get("openGapCount") != gap.get("openGapCount"):
+        raise AssertionError(f"audit open gap count mismatch: {audit}")
     if audit.get("gapContracts") != gap.get("gapContracts"):
         raise AssertionError(f"audit gap contracts mismatch: {audit}")
 

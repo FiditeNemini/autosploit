@@ -83,6 +83,8 @@ def assert_gap_ledger() -> None:
         raise AssertionError(f"gap ledger supported families mismatch: {ledger}")
     if "qwenMultimodalRuntime" not in (ledger.get("openGapIds") or []):
         raise AssertionError(f"gap ledger missing qwen multimodal gap id: {ledger}")
+    if ledger.get("openGapCount") != len(ledger.get("openGapIds") or []):
+        raise AssertionError(f"gap ledger open gap count mismatch: {ledger}")
     qwen_gap = (ledger.get("gapContracts") or {}).get("qwenMultimodalRuntime") or {}
     if qwen_gap.get("status") != "blocked":
         raise AssertionError(f"qwen multimodal gap should be blocked: {ledger}")

@@ -361,6 +361,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state unsupported multimodal block mismatch: {app_state_group}")
     if app_state_group.get("openGapIds") != gap.get("openGapIds"):
         raise AssertionError(f"coverage index app state open gap ids mismatch: {app_state_group}")
+    if app_state_group.get("openGapCount") != gap.get("openGapCount"):
+        raise AssertionError(f"coverage index app state open gap count mismatch: {app_state_group}")
     if app_state_group.get("gapContracts") != gap.get("gapContracts"):
         raise AssertionError(f"coverage index app state gap contracts mismatch: {app_state_group}")
     if app_state_group.get("gapContractCount") != len(gap.get("gapContracts") or {}):

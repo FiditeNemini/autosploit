@@ -567,6 +567,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index gap supported families mismatch: {coverage_index}")
     if app_state_group.get("unsupportedMultimodalBlocked") != gap_ledger.get("unsupportedMultimodalBlocked"):
         raise AssertionError(f"/qa/coverage-index unsupported multimodal block mismatch: {coverage_index}")
+    if app_state_group.get("openGapCount") != gap_ledger.get("openGapCount"):
+        raise AssertionError(f"/qa/coverage-index open gap count mismatch: {coverage_index}")
     if app_state_group.get("gapContracts") != gap_ledger.get("gapContracts"):
         raise AssertionError(f"/qa/coverage-index gap contract map mismatch: {coverage_index}")
     runtime_group = index_groups.get("runtimeAndCache") or {}
