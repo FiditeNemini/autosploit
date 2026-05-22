@@ -338,6 +338,9 @@ OSINT:
 Report:
 
 - Generates markdown/HTML/PDF from stored findings.
+- Visible Generate now routes through AppState and exposes
+  `/state.reportRenderActions` with template, finding count, generated HTML
+  size, and preview; covered by `scripts/report-generate-action-proof.py`.
 - Opens finding creation and deletes findings. `/state.reportFindingActions`
   exposes Create Finding/Delete finding labels, wizard visibility, last action,
   current finding rows, and the last created/deleted IDs so Report CRUD actions

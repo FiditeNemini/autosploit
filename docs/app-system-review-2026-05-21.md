@@ -387,9 +387,14 @@ Report:
 
 - Buttons: Generate, PDF, Markdown, Create Finding, delete finding.
 - Chat path: report generation is direct app code, not model-driven.
-- State: findings, generated report output, last export status/artifacts, and
+- State: findings, generated report output, `/state.reportRenderActions` for
+  visible Generate, last export status/artifacts, and
   `/state.reportFindingActions` for Create Finding/Delete finding labels,
   wizard visibility, current row metadata, and last created/deleted IDs.
+- Visible Generate coverage is handled by
+  `scripts/report-generate-action-proof.py`: it seeds a deterministic finding,
+  runs the AppState generate path, and verifies generated HTML size/preview,
+  finding count, and activity-feed state.
 - Create/delete finding action coverage is handled by
   `scripts/report-finding-actions-proof.py`: it starts from an empty Report
   page, opens the finding wizard, submits a deterministic confirmed finding,
