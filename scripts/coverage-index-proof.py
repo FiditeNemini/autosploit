@@ -286,6 +286,13 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index visual manifest count mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("actualCaptureCount", 0) < 48:
         raise AssertionError(f"coverage index visual capture count mismatch: {settings_visuals_group}")
+    visual_coverage = request("GET", "/qa/visual-coverage")
+    if settings_visuals_group.get("visualSurfaces") != visual_coverage.get("visualSurfaces"):
+        raise AssertionError(f"coverage index visual surface list mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("visualSurfaceCount") != visual_coverage.get("visualSurfaceCount"):
+        raise AssertionError(f"coverage index visual surface count mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("visualSurfaceParity") != visual_coverage.get("visualSurfaceParity"):
+        raise AssertionError(f"coverage index visual surface parity mismatch: {settings_visuals_group}")
     tools_parsers_group = groups.get("toolsAndParsers") or {}
     if tools_parsers_group.get("toolCount", 0) < 38:
         raise AssertionError(f"coverage index tools/parsers tool count mismatch: {tools_parsers_group}")

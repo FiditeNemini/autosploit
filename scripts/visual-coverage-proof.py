@@ -108,6 +108,18 @@ REQUIRED_ROUTES = {
     "/qa/context-packet",
 }
 
+REQUIRED_VISUAL_SURFACES = [
+    "chatAndScroll",
+    "settingsAndCache",
+    "contextInspectorAndAudit",
+    "tabAndSubtabActivity",
+    "osintScreenshots",
+    "reportAndStash",
+    "unsupportedAndPost",
+    "toolActionPanels",
+    "cveAndToolSettings",
+]
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -184,6 +196,12 @@ def assert_visual_coverage() -> None:
         raise AssertionError(f"visual coverage minimum capture count exceeds artifacts: {coverage}")
     if coverage.get("actualCaptureCount") != capture_count:
         raise AssertionError(f"visual coverage actual capture count mismatch: expected {capture_count}: {coverage}")
+    if coverage.get("visualSurfaces") != REQUIRED_VISUAL_SURFACES:
+        raise AssertionError(f"visual coverage surface list mismatch: {coverage}")
+    if coverage.get("visualSurfaceCount") != len(REQUIRED_VISUAL_SURFACES):
+        raise AssertionError(f"visual coverage surface count mismatch: {coverage}")
+    if coverage.get("visualSurfaceParity") is not True:
+        raise AssertionError(f"visual coverage surface parity mismatch: {coverage}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/visual-coverage" not in qa.get("stateRoutes", []):

@@ -567,9 +567,9 @@ Automated no-model gates:
   scroll lock, Settings, context inspector, request-audit badges, tab activity,
   subtab lifecycle strips, OSINT screenshots, reports, stash retrieval,
   unsupported models, post attribution, tool action panels, live cache stats,
-  CVE/tool settings pages, visual manifests, capture-count minimums, and
-  proof-count metadata, plus the QA routes used to seed or switch each visual
-  proof state.
+  CVE/tool settings pages, visual surface list/count/parity, visual manifests,
+  capture-count minimums, and proof-count metadata, plus the QA routes used to
+  seed or switch each visual proof state.
   `/qa/session-coverage` exposes cross-app session workflow proof coverage for
   onboarding/mode selection, Sidebar operations, overlays, model-folder pickers,
   persistence/relaunch, saved messages, result rebuild, finding wizard submit,
@@ -668,8 +668,9 @@ Automated no-model gates:
   `prefix-cache-l2-turboquant` response path, cache-preserving new-context
   boundary, and the checked-in Qwen/MiniMax
   live replay artifact set. The settings/visuals group exposes Settings surface
-  list/count/parity, settings visual manifest count, full visual manifest count,
-  and actual screenshot capture count. The tools/parsers group exposes registry tool
+  list/count/parity, visual surface list/count/parity, settings visual manifest
+  count, full visual manifest count, and actual screenshot capture count. The
+  tools/parsers group exposes registry tool
   count, callback count, representative family fanout count, state-key count,
   dynamic tool-schema cap/policy/route, structured/raw result-mode counts, and
   model-tool visual surface list/count/parity from `/qa/tool-flow-coverage`.
@@ -963,12 +964,14 @@ Visual gates:
 - Aggregate screenshot-backed UI proof coverage is exposed through
   `/qa/visual-coverage` and verified by `scripts/visual-coverage-proof.py`,
   which checks the route, required visual proof scripts, required manifests,
-  listed capture artifact existence, and `actualCaptureCount`.
+  listed capture artifact existence, visual surface list/count/parity, and
+  `actualCaptureCount`.
 - Settings-specific screenshot-backed UI proof coverage is also exposed through
   `/qa/settings-coverage.visualManifests` and verified by
   `scripts/settings-coverage-proof.py`.
 - The top-level `/qa/coverage-index.groups.settingsAndVisuals` aggregate now
-  rolls up settings visual manifest count, full visual manifest count, and
+  rolls up Settings surface list/count/parity, visual surface list/count/parity,
+  settings visual manifest count, full visual manifest count, and
   actual screenshot capture count for matrix-level proof accounting.
 - Chat control action state for reasoning, context inspector, and new context
   is covered by `scripts/chat-control-actions-proof.py`.
