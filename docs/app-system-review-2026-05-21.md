@@ -40,10 +40,19 @@ Chat streaming:
 Interaction modes:
 
 - `SidebarView` and onboarding choose `autopilot`, `copilot`, or `manual`.
+- Onboarding and Sidebar mode selection share `AppState.selectInteractionMode`
+  / `completeOnboarding` wiring, and `/state.modeSelection` exposes available
+  mode IDs/labels, selected mode, active op mode, source, onboarding visibility,
+  and whether a pending copilot approval was rejected during a mode switch.
 - Autopilot executes model tool calls directly.
 - Copilot shows an approval card before tool execution.
 - Manual converts model tool calls into suggested commands and stops.
 - Agents always run as autopilot after deployment.
+- Onboarding/sidebar selection proof is covered by
+  `scripts/mode-selection-flow-proof.py`: onboarding creates a manual-mode op
+  from a Qwen fixture folder without starting the engine, Sidebar switches the
+  active op to autopilot, rejects a seeded pending approval, persists the op
+  mode, and records mode-change activity.
 - Main-chat mode proof is covered by `scripts/live-turn-harness.py`: the same
   mock tool call executes in autopilot, becomes a suggestion in manual mode, and
   pauses behind an approval card in copilot before execution.

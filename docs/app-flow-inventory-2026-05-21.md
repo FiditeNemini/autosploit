@@ -53,6 +53,10 @@ main session.
   `CVEService`, and `AgentManager`.
 - Saves current messages and active op state.
 - Deploys agents with the same model-folder-driven generation defaults.
+- Onboarding completion and Sidebar mode selection now share AppState handlers.
+  `/state.modeSelection` exposes the available Autopilot/Copilot/Manual modes,
+  current selected mode, active op mode, source, onboarding visibility, and
+  pending-approval rejection status.
 
 ## Chat Stream And Tool Execution
 
@@ -79,6 +83,9 @@ main session.
 - In manual mode, tools require explicit user approval.
 - In copilot/autopilot modes, the loop can execute approved tool calls up to
   `maxIterations`.
+- Mode surface wiring is covered by `scripts/mode-selection-flow-proof.py`,
+  which proves onboarding-created Manual mode, Sidebar mode switching,
+  active-op persistence, pending approval rejection, and activity logging.
 - Built-in CVE calls use callbacks instead of shell subprocesses.
 - Shell-backed tools run through `ToolExecutor`.
 - Tool output is appended to chat, activity feed, and `ResultsStore.ingest`.
