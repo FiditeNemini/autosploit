@@ -721,7 +721,8 @@ Current repeatable gates:
   `scripts/coverage-index-proof.py` verifies every named proof file exists.
   Each group also exposes `endpointCount` and `proofCount` for machine-readable
   coverage accounting. The app-state group also exposes `/state.qaCoverage`
-  state-route count, subtab state tab count, subtab state proof count, and the
+  state-route list/count, context hook list/count, subtab state tab list/count,
+  subtab state proof list/count, and the
   `/qa/proof-ledger` proof count, source proof-ledger category counts/category
   surfaces, source category-surface count, category other count, category total count, and category
   parity across all local proof scripts. It also exposes proof category counts

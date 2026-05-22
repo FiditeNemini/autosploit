@@ -191,10 +191,21 @@ def assert_coverage_index() -> None:
         if group.get("proofCount") != len(proofs_for_group):
             raise AssertionError(f"coverage index group proof count mismatch {name}: {group}")
     app_state_group = groups.get("appState") or {}
+    qa = state.get("qaCoverage") or {}
+    if app_state_group.get("stateRoutes") != qa.get("stateRoutes"):
+        raise AssertionError(f"coverage index app state route list mismatch: {app_state_group}")
     if app_state_group.get("stateRouteCount", 0) < 14:
         raise AssertionError(f"coverage index app state route count mismatch: {app_state_group}")
+    if app_state_group.get("contextHooks") != qa.get("contextHooks"):
+        raise AssertionError(f"coverage index app state context hook list mismatch: {app_state_group}")
+    if app_state_group.get("contextHookCount") != len(qa.get("contextHooks") or []):
+        raise AssertionError(f"coverage index app state context hook count mismatch: {app_state_group}")
+    if app_state_group.get("subtabStateTabs") != qa.get("subtabStateTabs"):
+        raise AssertionError(f"coverage index app state subtab list mismatch: {app_state_group}")
     if app_state_group.get("subtabStateTabCount", 0) < 8:
         raise AssertionError(f"coverage index app state subtab count mismatch: {app_state_group}")
+    if app_state_group.get("subtabStateProofs") != qa.get("subtabStateProofs"):
+        raise AssertionError(f"coverage index app state subtab proof list mismatch: {app_state_group}")
     if app_state_group.get("subtabStateProofCount", 0) < 8:
         raise AssertionError(f"coverage index app state subtab proof count mismatch: {app_state_group}")
     if app_state_group.get("proofLedgerCount", 0) < 120:

@@ -457,6 +457,16 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index proof count mismatch: {coverage_index}")
     index_groups = coverage_index.get("groups") or {}
     app_state_group = index_groups.get("appState") or {}
+    if app_state_group.get("stateRoutes") != qa.get("stateRoutes"):
+        raise AssertionError(f"/qa/coverage-index state route list mismatch: {coverage_index}")
+    if app_state_group.get("contextHooks") != qa.get("contextHooks"):
+        raise AssertionError(f"/qa/coverage-index context hook list mismatch: {coverage_index}")
+    if app_state_group.get("contextHookCount") != len(qa.get("contextHooks") or []):
+        raise AssertionError(f"/qa/coverage-index context hook count mismatch: {coverage_index}")
+    if app_state_group.get("subtabStateTabs") != qa.get("subtabStateTabs"):
+        raise AssertionError(f"/qa/coverage-index subtab state tab list mismatch: {coverage_index}")
+    if app_state_group.get("subtabStateProofs") != qa.get("subtabStateProofs"):
+        raise AssertionError(f"/qa/coverage-index subtab state proof list mismatch: {coverage_index}")
     if app_state_group.get("proofLedgerCount", 0) < 120:
         raise AssertionError(f"/qa/coverage-index proof ledger count mismatch: {coverage_index}")
     if app_state_group.get("proofCategorySurfaceCount") != 8:
