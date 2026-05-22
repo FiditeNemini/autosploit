@@ -188,13 +188,19 @@ Post:
 
 - Buttons: Run LinPEAS, impacket Run, Pivot.
 - Chat path: sends prompts to chat.
-- State: raw post-exploitation output and network hosts.
+- State: raw post-exploitation output, network hosts, and structured
+  per-host/session output attribution.
 - Privilege escalation, AD/impacket, and lateral movement lifecycle state now
   tracks idle, running, done, failed, and canceled and is visible in the
   relevant Post subtab.
 - Live UI screenshot coverage for PrivEsc, AD Attacks, and Lateral lifecycle
   strips is captured by `scripts/visual-tab-proof.py`.
-- Missing proof: per-host/session output attribution.
+- Per-host/session attribution is covered by `scripts/post-attribution-proof.py`:
+  seeded linpeas, impacket secretsdump, and metasploit session output produce
+  structured host/user/session rows through `/state.postAttribution` and
+  `/results.postAttribution`.
+- Visible attribution rows are captured under
+  `docs/visual-proofs/checkpoint-94`.
 
 OSINT:
 
@@ -418,6 +424,8 @@ Visual gates:
   `docs/visual-proofs/checkpoint-92`.
 - Unsupported model-folder warning and engine blocked states are captured under
   `docs/visual-proofs/checkpoint-93`.
+- Post-exploitation output attribution is captured under
+  `docs/visual-proofs/checkpoint-94`.
 - Remaining visual gap: real-engine cache metrics state.
 
 ## Current Gaps To Close Next

@@ -180,7 +180,11 @@ Post:
   lifecycle strips for idle/running/done/failed/canceled status and are covered
   by the live-turn LinPEAS-style cancellation proof plus checkpoint-70 visual
   screenshots.
-- Still needs progress tied to host/session context and visible output status.
+- LinPEAS, impacket secretsdump, and metasploit session output now parse into
+  per-host/session attribution rows exposed through `/state.postAttribution` and
+  `/results.postAttribution`; the Post tab shows the same rows above raw output.
+- Attribution parsing is covered by `scripts/post-attribution-proof.py`, and the
+  visible Post tab state is captured under `docs/visual-proofs/checkpoint-94`.
 
 OSINT:
 
@@ -364,5 +368,7 @@ Required future proof gates:
   `docs/visual-proofs/checkpoint-91`.
 - Stash retrieval audit state is captured under
   `docs/visual-proofs/checkpoint-92`.
+- Post-exploitation output attribution is captured under
+  `docs/visual-proofs/checkpoint-94`.
 - Unsupported model-folder warning and blocked engine states are captured under
   `docs/visual-proofs/checkpoint-93`.
