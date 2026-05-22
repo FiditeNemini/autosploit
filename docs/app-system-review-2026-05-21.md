@@ -196,7 +196,8 @@ Stash:
 - Buttons: filters, search, add, copy, send to chat, delete.
 - Chat path: send-to-chat injects bounded stash content into the active chat.
 - State: persisted stash rows plus context catalogue source.
-- Missing proof: source/op scoping and catalogue inclusion/exclusion tests.
+- Source/op scoping and catalogue inclusion/exclusion are covered by
+  `scripts/context-catalog-proof.py`.
 
 Settings:
 
@@ -206,7 +207,9 @@ Settings:
 - Cache budgets/topology.
 - Agent count/mode settings.
 - CVE database and tool installer panels.
-- Missing work: split engine restart from app-only Apply where possible.
+- App-only settings can now be applied without restarting the engine; model,
+  cache, and engine runtime changes still use Apply & Restart Engine.
+- App-only apply is covered by `scripts/settings-apply-proof.py`.
 
 ## QA Matrix Required For Completion
 
@@ -219,6 +222,8 @@ Automated no-model gates:
 - Context catalogue seeded-state smoke.
 - Context catalogue source inclusion/exclusion and active-op stash scoping via
   `scripts/context-catalog-proof.py`.
+- App-only settings apply without engine restart via
+  `scripts/settings-apply-proof.py`.
 - Chat scroll lock visual smoke.
 - `scripts/live-turn-harness.py` mock-engine proof:
   - attaches a mock OpenAI-compatible stream endpoint;
@@ -288,5 +293,4 @@ Visual gates:
 ## Current Gaps To Close Next
 
 1. Add visual screenshot coverage for per-tab tool action indicators.
-2. Split app-only Settings apply from engine restart.
-4. Add live model verification scripts for Qwen and MiniMax folders.
+2. Add live model verification scripts for Qwen and MiniMax folders.

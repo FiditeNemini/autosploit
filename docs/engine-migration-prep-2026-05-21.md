@@ -440,6 +440,12 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   identity into `ContextCatalogService`, stash context is limited to global
   entries plus the active operation, and the proof script verifies disabled
   assets/findings/recent-output/stash sources do not enter selected snippets.
+- Checkpoint 67: Split Settings apply behavior into app-only settings and
+  engine restart paths. The footer now has `Apply App Settings` for context,
+  agent, and loop controls without restarting the engine, while model/cache/
+  runtime engine changes still use `Apply & Restart Engine`. Added
+  `scripts/settings-apply-proof.py` to verify app-only settings update without
+  changing engine connection state.
 
 ## Known Risk Areas
 

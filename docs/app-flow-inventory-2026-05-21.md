@@ -222,6 +222,8 @@ Agents:
 
 - Multi-agent mode remains available.
 - Active agents inherit the same model-folder defaults and parser/cache policy.
+- App-only Settings apply updates agent and loop controls without restarting the
+  engine.
 
 Context Catalog:
 
@@ -231,6 +233,8 @@ Context Catalog:
 - CVE assist can be off, current-result only, or semantic embedding ranked.
 - These settings are stored in the local settings database and applied to main
   chat plus newly deployed agents.
+- App-only Settings apply updates context controls without restarting the
+  engine; model/cache/runtime engine changes use the explicit restart action.
 
 CVE Database and Tools:
 
@@ -246,6 +250,7 @@ Current repeatable gates:
 - `cd ExploitBotEngine && PYTHONPATH=. uv run --extra dev pytest -q`
 - `python3 scripts/live-turn-harness.py`
 - `python3 scripts/context-catalog-proof.py`
+- `python3 scripts/settings-apply-proof.py`
 - `git diff --check`
 - Static scans proving no S/M/L profile selectors or `ModelProfile` code remain.
 - Visual QA through the local app run script plus screenshots.
