@@ -605,14 +605,26 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index tab action proof map mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopPhaseProofs") != agent_loop_coverage.get("loopPhaseProofs"):
         raise AssertionError(f"/qa/coverage-index agent loop phase proof map mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentLoopCurrentMode") != agent_loop_coverage.get("currentMode"):
+        raise AssertionError(f"/qa/coverage-index agent loop current mode mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentLoopMaxIterations") != agent_loop_coverage.get("maxIterations"):
+        raise AssertionError(f"/qa/coverage-index agent loop max iterations mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentLoopProofCount") != agent_loop_coverage.get("proofCount"):
+        raise AssertionError(f"/qa/coverage-index agent loop proof count mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentLoopVisualStateKeyCount") != agent_loop_coverage.get("visualStateKeyCount"):
+        raise AssertionError(f"/qa/coverage-index agent loop visual state key count mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopModes") != agent_loop_coverage.get("modes"):
         raise AssertionError(f"/qa/coverage-index agent loop modes mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopAgents") != agent_loop_coverage.get("agents"):
         raise AssertionError(f"/qa/coverage-index agent loop agent contract mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopRoutes") != agent_loop_coverage.get("routes"):
         raise AssertionError(f"/qa/coverage-index agent loop routes mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentLoopRouteCount") != len(agent_loop_coverage.get("routes") or []):
+        raise AssertionError(f"/qa/coverage-index agent loop route count mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopContracts") != agent_loop_coverage.get("contracts"):
         raise AssertionError(f"/qa/coverage-index agent loop contracts mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentLoopContractCount") != len(agent_loop_coverage.get("contracts") or {}):
+        raise AssertionError(f"/qa/coverage-index agent loop contract count mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopActionTelemetryFields") != agent_loop_coverage.get("actionTelemetryFields"):
         raise AssertionError(f"/qa/coverage-index agent loop telemetry fields mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopActionTelemetryFieldCount") != len(agent_loop_coverage.get("actionTelemetryFields") or []):
