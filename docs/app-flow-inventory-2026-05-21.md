@@ -130,10 +130,13 @@ Required next catalog lane:
 Recon:
 
 - Subtabs cover subdomains, ports, web hosts, crawl, and OSINT-oriented recon.
-- Main buttons create recon prompts and send them to chat.
+- Main buttons create Recon action state, then send generated prompts to chat.
 - Displays parsed `subfinder`, `dnsx`, `nmap`, `httpx`, and crawl outputs from
   `ResultsStore`.
-- Needs button-level running/error/complete states tied to tool calls.
+- Full Recon/Crawl/Harvest action status is represented by `/state.reconAction`
+  and the active toolbar button. `scripts/recon-action-status-proof.py` verifies
+  a seeded Full Recon target, generated command, and running tab activity; the
+  visible state is captured under `docs/visual-proofs/checkpoint-97`.
 
 Web:
 
@@ -384,5 +387,7 @@ Required future proof gates:
   `docs/visual-proofs/checkpoint-95`.
 - Web Verify queued/progress state is captured under
   `docs/visual-proofs/checkpoint-96`.
+- Recon Full Recon running state is captured under
+  `docs/visual-proofs/checkpoint-97`.
 - Unsupported model-folder warning and blocked engine states are captured under
   `docs/visual-proofs/checkpoint-93`.

@@ -135,9 +135,15 @@ Result fanout:
 Recon:
 
 - Buttons: Full Recon, Crawl, OSINT/theHarvester, copy controls.
-- Chat path: all run buttons call `onRunCommand`, then `ContentView.sendToChat`.
-- State: subdomains, ports, web hosts, crawl URLs from `ResultsStore`.
-- Missing proof: tab-level running/progress/error badges tied to tool callbacks.
+- Chat path: run buttons record a Recon action state, then send the generated
+  prompt to chat.
+- State: subdomains, ports, web hosts, crawl URLs from `ResultsStore`, plus
+  `/state.reconAction` for the latest Full Recon/Crawl/Harvest action.
+- Recon action status is covered by `scripts/recon-action-status-proof.py`: a
+  seeded Full Recon records target, generated command, running status, and Recon
+  tab activity with `lastTool=full_recon`.
+- Visible Full Recon running state is captured under
+  `docs/visual-proofs/checkpoint-97`.
 
 Web:
 
@@ -440,6 +446,8 @@ Visual gates:
   `docs/visual-proofs/checkpoint-95`.
 - Web Verify queued/progress state is captured under
   `docs/visual-proofs/checkpoint-96`.
+- Recon Full Recon running state is captured under
+  `docs/visual-proofs/checkpoint-97`.
 - Remaining visual gap: real-engine cache metrics state.
 
 ## Current Gaps To Close Next
