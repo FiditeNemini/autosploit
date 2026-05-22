@@ -383,6 +383,11 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   false when reasoning is off, exposes `isWorking` through `/state`, and proves
   `/stop` interrupts a deliberately slow stream before the final marker lands
   in chat.
+- Checkpoint 55: Added live tool-execution cancellation proof. The mock model
+  now issues a long-running `run_shell` call, `/state` exposes live
+  `ToolExecutor` status, `ChatService.stop()` marks active tool cards as
+  canceled, and the harness proves post-sleep process output does not reach the
+  canceled card.
 
 ## Known Risk Areas
 

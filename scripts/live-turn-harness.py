@@ -65,6 +65,42 @@ class MockEngineHandler(BaseHTTPRequestHandler):
                 {"choices": [{"delta": {"content": "slow-middle "}}]},
                 {"choices": [{"delta": {"content": "slow-final-marker"}}]},
             ]
+        elif "Run cancellable shell tool" in user_text:
+            events = [
+                {"choices": [{"delta": {"content": "Starting cancellable shell proof."}}]},
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "id": "call_cancel_shell",
+                                        "type": "function",
+                                        "function": {"name": "run_shell", "arguments": ""},
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "choices": [
+                        {
+                            "delta": {
+                                "tool_calls": [
+                                    {
+                                        "index": 0,
+                                        "function": {
+                                            "arguments": "{\"command\":\"printf tool-start; sleep 10; printf tool-final-marker\"}"
+                                        },
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+            ]
         elif turn == 1 or "Suggest the next Apache check" in user_text or "Ask approval before checking Apache" in user_text:
             events = [
                 {"choices": [{"delta": {"content": "I will check the seeded service context."}}]},
@@ -283,6 +319,28 @@ def run() -> None:
         assert not stopped_state["isStreaming"], stopped_state
         if "slow-final-marker" in stopped_joined:
             raise AssertionError(f"stop did not interrupt slow stream: {stopped_messages}")
+
+        request("POST", "/clear")
+        request("POST", "/mode", "autopilot")
+        request("POST", "/send", "Run cancellable shell tool")
+        wait_until(
+            lambda: request("GET", "/state") if request("GET", "/state").get("toolExecutor", {}).get("isRunning") else None,
+            "long-running shell tool start",
+        )
+        request("POST", "/stop")
+        wait_until(
+            lambda: request("GET", "/state") if not request("GET", "/state").get("isWorking") else None,
+            "tool cancellation",
+        )
+        tool_cancel_messages = request("GET", "/messages")
+        shell_cards = [m for m in tool_cancel_messages if m.get("tool") == "run_shell"]
+        if not shell_cards:
+            raise AssertionError(f"missing run_shell tool card: {tool_cancel_messages}")
+        latest_shell = shell_cards[-1]
+        assert "canceled" in latest_shell.get("status", ""), tool_cancel_messages
+        shell_output = latest_shell["content"].split("\n", 1)[1] if "\n" in latest_shell["content"] else latest_shell["content"]
+        if "tool-final-marker" in shell_output:
+            raise AssertionError(f"stop did not interrupt shell tool: {latest_shell}")
 
         print("live-turn harness passed")
     finally:

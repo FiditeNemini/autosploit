@@ -199,6 +199,8 @@ Automated no-model gates:
     `chat_template_kwargs.enable_thinking`, with no thinking messages emitted;
   - proves `/stop` interrupts a deliberately slow stream before the final
     marker reaches chat;
+  - proves `/stop` interrupts a long-running `run_shell` subprocess, marks the
+    tool card canceled, and prevents post-sleep output from landing;
   - proves `search_cve` tool calls execute under autopilot;
   - proves manual mode converts tool calls into suggestions;
   - proves copilot mode pauses for approval and executes after approval.
@@ -211,7 +213,7 @@ Mock-model gates:
 - Tool-call loop under manual/copilot/autopilot. Covered by
   `scripts/live-turn-harness.py`.
 - Stop/cancel during stream. Covered by `scripts/live-turn-harness.py`.
-- Stop/cancel during tool execution.
+- Stop/cancel during tool execution. Covered by `scripts/live-turn-harness.py`.
 - Context packet observed in the outbound request body. Covered by
   `scripts/live-turn-harness.py`.
 
