@@ -95,6 +95,7 @@ def wait_for_app(timeout: float = 15.0) -> None:
 def assert_coverage_index() -> None:
     state = request("GET", "/state")
     index = request("GET", "/qa/coverage-index")
+    proof = request("GET", "/qa/proof-ledger")
     checkpoint = request("GET", "/qa/checkpoint-ledger")
     gap = request("GET", "/qa/gap-ledger")
 
@@ -142,6 +143,13 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state subtab proof count mismatch: {app_state_group}")
     if app_state_group.get("proofLedgerCount", 0) < 120:
         raise AssertionError(f"coverage index app state proof ledger count mismatch: {app_state_group}")
+    expected_categories = {
+        name: category.get("count")
+        for name, category in (proof.get("categories") or {}).items()
+        if name in {"agent", "chat", "context", "runtime", "settings", "tabs", "tools", "visual"}
+    }
+    if app_state_group.get("proofCategoryCounts") != expected_categories:
+        raise AssertionError(f"coverage index app state proof category counts mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerVisualManifestCount", 0) < 22:
         raise AssertionError(f"coverage index app state artifact visual count mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerLiveProofCount", 0) < 18:

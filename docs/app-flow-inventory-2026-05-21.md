@@ -655,9 +655,11 @@ Current repeatable gates:
   coverage accounting. The app-state group also exposes `/state.qaCoverage`
   state-route count, subtab state tab count, subtab state proof count, and the
   `/qa/proof-ledger` proof count across all local proof scripts. It also exposes
-  `/qa/artifact-ledger` visual manifest and live-proof counts so screenshot and
-  live JSON evidence stay machine-auditable, including missing visual capture
-  count. `/qa/checkpoint-ledger` exposes checkpoint documentation count,
+  proof category counts for agent, chat, context, runtime, settings, tabs,
+  tools, and visual proof surfaces. It also exposes `/qa/artifact-ledger`
+  visual manifest and live-proof counts so screenshot and live JSON evidence
+  stay machine-auditable, including missing visual capture count.
+  `/qa/checkpoint-ledger` exposes checkpoint documentation count,
   completeness count, completion ratio, complete checkpoint paths, incomplete
   checkpoint paths, latest checkpoint, and latest checkpoint number using numeric checkpoint ordering; the checkpoint,
   complete, and incomplete path lists also use that numeric order. The
