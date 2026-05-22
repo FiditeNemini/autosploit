@@ -251,6 +251,11 @@ Exploit:
 - Search/prepare/execute differentiation is covered by
   `scripts/exploit-action-differentiation-proof.py`, and the visible stage
   badges are captured under `docs/visual-proofs/checkpoint-100`.
+- Copy controls now route through AppState for Metasploit, Reverse Shells,
+  Custom, and C2 (Sliver). `/state.exploitCopyActions` exposes the last kind,
+  copied count, clipboard preview, and summary, with tab activity recorded as
+  `lastTool=copy_exploit`; `scripts/exploit-copy-actions-proof.py` covers the
+  live seed/copy/state path.
 
 Post:
 

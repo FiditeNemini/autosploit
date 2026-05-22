@@ -286,13 +286,19 @@ Exploit:
   stages; listener/script/implant buttons send prompts to chat.
 - State: raw metasploit/sliver/session output, `/state.exploitAction` for the
   latest Exploit action, and `/state.exploitActionHistory` for bounded
-  search/prepare/execute stage history.
+  search/prepare/execute stage history, plus `/state.exploitCopyActions` for
+  the latest copy operation.
 - Search/prepare/execute differentiation is covered by
   `scripts/exploit-action-differentiation-proof.py`: seeded state records
   SEARCH done with `metasploit`, PREPARE done with `manual_plan`, EXECUTE
   running with `run_shell`, and Exploit tab activity with `lastTool=execute`.
 - Visible SEARCH/PREPARE/EXECUTE stage badges are captured under
   `docs/visual-proofs/checkpoint-100`.
+- Exploit copy controls are covered by `scripts/exploit-copy-actions-proof.py`:
+  the proof seeds Metasploit output, reverse-shell templates, custom script
+  lifecycle state, and Sliver output, then verifies each copy path records
+  clipboard preview, count, kind, and Exploit tab activity with
+  `lastTool=copy_exploit`.
 - Listener, custom script, and implant lifecycle state now tracks idle, running,
   done, failed, and canceled and is visible in the relevant Exploit subtab.
 - Live UI screenshot coverage for Reverse Shells, Custom, and C2 lifecycle
