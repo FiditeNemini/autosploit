@@ -169,9 +169,15 @@ Creds:
 
 - Covers hash cracking, brute force, secret scanning, and credential-derived
   findings.
-- Buttons route prompts through chat.
-- Displays parsed vulnerabilities and credential-oriented results.
-- Needs progress and result badges on cracking/bruteforce actions.
+- Start Crack creates Creds action state, then sends the generated prompt to
+  chat. Brute Force and Scan Secrets route prompts through chat.
+- Displays parsed vulnerabilities and credential-oriented results with visible
+  CRACKED/BRUTE/SECRET/CRED badges.
+- Hash cracking action status is represented by `/state.credsAction`, the
+  active Start Crack button, and parsed credential rows through `/results.creds`.
+  `scripts/creds-action-results-proof.py` verifies a seeded hashcat result set,
+  generated haiti/hashcat plan, result count, tab activity, and CRACKED badges;
+  the visible state is captured under `docs/visual-proofs/checkpoint-99`.
 
 Exploit:
 
@@ -308,9 +314,11 @@ Current repeatable gates:
 - `python3 scripts/persistence-proof.py`
 - `python3 scripts/request-audit-proof.py`
 - `python3 scripts/network-protocol-action-proof.py`
+- `python3 scripts/creds-action-results-proof.py`
 - `python3 scripts/verify-live-models.py --metadata-only --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --minimax /Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit`
 - `python3 scripts/visual-tab-proof.py`
 - `python3 scripts/visual-network-protocol-proof.py`
+- `python3 scripts/visual-creds-action-proof.py`
 - `python3 scripts/visual-chat-proof.py`
 - `python3 scripts/visual-chat-interaction-proof.py`
 - `python3 scripts/visual-request-audit-proof.py`
@@ -398,5 +406,7 @@ Required future proof gates:
   `docs/visual-proofs/checkpoint-97`.
 - Network Protocol Scan running state is captured under
   `docs/visual-proofs/checkpoint-98`.
+- Creds Start Crack done state and CRACKED result badges are captured under
+  `docs/visual-proofs/checkpoint-99`.
 - Unsupported model-folder warning and blocked engine states are captured under
   `docs/visual-proofs/checkpoint-93`.

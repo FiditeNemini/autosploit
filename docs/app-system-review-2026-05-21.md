@@ -184,8 +184,18 @@ Network:
 Creds:
 
 - Buttons: Start Crack, Brute Force, Scan Secrets.
-- Chat path: sends prompts to chat.
-- State: parsed credential/hash/secret findings.
+- Chat path: Start Crack records a Creds action state, then sends the generated
+  haiti/hashcat prompt to chat. Brute Force and Scan Secrets send prompts to
+  chat.
+- State: parsed credential/hash/secret findings, `/state.credsAction` for the
+  latest hash-cracking action, and `/results.creds` rows with
+  CRACKED/BRUTE/SECRET/CRED badges.
+- Hash-cracking action/result state is covered by
+  `scripts/creds-action-results-proof.py`: a seeded hashcat result set records
+  target, generated haiti/hashcat command, done status, result count, Creds tab
+  activity with `lastTool=hashcat`, and CRACKED result badges.
+- Visible Start Crack done state and credential result badges are captured under
+  `docs/visual-proofs/checkpoint-99`.
 - Cracking, brute force, and secret scan lifecycle state now tracks idle,
   running, done, failed, and canceled and is visible in the relevant Creds
   subtab.
@@ -442,6 +452,8 @@ Visual gates:
   `docs/visual-proofs/checkpoint-70`.
 - Network Protocol Scan running state is captured under
   `docs/visual-proofs/checkpoint-98`.
+- Creds Start Crack done state and CRACKED result badges are captured under
+  `docs/visual-proofs/checkpoint-99`.
 - OSINT screenshot artifact preview is captured under
   `docs/visual-proofs/checkpoint-90`.
 - Report export status and generated finding state are captured under
