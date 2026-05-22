@@ -86,6 +86,9 @@ main session.
   now provable through `/qa/result-parser-coverage`, which verifies that parser
   output reaches the tab collections and `/results` rather than staying as raw
   chat text only.
+- Parsed result rows also flow back into the dynamic context catalogue. Assets,
+  findings, recent raw output, OSINT artifacts, and post-exploitation
+  attributions are retrievable through the same bounded context/search path.
 
 The full tool catalog is no longer force-sent to the engine. `ChatService`
 passes the latest user prompt plus active tab into `ToolDefinitions.forModel`,
@@ -354,6 +357,7 @@ Current repeatable gates:
 - `python3 scripts/tool-catalog-proof.py`
 - `python3 scripts/tool-registry-coverage-proof.py`
 - `python3 scripts/result-parser-routing-proof.py`
+- `python3 scripts/result-context-catalog-proof.py`
 - `python3 scripts/semantic-cve-proof.py`
 - `python3 scripts/settings-apply-proof.py`
 - `python3 scripts/agent-autopilot-proof.py`
@@ -453,6 +457,11 @@ Required future proof gates:
   for structured and raw-only tools, checks all expected parser branches emit
   tab state, and verifies parsed `nmap`/screenshot rows are exposed through
   `/results`.
+- Parsed result-to-context routing: covered by
+  `scripts/result-context-catalog-proof.py`, which reuses the parser fixture and
+  proves parsed credential findings, nmap assets, nuclei CVE findings, and
+  post-exploitation attribution rows are retrievable as bounded catalogue
+  snippets with non-CVE embedding records.
 - Settings model warning, engine live cache status, and cache topology
   screenshots are captured under `docs/visual-proofs/checkpoint-73`.
 - Chat token metrics, active tool header, approval card, running tool card,

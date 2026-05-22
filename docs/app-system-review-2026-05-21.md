@@ -151,6 +151,11 @@ Result fanout:
   `scripts/result-parser-routing-proof.py`: it seeds outputs for structured
   recon, web, network, creds, exploit, post, OSINT, screenshot, and raw-only
   tools, then verifies parsed tab collections plus `/results` exposure.
+- Parsed-result context retrieval is covered by
+  `scripts/result-context-catalog-proof.py`: it reuses the parser fixture and
+  proves parsed credentials, nmap assets, nuclei findings, and post-exploitation
+  attribution rows are searchable catalogue items with persisted non-CVE
+  embeddings.
 - Required proof: each tool family can produce a visible chat card, activity
   entry, tab result, and context-catalog item from representative output.
 
@@ -334,6 +339,7 @@ Automated no-model gates:
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.
+- Parsed result-to-context retrieval via `scripts/result-context-catalog-proof.py`.
 - Context catalogue seeded-state smoke.
 - Context catalogue source inclusion/exclusion and active-op stash scoping via
   `scripts/context-catalog-proof.py`.
