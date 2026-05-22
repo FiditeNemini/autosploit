@@ -628,7 +628,9 @@ Current repeatable gates:
   tabs/sessions endpoints with their proof scripts, and
   `scripts/coverage-index-proof.py` verifies every named proof file exists.
   Each group also exposes `endpointCount` and `proofCount` for machine-readable
-  coverage accounting.
+  coverage accounting. The runtime/cache group additionally exposes
+  `liveProofArtifactCount`, so the checked-in Qwen/MiniMax live replay
+  artifacts remain visible from the top-level QA index.
 - Visual QA through the local app run script plus screenshots.
 
 Required future proof gates:

@@ -121,6 +121,9 @@ def assert_coverage_index() -> None:
             raise AssertionError(f"coverage index group endpoint count mismatch {name}: {group}")
         if group.get("proofCount") != len(proofs_for_group):
             raise AssertionError(f"coverage index group proof count mismatch {name}: {group}")
+    runtime_group = groups.get("runtimeAndCache") or {}
+    if runtime_group.get("liveProofArtifactCount", 0) < 6:
+        raise AssertionError(f"coverage index runtime live artifact count mismatch: {runtime_group}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/coverage-index" not in qa.get("stateRoutes", []):

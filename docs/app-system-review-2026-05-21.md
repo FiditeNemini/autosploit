@@ -558,7 +558,8 @@ Automated no-model gates:
   chat/context, runtime/cache, settings/visuals, tools/parsers, and tabs/
   sessions; `scripts/coverage-index-proof.py` verifies each group has endpoint
   and proof counts, endpoints, and proofs and that every named proof file
-  exists.
+  exists. The runtime/cache group also exposes `liveProofArtifactCount` for the
+  checked-in Qwen/MiniMax live replay artifact set.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.
