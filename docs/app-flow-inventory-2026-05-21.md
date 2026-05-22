@@ -449,6 +449,9 @@ CVE Database and Tools:
   All Missing controls route through AppState and expose
   `/state.toolSettingsActions`; covered by
   `scripts/tool-settings-actions-proof.py`.
+- Inference Log clear routes through AppState and exposes
+  `/state.inferenceLogActions`; covered by
+  `scripts/inference-log-actions-proof.py`.
 
 ## Test And Proof Requirements
 
