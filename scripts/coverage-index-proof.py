@@ -70,6 +70,16 @@ REQUIRED_GROUPS = {
     "tabsAndSessions",
 }
 
+EXPECTED_FAMILY_FANOUT_TOOLS = {
+    "recon": "nmap",
+    "web": "nuclei",
+    "network": "netexec",
+    "creds": "hashcat",
+    "exploit": "metasploit",
+    "post": "linpeas",
+    "osint": "gowitness",
+}
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -332,6 +342,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers callback count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("familyFanoutCount", 0) < 7:
         raise AssertionError(f"coverage index tools/parsers family fanout count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("familyFanoutTools") != EXPECTED_FAMILY_FANOUT_TOOLS:
+        raise AssertionError(f"coverage index tools/parsers family fanout tool map mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("stateKeyCount", 0) < 5:
         raise AssertionError(f"coverage index tools/parsers state key count mismatch: {tools_parsers_group}")
     tool_flow = request("GET", "/qa/tool-flow-coverage")

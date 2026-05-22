@@ -480,6 +480,17 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index tool tab activity proof map mismatch: {coverage_index}")
     if tools_parsers_group.get("toolVisualSurfaceProofs") != tool_flow_coverage.get("toolVisualSurfaceProofs"):
         raise AssertionError(f"/qa/coverage-index tool visual surface proof map mismatch: {coverage_index}")
+    expected_family_fanout_tools = {
+        "recon": "nmap",
+        "web": "nuclei",
+        "network": "netexec",
+        "creds": "hashcat",
+        "exploit": "metasploit",
+        "post": "linpeas",
+        "osint": "gowitness",
+    }
+    if tools_parsers_group.get("familyFanoutTools") != expected_family_fanout_tools:
+        raise AssertionError(f"/qa/coverage-index family fanout tool map mismatch: {coverage_index}")
     if ((index_groups.get("tabsAndSessions") or {}).get("actionStateKeyCount", 0)) < 26:
         raise AssertionError(f"/qa/coverage-index action state key count mismatch: {coverage_index}")
     tabs_sessions_group = index_groups.get("tabsAndSessions") or {}
