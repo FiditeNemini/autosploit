@@ -96,6 +96,7 @@ def assert_coverage_index() -> None:
     state = request("GET", "/state")
     index = request("GET", "/qa/coverage-index")
     checkpoint = request("GET", "/qa/checkpoint-ledger")
+    gap = request("GET", "/qa/gap-ledger")
 
     if index.get("ok") is not True:
         raise AssertionError(f"/qa/coverage-index failed: {index}")
@@ -155,6 +156,12 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state audit ledger count mismatch: {app_state_group}")
     if app_state_group.get("currentGapCount", -1) != 1:
         raise AssertionError(f"coverage index app state current gap count mismatch: {app_state_group}")
+    if app_state_group.get("openGapIds") != gap.get("openGapIds"):
+        raise AssertionError(f"coverage index app state open gap ids mismatch: {app_state_group}")
+    if app_state_group.get("gapContractCount") != len(gap.get("gapContracts") or {}):
+        raise AssertionError(f"coverage index app state gap contract count mismatch: {app_state_group}")
+    if "qwenMultimodalRuntime" not in (app_state_group.get("openGapIds") or []):
+        raise AssertionError(f"coverage index app state missing qwen multimodal gap id: {app_state_group}")
     runtime_group = groups.get("runtimeAndCache") or {}
     if runtime_group.get("liveProofArtifactCount", 0) < 6:
         raise AssertionError(f"coverage index runtime live artifact count mismatch: {runtime_group}")
