@@ -259,14 +259,19 @@ Creds:
   haiti/hashcat prompt to chat. Brute Force and Scan Secrets send prompts to
   chat.
 - State: parsed credential/hash/secret findings, `/state.credsAction` for the
-  latest hash-cracking action, and `/results.creds` rows with
-  CRACKED/BRUTE/SECRET/CRED badges.
+  latest hash-cracking action, `/state.credsCopyActions` for the latest copy
+  operation, and `/results.creds` rows with CRACKED/BRUTE/SECRET/CRED badges.
 - Hash-cracking action/result state is covered by
   `scripts/creds-action-results-proof.py`: a seeded hashcat result set records
   target, generated haiti/hashcat command, done status, result count, Creds tab
   activity with `lastTool=hashcat`, and CRACKED result badges.
 - Visible Start Crack done state and credential result badges are captured under
   `docs/visual-proofs/checkpoint-99`.
+- Creds copy controls are covered by `scripts/creds-copy-actions-proof.py`: the
+  proof seeds cracked hashcat results, a Hydra brute-force finding, and a
+  TruffleHog secret finding, then verifies Cracking, Online Brute, Secrets, and
+  Vault copy paths record clipboard preview, count, kind, and Creds tab
+  activity with `lastTool=copy_creds`.
 - Cracking, brute force, and secret scan lifecycle state now tracks idle,
   running, done, failed, and canceled and is visible in the relevant Creds
   subtab.

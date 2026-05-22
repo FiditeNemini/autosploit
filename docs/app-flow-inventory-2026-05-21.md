@@ -227,6 +227,11 @@ Creds:
   `scripts/creds-action-results-proof.py` verifies a seeded hashcat result set,
   generated haiti/hashcat plan, result count, tab activity, and CRACKED badges;
   the visible state is captured under `docs/visual-proofs/checkpoint-99`.
+- Copy controls now route through AppState for Cracking, Online Brute, Secrets,
+  and Vault. `/state.credsCopyActions` exposes the last kind, copied count,
+  clipboard preview, and summary, with tab activity recorded as
+  `lastTool=copy_creds`; `scripts/creds-copy-actions-proof.py` covers the live
+  seed/copy/state path.
 
 Exploit:
 
