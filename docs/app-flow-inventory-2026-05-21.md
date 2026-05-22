@@ -669,9 +669,10 @@ Current repeatable gates:
   artifact paths for MiniMax replay/no-thinking and Qwen hybrid replay,
   full-prefix-skip, and catalogue-prefix-shape gates, plus
   `liveProofArtifactCount` for matrix-level artifact accounting. It now also
-  exposes runtime cache component list/count/parity for prefix cache, prompt L2
-  disk, paged KV cache, block L2 disk, TurboQuant KV, SSM companion L2, and
-  new-context engine-session preservation. Dynamic context and catalogue
+  exposes runtime cache component list/count/parity and component proof
+  map/count/parity for prefix cache, prompt L2 disk, paged KV cache, block L2
+  disk, TurboQuant KV, SSM companion L2, and new-context engine-session
+  preservation. Dynamic context and catalogue
   invariants are now summarized through `/qa/context-coverage`, including the
   `search_context` retrieval tool, the fixed automatic context-injection cap,
   current effective snippet limit, context seed/query QA routes, bounded
@@ -778,7 +779,8 @@ Current repeatable gates:
   multimodal engine-start block proof. The runtime/cache group
   additionally exposes
   `supportedFamilies`, `cacheResponseMethod`, `cacheResponsesInferenceMethod`,
-  `newModelSessionBehavior`, runtime cache component list/count/parity, and
+  `newModelSessionBehavior`, runtime cache component list/count/parity,
+  component proof count/parity, and
   `liveProofArtifactCount`, so Qwen/MiniMax-only support,
   the `prefix-cache-l2-turboquant` response path, cache-preserving new-context
   session boundary, and the checked-in live replay

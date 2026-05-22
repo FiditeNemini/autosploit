@@ -56,6 +56,16 @@ EXPECTED_CACHE_COMPONENTS = [
     "newContextPreservesEngineSession",
 ]
 
+EXPECTED_CACHE_COMPONENT_PROOFS = {
+    "prefixCache": ["verify-live-models.py", "context-window-cache-proof.py"],
+    "promptL2Disk": ["engine-no-model-metadata-proof.py", "prove-block-l2-cache.py"],
+    "pagedKVCache": ["engine-no-model-metadata-proof.py", "verify-live-models.py"],
+    "blockL2Disk": ["prove-block-l2-cache.py", "live-cache-stats-ui-proof.py"],
+    "turboQuantKV": ["engine-no-model-metadata-proof.py", "cache-stats-state-proof.py"],
+    "ssmCompanionL2": ["prove-ssm-rederive-status.py", "live-cache-stats-ui-proof.py"],
+    "newContextPreservesEngineSession": ["context-window-cache-proof.py", "chat-control-actions-proof.py"],
+}
+
 
 def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
     if isinstance(body, dict):
@@ -126,6 +136,16 @@ def run() -> None:
             raise AssertionError(f"runtime cache component count mismatch: {coverage}")
         if coverage.get("cacheComponentParity") is not True:
             raise AssertionError(f"runtime cache component parity mismatch: {coverage}")
+        if coverage.get("cacheComponentProofs") != EXPECTED_CACHE_COMPONENT_PROOFS:
+            raise AssertionError(f"runtime cache component proof map mismatch: {coverage}")
+        if coverage.get("cacheComponentProofCount") != len(EXPECTED_CACHE_COMPONENT_PROOFS):
+            raise AssertionError(f"runtime cache component proof count mismatch: {coverage}")
+        if coverage.get("cacheComponentProofParity") is not True:
+            raise AssertionError(f"runtime cache component proof parity mismatch: {coverage}")
+        for component, proof_names in EXPECTED_CACHE_COMPONENT_PROOFS.items():
+            missing_component_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
+            if missing_component_files:
+                raise AssertionError(f"runtime cache component {component} names missing proof files {missing_component_files}: {coverage}")
         if not EXPECTED_PROOFS.issubset(set(coverage.get("proofs") or [])):
             raise AssertionError(f"runtime proof list missing entries: {coverage}")
         if coverage.get("proofCount", 0) < len(EXPECTED_PROOFS):

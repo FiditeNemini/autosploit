@@ -555,8 +555,9 @@ Automated no-model gates:
   Qwen/MiniMax support, parser autodetect, model-folder generation defaults,
   prefix-cache/L2/TurboQuant response mode, unsupported-start blocking, the
   runtime route list, proof-count metadata, runtime cache component
-  list/count/parity, and checked-in live proof artifact paths for Qwen/MiniMax
-  replay, prefix-skip, no-thinking, and catalogue-shape gates, plus
+  list/count/parity, runtime cache component proof map/count/parity, and
+  checked-in live proof artifact paths for Qwen/MiniMax replay, prefix-skip,
+  no-thinking, and catalogue-shape gates, plus
   `liveProofArtifactCount` for top-level matrix assertions.
   `/qa/context-coverage` exposes the dynamic context proof contract for bounded
   catalogue injection, `search_context`, request-audit persistence, parsed
@@ -672,7 +673,8 @@ Automated no-model gates:
   proofs, including a dedicated Qwen multimodal engine-start block proof. The
   runtime/cache group also exposes `supportedFamilies`,
   `cacheResponseMethod`, `cacheResponsesInferenceMethod`,
-  `newModelSessionBehavior`, cache component list/count/parity, and
+  `newModelSessionBehavior`, cache component list/count/parity, cache component
+  proof count/parity, and
   `liveProofArtifactCount` for Qwen/MiniMax-only support, the
   `prefix-cache-l2-turboquant` response path, cache-preserving new-context
   boundary, and the checked-in Qwen/MiniMax
