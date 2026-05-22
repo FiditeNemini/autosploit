@@ -243,7 +243,9 @@ Web:
   `scripts/web-direct-actions-proof.py`: it seeds an Apache CVE finding,
   opens the finding wizard with prefilled fields, stashes the finding, copies
   the finding text, queues a related CVE search through chat, and verifies Web
-  tab activity exposes `search_related_cve`.
+  tab activity exposes `search_related_cve`. Header Copy for the filtered web
+  list routes through AppState and is covered by
+  `scripts/web-header-copy-proof.py`.
 - Web row context-menu copy actions for title, target, and details now route
   through AppState and `/state.webDirectActions`; context-menu stash updates
   both Web direct-action state and `/state.stashActions`. Covered by

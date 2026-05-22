@@ -205,14 +205,15 @@ Web:
 
 - Shows web hosts, vulnerabilities, CVE data, and finding creation entrypoints.
 - Can stash selected content and prefill the finding wizard. Create Finding,
-  Stash, Copy, and Search Related CVEs now route through AppState action
-  handlers, and `/state.webDirectActions` exposes labels, prefill state, stash
-  preview/count, clipboard preview, queued related-CVE prompt, and action
+  Stash, Copy, Header Copy, and Search Related CVEs now route through AppState
+  action handlers, and `/state.webDirectActions` exposes labels, prefill state,
+  stash preview/count, clipboard preview, queued related-CVE prompt, and action
   status.
 - Uses `CVEService` directly for visible CVE search/lookup.
 - Direct action state is covered by `scripts/web-direct-actions-proof.py`,
   which verifies finding prefill, stash creation, copy preview, related-CVE chat
-  prompt, and Web tab activity.
+  prompt, and Web tab activity. Header copy is covered by
+  `scripts/web-header-copy-proof.py`.
 - Row context-menu copy actions for title, target, and details now route
   through AppState and `/state.webDirectActions`; context-menu stash uses the
   same `recordStashAdd` path as Stash tab additions, so `/state.stashActions`
