@@ -156,6 +156,11 @@ Result fanout:
   binary returns service output, and the proof verifies the chat tool card,
   recent activity-feed entries, Recon tab status, parsed `/results` port, and
   context-catalog retrieval.
+- Representative all-family fanout is covered by
+  `scripts/tool-family-fanout-coverage-proof.py`: deterministic Recon, Web,
+  Network, Creds, Exploit, Post, and OSINT fixtures each prove a visible chat
+  tool card, activity-feed entry, tab activity status, parsed tab result, and
+  context-catalog hit.
 - Representative parser routing is covered by
   `scripts/result-parser-routing-proof.py`: it seeds outputs for structured
   recon, web, network, creds, exploit, post, OSINT, screenshot, and raw-only
@@ -166,7 +171,8 @@ Result fanout:
   attribution rows are searchable catalogue items with persisted non-CVE
   embeddings.
 - Required proof: each tool family can produce a visible chat card, activity
-  entry, tab result, and context-catalog item from representative output.
+  entry, tab result, and context-catalog item from representative output. Covered
+  by `scripts/tool-family-fanout-coverage-proof.py`.
 
 ## Page And Button Coverage
 
@@ -355,6 +361,8 @@ Automated no-model gates:
   `scripts/result-parser-routing-proof.py`.
 - Parsed result-to-context retrieval via `scripts/result-context-catalog-proof.py`.
 - Model tool fanout status via `scripts/tool-fanout-status-proof.py`.
+- Representative all-family fanout via
+  `scripts/tool-family-fanout-coverage-proof.py`.
 - Engine no-model metadata via `scripts/engine-no-model-metadata-proof.py`,
   proving `/health` and `/v1/models` share parser, generation, topology,
   prefix/cache L2, TurboQuant, SSM companion, and cache-response method fields.

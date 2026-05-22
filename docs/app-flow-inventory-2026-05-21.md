@@ -91,6 +91,10 @@ main session.
 - Parsed result rows also flow back into the dynamic context catalogue. Assets,
   findings, recent raw output, OSINT artifacts, and post-exploitation
   attributions are retrievable through the same bounded context/search path.
+- Representative all-family fanout is covered by
+  `scripts/tool-family-fanout-coverage-proof.py`: Recon, Web, Network, Creds,
+  Exploit, Post, and OSINT fixtures each prove chat-card, activity-feed,
+  tab-activity, parsed-result, and context-catalog coverage.
 
 The full tool catalog is no longer force-sent to the engine. `ChatService`
 passes the latest user prompt plus active tab into `ToolDefinitions.forModel`,
@@ -366,6 +370,7 @@ Current repeatable gates:
 - `python3 scripts/tool-catalog-proof.py`
 - `python3 scripts/tool-registry-coverage-proof.py`
 - `python3 scripts/tool-fanout-status-proof.py`
+- `python3 scripts/tool-family-fanout-coverage-proof.py`
 - `python3 scripts/result-parser-routing-proof.py`
 - `python3 scripts/result-context-catalog-proof.py`
 - `python3 scripts/semantic-cve-proof.py`
@@ -473,6 +478,10 @@ Required future proof gates:
   `scripts/tool-fanout-status-proof.py`, which proves a model-issued `nmap`
   call produces a chat card, activity feed start/complete entries, Recon tab
   status, parsed `/results` port data, and a retrievable context catalogue item.
+- Representative all-family tool fanout: covered by
+  `scripts/tool-family-fanout-coverage-proof.py`, which proves Recon/Web/
+  Network/Creds/Exploit/Post/OSINT fixture tools each produce a chat card,
+  activity entry, tab activity, tab result, and context-catalog hit.
 - Representative parser-to-tab routing: covered by
   `scripts/result-parser-routing-proof.py`, which seeds representative outputs
   for structured and raw-only tools, checks all expected parser branches emit
