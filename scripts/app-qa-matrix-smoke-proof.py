@@ -98,6 +98,7 @@ def assert_testserver_smoke() -> None:
     subtab_coverage = request("GET", "/qa/subtab-coverage")
     agent_loop_coverage = request("GET", "/qa/agent-loop-coverage")
     tool_flow_coverage = request("GET", "/qa/tool-flow-coverage")
+    tool_coverage = request("GET", "/qa/tool-coverage")
     result_parser_coverage = request("GET", "/qa/result-parser-coverage")
     runtime_coverage = request("GET", "/qa/runtime-coverage")
     context_coverage = request("GET", "/qa/context-coverage")
@@ -660,6 +661,18 @@ def assert_testserver_smoke() -> None:
     if settings_visuals_group.get("minimumCaptureCount") != visual_coverage.get("minimumCaptureCount"):
         raise AssertionError(f"/qa/coverage-index visual minimum capture count mismatch: {coverage_index}")
     tools_parsers_group = index_groups.get("toolsAndParsers") or {}
+    if tools_parsers_group.get("toolRegistryTools") != tool_coverage.get("tools"):
+        raise AssertionError(f"/qa/coverage-index tool registry list mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolRegistryTabs") != tool_coverage.get("tabs"):
+        raise AssertionError(f"/qa/coverage-index tool registry tab list mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolRegistryFailures") != tool_coverage.get("failures"):
+        raise AssertionError(f"/qa/coverage-index tool registry failures mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolRegistryFailureCount") != len(tool_coverage.get("failures") or []):
+        raise AssertionError(f"/qa/coverage-index tool registry failure count mismatch: {coverage_index}")
+    if tools_parsers_group.get("alwaysVisibleToolCount") != tool_coverage.get("alwaysVisibleCount"):
+        raise AssertionError(f"/qa/coverage-index always-visible tool count mismatch: {coverage_index}")
+    if tools_parsers_group.get("boundedCatalogueLimit") != tool_coverage.get("boundedCatalogueLimit"):
+        raise AssertionError(f"/qa/coverage-index bounded catalogue limit mismatch: {coverage_index}")
     if tools_parsers_group.get("tabActivityStatusProofs") != tool_flow_coverage.get("tabActivityStatusProofs"):
         raise AssertionError(f"/qa/coverage-index tool tab activity proof map mismatch: {coverage_index}")
     if tools_parsers_group.get("toolVisualSurfaceProofs") != tool_flow_coverage.get("toolVisualSurfaceProofs"):

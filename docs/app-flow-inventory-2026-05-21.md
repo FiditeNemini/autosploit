@@ -834,8 +834,10 @@ Current repeatable gates:
   list/count/parity, visual surface proof map/count/parity, visual route
   list/count, contract map/count, proof list/count, manifest list/count,
   minimum capture count, and actual screenshot capture count. The tools/parsers
-  group exposes registry tool count, callback count, representative family
-  fanout count and family-to-tool map, structured/raw parser tool sets,
+  group exposes registry tool count, callback count, always-visible tool count,
+  bounded catalogue limit, registry tab list, full registry tool list, registry
+  failure list/count, representative family fanout count and family-to-tool map,
+  structured/raw parser tool sets,
   seeded result-parser counts, parsed structured tool list, raw-only preserved
   tool list, representative result-parser artifact lists for subdomains, URLs,
   vulnerability sources/titles, ports, network hosts, OSINT platforms, post

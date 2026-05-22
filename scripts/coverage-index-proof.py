@@ -563,6 +563,19 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers tool count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("callbackCount", 0) < 3:
         raise AssertionError(f"coverage index tools/parsers callback count mismatch: {tools_parsers_group}")
+    tool_coverage = request("GET", "/qa/tool-coverage")
+    if tools_parsers_group.get("toolRegistryTools") != tool_coverage.get("tools"):
+        raise AssertionError(f"coverage index tools/parsers tool registry list mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolRegistryTabs") != tool_coverage.get("tabs"):
+        raise AssertionError(f"coverage index tools/parsers tool registry tab list mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolRegistryFailures") != tool_coverage.get("failures"):
+        raise AssertionError(f"coverage index tools/parsers tool registry failures mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolRegistryFailureCount") != len(tool_coverage.get("failures") or []):
+        raise AssertionError(f"coverage index tools/parsers tool registry failure count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("alwaysVisibleToolCount") != tool_coverage.get("alwaysVisibleCount"):
+        raise AssertionError(f"coverage index tools/parsers always-visible tool count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("boundedCatalogueLimit") != tool_coverage.get("boundedCatalogueLimit"):
+        raise AssertionError(f"coverage index tools/parsers bounded catalogue limit mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("familyFanoutCount", 0) < 7:
         raise AssertionError(f"coverage index tools/parsers family fanout count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("familyFanoutTools") != EXPECTED_FAMILY_FANOUT_TOOLS:
