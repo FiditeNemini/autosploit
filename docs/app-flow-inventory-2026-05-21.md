@@ -134,14 +134,15 @@ main session.
   Representative outputs across the structured and raw-only tool families are
   now provable through `/qa/result-parser-coverage`, which verifies that parser
   output reaches the tab collections and `/results` rather than staying as raw
-  chat text only.
+  chat text only. The route now returns a standard `ok` aggregate status.
 - Parsed result rows also flow back into the dynamic context catalogue. Assets,
   findings, recent raw output, OSINT artifacts, and post-exploitation
   attributions are retrievable through the same bounded context/search path.
 - Representative all-family fanout is covered by
   `scripts/tool-family-fanout-coverage-proof.py`: Recon, Web, Network, Creds,
   Exploit, Post, and OSINT fixtures each prove chat-card, activity-feed,
-  tab-activity, parsed-result, and context-catalog coverage.
+  tab-activity, parsed-result, and context-catalog coverage. The route now
+  returns a standard `ok` aggregate status.
 
 The full tool catalog is no longer force-sent to the engine. `ChatService`
 passes the latest user prompt plus active tab into `ToolDefinitions.forModel`,

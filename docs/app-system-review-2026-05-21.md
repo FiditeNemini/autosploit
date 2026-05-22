@@ -204,7 +204,9 @@ Result fanout:
   `scripts/tool-family-fanout-coverage-proof.py`: deterministic Recon, Web,
   Network, Creds, Exploit, Post, and OSINT fixtures each prove a visible chat
   tool card, activity-feed entry, tab activity status, parsed tab result, and
-  context-catalog hit.
+  context-catalog hit. Parser and family-fanout aggregate routes now also
+  expose a standard `ok` status, covered by
+  `scripts/parser-fanout-aggregate-proof.py`.
 - Activity Feed copy and clear controls now route through AppState. The header
   copy, row copy, row copy-with-timestamp, copy-visible, and clear actions
   expose `/state.activityFeedActions` with last action, status, count, summary,
