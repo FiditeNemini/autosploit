@@ -724,8 +724,12 @@ Automated no-model gates:
   The tabs/sessions group exposes
   interaction-mode count, covered tab
   count, session state-key count, subtab tab maps and proof count,
+  session route list/count, contract map/count, proof list/count, state-key
+  list/count,
   session workflow surface list/count/parity,
   session workflow surface proof map/count/parity,
+  tab action tab list, route list/count, contract map/count, proof list/count,
+  action-state-key list/count,
   tab action surface list/count/parity, tab action surface proof map/count/parity,
   action-state-key count, agent-loop
   state-key count, agent-loop visual state keys, agent-loop phase-proof

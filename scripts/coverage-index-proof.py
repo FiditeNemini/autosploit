@@ -654,6 +654,22 @@ def assert_coverage_index() -> None:
     if tabs_sessions_group.get("tabActivityStatusProofParity") != tool_flow.get("tabActivityStatusProofParity"):
         raise AssertionError(f"coverage index tabs/sessions tab activity status proof parity mismatch: {tabs_sessions_group}")
     session_coverage = request("GET", "/qa/session-coverage")
+    if tabs_sessions_group.get("sessionRoutes") != session_coverage.get("routes"):
+        raise AssertionError(f"coverage index tabs/sessions session route list mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("sessionRouteCount") != len(session_coverage.get("routes") or []):
+        raise AssertionError(f"coverage index tabs/sessions session route count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("sessionContracts") != session_coverage.get("contracts"):
+        raise AssertionError(f"coverage index tabs/sessions session contract map mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("sessionContractCount") != len(session_coverage.get("contracts") or {}):
+        raise AssertionError(f"coverage index tabs/sessions session contract count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("sessionProofs") != session_coverage.get("proofs"):
+        raise AssertionError(f"coverage index tabs/sessions session proof list mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("sessionProofCount") != session_coverage.get("proofCount"):
+        raise AssertionError(f"coverage index tabs/sessions session proof count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("sessionStateKeys") != session_coverage.get("stateKeys"):
+        raise AssertionError(f"coverage index tabs/sessions session state-key list mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("sessionStateKeyCount") != len(session_coverage.get("stateKeys") or []):
+        raise AssertionError(f"coverage index tabs/sessions session state-key count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("sessionWorkflowSurfaces") != session_coverage.get("sessionWorkflowSurfaces"):
         raise AssertionError(f"coverage index tabs/sessions workflow surfaces mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("sessionWorkflowSurfaceCount") != session_coverage.get("sessionWorkflowSurfaceCount"):
@@ -667,6 +683,24 @@ def assert_coverage_index() -> None:
     if tabs_sessions_group.get("sessionWorkflowSurfaceProofParity") != session_coverage.get("sessionWorkflowSurfaceProofParity"):
         raise AssertionError(f"coverage index tabs/sessions workflow surface proof parity mismatch: {tabs_sessions_group}")
     tab_action_coverage = request("GET", "/qa/tab-action-coverage")
+    if tabs_sessions_group.get("tabActionTabs") != tab_action_coverage.get("tabs"):
+        raise AssertionError(f"coverage index tabs/sessions tab action tabs mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActionRoutes") != tab_action_coverage.get("routes"):
+        raise AssertionError(f"coverage index tabs/sessions tab action route list mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActionRouteCount") != len(tab_action_coverage.get("routes") or []):
+        raise AssertionError(f"coverage index tabs/sessions tab action route count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActionContracts") != tab_action_coverage.get("contracts"):
+        raise AssertionError(f"coverage index tabs/sessions tab action contract map mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActionContractCount") != len(tab_action_coverage.get("contracts") or {}):
+        raise AssertionError(f"coverage index tabs/sessions tab action contract count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActionProofs") != tab_action_coverage.get("proofs"):
+        raise AssertionError(f"coverage index tabs/sessions tab action proof list mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActionProofCount") != tab_action_coverage.get("proofCount"):
+        raise AssertionError(f"coverage index tabs/sessions tab action proof count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActionStateKeys") != tab_action_coverage.get("actionStateKeys"):
+        raise AssertionError(f"coverage index tabs/sessions tab action state-key list mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActionStateKeyCount") != len(tab_action_coverage.get("actionStateKeys") or []):
+        raise AssertionError(f"coverage index tabs/sessions tab action state-key count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActionSurfaces") != tab_action_coverage.get("tabActionSurfaces"):
         raise AssertionError(f"coverage index tabs/sessions tab action surfaces mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActionSurfaceCount") != tab_action_coverage.get("tabActionSurfaceCount"):

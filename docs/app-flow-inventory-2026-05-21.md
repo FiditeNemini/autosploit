@@ -844,8 +844,12 @@ Current repeatable gates:
   The tabs/sessions group exposes
   interaction-mode count, covered tab count, session state-key count, and
   action-state-key count, mirrors subtab tab maps and proof count,
+  mirrors session route list/count, contract map/count, proof list/count, and
+  state-key list/count,
   mirrors session workflow surface list/count/parity,
   session workflow surface proof map/count/parity,
+  mirrors tab action tab list, route list/count, contract map/count, proof
+  list/count, and action-state-key list/count,
   mirrors tab action surface list/count/parity and proof map/count/parity, mirrors
   agent-loop phase list/count/parity and phase-proof map/count/parity,
   mirrors agent-loop current mode, max-iteration guard, proof count,
