@@ -74,6 +74,11 @@ Interaction modes:
 - Agent header/settings actions are covered by `scripts/agent-actions-proof.py`:
   deploy, switch, remove, and clear actions route through AppState and expose
   `/state.agentActions` with agent id/name/type, count, summary, and activity.
+- Agent Settings controls are covered by
+  `scripts/agent-settings-actions-proof.py`: multi-agent enable/disable and
+  max-concurrent changes route through AppState, persist settings, update
+  `/state.agentActions`, and clear active agents when disabling full-auto
+  multi-agent mode.
 - Deployed-agent on-demand context retrieval is covered by
   `scripts/agent-search-context-proof.py`: an agent autonomously calls
   `search_context`, receives shared parsed-result catalogue facts from the main
