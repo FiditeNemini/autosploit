@@ -588,6 +588,11 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   `scripts/web-verify-action-proof.py` plus `scripts/visual-web-verify-proof.py`
   prove the seeded Apache CVE row is enriched and visibly `CVE verifying` while
   the Verify action is queued.
+- Checkpoint 107: Added a Report agent-draft loop path. Deterministic Generate
+  and export remain direct, while the new `Agent Draft` action builds a bounded
+  report prompt from confirmed findings, records `/state.reportAction`, updates
+  Report tab activity, and can send the prompt into chat. Proofs:
+  `scripts/report-agent-action-proof.py` and `scripts/visual-report-agent-proof.py`.
 
 ## Known Risk Areas
 

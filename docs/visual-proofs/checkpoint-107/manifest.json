@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "captures": [
+    "docs/visual-proofs/checkpoint-107/report-agent-queued.png"
+  ],
+  "note": "Cropped macOS capture of Report tab showing Agent Draft control and queued agent-report status strip for a seeded finding."
+}

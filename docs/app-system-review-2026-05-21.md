@@ -345,6 +345,8 @@ Automated no-model gates:
     render as running/done/failed/canceled indicators;
   - proves Web CVE rows expose per-row progress/enrichment status through
     `/state.webCVERows` and the visible card chip;
+  - proves Report can queue an agent-draft prompt from confirmed findings
+    through `/state.reportAction` and Report tab activity;
   - proves model-issued `search_context` returns targeted catalogue facts;
   - proves automatic context injection stays at 4 snippets or fewer and tells
     the model to use `search_context` for more targeted retrieval;
@@ -390,6 +392,10 @@ Mock-model gates:
 - Web CVE row progress. Covered by `scripts/web-verify-action-proof.py` and
   `scripts/visual-web-verify-proof.py`, which verify row-level CVE id,
   enrichment, active `CVE verifying` progress, and visible queued card state.
+- Report agent-draft loop. Covered by `scripts/report-agent-action-proof.py`
+  and `scripts/visual-report-agent-proof.py`, which verify the report prompt,
+  queued action state, Report tab activity, and visible agent-report status
+  strip.
 - Nested lifecycle strip visual state. Covered by
   `scripts/visual-tab-proof.py` with cropped captures under
   `docs/visual-proofs/checkpoint-70`.

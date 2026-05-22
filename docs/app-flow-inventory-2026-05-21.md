@@ -243,12 +243,18 @@ Report:
 
 - Generates markdown/HTML/PDF from stored findings.
 - Opens finding creation and deletes findings.
-- Does not currently route report generation through chat.
+- Deterministic Generate/Export remains direct, while `Agent Draft` now routes
+  a bounded report drafting prompt through the chat/agent loop.
+- `/state.reportAction` exposes the active report-agent draft status, template,
+  finding count, and prompt.
 - Exposes proof-oriented export status with artifact format/path/byte metadata
   through `/state.reportExport`.
 - Export validation is covered by `scripts/report-export-proof.py` for HTML,
   Markdown, JSON, and PDF artifacts; visible report status is captured under
   `docs/visual-proofs/checkpoint-91`.
+- Agent-draft routing is covered by `scripts/report-agent-action-proof.py`, and
+  the visible queued report-agent strip is captured under
+  `docs/visual-proofs/checkpoint-107`.
 
 Stash:
 
