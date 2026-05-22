@@ -590,9 +590,9 @@ Automated no-model gates:
   checkpoint paths, latest checkpoint, and latest checkpoint number using numeric checkpoint ordering; the checkpoint,
   complete, and incomplete path lists also use that numeric order. The
   `/qa/audit-ledger` route combines proof counts, proof category counts/surface
-  count/total/parity, live artifact counts, visual capture counts, missing/
-  failed artifact counts, and checkpoint completeness counts/ratio plus the
-  current gap count into one machine-readable audit rollup.
+  names/surface count/total/parity, live artifact counts, visual capture
+  counts, missing/failed artifact counts, and checkpoint completeness counts/
+  ratio plus the current gap count into one machine-readable audit rollup.
   It also exposes the missing visual capture paths, failed live-proof paths,
   complete and incomplete checkpoint paths, latest checkpoint number, open gap
   IDs, and structured gap contracts directly for triage.
