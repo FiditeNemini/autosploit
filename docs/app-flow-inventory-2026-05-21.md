@@ -524,6 +524,9 @@ CVE Database and Tools:
 - Inference Log copy and clear route through AppState and expose
   `/state.inferenceLogActions`; covered by
   `scripts/inference-log-actions-proof.py`.
+- `/qa/tab-action-coverage` exposes the per-tab action routes, proof scripts,
+  contracts, and `actionStateKeys` for Recon/Web/Network/Creds/Exploit/Post/
+  OSINT/Report/Stash action state surfaces.
 
 ## Test And Proof Requirements
 
@@ -607,7 +610,9 @@ Current repeatable gates:
   routing, deployed-agent context search, durable embeddings, stash retrieval,
   and new-context cache preservation proof gates. It now exposes `proofCount`
   and `/context/new` so cache-preserving context resets stay visible in the
-  aggregate. Visual screenshot coverage is summarized through
+  aggregate. Tab action coverage also exposes `actionStateKeys`, so the matrix
+  can verify the AppState surfaces behind per-tab copy/stash/export/tool
+  actions. Visual screenshot coverage is summarized through
   `/qa/visual-coverage`, including chat/tool states, scroll lock, Settings,
   context inspector, request-audit badges, tab activity, subtab lifecycle
   strips, OSINT screenshots, report export, stash retrieval, unsupported model

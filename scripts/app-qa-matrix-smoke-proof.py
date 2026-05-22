@@ -211,6 +211,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/tab-action-coverage tabs mismatch: {tab_action_coverage}")
     if tab_action_coverage.get("proofCount", 0) < 27:
         raise AssertionError(f"/qa/tab-action-coverage proof count mismatch: {tab_action_coverage}")
+    if "stashActions" not in (tab_action_coverage.get("actionStateKeys") or []):
+        raise AssertionError(f"/qa/tab-action-coverage action state keys mismatch: {tab_action_coverage}")
     if chat_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/chat-coverage failed: {chat_coverage}")
     if chat_coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
