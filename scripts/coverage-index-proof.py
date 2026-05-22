@@ -480,6 +480,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions workflow surface count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("sessionWorkflowSurfaceParity") != session_coverage.get("sessionWorkflowSurfaceParity"):
         raise AssertionError(f"coverage index tabs/sessions workflow surface parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("sessionWorkflowSurfaceProofs") != session_coverage.get("sessionWorkflowSurfaceProofs"):
+        raise AssertionError(f"coverage index tabs/sessions workflow surface proof map mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("sessionWorkflowSurfaceProofCount") != session_coverage.get("sessionWorkflowSurfaceProofCount"):
         raise AssertionError(f"coverage index tabs/sessions workflow surface proof count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("sessionWorkflowSurfaceProofParity") != session_coverage.get("sessionWorkflowSurfaceProofParity"):
