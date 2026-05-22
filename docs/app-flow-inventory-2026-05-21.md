@@ -82,6 +82,10 @@ main session.
 - Built-in CVE calls use callbacks instead of shell subprocesses.
 - Shell-backed tools run through `ToolExecutor`.
 - Tool output is appended to chat, activity feed, and `ResultsStore.ingest`.
+  Representative outputs across the structured and raw-only tool families are
+  now provable through `/qa/result-parser-coverage`, which verifies that parser
+  output reaches the tab collections and `/results` rather than staying as raw
+  chat text only.
 
 The full tool catalog is no longer force-sent to the engine. `ChatService`
 passes the latest user prompt plus active tab into `ToolDefinitions.forModel`,
@@ -349,6 +353,7 @@ Current repeatable gates:
 - `python3 scripts/catalog-embedding-audit-proof.py`
 - `python3 scripts/tool-catalog-proof.py`
 - `python3 scripts/tool-registry-coverage-proof.py`
+- `python3 scripts/result-parser-routing-proof.py`
 - `python3 scripts/semantic-cve-proof.py`
 - `python3 scripts/settings-apply-proof.py`
 - `python3 scripts/agent-autopilot-proof.py`
@@ -443,6 +448,11 @@ Required future proof gates:
   `scripts/tool-registry-coverage-proof.py`, which verifies all 38 exposed
   schemas have declared execution mode, bounded catalogue policy, tab coverage,
   sample CLI routing, and result parser mode.
+- Representative parser-to-tab routing: covered by
+  `scripts/result-parser-routing-proof.py`, which seeds representative outputs
+  for structured and raw-only tools, checks all expected parser branches emit
+  tab state, and verifies parsed `nmap`/screenshot rows are exposed through
+  `/results`.
 - Settings model warning, engine live cache status, and cache topology
   screenshots are captured under `docs/visual-proofs/checkpoint-73`.
 - Chat token metrics, active tool header, approval card, running tool card,
