@@ -241,6 +241,12 @@ Exploit, Post, OSINT, Report, and Stash is summarized through
 copy routes, row context actions, verify/protocol/hash/exploit/post/OSINT
 actions, report generation/finding/export/agent actions, and Stash add/filter/
 copy/send/delete controls with the focused proof scripts for each lane.
+Chat/control coverage is summarized through `/qa/chat-coverage`. The aggregate
+ties together Send/Stop, reasoning enable/collapse, approvals, copy/stash
+actions, tool-output expansion, request-audit badges, context inspector state,
+scroll-lock visual captures, tool-action/Stash chat handoff, token counters,
+and visible-new-context behavior while preserving the engine cache session for
+the `prefix-cache-l2-turboquant` response path.
 - CVE-bearing rows now expose per-row status through `/state.webCVERows` and a
   visible chip on each vulnerability card. The same proof verifies `pending`,
   `enriched`, and active `CVE verifying` row semantics for the seeded Web
@@ -582,6 +588,12 @@ Current repeatable gates:
   strips, OSINT screenshots, report export, stash retrieval, unsupported model
   states, post attribution, tool action panels, live cache stats, and
   CVE/tool-settings proof manifests.
+  Chat/control invariants are summarized through `/qa/chat-coverage`, including
+  streaming usage metrics, token counters, reasoning controls, tool-output
+  expansion, approval controls, copy/stash actions, request-audit badges,
+  context inspector state, scroll-lock visuals, tool-action/Stash chat control,
+  and cache-preserving new-context behavior for the
+  `prefix-cache-l2-turboquant` response path.
 - Visual QA through the local app run script plus screenshots.
 
 Required future proof gates:

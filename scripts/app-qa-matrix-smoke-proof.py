@@ -101,6 +101,7 @@ def assert_testserver_smoke() -> None:
     visual_coverage = request("GET", "/qa/visual-coverage")
     session_coverage = request("GET", "/qa/session-coverage")
     tab_action_coverage = request("GET", "/qa/tab-action-coverage")
+    chat_coverage = request("GET", "/qa/chat-coverage")
 
     required_state_keys = {
         "activeTab",
@@ -151,6 +152,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing session coverage route contract: {qa}")
     if "/qa/tab-action-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing tab action coverage route contract: {qa}")
+    if "/qa/chat-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing chat coverage route contract: {qa}")
     if subtab_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/subtab-coverage failed: {subtab_coverage}")
     if sorted((subtab_coverage.get("tabs") or {}).keys()) != expected_subtab_tabs:
@@ -199,6 +202,14 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/tab-action-coverage tabs mismatch: {tab_action_coverage}")
     if tab_action_coverage.get("proofCount", 0) < 27:
         raise AssertionError(f"/qa/tab-action-coverage proof count mismatch: {tab_action_coverage}")
+    if chat_coverage.get("ok") is not True:
+        raise AssertionError(f"/qa/chat-coverage failed: {chat_coverage}")
+    if chat_coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
+        raise AssertionError(f"/qa/chat-coverage cache method mismatch: {chat_coverage}")
+    if chat_coverage.get("newContextBehavior") != "clear-visible-chat-preserve-engine-cache-session":
+        raise AssertionError(f"/qa/chat-coverage context behavior mismatch: {chat_coverage}")
+    if chat_coverage.get("proofCount", 0) < 15:
+        raise AssertionError(f"/qa/chat-coverage proof count mismatch: {chat_coverage}")
 
 
 def run() -> None:

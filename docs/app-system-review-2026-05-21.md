@@ -455,6 +455,12 @@ Stash:
   `scripts/tab-action-coverage-proof.py`, which checks the route, action seed/
   action route list, contracts, focused proof scripts, covered tabs, and proof
   file existence.
+- Aggregate chat/control coverage is exposed through `/qa/chat-coverage` and
+  verified by `scripts/chat-coverage-proof.py`, which checks Send/Stop,
+  reasoning, approval, copy/stash, tool-output expansion, request-audit,
+  context inspector, scroll-lock visual, token counter, tool-action/Stash chat
+  handoff, and cache-preserving visible-new-context contracts for the
+  `prefix-cache-l2-turboquant` response path.
 - Source/op scoping and catalogue inclusion/exclusion are covered by
   `scripts/context-catalog-proof.py`; scored targeted retrieval is covered by
   `scripts/stash-retrieval-proof.py`.
@@ -524,6 +530,11 @@ Automated no-model gates:
   `/qa/tab-action-coverage` exposes per-tab direct action proof coverage for
   copy buttons, row context actions, verify/protocol/hash/exploit/post/OSINT
   actions, report generation/finding/export/agent actions, and Stash controls.
+  `/qa/chat-coverage` exposes chat/control proof coverage for streaming usage
+  metrics, token counters, reasoning controls, approval controls, tool-output
+  expansion, request-audit badges, context inspector state, scroll-lock visuals,
+  tool-action/Stash chat handoff, and cache-preserving new-context behavior for
+  the `prefix-cache-l2-turboquant` response path.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.
