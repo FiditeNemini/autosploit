@@ -743,6 +743,8 @@ def assert_coverage_index() -> None:
     agent_loop = request("GET", "/qa/agent-loop-coverage")
     if tabs_sessions_group.get("agentLoopStateKeyCount") != agent_loop.get("stateKeyCount"):
         raise AssertionError(f"coverage index tabs/sessions agent loop state key count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("agentLoopStateKeys") != agent_loop.get("stateKeys"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop state key list mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopCurrentMode") != agent_loop.get("currentMode"):
         raise AssertionError(f"coverage index tabs/sessions agent loop current mode mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopMaxIterations") != agent_loop.get("maxIterations"):

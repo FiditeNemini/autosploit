@@ -843,6 +843,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index tab action proof map mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopPhaseProofs") != agent_loop_coverage.get("loopPhaseProofs"):
         raise AssertionError(f"/qa/coverage-index agent loop phase proof map mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentLoopStateKeys") != agent_loop_coverage.get("stateKeys"):
+        raise AssertionError(f"/qa/coverage-index agent loop state key list mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopCurrentMode") != agent_loop_coverage.get("currentMode"):
         raise AssertionError(f"/qa/coverage-index agent loop current mode mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopMaxIterations") != agent_loop_coverage.get("maxIterations"):
