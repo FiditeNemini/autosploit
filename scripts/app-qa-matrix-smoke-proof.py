@@ -472,6 +472,13 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index current gap count mismatch: {coverage_index}")
     if ((index_groups.get("tabsAndSessions") or {}).get("actionStateKeyCount", 0)) < 26:
         raise AssertionError(f"/qa/coverage-index action state key count mismatch: {coverage_index}")
+    tabs_sessions_group = index_groups.get("tabsAndSessions") or {}
+    if tabs_sessions_group.get("agentLoopPhaseProofs") != agent_loop_coverage.get("loopPhaseProofs"):
+        raise AssertionError(f"/qa/coverage-index agent loop phase proof map mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentLoopPhaseProofCount") != agent_loop_coverage.get("loopPhaseProofCount"):
+        raise AssertionError(f"/qa/coverage-index agent loop phase proof count mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentLoopPhaseProofParity") != agent_loop_coverage.get("loopPhaseProofParity"):
+        raise AssertionError(f"/qa/coverage-index agent loop phase proof parity mismatch: {coverage_index}")
     if proof_ledger.get("ok") is not True or proof_ledger.get("proofCount", 0) < 120:
         raise AssertionError(f"/qa/proof-ledger count mismatch: {proof_ledger}")
     if artifact_ledger.get("ok") is not True:

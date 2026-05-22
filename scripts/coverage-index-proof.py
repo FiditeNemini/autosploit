@@ -385,6 +385,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions agent loop phase count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopPhaseParity") != agent_loop.get("loopPhaseParity"):
         raise AssertionError(f"coverage index tabs/sessions agent loop phase parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("agentLoopPhaseProofs") != agent_loop.get("loopPhaseProofs"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop phase proof map mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopPhaseProofCount") != agent_loop.get("loopPhaseProofCount"):
         raise AssertionError(f"coverage index tabs/sessions agent loop phase proof count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopPhaseProofParity") != agent_loop.get("loopPhaseProofParity"):

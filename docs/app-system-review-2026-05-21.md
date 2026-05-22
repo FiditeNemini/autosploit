@@ -700,8 +700,9 @@ Automated no-model gates:
   session workflow surface proof count/parity,
   tab action surface list/count/parity, tab action surface proof count/parity,
   action-state-key count, agent-loop
-  state-key count, agent-loop visual state keys, and tab activity status proof
-  count/parity. Chat/context also exposes state-key count.
+  state-key count, agent-loop visual state keys, agent-loop phase-proof
+  map/count/parity, and tab activity status proof count/parity. Chat/context
+  also exposes state-key count.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.

@@ -812,8 +812,8 @@ Current repeatable gates:
   interaction-mode count, covered tab count, session state-key count, and
   action-state-key count, mirrors session workflow surface list/count/parity,
   session workflow surface proof count/parity,
-  mirrors tab action surface list/count/parity and proof count/parity, mirrors agent-loop phase
-  list/count/parity and phase-proof count/parity,
+  mirrors tab action surface list/count/parity and proof count/parity, mirrors
+  agent-loop phase list/count/parity and phase-proof map/count/parity,
   and now mirrors the visible tab activity status list/count/parity plus
   indicator contract and status proof count/parity because the tab bar is owned by the
   tabs/session surface. Chat/context also exposes state-key count.
