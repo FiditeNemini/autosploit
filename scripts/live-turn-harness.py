@@ -744,6 +744,11 @@ def run() -> None:
                 for tool in MockState.requests[-1].get("tools", [])
             ]
         assert "search_context" in tool_names, tool_names
+        if len(tool_names) > 12:
+            raise AssertionError(f"tool schema was not query bounded: {tool_names}")
+        for unrelated in ("sherlock", "sliver", "metasploit"):
+            if unrelated in tool_names:
+                raise AssertionError(f"web request included unrelated tool schema {unrelated}: {tool_names}")
 
         request("POST", "/clear")
         request("POST", "/mode", "autopilot")

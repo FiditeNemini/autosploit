@@ -77,9 +77,12 @@ main session.
 - Shell-backed tools run through `ToolExecutor`.
 - Tool output is appended to chat, activity feed, and `ResultsStore.ingest`.
 
-The full tool catalog is always sent to the engine. The old profile-dependent
-tool reduction is removed. Future work should replace all-at-once catalog
-injection with dynamic retrieval rather than reintroducing model-size guesses.
+The full tool catalog is no longer force-sent to the engine. `ChatService`
+passes the latest user prompt plus active tab into `ToolDefinitions.forModel`,
+which always keeps the built-in retrieval/CVE/shell callbacks visible and then
+adds only the highest-ranked installed tools for the current lane, capped at 12
+schemas by default. The old profile-dependent tool reduction is removed; tool
+visibility is now prompt/tab based rather than small/medium/large model based.
 
 ## Context And Catalog State
 
@@ -109,8 +112,6 @@ Implemented dynamic catalogue lane:
 
 Required next catalog lane:
 
-- Add a model-callable catalogue search tool so the model can request additional
-  slices after seeing the compact index.
 - Add durable embeddings for tools, techniques, findings, assets, commands,
   prior outputs, and stash items, not only CVEs.
 - Store retrieval decisions with the chat turn for later audit.
@@ -254,6 +255,7 @@ Current repeatable gates:
 - `python3 scripts/live-turn-harness.py`
 - `cd ExploitBotEngine && uv run --extra dev ../scripts/prove-parser-api.py --output ../docs/live-proofs/checkpoint-79-parser-api-proof.json`
 - `python3 scripts/context-catalog-proof.py`
+- `python3 scripts/tool-catalog-proof.py`
 - `python3 scripts/settings-apply-proof.py`
 - `python3 scripts/verify-live-models.py --metadata-only --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --minimax /Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit`
 - `python3 scripts/visual-tab-proof.py`

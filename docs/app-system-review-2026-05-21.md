@@ -53,7 +53,10 @@ Static prompt:
 
 - `ChatService.systemPrompt` provides identity, compact tool categories, phase
   guidance, reasoning mode, and scope rules.
-- OpenAI-compatible `tools` still sends the full function schema to the engine.
+- OpenAI-compatible `tools` now sends a prompt/tab-ranked function schema capped
+  at 12 entries by default. Built-in retrieval/CVE/shell callbacks remain
+  visible; installed external tool schemas are selected by active lane and
+  query terms instead of model-size profiles.
 
 Dynamic context:
 
@@ -256,6 +259,8 @@ Automated no-model gates:
   - proves model-issued `search_context` returns targeted catalogue facts;
   - proves automatic context injection stays at 4 snippets or fewer and tells
     the model to use `search_context` for more targeted retrieval;
+  - proves web-tab tool schemas are query bounded and do not include unrelated
+    OSINT/exploit schemas in the request body;
   - proves prefix cache, prompt L2, paged cache, block L2, TurboQuant Q4, and
     model-folder generation defaults remain enabled in runtime config;
   - proves the new-context route clears chat state and token/cached counters

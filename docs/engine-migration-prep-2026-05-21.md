@@ -528,6 +528,12 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   TurboQuant Q4 metadata, returns non-empty assistant content on first and
   repeat turns, and proves repeat cached-token reuse. Artifact:
   `docs/live-proofs/checkpoint-80-minimax-strict-live.json`.
+- Checkpoint 81: Replaced broad tool-schema injection with prompt/tab-ranked
+  tool schema selection. `ChatService` now passes the latest prompt and active
+  tab to `ToolDefinitions.forModel`, built-in retrieval/CVE/shell callbacks
+  stay visible, installed external schemas are capped at 12 by default, and
+  `scripts/tool-catalog-proof.py` plus `scripts/live-turn-harness.py` prove the
+  web lane does not carry unrelated OSINT/exploit schemas.
 
 ## Known Risk Areas
 
