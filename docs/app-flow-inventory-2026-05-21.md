@@ -260,6 +260,7 @@ Current repeatable gates:
 - `python3 scripts/visual-chat-interaction-proof.py`
 - `python3 scripts/visual-settings-proof.py`
 - `python3 scripts/verify-live-models.py --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit --output docs/live-proofs/checkpoint-76-qwen-repeat-cache-live.json`
+- `cd ExploitBotEngine && uv run --extra dev ../scripts/prove-block-l2-cache.py --output ../docs/live-proofs/checkpoint-77-block-l2-quantized-proof.json`
 - `git diff --check`
 - Static scans proving no S/M/L profile selectors or `ModelProfile` code remain.
 - Visual QA through the local app run script plus screenshots.
@@ -278,6 +279,10 @@ Required future proof gates:
   present, plus async rederive status. Current Qwen live proof verifies load,
   generation, cache metadata, SSM companion L2 storage, and a repeat paged-cache
   hit with 20 cached tokens. Async rederive status remains open.
+- Quantized block L2 proof: covered by
+  `docs/live-proofs/checkpoint-77-block-l2-quantized-proof.json`, which proves
+  real MLX safetensors write/read plus full-block disk promotion for
+  `quantized_kv` cache data.
 - Reasoning parser smoke proving thinking text is separated from visible output.
 - Tool parser smoke proving parsed API `tool_calls`, not raw text only.
 - Settings model warning, engine live cache status, and cache topology

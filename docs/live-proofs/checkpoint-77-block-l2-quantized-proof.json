@@ -1,0 +1,42 @@
+{
+  "ok": true,
+  "stored_tokens": 4,
+  "write_stats": {
+    "blocks_on_disk": 1,
+    "disk_size_bytes": 936,
+    "disk_size_gb": 0.0,
+    "total_accesses": 0,
+    "disk_hits": 0,
+    "disk_misses": 0,
+    "disk_writes": 1,
+    "disk_evictions": 0
+  },
+  "promoted_table": {
+    "block_ids": [
+      1
+    ],
+    "num_tokens": 4,
+    "remaining": []
+  },
+  "paged_stats": {
+    "cache_hits": 1,
+    "cache_misses": 1,
+    "disk_hits": 1,
+    "disk_misses": 0
+  },
+  "read_stats": {
+    "blocks_on_disk": 1,
+    "disk_size_bytes": 936,
+    "disk_size_gb": 0.0,
+    "total_accesses": 0,
+    "disk_hits": 1,
+    "disk_misses": 0,
+    "disk_writes": 0,
+    "disk_evictions": 0
+  },
+  "promoted_block": {
+    "type": "quantized_kv",
+    "token_count": 4
+  },
+  "cache_dir": "temporary"
+}

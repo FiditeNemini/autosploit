@@ -500,12 +500,24 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   paged miss, second turn is a hybrid paged hit with KV plus 48 SSM companion
   layers, `cached_tokens=20`, `scheduler_hits_delta=1`, and
   `scheduler_tokens_saved_delta=20`.
+- Checkpoint 77: Fixed quantized block L2 write-through and full-block disk
+  promotion. `BlockAwarePrefixCache` now writes extracted `quantized_kv` block
+  data to `BlockDiskStore` when the non-quantized numpy path is unavailable,
+  and `fetch_cache()` can promote chain-hash full blocks from disk after an
+  in-memory miss. `BlockDiskStore` now avoids the reserved `__metadata__`
+  safetensors key. Proof is captured at
+  `docs/live-proofs/checkpoint-77-block-l2-quantized-proof.json` with
+  `disk_writes=1`, `disk_hits=1`, `promoted_block.type=quantized_kv`, and no
+  remaining prompt tokens.
 
 ## Known Risk Areas
 
 - ExploitBot currently has a custom stripped server contract. Replacing `server.py` wholesale may expose endpoints the app does not need.
 - vMLX cache code has schema and runtime fingerprinting. Cache schema mismatches must invalidate old L2 entries rather than replaying them.
 - Qwen hybrid SSM cache restore is correctness-sensitive. Do not trim recurrent state by slicing KV arrays.
+- Full-block block L2 promotion is proven with direct quantized KV cache data;
+  partial-block cross-run lookup still needs a persisted partial-size index or
+  a model prompt long enough to produce complete 64-token blocks.
 - MiniMax public MTP is not available from released weights; do not represent MiniMax MTP as supported unless tensor evidence exists.
 - JANGTQ2 can be quality-limited on some families. The app UI should label it as a memory tier rather than default premium tier.
 

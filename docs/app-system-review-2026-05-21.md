@@ -296,6 +296,12 @@ Real-model gates:
   defaults from the model folder, prefix cache, prompt L2, paged cache, block
   L2, TurboQuant Q4 metadata, Qwen hybrid SSM companion L2 storage, and a
   repeated prompt hit with 20 cached tokens and 20 tokens saved.
+- Quantized block L2 proof is captured at
+  `docs/live-proofs/checkpoint-77-block-l2-quantized-proof.json`. It uses real
+  MLX safetensors I/O to write a quantized KV block through `BlockDiskStore`,
+  reopen the disk store, and promote the full block through
+  `BlockAwarePrefixCache.fetch_cache()` with `disk_writes=1`, `disk_hits=1`,
+  and `promoted_block.type=quantized_kv`.
 - MiniMax live proof is captured at
   `docs/live-proofs/checkpoint-75-minimax-live.json`. It now routes through
   `jang_tools.load_jangtq_model` and reaches JANGTQ hydration, but the current
@@ -309,6 +315,9 @@ Real-model gates:
 - Prefix/L2/cache metrics visibility is script-checkable after real engine load
   and still needs real-engine UI screenshot proof. Seeded token metric UI is
   captured by `scripts/visual-chat-proof.py`.
+- Full-block block L2 quantized write/read/promotion is covered by
+  `scripts/prove-block-l2-cache.py`; a full real-model cross-run block L2 hit
+  remains open.
 
 Visual gates:
 
