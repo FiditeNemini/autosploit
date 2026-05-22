@@ -520,6 +520,13 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   `reasoning_content`, cleaned assistant content, structured OpenAI
   `tool_calls`, and `finish_reason=tool_calls`. Proof artifact:
   `docs/live-proofs/checkpoint-79-parser-api-proof.json`.
+- Checkpoint 80: Tightened MiniMax live verification after memory pressure
+  cleared. The verifier now rejects token usage without assistant
+  content/reasoning/tool calls and records failure evidence before assertions.
+  MiniMax now loads, warms up, reports full-KV/prefix/prompt-L2/paged/block-L2/
+  TurboQuant Q4 metadata, and shows cache reuse, but still fails generation
+  proof because the assistant message is empty. Artifact:
+  `docs/live-proofs/checkpoint-80-minimax-strict-live.json`.
 
 ## Known Risk Areas
 

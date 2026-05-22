@@ -201,7 +201,9 @@ def _assert_completion(completion: dict[str, Any]) -> None:
         if message.get("content") or message.get("reasoning_content") or message.get("tool_calls"):
             has_content = True
             break
-    if token_count <= 0 and not has_content:
+    if not has_content:
+        if token_count > 0:
+            raise RuntimeError("empty assistant message: token usage reported without content/reasoning/tool_calls")
         raise RuntimeError("empty completion: model returned no tokens/content")
 
 
@@ -319,9 +321,6 @@ def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float
         repeat_completion = _chat_completion(base_url, model_name, prompt, timeout)
         repeat_cache = _request_json("GET", f"{base_url}/v1/cache/stats")
         _assert_runtime_metadata(report, health, models, cache)
-        _assert_completion(completion)
-        _assert_completion(repeat_completion)
-        _assert_repeat_cache_behavior(report, cache, repeat_cache, repeat_completion)
         report.update({
             "health": health,
             "models": models,
@@ -332,6 +331,9 @@ def verify_live_model(path: str | Path, family: str, prompt: str, timeout: float
             "repeat_completion_preview": json.dumps(repeat_completion.get("choices", []))[:500],
             "repeat_cache_stats": repeat_cache,
         })
+        _assert_completion(completion)
+        _assert_completion(repeat_completion)
+        _assert_repeat_cache_behavior(report, cache, repeat_cache, repeat_completion)
         return report
     except Exception as exc:
         raise VerificationError(f"{family} live verification failed: {exc}", {family: report}) from exc

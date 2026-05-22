@@ -308,11 +308,13 @@ Real-model gates:
   content, `reasoning_content`, structured OpenAI `tool_calls`, and
   `finish_reason=tool_calls` without leaking raw parser tags into content.
 - MiniMax live proof is captured at
-  `docs/live-proofs/checkpoint-75-minimax-live.json`. It now routes through
-  `jang_tools.load_jangtq_model` and reaches JANGTQ hydration, but the current
-  run failed before health with Metal out-of-memory while the machine was under
-  high memory pressure. A clear-memory rerun is still required for MiniMax
-  generation and cache-hit proof.
+  `docs/live-proofs/checkpoint-80-minimax-strict-live.json`. It now routes
+  through `jang_tools.load_jangtq_model`, warms up, reaches `/health`,
+  `/v1/models`, and `/v1/cache/stats`, reports the intended full-KV cache
+  topology, and shows prompt/paged cache reuse. It is still not a generation
+  pass: both assistant messages are empty (`content=null`, `tool_calls=null`,
+  `reasoning_content=null`) despite token usage, so the stricter verifier marks
+  the report `ok=false`.
 - Unsupported folder warning and blocked/clear app UI handling still needs a
   live UI proof.
 - Full prompt -> context catalogue -> stream -> tool call -> tab result loop is
@@ -351,6 +353,6 @@ Visual gates:
 
 ## Current Gaps To Close Next
 
-1. Rerun MiniMax real-model verification after clearing competing MLX memory
-   pressure, then capture non-empty generation plus prefix/paged/L2/TurboQuant
-   cache stats.
+1. Debug MiniMax JANGTQ decode/API output: the model now loads and cache-hits
+   without OOM, but live responses report token usage with empty assistant
+   payloads.
