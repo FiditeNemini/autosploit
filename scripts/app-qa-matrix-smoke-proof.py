@@ -33,6 +33,17 @@ REQUIRED_CONTEXT_HOOKS = (
     "context.catalog.maxSnippets",
 )
 
+REQUIRED_SUBTAB_PROOFS = (
+    "recon-subtab-state-proof.py",
+    "web-subtab-state-proof.py",
+    "network-subtab-state-proof.py",
+    "creds-subtab-state-proof.py",
+    "exploit-subtab-state-proof.py",
+    "post-subtab-state-proof.py",
+    "osint-subtab-state-proof.py",
+    "report-subtab-state-proof.py",
+)
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -108,6 +119,11 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing TestServer smoke QA coverage: {qa}")
     if sorted(qa.get("contextHooks") or []) != sorted(REQUIRED_CONTEXT_HOOKS):
         raise AssertionError(f"/state missing required context hook names: {qa}")
+    if sorted(qa.get("subtabStateProofs") or []) != sorted(REQUIRED_SUBTAB_PROOFS):
+        raise AssertionError(f"/state missing shared subtab-state proof coverage: {qa}")
+    expected_subtab_tabs = ["creds", "exploit", "network", "osint", "post", "recon", "report", "web"]
+    if sorted(qa.get("subtabStateTabs") or []) != expected_subtab_tabs:
+        raise AssertionError(f"/state missing shared subtab-state tabs: {qa}")
 
 
 def run() -> None:

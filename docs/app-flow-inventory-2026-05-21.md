@@ -539,7 +539,9 @@ Current repeatable gates:
 - Static scans proving no S/M/L profile selectors or `ModelProfile` code remain
   are covered by `scripts/app-qa-matrix-smoke-proof.py`; the same proof verifies
   required context hooks and the TestServer `/state`, `/messages`, and
-  `/results` smoke contract through `/state.qaCoverage`.
+  `/results` smoke contract through `/state.qaCoverage`. It also now verifies
+  that `/state.qaCoverage` advertises the shared AppState subtab proof gates for
+  Recon, Web, Network, Creds, Exploit, Post, OSINT, and Report.
 - Visual QA through the local app run script plus screenshots.
 
 Required future proof gates:
