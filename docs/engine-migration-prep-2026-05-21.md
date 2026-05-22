@@ -582,6 +582,12 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   cache-ready state, asserts `/state.contextWindow` generation/session/cache
   markers, and refreshes
   `docs/visual-proofs/checkpoint-71/chat-tool-states.png`.
+- Checkpoint 106: Closed the Web CVE per-row progress gap. `/state.webCVERows`
+  now reports per-CVE row `pending`, `enriched`, and active `verifying` status,
+  Web vulnerability cards render a compact CVE progress chip, and
+  `scripts/web-verify-action-proof.py` plus `scripts/visual-web-verify-proof.py`
+  prove the seeded Apache CVE row is enriched and visibly `CVE verifying` while
+  the Verify action is queued.
 
 ## Known Risk Areas
 

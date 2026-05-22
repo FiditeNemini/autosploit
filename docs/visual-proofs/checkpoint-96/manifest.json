@@ -3,5 +3,5 @@
   "captures": [
     "docs/visual-proofs/checkpoint-96/web-verify-queued.png"
   ],
-  "note": "Cropped macOS capture of Web tab showing a vulnerability row with queued Verify status and web tab progress state."
+  "note": "Cropped macOS capture of Web tab showing a vulnerability row with queued Verify status, row-level CVE verifying chip, and web tab progress state."
 }

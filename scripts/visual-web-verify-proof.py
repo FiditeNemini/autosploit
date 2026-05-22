@@ -87,12 +87,15 @@ def run() -> None:
         state = request("GET", "/state")
         if state.get("activeTab") != "web" or (state.get("webAction") or {}).get("status") != "queued":
             raise AssertionError(f"expected queued web verify state: {state}")
+        cve_rows = state.get("webCVERows") or []
+        if not cve_rows or cve_rows[0].get("progressLabel") != "CVE verifying":
+            raise AssertionError(f"expected row-level CVE verifying state: {state}")
         target = OUT_DIR / "web-verify-queued.png"
         capture(target)
         manifest = {
             "ok": True,
             "captures": [str(target.relative_to(ROOT))],
-            "note": "Cropped macOS capture of Web tab showing a vulnerability row with queued Verify status and web tab progress state.",
+            "note": "Cropped macOS capture of Web tab showing a vulnerability row with queued Verify status, row-level CVE verifying chip, and web tab progress state.",
         }
         (OUT_DIR / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
         print("visual-web-verify proof passed")

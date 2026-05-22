@@ -343,6 +343,8 @@ Automated no-model gates:
     long-running Sherlock-style tool is stopped;
   - proves tool callbacks update per-tab activity state that the tab bar can
     render as running/done/failed/canceled indicators;
+  - proves Web CVE rows expose per-row progress/enrichment status through
+    `/state.webCVERows` and the visible card chip;
   - proves model-issued `search_context` returns targeted catalogue facts;
   - proves automatic context injection stays at 4 snippets or fewer and tells
     the model to use `search_context` for more targeted retrieval;
@@ -385,6 +387,9 @@ Mock-model gates:
 - Per-tab tool activity state. Covered by `scripts/live-turn-harness.py` for
   the Web/CVE path; tab-bar visual screenshot coverage is now captured by
   `scripts/visual-tab-proof.py`.
+- Web CVE row progress. Covered by `scripts/web-verify-action-proof.py` and
+  `scripts/visual-web-verify-proof.py`, which verify row-level CVE id,
+  enrichment, active `CVE verifying` progress, and visible queued card state.
 - Nested lifecycle strip visual state. Covered by
   `scripts/visual-tab-proof.py` with cropped captures under
   `docs/visual-proofs/checkpoint-70`.

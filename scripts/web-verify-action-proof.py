@@ -65,6 +65,18 @@ def run() -> None:
         web_activity = state.get("tabActivities", {}).get("web", {})
         if web_activity.get("status") != "running" or web_activity.get("lastTool") != "verify":
             raise AssertionError(f"web tab activity did not expose verify progress: {state}")
+        cve_rows = state.get("webCVERows") or []
+        if len(cve_rows) != 1:
+            raise AssertionError(f"expected one CVE row progress record: {state}")
+        cve_row = cve_rows[0]
+        if cve_row.get("cve") != "CVE-2021-41773":
+            raise AssertionError(f"CVE row id not tracked: {cve_row}")
+        if cve_row.get("status") != "verifying":
+            raise AssertionError(f"CVE row progress did not mirror active verification: {cve_row}")
+        if cve_row.get("hasDetails") is not True:
+            raise AssertionError(f"CVE row enrichment status missing: {cve_row}")
+        if cve_row.get("progressLabel") != "CVE verifying":
+            raise AssertionError(f"CVE row visible progress label missing: {cve_row}")
 
         print("web-verify-action proof passed")
     finally:
