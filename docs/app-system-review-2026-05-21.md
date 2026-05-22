@@ -486,7 +486,8 @@ Automated no-model gates:
 - TestServer `/state`, `/messages`, `/results` smoke via
   `scripts/app-qa-matrix-smoke-proof.py`; `/state.qaCoverage` exposes the
   profile-removal, context-hook, route-coverage, and shared subtab-state proof
-  contract.
+  contract. `/qa/subtab-coverage` exposes the live registry/default/active
+  subtab state for audit.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.

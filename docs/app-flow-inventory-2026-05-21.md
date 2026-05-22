@@ -541,7 +541,8 @@ Current repeatable gates:
   required context hooks and the TestServer `/state`, `/messages`, and
   `/results` smoke contract through `/state.qaCoverage`. It also now verifies
   that `/state.qaCoverage` advertises the shared AppState subtab proof gates for
-  Recon, Web, Network, Creds, Exploit, Post, OSINT, and Report.
+  Recon, Web, Network, Creds, Exploit, Post, OSINT, and Report, and checks the
+  machine-readable `/qa/subtab-coverage` route against the live subtab registry.
 - Visual QA through the local app run script plus screenshots.
 
 Required future proof gates:

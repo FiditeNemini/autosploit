@@ -92,6 +92,7 @@ def assert_testserver_smoke() -> None:
     state = request("GET", "/state")
     messages = request("GET", "/messages")
     results = request("GET", "/results")
+    subtab_coverage = request("GET", "/qa/subtab-coverage")
 
     required_state_keys = {
         "activeTab",
@@ -124,6 +125,12 @@ def assert_testserver_smoke() -> None:
     expected_subtab_tabs = ["creds", "exploit", "network", "osint", "post", "recon", "report", "web"]
     if sorted(qa.get("subtabStateTabs") or []) != expected_subtab_tabs:
         raise AssertionError(f"/state missing shared subtab-state tabs: {qa}")
+    if "/qa/subtab-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing subtab coverage route contract: {qa}")
+    if subtab_coverage.get("ok") is not True:
+        raise AssertionError(f"/qa/subtab-coverage failed: {subtab_coverage}")
+    if sorted((subtab_coverage.get("tabs") or {}).keys()) != expected_subtab_tabs:
+        raise AssertionError(f"/qa/subtab-coverage tabs mismatch: {subtab_coverage}")
 
 
 def run() -> None:
