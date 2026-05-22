@@ -73,6 +73,11 @@ def assert_proof_ledger() -> None:
         raise AssertionError(f"proof ledger category surfaces mismatch: {ledger}")
     if ledger.get("categorySurfaceCount") != len(category_surfaces):
         raise AssertionError(f"proof ledger category surface count mismatch: {ledger}")
+    category_total = sum((category.get("count") or 0) for category in categories.values())
+    if ledger.get("categoryTotalCount") != category_total:
+        raise AssertionError(f"proof ledger category total count mismatch: {ledger}")
+    if ledger.get("categoryParity") is not True:
+        raise AssertionError(f"proof ledger category parity mismatch: {ledger}")
     for key in category_surfaces:
         if (categories.get(key) or {}).get("count", 0) <= 0:
             raise AssertionError(f"proof ledger missing category {key}: {ledger}")
