@@ -291,6 +291,9 @@ Mock-model gates:
   `scripts/live-turn-harness.py`.
 - Stop/cancel during stream. Covered by `scripts/live-turn-harness.py`.
 - Stop/cancel during tool execution. Covered by `scripts/live-turn-harness.py`.
+  The harness now uses an isolated app data directory, and `ToolExecutor.cancel()`
+  marks executor state idle immediately after terminating the process so the
+  visible status does not remain stuck while exit collection finishes.
 - Context packet observed in the outbound request body. Covered by
   `scripts/live-turn-harness.py`.
 - Per-tab tool activity state. Covered by `scripts/live-turn-harness.py` for
@@ -307,6 +310,10 @@ Real-model gates:
   `testsuite/test_live_model_verifier.py`. The script proves supported-family
   detection and launcher args for model-folder generation defaults, parser
   defaults, prefix cache, prompt L2, paged cache, block L2, and TurboQuant Q4.
+- App-level model-folder warning state is covered by
+  `scripts/model-folder-warning-proof.py`: temporary Qwen and MiniMax fixtures
+  are accepted, and an unsupported fixture exposes the required Qwen/MiniMax
+  parser/cache warning through `/state.modelFolderInfo`.
 - Qwen live proof is captured at
   `docs/live-proofs/checkpoint-76-qwen-repeat-cache-live.json`. It proves
   actual engine startup, JANG folder load, non-empty chat completion,
@@ -333,8 +340,8 @@ Real-model gates:
   request with thinking-enabled template kwargs, returns non-empty assistant
   content on first and repeat turns, and proves repeat prefix-cache reuse with
   `cached_tokens=40` and `scheduler_cache.tokens_saved_delta=40`.
-- Unsupported folder warning and blocked/clear app UI handling still needs a
-  live UI proof.
+- Unsupported folder start-blocking/clear app UI behavior still needs a live UI
+  proof.
 - Full prompt -> context catalogue -> stream -> tool call -> tab result loop is
   covered with the mock engine; real-model repetition remains open.
 - Prefix/L2/cache metrics visibility is script-checkable after real engine load

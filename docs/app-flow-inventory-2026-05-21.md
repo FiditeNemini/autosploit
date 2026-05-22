@@ -266,6 +266,7 @@ Current repeatable gates:
 - `python3 scripts/semantic-cve-proof.py`
 - `python3 scripts/settings-apply-proof.py`
 - `python3 scripts/cache-stats-state-proof.py`
+- `python3 scripts/model-folder-warning-proof.py`
 - `python3 scripts/persistence-proof.py`
 - `python3 scripts/request-audit-proof.py`
 - `python3 scripts/verify-live-models.py --metadata-only --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --minimax /Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit`
@@ -284,6 +285,10 @@ Required future proof gates:
 
 - Model-folder fixture test: Qwen folder, MiniMax folder, and unsupported folder
   detection. Covered by `testsuite/test_live_model_verifier.py`.
+- App-level model-folder warning state: covered by
+  `scripts/model-folder-warning-proof.py`, which uses temporary fixtures and
+  verifies Qwen/MiniMax support plus unsupported parser/cache warning text
+  through `/state.modelFolderInfo`.
 - Engine no-model smoke proving `/health` and `/v1/models` report parser,
   generation, topology, and cache metadata.
 - MiniMax real generation smoke proving full KV attention with prefix hits,
@@ -325,6 +330,9 @@ Required future proof gates:
   `docs/visual-proofs/checkpoint-87`.
 - Chat scroll locked/paused and reasoning expanded/collapsed states are captured
   under `docs/visual-proofs/checkpoint-72`.
+- Tool cancellation state is covered by `scripts/live-turn-harness.py`; the
+  harness uses an isolated app data directory and verifies the executor leaves
+  running state after stop.
 - Tab-bar activity screenshots are captured under
   `docs/visual-proofs/checkpoint-69`.
 - Nested lifecycle strip screenshots are captured under
