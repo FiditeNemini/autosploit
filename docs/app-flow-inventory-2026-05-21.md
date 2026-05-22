@@ -206,6 +206,11 @@ Network:
   seeded SMB netexec scan target, credential context, generated command, and
   running tab activity; the visible state is captured under
   `docs/visual-proofs/checkpoint-98`.
+- Copy controls now route through AppState for Protocols, SNMP, Capture, MITM,
+  and Tunnels. `/state.networkCopyActions` exposes the last kind, copied count,
+  clipboard preview, and summary, with tab activity recorded as
+  `lastTool=copy_network`; `scripts/network-copy-actions-proof.py` covers the
+  live seed/copy/state path.
 - Capture, MITM, and Tunnels lifecycle strip screenshots are captured under
   `docs/visual-proofs/checkpoint-70`.
 

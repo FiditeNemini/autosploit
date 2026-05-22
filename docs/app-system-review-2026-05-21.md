@@ -234,13 +234,18 @@ Network:
 - Chat path: Protocol Scan records a Network action state, then sends the
   generated prompt to chat. Other actions send prompts to chat.
 - State: network hosts, raw output, `/state.networkAction` for the latest
-  protocol scan, and long-running lifecycle state for Capture/MITM/Tunnel.
+  protocol scan, `/state.networkCopyActions` for the latest copy operation, and
+  long-running lifecycle state for Capture/MITM/Tunnel.
 - Protocol Scan action state is covered by
   `scripts/network-protocol-action-proof.py`: a seeded SMB netexec scan records
   target, protocol, credential context, generated command, running status, and
   Network tab activity with `lastTool=netexec`.
 - Visible Protocol Scan running state is captured under
   `docs/visual-proofs/checkpoint-98`.
+- Network copy controls are covered by `scripts/network-copy-actions-proof.py`:
+  the proof seeds protocol host rows, SNMP rows, capture output, MITM output,
+  and tunnel output, then verifies each copy path records clipboard preview,
+  count, kind, and Network tab activity with `lastTool=copy_network`.
 - Long-running lifecycle state now tracks capture/MITM/tunnel status as idle,
   running, done, failed, or canceled and is visible inside the relevant Network
   subtab.
