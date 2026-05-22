@@ -358,6 +358,22 @@ def assert_coverage_index() -> None:
     if runtime_group.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"coverage index runtime cache response method mismatch: {runtime_group}")
     runtime_coverage = request("GET", "/qa/runtime-coverage")
+    if runtime_group.get("runtimeContracts") != runtime_coverage.get("contracts"):
+        raise AssertionError(f"coverage index runtime contract map mismatch: {runtime_group}")
+    if runtime_group.get("runtimeContractCount") != len(runtime_coverage.get("contracts") or {}):
+        raise AssertionError(f"coverage index runtime contract count mismatch: {runtime_group}")
+    if runtime_group.get("runtimeRoutes") != runtime_coverage.get("routes"):
+        raise AssertionError(f"coverage index runtime route list mismatch: {runtime_group}")
+    if runtime_group.get("runtimeRouteCount") != len(runtime_coverage.get("routes") or []):
+        raise AssertionError(f"coverage index runtime route count mismatch: {runtime_group}")
+    if runtime_group.get("runtimeProofs") != runtime_coverage.get("proofs"):
+        raise AssertionError(f"coverage index runtime proof list mismatch: {runtime_group}")
+    if runtime_group.get("runtimeProofCount") != runtime_coverage.get("proofCount"):
+        raise AssertionError(f"coverage index runtime proof count mismatch: {runtime_group}")
+    if runtime_group.get("liveProofs") != runtime_coverage.get("liveProofs"):
+        raise AssertionError(f"coverage index runtime live proof matrix mismatch: {runtime_group}")
+    if runtime_group.get("liveProofArtifacts") != runtime_coverage.get("liveProofArtifacts"):
+        raise AssertionError(f"coverage index runtime live proof artifact map mismatch: {runtime_group}")
     if runtime_group.get("cacheResponsesInferenceMethod") != runtime_coverage.get("cacheResponsesInferenceMethod"):
         raise AssertionError(f"coverage index runtime cache responses inference method mismatch: {runtime_group}")
     if runtime_group.get("newModelSessionBehavior") != runtime_coverage.get("newModelSessionBehavior"):

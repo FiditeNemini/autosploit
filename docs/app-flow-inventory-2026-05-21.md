@@ -808,9 +808,10 @@ Current repeatable gates:
   multimodal engine-start block proof. The runtime/cache group
   additionally exposes
   `supportedFamilies`, `cacheResponseMethod`, `cacheResponsesInferenceMethod`,
-  `newModelSessionBehavior`, runtime cache component list/count/parity,
-  component proof map/count/parity, and
-  `liveProofArtifactCount`, so Qwen/MiniMax-only support,
+  `newModelSessionBehavior`, runtime contract map/count, route list/count,
+  proof list/count, runtime cache component list/count/parity,
+  component proof map/count/parity, live proof family matrix, and
+  live proof artifact map/count, so Qwen/MiniMax-only support,
   the `prefix-cache-l2-turboquant` response path, cache-preserving new-context
   session boundary, and the checked-in live replay
   artifacts remain visible from the top-level QA index. The chat/context group

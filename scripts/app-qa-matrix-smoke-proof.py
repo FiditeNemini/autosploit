@@ -553,6 +553,22 @@ def assert_testserver_smoke() -> None:
     if app_state_group.get("gapContracts") != gap_ledger.get("gapContracts"):
         raise AssertionError(f"/qa/coverage-index gap contract map mismatch: {coverage_index}")
     runtime_group = index_groups.get("runtimeAndCache") or {}
+    if runtime_group.get("runtimeContracts") != runtime_coverage.get("contracts"):
+        raise AssertionError(f"/qa/coverage-index runtime contract map mismatch: {coverage_index}")
+    if runtime_group.get("runtimeContractCount") != len(runtime_coverage.get("contracts") or {}):
+        raise AssertionError(f"/qa/coverage-index runtime contract count mismatch: {coverage_index}")
+    if runtime_group.get("runtimeRoutes") != runtime_coverage.get("routes"):
+        raise AssertionError(f"/qa/coverage-index runtime route list mismatch: {coverage_index}")
+    if runtime_group.get("runtimeRouteCount") != len(runtime_coverage.get("routes") or []):
+        raise AssertionError(f"/qa/coverage-index runtime route count mismatch: {coverage_index}")
+    if runtime_group.get("runtimeProofs") != runtime_coverage.get("proofs"):
+        raise AssertionError(f"/qa/coverage-index runtime proof list mismatch: {coverage_index}")
+    if runtime_group.get("runtimeProofCount") != runtime_coverage.get("proofCount"):
+        raise AssertionError(f"/qa/coverage-index runtime proof count mismatch: {coverage_index}")
+    if runtime_group.get("liveProofs") != runtime_coverage.get("liveProofs"):
+        raise AssertionError(f"/qa/coverage-index runtime live proof matrix mismatch: {coverage_index}")
+    if runtime_group.get("liveProofArtifacts") != runtime_coverage.get("liveProofArtifacts"):
+        raise AssertionError(f"/qa/coverage-index runtime live proof artifact map mismatch: {coverage_index}")
     if runtime_group.get("cacheComponentProofs") != runtime_coverage.get("cacheComponentProofs"):
         raise AssertionError(f"/qa/coverage-index runtime cache component proof map mismatch: {coverage_index}")
     settings_visuals_group = index_groups.get("settingsAndVisuals") or {}

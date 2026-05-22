@@ -699,9 +699,10 @@ Automated no-model gates:
   proofs, including a dedicated Qwen multimodal engine-start block proof. The
   runtime/cache group also exposes `supportedFamilies`,
   `cacheResponseMethod`, `cacheResponsesInferenceMethod`,
-  `newModelSessionBehavior`, cache component list/count/parity, cache component
-  proof map/count/parity, and
-  `liveProofArtifactCount` for Qwen/MiniMax-only support, the
+  `newModelSessionBehavior`, runtime contract map/count, route list/count,
+  proof list/count, cache component list/count/parity, cache component
+  proof map/count/parity, live proof family matrix, and live proof artifact
+  map/count for Qwen/MiniMax-only support, the
   `prefix-cache-l2-turboquant` response path, cache-preserving new-context
   boundary, and the checked-in Qwen/MiniMax
   live replay artifact set. The settings/visuals group exposes Settings surface
