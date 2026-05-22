@@ -737,7 +737,9 @@ Current repeatable gates:
   fanout count, state-key count, visible tab activity statuses, and the tab
   activity status parity/indicator contract. The tabs/sessions group exposes
   interaction-mode count, covered tab count, session state-key count, and
-  action-state-key count. Chat/context also exposes state-key count.
+  action-state-key count, and now mirrors the visible tab activity status
+  list/count/parity plus indicator contract because the tab bar is owned by the
+  tabs/session surface. Chat/context also exposes state-key count.
 - Visual QA through the local app run script plus screenshots.
 
 Required future proof gates:

@@ -578,8 +578,10 @@ Automated no-model gates:
   `/qa/coverage-index` exposes the aggregate QA map across app state,
   chat/context, runtime/cache, settings/visuals, tools/parsers, and tabs/
   sessions; `scripts/coverage-index-proof.py` verifies each group has endpoint
-  and proof counts, endpoints, and proofs and that every named proof file
-  exists. The app-state group also exposes `/state.qaCoverage` state-route
+  and proof counts, endpoint lists, proof lists, and existing proof files. The
+  tabs/sessions group mirrors the visible tab activity status list/count/parity
+  plus indicator contract from tool-flow coverage. The app-state group also
+  exposes `/state.qaCoverage` state-route
   count, subtab state tab count, subtab state proof count, and the
   `/qa/proof-ledger` proof count, source proof-ledger category counts/category
   surfaces, source category-surface count, category other count, category total count, and category

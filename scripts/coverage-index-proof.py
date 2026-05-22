@@ -272,6 +272,14 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions state key count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("actionStateKeyCount", 0) < 26:
         raise AssertionError(f"coverage index tabs/sessions action state key count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActivityStatuses") != tool_flow.get("tabActivityStatuses"):
+        raise AssertionError(f"coverage index tabs/sessions tab activity statuses mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActivityStatusCount") != tool_flow.get("tabActivityStatusCount"):
+        raise AssertionError(f"coverage index tabs/sessions tab activity status count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActivityStatusParity") != tool_flow.get("tabActivityStatusParity"):
+        raise AssertionError(f"coverage index tabs/sessions tab activity status parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActivityIndicatorContract") != tool_flow.get("tabActivityIndicatorContract"):
+        raise AssertionError(f"coverage index tabs/sessions tab activity indicator contract mismatch: {tabs_sessions_group}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/coverage-index" not in qa.get("stateRoutes", []):
