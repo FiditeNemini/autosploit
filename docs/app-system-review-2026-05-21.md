@@ -515,6 +515,13 @@ Real-model gates:
   prompt L2 is disabled, replay reports `block_l2_hits_delta=2`,
   `ssm_l2_hits_delta=1`, `scheduler_tokens_saved_delta=112`, `cached_tokens=112`,
   and no rederive fallback.
+- Qwen hybrid catalogue/tool-schema prompt shape is covered by the same verifier
+  mode and
+  `docs/live-proofs/checkpoint-115-qwen-hybrid-catalogue-prefix-shape-live.json`:
+  prompt L2 is disabled, the replay process restores the longer dynamic-context
+  prefix through block L2 plus SSM companion L2 with `block_l2_hits_delta=3`,
+  `ssm_l2_hits_delta=1`, `scheduler_tokens_saved_delta=168`,
+  `cached_tokens=168`, and no rederive fallback.
 - MiniMax forced no-thinking API output is covered by
   `scripts/verify-live-models.py --enable-thinking false` and
   `docs/live-proofs/checkpoint-114-minimax-no-thinking-live.json`: the request
@@ -584,5 +591,5 @@ Visual gates:
 
 ## Current Gaps To Close Next
 
-1. Expand the full hybrid prefix-skip proof to more prompt shapes and any
-   multimodal Qwen path that needs the same key discipline.
+1. Add any Qwen multimodal path that needs the same prefix-cache key discipline
+   once the app keeps a multimodal Qwen model in the supported beta lane.

@@ -650,6 +650,14 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   showed TurboQuant Q4 plus prefix/paged/prompt-L2/block-L2 metadata, and proved
   same-process prefix reuse with `cached_tokens=51` and
   `scheduler_tokens_saved_delta=51`.
+- Checkpoint 115: Expanded Qwen hybrid full-prefix proof to a
+  catalogue/tool-schema prompt shape resembling the app's dynamic-context
+  packets. Artifact
+  `docs/live-proofs/checkpoint-115-qwen-hybrid-catalogue-prefix-shape-live.json`
+  loaded Qwen twice with prompt L2 disabled and replayed through block L2 plus
+  SSM companion L2: `block_l2_hits_delta=3`,
+  `scheduler_tokens_saved_delta=168`, `ssm_l2_hits_delta=1`,
+  `cached_tokens=168`, `prompt_l2_hits_delta=0`, and `no_rederive=true`.
 
 ## Known Risk Areas
 
@@ -662,9 +670,9 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   topology, but this is app/session-state proof and does not replace real-model
   cross-run disk replay proof.
 - Qwen hybrid SSM behavior is live-proven for both the missing-companion
-  re-derive fallback and a full KV+SSM companion prefix skip under a repeated
-  text prompt. SSM state is cumulative; do not slice longer checkpoints for
-  shorter prefixes.
+  re-derive fallback and full KV+SSM companion prefix skips under repeated
+  direct-smoke and catalogue/tool-schema text prompts. SSM state is cumulative;
+  do not slice longer checkpoints for shorter prefixes.
 - MiniMax forced no-thinking now has a live proof for non-empty API output and
   no `reasoning_content`. The model can still begin by paraphrasing the prompt
   under a tiny `max_tokens=16` verifier cap, so quality evaluation remains
