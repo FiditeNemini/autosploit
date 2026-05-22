@@ -205,8 +205,18 @@ Creds:
 Exploit:
 
 - Buttons: Search, Start Listener, Run Script, Generate Implant, Sliver listener.
-- Chat path: sends prompts to chat.
-- State: raw metasploit/sliver/session output.
+- Chat path: Search records an Exploit action state, then sends the generated
+  prompt to chat. Prepare/execute status is represented as separate action
+  stages; listener/script/implant buttons send prompts to chat.
+- State: raw metasploit/sliver/session output, `/state.exploitAction` for the
+  latest Exploit action, and `/state.exploitActionHistory` for bounded
+  search/prepare/execute stage history.
+- Search/prepare/execute differentiation is covered by
+  `scripts/exploit-action-differentiation-proof.py`: seeded state records
+  SEARCH done with `metasploit`, PREPARE done with `manual_plan`, EXECUTE
+  running with `run_shell`, and Exploit tab activity with `lastTool=execute`.
+- Visible SEARCH/PREPARE/EXECUTE stage badges are captured under
+  `docs/visual-proofs/checkpoint-100`.
 - Listener, custom script, and implant lifecycle state now tracks idle, running,
   done, failed, and canceled and is visible in the relevant Exploit subtab.
 - Live UI screenshot coverage for Reverse Shells, Custom, and C2 lifecycle
@@ -454,6 +464,8 @@ Visual gates:
   `docs/visual-proofs/checkpoint-98`.
 - Creds Start Crack done state and CRACKED result badges are captured under
   `docs/visual-proofs/checkpoint-99`.
+- Exploit search/prepare/execute stage badges are captured under
+  `docs/visual-proofs/checkpoint-100`.
 - OSINT screenshot artifact preview is captured under
   `docs/visual-proofs/checkpoint-90`.
 - Report export status and generated finding state are captured under

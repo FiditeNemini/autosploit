@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "captures": [
+    "docs/visual-proofs/checkpoint-100/exploit-search-prepare-execute.png"
+  ],
+  "note": "Cropped macOS capture of Exploit Metasploit tab showing separate SEARCH, PREPARE, and EXECUTE stage badges."
+}

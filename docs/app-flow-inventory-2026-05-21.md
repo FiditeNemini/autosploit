@@ -183,12 +183,20 @@ Exploit:
 
 - Covers exploit search, listeners, custom script execution, and Sliver helper
   prompts.
-- Buttons route prompts through chat and display raw execution output.
+- Search records Exploit action state, then routes the generated prompt through
+  chat. Prepare/execute state is represented as distinct Exploit action stages;
+  listeners, scripts, and Sliver helpers route prompts through chat and display
+  raw execution output.
+- `/state.exploitAction` and `/state.exploitActionHistory` expose the latest
+  action plus bounded search/prepare/execute history. The Metasploit tab shows
+  SEARCH/PREPARE/EXECUTE stage badges instead of flattening all actions into one
+  generic run state.
 - Listener, custom script, and implant actions expose lifecycle strips for
   idle/running/done/failed/canceled status and are covered by the live-turn
   listener cancellation proof plus checkpoint-70 visual screenshots.
-- Still needs safer visual differentiation between search, prepare, and execute
-  actions.
+- Search/prepare/execute differentiation is covered by
+  `scripts/exploit-action-differentiation-proof.py`, and the visible stage
+  badges are captured under `docs/visual-proofs/checkpoint-100`.
 
 Post:
 
@@ -315,10 +323,12 @@ Current repeatable gates:
 - `python3 scripts/request-audit-proof.py`
 - `python3 scripts/network-protocol-action-proof.py`
 - `python3 scripts/creds-action-results-proof.py`
+- `python3 scripts/exploit-action-differentiation-proof.py`
 - `python3 scripts/verify-live-models.py --metadata-only --qwen /Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP --minimax /Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ --unsupported /Users/eric/models/mlx-community/gemma-3n-E2B-it-4bit`
 - `python3 scripts/visual-tab-proof.py`
 - `python3 scripts/visual-network-protocol-proof.py`
 - `python3 scripts/visual-creds-action-proof.py`
+- `python3 scripts/visual-exploit-action-proof.py`
 - `python3 scripts/visual-chat-proof.py`
 - `python3 scripts/visual-chat-interaction-proof.py`
 - `python3 scripts/visual-request-audit-proof.py`
@@ -408,5 +418,7 @@ Required future proof gates:
   `docs/visual-proofs/checkpoint-98`.
 - Creds Start Crack done state and CRACKED result badges are captured under
   `docs/visual-proofs/checkpoint-99`.
+- Exploit search/prepare/execute stage badges are captured under
+  `docs/visual-proofs/checkpoint-100`.
 - Unsupported model-folder warning and blocked engine states are captured under
   `docs/visual-proofs/checkpoint-93`.
