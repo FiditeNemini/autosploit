@@ -70,6 +70,9 @@ Dynamic context:
   same ranked catalogue on demand with a bounded `max_snippets` limit so the
   model can pull targeted notes/assets/findings/CVEs without forcing all context
   into every prompt.
+- Automatic context injection is capped to 4 snippets. Settings stores a bounded
+  maximum, but routine model turns stay lean and rely on `search_context` for
+  deeper retrieval.
 - Required proof: prompt with seeded assets/stash/CVEs injects only configured
   top snippets; disabling a source removes that source; semantic CVE mode calls
   the embedder when available.
@@ -209,6 +212,8 @@ Automated no-model gates:
   - proves tool callbacks update per-tab activity state that the tab bar can
     render as running/done/failed/canceled indicators;
   - proves model-issued `search_context` returns targeted catalogue facts;
+  - proves automatic context injection stays at 4 snippets or fewer and tells
+    the model to use `search_context` for more targeted retrieval;
   - proves prefix cache, prompt L2, paged cache, block L2, TurboQuant Q4, and
     model-folder generation defaults remain enabled in runtime config;
   - proves the new-context route clears chat state without changing model or

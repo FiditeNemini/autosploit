@@ -404,6 +404,11 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   that clears chat state without restarting the engine, and live QA now asserts
   prefix cache, prompt L2, paged cache, block L2, TurboQuant Q4, and
   model-folder generation defaults stay enabled.
+- Checkpoint 59: Tightened routine context injection to avoid context rot.
+  Automatic catalogue packets are capped at 4 snippets, persisted settings are
+  clamped to 1-8, the packet instructs the model to use `search_context` for
+  deeper retrieval, and live QA proves the lean packet plus targeted
+  `search_context` retrieval both work.
 
 ## Known Risk Areas
 

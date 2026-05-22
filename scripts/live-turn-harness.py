@@ -353,7 +353,12 @@ def run() -> None:
             first_request = MockState.requests[0]
         request_text = json.dumps(first_request)
         assert_contains(request_text, "Dynamic Context Catalogue", "dynamic context packet")
+        assert_contains(request_text, "Use search_context", "on-demand context guidance")
         assert_contains(request_text, "Apache 2.4.49", "seeded context")
+        selected_line = next((line for line in request_text.split("\\n") if "Policy: selected" in line), "")
+        if selected_line:
+            selected_count = int(selected_line.split("Policy: selected ", 1)[1].split(" ", 1)[0])
+            assert selected_count <= 4, selected_line
         assert first_request["enable_thinking"] is True
         assert first_request["tools"], "tools schema was not sent"
 
