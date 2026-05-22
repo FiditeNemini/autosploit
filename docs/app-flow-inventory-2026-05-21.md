@@ -411,6 +411,12 @@ Stash:
   proof, including title/subtitle/detail/icon metadata and expected page
   sections; `scripts/settings-category-coverage-proof.py` verifies every
   category can be selected through the QA route.
+- `/qa/settings-coverage` aggregates the full Settings proof contract: category
+  page order/sections, Qwen/MiniMax-only support warning surface,
+  parser/generation autodetect, `prefix-cache-l2-turboquant` cache policy,
+  app-only apply without engine restart, engine Start/Stop action state,
+  context controls, cache topology, agent controls, CVE/tool/inference-log
+  actions, and visual Settings proof gates.
 
 Model:
 

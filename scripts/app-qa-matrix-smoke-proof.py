@@ -97,6 +97,7 @@ def assert_testserver_smoke() -> None:
     tool_flow_coverage = request("GET", "/qa/tool-flow-coverage")
     runtime_coverage = request("GET", "/qa/runtime-coverage")
     context_coverage = request("GET", "/qa/context-coverage")
+    settings_coverage = request("GET", "/qa/settings-coverage")
 
     required_state_keys = {
         "activeTab",
@@ -139,6 +140,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing runtime coverage route contract: {qa}")
     if "/qa/context-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing context coverage route contract: {qa}")
+    if "/qa/settings-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing settings coverage route contract: {qa}")
     if subtab_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/subtab-coverage failed: {subtab_coverage}")
     if sorted((subtab_coverage.get("tabs") or {}).keys()) != expected_subtab_tabs:
@@ -163,6 +166,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/context-coverage context cap mismatch: {context_coverage}")
     if not 1 <= context_coverage.get("currentInjectedContextLimit", 0) <= 4:
         raise AssertionError(f"/qa/context-coverage current context limit mismatch: {context_coverage}")
+    if settings_coverage.get("ok") is not True:
+        raise AssertionError(f"/qa/settings-coverage failed: {settings_coverage}")
+    if settings_coverage.get("categoryCount") != 9:
+        raise AssertionError(f"/qa/settings-coverage category count mismatch: {settings_coverage}")
+    if settings_coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
+        raise AssertionError(f"/qa/settings-coverage cache method mismatch: {settings_coverage}")
 
 
 def run() -> None:

@@ -468,6 +468,10 @@ Settings:
   `scripts/settings-category-coverage-proof.py`, which verifies all Settings
   pages can be selected through the QA route and have title/subtitle/detail/icon
   and page-section metadata.
+- `/qa/settings-coverage` aggregates Settings category structure, supported
+  model-family warnings, parser/generation autodetect, cache-response method,
+  app-only apply, engine Start/Stop actions, context/cache/agent controls,
+  CVE/tool/log action coverage, and visual Settings proof scripts.
 - App-only settings can now be applied without restarting the engine; model,
   cache, and engine runtime changes still use Apply & Restart Engine.
 - App-only apply is covered by `scripts/settings-apply-proof.py`.
@@ -513,6 +517,7 @@ Automated no-model gates:
   `scripts/context-catalog-proof.py`.
 - Settings category split-page coverage via
   `scripts/settings-category-coverage-proof.py`.
+- Aggregate Settings QA contract via `scripts/settings-coverage-proof.py`.
 - App-only settings apply without engine restart via
   `scripts/settings-apply-proof.py`.
 - Chat scroll lock visual smoke.
