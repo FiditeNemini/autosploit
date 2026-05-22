@@ -75,6 +75,8 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit incomplete checkpoint list mismatch: {audit}")
     if audit.get("latestCheckpoint") != checkpoint.get("latestCheckpoint"):
         raise AssertionError(f"audit latest checkpoint mismatch: {audit}")
+    if audit.get("latestCheckpointNumber") != checkpoint.get("latestCheckpointNumber"):
+        raise AssertionError(f"audit latest checkpoint number mismatch: {audit}")
     if audit.get("currentGapCount") != gap.get("currentGapCount"):
         raise AssertionError(f"audit current gap count mismatch: {audit}")
     if audit.get("nextGap") != gap.get("nextGap"):
