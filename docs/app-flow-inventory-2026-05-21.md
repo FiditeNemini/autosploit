@@ -129,9 +129,9 @@ main session.
   `scripts/agent-settings-actions-proof.py`, which proves enable/disable and
   max-concurrent controls route through AppState, persist config, clear agents
   on disable, and expose visible action telemetry.
-- `/qa/agent-loop-coverage` now exposes the mode, route, contract, proof count,
-  deploy-sheet, task-send, and settings-control proof surface for the agentic
-  loop.
+- `/qa/agent-loop-coverage` now exposes the mode, route, contract, action
+  telemetry fields, proof count, deploy-sheet, task-send, and settings-control
+  proof surface for the agentic loop.
 - Built-in CVE calls use callbacks instead of shell subprocesses.
 - Shell-backed tools run through `ToolExecutor`.
 - Tool output is appended to chat, activity feed, and `ResultsStore.ingest`.
@@ -583,7 +583,9 @@ Current repeatable gates:
   `/qa/visual-subtab` route coverage for state and visual subtab switching.
   The same matrix also checks `/qa/agent-loop-coverage` for manual suggestion,
   copilot approval, autopilot execution, and deployed-agent forced-autopilot
-  inheritance coverage. It now also checks `/qa/tool-flow-coverage`, which ties
+  inheritance coverage. It also checks the agent action telemetry fields needed
+  to prove deploy-sheet, task-send, progress, and status behavior. It now also
+  checks `/qa/tool-flow-coverage`, which ties
   the tool registry, parser routing, representative family fanout, and
   context-catalog tool-output proofs into one auditable contract. It now lists
   the parser and family-fanout fixture seed routes as part of that contract.

@@ -57,6 +57,20 @@ EXPECTED_CONTRACTS = {
     "agentSettingsControls",
 }
 
+EXPECTED_ACTION_TELEMETRY_FIELDS = {
+    "status",
+    "lastAction",
+    "agentId",
+    "agentName",
+    "agentType",
+    "agentCount",
+    "deploySheetVisible",
+    "taskSent",
+    "messageCount",
+    "stoppedGeneration",
+    "summary",
+}
+
 
 def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
     if isinstance(body, dict):
@@ -128,6 +142,10 @@ def run() -> None:
             raise AssertionError(f"agent loop contracts missing {missing_contracts}: {coverage}")
         if coverage.get("proofCount", 0) < len(EXPECTED_PROOFS):
             raise AssertionError(f"agent loop proof count mismatch: {coverage}")
+        telemetry_fields = set(coverage.get("actionTelemetryFields") or [])
+        missing_telemetry = sorted(EXPECTED_ACTION_TELEMETRY_FIELDS.difference(telemetry_fields))
+        if missing_telemetry:
+            raise AssertionError(f"agent loop telemetry fields missing {missing_telemetry}: {coverage}")
 
         request("POST", "/mode", "manual")
         manual = request("GET", "/qa/agent-loop-coverage")

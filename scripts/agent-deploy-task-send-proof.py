@@ -88,6 +88,11 @@ def run() -> None:
         subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         if app is not None and app.poll() is None:
             app.send_signal(signal.SIGTERM)
+            try:
+                app.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                app.kill()
+                app.wait(timeout=5)
         temp_home.cleanup()
 
 

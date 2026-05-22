@@ -165,6 +165,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/agent-loop-coverage failed: {agent_loop_coverage}")
     if agent_loop_coverage.get("modes") != {"autopilot": "execute", "copilot": "approval", "manual": "suggest"}:
         raise AssertionError(f"/qa/agent-loop-coverage mode contract mismatch: {agent_loop_coverage}")
+    if "taskSent" not in (agent_loop_coverage.get("actionTelemetryFields") or []):
+        raise AssertionError(f"/qa/agent-loop-coverage telemetry fields mismatch: {agent_loop_coverage}")
     if tool_flow_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/tool-flow-coverage failed: {tool_flow_coverage}")
     if tool_flow_coverage.get("toolCount") != 38 or tool_flow_coverage.get("callbackCount") != 3:

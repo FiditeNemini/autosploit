@@ -98,8 +98,9 @@ Interaction modes:
   `/state.agentActions`, and clear active agents when disabling full-auto
   multi-agent mode.
 - `/qa/agent-loop-coverage` now exposes the agent route list, contract flags,
-  proof count, and deploy-sheet/task-send proof references so the full
-  agentic-loop surface is auditable from one aggregate endpoint.
+  action telemetry field list, proof count, and deploy-sheet/task-send proof
+  references so the full agentic-loop surface is auditable from one aggregate
+  endpoint.
 - Deployed-agent on-demand context retrieval is covered by
   `scripts/agent-search-context-proof.py`: an agent autonomously calls
   `search_context`, receives shared parsed-result catalogue facts from the main
@@ -517,8 +518,8 @@ Automated no-model gates:
   subtab state, subtab QA routes, and proof-count metadata for audit.
   `/qa/agent-loop-coverage` exposes manual, copilot,
   autopilot, deployed-agent loop guarantees, agent action/settings/deploy
-  routes, deploy-sheet/task-send controls, and the proof scripts that cover
-  them. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
+  routes, deploy-sheet/task-send controls, action telemetry fields, and the
+  proof scripts that cover them. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
   context-catalog proof contract for model-issued tool calls, including the
   parser and family-fanout fixture seed routes and proof-count metadata.
   `/qa/runtime-coverage` exposes the runtime/model/cache proof contract for
