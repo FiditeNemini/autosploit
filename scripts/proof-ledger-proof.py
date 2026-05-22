@@ -68,7 +68,10 @@ def assert_proof_ledger() -> None:
         extra = sorted(set(proofs).difference(expected))
         raise AssertionError(f"proof ledger mismatch missing={missing} extra={extra}")
     categories = ledger.get("categories") or {}
-    for key in ("agent", "chat", "runtime", "visual", "settings", "tools", "tabs", "context"):
+    category_surfaces = sorted(("agent", "chat", "context", "runtime", "settings", "tabs", "tools", "visual"))
+    if ledger.get("categorySurfaces") != category_surfaces:
+        raise AssertionError(f"proof ledger category surfaces mismatch: {ledger}")
+    for key in category_surfaces:
         if (categories.get(key) or {}).get("count", 0) <= 0:
             raise AssertionError(f"proof ledger missing category {key}: {ledger}")
     if (categories.get("visual") or {}).get("count", 0) < 20:
