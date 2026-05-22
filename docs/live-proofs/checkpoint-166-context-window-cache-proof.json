@@ -1,0 +1,37 @@
+{
+  "context_window_after": {
+    "blockL2Disk": true,
+    "cacheResponsesMethod": "prefix-cache-l2-turboquant",
+    "engineSessionPreserved": true,
+    "generation": 1,
+    "modelGenerationDefaults": true,
+    "newContextBehavior": "clear-chat-preserve-engine-cache",
+    "pagedCache": true,
+    "prefixCache": true,
+    "promptL2Disk": true,
+    "turboQuantKV": true
+  },
+  "context_window_before": {
+    "blockL2Disk": true,
+    "cacheResponsesMethod": "prefix-cache-l2-turboquant",
+    "engineSessionPreserved": true,
+    "generation": 0,
+    "modelGenerationDefaults": true,
+    "newContextBehavior": "clear-chat-preserve-engine-cache",
+    "pagedCache": true,
+    "prefixCache": true,
+    "promptL2Disk": true,
+    "turboQuantKV": true
+  },
+  "engine_cache_stats_preserved": true,
+  "engine_config_preserved": true,
+  "messages_after_new_context": 0,
+  "metrics_after_new_context": {
+    "cachedTokens": 0,
+    "completionTokens": 0,
+    "promptTokens": 0,
+    "tokPerSec": 0,
+    "ttft": 0
+  },
+  "status": "passed"
+}
