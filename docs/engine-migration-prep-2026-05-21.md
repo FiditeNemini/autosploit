@@ -597,6 +597,10 @@ Do not enable MTP from metadata alone. Runtime activation must require config su
   now exposes import progress, total/KEV counts, last sync, search-result count,
   and active settings category, with deterministic QA seeding and visual proof
   under `docs/visual-proofs/checkpoint-108`.
+- Checkpoint 109: Added Tools settings status proof. `/state.toolSettings` now
+  exposes installed, missing, installing, and error counts, install log, active
+  settings category, and per-tool status rows, with deterministic QA seeding and
+  visual proof under `docs/visual-proofs/checkpoint-109`.
 
 ## Known Risk Areas
 

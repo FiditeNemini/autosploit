@@ -321,8 +321,11 @@ CVE Database and Tools:
   the state contract, and `scripts/visual-cve-settings-status-proof.py` captures
   the visible CVE import/status page under
   `docs/visual-proofs/checkpoint-108`.
-- Tools settings still need a matching install/detection status contract beyond
-  the existing panel.
+- Tools settings status is exposed through `/state.toolSettings`, including
+  installed/missing/installing/error counts, install log, and per-tool status
+  rows. `scripts/tool-settings-status-proof.py` verifies the state contract, and
+  `scripts/visual-tool-settings-status-proof.py` captures the visible status
+  page under `docs/visual-proofs/checkpoint-109`.
 
 ## Test And Proof Requirements
 
