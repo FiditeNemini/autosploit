@@ -802,15 +802,17 @@ Current repeatable gates:
   `/qa/audit-ledger.proofLedgerCategoryOtherCount` as
   `auditProofLedgerCategoryOtherCount`, and the broad app QA matrix cross-checks
   both source and audit `other` proof counts through `/qa/coverage-index`. It also carries
-  `/qa/gap-ledger.openGapIds`, `openGapCount`, `gapContracts`, and a
-  `gapContractCount`, plus gap source/path flags, current-gap list, next-gap
+  `/qa/gap-ledger.openGapIds`, `openGapCount`, `gapContracts`,
+  `gapContractCount`, Qwen multimodal blocked-kind count, required-work count,
+  and enforcement-proof count, plus gap source/path flags, current-gap list, next-gap
   text, supported-family list, and unsupported-multimodal block flag, so the
   top-level QA summary names the remaining gap and preserves both the
   source-derived warning boundary and the structured contract map. `/qa/gap-ledger` reads the
   current-gap section from `docs/app-system-review-2026-05-21.md` and exposes
   the currently documented gap, the Qwen/MiniMax support boundary, the Qwen VL
   block state, `openGapIds`, `openGapCount`, and the
-  `qwenMultimodalRuntime` contract with blocked model kinds plus enforcement proofs, including a dedicated Qwen
+  `qwenMultimodalRuntime` contract with blocked model kinds plus count fields
+  for blocked kinds, required runtime work, and enforcement proofs, including a dedicated Qwen
   multimodal engine-start block proof. The runtime/cache group
   additionally exposes
   `supportedFamilies`, `cacheResponseMethod`, `cacheResponsesInferenceMethod`,

@@ -391,6 +391,12 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state gap contracts mismatch: {app_state_group}")
     if app_state_group.get("gapContractCount") != len(gap.get("gapContracts") or {}):
         raise AssertionError(f"coverage index app state gap contract count mismatch: {app_state_group}")
+    if app_state_group.get("qwenMultimodalBlockedModelKindCount") != gap.get("qwenMultimodalBlockedModelKindCount"):
+        raise AssertionError(f"coverage index app state qwen blocked kind count mismatch: {app_state_group}")
+    if app_state_group.get("qwenMultimodalRequiredRuntimeWorkCount") != gap.get("qwenMultimodalRequiredRuntimeWorkCount"):
+        raise AssertionError(f"coverage index app state qwen required work count mismatch: {app_state_group}")
+    if app_state_group.get("qwenMultimodalProofCount") != gap.get("qwenMultimodalProofCount"):
+        raise AssertionError(f"coverage index app state qwen proof count mismatch: {app_state_group}")
     if "qwenMultimodalRuntime" not in (app_state_group.get("openGapIds") or []):
         raise AssertionError(f"coverage index app state missing qwen multimodal gap id: {app_state_group}")
     runtime_group = groups.get("runtimeAndCache") or {}

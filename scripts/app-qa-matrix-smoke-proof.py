@@ -591,6 +591,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index open gap count mismatch: {coverage_index}")
     if app_state_group.get("gapContracts") != gap_ledger.get("gapContracts"):
         raise AssertionError(f"/qa/coverage-index gap contract map mismatch: {coverage_index}")
+    if app_state_group.get("qwenMultimodalBlockedModelKindCount") != gap_ledger.get("qwenMultimodalBlockedModelKindCount"):
+        raise AssertionError(f"/qa/coverage-index qwen blocked kind count mismatch: {coverage_index}")
+    if app_state_group.get("qwenMultimodalRequiredRuntimeWorkCount") != gap_ledger.get("qwenMultimodalRequiredRuntimeWorkCount"):
+        raise AssertionError(f"/qa/coverage-index qwen required work count mismatch: {coverage_index}")
+    if app_state_group.get("qwenMultimodalProofCount") != gap_ledger.get("qwenMultimodalProofCount"):
+        raise AssertionError(f"/qa/coverage-index qwen proof count mismatch: {coverage_index}")
     runtime_group = index_groups.get("runtimeAndCache") or {}
     if runtime_group.get("runtimeContracts") != runtime_coverage.get("contracts"):
         raise AssertionError(f"/qa/coverage-index runtime contract map mismatch: {coverage_index}")

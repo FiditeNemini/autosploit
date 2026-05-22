@@ -132,6 +132,12 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit open gap count mismatch: {audit}")
     if audit.get("gapContracts") != gap.get("gapContracts"):
         raise AssertionError(f"audit gap contracts mismatch: {audit}")
+    if audit.get("qwenMultimodalBlockedModelKindCount") != gap.get("qwenMultimodalBlockedModelKindCount"):
+        raise AssertionError(f"audit qwen multimodal blocked kind count mismatch: {audit}")
+    if audit.get("qwenMultimodalRequiredRuntimeWorkCount") != gap.get("qwenMultimodalRequiredRuntimeWorkCount"):
+        raise AssertionError(f"audit qwen multimodal required work count mismatch: {audit}")
+    if audit.get("qwenMultimodalProofCount") != gap.get("qwenMultimodalProofCount"):
+        raise AssertionError(f"audit qwen multimodal proof count mismatch: {audit}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/audit-ledger" not in qa.get("stateRoutes", []):
