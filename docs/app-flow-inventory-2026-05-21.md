@@ -619,7 +619,8 @@ Current repeatable gates:
   the parser and family-fanout fixture seed routes as part of that contract.
   The aggregate also exposes `proofCount`, visible tab activity statuses, tab
   activity status count/parity, indicator contract, and `stateKeys` for
-  machine-readable proof accounting.
+  machine-readable proof accounting. The broad app QA matrix now checks the
+  same tab activity status list, count, parity, and indicator contract.
   Runtime and cache invariants are also summarized through
   `/qa/runtime-coverage`, including
   Qwen/MiniMax support, parser autodetect, model-folder generation defaults,

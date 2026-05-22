@@ -535,6 +535,7 @@ Automated no-model gates:
   context-catalog proof contract for model-issued tool calls, including the
   parser and family-fanout fixture seed routes, proof-count metadata, and
   `stateKeys`, plus the visible tab activity status count/parity and indicator
+  contract. The broad app QA matrix also checks that tab activity status
   contract.
   `/qa/runtime-coverage` exposes the runtime/model/cache proof contract for
   Qwen/MiniMax support, parser autodetect, model-folder generation defaults,

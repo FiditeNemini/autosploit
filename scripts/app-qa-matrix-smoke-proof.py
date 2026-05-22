@@ -186,6 +186,14 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/tool-flow-coverage failed: {tool_flow_coverage}")
     if tool_flow_coverage.get("toolCount") != 38 or tool_flow_coverage.get("callbackCount") != 3:
         raise AssertionError(f"/qa/tool-flow-coverage registry counters mismatch: {tool_flow_coverage}")
+    if tool_flow_coverage.get("tabActivityStatuses") != ["running", "done", "failed", "canceled"]:
+        raise AssertionError(f"/qa/tool-flow-coverage tab activity statuses mismatch: {tool_flow_coverage}")
+    if tool_flow_coverage.get("tabActivityStatusCount") != 4:
+        raise AssertionError(f"/qa/tool-flow-coverage tab activity status count mismatch: {tool_flow_coverage}")
+    if tool_flow_coverage.get("tabActivityStatusParity") is not True:
+        raise AssertionError(f"/qa/tool-flow-coverage tab activity status parity mismatch: {tool_flow_coverage}")
+    if tool_flow_coverage.get("tabActivityIndicatorContract") != "status-dot-running-ring":
+        raise AssertionError(f"/qa/tool-flow-coverage tab activity indicator contract mismatch: {tool_flow_coverage}")
     if "messages.toolCards" not in (tool_flow_coverage.get("stateKeys") or []):
         raise AssertionError(f"/qa/tool-flow-coverage state key mismatch: {tool_flow_coverage}")
     if runtime_coverage.get("ok") is not True:
