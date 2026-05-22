@@ -118,6 +118,13 @@ REQUIRED_CACHE_SESSION_FIELD_PROOFS = {
     "turboQuantKV": ["context-window-cache-proof.py", "visual-chat-proof.py"],
 }
 
+REQUIRED_HEADER_CACHE_BADGE_PROOFS = {
+    "ctx": ["visual-chat-proof.py", "chat-control-actions-proof.py"],
+    "cache preserved": ["context-window-cache-proof.py", "visual-chat-proof.py"],
+    "prefix/l2/tq": ["context-window-cache-proof.py", "visual-chat-proof.py"],
+    "new ctx keeps cache": ["chat-new-context-confirm-proof.py", "visual-chat-proof.py"],
+}
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -176,6 +183,16 @@ def assert_chat_coverage() -> None:
         raise AssertionError(f"chat coverage header cache badge count mismatch: {coverage}")
     if coverage.get("headerCacheBadgeParity") is not True:
         raise AssertionError(f"chat coverage header cache badge parity mismatch: {coverage}")
+    if coverage.get("headerCacheBadgeProofs") != REQUIRED_HEADER_CACHE_BADGE_PROOFS:
+        raise AssertionError(f"chat coverage header cache badge proof map mismatch: {coverage}")
+    if coverage.get("headerCacheBadgeProofCount") != len(REQUIRED_HEADER_CACHE_BADGE_PROOFS):
+        raise AssertionError(f"chat coverage header cache badge proof count mismatch: {coverage}")
+    if coverage.get("headerCacheBadgeProofParity") is not True:
+        raise AssertionError(f"chat coverage header cache badge proof parity mismatch: {coverage}")
+    for badge, proof_names in REQUIRED_HEADER_CACHE_BADGE_PROOFS.items():
+        missing_badge_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
+        if missing_badge_files:
+            raise AssertionError(f"chat header cache badge {badge} names missing proof files {missing_badge_files}: {coverage}")
     if coverage.get("cacheSessionIndicator") != "prefix/l2/tq":
         raise AssertionError(f"chat coverage cache session indicator mismatch: {coverage}")
     if coverage.get("newContextSessionBoundary") != "new ctx keeps cache":

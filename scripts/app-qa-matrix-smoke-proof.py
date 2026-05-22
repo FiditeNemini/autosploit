@@ -411,6 +411,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/chat-coverage header cache badge count mismatch: {chat_coverage}")
     if chat_coverage.get("headerCacheBadgeParity") is not True:
         raise AssertionError(f"/qa/chat-coverage header cache badge parity mismatch: {chat_coverage}")
+    if chat_coverage.get("headerCacheBadgeProofCount") != 4:
+        raise AssertionError(f"/qa/chat-coverage header cache badge proof count mismatch: {chat_coverage}")
+    if chat_coverage.get("headerCacheBadgeProofParity") is not True:
+        raise AssertionError(f"/qa/chat-coverage header cache badge proof parity mismatch: {chat_coverage}")
     if chat_coverage.get("cacheSessionIndicator") != "prefix/l2/tq":
         raise AssertionError(f"/qa/chat-coverage cache session indicator mismatch: {chat_coverage}")
     if chat_coverage.get("newContextSessionBoundary") != "new ctx keeps cache":

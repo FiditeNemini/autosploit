@@ -485,10 +485,12 @@ Stash:
   verified by `scripts/chat-coverage-proof.py`, which checks Send/Stop,
   reasoning, approval, copy/stash, tool-output expansion, request-audit,
   context inspector, scroll-lock visual, token counter, tool-action/Stash chat
-  handoff, visible cache-session header badges, cache-session field proof
-  map/count/parity, and cache-preserving visible-new-context contracts for the
+  handoff, visible cache-session header badges, header badge proof
+  map/count/parity, cache-session field proof map/count/parity, and
+  cache-preserving visible-new-context contracts for the
   `prefix-cache-l2-turboquant` response path. The broad app QA matrix also
-  checks the chat cache badge list, count, and parity.
+  checks the chat cache badge list, count, parity, proof count, and proof
+  parity.
 - Source/op scoping and catalogue inclusion/exclusion are covered by
   `scripts/context-catalog-proof.py`; scored targeted retrieval is covered by
   `scripts/stash-retrieval-proof.py`.
@@ -597,7 +599,8 @@ Automated no-model gates:
   `/qa/chat-coverage` exposes chat/control proof coverage for streaming usage
   metrics, token counters, reasoning controls, approval controls, tool-output
   expansion, request-audit badges, context inspector state, scroll-lock visuals,
-  tool-action/Stash chat handoff, visible cache-session header badges,
+  tool-action/Stash chat handoff, visible cache-session header badges, header
+  badge proof map/count/parity,
   `cacheResponsesInferenceMethod`, `newModelSessionBehavior`, cache-session
   field list/count/parity, cache-session field proof map/count/parity, and cache-preserving new-context
   behavior for the `prefix-cache-l2-turboquant` response path. It also exposes `stateKeys`
@@ -630,8 +633,10 @@ Automated no-model gates:
   visual manifest and live-proof counts so screenshot and live JSON evidence
   stay machine-auditable, including missing visual capture count.
   The chat/context group mirrors `/qa/chat-coverage.headerCacheBadges`,
-  `headerCacheBadgeCount`, `headerCacheBadgeParity`, `cacheSessionIndicator`, and
-  `newContextSessionBoundary`, plus `cacheResponsesInferenceMethod`,
+  `headerCacheBadgeCount`, `headerCacheBadgeParity`,
+  `headerCacheBadgeProofCount`, `headerCacheBadgeProofParity`,
+  `cacheSessionIndicator`, and `newContextSessionBoundary`, plus
+  `cacheResponsesInferenceMethod`,
   `newModelSessionBehavior`, cache-session field list/count/parity, cache-session
   field proof count/parity, and it
   mirrors `/qa/context-coverage` retrieval source list/count/parity plus

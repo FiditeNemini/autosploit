@@ -302,9 +302,11 @@ from destroying the prefix/L2/TurboQuant cache session. The chat header also
 surfaces `cache preserved`, `prefix/l2/tq`, and `new ctx keeps cache` badges
 through `/state.qaChatVisual.headerBadges` and the seeded visual chat proof;
 `/qa/chat-coverage` also advertises `headerCacheBadges`,
-`headerCacheBadgeCount`, `headerCacheBadgeParity`, `cacheSessionIndicator`, and
+`headerCacheBadgeCount`, `headerCacheBadgeParity`,
+`headerCacheBadgeProofs`, header badge proof count/parity,
+`cacheSessionIndicator`, and
 `newContextSessionBoundary` so the broad app QA matrix locks the visible
-cache-session contract, badge cardinality, and list/count parity. It now also
+cache-session contract, badge cardinality, list/count parity, and proof parity. It now also
 advertises the exact `cacheResponsesInferenceMethod`,
 `newModelSessionBehavior`, cache-session field list/count/parity, and
 cache-session field proof map/count/parity for
@@ -738,10 +740,11 @@ Current repeatable gates:
   visual manifest and live-proof counts so screenshot and live JSON evidence
   stay machine-auditable, including missing visual capture count.
   The chat/context group mirrors `/qa/chat-coverage.headerCacheBadges`,
-  `headerCacheBadgeCount`, `headerCacheBadgeParity`, `cacheSessionIndicator`, and
-  `newContextSessionBoundary`, so the aggregate coverage map carries the same
-  visible cache-session contract, badge count, and badge parity as the chat
-  coverage endpoint.
+  `headerCacheBadgeCount`, `headerCacheBadgeParity`,
+  `headerCacheBadgeProofCount`, `headerCacheBadgeProofParity`,
+  `cacheSessionIndicator`, and `newContextSessionBoundary`, so the aggregate
+  coverage map carries the same visible cache-session contract, badge count,
+  badge parity, and proof-map parity as the chat coverage endpoint.
   `/qa/checkpoint-ledger` exposes checkpoint documentation count,
   completeness count, completion ratio, complete checkpoint paths, incomplete
   checkpoint paths, latest checkpoint, and latest checkpoint number using numeric checkpoint ordering; the checkpoint,
@@ -787,7 +790,8 @@ Current repeatable gates:
   session boundary, and the checked-in live replay
   artifacts remain visible from the top-level QA index. The chat/context group
   also mirrors `/qa/chat-coverage.cacheResponsesInferenceMethod`,
-  `newModelSessionBehavior`, cache-session field proof count/parity,
+  `newModelSessionBehavior`, header cache badge proof count/parity,
+  cache-session field proof count/parity,
   context retrieval source list/count/parity,
   retrieval-source proof count/parity,
   context delivery mode list/count/parity, and delivery-mode proof
