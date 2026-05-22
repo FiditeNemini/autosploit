@@ -199,7 +199,11 @@ Report:
 - Generates markdown/HTML/PDF from stored findings.
 - Opens finding creation and deletes findings.
 - Does not currently route report generation through chat.
-- Needs proof-oriented export status and screenshot/render validation.
+- Exposes proof-oriented export status with artifact format/path/byte metadata
+  through `/state.reportExport`.
+- Export validation is covered by `scripts/report-export-proof.py` for HTML,
+  Markdown, JSON, and PDF artifacts; visible report status is captured under
+  `docs/visual-proofs/checkpoint-91`.
 
 Stash:
 
@@ -343,3 +347,5 @@ Required future proof gates:
   `docs/visual-proofs/checkpoint-70`.
 - OSINT screenshot artifact preview is captured under
   `docs/visual-proofs/checkpoint-90`.
+- Report export status and seeded finding state are captured under
+  `docs/visual-proofs/checkpoint-91`.

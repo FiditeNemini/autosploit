@@ -205,8 +205,14 @@ Report:
 
 - Buttons: Generate, PDF, Markdown, Create Finding, delete finding.
 - Chat path: report generation is direct app code, not model-driven.
-- State: findings and report output.
-- Missing proof: render/export artifact validation in automated QA.
+- State: findings, generated report output, and last export status/artifacts.
+- Render/export artifact validation is covered by
+  `scripts/report-export-proof.py`: it seeds a deterministic critical finding,
+  exports HTML, Markdown, JSON, and PDF into a QA directory, validates paths,
+  bytes, expected content markers, and `%PDF`, and exposes the metadata through
+  `/state.reportExport`.
+- Visible report export state is captured under
+  `docs/visual-proofs/checkpoint-91`.
 
 Stash:
 
@@ -389,6 +395,8 @@ Visual gates:
   `docs/visual-proofs/checkpoint-70`.
 - OSINT screenshot artifact preview is captured under
   `docs/visual-proofs/checkpoint-90`.
+- Report export status and generated finding state are captured under
+  `docs/visual-proofs/checkpoint-91`.
 - Remaining visual gap: real-engine cache metrics state.
 
 ## Current Gaps To Close Next
