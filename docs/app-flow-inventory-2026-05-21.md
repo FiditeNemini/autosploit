@@ -778,8 +778,9 @@ Current repeatable gates:
   documentation frontier and its completion breakdown. It also carries
   `/qa/artifact-ledger.visualManifests`, `/qa/artifact-ledger.liveProofs`, and
   `/qa/artifact-ledger.liveProofStatus`, plus
-  `/qa/artifact-ledger.visualCaptureStatus`, `missingVisualCaptures`,
-  `failedLiveProofCount`, and `failedLiveProofs`, so the aggregate preserves
+  `/qa/artifact-ledger.visualCaptureCount`,
+  `/qa/artifact-ledger.visualCaptureStatus`, `liveProofOkCount`,
+  `missingVisualCaptures`, `failedLiveProofCount`, and `failedLiveProofs`, so the aggregate preserves
   artifact evidence paths and pass/fail status instead of only artifact counts.
   It also carries
   `/qa/audit-ledger.proofCategoryCounts`, proof-category surface names/surface

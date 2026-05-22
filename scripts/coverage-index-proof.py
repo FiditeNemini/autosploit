@@ -247,12 +247,16 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state proof category parity flag mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerVisualManifestCount", 0) < 22:
         raise AssertionError(f"coverage index app state artifact visual count mismatch: {app_state_group}")
+    if app_state_group.get("artifactLedgerVisualCaptureCount") != artifact.get("visualCaptureCount"):
+        raise AssertionError(f"coverage index app state artifact visual capture count mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerVisualManifests") != artifact.get("visualManifests"):
         raise AssertionError(f"coverage index app state artifact visual manifests mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerVisualCaptureStatus") != artifact.get("visualCaptureStatus"):
         raise AssertionError(f"coverage index app state artifact visual capture status mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerLiveProofCount", 0) < 18:
         raise AssertionError(f"coverage index app state artifact live count mismatch: {app_state_group}")
+    if app_state_group.get("artifactLedgerLiveProofOkCount") != artifact.get("liveProofOkCount"):
+        raise AssertionError(f"coverage index app state artifact live ok count mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerLiveProofs") != artifact.get("liveProofs"):
         raise AssertionError(f"coverage index app state artifact live proofs mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerLiveProofStatus") != artifact.get("liveProofStatus"):

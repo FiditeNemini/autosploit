@@ -539,10 +539,14 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index audit gap contracts mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerVisualManifests") != artifact_ledger.get("visualManifests"):
         raise AssertionError(f"/qa/coverage-index artifact visual manifest list mismatch: {coverage_index}")
+    if app_state_group.get("artifactLedgerVisualCaptureCount") != artifact_ledger.get("visualCaptureCount"):
+        raise AssertionError(f"/qa/coverage-index artifact visual capture count mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerVisualCaptureStatus") != artifact_ledger.get("visualCaptureStatus"):
         raise AssertionError(f"/qa/coverage-index artifact visual capture status mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerLiveProofs") != artifact_ledger.get("liveProofs"):
         raise AssertionError(f"/qa/coverage-index artifact live proof list mismatch: {coverage_index}")
+    if app_state_group.get("artifactLedgerLiveProofOkCount") != artifact_ledger.get("liveProofOkCount"):
+        raise AssertionError(f"/qa/coverage-index artifact live proof ok count mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerLiveProofStatus") != artifact_ledger.get("liveProofStatus"):
         raise AssertionError(f"/qa/coverage-index artifact live proof status mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerFailedLiveProofCount") != artifact_ledger.get("failedLiveProofCount"):
