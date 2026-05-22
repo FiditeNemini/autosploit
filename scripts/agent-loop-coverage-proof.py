@@ -172,6 +172,8 @@ def run() -> None:
         missing_files = sorted(name for name in EXPECTED_PROOFS if not (ROOT / "scripts" / name).is_file())
         if missing_files:
             raise AssertionError(f"agent loop names non-existent proof files: {missing_files}")
+        if coverage.get("proofFileParity") is not True:
+            raise AssertionError(f"agent loop proof file parity mismatch: {coverage}")
 
         routes = set(coverage.get("routes") or [])
         missing_routes = sorted(EXPECTED_ROUTES.difference(routes))

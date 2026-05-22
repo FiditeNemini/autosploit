@@ -753,6 +753,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions agent loop proof count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopProofs") != agent_loop.get("proofs"):
         raise AssertionError(f"coverage index tabs/sessions agent loop proof list mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("agentLoopProofFileParity") != agent_loop.get("proofFileParity"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop proof file parity mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopVisualStateKeys") != agent_loop.get("visualStateKeys"):
         raise AssertionError(f"coverage index tabs/sessions agent loop visual state keys mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopVisualStateKeyCount") != agent_loop.get("visualStateKeyCount"):

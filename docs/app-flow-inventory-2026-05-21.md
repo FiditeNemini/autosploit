@@ -871,7 +871,7 @@ Current repeatable gates:
   mirrors tab action surface list/count/parity and proof map/count/parity, mirrors
   agent-loop phase list/count/parity and phase-proof map/count/parity,
   mirrors agent-loop state-key list/count, current mode, max-iteration guard,
-  proof count/list, visual-state-key count, mode behavior/count, deployed-agent
+  proof count/list/file parity, visual-state-key count, mode behavior/count, deployed-agent
   inheritance/status contract/count, route-owned route list/count, route-owned contract flags/count, and
   route-owned action telemetry field list/count,
   and now mirrors the visible tab activity status list/count/parity plus

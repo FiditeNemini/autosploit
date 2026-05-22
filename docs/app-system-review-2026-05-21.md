@@ -752,7 +752,7 @@ Automated no-model gates:
   tab action surface list/count/parity, tab action surface proof map/count/parity,
   action-state-key count, agent-loop
   state-key list/count, agent-loop visual state keys, agent-loop phase-proof
-  map/count/parity, agent-loop current mode, max-iteration guard, proof count/list,
+  map/count/parity, agent-loop current mode, max-iteration guard, proof count/list/file parity,
   visual-state-key count, mode behavior/count, deployed-agent inheritance/status
   contract/count, route-owned route list/count, route-owned contract flags/count,
   route-owned action telemetry field list/count, and tab activity status proof count/parity. Chat/context
