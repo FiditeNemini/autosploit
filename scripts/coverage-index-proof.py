@@ -483,6 +483,11 @@ def assert_coverage_index() -> None:
     tool_flow = request("GET", "/qa/tool-flow-coverage")
     if tools_parsers_group.get("toolFlowProofCount") != tool_flow.get("proofCount"):
         raise AssertionError(f"coverage index tools/parsers tool-flow proof count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolFlowProofs") != tool_flow.get("proofs"):
+        raise AssertionError(f"coverage index tools/parsers tool-flow proof list mismatch: {tools_parsers_group}")
+    proof_files_exist = all((ROOT / "scripts" / name).is_file() for name in (tool_flow.get("proofs") or []))
+    if tools_parsers_group.get("toolFlowProofFileParity") is not proof_files_exist:
+        raise AssertionError(f"coverage index tools/parsers tool-flow proof-file parity mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolFlowRoutes") != tool_flow.get("routes"):
         raise AssertionError(f"coverage index tools/parsers tool-flow routes mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolFlowRouteCount") != len(tool_flow.get("routes") or []):

@@ -711,7 +711,8 @@ Automated no-model gates:
   tools/parsers group exposes registry tool
   count, callback count, representative family fanout count and family-to-tool map,
   structured/raw parser tool sets, state-key count, tool-flow proof count,
-  route list/count, family list/count, state-key list, contract map/count,
+  proof list/file parity, route list/count, family list/count, state-key list,
+  contract map/count,
   dynamic tool-schema cap/policy/route, structured/raw result-mode counts,
   tab activity status proof map/count/parity, and model-tool visual surface
   list/count/parity plus proof map/count/parity from `/qa/tool-flow-coverage`.

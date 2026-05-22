@@ -594,6 +594,11 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index raw-only parser tool set mismatch: {coverage_index}")
     if tools_parsers_group.get("toolFlowProofCount") != tool_flow_coverage.get("proofCount"):
         raise AssertionError(f"/qa/coverage-index tool-flow proof count mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolFlowProofs") != tool_flow_coverage.get("proofs"):
+        raise AssertionError(f"/qa/coverage-index tool-flow proof list mismatch: {coverage_index}")
+    proof_files_exist = all((ROOT / "scripts" / name).is_file() for name in (tool_flow_coverage.get("proofs") or []))
+    if tools_parsers_group.get("toolFlowProofFileParity") is not proof_files_exist:
+        raise AssertionError(f"/qa/coverage-index tool-flow proof-file parity mismatch: {coverage_index}")
     if tools_parsers_group.get("toolFlowRoutes") != tool_flow_coverage.get("routes"):
         raise AssertionError(f"/qa/coverage-index tool-flow routes mismatch: {coverage_index}")
     if tools_parsers_group.get("toolFlowRouteCount") != len(tool_flow_coverage.get("routes") or []):
