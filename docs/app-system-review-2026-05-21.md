@@ -754,7 +754,7 @@ Automated no-model gates:
   state-key list/count, agent-loop visual state keys, agent-loop phase-proof
   map/count/parity, agent-loop current mode, max-iteration guard, proof count/list,
   visual-state-key count, mode behavior/count, deployed-agent inheritance/status
-  contract, route list/count, route-owned contract flags/count, action telemetry field
+  contract, route-owned route list/count, route-owned contract flags/count, action telemetry field
   list/count, and tab activity status proof count/parity. Chat/context
   also exposes state-key count.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.

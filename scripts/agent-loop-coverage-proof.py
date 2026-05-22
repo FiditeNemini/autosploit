@@ -175,6 +175,8 @@ def run() -> None:
         missing_routes = sorted(EXPECTED_ROUTES.difference(routes))
         if missing_routes:
             raise AssertionError(f"agent loop routes missing {missing_routes}: {coverage}")
+        if coverage.get("routeCount") != len(EXPECTED_ROUTES):
+            raise AssertionError(f"agent loop route count mismatch: {coverage}")
 
         contracts = coverage.get("contracts") or {}
         missing_contracts = sorted(name for name in EXPECTED_CONTRACTS if contracts.get(name) is not True)
