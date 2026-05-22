@@ -38,6 +38,10 @@ Chat streaming:
   exposes action status, role, count, clipboard preview, and last stash item;
   stash actions update `/state.stashActions` through `recordStashAdd`.
   Covered by `scripts/chat-actions-proof.py`.
+- Chat header reasoning, request-context inspector, and new-context controls
+  now route through AppState. `/state.chatControlActions` exposes last action,
+  reasoning state, inspector visibility, context generation, and summary;
+  covered by `scripts/chat-control-actions-proof.py`.
 - Required proof: stream with reasoning on/off, metrics visible after usage,
   manual scroll pause while output streams, relock jump, stop button cancels the
   stream session.
@@ -635,7 +639,8 @@ Real-model gates:
   prompt/completion/cached counters while preserving prefix, prompt L2, paged,
   block L2, TurboQuant Q4, model-folder generation-default flags, and parsed
   engine cache stats. `/state.contextWindow` exposes the context generation and
-  `prefix-cache-l2-turboquant` response method marker.
+  `prefix-cache-l2-turboquant` response method marker. The visible header
+  route is covered by `scripts/chat-control-actions-proof.py`.
 - Chat-panel visual context/cache status is covered by
   `scripts/visual-chat-proof.py`, which seeds a running cache-ready engine state
   and captures the `ctx N` plus `cache preserved` header indicators.
@@ -702,6 +707,8 @@ Visual gates:
   `docs/visual-proofs/checkpoint-109`.
 - Chat scroll locked, paused/new-output, and relock-ready states are captured
   under `docs/visual-proofs/checkpoint-72`.
+- Chat control action state for reasoning, context inspector, and new context
+  is covered by `scripts/chat-control-actions-proof.py`.
 - Chat copy/stash action state is covered by `scripts/chat-actions-proof.py`.
 - Reasoning expanded/streaming and collapsed states are captured under
   `docs/visual-proofs/checkpoint-72`; manually reopened is represented by the

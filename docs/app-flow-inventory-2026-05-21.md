@@ -68,7 +68,9 @@ main session.
 - Keeps reasoning content separate when the engine parser exposes it.
 - Reasoning can be toggled on/off from the chat header. Reasoning blocks expand
   while streaming and collapse after completion unless the user manually toggles
-  the block.
+  the block. Header reasoning, context-inspector, and new-context controls now
+  route through AppState and expose `/state.chatControlActions`; covered by
+  `scripts/chat-control-actions-proof.py`.
 - Metrics show token/s, TTFT, prompt tokens, cached prompt tokens, and
   completion tokens when the engine returns usage.
 - The same strip shows the last request's selected context count and exposed
@@ -538,6 +540,9 @@ Required future proof gates:
   `scripts/visual-chat-proof.py`, which captures the chat header showing the
   active context generation and cache-preserved status next to live tool,
   reasoning, token, context, and tool-schema states.
+- Visible new-context control routing is covered by
+  `scripts/chat-control-actions-proof.py`, which verifies the same
+  cache-preserving context-window behavior from the AppState control path.
 - Quantized block L2 proof: covered by
   `docs/live-proofs/checkpoint-77-block-l2-quantized-proof.json`, which proves
   real MLX safetensors write/read plus full-block disk promotion for
