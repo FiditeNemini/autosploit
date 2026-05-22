@@ -148,7 +148,9 @@ main session.
   `scripts/tool-family-fanout-coverage-proof.py`: Recon, Web, Network, Creds,
   Exploit, Post, and OSINT fixtures each prove chat-card, activity-feed,
   tab-activity, parsed-result, and context-catalog coverage. The route now
-  returns a standard `ok` aggregate status.
+  returns a standard `ok` aggregate status. `/qa/tool-flow-coverage.stateKeys`
+  exposes the message, tab activity, feed, result, and context-catalog surfaces
+  behind those proofs.
 
 The full tool catalog is no longer force-sent to the engine. `ChatService`
 passes the latest user prompt plus active tab into `ToolDefinitions.forModel`,
@@ -596,7 +598,8 @@ Current repeatable gates:
   the tool registry, parser routing, representative family fanout, and
   context-catalog tool-output proofs into one auditable contract. It now lists
   the parser and family-fanout fixture seed routes as part of that contract.
-  The aggregate also exposes `proofCount` for machine-readable proof accounting.
+  The aggregate also exposes `proofCount` and `stateKeys` for machine-readable
+  proof accounting.
   Runtime and cache invariants are also summarized through
   `/qa/runtime-coverage`, including
   Qwen/MiniMax support, parser autodetect, model-folder generation defaults,

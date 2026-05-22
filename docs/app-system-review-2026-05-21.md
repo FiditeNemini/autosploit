@@ -213,7 +213,9 @@ Result fanout:
   `scripts/tool-family-fanout-coverage-proof.py`: deterministic Recon, Web,
   Network, Creds, Exploit, Post, and OSINT fixtures each prove a visible chat
   tool card, activity-feed entry, tab activity status, parsed tab result, and
-  context-catalog hit. Parser and family-fanout aggregate routes now also
+  context-catalog hit. `/qa/tool-flow-coverage.stateKeys` ties that aggregate to
+  message tool cards, tab activity, activity feed, result rows, and context
+  catalogue state. Parser and family-fanout aggregate routes now also
   expose a standard `ok` status, covered by
   `scripts/parser-fanout-aggregate-proof.py`.
 - Activity Feed copy and clear controls now route through AppState. The header
@@ -526,7 +528,8 @@ Automated no-model gates:
   routes, deploy-sheet/task-send controls, action telemetry fields, and the
   proof scripts that cover them. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
   context-catalog proof contract for model-issued tool calls, including the
-  parser and family-fanout fixture seed routes and proof-count metadata.
+  parser and family-fanout fixture seed routes, proof-count metadata, and
+  `stateKeys`.
   `/qa/runtime-coverage` exposes the runtime/model/cache proof contract for
   Qwen/MiniMax support, parser autodetect, model-folder generation defaults,
   prefix-cache/L2/TurboQuant response mode, unsupported-start blocking, the

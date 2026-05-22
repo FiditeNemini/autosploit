@@ -171,6 +171,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/tool-flow-coverage failed: {tool_flow_coverage}")
     if tool_flow_coverage.get("toolCount") != 38 or tool_flow_coverage.get("callbackCount") != 3:
         raise AssertionError(f"/qa/tool-flow-coverage registry counters mismatch: {tool_flow_coverage}")
+    if "messages.toolCards" not in (tool_flow_coverage.get("stateKeys") or []):
+        raise AssertionError(f"/qa/tool-flow-coverage state key mismatch: {tool_flow_coverage}")
     if runtime_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/runtime-coverage failed: {runtime_coverage}")
     if runtime_coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":

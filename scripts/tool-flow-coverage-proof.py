@@ -30,6 +30,13 @@ EXPECTED_PROOFS = {
     "tool-family-fanout-coverage-proof.py",
 }
 EXPECTED_FAMILIES = {"recon", "web", "network", "creds", "exploit", "post", "osint"}
+EXPECTED_STATE_KEYS = {
+    "messages.toolCards",
+    "tabActivities",
+    "feedRecent",
+    "contextCatalog",
+    "results",
+}
 
 
 def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
@@ -84,6 +91,10 @@ def run() -> None:
             raise AssertionError(f"tool flow did not expose registry count: {coverage}")
         if coverage.get("callbackCount") != 3:
             raise AssertionError(f"tool flow did not expose callback count: {coverage}")
+        state_keys = set(coverage.get("stateKeys") or [])
+        missing_state_keys = sorted(EXPECTED_STATE_KEYS.difference(state_keys))
+        if missing_state_keys:
+            raise AssertionError(f"tool flow missing state keys {missing_state_keys}: {coverage}")
         for key in ("registry", "parserRouting", "fanout", "contextCatalog"):
             if coverage.get("contracts", {}).get(key) is not True:
                 raise AssertionError(f"tool flow contract missing {key}: {coverage}")
