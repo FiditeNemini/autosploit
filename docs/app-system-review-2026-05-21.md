@@ -575,8 +575,9 @@ Automated no-model gates:
   and proof counts, endpoints, and proofs and that every named proof file
   exists. The app-state group also exposes `/state.qaCoverage` state-route
   count, subtab state tab count, subtab state proof count, and the
-  `/qa/proof-ledger` proof count across all local proof scripts. The
-  runtime/cache group also exposes `supportedFamilies`,
+  `/qa/proof-ledger` proof count across all local proof scripts. It also exposes
+  `/qa/artifact-ledger` visual manifest and live-proof counts so screenshot and
+  live JSON evidence stay machine-auditable. The runtime/cache group also exposes `supportedFamilies`,
   `cacheResponseMethod`, and `liveProofArtifactCount` for Qwen/MiniMax-only
   support, the `prefix-cache-l2-turboquant` response path, and the checked-in
   Qwen/MiniMax live replay artifact set. The settings/visuals group exposes
