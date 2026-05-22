@@ -69,6 +69,8 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit checkpoint count mismatch: {audit}")
     if audit.get("completeCheckpointCount") != checkpoint.get("completeCheckpointCount"):
         raise AssertionError(f"audit complete checkpoint count mismatch: {audit}")
+    if audit.get("checkpointCompletionRatio") != checkpoint.get("checkpointCompletionRatio"):
+        raise AssertionError(f"audit checkpoint completion ratio mismatch: {audit}")
     if audit.get("completeCheckpoints") != checkpoint.get("completeCheckpoints"):
         raise AssertionError(f"audit complete checkpoint list mismatch: {audit}")
     if audit.get("incompleteCheckpointCount") != len(checkpoint.get("incompleteCheckpoints") or []):

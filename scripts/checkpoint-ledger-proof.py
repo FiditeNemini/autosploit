@@ -68,6 +68,7 @@ def assert_checkpoint_ledger() -> None:
     ]
     expected_complete_set = set(expected_complete)
     expected_incomplete = [path for path in expected_paths if path not in expected_complete_set]
+    expected_ratio = round(len(expected_complete) / len(checkpoints), 6)
 
     if ledger.get("ok") is not True:
         raise AssertionError(f"/qa/checkpoint-ledger failed: {ledger}")
@@ -77,6 +78,8 @@ def assert_checkpoint_ledger() -> None:
         raise AssertionError(f"checkpoint ledger path list mismatch: {ledger}")
     if ledger.get("completeCheckpointCount") != len(expected_complete):
         raise AssertionError(f"checkpoint ledger complete count mismatch: {ledger}")
+    if ledger.get("checkpointCompletionRatio") != expected_ratio:
+        raise AssertionError(f"checkpoint ledger completion ratio mismatch expected {expected_ratio}: {ledger}")
     if ledger.get("completeCheckpoints") != expected_complete:
         raise AssertionError(f"checkpoint ledger complete list mismatch expected {expected_complete}: {ledger}")
     if ledger.get("incompleteCheckpoints") != expected_incomplete:
