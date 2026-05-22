@@ -661,7 +661,8 @@ Automated no-model gates:
   group also carries `/qa/checkpoint-ledger.checkpointCompletionRatio`, so the
   top-level QA summary reports checkpoint documentation completeness, not just
   checkpoint count. It also carries complete and incomplete checkpoint counts
-  from `/qa/checkpoint-ledger`, plus `/qa/checkpoint-ledger.latestCheckpoint`
+  and path lists from `/qa/checkpoint-ledger`, plus
+  `/qa/checkpoint-ledger.checkpoints`, `/qa/checkpoint-ledger.latestCheckpoint`,
   and `latestCheckpointNumber`, so the same aggregate identifies the current
   documentation frontier and its completion breakdown. It also carries
   `/qa/artifact-ledger.visualManifests`, `/qa/artifact-ledger.liveProofs`, and
