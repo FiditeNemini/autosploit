@@ -42,6 +42,10 @@ Chat streaming:
   now route through AppState. `/state.chatControlActions` exposes last action,
   reasoning state, inspector visibility, context generation, and summary;
   covered by `scripts/chat-control-actions-proof.py`.
+- Manual tab switching now routes through AppState instead of only mutating the
+  active-tab binding. `/state.tabSwitchActions` exposes from/to tab,
+  follow-agent pause state, and summary; covered by
+  `scripts/tab-switch-action-proof.py`.
 - Required proof: stream with reasoning on/off, metrics visible after usage,
   manual scroll pause while output streams, relock jump, stop button cancels the
   stream session.

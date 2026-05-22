@@ -39,6 +39,9 @@ workspace, then renders:
 - `ChatPanelView` on the right.
 - `SettingsView` and `FindingWizardView` as overlays.
 
+Manual tab switching now routes through `AppState.switchToolTab(_:)`, exposes
+`/state.tabSwitchActions` with from/to tab, follow-agent pause state, and
+activity-feed visibility, and is covered by `scripts/tab-switch-action-proof.py`.
 Terminal, settings, and finding-wizard overlay open/close controls route
 through AppState and expose `/state.windowOverlayActions`; covered by
 `scripts/window-overlay-actions-proof.py`.
