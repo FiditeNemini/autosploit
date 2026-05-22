@@ -355,6 +355,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers tab activity status parity mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("tabActivityIndicatorContract") != tool_flow.get("tabActivityIndicatorContract"):
         raise AssertionError(f"coverage index tools/parsers tab activity indicator contract mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("tabActivityStatusProofs") != tool_flow.get("tabActivityStatusProofs"):
+        raise AssertionError(f"coverage index tools/parsers tab activity status proof map mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("tabActivityStatusProofCount") != tool_flow.get("tabActivityStatusProofCount"):
         raise AssertionError(f"coverage index tools/parsers tab activity status proof count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("tabActivityStatusProofParity") != tool_flow.get("tabActivityStatusProofParity"):
@@ -365,6 +367,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers visual surface count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolVisualSurfaceParity") != tool_flow.get("toolVisualSurfaceParity"):
         raise AssertionError(f"coverage index tools/parsers visual surface parity mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolVisualSurfaceProofs") != tool_flow.get("toolVisualSurfaceProofs"):
+        raise AssertionError(f"coverage index tools/parsers visual surface proof map mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolVisualSurfaceProofCount") != tool_flow.get("toolVisualSurfaceProofCount"):
         raise AssertionError(f"coverage index tools/parsers visual surface proof count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolVisualSurfaceProofParity") != tool_flow.get("toolVisualSurfaceProofParity"):

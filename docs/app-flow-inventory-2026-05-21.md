@@ -806,8 +806,8 @@ Current repeatable gates:
   fanout count, state-key count, dynamic tool-schema cap/policy/route,
   structured/raw result-mode counts, visible tab activity statuses, the tab
   activity status parity/indicator contract, tab activity status proof
-  count/parity, and the model-tool visual surface list/count/parity plus proof
-  count/parity mirrored from `/qa/tool-flow-coverage`.
+  map/count/parity, and the model-tool visual surface list/count/parity plus proof
+  map/count/parity mirrored from `/qa/tool-flow-coverage`.
   The tabs/sessions group exposes
   interaction-mode count, covered tab count, session state-key count, and
   action-state-key count, mirrors session workflow surface list/count/parity,

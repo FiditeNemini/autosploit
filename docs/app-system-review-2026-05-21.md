@@ -692,8 +692,8 @@ Automated no-model gates:
   tools/parsers group exposes registry tool
   count, callback count, representative family fanout count, state-key count,
   dynamic tool-schema cap/policy/route, structured/raw result-mode counts,
-  tab activity status proof count/parity, and model-tool visual surface
-  list/count/parity plus proof count/parity from `/qa/tool-flow-coverage`.
+  tab activity status proof map/count/parity, and model-tool visual surface
+  list/count/parity plus proof map/count/parity from `/qa/tool-flow-coverage`.
   The tabs/sessions group exposes
   interaction-mode count, covered tab
   count, session state-key count, session workflow surface list/count/parity,

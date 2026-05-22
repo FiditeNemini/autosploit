@@ -475,6 +475,11 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index settings surface proof map mismatch: {coverage_index}")
     if settings_visuals_group.get("visualSurfaceProofs") != visual_coverage.get("visualSurfaceProofs"):
         raise AssertionError(f"/qa/coverage-index visual surface proof map mismatch: {coverage_index}")
+    tools_parsers_group = index_groups.get("toolsAndParsers") or {}
+    if tools_parsers_group.get("tabActivityStatusProofs") != tool_flow_coverage.get("tabActivityStatusProofs"):
+        raise AssertionError(f"/qa/coverage-index tool tab activity proof map mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolVisualSurfaceProofs") != tool_flow_coverage.get("toolVisualSurfaceProofs"):
+        raise AssertionError(f"/qa/coverage-index tool visual surface proof map mismatch: {coverage_index}")
     if ((index_groups.get("tabsAndSessions") or {}).get("actionStateKeyCount", 0)) < 26:
         raise AssertionError(f"/qa/coverage-index action state key count mismatch: {coverage_index}")
     tabs_sessions_group = index_groups.get("tabsAndSessions") or {}
