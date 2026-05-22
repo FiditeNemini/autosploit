@@ -183,6 +183,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state latest checkpoint number mismatch: {app_state_group}")
     if app_state_group.get("auditLedgerCount", 0) < 300:
         raise AssertionError(f"coverage index app state audit ledger count mismatch: {app_state_group}")
+    if app_state_group.get("auditProofCategorySurfaces") != audit.get("proofCategorySurfaces"):
+        raise AssertionError(f"coverage index app state audit proof surfaces mismatch: {app_state_group}")
     if app_state_group.get("auditProofCategorySurfaceCount") != audit.get("proofCategorySurfaceCount"):
         raise AssertionError(f"coverage index app state audit proof surface count mismatch: {app_state_group}")
     if app_state_group.get("auditProofCategoryTotalCount") != audit.get("proofCategoryTotalCount"):
