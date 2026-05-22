@@ -447,6 +447,10 @@ Agents:
   and preserve the type-specific prompt override after phase guidance is set.
 - App-only Settings apply updates agent and loop controls without restarting the
   engine.
+- Settings engine Start/Stop actions expose `/state.settingsEngineActions` with
+  previous/current running state, model label, health status, summary, and
+  activity-feed visibility. Stop action coverage is handled by
+  `scripts/settings-engine-actions-proof.py`.
 
 Context Catalog:
 

@@ -465,6 +465,9 @@ Settings:
 - App-only settings can now be applied without restarting the engine; model,
   cache, and engine runtime changes still use Apply & Restart Engine.
 - App-only apply is covered by `scripts/settings-apply-proof.py`.
+- Settings engine Start/Stop actions expose `/state.settingsEngineActions` with
+  previous/current running state, model label, health status, and summary.
+  Stop action coverage is handled by `scripts/settings-engine-actions-proof.py`.
 
 ## QA Matrix Required For Completion
 
