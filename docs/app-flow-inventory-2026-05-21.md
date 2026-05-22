@@ -39,6 +39,10 @@ workspace, then renders:
 - `ChatPanelView` on the right.
 - `SettingsView` and `FindingWizardView` as overlays.
 
+Terminal, settings, and finding-wizard overlay open/close controls route
+through AppState and expose `/state.windowOverlayActions`; covered by
+`scripts/window-overlay-actions-proof.py`.
+
 Every actionable tool-tab button currently flows through
 `ContentView.sendToChat(_:)`, which calls `state.displayChatService.send(...)`.
 In multi-agent mode, `displayChatService`, `displayResultsStore`, and
