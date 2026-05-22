@@ -450,6 +450,11 @@ Stash:
   copies one row, sends one row into chat with the bounded stash-content path,
   deletes that row, and verifies Stash tab activity exposes `delete_stash`
   completion.
+- Aggregate per-tab direct action coverage is exposed through
+  `/qa/tab-action-coverage` and verified by
+  `scripts/tab-action-coverage-proof.py`, which checks the route, action seed/
+  action route list, contracts, focused proof scripts, covered tabs, and proof
+  file existence.
 - Source/op scoping and catalogue inclusion/exclusion are covered by
   `scripts/context-catalog-proof.py`; scored targeted retrieval is covered by
   `scripts/stash-retrieval-proof.py`.
@@ -516,6 +521,9 @@ Automated no-model gates:
   onboarding/mode selection, Sidebar operations, overlays, model-folder pickers,
   persistence/relaunch, saved messages, result rebuild, finding wizard submit,
   tab switching, phase changes, and Activity Feed controls.
+  `/qa/tab-action-coverage` exposes per-tab direct action proof coverage for
+  copy buttons, row context actions, verify/protocol/hash/exploit/post/OSINT
+  actions, report generation/finding/export/agent actions, and Stash controls.
 - Full tool-registry coverage via `scripts/tool-registry-coverage-proof.py`.
 - Representative tool-output parser routing via
   `scripts/result-parser-routing-proof.py`.

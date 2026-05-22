@@ -100,6 +100,7 @@ def assert_testserver_smoke() -> None:
     settings_coverage = request("GET", "/qa/settings-coverage")
     visual_coverage = request("GET", "/qa/visual-coverage")
     session_coverage = request("GET", "/qa/session-coverage")
+    tab_action_coverage = request("GET", "/qa/tab-action-coverage")
 
     required_state_keys = {
         "activeTab",
@@ -148,6 +149,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing visual coverage route contract: {qa}")
     if "/qa/session-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing session coverage route contract: {qa}")
+    if "/qa/tab-action-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing tab action coverage route contract: {qa}")
     if subtab_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/subtab-coverage failed: {subtab_coverage}")
     if sorted((subtab_coverage.get("tabs") or {}).keys()) != expected_subtab_tabs:
@@ -190,6 +193,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/session-coverage mode order mismatch: {session_coverage}")
     if session_coverage.get("sidebarActions") != ["createOp", "renameOp", "switchOp", "deleteOp"]:
         raise AssertionError(f"/qa/session-coverage sidebar action mismatch: {session_coverage}")
+    if tab_action_coverage.get("ok") is not True:
+        raise AssertionError(f"/qa/tab-action-coverage failed: {tab_action_coverage}")
+    if tab_action_coverage.get("tabs") != ["recon", "web", "network", "creds", "exploit", "post", "osint", "report", "stash"]:
+        raise AssertionError(f"/qa/tab-action-coverage tabs mismatch: {tab_action_coverage}")
+    if tab_action_coverage.get("proofCount", 0) < 27:
+        raise AssertionError(f"/qa/tab-action-coverage proof count mismatch: {tab_action_coverage}")
 
 
 def run() -> None:

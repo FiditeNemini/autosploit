@@ -234,6 +234,13 @@ Web:
   Web tab activity. `scripts/web-verify-action-proof.py` verifies the target,
   finding title, prompt, and running tab badge; the visible queued button state
   is captured under `docs/visual-proofs/checkpoint-96`.
+
+Per-tab direct action and copy coverage across Recon, Web, Network, Creds,
+Exploit, Post, OSINT, Report, and Stash is summarized through
+`/qa/tab-action-coverage`. The aggregate ties together action seed routes,
+copy routes, row context actions, verify/protocol/hash/exploit/post/OSINT
+actions, report generation/finding/export/agent actions, and Stash add/filter/
+copy/send/delete controls with the focused proof scripts for each lane.
 - CVE-bearing rows now expose per-row status through `/state.webCVERows` and a
   visible chip on each vulnerability card. The same proof verifies `pending`,
   `enriched`, and active `CVE verifying` row semantics for the seeded Web
