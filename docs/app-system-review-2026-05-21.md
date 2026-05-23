@@ -1270,6 +1270,15 @@ Visual gates:
   proof owner. Coverage-index mirrors its file counts, function counts, group
   counts, and proof-file parity so backend service changes remain tied to
   proof coverage.
+- `/qa/python-runtime-inventory` is the source-owned inventory for Python engine
+  and proof surfaces: it parses files under `ExploitBotEngine` and `scripts`,
+  records classes/functions, groups them by engine runtime, API adapter,
+  reasoning parser, tool parser, cache/SSM, engine test, QA proof, or data
+  pipeline surface, and records the proof owner. Coverage-index mirrors its
+  file count, function count, group counts, and proof-file parity through
+  `/qa/coverage-index.groups.runtimeAndCache`, so changes to vMLX runtime
+  modules, parser modules, cache/SSM components, live model verifiers, and data
+  pipeline scripts stay tied to an app-owned proof contract.
 
 ## Current Gaps To Close Next
 

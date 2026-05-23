@@ -1175,3 +1175,12 @@ Required future proof gates:
   records the proof owner. The counts and proof parity are mirrored in
   `/qa/coverage-index.groups.appState`, which keeps service-layer changes from
   bypassing the route/action/view inventories.
+- Python runtime ownership is summarized through
+  `/qa/python-runtime-inventory`. It parses Python files under
+  `ExploitBotEngine` and `scripts`, groups them by engine runtime, API adapter,
+  reasoning parser, tool parser, cache/SSM, engine test, QA proof, or data
+  pipeline surface, records classes/functions, and assigns each group to a
+  proof owner. The counts, group map, and proof parity are mirrored in
+  `/qa/coverage-index.groups.runtimeAndCache`, keeping the Python engine,
+  parser, cache, data, and live-proof layers visible to the same app-owned
+  coverage contract as the Swift UI and service inventories.

@@ -102,6 +102,7 @@ def assert_testserver_smoke() -> None:
     tool_coverage = request("GET", "/qa/tool-coverage")
     result_parser_coverage = request("GET", "/qa/result-parser-coverage")
     runtime_coverage = request("GET", "/qa/runtime-coverage")
+    python_runtime_inventory = request("GET", "/qa/python-runtime-inventory")
     context_coverage = request("GET", "/qa/context-coverage")
     evidence_lifecycle_coverage = request("GET", "/qa/evidence-lifecycle-coverage")
     settings_coverage = request("GET", "/qa/settings-coverage")
@@ -182,6 +183,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing tool flow coverage route contract: {qa}")
     if "/qa/runtime-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing runtime coverage route contract: {qa}")
+    if "/qa/python-runtime-inventory" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing python runtime inventory route contract: {qa}")
     if "/qa/context-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing context coverage route contract: {qa}")
     if "/qa/evidence-lifecycle-coverage" not in qa.get("stateRoutes", []):
@@ -927,6 +930,20 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/runtime-coverage proof-file parity mismatch: {runtime_coverage}")
     if runtime_group.get("runtimeProofFileParity") != runtime_coverage.get("proofFileParity"):
         raise AssertionError(f"/qa/coverage-index runtime proof-file parity mismatch: {coverage_index}")
+    if python_runtime_inventory.get("ok") is not True:
+        raise AssertionError(f"/qa/python-runtime-inventory failed: {python_runtime_inventory}")
+    if python_runtime_inventory.get("parseParity") is not True:
+        raise AssertionError(f"/qa/python-runtime-inventory parse parity mismatch: {python_runtime_inventory}")
+    if python_runtime_inventory.get("functionCount", 0) < 500:
+        raise AssertionError(f"/qa/python-runtime-inventory function count too low: {python_runtime_inventory}")
+    if python_runtime_inventory.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/python-runtime-inventory proof-file parity mismatch: {python_runtime_inventory}")
+    if runtime_group.get("pythonRuntimeInventoryFileCount") != python_runtime_inventory.get("fileCount"):
+        raise AssertionError(f"/qa/coverage-index python runtime file count mismatch: {coverage_index}")
+    if runtime_group.get("pythonRuntimeInventoryFunctionCount") != python_runtime_inventory.get("functionCount"):
+        raise AssertionError(f"/qa/coverage-index python runtime function count mismatch: {coverage_index}")
+    if runtime_group.get("pythonRuntimeInventoryGroupCounts") != python_runtime_inventory.get("groupCounts"):
+        raise AssertionError(f"/qa/coverage-index python runtime group count mismatch: {coverage_index}")
     if runtime_group.get("liveProofs") != runtime_coverage.get("liveProofs"):
         raise AssertionError(f"/qa/coverage-index runtime live proof matrix mismatch: {coverage_index}")
     if runtime_group.get("liveProofArtifacts") != runtime_coverage.get("liveProofArtifacts"):

@@ -29,6 +29,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/agent-tool-authorization-coverage",
     "/qa/tool-flow-coverage",
     "/qa/runtime-coverage",
+    "/qa/python-runtime-inventory",
     "/qa/context-coverage",
     "/qa/evidence-lifecycle-coverage",
     "/qa/settings-coverage",
@@ -69,6 +70,7 @@ REQUIRED_PROOFS = {
     "tool-flow-coverage-proof.py",
     "tool-catalog-detail-proof.py",
     "runtime-coverage-proof.py",
+    "python-runtime-inventory-proof.py",
     "context-coverage-proof.py",
     "evidence-lifecycle-coverage-proof.py",
     "settings-coverage-proof.py",
@@ -673,6 +675,23 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime proof count mismatch: {runtime_group}")
     if runtime_group.get("runtimeProofFileParity") != runtime_coverage.get("proofFileParity"):
         raise AssertionError(f"coverage index runtime proof-file parity mismatch: {runtime_group}")
+    python_runtime = request("GET", "/qa/python-runtime-inventory")
+    if python_runtime.get("ok") is not True:
+        raise AssertionError(f"python runtime inventory route failed: {python_runtime}")
+    if python_runtime.get("parseParity") is not True:
+        raise AssertionError(f"python runtime inventory parse parity mismatch: {python_runtime}")
+    if python_runtime.get("functionCount", 0) < 500:
+        raise AssertionError(f"python runtime inventory function count too low: {python_runtime}")
+    if python_runtime.get("proofFileParity") is not True:
+        raise AssertionError(f"python runtime inventory proof-file parity mismatch: {python_runtime}")
+    if runtime_group.get("pythonRuntimeInventoryFileCount") != python_runtime.get("fileCount"):
+        raise AssertionError(f"coverage index python runtime file count mismatch: {runtime_group}")
+    if runtime_group.get("pythonRuntimeInventoryFunctionCount") != python_runtime.get("functionCount"):
+        raise AssertionError(f"coverage index python runtime function count mismatch: {runtime_group}")
+    if runtime_group.get("pythonRuntimeInventoryGroupCounts") != python_runtime.get("groupCounts"):
+        raise AssertionError(f"coverage index python runtime group counts mismatch: {runtime_group}")
+    if runtime_group.get("pythonRuntimeInventoryProofFileParity") != python_runtime.get("proofFileParity"):
+        raise AssertionError(f"coverage index python runtime proof parity mismatch: {runtime_group}")
     if runtime_group.get("liveProofs") != runtime_coverage.get("liveProofs"):
         raise AssertionError(f"coverage index runtime live proof matrix mismatch: {runtime_group}")
     if runtime_group.get("liveProofArtifacts") != runtime_coverage.get("liveProofArtifacts"):
