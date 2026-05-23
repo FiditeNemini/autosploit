@@ -168,6 +168,8 @@ def run() -> None:
         artifacts = coverage.get("liveProofArtifacts") or {}
         if coverage.get("liveProofArtifactCount") != len(EXPECTED_LIVE_ARTIFACTS):
             raise AssertionError(f"runtime live artifact count mismatch: {coverage}")
+        if coverage.get("liveProofArtifactFileParity") is not True:
+            raise AssertionError(f"runtime live artifact file parity mismatch: {coverage}")
         for name, (path, family) in EXPECTED_LIVE_ARTIFACTS.items():
             if artifacts.get(name) != path:
                 raise AssertionError(f"runtime live artifact {name} mismatch: {coverage}")

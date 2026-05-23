@@ -557,6 +557,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime live proof matrix mismatch: {runtime_group}")
     if runtime_group.get("liveProofArtifacts") != runtime_coverage.get("liveProofArtifacts"):
         raise AssertionError(f"coverage index runtime live proof artifact map mismatch: {runtime_group}")
+    if runtime_coverage.get("liveProofArtifactFileParity") is not True:
+        raise AssertionError(f"runtime coverage live proof artifact file parity mismatch: {runtime_coverage}")
+    if runtime_group.get("liveProofArtifactFileParity") != runtime_coverage.get("liveProofArtifactFileParity"):
+        raise AssertionError(f"coverage index runtime live proof artifact file parity mismatch: {runtime_group}")
     if runtime_group.get("cacheResponsesInferenceMethod") != runtime_coverage.get("cacheResponsesInferenceMethod"):
         raise AssertionError(f"coverage index runtime cache responses inference method mismatch: {runtime_group}")
     if runtime_group.get("newModelSessionBehavior") != runtime_coverage.get("newModelSessionBehavior"):

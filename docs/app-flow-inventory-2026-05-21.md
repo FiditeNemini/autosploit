@@ -679,7 +679,7 @@ Current repeatable gates:
   seed routes that back those contracts. It also exposes checked-in live proof
   artifact paths for MiniMax replay/no-thinking and Qwen hybrid replay,
   full-prefix-skip, and catalogue-prefix-shape gates, plus
-  `liveProofArtifactCount` for matrix-level artifact accounting. It now also
+  `liveProofArtifactCount` and live proof artifact file parity for matrix-level artifact accounting. It now also
   exposes runtime cache component list/count/parity and component proof
   map/count/parity/file parity for prefix cache, prompt L2 disk, paged KV cache, block L2
   disk, TurboQuant KV, SSM companion L2, and new-context engine-session
@@ -847,7 +847,7 @@ Current repeatable gates:
   `newModelSessionBehavior`, runtime contract map/count, route list/count,
   proof list/count/file parity, runtime cache component list/count/parity,
   component proof map/count/parity/file parity, live proof family matrix, and
-  live proof artifact map/count, so Qwen/MiniMax-only support,
+  live proof artifact map/count/file parity, so Qwen/MiniMax-only support,
   the `prefix-cache-l2-turboquant` response path, cache-preserving new-context
   session boundary, and the checked-in live replay
   artifacts remain visible from the top-level QA index. The chat/context group
