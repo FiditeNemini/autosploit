@@ -1149,3 +1149,9 @@ Required future proof gates:
   the notary-profile gate. The route is mirrored in
   `/qa/coverage-index.groups.releaseReadiness` and intentionally separates
   `packageReady=true` from `distributionReady=false` until notarization is run.
+- Full QA route ownership is summarized through `/qa/endpoint-inventory`. The
+  route parses `AppState.swift` route cases, assigns each endpoint to a
+  functional group, records the proof owner, mirrors `/state.qaCoverage`
+  route coverage, and is mirrored back into
+  `/qa/coverage-index.groups.appState` so newly added app/API functions cannot
+  remain undocumented.

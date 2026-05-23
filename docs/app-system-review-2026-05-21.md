@@ -1242,6 +1242,12 @@ Visual gates:
   beta package is marked package-ready but not distribution-ready until a local
   notarytool profile is supplied and the DMG is submitted, accepted, and
   stapled.
+- `/qa/endpoint-inventory` is the source-owned route inventory for the app API:
+  it parses `AppState.swift`, groups every route by surface, records the proof
+  owner for each route, mirrors `/state.qaCoverage.stateRoutes`, and is exposed
+  through `/qa/coverage-index.groups.appState`. This keeps endpoint coverage
+  from depending on a manually curated subset when new tabs, tools, settings,
+  ledgers, or agent flows are added.
 
 ## Current Gaps To Close Next
 

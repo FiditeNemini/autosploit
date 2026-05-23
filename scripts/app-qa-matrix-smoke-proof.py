@@ -118,6 +118,7 @@ def assert_testserver_smoke() -> None:
     osint_coverage = request("GET", "/qa/osint-coverage")
     report_coverage = request("GET", "/qa/report-coverage")
     stash_coverage = request("GET", "/qa/stash-coverage")
+    endpoint_inventory = request("GET", "/qa/endpoint-inventory")
     coverage_index = request("GET", "/qa/coverage-index")
     proof_ledger = request("GET", "/qa/proof-ledger")
     artifact_ledger = request("GET", "/qa/artifact-ledger")
@@ -162,6 +163,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing shared subtab-state tabs: {qa}")
     if "/qa/subtab-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing subtab coverage route contract: {qa}")
+    if "/qa/endpoint-inventory" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing endpoint inventory route contract: {qa}")
     if "/qa/agent-loop-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing agent loop coverage route contract: {qa}")
     if "/qa/agent-tool-authorization-coverage" not in qa.get("stateRoutes", []):
@@ -546,8 +549,22 @@ def assert_testserver_smoke() -> None:
     app_state_group = index_groups.get("appState") or {}
     if "docs-inventory-parity-proof.py" not in (app_state_group.get("proofs") or []):
         raise AssertionError(f"/qa/coverage-index missing docs inventory parity proof: {coverage_index}")
+    if "endpoint-inventory-proof.py" not in (app_state_group.get("proofs") or []):
+        raise AssertionError(f"/qa/coverage-index missing endpoint inventory proof: {coverage_index}")
     if app_state_group.get("stateRoutes") != qa.get("stateRoutes"):
         raise AssertionError(f"/qa/coverage-index state route list mismatch: {coverage_index}")
+    if endpoint_inventory.get("ok") is not True:
+        raise AssertionError(f"/qa/endpoint-inventory failed: {endpoint_inventory}")
+    if endpoint_inventory.get("routeCount", 0) < 150:
+        raise AssertionError(f"/qa/endpoint-inventory route count too low: {endpoint_inventory}")
+    if endpoint_inventory.get("routeParity") is not True:
+        raise AssertionError(f"/qa/endpoint-inventory route parity mismatch: {endpoint_inventory}")
+    if endpoint_inventory.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/endpoint-inventory proof-file parity mismatch: {endpoint_inventory}")
+    if app_state_group.get("endpointInventoryRouteCount") != endpoint_inventory.get("routeCount"):
+        raise AssertionError(f"/qa/coverage-index endpoint inventory route count mismatch: {coverage_index}")
+    if app_state_group.get("endpointInventoryGroupCounts") != endpoint_inventory.get("groupCounts"):
+        raise AssertionError(f"/qa/coverage-index endpoint inventory group counts mismatch: {coverage_index}")
     if app_state_group.get("contextHooks") != qa.get("contextHooks"):
         raise AssertionError(f"/qa/coverage-index context hook list mismatch: {coverage_index}")
     if app_state_group.get("contextHookCount") != len(qa.get("contextHooks") or []):

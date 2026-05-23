@@ -21,6 +21,7 @@ REQUIRED_ENDPOINTS = {
     "/results",
     "/qa/tool-coverage",
     "/qa/subtab-coverage",
+    "/qa/endpoint-inventory",
     "/qa/agent-loop-coverage",
     "/qa/agent-tool-authorization-coverage",
     "/qa/tool-flow-coverage",
@@ -54,6 +55,7 @@ REQUIRED_ENDPOINTS = {
 
 REQUIRED_PROOFS = {
     "app-qa-matrix-smoke-proof.py",
+    "endpoint-inventory-proof.py",
     "tool-registry-coverage-proof.py",
     "subtab-coverage-proof.py",
     "agent-loop-coverage-proof.py",
@@ -231,6 +233,19 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state route list mismatch: {app_state_group}")
     if app_state_group.get("stateRouteCount", 0) < 14:
         raise AssertionError(f"coverage index app state route count mismatch: {app_state_group}")
+    endpoint_inventory = request("GET", "/qa/endpoint-inventory")
+    if endpoint_inventory.get("ok") is not True:
+        raise AssertionError(f"endpoint inventory route failed: {endpoint_inventory}")
+    if endpoint_inventory.get("routeParity") is not True:
+        raise AssertionError(f"endpoint inventory route parity mismatch: {endpoint_inventory}")
+    if endpoint_inventory.get("proofFileParity") is not True:
+        raise AssertionError(f"endpoint inventory proof-file parity mismatch: {endpoint_inventory}")
+    if app_state_group.get("endpointInventoryRouteCount") != endpoint_inventory.get("routeCount"):
+        raise AssertionError(f"coverage index endpoint inventory route count mismatch: {app_state_group}")
+    if app_state_group.get("endpointInventoryGroupCounts") != endpoint_inventory.get("groupCounts"):
+        raise AssertionError(f"coverage index endpoint inventory group counts mismatch: {app_state_group}")
+    if app_state_group.get("endpointInventoryProofFileParity") != endpoint_inventory.get("proofFileParity"):
+        raise AssertionError(f"coverage index endpoint inventory proof parity mismatch: {app_state_group}")
     if app_state_group.get("contextHooks") != qa.get("contextHooks"):
         raise AssertionError(f"coverage index app state context hook list mismatch: {app_state_group}")
     if app_state_group.get("contextHookCount") != len(qa.get("contextHooks") or []):
