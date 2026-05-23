@@ -1143,3 +1143,9 @@ Required future proof gates:
   under `docs/visual-proofs/checkpoint-101`.
 - Unsupported model-folder warning and blocked engine states are captured under
   `docs/visual-proofs/checkpoint-93`.
+- Beta package readiness is summarized through
+  `/qa/beta-readiness-coverage`: it combines release manifest/signature state,
+  artifact/live-proof ledgers, checkpoint completeness, known current gaps, and
+  the notary-profile gate. The route is mirrored in
+  `/qa/coverage-index.groups.releaseReadiness` and intentionally separates
+  `packageReady=true` from `distributionReady=false` until notarization is run.

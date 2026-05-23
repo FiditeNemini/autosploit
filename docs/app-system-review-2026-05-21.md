@@ -1235,6 +1235,13 @@ Visual gates:
   generated release manifest fields, app/DMG/script/doc artifact presence,
   release proof-file parity, signed-artifact hash metadata, bundled resource
   flags, and the explicit notary-profile gate.
+- `/qa/beta-readiness-coverage` rolls release readiness together with the
+  artifact ledger, audit ledger, gap ledger, and coverage index. It exposes
+  source-proof, visual-artifact, live-artifact, checkpoint, signed-app,
+  signed-DMG, manifest, known-gap, and notarization-profile gates. The current
+  beta package is marked package-ready but not distribution-ready until a local
+  notarytool profile is supplied and the DMG is submitted, accepted, and
+  stapled.
 
 ## Current Gaps To Close Next
 

@@ -49,6 +49,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/audit-ledger",
     "/qa/gap-ledger",
     "/qa/release-readiness",
+    "/qa/beta-readiness-coverage",
 }
 
 REQUIRED_PROOFS = {
@@ -85,6 +86,7 @@ REQUIRED_PROOFS = {
     "gap-ledger-proof.py",
     "docs-inventory-parity-proof.py",
     "release-readiness-proof.py",
+    "beta-readiness-coverage-proof.py",
 }
 
 REQUIRED_GROUPS = {
@@ -548,6 +550,7 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state missing qwen multimodal gap id: {app_state_group}")
     release_group = groups.get("releaseReadiness") or {}
     release_coverage = request("GET", "/qa/release-readiness")
+    beta_readiness = request("GET", "/qa/beta-readiness-coverage")
     if release_group.get("releaseRoute") != "/qa/release-readiness":
         raise AssertionError(f"coverage index release route mismatch: {release_group}")
     if release_group.get("releaseProofs") != release_coverage.get("proofs"):
@@ -566,6 +569,22 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index release notarization gate reason mismatch: {release_group}")
     if release_group.get("releaseCommands") != release_coverage.get("commands"):
         raise AssertionError(f"coverage index release command map mismatch: {release_group}")
+    if release_group.get("betaReadinessGates") != beta_readiness.get("gates"):
+        raise AssertionError(f"coverage index beta readiness gates mismatch: {release_group}")
+    if release_group.get("betaReadinessGateStatus") != beta_readiness.get("gateStatus"):
+        raise AssertionError(f"coverage index beta readiness status mismatch: {release_group}")
+    if release_group.get("betaReadinessReadyGateCount") != beta_readiness.get("readyGateCount"):
+        raise AssertionError(f"coverage index beta readiness ready count mismatch: {release_group}")
+    if release_group.get("betaReadinessBlockedGateCount") != beta_readiness.get("blockedGateCount"):
+        raise AssertionError(f"coverage index beta readiness blocked count mismatch: {release_group}")
+    if release_group.get("betaPackageReady") != beta_readiness.get("packageReady"):
+        raise AssertionError(f"coverage index beta package-ready mismatch: {release_group}")
+    if release_group.get("betaDistributionReady") != beta_readiness.get("distributionReady"):
+        raise AssertionError(f"coverage index beta distribution-ready mismatch: {release_group}")
+    if release_group.get("betaReadinessProofs") != beta_readiness.get("proofs"):
+        raise AssertionError(f"coverage index beta readiness proof list mismatch: {release_group}")
+    if release_group.get("betaReadinessProofFileParity") != beta_readiness.get("proofFileParity"):
+        raise AssertionError(f"coverage index beta readiness proof-file parity mismatch: {release_group}")
     runtime_group = groups.get("runtimeAndCache") or {}
     if runtime_group.get("liveProofArtifactCount", 0) < 6:
         raise AssertionError(f"coverage index runtime live artifact count mismatch: {runtime_group}")

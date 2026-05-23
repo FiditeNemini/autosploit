@@ -125,6 +125,7 @@ def assert_testserver_smoke() -> None:
     audit_ledger = request("GET", "/qa/audit-ledger")
     gap_ledger = request("GET", "/qa/gap-ledger")
     release_readiness = request("GET", "/qa/release-readiness")
+    beta_readiness = request("GET", "/qa/beta-readiness-coverage")
 
     required_state_keys = {
         "activeTab",
@@ -215,6 +216,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing gap-ledger route contract: {qa}")
     if "/qa/release-readiness" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing release-readiness route contract: {qa}")
+    if "/qa/beta-readiness-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing beta-readiness coverage route contract: {qa}")
     if subtab_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/subtab-coverage failed: {subtab_coverage}")
     if sorted((subtab_coverage.get("tabs") or {}).keys()) != expected_subtab_tabs:
@@ -815,6 +818,24 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index release command map mismatch: {coverage_index}")
     if release_group.get("appBinarySha256Length") != 64 or release_group.get("dmgSha256Length") != 64:
         raise AssertionError(f"/qa/coverage-index release hash length mismatch: {coverage_index}")
+    if beta_readiness.get("ok") is not True:
+        raise AssertionError(f"/qa/beta-readiness-coverage failed: {beta_readiness}")
+    if beta_readiness.get("packageReady") is not True:
+        raise AssertionError(f"/qa/beta-readiness-coverage package readiness mismatch: {beta_readiness}")
+    if beta_readiness.get("distributionReady") is not False:
+        raise AssertionError(f"/qa/beta-readiness-coverage distribution readiness mismatch: {beta_readiness}")
+    if beta_readiness.get("notarizationGate") != "requires-notary-profile":
+        raise AssertionError(f"/qa/beta-readiness-coverage notarization gate mismatch: {beta_readiness}")
+    if release_group.get("betaReadinessGates") != beta_readiness.get("gates"):
+        raise AssertionError(f"/qa/coverage-index beta readiness gates mismatch: {coverage_index}")
+    if release_group.get("betaReadinessGateStatus") != beta_readiness.get("gateStatus"):
+        raise AssertionError(f"/qa/coverage-index beta readiness status mismatch: {coverage_index}")
+    if release_group.get("betaPackageReady") != beta_readiness.get("packageReady"):
+        raise AssertionError(f"/qa/coverage-index beta package-ready mismatch: {coverage_index}")
+    if release_group.get("betaDistributionReady") != beta_readiness.get("distributionReady"):
+        raise AssertionError(f"/qa/coverage-index beta distribution-ready mismatch: {coverage_index}")
+    if release_group.get("betaReadinessProofFileParity") != beta_readiness.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index beta proof-file parity mismatch: {coverage_index}")
     runtime_group = index_groups.get("runtimeAndCache") or {}
     if runtime_group.get("runtimeContracts") != runtime_coverage.get("contracts"):
         raise AssertionError(f"/qa/coverage-index runtime contract map mismatch: {coverage_index}")
