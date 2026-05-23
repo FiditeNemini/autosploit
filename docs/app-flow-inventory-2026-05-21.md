@@ -141,7 +141,7 @@ main session.
   on disable, and expose visible action telemetry.
 - `/qa/agent-loop-coverage` now exposes the mode, route, contract, action
   telemetry fields, proof count, deploy-sheet, task-send, settings-control,
-  state-key list/count, and visual state-key list for the agentic loop. The
+  state-key list/count, and visual state-key list/parity for the agentic loop. The
   state contract names `/state.agents`, `/state.agentActions`, active
   agent chat/results/feed display routing, context-snippet count, and exposed
   tool-schema names so full-auto agent behavior is auditable from UI state and
@@ -901,7 +901,7 @@ mirrors session route list/count, contract map/count, proof list/count/file pari
   mirrors tab action surface list/count/parity and proof map/count/parity/file parity, mirrors
   agent-loop phase list/count/parity and phase-proof map/count/parity/file parity,
   mirrors agent-loop state-key list/count, current mode, max-iteration guard,
-  proof count/list/file parity, visual-state-key count, mode behavior/count, deployed-agent
+  proof count/list/file parity, visual-state-key count/parity, mode behavior/count, deployed-agent
   inheritance/status contract/count, route-owned route list/count, route-owned contract flags/count, and
   route-owned action telemetry field list/count,
   and now mirrors the visible tab activity status list/count/parity plus

@@ -1087,6 +1087,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index agent loop proof file parity mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopVisualStateKeyCount") != agent_loop_coverage.get("visualStateKeyCount"):
         raise AssertionError(f"/qa/coverage-index agent loop visual state key count mismatch: {coverage_index}")
+    if agent_loop_coverage.get("visualStateKeyParity") is not True:
+        raise AssertionError(f"/qa/agent-loop-coverage visual state key parity mismatch: {agent_loop_coverage}")
+    if tabs_sessions_group.get("agentLoopVisualStateKeyParity") != agent_loop_coverage.get("visualStateKeyParity"):
+        raise AssertionError(f"/qa/coverage-index agent loop visual state key parity mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopModes") != agent_loop_coverage.get("modes"):
         raise AssertionError(f"/qa/coverage-index agent loop modes mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopModeCount") != agent_loop_coverage.get("modeCount"):

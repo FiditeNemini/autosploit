@@ -551,7 +551,7 @@ Automated no-model gates:
   `/qa/agent-loop-coverage` exposes manual, copilot,
   autopilot, deployed-agent loop guarantees, agent action/settings/deploy
   routes, deploy-sheet/task-send controls, action telemetry fields, and the
-  agent-loop state-key list/count plus visual state keys for active agent
+  agent-loop state-key list/count plus visual state keys and visual state-key parity for active agent
   chat/results/feed routing, context snippets, exposed tool-schema audit state,
   loop-phase list/count/parity, and phase-proof map/count/parity/file parity. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
   context-catalog proof contract for model-issued tool calls, including the
@@ -776,7 +776,7 @@ Automated no-model gates:
   action-state-key list/count,
   tab action surface list/count/parity, tab action surface proof map/count/parity/file parity,
   action-state-key count, agent-loop
-  state-key list/count, agent-loop visual state keys, agent-loop phase-proof
+  state-key list/count, agent-loop visual state keys/parity, agent-loop phase-proof
   map/count/parity/file parity, agent-loop current mode, max-iteration guard, proof count/list/file parity,
   visual-state-key count, mode behavior/count, deployed-agent inheritance/status
   contract/count, route-owned route list/count, route-owned contract flags/count,

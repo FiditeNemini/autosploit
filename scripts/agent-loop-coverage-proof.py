@@ -224,6 +224,8 @@ def run() -> None:
         for key in ("agents", "agentActions", "displayChatService", "displayResultsStore", "displayActivityFeed"):
             if key not in visual_state_keys:
                 raise AssertionError(f"agent loop visual state key missing {key}: {coverage}")
+        if coverage.get("visualStateKeyParity") is not True:
+            raise AssertionError(f"agent loop visual state key parity mismatch: {coverage}")
 
         request("POST", "/mode", "manual")
         manual = request("GET", "/qa/agent-loop-coverage")

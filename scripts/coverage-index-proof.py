@@ -948,6 +948,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions agent loop visual state keys mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopVisualStateKeyCount") != agent_loop.get("visualStateKeyCount"):
         raise AssertionError(f"coverage index tabs/sessions agent loop visual state key count mismatch: {tabs_sessions_group}")
+    if agent_loop.get("visualStateKeyParity") is not True:
+        raise AssertionError(f"agent loop visual state key parity mismatch: {agent_loop}")
+    if tabs_sessions_group.get("agentLoopVisualStateKeyParity") != agent_loop.get("visualStateKeyParity"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop visual state key parity mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopPhases") != agent_loop.get("loopPhases"):
         raise AssertionError(f"coverage index tabs/sessions agent loop phases mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopPhaseCount") != agent_loop.get("loopPhaseCount"):
