@@ -263,6 +263,13 @@ Result fanout:
   proves parsed credentials, nmap assets, nuclei findings, and post-exploitation
   attribution rows are searchable catalogue items with persisted non-CVE
   embeddings.
+- `/qa/evidence-lifecycle-coverage` exposes the cross-app data lifecycle from
+  captured tool output through parsed results, finding drafts, durable findings,
+  stash notes, report preview/export, report-agent draft, context catalogue
+  indexing, bounded automatic context, and `search_context` retrieval. It also
+  exposes storage targets, handoff names, routes, proof parity, and the
+  anti-context-flooding policy that prevents forcing all evidence into every
+  model turn.
 - Required proof: each tool family can produce a visible chat card, activity
   entry, tab result, and context-catalog item from representative output. Covered
   by `scripts/tool-family-fanout-coverage-proof.py`.
@@ -637,6 +644,9 @@ Automated no-model gates:
   automatic bounded injection, on-demand `search_context`, persisted turn audit,
   durable embeddings, and active-scope stash retrieval are visible as separate
   anti-context-flooding paths tied to concrete proof scripts.
+  `/qa/evidence-lifecycle-coverage` rolls parser/finding/stash/report/context
+  handoffs into one route-owned lifecycle contract and is mirrored in
+  `/qa/coverage-index.groups.chatAndContext`.
   `/qa/visual-coverage` exposes screenshot-backed UI proof coverage for chat,
   scroll lock, Settings, context inspector, request-audit badges, tab activity,
   subtab lifecycle strips, OSINT screenshots, reports, stash retrieval,

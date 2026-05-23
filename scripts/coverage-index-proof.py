@@ -26,6 +26,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/tool-flow-coverage",
     "/qa/runtime-coverage",
     "/qa/context-coverage",
+    "/qa/evidence-lifecycle-coverage",
     "/qa/settings-coverage",
     "/qa/visual-coverage",
     "/qa/session-coverage",
@@ -60,6 +61,7 @@ REQUIRED_PROOFS = {
     "tool-catalog-detail-proof.py",
     "runtime-coverage-proof.py",
     "context-coverage-proof.py",
+    "evidence-lifecycle-coverage-proof.py",
     "settings-coverage-proof.py",
     "visual-coverage-proof.py",
     "session-coverage-proof.py",
@@ -731,6 +733,53 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context delivery mode proof parity mismatch: {chat_context_group}")
     if chat_context_group.get("contextDeliveryModeProofFileParity") != context_coverage.get("contextDeliveryModeProofFileParity"):
         raise AssertionError(f"coverage index chat/context delivery mode proof-file parity mismatch: {chat_context_group}")
+    evidence_lifecycle = request("GET", "/qa/evidence-lifecycle-coverage")
+    if chat_context_group.get("evidenceLifecycleStages") != evidence_lifecycle.get("stages"):
+        raise AssertionError(f"coverage index chat/context evidence lifecycle stages mismatch: {chat_context_group}")
+    if chat_context_group.get("evidenceLifecycleStageCount") != evidence_lifecycle.get("stageCount"):
+        raise AssertionError(f"coverage index chat/context evidence lifecycle stage count mismatch: {chat_context_group}")
+    if evidence_lifecycle.get("stageParity") is not True:
+        raise AssertionError(f"evidence lifecycle stage parity mismatch: {evidence_lifecycle}")
+    if chat_context_group.get("evidenceLifecycleStageParity") != evidence_lifecycle.get("stageParity"):
+        raise AssertionError(f"coverage index chat/context evidence lifecycle stage parity mismatch: {chat_context_group}")
+    if chat_context_group.get("evidenceLifecycleStorageTargets") != evidence_lifecycle.get("storageTargets"):
+        raise AssertionError(f"coverage index chat/context evidence lifecycle storage targets mismatch: {chat_context_group}")
+    if chat_context_group.get("evidenceLifecycleStorageTargetCount") != evidence_lifecycle.get("storageTargetCount"):
+        raise AssertionError(f"coverage index chat/context evidence lifecycle storage target count mismatch: {chat_context_group}")
+    if evidence_lifecycle.get("storageTargetParity") is not True:
+        raise AssertionError(f"evidence lifecycle storage target parity mismatch: {evidence_lifecycle}")
+    if chat_context_group.get("evidenceLifecycleStorageTargetParity") != evidence_lifecycle.get("storageTargetParity"):
+        raise AssertionError(f"coverage index chat/context evidence lifecycle storage target parity mismatch: {chat_context_group}")
+    if chat_context_group.get("evidenceLifecycleHandoffs") != evidence_lifecycle.get("handoffs"):
+        raise AssertionError(f"coverage index chat/context evidence lifecycle handoffs mismatch: {chat_context_group}")
+    if chat_context_group.get("evidenceLifecycleHandoffCount") != evidence_lifecycle.get("handoffCount"):
+        raise AssertionError(f"coverage index chat/context evidence lifecycle handoff count mismatch: {chat_context_group}")
+    if evidence_lifecycle.get("handoffParity") is not True:
+        raise AssertionError(f"evidence lifecycle handoff parity mismatch: {evidence_lifecycle}")
+    if chat_context_group.get("evidenceLifecycleHandoffParity") != evidence_lifecycle.get("handoffParity"):
+        raise AssertionError(f"coverage index chat/context evidence lifecycle handoff parity mismatch: {chat_context_group}")
+    if chat_context_group.get("evidenceLifecycleRoutes") != evidence_lifecycle.get("routes"):
+        raise AssertionError(f"coverage index chat/context evidence lifecycle routes mismatch: {chat_context_group}")
+    if chat_context_group.get("evidenceLifecycleRouteCount") != evidence_lifecycle.get("routeCount"):
+        raise AssertionError(f"coverage index chat/context evidence lifecycle route count mismatch: {chat_context_group}")
+    if evidence_lifecycle.get("routeParity") is not True:
+        raise AssertionError(f"evidence lifecycle route parity mismatch: {evidence_lifecycle}")
+    if chat_context_group.get("evidenceLifecycleRouteParity") != evidence_lifecycle.get("routeParity"):
+        raise AssertionError(f"coverage index chat/context evidence lifecycle route parity mismatch: {chat_context_group}")
+    if chat_context_group.get("evidenceLifecycleProofs") != evidence_lifecycle.get("proofs"):
+        raise AssertionError(f"coverage index chat/context evidence lifecycle proofs mismatch: {chat_context_group}")
+    if chat_context_group.get("evidenceLifecycleProofCount") != evidence_lifecycle.get("proofCount"):
+        raise AssertionError(f"coverage index chat/context evidence lifecycle proof count mismatch: {chat_context_group}")
+    if evidence_lifecycle.get("proofFileParity") is not True:
+        raise AssertionError(f"evidence lifecycle proof-file parity mismatch: {evidence_lifecycle}")
+    if chat_context_group.get("evidenceLifecycleProofFileParity") != evidence_lifecycle.get("proofFileParity"):
+        raise AssertionError(f"coverage index chat/context evidence lifecycle proof-file parity mismatch: {chat_context_group}")
+    if chat_context_group.get("evidenceLifecycleContextPolicy") != evidence_lifecycle.get("contextPolicy"):
+        raise AssertionError(f"coverage index chat/context evidence lifecycle context policy mismatch: {chat_context_group}")
+    if evidence_lifecycle.get("contextPolicyParity") is not True:
+        raise AssertionError(f"evidence lifecycle context policy parity mismatch: {evidence_lifecycle}")
+    if chat_context_group.get("evidenceLifecycleContextPolicyParity") != evidence_lifecycle.get("contextPolicyParity"):
+        raise AssertionError(f"coverage index chat/context evidence lifecycle context policy parity mismatch: {chat_context_group}")
     cve_taxonomy = request("GET", "/qa/cve-taxonomy-coverage")
     if chat_context_group.get("cveTaxonomySourceFeeds") != cve_taxonomy.get("sourceFeeds"):
         raise AssertionError(f"coverage index chat/context cve taxonomy source feed mismatch: {chat_context_group}")

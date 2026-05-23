@@ -103,6 +103,7 @@ def assert_testserver_smoke() -> None:
     result_parser_coverage = request("GET", "/qa/result-parser-coverage")
     runtime_coverage = request("GET", "/qa/runtime-coverage")
     context_coverage = request("GET", "/qa/context-coverage")
+    evidence_lifecycle_coverage = request("GET", "/qa/evidence-lifecycle-coverage")
     settings_coverage = request("GET", "/qa/settings-coverage")
     visual_coverage = request("GET", "/qa/visual-coverage")
     session_coverage = request("GET", "/qa/session-coverage")
@@ -170,6 +171,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing runtime coverage route contract: {qa}")
     if "/qa/context-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing context coverage route contract: {qa}")
+    if "/qa/evidence-lifecycle-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing evidence lifecycle coverage route contract: {qa}")
     if "/qa/settings-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing settings coverage route contract: {qa}")
     if "/qa/visual-coverage" not in qa.get("stateRoutes", []):
@@ -334,6 +337,31 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/context-coverage delivery mode parity mismatch: {context_coverage}")
     if "requestContext" not in (context_coverage.get("stateKeys") or []):
         raise AssertionError(f"/qa/context-coverage state key mismatch: {context_coverage}")
+    if evidence_lifecycle_coverage.get("ok") is not True:
+        raise AssertionError(f"/qa/evidence-lifecycle-coverage failed: {evidence_lifecycle_coverage}")
+    expected_evidence_stages = [
+        "toolOutputCaptured",
+        "parsedResultStored",
+        "findingDraftCreated",
+        "findingPersisted",
+        "stashNoteCreated",
+        "reportSectionGenerated",
+        "reportArtifactExported",
+        "agentDraftQueued",
+        "contextCatalogIndexed",
+        "boundedContextSelected",
+        "searchContextRetrieves",
+    ]
+    if evidence_lifecycle_coverage.get("stages") != expected_evidence_stages:
+        raise AssertionError(f"/qa/evidence-lifecycle-coverage stage list mismatch: {evidence_lifecycle_coverage}")
+    if evidence_lifecycle_coverage.get("stageParity") is not True:
+        raise AssertionError(f"/qa/evidence-lifecycle-coverage stage parity mismatch: {evidence_lifecycle_coverage}")
+    if evidence_lifecycle_coverage.get("contextPolicy", {}).get("targetedRetrieval") != "search_context":
+        raise AssertionError(f"/qa/evidence-lifecycle-coverage context policy mismatch: {evidence_lifecycle_coverage}")
+    if evidence_lifecycle_coverage.get("contextPolicy", {}).get("forceInjectAllEvidence") is not False:
+        raise AssertionError(f"/qa/evidence-lifecycle-coverage force-inject policy mismatch: {evidence_lifecycle_coverage}")
+    if evidence_lifecycle_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/evidence-lifecycle-coverage proof-file parity mismatch: {evidence_lifecycle_coverage}")
     if settings_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/settings-coverage failed: {settings_coverage}")
     if settings_coverage.get("categoryCount") != 9:
@@ -892,6 +920,22 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/context-coverage delivery mode proof-file parity mismatch: {context_coverage}")
     if chat_context_group.get("contextDeliveryModeProofFileParity") != context_coverage.get("contextDeliveryModeProofFileParity"):
         raise AssertionError(f"/qa/coverage-index context delivery mode proof-file parity mismatch: {coverage_index}")
+    if chat_context_group.get("evidenceLifecycleStages") != evidence_lifecycle_coverage.get("stages"):
+        raise AssertionError(f"/qa/coverage-index evidence lifecycle stage list mismatch: {coverage_index}")
+    if chat_context_group.get("evidenceLifecycleStorageTargets") != evidence_lifecycle_coverage.get("storageTargets"):
+        raise AssertionError(f"/qa/coverage-index evidence lifecycle storage targets mismatch: {coverage_index}")
+    if chat_context_group.get("evidenceLifecycleHandoffs") != evidence_lifecycle_coverage.get("handoffs"):
+        raise AssertionError(f"/qa/coverage-index evidence lifecycle handoff list mismatch: {coverage_index}")
+    if chat_context_group.get("evidenceLifecycleRoutes") != evidence_lifecycle_coverage.get("routes"):
+        raise AssertionError(f"/qa/coverage-index evidence lifecycle route list mismatch: {coverage_index}")
+    if chat_context_group.get("evidenceLifecycleProofs") != evidence_lifecycle_coverage.get("proofs"):
+        raise AssertionError(f"/qa/coverage-index evidence lifecycle proof list mismatch: {coverage_index}")
+    if chat_context_group.get("evidenceLifecycleProofFileParity") != evidence_lifecycle_coverage.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index evidence lifecycle proof-file parity mismatch: {coverage_index}")
+    if chat_context_group.get("evidenceLifecycleContextPolicy") != evidence_lifecycle_coverage.get("contextPolicy"):
+        raise AssertionError(f"/qa/coverage-index evidence lifecycle context policy mismatch: {coverage_index}")
+    if chat_context_group.get("evidenceLifecycleContextPolicyParity") != evidence_lifecycle_coverage.get("contextPolicyParity"):
+        raise AssertionError(f"/qa/coverage-index evidence lifecycle context policy parity mismatch: {coverage_index}")
     cve_taxonomy_coverage = request("GET", "/qa/cve-taxonomy-coverage")
     if cve_taxonomy_coverage.get("softwareFamilyCount", 0) < 19:
         raise AssertionError(f"/qa/cve-taxonomy-coverage software family coverage too small: {cve_taxonomy_coverage}")

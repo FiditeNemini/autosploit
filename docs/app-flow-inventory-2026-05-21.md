@@ -163,6 +163,12 @@ main session.
 - Parsed result rows also flow back into the dynamic context catalogue. Assets,
   findings, recent raw output, OSINT artifacts, and post-exploitation
   attributions are retrievable through the same bounded context/search path.
+- `/qa/evidence-lifecycle-coverage` ties the full evidence path together:
+  captured tool output, parsed result storage, finding draft/persist, stash
+  note creation, report preview/export, report-agent draft, context catalogue
+  indexing, bounded injection, and on-demand `search_context` retrieval. The
+  route names storage targets, handoffs, routes, proof scripts, and the policy
+  that avoids force-injecting every note or result into each prompt.
 - Representative all-family fanout is covered by
   `scripts/tool-family-fanout-coverage-proof.py`: Recon, Web, Network, Creds,
   Exploit, Post, and OSINT fixtures each prove chat-card, activity-feed,
@@ -752,6 +758,9 @@ Current repeatable gates:
   turn audit, durable embeddings, and active-scope stash retrieval. The source
   list names asset ports, findings, raw tool
   output, stash notes, and CVEs as bounded dynamic catalogue inputs. Tab action
+  coverage and `/qa/evidence-lifecycle-coverage` also expose the cross-surface
+  parser/finding/stash/report/context handoffs and their chat/context index
+  mirror, so reportable evidence remains traceable without prompt flooding. Tab action
   coverage also exposes `actionStateKeys`, so the matrix
   can verify the AppState surfaces behind per-tab copy/stash/export/tool
   actions. Visual screenshot coverage is summarized through
