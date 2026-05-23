@@ -181,13 +181,21 @@ def assert_audit_ledger() -> None:
     if audit.get("qwenMultimodalProofFileParity") != gap.get("qwenMultimodalProofFileParity"):
         raise AssertionError(f"audit qwen multimodal proof-file parity mismatch: {audit}")
     qwen_gap = (gap.get("gapContracts") or {}).get("qwenMultimodalRuntime") or {}
-    if audit.get("qwenMultimodalPromotionReady") != qwen_gap.get("promotionReady"):
+    if gap.get("qwenMultimodalPromotionReady") != qwen_gap.get("promotionReady"):
+        raise AssertionError(f"gap top-level qwen promotion-ready mismatch: {gap}")
+    if gap.get("qwenMultimodalPromotionCriteriaCount") != qwen_gap.get("promotionCriteriaCount"):
+        raise AssertionError(f"gap top-level qwen promotion criteria count mismatch: {gap}")
+    if gap.get("qwenMultimodalMissingPromotionCriteriaIds") != qwen_gap.get("missingPromotionCriteriaIds"):
+        raise AssertionError(f"gap top-level qwen missing criteria mismatch: {gap}")
+    if gap.get("qwenMultimodalMissingPromotionProofs") != qwen_gap.get("missingPromotionProofs"):
+        raise AssertionError(f"gap top-level qwen missing promotion proofs mismatch: {gap}")
+    if audit.get("qwenMultimodalPromotionReady") != gap.get("qwenMultimodalPromotionReady"):
         raise AssertionError(f"audit qwen multimodal promotion-ready mismatch: {audit}")
-    if audit.get("qwenMultimodalPromotionCriteriaCount") != qwen_gap.get("promotionCriteriaCount"):
+    if audit.get("qwenMultimodalPromotionCriteriaCount") != gap.get("qwenMultimodalPromotionCriteriaCount"):
         raise AssertionError(f"audit qwen multimodal promotion criteria count mismatch: {audit}")
-    if audit.get("qwenMultimodalMissingPromotionCriteriaIds") != qwen_gap.get("missingPromotionCriteriaIds"):
+    if audit.get("qwenMultimodalMissingPromotionCriteriaIds") != gap.get("qwenMultimodalMissingPromotionCriteriaIds"):
         raise AssertionError(f"audit qwen multimodal missing criteria mismatch: {audit}")
-    if audit.get("qwenMultimodalMissingPromotionProofs") != qwen_gap.get("missingPromotionProofs"):
+    if audit.get("qwenMultimodalMissingPromotionProofs") != gap.get("qwenMultimodalMissingPromotionProofs"):
         raise AssertionError(f"audit qwen multimodal missing promotion proofs mismatch: {audit}")
 
     qa = state.get("qaCoverage") or {}

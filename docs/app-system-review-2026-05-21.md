@@ -722,7 +722,11 @@ Automated no-model gates:
   document's current-gap section and exposes the currently documented gap, the
   Qwen/MiniMax support boundary, the Qwen VL block state, `openGapIds`,
   `openGapCount`, and the `qwenMultimodalRuntime` contract with blocked model kinds plus count/file-parity fields for blocked kinds, required runtime work, and enforcement
-  proofs, including a dedicated Qwen multimodal engine-start block proof. The
+  proofs, including a dedicated Qwen multimodal engine-start block proof. It
+  also exposes top-level Qwen multimodal promotion readiness, promotion
+  criteria count, missing promotion criterion IDs, and missing live proof names,
+  so gap consumers do not need to unpack the nested contract map before showing
+  the blocked promotion requirements. The
   runtime/cache group also exposes `supportedFamilies`,
   `cacheResponseMethod`, `cacheResponsesInferenceMethod`,
   `newModelSessionBehavior`, runtime contract map/count, route list/count,

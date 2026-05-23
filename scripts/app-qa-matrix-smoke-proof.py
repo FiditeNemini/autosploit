@@ -690,13 +690,21 @@ def assert_testserver_smoke() -> None:
     if app_state_group.get("qwenMultimodalProofCount") != gap_ledger.get("qwenMultimodalProofCount"):
         raise AssertionError(f"/qa/coverage-index qwen proof count mismatch: {coverage_index}")
     qwen_gap = (gap_ledger.get("gapContracts") or {}).get("qwenMultimodalRuntime") or {}
-    if app_state_group.get("qwenMultimodalPromotionReady") != qwen_gap.get("promotionReady"):
+    if gap_ledger.get("qwenMultimodalPromotionReady") != qwen_gap.get("promotionReady"):
+        raise AssertionError(f"/qa/gap-ledger qwen promotion-ready mismatch: {gap_ledger}")
+    if gap_ledger.get("qwenMultimodalPromotionCriteriaCount") != qwen_gap.get("promotionCriteriaCount"):
+        raise AssertionError(f"/qa/gap-ledger qwen promotion criteria count mismatch: {gap_ledger}")
+    if gap_ledger.get("qwenMultimodalMissingPromotionCriteriaIds") != qwen_gap.get("missingPromotionCriteriaIds"):
+        raise AssertionError(f"/qa/gap-ledger qwen missing criteria mismatch: {gap_ledger}")
+    if gap_ledger.get("qwenMultimodalMissingPromotionProofs") != qwen_gap.get("missingPromotionProofs"):
+        raise AssertionError(f"/qa/gap-ledger qwen missing promotion proof mismatch: {gap_ledger}")
+    if app_state_group.get("qwenMultimodalPromotionReady") != gap_ledger.get("qwenMultimodalPromotionReady"):
         raise AssertionError(f"/qa/coverage-index qwen promotion-ready mismatch: {coverage_index}")
-    if app_state_group.get("qwenMultimodalPromotionCriteriaCount") != qwen_gap.get("promotionCriteriaCount"):
+    if app_state_group.get("qwenMultimodalPromotionCriteriaCount") != gap_ledger.get("qwenMultimodalPromotionCriteriaCount"):
         raise AssertionError(f"/qa/coverage-index qwen promotion criteria count mismatch: {coverage_index}")
-    if app_state_group.get("qwenMultimodalMissingPromotionCriteriaIds") != qwen_gap.get("missingPromotionCriteriaIds"):
+    if app_state_group.get("qwenMultimodalMissingPromotionCriteriaIds") != gap_ledger.get("qwenMultimodalMissingPromotionCriteriaIds"):
         raise AssertionError(f"/qa/coverage-index qwen missing criteria mismatch: {coverage_index}")
-    if app_state_group.get("qwenMultimodalMissingPromotionProofs") != qwen_gap.get("missingPromotionProofs"):
+    if app_state_group.get("qwenMultimodalMissingPromotionProofs") != gap_ledger.get("qwenMultimodalMissingPromotionProofs"):
         raise AssertionError(f"/qa/coverage-index qwen missing promotion proof mismatch: {coverage_index}")
     if gap_ledger.get("qwenMultimodalProofFileParity") is not True:
         raise AssertionError(f"/qa/gap-ledger qwen proof-file parity mismatch: {gap_ledger}")
