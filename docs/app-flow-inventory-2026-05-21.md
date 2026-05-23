@@ -837,7 +837,8 @@ Current repeatable gates:
   multimodal engine-start block proof. It also exposes promotion gates for the
   Qwen multimodal loader, multimodal prefix-cache key discipline, and
   multimodal context packet routing as top-level promotion readiness, criteria
-  count, missing criterion IDs, and missing live proof names. The exact missing live proofs are
+  count, missing criterion IDs, missing live proof names, and promotion proof
+  existence map/count/parity. The exact missing live proofs are
   `live-qwen-multimodal-loader-proof.py`,
   `live-qwen-multimodal-prefix-cache-proof.py`, and
   `live-qwen-multimodal-context-routing-proof.py`; promotion remains false

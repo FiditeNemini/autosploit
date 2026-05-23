@@ -501,6 +501,12 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index source qwen missing criteria mismatch: {gap}")
     if gap.get("qwenMultimodalMissingPromotionProofs") != qwen_gap.get("missingPromotionProofs"):
         raise AssertionError(f"coverage index source qwen missing promotion proof mismatch: {gap}")
+    if gap.get("qwenMultimodalPromotionProofExistence") != qwen_gap.get("promotionProofExistence"):
+        raise AssertionError(f"coverage index source qwen promotion proof existence mismatch: {gap}")
+    if gap.get("qwenMultimodalPromotionProofExistenceCount") != qwen_gap.get("promotionProofExistenceCount"):
+        raise AssertionError(f"coverage index source qwen promotion proof existence count mismatch: {gap}")
+    if gap.get("qwenMultimodalPromotionProofExistenceParity") != qwen_gap.get("promotionProofExistenceParity"):
+        raise AssertionError(f"coverage index source qwen promotion proof existence parity mismatch: {gap}")
     if app_state_group.get("qwenMultimodalPromotionReady") != gap.get("qwenMultimodalPromotionReady"):
         raise AssertionError(f"coverage index app state qwen promotion-ready mismatch: {app_state_group}")
     if app_state_group.get("qwenMultimodalPromotionCriteriaCount") != gap.get("qwenMultimodalPromotionCriteriaCount"):
@@ -509,6 +515,12 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state qwen missing criteria mismatch: {app_state_group}")
     if app_state_group.get("qwenMultimodalMissingPromotionProofs") != gap.get("qwenMultimodalMissingPromotionProofs"):
         raise AssertionError(f"coverage index app state qwen missing promotion proof mismatch: {app_state_group}")
+    if app_state_group.get("qwenMultimodalPromotionProofExistence") != gap.get("qwenMultimodalPromotionProofExistence"):
+        raise AssertionError(f"coverage index app state qwen promotion proof existence mismatch: {app_state_group}")
+    if app_state_group.get("qwenMultimodalPromotionProofExistenceCount") != gap.get("qwenMultimodalPromotionProofExistenceCount"):
+        raise AssertionError(f"coverage index app state qwen promotion proof existence count mismatch: {app_state_group}")
+    if app_state_group.get("qwenMultimodalPromotionProofExistenceParity") != gap.get("qwenMultimodalPromotionProofExistenceParity"):
+        raise AssertionError(f"coverage index app state qwen promotion proof existence parity mismatch: {app_state_group}")
     if "qwenMultimodalRuntime" not in (app_state_group.get("openGapIds") or []):
         raise AssertionError(f"coverage index app state missing qwen multimodal gap id: {app_state_group}")
     release_group = groups.get("releaseReadiness") or {}

@@ -135,6 +135,15 @@ def assert_gap_ledger() -> None:
         raise AssertionError(f"qwen multimodal missing criteria id mismatch: {qwen_gap}")
     if qwen_gap.get("missingPromotionProofs") != [item["requiredProof"] for item in EXPECTED_QWEN_PROMOTION_CRITERIA]:
         raise AssertionError(f"qwen multimodal missing promotion proof mismatch: {qwen_gap}")
+    expected_promotion_proof_existence = {
+        item["requiredProof"]: False for item in EXPECTED_QWEN_PROMOTION_CRITERIA
+    }
+    if qwen_gap.get("promotionProofExistence") != expected_promotion_proof_existence:
+        raise AssertionError(f"qwen multimodal promotion proof existence map mismatch: {qwen_gap}")
+    if qwen_gap.get("promotionProofExistenceCount") != len(expected_promotion_proof_existence):
+        raise AssertionError(f"qwen multimodal promotion proof existence count mismatch: {qwen_gap}")
+    if qwen_gap.get("promotionProofExistenceParity") is not True:
+        raise AssertionError(f"qwen multimodal promotion proof existence parity mismatch: {qwen_gap}")
     if ledger.get("qwenMultimodalPromotionReady") != qwen_gap.get("promotionReady"):
         raise AssertionError(f"gap ledger top-level qwen promotion readiness mismatch: {ledger}")
     if ledger.get("qwenMultimodalPromotionCriteriaCount") != qwen_gap.get("promotionCriteriaCount"):
@@ -143,6 +152,12 @@ def assert_gap_ledger() -> None:
         raise AssertionError(f"gap ledger top-level qwen missing criteria id mismatch: {ledger}")
     if ledger.get("qwenMultimodalMissingPromotionProofs") != qwen_gap.get("missingPromotionProofs"):
         raise AssertionError(f"gap ledger top-level qwen missing promotion proof mismatch: {ledger}")
+    if ledger.get("qwenMultimodalPromotionProofExistence") != qwen_gap.get("promotionProofExistence"):
+        raise AssertionError(f"gap ledger top-level qwen promotion proof existence mismatch: {ledger}")
+    if ledger.get("qwenMultimodalPromotionProofExistenceCount") != qwen_gap.get("promotionProofExistenceCount"):
+        raise AssertionError(f"gap ledger top-level qwen promotion proof existence count mismatch: {ledger}")
+    if ledger.get("qwenMultimodalPromotionProofExistenceParity") != qwen_gap.get("promotionProofExistenceParity"):
+        raise AssertionError(f"gap ledger top-level qwen promotion proof existence parity mismatch: {ledger}")
     for expected, actual in zip(EXPECTED_QWEN_PROMOTION_CRITERIA, promotion_criteria):
         for key, value in expected.items():
             if actual.get(key) != value:

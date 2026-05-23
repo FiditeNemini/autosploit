@@ -726,7 +726,8 @@ Automated no-model gates:
   `openGapCount`, and the `qwenMultimodalRuntime` contract with blocked model kinds plus count/file-parity fields for blocked kinds, required runtime work, and enforcement
   proofs, including a dedicated Qwen multimodal engine-start block proof. It
   also exposes top-level Qwen multimodal promotion readiness, promotion
-  criteria count, missing promotion criterion IDs, and missing live proof names,
+  criteria count, missing promotion criterion IDs, missing live proof names,
+  and promotion proof existence map/count/parity,
   so gap consumers do not need to unpack the nested contract map before showing
   the blocked promotion requirements. The
   runtime/cache group also exposes `supportedFamilies`,
@@ -1158,7 +1159,8 @@ Visual gates:
    supported beta lane. Until then, Qwen VL folders are detected but blocked.
    `/qa/gap-ledger` now exposes promotion gates for the Qwen multimodal loader,
    multimodal prefix-cache key discipline, and multimodal context packet
-   routing. The exact missing live proofs are
+   routing, including a proof-existence map/count/parity for the required live
+   proof scripts. The exact missing live proofs are
    `live-qwen-multimodal-loader-proof.py`,
    `live-qwen-multimodal-prefix-cache-proof.py`, and
    `live-qwen-multimodal-context-routing-proof.py`; promotion remains false
