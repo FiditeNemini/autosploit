@@ -155,6 +155,8 @@ def run() -> None:
             missing_status_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
             if missing_status_files:
                 raise AssertionError(f"tool tab activity status {status} names missing proof files {missing_status_files}: {coverage}")
+        if coverage.get("tabActivityStatusProofFileParity") is not True:
+            raise AssertionError(f"tool flow tab activity status proof-file parity mismatch: {coverage}")
         if coverage.get("toolVisualSurfaces") != EXPECTED_VISUAL_SURFACES:
             raise AssertionError(f"tool flow visual surfaces mismatch: {coverage}")
         if coverage.get("toolVisualSurfaceCount") != len(EXPECTED_VISUAL_SURFACES):
@@ -171,6 +173,8 @@ def run() -> None:
             missing_surface_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
             if missing_surface_files:
                 raise AssertionError(f"tool visual surface {surface} names missing proof files {missing_surface_files}: {coverage}")
+        if coverage.get("toolVisualSurfaceProofFileParity") is not True:
+            raise AssertionError(f"tool flow visual surface proof-file parity mismatch: {coverage}")
         state_keys = set(coverage.get("stateKeys") or [])
         missing_state_keys = sorted(EXPECTED_STATE_KEYS.difference(state_keys))
         if missing_state_keys:

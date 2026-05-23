@@ -714,6 +714,19 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/context-coverage delivery mode proof-file parity mismatch: {context_coverage}")
     if chat_context_group.get("contextDeliveryModeProofFileParity") != context_coverage.get("contextDeliveryModeProofFileParity"):
         raise AssertionError(f"/qa/coverage-index context delivery mode proof-file parity mismatch: {coverage_index}")
+    cve_taxonomy_coverage = request("GET", "/qa/cve-taxonomy-coverage")
+    if cve_taxonomy_coverage.get("softwareFamilyCount", 0) < 19:
+        raise AssertionError(f"/qa/cve-taxonomy-coverage software family coverage too small: {cve_taxonomy_coverage}")
+    if cve_taxonomy_coverage.get("vulnerabilityClassCount", 0) < 21:
+        raise AssertionError(f"/qa/cve-taxonomy-coverage vulnerability class coverage too small: {cve_taxonomy_coverage}")
+    if cve_taxonomy_coverage.get("boundedContextContract") != "search-on-demand-not-force-injected":
+        raise AssertionError(f"/qa/cve-taxonomy-coverage bounded context contract mismatch: {cve_taxonomy_coverage}")
+    if cve_taxonomy_coverage.get("reportingContract") != "asset-surface-evidence-vuln-exploit-result-remediation":
+        raise AssertionError(f"/qa/cve-taxonomy-coverage reporting contract mismatch: {cve_taxonomy_coverage}")
+    if chat_context_group.get("cveTaxonomyAgentToolNames") != cve_taxonomy_coverage.get("agentToolNames"):
+        raise AssertionError(f"/qa/coverage-index cve taxonomy tool mismatch: {coverage_index}")
+    if chat_context_group.get("cveTaxonomyEvidenceFlow") != cve_taxonomy_coverage.get("evidenceFlow"):
+        raise AssertionError(f"/qa/coverage-index cve taxonomy evidence-flow mismatch: {coverage_index}")
     if settings_visuals_group.get("settingsSurfaceProofs") != settings_coverage.get("settingsSurfaceProofs"):
         raise AssertionError(f"/qa/coverage-index settings surface proof map mismatch: {coverage_index}")
     if settings_visuals_group.get("settingsCategories") != settings_coverage.get("categories"):
@@ -785,8 +798,16 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index bounded catalogue limit mismatch: {coverage_index}")
     if tools_parsers_group.get("tabActivityStatusProofs") != tool_flow_coverage.get("tabActivityStatusProofs"):
         raise AssertionError(f"/qa/coverage-index tool tab activity proof map mismatch: {coverage_index}")
+    if tool_flow_coverage.get("tabActivityStatusProofFileParity") is not True:
+        raise AssertionError(f"/qa/tool-flow-coverage tab activity proof-file parity mismatch: {tool_flow_coverage}")
+    if tools_parsers_group.get("tabActivityStatusProofFileParity") != tool_flow_coverage.get("tabActivityStatusProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index tool tab activity proof-file parity mismatch: {coverage_index}")
     if tools_parsers_group.get("toolVisualSurfaceProofs") != tool_flow_coverage.get("toolVisualSurfaceProofs"):
         raise AssertionError(f"/qa/coverage-index tool visual surface proof map mismatch: {coverage_index}")
+    if tool_flow_coverage.get("toolVisualSurfaceProofFileParity") is not True:
+        raise AssertionError(f"/qa/tool-flow-coverage visual surface proof-file parity mismatch: {tool_flow_coverage}")
+    if tools_parsers_group.get("toolVisualSurfaceProofFileParity") != tool_flow_coverage.get("toolVisualSurfaceProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index tool visual surface proof-file parity mismatch: {coverage_index}")
     expected_family_fanout_tools = {
         "recon": "nmap",
         "web": "nuclei",
@@ -964,6 +985,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index agent loop telemetry count mismatch: {coverage_index}")
     if tabs_sessions_group.get("tabActivityStatusProofs") != tool_flow_coverage.get("tabActivityStatusProofs"):
         raise AssertionError(f"/qa/coverage-index tab activity status proof map mismatch: {coverage_index}")
+    if tabs_sessions_group.get("tabActivityStatusProofFileParity") != tool_flow_coverage.get("tabActivityStatusProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index tab activity status proof-file parity mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopPhaseProofCount") != agent_loop_coverage.get("loopPhaseProofCount"):
         raise AssertionError(f"/qa/coverage-index agent loop phase proof count mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopPhaseProofParity") != agent_loop_coverage.get("loopPhaseProofParity"):

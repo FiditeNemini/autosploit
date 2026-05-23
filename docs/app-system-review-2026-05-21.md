@@ -131,6 +131,13 @@ Dynamic context:
 - CVE assist mode can be off, current visible results, or semantic embedding
   ranked. Semantic mode uses `CVEService.semanticSearch(...)` and falls back
   through local CVE search behavior when embeddings are unavailable.
+- `/qa/cve-taxonomy-coverage` makes the defensive vulnerability coverage
+  explicit: CISA KEV, NVD API 2.0, OWASP Top 10, MITRE CWE Top 25, and local
+  custom rows feed a broad software taxonomy spanning web, identity, edge,
+  network, cloud, container, CI/CD, database, collaboration, MFT, virtualization,
+  logging, endpoint, OT/ICS, API, secrets, and supply-chain surfaces. It also
+  names vulnerability classes, risk signals, bounded context behavior, and the
+  scan-evidence to report-section flow.
 - `search_context` is exposed as a model-callable built-in tool. It queries the
   same ranked catalogue on demand with a bounded `max_snippets` limit so the
   model can pull targeted notes/assets/findings/CVEs without forcing all context
@@ -220,10 +227,10 @@ Result fanout:
   catalogue state. `/qa/tool-flow-coverage.tabActivityStatuses` names the
   visible tab indicator states (`running`, `done`, `failed`, `canceled`) and
   exposes status count/parity plus the `status-dot-running-ring` indicator
-  contract. It also exposes tab activity status proof map/count/parity, tying
+  contract. It also exposes tab activity status proof map/count/parity/file parity, tying
   each status to its proof scripts. It also exposes `toolVisualSurfaces`,
   `toolVisualSurfaceCount`, and
-  `toolVisualSurfaceParity`, plus visual-surface proof map/count/parity, for
+  `toolVisualSurfaceParity`, plus visual-surface proof map/count/parity/file parity, for
   chat tool cards, activity-feed status, tab status indicators, parsed result
   rows, context-catalog hits, and expandable tool output. Parser and
   family-fanout aggregate routes now also
@@ -739,8 +746,12 @@ Automated no-model gates:
   route-owned proof list/file parity, tool/callback counters, route
   list/count, family list/count, state-key list, contract map/count,
   dynamic tool-schema cap/policy/route, structured/raw result-mode counts,
-  tab activity status proof map/count/parity, and model-tool visual surface
-  list/count/parity plus proof map/count/parity from `/qa/tool-flow-coverage`.
+  tab activity status proof map/count/parity/file parity, and model-tool visual surface
+  list/count/parity plus proof map/count/parity/file parity from `/qa/tool-flow-coverage`.
+  The chat/context group mirrors the CVE taxonomy route so source feeds,
+  software/vuln coverage, risk signals, evidence flow, agent tools,
+  bounded-context behavior, and report assembly contract remain visible in the
+  top-level QA index.
   The tabs/sessions group exposes
   interaction-mode count, covered tab
   count, session state-key count, subtab tab maps and proof count/file parity,

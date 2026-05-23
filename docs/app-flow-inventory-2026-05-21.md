@@ -167,10 +167,10 @@ main session.
   behind those proofs, and `/qa/tool-flow-coverage.tabActivityStatuses` names
   the visible tab indicator states (`running`, `done`, `failed`, `canceled`)
   plus a status count, parity flag, and `status-dot-running-ring` indicator
-  contract. It also exposes tab activity status proof map/count/parity, tying
+  contract. It also exposes tab activity status proof map/count/parity/file parity, tying
   each visible tab status to the scripts that prove it. It also exposes
   `toolVisualSurfaces`, `toolVisualSurfaceCount`, and
-  `toolVisualSurfaceParity`, plus visual-surface proof map/count/parity, for
+  `toolVisualSurfaceParity`, plus visual-surface proof map/count/parity/file parity, for
   chat tool cards, activity-feed status, tab status indicators, parsed result
   rows, context-catalog hits, and expandable tool output.
 
@@ -203,6 +203,12 @@ Current context sources:
 - CVE full-text/CPE/severity lookup through `CVEService`.
 - CVE semantic search support exists inside `CVEService`, backed by stored
   embeddings when available.
+- `/qa/cve-taxonomy-coverage` exposes broad defensive CVE/vulnerability
+  coverage for the agent: CISA KEV, NVD API 2.0, OWASP Top 10, MITRE CWE Top
+  25, and local custom CVEs as source feeds; 19 modern software families; 21
+  vulnerability classes; risk signals; and an evidence flow from scan evidence
+  through product normalization, CVE search, risk ranking, finding draft,
+  context catalogue, and report section.
 - Stash items can be sent to chat, truncated to about 5 KB in `ContentView`.
 - Active phase guidance comes from `PentestPhase`.
 - Active op, scope, findings, and stash are persisted through `DatabaseManager`.
@@ -861,8 +867,12 @@ Current repeatable gates:
   tool-schema cap/policy/route,
   structured/raw result-mode counts, visible tab activity statuses, the tab
   activity status parity/indicator contract, tab activity status proof
-  map/count/parity, and the model-tool visual surface list/count/parity plus proof
-  map/count/parity mirrored from `/qa/tool-flow-coverage`.
+  map/count/parity/file parity, and the model-tool visual surface list/count/parity plus proof
+  map/count/parity/file parity mirrored from `/qa/tool-flow-coverage`.
+  The chat/context group also mirrors `/qa/cve-taxonomy-coverage`, including
+  source feeds, software families, vulnerability classes, risk signals,
+  evidence-flow steps, agent tool names, bounded context contract, and report
+  assembly contract.
   The tabs/sessions group exposes
   interaction-mode count, covered tab count, session state-key count, and
   action-state-key count, mirrors subtab tab maps and proof count/file parity,

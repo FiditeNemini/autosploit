@@ -573,6 +573,27 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context delivery mode proof parity mismatch: {chat_context_group}")
     if chat_context_group.get("contextDeliveryModeProofFileParity") != context_coverage.get("contextDeliveryModeProofFileParity"):
         raise AssertionError(f"coverage index chat/context delivery mode proof-file parity mismatch: {chat_context_group}")
+    cve_taxonomy = request("GET", "/qa/cve-taxonomy-coverage")
+    if chat_context_group.get("cveTaxonomySourceFeeds") != cve_taxonomy.get("sourceFeeds"):
+        raise AssertionError(f"coverage index chat/context cve taxonomy source feed mismatch: {chat_context_group}")
+    if chat_context_group.get("cveTaxonomySoftwareFamilies") != cve_taxonomy.get("softwareFamilies"):
+        raise AssertionError(f"coverage index chat/context cve taxonomy software families mismatch: {chat_context_group}")
+    if chat_context_group.get("cveTaxonomySoftwareFamilyCount") != cve_taxonomy.get("softwareFamilyCount"):
+        raise AssertionError(f"coverage index chat/context cve taxonomy software family count mismatch: {chat_context_group}")
+    if chat_context_group.get("cveTaxonomyVulnerabilityClasses") != cve_taxonomy.get("vulnerabilityClasses"):
+        raise AssertionError(f"coverage index chat/context cve taxonomy vulnerability classes mismatch: {chat_context_group}")
+    if chat_context_group.get("cveTaxonomyVulnerabilityClassCount") != cve_taxonomy.get("vulnerabilityClassCount"):
+        raise AssertionError(f"coverage index chat/context cve taxonomy vulnerability class count mismatch: {chat_context_group}")
+    if chat_context_group.get("cveTaxonomyRiskSignals") != cve_taxonomy.get("riskSignals"):
+        raise AssertionError(f"coverage index chat/context cve taxonomy risk signals mismatch: {chat_context_group}")
+    if chat_context_group.get("cveTaxonomyEvidenceFlow") != cve_taxonomy.get("evidenceFlow"):
+        raise AssertionError(f"coverage index chat/context cve taxonomy evidence flow mismatch: {chat_context_group}")
+    if chat_context_group.get("cveTaxonomyAgentToolNames") != cve_taxonomy.get("agentToolNames"):
+        raise AssertionError(f"coverage index chat/context cve taxonomy tool names mismatch: {chat_context_group}")
+    if chat_context_group.get("cveTaxonomyBoundedContextContract") != cve_taxonomy.get("boundedContextContract"):
+        raise AssertionError(f"coverage index chat/context cve taxonomy context contract mismatch: {chat_context_group}")
+    if chat_context_group.get("cveTaxonomyReportingContract") != cve_taxonomy.get("reportingContract"):
+        raise AssertionError(f"coverage index chat/context cve taxonomy reporting contract mismatch: {chat_context_group}")
     settings_visuals_group = groups.get("settingsAndVisuals") or {}
     settings_coverage = request("GET", "/qa/settings-coverage")
     if settings_visuals_group.get("settingsSurfaces") != settings_coverage.get("settingsSurfaces"):
@@ -754,6 +775,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers tab activity status proof count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("tabActivityStatusProofParity") != tool_flow.get("tabActivityStatusProofParity"):
         raise AssertionError(f"coverage index tools/parsers tab activity status proof parity mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("tabActivityStatusProofFileParity") != tool_flow.get("tabActivityStatusProofFileParity"):
+        raise AssertionError(f"coverage index tools/parsers tab activity status proof-file parity mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolVisualSurfaces") != tool_flow.get("toolVisualSurfaces"):
         raise AssertionError(f"coverage index tools/parsers visual surfaces mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolVisualSurfaceCount") != tool_flow.get("toolVisualSurfaceCount"):
@@ -766,6 +789,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers visual surface proof count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolVisualSurfaceProofParity") != tool_flow.get("toolVisualSurfaceProofParity"):
         raise AssertionError(f"coverage index tools/parsers visual surface proof parity mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolVisualSurfaceProofFileParity") != tool_flow.get("toolVisualSurfaceProofFileParity"):
+        raise AssertionError(f"coverage index tools/parsers visual surface proof-file parity mismatch: {tools_parsers_group}")
     tabs_sessions_group = groups.get("tabsAndSessions") or {}
     if tabs_sessions_group.get("interactionModeCount", 0) < 3:
         raise AssertionError(f"coverage index tabs/sessions mode count mismatch: {tabs_sessions_group}")
@@ -848,6 +873,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions tab activity status proof count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActivityStatusProofParity") != tool_flow.get("tabActivityStatusProofParity"):
         raise AssertionError(f"coverage index tabs/sessions tab activity status proof parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("tabActivityStatusProofFileParity") != tool_flow.get("tabActivityStatusProofFileParity"):
+        raise AssertionError(f"coverage index tabs/sessions tab activity status proof-file parity mismatch: {tabs_sessions_group}")
     session_coverage = request("GET", "/qa/session-coverage")
     if tabs_sessions_group.get("sessionRoutes") != session_coverage.get("routes"):
         raise AssertionError(f"coverage index tabs/sessions session route list mismatch: {tabs_sessions_group}")
