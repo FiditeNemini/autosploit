@@ -35,6 +35,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/creds-coverage",
     "/qa/exploit-coverage",
     "/qa/post-coverage",
+    "/qa/osint-coverage",
     "/qa/report-coverage",
     "/qa/stash-coverage",
     "/qa/result-parser-coverage",
@@ -65,6 +66,7 @@ REQUIRED_PROOFS = {
     "creds-coverage-proof.py",
     "exploit-coverage-proof.py",
     "post-coverage-proof.py",
+    "osint-coverage-proof.py",
     "report-coverage-proof.py",
     "stash-coverage-proof.py",
     "result-parser-routing-proof.py",
@@ -1339,6 +1341,43 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"post coverage proof-file parity mismatch: {post_coverage}")
     if tabs_sessions_group.get("postProofFileParity") != post_coverage.get("proofFileParity"):
         raise AssertionError(f"coverage index tabs/sessions post proof-file parity mismatch: {tabs_sessions_group}")
+    osint_coverage = request("GET", "/qa/osint-coverage")
+    if tabs_sessions_group.get("osintSurfaces") != osint_coverage.get("osintSurfaces"):
+        raise AssertionError(f"coverage index tabs/sessions osint surfaces mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("osintSurfaceCount") != osint_coverage.get("osintSurfaceCount"):
+        raise AssertionError(f"coverage index tabs/sessions osint surface count mismatch: {tabs_sessions_group}")
+    if osint_coverage.get("osintSurfaceParity") is not True:
+        raise AssertionError(f"osint coverage surface parity mismatch: {osint_coverage}")
+    if tabs_sessions_group.get("osintSurfaceParity") != osint_coverage.get("osintSurfaceParity"):
+        raise AssertionError(f"coverage index tabs/sessions osint surface parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("osintRoutes") != osint_coverage.get("routes"):
+        raise AssertionError(f"coverage index tabs/sessions osint routes mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("osintRouteCount") != osint_coverage.get("routeCount"):
+        raise AssertionError(f"coverage index tabs/sessions osint route count mismatch: {tabs_sessions_group}")
+    if osint_coverage.get("routeParity") is not True:
+        raise AssertionError(f"osint coverage route parity mismatch: {osint_coverage}")
+    if tabs_sessions_group.get("osintRouteParity") != osint_coverage.get("routeParity"):
+        raise AssertionError(f"coverage index tabs/sessions osint route parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("osintStateKeys") != osint_coverage.get("stateKeys"):
+        raise AssertionError(f"coverage index tabs/sessions osint state keys mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("osintStateKeyCount") != osint_coverage.get("stateKeyCount"):
+        raise AssertionError(f"coverage index tabs/sessions osint state-key count mismatch: {tabs_sessions_group}")
+    if osint_coverage.get("stateKeyParity") is not True:
+        raise AssertionError(f"osint coverage state-key parity mismatch: {osint_coverage}")
+    if tabs_sessions_group.get("osintStateKeyParity") != osint_coverage.get("stateKeyParity"):
+        raise AssertionError(f"coverage index tabs/sessions osint state-key parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("osintContracts") != osint_coverage.get("contracts"):
+        raise AssertionError(f"coverage index tabs/sessions osint contracts mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("osintContractCount") != len(osint_coverage.get("contracts") or {}):
+        raise AssertionError(f"coverage index tabs/sessions osint contract count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("osintProofs") != osint_coverage.get("proofs"):
+        raise AssertionError(f"coverage index tabs/sessions osint proofs mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("osintProofCount") != osint_coverage.get("proofCount"):
+        raise AssertionError(f"coverage index tabs/sessions osint proof count mismatch: {tabs_sessions_group}")
+    if osint_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"osint coverage proof-file parity mismatch: {osint_coverage}")
+    if tabs_sessions_group.get("osintProofFileParity") != osint_coverage.get("proofFileParity"):
+        raise AssertionError(f"coverage index tabs/sessions osint proof-file parity mismatch: {tabs_sessions_group}")
     report_coverage = request("GET", "/qa/report-coverage")
     if tabs_sessions_group.get("reportSurfaces") != report_coverage.get("reportSurfaces"):
         raise AssertionError(f"coverage index tabs/sessions report surfaces mismatch: {tabs_sessions_group}")

@@ -112,6 +112,7 @@ def assert_testserver_smoke() -> None:
     creds_coverage = request("GET", "/qa/creds-coverage")
     exploit_coverage = request("GET", "/qa/exploit-coverage")
     post_coverage = request("GET", "/qa/post-coverage")
+    osint_coverage = request("GET", "/qa/osint-coverage")
     report_coverage = request("GET", "/qa/report-coverage")
     stash_coverage = request("GET", "/qa/stash-coverage")
     coverage_index = request("GET", "/qa/coverage-index")
@@ -185,6 +186,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing exploit coverage route contract: {qa}")
     if "/qa/post-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing post coverage route contract: {qa}")
+    if "/qa/osint-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing osint coverage route contract: {qa}")
     if "/qa/report-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing report coverage route contract: {qa}")
     if "/qa/stash-coverage" not in qa.get("stateRoutes", []):
@@ -1230,6 +1233,22 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index post state-key list mismatch: {coverage_index}")
     if tabs_sessions_group.get("postContracts") != post_coverage.get("contracts"):
         raise AssertionError(f"/qa/coverage-index post contract map mismatch: {coverage_index}")
+    if osint_coverage.get("osintSurfaceParity") is not True:
+        raise AssertionError(f"/qa/osint-coverage surface parity mismatch: {osint_coverage}")
+    if osint_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/osint-coverage proof-file parity mismatch: {osint_coverage}")
+    if tabs_sessions_group.get("osintSurfaces") != osint_coverage.get("osintSurfaces"):
+        raise AssertionError(f"/qa/coverage-index osint surface list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("osintSurfaceParity") != osint_coverage.get("osintSurfaceParity"):
+        raise AssertionError(f"/qa/coverage-index osint surface parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("osintProofs") != osint_coverage.get("proofs"):
+        raise AssertionError(f"/qa/coverage-index osint proof list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("osintProofFileParity") != osint_coverage.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index osint proof-file parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("osintStateKeys") != osint_coverage.get("stateKeys"):
+        raise AssertionError(f"/qa/coverage-index osint state-key list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("osintContracts") != osint_coverage.get("contracts"):
+        raise AssertionError(f"/qa/coverage-index osint contract map mismatch: {coverage_index}")
     if report_coverage.get("reportSurfaceParity") is not True:
         raise AssertionError(f"/qa/report-coverage surface parity mismatch: {report_coverage}")
     if report_coverage.get("proofFileParity") is not True:

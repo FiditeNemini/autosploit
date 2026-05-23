@@ -458,6 +458,10 @@ OSINT:
 - Artifact action behavior is covered by `scripts/osint-artifact-actions-proof.py`,
   and visible row controls are captured under
   `docs/visual-proofs/checkpoint-95`.
+- `/qa/osint-coverage` rolls up username/email/metadata rows, screenshot
+  artifacts, copy paths for each OSINT result type, artifact row actions,
+  lifecycle state, and activity telemetry with surface/route/state-key/proof
+  list/count/parity metadata and mirrors into `/qa/coverage-index`.
 
 Report:
 
@@ -939,6 +943,7 @@ mirrors session route list/count, contract map/count, proof list/count/file pari
   Creds coverage surface/route/state-key/proof list/count/parity,
   Exploit coverage surface/route/state-key/proof list/count/parity,
   Post coverage surface/route/state-key/proof list/count/parity,
+  OSINT coverage surface/route/state-key/proof list/count/parity,
   Report coverage surface/route/state-key/proof list/count/parity,
   Stash coverage surface/route/state-key/proof list/count/parity,
   agent-loop phase list/count/parity and phase-proof map/count/parity/file parity,

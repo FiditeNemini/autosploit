@@ -453,6 +453,10 @@ OSINT:
   tracks status, summary, last action, validated path, byte count, and action
   history. `/state.osintArtifacts[*].actionLabels` exposes the user-facing row
   action labels.
+- `/qa/osint-coverage` now summarizes the OSINT tab as one auditable surface:
+  username/email/metadata rows, screenshot artifacts, copy paths for each OSINT
+  result type, artifact row actions, lifecycle state, and activity telemetry
+  expose surface/route/state-key/proof list/count/parity metadata.
 - Visible artifact action controls are captured under
   `docs/visual-proofs/checkpoint-95`.
 
@@ -818,6 +822,7 @@ Automated no-model gates:
   Creds coverage surface/route/state-key/proof list/count/parity,
   Exploit coverage surface/route/state-key/proof list/count/parity,
   Post coverage surface/route/state-key/proof list/count/parity,
+  OSINT coverage surface/route/state-key/proof list/count/parity,
   Report coverage surface/route/state-key/proof list/count/parity,
   Stash coverage surface/route/state-key/proof list/count/parity,
   action-state-key count/parity, agent-loop
