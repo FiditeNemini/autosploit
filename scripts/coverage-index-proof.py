@@ -713,18 +713,30 @@ def assert_coverage_index() -> None:
     cve_taxonomy = request("GET", "/qa/cve-taxonomy-coverage")
     if chat_context_group.get("cveTaxonomySourceFeeds") != cve_taxonomy.get("sourceFeeds"):
         raise AssertionError(f"coverage index chat/context cve taxonomy source feed mismatch: {chat_context_group}")
+    if chat_context_group.get("cveTaxonomySourceFeedCount") != cve_taxonomy.get("sourceFeedCount"):
+        raise AssertionError(f"coverage index chat/context cve taxonomy source feed count mismatch: {chat_context_group}")
+    if chat_context_group.get("cveTaxonomySourceFeedParity") != cve_taxonomy.get("sourceFeedParity"):
+        raise AssertionError(f"coverage index chat/context cve taxonomy source feed parity mismatch: {chat_context_group}")
     if chat_context_group.get("cveTaxonomySoftwareFamilies") != cve_taxonomy.get("softwareFamilies"):
         raise AssertionError(f"coverage index chat/context cve taxonomy software families mismatch: {chat_context_group}")
     if chat_context_group.get("cveTaxonomySoftwareFamilyCount") != cve_taxonomy.get("softwareFamilyCount"):
         raise AssertionError(f"coverage index chat/context cve taxonomy software family count mismatch: {chat_context_group}")
+    if chat_context_group.get("cveTaxonomySoftwareFamilyParity") != cve_taxonomy.get("softwareFamilyParity"):
+        raise AssertionError(f"coverage index chat/context cve taxonomy software family parity mismatch: {chat_context_group}")
     if chat_context_group.get("cveTaxonomyVulnerabilityClasses") != cve_taxonomy.get("vulnerabilityClasses"):
         raise AssertionError(f"coverage index chat/context cve taxonomy vulnerability classes mismatch: {chat_context_group}")
     if chat_context_group.get("cveTaxonomyVulnerabilityClassCount") != cve_taxonomy.get("vulnerabilityClassCount"):
         raise AssertionError(f"coverage index chat/context cve taxonomy vulnerability class count mismatch: {chat_context_group}")
+    if chat_context_group.get("cveTaxonomyVulnerabilityClassParity") != cve_taxonomy.get("vulnerabilityClassParity"):
+        raise AssertionError(f"coverage index chat/context cve taxonomy vulnerability class parity mismatch: {chat_context_group}")
     if chat_context_group.get("cveTaxonomyRiskSignals") != cve_taxonomy.get("riskSignals"):
         raise AssertionError(f"coverage index chat/context cve taxonomy risk signals mismatch: {chat_context_group}")
+    if chat_context_group.get("cveTaxonomyRiskSignalParity") != cve_taxonomy.get("riskSignalParity"):
+        raise AssertionError(f"coverage index chat/context cve taxonomy risk signal parity mismatch: {chat_context_group}")
     if chat_context_group.get("cveTaxonomyEvidenceFlow") != cve_taxonomy.get("evidenceFlow"):
         raise AssertionError(f"coverage index chat/context cve taxonomy evidence flow mismatch: {chat_context_group}")
+    if chat_context_group.get("cveTaxonomyEvidenceFlowParity") != cve_taxonomy.get("evidenceFlowParity"):
+        raise AssertionError(f"coverage index chat/context cve taxonomy evidence flow parity mismatch: {chat_context_group}")
     if chat_context_group.get("cveTaxonomyAgentToolNames") != cve_taxonomy.get("agentToolNames"):
         raise AssertionError(f"coverage index chat/context cve taxonomy tool names mismatch: {chat_context_group}")
     if chat_context_group.get("cveTaxonomyBoundedContextContract") != cve_taxonomy.get("boundedContextContract"):

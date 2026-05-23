@@ -208,7 +208,9 @@ Current context sources:
   25, and local custom CVEs as source feeds; 19 modern software families; 21
   vulnerability classes; risk signals; and an evidence flow from scan evidence
   through product normalization, CVE search, risk ranking, finding draft,
-  context catalogue, and report section.
+  context catalogue, and report section. The route reports list/count/parity
+  status for source feeds, software families, vulnerability classes, risk
+  signals, and evidence-flow steps.
 - Stash items can be sent to chat, truncated to about 5 KB in `ContentView`.
 - Active phase guidance comes from `PentestPhase`.
 - Active op, scope, findings, and stash are persisted through `DatabaseManager`.
@@ -890,8 +892,8 @@ Current repeatable gates:
   map/count/parity/file parity mirrored from `/qa/tool-flow-coverage`.
   The chat/context group also mirrors `/qa/cve-taxonomy-coverage`, including
   source feeds, software families, vulnerability classes, risk signals,
-  evidence-flow steps, agent tool names, bounded context contract, and report
-  assembly contract.
+  evidence-flow steps, list/count/parity status, agent tool names, bounded
+  context contract, and report assembly contract.
   The tabs/sessions group exposes
   interaction-mode count, covered tab count, session state-key count, and
   action-state-key count/parity, mirrors subtab tab maps and proof count/file parity,

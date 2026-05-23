@@ -139,7 +139,9 @@ Dynamic context:
   network, cloud, container, CI/CD, database, collaboration, MFT, virtualization,
   logging, endpoint, OT/ICS, API, secrets, and supply-chain surfaces. It also
   names vulnerability classes, risk signals, bounded context behavior, and the
-  scan-evidence to report-section flow.
+  scan-evidence to report-section flow, with list/count/parity checks for the
+  source feeds, software families, vulnerability classes, risk signals, and
+  evidence-flow steps.
 - `search_context` is exposed as a model-callable built-in tool. It queries the
   same ranked catalogue on demand with a bounded `max_snippets` limit so the
   model can pull targeted notes/assets/findings/CVEs without forcing all context
@@ -769,8 +771,8 @@ Automated no-model gates:
   list/count/parity plus proof map/count/parity/file parity from `/qa/tool-flow-coverage`.
   The chat/context group mirrors the CVE taxonomy route so source feeds,
   software/vuln coverage, risk signals, evidence flow, agent tools,
-  bounded-context behavior, and report assembly contract remain visible in the
-  top-level QA index.
+  list/count/parity status, bounded-context behavior, and report assembly
+  contract remain visible in the top-level QA index.
   The tabs/sessions group exposes
   interaction-mode count, covered tab
   count, session state-key count, subtab tab maps and proof count/file parity,

@@ -853,8 +853,18 @@ def assert_testserver_smoke() -> None:
     cve_taxonomy_coverage = request("GET", "/qa/cve-taxonomy-coverage")
     if cve_taxonomy_coverage.get("softwareFamilyCount", 0) < 19:
         raise AssertionError(f"/qa/cve-taxonomy-coverage software family coverage too small: {cve_taxonomy_coverage}")
+    if cve_taxonomy_coverage.get("softwareFamilyParity") is not True:
+        raise AssertionError(f"/qa/cve-taxonomy-coverage software family parity mismatch: {cve_taxonomy_coverage}")
     if cve_taxonomy_coverage.get("vulnerabilityClassCount", 0) < 21:
         raise AssertionError(f"/qa/cve-taxonomy-coverage vulnerability class coverage too small: {cve_taxonomy_coverage}")
+    if cve_taxonomy_coverage.get("vulnerabilityClassParity") is not True:
+        raise AssertionError(f"/qa/cve-taxonomy-coverage vulnerability class parity mismatch: {cve_taxonomy_coverage}")
+    if cve_taxonomy_coverage.get("sourceFeedParity") is not True:
+        raise AssertionError(f"/qa/cve-taxonomy-coverage source-feed parity mismatch: {cve_taxonomy_coverage}")
+    if cve_taxonomy_coverage.get("riskSignalParity") is not True:
+        raise AssertionError(f"/qa/cve-taxonomy-coverage risk-signal parity mismatch: {cve_taxonomy_coverage}")
+    if cve_taxonomy_coverage.get("evidenceFlowParity") is not True:
+        raise AssertionError(f"/qa/cve-taxonomy-coverage evidence-flow parity mismatch: {cve_taxonomy_coverage}")
     if cve_taxonomy_coverage.get("boundedContextContract") != "search-on-demand-not-force-injected":
         raise AssertionError(f"/qa/cve-taxonomy-coverage bounded context contract mismatch: {cve_taxonomy_coverage}")
     if cve_taxonomy_coverage.get("reportingContract") != "asset-surface-evidence-vuln-exploit-result-remediation":
@@ -863,6 +873,16 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index cve taxonomy tool mismatch: {coverage_index}")
     if chat_context_group.get("cveTaxonomyEvidenceFlow") != cve_taxonomy_coverage.get("evidenceFlow"):
         raise AssertionError(f"/qa/coverage-index cve taxonomy evidence-flow mismatch: {coverage_index}")
+    if chat_context_group.get("cveTaxonomySourceFeedParity") != cve_taxonomy_coverage.get("sourceFeedParity"):
+        raise AssertionError(f"/qa/coverage-index cve taxonomy source-feed parity mismatch: {coverage_index}")
+    if chat_context_group.get("cveTaxonomySoftwareFamilyParity") != cve_taxonomy_coverage.get("softwareFamilyParity"):
+        raise AssertionError(f"/qa/coverage-index cve taxonomy software family parity mismatch: {coverage_index}")
+    if chat_context_group.get("cveTaxonomyVulnerabilityClassParity") != cve_taxonomy_coverage.get("vulnerabilityClassParity"):
+        raise AssertionError(f"/qa/coverage-index cve taxonomy vulnerability class parity mismatch: {coverage_index}")
+    if chat_context_group.get("cveTaxonomyRiskSignalParity") != cve_taxonomy_coverage.get("riskSignalParity"):
+        raise AssertionError(f"/qa/coverage-index cve taxonomy risk-signal parity mismatch: {coverage_index}")
+    if chat_context_group.get("cveTaxonomyEvidenceFlowParity") != cve_taxonomy_coverage.get("evidenceFlowParity"):
+        raise AssertionError(f"/qa/coverage-index cve taxonomy evidence-flow parity mismatch: {coverage_index}")
     if settings_visuals_group.get("settingsSurfaceProofs") != settings_coverage.get("settingsSurfaceProofs"):
         raise AssertionError(f"/qa/coverage-index settings surface proof map mismatch: {coverage_index}")
     if settings_visuals_group.get("settingsCategories") != settings_coverage.get("categories"):
