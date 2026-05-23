@@ -146,6 +146,8 @@ def run() -> None:
             missing_component_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
             if missing_component_files:
                 raise AssertionError(f"runtime cache component {component} names missing proof files {missing_component_files}: {coverage}")
+        if coverage.get("cacheComponentProofFileParity") is not True:
+            raise AssertionError(f"runtime cache component proof-file parity mismatch: {coverage}")
         if not EXPECTED_PROOFS.issubset(set(coverage.get("proofs") or [])):
             raise AssertionError(f"runtime proof list missing entries: {coverage}")
         if coverage.get("proofCount", 0) < len(EXPECTED_PROOFS):

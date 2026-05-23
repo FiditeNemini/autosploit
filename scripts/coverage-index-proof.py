@@ -573,6 +573,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime cache component proof count mismatch: {runtime_group}")
     if runtime_group.get("cacheComponentProofParity") != runtime_coverage.get("cacheComponentProofParity"):
         raise AssertionError(f"coverage index runtime cache component proof parity mismatch: {runtime_group}")
+    if runtime_coverage.get("cacheComponentProofFileParity") is not True:
+        raise AssertionError(f"runtime coverage cache component proof-file parity mismatch: {runtime_coverage}")
+    if runtime_group.get("cacheComponentProofFileParity") != runtime_coverage.get("cacheComponentProofFileParity"):
+        raise AssertionError(f"coverage index runtime cache component proof-file parity mismatch: {runtime_group}")
     chat_context_group = groups.get("chatAndContext") or {}
     chat_coverage = request("GET", "/qa/chat-coverage")
     if chat_context_group.get("stateKeyCount", 0) < 19:

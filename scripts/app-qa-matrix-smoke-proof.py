@@ -756,6 +756,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index runtime live proof artifact map mismatch: {coverage_index}")
     if runtime_group.get("cacheComponentProofs") != runtime_coverage.get("cacheComponentProofs"):
         raise AssertionError(f"/qa/coverage-index runtime cache component proof map mismatch: {coverage_index}")
+    if runtime_coverage.get("cacheComponentProofFileParity") is not True:
+        raise AssertionError(f"/qa/runtime-coverage cache component proof-file parity mismatch: {runtime_coverage}")
+    if runtime_group.get("cacheComponentProofFileParity") != runtime_coverage.get("cacheComponentProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index runtime cache component proof-file parity mismatch: {coverage_index}")
     settings_visuals_group = index_groups.get("settingsAndVisuals") or {}
     chat_context_group = index_groups.get("chatAndContext") or {}
     if chat_context_group.get("headerCacheBadgeProofs") != chat_coverage.get("headerCacheBadgeProofs"):

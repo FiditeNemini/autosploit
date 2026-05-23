@@ -681,7 +681,7 @@ Current repeatable gates:
   full-prefix-skip, and catalogue-prefix-shape gates, plus
   `liveProofArtifactCount` for matrix-level artifact accounting. It now also
   exposes runtime cache component list/count/parity and component proof
-  map/count/parity for prefix cache, prompt L2 disk, paged KV cache, block L2
+  map/count/parity/file parity for prefix cache, prompt L2 disk, paged KV cache, block L2
   disk, TurboQuant KV, SSM companion L2, and new-context engine-session
   preservation. Dynamic context and catalogue
   invariants are now summarized through `/qa/context-coverage`, including the
@@ -846,7 +846,7 @@ Current repeatable gates:
   `supportedFamilies`, `cacheResponseMethod`, `cacheResponsesInferenceMethod`,
   `newModelSessionBehavior`, runtime contract map/count, route list/count,
   proof list/count/file parity, runtime cache component list/count/parity,
-  component proof map/count/parity, live proof family matrix, and
+  component proof map/count/parity/file parity, live proof family matrix, and
   live proof artifact map/count, so Qwen/MiniMax-only support,
   the `prefix-cache-l2-turboquant` response path, cache-preserving new-context
   session boundary, and the checked-in live replay
