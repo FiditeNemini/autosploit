@@ -566,10 +566,10 @@ Automated no-model gates:
   result-to-context routing, deployed-agent retrieval, durable embeddings,
   targeted stash retrieval, new-context cache preservation, the `/context/new`
   route, proof-count metadata, `stateKeys`, and retrieval source
-  list/count/parity plus retrieval-source proof map/count/parity for the
+  list/count/parity plus retrieval-source proof map/count/parity/file parity for the
   context audit surfaces. It also exposes `contextDeliveryModes`,
   `contextDeliveryModeCount`, and
-  `contextDeliveryModeParity`, plus delivery-mode proof map/count/parity, so
+  `contextDeliveryModeParity`, plus delivery-mode proof map/count/parity/file parity, so
   automatic bounded injection, on-demand `search_context`, persisted turn audit,
   durable embeddings, and active-scope stash retrieval are visible as separate
   anti-context-flooding paths tied to concrete proof scripts.
@@ -640,8 +640,8 @@ Automated no-model gates:
   `newModelSessionBehavior`, cache-session field list/count/parity, cache-session
   field proof map/count/parity, and it
   mirrors `/qa/context-coverage` retrieval source list/count/parity plus
-  retrieval source proof map/count/parity and context delivery mode
-  list/count/parity plus delivery proof map/count/parity, so
+  retrieval source proof map/count/parity/file parity and context delivery mode
+  list/count/parity plus delivery proof map/count/parity/file parity, so
   the aggregate coverage map carries the same visible cache-session and bounded
   dynamic-context source contracts as the detailed endpoints.
   `/qa/checkpoint-ledger` exposes checkpoint documentation count/file parity,
@@ -719,8 +719,8 @@ Automated no-model gates:
   list/count, contract map/count, proof list/count/file parity, state-key list/count,
   context search tool name, automatic/current injection caps, context route
   list/count, contract map/count, proof list/count/file parity, state-key list/count,
-  retrieval-source proof map/count/parity, and delivery-mode proof
-  map/count/parity. The settings/visuals group exposes Settings surface
+  retrieval-source proof map/count/parity/file parity, and delivery-mode proof
+  map/count/parity/file parity. The settings/visuals group exposes Settings surface
   list/count/parity, Settings surface proof map/count/parity, visual surface list/count/parity,
   Settings category list/count/current category, Settings route list/count,
   contract map/count, proof list/count/file parity, settings visual manifest list/count,

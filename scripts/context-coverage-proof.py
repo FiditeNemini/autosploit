@@ -166,6 +166,8 @@ def assert_context_coverage() -> None:
         missing_source_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
         if missing_source_files:
             raise AssertionError(f"context retrieval source {source} names missing proof files {missing_source_files}: {coverage}")
+    if coverage.get("retrievalSourceProofFileParity") is not True:
+        raise AssertionError(f"context retrieval source proof-file parity mismatch: {coverage}")
     if coverage.get("contextDeliveryModes") != REQUIRED_DELIVERY_MODES:
         raise AssertionError(f"context coverage delivery modes mismatch: {coverage}")
     if coverage.get("contextDeliveryModeCount") != len(REQUIRED_DELIVERY_MODES):
@@ -182,6 +184,8 @@ def assert_context_coverage() -> None:
         missing_mode_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
         if missing_mode_files:
             raise AssertionError(f"context delivery mode {mode} names missing proof files {missing_mode_files}: {coverage}")
+    if coverage.get("contextDeliveryModeProofFileParity") is not True:
+        raise AssertionError(f"context delivery mode proof-file parity mismatch: {coverage}")
     state_keys = set(coverage.get("stateKeys") or [])
     missing_state_keys = sorted(REQUIRED_STATE_KEYS.difference(state_keys))
     if missing_state_keys:

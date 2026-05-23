@@ -704,8 +704,16 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index context state-key count mismatch: {coverage_index}")
     if chat_context_group.get("retrievalSourceProofs") != context_coverage.get("retrievalSourceProofs"):
         raise AssertionError(f"/qa/coverage-index retrieval source proof map mismatch: {coverage_index}")
+    if context_coverage.get("retrievalSourceProofFileParity") is not True:
+        raise AssertionError(f"/qa/context-coverage retrieval source proof-file parity mismatch: {context_coverage}")
+    if chat_context_group.get("retrievalSourceProofFileParity") != context_coverage.get("retrievalSourceProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index retrieval source proof-file parity mismatch: {coverage_index}")
     if chat_context_group.get("contextDeliveryModeProofs") != context_coverage.get("contextDeliveryModeProofs"):
         raise AssertionError(f"/qa/coverage-index context delivery mode proof map mismatch: {coverage_index}")
+    if context_coverage.get("contextDeliveryModeProofFileParity") is not True:
+        raise AssertionError(f"/qa/context-coverage delivery mode proof-file parity mismatch: {context_coverage}")
+    if chat_context_group.get("contextDeliveryModeProofFileParity") != context_coverage.get("contextDeliveryModeProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index context delivery mode proof-file parity mismatch: {coverage_index}")
     if settings_visuals_group.get("settingsSurfaceProofs") != settings_coverage.get("settingsSurfaceProofs"):
         raise AssertionError(f"/qa/coverage-index settings surface proof map mismatch: {coverage_index}")
     if settings_visuals_group.get("settingsCategories") != settings_coverage.get("categories"):

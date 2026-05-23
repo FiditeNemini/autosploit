@@ -557,6 +557,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context retrieval source proof count mismatch: {chat_context_group}")
     if chat_context_group.get("retrievalSourceProofParity") != context_coverage.get("retrievalSourceProofParity"):
         raise AssertionError(f"coverage index chat/context retrieval source proof parity mismatch: {chat_context_group}")
+    if chat_context_group.get("retrievalSourceProofFileParity") != context_coverage.get("retrievalSourceProofFileParity"):
+        raise AssertionError(f"coverage index chat/context retrieval source proof-file parity mismatch: {chat_context_group}")
     if chat_context_group.get("contextDeliveryModes") != context_coverage.get("contextDeliveryModes"):
         raise AssertionError(f"coverage index chat/context delivery modes mismatch: {chat_context_group}")
     if chat_context_group.get("contextDeliveryModeCount") != context_coverage.get("contextDeliveryModeCount"):
@@ -569,6 +571,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context delivery mode proof count mismatch: {chat_context_group}")
     if chat_context_group.get("contextDeliveryModeProofParity") != context_coverage.get("contextDeliveryModeProofParity"):
         raise AssertionError(f"coverage index chat/context delivery mode proof parity mismatch: {chat_context_group}")
+    if chat_context_group.get("contextDeliveryModeProofFileParity") != context_coverage.get("contextDeliveryModeProofFileParity"):
+        raise AssertionError(f"coverage index chat/context delivery mode proof-file parity mismatch: {chat_context_group}")
     settings_visuals_group = groups.get("settingsAndVisuals") or {}
     settings_coverage = request("GET", "/qa/settings-coverage")
     if settings_visuals_group.get("settingsSurfaces") != settings_coverage.get("settingsSurfaces"):

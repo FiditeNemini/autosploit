@@ -685,8 +685,9 @@ Current repeatable gates:
   routing, deployed-agent context search, durable embeddings, stash retrieval,
   and new-context cache preservation proof gates. It now exposes `proofCount`
   and `/context/new` so cache-preserving context resets stay visible in the
-  aggregate, plus `stateKeys` and retrieval source list/count/parity for
-  context audit surfaces. It also exposes context delivery mode list/count/
+  aggregate, plus `stateKeys` and retrieval source list/count/parity plus
+  retrieval-source proof map/count/parity/file parity for context audit
+  surfaces. It also exposes context delivery mode list/count/
   parity for automatic bounded injection, on-demand `search_context`, persisted
   turn audit, durable embeddings, and active-scope stash retrieval. The source
   list names asset ports, findings, raw tool
@@ -750,8 +751,8 @@ Current repeatable gates:
   `newModelSessionBehavior`, cache-session field list/count/parity, and
   cache-session field proof map/count/parity. It also mirrors
   `/qa/context-coverage` retrieval source list/count/parity plus retrieval
-  source proof map/count/parity and context delivery mode list/count/parity
-  plus delivery proof map/count/parity, so the aggregate coverage map carries
+  source proof map/count/parity/file parity and context delivery mode list/count/parity
+  plus delivery proof map/count/parity/file parity, so the aggregate coverage map carries
   the same visible cache-session and bounded dynamic-context source contracts as
   the detailed endpoints.
   `/qa/checkpoint-ledger` exposes checkpoint documentation count/file parity,
@@ -835,9 +836,9 @@ Current repeatable gates:
   `/qa/context-coverage` search tool name, automatic/current injection caps,
   context route list/count, contract map/count, proof list/count/file parity, state-key
   list/count, context retrieval source list/count/parity,
-  retrieval-source proof count/parity,
+  retrieval-source proof count/parity/file parity,
   context delivery mode list/count/parity, and delivery-mode proof
-  count/parity, so
+  count/parity/file parity, so
   bounded dynamic catalogue source coverage and cache-session preservation remain
   visible from the aggregate QA index. The
   settings/visuals group exposes Settings surface list/count/parity, Settings
