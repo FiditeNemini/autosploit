@@ -270,6 +270,10 @@ def assert_tab_action_coverage() -> None:
     missing_state_keys = sorted(REQUIRED_ACTION_STATE_KEYS.difference(state_keys))
     if missing_state_keys:
         raise AssertionError(f"tab action coverage missing state keys {missing_state_keys}: {coverage}")
+    if coverage.get("actionStateKeyCount") != len(coverage.get("actionStateKeys") or []):
+        raise AssertionError(f"tab action coverage action state key count mismatch: {coverage}")
+    if coverage.get("actionStateKeyParity") is not True:
+        raise AssertionError(f"tab action coverage action state key parity mismatch: {coverage}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/tab-action-coverage" not in qa.get("stateRoutes", []):
