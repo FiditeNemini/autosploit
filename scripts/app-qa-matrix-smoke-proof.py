@@ -535,6 +535,18 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index complete checkpoint list mismatch: {coverage_index}")
     if app_state_group.get("incompleteCheckpoints") != checkpoint_ledger.get("incompleteCheckpoints"):
         raise AssertionError(f"/qa/coverage-index incomplete checkpoint list mismatch: {coverage_index}")
+    if app_state_group.get("legacyIncompleteCheckpointMaxNumber") != checkpoint_ledger.get("legacyIncompleteCheckpointMaxNumber"):
+        raise AssertionError(f"/qa/coverage-index legacy incomplete max checkpoint mismatch: {coverage_index}")
+    if app_state_group.get("legacyIncompleteCheckpointCount") != checkpoint_ledger.get("legacyIncompleteCheckpointCount"):
+        raise AssertionError(f"/qa/coverage-index legacy incomplete checkpoint count mismatch: {coverage_index}")
+    if app_state_group.get("legacyIncompleteCheckpoints") != checkpoint_ledger.get("legacyIncompleteCheckpoints"):
+        raise AssertionError(f"/qa/coverage-index legacy incomplete checkpoint list mismatch: {coverage_index}")
+    if app_state_group.get("currentIncompleteCheckpointCount") != checkpoint_ledger.get("currentIncompleteCheckpointCount"):
+        raise AssertionError(f"/qa/coverage-index current incomplete checkpoint count mismatch: {coverage_index}")
+    if app_state_group.get("currentIncompleteCheckpoints") != checkpoint_ledger.get("currentIncompleteCheckpoints"):
+        raise AssertionError(f"/qa/coverage-index current incomplete checkpoint list mismatch: {coverage_index}")
+    if app_state_group.get("currentCheckpointDocsComplete") != checkpoint_ledger.get("currentCheckpointDocsComplete"):
+        raise AssertionError(f"/qa/coverage-index current checkpoint docs complete flag mismatch: {coverage_index}")
     if app_state_group.get("auditLedgerCount", 0) < 300:
         raise AssertionError(f"/qa/coverage-index audit ledger count mismatch: {coverage_index}")
     if app_state_group.get("auditVisualManifestCount") != audit_ledger.get("visualManifestCount"):
@@ -567,6 +579,18 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index audit incomplete checkpoint count mismatch: {coverage_index}")
     if app_state_group.get("auditIncompleteCheckpoints") != audit_ledger.get("incompleteCheckpoints"):
         raise AssertionError(f"/qa/coverage-index audit incomplete checkpoint list mismatch: {coverage_index}")
+    if app_state_group.get("auditLegacyIncompleteCheckpointMaxNumber") != audit_ledger.get("legacyIncompleteCheckpointMaxNumber"):
+        raise AssertionError(f"/qa/coverage-index audit legacy incomplete max checkpoint mismatch: {coverage_index}")
+    if app_state_group.get("auditLegacyIncompleteCheckpointCount") != audit_ledger.get("legacyIncompleteCheckpointCount"):
+        raise AssertionError(f"/qa/coverage-index audit legacy incomplete checkpoint count mismatch: {coverage_index}")
+    if app_state_group.get("auditLegacyIncompleteCheckpoints") != audit_ledger.get("legacyIncompleteCheckpoints"):
+        raise AssertionError(f"/qa/coverage-index audit legacy incomplete checkpoint list mismatch: {coverage_index}")
+    if app_state_group.get("auditCurrentIncompleteCheckpointCount") != audit_ledger.get("currentIncompleteCheckpointCount"):
+        raise AssertionError(f"/qa/coverage-index audit current incomplete checkpoint count mismatch: {coverage_index}")
+    if app_state_group.get("auditCurrentIncompleteCheckpoints") != audit_ledger.get("currentIncompleteCheckpoints"):
+        raise AssertionError(f"/qa/coverage-index audit current incomplete checkpoint list mismatch: {coverage_index}")
+    if app_state_group.get("auditCurrentCheckpointDocsComplete") != audit_ledger.get("currentCheckpointDocsComplete"):
+        raise AssertionError(f"/qa/coverage-index audit current checkpoint docs complete flag mismatch: {coverage_index}")
     if app_state_group.get("auditLatestCheckpoint") != audit_ledger.get("latestCheckpoint"):
         raise AssertionError(f"/qa/coverage-index audit latest checkpoint mismatch: {coverage_index}")
     if app_state_group.get("auditLatestCheckpointNumber") != audit_ledger.get("latestCheckpointNumber"):

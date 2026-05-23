@@ -320,6 +320,18 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state incomplete checkpoint count mismatch: {app_state_group}")
     if app_state_group.get("incompleteCheckpoints") != checkpoint.get("incompleteCheckpoints"):
         raise AssertionError(f"coverage index app state incomplete checkpoint list mismatch: {app_state_group}")
+    if app_state_group.get("legacyIncompleteCheckpointMaxNumber") != checkpoint.get("legacyIncompleteCheckpointMaxNumber"):
+        raise AssertionError(f"coverage index app state legacy incomplete max checkpoint mismatch: {app_state_group}")
+    if app_state_group.get("legacyIncompleteCheckpointCount") != checkpoint.get("legacyIncompleteCheckpointCount"):
+        raise AssertionError(f"coverage index app state legacy incomplete checkpoint count mismatch: {app_state_group}")
+    if app_state_group.get("legacyIncompleteCheckpoints") != checkpoint.get("legacyIncompleteCheckpoints"):
+        raise AssertionError(f"coverage index app state legacy incomplete checkpoint list mismatch: {app_state_group}")
+    if app_state_group.get("currentIncompleteCheckpointCount") != checkpoint.get("currentIncompleteCheckpointCount"):
+        raise AssertionError(f"coverage index app state current incomplete checkpoint count mismatch: {app_state_group}")
+    if app_state_group.get("currentIncompleteCheckpoints") != checkpoint.get("currentIncompleteCheckpoints"):
+        raise AssertionError(f"coverage index app state current incomplete checkpoint list mismatch: {app_state_group}")
+    if app_state_group.get("currentCheckpointDocsComplete") != checkpoint.get("currentCheckpointDocsComplete"):
+        raise AssertionError(f"coverage index app state current checkpoint docs complete flag mismatch: {app_state_group}")
     if app_state_group.get("checkpointCompletionRatio") != checkpoint.get("checkpointCompletionRatio"):
         raise AssertionError(f"coverage index app state checkpoint ratio mismatch: {app_state_group}")
     if app_state_group.get("latestCheckpoint") != checkpoint.get("latestCheckpoint"):
@@ -372,6 +384,18 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state audit incomplete checkpoint count mismatch: {app_state_group}")
     if app_state_group.get("auditIncompleteCheckpoints") != audit.get("incompleteCheckpoints"):
         raise AssertionError(f"coverage index app state audit incomplete checkpoint list mismatch: {app_state_group}")
+    if app_state_group.get("auditLegacyIncompleteCheckpointMaxNumber") != audit.get("legacyIncompleteCheckpointMaxNumber"):
+        raise AssertionError(f"coverage index app state audit legacy incomplete max checkpoint mismatch: {app_state_group}")
+    if app_state_group.get("auditLegacyIncompleteCheckpointCount") != audit.get("legacyIncompleteCheckpointCount"):
+        raise AssertionError(f"coverage index app state audit legacy incomplete checkpoint count mismatch: {app_state_group}")
+    if app_state_group.get("auditLegacyIncompleteCheckpoints") != audit.get("legacyIncompleteCheckpoints"):
+        raise AssertionError(f"coverage index app state audit legacy incomplete checkpoint list mismatch: {app_state_group}")
+    if app_state_group.get("auditCurrentIncompleteCheckpointCount") != audit.get("currentIncompleteCheckpointCount"):
+        raise AssertionError(f"coverage index app state audit current incomplete checkpoint count mismatch: {app_state_group}")
+    if app_state_group.get("auditCurrentIncompleteCheckpoints") != audit.get("currentIncompleteCheckpoints"):
+        raise AssertionError(f"coverage index app state audit current incomplete checkpoint list mismatch: {app_state_group}")
+    if app_state_group.get("auditCurrentCheckpointDocsComplete") != audit.get("currentCheckpointDocsComplete"):
+        raise AssertionError(f"coverage index app state audit current checkpoint docs complete flag mismatch: {app_state_group}")
     if app_state_group.get("auditLatestCheckpoint") != audit.get("latestCheckpoint"):
         raise AssertionError(f"coverage index app state audit latest checkpoint mismatch: {app_state_group}")
     if app_state_group.get("auditLatestCheckpointNumber") != audit.get("latestCheckpointNumber"):

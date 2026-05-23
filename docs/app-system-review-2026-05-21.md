@@ -653,7 +653,9 @@ Automated no-model gates:
   dynamic-context source contracts as the detailed endpoints.
   `/qa/checkpoint-ledger` exposes checkpoint documentation count/file parity,
   completeness count, completion ratio, complete checkpoint paths, incomplete
-  checkpoint paths, latest checkpoint, and latest checkpoint number using numeric checkpoint ordering; the checkpoint,
+  checkpoint paths, legacy incomplete checkpoint cutoff/list/count,
+  current incomplete checkpoint list/count, the current checkpoint docs complete
+  flag, latest checkpoint, and latest checkpoint number using numeric checkpoint ordering; the checkpoint,
   complete, and incomplete path lists also use that numeric order. The
   `/qa/audit-ledger` route combines proof counts/file parity, source proof-ledger category
   counts/surfaces/surface-count/total/parity, proof category counts/surface
@@ -661,7 +663,8 @@ Automated no-model gates:
   counts, missing/failed artifact counts, and checkpoint completeness counts/
   ratio plus the current gap count into one machine-readable audit rollup.
   It also exposes the missing visual capture paths, failed live-proof paths,
-  complete and incomplete checkpoint paths, latest checkpoint number, gap
+  complete, incomplete, legacy incomplete, and current incomplete checkpoint
+  paths, current checkpoint docs complete flag, latest checkpoint number, gap
   source/path flags, current-gap list, supported-family list,
   unsupported-multimodal block flag, open gap IDs, and structured gap contracts
   directly for triage.
@@ -673,8 +676,10 @@ Automated no-model gates:
   checkpoint count. It also carries complete and incomplete checkpoint counts
   path lists, and file parity from `/qa/checkpoint-ledger`, plus
   `/qa/checkpoint-ledger.checkpoints`, `/qa/checkpoint-ledger.latestCheckpoint`,
-  and `latestCheckpointNumber`, so the same aggregate identifies the current
-  documentation frontier and its completion breakdown. It also carries
+  and `latestCheckpointNumber`, plus legacy/current incomplete checkpoint
+  counts and lists, so the same aggregate identifies the current documentation
+  frontier, separates old checkpoint-doc backlog from current failures, and
+  exposes whether current checkpoint docs are complete. It also carries
   `/qa/artifact-ledger.visualManifests`, visual manifest file parity,
   `/qa/artifact-ledger.liveProofs`, live-proof file parity, and
   `/qa/artifact-ledger.liveProofStatus`, plus

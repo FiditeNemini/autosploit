@@ -68,6 +68,14 @@ def assert_checkpoint_ledger() -> None:
     ]
     expected_complete_set = set(expected_complete)
     expected_incomplete = [path for path in expected_paths if path not in expected_complete_set]
+    expected_legacy_incomplete = [
+        path for path in expected_incomplete
+        if checkpoint_number(ROOT / path) <= 171
+    ]
+    expected_current_incomplete = [
+        path for path in expected_incomplete
+        if checkpoint_number(ROOT / path) > 171
+    ]
     expected_ratio = round(len(expected_complete) / len(checkpoints), 6)
 
     if ledger.get("ok") is not True:
@@ -86,6 +94,18 @@ def assert_checkpoint_ledger() -> None:
         raise AssertionError(f"checkpoint ledger complete list mismatch expected {expected_complete}: {ledger}")
     if ledger.get("incompleteCheckpoints") != expected_incomplete:
         raise AssertionError(f"checkpoint ledger incomplete list mismatch expected {expected_incomplete}: {ledger}")
+    if ledger.get("legacyIncompleteCheckpoints") != expected_legacy_incomplete:
+        raise AssertionError(f"checkpoint ledger legacy incomplete list mismatch expected {expected_legacy_incomplete}: {ledger}")
+    if ledger.get("legacyIncompleteCheckpointCount") != len(expected_legacy_incomplete):
+        raise AssertionError(f"checkpoint ledger legacy incomplete count mismatch: {ledger}")
+    if ledger.get("currentIncompleteCheckpoints") != expected_current_incomplete:
+        raise AssertionError(f"checkpoint ledger current incomplete list mismatch expected {expected_current_incomplete}: {ledger}")
+    if ledger.get("currentIncompleteCheckpointCount") != len(expected_current_incomplete):
+        raise AssertionError(f"checkpoint ledger current incomplete count mismatch: {ledger}")
+    if ledger.get("currentCheckpointDocsComplete") is not True:
+        raise AssertionError(f"checkpoint ledger should report current checkpoint docs complete: {ledger}")
+    if ledger.get("legacyIncompleteCheckpointMaxNumber") != 171:
+        raise AssertionError(f"checkpoint ledger legacy incomplete max checkpoint mismatch: {ledger}")
     if ledger.get("latestCheckpoint") != expected_latest:
         raise AssertionError(f"checkpoint ledger latest checkpoint mismatch expected {expected_latest}: {ledger}")
     if ledger.get("latestCheckpointNumber") != checkpoint_number(max(checkpoints, key=checkpoint_number)):

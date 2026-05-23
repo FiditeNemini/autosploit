@@ -132,6 +132,18 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit incomplete checkpoint count mismatch: {audit}")
     if audit.get("incompleteCheckpoints") != checkpoint.get("incompleteCheckpoints"):
         raise AssertionError(f"audit incomplete checkpoint list mismatch: {audit}")
+    if audit.get("legacyIncompleteCheckpointMaxNumber") != checkpoint.get("legacyIncompleteCheckpointMaxNumber"):
+        raise AssertionError(f"audit legacy incomplete max checkpoint mismatch: {audit}")
+    if audit.get("legacyIncompleteCheckpointCount") != checkpoint.get("legacyIncompleteCheckpointCount"):
+        raise AssertionError(f"audit legacy incomplete checkpoint count mismatch: {audit}")
+    if audit.get("legacyIncompleteCheckpoints") != checkpoint.get("legacyIncompleteCheckpoints"):
+        raise AssertionError(f"audit legacy incomplete checkpoint list mismatch: {audit}")
+    if audit.get("currentIncompleteCheckpointCount") != checkpoint.get("currentIncompleteCheckpointCount"):
+        raise AssertionError(f"audit current incomplete checkpoint count mismatch: {audit}")
+    if audit.get("currentIncompleteCheckpoints") != checkpoint.get("currentIncompleteCheckpoints"):
+        raise AssertionError(f"audit current incomplete checkpoint list mismatch: {audit}")
+    if audit.get("currentCheckpointDocsComplete") != checkpoint.get("currentCheckpointDocsComplete"):
+        raise AssertionError(f"audit current checkpoint docs complete flag mismatch: {audit}")
     if audit.get("latestCheckpoint") != checkpoint.get("latestCheckpoint"):
         raise AssertionError(f"audit latest checkpoint mismatch: {audit}")
     if audit.get("latestCheckpointNumber") != checkpoint.get("latestCheckpointNumber"):
