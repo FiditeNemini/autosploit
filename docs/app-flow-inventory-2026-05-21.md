@@ -1175,6 +1175,14 @@ Required future proof gates:
   records the proof owner. The counts and proof parity are mirrored in
   `/qa/coverage-index.groups.appState`, which keeps service-layer changes from
   bypassing the route/action/view inventories.
+- Swift model/state ownership is summarized through
+  `/qa/model-state-inventory`. It parses every Swift file under
+  `ExploitBot/Sources/ExploitBot/Models`, records declared structs/classes/
+  enums/protocols, function names, and enum cases, then groups them by AppState
+  core, operation models, navigation models, chat models, or parsed-result
+  models. The route locks the current operation status/mode, pentest phase, and
+  tool-tab enum cases, and mirrors file/type/function/group/proof parity into
+  `/qa/coverage-index.groups.appState`.
 - Python runtime ownership is summarized through
   `/qa/python-runtime-inventory`. It parses Python files under
   `ExploitBotEngine` and `scripts`, groups them by engine runtime, API adapter,

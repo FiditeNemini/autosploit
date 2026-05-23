@@ -1270,6 +1270,16 @@ Visual gates:
   proof owner. Coverage-index mirrors its file counts, function counts, group
   counts, and proof-file parity so backend service changes remain tied to
   proof coverage.
+- `/qa/model-state-inventory` is the source-owned inventory for Swift model and
+  state surfaces: it parses every Swift file under
+  `ExploitBot/Sources/ExploitBot/Models`, records declared structs/classes/
+  enums/protocols, function names, and enum cases, groups files by AppState
+  core, operation models, navigation models, chat models, or parsed-result
+  models, and records the proof owner. Coverage-index mirrors its file count,
+  type count, function count, group counts, and proof-file parity through
+  `/qa/coverage-index.groups.appState`, so AppState helpers, model enums,
+  tool-tab cases, operation modes, and parsed-result models remain auditable
+  from source.
 - `/qa/python-runtime-inventory` is the source-owned inventory for Python engine
   and proof surfaces: it parses files under `ExploitBotEngine` and `scripts`,
   records classes/functions, groups them by engine runtime, API adapter,

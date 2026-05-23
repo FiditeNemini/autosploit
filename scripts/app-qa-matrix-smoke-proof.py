@@ -123,6 +123,7 @@ def assert_testserver_smoke() -> None:
     action_state_inventory = request("GET", "/qa/action-state-inventory")
     view_inventory = request("GET", "/qa/view-inventory")
     service_inventory = request("GET", "/qa/service-inventory")
+    model_state_inventory = request("GET", "/qa/model-state-inventory")
     coverage_index = request("GET", "/qa/coverage-index")
     proof_ledger = request("GET", "/qa/proof-ledger")
     artifact_ledger = request("GET", "/qa/artifact-ledger")
@@ -175,6 +176,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing view inventory route contract: {qa}")
     if "/qa/service-inventory" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing service inventory route contract: {qa}")
+    if "/qa/model-state-inventory" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing model-state inventory route contract: {qa}")
     if "/qa/agent-loop-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing agent loop coverage route contract: {qa}")
     if "/qa/agent-tool-authorization-coverage" not in qa.get("stateRoutes", []):
@@ -625,6 +628,20 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index service inventory function count mismatch: {coverage_index}")
     if app_state_group.get("serviceInventoryGroupCounts") != service_inventory.get("groupCounts"):
         raise AssertionError(f"/qa/coverage-index service inventory group counts mismatch: {coverage_index}")
+    if model_state_inventory.get("ok") is not True:
+        raise AssertionError(f"/qa/model-state-inventory failed: {model_state_inventory}")
+    if model_state_inventory.get("fileCount", 0) < 6:
+        raise AssertionError(f"/qa/model-state-inventory file count too low: {model_state_inventory}")
+    if model_state_inventory.get("functionCount", 0) < 150:
+        raise AssertionError(f"/qa/model-state-inventory function count too low: {model_state_inventory}")
+    if model_state_inventory.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/model-state-inventory proof-file parity mismatch: {model_state_inventory}")
+    if app_state_group.get("modelStateInventoryFileCount") != model_state_inventory.get("fileCount"):
+        raise AssertionError(f"/qa/coverage-index model-state inventory file count mismatch: {coverage_index}")
+    if app_state_group.get("modelStateInventoryFunctionCount") != model_state_inventory.get("functionCount"):
+        raise AssertionError(f"/qa/coverage-index model-state inventory function count mismatch: {coverage_index}")
+    if app_state_group.get("modelStateInventoryGroupCounts") != model_state_inventory.get("groupCounts"):
+        raise AssertionError(f"/qa/coverage-index model-state inventory group count mismatch: {coverage_index}")
     if app_state_group.get("contextHooks") != qa.get("contextHooks"):
         raise AssertionError(f"/qa/coverage-index context hook list mismatch: {coverage_index}")
     if app_state_group.get("contextHookCount") != len(qa.get("contextHooks") or []):
