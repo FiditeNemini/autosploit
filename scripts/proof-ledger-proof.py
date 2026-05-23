@@ -100,6 +100,23 @@ def assert_proof_ledger() -> None:
         raise AssertionError(f"proof ledger runtime category too small: {ledger}")
     if "release-readiness-proof.py" not in (categories.get("release") or {}).get("proofs", []):
         raise AssertionError(f"proof ledger missing release readiness proof category: {ledger}")
+    tab_owned_proofs = {
+        "recon-action-status-proof.py",
+        "web-direct-actions-proof.py",
+        "network-protocol-action-proof.py",
+        "creds-action-results-proof.py",
+        "exploit-action-differentiation-proof.py",
+        "post-attribution-proof.py",
+        "osint-artifact-actions-proof.py",
+        "report-generate-action-proof.py",
+        "stash-actions-proof.py",
+    }
+    tabs_proofs = set((categories.get("tabs") or {}).get("proofs") or [])
+    missing_tab_owned = sorted(tab_owned_proofs.difference(tabs_proofs))
+    if missing_tab_owned:
+        raise AssertionError(f"proof ledger tab-owned action proofs categorized outside tabs: {missing_tab_owned}")
+    if ledger.get("categoryOtherCount", 99) > 30:
+        raise AssertionError(f"proof ledger other category still too broad: {ledger}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/proof-ledger" not in qa.get("stateRoutes", []):
