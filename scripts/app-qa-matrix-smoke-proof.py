@@ -113,6 +113,7 @@ def assert_testserver_smoke() -> None:
     checkpoint_ledger = request("GET", "/qa/checkpoint-ledger")
     audit_ledger = request("GET", "/qa/audit-ledger")
     gap_ledger = request("GET", "/qa/gap-ledger")
+    release_readiness = request("GET", "/qa/release-readiness")
 
     required_state_keys = {
         "activeTab",
@@ -179,6 +180,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing audit-ledger route contract: {qa}")
     if "/qa/gap-ledger" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing gap-ledger route contract: {qa}")
+    if "/qa/release-readiness" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing release-readiness route contract: {qa}")
     if subtab_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/subtab-coverage failed: {subtab_coverage}")
     if sorted((subtab_coverage.get("tabs") or {}).keys()) != expected_subtab_tabs:
@@ -477,8 +480,14 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/proof-ledger proof-file parity mismatch: {proof_ledger}")
     if app_state_group.get("proofLedgerProofFileParity") != proof_ledger.get("proofFileParity"):
         raise AssertionError(f"/qa/coverage-index proof-file parity mismatch: {coverage_index}")
-    if app_state_group.get("proofCategorySurfaceCount") != 8:
+    expected_proof_surfaces = ["agent", "chat", "context", "release", "runtime", "settings", "tabs", "tools", "visual"]
+    if app_state_group.get("proofCategorySurfaces") != expected_proof_surfaces:
+        raise AssertionError(f"/qa/coverage-index proof category surfaces mismatch: {coverage_index}")
+    if app_state_group.get("proofCategorySurfaceCount") != len(expected_proof_surfaces):
         raise AssertionError(f"/qa/coverage-index proof category surface count mismatch: {coverage_index}")
+    release_category = (proof_ledger.get("categories") or {}).get("release") or {}
+    if "release-readiness-proof.py" not in (release_category.get("proofs") or []):
+        raise AssertionError(f"/qa/proof-ledger missing release readiness category proof: {proof_ledger}")
     if app_state_group.get("proofLedgerCategoryOtherCount") != proof_ledger.get("categoryOtherCount"):
         raise AssertionError(f"/qa/coverage-index source proof other count mismatch: {coverage_index}")
     if app_state_group.get("proofLedgerCategories") != proof_ledger.get("categories"):
@@ -627,6 +636,23 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/gap-ledger qwen proof-file parity mismatch: {gap_ledger}")
     if app_state_group.get("qwenMultimodalProofFileParity") != gap_ledger.get("qwenMultimodalProofFileParity"):
         raise AssertionError(f"/qa/coverage-index qwen proof-file parity mismatch: {coverage_index}")
+    release_group = index_groups.get("releaseReadiness") or {}
+    if release_readiness.get("ok") is not True:
+        raise AssertionError(f"/qa/release-readiness failed: {release_readiness}")
+    if release_group.get("releaseRoute") != "/qa/release-readiness":
+        raise AssertionError(f"/qa/coverage-index release route mismatch: {coverage_index}")
+    if release_group.get("releaseProofs") != release_readiness.get("proofs"):
+        raise AssertionError(f"/qa/coverage-index release proof list mismatch: {coverage_index}")
+    if release_group.get("releaseProofFileParity") != release_readiness.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index release proof-file parity mismatch: {coverage_index}")
+    if release_group.get("releaseArtifacts") != release_readiness.get("artifacts"):
+        raise AssertionError(f"/qa/coverage-index release artifact map mismatch: {coverage_index}")
+    if release_group.get("releaseManifestFieldParity") is not True:
+        raise AssertionError(f"/qa/coverage-index release manifest field parity mismatch: {coverage_index}")
+    if release_group.get("notarizationGate") != "requires-notary-profile":
+        raise AssertionError(f"/qa/coverage-index release notarization gate mismatch: {coverage_index}")
+    if release_group.get("appBinarySha256Length") != 64 or release_group.get("dmgSha256Length") != 64:
+        raise AssertionError(f"/qa/coverage-index release hash length mismatch: {coverage_index}")
     runtime_group = index_groups.get("runtimeAndCache") or {}
     if runtime_group.get("runtimeContracts") != runtime_coverage.get("contracts"):
         raise AssertionError(f"/qa/coverage-index runtime contract map mismatch: {coverage_index}")
