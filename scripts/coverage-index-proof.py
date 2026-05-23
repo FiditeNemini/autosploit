@@ -388,6 +388,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state audit proof total count mismatch: {app_state_group}")
     if app_state_group.get("auditProofCategoryParity") != audit.get("proofCategoryParity"):
         raise AssertionError(f"coverage index app state audit proof parity mismatch: {app_state_group}")
+    if app_state_group.get("auditQwenMultimodalProofFileParity") != audit.get("qwenMultimodalProofFileParity"):
+        raise AssertionError(f"coverage index app state audit qwen proof-file parity mismatch: {app_state_group}")
     if app_state_group.get("currentGapCount", -1) != 1:
         raise AssertionError(f"coverage index app state current gap count mismatch: {app_state_group}")
     if app_state_group.get("gapSource") != gap.get("source"):
@@ -418,6 +420,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state qwen required work count mismatch: {app_state_group}")
     if app_state_group.get("qwenMultimodalProofCount") != gap.get("qwenMultimodalProofCount"):
         raise AssertionError(f"coverage index app state qwen proof count mismatch: {app_state_group}")
+    if app_state_group.get("qwenMultimodalProofFileParity") != gap.get("qwenMultimodalProofFileParity"):
+        raise AssertionError(f"coverage index app state qwen proof-file parity mismatch: {app_state_group}")
     if "qwenMultimodalRuntime" not in (app_state_group.get("openGapIds") or []):
         raise AssertionError(f"coverage index app state missing qwen multimodal gap id: {app_state_group}")
     runtime_group = groups.get("runtimeAndCache") or {}

@@ -571,6 +571,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index audit source proof category surface count mismatch: {coverage_index}")
     if app_state_group.get("auditProofLedgerCategories") != audit_ledger.get("proofLedgerCategories"):
         raise AssertionError(f"/qa/coverage-index audit source proof category map mismatch: {coverage_index}")
+    if app_state_group.get("auditQwenMultimodalProofFileParity") != audit_ledger.get("qwenMultimodalProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index audit qwen proof-file parity mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerVisualManifests") != artifact_ledger.get("visualManifests"):
         raise AssertionError(f"/qa/coverage-index artifact visual manifest list mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerVisualManifestFileParity") != artifact_ledger.get("visualManifestFileParity"):
@@ -621,6 +623,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index qwen required work count mismatch: {coverage_index}")
     if app_state_group.get("qwenMultimodalProofCount") != gap_ledger.get("qwenMultimodalProofCount"):
         raise AssertionError(f"/qa/coverage-index qwen proof count mismatch: {coverage_index}")
+    if gap_ledger.get("qwenMultimodalProofFileParity") is not True:
+        raise AssertionError(f"/qa/gap-ledger qwen proof-file parity mismatch: {gap_ledger}")
+    if app_state_group.get("qwenMultimodalProofFileParity") != gap_ledger.get("qwenMultimodalProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index qwen proof-file parity mismatch: {coverage_index}")
     runtime_group = index_groups.get("runtimeAndCache") or {}
     if runtime_group.get("runtimeContracts") != runtime_coverage.get("contracts"):
         raise AssertionError(f"/qa/coverage-index runtime contract map mismatch: {coverage_index}")

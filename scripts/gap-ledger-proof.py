@@ -100,6 +100,14 @@ def assert_gap_ledger() -> None:
         raise AssertionError(f"qwen multimodal required runtime work count mismatch: {ledger}")
     if ledger.get("qwenMultimodalProofCount") != len(qwen_gap.get("proofs") or []):
         raise AssertionError(f"qwen multimodal proof count mismatch: {ledger}")
+    missing_proof_files = sorted(
+        proof for proof in qwen_gap.get("proofs") or []
+        if not (ROOT / "scripts" / proof).is_file()
+    )
+    if missing_proof_files:
+        raise AssertionError(f"qwen multimodal gap names missing proof files: {missing_proof_files}")
+    if ledger.get("qwenMultimodalProofFileParity") is not True:
+        raise AssertionError(f"qwen multimodal proof-file parity mismatch: {ledger}")
     required_proofs = {
         "model-folder-warning-proof.py",
         "unsupported-model-start-proof.py",
