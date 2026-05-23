@@ -108,6 +108,7 @@ def assert_testserver_smoke() -> None:
     tab_action_coverage = request("GET", "/qa/tab-action-coverage")
     chat_coverage = request("GET", "/qa/chat-coverage")
     web_coverage = request("GET", "/qa/web-coverage")
+    network_coverage = request("GET", "/qa/network-coverage")
     report_coverage = request("GET", "/qa/report-coverage")
     stash_coverage = request("GET", "/qa/stash-coverage")
     coverage_index = request("GET", "/qa/coverage-index")
@@ -173,6 +174,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing chat coverage route contract: {qa}")
     if "/qa/web-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing web coverage route contract: {qa}")
+    if "/qa/network-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing network coverage route contract: {qa}")
     if "/qa/report-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing report coverage route contract: {qa}")
     if "/qa/stash-coverage" not in qa.get("stateRoutes", []):
@@ -1154,6 +1157,22 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index web state-key list mismatch: {coverage_index}")
     if tabs_sessions_group.get("webContracts") != web_coverage.get("contracts"):
         raise AssertionError(f"/qa/coverage-index web contract map mismatch: {coverage_index}")
+    if network_coverage.get("networkSurfaceParity") is not True:
+        raise AssertionError(f"/qa/network-coverage surface parity mismatch: {network_coverage}")
+    if network_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/network-coverage proof-file parity mismatch: {network_coverage}")
+    if tabs_sessions_group.get("networkSurfaces") != network_coverage.get("networkSurfaces"):
+        raise AssertionError(f"/qa/coverage-index network surface list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("networkSurfaceParity") != network_coverage.get("networkSurfaceParity"):
+        raise AssertionError(f"/qa/coverage-index network surface parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("networkProofs") != network_coverage.get("proofs"):
+        raise AssertionError(f"/qa/coverage-index network proof list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("networkProofFileParity") != network_coverage.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index network proof-file parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("networkStateKeys") != network_coverage.get("stateKeys"):
+        raise AssertionError(f"/qa/coverage-index network state-key list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("networkContracts") != network_coverage.get("contracts"):
+        raise AssertionError(f"/qa/coverage-index network contract map mismatch: {coverage_index}")
     if report_coverage.get("reportSurfaceParity") is not True:
         raise AssertionError(f"/qa/report-coverage surface parity mismatch: {report_coverage}")
     if report_coverage.get("proofFileParity") is not True:

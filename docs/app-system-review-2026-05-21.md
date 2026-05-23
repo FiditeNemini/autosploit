@@ -334,6 +334,10 @@ Network:
 - Long-running lifecycle state now tracks capture/MITM/tunnel status as idle,
   running, done, failed, or canceled and is visible inside the relevant Network
   subtab.
+- `/qa/network-coverage` now summarizes the Network tab as one auditable
+  surface: parsed network hosts, Protocol Scan, copy paths for protocols/SNMP/
+  captures/MITM/tunnels, capture/MITM/tunnel lifecycle state, and activity
+  telemetry expose surface/route/state-key/proof list/count/parity metadata.
 - Live UI screenshot coverage for Capture, MITM, and Tunnels lifecycle strips
   is captured by `scripts/visual-tab-proof.py`.
 
@@ -797,6 +801,7 @@ Automated no-model gates:
   action-state-key list/count/parity,
   tab action surface list/count/parity, tab action surface proof map/count/parity/file parity,
   Web coverage surface/route/state-key/proof list/count/parity,
+  Network coverage surface/route/state-key/proof list/count/parity,
   Report coverage surface/route/state-key/proof list/count/parity,
   Stash coverage surface/route/state-key/proof list/count/parity,
   action-state-key count/parity, agent-loop

@@ -31,6 +31,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/tab-action-coverage",
     "/qa/chat-coverage",
     "/qa/web-coverage",
+    "/qa/network-coverage",
     "/qa/report-coverage",
     "/qa/stash-coverage",
     "/qa/result-parser-coverage",
@@ -57,6 +58,7 @@ REQUIRED_PROOFS = {
     "tab-action-coverage-proof.py",
     "chat-coverage-proof.py",
     "web-coverage-proof.py",
+    "network-coverage-proof.py",
     "report-coverage-proof.py",
     "stash-coverage-proof.py",
     "result-parser-routing-proof.py",
@@ -1183,6 +1185,43 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"web coverage proof-file parity mismatch: {web_coverage}")
     if tabs_sessions_group.get("webProofFileParity") != web_coverage.get("proofFileParity"):
         raise AssertionError(f"coverage index tabs/sessions web proof-file parity mismatch: {tabs_sessions_group}")
+    network_coverage = request("GET", "/qa/network-coverage")
+    if tabs_sessions_group.get("networkSurfaces") != network_coverage.get("networkSurfaces"):
+        raise AssertionError(f"coverage index tabs/sessions network surfaces mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("networkSurfaceCount") != network_coverage.get("networkSurfaceCount"):
+        raise AssertionError(f"coverage index tabs/sessions network surface count mismatch: {tabs_sessions_group}")
+    if network_coverage.get("networkSurfaceParity") is not True:
+        raise AssertionError(f"network coverage surface parity mismatch: {network_coverage}")
+    if tabs_sessions_group.get("networkSurfaceParity") != network_coverage.get("networkSurfaceParity"):
+        raise AssertionError(f"coverage index tabs/sessions network surface parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("networkRoutes") != network_coverage.get("routes"):
+        raise AssertionError(f"coverage index tabs/sessions network routes mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("networkRouteCount") != network_coverage.get("routeCount"):
+        raise AssertionError(f"coverage index tabs/sessions network route count mismatch: {tabs_sessions_group}")
+    if network_coverage.get("routeParity") is not True:
+        raise AssertionError(f"network coverage route parity mismatch: {network_coverage}")
+    if tabs_sessions_group.get("networkRouteParity") != network_coverage.get("routeParity"):
+        raise AssertionError(f"coverage index tabs/sessions network route parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("networkStateKeys") != network_coverage.get("stateKeys"):
+        raise AssertionError(f"coverage index tabs/sessions network state keys mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("networkStateKeyCount") != network_coverage.get("stateKeyCount"):
+        raise AssertionError(f"coverage index tabs/sessions network state-key count mismatch: {tabs_sessions_group}")
+    if network_coverage.get("stateKeyParity") is not True:
+        raise AssertionError(f"network coverage state-key parity mismatch: {network_coverage}")
+    if tabs_sessions_group.get("networkStateKeyParity") != network_coverage.get("stateKeyParity"):
+        raise AssertionError(f"coverage index tabs/sessions network state-key parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("networkContracts") != network_coverage.get("contracts"):
+        raise AssertionError(f"coverage index tabs/sessions network contracts mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("networkContractCount") != len(network_coverage.get("contracts") or {}):
+        raise AssertionError(f"coverage index tabs/sessions network contract count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("networkProofs") != network_coverage.get("proofs"):
+        raise AssertionError(f"coverage index tabs/sessions network proofs mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("networkProofCount") != network_coverage.get("proofCount"):
+        raise AssertionError(f"coverage index tabs/sessions network proof count mismatch: {tabs_sessions_group}")
+    if network_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"network coverage proof-file parity mismatch: {network_coverage}")
+    if tabs_sessions_group.get("networkProofFileParity") != network_coverage.get("proofFileParity"):
+        raise AssertionError(f"coverage index tabs/sessions network proof-file parity mismatch: {tabs_sessions_group}")
     report_coverage = request("GET", "/qa/report-coverage")
     if tabs_sessions_group.get("reportSurfaces") != report_coverage.get("reportSurfaces"):
         raise AssertionError(f"coverage index tabs/sessions report surfaces mismatch: {tabs_sessions_group}")

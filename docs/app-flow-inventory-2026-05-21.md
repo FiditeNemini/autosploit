@@ -351,6 +351,10 @@ Network:
   clipboard preview, and summary, with tab activity recorded as
   `lastTool=copy_network`; `scripts/network-copy-actions-proof.py` covers the
   live seed/copy/state path.
+- `/qa/network-coverage` rolls up parsed network hosts, Protocol Scan, copy
+  paths for protocols/SNMP/captures/MITM/tunnels, capture/MITM/tunnel lifecycle
+  state, and activity telemetry with surface/route/state-key/proof
+  list/count/parity metadata and mirrors into `/qa/coverage-index`.
 - Capture, MITM, and Tunnels lifecycle strip screenshots are captured under
   `docs/visual-proofs/checkpoint-70`.
 
@@ -918,6 +922,7 @@ mirrors session route list/count, contract map/count, proof list/count/file pari
   list/count/file parity, and action-state-key list/count/parity,
   mirrors tab action surface list/count/parity and proof map/count/parity/file parity, mirrors
   Web coverage surface/route/state-key/proof list/count/parity,
+  Network coverage surface/route/state-key/proof list/count/parity,
   Report coverage surface/route/state-key/proof list/count/parity,
   Stash coverage surface/route/state-key/proof list/count/parity,
   agent-loop phase list/count/parity and phase-proof map/count/parity/file parity,
