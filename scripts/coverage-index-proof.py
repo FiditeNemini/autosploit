@@ -421,6 +421,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime proof list mismatch: {runtime_group}")
     if runtime_group.get("runtimeProofCount") != runtime_coverage.get("proofCount"):
         raise AssertionError(f"coverage index runtime proof count mismatch: {runtime_group}")
+    if runtime_group.get("runtimeProofFileParity") != runtime_coverage.get("proofFileParity"):
+        raise AssertionError(f"coverage index runtime proof-file parity mismatch: {runtime_group}")
     if runtime_group.get("liveProofs") != runtime_coverage.get("liveProofs"):
         raise AssertionError(f"coverage index runtime live proof matrix mismatch: {runtime_group}")
     if runtime_group.get("liveProofArtifacts") != runtime_coverage.get("liveProofArtifacts"):

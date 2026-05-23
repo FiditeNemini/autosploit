@@ -150,6 +150,11 @@ def run() -> None:
             raise AssertionError(f"runtime proof list missing entries: {coverage}")
         if coverage.get("proofCount", 0) < len(EXPECTED_PROOFS):
             raise AssertionError(f"runtime proof count mismatch: {coverage}")
+        missing_files = sorted(name for name in EXPECTED_PROOFS if not (ROOT / "scripts" / name).is_file())
+        if missing_files:
+            raise AssertionError(f"runtime coverage names non-existent proof files: {missing_files}")
+        if coverage.get("proofFileParity") is not True:
+            raise AssertionError(f"runtime proof file parity mismatch: {coverage}")
         if not EXPECTED_ROUTES.issubset(set(coverage.get("routes") or [])):
             raise AssertionError(f"runtime route list missing entries: {coverage}")
 

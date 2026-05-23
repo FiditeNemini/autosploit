@@ -709,7 +709,7 @@ Automated no-model gates:
   runtime/cache group also exposes `supportedFamilies`,
   `cacheResponseMethod`, `cacheResponsesInferenceMethod`,
   `newModelSessionBehavior`, runtime contract map/count, route list/count,
-  proof list/count, cache component list/count/parity, cache component
+  proof list/count/file parity, cache component list/count/parity, cache component
   proof map/count/parity, live proof family matrix, and live proof artifact
   map/count for Qwen/MiniMax-only support, the
   `prefix-cache-l2-turboquant` response path, cache-preserving new-context

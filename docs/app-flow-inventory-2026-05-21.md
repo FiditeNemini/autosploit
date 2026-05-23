@@ -819,7 +819,7 @@ Current repeatable gates:
   additionally exposes
   `supportedFamilies`, `cacheResponseMethod`, `cacheResponsesInferenceMethod`,
   `newModelSessionBehavior`, runtime contract map/count, route list/count,
-  proof list/count, runtime cache component list/count/parity,
+  proof list/count/file parity, runtime cache component list/count/parity,
   component proof map/count/parity, live proof family matrix, and
   live proof artifact map/count, so Qwen/MiniMax-only support,
   the `prefix-cache-l2-turboquant` response path, cache-preserving new-context

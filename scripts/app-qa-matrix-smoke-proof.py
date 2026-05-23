@@ -614,6 +614,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index runtime proof list mismatch: {coverage_index}")
     if runtime_group.get("runtimeProofCount") != runtime_coverage.get("proofCount"):
         raise AssertionError(f"/qa/coverage-index runtime proof count mismatch: {coverage_index}")
+    if runtime_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/runtime-coverage proof-file parity mismatch: {runtime_coverage}")
+    if runtime_group.get("runtimeProofFileParity") != runtime_coverage.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index runtime proof-file parity mismatch: {coverage_index}")
     if runtime_group.get("liveProofs") != runtime_coverage.get("liveProofs"):
         raise AssertionError(f"/qa/coverage-index runtime live proof matrix mismatch: {coverage_index}")
     if runtime_group.get("liveProofArtifacts") != runtime_coverage.get("liveProofArtifacts"):
