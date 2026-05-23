@@ -264,6 +264,8 @@ def assert_tab_action_coverage() -> None:
         missing_surface_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
         if missing_surface_files:
             raise AssertionError(f"tab action surface {surface} names missing proof files {missing_surface_files}: {coverage}")
+    if coverage.get("tabActionSurfaceProofFileParity") is not True:
+        raise AssertionError(f"tab action surface proof-file parity mismatch: {coverage}")
     state_keys = set(coverage.get("actionStateKeys") or [])
     missing_state_keys = sorted(REQUIRED_ACTION_STATE_KEYS.difference(state_keys))
     if missing_state_keys:

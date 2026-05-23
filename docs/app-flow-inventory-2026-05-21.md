@@ -287,6 +287,7 @@ copy routes, row context actions, verify/protocol/hash/exploit/post/OSINT
 actions, report generation/finding/export/agent actions, and Stash add/filter/
 copy/send/delete controls with the focused proof scripts for each lane. It also
 advertises tab action surface list/count/parity, tab action surface proof
+file parity,
 map/count/parity, plus the copy/export/agent and OSINT screenshot seed routes used by those
 proof fixtures.
 Chat/control coverage is summarized through `/qa/chat-coverage`. The aggregate
@@ -590,6 +591,7 @@ CVE Database and Tools:
   `scripts/inference-log-actions-proof.py`.
 - `/qa/tab-action-coverage` exposes the per-tab action routes, proof scripts,
   contracts, tab action surface list/count/parity, tab action surface proof
+  file parity,
   map/count/parity, and `actionStateKeys` for Recon/Web/Network/Creds/Exploit/
   Post/OSINT/Report/Stash action state surfaces.
 
@@ -869,7 +871,7 @@ mirrors session route list/count, contract map/count, proof list/count/file pari
   session workflow surface proof map/count/parity/file parity,
   mirrors tab action tab list, route list/count, contract map/count, proof
   list/count/file parity, and action-state-key list/count,
-  mirrors tab action surface list/count/parity and proof map/count/parity, mirrors
+  mirrors tab action surface list/count/parity and proof map/count/parity/file parity, mirrors
   agent-loop phase list/count/parity and phase-proof map/count/parity,
   mirrors agent-loop state-key list/count, current mode, max-iteration guard,
   proof count/list/file parity, visual-state-key count, mode behavior/count, deployed-agent

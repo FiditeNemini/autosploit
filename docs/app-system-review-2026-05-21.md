@@ -479,7 +479,7 @@ Stash:
   `scripts/tab-action-coverage-proof.py`, which checks the route, action seed/
   action route list, copy/export/agent seed routes, contracts, focused proof
   scripts, covered tabs, tab action surface list/count/parity, tab action
-  surface proof map/count/parity, action-state keys, and proof file existence.
+  surface proof map/count/parity/file parity, action-state keys, and proof file existence.
 - Aggregate chat/control coverage is exposed through `/qa/chat-coverage` and
   verified by `scripts/chat-coverage-proof.py`, which checks Send/Stop,
   reasoning, approval, copy/stash, tool-output expansion, request-audit,
@@ -593,7 +593,7 @@ Automated no-model gates:
   actions, report generation/finding/export/agent actions, Stash controls, and
   the seed routes behind those focused proofs, including OSINT screenshot
   artifact setup. It also exposes tab action surface list/count/parity and
-  tab action surface proof map/count/parity plus `actionStateKeys`, tying the aggregate to the
+  tab action surface proof map/count/parity/file parity plus `actionStateKeys`, tying the aggregate to the
   `/state` surfaces each proof validates.
   `/qa/chat-coverage` exposes chat/control proof coverage for streaming usage
   metrics, token counters, reasoning controls, approval controls, tool-output
@@ -750,7 +750,7 @@ Automated no-model gates:
   session workflow surface proof map/count/parity/file parity,
   tab action tab list, route list/count, contract map/count, proof list/count/file parity,
   action-state-key list/count,
-  tab action surface list/count/parity, tab action surface proof map/count/parity,
+  tab action surface list/count/parity, tab action surface proof map/count/parity/file parity,
   action-state-key count, agent-loop
   state-key list/count, agent-loop visual state keys, agent-loop phase-proof
   map/count/parity, agent-loop current mode, max-iteration guard, proof count/list/file parity,

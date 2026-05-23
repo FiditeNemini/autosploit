@@ -902,6 +902,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index session workflow proof-file parity mismatch: {coverage_index}")
     if tabs_sessions_group.get("tabActionSurfaceProofs") != tab_action_coverage.get("tabActionSurfaceProofs"):
         raise AssertionError(f"/qa/coverage-index tab action proof map mismatch: {coverage_index}")
+    if tab_action_coverage.get("tabActionSurfaceProofFileParity") is not True:
+        raise AssertionError(f"/qa/tab-action-coverage surface proof-file parity mismatch: {tab_action_coverage}")
+    if tabs_sessions_group.get("tabActionSurfaceProofFileParity") != tab_action_coverage.get("tabActionSurfaceProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index tab action surface proof-file parity mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopPhaseProofs") != agent_loop_coverage.get("loopPhaseProofs"):
         raise AssertionError(f"/qa/coverage-index agent loop phase proof map mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopStateKeys") != agent_loop_coverage.get("stateKeys"):
