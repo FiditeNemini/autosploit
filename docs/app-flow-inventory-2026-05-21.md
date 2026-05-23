@@ -839,7 +839,7 @@ Current repeatable gates:
   visible from the aggregate QA index. The
   settings/visuals group exposes Settings surface list/count/parity, Settings
   surface proof map/count/parity, Settings category list/count/current
-  category, Settings route list/count, contract map/count, proof list/count,
+  category, Settings route list/count, contract map/count, proof list/count/file parity,
   and visual manifest list/count. It also exposes visual surface
   list/count/parity, visual surface proof map/count/parity, visual route
   list/count, contract map/count, proof list/count, manifest list/count,

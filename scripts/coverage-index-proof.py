@@ -576,6 +576,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index settings proof list mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("settingsProofCount") != settings_coverage.get("proofCount"):
         raise AssertionError(f"coverage index settings proof count mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("settingsProofFileParity") != settings_coverage.get("proofFileParity"):
+        raise AssertionError(f"coverage index settings proof-file parity mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("settingsVisualManifests") != settings_coverage.get("visualManifests"):
         raise AssertionError(f"coverage index settings visual manifest list mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("settingsVisualManifestCount", 0) < 6:

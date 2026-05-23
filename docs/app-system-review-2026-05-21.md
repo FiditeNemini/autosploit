@@ -722,7 +722,7 @@ Automated no-model gates:
   map/count/parity. The settings/visuals group exposes Settings surface
   list/count/parity, Settings surface proof map/count/parity, visual surface list/count/parity,
   Settings category list/count/current category, Settings route list/count,
-  contract map/count, proof list/count, settings visual manifest list/count,
+  contract map/count, proof list/count/file parity, settings visual manifest list/count,
   visual surface proof map/count/parity, visual route list/count, contract
   map/count, proof list/count, visual manifest list/count, minimum capture
   count, and actual screenshot capture count. The

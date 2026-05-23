@@ -696,6 +696,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index settings proof list mismatch: {coverage_index}")
     if settings_visuals_group.get("settingsProofCount") != settings_coverage.get("proofCount"):
         raise AssertionError(f"/qa/coverage-index settings proof count mismatch: {coverage_index}")
+    if settings_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/settings-coverage proof-file parity mismatch: {settings_coverage}")
+    if settings_visuals_group.get("settingsProofFileParity") != settings_coverage.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index settings proof-file parity mismatch: {coverage_index}")
     if settings_visuals_group.get("settingsVisualManifests") != settings_coverage.get("visualManifests"):
         raise AssertionError(f"/qa/coverage-index settings visual manifest list mismatch: {coverage_index}")
     if settings_visuals_group.get("visualSurfaceProofs") != visual_coverage.get("visualSurfaceProofs"):

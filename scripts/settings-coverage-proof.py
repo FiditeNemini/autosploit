@@ -191,6 +191,8 @@ def assert_settings_coverage() -> None:
     missing_files = sorted(name for name in REQUIRED_PROOFS if not (ROOT / "scripts" / name).is_file())
     if missing_files:
         raise AssertionError(f"settings coverage names non-existent proof files: {missing_files}")
+    if coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"settings coverage proof file parity mismatch: {coverage}")
     manifests = set(coverage.get("visualManifests") or [])
     missing_manifests = sorted(REQUIRED_VISUAL_MANIFESTS.difference(manifests))
     if missing_manifests:
