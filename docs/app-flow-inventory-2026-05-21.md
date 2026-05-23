@@ -1168,3 +1168,10 @@ Required future proof gates:
   counts/groups/tab map into `/qa/coverage-index.groups.appState`. This keeps
   visible pages, panels, tabs, overlays, settings views, and chat surfaces
   auditable from source instead of depending only on scattered screenshot notes.
+- Backend service ownership is summarized through `/qa/service-inventory`. It
+  parses every Swift file under `ExploitBot/Sources/ExploitBot/Services`,
+  records declared types and service functions, groups each file by runtime,
+  tools, context, persistence/reporting, agent/chat, or support surface, and
+  records the proof owner. The counts and proof parity are mirrored in
+  `/qa/coverage-index.groups.appState`, which keeps service-layer changes from
+  bypassing the route/action/view inventories.

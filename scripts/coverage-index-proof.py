@@ -24,6 +24,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/endpoint-inventory",
     "/qa/action-state-inventory",
     "/qa/view-inventory",
+    "/qa/service-inventory",
     "/qa/agent-loop-coverage",
     "/qa/agent-tool-authorization-coverage",
     "/qa/tool-flow-coverage",
@@ -60,6 +61,7 @@ REQUIRED_PROOFS = {
     "endpoint-inventory-proof.py",
     "action-state-inventory-proof.py",
     "view-inventory-proof.py",
+    "service-inventory-proof.py",
     "tool-registry-coverage-proof.py",
     "subtab-coverage-proof.py",
     "agent-loop-coverage-proof.py",
@@ -280,6 +282,21 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index view inventory tab map mismatch: {app_state_group}")
     if app_state_group.get("viewInventoryProofFileParity") != view_inventory.get("proofFileParity"):
         raise AssertionError(f"coverage index view inventory proof parity mismatch: {app_state_group}")
+    service_inventory = request("GET", "/qa/service-inventory")
+    if service_inventory.get("ok") is not True:
+        raise AssertionError(f"service inventory route failed: {service_inventory}")
+    if service_inventory.get("functionCount", 0) < 150:
+        raise AssertionError(f"service inventory function count too low: {service_inventory}")
+    if service_inventory.get("proofFileParity") is not True:
+        raise AssertionError(f"service inventory proof-file parity mismatch: {service_inventory}")
+    if app_state_group.get("serviceInventoryFileCount") != service_inventory.get("serviceFileCount"):
+        raise AssertionError(f"coverage index service inventory file count mismatch: {app_state_group}")
+    if app_state_group.get("serviceInventoryFunctionCount") != service_inventory.get("functionCount"):
+        raise AssertionError(f"coverage index service inventory function count mismatch: {app_state_group}")
+    if app_state_group.get("serviceInventoryGroupCounts") != service_inventory.get("groupCounts"):
+        raise AssertionError(f"coverage index service inventory group counts mismatch: {app_state_group}")
+    if app_state_group.get("serviceInventoryProofFileParity") != service_inventory.get("proofFileParity"):
+        raise AssertionError(f"coverage index service inventory proof parity mismatch: {app_state_group}")
     if app_state_group.get("contextHooks") != qa.get("contextHooks"):
         raise AssertionError(f"coverage index app state context hook list mismatch: {app_state_group}")
     if app_state_group.get("contextHookCount") != len(qa.get("contextHooks") or []):

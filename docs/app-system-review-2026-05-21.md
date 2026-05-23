@@ -1262,6 +1262,14 @@ Visual gates:
   tab map, and proof-file parity through `/qa/coverage-index.groups.appState`.
   This gives each page, tab, chat surface, settings view, panel, and overlay a
   machine-readable ownership record.
+- `/qa/service-inventory` is the source-owned inventory for backend service
+  surfaces: it parses every Swift file under
+  `ExploitBot/Sources/ExploitBot/Services`, records declared types and service
+  functions, groups files by agent/chat, context/evidence, runtime/model,
+  tool/execution, persistence/reporting, or support surface, and records the
+  proof owner. Coverage-index mirrors its file counts, function counts, group
+  counts, and proof-file parity so backend service changes remain tied to
+  proof coverage.
 
 ## Current Gaps To Close Next
 
