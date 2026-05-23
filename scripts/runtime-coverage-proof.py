@@ -165,6 +165,9 @@ def run() -> None:
             item = live.get(family) or {}
             if item.get("metadata") is not True or item.get("repeatCache") is not True:
                 raise AssertionError(f"runtime live proof missing {family} metadata/cache checks: {coverage}")
+        qwen_live = live.get("qwen") or {}
+        if qwen_live.get("ssmReDerive") is not True:
+            raise AssertionError(f"runtime live proof missing qwen SSM rederive check: {coverage}")
         artifacts = coverage.get("liveProofArtifacts") or {}
         if coverage.get("liveProofArtifactCount") != len(EXPECTED_LIVE_ARTIFACTS):
             raise AssertionError(f"runtime live artifact count mismatch: {coverage}")
@@ -181,6 +184,22 @@ def run() -> None:
                 raise AssertionError(f"runtime live artifact not ok: {path} {payload}")
             if family not in (payload.get("reports") or {}):
                 raise AssertionError(f"runtime live artifact missing {family} report: {path} {payload}")
+        qwen_rederive_artifact = ROOT / EXPECTED_LIVE_ARTIFACTS["qwenHybridBlockL2SSMReplay"][0]
+        qwen_payload = json.loads(qwen_rederive_artifact.read_text(encoding="utf-8"))
+        qwen_report = (qwen_payload.get("reports") or {}).get("qwen") or {}
+        ssm_checks = qwen_report.get("ssm_rederive_checks") or {}
+        if coverage.get("qwenSSMReDeriveArtifact") != EXPECTED_LIVE_ARTIFACTS["qwenHybridBlockL2SSMReplay"][0]:
+            raise AssertionError(f"runtime qwen SSM rederive artifact path mismatch: {coverage}")
+        if coverage.get("qwenSSMReDeriveRequested") != ssm_checks.get("requested"):
+            raise AssertionError(f"runtime qwen SSM rederive requested mismatch: {coverage}")
+        if coverage.get("qwenSSMReDeriveCompleted") != ssm_checks.get("completed"):
+            raise AssertionError(f"runtime qwen SSM rederive completed mismatch: {coverage}")
+        if coverage.get("qwenSSMReDeriveNoFailures") != ssm_checks.get("no_failures"):
+            raise AssertionError(f"runtime qwen SSM rederive no-failures mismatch: {coverage}")
+        if coverage.get("qwenSSMReDeriveLastNumTokens") != ssm_checks.get("last_num_tokens"):
+            raise AssertionError(f"runtime qwen SSM rederive token count mismatch: {coverage}")
+        if coverage.get("qwenSSMReDeriveArtifactOK") is not True:
+            raise AssertionError(f"runtime qwen SSM rederive artifact check missing: {coverage}")
 
         print("runtime-coverage proof passed")
     finally:

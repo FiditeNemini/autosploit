@@ -1031,7 +1031,10 @@ Real-model gates:
   prompt L2 is disabled, the replay process reports `block_l2_hits_delta=1`
   and `scheduler_tokens_saved_delta=64`, then records SSM re-derive
   `requested=true`, `completed=true`, `reason=missing_companion`, and no
-  failures.
+  failures. `/qa/runtime-coverage` and the runtime/cache coverage-index group
+  now expose the same artifact path, requested/completed/no-failures flags, and
+  `last_num_tokens` so the real async rederive proof is machine-auditable from
+  the app surface.
 - Qwen hybrid full prefix skip is covered by
   `scripts/verify-live-models.py --block-l2-only-replay
   --require-ssm-companion-hit` and

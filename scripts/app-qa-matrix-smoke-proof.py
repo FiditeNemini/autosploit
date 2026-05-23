@@ -770,6 +770,16 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/runtime-coverage live proof artifact file parity mismatch: {runtime_coverage}")
     if runtime_group.get("liveProofArtifactFileParity") != runtime_coverage.get("liveProofArtifactFileParity"):
         raise AssertionError(f"/qa/coverage-index runtime live proof artifact file parity mismatch: {coverage_index}")
+    for key in (
+        "qwenSSMReDeriveArtifact",
+        "qwenSSMReDeriveArtifactOK",
+        "qwenSSMReDeriveRequested",
+        "qwenSSMReDeriveCompleted",
+        "qwenSSMReDeriveNoFailures",
+        "qwenSSMReDeriveLastNumTokens",
+    ):
+        if runtime_group.get(key) != runtime_coverage.get(key):
+            raise AssertionError(f"/qa/coverage-index runtime {key} mismatch: {coverage_index}")
     if runtime_group.get("cacheComponentProofs") != runtime_coverage.get("cacheComponentProofs"):
         raise AssertionError(f"/qa/coverage-index runtime cache component proof map mismatch: {coverage_index}")
     if runtime_coverage.get("cacheComponentProofFileParity") is not True:

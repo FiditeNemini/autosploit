@@ -680,6 +680,8 @@ Current repeatable gates:
   artifact paths for MiniMax replay/no-thinking and Qwen hybrid replay,
   full-prefix-skip, and catalogue-prefix-shape gates, plus
   `liveProofArtifactCount` and live proof artifact file parity for matrix-level artifact accounting. It now also
+  mirrors the real Qwen SSM rederive artifact path, requested/completed/no-failures
+  flags, and `last_num_tokens` from the runtime route. It now also
   exposes runtime cache component list/count/parity and component proof
   map/count/parity/file parity for prefix cache, prompt L2 disk, paged KV cache, block L2
   disk, TurboQuant KV, SSM companion L2, and new-context engine-session
@@ -945,7 +947,8 @@ Required future proof gates:
   hit with 20 cached tokens. Re-derive status is now exposed through
   `/v1/cache/stats` and `/state.engineCacheStats`; checkpoint-103 proves queued
   and completed states without loading a model. Real-model async rederive
-  execution remains a separate correctness gate.
+  execution is covered by checkpoint-112 and surfaced through
+  `/qa/runtime-coverage` plus `/qa/coverage-index.groups.runtimeAndCache`.
 - Parsed app-level cache stats visibility: covered by
   `scripts/cache-stats-state-proof.py`, which verifies `/state.engineCacheStats`
   exposes TurboQuant, prompt L2, block L2, SSM companion disk, and cache memory

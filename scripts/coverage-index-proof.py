@@ -573,6 +573,16 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"runtime coverage live proof artifact file parity mismatch: {runtime_coverage}")
     if runtime_group.get("liveProofArtifactFileParity") != runtime_coverage.get("liveProofArtifactFileParity"):
         raise AssertionError(f"coverage index runtime live proof artifact file parity mismatch: {runtime_group}")
+    for key in (
+        "qwenSSMReDeriveArtifact",
+        "qwenSSMReDeriveArtifactOK",
+        "qwenSSMReDeriveRequested",
+        "qwenSSMReDeriveCompleted",
+        "qwenSSMReDeriveNoFailures",
+        "qwenSSMReDeriveLastNumTokens",
+    ):
+        if runtime_group.get(key) != runtime_coverage.get(key):
+            raise AssertionError(f"coverage index runtime {key} mismatch: {runtime_group}")
     if runtime_group.get("cacheResponsesInferenceMethod") != runtime_coverage.get("cacheResponsesInferenceMethod"):
         raise AssertionError(f"coverage index runtime cache responses inference method mismatch: {runtime_group}")
     if runtime_group.get("newModelSessionBehavior") != runtime_coverage.get("newModelSessionBehavior"):
