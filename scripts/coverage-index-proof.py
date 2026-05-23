@@ -30,6 +30,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/session-coverage",
     "/qa/tab-action-coverage",
     "/qa/chat-coverage",
+    "/qa/report-coverage",
     "/qa/result-parser-coverage",
     "/qa/tool-family-fanout-coverage",
     "/qa/proof-ledger",
@@ -53,6 +54,7 @@ REQUIRED_PROOFS = {
     "session-coverage-proof.py",
     "tab-action-coverage-proof.py",
     "chat-coverage-proof.py",
+    "report-coverage-proof.py",
     "result-parser-routing-proof.py",
     "tool-family-fanout-coverage-proof.py",
     "proof-ledger-proof.py",
@@ -1140,6 +1142,43 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions tab action surface proof parity mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActionSurfaceProofFileParity") != tab_action_coverage.get("tabActionSurfaceProofFileParity"):
         raise AssertionError(f"coverage index tabs/sessions tab action surface proof-file parity mismatch: {tabs_sessions_group}")
+    report_coverage = request("GET", "/qa/report-coverage")
+    if tabs_sessions_group.get("reportSurfaces") != report_coverage.get("reportSurfaces"):
+        raise AssertionError(f"coverage index tabs/sessions report surfaces mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reportSurfaceCount") != report_coverage.get("reportSurfaceCount"):
+        raise AssertionError(f"coverage index tabs/sessions report surface count mismatch: {tabs_sessions_group}")
+    if report_coverage.get("reportSurfaceParity") is not True:
+        raise AssertionError(f"report coverage surface parity mismatch: {report_coverage}")
+    if tabs_sessions_group.get("reportSurfaceParity") != report_coverage.get("reportSurfaceParity"):
+        raise AssertionError(f"coverage index tabs/sessions report surface parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reportRoutes") != report_coverage.get("routes"):
+        raise AssertionError(f"coverage index tabs/sessions report routes mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reportRouteCount") != report_coverage.get("routeCount"):
+        raise AssertionError(f"coverage index tabs/sessions report route count mismatch: {tabs_sessions_group}")
+    if report_coverage.get("routeParity") is not True:
+        raise AssertionError(f"report coverage route parity mismatch: {report_coverage}")
+    if tabs_sessions_group.get("reportRouteParity") != report_coverage.get("routeParity"):
+        raise AssertionError(f"coverage index tabs/sessions report route parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reportStateKeys") != report_coverage.get("stateKeys"):
+        raise AssertionError(f"coverage index tabs/sessions report state keys mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reportStateKeyCount") != report_coverage.get("stateKeyCount"):
+        raise AssertionError(f"coverage index tabs/sessions report state-key count mismatch: {tabs_sessions_group}")
+    if report_coverage.get("stateKeyParity") is not True:
+        raise AssertionError(f"report coverage state-key parity mismatch: {report_coverage}")
+    if tabs_sessions_group.get("reportStateKeyParity") != report_coverage.get("stateKeyParity"):
+        raise AssertionError(f"coverage index tabs/sessions report state-key parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reportContracts") != report_coverage.get("contracts"):
+        raise AssertionError(f"coverage index tabs/sessions report contracts mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reportContractCount") != len(report_coverage.get("contracts") or {}):
+        raise AssertionError(f"coverage index tabs/sessions report contract count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reportProofs") != report_coverage.get("proofs"):
+        raise AssertionError(f"coverage index tabs/sessions report proofs mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reportProofCount") != report_coverage.get("proofCount"):
+        raise AssertionError(f"coverage index tabs/sessions report proof count mismatch: {tabs_sessions_group}")
+    if report_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"report coverage proof-file parity mismatch: {report_coverage}")
+    if tabs_sessions_group.get("reportProofFileParity") != report_coverage.get("proofFileParity"):
+        raise AssertionError(f"coverage index tabs/sessions report proof-file parity mismatch: {tabs_sessions_group}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/coverage-index" not in qa.get("stateRoutes", []):

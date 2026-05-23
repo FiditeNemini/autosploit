@@ -464,6 +464,10 @@ Report:
   which uses `/qa/report-export-action`, checks `/state.reportExport`, and
   confirms activity-feed visibility. Visible report status is captured under
   `docs/visual-proofs/checkpoint-91`.
+- `/qa/report-coverage` rolls up the durable Report workflow into one route:
+  finding CRUD, report preview, artifact export, agent draft, activity feed,
+  durable finding storage, and context handoff expose surface/route/state-key/
+  proof list/count/parity metadata and mirror into `/qa/coverage-index`.
 - Create/delete finding action state is covered by
   `scripts/report-finding-actions-proof.py`, which opens the Report finding
   wizard, submits a deterministic finding, verifies the row delete action
@@ -904,6 +908,7 @@ mirrors session route list/count, contract map/count, proof list/count/file pari
   mirrors tab action tab list, route list/count, contract map/count, proof
   list/count/file parity, and action-state-key list/count/parity,
   mirrors tab action surface list/count/parity and proof map/count/parity/file parity, mirrors
+  Report coverage surface/route/state-key/proof list/count/parity,
   agent-loop phase list/count/parity and phase-proof map/count/parity/file parity,
   mirrors agent-loop state-key list/count/parity, current mode, max-iteration guard,
   proof count/list/file parity, visual-state-key count/parity, mode behavior/count, deployed-agent

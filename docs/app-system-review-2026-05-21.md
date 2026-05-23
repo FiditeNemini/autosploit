@@ -464,6 +464,10 @@ Report:
   `scripts/report-visible-export-actions-proof.py`: it drives the AppState
   export action route for both toolbar actions, verifies generated artifact
   metadata through `/state.reportExport`, and checks activity-feed visibility.
+- `/qa/report-coverage` now summarizes the Report tab as one auditable surface:
+  finding CRUD, preview generation, artifact export, agent draft, activity
+  telemetry, durable finding storage, and context handoff all expose
+  list/count/parity state, route, proof, and state-key metadata.
 - Visible report export state is captured under
   `docs/visual-proofs/checkpoint-91`.
 
@@ -783,6 +787,7 @@ Automated no-model gates:
   tab action tab list, route list/count, contract map/count, proof list/count/file parity,
   action-state-key list/count/parity,
   tab action surface list/count/parity, tab action surface proof map/count/parity/file parity,
+  Report coverage surface/route/state-key/proof list/count/parity,
   action-state-key count/parity, agent-loop
   state-key list/count, agent-loop visual state keys/parity, agent-loop phase-proof
   map/count/parity/file parity, agent-loop current mode, max-iteration guard, proof count/list/file parity,

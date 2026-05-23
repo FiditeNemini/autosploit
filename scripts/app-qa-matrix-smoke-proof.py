@@ -107,6 +107,7 @@ def assert_testserver_smoke() -> None:
     session_coverage = request("GET", "/qa/session-coverage")
     tab_action_coverage = request("GET", "/qa/tab-action-coverage")
     chat_coverage = request("GET", "/qa/chat-coverage")
+    report_coverage = request("GET", "/qa/report-coverage")
     coverage_index = request("GET", "/qa/coverage-index")
     proof_ledger = request("GET", "/qa/proof-ledger")
     artifact_ledger = request("GET", "/qa/artifact-ledger")
@@ -168,6 +169,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing tab action coverage route contract: {qa}")
     if "/qa/chat-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing chat coverage route contract: {qa}")
+    if "/qa/report-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing report coverage route contract: {qa}")
     if "/qa/coverage-index" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing coverage-index route contract: {qa}")
     if "/qa/proof-ledger" not in qa.get("stateRoutes", []):
@@ -1129,6 +1132,22 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/tab-action-coverage surface proof-file parity mismatch: {tab_action_coverage}")
     if tabs_sessions_group.get("tabActionSurfaceProofFileParity") != tab_action_coverage.get("tabActionSurfaceProofFileParity"):
         raise AssertionError(f"/qa/coverage-index tab action surface proof-file parity mismatch: {coverage_index}")
+    if report_coverage.get("reportSurfaceParity") is not True:
+        raise AssertionError(f"/qa/report-coverage surface parity mismatch: {report_coverage}")
+    if report_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/report-coverage proof-file parity mismatch: {report_coverage}")
+    if tabs_sessions_group.get("reportSurfaces") != report_coverage.get("reportSurfaces"):
+        raise AssertionError(f"/qa/coverage-index report surface list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("reportSurfaceParity") != report_coverage.get("reportSurfaceParity"):
+        raise AssertionError(f"/qa/coverage-index report surface parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("reportProofs") != report_coverage.get("proofs"):
+        raise AssertionError(f"/qa/coverage-index report proof list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("reportProofFileParity") != report_coverage.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index report proof-file parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("reportStateKeys") != report_coverage.get("stateKeys"):
+        raise AssertionError(f"/qa/coverage-index report state-key list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("reportContracts") != report_coverage.get("contracts"):
+        raise AssertionError(f"/qa/coverage-index report contract map mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopPhaseProofs") != agent_loop_coverage.get("loopPhaseProofs"):
         raise AssertionError(f"/qa/coverage-index agent loop phase proof map mismatch: {coverage_index}")
     if agent_loop_coverage.get("loopPhaseProofFileParity") is not True:
