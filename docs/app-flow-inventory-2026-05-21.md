@@ -861,7 +861,7 @@ Current repeatable gates:
   map/count/parity mirrored from `/qa/tool-flow-coverage`.
   The tabs/sessions group exposes
   interaction-mode count, covered tab count, session state-key count, and
-  action-state-key count, mirrors subtab tab maps and proof count,
+  action-state-key count, mirrors subtab tab maps and proof count/file parity,
 mirrors session route list/count, contract map/count, proof list/count/file parity, and
   state-key list/count,
   mirrors session workflow surface list/count/parity,

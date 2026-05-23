@@ -76,6 +76,11 @@ def run() -> None:
             raise AssertionError(f"subtab coverage proof list mismatch: {coverage}")
         if coverage.get("proofCount", 0) < len(EXPECTED):
             raise AssertionError(f"subtab coverage proof count mismatch: {coverage}")
+        missing_files = sorted(proof for _, _, proof in EXPECTED.values() if not (ROOT / "scripts" / proof).is_file())
+        if missing_files:
+            raise AssertionError(f"subtab coverage names non-existent proof files: {missing_files}")
+        if coverage.get("proofFileParity") is not True:
+            raise AssertionError(f"subtab coverage proof file parity mismatch: {coverage}")
         missing_routes = sorted(EXPECTED_ROUTES.difference(set(coverage.get("routes") or [])))
         if missing_routes:
             raise AssertionError(f"subtab coverage missing routes {missing_routes}: {coverage}")

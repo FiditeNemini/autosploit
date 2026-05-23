@@ -208,6 +208,9 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state subtab proof list mismatch: {app_state_group}")
     if app_state_group.get("subtabStateProofCount", 0) < 8:
         raise AssertionError(f"coverage index app state subtab proof count mismatch: {app_state_group}")
+    subtab_coverage = request("GET", "/qa/subtab-coverage")
+    if app_state_group.get("subtabStateProofFileParity") != subtab_coverage.get("proofFileParity"):
+        raise AssertionError(f"coverage index app state subtab proof-file parity mismatch: {app_state_group}")
     if app_state_group.get("proofLedgerCount", 0) < 120:
         raise AssertionError(f"coverage index app state proof ledger count mismatch: {app_state_group}")
     if app_state_group.get("proofLedgerCategoryCounts") != proof.get("categoryCounts"):
@@ -744,11 +747,12 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions state key count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("actionStateKeyCount", 0) < 26:
         raise AssertionError(f"coverage index tabs/sessions action state key count mismatch: {tabs_sessions_group}")
-    subtab_coverage = request("GET", "/qa/subtab-coverage")
     if tabs_sessions_group.get("subtabTabs") != subtab_coverage.get("tabs"):
         raise AssertionError(f"coverage index tabs/sessions subtab tab map mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("subtabProofCount") != subtab_coverage.get("proofCount"):
         raise AssertionError(f"coverage index tabs/sessions subtab proof count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("subtabProofFileParity") != subtab_coverage.get("proofFileParity"):
+        raise AssertionError(f"coverage index tabs/sessions subtab proof-file parity mismatch: {tabs_sessions_group}")
     agent_loop = request("GET", "/qa/agent-loop-coverage")
     if tabs_sessions_group.get("agentLoopStateKeyCount") != agent_loop.get("stateKeyCount"):
         raise AssertionError(f"coverage index tabs/sessions agent loop state key count mismatch: {tabs_sessions_group}")

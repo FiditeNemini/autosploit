@@ -142,6 +142,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing required context hook names: {qa}")
     if sorted(qa.get("subtabStateProofs") or []) != sorted(REQUIRED_SUBTAB_PROOFS):
         raise AssertionError(f"/state missing shared subtab-state proof coverage: {qa}")
+    if subtab_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/subtab-coverage proof-file parity mismatch: {subtab_coverage}")
     expected_subtab_tabs = ["creds", "exploit", "network", "osint", "post", "recon", "report", "web"]
     if sorted(qa.get("subtabStateTabs") or []) != expected_subtab_tabs:
         raise AssertionError(f"/state missing shared subtab-state tabs: {qa}")
@@ -467,6 +469,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index subtab state tab list mismatch: {coverage_index}")
     if app_state_group.get("subtabStateProofs") != qa.get("subtabStateProofs"):
         raise AssertionError(f"/qa/coverage-index subtab state proof list mismatch: {coverage_index}")
+    if app_state_group.get("subtabStateProofFileParity") != subtab_coverage.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index subtab state proof-file parity mismatch: {coverage_index}")
     if app_state_group.get("proofLedgerCount", 0) < 120:
         raise AssertionError(f"/qa/coverage-index proof ledger count mismatch: {coverage_index}")
     if app_state_group.get("proofCategorySurfaceCount") != 8:
@@ -824,6 +828,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index subtab tab map mismatch: {coverage_index}")
     if tabs_sessions_group.get("subtabProofCount") != subtab_coverage.get("proofCount"):
         raise AssertionError(f"/qa/coverage-index subtab proof count mismatch: {coverage_index}")
+    if tabs_sessions_group.get("subtabProofFileParity") != subtab_coverage.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index subtab proof-file parity mismatch: {coverage_index}")
     if tabs_sessions_group.get("sessionRoutes") != session_coverage.get("routes"):
         raise AssertionError(f"/qa/coverage-index session route list mismatch: {coverage_index}")
     if tabs_sessions_group.get("sessionRouteCount") != len(session_coverage.get("routes") or []):
