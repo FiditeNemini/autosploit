@@ -429,6 +429,10 @@ Post:
   count, clipboard preview, and summary, with tab activity recorded as
   `lastTool=copy_post`; `scripts/post-copy-actions-proof.py` covers the live
   seed/copy/state path.
+- `/qa/post-coverage` rolls up PrivEsc/AD/lateral lifecycle state, attribution
+  rows, copy paths for PrivEsc/AD/lateral/attribution, raw post-exploitation
+  output, and activity telemetry with surface/route/state-key/proof
+  list/count/parity metadata and mirrors into `/qa/coverage-index`.
 
 OSINT:
 
@@ -934,6 +938,7 @@ mirrors session route list/count, contract map/count, proof list/count/file pari
   Network coverage surface/route/state-key/proof list/count/parity,
   Creds coverage surface/route/state-key/proof list/count/parity,
   Exploit coverage surface/route/state-key/proof list/count/parity,
+  Post coverage surface/route/state-key/proof list/count/parity,
   Report coverage surface/route/state-key/proof list/count/parity,
   Stash coverage surface/route/state-key/proof list/count/parity,
   agent-loop phase list/count/parity and phase-proof map/count/parity/file parity,

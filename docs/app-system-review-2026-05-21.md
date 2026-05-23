@@ -423,6 +423,10 @@ Post:
   seeded linpeas, impacket secretsdump, and metasploit session output produce
   structured host/user/session rows through `/state.postAttribution` and
   `/results.postAttribution`.
+- `/qa/post-coverage` now summarizes the Post tab as one auditable surface:
+  PrivEsc/AD/lateral lifecycle state, attribution rows, copy paths for
+  PrivEsc/AD/lateral/attribution, raw post-exploitation output, and activity
+  telemetry expose surface/route/state-key/proof list/count/parity metadata.
 - Visible attribution rows are captured under
   `docs/visual-proofs/checkpoint-94`.
 
@@ -813,6 +817,7 @@ Automated no-model gates:
   Network coverage surface/route/state-key/proof list/count/parity,
   Creds coverage surface/route/state-key/proof list/count/parity,
   Exploit coverage surface/route/state-key/proof list/count/parity,
+  Post coverage surface/route/state-key/proof list/count/parity,
   Report coverage surface/route/state-key/proof list/count/parity,
   Stash coverage surface/route/state-key/proof list/count/parity,
   action-state-key count/parity, agent-loop

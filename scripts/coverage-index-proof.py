@@ -34,6 +34,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/network-coverage",
     "/qa/creds-coverage",
     "/qa/exploit-coverage",
+    "/qa/post-coverage",
     "/qa/report-coverage",
     "/qa/stash-coverage",
     "/qa/result-parser-coverage",
@@ -63,6 +64,7 @@ REQUIRED_PROOFS = {
     "network-coverage-proof.py",
     "creds-coverage-proof.py",
     "exploit-coverage-proof.py",
+    "post-coverage-proof.py",
     "report-coverage-proof.py",
     "stash-coverage-proof.py",
     "result-parser-routing-proof.py",
@@ -1300,6 +1302,43 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"exploit coverage proof-file parity mismatch: {exploit_coverage}")
     if tabs_sessions_group.get("exploitProofFileParity") != exploit_coverage.get("proofFileParity"):
         raise AssertionError(f"coverage index tabs/sessions exploit proof-file parity mismatch: {tabs_sessions_group}")
+    post_coverage = request("GET", "/qa/post-coverage")
+    if tabs_sessions_group.get("postSurfaces") != post_coverage.get("postSurfaces"):
+        raise AssertionError(f"coverage index tabs/sessions post surfaces mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("postSurfaceCount") != post_coverage.get("postSurfaceCount"):
+        raise AssertionError(f"coverage index tabs/sessions post surface count mismatch: {tabs_sessions_group}")
+    if post_coverage.get("postSurfaceParity") is not True:
+        raise AssertionError(f"post coverage surface parity mismatch: {post_coverage}")
+    if tabs_sessions_group.get("postSurfaceParity") != post_coverage.get("postSurfaceParity"):
+        raise AssertionError(f"coverage index tabs/sessions post surface parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("postRoutes") != post_coverage.get("routes"):
+        raise AssertionError(f"coverage index tabs/sessions post routes mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("postRouteCount") != post_coverage.get("routeCount"):
+        raise AssertionError(f"coverage index tabs/sessions post route count mismatch: {tabs_sessions_group}")
+    if post_coverage.get("routeParity") is not True:
+        raise AssertionError(f"post coverage route parity mismatch: {post_coverage}")
+    if tabs_sessions_group.get("postRouteParity") != post_coverage.get("routeParity"):
+        raise AssertionError(f"coverage index tabs/sessions post route parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("postStateKeys") != post_coverage.get("stateKeys"):
+        raise AssertionError(f"coverage index tabs/sessions post state keys mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("postStateKeyCount") != post_coverage.get("stateKeyCount"):
+        raise AssertionError(f"coverage index tabs/sessions post state-key count mismatch: {tabs_sessions_group}")
+    if post_coverage.get("stateKeyParity") is not True:
+        raise AssertionError(f"post coverage state-key parity mismatch: {post_coverage}")
+    if tabs_sessions_group.get("postStateKeyParity") != post_coverage.get("stateKeyParity"):
+        raise AssertionError(f"coverage index tabs/sessions post state-key parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("postContracts") != post_coverage.get("contracts"):
+        raise AssertionError(f"coverage index tabs/sessions post contracts mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("postContractCount") != len(post_coverage.get("contracts") or {}):
+        raise AssertionError(f"coverage index tabs/sessions post contract count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("postProofs") != post_coverage.get("proofs"):
+        raise AssertionError(f"coverage index tabs/sessions post proofs mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("postProofCount") != post_coverage.get("proofCount"):
+        raise AssertionError(f"coverage index tabs/sessions post proof count mismatch: {tabs_sessions_group}")
+    if post_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"post coverage proof-file parity mismatch: {post_coverage}")
+    if tabs_sessions_group.get("postProofFileParity") != post_coverage.get("proofFileParity"):
+        raise AssertionError(f"coverage index tabs/sessions post proof-file parity mismatch: {tabs_sessions_group}")
     report_coverage = request("GET", "/qa/report-coverage")
     if tabs_sessions_group.get("reportSurfaces") != report_coverage.get("reportSurfaces"):
         raise AssertionError(f"coverage index tabs/sessions report surfaces mismatch: {tabs_sessions_group}")
