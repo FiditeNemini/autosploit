@@ -109,6 +109,7 @@ def assert_testserver_smoke() -> None:
     chat_coverage = request("GET", "/qa/chat-coverage")
     web_coverage = request("GET", "/qa/web-coverage")
     network_coverage = request("GET", "/qa/network-coverage")
+    creds_coverage = request("GET", "/qa/creds-coverage")
     report_coverage = request("GET", "/qa/report-coverage")
     stash_coverage = request("GET", "/qa/stash-coverage")
     coverage_index = request("GET", "/qa/coverage-index")
@@ -176,6 +177,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing web coverage route contract: {qa}")
     if "/qa/network-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing network coverage route contract: {qa}")
+    if "/qa/creds-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing creds coverage route contract: {qa}")
     if "/qa/report-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing report coverage route contract: {qa}")
     if "/qa/stash-coverage" not in qa.get("stateRoutes", []):
@@ -1173,6 +1176,22 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index network state-key list mismatch: {coverage_index}")
     if tabs_sessions_group.get("networkContracts") != network_coverage.get("contracts"):
         raise AssertionError(f"/qa/coverage-index network contract map mismatch: {coverage_index}")
+    if creds_coverage.get("credsSurfaceParity") is not True:
+        raise AssertionError(f"/qa/creds-coverage surface parity mismatch: {creds_coverage}")
+    if creds_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/creds-coverage proof-file parity mismatch: {creds_coverage}")
+    if tabs_sessions_group.get("credsSurfaces") != creds_coverage.get("credsSurfaces"):
+        raise AssertionError(f"/qa/coverage-index creds surface list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("credsSurfaceParity") != creds_coverage.get("credsSurfaceParity"):
+        raise AssertionError(f"/qa/coverage-index creds surface parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("credsProofs") != creds_coverage.get("proofs"):
+        raise AssertionError(f"/qa/coverage-index creds proof list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("credsProofFileParity") != creds_coverage.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index creds proof-file parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("credsStateKeys") != creds_coverage.get("stateKeys"):
+        raise AssertionError(f"/qa/coverage-index creds state-key list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("credsContracts") != creds_coverage.get("contracts"):
+        raise AssertionError(f"/qa/coverage-index creds contract map mismatch: {coverage_index}")
     if report_coverage.get("reportSurfaceParity") is not True:
         raise AssertionError(f"/qa/report-coverage surface parity mismatch: {report_coverage}")
     if report_coverage.get("proofFileParity") is not True:

@@ -364,6 +364,10 @@ Creds:
 - Cracking, brute force, and secret scan lifecycle state now tracks idle,
   running, done, failed, and canceled and is visible in the relevant Creds
   subtab.
+- `/qa/creds-coverage` now summarizes the Creds tab as one auditable surface:
+  parsed credential rows, Hash Crack, copy paths for cracking/bruteforce/
+  secrets/vault, cracking/bruteforce/secrets lifecycle state, and activity
+  telemetry expose surface/route/state-key/proof list/count/parity metadata.
 - Live UI screenshot coverage for Cracking, Online Brute, and Secrets lifecycle
   strips is captured by `scripts/visual-tab-proof.py`.
 
@@ -802,6 +806,7 @@ Automated no-model gates:
   tab action surface list/count/parity, tab action surface proof map/count/parity/file parity,
   Web coverage surface/route/state-key/proof list/count/parity,
   Network coverage surface/route/state-key/proof list/count/parity,
+  Creds coverage surface/route/state-key/proof list/count/parity,
   Report coverage surface/route/state-key/proof list/count/parity,
   Stash coverage surface/route/state-key/proof list/count/parity,
   action-state-key count/parity, agent-loop

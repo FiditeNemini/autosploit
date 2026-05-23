@@ -376,6 +376,10 @@ Creds:
   clipboard preview, and summary, with tab activity recorded as
   `lastTool=copy_creds`; `scripts/creds-copy-actions-proof.py` covers the live
   seed/copy/state path.
+- `/qa/creds-coverage` rolls up parsed credential rows, Hash Crack, copy paths
+  for cracking/bruteforce/secrets/vault, cracking/bruteforce/secrets lifecycle
+  state, and activity telemetry with surface/route/state-key/proof
+  list/count/parity metadata and mirrors into `/qa/coverage-index`.
 
 Exploit:
 
@@ -923,6 +927,7 @@ mirrors session route list/count, contract map/count, proof list/count/file pari
   mirrors tab action surface list/count/parity and proof map/count/parity/file parity, mirrors
   Web coverage surface/route/state-key/proof list/count/parity,
   Network coverage surface/route/state-key/proof list/count/parity,
+  Creds coverage surface/route/state-key/proof list/count/parity,
   Report coverage surface/route/state-key/proof list/count/parity,
   Stash coverage surface/route/state-key/proof list/count/parity,
   agent-loop phase list/count/parity and phase-proof map/count/parity/file parity,
