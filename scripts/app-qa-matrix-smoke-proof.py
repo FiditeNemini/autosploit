@@ -492,10 +492,22 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index source proof other count mismatch: {coverage_index}")
     if app_state_group.get("proofLedgerCategories") != proof_ledger.get("categories"):
         raise AssertionError(f"/qa/coverage-index source proof category map mismatch: {coverage_index}")
+    if app_state_group.get("proofLedgerTabProofFamilies") != proof_ledger.get("tabProofFamilies"):
+        raise AssertionError(f"/qa/coverage-index source proof tab family map mismatch: {coverage_index}")
+    if app_state_group.get("proofLedgerTabProofFamilyFileParity") != proof_ledger.get("tabProofFamilyFileParity"):
+        raise AssertionError(f"/qa/coverage-index source proof tab family file parity mismatch: {coverage_index}")
     if app_state_group.get("auditProofLedgerCategoryOtherCount") != audit_ledger.get("proofLedgerCategoryOtherCount"):
         raise AssertionError(f"/qa/coverage-index audit source proof other count mismatch: {coverage_index}")
     if app_state_group.get("auditProofLedgerProofFileParity") != audit_ledger.get("proofLedgerProofFileParity"):
         raise AssertionError(f"/qa/coverage-index audit source proof-file parity mismatch: {coverage_index}")
+    if audit_ledger.get("proofLedgerTabProofFamilies") != proof_ledger.get("tabProofFamilies"):
+        raise AssertionError(f"/qa/audit-ledger source proof tab family map mismatch: {audit_ledger}")
+    if audit_ledger.get("proofLedgerTabProofFamilyFileParity") != proof_ledger.get("tabProofFamilyFileParity"):
+        raise AssertionError(f"/qa/audit-ledger source proof tab family file parity mismatch: {audit_ledger}")
+    if app_state_group.get("auditProofLedgerTabProofFamilies") != audit_ledger.get("proofLedgerTabProofFamilies"):
+        raise AssertionError(f"/qa/coverage-index audit source proof tab family map mismatch: {coverage_index}")
+    if app_state_group.get("auditProofLedgerTabProofFamilyFileParity") != audit_ledger.get("proofLedgerTabProofFamilyFileParity"):
+        raise AssertionError(f"/qa/coverage-index audit source proof tab family file parity mismatch: {coverage_index}")
     if app_state_group.get("proofCategoryTotalCount") != proof_ledger.get("proofCount"):
         raise AssertionError(f"/qa/coverage-index proof category total mismatch: {coverage_index}")
     if app_state_group.get("proofCategoryParity") is not True:

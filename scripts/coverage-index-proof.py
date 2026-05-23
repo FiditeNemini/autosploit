@@ -383,6 +383,14 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state audit source proof category surface count mismatch: {app_state_group}")
     if app_state_group.get("auditProofLedgerCategories") != audit.get("proofLedgerCategories"):
         raise AssertionError(f"coverage index app state audit source proof category map mismatch: {app_state_group}")
+    if app_state_group.get("auditProofLedgerTabProofFamilies") != audit.get("proofLedgerTabProofFamilies"):
+        raise AssertionError(f"coverage index app state audit source proof tab family map mismatch: {app_state_group}")
+    if app_state_group.get("auditProofLedgerTabProofFamilyCount") != audit.get("proofLedgerTabProofFamilyCount"):
+        raise AssertionError(f"coverage index app state audit source proof tab family count mismatch: {app_state_group}")
+    if app_state_group.get("auditProofLedgerTabProofFamilyParity") != audit.get("proofLedgerTabProofFamilyParity"):
+        raise AssertionError(f"coverage index app state audit source proof tab family parity mismatch: {app_state_group}")
+    if app_state_group.get("auditProofLedgerTabProofFamilyFileParity") != audit.get("proofLedgerTabProofFamilyFileParity"):
+        raise AssertionError(f"coverage index app state audit source proof tab family file parity mismatch: {app_state_group}")
     if app_state_group.get("auditProofCategoryCounts") != audit.get("proofCategoryCounts"):
         raise AssertionError(f"coverage index app state audit proof category counts mismatch: {app_state_group}")
     if app_state_group.get("auditProofCategorySurfaces") != audit.get("proofCategorySurfaces"):

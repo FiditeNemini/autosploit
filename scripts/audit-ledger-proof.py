@@ -65,6 +65,14 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit source proof category parity mismatch: {audit}")
     if audit.get("proofLedgerCategories") != proof.get("categories"):
         raise AssertionError(f"audit source proof category map mismatch: {audit}")
+    if audit.get("proofLedgerTabProofFamilies") != proof.get("tabProofFamilies"):
+        raise AssertionError(f"audit source proof tab family map mismatch: {audit}")
+    if audit.get("proofLedgerTabProofFamilyCount") != proof.get("tabProofFamilyCount"):
+        raise AssertionError(f"audit source proof tab family count mismatch: {audit}")
+    if audit.get("proofLedgerTabProofFamilyParity") != proof.get("tabProofFamilyParity"):
+        raise AssertionError(f"audit source proof tab family parity mismatch: {audit}")
+    if audit.get("proofLedgerTabProofFamilyFileParity") != proof.get("tabProofFamilyFileParity"):
+        raise AssertionError(f"audit source proof tab family file parity mismatch: {audit}")
     expected_proof_categories = {
         name: category.get("count")
         for name, category in (proof.get("categories") or {}).items()
