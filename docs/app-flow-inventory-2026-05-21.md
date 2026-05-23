@@ -842,7 +842,7 @@ Current repeatable gates:
   category, Settings route list/count, contract map/count, proof list/count/file parity,
   and visual manifest list/count. It also exposes visual surface
   list/count/parity, visual surface proof map/count/parity, visual route
-  list/count, contract map/count, proof list/count, manifest list/count,
+  list/count, contract map/count, proof list/count/file parity, manifest list/count,
   minimum capture count, and actual screenshot capture count. The tools/parsers
   group exposes registry tool count, callback count, always-visible tool count,
   bounded catalogue limit, registry tab list, full registry tool list, registry

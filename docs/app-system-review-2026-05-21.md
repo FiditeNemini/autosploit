@@ -724,7 +724,7 @@ Automated no-model gates:
   Settings category list/count/current category, Settings route list/count,
   contract map/count, proof list/count/file parity, settings visual manifest list/count,
   visual surface proof map/count/parity, visual route list/count, contract
-  map/count, proof list/count, visual manifest list/count, minimum capture
+  map/count, proof list/count/file parity, visual manifest list/count, minimum capture
   count, and actual screenshot capture count. The
   tools/parsers group exposes registry tool
   count, callback count, always-visible tool count, bounded catalogue limit,

@@ -201,6 +201,8 @@ def assert_visual_coverage() -> None:
     missing_files = sorted(name for name in REQUIRED_PROOFS if not (ROOT / "scripts" / name).is_file())
     if missing_files:
         raise AssertionError(f"visual coverage names non-existent proof files: {missing_files}")
+    if coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"visual coverage proof file parity mismatch: {coverage}")
     if coverage.get("proofCount", 0) < len(REQUIRED_PROOFS):
         raise AssertionError(f"visual coverage proof count mismatch: {coverage}")
     missing_routes = sorted(REQUIRED_ROUTES.difference(set(coverage.get("routes") or [])))
