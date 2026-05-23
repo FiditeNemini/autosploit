@@ -265,6 +265,10 @@ Recon:
   count, clipboard preview, and summary, with tab activity recorded as
   `lastTool=copy_recon`; `scripts/recon-copy-actions-proof.py` covers the live
   seed/copy/state path.
+- `/qa/recon-coverage` rolls up Full Recon action state, parsed
+  subdomain/port/web-host/crawl/OSINT rows, copy paths for each Recon result
+  type, and activity telemetry with surface/route/state-key/proof
+  list/count/parity metadata and mirrors into `/qa/coverage-index`.
 
 Web:
 
@@ -938,6 +942,7 @@ mirrors session route list/count, contract map/count, proof list/count/file pari
   mirrors tab action tab list, route list/count, contract map/count, proof
   list/count/file parity, and action-state-key list/count/parity,
   mirrors tab action surface list/count/parity and proof map/count/parity/file parity, mirrors
+  Recon coverage surface/route/state-key/proof list/count/parity,
   Web coverage surface/route/state-key/proof list/count/parity,
   Network coverage surface/route/state-key/proof list/count/parity,
   Creds coverage surface/route/state-key/proof list/count/parity,

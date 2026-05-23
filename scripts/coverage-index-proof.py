@@ -30,6 +30,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/session-coverage",
     "/qa/tab-action-coverage",
     "/qa/chat-coverage",
+    "/qa/recon-coverage",
     "/qa/web-coverage",
     "/qa/network-coverage",
     "/qa/creds-coverage",
@@ -61,6 +62,7 @@ REQUIRED_PROOFS = {
     "session-coverage-proof.py",
     "tab-action-coverage-proof.py",
     "chat-coverage-proof.py",
+    "recon-coverage-proof.py",
     "web-coverage-proof.py",
     "network-coverage-proof.py",
     "creds-coverage-proof.py",
@@ -1156,6 +1158,43 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions tab action surface proof parity mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActionSurfaceProofFileParity") != tab_action_coverage.get("tabActionSurfaceProofFileParity"):
         raise AssertionError(f"coverage index tabs/sessions tab action surface proof-file parity mismatch: {tabs_sessions_group}")
+    recon_coverage = request("GET", "/qa/recon-coverage")
+    if tabs_sessions_group.get("reconSurfaces") != recon_coverage.get("reconSurfaces"):
+        raise AssertionError(f"coverage index tabs/sessions recon surfaces mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reconSurfaceCount") != recon_coverage.get("reconSurfaceCount"):
+        raise AssertionError(f"coverage index tabs/sessions recon surface count mismatch: {tabs_sessions_group}")
+    if recon_coverage.get("reconSurfaceParity") is not True:
+        raise AssertionError(f"recon coverage surface parity mismatch: {recon_coverage}")
+    if tabs_sessions_group.get("reconSurfaceParity") != recon_coverage.get("reconSurfaceParity"):
+        raise AssertionError(f"coverage index tabs/sessions recon surface parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reconRoutes") != recon_coverage.get("routes"):
+        raise AssertionError(f"coverage index tabs/sessions recon routes mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reconRouteCount") != recon_coverage.get("routeCount"):
+        raise AssertionError(f"coverage index tabs/sessions recon route count mismatch: {tabs_sessions_group}")
+    if recon_coverage.get("routeParity") is not True:
+        raise AssertionError(f"recon coverage route parity mismatch: {recon_coverage}")
+    if tabs_sessions_group.get("reconRouteParity") != recon_coverage.get("routeParity"):
+        raise AssertionError(f"coverage index tabs/sessions recon route parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reconStateKeys") != recon_coverage.get("stateKeys"):
+        raise AssertionError(f"coverage index tabs/sessions recon state keys mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reconStateKeyCount") != recon_coverage.get("stateKeyCount"):
+        raise AssertionError(f"coverage index tabs/sessions recon state-key count mismatch: {tabs_sessions_group}")
+    if recon_coverage.get("stateKeyParity") is not True:
+        raise AssertionError(f"recon coverage state-key parity mismatch: {recon_coverage}")
+    if tabs_sessions_group.get("reconStateKeyParity") != recon_coverage.get("stateKeyParity"):
+        raise AssertionError(f"coverage index tabs/sessions recon state-key parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reconContracts") != recon_coverage.get("contracts"):
+        raise AssertionError(f"coverage index tabs/sessions recon contracts mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reconContractCount") != len(recon_coverage.get("contracts") or {}):
+        raise AssertionError(f"coverage index tabs/sessions recon contract count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reconProofs") != recon_coverage.get("proofs"):
+        raise AssertionError(f"coverage index tabs/sessions recon proofs mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("reconProofCount") != recon_coverage.get("proofCount"):
+        raise AssertionError(f"coverage index tabs/sessions recon proof count mismatch: {tabs_sessions_group}")
+    if recon_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"recon coverage proof-file parity mismatch: {recon_coverage}")
+    if tabs_sessions_group.get("reconProofFileParity") != recon_coverage.get("proofFileParity"):
+        raise AssertionError(f"coverage index tabs/sessions recon proof-file parity mismatch: {tabs_sessions_group}")
     web_coverage = request("GET", "/qa/web-coverage")
     if tabs_sessions_group.get("webSurfaces") != web_coverage.get("webSurfaces"):
         raise AssertionError(f"coverage index tabs/sessions web surfaces mismatch: {tabs_sessions_group}")

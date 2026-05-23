@@ -107,6 +107,7 @@ def assert_testserver_smoke() -> None:
     session_coverage = request("GET", "/qa/session-coverage")
     tab_action_coverage = request("GET", "/qa/tab-action-coverage")
     chat_coverage = request("GET", "/qa/chat-coverage")
+    recon_coverage = request("GET", "/qa/recon-coverage")
     web_coverage = request("GET", "/qa/web-coverage")
     network_coverage = request("GET", "/qa/network-coverage")
     creds_coverage = request("GET", "/qa/creds-coverage")
@@ -176,6 +177,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing tab action coverage route contract: {qa}")
     if "/qa/chat-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing chat coverage route contract: {qa}")
+    if "/qa/recon-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing recon coverage route contract: {qa}")
     if "/qa/web-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing web coverage route contract: {qa}")
     if "/qa/network-coverage" not in qa.get("stateRoutes", []):
@@ -1153,6 +1156,22 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/tab-action-coverage surface proof-file parity mismatch: {tab_action_coverage}")
     if tabs_sessions_group.get("tabActionSurfaceProofFileParity") != tab_action_coverage.get("tabActionSurfaceProofFileParity"):
         raise AssertionError(f"/qa/coverage-index tab action surface proof-file parity mismatch: {coverage_index}")
+    if recon_coverage.get("reconSurfaceParity") is not True:
+        raise AssertionError(f"/qa/recon-coverage surface parity mismatch: {recon_coverage}")
+    if recon_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/recon-coverage proof-file parity mismatch: {recon_coverage}")
+    if tabs_sessions_group.get("reconSurfaces") != recon_coverage.get("reconSurfaces"):
+        raise AssertionError(f"/qa/coverage-index recon surface list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("reconSurfaceParity") != recon_coverage.get("reconSurfaceParity"):
+        raise AssertionError(f"/qa/coverage-index recon surface parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("reconProofs") != recon_coverage.get("proofs"):
+        raise AssertionError(f"/qa/coverage-index recon proof list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("reconProofFileParity") != recon_coverage.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index recon proof-file parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("reconStateKeys") != recon_coverage.get("stateKeys"):
+        raise AssertionError(f"/qa/coverage-index recon state-key list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("reconContracts") != recon_coverage.get("contracts"):
+        raise AssertionError(f"/qa/coverage-index recon contract map mismatch: {coverage_index}")
     if web_coverage.get("webSurfaceParity") is not True:
         raise AssertionError(f"/qa/web-coverage surface parity mismatch: {web_coverage}")
     if web_coverage.get("proofFileParity") is not True:

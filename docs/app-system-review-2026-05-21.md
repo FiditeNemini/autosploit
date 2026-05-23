@@ -274,6 +274,10 @@ Recon:
   proof seeds subdomains, ports, web hosts, crawl URLs, and OSINT rows, then
   verifies each copy path records clipboard preview, count, kind, and Recon tab
   activity with `lastTool=copy_recon`.
+- `/qa/recon-coverage` now summarizes the Recon tab as one auditable surface:
+  Full Recon action state, parsed subdomain/port/web-host/crawl/OSINT rows,
+  copy paths for each Recon result type, and activity telemetry expose
+  surface/route/state-key/proof list/count/parity metadata.
 - Visible Full Recon running state is captured under
   `docs/visual-proofs/checkpoint-97`.
 
@@ -817,6 +821,7 @@ Automated no-model gates:
   tab action tab list, route list/count, contract map/count, proof list/count/file parity,
   action-state-key list/count/parity,
   tab action surface list/count/parity, tab action surface proof map/count/parity/file parity,
+  Recon coverage surface/route/state-key/proof list/count/parity,
   Web coverage surface/route/state-key/proof list/count/parity,
   Network coverage surface/route/state-key/proof list/count/parity,
   Creds coverage surface/route/state-key/proof list/count/parity,
