@@ -630,7 +630,7 @@ Automated no-model gates:
   rollup preserves the same uncategorized proof accounting as the source ledger.
   It also exposes
   `/qa/artifact-ledger`
-  visual manifest and live-proof counts so screenshot and live JSON evidence
+  visual manifest/live-proof counts and file parity so screenshot and live JSON evidence
   stay machine-auditable, including missing visual capture count.
   The chat/context group mirrors `/qa/chat-coverage.headerCacheBadges`,
   `headerCacheBadgeCount`, `headerCacheBadgeParity`,
@@ -668,7 +668,8 @@ Automated no-model gates:
   `/qa/checkpoint-ledger.checkpoints`, `/qa/checkpoint-ledger.latestCheckpoint`,
   and `latestCheckpointNumber`, so the same aggregate identifies the current
   documentation frontier and its completion breakdown. It also carries
-  `/qa/artifact-ledger.visualManifests`, `/qa/artifact-ledger.liveProofs`, and
+  `/qa/artifact-ledger.visualManifests`, visual manifest file parity,
+  `/qa/artifact-ledger.liveProofs`, live-proof file parity, and
   `/qa/artifact-ledger.liveProofStatus`, plus
   `/qa/artifact-ledger.visualCaptureCount`,
   `/qa/artifact-ledger.visualCaptureStatus`, `liveProofOkCount`,

@@ -82,6 +82,8 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit proof category parity mismatch: {audit}")
     if audit.get("visualManifestCount") != artifact.get("visualManifestCount"):
         raise AssertionError(f"audit visual manifest count mismatch: {audit}")
+    if audit.get("visualManifestFileParity") != artifact.get("visualManifestFileParity"):
+        raise AssertionError(f"audit visual manifest file parity mismatch: {audit}")
     if audit.get("visualCaptureCount") != artifact.get("visualCaptureCount"):
         raise AssertionError(f"audit visual capture count mismatch: {audit}")
     if audit.get("missingVisualCaptureCount") != len(artifact.get("missingVisualCaptures") or []):
@@ -90,6 +92,8 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit missing visual list mismatch: {audit}")
     if audit.get("liveProofCount") != artifact.get("liveProofCount"):
         raise AssertionError(f"audit live proof count mismatch: {audit}")
+    if audit.get("liveProofFileParity") != artifact.get("liveProofFileParity"):
+        raise AssertionError(f"audit live proof file parity mismatch: {audit}")
     if audit.get("liveProofOkCount") != artifact.get("liveProofOkCount"):
         raise AssertionError(f"audit live proof ok count mismatch: {audit}")
     if audit.get("failedLiveProofCount") != len(artifact.get("failedLiveProofs") or []):

@@ -256,6 +256,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state artifact visual capture count mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerVisualManifests") != artifact.get("visualManifests"):
         raise AssertionError(f"coverage index app state artifact visual manifests mismatch: {app_state_group}")
+    if app_state_group.get("artifactLedgerVisualManifestFileParity") != artifact.get("visualManifestFileParity"):
+        raise AssertionError(f"coverage index app state artifact visual manifest file parity mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerVisualCaptureStatus") != artifact.get("visualCaptureStatus"):
         raise AssertionError(f"coverage index app state artifact visual capture status mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerLiveProofCount", 0) < 18:
@@ -264,6 +266,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state artifact live ok count mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerLiveProofs") != artifact.get("liveProofs"):
         raise AssertionError(f"coverage index app state artifact live proofs mismatch: {app_state_group}")
+    if app_state_group.get("artifactLedgerLiveProofFileParity") != artifact.get("liveProofFileParity"):
+        raise AssertionError(f"coverage index app state artifact live proof file parity mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerLiveProofStatus") != artifact.get("liveProofStatus"):
         raise AssertionError(f"coverage index app state artifact live proof status mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerFailedLiveProofCount") != artifact.get("failedLiveProofCount"):
@@ -296,6 +300,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state audit ledger count mismatch: {app_state_group}")
     if app_state_group.get("auditVisualManifestCount") != audit.get("visualManifestCount"):
         raise AssertionError(f"coverage index app state audit visual manifest count mismatch: {app_state_group}")
+    if app_state_group.get("auditVisualManifestFileParity") != audit.get("visualManifestFileParity"):
+        raise AssertionError(f"coverage index app state audit visual manifest file parity mismatch: {app_state_group}")
     if app_state_group.get("auditVisualCaptureCount") != audit.get("visualCaptureCount"):
         raise AssertionError(f"coverage index app state audit visual capture count mismatch: {app_state_group}")
     if app_state_group.get("auditMissingVisualCaptureCount") != audit.get("missingVisualCaptureCount"):
@@ -304,6 +310,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state audit missing visual capture list mismatch: {app_state_group}")
     if app_state_group.get("auditLiveProofCount") != audit.get("liveProofCount"):
         raise AssertionError(f"coverage index app state audit live proof count mismatch: {app_state_group}")
+    if app_state_group.get("auditLiveProofFileParity") != audit.get("liveProofFileParity"):
+        raise AssertionError(f"coverage index app state audit live proof file parity mismatch: {app_state_group}")
     if app_state_group.get("auditLiveProofOkCount") != audit.get("liveProofOkCount"):
         raise AssertionError(f"coverage index app state audit live proof ok count mismatch: {app_state_group}")
     if app_state_group.get("auditFailedLiveProofCount") != audit.get("failedLiveProofCount"):

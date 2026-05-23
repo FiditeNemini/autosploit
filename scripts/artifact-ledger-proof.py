@@ -92,11 +92,15 @@ def assert_artifact_ledger() -> None:
     expected_manifest_paths = [str(path.relative_to(ROOT)) for path in manifests]
     if manifest_paths != expected_manifest_paths:
         raise AssertionError(f"artifact ledger visual manifest list mismatch: {ledger}")
+    if ledger.get("visualManifestFileParity") is not True:
+        raise AssertionError(f"artifact ledger visual manifest file parity mismatch: {ledger}")
 
     live_paths = ledger.get("liveProofs") or []
     expected_live_paths = [str(path.relative_to(ROOT)) for path in live_proofs]
     if live_paths != expected_live_paths:
         raise AssertionError(f"artifact ledger live proof list mismatch: {ledger}")
+    if ledger.get("liveProofFileParity") is not True:
+        raise AssertionError(f"artifact ledger live proof file parity mismatch: {ledger}")
     live_status = ledger.get("liveProofStatus") or {}
     expected_live_ok = {
         str(path.relative_to(ROOT)): live_proof_ok(path)
