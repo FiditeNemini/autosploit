@@ -654,7 +654,7 @@ Current repeatable gates:
   The same matrix also checks `/qa/agent-loop-coverage` for manual suggestion,
   copilot approval, autopilot execution, and deployed-agent forced-autopilot
   inheritance coverage. It also checks the agent-loop phase list/count/parity,
-  phase-proof count/parity, and the agent action telemetry fields needed to prove deploy-sheet,
+  phase-proof count/parity/file parity, and the agent action telemetry fields needed to prove deploy-sheet,
   task-send, progress, and status behavior. It now also
   checks `/qa/tool-flow-coverage`, which ties
   the tool registry, parser routing, representative family fanout, and
@@ -872,7 +872,7 @@ mirrors session route list/count, contract map/count, proof list/count/file pari
   mirrors tab action tab list, route list/count, contract map/count, proof
   list/count/file parity, and action-state-key list/count,
   mirrors tab action surface list/count/parity and proof map/count/parity/file parity, mirrors
-  agent-loop phase list/count/parity and phase-proof map/count/parity,
+  agent-loop phase list/count/parity and phase-proof map/count/parity/file parity,
   mirrors agent-loop state-key list/count, current mode, max-iteration guard,
   proof count/list/file parity, visual-state-key count, mode behavior/count, deployed-agent
   inheritance/status contract/count, route-owned route list/count, route-owned contract flags/count, and

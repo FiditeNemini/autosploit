@@ -804,6 +804,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions agent loop phase proof count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopPhaseProofParity") != agent_loop.get("loopPhaseProofParity"):
         raise AssertionError(f"coverage index tabs/sessions agent loop phase proof parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("agentLoopPhaseProofFileParity") != agent_loop.get("loopPhaseProofFileParity"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop phase proof-file parity mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopModes") != agent_loop.get("modes"):
         raise AssertionError(f"coverage index tabs/sessions agent loop modes mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopModeCount") != agent_loop.get("modeCount"):

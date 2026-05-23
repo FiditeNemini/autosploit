@@ -546,7 +546,7 @@ Automated no-model gates:
   routes, deploy-sheet/task-send controls, action telemetry fields, and the
   agent-loop state-key list/count plus visual state keys for active agent
   chat/results/feed routing, context snippets, exposed tool-schema audit state,
-  loop-phase list/count/parity, and phase-proof map/count/parity. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
+  loop-phase list/count/parity, and phase-proof map/count/parity/file parity. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
   context-catalog proof contract for model-issued tool calls, including the
   parser, tool-catalog, and family-fanout fixture seed routes, proof-count
   metadata, `stateKeys`, tool-schema cap/policy/route, structured/raw
@@ -753,7 +753,7 @@ Automated no-model gates:
   tab action surface list/count/parity, tab action surface proof map/count/parity/file parity,
   action-state-key count, agent-loop
   state-key list/count, agent-loop visual state keys, agent-loop phase-proof
-  map/count/parity, agent-loop current mode, max-iteration guard, proof count/list/file parity,
+  map/count/parity/file parity, agent-loop current mode, max-iteration guard, proof count/list/file parity,
   visual-state-key count, mode behavior/count, deployed-agent inheritance/status
   contract/count, route-owned route list/count, route-owned contract flags/count,
   route-owned action telemetry field list/count, and tab activity status proof count/parity. Chat/context
@@ -847,7 +847,7 @@ Automated no-model gates:
   - proves `/qa/agent-loop-coverage` names the model/tool loop phases from user
     prompt through dynamic context, schema selection, streaming, mode/scope
     policy, execution, result storage, and loop re-entry, with each phase mapped
-    to concrete proof scripts.
+    to concrete proof scripts and route-owned proof-file parity.
   - proves a deployed typed agent runs in forced autopilot, inherits runtime
     defaults, uses bounded dynamic context/tool schemas, preserves its type
     prompt override, executes a tool, and completes autonomously through

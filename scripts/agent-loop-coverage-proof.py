@@ -218,6 +218,8 @@ def run() -> None:
             missing_phase_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
             if missing_phase_files:
                 raise AssertionError(f"agent loop phase {phase} names missing proof files {missing_phase_files}: {coverage}")
+        if coverage.get("loopPhaseProofFileParity") is not True:
+            raise AssertionError(f"agent loop phase proof-file parity mismatch: {coverage}")
         visual_state_keys = set(coverage.get("visualStateKeys") or [])
         for key in ("agents", "agentActions", "displayChatService", "displayResultsStore", "displayActivityFeed"):
             if key not in visual_state_keys:
