@@ -594,7 +594,7 @@ Automated no-model gates:
   tab switching, phase changes, and Activity Feed controls, and lists the
   `/phase`, `/qa/seed-activity-actions`, and `/qa/activity-action` routes with
   proof-count metadata, session workflow surface list/count/parity, workflow
-  surface proof map/count/parity, plus `stateKeys`.
+  surface proof map/count/parity, plus `stateKeys` count/parity.
   `/qa/tab-action-coverage` exposes per-tab direct action proof coverage for
   copy buttons, row context actions, verify/protocol/hash/exploit/post/OSINT
   actions, report generation/finding/export/agent actions, Stash controls, and
@@ -769,7 +769,7 @@ Automated no-model gates:
   interaction-mode count, covered tab
   count, session state-key count, subtab tab maps and proof count/file parity,
   session route list/count, contract map/count, proof list/count/file parity, state-key
-  list/count,
+  list/count/parity,
   session workflow surface list/count/parity,
   session workflow surface proof map/count/parity/file parity,
   tab action tab list, route list/count, contract map/count, proof list/count/file parity,

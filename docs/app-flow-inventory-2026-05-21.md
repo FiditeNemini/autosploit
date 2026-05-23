@@ -54,7 +54,7 @@ sidebar create/rename/switch/delete, create-op stop behavior, overlays,
 model-folder pickers, persistence across relaunch, saved messages, restored
 results, finding wizard submit, tab switching, phase actions, Activity Feed
 actions, proof-count metadata, session workflow surface list/count/parity,
-session workflow surface proof map/count/parity/file parity, and the `stateKeys` those
+session workflow surface proof map/count/parity/file parity, and the `stateKeys` count/parity those
 proofs validate.
 The coverage payload now lists the phase and Activity Feed QA routes (`/phase`,
 `/qa/seed-activity-actions`, `/qa/activity-action`) plus `proofCount`, so the
@@ -893,7 +893,7 @@ Current repeatable gates:
   interaction-mode count, covered tab count, session state-key count, and
   action-state-key count, mirrors subtab tab maps and proof count/file parity,
 mirrors session route list/count, contract map/count, proof list/count/file parity, and
-  state-key list/count,
+  state-key list/count/parity,
   mirrors session workflow surface list/count/parity,
   session workflow surface proof map/count/parity/file parity,
   mirrors tab action tab list, route list/count, contract map/count, proof

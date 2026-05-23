@@ -183,6 +183,10 @@ def assert_session_coverage() -> None:
     missing_state_keys = sorted(REQUIRED_STATE_KEYS.difference(state_keys))
     if missing_state_keys:
         raise AssertionError(f"session coverage missing state keys {missing_state_keys}: {coverage}")
+    if coverage.get("stateKeyCount") != len(coverage.get("stateKeys") or []):
+        raise AssertionError(f"session coverage state key count mismatch: {coverage}")
+    if coverage.get("stateKeyParity") is not True:
+        raise AssertionError(f"session coverage state key parity mismatch: {coverage}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/session-coverage" not in qa.get("stateRoutes", []):

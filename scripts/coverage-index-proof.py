@@ -1025,8 +1025,12 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions session proof-file parity mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("sessionStateKeys") != session_coverage.get("stateKeys"):
         raise AssertionError(f"coverage index tabs/sessions session state-key list mismatch: {tabs_sessions_group}")
-    if tabs_sessions_group.get("sessionStateKeyCount") != len(session_coverage.get("stateKeys") or []):
+    if session_coverage.get("stateKeyParity") is not True:
+        raise AssertionError(f"session coverage state-key parity mismatch: {session_coverage}")
+    if tabs_sessions_group.get("sessionStateKeyCount") != session_coverage.get("stateKeyCount"):
         raise AssertionError(f"coverage index tabs/sessions session state-key count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("sessionStateKeyParity") != session_coverage.get("stateKeyParity"):
+        raise AssertionError(f"coverage index tabs/sessions session state-key parity mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("sessionWorkflowSurfaces") != session_coverage.get("sessionWorkflowSurfaces"):
         raise AssertionError(f"coverage index tabs/sessions workflow surfaces mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("sessionWorkflowSurfaceCount") != session_coverage.get("sessionWorkflowSurfaceCount"):
