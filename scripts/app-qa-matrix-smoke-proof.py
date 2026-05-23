@@ -108,6 +108,7 @@ def assert_testserver_smoke() -> None:
     tab_action_coverage = request("GET", "/qa/tab-action-coverage")
     chat_coverage = request("GET", "/qa/chat-coverage")
     report_coverage = request("GET", "/qa/report-coverage")
+    stash_coverage = request("GET", "/qa/stash-coverage")
     coverage_index = request("GET", "/qa/coverage-index")
     proof_ledger = request("GET", "/qa/proof-ledger")
     artifact_ledger = request("GET", "/qa/artifact-ledger")
@@ -171,6 +172,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing chat coverage route contract: {qa}")
     if "/qa/report-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing report coverage route contract: {qa}")
+    if "/qa/stash-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing stash coverage route contract: {qa}")
     if "/qa/coverage-index" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing coverage-index route contract: {qa}")
     if "/qa/proof-ledger" not in qa.get("stateRoutes", []):
@@ -1148,6 +1151,22 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index report state-key list mismatch: {coverage_index}")
     if tabs_sessions_group.get("reportContracts") != report_coverage.get("contracts"):
         raise AssertionError(f"/qa/coverage-index report contract map mismatch: {coverage_index}")
+    if stash_coverage.get("stashSurfaceParity") is not True:
+        raise AssertionError(f"/qa/stash-coverage surface parity mismatch: {stash_coverage}")
+    if stash_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/stash-coverage proof-file parity mismatch: {stash_coverage}")
+    if tabs_sessions_group.get("stashSurfaces") != stash_coverage.get("stashSurfaces"):
+        raise AssertionError(f"/qa/coverage-index stash surface list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("stashSurfaceParity") != stash_coverage.get("stashSurfaceParity"):
+        raise AssertionError(f"/qa/coverage-index stash surface parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("stashProofs") != stash_coverage.get("proofs"):
+        raise AssertionError(f"/qa/coverage-index stash proof list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("stashProofFileParity") != stash_coverage.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index stash proof-file parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("stashStateKeys") != stash_coverage.get("stateKeys"):
+        raise AssertionError(f"/qa/coverage-index stash state-key list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("stashContracts") != stash_coverage.get("contracts"):
+        raise AssertionError(f"/qa/coverage-index stash contract map mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopPhaseProofs") != agent_loop_coverage.get("loopPhaseProofs"):
         raise AssertionError(f"/qa/coverage-index agent loop phase proof map mismatch: {coverage_index}")
     if agent_loop_coverage.get("loopPhaseProofFileParity") is not True:

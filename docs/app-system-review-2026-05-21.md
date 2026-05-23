@@ -509,6 +509,10 @@ Stash:
 - Source/op scoping and catalogue inclusion/exclusion are covered by
   `scripts/context-catalog-proof.py`; scored targeted retrieval is covered by
   `scripts/stash-retrieval-proof.py`.
+- `/qa/stash-coverage` now summarizes durable note storage, manual/add-sheet
+  creation, filtering, copy/delete, bounded chat handoff, row context actions,
+  active-scope retrieval, dynamic catalogue sourcing, and activity telemetry
+  with surface/route/state-key/proof list/count/parity metadata.
 - Visible retrieval audit state is captured under
   `docs/visual-proofs/checkpoint-92`.
 
@@ -788,6 +792,7 @@ Automated no-model gates:
   action-state-key list/count/parity,
   tab action surface list/count/parity, tab action surface proof map/count/parity/file parity,
   Report coverage surface/route/state-key/proof list/count/parity,
+  Stash coverage surface/route/state-key/proof list/count/parity,
   action-state-key count/parity, agent-loop
   state-key list/count, agent-loop visual state keys/parity, agent-loop phase-proof
   map/count/parity/file parity, agent-loop current mode, max-iteration guard, proof count/list/file parity,

@@ -503,6 +503,11 @@ Stash:
   state.
 - Targeted retrieval is covered by `scripts/stash-retrieval-proof.py`, and the
   visible audit strip is captured under `docs/visual-proofs/checkpoint-92`.
+- `/qa/stash-coverage` rolls up durable notes, manual/add-sheet creation,
+  filtering, copy/delete, bounded chat handoff, row context actions,
+  active-scope retrieval, dynamic context catalogue sourcing, and activity
+  telemetry with surface/route/state-key/proof list/count/parity metadata and
+  mirrors into `/qa/coverage-index`.
 
 ## Settings Functions
 
@@ -909,6 +914,7 @@ mirrors session route list/count, contract map/count, proof list/count/file pari
   list/count/file parity, and action-state-key list/count/parity,
   mirrors tab action surface list/count/parity and proof map/count/parity/file parity, mirrors
   Report coverage surface/route/state-key/proof list/count/parity,
+  Stash coverage surface/route/state-key/proof list/count/parity,
   agent-loop phase list/count/parity and phase-proof map/count/parity/file parity,
   mirrors agent-loop state-key list/count/parity, current mode, max-iteration guard,
   proof count/list/file parity, visual-state-key count/parity, mode behavior/count, deployed-agent
