@@ -158,6 +158,15 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit qwen multimodal proof count mismatch: {audit}")
     if audit.get("qwenMultimodalProofFileParity") != gap.get("qwenMultimodalProofFileParity"):
         raise AssertionError(f"audit qwen multimodal proof-file parity mismatch: {audit}")
+    qwen_gap = (gap.get("gapContracts") or {}).get("qwenMultimodalRuntime") or {}
+    if audit.get("qwenMultimodalPromotionReady") != qwen_gap.get("promotionReady"):
+        raise AssertionError(f"audit qwen multimodal promotion-ready mismatch: {audit}")
+    if audit.get("qwenMultimodalPromotionCriteriaCount") != qwen_gap.get("promotionCriteriaCount"):
+        raise AssertionError(f"audit qwen multimodal promotion criteria count mismatch: {audit}")
+    if audit.get("qwenMultimodalMissingPromotionCriteriaIds") != qwen_gap.get("missingPromotionCriteriaIds"):
+        raise AssertionError(f"audit qwen multimodal missing criteria mismatch: {audit}")
+    if audit.get("qwenMultimodalMissingPromotionProofs") != qwen_gap.get("missingPromotionProofs"):
+        raise AssertionError(f"audit qwen multimodal missing promotion proofs mismatch: {audit}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/audit-ledger" not in qa.get("stateRoutes", []):

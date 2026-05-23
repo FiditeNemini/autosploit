@@ -17,6 +17,24 @@ ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
 SYSTEM_REVIEW = ROOT / "docs" / "app-system-review-2026-05-21.md"
 
+EXPECTED_QWEN_PROMOTION_CRITERIA = [
+    {
+        "id": "qwenMultimodalLoader",
+        "status": "missing",
+        "requiredProof": "live-qwen-multimodal-loader-proof.py",
+    },
+    {
+        "id": "prefixCacheKeyDiscipline",
+        "status": "missing",
+        "requiredProof": "live-qwen-multimodal-prefix-cache-proof.py",
+    },
+    {
+        "id": "multimodalContextPacketRouting",
+        "status": "missing",
+        "requiredProof": "live-qwen-multimodal-context-routing-proof.py",
+    },
+]
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -108,6 +126,21 @@ def assert_gap_ledger() -> None:
         raise AssertionError(f"qwen multimodal gap names missing proof files: {missing_proof_files}")
     if ledger.get("qwenMultimodalProofFileParity") is not True:
         raise AssertionError(f"qwen multimodal proof-file parity mismatch: {ledger}")
+    promotion_criteria = qwen_gap.get("promotionCriteria") or []
+    if qwen_gap.get("promotionReady") is not False:
+        raise AssertionError(f"qwen multimodal promotion should remain false until live proofs exist: {qwen_gap}")
+    if qwen_gap.get("promotionCriteriaCount") != len(EXPECTED_QWEN_PROMOTION_CRITERIA):
+        raise AssertionError(f"qwen multimodal promotion criteria count mismatch: {qwen_gap}")
+    if qwen_gap.get("missingPromotionCriteriaIds") != [item["id"] for item in EXPECTED_QWEN_PROMOTION_CRITERIA]:
+        raise AssertionError(f"qwen multimodal missing criteria id mismatch: {qwen_gap}")
+    if qwen_gap.get("missingPromotionProofs") != [item["requiredProof"] for item in EXPECTED_QWEN_PROMOTION_CRITERIA]:
+        raise AssertionError(f"qwen multimodal missing promotion proof mismatch: {qwen_gap}")
+    for expected, actual in zip(EXPECTED_QWEN_PROMOTION_CRITERIA, promotion_criteria):
+        for key, value in expected.items():
+            if actual.get(key) != value:
+                raise AssertionError(f"qwen multimodal promotion criterion {key} mismatch: {qwen_gap}")
+        if (ROOT / "scripts" / expected["requiredProof"]).exists():
+            raise AssertionError(f"qwen multimodal promotion proof unexpectedly exists before runtime support: {expected}")
     required_proofs = {
         "model-folder-warning-proof.py",
         "unsupported-model-start-proof.py",
