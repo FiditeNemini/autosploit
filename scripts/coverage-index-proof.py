@@ -185,6 +185,10 @@ def assert_coverage_index() -> None:
     for name, group in groups.items():
         endpoints_for_group = group.get("endpoints") or []
         proofs_for_group = group.get("proofs") or []
+        if group.get("ok") is not True:
+            raise AssertionError(f"coverage index group missing ok health {name}: {group}")
+        if group.get("proofFileParity") is not True:
+            raise AssertionError(f"coverage index group proof-file parity mismatch {name}: {group}")
         if not endpoints_for_group:
             raise AssertionError(f"coverage index group has no endpoints {name}: {group}")
         if not proofs_for_group:

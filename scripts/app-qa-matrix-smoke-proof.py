@@ -461,6 +461,15 @@ def assert_testserver_smoke() -> None:
     if coverage_index.get("proofCount", 0) < 14:
         raise AssertionError(f"/qa/coverage-index proof count mismatch: {coverage_index}")
     index_groups = coverage_index.get("groups") or {}
+    for group_name, group_payload in index_groups.items():
+        if group_payload.get("ok") is not True:
+            raise AssertionError(f"/qa/coverage-index group {group_name} missing ok health: {coverage_index}")
+        if group_payload.get("proofFileParity") is not True:
+            raise AssertionError(f"/qa/coverage-index group {group_name} proof-file parity mismatch: {coverage_index}")
+        if group_payload.get("endpointCount") != len(group_payload.get("endpoints") or []):
+            raise AssertionError(f"/qa/coverage-index group {group_name} endpoint count mismatch: {coverage_index}")
+        if group_payload.get("proofCount") != len(group_payload.get("proofs") or []):
+            raise AssertionError(f"/qa/coverage-index group {group_name} proof count mismatch: {coverage_index}")
     app_state_group = index_groups.get("appState") or {}
     if app_state_group.get("stateRoutes") != qa.get("stateRoutes"):
         raise AssertionError(f"/qa/coverage-index state route list mismatch: {coverage_index}")
