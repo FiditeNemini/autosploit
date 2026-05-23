@@ -18,7 +18,9 @@ DMG.
 The packaging script also writes `release/release-manifest.json` after signing.
 The manifest records the bundle identifier, beta version, Developer ID identity,
 Team ID, hardened runtime flag, notarization status, app binary SHA-256, DMG
-SHA-256, bundled resource flags, and the notarization command.
+SHA-256, bundled resource flags, the notary-profile gate, the reason
+notarization is currently skipped, and the package/signature/notarization
+commands needed to finish the handoff.
 
 Validated identity:
 
@@ -40,11 +42,18 @@ Validated local commands:
   `(55KGF2S5AY)`.
 - Hardened runtime: enabled.
 - Release manifest: generated and checked against signed artifacts.
+- Release manifest notary gate: `requires-notary-profile`.
+- Notary profile requirement: `notaryProfileRequired=true`.
 - Resource seal: present.
 - Gatekeeper status before notarization: rejected as `Unnotarized Developer ID`.
 
 That Gatekeeper result is expected before notarization. The package is ready for
 notary submission once a notarytool keychain profile is available.
+
+The machine-readable manifest now distinguishes signed/package readiness from
+notarization readiness: signed app and DMG artifacts are present, while
+notarization remains intentionally gated until `EXPLOITBOT_NOTARY_PROFILE`
+names a local notarytool keychain profile.
 
 ## Notarization Command
 

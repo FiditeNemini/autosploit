@@ -473,6 +473,12 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index release manifest fields mismatch: {release_group}")
     if release_group.get("notarizationGate") != "requires-notary-profile":
         raise AssertionError(f"coverage index release notarization gate mismatch: {release_group}")
+    if release_group.get("notaryProfileRequired") != release_coverage.get("notaryProfileRequired"):
+        raise AssertionError(f"coverage index release notary profile requirement mismatch: {release_group}")
+    if release_group.get("notarizationGateReason") != release_coverage.get("notarizationGateReason"):
+        raise AssertionError(f"coverage index release notarization gate reason mismatch: {release_group}")
+    if release_group.get("releaseCommands") != release_coverage.get("commands"):
+        raise AssertionError(f"coverage index release command map mismatch: {release_group}")
     runtime_group = groups.get("runtimeAndCache") or {}
     if runtime_group.get("liveProofArtifactCount", 0) < 6:
         raise AssertionError(f"coverage index runtime live artifact count mismatch: {runtime_group}")

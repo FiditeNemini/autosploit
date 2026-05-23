@@ -683,6 +683,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index release manifest field parity mismatch: {coverage_index}")
     if release_group.get("notarizationGate") != "requires-notary-profile":
         raise AssertionError(f"/qa/coverage-index release notarization gate mismatch: {coverage_index}")
+    if release_group.get("notaryProfileRequired") != release_readiness.get("notaryProfileRequired"):
+        raise AssertionError(f"/qa/coverage-index release notary profile requirement mismatch: {coverage_index}")
+    if release_group.get("notarizationGateReason") != release_readiness.get("notarizationGateReason"):
+        raise AssertionError(f"/qa/coverage-index release notarization gate reason mismatch: {coverage_index}")
+    if release_group.get("releaseCommands") != release_readiness.get("commands"):
+        raise AssertionError(f"/qa/coverage-index release command map mismatch: {coverage_index}")
     if release_group.get("appBinarySha256Length") != 64 or release_group.get("dmgSha256Length") != 64:
         raise AssertionError(f"/qa/coverage-index release hash length mismatch: {coverage_index}")
     runtime_group = index_groups.get("runtimeAndCache") or {}

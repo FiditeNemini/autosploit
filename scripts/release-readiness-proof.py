@@ -59,6 +59,13 @@ def main() -> None:
     require(manifest.get("teamIdentifier") == "55KGF2S5AY", "manifest team identifier mismatch", str(manifest))
     require(manifest.get("hardenedRuntime") is True, "manifest hardened runtime flag missing", str(manifest))
     require(manifest.get("notarizationStatus") == "not-submitted", "manifest notarization status mismatch", str(manifest))
+    require(manifest.get("notarizationGate") == "requires-notary-profile", "manifest notarization gate mismatch", str(manifest))
+    require(manifest.get("notaryProfileRequired") is True, "manifest notary profile requirement missing", str(manifest))
+    require(
+        manifest.get("notarizationGateReason") == "Notarization is intentionally skipped until EXPLOITBOT_NOTARY_PROFILE names a local notarytool keychain profile.",
+        "manifest notarization gate reason mismatch",
+        str(manifest),
+    )
     artifacts = manifest.get("artifacts", {})
     require(artifacts.get("appPath") == "release/ExploitBot.app", "manifest app path mismatch", str(manifest))
     require(artifacts.get("dmgPath") == "release/ExploitBot-beta.dmg", "manifest DMG path mismatch", str(manifest))
@@ -67,6 +74,11 @@ def main() -> None:
     resources = manifest.get("resources", {})
     require(resources.get("starterCvesDb") is True, "manifest starter CVE resource flag missing", str(manifest))
     require(resources.get("appIcon") is True, "manifest app icon resource flag missing", str(manifest))
+    commands = manifest.get("commands", {})
+    require(commands.get("packageUnsigned") == "./script/package_release.sh --skip-notarize", "manifest skip-notarize command mismatch", str(manifest))
+    require(commands.get("notarize") == "EXPLOITBOT_NOTARY_PROFILE=<profile-name> ./script/package_release.sh --notarize", "manifest notarize command mismatch", str(manifest))
+    require(commands.get("verifyAppSignature") == "codesign --verify --deep --strict --verbose=2 release/ExploitBot.app", "manifest app signature command mismatch", str(manifest))
+    require(commands.get("verifyDmgSignature") == "codesign --verify --verbose=2 release/ExploitBot-beta.dmg", "manifest dmg signature command mismatch", str(manifest))
 
     print("release-readiness proof passed")
 

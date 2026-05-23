@@ -177,6 +177,9 @@ manifest = {
     "teamIdentifier": os.environ["TEAM_ID"],
     "hardenedRuntime": True,
     "notarizationStatus": os.environ["NOTARIZATION_STATUS"],
+    "notarizationGate": "requires-notary-profile",
+    "notaryProfileRequired": True,
+    "notarizationGateReason": "Notarization is intentionally skipped until EXPLOITBOT_NOTARY_PROFILE names a local notarytool keychain profile.",
     "artifacts": {
         "appPath": "release/ExploitBot.app",
         "dmgPath": "release/ExploitBot-beta.dmg",
@@ -188,7 +191,10 @@ manifest = {
         "appIcon": os.environ["APP_ICON_PRESENT"] == "true",
     },
     "commands": {
+        "packageUnsigned": "./script/package_release.sh --skip-notarize",
         "notarize": "EXPLOITBOT_NOTARY_PROFILE=<profile-name> ./script/package_release.sh --notarize",
+        "verifyAppSignature": "codesign --verify --deep --strict --verbose=2 release/ExploitBot.app",
+        "verifyDmgSignature": "codesign --verify --verbose=2 release/ExploitBot-beta.dmg",
     },
 }
 
