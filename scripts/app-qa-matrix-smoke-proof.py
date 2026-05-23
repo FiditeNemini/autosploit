@@ -97,6 +97,7 @@ def assert_testserver_smoke() -> None:
     results = request("GET", "/results")
     subtab_coverage = request("GET", "/qa/subtab-coverage")
     agent_loop_coverage = request("GET", "/qa/agent-loop-coverage")
+    agent_tool_auth_coverage = request("GET", "/qa/agent-tool-authorization-coverage")
     tool_flow_coverage = request("GET", "/qa/tool-flow-coverage")
     tool_coverage = request("GET", "/qa/tool-coverage")
     result_parser_coverage = request("GET", "/qa/result-parser-coverage")
@@ -161,6 +162,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing subtab coverage route contract: {qa}")
     if "/qa/agent-loop-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing agent loop coverage route contract: {qa}")
+    if "/qa/agent-tool-authorization-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing agent tool authorization coverage route contract: {qa}")
     if "/qa/tool-flow-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing tool flow coverage route contract: {qa}")
     if "/qa/runtime-coverage" not in qa.get("stateRoutes", []):
@@ -224,6 +227,18 @@ def assert_testserver_smoke() -> None:
     for key in ("agents", "agentActions", "displayChatService", "displayResultsStore", "displayActivityFeed"):
         if key not in (agent_loop_coverage.get("visualStateKeys") or []):
             raise AssertionError(f"/qa/agent-loop-coverage visual state key missing {key}: {agent_loop_coverage}")
+    if agent_tool_auth_coverage.get("ok") is not True:
+        raise AssertionError(f"/qa/agent-tool-authorization-coverage failed: {agent_tool_auth_coverage}")
+    if agent_tool_auth_coverage.get("policyParity") is not True:
+        raise AssertionError(f"/qa/agent-tool-authorization-coverage policy parity mismatch: {agent_tool_auth_coverage}")
+    if agent_tool_auth_coverage.get("policies", {}).get("copilot", {}).get("decision") != "pauseForApproval":
+        raise AssertionError(f"/qa/agent-tool-authorization-coverage copilot policy mismatch: {agent_tool_auth_coverage}")
+    if agent_tool_auth_coverage.get("policies", {}).get("manual", {}).get("decision") != "suggest":
+        raise AssertionError(f"/qa/agent-tool-authorization-coverage manual policy mismatch: {agent_tool_auth_coverage}")
+    if agent_tool_auth_coverage.get("policies", {}).get("autopilot", {}).get("decision") != "execute":
+        raise AssertionError(f"/qa/agent-tool-authorization-coverage autopilot policy mismatch: {agent_tool_auth_coverage}")
+    if agent_tool_auth_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/agent-tool-authorization-coverage proof-file parity mismatch: {agent_tool_auth_coverage}")
     if tool_flow_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/tool-flow-coverage failed: {tool_flow_coverage}")
     if tool_flow_coverage.get("toolCount") != 38 or tool_flow_coverage.get("callbackCount") != 3:
@@ -1378,6 +1393,24 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/agent-loop-coverage telemetry field parity mismatch: {agent_loop_coverage}")
     if tabs_sessions_group.get("agentLoopActionTelemetryFieldParity") != agent_loop_coverage.get("actionTelemetryFieldParity"):
         raise AssertionError(f"/qa/coverage-index agent loop telemetry parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentToolAuthorizationPolicies") != agent_tool_auth_coverage.get("policies"):
+        raise AssertionError(f"/qa/coverage-index agent tool authorization policy map mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentToolAuthorizationPolicyCount") != agent_tool_auth_coverage.get("policyCount"):
+        raise AssertionError(f"/qa/coverage-index agent tool authorization policy count mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentToolAuthorizationPolicyParity") != agent_tool_auth_coverage.get("policyParity"):
+        raise AssertionError(f"/qa/coverage-index agent tool authorization policy parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentToolAuthorizationRoutes") != agent_tool_auth_coverage.get("routes"):
+        raise AssertionError(f"/qa/coverage-index agent tool authorization routes mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentToolAuthorizationStateKeys") != agent_tool_auth_coverage.get("stateKeys"):
+        raise AssertionError(f"/qa/coverage-index agent tool authorization state keys mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentToolAuthorizationVisualSurfaces") != agent_tool_auth_coverage.get("visualSurfaces"):
+        raise AssertionError(f"/qa/coverage-index agent tool authorization visual surfaces mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentToolAuthorizationTransitions") != agent_tool_auth_coverage.get("transitions"):
+        raise AssertionError(f"/qa/coverage-index agent tool authorization transitions mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentToolAuthorizationProofs") != agent_tool_auth_coverage.get("proofs"):
+        raise AssertionError(f"/qa/coverage-index agent tool authorization proofs mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentToolAuthorizationProofFileParity") != agent_tool_auth_coverage.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index agent tool authorization proof parity mismatch: {coverage_index}")
     if tabs_sessions_group.get("tabActivityStatusProofs") != tool_flow_coverage.get("tabActivityStatusProofs"):
         raise AssertionError(f"/qa/coverage-index tab activity status proof map mismatch: {coverage_index}")
     if tabs_sessions_group.get("tabActivityStatusProofFileParity") != tool_flow_coverage.get("tabActivityStatusProofFileParity"):

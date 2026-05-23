@@ -126,6 +126,11 @@ main session.
   the model until stop or `maxIterations`. The endpoint also exposes
   loop-phase count/parity plus a phase-to-proof map tying each phase to the
   scripts that exercise it.
+- `/qa/agent-tool-authorization-coverage` names the mode-specific tool-call
+  policy: Manual suggests without execution, Copilot creates a pending approval
+  and waits for approve/reject, and Autopilot executes within the iteration
+  guard. It also exposes approve/reject routes, pending approval state,
+  approval/tool-card visual surfaces, state keys, transitions, and proof parity.
 - Mode surface wiring is covered by `scripts/mode-selection-flow-proof.py`,
   which proves onboarding-created Manual mode, Sidebar mode switching,
   active-op persistence, pending approval rejection, and activity logging.
@@ -706,7 +711,9 @@ Current repeatable gates:
   copilot approval, autopilot execution, and deployed-agent forced-autopilot
   inheritance coverage. It also checks the agent-loop phase list/count/parity,
   phase-proof count/parity/file parity, and the agent action telemetry fields needed to prove deploy-sheet,
-  task-send, progress, and status behavior. It now also
+  task-send, progress, and status behavior. It also checks
+  `/qa/agent-tool-authorization-coverage` and the coverage-index mirror for
+  policy/state/visual/transition/proof parity. It now also
   checks `/qa/tool-flow-coverage`, which ties
   the tool registry, parser routing, representative family fanout, and
   context-catalog tool-output proofs into one auditable contract. It now lists

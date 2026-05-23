@@ -106,6 +106,12 @@ Interaction modes:
   It also exposes state-key, route, contract, and action-telemetry
   list/count/parity so the full agentic-loop surface is auditable from one
   aggregate endpoint.
+- `/qa/agent-tool-authorization-coverage` now exposes the manual/copilot/
+  autopilot tool-call authorization policy, approve/reject routes, pending
+  approval snapshot, state keys, visual surfaces, transition names, and proof
+  file parity. `scripts/agent-tool-authorization-proof.py` seeds a pending
+  approval and proves approve/reject clear the pending state through the live
+  app API.
 - Deployed-agent on-demand context retrieval is covered by
   `scripts/agent-search-context-proof.py`: an agent autonomously calls
   `search_context`, receives shared parsed-result catalogue facts from the main
@@ -601,7 +607,10 @@ Automated no-model gates:
   routes, deploy-sheet/task-send controls, action telemetry fields, and the
   agent-loop state-key list/count plus visual state keys and visual state-key parity for active agent
   chat/results/feed routing, context snippets, exposed tool-schema audit state,
-  loop-phase list/count/parity, and phase-proof map/count/parity/file parity. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
+  loop-phase list/count/parity, and phase-proof map/count/parity/file parity.
+  `/qa/agent-tool-authorization-coverage` exposes the mode policy, pending
+  approval, approve/reject route, visual surface, transition, and proof parity
+  contract for model-issued tool calls. `/qa/tool-flow-coverage` exposes the registry/parser/fanout/
   context-catalog proof contract for model-issued tool calls, including the
   parser, tool-catalog, and family-fanout fixture seed routes, proof-count
   metadata, `stateKeys`, tool-schema cap/policy/route, structured/raw
@@ -933,6 +942,10 @@ Automated no-model gates:
     prompt through dynamic context, schema selection, streaming, mode/scope
     policy, execution, result storage, and loop re-entry, with each phase mapped
     to concrete proof scripts and route-owned proof-file parity.
+  - proves `/qa/agent-tool-authorization-coverage` exposes manual suggestion,
+    copilot pending approval, approve/reject clearing, autopilot execution
+    policy, visual surfaces, state keys, transitions, and coverage-index parity
+    through `scripts/agent-tool-authorization-proof.py`.
   - proves a deployed typed agent runs in forced autopilot, inherits runtime
     defaults, uses bounded dynamic context/tool schemas, preserves its type
     prompt override, executes a tool, and completes autonomously through
