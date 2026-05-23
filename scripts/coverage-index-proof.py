@@ -282,6 +282,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state checkpoint ledger count mismatch: {app_state_group}")
     if app_state_group.get("checkpoints") != checkpoint.get("checkpoints"):
         raise AssertionError(f"coverage index app state checkpoint list mismatch: {app_state_group}")
+    if app_state_group.get("checkpointFileParity") != checkpoint.get("checkpointFileParity"):
+        raise AssertionError(f"coverage index app state checkpoint file parity mismatch: {app_state_group}")
     if app_state_group.get("completeCheckpointCount") != checkpoint.get("completeCheckpointCount"):
         raise AssertionError(f"coverage index app state complete checkpoint count mismatch: {app_state_group}")
     if app_state_group.get("completeCheckpoints") != checkpoint.get("completeCheckpoints"):
@@ -320,6 +322,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state audit failed live proof list mismatch: {app_state_group}")
     if app_state_group.get("auditCheckpointCount") != audit.get("checkpointCount"):
         raise AssertionError(f"coverage index app state audit checkpoint count mismatch: {app_state_group}")
+    if app_state_group.get("auditCheckpointFileParity") != audit.get("checkpointFileParity"):
+        raise AssertionError(f"coverage index app state audit checkpoint file parity mismatch: {app_state_group}")
     if app_state_group.get("auditCompleteCheckpointCount") != audit.get("completeCheckpointCount"):
         raise AssertionError(f"coverage index app state audit complete checkpoint count mismatch: {app_state_group}")
     if app_state_group.get("auditCheckpointCompletionRatio") != audit.get("checkpointCompletionRatio"):

@@ -644,7 +644,7 @@ Automated no-model gates:
   list/count/parity plus delivery proof map/count/parity, so
   the aggregate coverage map carries the same visible cache-session and bounded
   dynamic-context source contracts as the detailed endpoints.
-  `/qa/checkpoint-ledger` exposes checkpoint documentation count,
+  `/qa/checkpoint-ledger` exposes checkpoint documentation count/file parity,
   completeness count, completion ratio, complete checkpoint paths, incomplete
   checkpoint paths, latest checkpoint, and latest checkpoint number using numeric checkpoint ordering; the checkpoint,
   complete, and incomplete path lists also use that numeric order. The
@@ -664,7 +664,7 @@ Automated no-model gates:
   group also carries `/qa/checkpoint-ledger.checkpointCompletionRatio`, so the
   top-level QA summary reports checkpoint documentation completeness, not just
   checkpoint count. It also carries complete and incomplete checkpoint counts
-  and path lists from `/qa/checkpoint-ledger`, plus
+  path lists, and file parity from `/qa/checkpoint-ledger`, plus
   `/qa/checkpoint-ledger.checkpoints`, `/qa/checkpoint-ledger.latestCheckpoint`,
   and `latestCheckpointNumber`, so the same aggregate identifies the current
   documentation frontier and its completion breakdown. It also carries

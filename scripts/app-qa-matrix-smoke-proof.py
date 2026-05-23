@@ -495,6 +495,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index checkpoint ledger count mismatch: {coverage_index}")
     if app_state_group.get("checkpoints") != checkpoint_ledger.get("checkpoints"):
         raise AssertionError(f"/qa/coverage-index checkpoint list mismatch: {coverage_index}")
+    if checkpoint_ledger.get("checkpointFileParity") is not True:
+        raise AssertionError(f"/qa/checkpoint-ledger file parity mismatch: {checkpoint_ledger}")
+    if app_state_group.get("checkpointFileParity") != checkpoint_ledger.get("checkpointFileParity"):
+        raise AssertionError(f"/qa/coverage-index checkpoint file parity mismatch: {coverage_index}")
     if app_state_group.get("completeCheckpoints") != checkpoint_ledger.get("completeCheckpoints"):
         raise AssertionError(f"/qa/coverage-index complete checkpoint list mismatch: {coverage_index}")
     if app_state_group.get("incompleteCheckpoints") != checkpoint_ledger.get("incompleteCheckpoints"):
@@ -519,6 +523,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index audit failed live proof list mismatch: {coverage_index}")
     if app_state_group.get("auditCheckpointCount") != audit_ledger.get("checkpointCount"):
         raise AssertionError(f"/qa/coverage-index audit checkpoint count mismatch: {coverage_index}")
+    if app_state_group.get("auditCheckpointFileParity") != audit_ledger.get("checkpointFileParity"):
+        raise AssertionError(f"/qa/coverage-index audit checkpoint file parity mismatch: {coverage_index}")
     if app_state_group.get("auditCompleteCheckpointCount") != audit_ledger.get("completeCheckpointCount"):
         raise AssertionError(f"/qa/coverage-index audit complete checkpoint count mismatch: {coverage_index}")
     if app_state_group.get("auditCheckpointCompletionRatio") != audit_ledger.get("checkpointCompletionRatio"):

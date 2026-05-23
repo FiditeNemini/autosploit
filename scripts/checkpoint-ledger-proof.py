@@ -76,6 +76,8 @@ def assert_checkpoint_ledger() -> None:
         raise AssertionError(f"checkpoint ledger count mismatch expected {len(checkpoints)}: {ledger}")
     if ledger.get("checkpoints") != expected_paths:
         raise AssertionError(f"checkpoint ledger path list mismatch: {ledger}")
+    if ledger.get("checkpointFileParity") is not True:
+        raise AssertionError(f"checkpoint ledger file parity mismatch: {ledger}")
     if ledger.get("completeCheckpointCount") != len(expected_complete):
         raise AssertionError(f"checkpoint ledger complete count mismatch: {ledger}")
     if ledger.get("checkpointCompletionRatio") != expected_ratio:
