@@ -625,6 +625,16 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index artifact failed live proof count mismatch: {coverage_index}")
     if app_state_group.get("artifactLedgerFailedLiveProofs") != artifact_ledger.get("failedLiveProofs"):
         raise AssertionError(f"/qa/coverage-index artifact failed live proof list mismatch: {coverage_index}")
+    if app_state_group.get("artifactLedgerKnownFailedLiveProofCount") != artifact_ledger.get("knownFailedLiveProofCount"):
+        raise AssertionError(f"/qa/coverage-index artifact known failed live proof count mismatch: {coverage_index}")
+    if app_state_group.get("artifactLedgerKnownFailedLiveProofs") != artifact_ledger.get("knownFailedLiveProofs"):
+        raise AssertionError(f"/qa/coverage-index artifact known failed live proof list mismatch: {coverage_index}")
+    if app_state_group.get("artifactLedgerCurrentFailedLiveProofCount") != artifact_ledger.get("currentFailedLiveProofCount"):
+        raise AssertionError(f"/qa/coverage-index artifact current failed live proof count mismatch: {coverage_index}")
+    if app_state_group.get("artifactLedgerCurrentFailedLiveProofs") != artifact_ledger.get("currentFailedLiveProofs"):
+        raise AssertionError(f"/qa/coverage-index artifact current failed live proof list mismatch: {coverage_index}")
+    if app_state_group.get("artifactLedgerCurrentLiveProofFailureFree") != artifact_ledger.get("currentLiveProofFailureFree"):
+        raise AssertionError(f"/qa/coverage-index artifact current failure-free flag mismatch: {coverage_index}")
     if app_state_group.get("missingVisualCaptures") != artifact_ledger.get("missingVisualCaptures"):
         raise AssertionError(f"/qa/coverage-index missing visual capture list mismatch: {coverage_index}")
     if app_state_group.get("currentGapCount", -1) != 1:

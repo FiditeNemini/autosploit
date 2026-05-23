@@ -14,6 +14,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
+KNOWN_FAILED_LIVE_PROOFS = [
+    "docs/live-proofs/checkpoint-75-minimax-live.json",
+]
 
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
@@ -116,6 +119,16 @@ def assert_artifact_ledger() -> None:
         raise AssertionError(f"artifact ledger failed live proof count mismatch expected {len(expected_failed)}: {ledger}")
     if ledger.get("failedLiveProofs") != expected_failed:
         raise AssertionError(f"artifact ledger failed live proof list mismatch expected {expected_failed}: {ledger}")
+    if ledger.get("knownFailedLiveProofs") != KNOWN_FAILED_LIVE_PROOFS:
+        raise AssertionError(f"artifact ledger known failed live proof list mismatch: {ledger}")
+    if ledger.get("knownFailedLiveProofCount") != len(KNOWN_FAILED_LIVE_PROOFS):
+        raise AssertionError(f"artifact ledger known failed live proof count mismatch: {ledger}")
+    if ledger.get("currentFailedLiveProofs") != sorted(set(expected_failed).difference(KNOWN_FAILED_LIVE_PROOFS)):
+        raise AssertionError(f"artifact ledger current failed live proof list mismatch: {ledger}")
+    if ledger.get("currentFailedLiveProofCount") != len(set(expected_failed).difference(KNOWN_FAILED_LIVE_PROOFS)):
+        raise AssertionError(f"artifact ledger current failed live proof count mismatch: {ledger}")
+    if ledger.get("currentLiveProofFailureFree") is not True:
+        raise AssertionError(f"artifact ledger should classify all current live proof failures: {ledger}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/artifact-ledger" not in qa.get("stateRoutes", []):

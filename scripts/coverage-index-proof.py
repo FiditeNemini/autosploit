@@ -292,6 +292,16 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state artifact failed live proof count mismatch: {app_state_group}")
     if app_state_group.get("artifactLedgerFailedLiveProofs") != artifact.get("failedLiveProofs"):
         raise AssertionError(f"coverage index app state artifact failed live proofs mismatch: {app_state_group}")
+    if app_state_group.get("artifactLedgerKnownFailedLiveProofCount") != artifact.get("knownFailedLiveProofCount"):
+        raise AssertionError(f"coverage index app state artifact known failed count mismatch: {app_state_group}")
+    if app_state_group.get("artifactLedgerKnownFailedLiveProofs") != artifact.get("knownFailedLiveProofs"):
+        raise AssertionError(f"coverage index app state artifact known failed list mismatch: {app_state_group}")
+    if app_state_group.get("artifactLedgerCurrentFailedLiveProofCount") != artifact.get("currentFailedLiveProofCount"):
+        raise AssertionError(f"coverage index app state artifact current failed count mismatch: {app_state_group}")
+    if app_state_group.get("artifactLedgerCurrentFailedLiveProofs") != artifact.get("currentFailedLiveProofs"):
+        raise AssertionError(f"coverage index app state artifact current failed list mismatch: {app_state_group}")
+    if app_state_group.get("artifactLedgerCurrentLiveProofFailureFree") != artifact.get("currentLiveProofFailureFree"):
+        raise AssertionError(f"coverage index app state artifact current failure-free flag mismatch: {app_state_group}")
     if app_state_group.get("missingVisualCaptureCount", 1) != 0:
         raise AssertionError(f"coverage index app state missing visual captures: {app_state_group}")
     if app_state_group.get("missingVisualCaptures") != artifact.get("missingVisualCaptures"):
@@ -338,6 +348,16 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state audit failed live proof count mismatch: {app_state_group}")
     if app_state_group.get("auditFailedLiveProofs") != audit.get("failedLiveProofs"):
         raise AssertionError(f"coverage index app state audit failed live proof list mismatch: {app_state_group}")
+    if app_state_group.get("auditKnownFailedLiveProofCount") != audit.get("knownFailedLiveProofCount"):
+        raise AssertionError(f"coverage index app state audit known failed count mismatch: {app_state_group}")
+    if app_state_group.get("auditKnownFailedLiveProofs") != audit.get("knownFailedLiveProofs"):
+        raise AssertionError(f"coverage index app state audit known failed list mismatch: {app_state_group}")
+    if app_state_group.get("auditCurrentFailedLiveProofCount") != audit.get("currentFailedLiveProofCount"):
+        raise AssertionError(f"coverage index app state audit current failed count mismatch: {app_state_group}")
+    if app_state_group.get("auditCurrentFailedLiveProofs") != audit.get("currentFailedLiveProofs"):
+        raise AssertionError(f"coverage index app state audit current failed list mismatch: {app_state_group}")
+    if app_state_group.get("auditCurrentLiveProofFailureFree") != audit.get("currentLiveProofFailureFree"):
+        raise AssertionError(f"coverage index app state audit current failure-free flag mismatch: {app_state_group}")
     if app_state_group.get("auditCheckpointCount") != audit.get("checkpointCount"):
         raise AssertionError(f"coverage index app state audit checkpoint count mismatch: {app_state_group}")
     if app_state_group.get("auditCheckpointFileParity") != audit.get("checkpointFileParity"):

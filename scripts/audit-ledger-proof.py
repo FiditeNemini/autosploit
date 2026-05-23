@@ -108,6 +108,16 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit failed live proof count mismatch: {audit}")
     if audit.get("failedLiveProofs") != artifact.get("failedLiveProofs"):
         raise AssertionError(f"audit failed live proof list mismatch: {audit}")
+    if audit.get("knownFailedLiveProofCount") != artifact.get("knownFailedLiveProofCount"):
+        raise AssertionError(f"audit known failed live proof count mismatch: {audit}")
+    if audit.get("knownFailedLiveProofs") != artifact.get("knownFailedLiveProofs"):
+        raise AssertionError(f"audit known failed live proof list mismatch: {audit}")
+    if audit.get("currentFailedLiveProofCount") != artifact.get("currentFailedLiveProofCount"):
+        raise AssertionError(f"audit current failed live proof count mismatch: {audit}")
+    if audit.get("currentFailedLiveProofs") != artifact.get("currentFailedLiveProofs"):
+        raise AssertionError(f"audit current failed live proof list mismatch: {audit}")
+    if audit.get("currentLiveProofFailureFree") != artifact.get("currentLiveProofFailureFree"):
+        raise AssertionError(f"audit current live proof failure-free flag mismatch: {audit}")
     if audit.get("checkpointCount") != checkpoint.get("checkpointCount"):
         raise AssertionError(f"audit checkpoint count mismatch: {audit}")
     if audit.get("checkpointFileParity") != checkpoint.get("checkpointFileParity"):

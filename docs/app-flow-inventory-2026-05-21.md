@@ -790,8 +790,11 @@ Current repeatable gates:
   `/qa/artifact-ledger.liveProofStatus`, plus
   `/qa/artifact-ledger.visualCaptureCount`,
   `/qa/artifact-ledger.visualCaptureStatus`, `liveProofOkCount`,
-  `missingVisualCaptures`, `failedLiveProofCount`, and `failedLiveProofs`, so the aggregate preserves
-  artifact evidence paths and pass/fail status instead of only artifact counts.
+  `missingVisualCaptures`, `failedLiveProofCount`, `failedLiveProofs`,
+  `knownFailedLiveProofs`, `currentFailedLiveProofs`, and
+  `currentLiveProofFailureFree`, so the aggregate preserves artifact evidence
+  paths and separates known legacy failed live evidence from current
+  unclassified live-proof regressions.
   It also carries
   `/qa/audit-ledger.proofCount`, source proof-ledger proof-file parity/category counts/surfaces/
   surface-count/category-map/other-count/total/parity, normalized
@@ -809,8 +812,9 @@ Current repeatable gates:
   reduced to counts while the audit contract count remains machine-checkable in
   the aggregate. It also carries
   `/qa/audit-ledger.liveProofOkCount`, `failedLiveProofCount`, and
-  `failedLiveProofs`, so failed live JSON evidence remains visible from the
-  top-level QA index. It also carries
+  `failedLiveProofs`, plus known/current failed-live classifications, so failed
+  live JSON evidence remains visible from the top-level QA index without
+  treating known historical failure artifacts as current regressions. It also carries
   `/qa/audit-ledger.proofLedgerCategoryOtherCount` as
   `auditProofLedgerCategoryOtherCount`, and the broad app QA matrix cross-checks
   both source and audit `other` proof counts through `/qa/coverage-index`. It also carries
