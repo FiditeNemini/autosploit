@@ -117,6 +117,36 @@ def assert_proof_ledger() -> None:
         raise AssertionError(f"proof ledger tab-owned action proofs categorized outside tabs: {missing_tab_owned}")
     if ledger.get("categoryOtherCount", 99) > 30:
         raise AssertionError(f"proof ledger other category still too broad: {ledger}")
+    expected_tab_families = {
+        "recon": {"recon-subtab-state-proof.py", "recon-action-status-proof.py", "recon-copy-actions-proof.py"},
+        "web": {"web-subtab-state-proof.py", "web-direct-actions-proof.py", "web-verify-action-proof.py"},
+        "network": {"network-subtab-state-proof.py", "network-protocol-action-proof.py", "network-copy-actions-proof.py"},
+        "creds": {"creds-subtab-state-proof.py", "creds-action-results-proof.py", "creds-copy-actions-proof.py"},
+        "exploit": {"exploit-subtab-state-proof.py", "exploit-action-differentiation-proof.py", "exploit-copy-actions-proof.py"},
+        "post": {"post-subtab-state-proof.py", "post-attribution-proof.py", "post-copy-actions-proof.py"},
+        "osint": {"osint-subtab-state-proof.py", "osint-artifact-actions-proof.py", "osint-copy-actions-proof.py"},
+        "report": {"report-subtab-state-proof.py", "report-generate-action-proof.py", "report-export-proof.py"},
+        "stash": {"stash-actions-proof.py", "stash-row-context-actions-proof.py", "stash-send-chat-control-proof.py"},
+    }
+    tab_families = ledger.get("tabProofFamilies") or {}
+    if sorted(tab_families) != sorted(expected_tab_families):
+        raise AssertionError(f"proof ledger tab family keys mismatch: {ledger}")
+    if ledger.get("tabProofFamilyCount") != len(expected_tab_families):
+        raise AssertionError(f"proof ledger tab family count mismatch: {ledger}")
+    if ledger.get("tabProofFamilyParity") is not True:
+        raise AssertionError(f"proof ledger tab family parity mismatch: {ledger}")
+    if ledger.get("tabProofFamilyFileParity") is not True:
+        raise AssertionError(f"proof ledger tab family file parity mismatch: {ledger}")
+    for family, required in expected_tab_families.items():
+        payload = tab_families.get(family) or {}
+        proofs_for_family = set(payload.get("proofs") or [])
+        missing_family = sorted(required.difference(proofs_for_family))
+        if missing_family:
+            raise AssertionError(f"proof ledger tab family {family} missing proofs {missing_family}: {payload}")
+        if payload.get("count") != len(payload.get("proofs") or []):
+            raise AssertionError(f"proof ledger tab family count mismatch {family}: {payload}")
+        if payload.get("proofFileParity") is not True:
+            raise AssertionError(f"proof ledger tab family file parity mismatch {family}: {payload}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/proof-ledger" not in qa.get("stateRoutes", []):

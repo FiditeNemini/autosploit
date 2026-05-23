@@ -232,6 +232,14 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state proof ledger category parity mismatch: {app_state_group}")
     if app_state_group.get("proofLedgerCategories") != proof.get("categories"):
         raise AssertionError(f"coverage index app state proof ledger category map mismatch: {app_state_group}")
+    if app_state_group.get("proofLedgerTabProofFamilies") != proof.get("tabProofFamilies"):
+        raise AssertionError(f"coverage index app state proof ledger tab family map mismatch: {app_state_group}")
+    if app_state_group.get("proofLedgerTabProofFamilyCount") != proof.get("tabProofFamilyCount"):
+        raise AssertionError(f"coverage index app state proof ledger tab family count mismatch: {app_state_group}")
+    if app_state_group.get("proofLedgerTabProofFamilyParity") != proof.get("tabProofFamilyParity"):
+        raise AssertionError(f"coverage index app state proof ledger tab family parity mismatch: {app_state_group}")
+    if app_state_group.get("proofLedgerTabProofFamilyFileParity") != proof.get("tabProofFamilyFileParity"):
+        raise AssertionError(f"coverage index app state proof ledger tab family file parity mismatch: {app_state_group}")
     expected_categories = {
         name: category.get("count")
         for name, category in (proof.get("categories") or {}).items()
