@@ -107,6 +107,7 @@ def assert_testserver_smoke() -> None:
     evidence_lifecycle_coverage = request("GET", "/qa/evidence-lifecycle-coverage")
     settings_coverage = request("GET", "/qa/settings-coverage")
     visual_coverage = request("GET", "/qa/visual-coverage")
+    theme_inventory = request("GET", "/qa/theme-inventory")
     session_coverage = request("GET", "/qa/session-coverage")
     tab_action_coverage = request("GET", "/qa/tab-action-coverage")
     chat_coverage = request("GET", "/qa/chat-coverage")
@@ -196,6 +197,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing settings coverage route contract: {qa}")
     if "/qa/visual-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing visual coverage route contract: {qa}")
+    if "/qa/theme-inventory" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing theme inventory route contract: {qa}")
     if "/qa/session-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing session coverage route contract: {qa}")
     if "/qa/tab-action-coverage" not in qa.get("stateRoutes", []):
@@ -1170,6 +1173,24 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index visual manifest list mismatch: {coverage_index}")
     if settings_visuals_group.get("minimumCaptureCount") != visual_coverage.get("minimumCaptureCount"):
         raise AssertionError(f"/qa/coverage-index visual minimum capture count mismatch: {coverage_index}")
+    if theme_inventory.get("ok") is not True:
+        raise AssertionError(f"/qa/theme-inventory failed: {theme_inventory}")
+    if theme_inventory.get("fileCount", 0) < 8:
+        raise AssertionError(f"/qa/theme-inventory file count too low: {theme_inventory}")
+    if theme_inventory.get("staticTokenCount", 0) < 20:
+        raise AssertionError(f"/qa/theme-inventory static token count too low: {theme_inventory}")
+    if theme_inventory.get("professionalShapePolicy") != "max-corner-radius-8":
+        raise AssertionError(f"/qa/theme-inventory shape policy mismatch: {theme_inventory}")
+    if theme_inventory.get("maxCornerRadius", 0) > 8:
+        raise AssertionError(f"/qa/theme-inventory corner radius policy mismatch: {theme_inventory}")
+    if theme_inventory.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/theme-inventory proof-file parity mismatch: {theme_inventory}")
+    if settings_visuals_group.get("themeInventoryFileCount") != theme_inventory.get("fileCount"):
+        raise AssertionError(f"/qa/coverage-index theme inventory file count mismatch: {coverage_index}")
+    if settings_visuals_group.get("themeInventoryStaticTokenCount") != theme_inventory.get("staticTokenCount"):
+        raise AssertionError(f"/qa/coverage-index theme inventory token count mismatch: {coverage_index}")
+    if settings_visuals_group.get("themeInventoryGroupCounts") != theme_inventory.get("groupCounts"):
+        raise AssertionError(f"/qa/coverage-index theme inventory group count mismatch: {coverage_index}")
     tools_parsers_group = index_groups.get("toolsAndParsers") or {}
     if tools_parsers_group.get("toolRegistryTools") != tool_coverage.get("tools"):
         raise AssertionError(f"/qa/coverage-index tool registry list mismatch: {coverage_index}")

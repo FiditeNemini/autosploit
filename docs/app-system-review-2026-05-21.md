@@ -1280,6 +1280,16 @@ Visual gates:
   `/qa/coverage-index.groups.appState`, so AppState helpers, model enums,
   tool-tab cases, operation modes, and parsed-result models remain auditable
   from source.
+- `/qa/theme-inventory` is the source-owned inventory for Swift theme and UI
+  primitive surfaces: it parses every Swift file under
+  `ExploitBot/Sources/ExploitBot/Theme`, records declared types, functions,
+  static design tokens, and corner-radius usage, groups files by action
+  buttons, branding, color tokens, overlays, controls, clipboard, typography,
+  or navigation controls, and records the proof owner. Coverage-index mirrors
+  its file count, type count, token count, group counts, max corner radius,
+  professional shape policy, and proof-file parity through
+  `/qa/coverage-index.groups.settingsAndVisuals`, keeping the squared
+  professional theme primitives auditable from source.
 - `/qa/python-runtime-inventory` is the source-owned inventory for Python engine
   and proof surfaces: it parses files under `ExploitBotEngine` and `scripts`,
   records classes/functions, groups them by engine runtime, API adapter,

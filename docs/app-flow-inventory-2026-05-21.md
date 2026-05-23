@@ -1183,6 +1183,14 @@ Required future proof gates:
   models. The route locks the current operation status/mode, pentest phase, and
   tool-tab enum cases, and mirrors file/type/function/group/proof parity into
   `/qa/coverage-index.groups.appState`.
+- Theme ownership is summarized through `/qa/theme-inventory`. It parses every
+  Swift file under `ExploitBot/Sources/ExploitBot/Theme`, records declared
+  types, functions, static design tokens, and corner-radius usage, then groups
+  theme source by action buttons, branding, color tokens, overlays, controls,
+  clipboard, typography, or navigation controls. The route exposes the
+  `max-corner-radius-8` professional shape policy and mirrors file/type/token/
+  group/proof parity into `/qa/coverage-index.groups.settingsAndVisuals`, so
+  polished squared UI primitives stay tied to source and proof coverage.
 - Python runtime ownership is summarized through
   `/qa/python-runtime-inventory`. It parses Python files under
   `ExploitBotEngine` and `scripts`, groups them by engine runtime, API adapter,

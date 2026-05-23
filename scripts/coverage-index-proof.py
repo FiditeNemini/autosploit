@@ -35,6 +35,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/evidence-lifecycle-coverage",
     "/qa/settings-coverage",
     "/qa/visual-coverage",
+    "/qa/theme-inventory",
     "/qa/session-coverage",
     "/qa/tab-action-coverage",
     "/qa/chat-coverage",
@@ -77,6 +78,7 @@ REQUIRED_PROOFS = {
     "evidence-lifecycle-coverage-proof.py",
     "settings-coverage-proof.py",
     "visual-coverage-proof.py",
+    "theme-inventory-proof.py",
     "session-coverage-proof.py",
     "tab-action-coverage-proof.py",
     "chat-coverage-proof.py",
@@ -1029,6 +1031,29 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index visual tab family parity mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("visualTabProofFamilyFileParity") != visual_coverage.get("visualTabProofFamilyFileParity"):
         raise AssertionError(f"coverage index visual tab family file parity mismatch: {settings_visuals_group}")
+    theme_inventory = request("GET", "/qa/theme-inventory")
+    if theme_inventory.get("ok") is not True:
+        raise AssertionError(f"theme inventory route failed: {theme_inventory}")
+    if theme_inventory.get("fileCount", 0) < 8:
+        raise AssertionError(f"theme inventory file count too low: {theme_inventory}")
+    if theme_inventory.get("staticTokenCount", 0) < 20:
+        raise AssertionError(f"theme inventory static token count too low: {theme_inventory}")
+    if theme_inventory.get("professionalShapePolicy") != "max-corner-radius-8":
+        raise AssertionError(f"theme inventory shape policy mismatch: {theme_inventory}")
+    if theme_inventory.get("maxCornerRadius", 0) > 8:
+        raise AssertionError(f"theme inventory corner radius policy mismatch: {theme_inventory}")
+    if theme_inventory.get("proofFileParity") is not True:
+        raise AssertionError(f"theme inventory proof-file parity mismatch: {theme_inventory}")
+    if settings_visuals_group.get("themeInventoryFileCount") != theme_inventory.get("fileCount"):
+        raise AssertionError(f"coverage index theme inventory file count mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("themeInventoryTypeCount") != theme_inventory.get("typeCount"):
+        raise AssertionError(f"coverage index theme inventory type count mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("themeInventoryStaticTokenCount") != theme_inventory.get("staticTokenCount"):
+        raise AssertionError(f"coverage index theme inventory static token count mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("themeInventoryGroupCounts") != theme_inventory.get("groupCounts"):
+        raise AssertionError(f"coverage index theme inventory group counts mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("themeInventoryProofFileParity") != theme_inventory.get("proofFileParity"):
+        raise AssertionError(f"coverage index theme inventory proof parity mismatch: {settings_visuals_group}")
     tools_parsers_group = groups.get("toolsAndParsers") or {}
     if tools_parsers_group.get("toolCount", 0) < 38:
         raise AssertionError(f"coverage index tools/parsers tool count mismatch: {tools_parsers_group}")
