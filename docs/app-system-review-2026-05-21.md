@@ -529,7 +529,8 @@ Settings:
   CVE/tool/log action coverage, visual Settings proof scripts, and proof-count
   metadata. It also exposes Settings surface list/count/parity for engine/model/
   runtime, context/cache, agents, CVEs, tools, inference logs, and visual status
-  proofs, plus Settings surface proof map/count/parity/file parity. It now also exposes the checked-in Settings visual manifest paths and
+  proofs, plus Settings category ID list/count/parity and Settings surface proof
+  map/count/parity/file parity. It now also exposes the checked-in Settings visual manifest paths and
   `visualManifestCount` for matrix-level visual accounting.
 - App-only settings can now be applied without restarting the engine; model,
   cache, and engine runtime changes still use Apply & Restart Engine.

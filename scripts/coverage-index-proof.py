@@ -749,8 +749,14 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index settings surface proof-file parity mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("settingsCategories") != settings_coverage.get("categories"):
         raise AssertionError(f"coverage index settings category list mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("settingsCategoryIDs") != settings_coverage.get("categoryIDs"):
+        raise AssertionError(f"coverage index settings category id list mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("settingsCategoryCount") != settings_coverage.get("categoryCount"):
         raise AssertionError(f"coverage index settings category count mismatch: {settings_visuals_group}")
+    if settings_coverage.get("categoryParity") is not True:
+        raise AssertionError(f"settings coverage category parity mismatch: {settings_coverage}")
+    if settings_visuals_group.get("settingsCategoryParity") != settings_coverage.get("categoryParity"):
+        raise AssertionError(f"coverage index settings category parity mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("settingsCurrentCategory") != settings_coverage.get("currentCategory"):
         raise AssertionError(f"coverage index settings current category mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("settingsRoutes") != settings_coverage.get("routes"):

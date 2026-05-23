@@ -867,8 +867,14 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index settings surface proof map mismatch: {coverage_index}")
     if settings_visuals_group.get("settingsCategories") != settings_coverage.get("categories"):
         raise AssertionError(f"/qa/coverage-index settings category list mismatch: {coverage_index}")
+    if settings_visuals_group.get("settingsCategoryIDs") != settings_coverage.get("categoryIDs"):
+        raise AssertionError(f"/qa/coverage-index settings category id list mismatch: {coverage_index}")
     if settings_visuals_group.get("settingsCategoryCount") != settings_coverage.get("categoryCount"):
         raise AssertionError(f"/qa/coverage-index settings category count mismatch: {coverage_index}")
+    if settings_coverage.get("categoryParity") is not True:
+        raise AssertionError(f"/qa/settings-coverage category parity mismatch: {settings_coverage}")
+    if settings_visuals_group.get("settingsCategoryParity") != settings_coverage.get("categoryParity"):
+        raise AssertionError(f"/qa/coverage-index settings category parity mismatch: {coverage_index}")
     if settings_visuals_group.get("settingsCurrentCategory") != settings_coverage.get("currentCategory"):
         raise AssertionError(f"/qa/coverage-index settings current category mismatch: {coverage_index}")
     if settings_visuals_group.get("settingsRoutes") != settings_coverage.get("routes"):

@@ -202,6 +202,8 @@ def assert_settings_coverage() -> None:
 
     if coverage.get("categoryCount") != len(EXPECTED_CATEGORIES):
         raise AssertionError(f"settings coverage category count mismatch: {coverage}")
+    if coverage.get("categoryParity") is not True:
+        raise AssertionError(f"settings coverage category parity mismatch: {coverage}")
     if coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"settings coverage cache method mismatch: {coverage}")
     if coverage.get("supportedFamilies") != ["qwen", "minimax"]:
