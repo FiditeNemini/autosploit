@@ -181,6 +181,8 @@ def run() -> None:
             raise AssertionError(f"agent loop routes missing {missing_routes}: {coverage}")
         if coverage.get("routeCount") != len(EXPECTED_ROUTES):
             raise AssertionError(f"agent loop route count mismatch: {coverage}")
+        if coverage.get("routeParity") is not True:
+            raise AssertionError(f"agent loop route parity mismatch: {coverage}")
 
         contracts = coverage.get("contracts") or {}
         missing_contracts = sorted(name for name in EXPECTED_CONTRACTS if contracts.get(name) is not True)
@@ -188,6 +190,8 @@ def run() -> None:
             raise AssertionError(f"agent loop contracts missing {missing_contracts}: {coverage}")
         if coverage.get("contractCount") != len(EXPECTED_CONTRACTS):
             raise AssertionError(f"agent loop contract count mismatch: {coverage}")
+        if coverage.get("contractParity") is not True:
+            raise AssertionError(f"agent loop contract parity mismatch: {coverage}")
         if coverage.get("proofCount", 0) < len(EXPECTED_PROOFS):
             raise AssertionError(f"agent loop proof count mismatch: {coverage}")
         telemetry_fields = set(coverage.get("actionTelemetryFields") or [])
@@ -196,12 +200,16 @@ def run() -> None:
             raise AssertionError(f"agent loop telemetry fields missing {missing_telemetry}: {coverage}")
         if coverage.get("actionTelemetryFieldCount") != len(EXPECTED_ACTION_TELEMETRY_FIELDS):
             raise AssertionError(f"agent loop telemetry field count mismatch: {coverage}")
+        if coverage.get("actionTelemetryFieldParity") is not True:
+            raise AssertionError(f"agent loop telemetry field parity mismatch: {coverage}")
         state_keys = set(coverage.get("stateKeys") or [])
         missing_state_keys = sorted(EXPECTED_STATE_KEYS.difference(state_keys))
         if missing_state_keys:
             raise AssertionError(f"agent loop state keys missing {missing_state_keys}: {coverage}")
         if coverage.get("stateKeyCount") != len(coverage.get("stateKeys") or []):
             raise AssertionError(f"agent loop state key count mismatch: {coverage}")
+        if coverage.get("stateKeyParity") is not True:
+            raise AssertionError(f"agent loop state key parity mismatch: {coverage}")
         if coverage.get("loopPhases") != EXPECTED_LOOP_PHASES:
             raise AssertionError(f"agent loop phase list mismatch: {coverage}")
         if coverage.get("loopPhaseCount") != len(EXPECTED_LOOP_PHASES):

@@ -102,8 +102,10 @@ Interaction modes:
   multi-agent mode.
 - `/qa/agent-loop-coverage` now exposes the agent route list, contract flags,
   action telemetry field list, proof count, deploy-sheet/task-send proof
-  references, loop-phase list/count/parity, and phase-to-proof map/count/parity
-  so the full agentic-loop surface is auditable from one aggregate endpoint.
+  references, loop-phase list/count/parity, and phase-to-proof map/count/parity.
+  It also exposes state-key, route, contract, and action-telemetry
+  list/count/parity so the full agentic-loop surface is auditable from one
+  aggregate endpoint.
 - Deployed-agent on-demand context retrieval is covered by
   `scripts/agent-search-context-proof.py`: an agent autonomously calls
   `search_context`, receives shared parsed-result catalogue facts from the main

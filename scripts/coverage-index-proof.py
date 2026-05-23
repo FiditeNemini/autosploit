@@ -962,6 +962,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions agent loop state key count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopStateKeys") != agent_loop.get("stateKeys"):
         raise AssertionError(f"coverage index tabs/sessions agent loop state key list mismatch: {tabs_sessions_group}")
+    if agent_loop.get("stateKeyParity") is not True:
+        raise AssertionError(f"agent loop state-key parity mismatch: {agent_loop}")
+    if tabs_sessions_group.get("agentLoopStateKeyParity") != agent_loop.get("stateKeyParity"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop state-key parity mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopCurrentMode") != agent_loop.get("currentMode"):
         raise AssertionError(f"coverage index tabs/sessions agent loop current mode mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopMaxIterations") != agent_loop.get("maxIterations"):
@@ -1006,14 +1010,26 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions agent loop routes mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopRouteCount") != agent_loop.get("routeCount"):
         raise AssertionError(f"coverage index tabs/sessions agent loop route count mismatch: {tabs_sessions_group}")
+    if agent_loop.get("routeParity") is not True:
+        raise AssertionError(f"agent loop route parity mismatch: {agent_loop}")
+    if tabs_sessions_group.get("agentLoopRouteParity") != agent_loop.get("routeParity"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop route parity mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopContracts") != agent_loop.get("contracts"):
         raise AssertionError(f"coverage index tabs/sessions agent loop contracts mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopContractCount") != agent_loop.get("contractCount"):
         raise AssertionError(f"coverage index tabs/sessions agent loop contract count mismatch: {tabs_sessions_group}")
+    if agent_loop.get("contractParity") is not True:
+        raise AssertionError(f"agent loop contract parity mismatch: {agent_loop}")
+    if tabs_sessions_group.get("agentLoopContractParity") != agent_loop.get("contractParity"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop contract parity mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopActionTelemetryFields") != agent_loop.get("actionTelemetryFields"):
         raise AssertionError(f"coverage index tabs/sessions agent loop telemetry fields mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("agentLoopActionTelemetryFieldCount") != agent_loop.get("actionTelemetryFieldCount"):
         raise AssertionError(f"coverage index tabs/sessions agent loop telemetry count mismatch: {tabs_sessions_group}")
+    if agent_loop.get("actionTelemetryFieldParity") is not True:
+        raise AssertionError(f"agent loop telemetry field parity mismatch: {agent_loop}")
+    if tabs_sessions_group.get("agentLoopActionTelemetryFieldParity") != agent_loop.get("actionTelemetryFieldParity"):
+        raise AssertionError(f"coverage index tabs/sessions agent loop telemetry parity mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActivityStatuses") != tool_flow.get("tabActivityStatuses"):
         raise AssertionError(f"coverage index tabs/sessions tab activity statuses mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActivityStatusCount") != tool_flow.get("tabActivityStatusCount"):

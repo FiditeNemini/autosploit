@@ -903,10 +903,11 @@ mirrors session route list/count, contract map/count, proof list/count/file pari
   list/count/file parity, and action-state-key list/count/parity,
   mirrors tab action surface list/count/parity and proof map/count/parity/file parity, mirrors
   agent-loop phase list/count/parity and phase-proof map/count/parity/file parity,
-  mirrors agent-loop state-key list/count, current mode, max-iteration guard,
+  mirrors agent-loop state-key list/count/parity, current mode, max-iteration guard,
   proof count/list/file parity, visual-state-key count/parity, mode behavior/count, deployed-agent
-  inheritance/status contract/count, route-owned route list/count, route-owned contract flags/count, and
-  route-owned action telemetry field list/count,
+  inheritance/status contract/count, route-owned route list/count/parity,
+  route-owned contract flags/count/parity, and
+  route-owned action telemetry field list/count/parity,
   and now mirrors the visible tab activity status list/count/parity plus
   indicator contract and status proof count/parity because the tab bar is owned by the
   tabs/session surface. Chat/context also exposes state-key count.
