@@ -615,7 +615,7 @@ Automated no-model gates:
   exposes `/state.qaCoverage` state-route
   list/count, context hook list/count, subtab state tab list/count, subtab
   state proof list/count, and the
-  `/qa/proof-ledger` proof count, source proof-ledger category counts/category
+  `/qa/proof-ledger` proof count/file parity, source proof-ledger category counts/category
   surfaces, source proof-ledger category map, source category-surface count,
   category other count, category total count, and category parity across all local proof scripts. It also exposes proof category counts
   and normalized surface names for agent, chat, context, runtime, settings,
@@ -648,7 +648,7 @@ Automated no-model gates:
   completeness count, completion ratio, complete checkpoint paths, incomplete
   checkpoint paths, latest checkpoint, and latest checkpoint number using numeric checkpoint ordering; the checkpoint,
   complete, and incomplete path lists also use that numeric order. The
-  `/qa/audit-ledger` route combines proof counts, source proof-ledger category
+  `/qa/audit-ledger` route combines proof counts/file parity, source proof-ledger category
   counts/surfaces/surface-count/total/parity, proof category counts/surface
   names/surface count/total/parity, live artifact counts, visual capture
   counts, missing/failed artifact counts, and checkpoint completeness counts/
@@ -675,7 +675,7 @@ Automated no-model gates:
   `missingVisualCaptures`, `failedLiveProofCount`, and `failedLiveProofs`, so the aggregate preserves
   artifact evidence paths and pass/fail status instead of only artifact counts.
   It also carries
-  `/qa/audit-ledger.proofCount`, source proof-ledger category counts/surfaces/
+  `/qa/audit-ledger.proofCount`, source proof-ledger proof-file parity/category counts/surfaces/
   surface-count/category-map/other-count/total/parity, normalized
   proof-category counts, proof-category surface names/surface count,
   proof-category total count, and proof-category parity, so the top-level index

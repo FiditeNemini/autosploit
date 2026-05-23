@@ -213,6 +213,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state subtab proof-file parity mismatch: {app_state_group}")
     if app_state_group.get("proofLedgerCount", 0) < 120:
         raise AssertionError(f"coverage index app state proof ledger count mismatch: {app_state_group}")
+    if app_state_group.get("proofLedgerProofFileParity") != proof.get("proofFileParity"):
+        raise AssertionError(f"coverage index app state proof-file parity mismatch: {app_state_group}")
     if app_state_group.get("proofLedgerCategoryCounts") != proof.get("categoryCounts"):
         raise AssertionError(f"coverage index app state proof ledger category counts mismatch: {app_state_group}")
     if app_state_group.get("proofLedgerCategorySurfaces") != proof.get("categorySurfaces"):
@@ -348,6 +350,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state audit gap contract count mismatch: {app_state_group}")
     if app_state_group.get("auditProofCount") != audit.get("proofCount"):
         raise AssertionError(f"coverage index app state audit proof count mismatch: {app_state_group}")
+    if app_state_group.get("auditProofLedgerProofFileParity") != audit.get("proofLedgerProofFileParity"):
+        raise AssertionError(f"coverage index app state audit proof-file parity mismatch: {app_state_group}")
     if app_state_group.get("auditProofLedgerCategoryCounts") != audit.get("proofLedgerCategoryCounts"):
         raise AssertionError(f"coverage index app state audit source proof category counts mismatch: {app_state_group}")
     if app_state_group.get("auditProofLedgerCategorySurfaces") != audit.get("proofLedgerCategorySurfaces"):

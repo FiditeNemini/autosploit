@@ -49,6 +49,8 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"/qa/audit-ledger failed: {audit}")
     if audit.get("proofCount") != proof.get("proofCount"):
         raise AssertionError(f"audit proof count mismatch: {audit}")
+    if audit.get("proofLedgerProofFileParity") != proof.get("proofFileParity"):
+        raise AssertionError(f"audit source proof-file parity mismatch: {audit}")
     if audit.get("proofLedgerCategoryCounts") != proof.get("categoryCounts"):
         raise AssertionError(f"audit source proof category counts mismatch: {audit}")
     if audit.get("proofLedgerCategorySurfaces") != proof.get("categorySurfaces"):

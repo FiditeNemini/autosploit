@@ -67,6 +67,11 @@ def assert_proof_ledger() -> None:
         missing = sorted(set(expected).difference(proofs))
         extra = sorted(set(proofs).difference(expected))
         raise AssertionError(f"proof ledger mismatch missing={missing} extra={extra}")
+    missing_files = sorted(name for name in proofs if not (ROOT / "scripts" / name).is_file())
+    if missing_files:
+        raise AssertionError(f"proof ledger names non-existent proof files: {missing_files}")
+    if ledger.get("proofFileParity") is not True:
+        raise AssertionError(f"proof ledger proof-file parity mismatch: {ledger}")
     categories = ledger.get("categories") or {}
     category_surfaces = sorted(("agent", "chat", "context", "runtime", "settings", "tabs", "tools", "visual"))
     if ledger.get("categorySurfaces") != category_surfaces:

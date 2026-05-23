@@ -473,6 +473,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index subtab state proof-file parity mismatch: {coverage_index}")
     if app_state_group.get("proofLedgerCount", 0) < 120:
         raise AssertionError(f"/qa/coverage-index proof ledger count mismatch: {coverage_index}")
+    if proof_ledger.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/proof-ledger proof-file parity mismatch: {proof_ledger}")
+    if app_state_group.get("proofLedgerProofFileParity") != proof_ledger.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index proof-file parity mismatch: {coverage_index}")
     if app_state_group.get("proofCategorySurfaceCount") != 8:
         raise AssertionError(f"/qa/coverage-index proof category surface count mismatch: {coverage_index}")
     if app_state_group.get("proofLedgerCategoryOtherCount") != proof_ledger.get("categoryOtherCount"):
@@ -481,6 +485,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index source proof category map mismatch: {coverage_index}")
     if app_state_group.get("auditProofLedgerCategoryOtherCount") != audit_ledger.get("proofLedgerCategoryOtherCount"):
         raise AssertionError(f"/qa/coverage-index audit source proof other count mismatch: {coverage_index}")
+    if app_state_group.get("auditProofLedgerProofFileParity") != audit_ledger.get("proofLedgerProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index audit source proof-file parity mismatch: {coverage_index}")
     if app_state_group.get("proofCategoryTotalCount") != proof_ledger.get("proofCount"):
         raise AssertionError(f"/qa/coverage-index proof category total mismatch: {coverage_index}")
     if app_state_group.get("proofCategoryParity") is not True:
