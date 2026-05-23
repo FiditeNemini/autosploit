@@ -519,7 +519,7 @@ Settings:
   CVE/tool/log action coverage, visual Settings proof scripts, and proof-count
   metadata. It also exposes Settings surface list/count/parity for engine/model/
   runtime, context/cache, agents, CVEs, tools, inference logs, and visual status
-  proofs, plus Settings surface proof map/count/parity. It now also exposes the checked-in Settings visual manifest paths and
+  proofs, plus Settings surface proof map/count/parity/file parity. It now also exposes the checked-in Settings visual manifest paths and
   `visualManifestCount` for matrix-level visual accounting.
 - App-only settings can now be applied without restarting the engine; model,
   cache, and engine runtime changes still use Apply & Restart Engine.
@@ -578,7 +578,7 @@ Automated no-model gates:
   subtab lifecycle strips, OSINT screenshots, reports, stash retrieval,
   unsupported models, post attribution, tool action panels, live cache stats,
   CVE/tool settings pages, visual surface list/count/parity, visual surface
-  proof map/count/parity, visual manifests, capture-count minimums, and
+  proof map/count/parity/file parity, visual manifests, capture-count minimums, and
   proof-count metadata, plus the QA routes used to seed or switch each visual
   proof state.
   `/qa/session-coverage` exposes cross-app session workflow proof coverage for
@@ -721,10 +721,10 @@ Automated no-model gates:
   list/count, contract map/count, proof list/count/file parity, state-key list/count,
   retrieval-source proof map/count/parity/file parity, and delivery-mode proof
   map/count/parity/file parity. The settings/visuals group exposes Settings surface
-  list/count/parity, Settings surface proof map/count/parity, visual surface list/count/parity,
+  list/count/parity, Settings surface proof map/count/parity/file parity, visual surface list/count/parity,
   Settings category list/count/current category, Settings route list/count,
   contract map/count, proof list/count/file parity, settings visual manifest list/count,
-  visual surface proof map/count/parity, visual route list/count, contract
+  visual surface proof map/count/parity/file parity, visual route list/count, contract
   map/count, proof list/count/file parity, visual manifest list/count, minimum capture
   count, and actual screenshot capture count. The
   tools/parsers group exposes registry tool
@@ -1052,14 +1052,14 @@ Visual gates:
   `/qa/visual-coverage` and verified by `scripts/visual-coverage-proof.py`,
   which checks the route, required visual proof scripts, required manifests,
   listed capture artifact existence, visual surface list/count/parity, visual
-  surface proof map/count/parity, and `actualCaptureCount`.
+  surface proof map/count/parity/file parity, and `actualCaptureCount`.
 - Settings-specific screenshot-backed UI proof coverage is also exposed through
   `/qa/settings-coverage.visualManifests` and verified by
   `scripts/settings-coverage-proof.py`.
 - The top-level `/qa/coverage-index.groups.settingsAndVisuals` aggregate now
   rolls up Settings surface list/count/parity, Settings surface proof
-  count/parity, visual surface list/count/parity, visual surface proof
-  count/parity, settings visual manifest count, full visual manifest count, and
+  count/parity/file parity, visual surface list/count/parity, visual surface proof
+  count/parity/file parity, settings visual manifest count, full visual manifest count, and
   actual screenshot capture count for matrix-level proof accounting.
 - Chat control action state for reasoning, context inspector, and new context
   is covered by `scripts/chat-control-actions-proof.py`.

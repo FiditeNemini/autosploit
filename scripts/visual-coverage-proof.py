@@ -236,6 +236,8 @@ def assert_visual_coverage() -> None:
         missing_surface_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
         if missing_surface_files:
             raise AssertionError(f"visual surface {surface} names missing proof files {missing_surface_files}: {coverage}")
+    if coverage.get("visualSurfaceProofFileParity") is not True:
+        raise AssertionError(f"visual surface proof-file parity mismatch: {coverage}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/visual-coverage" not in qa.get("stateRoutes", []):

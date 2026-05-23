@@ -506,7 +506,7 @@ Stash:
   app-only apply without engine restart, engine Start/Stop action state,
   context controls, cache topology, agent controls, CVE/tool/inference-log
   actions, visual Settings proof gates, Settings surface list/count/parity,
-  Settings surface proof map/count/parity, proof-count metadata, checked-in Settings visual manifests, and
+  Settings surface proof map/count/parity/file parity, proof-count metadata, checked-in Settings visual manifests, and
   `visualManifestCount`.
 
 Model:
@@ -700,7 +700,7 @@ Current repeatable gates:
   strips, OSINT screenshots, report export, stash retrieval, unsupported model
   states, post attribution, tool action panels, live cache stats, and
   CVE/tool-settings proof manifests. The aggregate exposes visual surface
-  list/count/parity, visual surface proof map/count/parity, `proofCount`,
+  list/count/parity, visual surface proof map/count/parity/file parity, `proofCount`,
   `manifestCount`, minimum capture count, and `actualCaptureCount` so visual
   proof breadth is machine-checkable. It also lists the visual QA seed/switch
   routes used by the screenshot proofs.
@@ -842,10 +842,10 @@ Current repeatable gates:
   bounded dynamic catalogue source coverage and cache-session preservation remain
   visible from the aggregate QA index. The
   settings/visuals group exposes Settings surface list/count/parity, Settings
-  surface proof map/count/parity, Settings category list/count/current
+  surface proof map/count/parity/file parity, Settings category list/count/current
   category, Settings route list/count, contract map/count, proof list/count/file parity,
   and visual manifest list/count. It also exposes visual surface
-  list/count/parity, visual surface proof map/count/parity, visual route
+  list/count/parity, visual surface proof map/count/parity/file parity, visual route
   list/count, contract map/count, proof list/count/file parity, manifest list/count,
   minimum capture count, and actual screenshot capture count. The tools/parsers
   group exposes registry tool count, callback count, always-visible tool count,
@@ -983,7 +983,7 @@ Required future proof gates:
   status, live cache metrics, and split category screenshots are exposed through
   `/qa/settings-coverage.visualManifests`; full visual surface coverage is
   summarized through `/qa/visual-coverage.visualSurfaces` plus visual surface
-  proof map/count/parity.
+  proof map/count/parity/file parity.
 - Chat token metrics, active tool header, cache-session badges, approval card,
   running tool card, failed tool card, and streaming reasoning state are captured under
   `docs/visual-proofs/checkpoint-71`.

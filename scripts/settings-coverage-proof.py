@@ -222,6 +222,8 @@ def assert_settings_coverage() -> None:
         missing_surface_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
         if missing_surface_files:
             raise AssertionError(f"settings surface {surface} names missing proof files {missing_surface_files}: {coverage}")
+    if coverage.get("settingsSurfaceProofFileParity") is not True:
+        raise AssertionError(f"settings surface proof-file parity mismatch: {coverage}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/settings-coverage" not in qa.get("stateRoutes", []):

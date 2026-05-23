@@ -587,6 +587,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index settings surface proof count mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("settingsSurfaceProofParity") != settings_coverage.get("settingsSurfaceProofParity"):
         raise AssertionError(f"coverage index settings surface proof parity mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("settingsSurfaceProofFileParity") != settings_coverage.get("settingsSurfaceProofFileParity"):
+        raise AssertionError(f"coverage index settings surface proof-file parity mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("settingsCategories") != settings_coverage.get("categories"):
         raise AssertionError(f"coverage index settings category list mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("settingsCategoryCount") != settings_coverage.get("categoryCount"):
@@ -646,6 +648,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index visual surface proof count mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("visualSurfaceProofParity") != visual_coverage.get("visualSurfaceProofParity"):
         raise AssertionError(f"coverage index visual surface proof parity mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("visualSurfaceProofFileParity") != visual_coverage.get("visualSurfaceProofFileParity"):
+        raise AssertionError(f"coverage index visual surface proof-file parity mismatch: {settings_visuals_group}")
     tools_parsers_group = groups.get("toolsAndParsers") or {}
     if tools_parsers_group.get("toolCount", 0) < 38:
         raise AssertionError(f"coverage index tools/parsers tool count mismatch: {tools_parsers_group}")

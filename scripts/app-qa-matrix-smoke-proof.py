@@ -740,8 +740,16 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index settings proof-file parity mismatch: {coverage_index}")
     if settings_visuals_group.get("settingsVisualManifests") != settings_coverage.get("visualManifests"):
         raise AssertionError(f"/qa/coverage-index settings visual manifest list mismatch: {coverage_index}")
+    if settings_coverage.get("settingsSurfaceProofFileParity") is not True:
+        raise AssertionError(f"/qa/settings-coverage surface proof-file parity mismatch: {settings_coverage}")
+    if settings_visuals_group.get("settingsSurfaceProofFileParity") != settings_coverage.get("settingsSurfaceProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index settings surface proof-file parity mismatch: {coverage_index}")
     if settings_visuals_group.get("visualSurfaceProofs") != visual_coverage.get("visualSurfaceProofs"):
         raise AssertionError(f"/qa/coverage-index visual surface proof map mismatch: {coverage_index}")
+    if visual_coverage.get("visualSurfaceProofFileParity") is not True:
+        raise AssertionError(f"/qa/visual-coverage surface proof-file parity mismatch: {visual_coverage}")
+    if settings_visuals_group.get("visualSurfaceProofFileParity") != visual_coverage.get("visualSurfaceProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index visual surface proof-file parity mismatch: {coverage_index}")
     if settings_visuals_group.get("visualRoutes") != visual_coverage.get("routes"):
         raise AssertionError(f"/qa/coverage-index visual route list mismatch: {coverage_index}")
     if settings_visuals_group.get("visualRouteCount") != len(visual_coverage.get("routes") or []):
