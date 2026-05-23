@@ -22,6 +22,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/tool-coverage",
     "/qa/subtab-coverage",
     "/qa/endpoint-inventory",
+    "/qa/action-state-inventory",
     "/qa/agent-loop-coverage",
     "/qa/agent-tool-authorization-coverage",
     "/qa/tool-flow-coverage",
@@ -56,6 +57,7 @@ REQUIRED_ENDPOINTS = {
 REQUIRED_PROOFS = {
     "app-qa-matrix-smoke-proof.py",
     "endpoint-inventory-proof.py",
+    "action-state-inventory-proof.py",
     "tool-registry-coverage-proof.py",
     "subtab-coverage-proof.py",
     "agent-loop-coverage-proof.py",
@@ -246,6 +248,21 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index endpoint inventory group counts mismatch: {app_state_group}")
     if app_state_group.get("endpointInventoryProofFileParity") != endpoint_inventory.get("proofFileParity"):
         raise AssertionError(f"coverage index endpoint inventory proof parity mismatch: {app_state_group}")
+    action_state_inventory = request("GET", "/qa/action-state-inventory")
+    if action_state_inventory.get("ok") is not True:
+        raise AssertionError(f"action-state inventory route failed: {action_state_inventory}")
+    if action_state_inventory.get("snapshotParity") is not True:
+        raise AssertionError(f"action-state inventory snapshot parity mismatch: {action_state_inventory}")
+    if action_state_inventory.get("stateFieldParity") is not True:
+        raise AssertionError(f"action-state inventory state-field parity mismatch: {action_state_inventory}")
+    if action_state_inventory.get("proofFileParity") is not True:
+        raise AssertionError(f"action-state inventory proof-file parity mismatch: {action_state_inventory}")
+    if app_state_group.get("actionStateInventoryCount") != action_state_inventory.get("actionStateCount"):
+        raise AssertionError(f"coverage index action-state inventory count mismatch: {app_state_group}")
+    if app_state_group.get("actionStateInventoryGroups") != action_state_inventory.get("groupCounts"):
+        raise AssertionError(f"coverage index action-state inventory group counts mismatch: {app_state_group}")
+    if app_state_group.get("actionStateInventoryProofFileParity") != action_state_inventory.get("proofFileParity"):
+        raise AssertionError(f"coverage index action-state inventory proof parity mismatch: {app_state_group}")
     if app_state_group.get("contextHooks") != qa.get("contextHooks"):
         raise AssertionError(f"coverage index app state context hook list mismatch: {app_state_group}")
     if app_state_group.get("contextHookCount") != len(qa.get("contextHooks") or []):

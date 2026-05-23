@@ -1248,6 +1248,13 @@ Visual gates:
   through `/qa/coverage-index.groups.appState`. This keeps endpoint coverage
   from depending on a manually curated subset when new tabs, tools, settings,
   ledgers, or agent flows are added.
+- `/qa/action-state-inventory` is the source-owned inventory for visible app
+  actions: it parses every `*ActionState` struct, action state field, action
+  snapshot helper, `record*Action` function, and action QA route from
+  `AppState.swift`. Each action state is grouped by surface and tied to a proof
+  owner, then mirrored through `/qa/coverage-index.groups.appState` so tab,
+  tool, settings, report, evidence, and agent controls have an auditable action
+  contract.
 
 ## Current Gaps To Close Next
 

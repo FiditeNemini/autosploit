@@ -119,6 +119,7 @@ def assert_testserver_smoke() -> None:
     report_coverage = request("GET", "/qa/report-coverage")
     stash_coverage = request("GET", "/qa/stash-coverage")
     endpoint_inventory = request("GET", "/qa/endpoint-inventory")
+    action_state_inventory = request("GET", "/qa/action-state-inventory")
     coverage_index = request("GET", "/qa/coverage-index")
     proof_ledger = request("GET", "/qa/proof-ledger")
     artifact_ledger = request("GET", "/qa/artifact-ledger")
@@ -165,6 +166,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing subtab coverage route contract: {qa}")
     if "/qa/endpoint-inventory" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing endpoint inventory route contract: {qa}")
+    if "/qa/action-state-inventory" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing action-state inventory route contract: {qa}")
     if "/qa/agent-loop-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing agent loop coverage route contract: {qa}")
     if "/qa/agent-tool-authorization-coverage" not in qa.get("stateRoutes", []):
@@ -551,6 +554,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index missing docs inventory parity proof: {coverage_index}")
     if "endpoint-inventory-proof.py" not in (app_state_group.get("proofs") or []):
         raise AssertionError(f"/qa/coverage-index missing endpoint inventory proof: {coverage_index}")
+    if "action-state-inventory-proof.py" not in (app_state_group.get("proofs") or []):
+        raise AssertionError(f"/qa/coverage-index missing action-state inventory proof: {coverage_index}")
     if app_state_group.get("stateRoutes") != qa.get("stateRoutes"):
         raise AssertionError(f"/qa/coverage-index state route list mismatch: {coverage_index}")
     if endpoint_inventory.get("ok") is not True:
@@ -565,6 +570,20 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index endpoint inventory route count mismatch: {coverage_index}")
     if app_state_group.get("endpointInventoryGroupCounts") != endpoint_inventory.get("groupCounts"):
         raise AssertionError(f"/qa/coverage-index endpoint inventory group counts mismatch: {coverage_index}")
+    if action_state_inventory.get("ok") is not True:
+        raise AssertionError(f"/qa/action-state-inventory failed: {action_state_inventory}")
+    if action_state_inventory.get("actionStateCount", 0) < 30:
+        raise AssertionError(f"/qa/action-state-inventory state count too low: {action_state_inventory}")
+    if action_state_inventory.get("snapshotParity") is not True:
+        raise AssertionError(f"/qa/action-state-inventory snapshot parity mismatch: {action_state_inventory}")
+    if action_state_inventory.get("stateFieldParity") is not True:
+        raise AssertionError(f"/qa/action-state-inventory state-field parity mismatch: {action_state_inventory}")
+    if action_state_inventory.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/action-state-inventory proof-file parity mismatch: {action_state_inventory}")
+    if app_state_group.get("actionStateInventoryCount") != action_state_inventory.get("actionStateCount"):
+        raise AssertionError(f"/qa/coverage-index action-state inventory count mismatch: {coverage_index}")
+    if app_state_group.get("actionStateInventoryGroups") != action_state_inventory.get("groupCounts"):
+        raise AssertionError(f"/qa/coverage-index action-state inventory group counts mismatch: {coverage_index}")
     if app_state_group.get("contextHooks") != qa.get("contextHooks"):
         raise AssertionError(f"/qa/coverage-index context hook list mismatch: {coverage_index}")
     if app_state_group.get("contextHookCount") != len(qa.get("contextHooks") or []):

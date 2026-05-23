@@ -1155,3 +1155,10 @@ Required future proof gates:
   route coverage, and is mirrored back into
   `/qa/coverage-index.groups.appState` so newly added app/API functions cannot
   remain undocumented.
+- App action-state ownership is summarized through `/qa/action-state-inventory`.
+  It parses every `*ActionState` struct, AppState action field, action snapshot
+  helper, `record*Action` function, and action QA route from `AppState.swift`,
+  then groups each action state by surface and records the proof owner. The
+  route is mirrored in `/qa/coverage-index.groups.appState`, which keeps
+  visible tab/tool/status/control actions from drifting away from proof
+  coverage.
