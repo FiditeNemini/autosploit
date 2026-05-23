@@ -704,6 +704,14 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index visual surface proof parity mismatch: {settings_visuals_group}")
     if settings_visuals_group.get("visualSurfaceProofFileParity") != visual_coverage.get("visualSurfaceProofFileParity"):
         raise AssertionError(f"coverage index visual surface proof-file parity mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("visualTabProofFamilies") != visual_coverage.get("visualTabProofFamilies"):
+        raise AssertionError(f"coverage index visual tab family map mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("visualTabProofFamilyCount") != visual_coverage.get("visualTabProofFamilyCount"):
+        raise AssertionError(f"coverage index visual tab family count mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("visualTabProofFamilyParity") != visual_coverage.get("visualTabProofFamilyParity"):
+        raise AssertionError(f"coverage index visual tab family parity mismatch: {settings_visuals_group}")
+    if settings_visuals_group.get("visualTabProofFamilyFileParity") != visual_coverage.get("visualTabProofFamilyFileParity"):
+        raise AssertionError(f"coverage index visual tab family file parity mismatch: {settings_visuals_group}")
     tools_parsers_group = groups.get("toolsAndParsers") or {}
     if tools_parsers_group.get("toolCount", 0) < 38:
         raise AssertionError(f"coverage index tools/parsers tool count mismatch: {tools_parsers_group}")

@@ -801,6 +801,16 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/visual-coverage surface proof-file parity mismatch: {visual_coverage}")
     if settings_visuals_group.get("visualSurfaceProofFileParity") != visual_coverage.get("visualSurfaceProofFileParity"):
         raise AssertionError(f"/qa/coverage-index visual surface proof-file parity mismatch: {coverage_index}")
+    if settings_visuals_group.get("visualTabProofFamilies") != visual_coverage.get("visualTabProofFamilies"):
+        raise AssertionError(f"/qa/coverage-index visual tab family map mismatch: {coverage_index}")
+    if settings_visuals_group.get("visualTabProofFamilyCount") != visual_coverage.get("visualTabProofFamilyCount"):
+        raise AssertionError(f"/qa/coverage-index visual tab family count mismatch: {coverage_index}")
+    if settings_visuals_group.get("visualTabProofFamilyParity") != visual_coverage.get("visualTabProofFamilyParity"):
+        raise AssertionError(f"/qa/coverage-index visual tab family parity mismatch: {coverage_index}")
+    if visual_coverage.get("visualTabProofFamilyFileParity") is not True:
+        raise AssertionError(f"/qa/visual-coverage visual tab family proof-file parity mismatch: {visual_coverage}")
+    if settings_visuals_group.get("visualTabProofFamilyFileParity") != visual_coverage.get("visualTabProofFamilyFileParity"):
+        raise AssertionError(f"/qa/coverage-index visual tab family proof-file parity mismatch: {coverage_index}")
     if settings_visuals_group.get("visualRoutes") != visual_coverage.get("routes"):
         raise AssertionError(f"/qa/coverage-index visual route list mismatch: {coverage_index}")
     if settings_visuals_group.get("visualRouteCount") != len(visual_coverage.get("routes") or []):

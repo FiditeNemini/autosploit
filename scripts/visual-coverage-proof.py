@@ -41,6 +41,7 @@ REQUIRED_PROOFS = {
     "visual-request-audit-proof.py",
     "visual-tab-proof.py",
     "visual-osint-screenshot-proof.py",
+    "visual-osint-artifact-actions-proof.py",
     "visual-report-export-proof.py",
     "visual-stash-retrieval-proof.py",
     "visual-unsupported-model-proof.py",
@@ -142,6 +143,18 @@ REQUIRED_VISUAL_SURFACE_PROOFS = {
     "cveAndToolSettings": ["visual-cve-settings-status-proof.py", "visual-tool-settings-status-proof.py"],
 }
 
+REQUIRED_VISUAL_TAB_PROOFS = {
+    "recon": {"visual-recon-action-proof.py"},
+    "web": {"visual-web-verify-proof.py"},
+    "network": {"visual-network-protocol-proof.py"},
+    "creds": {"visual-creds-action-proof.py"},
+    "exploit": {"visual-exploit-action-proof.py"},
+    "post": {"visual-post-attribution-proof.py"},
+    "osint": {"visual-osint-screenshot-proof.py", "visual-osint-artifact-actions-proof.py"},
+    "report": {"visual-report-export-proof.py", "visual-report-agent-proof.py"},
+    "stash": {"visual-stash-retrieval-proof.py"},
+}
+
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
     data = None if body is None else body.encode("utf-8")
@@ -238,6 +251,25 @@ def assert_visual_coverage() -> None:
             raise AssertionError(f"visual surface {surface} names missing proof files {missing_surface_files}: {coverage}")
     if coverage.get("visualSurfaceProofFileParity") is not True:
         raise AssertionError(f"visual surface proof-file parity mismatch: {coverage}")
+    visual_tab_families = coverage.get("visualTabProofFamilies") or {}
+    if sorted(visual_tab_families) != sorted(REQUIRED_VISUAL_TAB_PROOFS):
+        raise AssertionError(f"visual tab family keys mismatch: {coverage}")
+    if coverage.get("visualTabProofFamilyCount") != len(REQUIRED_VISUAL_TAB_PROOFS):
+        raise AssertionError(f"visual tab family count mismatch: {coverage}")
+    if coverage.get("visualTabProofFamilyParity") is not True:
+        raise AssertionError(f"visual tab family parity mismatch: {coverage}")
+    if coverage.get("visualTabProofFamilyFileParity") is not True:
+        raise AssertionError(f"visual tab family file parity mismatch: {coverage}")
+    for family, required in REQUIRED_VISUAL_TAB_PROOFS.items():
+        payload = visual_tab_families.get(family) or {}
+        proofs_for_family = set(payload.get("proofs") or [])
+        missing_family = sorted(required.difference(proofs_for_family))
+        if missing_family:
+            raise AssertionError(f"visual tab family {family} missing proofs {missing_family}: {payload}")
+        if payload.get("count") != len(payload.get("proofs") or []):
+            raise AssertionError(f"visual tab family count mismatch {family}: {payload}")
+        if payload.get("proofFileParity") is not True:
+            raise AssertionError(f"visual tab family file parity mismatch {family}: {payload}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/visual-coverage" not in qa.get("stateRoutes", []):
