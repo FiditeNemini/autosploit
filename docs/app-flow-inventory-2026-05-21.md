@@ -1191,6 +1191,16 @@ Required future proof gates:
   `max-corner-radius-8` professional shape policy and mirrors file/type/token/
   group/proof parity into `/qa/coverage-index.groups.settingsAndVisuals`, so
   polished squared UI primitives stay tied to source and proof coverage.
+- Agentic turn flow ownership is summarized through
+  `/qa/agent-flow-inventory`. It parses the source files that move a model turn
+  through chat send guards, dynamic context catalogue injection, tool schema
+  ranking, streaming, reasoning and token metrics, tool-call accumulation,
+  manual suggestions, copilot approvals, scope enforcement, built-in callbacks,
+  subprocess execution, result ingestion, activity telemetry, phase advance,
+  loop continuation, and stop/cancel behavior. The route mirrors file/function/
+  callback/group counts, flow-phase coverage, and proof parity into
+  `/qa/coverage-index.groups.chatAndContext`, making the agent loop source map
+  explicit instead of relying only on scattered feature proofs.
 - Python runtime ownership is summarized through
   `/qa/python-runtime-inventory`. It parses Python files under
   `ExploitBotEngine` and `scripts`, groups them by engine runtime, API adapter,

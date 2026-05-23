@@ -1290,6 +1290,17 @@ Visual gates:
   professional shape policy, and proof-file parity through
   `/qa/coverage-index.groups.settingsAndVisuals`, keeping the squared
   professional theme primitives auditable from source.
+- `/qa/agent-flow-inventory` is the source-owned inventory for the model turn
+  and tool loop: it parses `ChatService`, `AgentManager`, `ToolDefinitions`,
+  `ToolExecutor`, `ResultsStore`, `ContextCatalogService`, `ActivityFeed`, and
+  AppState wiring, records declared types, functions, callback fields, source
+  groups, and proof owners, then verifies coverage for the expected flow
+  phases from send guard through context injection, tool schema ranking,
+  streaming, reasoning and metrics, tool-call accumulation, manual/copilot/
+  autopilot handling, scope enforcement, callback and subprocess execution,
+  result ingestion, activity telemetry, phase advance, loop continuation, and
+  stop/cancel behavior. Coverage-index mirrors its counts and phase parity
+  through `/qa/coverage-index.groups.chatAndContext`.
 - `/qa/python-runtime-inventory` is the source-owned inventory for Python engine
   and proof surfaces: it parses files under `ExploitBotEngine` and `scripts`,
   records classes/functions, groups them by engine runtime, API adapter,

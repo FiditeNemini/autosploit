@@ -103,6 +103,7 @@ def assert_testserver_smoke() -> None:
     result_parser_coverage = request("GET", "/qa/result-parser-coverage")
     runtime_coverage = request("GET", "/qa/runtime-coverage")
     python_runtime_inventory = request("GET", "/qa/python-runtime-inventory")
+    agent_flow_inventory = request("GET", "/qa/agent-flow-inventory")
     context_coverage = request("GET", "/qa/context-coverage")
     evidence_lifecycle_coverage = request("GET", "/qa/evidence-lifecycle-coverage")
     settings_coverage = request("GET", "/qa/settings-coverage")
@@ -189,6 +190,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing runtime coverage route contract: {qa}")
     if "/qa/python-runtime-inventory" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing python runtime inventory route contract: {qa}")
+    if "/qa/agent-flow-inventory" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing agent flow inventory route contract: {qa}")
     if "/qa/context-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing context coverage route contract: {qa}")
     if "/qa/evidence-lifecycle-coverage" not in qa.get("stateRoutes", []):
@@ -1052,6 +1055,24 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/context-coverage delivery mode proof-file parity mismatch: {context_coverage}")
     if chat_context_group.get("contextDeliveryModeProofFileParity") != context_coverage.get("contextDeliveryModeProofFileParity"):
         raise AssertionError(f"/qa/coverage-index context delivery mode proof-file parity mismatch: {coverage_index}")
+    if agent_flow_inventory.get("ok") is not True:
+        raise AssertionError(f"/qa/agent-flow-inventory failed: {agent_flow_inventory}")
+    if agent_flow_inventory.get("fileCount", 0) < 8:
+        raise AssertionError(f"/qa/agent-flow-inventory file count too low: {agent_flow_inventory}")
+    if agent_flow_inventory.get("functionCount", 0) < 100:
+        raise AssertionError(f"/qa/agent-flow-inventory function count too low: {agent_flow_inventory}")
+    if agent_flow_inventory.get("phaseCoverageParity") is not True:
+        raise AssertionError(f"/qa/agent-flow-inventory phase parity mismatch: {agent_flow_inventory}")
+    if agent_flow_inventory.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/agent-flow-inventory proof-file parity mismatch: {agent_flow_inventory}")
+    if chat_context_group.get("agentFlowInventoryFileCount") != agent_flow_inventory.get("fileCount"):
+        raise AssertionError(f"/qa/coverage-index agent flow file count mismatch: {coverage_index}")
+    if chat_context_group.get("agentFlowInventoryFunctionCount") != agent_flow_inventory.get("functionCount"):
+        raise AssertionError(f"/qa/coverage-index agent flow function count mismatch: {coverage_index}")
+    if chat_context_group.get("agentFlowInventoryGroupCounts") != agent_flow_inventory.get("groupCounts"):
+        raise AssertionError(f"/qa/coverage-index agent flow group count mismatch: {coverage_index}")
+    if chat_context_group.get("agentFlowInventoryPhaseCoverageParity") != agent_flow_inventory.get("phaseCoverageParity"):
+        raise AssertionError(f"/qa/coverage-index agent flow phase parity mismatch: {coverage_index}")
     if chat_context_group.get("evidenceLifecycleStages") != evidence_lifecycle_coverage.get("stages"):
         raise AssertionError(f"/qa/coverage-index evidence lifecycle stage list mismatch: {coverage_index}")
     if chat_context_group.get("evidenceLifecycleStorageTargets") != evidence_lifecycle_coverage.get("storageTargets"):
