@@ -185,6 +185,10 @@ callback-vs-subprocess execution, sample CLI routing, tab ownership, global
 visibility, and structured-vs-raw result mode so tool-loop coverage can be
 checked without relying on a live model to enumerate the catalogue. The route
 returns a standard `ok` aggregate status.
+`scripts/tool-catalog-detail-proof.py` now requires `/qa/tool-coverage` to
+expose tab tool maps/counts, callback and always-visible tool lists/counts,
+execution counts, result-mode counts, and parity flags, with the same detail
+mirrored into `/qa/coverage-index.groups.toolsAndParsers`.
 `/qa/tool-flow-coverage` now also exposes the `/qa/tool-catalog` route, the
 `tool-catalog-proof.py` proof, `toolSchemaCap=12`, and
 `toolSchemaPolicy=prompt-tab-ranked-installed-cap`, so the aggregate proves
@@ -654,6 +658,7 @@ Current repeatable gates:
 - `python3 scripts/settings-category-coverage-proof.py`
 - `python3 scripts/catalog-embedding-audit-proof.py`
 - `python3 scripts/tool-catalog-proof.py`
+- `python3 scripts/tool-catalog-detail-proof.py`
 - `python3 scripts/tool-registry-coverage-proof.py`
 - `python3 scripts/tool-fanout-status-proof.py`
 - `python3 scripts/tool-family-fanout-coverage-proof.py`
@@ -915,7 +920,9 @@ Current repeatable gates:
   minimum capture count, and actual screenshot capture count. The tools/parsers
   group exposes registry tool count, callback count, always-visible tool count,
   bounded catalogue limit, registry tab list, full registry tool list, registry
-  failure list/count, representative family fanout count and family-to-tool map,
+  failure list/count, registry tab tool map/count/parity, callback and
+  always-visible list/count/parity, execution count/parity, result-mode
+  count/parity, representative family fanout count and family-to-tool map,
   structured/raw parser tool sets,
   seeded result-parser counts, parsed structured tool list, raw-only preserved
   tool list, representative result-parser artifact lists for subdomains, URLs,

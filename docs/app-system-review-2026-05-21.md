@@ -207,6 +207,10 @@ Tool API:
   `scripts/tool-registry-coverage-proof.py`: every model-visible tool has an
   execution type, tab ownership unless intentionally global, CLI routing sample,
   structured-vs-raw result mode, and a standard `ok` aggregate status.
+- `scripts/tool-catalog-detail-proof.py` now requires `/qa/tool-coverage` to
+  expose tab tool maps/counts, callback and always-visible tool lists/counts,
+  execution counts, result-mode counts, and parity flags, with the same detail
+  mirrored into `/qa/coverage-index.groups.toolsAndParsers`.
 
 Result fanout:
 
@@ -796,6 +800,8 @@ Automated no-model gates:
   tools/parsers group exposes registry tool
   count, callback count, always-visible tool count, bounded catalogue limit,
   registry tab list, full registry tool list, registry failure list/count,
+  registry tab tool map/count/parity, callback and always-visible
+  list/count/parity, execution count/parity, result-mode count/parity,
   representative family fanout count and family-to-tool map, structured/raw
   parser tool sets, seeded result-parser counts, parsed
   structured tool list, raw-only preserved tool list, representative

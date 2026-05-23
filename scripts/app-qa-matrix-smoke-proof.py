@@ -991,6 +991,24 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index tool registry failures mismatch: {coverage_index}")
     if tools_parsers_group.get("toolRegistryFailureCount") != len(tool_coverage.get("failures") or []):
         raise AssertionError(f"/qa/coverage-index tool registry failure count mismatch: {coverage_index}")
+    for key in (
+        "tabToolMap",
+        "tabToolCounts",
+        "tabToolCountParity",
+        "callbackTools",
+        "callbackToolCount",
+        "callbackToolParity",
+        "alwaysVisibleTools",
+        "alwaysVisibleToolCount",
+        "alwaysVisibleToolParity",
+        "executionCounts",
+        "executionCountParity",
+        "resultModeCounts",
+        "resultModeCountParity",
+    ):
+        aggregate_key = "toolRegistry" + key[:1].upper() + key[1:]
+        if tools_parsers_group.get(aggregate_key) != tool_coverage.get(key):
+            raise AssertionError(f"/qa/coverage-index registry detail {aggregate_key} mismatch: {coverage_index}")
     if tools_parsers_group.get("alwaysVisibleToolCount") != tool_coverage.get("alwaysVisibleCount"):
         raise AssertionError(f"/qa/coverage-index always-visible tool count mismatch: {coverage_index}")
     if tools_parsers_group.get("boundedCatalogueLimit") != tool_coverage.get("boundedCatalogueLimit"):

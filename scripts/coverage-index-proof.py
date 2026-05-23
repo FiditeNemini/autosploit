@@ -55,6 +55,7 @@ REQUIRED_PROOFS = {
     "subtab-coverage-proof.py",
     "agent-loop-coverage-proof.py",
     "tool-flow-coverage-proof.py",
+    "tool-catalog-detail-proof.py",
     "runtime-coverage-proof.py",
     "context-coverage-proof.py",
     "settings-coverage-proof.py",
@@ -866,6 +867,24 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers tool registry failures mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolRegistryFailureCount") != len(tool_coverage.get("failures") or []):
         raise AssertionError(f"coverage index tools/parsers tool registry failure count mismatch: {tools_parsers_group}")
+    for key in (
+        "tabToolMap",
+        "tabToolCounts",
+        "tabToolCountParity",
+        "callbackTools",
+        "callbackToolCount",
+        "callbackToolParity",
+        "alwaysVisibleTools",
+        "alwaysVisibleToolCount",
+        "alwaysVisibleToolParity",
+        "executionCounts",
+        "executionCountParity",
+        "resultModeCounts",
+        "resultModeCountParity",
+    ):
+        aggregate_key = "toolRegistry" + key[:1].upper() + key[1:]
+        if tools_parsers_group.get(aggregate_key) != tool_coverage.get(key):
+            raise AssertionError(f"coverage index tools/parsers registry detail {aggregate_key} mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("alwaysVisibleToolCount") != tool_coverage.get("alwaysVisibleCount"):
         raise AssertionError(f"coverage index tools/parsers always-visible tool count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("boundedCatalogueLimit") != tool_coverage.get("boundedCatalogueLimit"):
