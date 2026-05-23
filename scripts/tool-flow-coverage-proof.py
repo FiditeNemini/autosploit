@@ -179,6 +179,10 @@ def run() -> None:
         missing_state_keys = sorted(EXPECTED_STATE_KEYS.difference(state_keys))
         if missing_state_keys:
             raise AssertionError(f"tool flow missing state keys {missing_state_keys}: {coverage}")
+        if coverage.get("stateKeyCount") != len(coverage.get("stateKeys") or []):
+            raise AssertionError(f"tool flow state key count mismatch: {coverage}")
+        if coverage.get("stateKeyParity") is not True:
+            raise AssertionError(f"tool flow state key parity mismatch: {coverage}")
         for key in ("registry", "parserRouting", "fanout", "contextCatalog"):
             if coverage.get("contracts", {}).get(key) is not True:
                 raise AssertionError(f"tool flow contract missing {key}: {coverage}")

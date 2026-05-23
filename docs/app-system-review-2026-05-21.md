@@ -222,7 +222,7 @@ Result fanout:
   `scripts/tool-family-fanout-coverage-proof.py`: deterministic Recon, Web,
   Network, Creds, Exploit, Post, and OSINT fixtures each prove a visible chat
   tool card, activity-feed entry, tab activity status, parsed tab result, and
-  context-catalog hit. `/qa/tool-flow-coverage.stateKeys` ties that aggregate to
+  context-catalog hit. `/qa/tool-flow-coverage.stateKeys` plus state-key count/parity ties that aggregate to
   message tool cards, tab activity, activity feed, result rows, and context
   catalogue state. `/qa/tool-flow-coverage.tabActivityStatuses` names the
   visible tab indicator states (`running`, `done`, `failed`, `canceled`) and
@@ -757,7 +757,7 @@ Automated no-model gates:
   sources/titles, ports, network hosts, OSINT platforms, post labels, and raw
   tools, parser failure list/count, state-key count, tool-flow proof count,
   route-owned proof list/file parity, tool/callback counters, route
-  list/count, family list/count, state-key list, contract map/count,
+  list/count, family list/count, state-key list/count/parity, contract map/count,
   dynamic tool-schema cap/policy/route, structured/raw result-mode counts,
   tab activity status proof map/count/parity/file parity, and model-tool visual surface
   list/count/parity plus proof map/count/parity/file parity from `/qa/tool-flow-coverage`.

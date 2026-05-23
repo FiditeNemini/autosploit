@@ -868,6 +868,12 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers tool-flow family count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolFlowStateKeys") != tool_flow.get("stateKeys"):
         raise AssertionError(f"coverage index tools/parsers tool-flow state keys mismatch: {tools_parsers_group}")
+    if tool_flow.get("stateKeyParity") is not True:
+        raise AssertionError(f"tool-flow state key parity mismatch: {tool_flow}")
+    if tools_parsers_group.get("toolFlowStateKeyCount") != tool_flow.get("stateKeyCount"):
+        raise AssertionError(f"coverage index tools/parsers tool-flow state key count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolFlowStateKeyParity") != tool_flow.get("stateKeyParity"):
+        raise AssertionError(f"coverage index tools/parsers tool-flow state key parity mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolFlowContracts") != tool_flow.get("contracts"):
         raise AssertionError(f"coverage index tools/parsers tool-flow contracts mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolFlowContractCount") != len(tool_flow.get("contracts") or {}):

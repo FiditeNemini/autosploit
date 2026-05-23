@@ -162,7 +162,7 @@ main session.
   `scripts/tool-family-fanout-coverage-proof.py`: Recon, Web, Network, Creds,
   Exploit, Post, and OSINT fixtures each prove chat-card, activity-feed,
   tab-activity, parsed-result, and context-catalog coverage. The route now
-  returns a standard `ok` aggregate status. `/qa/tool-flow-coverage.stateKeys`
+  returns a standard `ok` aggregate status. `/qa/tool-flow-coverage.stateKeys` plus state-key count/parity
   exposes the message, tab activity, feed, result, and context-catalog surfaces
   behind those proofs, and `/qa/tool-flow-coverage.tabActivityStatuses` names
   the visible tab indicator states (`running`, `done`, `failed`, `canceled`)
@@ -879,7 +879,7 @@ Current repeatable gates:
   vulnerability sources/titles, ports, network hosts, OSINT platforms, post
   labels, and raw tools, parser failure list/count, state-key count,
   tool-flow proof count, route-owned proof list/file parity, tool/callback counters, route
-  list/count, family list/count, state-key list, contract map/count, dynamic
+  list/count, family list/count, state-key list/count/parity, contract map/count, dynamic
   tool-schema cap/policy/route,
   structured/raw result-mode counts, visible tab activity statuses, the tab
   activity status parity/indicator contract, tab activity status proof

@@ -1000,6 +1000,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index tool-flow family count mismatch: {coverage_index}")
     if tools_parsers_group.get("toolFlowStateKeys") != tool_flow_coverage.get("stateKeys"):
         raise AssertionError(f"/qa/coverage-index tool-flow state keys mismatch: {coverage_index}")
+    if tool_flow_coverage.get("stateKeyParity") is not True:
+        raise AssertionError(f"/qa/tool-flow-coverage state key parity mismatch: {tool_flow_coverage}")
+    if tools_parsers_group.get("toolFlowStateKeyCount") != tool_flow_coverage.get("stateKeyCount"):
+        raise AssertionError(f"/qa/coverage-index tool-flow state key count mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolFlowStateKeyParity") != tool_flow_coverage.get("stateKeyParity"):
+        raise AssertionError(f"/qa/coverage-index tool-flow state key parity mismatch: {coverage_index}")
     if tools_parsers_group.get("toolFlowContracts") != tool_flow_coverage.get("contracts"):
         raise AssertionError(f"/qa/coverage-index tool-flow contracts mismatch: {coverage_index}")
     if tools_parsers_group.get("toolFlowContractCount") != len(tool_flow_coverage.get("contracts") or {}):
