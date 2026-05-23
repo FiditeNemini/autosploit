@@ -1162,3 +1162,9 @@ Required future proof gates:
   route is mirrored in `/qa/coverage-index.groups.appState`, which keeps
   visible tab/tool/status/control actions from drifting away from proof
   coverage.
+- SwiftUI view ownership is summarized through `/qa/view-inventory`. It parses
+  the app and view source tree, lists each `View` struct with its file, group,
+  and proof owner, verifies the main `ToolTab` to tab-view map, and mirrors the
+  counts/groups/tab map into `/qa/coverage-index.groups.appState`. This keeps
+  visible pages, panels, tabs, overlays, settings views, and chat surfaces
+  auditable from source instead of depending only on scattered screenshot notes.

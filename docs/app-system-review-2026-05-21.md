@@ -1255,6 +1255,13 @@ Visual gates:
   owner, then mirrored through `/qa/coverage-index.groups.appState` so tab,
   tool, settings, report, evidence, and agent controls have an auditable action
   contract.
+- `/qa/view-inventory` is the source-owned inventory for SwiftUI UI surfaces:
+  it parses `ExploitBot/Sources/ExploitBot/App` and `Views`, lists each `View`
+  struct with its source file, surface group, and proof owner, verifies the
+  main `ToolTab` to tab-view map, and mirrors the view counts, group counts,
+  tab map, and proof-file parity through `/qa/coverage-index.groups.appState`.
+  This gives each page, tab, chat surface, settings view, panel, and overlay a
+  machine-readable ownership record.
 
 ## Current Gaps To Close Next
 
