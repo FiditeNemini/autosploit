@@ -175,6 +175,8 @@ def assert_session_coverage() -> None:
         missing_surface_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
         if missing_surface_files:
             raise AssertionError(f"session workflow surface {surface} names missing proof files {missing_surface_files}: {coverage}")
+    if coverage.get("sessionWorkflowSurfaceProofFileParity") is not True:
+        raise AssertionError(f"session workflow surface proof-file parity mismatch: {coverage}")
     if coverage.get("proofCount", 0) < len(REQUIRED_PROOFS):
         raise AssertionError(f"session coverage proof count mismatch: {coverage}")
     state_keys = set(coverage.get("stateKeys") or [])

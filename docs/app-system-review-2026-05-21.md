@@ -70,7 +70,7 @@ Interaction modes:
   model-folder pickers, persistence/relaunch, saved messages, result rebuild,
   finding wizard submit, tab switch actions, phase actions, and Activity Feed
   controls. It also exposes session workflow surface list/count/parity and
-  workflow surface proof map/count/parity plus `stateKeys` for the `/state`
+  workflow surface proof map/count/parity/file parity plus `stateKeys` for the `/state`
   surfaces used by those workflow proofs.
 - Autopilot executes model tool calls directly.
 - Copilot shows an approval card before tool execution.
@@ -747,7 +747,7 @@ Automated no-model gates:
   session route list/count, contract map/count, proof list/count/file parity, state-key
   list/count,
   session workflow surface list/count/parity,
-  session workflow surface proof map/count/parity,
+  session workflow surface proof map/count/parity/file parity,
   tab action tab list, route list/count, contract map/count, proof list/count/file parity,
   action-state-key list/count,
   tab action surface list/count/parity, tab action surface proof map/count/parity,

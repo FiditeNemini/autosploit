@@ -54,7 +54,7 @@ sidebar create/rename/switch/delete, create-op stop behavior, overlays,
 model-folder pickers, persistence across relaunch, saved messages, restored
 results, finding wizard submit, tab switching, phase actions, Activity Feed
 actions, proof-count metadata, session workflow surface list/count/parity,
-session workflow surface proof map/count/parity, and the `stateKeys` those
+session workflow surface proof map/count/parity/file parity, and the `stateKeys` those
 proofs validate.
 The coverage payload now lists the phase and Activity Feed QA routes (`/phase`,
 `/qa/seed-activity-actions`, `/qa/activity-action`) plus `proofCount`, so the
@@ -714,7 +714,7 @@ Current repeatable gates:
   including onboarding, Sidebar operations, overlays, model-folder pickers,
   persistence, finding-wizard submit, tab switching, phase actions, Activity
   Feed actions, proof-count metadata, session workflow surface list/count/
-  parity, session workflow surface proof map/count/parity, and `stateKeys`.
+  parity, session workflow surface proof map/count/parity/file parity, and `stateKeys`.
   The aggregate QA map is exposed through `/qa/coverage-index`; it groups app
   state, chat/context, runtime/cache, settings/visuals, tools/parsers, and
   tabs/sessions endpoints with their proof scripts, and
@@ -866,7 +866,7 @@ Current repeatable gates:
 mirrors session route list/count, contract map/count, proof list/count/file parity, and
   state-key list/count,
   mirrors session workflow surface list/count/parity,
-  session workflow surface proof map/count/parity,
+  session workflow surface proof map/count/parity/file parity,
   mirrors tab action tab list, route list/count, contract map/count, proof
   list/count/file parity, and action-state-key list/count,
   mirrors tab action surface list/count/parity and proof map/count/parity, mirrors

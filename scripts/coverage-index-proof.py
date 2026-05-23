@@ -869,6 +869,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tabs/sessions workflow surface proof count mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("sessionWorkflowSurfaceProofParity") != session_coverage.get("sessionWorkflowSurfaceProofParity"):
         raise AssertionError(f"coverage index tabs/sessions workflow surface proof parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("sessionWorkflowSurfaceProofFileParity") != session_coverage.get("sessionWorkflowSurfaceProofFileParity"):
+        raise AssertionError(f"coverage index tabs/sessions workflow surface proof-file parity mismatch: {tabs_sessions_group}")
     tab_action_coverage = request("GET", "/qa/tab-action-coverage")
     if tabs_sessions_group.get("tabActionTabs") != tab_action_coverage.get("tabs"):
         raise AssertionError(f"coverage index tabs/sessions tab action tabs mismatch: {tabs_sessions_group}")
