@@ -60,6 +60,7 @@ REQUIRED_PROOFS = {
     "checkpoint-ledger-proof.py",
     "audit-ledger-proof.py",
     "gap-ledger-proof.py",
+    "docs-inventory-parity-proof.py",
     "release-readiness-proof.py",
 }
 
@@ -198,6 +199,8 @@ def assert_coverage_index() -> None:
         if group.get("proofCount") != len(proofs_for_group):
             raise AssertionError(f"coverage index group proof count mismatch {name}: {group}")
     app_state_group = groups.get("appState") or {}
+    if "docs-inventory-parity-proof.py" not in (app_state_group.get("proofs") or []):
+        raise AssertionError(f"coverage index app state missing docs inventory parity proof: {app_state_group}")
     qa = state.get("qaCoverage") or {}
     if app_state_group.get("stateRoutes") != qa.get("stateRoutes"):
         raise AssertionError(f"coverage index app state route list mismatch: {app_state_group}")

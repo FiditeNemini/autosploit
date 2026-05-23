@@ -825,7 +825,13 @@ Current repeatable gates:
   block state, `openGapIds`, `openGapCount`, and the
   `qwenMultimodalRuntime` contract with blocked model kinds plus count/file-parity fields
   for blocked kinds, required runtime work, and enforcement proofs, including a dedicated Qwen
-  multimodal engine-start block proof. The runtime/cache group
+  multimodal engine-start block proof. It also exposes promotion gates for the
+  Qwen multimodal loader, multimodal prefix-cache key discipline, and
+  multimodal context packet routing. The exact missing live proofs are
+  `live-qwen-multimodal-loader-proof.py`,
+  `live-qwen-multimodal-prefix-cache-proof.py`, and
+  `live-qwen-multimodal-context-routing-proof.py`; promotion remains false
+  until those proof scripts exist and pass. The runtime/cache group
   additionally exposes
   `supportedFamilies`, `cacheResponseMethod`, `cacheResponsesInferenceMethod`,
   `newModelSessionBehavior`, runtime contract map/count, route list/count,

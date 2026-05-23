@@ -471,6 +471,8 @@ def assert_testserver_smoke() -> None:
         if group_payload.get("proofCount") != len(group_payload.get("proofs") or []):
             raise AssertionError(f"/qa/coverage-index group {group_name} proof count mismatch: {coverage_index}")
     app_state_group = index_groups.get("appState") or {}
+    if "docs-inventory-parity-proof.py" not in (app_state_group.get("proofs") or []):
+        raise AssertionError(f"/qa/coverage-index missing docs inventory parity proof: {coverage_index}")
     if app_state_group.get("stateRoutes") != qa.get("stateRoutes"):
         raise AssertionError(f"/qa/coverage-index state route list mismatch: {coverage_index}")
     if app_state_group.get("contextHooks") != qa.get("contextHooks"):
