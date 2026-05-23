@@ -304,6 +304,11 @@ Web:
 - Verify action state is covered by `scripts/web-verify-action-proof.py`: a
   seeded finding records `/state.webAction`, preserves the exact verification
   prompt, and marks the Web tab activity state as running/verify.
+- `/qa/web-coverage` now summarizes the Web tab as one auditable surface:
+  vulnerability rows, Create Finding, Stash, Copy, Copy All, Header Copy, row
+  context actions, related-CVE search, Verify progress, context handoff, and
+  activity telemetry all expose surface/route/state-key/proof list/count/parity
+  metadata.
 - Visible Verify button progress state is captured under
   `docs/visual-proofs/checkpoint-96`.
 
@@ -791,6 +796,7 @@ Automated no-model gates:
   tab action tab list, route list/count, contract map/count, proof list/count/file parity,
   action-state-key list/count/parity,
   tab action surface list/count/parity, tab action surface proof map/count/parity/file parity,
+  Web coverage surface/route/state-key/proof list/count/parity,
   Report coverage surface/route/state-key/proof list/count/parity,
   Stash coverage surface/route/state-key/proof list/count/parity,
   action-state-key count/parity, agent-loop

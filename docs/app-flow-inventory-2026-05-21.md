@@ -287,6 +287,10 @@ Web:
   Web tab activity. `scripts/web-verify-action-proof.py` verifies the target,
   finding title, prompt, and running tab badge; the visible queued button state
   is captured under `docs/visual-proofs/checkpoint-96`.
+- `/qa/web-coverage` rolls up vulnerability rows, Create Finding, Stash, Copy,
+  Copy All, Header Copy, row context actions, related-CVE search, Verify
+  progress, context handoff, and activity telemetry with surface/route/state-key/
+  proof list/count/parity metadata and mirrors into `/qa/coverage-index`.
 
 Per-tab direct action and copy coverage across Recon, Web, Network, Creds,
 Exploit, Post, OSINT, Report, and Stash is summarized through
@@ -913,6 +917,7 @@ mirrors session route list/count, contract map/count, proof list/count/file pari
   mirrors tab action tab list, route list/count, contract map/count, proof
   list/count/file parity, and action-state-key list/count/parity,
   mirrors tab action surface list/count/parity and proof map/count/parity/file parity, mirrors
+  Web coverage surface/route/state-key/proof list/count/parity,
   Report coverage surface/route/state-key/proof list/count/parity,
   Stash coverage surface/route/state-key/proof list/count/parity,
   agent-loop phase list/count/parity and phase-proof map/count/parity/file parity,
