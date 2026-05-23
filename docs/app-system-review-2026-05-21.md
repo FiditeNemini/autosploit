@@ -394,6 +394,11 @@ Exploit:
   `lastTool=copy_exploit`.
 - Listener, custom script, and implant lifecycle state now tracks idle, running,
   done, failed, and canceled and is visible in the relevant Exploit subtab.
+- `/qa/exploit-coverage` now summarizes the Exploit tab as one auditable
+  surface: search/prepare/execute stages, listener/script/implant lifecycle,
+  copy paths for search/listener/script/implant, raw exploit output, and
+  activity telemetry expose surface/route/state-key/proof list/count/parity
+  metadata.
 - Live UI screenshot coverage for Reverse Shells, Custom, and C2 lifecycle
   strips is captured by `scripts/visual-tab-proof.py`.
 
@@ -807,6 +812,7 @@ Automated no-model gates:
   Web coverage surface/route/state-key/proof list/count/parity,
   Network coverage surface/route/state-key/proof list/count/parity,
   Creds coverage surface/route/state-key/proof list/count/parity,
+  Exploit coverage surface/route/state-key/proof list/count/parity,
   Report coverage surface/route/state-key/proof list/count/parity,
   Stash coverage surface/route/state-key/proof list/count/parity,
   action-state-key count/parity, agent-loop

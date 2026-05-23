@@ -110,6 +110,7 @@ def assert_testserver_smoke() -> None:
     web_coverage = request("GET", "/qa/web-coverage")
     network_coverage = request("GET", "/qa/network-coverage")
     creds_coverage = request("GET", "/qa/creds-coverage")
+    exploit_coverage = request("GET", "/qa/exploit-coverage")
     report_coverage = request("GET", "/qa/report-coverage")
     stash_coverage = request("GET", "/qa/stash-coverage")
     coverage_index = request("GET", "/qa/coverage-index")
@@ -179,6 +180,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing network coverage route contract: {qa}")
     if "/qa/creds-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing creds coverage route contract: {qa}")
+    if "/qa/exploit-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing exploit coverage route contract: {qa}")
     if "/qa/report-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing report coverage route contract: {qa}")
     if "/qa/stash-coverage" not in qa.get("stateRoutes", []):
@@ -1192,6 +1195,22 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index creds state-key list mismatch: {coverage_index}")
     if tabs_sessions_group.get("credsContracts") != creds_coverage.get("contracts"):
         raise AssertionError(f"/qa/coverage-index creds contract map mismatch: {coverage_index}")
+    if exploit_coverage.get("exploitSurfaceParity") is not True:
+        raise AssertionError(f"/qa/exploit-coverage surface parity mismatch: {exploit_coverage}")
+    if exploit_coverage.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/exploit-coverage proof-file parity mismatch: {exploit_coverage}")
+    if tabs_sessions_group.get("exploitSurfaces") != exploit_coverage.get("exploitSurfaces"):
+        raise AssertionError(f"/qa/coverage-index exploit surface list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("exploitSurfaceParity") != exploit_coverage.get("exploitSurfaceParity"):
+        raise AssertionError(f"/qa/coverage-index exploit surface parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("exploitProofs") != exploit_coverage.get("proofs"):
+        raise AssertionError(f"/qa/coverage-index exploit proof list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("exploitProofFileParity") != exploit_coverage.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index exploit proof-file parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("exploitStateKeys") != exploit_coverage.get("stateKeys"):
+        raise AssertionError(f"/qa/coverage-index exploit state-key list mismatch: {coverage_index}")
+    if tabs_sessions_group.get("exploitContracts") != exploit_coverage.get("contracts"):
+        raise AssertionError(f"/qa/coverage-index exploit contract map mismatch: {coverage_index}")
     if report_coverage.get("reportSurfaceParity") is not True:
         raise AssertionError(f"/qa/report-coverage surface parity mismatch: {report_coverage}")
     if report_coverage.get("proofFileParity") is not True:

@@ -404,6 +404,11 @@ Exploit:
   copied count, clipboard preview, and summary, with tab activity recorded as
   `lastTool=copy_exploit`; `scripts/exploit-copy-actions-proof.py` covers the
   live seed/copy/state path.
+- `/qa/exploit-coverage` rolls up search/prepare/execute stages,
+  listener/script/implant lifecycle state, copy paths for search/listener/
+  script/implant, raw exploit output, and activity telemetry with
+  surface/route/state-key/proof list/count/parity metadata and mirrors into
+  `/qa/coverage-index`.
 
 Post:
 
@@ -928,6 +933,7 @@ mirrors session route list/count, contract map/count, proof list/count/file pari
   Web coverage surface/route/state-key/proof list/count/parity,
   Network coverage surface/route/state-key/proof list/count/parity,
   Creds coverage surface/route/state-key/proof list/count/parity,
+  Exploit coverage surface/route/state-key/proof list/count/parity,
   Report coverage surface/route/state-key/proof list/count/parity,
   Stash coverage surface/route/state-key/proof list/count/parity,
   agent-loop phase list/count/parity and phase-proof map/count/parity/file parity,
