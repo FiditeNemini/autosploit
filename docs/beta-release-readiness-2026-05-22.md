@@ -4,6 +4,7 @@
 
 - App bundle: `release/ExploitBot.app`
 - DMG: `release/ExploitBot-beta.dmg`
+- Release manifest: `release/release-manifest.json`
 - Packaging script: `script/package_release.sh`
 - Readiness proof: `scripts/release-readiness-proof.py`
 
@@ -13,6 +14,11 @@ The beta packaging path can now build a SwiftPM release binary, stage a macOS
 `.app` bundle, copy bundled resources including `starter-cves.db`, sign the app
 with Developer ID and hardened runtime, create a compressed DMG, and sign the
 DMG.
+
+The packaging script also writes `release/release-manifest.json` after signing.
+The manifest records the bundle identifier, beta version, Developer ID identity,
+Team ID, hardened runtime flag, notarization status, app binary SHA-256, DMG
+SHA-256, bundled resource flags, and the notarization command.
 
 Validated identity:
 
@@ -33,6 +39,7 @@ Validated local commands:
 - App signing authority: Developer ID Application: ShieldStack LLC
   `(55KGF2S5AY)`.
 - Hardened runtime: enabled.
+- Release manifest: generated and checked against signed artifacts.
 - Resource seal: present.
 - Gatekeeper status before notarization: rejected as `Unnotarized Developer ID`.
 
@@ -56,5 +63,7 @@ Before calling this beta distributable complete:
 
 - Run the focused app QA proofs for the current commit.
 - Run `python3 scripts/release-readiness-proof.py`.
+- Confirm `release/release-manifest.json` exists for the artifact being handed
+  off.
 - Run `./script/package_release.sh --notarize` with a valid notary profile.
 - Re-run Gatekeeper assessment against the stapled DMG.

@@ -19,6 +19,7 @@ APP_RESOURCES="$APP_CONTENTS/Resources"
 APP_BINARY="$APP_MACOS/$APP_NAME"
 INFO_PLIST="$APP_CONTENTS/Info.plist"
 DMG_PATH="$RELEASE_DIR/$APP_NAME-beta.dmg"
+MANIFEST_PATH="$RELEASE_DIR/release-manifest.json"
 ENTITLEMENTS="$PACKAGE_DIR/ExploitBot.entitlements"
 
 while [[ $# -gt 0 ]]; do
@@ -64,7 +65,7 @@ if ! security find-identity -p codesigning -v | grep -F "$IDENTITY" >/dev/null; 
   exit 1
 fi
 
-rm -rf "$APP_BUNDLE" "$DMG_PATH" "$RELEASE_DIR/dmg-root"
+rm -rf "$APP_BUNDLE" "$DMG_PATH" "$MANIFEST_PATH" "$RELEASE_DIR/dmg-root"
 mkdir -p "$APP_MACOS" "$APP_RESOURCES" "$RELEASE_DIR/dmg-root"
 
 swift build --package-path "$PACKAGE_DIR" -c release
@@ -134,6 +135,7 @@ hdiutil create \
 codesign --force --timestamp --sign "$IDENTITY" "$DMG_PATH"
 codesign --verify --verbose=2 "$DMG_PATH"
 
+NOTARIZATION_STATUS="not-submitted"
 if [[ "$DO_NOTARIZE" == "1" ]]; then
   if [[ -z "$NOTARY_PROFILE" ]]; then
     echo "--notarize requires --notary-profile or EXPLOITBOT_NOTARY_PROFILE" >&2
@@ -141,7 +143,60 @@ if [[ "$DO_NOTARIZE" == "1" ]]; then
   fi
   xcrun notarytool submit "$DMG_PATH" --keychain-profile "$NOTARY_PROFILE" --wait
   xcrun stapler staple "$DMG_PATH"
+  NOTARIZATION_STATUS="submitted-and-stapled"
 fi
+
+TEAM_ID="$(codesign -dvvv "$APP_BUNDLE" 2>&1 | awk -F= '/TeamIdentifier=/{print $2; exit}')"
+APP_BINARY_SHA="$(shasum -a 256 "$APP_BINARY" | awk '{print $1}')"
+DMG_SHA="$(shasum -a 256 "$DMG_PATH" | awk '{print $1}')"
+STARTER_CVES_DB_PRESENT="false"
+APP_ICON_PRESENT="false"
+[[ -f "$APP_RESOURCES/starter-cves.db" ]] && STARTER_CVES_DB_PRESENT="true"
+[[ -f "$APP_RESOURCES/AppIcon.icns" ]] && APP_ICON_PRESENT="true"
+
+APP_NAME="$APP_NAME" \
+BUNDLE_ID="$BUNDLE_ID" \
+VERSION="$VERSION" \
+IDENTITY="$IDENTITY" \
+TEAM_ID="$TEAM_ID" \
+NOTARIZATION_STATUS="$NOTARIZATION_STATUS" \
+APP_BINARY_SHA="$APP_BINARY_SHA" \
+DMG_SHA="$DMG_SHA" \
+STARTER_CVES_DB_PRESENT="$STARTER_CVES_DB_PRESENT" \
+APP_ICON_PRESENT="$APP_ICON_PRESENT" \
+python3 - "$MANIFEST_PATH" <<'PY'
+import json
+import os
+import sys
+
+manifest = {
+    "appName": os.environ["APP_NAME"],
+    "bundleIdentifier": os.environ["BUNDLE_ID"],
+    "version": os.environ["VERSION"],
+    "identity": os.environ["IDENTITY"],
+    "teamIdentifier": os.environ["TEAM_ID"],
+    "hardenedRuntime": True,
+    "notarizationStatus": os.environ["NOTARIZATION_STATUS"],
+    "artifacts": {
+        "appPath": "release/ExploitBot.app",
+        "dmgPath": "release/ExploitBot-beta.dmg",
+        "appBinarySha256": os.environ["APP_BINARY_SHA"],
+        "dmgSha256": os.environ["DMG_SHA"],
+    },
+    "resources": {
+        "starterCvesDb": os.environ["STARTER_CVES_DB_PRESENT"] == "true",
+        "appIcon": os.environ["APP_ICON_PRESENT"] == "true",
+    },
+    "commands": {
+        "notarize": "EXPLOITBOT_NOTARY_PROFILE=<profile-name> ./script/package_release.sh --notarize",
+    },
+}
+
+with open(sys.argv[1], "w", encoding="utf-8") as handle:
+    json.dump(manifest, handle, indent=2, sort_keys=True)
+    handle.write("\n")
+PY
 
 echo "Release app: $APP_BUNDLE"
 echo "Release dmg: $DMG_PATH"
+echo "Release manifest: $MANIFEST_PATH"
