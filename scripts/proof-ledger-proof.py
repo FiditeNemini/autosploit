@@ -73,7 +73,7 @@ def assert_proof_ledger() -> None:
     if ledger.get("proofFileParity") is not True:
         raise AssertionError(f"proof ledger proof-file parity mismatch: {ledger}")
     categories = ledger.get("categories") or {}
-    category_surfaces = sorted(("agent", "chat", "context", "runtime", "settings", "tabs", "tools", "visual"))
+    category_surfaces = sorted(("agent", "chat", "context", "release", "runtime", "settings", "tabs", "tools", "visual"))
     if ledger.get("categorySurfaces") != category_surfaces:
         raise AssertionError(f"proof ledger category surfaces mismatch: {ledger}")
     if ledger.get("categorySurfaceCount") != len(category_surfaces):
@@ -98,6 +98,8 @@ def assert_proof_ledger() -> None:
         raise AssertionError(f"proof ledger visual category too small: {ledger}")
     if (categories.get("runtime") or {}).get("count", 0) < 8:
         raise AssertionError(f"proof ledger runtime category too small: {ledger}")
+    if "release-readiness-proof.py" not in (categories.get("release") or {}).get("proofs", []):
+        raise AssertionError(f"proof ledger missing release readiness proof category: {ledger}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/proof-ledger" not in qa.get("stateRoutes", []):

@@ -1130,6 +1130,11 @@ Visual gates:
 - Remaining visual gap: none currently listed here; real live-proof cache
   metrics UI state is covered by checkpoint-101. Fresh real-model UI attachment
   can still be rerun when the user wants an expensive full-load screenshot.
+- Release/package readiness is exposed through `/qa/release-readiness` and
+  rolled into `/qa/coverage-index.groups.releaseReadiness`. It verifies the
+  generated release manifest fields, app/DMG/script/doc artifact presence,
+  release proof-file parity, signed-artifact hash metadata, bundled resource
+  flags, and the explicit notary-profile gate.
 
 ## Current Gaps To Close Next
 

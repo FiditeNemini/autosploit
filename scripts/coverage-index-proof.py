@@ -37,6 +37,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/checkpoint-ledger",
     "/qa/audit-ledger",
     "/qa/gap-ledger",
+    "/qa/release-readiness",
 }
 
 REQUIRED_PROOFS = {
@@ -59,6 +60,7 @@ REQUIRED_PROOFS = {
     "checkpoint-ledger-proof.py",
     "audit-ledger-proof.py",
     "gap-ledger-proof.py",
+    "release-readiness-proof.py",
 }
 
 REQUIRED_GROUPS = {
@@ -68,6 +70,7 @@ REQUIRED_GROUPS = {
     "settingsAndVisuals",
     "toolsAndParsers",
     "tabsAndSessions",
+    "releaseReadiness",
 }
 
 EXPECTED_FAMILY_FANOUT_TOOLS = {
@@ -232,7 +235,7 @@ def assert_coverage_index() -> None:
     expected_categories = {
         name: category.get("count")
         for name, category in (proof.get("categories") or {}).items()
-        if name in {"agent", "chat", "context", "runtime", "settings", "tabs", "tools", "visual"}
+        if name in {"agent", "chat", "context", "release", "runtime", "settings", "tabs", "tools", "visual"}
     }
     if app_state_group.get("proofCategoryCounts") != expected_categories:
         raise AssertionError(f"coverage index app state proof category counts mismatch: {app_state_group}")
@@ -424,6 +427,20 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state qwen proof-file parity mismatch: {app_state_group}")
     if "qwenMultimodalRuntime" not in (app_state_group.get("openGapIds") or []):
         raise AssertionError(f"coverage index app state missing qwen multimodal gap id: {app_state_group}")
+    release_group = groups.get("releaseReadiness") or {}
+    release_coverage = request("GET", "/qa/release-readiness")
+    if release_group.get("releaseRoute") != "/qa/release-readiness":
+        raise AssertionError(f"coverage index release route mismatch: {release_group}")
+    if release_group.get("releaseProofs") != release_coverage.get("proofs"):
+        raise AssertionError(f"coverage index release proof list mismatch: {release_group}")
+    if release_group.get("releaseProofFileParity") != release_coverage.get("proofFileParity"):
+        raise AssertionError(f"coverage index release proof-file parity mismatch: {release_group}")
+    if release_group.get("releaseArtifacts") != release_coverage.get("artifacts"):
+        raise AssertionError(f"coverage index release artifact map mismatch: {release_group}")
+    if release_group.get("releaseManifestFields") != release_coverage.get("manifestFields"):
+        raise AssertionError(f"coverage index release manifest fields mismatch: {release_group}")
+    if release_group.get("notarizationGate") != "requires-notary-profile":
+        raise AssertionError(f"coverage index release notarization gate mismatch: {release_group}")
     runtime_group = groups.get("runtimeAndCache") or {}
     if runtime_group.get("liveProofArtifactCount", 0) < 6:
         raise AssertionError(f"coverage index runtime live artifact count mismatch: {runtime_group}")
