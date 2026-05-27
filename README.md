@@ -17,7 +17,7 @@
 
 <p align="center">
   <a href="https://github.com/jjang-ai/exploitbot/releases">
-    <img src="https://img.shields.io/badge/Download-DMG%20(v0.1.0--beta)-blue?style=for-the-badge&logo=apple" alt="Download DMG">
+    <img src="https://img.shields.io/badge/Download-DMG--beta-blue?style=for-the-badge&logo=apple" alt="Download DMG">
   </a>
 </p>
 
@@ -50,7 +50,7 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 - **Copilot** — AI suggests tools, you approve. Each action explained with risk level.
 - **Manual** — You drive, AI advises. Full tool controls with chat-based guidance.
 
-**42 Integrated Functions** — from recon and web to exploit, OSINT, report, and supply-chain workflows. Callback tools (`search_cve`, `lookup_cve`, `search_context`) and `run_shell` are part of the same tool surface so you can mix operator-invoked and context tools per tab.
+**42 integrated tool schemas** — from recon and web to exploit, OSINT, report, and supply-chain workflows. Callback tools (`search_cve`, `lookup_cve`, `search_context`) and `run_shell` are part of the same tool surface so you can mix operator-invoked and context tools per tab.
 
 **Stash** — Cross-op artifact sharing. Drop credentials, hosts, payloads from any engagement, pull them into any other.
 
@@ -71,7 +71,8 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 - ✅ **MiniMax verification** includes repeat cache hit checks and TurboQuant path checks in live/release harnesses.
 - ✅ **Supply-chain + CVE surfaces** are covered by live UI/agent proofs for tab actions, tool path routing, and import workflows.
 - ⚠️ **Known blockers**:
-  - Beta packaging remains blocked until a local notary profile is configured (`notarizationProfile` gate).
+  - Beta packaging remains gated by local notarization profile configuration (`EXPLOITBOT_NOTARY_PROFILE` and `--notary-profile`).
+  - `release-app-live-qwen-proof` validates runtime interpreter dependencies; the selected runtime must include `fastapi`, `uvicorn`, `mlx`, `mlx_lm`, `transformers`, `numpy`, and `vmlx_engine`.
   - Qwen multimodal promotion is tracked as a documented gap pending loader/prefix-cache/prefix-routing proofs for the beta lane.
 
 ## Screenshots
@@ -100,7 +101,7 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 
 ### Download
 
-Download the signed DMG from [Releases](https://github.com/jjang-ai/exploitbot/releases).
+Download the DMG from [Releases](https://github.com/jjang-ai/exploitbot/releases). Packaging defaults to unsigned output unless notarization is enabled.
 
 Requires **macOS 14+** and **Apple Silicon** (M1/M2/M3/M4).
 
@@ -112,6 +113,12 @@ cd exploitbot
 
 # Build and run local verification app
 ./script/build_and_run.sh --verify
+
+# Package unsigned DMG for beta distribution
+./script/package_release.sh --skip-notarize
+
+# Optional notarized DMG (requires local keychain profile)
+# EXPLOITBOT_NOTARY_PROFILE=<profile> ./script/package_release.sh --notary-profile "$EXPLOITBOT_NOTARY_PROFILE" --notarize
 ```
 
 **Prerequisites:**
@@ -156,12 +163,12 @@ The command examples below also default to this model.
 
 | Category | Tools |
 |----------|-------|
-| **Recon** | subfinder, dnsx, nmap, masscan, httpx, katana, theHarvester |
+| **Recon** | subfinder, dnsx, nmap, masscan, httpx, katana, theharvester |
 | **Web** | nuclei, sqlmap, dalfox, feroxbuster, ffuf, arjun, wpscan, testssl, graphqlmap, jwt_tool |
 | **Network** | netexec, snmpwalk, tshark, bettercap, chisel |
 | **Credentials** | hashcat, hydra, haiti, trufflehog |
-| **Exploit** | metasploit, pwncat, pwntools, sliver |
-| **Post-Exploit** | linpeas, winpeas, impacket |
+| **Exploit** | metasploit, pwncat, sliver |
+| **Post-Exploit** | linpeas, impacket |
 | **OSINT** | sherlock, holehe, exiftool, gowitness |
 | **Supply-Chain** | trufflehog, syft, grype, osv_scanner |
 | **General / Report / Stash** | search_cve (local CVE DB), lookup_cve, search_context, run_shell |
@@ -177,6 +184,7 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 - **Terminal:** SwiftTerm (embedded pty)
 - **Reports:** HTML → PDF via WKWebView
 - **CVE DB:** SQLite + sqlite-vec (semantic search with nomic-embed-text)
+- **Packaging:** Hardened runtime and DMG signing path (notarization remains optional/profile-gated)
 
 ## Documentation
 
@@ -201,6 +209,7 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 - `python3 scripts/supply-chain-cve-ui-proof.py`
 - `python3 scripts/cve-settings-actions-proof.py`
 - `python3 scripts/terminal-tool-paths-proof.py`
+- `python3 scripts/tool-flow-coverage-proof.py`
 
 ## License
 
