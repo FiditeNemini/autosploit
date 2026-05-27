@@ -124,6 +124,7 @@ def assert_proof_ledger() -> None:
         "creds": {"creds-subtab-state-proof.py", "creds-action-results-proof.py", "creds-copy-actions-proof.py"},
         "exploit": {"exploit-subtab-state-proof.py", "exploit-action-differentiation-proof.py", "exploit-copy-actions-proof.py"},
         "post": {"post-subtab-state-proof.py", "post-attribution-proof.py", "post-copy-actions-proof.py"},
+        "supplyChain": {"supply-chain-cve-ui-proof.py"},
         "osint": {"osint-subtab-state-proof.py", "osint-artifact-actions-proof.py", "osint-copy-actions-proof.py"},
         "report": {"report-subtab-state-proof.py", "report-generate-action-proof.py", "report-export-proof.py"},
         "stash": {"stash-actions-proof.py", "stash-row-context-actions-proof.py", "stash-send-chat-control-proof.py"},

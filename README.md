@@ -66,14 +66,24 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 
 ## Beta Readiness (May 26, 2026)
 
-- ✅ **Release app proofing is in place**: signed DMG/package path, manifest checks, bundled Python/engine runtime verification.
-- ✅ **Qwen family verification** is running on the smallest local target first (`Qwen3.6-27B-JANG_4M-MTP`) and includes hybrid cache + SSM + TurboQuant assertions.
-- ✅ **MiniMax verification** includes repeat cache hit checks and TurboQuant path checks in live/release harnesses.
-- ✅ **Supply-chain + CVE surfaces** are covered by live UI/agent proofs for tab actions, tool path routing, and import workflows.
-- ⚠️ **Known blockers**:
-  - Beta packaging remains gated by local notarization profile configuration (`EXPLOITBOT_NOTARY_PROFILE` and `--notary-profile`).
-  - `release-app-live-qwen-proof` validates runtime interpreter dependencies; the selected runtime must include `fastapi`, `uvicorn`, `mlx`, `mlx_lm`, `transformers`, `numpy`, and `vmlx_engine`.
-  - Qwen multimodal promotion is tracked as a documented gap pending loader/prefix-cache/prefix-routing proofs for the beta lane.
+### Done in the current beta lane
+
+- **Autonomous agent loop**: deployed agents run in autopilot mode, inherit model/settings state, expose live tool status, and can request the full registered tool schema set instead of only the active tab subset.
+- **Broad tool surface**: the in-app model tool catalogue covers recon, web, network, credentials, exploit, post-exploit, OSINT, supply-chain, CVE, context, and shell execution.
+- **Supply-chain + CVE workflow**: first-class supply-chain tab, CVE search/import actions, SBOM/dependency/secrets actions, CLI routing, installer taxonomy, and per-action status state are wired.
+- **Runtime packaging path**: release packaging bundles the vMLX Python engine, selects a valid bundled/runtime interpreter, verifies required modules, signs the app/DMG, and records manifest evidence.
+- **Qwen + MiniMax cache proofs**: live/release harnesses cover Qwen hybrid SSM attention, MiniMax full-KV attention, TurboQuant KV cache, prefix cache, paged/block L2 cache, and repeat-prompt cache hits.
+- **Visual model path**: ZAYA1-VL has a real narrow MLX-VLM loader path and release proof; Qwen text bundles that carry vision metadata stay on the text path.
+- **Settings and persistence**: parser, generation, reasoning, engine cache, KV quantization, model path, session, terminal/tool path, and result-store state have QA proof coverage.
+- **UI status coverage**: chat, sidebar, active agent lists, supply-chain actions, CVE import/search, terminal path state, and visual proof screenshots have checkpoint coverage.
+
+### Needs more work before public beta
+
+- **Notarization/stapling**: packaging is signed, but notarization is still profile-gated (`EXPLOITBOT_NOTARY_PROFILE` and `--notary-profile`).
+- **Qwen multimodal promotion**: Qwen-specific VL/multimodal runtime, multimodal prefix cache, and multimodal context-routing proofs are still pending.
+- **General chat quality**: broad reasoning/tool-call quality beyond bounded smoke prompts still needs longer realistic runs, especially JANGTQ first-turn exact prompt-following.
+- **Full manual UI pass**: source/API/proof coverage is broad, but a final hands-on visual pass across every tab, status indicator, hover/detail state, and release build window is still required before calling it polished.
+- **Security review**: supply-chain/pentest features are wired, but the release still needs a deliberate abuse-boundary, logging, and command-safety review before wider distribution.
 
 ## Screenshots
 

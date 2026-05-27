@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "model": "/Users/eric/models/Osaurus/ZAYA1-VL-8B-MXFP4",
+  "image": "/Users/eric/models/Osaurus/ZAYA1-VL-8B-MXFP4/osaurus-x-banner.png",
+  "text": "A dinosaur logo.",
+  "promptTokens": 994,
+  "completionTokens": 5,
+  "proof": "zaya-visual-live-proof.py",
+  "timestamp": "2026-05-26T19:19:58.775275-07:00"
+}

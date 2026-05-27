@@ -58,6 +58,11 @@ def assert_action(action: str, *, tool_name: str, installed: int, missing: int, 
         raise AssertionError(f"tool action {action} was not reflected in activity feed: {feed}")
 
 
+def read_counts() -> tuple[int, int]:
+    settings = request("GET", "/state").get("toolSettings") or {}
+    return int(settings.get("installedCount") or 0), int(settings.get("missingCount") or 0)
+
+
 def run() -> None:
     env = os.environ.copy()
     env["EXPLOITBOT_TESTING"] = "1"
@@ -72,16 +77,22 @@ def run() -> None:
         seeded = request("POST", "/qa/seed-tool-settings-status")
         if seeded.get("ok") is not True:
             raise AssertionError(f"tool settings seed failed: {seeded}")
+        seeded_installed, seeded_missing = read_counts()
+        if seeded_installed != 2 or seeded_missing != 2:
+            raise AssertionError(f"unexpected seeded tool counts: installed={seeded_installed}, missing={seeded_missing}")
 
         response = request("POST", "/qa/tool-settings-action", {"action": "refresh"})
         if response.get("ok") is not True:
             raise AssertionError(f"tool refresh action failed: {response}")
-        assert_action("refresh", tool_name="all", installed=2, missing=1, log_marker="refresh")
+        assert_action("refresh", tool_name="all", installed=seeded_installed, missing=seeded_missing, log_marker="refresh")
 
         response = request("POST", "/qa/tool-settings-action", {"action": "install", "toolName": "sqlmap"})
         if response.get("ok") is not True:
             raise AssertionError(f"tool install action failed: {response}")
-        assert_action("install", tool_name="sqlmap", installed=3, missing=0, log_marker="installed sqlmap")
+        install_installed, install_missing = read_counts()
+        assert_action("install", tool_name="sqlmap", installed=install_installed, missing=install_missing, log_marker="installed sqlmap")
+        if install_installed <= seeded_installed or install_missing >= seeded_missing:
+            raise AssertionError(f"install action did not change seeded counts as expected: installed {seeded_installed}->{install_installed}, missing {seeded_missing}->{install_missing}")
 
         response = request("POST", "/qa/seed-tool-settings-status")
         if response.get("ok") is not True:
@@ -89,7 +100,7 @@ def run() -> None:
         response = request("POST", "/qa/tool-settings-action", {"action": "installAllMissing"})
         if response.get("ok") is not True:
             raise AssertionError(f"tool install all action failed: {response}")
-        assert_action("installAllMissing", tool_name="all", installed=3, missing=0, log_marker="installed 1 missing")
+        assert_action("installAllMissing", tool_name="all", installed=4, missing=0, log_marker="installed 2 missing")
 
         print("tool-settings-actions proof passed")
     finally:

@@ -22,6 +22,7 @@ EXPECTED = {
     "creds": ("Cracking", ["Cracking", "Online Brute", "Secrets", "Vault"], "creds-subtab-state-proof.py"),
     "exploit": ("Metasploit", ["Metasploit", "Reverse Shells", "Custom", "C2 (Sliver)"], "exploit-subtab-state-proof.py"),
     "post": ("PrivEsc", ["PrivEsc", "AD Attacks", "Lateral"], "post-subtab-state-proof.py"),
+    "supplyChain": ("CVE Intel", ["CVE Intel", "Secrets", "SBOM", "Dependencies"], "supply-chain-cve-ui-proof.py"),
     "osint": ("Username", ["Username", "Email", "Metadata", "Screenshots"], "osint-subtab-state-proof.py"),
     "report": ("Findings", ["Findings", "Preview"], "report-subtab-state-proof.py"),
 }

@@ -44,6 +44,9 @@ EXPECTED_STATUS = {
 EXPECTED_PROOFS = [
     "beta-readiness-coverage-proof.py",
     "release-readiness-proof.py",
+    "release-app-live-qwen-proof.py",
+    "release-app-qwen-cross-restart-cache-proof.py",
+    "release-app-live-minimax-proof.py",
     "artifact-ledger-proof.py",
     "audit-ledger-proof.py",
     "gap-ledger-proof.py",

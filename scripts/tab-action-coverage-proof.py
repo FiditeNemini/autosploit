@@ -15,7 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
 
-REQUIRED_TABS = ["recon", "web", "network", "creds", "exploit", "post", "osint", "report", "stash"]
+REQUIRED_TABS = ["recon", "web", "network", "creds", "exploit", "post", "supplyChain", "osint", "report", "stash"]
 
 REQUIRED_CONTRACTS = {
     "reconCopyActions",
@@ -30,6 +30,7 @@ REQUIRED_CONTRACTS = {
     "exploitCopyActions",
     "postAttribution",
     "postCopyActions",
+    "supplyChainActions",
     "osintCopyActions",
     "osintArtifactActions",
     "reportGenerateAction",
@@ -67,6 +68,7 @@ REQUIRED_ROUTES = {
     "/qa/seed-post-attribution",
     "/qa/seed-post-copy-actions",
     "/qa/post-copy",
+    "/qa/supply-chain-coverage",
     "/qa/seed-osint-screenshot-artifact",
     "/qa/seed-osint-copy-actions",
     "/qa/osint-copy",
@@ -147,6 +149,7 @@ REQUIRED_ACTION_STATE_KEYS = {
     "reportAction",
     "reportRenderActions",
     "reportFindingActions",
+    "supplyChainLifecycle",
     "stashActions",
 }
 
@@ -157,6 +160,7 @@ REQUIRED_ACTION_SURFACES = [
     "credsActions",
     "exploitActions",
     "postActions",
+    "supplyChainActions",
     "osintActions",
     "reportActions",
     "stashActions",
@@ -174,6 +178,7 @@ REQUIRED_ACTION_SURFACE_PROOFS = {
     "credsActions": ["creds-action-results-proof.py", "creds-copy-actions-proof.py"],
     "exploitActions": ["exploit-action-differentiation-proof.py", "exploit-copy-actions-proof.py"],
     "postActions": ["post-attribution-proof.py", "post-copy-actions-proof.py"],
+    "supplyChainActions": ["supply-chain-cve-ui-proof.py"],
     "osintActions": [
         "osint-copy-actions-proof.py",
         "osint-screenshot-artifact-proof.py",

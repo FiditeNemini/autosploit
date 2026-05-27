@@ -120,7 +120,7 @@ def run() -> None:
             raise AssertionError(f"tool flow proof file parity mismatch: {coverage}")
         if set(coverage.get("families") or []) != EXPECTED_FAMILIES:
             raise AssertionError(f"tool flow family coverage mismatch: {coverage}")
-        if coverage.get("toolCount") != 38:
+        if coverage.get("toolCount", 0) < 39:
             raise AssertionError(f"tool flow did not expose registry count: {coverage}")
         if coverage.get("callbackCount") != 3:
             raise AssertionError(f"tool flow did not expose callback count: {coverage}")

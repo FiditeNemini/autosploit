@@ -21,6 +21,10 @@ INFO_PLIST="$APP_CONTENTS/Info.plist"
 DMG_PATH="$RELEASE_DIR/$APP_NAME-beta.dmg"
 MANIFEST_PATH="$RELEASE_DIR/release-manifest.json"
 ENTITLEMENTS="$PACKAGE_DIR/ExploitBot.entitlements"
+ENGINE_SOURCE_DIR="$ROOT_DIR/ExploitBotEngine"
+ENGINE_BUNDLE_DIR="$APP_RESOURCES/ExploitBotEngine"
+BUNDLED_PYTHON_SOURCE="${EXPLOITBOT_BUNDLED_PYTHON_SOURCE:-/Applications/vMLX.app/Contents/Resources/bundled-python}"
+BUNDLED_PYTHON_DIR="$APP_RESOURCES/bundled-python"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -58,6 +62,8 @@ require_tool swift
 require_tool codesign
 require_tool hdiutil
 require_tool xcrun
+require_tool rsync
+require_tool file
 
 if ! security find-identity -p codesigning -v | grep -F "$IDENTITY" >/dev/null; then
   echo "signing identity not found: $IDENTITY" >&2
@@ -77,6 +83,33 @@ chmod +x "$APP_BINARY"
 if [[ -d "$PACKAGE_DIR/Resources" ]]; then
   rsync -a --delete "$PACKAGE_DIR/Resources/" "$APP_RESOURCES/"
 fi
+
+if [[ -d "$ENGINE_SOURCE_DIR" ]]; then
+  mkdir -p "$ENGINE_BUNDLE_DIR"
+  rsync -a --delete \
+    --exclude ".venv/" \
+    --exclude ".pytest_cache/" \
+    --exclude "__pycache__/" \
+    --exclude "*/__pycache__/" \
+    --exclude "testsuite/" \
+    --exclude "*.egg-info/" \
+    "$ENGINE_SOURCE_DIR/" "$ENGINE_BUNDLE_DIR/"
+fi
+
+if [[ ! -x "$BUNDLED_PYTHON_SOURCE/python/bin/python3" ]]; then
+  echo "bundled Python runtime source is missing or not executable: $BUNDLED_PYTHON_SOURCE/python/bin/python3" >&2
+  echo "set EXPLOITBOT_BUNDLED_PYTHON_SOURCE to a vMLX-compatible bundled-python directory" >&2
+  exit 1
+fi
+
+mkdir -p "$BUNDLED_PYTHON_DIR"
+rsync -a --delete \
+  --exclude "__pycache__/" \
+  --exclude "*/__pycache__/" \
+  --exclude "*.pyc" \
+  --exclude ".pytest_cache/" \
+  --exclude "pip/cache/" \
+  "$BUNDLED_PYTHON_SOURCE/" "$BUNDLED_PYTHON_DIR/"
 
 cat >"$INFO_PLIST" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
@@ -113,6 +146,16 @@ if [[ -f "$APP_RESOURCES/AppIcon.icns" ]]; then
   /usr/libexec/PlistBuddy -c "Add :CFBundleIconFile string AppIcon" "$INFO_PLIST" 2>/dev/null || \
     /usr/libexec/PlistBuddy -c "Set :CFBundleIconFile AppIcon" "$INFO_PLIST"
 fi
+
+while IFS= read -r -d '' nested_code; do
+  if file "$nested_code" | grep -q "Mach-O"; then
+    codesign --force \
+      --timestamp \
+      --options runtime \
+      --sign "$IDENTITY" \
+      "$nested_code"
+  fi
+done < <(find "$BUNDLED_PYTHON_DIR" -type f \( -perm -111 -o -name "*.dylib" -o -name "*.so" \) -print0)
 
 codesign --force \
   --timestamp \
@@ -151,8 +194,14 @@ APP_BINARY_SHA="$(shasum -a 256 "$APP_BINARY" | awk '{print $1}')"
 DMG_SHA="$(shasum -a 256 "$DMG_PATH" | awk '{print $1}')"
 STARTER_CVES_DB_PRESENT="false"
 APP_ICON_PRESENT="false"
+PYTHON_ENGINE_PRESENT="false"
+PYTHON_ENGINE_VENV_PRESENT="false"
+BUNDLED_PYTHON_RUNTIME_PRESENT="false"
 [[ -f "$APP_RESOURCES/starter-cves.db" ]] && STARTER_CVES_DB_PRESENT="true"
 [[ -f "$APP_RESOURCES/AppIcon.icns" ]] && APP_ICON_PRESENT="true"
+[[ -f "$ENGINE_BUNDLE_DIR/launch.py" && -f "$ENGINE_BUNDLE_DIR/vmlx_engine/server.py" ]] && PYTHON_ENGINE_PRESENT="true"
+[[ -d "$ENGINE_BUNDLE_DIR/.venv" ]] && PYTHON_ENGINE_VENV_PRESENT="true"
+[[ -x "$BUNDLED_PYTHON_DIR/python/bin/python3" && -d "$BUNDLED_PYTHON_DIR/python/lib" ]] && BUNDLED_PYTHON_RUNTIME_PRESENT="true"
 
 APP_NAME="$APP_NAME" \
 BUNDLE_ID="$BUNDLE_ID" \
@@ -164,6 +213,9 @@ APP_BINARY_SHA="$APP_BINARY_SHA" \
 DMG_SHA="$DMG_SHA" \
 STARTER_CVES_DB_PRESENT="$STARTER_CVES_DB_PRESENT" \
 APP_ICON_PRESENT="$APP_ICON_PRESENT" \
+PYTHON_ENGINE_PRESENT="$PYTHON_ENGINE_PRESENT" \
+PYTHON_ENGINE_VENV_PRESENT="$PYTHON_ENGINE_VENV_PRESENT" \
+BUNDLED_PYTHON_RUNTIME_PRESENT="$BUNDLED_PYTHON_RUNTIME_PRESENT" \
 python3 - "$MANIFEST_PATH" <<'PY'
 import json
 import os
@@ -189,6 +241,9 @@ manifest = {
     "resources": {
         "starterCvesDb": os.environ["STARTER_CVES_DB_PRESENT"] == "true",
         "appIcon": os.environ["APP_ICON_PRESENT"] == "true",
+        "pythonEngine": os.environ["PYTHON_ENGINE_PRESENT"] == "true",
+        "pythonEngineVenv": os.environ["PYTHON_ENGINE_VENV_PRESENT"] == "true",
+        "bundledPythonRuntime": os.environ["BUNDLED_PYTHON_RUNTIME_PRESENT"] == "true",
     },
     "commands": {
         "packageUnsigned": "./script/package_release.sh --skip-notarize",

@@ -56,13 +56,13 @@ def run() -> None:
         failures = coverage.get("failures", [])
         if failures:
             raise AssertionError(f"tool coverage failures: {failures}")
-        if coverage.get("toolCount") != 38:
+        if coverage.get("toolCount") != 42:
             raise AssertionError(f"unexpected model tool count: {coverage}")
         if coverage.get("callbackCount") != 3:
             raise AssertionError(f"unexpected callback count: {coverage}")
         if coverage.get("boundedCatalogueLimit") != 12:
             raise AssertionError(f"tool catalogue limit changed: {coverage}")
-        required_tabs = {"recon", "web", "network", "creds", "exploit", "post", "osint", "report", "stash"}
+        required_tabs = {"recon", "web", "network", "creds", "exploit", "post", "supplyChain", "osint", "report", "stash"}
         if set(coverage.get("tabs", [])) != required_tabs:
             raise AssertionError(f"tab coverage mismatch: {coverage}")
 
@@ -70,7 +70,7 @@ def run() -> None:
         for name in ("search_context", "search_cve", "lookup_cve"):
             if tools.get(name, {}).get("execution") != "callback":
                 raise AssertionError(f"callback tool not marked correctly: {name} {tools.get(name)}")
-        for name in ("nmap", "nuclei", "netexec", "hashcat", "metasploit", "impacket", "gowitness", "run_shell"):
+        for name in ("nmap", "nuclei", "netexec", "hashcat", "metasploit", "impacket", "linpeas", "gowitness", "syft", "grype", "osv_scanner", "run_shell"):
             if tools.get(name, {}).get("execution") != "subprocess":
                 raise AssertionError(f"external tool not marked correctly: {name} {tools.get(name)}")
             if name != "run_shell" and not tools.get(name, {}).get("tabs"):
@@ -82,7 +82,7 @@ def run() -> None:
                 raise AssertionError(f"expected raw-only tool not declared raw-only: {name} {tools.get(name)}")
 
         structured = {tool["name"] for tool in coverage.get("tools", []) if tool.get("resultMode") == "structured"}
-        for name in ("subfinder", "httpx", "nuclei", "nmap", "sqlmap", "hashcat", "impacket", "gowitness", "graphqlmap"):
+        for name in ("subfinder", "httpx", "nuclei", "nmap", "sqlmap", "hashcat", "impacket", "linpeas", "gowitness", "graphqlmap", "syft", "grype", "osv_scanner"):
             if name not in structured:
                 raise AssertionError(f"expected structured parser missing: {name} {tools.get(name)}")
 

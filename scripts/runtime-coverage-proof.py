@@ -24,6 +24,11 @@ EXPECTED_PROOFS = {
     "live-cache-stats-ui-proof.py",
     "context-window-cache-proof.py",
     "chat-control-actions-proof.py",
+    "engine-python-runtime-resolution-proof.py",
+    "release-app-live-qwen-proof.py",
+    "release-app-qwen-cross-restart-cache-proof.py",
+    "release-app-live-minimax-proof.py",
+    "zaya-visual-live-proof.py",
     "verify-live-models.py",
     "prove-block-l2-cache.py",
     "prove-ssm-rederive-status.py",
@@ -35,12 +40,14 @@ EXPECTED_ROUTES = {
     "/context/new",
     "/qa/seed-settings-visual-state",
     "/qa/seed-live-cache-stats",
+    "/qa/engine-python-runtime",
 }
 
 EXPECTED_LIVE_ARTIFACTS = {
     "minimaxRestartReplay": ("docs/live-proofs/checkpoint-110-minimax-restart-replay-live.json", "minimax"),
     "minimaxBlockL2Replay": ("docs/live-proofs/checkpoint-111-minimax-block-l2-restart-replay-live.json", "minimax"),
     "qwenHybridBlockL2SSMReplay": ("docs/live-proofs/checkpoint-112-qwen-hybrid-block-l2-ssm-restart-replay-live.json", "qwen"),
+    "releaseAppQwenCrossRestartCache": ("docs/live-proofs/checkpoint-463-release-app-qwen-cross-restart-cache.json", "qwen-release-app"),
     "qwenHybridFullPrefixSkip": ("docs/live-proofs/checkpoint-113-qwen-hybrid-full-prefix-skip-live.json", "qwen"),
     "minimaxNoThinking": ("docs/live-proofs/checkpoint-114-minimax-no-thinking-live.json", "minimax"),
     "qwenHybridCataloguePrefixShape": ("docs/live-proofs/checkpoint-115-qwen-hybrid-catalogue-prefix-shape-live.json", "qwen"),
@@ -62,7 +69,7 @@ EXPECTED_CACHE_COMPONENT_PROOFS = {
     "pagedKVCache": ["engine-no-model-metadata-proof.py", "verify-live-models.py"],
     "blockL2Disk": ["prove-block-l2-cache.py", "live-cache-stats-ui-proof.py"],
     "turboQuantKV": ["engine-no-model-metadata-proof.py", "cache-stats-state-proof.py"],
-    "ssmCompanionL2": ["prove-ssm-rederive-status.py", "live-cache-stats-ui-proof.py"],
+    "ssmCompanionL2": ["prove-ssm-rederive-status.py", "live-cache-stats-ui-proof.py", "release-app-live-qwen-proof.py", "release-app-qwen-cross-restart-cache-proof.py"],
     "newContextPreservesEngineSession": ["context-window-cache-proof.py", "chat-control-actions-proof.py"],
 }
 
@@ -104,11 +111,12 @@ def run() -> None:
         coverage = request("GET", "/qa/runtime-coverage")
         if coverage.get("ok") is not True:
             raise AssertionError(f"runtime coverage route failed: {coverage}")
-        if set(coverage.get("supportedFamilies") or []) != {"qwen", "minimax"}:
+        if set(coverage.get("supportedFamilies") or []) != {"qwen", "minimax", "zaya"}:
             raise AssertionError(f"supported family contract mismatch: {coverage}")
         contracts = coverage.get("contracts") or {}
         for key in (
             "modelFolderAutodetect",
+            "enginePythonRuntimePreflight",
             "generationDefaults",
             "reasoningParserAuto",
             "toolParserAuto",
@@ -182,6 +190,16 @@ def run() -> None:
             payload = json.loads(artifact_path.read_text(encoding="utf-8"))
             if payload.get("ok") is not True:
                 raise AssertionError(f"runtime live artifact not ok: {path} {payload}")
+            if family == "qwen-release-app":
+                replay = payload.get("replay") or {}
+                summary = replay.get("cacheSummary") or {}
+                if replay.get("cachedTokens", 0) <= 0:
+                    raise AssertionError(f"release-app Qwen replay missing cached tokens: {path} {payload}")
+                if summary.get("blockL2DiskHits", 0) <= 0 or summary.get("ssmDiskHits", 0) <= 0:
+                    raise AssertionError(f"release-app Qwen replay missing block/SSM L2 hit: {path} {payload}")
+                if summary.get("ssmReDeriveRequested", 0) != 0 or summary.get("ssmReDeriveFailed", 0) != 0:
+                    raise AssertionError(f"release-app Qwen replay used/faulted SSM rederive: {path} {payload}")
+                continue
             if family not in (payload.get("reports") or {}):
                 raise AssertionError(f"runtime live artifact missing {family} report: {path} {payload}")
         qwen_rederive_artifact = ROOT / EXPECTED_LIVE_ARTIFACTS["qwenHybridBlockL2SSMReplay"][0]

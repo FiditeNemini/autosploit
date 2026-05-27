@@ -30,6 +30,7 @@ EXPECTED_PROOFS = {
     "agent-deploy-sheet-proof.py",
     "agent-deploy-task-send-proof.py",
     "agent-settings-actions-proof.py",
+    "agent-live-tool-status-proof.py",
 }
 
 EXPECTED_ROUTES = {
@@ -52,9 +53,12 @@ EXPECTED_CONTRACTS = {
     "agentReasoningInheritance",
     "agentMaxIterationsInheritance",
     "agentSearchContextTool",
+    "agentBroadToolSchemas",
+    "agentUnavailableToolDiscovery",
     "agentDeploySheet",
     "agentTaskSend",
     "agentSettingsControls",
+    "agentLiveToolStatus",
 }
 
 EXPECTED_ACTION_TELEMETRY_FIELDS = {
@@ -81,6 +85,8 @@ EXPECTED_STATE_KEYS = {
     "chatService.maxIterations",
     "chatService.lastContextSnippetCount",
     "chatService.lastToolSchemaNames",
+    "agents.details.statusLine",
+    "agents.details.currentToolStatus",
 }
 
 EXPECTED_LOOP_PHASES = [
@@ -104,7 +110,7 @@ EXPECTED_PHASE_PROOFS = {
     "parseToolCalls": ["live-turn-harness.py", "tool-fanout-status-proof.py"],
     "applyModePolicy": ["mode-selection-flow-proof.py", "live-turn-harness.py"],
     "enforceScope": ["live-turn-harness.py"],
-    "executeToolOrBuiltin": ["tool-fanout-status-proof.py", "agent-autopilot-proof.py"],
+    "executeToolOrBuiltin": ["tool-fanout-status-proof.py", "agent-autopilot-proof.py", "agent-live-tool-status-proof.py"],
     "parseAndStoreToolResult": ["tool-fanout-status-proof.py", "result-parser-routing-proof.py"],
     "reenterModelUntilStopOrMaxIterations": ["live-turn-harness.py", "agent-autopilot-proof.py"],
 }
@@ -162,6 +168,14 @@ def run() -> None:
         for key in ("inheritsEngine", "inheritsGenerationDefaults", "inheritsReasoning", "inheritsMaxIterations", "searchContextTool"):
             if agent_contract.get(key) is not True:
                 raise AssertionError(f"agent contract missing {key}: {coverage}")
+        if agent_contract.get("includeUnavailableToolSchemas") is not True:
+            raise AssertionError(f"agent unavailable tool discovery disabled: {coverage}")
+        if agent_contract.get("agentCallableAllRegisteredTools") is not True:
+            raise AssertionError(f"agent full tool catalogue contract missing: {coverage}")
+        if agent_contract.get("toolSchemaMaxTools", 0) < 30:
+            raise AssertionError(f"agent tool schema cap is still too narrow: {coverage}")
+        if agent_contract.get("fullToolSchemaCount") != agent_contract.get("toolSchemaMaxTools"):
+            raise AssertionError(f"agent tool schema cap does not match full catalogue: {coverage}")
         if coverage.get("agentContractCount") != len(agent_contract):
             raise AssertionError(f"agent contract count mismatch: {coverage}")
 

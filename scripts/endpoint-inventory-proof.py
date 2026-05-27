@@ -33,6 +33,7 @@ EXPECTED_GROUPS = [
 
 EXPECTED_PROOFS = [
     "endpoint-inventory-proof.py",
+    "endpoint-route-matrix-proof.py",
     "app-qa-matrix-smoke-proof.py",
     "coverage-index-proof.py",
     "chat-turn-controls-proof.py",

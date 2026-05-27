@@ -18,6 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
 MOCK_ENGINE = "http://127.0.0.1:18992"
+RELEASE_APP_BINARY = ROOT / "release" / "ExploitBot.app" / "Contents" / "MacOS" / "ExploitBot"
 
 
 class MockState:
@@ -176,10 +177,14 @@ def run() -> None:
         env["HOME"] = temp_home.name
         env["EXPLOITBOT_DATA_DIR"] = str(Path(temp_home.name) / ".exploitbot" / "data")
         subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        app = subprocess.Popen([str(ROOT / "script" / "build_and_run.sh"), "--verify"], cwd=ROOT, env=env)
-
-        if app.wait(timeout=30) != 0:
-            raise RuntimeError("build_and_run --verify failed")
+        if os.environ.get("EXPLOITBOT_AGENT_PROOF_RELEASE_APP") == "1":
+            if not RELEASE_APP_BINARY.is_file():
+                raise RuntimeError("release app binary missing; run release-readiness proof first")
+            app = subprocess.Popen([str(RELEASE_APP_BINARY)], cwd=ROOT, env=env)
+        else:
+            app = subprocess.Popen([str(ROOT / "script" / "build_and_run.sh"), "--verify"], cwd=ROOT, env=env)
+            if app.wait(timeout=30) != 0:
+                raise RuntimeError("build_and_run --verify failed")
         wait_for_app()
 
         request("POST", "/engine/mock", MOCK_ENGINE)
@@ -199,13 +204,26 @@ def run() -> None:
         if deployed.get("ok") is not True:
             raise AssertionError(f"agent deploy failed: {deployed}")
 
-        state = wait_until(
-            lambda: request("GET", "/state")
-            if (request("GET", "/state").get("agents", {}).get("details") or [{}])[0].get("isComplete") is True
-            else None,
-            "agent autopilot completion",
-            timeout=30.0,
-        )
+        last_state = {}
+        try:
+            state = wait_until(
+                lambda: request("GET", "/state")
+                if (request("GET", "/state").get("agents", {}).get("details") or [{}])[0].get("isComplete") is True
+                else None,
+                "agent autopilot completion",
+                timeout=30.0,
+            )
+        except AssertionError as exc:
+            try:
+                last_state = request("GET", "/state")
+            except Exception:
+                last_state = {}
+            with MockState.lock:
+                request_count = len(MockState.requests)
+            agents = last_state.get("agents", {}).get("details") or []
+            raise AssertionError(
+                f"{exc}; request_count={request_count}; agents={agents}"
+            ) from exc
         agents = state.get("agents", {}).get("details") or []
         if len(agents) != 1:
             raise AssertionError(f"expected exactly one agent detail: {state}")
@@ -239,6 +257,45 @@ def run() -> None:
         for marker in ("Dynamic Context Catalogue", "Apache 2.4.49", "search_context"):
             if marker not in request_text:
                 raise AssertionError(f"agent request missing {marker!r}: {request_text}")
+        tool_names = [
+            (((tool.get("function") or {}).get("name")) if isinstance(tool, dict) else None)
+            for tool in (first_request.get("tools") or [])
+        ]
+        tool_names = [name for name in tool_names if name]
+        required_web_tools = {
+            "search_context",
+            "search_cve",
+            "lookup_cve",
+            "run_shell",
+            "subfinder",
+            "nmap",
+            "nuclei",
+            "sqlmap",
+            "dalfox",
+            "ffuf",
+            "katana",
+            "netexec",
+            "hashcat",
+            "hydra",
+            "trufflehog",
+            "syft",
+            "grype",
+            "osv_scanner",
+            "metasploit",
+            "pwncat",
+            "sliver",
+            "impacket",
+            "linpeas",
+            "sherlock",
+            "holehe",
+            "exiftool",
+            "gowitness",
+        }
+        missing_tools = sorted(required_web_tools.difference(tool_names))
+        if missing_tools:
+            raise AssertionError(f"agent request missing broad autonomous tools {missing_tools}: {tool_names}")
+        if len(tool_names) < 30:
+            raise AssertionError(f"agent tool catalogue too narrow: {tool_names}")
         if first_request.get("enable_thinking") is not True:
             raise AssertionError(f"agent did not inherit reasoning setting: {first_request}")
 

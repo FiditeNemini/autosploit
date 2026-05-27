@@ -1,0 +1,522 @@
+{
+  "ok": true,
+  "reports": {
+    "minimax": {
+      "base_url": "http://127.0.0.1:62091",
+      "block_l2_only_replay": false,
+      "cache_root": "temporary",
+      "cache_stats": {
+        "block_disk_cache": {
+          "blocks_on_disk": 1,
+          "disk_evictions": 0,
+          "disk_hits": 0,
+          "disk_misses": 1,
+          "disk_size_bytes": 3608879,
+          "disk_size_gb": 0.003,
+          "disk_writes": 1,
+          "total_accesses": 0
+        },
+        "disk_cache": {
+          "entries": 1,
+          "hit_rate": 0.0,
+          "hits": 0,
+          "max_size_gb": 10.0,
+          "misses": 1,
+          "pending_writes": 0,
+          "stores": 1,
+          "total_cached_tokens": 49,
+          "total_size_mb": 23.26,
+          "total_tokens_on_disk": 49
+        },
+        "kv_cache_quantization": {
+          "bits": 4,
+          "group_size": 64
+        },
+        "memory": {
+          "active_mb": 39588.0,
+          "cache_mb": 223.1,
+          "peak_mb": 39887.9
+        },
+        "scheduler_cache": {
+          "active_requests": 1,
+          "allocated_blocks": 2,
+          "block_size": 64,
+          "cache_hit_rate": 0.0,
+          "cache_hits": 0,
+          "cache_misses": 2,
+          "cow_copies": 0,
+          "disk_hits": 0,
+          "disk_misses": 1,
+          "evictions": 0,
+          "free_blocks": 998,
+          "hit_rate": 0.0,
+          "hits": 0,
+          "max_blocks": 1000,
+          "misses": 1,
+          "shared_blocks": 0,
+          "tokens_saved": 0,
+          "total_tokens_cached": 46,
+          "utilization": 0.002
+        },
+        "scheduler_stats": {
+          "num_requests_processed": 1,
+          "num_running": 0,
+          "num_waiting": 0,
+          "total_completion_tokens": 16,
+          "total_prompt_tokens": 49
+        }
+      },
+      "completion_preview": "[{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": \"The user message is a bit confusing: \\\"ExploitBot MiniMax\", \"tool_calls\": null, \"reasoning_content\": null}, \"finish_reason\": \"length\"}]",
+      "completion_usage": {
+        "completion_tokens": 16,
+        "prompt_tokens": 49,
+        "prompt_tokens_details": null,
+        "total_tokens": 65
+      },
+      "engine_log_tail": "  Hydration complete\n  [load_jangtq] merged eos_token_id from generation_config.json: +[200020] \u2192 [200020]\n  [warmup] layer-by-layer 1-token forward (62 layers, H=3072) ...\n    layer 0/61 compiled  (0.0s)\n    layer 10/61 compiled  (0.0s)\n    layer 20/61 compiled  (0.1s)\n    layer 30/61 compiled  (0.1s)\n    layer 40/61 compiled  (0.1s)\n    layer 50/61 compiled  (0.1s)\n    layer 60/61 compiled  (0.1s)\n    layer 61/61 compiled  (0.1s)\n  [warmup] full-model 16-token prefill shape ...\n    ok  (0.2s)\n  [warmup] done in 0.3s (Metal kernels now JIT-cached)\n  Done (eos_token_ids=[200020])\nINFO:vmlx_engine.scheduler:KV cache quantization validated: head_dim=128, group_size=64\nINFO:vmlx_engine.scheduler:KV cache quantization round-trip test passed: bits=4, group_size=64, test_shape=(1, 4, 8, 128)\nINFO:vmlx_engine.scheduler:KV cache quantization enabled: turboquant-q4 (bits=4, group_size=64)\nINFO:vmlx_engine.scheduler:Prefix cache requires continuous batching \u2014 enabled automatically\nINFO:vmlx_engine.block_disk_store:BlockDiskStore initialized: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-zt3vt8ie/block, max_size=10.0GB, entries=0, size=0.00GB\nINFO:vmlx_engine.scheduler:Block disk cache enabled: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-zt3vt8ie/block, max=10.0GB\nINFO:vmlx_engine.paged_cache:PagedCacheManager initialized: block_size=64, max_blocks=1000, max_tokens=64000\nINFO:vmlx_engine.scheduler:Paged cache enabled: block_size=64, max_blocks=1000\nINFO:vmlx_engine.disk_cache:Disk cache initialized: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-zt3vt8ie/prompt/MiniMax-M2.7-Small-JANGTQ_200a134f41a0, max_size=10.0GB, entries=0\nINFO:vmlx_engine.scheduler:Disk cache enabled with paged cache backend \u2014 L2 writes happen during cache extraction (pre-quantization)\nINFO:vmlx_engine.engine_core:Engine started\nINFO:vmlx_engine.engine.batched:BatchedEngine loaded: /Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ (mllm=False)\nINFO:     Application startup complete.\nINFO:     Uvicorn running on http://127.0.0.1:62091 (Press CTRL+C to quit)\nINFO:     127.0.0.1:62107 - \"GET /health HTTP/1.1\" 200 OK\nWARNING:__main__:SECURITY WARNING: Server running without API key authentication. Anyone can access the API. Use --api-key to enable authentication.\nINFO:     127.0.0.1:62108 - \"GET /v1/models HTTP/1.1\" 200 OK\nINFO:vmlx_engine.scheduler:Request c825c6a9-afb8-468e-8373-e0ead09efb03: paged cache miss, processing all 49 tokens\nINFO:vmlx_engine.scheduler:Extracted 62 layer states for request c825c6a9-afb8-468e-8373-e0ead09efb03\nINFO:vmlx_engine.disk_cache:Disk cache stored: 49 tokens, 23.3MB \u2192 cache_792840980a40b7e1_49tok.safetensors\nINFO:vmlx_engine.scheduler:Stored paged cache for request c825c6a9-afb8-468e-8373-e0ead09efb03 (46 prompt tokens, 62 layers, cache truncated to 45 tokens)\nINFO:__main__:Chat completion: 16 tokens in 0.90s (17.8 tok/s)\nINFO:     127.0.0.1:62109 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:62110 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nINFO:vmlx_engine.scheduler:Request f5fad099-0bba-4af0-bc54-28d69b95cc96: paged cache hit, 46 tokens in 1 blocks, 4 remaining to process\nINFO:vmlx_engine.scheduler:Extracted 62 layer states for request f5fad099-0bba-4af0-bc54-28d69b95cc96\nINFO:vmlx_engine.scheduler:Stored paged cache for request f5fad099-0bba-4af0-bc54-28d69b95cc96 (46 prompt tokens, 62 layers, cache truncated to 45 tokens)\nINFO:__main__:Chat completion: 16 tokens in 0.54s (29.5 tok/s)\nINFO:     127.0.0.1:62111 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:62112 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nINFO:     Shutting down\nINFO:     Waiting for application shutdown.\nINFO:vmlx_engine.scheduler:Shutting down prompt disk cache...\nINFO:vmlx_engine.disk_cache:Disk cache shut down\nINFO:vmlx_engine.scheduler:Prompt disk cache shutdown complete\nINFO:vmlx_engine.scheduler:Shutting down block disk cache...\nINFO:vmlx_engine.scheduler:Block disk cache shutdown complete\nINFO:vmlx_engine.engine_core:Engine stopped\nINFO:vmlx_engine.paged_cache:PagedCacheManager cleared\nINFO:vmlx_engine.scheduler:Deep reset completed - all caches cleared\nINFO:vmlx_engine.engine.batched:BatchedEngine stopped\nINFO:__main__:Engine stopped\nINFO:__main__:Caffeinate process terminated\nINFO:     Application shutdown complete.\nINFO:     Finished server process [43380]\n",
+      "errors": [],
+      "exists": true,
+      "expected_family": "minimax",
+      "expected_ok": true,
+      "family": "minimax",
+      "generation_keys": [
+        "bos_token_id",
+        "do_sample",
+        "eos_token_id",
+        "temperature",
+        "top_k",
+        "top_p",
+        "transformers_version"
+      ],
+      "has_config": true,
+      "has_generation_config": true,
+      "has_jang_config": true,
+      "has_jangtq_config": false,
+      "has_tokenizer_config": true,
+      "health": {
+        "effective_config": {
+          "cache": {
+            "disk_cache": {
+              "block_l2": {
+                "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-zt3vt8ie/block",
+                "enabled": true,
+                "max_gb": 10.0
+              },
+              "prompt_l2": {
+                "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-zt3vt8ie/prompt",
+                "enabled": true,
+                "max_gb": 10.0
+              }
+            },
+            "kv_cache_quantization": {
+              "enabled": true,
+              "group_size": 64,
+              "mode": "turboquant-q4"
+            },
+            "paged_cache": {
+              "block_size": 64,
+              "enabled": true
+            },
+            "prefix_cache": {
+              "enabled": true,
+              "memory_percent": 0.3
+            },
+            "responses": {
+              "clears_conversation_state_only": true,
+              "method": "prefix-cache-l2-turboquant",
+              "new_context_preserves_engine_session": true,
+              "prefix_cache_required": true
+            },
+            "ssm_companion": {
+              "disk_l2_enabled": true,
+              "enabled": true,
+              "max_entries": 8,
+              "max_mb": 512
+            },
+            "topology": {
+              "block_l2_active": true,
+              "cache_type": "kv",
+              "expected_components": [
+                "kv_cache",
+                "prefix_cache",
+                "prompt_l2",
+                "paged_cache",
+                "block_l2",
+                "kv_quantization"
+              ],
+              "kv_quantization_active": true,
+              "name": "full_kv_attention",
+              "prompt_l2_active": true,
+              "ssm_companion_required": false,
+              "warnings": []
+            }
+          },
+          "generation": {
+            "chat_template_kwargs": null,
+            "custom_chat_template": false,
+            "enable_thinking": true,
+            "max_tokens": 64,
+            "min_p": null,
+            "repetition_penalty": null,
+            "stop": null,
+            "temperature": 1.0,
+            "top_k": 40,
+            "top_p": 0.95
+          },
+          "model": {
+            "architecture_hints": {
+              "cache_topology": "full_kv_attention",
+              "ssm_companion_required": false
+            },
+            "cache_type": "kv",
+            "family": "minimax",
+            "name": "JANGQ/MiniMax-M2.7-Small-JANGTQ",
+            "path": "/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ",
+            "served_name": null,
+            "type": "llm"
+          },
+          "parsers": {
+            "auto_tool_choice": true,
+            "reasoning": "minimax_m2",
+            "tool_call": "minimax"
+          },
+          "sources": {
+            "generation": {
+              "chat_template_kwargs": "unset",
+              "enable_thinking": "launcher_default",
+              "max_tokens": "cli",
+              "min_p": "unset",
+              "repetition_penalty": "unset",
+              "stop": "unset",
+              "temperature": "generation_config",
+              "top_k": "generation_config",
+              "top_p": "generation_config"
+            },
+            "parsers": {
+              "reasoning": "model_registry",
+              "tool_call": "model_registry"
+            }
+          }
+        },
+        "engine_type": "batched",
+        "kv_cache_quantization": {
+          "bits": 4,
+          "enabled": true,
+          "group_size": 64
+        },
+        "last_request_time": null,
+        "mcp": null,
+        "memory": {
+          "active_mb": 39579.1,
+          "cache_mb": 1187.3,
+          "peak_mb": 39789.0
+        },
+        "model_loaded": true,
+        "model_name": "JANGQ/MiniMax-M2.7-Small-JANGTQ",
+        "model_type": "llm",
+        "quantization_format": {
+          "actual_bits": null,
+          "block_size": 64,
+          "target_bits": null,
+          "type": "jang"
+        },
+        "status": "healthy"
+      },
+      "jang_capabilities": {},
+      "launch_args": [
+        "--model",
+        "/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ",
+        "--port",
+        "62091",
+        "--host",
+        "127.0.0.1",
+        "--timeout",
+        "600",
+        "--continuous-batching",
+        "--enable-auto-tool-choice",
+        "--reasoning-parser",
+        "minimax_m2",
+        "--tool-call-parser",
+        "minimax",
+        "--default-temperature",
+        "1.0",
+        "--default-top-p",
+        "0.95",
+        "--default-top-k",
+        "40",
+        "--default-enable-thinking",
+        "true",
+        "--effective-config-sources",
+        "{\"generation\": {\"chat_template_kwargs\": \"unset\", \"enable_thinking\": \"launcher_default\", \"max_tokens\": \"unset\", \"min_p\": \"unset\", \"repetition_penalty\": \"unset\", \"stop\": \"unset\", \"temperature\": \"generation_config\", \"top_k\": \"generation_config\", \"top_p\": \"generation_config\"}, \"parsers\": {\"reasoning\": \"model_registry\", \"tool_call\": \"model_registry\"}}",
+        "--enable-prefix-cache",
+        "true",
+        "--enable-disk-cache",
+        "true",
+        "--disk-cache-dir",
+        "/private/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-zt3vt8ie/prompt",
+        "--disk-cache-max-gb",
+        "10.0",
+        "--cache-memory-percent",
+        "0.3",
+        "--use-paged-cache",
+        "true",
+        "--paged-cache-block-size",
+        "64",
+        "--enable-block-disk-cache",
+        "true",
+        "--block-disk-cache-dir",
+        "/private/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-zt3vt8ie/block",
+        "--block-disk-cache-max-gb",
+        "10.0",
+        "--kv-cache-quantization",
+        "turboquant-q4",
+        "--kv-cache-group-size",
+        "64"
+      ],
+      "launch_command": [
+        "/Users/eric/exploitbot/ExploitBotEngine/.venv/bin/python3",
+        "/Users/eric/exploitbot/ExploitBotEngine/launch.py",
+        "--model",
+        "/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ",
+        "--port",
+        "62091",
+        "--reasoning-parser",
+        "auto",
+        "--tool-call-parser",
+        "auto",
+        "--kv-cache-quantization",
+        "turboquant-q4",
+        "--enable-prefix-cache",
+        "true",
+        "--enable-disk-cache",
+        "true",
+        "--disk-cache-dir",
+        "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-zt3vt8ie/prompt",
+        "--use-paged-cache",
+        "true",
+        "--enable-block-disk-cache",
+        "true",
+        "--block-disk-cache-dir",
+        "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-zt3vt8ie/block",
+        "--max-tokens",
+        "64",
+        "--verbose"
+      ],
+      "metadata_only": false,
+      "model_type": "minimax_m2",
+      "models": {
+        "data": [
+          {
+            "created": 1779832352,
+            "id": "JANGQ/MiniMax-M2.7-Small-JANGTQ",
+            "metadata": {
+              "cache": {
+                "disk_cache": {
+                  "block_l2": {
+                    "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-zt3vt8ie/block",
+                    "enabled": true,
+                    "max_gb": 10.0
+                  },
+                  "prompt_l2": {
+                    "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-minimax-live-cache-zt3vt8ie/prompt",
+                    "enabled": true,
+                    "max_gb": 10.0
+                  }
+                },
+                "kv_cache_quantization": {
+                  "enabled": true,
+                  "group_size": 64,
+                  "mode": "turboquant-q4"
+                },
+                "paged_cache": {
+                  "block_size": 64,
+                  "enabled": true
+                },
+                "prefix_cache": {
+                  "enabled": true,
+                  "memory_percent": 0.3
+                },
+                "responses": {
+                  "clears_conversation_state_only": true,
+                  "method": "prefix-cache-l2-turboquant",
+                  "new_context_preserves_engine_session": true,
+                  "prefix_cache_required": true
+                },
+                "ssm_companion": {
+                  "disk_l2_enabled": true,
+                  "enabled": true,
+                  "max_entries": 8,
+                  "max_mb": 512
+                },
+                "topology": {
+                  "block_l2_active": true,
+                  "cache_type": "kv",
+                  "expected_components": [
+                    "kv_cache",
+                    "prefix_cache",
+                    "prompt_l2",
+                    "paged_cache",
+                    "block_l2",
+                    "kv_quantization"
+                  ],
+                  "kv_quantization_active": true,
+                  "name": "full_kv_attention",
+                  "prompt_l2_active": true,
+                  "ssm_companion_required": false,
+                  "warnings": []
+                }
+              },
+              "generation": {
+                "chat_template_kwargs": null,
+                "custom_chat_template": false,
+                "enable_thinking": true,
+                "max_tokens": 64,
+                "min_p": null,
+                "repetition_penalty": null,
+                "stop": null,
+                "temperature": 1.0,
+                "top_k": 40,
+                "top_p": 0.95
+              },
+              "model": {
+                "architecture_hints": {
+                  "cache_topology": "full_kv_attention",
+                  "ssm_companion_required": false
+                },
+                "cache_type": "kv",
+                "family": "minimax",
+                "name": "JANGQ/MiniMax-M2.7-Small-JANGTQ",
+                "path": "/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ",
+                "served_name": null,
+                "type": "llm"
+              },
+              "parsers": {
+                "auto_tool_choice": true,
+                "reasoning": "minimax_m2",
+                "tool_call": "minimax"
+              },
+              "sources": {
+                "generation": {
+                  "chat_template_kwargs": "unset",
+                  "enable_thinking": "launcher_default",
+                  "max_tokens": "cli",
+                  "min_p": "unset",
+                  "repetition_penalty": "unset",
+                  "stop": "unset",
+                  "temperature": "generation_config",
+                  "top_k": "generation_config",
+                  "top_p": "generation_config"
+                },
+                "parsers": {
+                  "reasoning": "model_registry",
+                  "tool_call": "model_registry"
+                }
+              }
+            },
+            "object": "model",
+            "owned_by": "vmlx-engine"
+          }
+        ],
+        "object": "list"
+      },
+      "path": "/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ",
+      "repeat_cache_checks": {
+        "block_l2_hits_delta": 0,
+        "cache_hit_counter": true,
+        "cached_tokens": 46,
+        "cached_usage": true,
+        "prompt_l2_hits_delta": 0,
+        "scheduler_cache_hits_delta": 1,
+        "scheduler_disk_hits_delta": 0,
+        "scheduler_hits_delta": 1,
+        "scheduler_tokens_saved_delta": 46,
+        "ssm_l2_hits_delta": 0
+      },
+      "repeat_cache_stats": {
+        "block_disk_cache": {
+          "blocks_on_disk": 1,
+          "disk_evictions": 0,
+          "disk_hits": 0,
+          "disk_misses": 1,
+          "disk_size_bytes": 3608879,
+          "disk_size_gb": 0.003,
+          "disk_writes": 1,
+          "total_accesses": 0
+        },
+        "disk_cache": {
+          "entries": 1,
+          "hit_rate": 0.0,
+          "hits": 0,
+          "max_size_gb": 10.0,
+          "misses": 1,
+          "pending_writes": 0,
+          "stores": 1,
+          "total_cached_tokens": 49,
+          "total_size_mb": 23.26,
+          "total_tokens_on_disk": 49
+        },
+        "kv_cache_quantization": {
+          "bits": 4,
+          "group_size": 64
+        },
+        "memory": {
+          "active_mb": 39609.7,
+          "cache_mb": 245.2,
+          "peak_mb": 39887.9
+        },
+        "scheduler_cache": {
+          "active_requests": 2,
+          "allocated_blocks": 2,
+          "block_size": 64,
+          "cache_hit_rate": 0.3333333333333333,
+          "cache_hits": 1,
+          "cache_misses": 2,
+          "cow_copies": 0,
+          "disk_hits": 0,
+          "disk_misses": 1,
+          "evictions": 0,
+          "free_blocks": 998,
+          "hit_rate": 0.5,
+          "hits": 1,
+          "max_blocks": 1000,
+          "misses": 1,
+          "shared_blocks": 1,
+          "tokens_saved": 46,
+          "total_tokens_cached": 92,
+          "utilization": 0.002
+        },
+        "scheduler_stats": {
+          "num_requests_processed": 2,
+          "num_running": 0,
+          "num_waiting": 0,
+          "total_completion_tokens": 32,
+          "total_prompt_tokens": 98
+        }
+      },
+      "repeat_completion_preview": "[{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": \"The user says \\\"ExploitBot MiniMax release no-thinking smoke.\", \"tool_calls\": null, \"reasoning_content\": null}, \"finish_reason\": \"length\"}]",
+      "repeat_completion_usage": {
+        "completion_tokens": 16,
+        "prompt_tokens": 49,
+        "prompt_tokens_details": {
+          "cached_tokens": 46
+        },
+        "total_tokens": 65
+      },
+      "require_ssm_companion_hit": false,
+      "require_ssm_rederive": false,
+      "restart_replay": false,
+      "runtime_checks": {
+        "block_l2_disk": true,
+        "effective_config": true,
+        "models_metadata": true,
+        "paged_cache": true,
+        "prefix_cache": true,
+        "prompt_l2_disk": true,
+        "turboquant": true
+      },
+      "smoke_enable_thinking": false,
+      "smoke_enable_thinking_mode": "false",
+      "supported": true
+    }
+  }
+}

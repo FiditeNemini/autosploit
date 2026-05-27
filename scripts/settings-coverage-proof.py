@@ -206,7 +206,7 @@ def assert_settings_coverage() -> None:
         raise AssertionError(f"settings coverage category parity mismatch: {coverage}")
     if coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"settings coverage cache method mismatch: {coverage}")
-    if coverage.get("supportedFamilies") != ["qwen", "minimax"]:
+    if coverage.get("supportedFamilies") != ["qwen", "minimax", "zaya"]:
         raise AssertionError(f"settings coverage supported family mismatch: {coverage}")
     if coverage.get("settingsSurfaces") != REQUIRED_SETTINGS_SURFACES:
         raise AssertionError(f"settings coverage surface list mismatch: {coverage}")

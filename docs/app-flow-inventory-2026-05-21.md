@@ -56,6 +56,13 @@ results, finding wizard submit, tab switching, phase actions, Activity Feed
 actions, proof-count metadata, session workflow surface list/count/parity,
 session workflow surface proof map/count/parity/file parity, and the `stateKeys` count/parity those
 proofs validate.
+`/qa/session-workflow-matrix` expands those workflow surfaces into per-workflow
+rows linked to route owners, state-key owners, `/qa/session-coverage`,
+`/qa/tab-action-coverage`, `/qa/agent-loop-phase-matrix`, and proof-owner file
+parity. The coverage index mirrors `sessionWorkflowMatrixCount`,
+`sessionWorkflowMatrixProofOwnerFileParity`,
+`sessionWorkflowMatrixProofFileParity`, and
+`sessionWorkflowMatrixTabActionRouteCount`.
 The coverage payload now lists the phase and Activity Feed QA routes (`/phase`,
 `/qa/seed-activity-actions`, `/qa/activity-action`) plus `proofCount`, so the
 aggregate cannot claim those contracts without exposing the routes.
@@ -169,6 +176,15 @@ main session.
   indexing, bounded injection, and on-demand `search_context` retrieval. The
   route names storage targets, handoffs, routes, proof scripts, and the policy
   that avoids force-injecting every note or result into each prompt.
+- `/qa/evidence-lifecycle-flow-matrix` expands that lifecycle into per-stage,
+  per-storage-target, and per-handoff rows. Each row names route owners, proof
+  owners, `/qa/evidence-lifecycle-coverage`, `/qa/context-flow-matrix`, and
+  proof-owner file parity. The coverage index mirrors
+  `evidenceLifecycleFlowMatrixStageCount`,
+  `evidenceLifecycleFlowMatrixStorageTargetCount`,
+  `evidenceLifecycleFlowMatrixHandoffCount`,
+  `evidenceLifecycleFlowMatrixProofOwnerFileParity`, and
+  `evidenceLifecycleFlowMatrixProofFileParity`.
 - Representative all-family fanout is covered by
   `scripts/tool-family-fanout-coverage-proof.py`: Recon, Web, Network, Creds,
   Exploit, Post, and OSINT fixtures each prove chat-card, activity-feed,
@@ -226,6 +242,13 @@ Current context sources:
   context catalogue, and report section. The route reports list/count/parity
   status for source feeds, software families, vulnerability classes, risk
   signals, and evidence-flow steps.
+- `/qa/cve-taxonomy-matrix` expands that coverage into one row per source feed,
+  software family, vulnerability class, risk signal, and evidence-flow stage,
+  with proof owners and links to `/qa/cve-taxonomy-coverage`,
+  `/qa/context-flow-matrix`, `/qa/evidence-lifecycle-flow-matrix`, and
+  `/qa/coverage-index`. `cve-taxonomy-matrix-proof.py` verifies row order,
+  proof files, docs, and coverage-index mirrors including
+  `cveTaxonomyMatrixCount`.
 - Stash items can be sent to chat, truncated to about 5 KB in `ContentView`.
 - Active phase guidance comes from `PentestPhase`.
 - Active op, scope, findings, and stash are persisted through `DatabaseManager`.
@@ -569,6 +592,13 @@ Stash:
   actions, visual Settings proof gates, Settings surface list/count/parity,
   Settings surface proof map/count/parity/file parity, proof-count metadata, checked-in Settings visual manifests, and
   `visualManifestCount`.
+- `/qa/settings-surface-matrix` expands the Settings surface list into one row
+  per settings surface with proof owners and links to `/qa/settings-coverage`,
+  `/qa/visual-surface-matrix`, `/qa/theme-inventory`, and
+  `/qa/coverage-index`. It is verified by
+  `settings-surface-matrix-proof.py`; coverage-index mirrors
+  `settingsSurfaceMatrixCount`, proof parity, surface proof parity, and theme
+  file count.
 
 Model:
 
@@ -655,6 +685,13 @@ CVE Database and Tools:
   file parity,
   map/count/parity, and `actionStateKeys` for Recon/Web/Network/Creds/Exploit/
   Post/OSINT/Report/Stash action state surfaces.
+- `/qa/tab-action-surface-matrix` expands those tab action surfaces into
+  per-surface rows linked to tab owners, route owners, action-state keys,
+  `/qa/action-state-inventory`, `/qa/function-proof-matrix`, and proof-owner
+  file parity. The coverage index mirrors `tabActionSurfaceMatrixCount`,
+  `tabActionSurfaceMatrixProofOwnerFileParity`,
+  `tabActionSurfaceMatrixProofFileParity`, and
+  `tabActionSurfaceMatrixActionStateCount`.
 
 ## Test And Proof Requirements
 
@@ -713,6 +750,15 @@ Current repeatable gates:
   machine-readable `/qa/subtab-coverage` route against the live subtab registry.
   That aggregate now exposes `proofCount` plus `/qa/tool-subtab` and
   `/qa/visual-subtab` route coverage for state and visual subtab switching.
+  `/qa/subtab-lifecycle-matrix` expands that registry into one row per subtab
+  and links each row to `/qa/subtab-coverage`, `/qa/tab-tool-function-flow`,
+  `/qa/session-workflow-matrix`, and `/qa/visual-surface-matrix`.
+  `subtab-lifecycle-matrix-proof.py` verifies row order, proof-owner files,
+  docs, and `subtabLifecycleMatrixCount`,
+  `subtabLifecycleMatrixProofOwnerFileParity`,
+  `subtabLifecycleMatrixProofFileParity`, and
+  `subtabLifecycleMatrixTabToolFunctionFlowCount` mirrors in the coverage
+  index.
   The same matrix also checks `/qa/agent-loop-coverage` for manual suggestion,
   copilot approval, autopilot execution, and deployed-agent forced-autopilot
   inheritance coverage. It also checks the agent-loop phase list/count/parity,
@@ -758,12 +804,16 @@ Current repeatable gates:
   turn audit, durable embeddings, and active-scope stash retrieval. The source
   list names asset ports, findings, raw tool
   output, stash notes, and CVEs as bounded dynamic catalogue inputs. Tab action
-  coverage and `/qa/evidence-lifecycle-coverage` also expose the cross-surface
-  parser/finding/stash/report/context handoffs and their chat/context index
-  mirror, so reportable evidence remains traceable without prompt flooding. Tab action
-  coverage also exposes `actionStateKeys`, so the matrix
-  can verify the AppState surfaces behind per-tab copy/stash/export/tool
-  actions. Visual screenshot coverage is summarized through
+  coverage, `/qa/evidence-lifecycle-coverage`, and
+  `/qa/evidence-lifecycle-flow-matrix` also expose the cross-surface
+  parser/finding/stash/report/context handoffs, row-level owners, and their
+  chat/context index mirror, so reportable evidence remains traceable without
+  prompt flooding. `evidence-lifecycle-flow-matrix-proof.py` verifies the route,
+  row parity, proof files, context-flow linkage, docs, and coverage-index
+  mirrors. `tab-action-surface-matrix-proof.py` verifies
+  `/qa/tab-action-surface-matrix` rows against tab action coverage,
+  action-state inventory, the function proof matrix, docs, and coverage-index
+  mirrors. Visual screenshot coverage is summarized through
   `/qa/visual-coverage`, including chat/tool states, scroll lock, Settings,
   context inspector, request-audit badges, tab activity, subtab lifecycle
   strips, OSINT screenshots, report export, stash retrieval, unsupported model
@@ -771,8 +821,12 @@ Current repeatable gates:
   CVE/tool-settings proof manifests. The aggregate exposes visual surface
   list/count/parity, visual surface proof map/count/parity/file parity, `proofCount`,
   `manifestCount`, minimum capture count, and `actualCaptureCount` so visual
-  proof breadth is machine-checkable. It also lists the visual QA seed/switch
-  routes used by the screenshot proofs.
+  proof breadth is machine-checkable. `/qa/visual-surface-matrix` expands those
+  visual surfaces into per-surface rows linked to proof owners, manifest
+  owners, `/qa/view-inventory`, and `/qa/theme-inventory`; the coverage index
+  mirrors `visualSurfaceMatrixCount`, owner parity, proof-file parity, and
+  manifest count. It also lists the visual QA seed/switch routes used by the
+  screenshot proofs.
   Chat/control invariants are summarized through `/qa/chat-coverage`, including
   streaming usage metrics, token counters, reasoning controls, tool-output
   expansion, approval controls, copy/stash actions, request-audit badges,
@@ -787,6 +841,9 @@ Current repeatable gates:
   persistence, finding-wizard submit, tab switching, phase actions, Activity
   Feed actions, proof-count metadata, session workflow surface list/count/
   parity, session workflow surface proof map/count/parity/file parity, and `stateKeys`.
+  `session-workflow-matrix-proof.py` verifies `/qa/session-workflow-matrix`
+  rows against session coverage, tab action coverage, the agent-loop phase
+  matrix, docs, and coverage-index mirrors.
   The aggregate QA map is exposed through `/qa/coverage-index`; it groups app
   state, chat/context, runtime/cache, settings/visuals, tools/parsers, and
   tabs/sessions endpoints with their proof scripts, and
@@ -805,13 +862,27 @@ Current repeatable gates:
   category count that must match the proof ledger count, including the `other`
   bucket, and mirrors the source proof-ledger `other` count as
   `proofLedgerCategoryOtherCount`. It also exposes an explicit proof-category parity flag consumed by
-  both the coverage-index proof and the broad app QA matrix. It also exposes
+  both the coverage-index proof and the broad app QA matrix. `/qa/proof-category-matrix`
+  expands the normalized proof surfaces into one row per category, links each
+  row to `/qa/proof-ledger`, `/qa/proof-suite-inventory`, and
+  `/qa/coverage-index`, and is verified by
+  `proof-category-matrix-proof.py`. The app-state coverage index mirrors
+  `proofCategoryMatrixCount`, `proofCategoryMatrixProofFileParity`,
+  `proofCategoryMatrixCategoryProofFileParity`, and
+  `proofCategoryMatrixProofLedgerCount`. It also exposes
   `/qa/audit-ledger` source proof-ledger category other count, so the audit
   rollup preserves the same uncategorized proof accounting as the source ledger.
   It also exposes
   `/qa/artifact-ledger`
   visual manifest/live-proof counts and file parity so screenshot and live JSON evidence
-  stay machine-auditable, including missing visual capture count.
+  stay machine-auditable, including missing visual capture count. `/qa/artifact-manifest-matrix`
+  adds row-level ownership for each visual manifest, links each manifest row to
+  `/qa/artifact-ledger`, `/qa/visual-surface-matrix`, and `/qa/runtime-coverage`,
+  and is verified by `artifact-manifest-matrix-proof.py`. The coverage-index
+  app-state group mirrors `artifactManifestMatrixCount`,
+  `artifactManifestMatrixProofFileParity`,
+  `artifactManifestMatrixManifestFileParity`, and
+  `artifactManifestMatrixCaptureFileParity`.
   The chat/context group mirrors `/qa/chat-coverage.headerCacheBadges`,
   `headerCacheBadgeCount`, `headerCacheBadgeParity`,
   `headerCacheBadgeProofs`, `headerCacheBadgeProofCount`,
@@ -862,7 +933,10 @@ Current repeatable gates:
   `knownFailedLiveProofs`, `currentFailedLiveProofs`, and
   `currentLiveProofFailureFree`, so the aggregate preserves artifact evidence
   paths and separates known legacy failed live evidence from current
-  unclassified live-proof regressions.
+  unclassified live-proof regressions. It also carries
+  `/qa/artifact-manifest-matrix` manifest count and proof/manifest/capture
+  parity mirrors, so visual evidence manifests are tied back to their route
+  owners and capture files at the aggregate QA layer.
   It also carries
   `/qa/audit-ledger.proofCount`, source proof-ledger proof-file parity/category counts/surfaces/
   surface-count/category-map/other-count/total/parity, normalized
@@ -926,7 +1000,13 @@ Current repeatable gates:
   context delivery mode list/count/parity, and delivery-mode proof
   count/parity/file parity, so
   bounded dynamic catalogue source coverage and cache-session preservation remain
-  visible from the aggregate QA index. The
+  visible from the aggregate QA index. It also mirrors
+  `/qa/context-flow-matrix` via `contextFlowMatrixRetrievalSourceCount`,
+  `contextFlowMatrixDeliveryModeCount`,
+  `contextFlowMatrixProofOwnerFileParity`, and
+  `contextFlowMatrixProofFileParity`; `context-flow-matrix-proof.py` compares
+  retrieval source and delivery mode rows against context coverage, agent-flow
+  source coverage, the agent-loop phase matrix, docs, and proof-owner files. The
   settings/visuals group exposes Settings surface list/count/parity, Settings
   surface proof map/count/parity/file parity, Settings category list/id-list/count/parity/current
   category, Settings route list/count, contract map/count, proof list/count/file parity,
@@ -954,7 +1034,10 @@ Current repeatable gates:
   The chat/context group also mirrors `/qa/cve-taxonomy-coverage`, including
   source feeds, software families, vulnerability classes, risk signals,
   evidence-flow steps, list/count/parity status, agent tool names, bounded
-  context contract, and report assembly contract.
+  context contract, and report assembly contract. It also mirrors
+  `/qa/cve-taxonomy-matrix` total row count, proof parity, row proof parity,
+  and evidence-flow row count so CVE taxonomy breadth is tied to proof-owned
+  flow rows.
   The tabs/sessions group exposes
   interaction-mode count, covered tab count, session state-key count, and
   action-state-key count/parity, mirrors subtab tab maps and proof count/file parity,
@@ -1086,7 +1169,9 @@ Required future proof gates:
   status, live cache metrics, and split category screenshots are exposed through
   `/qa/settings-coverage.visualManifests`; full visual surface coverage is
   summarized through `/qa/visual-coverage.visualSurfaces` plus visual surface
-  proof map/count/parity/file parity.
+  proof map/count/parity/file parity. `visual-surface-matrix-proof.py` verifies
+  `/qa/visual-surface-matrix` rows against visual coverage, view inventory,
+  theme inventory, docs, and coverage-index mirrors.
 - Chat token metrics, active tool header, cache-session badges, approval card,
   running tool card, failed tool card, and streaming reasoning state are captured under
   `docs/visual-proofs/checkpoint-71`.
@@ -1155,6 +1240,14 @@ Required future proof gates:
   route coverage, and is mirrored back into
   `/qa/coverage-index.groups.appState` so newly added app/API functions cannot
   remain undocumented.
+- `/qa/endpoint-route-matrix` expands endpoint ownership into one row per
+  route, links each route to `/qa/endpoint-inventory`,
+  `/qa/action-state-inventory`, and `/qa/coverage-index`, and records whether
+  the route is listed in `/state.qaCoverage.stateRoutes`.
+  `endpoint-route-matrix-proof.py` verifies row order, proof-owner files, docs,
+  and `endpointRouteMatrixCount`, `endpointRouteMatrixProofOwnerFileParity`,
+  `endpointRouteMatrixProofFileParity`, and
+  `endpointRouteMatrixStateRouteCount` mirrors in the coverage index.
 - App action-state ownership is summarized through `/qa/action-state-inventory`.
   It parses every `*ActionState` struct, AppState action field, action snapshot
   helper, `record*Action` function, and action QA route from `AppState.swift`,
@@ -1168,6 +1261,27 @@ Required future proof gates:
   counts/groups/tab map into `/qa/coverage-index.groups.appState`. This keeps
   visible pages, panels, tabs, overlays, settings views, and chat surfaces
   auditable from source instead of depending only on scattered screenshot notes.
+- Swift function-flow ownership is summarized through
+  `/qa/function-flow-inventory`. It parses function declarations across
+  `ExploitBot/Sources/ExploitBot/App`, `Models`, `Services`, and `Views`,
+  groups each function by ownership surface, records a proof owner, and mirrors
+  `functionFlowInventoryCount`, group counts, and proof parity into
+  `/qa/coverage-index.groups.appState`. `function-flow-inventory-proof.py`
+  compares that route against the current source tree and docs, so individual
+  AppState helpers, service functions, view callbacks, QA snapshots, and
+  agent-loop functions stay connected to proof owners.
+- Individual function proof ownership is summarized through
+  `/qa/function-proof-matrix`. It consumes `/qa/function-flow-inventory`,
+  keeps one row per Swift function, maps each ownership group to its QA route,
+  verifies the proof owner exists on disk, and mirrors
+  `functionProofMatrixCount`, `functionProofMatrixRowParity`,
+  `functionProofMatrixGroupRouteParity`,
+  `functionProofMatrixProofOwnerFileParity`, and
+  `functionProofMatrixProofFileParity` into
+  `/qa/coverage-index.groups.appState`. `function-proof-matrix-proof.py`
+  compares the matrix against the function-flow route, state route list,
+  proof-owner files, docs, and coverage index so individual functions cannot
+  drift away from a route and proof owner.
 - Backend service ownership is summarized through `/qa/service-inventory`. It
   parses every Swift file under `ExploitBot/Sources/ExploitBot/Services`,
   records declared types and service functions, groups each file by runtime,
@@ -1175,6 +1289,14 @@ Required future proof gates:
   records the proof owner. The counts and proof parity are mirrored in
   `/qa/coverage-index.groups.appState`, which keeps service-layer changes from
   bypassing the route/action/view inventories.
+- `/qa/service-function-matrix` expands the service inventory into one row per
+  service function and links each row to `/qa/service-inventory`,
+  `/qa/function-proof-matrix`, `/qa/tool-execution-matrix`, and
+  `/qa/context-flow-matrix`. `service-function-matrix-proof.py` verifies row
+  order, proof-owner files, docs, and `serviceFunctionMatrixCount`,
+  `serviceFunctionMatrixProofOwnerFileParity`,
+  `serviceFunctionMatrixProofFileParity`, and
+  `serviceFunctionMatrixFunctionProofCount` mirrors in the coverage index.
 - Swift model/state ownership is summarized through
   `/qa/model-state-inventory`. It parses every Swift file under
   `ExploitBot/Sources/ExploitBot/Models`, records declared structs/classes/
@@ -1183,6 +1305,14 @@ Required future proof gates:
   models. The route locks the current operation status/mode, pentest phase, and
   tool-tab enum cases, and mirrors file/type/function/group/proof parity into
   `/qa/coverage-index.groups.appState`.
+- `/qa/model-state-function-matrix` expands model/state ownership into one row
+  per Swift model function and links each row to `/qa/model-state-inventory`,
+  `/qa/function-proof-matrix`, and `/qa/runtime-coverage`.
+  `model-state-function-matrix-proof.py` verifies row order, proof-owner files,
+  docs, and `modelStateFunctionMatrixCount`,
+  `modelStateFunctionMatrixProofOwnerFileParity`,
+  `modelStateFunctionMatrixProofFileParity`, and
+  `modelStateFunctionMatrixFunctionProofCount` mirrors in the coverage index.
 - Theme ownership is summarized through `/qa/theme-inventory`. It parses every
   Swift file under `ExploitBot/Sources/ExploitBot/Theme`, records declared
   types, functions, static design tokens, and corner-radius usage, then groups
@@ -1191,6 +1321,13 @@ Required future proof gates:
   `max-corner-radius-8` professional shape policy and mirrors file/type/token/
   group/proof parity into `/qa/coverage-index.groups.settingsAndVisuals`, so
   polished squared UI primitives stay tied to source and proof coverage.
+- `/qa/theme-token-matrix` turns the theme inventory into per-file token rows
+  with proof owners and route ownership back to `/qa/theme-inventory`,
+  `/qa/settings-surface-matrix`, `/qa/visual-surface-matrix`, and
+  `/qa/coverage-index`. `theme-token-matrix-proof.py` verifies file order,
+  token counts, policy parity, proof-file parity, docs tokens, and coverage
+  mirrors including `themeTokenMatrixFileCount` and
+  `themeTokenMatrixPolicyParity`.
 - Agentic turn flow ownership is summarized through
   `/qa/agent-flow-inventory`. It parses the source files that move a model turn
   through chat send guards, dynamic context catalogue injection, tool schema
@@ -1210,3 +1347,67 @@ Required future proof gates:
   `/qa/coverage-index.groups.runtimeAndCache`, keeping the Python engine,
   parser, cache, data, and live-proof layers visible to the same app-owned
   coverage contract as the Swift UI and service inventories.
+- Proof-suite ownership is summarized through
+  `/qa/proof-suite-inventory`. It parses every proof and special live/model
+  harness in `scripts`, records route targets, app-launching behavior, visual
+  capture signals, live-model signals, function/class counts, and proof-suite
+  groups, then mirrors the counts and parity into
+  `/qa/coverage-index.groups.appState`. This makes the test harness itself a
+  first-class app surface, so live-turn proofs, screenshot proofs, runtime
+  proofs, parser proofs, and release proofs stay visible as the beta grows.
+- Tab/tool/function/agent-loop ownership is summarized through
+  `/qa/tab-tool-function-flow`. It walks every primary tab, records the mapped
+  SwiftUI view, tab tool list, tab action surface proofs, subtab proof/count,
+  function-flow route/count, and shared agent-loop phases, then mirrors
+  `tabToolFunctionFlowCount`, `tabToolFunctionFlowParity`,
+  `tabToolFunctionFlowProofFileParity`, `tabToolFunctionFlowFunctionCount`,
+  and `tabToolFunctionFlowAgentLoopPhaseCount` into
+  `/qa/coverage-index.groups.tabsAndSessions`. `tab-tool-function-flow-proof.py`
+  compares that cross-flow route against the tool, action, subtab, view,
+  function, agent-loop, and coverage-index routes so individual tabs cannot
+  drift away from their tools, functions, proofs, or agentic loop contract.
+- `/qa/tab-proof-family-matrix` expands `/qa/proof-ledger.tabProofFamilies`
+  into one row per primary tab family, links each family to
+  `/qa/proof-ledger`, `/qa/tab-action-surface-matrix`, and
+  `/qa/tab-tool-function-flow`, and `tab-proof-family-matrix-proof.py`
+  verifies every family proof file. The coverage index mirrors
+  `tabProofFamilyMatrixCount`,
+  `tabProofFamilyMatrixProofFileParity`,
+  `tabProofFamilyMatrixFamilyProofFileParity`, and
+  `tabProofFamilyMatrixProofLedgerFamilyCount` in
+  `/qa/coverage-index.groups.tabsAndSessions`.
+- Per-tool execution ownership is summarized through
+  `/qa/tool-execution-matrix`. It records each tool registry row with binary,
+  argument count, callback/subprocess execution path, result mode, owning tabs,
+  source hooks, execution states, and the manual/copilot/autopilot
+  authorization policies. The route mirrors `toolExecutionMatrixCount`,
+  `toolExecutionMatrixParity`, `toolExecutionMatrixProofFileParity`,
+  `toolExecutionMatrixAuthorizationPolicyCount`, and
+  `toolExecutionMatrixExecutionStateCount` into
+  `/qa/coverage-index.groups.toolsAndParsers`. `tool-execution-matrix-proof.py`
+  compares the matrix against the registry, tool-flow, authorization, and
+  coverage-index routes so individual tools cannot drift away from execution
+  handlers, result modes, or agent authorization behavior.
+- Per-parser tool ownership is summarized through `/qa/parser-tool-matrix`.
+  It records every structured and raw-only result parser tool with parser mode,
+  parsed-state evidence, tool-execution presence, family-fanout membership, and
+  links to `/qa/result-parser-coverage`, `/qa/tool-execution-matrix`,
+  `/qa/tool-family-fanout-coverage`, and `/qa/coverage-index`.
+  `parser-tool-matrix-proof.py` verifies row order and proof files, while
+  `/qa/coverage-index.groups.toolsAndParsers` mirrors
+  `parserToolMatrixCount`, `parserToolMatrixParsedParity`,
+  `parserToolMatrixToolExecutionParity`, and
+  `parserToolMatrixProofFileParity`.
+- Per-phase agentic loop ownership is summarized through
+  `/qa/agent-loop-phase-matrix`. It records each loop phase with its proof
+  files, source-phase links from `/qa/agent-flow-inventory`, authorization
+  policies, state keys, visual state keys, routes, function count, and
+  per-tool execution matrix count. The route mirrors
+  `agentLoopPhaseMatrixCount`, `agentLoopPhaseMatrixParity`,
+  `agentLoopPhaseMatrixSourceCoverageParity`, and
+  `agentLoopPhaseMatrixProofFileParity` into
+  `/qa/coverage-index.groups.tabsAndSessions`.
+  `agent-loop-phase-matrix-proof.py` compares the matrix against the loop,
+  source-flow, authorization, tool-execution, and coverage-index routes so
+  agentic loop phases cannot drift away from source tokens, mode policy, tool
+  execution, or proof coverage.

@@ -15,6 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
+RELEASE_APP_BINARY = ROOT / "release" / "ExploitBot.app" / "Contents" / "MacOS" / "ExploitBot"
 
 
 def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
@@ -42,9 +43,14 @@ def wait_for_app(timeout: float = 15.0) -> None:
 
 def launch(env: dict[str, str]) -> subprocess.Popen:
     subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    app = subprocess.Popen([str(ROOT / "script" / "build_and_run.sh"), "--verify"], cwd=ROOT, env=env)
-    if app.wait(timeout=30) != 0:
-        raise RuntimeError("build_and_run --verify failed")
+    if os.environ.get("EXPLOITBOT_PERSISTENCE_PROOF_RELEASE_APP") == "1":
+        if not RELEASE_APP_BINARY.is_file():
+            raise RuntimeError("release app binary missing; run release-readiness proof first")
+        app = subprocess.Popen([str(RELEASE_APP_BINARY)], cwd=ROOT, env=env)
+    else:
+        app = subprocess.Popen([str(ROOT / "script" / "build_and_run.sh"), "--verify"], cwd=ROOT, env=env)
+        if app.wait(timeout=30) != 0:
+            raise RuntimeError("build_and_run --verify failed")
     wait_for_app()
     return app
 
@@ -65,6 +71,31 @@ def assert_persisted_state() -> None:
         raise AssertionError(f"context settings did not persist: {state}")
     if state.get("chat", {}).get("maxIterations") != 9:
         raise AssertionError(f"chat settings did not persist: {state}")
+    if state.get("chat", {}).get("enableReasoning") is not False:
+        raise AssertionError(f"reasoning toggle did not persist: {state}")
+    engine = state.get("engineConfig") or {}
+    expected_engine = {
+        "modelPath": "/Users/eric/models/JANGQ/Qwen3.6-27B-JANG_4M-MTP",
+        "reasoningParser": "qwen3",
+        "toolCallParser": "qwen",
+        "kvCacheQuantization": "none",
+        "useModelGenerationDefaults": False,
+        "temperature": 0.42,
+        "topP": 0.77,
+        "maxTokens": 321,
+        "prefixCache": False,
+        "promptL2Disk": False,
+        "diskCacheMaxGB": 3.5,
+        "cacheMemoryPercent": 0.55,
+        "pagedCache": False,
+        "pagedCacheBlockSize": 128,
+        "blockL2Disk": False,
+        "blockDiskCacheMaxGB": 4.5,
+        "kvCacheGroupSize": 32,
+    }
+    for key, expected in expected_engine.items():
+        if engine.get(key) != expected:
+            raise AssertionError(f"engine setting {key} did not persist: expected {expected!r}, got {engine.get(key)!r}; state={state}")
     if not any("QA-PERSIST-USER" in msg.get("content", "") for msg in messages):
         raise AssertionError(f"persisted user message missing: {messages}")
     if not any(msg.get("tool") == "nmap" and "QA-PERSIST-TOOL" in msg.get("content", "") for msg in messages):
@@ -88,6 +119,31 @@ def run() -> None:
             seeded = request("POST", "/qa/seed-persistence-fixture")
             if seeded.get("ok") is not True:
                 raise AssertionError(f"persistence fixture seed failed: {seeded}")
+            configured = request("POST", "/qa/apply-app-settings", {
+                "maxIterations": 9,
+                "chat": {"enableReasoning": False},
+                "engine": {
+                    "modelPath": "/Users/eric/models/JANGQ/Qwen3.6-27B-JANG_4M-MTP",
+                    "reasoningParser": "qwen3",
+                    "toolCallParser": "qwen",
+                    "kvCacheQuantization": "none",
+                    "useModelGenerationDefaults": False,
+                    "temperature": 0.42,
+                    "topP": 0.77,
+                    "maxTokens": 321,
+                    "prefixCache": False,
+                    "diskCache": False,
+                    "diskCacheMaxGB": 3.5,
+                    "cacheMemoryPercent": 0.55,
+                    "pagedCache": False,
+                    "pagedCacheBlockSize": 128,
+                    "blockDiskCache": False,
+                    "blockDiskCacheMaxGB": 4.5,
+                    "kvCacheGroupSize": 32,
+                },
+            })
+            if configured.get("ok") is not True:
+                raise AssertionError(f"persistence settings configuration failed: {configured}")
             assert_persisted_state()
 
             stop(app)

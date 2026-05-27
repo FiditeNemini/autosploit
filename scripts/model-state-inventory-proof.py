@@ -39,7 +39,7 @@ EXPECTED_ENUMS = {
     "OpStatus": ["active", "paused", "complete"],
     "InteractionMode": ["autopilot", "copilot", "manual"],
     "PentestPhase": ["scan", "detect", "breach"],
-    "ToolTab": ["recon", "web", "network", "creds", "exploit", "post", "osint", "report", "stash"],
+    "ToolTab": ["recon", "web", "network", "creds", "exploit", "post", "supplyChain", "osint", "report", "stash"],
 }
 
 

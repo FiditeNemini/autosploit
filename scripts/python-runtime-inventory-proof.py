@@ -34,6 +34,7 @@ EXPECTED_PROOFS = [
     "app-qa-matrix-smoke-proof.py",
     "coverage-index-proof.py",
     "runtime-coverage-proof.py",
+    "engine-python-runtime-resolution-proof.py",
     "prove-parser-api.py",
     "result-parser-routing-proof.py",
     "tool-flow-coverage-proof.py",
