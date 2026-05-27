@@ -50,7 +50,7 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 - **Copilot** — AI suggests tools, you approve. Each action explained with risk level.
 - **Manual** — You drive, AI advises. Full tool controls with chat-based guidance.
 
-**30+ Integrated Tools** — subfinder, nmap, nuclei, sqlmap, hashcat, metasploit, impacket, and more. Each tool has a dedicated UI state, logs, and progress markers.
+**42 Integrated Functions** — from recon and web to exploit, OSINT, report, and supply-chain workflows. Callback tools (`search_cve`, `lookup_cve`, `search_context`) and `run_shell` are part of the same tool surface so you can mix operator-invoked and context tools per tab.
 
 **Stash** — Cross-op artifact sharing. Drop credentials, hosts, payloads from any engagement, pull them into any other.
 
@@ -62,13 +62,17 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 
 **5 Languages** — Full interface and report generation in English, 한국어, 中文, Español, 日本語.
 
+**Live Tool Telemetry** — Tool execution status updates are emitted per button/tab (queued, running, done, error), written to logs, and tracked in chat/panel history with CVE and stash workflow visibility.
+
 ## Beta Readiness (May 26, 2026)
 
 - ✅ **Release app proofing is in place**: signed DMG/package path, manifest checks, bundled Python/engine runtime verification.
 - ✅ **Qwen family verification** is running on the smallest local target first (`Qwen3.6-27B-JANG_4M-MTP`) and includes hybrid cache + SSM + TurboQuant assertions.
 - ✅ **MiniMax verification** includes repeat cache hit checks and TurboQuant path checks in live/release harnesses.
-- ✅ **ZAYA1-VL image-chat path** is wired through the multimodal loader and has live completion evidence.
-- ⚠️ **Remaining**: full Qwen multimodal folder promotion and broader visual/UX regression coverage are still in progress.
+- ✅ **Supply-chain + CVE surfaces** are covered by live UI/agent proofs for tab actions, tool path routing, and import workflows.
+- ⚠️ **Known blockers**:
+  - Beta packaging remains blocked until a local notary profile is configured (`notarizationProfile` gate).
+  - Qwen multimodal promotion is tracked as a documented gap pending loader/prefix-cache/prefix-routing proofs for the beta lane.
 
 ## Screenshots
 
@@ -129,6 +133,7 @@ Use local folders from:
 
 ```bash
 export EXPLOITBOT_MODELS=/Users/eric/models
+export EXPLOITBOT_RELEASE_QWEN_MODEL=${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-JANG_4M-MTP
 
 # Smallest local Qwen smoke target (lower RAM)
 ${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-JANG_4M-MTP
@@ -142,25 +147,26 @@ ${EXPLOITBOT_MODELS}/JANGQ/ZAYA1-VL-8B-JANGTQ4
 ```
 
 For runtime checks, start with the smallest Qwen target first to keep RAM pressure low.
+The command examples below also default to this model.
 
 <a name="tools"></a>
 ## Tools
 
-39 integrated pentesting tools across 9 categories:
+42 tool definitions across 8 operational areas:
 
 | Category | Tools |
 |----------|-------|
 | **Recon** | subfinder, dnsx, nmap, masscan, httpx, katana, theHarvester |
 | **Web** | nuclei, sqlmap, dalfox, feroxbuster, ffuf, arjun, wpscan, testssl, graphqlmap, jwt_tool |
 | **Network** | netexec, snmpwalk, tshark, bettercap, chisel |
-| **Credentials** | hashcat, hydra, haiti, trufflehog, seclists |
+| **Credentials** | hashcat, hydra, haiti, trufflehog |
 | **Exploit** | metasploit, pwncat, pwntools, sliver |
 | **Post-Exploit** | linpeas, winpeas, impacket |
 | **OSINT** | sherlock, holehe, exiftool, gowitness |
-| **General** | search_cve (local CVE DB), run_shell |
 | **Supply-Chain** | trufflehog, syft, grype, osv_scanner |
+| **General / Report / Stash** | search_cve (local CVE DB), lookup_cve, search_context, run_shell |
 
-Lightweight tools are bundled in the app. Heavy tools (metasploit, hashcat, etc.) are installed on first use via homebrew/pip.
+Lightweight tools are bundled in the app. Heavy tools are installed on first use via homebrew/pip.
 
 ## Architecture
 
@@ -177,21 +183,24 @@ Lightweight tools are bundled in the app. Heavy tools (metasploit, hashcat, etc.
 - [Design Document](docs/plans/2026-03-23-exploitbot-design.md) — Product and UX design
 - [Technical Specification](docs/plans/2026-03-23-technical-spec.md) — 29 technical decisions with rationale
 - [Feature Matrix](docs/plans/2026-03-23-exhaustive-feature-matrix.md) — 1,307 checkable items for QA
-- [Tool Registry](ExploitBotEngine/tools/registry.json) — 39 tool schemas with CLI mappings
+- [Tool Definitions](ExploitBot/Sources/ExploitBot/Services/ToolDefinitions.swift) — 42 tool schemas in-app
+- [Tool Registry](ExploitBotEngine/tools/registry.json) — external CLI mappings for supported binaries (39 entries)
 - [System Prompts](ExploitBotEngine/prompts/) — Base + per-tab LLM instruction templates
 
 ### Runtime Verification
 
+- `swift build --package-path ExploitBot -c debug`
+- `python3 scripts/release-readiness-proof.py`
 - `python3 scripts/verify-live-models.py --qwen ${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-JANG_4M-MTP --metadata-only`
-- `python3 scripts/verify-live-models.py --qwen ${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-JANG_4M-MTP --restart-replay --require-ssm-companion-hit`
-- `python3 scripts/verify-live-models.py --qwen ${EXPLOITBOT_MODELS}/dealign.ai/Qwen3.6-35B-A3B-JANGTQ-CRACK`
-- `python3 scripts/verify-live-models.py --qwen ${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-35B-A3B-MXFP4-MTP`
-- `python3 scripts/verify-live-models.py --minimax ${EXPLOITBOT_MODELS}/JANGQ/MiniMax-M2.7-Small-JANGTQ`
+- `python3 scripts/verify-live-models.py --qwen ${EXPLOITBOT_RELEASE_QWEN_MODEL} --restart-replay --require-ssm-companion-hit`
 - `python3 scripts/release-app-live-qwen-proof.py`
-- `python3 scripts/release-app-qwen-cross-restart-cache-proof.py`
+- `EXPLOITBOT_RELEASE_QWEN_MODEL=${EXPLOITBOT_RELEASE_QWEN_MODEL} python3 scripts/release-app-qwen-cross-restart-cache-proof.py`
 - `python3 scripts/release-app-live-minimax-proof.py`
 - `python3 scripts/zaya-visual-live-proof.py`
-- `EXPLOITBOT_QWEN_SMOKE_MODEL=${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-JANG_4M-MTP scripts/qwen-multimodal-start-proof.py`
+- `python3 scripts/agent-live-tool-status-proof.py`
+- `python3 scripts/supply-chain-cve-ui-proof.py`
+- `python3 scripts/cve-settings-actions-proof.py`
+- `python3 scripts/terminal-tool-paths-proof.py`
 
 ## License
 
