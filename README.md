@@ -31,7 +31,7 @@
 
 ---
 
-AI-powered penetration testing toolkit with local LLM inference. No cloud. No guardrails. Open source.
+AI-powered penetration testing toolkit with local LLM inference. No cloud dependency, runs entirely on Apple Silicon.
 
 exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-explore/mlx), integrates real pentesting tools, and generates professional pentest reports from findings.
 
@@ -41,7 +41,7 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 
 ## Features
 
-**Local AI Inference** — Uncensored models running on Apple Silicon via the [vMLX engine](https://github.com/jjang-ai/vmlx). No API keys, no cloud, no content filtering. Your pentest stays on your machine.
+**Local AI Inference** — vMLX-based models run on-device via Apple Silicon, with no API keys required.
 
 **Ops System** — Named persistent workspaces for each engagement. Switch between targets without losing context. The LLM remembers evidence and findings across tabs.
 
@@ -58,7 +58,17 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 
 **CVE Knowledge Base + Import** — Local CVE database with semantic search plus list import support (CSV/JSON) and include filters.
 
+**Supply-Chain + CVE Ops** — Supply-chain discovery and CVE lifecycle workflows now include `trufflehog`, `syft`, `grype`, and `osv_scanner` action coverage in the same tool/agent state system as other recon modules.
+
 **5 Languages** — Full interface and report generation in English, 한국어, 中文, Español, 日本語.
+
+## Beta Readiness (May 26, 2026)
+
+- ✅ **Release app proofing is in place**: signed DMG/package path, manifest checks, bundled Python/engine runtime verification.
+- ✅ **Qwen family verification** is running on the smallest local target first (`Qwen3.6-27B-JANG_4M-MTP`) and includes hybrid cache + SSM + TurboQuant assertions.
+- ✅ **MiniMax verification** includes repeat cache hit checks and TurboQuant path checks in live/release harnesses.
+- ✅ **ZAYA1-VL image-chat path** is wired through the multimodal loader and has live completion evidence.
+- ⚠️ **Remaining**: full Qwen multimodal folder promotion and broader visual/UX regression coverage are still in progress.
 
 ## Screenshots
 
@@ -111,23 +121,32 @@ cd exploitbot
 
 exploitbot is model-folder driven and currently supports:
 
-- **Qwen text + vision** (`qwen` / `qwen-vl`)
-- **MiniMax text** (`minimax`)
-- **ZAYA1-VL**
+- **Qwen text** (`qwen`) with JANG/JANGTQ/MXFP4 folders.
+- **MiniMax text** (`minimax`).
+- **ZAYA1-VL** (`zaya1`/`zaya1-vl`).
 
 Use local folders from:
 
 ```bash
-/Users/eric/models/JANGQ/Qwen3.6-35B-A3B-JANG_2K-MTP   # smallest tested Qwen multimodal folder (~11 GB)
-/Users/eric/models/JANGQ/ZAYA1-VL-8B-JANGTQ4             # compact visual model
+export EXPLOITBOT_MODELS=/Users/eric/models
+
+# Smallest local Qwen smoke target (lower RAM)
+${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-JANG_4M-MTP
+
+# JANGTQ and MXFP4 variants
+${EXPLOITBOT_MODELS}/dealign.ai/Qwen3.6-35B-A3B-JANGTQ-CRACK
+${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-35B-A3B-MXFP4-MTP
+
+# Compact visual model
+${EXPLOITBOT_MODELS}/JANGQ/ZAYA1-VL-8B-JANGTQ4
 ```
 
-For runtime checks, load the above with the smallest model above first to keep RAM pressure low.
+For runtime checks, start with the smallest Qwen target first to keep RAM pressure low.
 
 <a name="tools"></a>
 ## Tools
 
-39 integrated pentesting tools across 8 categories:
+39 integrated pentesting tools across 9 categories:
 
 | Category | Tools |
 |----------|-------|
@@ -139,6 +158,7 @@ For runtime checks, load the above with the smallest model above first to keep R
 | **Post-Exploit** | linpeas, winpeas, impacket |
 | **OSINT** | sherlock, holehe, exiftool, gowitness |
 | **General** | search_cve (local CVE DB), run_shell |
+| **Supply-Chain** | trufflehog, syft, grype, osv_scanner |
 
 Lightweight tools are bundled in the app. Heavy tools (metasploit, hashcat, etc.) are installed on first use via homebrew/pip.
 
@@ -162,8 +182,16 @@ Lightweight tools are bundled in the app. Heavy tools (metasploit, hashcat, etc.
 
 ### Runtime Verification
 
-- `scripts/verify-live-models.py --qwen /Users/eric/models/JANGQ/Qwen3.6-35B-A3B-JANG_2K-MTP --restart-replay --require-ssm-rederive --require-ssm-companion-hit`
-- `EXPLOITBOT_QWEN_SMOKE_MODEL=/Users/eric/models/JANGQ/Qwen3.6-35B-A3B-JANG_2K-MTP scripts/qwen-multimodal-start-proof.py`
+- `python3 scripts/verify-live-models.py --qwen ${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-JANG_4M-MTP --metadata-only`
+- `python3 scripts/verify-live-models.py --qwen ${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-JANG_4M-MTP --restart-replay --require-ssm-companion-hit`
+- `python3 scripts/verify-live-models.py --qwen ${EXPLOITBOT_MODELS}/dealign.ai/Qwen3.6-35B-A3B-JANGTQ-CRACK`
+- `python3 scripts/verify-live-models.py --qwen ${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-35B-A3B-MXFP4-MTP`
+- `python3 scripts/verify-live-models.py --minimax ${EXPLOITBOT_MODELS}/JANGQ/MiniMax-M2.7-Small-JANGTQ`
+- `python3 scripts/release-app-live-qwen-proof.py`
+- `python3 scripts/release-app-qwen-cross-restart-cache-proof.py`
+- `python3 scripts/release-app-live-minimax-proof.py`
+- `python3 scripts/zaya-visual-live-proof.py`
+- `EXPLOITBOT_QWEN_SMOKE_MODEL=${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-JANG_4M-MTP scripts/qwen-multimodal-start-proof.py`
 
 ## License
 
