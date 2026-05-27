@@ -40,6 +40,7 @@ REQUIRED_SUBTAB_PROOFS = (
     "creds-subtab-state-proof.py",
     "exploit-subtab-state-proof.py",
     "post-subtab-state-proof.py",
+    "supply-chain-cve-ui-proof.py",
     "osint-subtab-state-proof.py",
     "report-subtab-state-proof.py",
 )
@@ -96,21 +97,36 @@ def assert_testserver_smoke() -> None:
     messages = request("GET", "/messages")
     results = request("GET", "/results")
     subtab_coverage = request("GET", "/qa/subtab-coverage")
+    subtab_lifecycle_matrix = request("GET", "/qa/subtab-lifecycle-matrix")
     agent_loop_coverage = request("GET", "/qa/agent-loop-coverage")
+    agent_loop_phase_matrix = request("GET", "/qa/agent-loop-phase-matrix")
     agent_tool_auth_coverage = request("GET", "/qa/agent-tool-authorization-coverage")
+    tab_tool_function_flow = request("GET", "/qa/tab-tool-function-flow")
+    tab_proof_family_matrix = request("GET", "/qa/tab-proof-family-matrix")
+    tool_execution_matrix = request("GET", "/qa/tool-execution-matrix")
     tool_flow_coverage = request("GET", "/qa/tool-flow-coverage")
     tool_coverage = request("GET", "/qa/tool-coverage")
     result_parser_coverage = request("GET", "/qa/result-parser-coverage")
+    parser_tool_matrix = request("GET", "/qa/parser-tool-matrix")
     runtime_coverage = request("GET", "/qa/runtime-coverage")
     python_runtime_inventory = request("GET", "/qa/python-runtime-inventory")
+    engine_python_runtime = request("GET", "/qa/engine-python-runtime")
     agent_flow_inventory = request("GET", "/qa/agent-flow-inventory")
     context_coverage = request("GET", "/qa/context-coverage")
+    context_flow_matrix = request("GET", "/qa/context-flow-matrix")
     evidence_lifecycle_coverage = request("GET", "/qa/evidence-lifecycle-coverage")
+    evidence_lifecycle_flow_matrix = request("GET", "/qa/evidence-lifecycle-flow-matrix")
+    cve_taxonomy_matrix = request("GET", "/qa/cve-taxonomy-matrix")
     settings_coverage = request("GET", "/qa/settings-coverage")
+    settings_surface_matrix = request("GET", "/qa/settings-surface-matrix")
     visual_coverage = request("GET", "/qa/visual-coverage")
+    visual_surface_matrix = request("GET", "/qa/visual-surface-matrix")
     theme_inventory = request("GET", "/qa/theme-inventory")
+    theme_token_matrix = request("GET", "/qa/theme-token-matrix")
     session_coverage = request("GET", "/qa/session-coverage")
+    session_workflow_matrix = request("GET", "/qa/session-workflow-matrix")
     tab_action_coverage = request("GET", "/qa/tab-action-coverage")
+    tab_action_surface_matrix = request("GET", "/qa/tab-action-surface-matrix")
     chat_coverage = request("GET", "/qa/chat-coverage")
     recon_coverage = request("GET", "/qa/recon-coverage")
     web_coverage = request("GET", "/qa/web-coverage")
@@ -122,13 +138,21 @@ def assert_testserver_smoke() -> None:
     report_coverage = request("GET", "/qa/report-coverage")
     stash_coverage = request("GET", "/qa/stash-coverage")
     endpoint_inventory = request("GET", "/qa/endpoint-inventory")
+    endpoint_route_matrix = request("GET", "/qa/endpoint-route-matrix")
     action_state_inventory = request("GET", "/qa/action-state-inventory")
     view_inventory = request("GET", "/qa/view-inventory")
+    function_flow_inventory = request("GET", "/qa/function-flow-inventory")
+    function_proof_matrix = request("GET", "/qa/function-proof-matrix")
     service_inventory = request("GET", "/qa/service-inventory")
+    service_function_matrix = request("GET", "/qa/service-function-matrix")
     model_state_inventory = request("GET", "/qa/model-state-inventory")
+    model_state_function_matrix = request("GET", "/qa/model-state-function-matrix")
+    proof_suite_inventory = request("GET", "/qa/proof-suite-inventory")
     coverage_index = request("GET", "/qa/coverage-index")
     proof_ledger = request("GET", "/qa/proof-ledger")
+    proof_category_matrix = request("GET", "/qa/proof-category-matrix")
     artifact_ledger = request("GET", "/qa/artifact-ledger")
+    artifact_manifest_matrix = request("GET", "/qa/artifact-manifest-matrix")
     checkpoint_ledger = request("GET", "/qa/checkpoint-ledger")
     audit_ledger = request("GET", "/qa/audit-ledger")
     gap_ledger = request("GET", "/qa/gap-ledger")
@@ -165,47 +189,89 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing shared subtab-state proof coverage: {qa}")
     if subtab_coverage.get("proofFileParity") is not True:
         raise AssertionError(f"/qa/subtab-coverage proof-file parity mismatch: {subtab_coverage}")
-    expected_subtab_tabs = ["creds", "exploit", "network", "osint", "post", "recon", "report", "web"]
+    expected_subtab_tabs = ["creds", "exploit", "network", "osint", "post", "recon", "report", "supplyChain", "web"]
     if sorted(qa.get("subtabStateTabs") or []) != expected_subtab_tabs:
         raise AssertionError(f"/state missing shared subtab-state tabs: {qa}")
     if "/qa/subtab-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing subtab coverage route contract: {qa}")
+    if "/qa/subtab-lifecycle-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing subtab lifecycle matrix route contract: {qa}")
     if "/qa/endpoint-inventory" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing endpoint inventory route contract: {qa}")
+    if "/qa/endpoint-route-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing endpoint route matrix route contract: {qa}")
     if "/qa/action-state-inventory" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing action-state inventory route contract: {qa}")
     if "/qa/view-inventory" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing view inventory route contract: {qa}")
+    if "/qa/function-flow-inventory" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing function-flow inventory route contract: {qa}")
+    if "/qa/function-proof-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing function proof matrix route contract: {qa}")
     if "/qa/service-inventory" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing service inventory route contract: {qa}")
+    if "/qa/service-function-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing service function matrix route contract: {qa}")
     if "/qa/model-state-inventory" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing model-state inventory route contract: {qa}")
+    if "/qa/model-state-function-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing model-state function matrix route contract: {qa}")
+    if "/qa/proof-suite-inventory" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing proof-suite inventory route contract: {qa}")
     if "/qa/agent-loop-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing agent loop coverage route contract: {qa}")
+    if "/qa/agent-loop-phase-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing agent loop phase matrix route contract: {qa}")
     if "/qa/agent-tool-authorization-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing agent tool authorization coverage route contract: {qa}")
+    if "/qa/tab-tool-function-flow" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing tab-tool-function flow route contract: {qa}")
+    if "/qa/tool-execution-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing tool execution matrix route contract: {qa}")
     if "/qa/tool-flow-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing tool flow coverage route contract: {qa}")
+    if "/qa/parser-tool-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing parser tool matrix route contract: {qa}")
     if "/qa/runtime-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing runtime coverage route contract: {qa}")
     if "/qa/python-runtime-inventory" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing python runtime inventory route contract: {qa}")
+    if "/qa/engine-python-runtime" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing engine python runtime route contract: {qa}")
     if "/qa/agent-flow-inventory" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing agent flow inventory route contract: {qa}")
     if "/qa/context-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing context coverage route contract: {qa}")
+    if "/qa/context-flow-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing context flow matrix route contract: {qa}")
     if "/qa/evidence-lifecycle-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing evidence lifecycle coverage route contract: {qa}")
+    if "/qa/evidence-lifecycle-flow-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing evidence lifecycle flow matrix route contract: {qa}")
+    if "/qa/cve-taxonomy-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing cve taxonomy matrix route contract: {qa}")
     if "/qa/settings-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing settings coverage route contract: {qa}")
+    if "/qa/settings-surface-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing settings surface matrix route contract: {qa}")
     if "/qa/visual-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing visual coverage route contract: {qa}")
+    if "/qa/visual-surface-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing visual surface matrix route contract: {qa}")
     if "/qa/theme-inventory" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing theme inventory route contract: {qa}")
+    if "/qa/theme-token-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing theme token matrix route contract: {qa}")
     if "/qa/session-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing session coverage route contract: {qa}")
+    if "/qa/session-workflow-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing session workflow matrix route contract: {qa}")
     if "/qa/tab-action-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing tab action coverage route contract: {qa}")
+    if "/qa/tab-action-surface-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing tab action surface matrix route contract: {qa}")
+    if "/qa/tab-proof-family-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing tab proof family matrix route contract: {qa}")
     if "/qa/chat-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing chat coverage route contract: {qa}")
     if "/qa/recon-coverage" not in qa.get("stateRoutes", []):
@@ -230,8 +296,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing coverage-index route contract: {qa}")
     if "/qa/proof-ledger" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing proof-ledger route contract: {qa}")
+    if "/qa/proof-category-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing proof-category matrix route contract: {qa}")
     if "/qa/artifact-ledger" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing artifact-ledger route contract: {qa}")
+    if "/qa/artifact-manifest-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing artifact manifest matrix route contract: {qa}")
     if "/qa/checkpoint-ledger" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing checkpoint-ledger route contract: {qa}")
     if "/qa/audit-ledger" not in qa.get("stateRoutes", []):
@@ -246,6 +316,14 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/subtab-coverage failed: {subtab_coverage}")
     if sorted((subtab_coverage.get("tabs") or {}).keys()) != expected_subtab_tabs:
         raise AssertionError(f"/qa/subtab-coverage tabs mismatch: {subtab_coverage}")
+    if subtab_lifecycle_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/subtab-lifecycle-matrix failed: {subtab_lifecycle_matrix}")
+    if subtab_lifecycle_matrix.get("subtabCount") != sum((entry.get("count") or 0) for entry in (subtab_coverage.get("tabs") or {}).values()):
+        raise AssertionError(f"/qa/subtab-lifecycle-matrix count mismatch: {subtab_lifecycle_matrix}")
+    if subtab_lifecycle_matrix.get("proofOwnerFileParity") is not True:
+        raise AssertionError(f"/qa/subtab-lifecycle-matrix owner parity mismatch: {subtab_lifecycle_matrix}")
+    if subtab_lifecycle_matrix.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/subtab-lifecycle-matrix proof-file parity mismatch: {subtab_lifecycle_matrix}")
     if agent_loop_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/agent-loop-coverage failed: {agent_loop_coverage}")
     if agent_loop_coverage.get("modes") != {"autopilot": "execute", "copilot": "approval", "manual": "suggest"}:
@@ -269,9 +347,25 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/agent-tool-authorization-coverage autopilot policy mismatch: {agent_tool_auth_coverage}")
     if agent_tool_auth_coverage.get("proofFileParity") is not True:
         raise AssertionError(f"/qa/agent-tool-authorization-coverage proof-file parity mismatch: {agent_tool_auth_coverage}")
+    if tab_tool_function_flow.get("ok") is not True:
+        raise AssertionError(f"/qa/tab-tool-function-flow failed: {tab_tool_function_flow}")
+    if tab_tool_function_flow.get("tabCount") != 10:
+        raise AssertionError(f"/qa/tab-tool-function-flow tab count mismatch: {tab_tool_function_flow}")
+    if tab_tool_function_flow.get("tabParity") is not True:
+        raise AssertionError(f"/qa/tab-tool-function-flow tab parity mismatch: {tab_tool_function_flow}")
+    if tab_tool_function_flow.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/tab-tool-function-flow proof-file parity mismatch: {tab_tool_function_flow}")
+    if tool_execution_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/tool-execution-matrix failed: {tool_execution_matrix}")
+    if tool_execution_matrix.get("toolCount") != tool_coverage.get("toolCount"):
+        raise AssertionError(f"/qa/tool-execution-matrix tool count mismatch: {tool_execution_matrix}")
+    if tool_execution_matrix.get("rowParity") is not True:
+        raise AssertionError(f"/qa/tool-execution-matrix row parity mismatch: {tool_execution_matrix}")
+    if tool_execution_matrix.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/tool-execution-matrix proof-file parity mismatch: {tool_execution_matrix}")
     if tool_flow_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/tool-flow-coverage failed: {tool_flow_coverage}")
-    if tool_flow_coverage.get("toolCount") != 38 or tool_flow_coverage.get("callbackCount") != 3:
+    if tool_flow_coverage.get("toolCount") != tool_coverage.get("toolCount") or tool_flow_coverage.get("callbackCount") != 3:
         raise AssertionError(f"/qa/tool-flow-coverage registry counters mismatch: {tool_flow_coverage}")
     if tool_flow_coverage.get("toolSchemaCap") != 12:
         raise AssertionError(f"/qa/tool-flow-coverage schema cap mismatch: {tool_flow_coverage}")
@@ -389,6 +483,18 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/evidence-lifecycle-coverage force-inject policy mismatch: {evidence_lifecycle_coverage}")
     if evidence_lifecycle_coverage.get("proofFileParity") is not True:
         raise AssertionError(f"/qa/evidence-lifecycle-coverage proof-file parity mismatch: {evidence_lifecycle_coverage}")
+    if evidence_lifecycle_flow_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/evidence-lifecycle-flow-matrix failed: {evidence_lifecycle_flow_matrix}")
+    if evidence_lifecycle_flow_matrix.get("stageCount") != evidence_lifecycle_coverage.get("stageCount"):
+        raise AssertionError(f"/qa/evidence-lifecycle-flow-matrix stage count mismatch: {evidence_lifecycle_flow_matrix}")
+    if evidence_lifecycle_flow_matrix.get("storageTargetCount") != evidence_lifecycle_coverage.get("storageTargetCount"):
+        raise AssertionError(f"/qa/evidence-lifecycle-flow-matrix storage count mismatch: {evidence_lifecycle_flow_matrix}")
+    if evidence_lifecycle_flow_matrix.get("handoffCount") != evidence_lifecycle_coverage.get("handoffCount"):
+        raise AssertionError(f"/qa/evidence-lifecycle-flow-matrix handoff count mismatch: {evidence_lifecycle_flow_matrix}")
+    if evidence_lifecycle_flow_matrix.get("proofOwnerFileParity") is not True:
+        raise AssertionError(f"/qa/evidence-lifecycle-flow-matrix proof owner parity mismatch: {evidence_lifecycle_flow_matrix}")
+    if evidence_lifecycle_flow_matrix.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/evidence-lifecycle-flow-matrix proof-file parity mismatch: {evidence_lifecycle_flow_matrix}")
     if settings_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/settings-coverage failed: {settings_coverage}")
     if settings_coverage.get("categoryCount") != 9:
@@ -455,6 +561,7 @@ def assert_testserver_smoke() -> None:
         "onboardingModeSelection",
         "sidebarOperationLifecycle",
         "windowOverlayControls",
+        "terminalToolPathWiring",
         "modelFolderSelection",
         "persistenceAndResultRebuild",
         "findingWizardSubmit",
@@ -475,7 +582,7 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/session-coverage state key mismatch: {session_coverage}")
     if tab_action_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/tab-action-coverage failed: {tab_action_coverage}")
-    if tab_action_coverage.get("tabs") != ["recon", "web", "network", "creds", "exploit", "post", "osint", "report", "stash"]:
+    if tab_action_coverage.get("tabs") != ["recon", "web", "network", "creds", "exploit", "post", "supplyChain", "osint", "report", "stash"]:
         raise AssertionError(f"/qa/tab-action-coverage tabs mismatch: {tab_action_coverage}")
     if tab_action_coverage.get("proofCount", 0) < 27:
         raise AssertionError(f"/qa/tab-action-coverage proof count mismatch: {tab_action_coverage}")
@@ -486,6 +593,7 @@ def assert_testserver_smoke() -> None:
         "credsActions",
         "exploitActions",
         "postActions",
+        "supplyChainActions",
         "osintActions",
         "reportActions",
         "stashActions",
@@ -500,7 +608,7 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/tab-action-coverage surface proof count mismatch: {tab_action_coverage}")
     if tab_action_coverage.get("tabActionSurfaceProofParity") is not True:
         raise AssertionError(f"/qa/tab-action-coverage surface proof parity mismatch: {tab_action_coverage}")
-    if "stashActions" not in (tab_action_coverage.get("actionStateKeys") or []):
+    if "stashActions" not in (tab_action_coverage.get("actionStateKeys") or []) or "supplyChainLifecycle" not in (tab_action_coverage.get("actionStateKeys") or []):
         raise AssertionError(f"/qa/tab-action-coverage action state keys mismatch: {tab_action_coverage}")
     if chat_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/chat-coverage failed: {chat_coverage}")
@@ -592,6 +700,20 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index endpoint inventory route count mismatch: {coverage_index}")
     if app_state_group.get("endpointInventoryGroupCounts") != endpoint_inventory.get("groupCounts"):
         raise AssertionError(f"/qa/coverage-index endpoint inventory group counts mismatch: {coverage_index}")
+    if endpoint_route_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/endpoint-route-matrix failed: {endpoint_route_matrix}")
+    if endpoint_route_matrix.get("routeCount") != endpoint_inventory.get("routeCount"):
+        raise AssertionError(f"/qa/endpoint-route-matrix route count mismatch: {endpoint_route_matrix}")
+    if endpoint_route_matrix.get("proofOwnerFileParity") is not True:
+        raise AssertionError(f"/qa/endpoint-route-matrix proof owner parity mismatch: {endpoint_route_matrix}")
+    if endpoint_route_matrix.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/endpoint-route-matrix proof-file parity mismatch: {endpoint_route_matrix}")
+    if app_state_group.get("endpointRouteMatrixCount") != endpoint_route_matrix.get("routeCount"):
+        raise AssertionError(f"/qa/coverage-index endpoint route matrix count mismatch: {coverage_index}")
+    if app_state_group.get("endpointRouteMatrixProofOwnerFileParity") != endpoint_route_matrix.get("proofOwnerFileParity"):
+        raise AssertionError(f"/qa/coverage-index endpoint route matrix owner parity mismatch: {coverage_index}")
+    if app_state_group.get("endpointRouteMatrixProofFileParity") != endpoint_route_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index endpoint route matrix proof parity mismatch: {coverage_index}")
     if action_state_inventory.get("ok") is not True:
         raise AssertionError(f"/qa/action-state-inventory failed: {action_state_inventory}")
     if action_state_inventory.get("actionStateCount", 0) < 30:
@@ -620,6 +742,42 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index view inventory group counts mismatch: {coverage_index}")
     if app_state_group.get("viewInventoryMainTabViews") != view_inventory.get("mainTabViews"):
         raise AssertionError(f"/qa/coverage-index view inventory main tab map mismatch: {coverage_index}")
+    if function_flow_inventory.get("ok") is not True:
+        raise AssertionError(f"/qa/function-flow-inventory failed: {function_flow_inventory}")
+    if function_flow_inventory.get("functionCount", 0) < 500:
+        raise AssertionError(f"/qa/function-flow-inventory function count too low: {function_flow_inventory}")
+    if function_flow_inventory.get("groupParity") is not True:
+        raise AssertionError(f"/qa/function-flow-inventory group parity mismatch: {function_flow_inventory}")
+    if function_flow_inventory.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/function-flow-inventory proof-file parity mismatch: {function_flow_inventory}")
+    if app_state_group.get("functionFlowInventoryCount") != function_flow_inventory.get("functionCount"):
+        raise AssertionError(f"/qa/coverage-index function-flow inventory count mismatch: {coverage_index}")
+    if app_state_group.get("functionFlowInventoryGroupCounts") != function_flow_inventory.get("groupCounts"):
+        raise AssertionError(f"/qa/coverage-index function-flow inventory group counts mismatch: {coverage_index}")
+    if app_state_group.get("functionFlowInventoryProofFileParity") != function_flow_inventory.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index function-flow inventory proof parity mismatch: {coverage_index}")
+    if function_proof_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/function-proof-matrix failed: {function_proof_matrix}")
+    if function_proof_matrix.get("functionCount") != function_flow_inventory.get("functionCount"):
+        raise AssertionError(f"/qa/function-proof-matrix function count mismatch: {function_proof_matrix}")
+    if function_proof_matrix.get("rowParity") is not True:
+        raise AssertionError(f"/qa/function-proof-matrix row parity mismatch: {function_proof_matrix}")
+    if function_proof_matrix.get("groupRouteParity") is not True:
+        raise AssertionError(f"/qa/function-proof-matrix group route parity mismatch: {function_proof_matrix}")
+    if function_proof_matrix.get("proofOwnerFileParity") is not True:
+        raise AssertionError(f"/qa/function-proof-matrix proof owner parity mismatch: {function_proof_matrix}")
+    if function_proof_matrix.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/function-proof-matrix proof-file parity mismatch: {function_proof_matrix}")
+    if app_state_group.get("functionProofMatrixCount") != function_proof_matrix.get("functionCount"):
+        raise AssertionError(f"/qa/coverage-index function proof matrix count mismatch: {coverage_index}")
+    if app_state_group.get("functionProofMatrixRowParity") != function_proof_matrix.get("rowParity"):
+        raise AssertionError(f"/qa/coverage-index function proof matrix row parity mismatch: {coverage_index}")
+    if app_state_group.get("functionProofMatrixGroupRouteParity") != function_proof_matrix.get("groupRouteParity"):
+        raise AssertionError(f"/qa/coverage-index function proof matrix group route parity mismatch: {coverage_index}")
+    if app_state_group.get("functionProofMatrixProofOwnerFileParity") != function_proof_matrix.get("proofOwnerFileParity"):
+        raise AssertionError(f"/qa/coverage-index function proof matrix owner parity mismatch: {coverage_index}")
+    if app_state_group.get("functionProofMatrixProofFileParity") != function_proof_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index function proof matrix proof parity mismatch: {coverage_index}")
     if service_inventory.get("ok") is not True:
         raise AssertionError(f"/qa/service-inventory failed: {service_inventory}")
     if service_inventory.get("serviceFileCount", 0) < 18:
@@ -634,6 +792,20 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index service inventory function count mismatch: {coverage_index}")
     if app_state_group.get("serviceInventoryGroupCounts") != service_inventory.get("groupCounts"):
         raise AssertionError(f"/qa/coverage-index service inventory group counts mismatch: {coverage_index}")
+    if service_function_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/service-function-matrix failed: {service_function_matrix}")
+    if service_function_matrix.get("functionCount") != service_inventory.get("functionCount"):
+        raise AssertionError(f"/qa/service-function-matrix function count mismatch: {service_function_matrix}")
+    if service_function_matrix.get("proofOwnerFileParity") is not True:
+        raise AssertionError(f"/qa/service-function-matrix proof owner parity mismatch: {service_function_matrix}")
+    if service_function_matrix.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/service-function-matrix proof-file parity mismatch: {service_function_matrix}")
+    if app_state_group.get("serviceFunctionMatrixCount") != service_function_matrix.get("functionCount"):
+        raise AssertionError(f"/qa/coverage-index service function matrix count mismatch: {coverage_index}")
+    if app_state_group.get("serviceFunctionMatrixProofOwnerFileParity") != service_function_matrix.get("proofOwnerFileParity"):
+        raise AssertionError(f"/qa/coverage-index service function matrix owner parity mismatch: {coverage_index}")
+    if app_state_group.get("serviceFunctionMatrixProofFileParity") != service_function_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index service function matrix proof parity mismatch: {coverage_index}")
     if model_state_inventory.get("ok") is not True:
         raise AssertionError(f"/qa/model-state-inventory failed: {model_state_inventory}")
     if model_state_inventory.get("fileCount", 0) < 6:
@@ -648,6 +820,38 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index model-state inventory function count mismatch: {coverage_index}")
     if app_state_group.get("modelStateInventoryGroupCounts") != model_state_inventory.get("groupCounts"):
         raise AssertionError(f"/qa/coverage-index model-state inventory group count mismatch: {coverage_index}")
+    if model_state_function_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/model-state-function-matrix failed: {model_state_function_matrix}")
+    if model_state_function_matrix.get("functionCount") != model_state_inventory.get("functionCount"):
+        raise AssertionError(f"/qa/model-state-function-matrix function count mismatch: {model_state_function_matrix}")
+    if model_state_function_matrix.get("proofOwnerFileParity") is not True:
+        raise AssertionError(f"/qa/model-state-function-matrix proof owner parity mismatch: {model_state_function_matrix}")
+    if model_state_function_matrix.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/model-state-function-matrix proof-file parity mismatch: {model_state_function_matrix}")
+    if app_state_group.get("modelStateFunctionMatrixCount") != model_state_function_matrix.get("functionCount"):
+        raise AssertionError(f"/qa/coverage-index model-state function matrix count mismatch: {coverage_index}")
+    if app_state_group.get("modelStateFunctionMatrixProofOwnerFileParity") != model_state_function_matrix.get("proofOwnerFileParity"):
+        raise AssertionError(f"/qa/coverage-index model-state function matrix owner parity mismatch: {coverage_index}")
+    if app_state_group.get("modelStateFunctionMatrixProofFileParity") != model_state_function_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index model-state function matrix proof parity mismatch: {coverage_index}")
+    if proof_suite_inventory.get("ok") is not True:
+        raise AssertionError(f"/qa/proof-suite-inventory failed: {proof_suite_inventory}")
+    if proof_suite_inventory.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/proof-suite-inventory proof-file parity mismatch: {proof_suite_inventory}")
+    if proof_suite_inventory.get("parseParity") is not True:
+        raise AssertionError(f"/qa/proof-suite-inventory parse parity mismatch: {proof_suite_inventory}")
+    if proof_suite_inventory.get("fileCount", 0) < 120:
+        raise AssertionError(f"/qa/proof-suite-inventory file count too low: {proof_suite_inventory}")
+    if proof_suite_inventory.get("routeTargetCount", 0) < 45:
+        raise AssertionError(f"/qa/proof-suite-inventory route target count too low: {proof_suite_inventory}")
+    if app_state_group.get("proofSuiteInventoryFileCount") != proof_suite_inventory.get("fileCount"):
+        raise AssertionError(f"/qa/coverage-index proof-suite file count mismatch: {coverage_index}")
+    if app_state_group.get("proofSuiteInventoryGroupCounts") != proof_suite_inventory.get("groupCounts"):
+        raise AssertionError(f"/qa/coverage-index proof-suite group count mismatch: {coverage_index}")
+    if app_state_group.get("proofSuiteInventoryProofFileParity") != proof_suite_inventory.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index proof-suite file parity mismatch: {coverage_index}")
+    if app_state_group.get("proofSuiteInventoryParseParity") != proof_suite_inventory.get("parseParity"):
+        raise AssertionError(f"/qa/coverage-index proof-suite parse parity mismatch: {coverage_index}")
     if app_state_group.get("contextHooks") != qa.get("contextHooks"):
         raise AssertionError(f"/qa/coverage-index context hook list mismatch: {coverage_index}")
     if app_state_group.get("contextHookCount") != len(qa.get("contextHooks") or []):
@@ -696,6 +900,16 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index proof category total mismatch: {coverage_index}")
     if app_state_group.get("proofCategoryParity") is not True:
         raise AssertionError(f"/qa/coverage-index proof category parity flag mismatch: {coverage_index}")
+    if proof_category_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/proof-category-matrix failed: {proof_category_matrix}")
+    if app_state_group.get("proofCategoryMatrixCount") != proof_category_matrix.get("categoryCount"):
+        raise AssertionError(f"/qa/coverage-index proof category matrix count mismatch: {coverage_index}")
+    if app_state_group.get("proofCategoryMatrixProofFileParity") != proof_category_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index proof category matrix proof parity mismatch: {coverage_index}")
+    if app_state_group.get("proofCategoryMatrixCategoryProofFileParity") != proof_category_matrix.get("categoryProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index proof category matrix category parity mismatch: {coverage_index}")
+    if app_state_group.get("proofCategoryMatrixProofLedgerCount") != proof_category_matrix.get("proofLedgerCount"):
+        raise AssertionError(f"/qa/coverage-index proof category matrix ledger count mismatch: {coverage_index}")
     if app_state_group.get("checkpointLedgerCount", 0) < 200:
         raise AssertionError(f"/qa/coverage-index checkpoint ledger count mismatch: {coverage_index}")
     if app_state_group.get("checkpoints") != checkpoint_ledger.get("checkpoints"):
@@ -916,6 +1130,14 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index release notarization gate reason mismatch: {coverage_index}")
     if release_group.get("releaseCommands") != release_readiness.get("commands"):
         raise AssertionError(f"/qa/coverage-index release command map mismatch: {coverage_index}")
+    if release_readiness.get("pythonEngine") is not True:
+        raise AssertionError(f"/qa/release-readiness missing bundled Python engine flag: {release_readiness}")
+    if release_readiness.get("pythonEngineVenv") is not False:
+        raise AssertionError(f"/qa/release-readiness should exclude local engine virtualenv: {release_readiness}")
+    if release_readiness.get("bundledEngineLaunch") is not True or release_readiness.get("bundledEngineServer") is not True:
+        raise AssertionError(f"/qa/release-readiness bundled engine file parity mismatch: {release_readiness}")
+    if release_group.get("pythonEngine") != release_readiness.get("pythonEngine"):
+        raise AssertionError(f"/qa/coverage-index release Python engine flag mismatch: {coverage_index}")
     if release_group.get("appBinarySha256Length") != 64 or release_group.get("dmgSha256Length") != 64:
         raise AssertionError(f"/qa/coverage-index release hash length mismatch: {coverage_index}")
     if beta_readiness.get("ok") is not True:
@@ -961,6 +1183,13 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/python-runtime-inventory function count too low: {python_runtime_inventory}")
     if python_runtime_inventory.get("proofFileParity") is not True:
         raise AssertionError(f"/qa/python-runtime-inventory proof-file parity mismatch: {python_runtime_inventory}")
+    if engine_python_runtime.get("ok") is not True:
+        raise AssertionError(f"/qa/engine-python-runtime failed: {engine_python_runtime}")
+    selected_engine_python = engine_python_runtime.get("selected") or {}
+    if selected_engine_python.get("valid") is not True or selected_engine_python.get("missingModuleCount") != 0:
+        raise AssertionError(f"/qa/engine-python-runtime selected runtime invalid: {engine_python_runtime}")
+    if "vmlx_engine" not in (engine_python_runtime.get("requiredModules") or []):
+        raise AssertionError(f"/qa/engine-python-runtime missing vmlx_engine requirement: {engine_python_runtime}")
     if runtime_group.get("pythonRuntimeInventoryFileCount") != python_runtime_inventory.get("fileCount"):
         raise AssertionError(f"/qa/coverage-index python runtime file count mismatch: {coverage_index}")
     if runtime_group.get("pythonRuntimeInventoryFunctionCount") != python_runtime_inventory.get("functionCount"):
@@ -1055,6 +1284,34 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/context-coverage delivery mode proof-file parity mismatch: {context_coverage}")
     if chat_context_group.get("contextDeliveryModeProofFileParity") != context_coverage.get("contextDeliveryModeProofFileParity"):
         raise AssertionError(f"/qa/coverage-index context delivery mode proof-file parity mismatch: {coverage_index}")
+    if context_flow_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/context-flow-matrix failed: {context_flow_matrix}")
+    if context_flow_matrix.get("retrievalSourceCount") != context_coverage.get("retrievalSourceCount"):
+        raise AssertionError(f"/qa/context-flow-matrix retrieval count mismatch: {context_flow_matrix}")
+    if context_flow_matrix.get("deliveryModeCount") != context_coverage.get("contextDeliveryModeCount"):
+        raise AssertionError(f"/qa/context-flow-matrix delivery mode count mismatch: {context_flow_matrix}")
+    if context_flow_matrix.get("proofOwnerFileParity") is not True:
+        raise AssertionError(f"/qa/context-flow-matrix proof owner parity mismatch: {context_flow_matrix}")
+    if context_flow_matrix.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/context-flow-matrix proof-file parity mismatch: {context_flow_matrix}")
+    if chat_context_group.get("contextFlowMatrixRetrievalSourceCount") != context_flow_matrix.get("retrievalSourceCount"):
+        raise AssertionError(f"/qa/coverage-index context flow matrix retrieval count mismatch: {coverage_index}")
+    if chat_context_group.get("contextFlowMatrixDeliveryModeCount") != context_flow_matrix.get("deliveryModeCount"):
+        raise AssertionError(f"/qa/coverage-index context flow matrix delivery count mismatch: {coverage_index}")
+    if chat_context_group.get("contextFlowMatrixProofOwnerFileParity") != context_flow_matrix.get("proofOwnerFileParity"):
+        raise AssertionError(f"/qa/coverage-index context flow matrix owner parity mismatch: {coverage_index}")
+    if chat_context_group.get("contextFlowMatrixProofFileParity") != context_flow_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index context flow matrix proof parity mismatch: {coverage_index}")
+    if chat_context_group.get("evidenceLifecycleFlowMatrixStageCount") != evidence_lifecycle_flow_matrix.get("stageCount"):
+        raise AssertionError(f"/qa/coverage-index evidence lifecycle flow matrix stage count mismatch: {coverage_index}")
+    if chat_context_group.get("evidenceLifecycleFlowMatrixStorageTargetCount") != evidence_lifecycle_flow_matrix.get("storageTargetCount"):
+        raise AssertionError(f"/qa/coverage-index evidence lifecycle flow matrix storage count mismatch: {coverage_index}")
+    if chat_context_group.get("evidenceLifecycleFlowMatrixHandoffCount") != evidence_lifecycle_flow_matrix.get("handoffCount"):
+        raise AssertionError(f"/qa/coverage-index evidence lifecycle flow matrix handoff count mismatch: {coverage_index}")
+    if chat_context_group.get("evidenceLifecycleFlowMatrixProofOwnerFileParity") != evidence_lifecycle_flow_matrix.get("proofOwnerFileParity"):
+        raise AssertionError(f"/qa/coverage-index evidence lifecycle flow matrix owner parity mismatch: {coverage_index}")
+    if chat_context_group.get("evidenceLifecycleFlowMatrixProofFileParity") != evidence_lifecycle_flow_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index evidence lifecycle flow matrix proof parity mismatch: {coverage_index}")
     if agent_flow_inventory.get("ok") is not True:
         raise AssertionError(f"/qa/agent-flow-inventory failed: {agent_flow_inventory}")
     if agent_flow_inventory.get("fileCount", 0) < 8:
@@ -1122,6 +1379,28 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index cve taxonomy risk-signal parity mismatch: {coverage_index}")
     if chat_context_group.get("cveTaxonomyEvidenceFlowParity") != cve_taxonomy_coverage.get("evidenceFlowParity"):
         raise AssertionError(f"/qa/coverage-index cve taxonomy evidence-flow parity mismatch: {coverage_index}")
+    if cve_taxonomy_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/cve-taxonomy-matrix failed: {cve_taxonomy_matrix}")
+    if cve_taxonomy_matrix.get("totalRowCount") != (
+        cve_taxonomy_coverage.get("sourceFeedCount", 0)
+        + cve_taxonomy_coverage.get("softwareFamilyCount", 0)
+        + cve_taxonomy_coverage.get("vulnerabilityClassCount", 0)
+        + cve_taxonomy_coverage.get("riskSignalCount", 0)
+        + cve_taxonomy_coverage.get("evidenceFlowCount", 0)
+    ):
+        raise AssertionError(f"/qa/cve-taxonomy-matrix total count mismatch: {cve_taxonomy_matrix}")
+    if cve_taxonomy_matrix.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/cve-taxonomy-matrix proof parity mismatch: {cve_taxonomy_matrix}")
+    if cve_taxonomy_matrix.get("rowProofFileParity") is not True:
+        raise AssertionError(f"/qa/cve-taxonomy-matrix row proof parity mismatch: {cve_taxonomy_matrix}")
+    if chat_context_group.get("cveTaxonomyMatrixCount") != cve_taxonomy_matrix.get("totalRowCount"):
+        raise AssertionError(f"/qa/coverage-index cve taxonomy matrix count mismatch: {coverage_index}")
+    if chat_context_group.get("cveTaxonomyMatrixProofFileParity") != cve_taxonomy_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index cve taxonomy matrix proof parity mismatch: {coverage_index}")
+    if chat_context_group.get("cveTaxonomyMatrixRowProofFileParity") != cve_taxonomy_matrix.get("rowProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index cve taxonomy matrix row parity mismatch: {coverage_index}")
+    if chat_context_group.get("cveTaxonomyMatrixEvidenceFlowCount") != cve_taxonomy_matrix.get("evidenceFlowCount"):
+        raise AssertionError(f"/qa/coverage-index cve taxonomy matrix evidence count mismatch: {coverage_index}")
     if settings_visuals_group.get("settingsSurfaceProofs") != settings_coverage.get("settingsSurfaceProofs"):
         raise AssertionError(f"/qa/coverage-index settings surface proof map mismatch: {coverage_index}")
     if settings_visuals_group.get("settingsCategories") != settings_coverage.get("categories"):
@@ -1158,6 +1437,22 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/settings-coverage surface proof-file parity mismatch: {settings_coverage}")
     if settings_visuals_group.get("settingsSurfaceProofFileParity") != settings_coverage.get("settingsSurfaceProofFileParity"):
         raise AssertionError(f"/qa/coverage-index settings surface proof-file parity mismatch: {coverage_index}")
+    if settings_surface_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/settings-surface-matrix failed: {settings_surface_matrix}")
+    if settings_surface_matrix.get("surfaceCount") != settings_coverage.get("settingsSurfaceCount"):
+        raise AssertionError(f"/qa/settings-surface-matrix surface count mismatch: {settings_surface_matrix}")
+    if settings_surface_matrix.get("surfaceProofFileParity") is not True:
+        raise AssertionError(f"/qa/settings-surface-matrix surface proof parity mismatch: {settings_surface_matrix}")
+    if settings_surface_matrix.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/settings-surface-matrix proof parity mismatch: {settings_surface_matrix}")
+    if settings_visuals_group.get("settingsSurfaceMatrixCount") != settings_surface_matrix.get("surfaceCount"):
+        raise AssertionError(f"/qa/coverage-index settings surface matrix count mismatch: {coverage_index}")
+    if settings_visuals_group.get("settingsSurfaceMatrixProofFileParity") != settings_surface_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index settings surface matrix proof parity mismatch: {coverage_index}")
+    if settings_visuals_group.get("settingsSurfaceMatrixSurfaceProofFileParity") != settings_surface_matrix.get("surfaceProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index settings surface matrix surface parity mismatch: {coverage_index}")
+    if settings_visuals_group.get("settingsSurfaceMatrixThemeFileCount") != settings_surface_matrix.get("themeInventoryFileCount"):
+        raise AssertionError(f"/qa/coverage-index settings surface matrix theme count mismatch: {coverage_index}")
     if settings_visuals_group.get("visualSurfaceProofs") != visual_coverage.get("visualSurfaceProofs"):
         raise AssertionError(f"/qa/coverage-index visual surface proof map mismatch: {coverage_index}")
     if visual_coverage.get("visualSurfaceProofFileParity") is not True:
@@ -1174,6 +1469,22 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/visual-coverage visual tab family proof-file parity mismatch: {visual_coverage}")
     if settings_visuals_group.get("visualTabProofFamilyFileParity") != visual_coverage.get("visualTabProofFamilyFileParity"):
         raise AssertionError(f"/qa/coverage-index visual tab family proof-file parity mismatch: {coverage_index}")
+    if visual_surface_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/visual-surface-matrix failed: {visual_surface_matrix}")
+    if visual_surface_matrix.get("surfaceCount") != visual_coverage.get("visualSurfaceCount"):
+        raise AssertionError(f"/qa/visual-surface-matrix surface count mismatch: {visual_surface_matrix}")
+    if visual_surface_matrix.get("proofOwnerFileParity") is not True:
+        raise AssertionError(f"/qa/visual-surface-matrix proof owner parity mismatch: {visual_surface_matrix}")
+    if visual_surface_matrix.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/visual-surface-matrix proof-file parity mismatch: {visual_surface_matrix}")
+    if settings_visuals_group.get("visualSurfaceMatrixCount") != visual_surface_matrix.get("surfaceCount"):
+        raise AssertionError(f"/qa/coverage-index visual surface matrix count mismatch: {coverage_index}")
+    if settings_visuals_group.get("visualSurfaceMatrixProofOwnerFileParity") != visual_surface_matrix.get("proofOwnerFileParity"):
+        raise AssertionError(f"/qa/coverage-index visual surface matrix owner parity mismatch: {coverage_index}")
+    if settings_visuals_group.get("visualSurfaceMatrixProofFileParity") != visual_surface_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index visual surface matrix proof parity mismatch: {coverage_index}")
+    if settings_visuals_group.get("visualSurfaceMatrixManifestCount") != visual_surface_matrix.get("manifestCount"):
+        raise AssertionError(f"/qa/coverage-index visual surface matrix manifest count mismatch: {coverage_index}")
     if settings_visuals_group.get("visualRoutes") != visual_coverage.get("routes"):
         raise AssertionError(f"/qa/coverage-index visual route list mismatch: {coverage_index}")
     if settings_visuals_group.get("visualRouteCount") != len(visual_coverage.get("routes") or []):
@@ -1212,6 +1523,20 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index theme inventory token count mismatch: {coverage_index}")
     if settings_visuals_group.get("themeInventoryGroupCounts") != theme_inventory.get("groupCounts"):
         raise AssertionError(f"/qa/coverage-index theme inventory group count mismatch: {coverage_index}")
+    if theme_token_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/theme-token-matrix failed: {theme_token_matrix}")
+    if theme_token_matrix.get("fileCount") != theme_inventory.get("fileCount"):
+        raise AssertionError(f"/qa/theme-token-matrix file count mismatch: {theme_token_matrix}")
+    if theme_token_matrix.get("staticTokenCount") != theme_inventory.get("staticTokenCount"):
+        raise AssertionError(f"/qa/theme-token-matrix token count mismatch: {theme_token_matrix}")
+    if theme_token_matrix.get("policyParity") is not True:
+        raise AssertionError(f"/qa/theme-token-matrix policy parity mismatch: {theme_token_matrix}")
+    if settings_visuals_group.get("themeTokenMatrixFileCount") != theme_token_matrix.get("fileCount"):
+        raise AssertionError(f"/qa/coverage-index theme token matrix file count mismatch: {coverage_index}")
+    if settings_visuals_group.get("themeTokenMatrixStaticTokenCount") != theme_token_matrix.get("staticTokenCount"):
+        raise AssertionError(f"/qa/coverage-index theme token matrix token count mismatch: {coverage_index}")
+    if settings_visuals_group.get("themeTokenMatrixPolicyParity") != theme_token_matrix.get("policyParity"):
+        raise AssertionError(f"/qa/coverage-index theme token matrix policy parity mismatch: {coverage_index}")
     tools_parsers_group = index_groups.get("toolsAndParsers") or {}
     if tools_parsers_group.get("toolRegistryTools") != tool_coverage.get("tools"):
         raise AssertionError(f"/qa/coverage-index tool registry list mismatch: {coverage_index}")
@@ -1243,6 +1568,16 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index always-visible tool count mismatch: {coverage_index}")
     if tools_parsers_group.get("boundedCatalogueLimit") != tool_coverage.get("boundedCatalogueLimit"):
         raise AssertionError(f"/qa/coverage-index bounded catalogue limit mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolExecutionMatrixCount") != tool_execution_matrix.get("toolCount"):
+        raise AssertionError(f"/qa/coverage-index tool execution matrix count mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolExecutionMatrixParity") != tool_execution_matrix.get("rowParity"):
+        raise AssertionError(f"/qa/coverage-index tool execution matrix parity mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolExecutionMatrixProofFileParity") != tool_execution_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index tool execution matrix proof-file parity mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolExecutionMatrixAuthorizationPolicyCount") != tool_execution_matrix.get("authorizationPolicyCount"):
+        raise AssertionError(f"/qa/coverage-index tool execution matrix auth count mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolExecutionMatrixExecutionStateCount") != tool_execution_matrix.get("executionStateCount"):
+        raise AssertionError(f"/qa/coverage-index tool execution matrix state count mismatch: {coverage_index}")
     if tools_parsers_group.get("tabActivityStatusProofs") != tool_flow_coverage.get("tabActivityStatusProofs"):
         raise AssertionError(f"/qa/coverage-index tool tab activity proof map mismatch: {coverage_index}")
     if tool_flow_coverage.get("tabActivityStatusProofFileParity") is not True:
@@ -1287,6 +1622,24 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index result-parser failures mismatch: {coverage_index}")
     if tools_parsers_group.get("resultParserFailureCount") != len(result_parser_coverage.get("failures") or []):
         raise AssertionError(f"/qa/coverage-index result-parser failure count mismatch: {coverage_index}")
+    if parser_tool_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/parser-tool-matrix failed: {parser_tool_matrix}")
+    if parser_tool_matrix.get("toolCount") != len(expected_structured_parser_tools) + 5:
+        raise AssertionError(f"/qa/parser-tool-matrix count mismatch: {parser_tool_matrix}")
+    if parser_tool_matrix.get("parsedParity") is not True:
+        raise AssertionError(f"/qa/parser-tool-matrix parsed parity mismatch: {parser_tool_matrix}")
+    if parser_tool_matrix.get("toolExecutionParity") is not True:
+        raise AssertionError(f"/qa/parser-tool-matrix execution parity mismatch: {parser_tool_matrix}")
+    if parser_tool_matrix.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/parser-tool-matrix proof parity mismatch: {parser_tool_matrix}")
+    if tools_parsers_group.get("parserToolMatrixCount") != parser_tool_matrix.get("toolCount"):
+        raise AssertionError(f"/qa/coverage-index parser tool matrix count mismatch: {coverage_index}")
+    if tools_parsers_group.get("parserToolMatrixParsedParity") != parser_tool_matrix.get("parsedParity"):
+        raise AssertionError(f"/qa/coverage-index parser tool matrix parsed parity mismatch: {coverage_index}")
+    if tools_parsers_group.get("parserToolMatrixToolExecutionParity") != parser_tool_matrix.get("toolExecutionParity"):
+        raise AssertionError(f"/qa/coverage-index parser tool matrix execution parity mismatch: {coverage_index}")
+    if tools_parsers_group.get("parserToolMatrixProofFileParity") != parser_tool_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index parser tool matrix proof parity mismatch: {coverage_index}")
     for field in (
         "subdomains",
         "webUrls",
@@ -1342,6 +1695,34 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index subtab proof count mismatch: {coverage_index}")
     if tabs_sessions_group.get("subtabProofFileParity") != subtab_coverage.get("proofFileParity"):
         raise AssertionError(f"/qa/coverage-index subtab proof-file parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("subtabLifecycleMatrixCount") != subtab_lifecycle_matrix.get("subtabCount"):
+        raise AssertionError(f"/qa/coverage-index subtab lifecycle matrix count mismatch: {coverage_index}")
+    if tabs_sessions_group.get("subtabLifecycleMatrixProofOwnerFileParity") != subtab_lifecycle_matrix.get("proofOwnerFileParity"):
+        raise AssertionError(f"/qa/coverage-index subtab lifecycle matrix owner parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("subtabLifecycleMatrixProofFileParity") != subtab_lifecycle_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index subtab lifecycle matrix proof parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("subtabLifecycleMatrixTabToolFunctionFlowCount") != subtab_lifecycle_matrix.get("tabToolFunctionFlowCount"):
+        raise AssertionError(f"/qa/coverage-index subtab lifecycle matrix tab-flow count mismatch: {coverage_index}")
+    if tabs_sessions_group.get("tabToolFunctionFlowCount") != tab_tool_function_flow.get("tabCount"):
+        raise AssertionError(f"/qa/coverage-index tab-tool-function flow count mismatch: {coverage_index}")
+    if tabs_sessions_group.get("tabToolFunctionFlowParity") != tab_tool_function_flow.get("tabParity"):
+        raise AssertionError(f"/qa/coverage-index tab-tool-function flow parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("tabToolFunctionFlowProofFileParity") != tab_tool_function_flow.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index tab-tool-function flow proof-file parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("tabToolFunctionFlowFunctionCount") != tab_tool_function_flow.get("functionFlowCount"):
+        raise AssertionError(f"/qa/coverage-index tab-tool-function flow function count mismatch: {coverage_index}")
+    if tabs_sessions_group.get("tabToolFunctionFlowAgentLoopPhaseCount") != tab_tool_function_flow.get("agentLoopPhaseCount"):
+        raise AssertionError(f"/qa/coverage-index tab-tool-function flow agent-loop phase count mismatch: {coverage_index}")
+    if tab_proof_family_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/tab-proof-family-matrix failed: {tab_proof_family_matrix}")
+    if tabs_sessions_group.get("tabProofFamilyMatrixCount") != tab_proof_family_matrix.get("familyCount"):
+        raise AssertionError(f"/qa/coverage-index tab proof family matrix count mismatch: {coverage_index}")
+    if tabs_sessions_group.get("tabProofFamilyMatrixProofFileParity") != tab_proof_family_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index tab proof family matrix proof parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("tabProofFamilyMatrixFamilyProofFileParity") != tab_proof_family_matrix.get("familyProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index tab proof family matrix family parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("tabProofFamilyMatrixProofLedgerFamilyCount") != tab_proof_family_matrix.get("proofLedgerTabProofFamilyCount"):
+        raise AssertionError(f"/qa/coverage-index tab proof family matrix ledger family count mismatch: {coverage_index}")
     if tabs_sessions_group.get("sessionRoutes") != session_coverage.get("routes"):
         raise AssertionError(f"/qa/coverage-index session route list mismatch: {coverage_index}")
     if tabs_sessions_group.get("sessionRouteCount") != len(session_coverage.get("routes") or []):
@@ -1398,12 +1779,44 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/session-coverage workflow proof-file parity mismatch: {session_coverage}")
     if tabs_sessions_group.get("sessionWorkflowSurfaceProofFileParity") != session_coverage.get("sessionWorkflowSurfaceProofFileParity"):
         raise AssertionError(f"/qa/coverage-index session workflow proof-file parity mismatch: {coverage_index}")
+    if session_workflow_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/session-workflow-matrix failed: {session_workflow_matrix}")
+    if session_workflow_matrix.get("workflowCount") != session_coverage.get("sessionWorkflowSurfaceCount"):
+        raise AssertionError(f"/qa/session-workflow-matrix workflow count mismatch: {session_workflow_matrix}")
+    if session_workflow_matrix.get("proofOwnerFileParity") is not True:
+        raise AssertionError(f"/qa/session-workflow-matrix proof owner parity mismatch: {session_workflow_matrix}")
+    if session_workflow_matrix.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/session-workflow-matrix proof-file parity mismatch: {session_workflow_matrix}")
+    if tabs_sessions_group.get("sessionWorkflowMatrixCount") != session_workflow_matrix.get("workflowCount"):
+        raise AssertionError(f"/qa/coverage-index session workflow matrix count mismatch: {coverage_index}")
+    if tabs_sessions_group.get("sessionWorkflowMatrixProofOwnerFileParity") != session_workflow_matrix.get("proofOwnerFileParity"):
+        raise AssertionError(f"/qa/coverage-index session workflow matrix owner parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("sessionWorkflowMatrixProofFileParity") != session_workflow_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index session workflow matrix proof parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("sessionWorkflowMatrixTabActionRouteCount") != session_workflow_matrix.get("tabActionRouteCount"):
+        raise AssertionError(f"/qa/coverage-index session workflow matrix tab-action route count mismatch: {coverage_index}")
     if tabs_sessions_group.get("tabActionSurfaceProofs") != tab_action_coverage.get("tabActionSurfaceProofs"):
         raise AssertionError(f"/qa/coverage-index tab action proof map mismatch: {coverage_index}")
     if tab_action_coverage.get("tabActionSurfaceProofFileParity") is not True:
         raise AssertionError(f"/qa/tab-action-coverage surface proof-file parity mismatch: {tab_action_coverage}")
     if tabs_sessions_group.get("tabActionSurfaceProofFileParity") != tab_action_coverage.get("tabActionSurfaceProofFileParity"):
         raise AssertionError(f"/qa/coverage-index tab action surface proof-file parity mismatch: {coverage_index}")
+    if tab_action_surface_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/tab-action-surface-matrix failed: {tab_action_surface_matrix}")
+    if tab_action_surface_matrix.get("surfaceCount") != tab_action_coverage.get("tabActionSurfaceCount"):
+        raise AssertionError(f"/qa/tab-action-surface-matrix surface count mismatch: {tab_action_surface_matrix}")
+    if tab_action_surface_matrix.get("proofOwnerFileParity") is not True:
+        raise AssertionError(f"/qa/tab-action-surface-matrix proof owner parity mismatch: {tab_action_surface_matrix}")
+    if tab_action_surface_matrix.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/tab-action-surface-matrix proof-file parity mismatch: {tab_action_surface_matrix}")
+    if tabs_sessions_group.get("tabActionSurfaceMatrixCount") != tab_action_surface_matrix.get("surfaceCount"):
+        raise AssertionError(f"/qa/coverage-index tab action surface matrix count mismatch: {coverage_index}")
+    if tabs_sessions_group.get("tabActionSurfaceMatrixProofOwnerFileParity") != tab_action_surface_matrix.get("proofOwnerFileParity"):
+        raise AssertionError(f"/qa/coverage-index tab action surface matrix owner parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("tabActionSurfaceMatrixProofFileParity") != tab_action_surface_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index tab action surface matrix proof parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("tabActionSurfaceMatrixActionStateCount") != tab_action_surface_matrix.get("actionStateCount"):
+        raise AssertionError(f"/qa/coverage-index tab action surface matrix action-state count mismatch: {coverage_index}")
     if recon_coverage.get("reconSurfaceParity") is not True:
         raise AssertionError(f"/qa/recon-coverage surface parity mismatch: {recon_coverage}")
     if recon_coverage.get("proofFileParity") is not True:
@@ -1554,6 +1967,16 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/agent-loop-coverage phase proof-file parity mismatch: {agent_loop_coverage}")
     if tabs_sessions_group.get("agentLoopPhaseProofFileParity") != agent_loop_coverage.get("loopPhaseProofFileParity"):
         raise AssertionError(f"/qa/coverage-index agent loop phase proof-file parity mismatch: {coverage_index}")
+    if agent_loop_phase_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/agent-loop-phase-matrix failed: {agent_loop_phase_matrix}")
+    if tabs_sessions_group.get("agentLoopPhaseMatrixCount") != agent_loop_phase_matrix.get("phaseCount"):
+        raise AssertionError(f"/qa/coverage-index agent loop phase matrix count mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentLoopPhaseMatrixParity") != agent_loop_phase_matrix.get("phaseParity"):
+        raise AssertionError(f"/qa/coverage-index agent loop phase matrix parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentLoopPhaseMatrixSourceCoverageParity") != agent_loop_phase_matrix.get("sourceCoverageParity"):
+        raise AssertionError(f"/qa/coverage-index agent loop phase matrix source parity mismatch: {coverage_index}")
+    if tabs_sessions_group.get("agentLoopPhaseMatrixProofFileParity") != agent_loop_phase_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index agent loop phase matrix proof-file parity mismatch: {coverage_index}")
     if tabs_sessions_group.get("agentLoopStateKeys") != agent_loop_coverage.get("stateKeys"):
         raise AssertionError(f"/qa/coverage-index agent loop state key list mismatch: {coverage_index}")
     if agent_loop_coverage.get("stateKeyParity") is not True:
@@ -1642,6 +2065,25 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/artifact-ledger visual manifest count mismatch: {artifact_ledger}")
     if artifact_ledger.get("missingVisualCaptures") != []:
         raise AssertionError(f"/qa/artifact-ledger reports missing captures: {artifact_ledger}")
+    if artifact_manifest_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/artifact-manifest-matrix failed: {artifact_manifest_matrix}")
+    if artifact_manifest_matrix.get("manifestCount") != artifact_ledger.get("visualManifestCount"):
+        raise AssertionError(f"/qa/artifact-manifest-matrix manifest count mismatch: {artifact_manifest_matrix}")
+    if artifact_manifest_matrix.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/artifact-manifest-matrix proof parity mismatch: {artifact_manifest_matrix}")
+    if artifact_manifest_matrix.get("manifestFileParity") is not True:
+        raise AssertionError(f"/qa/artifact-manifest-matrix manifest parity mismatch: {artifact_manifest_matrix}")
+    if artifact_manifest_matrix.get("captureFileParity") is not True:
+        raise AssertionError(f"/qa/artifact-manifest-matrix capture parity mismatch: {artifact_manifest_matrix}")
+    coverage_app_state = (coverage_index.get("groups") or {}).get("appState") or {}
+    if coverage_app_state.get("artifactManifestMatrixCount") != artifact_manifest_matrix.get("manifestCount"):
+        raise AssertionError(f"/qa/coverage-index artifact manifest matrix count mismatch: {coverage_index}")
+    if coverage_app_state.get("artifactManifestMatrixProofFileParity") != artifact_manifest_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index artifact manifest matrix proof parity mismatch: {coverage_index}")
+    if coverage_app_state.get("artifactManifestMatrixManifestFileParity") != artifact_manifest_matrix.get("manifestFileParity"):
+        raise AssertionError(f"/qa/coverage-index artifact manifest matrix manifest parity mismatch: {coverage_index}")
+    if coverage_app_state.get("artifactManifestMatrixCaptureFileParity") != artifact_manifest_matrix.get("captureFileParity"):
+        raise AssertionError(f"/qa/coverage-index artifact manifest matrix capture parity mismatch: {coverage_index}")
     if checkpoint_ledger.get("ok") is not True or checkpoint_ledger.get("checkpointCount", 0) < 200:
         raise AssertionError(f"/qa/checkpoint-ledger count mismatch: {checkpoint_ledger}")
     if not checkpoint_ledger.get("latestCheckpoint", "").endswith(".md"):
@@ -1660,10 +2102,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/gap-ledger failed: {gap_ledger}")
     if gap_ledger.get("currentGapCount") != 1:
         raise AssertionError(f"/qa/gap-ledger current gap count mismatch: {gap_ledger}")
-    if set(gap_ledger.get("supportedFamilies") or []) != {"qwen", "minimax"}:
+    if set(gap_ledger.get("supportedFamilies") or []) != {"qwen", "minimax", "zaya"}:
         raise AssertionError(f"/qa/gap-ledger supported families mismatch: {gap_ledger}")
-    if gap_ledger.get("unsupportedMultimodalBlocked") is not True:
-        raise AssertionError(f"/qa/gap-ledger Qwen VL block mismatch: {gap_ledger}")
+    if gap_ledger.get("unsupportedMultimodalBlocked") is not False:
+        raise AssertionError(f"/qa/gap-ledger Qwen VL hard block mismatch: {gap_ledger}")
 
 
 def run() -> None:

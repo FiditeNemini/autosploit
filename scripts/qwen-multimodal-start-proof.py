@@ -49,7 +49,33 @@ def run() -> None:
             raise RuntimeError("build_and_run --verify failed")
         wait_for_app()
 
-        with tempfile.TemporaryDirectory(prefix="exploitbot-qwen-vl-model-") as tmp:
+        with tempfile.TemporaryDirectory(prefix="exploitbot-qwen-model-") as tmp:
+            text_model = Path(tmp) / "Qwen3.6-Text-JANG"
+            text_model.mkdir()
+            (text_model / "config.json").write_text(
+                json.dumps(
+                    {
+                        "model_type": "qwen3_5",
+                        "architectures": ["Qwen3_5ForConditionalGeneration"],
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (text_model / "generation_config.json").write_text(json.dumps({"temperature": 0.7}) + "\n", encoding="utf-8")
+            (text_model / "jang_config.json").write_text(json.dumps({"format": "jang"}) + "\n", encoding="utf-8")
+            response = request("POST", "/qa/model-folder", str(text_model))
+            if response.get("ok") is not True:
+                raise AssertionError(f"qwen text-capable model folder route failed: {response}")
+            state = request("GET", "/state")
+            info = state.get("modelFolderInfo") or {}
+            if info.get("family") != "Qwen":
+                raise AssertionError(f"qwen text-capable fixture did not retain Qwen family: {info}")
+            if info.get("isMultimodal") is not False:
+                raise AssertionError(f"qwen text-capable fixture should not be blocked as multimodal: {info}")
+            if info.get("isSupported") is not True:
+                raise AssertionError(f"qwen text-capable fixture should be startable in text mode: {info}")
+
             model = Path(tmp) / "Qwen3-VL-JANGTQ"
             model.mkdir()
             (model / "config.json").write_text(
@@ -69,27 +95,31 @@ def run() -> None:
             response = request("POST", "/qa/model-folder", str(model))
             if response.get("ok") is not True:
                 raise AssertionError(f"model folder route failed: {response}")
-
-            started = request("POST", "/engine/start")
-            if started.get("ok") is not True:
-                raise AssertionError(f"engine start route failed: {started}")
-            time.sleep(0.7)
-            state = request("GET", "/state")
-
-            info = state.get("modelFolderInfo") or {}
+            info = request("GET", "/state").get("modelFolderInfo") or {}
             if info.get("family") != "Qwen":
                 raise AssertionError(f"qwen multimodal fixture did not retain Qwen family: {info}")
             if info.get("isMultimodal") is not True:
                 raise AssertionError(f"qwen multimodal fixture missing multimodal flag: {info}")
-            if info.get("isSupported") is not False:
-                raise AssertionError(f"qwen multimodal fixture should be blocked until runtime support exists: {info}")
-            if state.get("engineRunning") is True:
-                raise AssertionError(f"engine started for Qwen multimodal folder: {state}")
-            if state.get("healthStatus") != "blocked":
-                raise AssertionError(f"qwen multimodal start did not set blocked health: {state}")
-            error = state.get("engineError") or ""
-            if "multimodal" not in error.lower() or "not yet supported" not in error.lower():
-                raise AssertionError(f"qwen multimodal start did not expose multimodal block error: {state}")
+            if info.get("isSupported") is not True:
+                raise AssertionError(f"qwen multimodal fixture should be supported now: {info}")
+
+            # Optional live start smoke against a real local multimodal Qwen model to verify
+            # we can reach the start endpoint without the legacy modal block.
+            live_qwen = os.environ.get("EXPLOITBOT_QWEN_SMOKE_MODEL", "").strip()
+            if live_qwen:
+                live_model = Path(live_qwen).expanduser()
+                if live_model.is_dir():
+                    response = request("POST", "/qa/model-folder", str(live_model))
+                    if response.get("ok") is not True:
+                        raise AssertionError(f"live qwen model folder route failed: {response}")
+                    started = request("POST", "/engine/start")
+                    if started.get("ok") is not True:
+                        raise AssertionError(f"live qwen engine start request failed: {started}")
+                    time.sleep(0.8)
+                    live_state = request("GET", "/state")
+                    if live_state.get("healthStatus") == "blocked":
+                        raise AssertionError(f"live qwen start still blocked in-app: {live_state}")
+                    request("POST", "/engine/stop")
 
         print("qwen-multimodal-start proof passed")
     finally:

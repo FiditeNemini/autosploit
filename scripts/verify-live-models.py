@@ -225,6 +225,10 @@ def _assert_runtime_metadata(report: dict[str, Any], health: dict[str, Any], mod
     effective_text = json.dumps(effective, sort_keys=True).lower()
     cache_text = json.dumps(cache, sort_keys=True).lower()
     model_text = json.dumps(models, sort_keys=True).lower()
+    topology = ((effective.get("cache") or {}).get("topology") or {}) if isinstance(effective.get("cache"), dict) else {}
+    topology_components = topology.get("expected_components") if isinstance(topology, dict) else []
+    if not isinstance(topology_components, list):
+        topology_components = []
 
     required = {
         "effective_config": bool(effective),
@@ -235,6 +239,10 @@ def _assert_runtime_metadata(report: dict[str, Any], health: dict[str, Any], mod
         "block_l2_disk": "block" in effective_text or "block_disk_cache" in cache,
         "turboquant": "turbo" in effective_text or "turbo" in cache_text or health.get("kv_cache_quantization") is not None,
     }
+    if (report.get("jang_capabilities") or {}).get("cache_type") == "hybrid":
+        required["hybrid_topology"] = topology.get("name") == "hybrid_ssm_attention"
+        required["hybrid_cache_type"] = topology.get("cache_type") == "hybrid"
+        required["ssm_companion_component"] = "ssm_companion" in topology_components
     report["runtime_checks"] = required
     missing = [name for name, ok in required.items() if not ok]
     if missing:

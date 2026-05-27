@@ -16,8 +16,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/jjang-ai/exploitbot/releases/latest/download/ExploitBot-1.4.1.dmg">
-    <img src="https://img.shields.io/badge/Download-DMG%20(v1.4.1)-blue?style=for-the-badge&logo=apple" alt="Download DMG">
+  <a href="https://github.com/jjang-ai/exploitbot/releases">
+    <img src="https://img.shields.io/badge/Download-DMG%20(v0.1.0--beta)-blue?style=for-the-badge&logo=apple" alt="Download DMG">
   </a>
 </p>
 
@@ -33,7 +33,7 @@
 
 AI-powered penetration testing toolkit with local LLM inference. No cloud. No guardrails. Open source.
 
-exploitbot runs uncensored models locally on your Mac via [MLX](https://github.com/ml-explore/mlx), integrated with 30+ real pentesting tools, and generates professional pentest reports from findings.
+exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-explore/mlx), integrates real pentesting tools, and generates professional pentest reports from findings.
 
 <p align="center">
   <img src="assets/screenshots/main-workspace.png" alt="exploitbot workspace" width="900">
@@ -43,20 +43,20 @@ exploitbot runs uncensored models locally on your Mac via [MLX](https://github.c
 
 **Local AI Inference** — Uncensored models running on Apple Silicon via the [vMLX engine](https://github.com/jjang-ai/vmlx). No API keys, no cloud, no content filtering. Your pentest stays on your machine.
 
-**Ops System** — Named persistent workspaces for each engagement. Switch between targets without losing context. The LLM remembers everything across tool tabs.
+**Ops System** — Named persistent workspaces for each engagement. Switch between targets without losing context. The LLM remembers evidence and findings across tabs.
 
 **3 Interaction Modes**
 - **Autopilot** — Give a target, watch it work. Full autonomous recon → exploitation → reporting.
 - **Copilot** — AI suggests tools, you approve. Each action explained with risk level.
 - **Manual** — You drive, AI advises. Full tool controls with chat-based guidance.
 
-**30+ Integrated Tools** — subfinder, nmap, nuclei, sqlmap, hashcat, metasploit, impacket, and more. Each tool has a bespoke UI — not a generic wrapper.
+**30+ Integrated Tools** — subfinder, nmap, nuclei, sqlmap, hashcat, metasploit, impacket, and more. Each tool has a dedicated UI state, logs, and progress markers.
 
 **Stash** — Cross-op artifact sharing. Drop credentials, hosts, payloads from any engagement, pull them into any other.
 
 **Findings → Reports** — The endgame. Confirmed vulnerabilities auto-capture attack chains, evidence, and impact. Generate professional pentest reports in PDF, Markdown, HTML, or JSON.
 
-**CVE Knowledge Base** — Local database of 250K+ CVEs with semantic search. Auto-enriches findings with CVE data, CVSS scores, and exploit availability.
+**CVE Knowledge Base + Import** — Local CVE database with semantic search plus list import support (CSV/JSON) and include filters.
 
 **5 Languages** — Full interface and report generation in English, 한국어, 中文, Español, 日本語.
 
@@ -94,14 +94,10 @@ Requires **macOS 14+** and **Apple Silicon** (M1/M2/M3/M4).
 
 ```bash
 git clone https://github.com/jjang-ai/exploitbot.git
-cd exploitbot/ExploitBot
+cd exploitbot
 
-# Build
-swift build
-
-# Create .app bundle and launch
-cp .build/debug/ExploitBot ../ExploitBotXcode/ExploitBot.app/Contents/MacOS/ExploitBot
-open ../ExploitBotXcode/ExploitBot.app
+# Build and run local verification app
+./script/build_and_run.sh --verify
 ```
 
 **Prerequisites:**
@@ -113,15 +109,20 @@ open ../ExploitBotXcode/ExploitBot.app
 <a name="models"></a>
 ## Models
 
-exploitbot includes a model downloader with curated uncensored models from [dealignai](https://huggingface.co/dealignai):
+exploitbot is model-folder driven and currently supports:
 
-| Tier | Model | Size | RAM |
-|------|-------|------|-----|
-| **S** | [Qwen3.5-VL-122B-A10B-UNCENSORED-JANG_2S](https://huggingface.co/dealignai/Qwen3.5-VL-122B-A10B-UNCENSORED-JANG_2S) | ~30 GB | 32+ GB |
-| **M** | [MiniMax-M2.5-UNCENSORED-JANG_2L](https://huggingface.co/dealignai/MiniMax-M2.5-UNCENSORED-JANG_2L) | ~60 GB | 64+ GB |
-| **L** | [Qwen3.5-VL-397B-A17B-UNCENSORED-JANG_1L](https://huggingface.co/dealignai/Qwen3.5-VL-397B-A17B-UNCENSORED-JANG_1L) | ~112 GB | 128+ GB |
+- **Qwen text + vision** (`qwen` / `qwen-vl`)
+- **MiniMax text** (`minimax`)
+- **ZAYA1-VL**
 
-You can also load any JANG or MLX-compatible model folder from your local disk.
+Use local folders from:
+
+```bash
+/Users/eric/models/JANGQ/Qwen3.6-35B-A3B-JANG_2K-MTP   # smallest tested Qwen multimodal folder (~11 GB)
+/Users/eric/models/JANGQ/ZAYA1-VL-8B-JANGTQ4             # compact visual model
+```
+
+For runtime checks, load the above with the smallest model above first to keep RAM pressure low.
 
 <a name="tools"></a>
 ## Tools
@@ -158,6 +159,11 @@ Lightweight tools are bundled in the app. Heavy tools (metasploit, hashcat, etc.
 - [Feature Matrix](docs/plans/2026-03-23-exhaustive-feature-matrix.md) — 1,307 checkable items for QA
 - [Tool Registry](ExploitBotEngine/tools/registry.json) — 39 tool schemas with CLI mappings
 - [System Prompts](ExploitBotEngine/prompts/) — Base + per-tab LLM instruction templates
+
+### Runtime Verification
+
+- `scripts/verify-live-models.py --qwen /Users/eric/models/JANGQ/Qwen3.6-35B-A3B-JANG_2K-MTP --restart-replay --require-ssm-rederive --require-ssm-companion-hit`
+- `EXPLOITBOT_QWEN_SMOKE_MODEL=/Users/eric/models/JANGQ/Qwen3.6-35B-A3B-JANG_2K-MTP scripts/qwen-multimodal-start-proof.py`
 
 ## License
 

@@ -95,9 +95,9 @@ def assert_gap_ledger() -> None:
         raise AssertionError(f"gap ledger count mismatch expected {len(expected_gaps)}: {ledger}")
     if ledger.get("currentGaps") != expected_gaps:
         raise AssertionError(f"gap ledger current gaps mismatch expected {expected_gaps}: {ledger}")
-    if ledger.get("unsupportedMultimodalBlocked") is not True:
-        raise AssertionError(f"gap ledger should record Qwen VL is blocked: {ledger}")
-    if set(ledger.get("supportedFamilies") or []) != {"qwen", "minimax"}:
+    if ledger.get("unsupportedMultimodalBlocked") is not False:
+        raise AssertionError(f"gap ledger should record Qwen VL as no longer hard-blocked: {ledger}")
+    if set(ledger.get("supportedFamilies") or []) != {"qwen", "minimax", "zaya"}:
         raise AssertionError(f"gap ledger supported families mismatch: {ledger}")
     if "qwenMultimodalRuntime" not in (ledger.get("openGapIds") or []):
         raise AssertionError(f"gap ledger missing qwen multimodal gap id: {ledger}")
@@ -106,12 +106,12 @@ def assert_gap_ledger() -> None:
     if ledger.get("gapContractCount") != len(ledger.get("gapContracts") or {}):
         raise AssertionError(f"gap ledger contract count mismatch: {ledger}")
     qwen_gap = (ledger.get("gapContracts") or {}).get("qwenMultimodalRuntime") or {}
-    if qwen_gap.get("status") != "blocked":
-        raise AssertionError(f"qwen multimodal gap should be blocked: {ledger}")
+    if qwen_gap.get("status") != "in_progress":
+        raise AssertionError(f"qwen multimodal gap should be in_progress: {ledger}")
     if qwen_gap.get("supportedFamilies") != ["qwen", "minimax"]:
         raise AssertionError(f"qwen multimodal gap supported families mismatch: {qwen_gap}")
-    if set(qwen_gap.get("blockedModelKinds") or []) != {"qwen-vl", "qwen-multimodal"}:
-        raise AssertionError(f"qwen multimodal blocked kinds mismatch: {qwen_gap}")
+    if set(qwen_gap.get("blockedModelKinds") or []) != set():
+        raise AssertionError(f"qwen multimodal blocked kinds should be empty while in progress: {qwen_gap}")
     if ledger.get("qwenMultimodalBlockedModelKindCount") != len(qwen_gap.get("blockedModelKinds") or []):
         raise AssertionError(f"qwen multimodal blocked model kind count mismatch: {ledger}")
     if ledger.get("qwenMultimodalRequiredRuntimeWorkCount") != len(qwen_gap.get("requiredRuntimeWork") or []):
@@ -168,6 +168,7 @@ def assert_gap_ledger() -> None:
         "model-folder-warning-proof.py",
         "unsupported-model-start-proof.py",
         "qwen-multimodal-start-proof.py",
+        "qwen-multimodal-runtime-blocker-proof.py",
     }
     if not required_proofs.issubset(set(qwen_gap.get("proofs") or [])):
         raise AssertionError(f"qwen multimodal gap missing enforcement proofs: {qwen_gap}")

@@ -87,13 +87,13 @@ def run() -> None:
                 raise AssertionError(f"qwen support message did not mention autodetect: {qwen_info}")
 
             qwen_vl_info = inspect_fixture(qwen_vl)
-            if qwen_vl_info.get("family") != "Qwen" or qwen_vl_info.get("isSupported") is not False:
-                raise AssertionError(f"qwen vl fixture should be blocked until multimodal support is enabled: {qwen_vl_info}")
+            if qwen_vl_info.get("family") != "Qwen" or qwen_vl_info.get("isSupported") is not True:
+                raise AssertionError(f"qwen vl fixture should be supported: {qwen_vl_info}")
             if qwen_vl_info.get("isMultimodal") is not True:
                 raise AssertionError(f"qwen vl fixture did not expose multimodal flag: {qwen_vl_info}")
             qwen_vl_warning = qwen_vl_info.get("supportMessage", "")
-            if "multimodal" not in qwen_vl_warning.lower() or "not yet supported" not in qwen_vl_warning.lower():
-                raise AssertionError(f"qwen vl warning missing multimodal unsupported language: {qwen_vl_info}")
+            if "multimodal" not in qwen_vl_warning.lower() or "supported" not in qwen_vl_warning.lower():
+                raise AssertionError(f"qwen vl warning missing multimodal support language: {qwen_vl_info}")
 
             minimax_info = inspect_fixture(minimax)
             if minimax_info.get("family") != "MiniMax" or minimax_info.get("isSupported") is not True:
