@@ -61,10 +61,20 @@ def run() -> None:
             raise AssertionError(f"MiniMax batching artifact path mismatch: {coverage}")
         if coverage.get("minimaxContinuousBatchingArtifactRequired") is not True:
             raise AssertionError(f"MiniMax batching artifact should be required: {coverage}")
-        if coverage.get("minimaxContinuousBatchingLiveReady") not in {True, False}:
+        if coverage.get("minimaxContinuousBatchingLiveReady") is not True:
             raise AssertionError(f"MiniMax batching live-ready flag missing: {coverage}")
-        if coverage.get("minimaxContinuousBatchingArtifactOK") not in {True, False}:
+        if coverage.get("minimaxContinuousBatchingArtifactOK") is not True:
             raise AssertionError(f"MiniMax batching artifact OK flag missing: {coverage}")
+        if coverage.get("minimaxContinuousBatchingMaxRunningObserved", 0) < 2:
+            raise AssertionError(f"MiniMax batching max running too low: {coverage}")
+        if coverage.get("minimaxContinuousBatchingMaxWaitingObserved", 0) < 2:
+            raise AssertionError(f"MiniMax batching max waiting too low: {coverage}")
+        if coverage.get("minimaxContinuousBatchingRequestsProcessed", 0) < 2:
+            raise AssertionError(f"MiniMax batching processed too few requests: {coverage}")
+        if coverage.get("minimaxContinuousBatchingKVBits") != 4:
+            raise AssertionError(f"MiniMax batching KV bits mismatch: {coverage}")
+        if coverage.get("minimaxContinuousBatchingBlockL2DiskWrites", 0) < 1:
+            raise AssertionError(f"MiniMax batching block L2 writes missing: {coverage}")
         if not coverage.get("minimaxContinuousBatchingNextCommand"):
             raise AssertionError(f"MiniMax batching next command missing: {coverage}")
         if EXPECTED_SCRIPT not in coverage.get("minimaxContinuousBatchingNextCommand"):

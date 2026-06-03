@@ -82,6 +82,7 @@ Still not proven:
 
 - A realistic live parallel-session stress test with multiple concurrent agents
   and loaded model generation.
-- Continuous-batching behavior under live multi-request pressure.
+- Higher-cardinality continuous batching beyond the current two-request
+  Qwen/MiniMax live proofs.
 - Full manual native-app visual review across every tab/status/hover/detail
   state in the notarized release app.

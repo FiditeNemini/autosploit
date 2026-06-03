@@ -32,6 +32,8 @@ EXPECTED_CONTRACTS = {
     "hybridSSMCompanion",
     "hybridMambaBatchCache",
     "mllmContinuousBatchServing",
+    "qwenLiveLoadedModelStress",
+    "minimaxLiveLoadedModelStress",
 }
 
 EXPECTED_SOURCE_FILES = {
@@ -98,11 +100,11 @@ def run() -> None:
 
         if coverage.get("ok") is not True:
             raise AssertionError(f"continuous batching route failed: {coverage}")
-        if coverage.get("proofLevel") != "source-and-live-qwen-stress-backed":
+        if coverage.get("proofLevel") != "source-and-live-qwen-minimax-stress-backed":
             raise AssertionError(f"unexpected proof level: {coverage}")
-        if coverage.get("liveLoadedModelStress") != "qwen-live-max-running-observed-2":
+        if coverage.get("liveLoadedModelStress") != "qwen-live-max-running-observed-2-minimax-live-max-running-observed-2":
             raise AssertionError(f"live stress label mismatch: {coverage}")
-        if coverage.get("liveLoadedModelStressScope") != "qwen-live-proven-minimax-live-batching-not-run":
+        if coverage.get("liveLoadedModelStressScope") != "qwen-and-minimax-live-proven":
             raise AssertionError(f"live stress scope mismatch: {coverage}")
         if coverage.get("qwenContinuousBatchingArtifact") != "docs/live-proofs/checkpoint-452-qwen-continuous-batching-live.json":
             raise AssertionError(f"qwen continuous batching artifact path mismatch: {coverage}")
@@ -132,8 +134,20 @@ def run() -> None:
             raise AssertionError(f"minimax continuous batching artifact path mismatch: {coverage}")
         if coverage.get("minimaxContinuousBatchingArtifactRequired") is not True:
             raise AssertionError(f"minimax continuous batching artifact should be required: {coverage}")
-        if coverage.get("minimaxContinuousBatchingLiveReady") not in {True, False}:
+        if coverage.get("minimaxContinuousBatchingLiveReady") is not True:
             raise AssertionError(f"minimax continuous batching ready flag missing: {coverage}")
+        if coverage.get("minimaxContinuousBatchingArtifactOK") is not True:
+            raise AssertionError(f"minimax continuous batching artifact not accepted: {coverage}")
+        if coverage.get("minimaxContinuousBatchingMaxRunningObserved", 0) < 2:
+            raise AssertionError(f"minimax continuous batching max running too low: {coverage}")
+        if coverage.get("minimaxContinuousBatchingMaxWaitingObserved", 0) < 2:
+            raise AssertionError(f"minimax continuous batching max waiting too low: {coverage}")
+        if coverage.get("minimaxContinuousBatchingRequestsProcessed", 0) < 2:
+            raise AssertionError(f"minimax continuous batching processed too few requests: {coverage}")
+        if coverage.get("minimaxContinuousBatchingKVBits") != 4:
+            raise AssertionError(f"minimax continuous batching KV bits mismatch: {coverage}")
+        if coverage.get("minimaxContinuousBatchingBlockL2DiskWrites", 0) < 1:
+            raise AssertionError(f"minimax continuous batching missing block L2 writes: {coverage}")
         if not coverage.get("minimaxContinuousBatchingNextCommand"):
             raise AssertionError(f"minimax continuous batching next command missing: {coverage}")
 

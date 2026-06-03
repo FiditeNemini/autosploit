@@ -60,18 +60,17 @@ sent two concurrent non-streaming chat completions and recorded:
 - `ssm_companion.rederive.failed: 0`
 - `memory.active_mb: 14221.2`
 
-The QA surface now exposes this as
+The QA surface now exposes this as the Qwen side of
 `/qa/continuous-batching-coverage.proofLevel =
-source-and-live-qwen-stress-backed` and mirrors the live artifact through
-`/qa/runtime-coverage`, `/qa/deep-runtime-flow-coverage`, and
-`/qa/coverage-index`. This is a Qwen live batching proof only; MiniMax
-multi-request live batching remains a separate not-yet-run stress proof.
+source-and-live-qwen-minimax-stress-backed` and mirrors the live artifact
+through `/qa/runtime-coverage`, `/qa/deep-runtime-flow-coverage`, and
+`/qa/coverage-index`.
 
-## MiniMax live batching readiness addendum
+## MiniMax live batching addendum
 
 `scripts/minimax-continuous-batching-readiness-proof.py` now verifies that
 `/qa/continuous-batching-coverage` exposes a first-class MiniMax live batching
-lane instead of burying it in prose. The route records:
+lane instead of burying it in prose. The route records and requires:
 
 - model: `/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ`
 - required artifact:
@@ -82,10 +81,16 @@ lane instead of burying it in prose. The route records:
 
 The wrapper reuses `scripts/prove-live-continuous-batching.py` with
 `EXPLOITBOT_LIVE_BATCH_FAMILY=minimax`, `--max-num-seqs 2`, TurboQuant q4 KV,
-prefix cache, paged cache, and block L2 enabled. This checkpoint did not run
-that live MiniMax stress because another local Python job was already using
-about 82 GB RSS; the readiness route reports the missing artifact explicitly
-until the live proof can be generated on a quiet machine.
+prefix cache, paged cache, and block L2 enabled. The live artifact is now
+present and accepted by the route:
+
+- `clientOverlap=true`
+- `max_running_observed=2`
+- `max_waiting_observed=2`
+- `num_requests_processed=2`
+- `kv_cache_quantization.bits=4`
+- `block_disk_cache.disk_writes=4`
+- peak memory about 40.6 GB
 
 ## Local low-RAM model lane addendum
 
@@ -122,8 +127,9 @@ cached-token deltas, the `/v1/responses` endpoint, Responses streaming events,
 Qwen/MiniMax streaming tool parser files.
 
 This gate is source/API-contract-backed. It does not replace the separate live
-Qwen and MiniMax load/chat/cache artifacts, and it does not claim MiniMax live
-multi-request batching.
+Qwen and MiniMax load/chat/cache artifacts, but MiniMax live multi-request
+batching is now covered by
+`docs/live-proofs/checkpoint-464-minimax-continuous-batching-live.json`.
 
 ## CVE import, include filter, and embedding addendum
 
@@ -182,8 +188,8 @@ The proof checks:
 - `/qa/deep-runtime-flow-coverage` and `/qa/coverage-index` mirrors
 
 This is an app-state plus existing-live-artifact gate. It does not replace the
-dedicated Qwen live batching proof, the dedicated CVE import/embedding proof, or
-the still-pending MiniMax live batching stress proof.
+dedicated Qwen/MiniMax live batching proofs or the dedicated CVE
+import/embedding proof.
 
 ## Cache artifact matrix addendum
 
@@ -264,8 +270,8 @@ to avoid unnecessary RAM pressure.
 - MiniMax is partially proven: the smaller MiniMax text target loads and caches
   correctly in the release app, but instruction-following quality needs a real
   prompt-suite pass before calling it polished.
-- Qwen continuous batching is now live-model proven for the two-request low-RAM
-  gate above. MiniMax continuous batching is not live-model proven yet.
+- Qwen and MiniMax continuous batching are now live-model proven for the
+  two-request low-RAM gates above.
 - Full MiniMax JANG_K is artifact/metadata proven only at this checkpoint; it
   still needs a live load/chat/cache pass on a quiet machine.
 - The live `exploit.bot` website copy was updated after this scope correction:

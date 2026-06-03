@@ -451,7 +451,7 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/runtime-coverage cache method mismatch: {runtime_coverage}")
     if continuous_batching_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/continuous-batching-coverage failed: {continuous_batching_coverage}")
-    if continuous_batching_coverage.get("proofLevel") != "source-and-live-qwen-stress-backed":
+    if continuous_batching_coverage.get("proofLevel") != "source-and-live-qwen-minimax-stress-backed":
         raise AssertionError(f"/qa/continuous-batching-coverage proof level mismatch: {continuous_batching_coverage}")
     if continuous_batching_coverage.get("qwenContinuousBatchingArtifactOK") is not True:
         raise AssertionError(f"/qa/continuous-batching-coverage qwen live artifact mismatch: {continuous_batching_coverage}")
@@ -461,6 +461,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/continuous-batching-coverage qwen KV bits mismatch: {continuous_batching_coverage}")
     if continuous_batching_coverage.get("minimaxContinuousBatchingArtifact") != "docs/live-proofs/checkpoint-464-minimax-continuous-batching-live.json":
         raise AssertionError(f"/qa/continuous-batching-coverage MiniMax artifact path mismatch: {continuous_batching_coverage}")
+    if continuous_batching_coverage.get("minimaxContinuousBatchingArtifactOK") is not True:
+        raise AssertionError(f"/qa/continuous-batching-coverage MiniMax live artifact mismatch: {continuous_batching_coverage}")
+    if continuous_batching_coverage.get("minimaxContinuousBatchingMaxRunningObserved", 0) < 2:
+        raise AssertionError(f"/qa/continuous-batching-coverage MiniMax live concurrency mismatch: {continuous_batching_coverage}")
+    if continuous_batching_coverage.get("minimaxContinuousBatchingKVBits") != 4:
+        raise AssertionError(f"/qa/continuous-batching-coverage MiniMax KV bits mismatch: {continuous_batching_coverage}")
     if not continuous_batching_coverage.get("minimaxContinuousBatchingNextCommand"):
         raise AssertionError(f"/qa/continuous-batching-coverage MiniMax next command missing: {continuous_batching_coverage}")
     if continuous_batching_coverage.get("contractParity") is not True:
