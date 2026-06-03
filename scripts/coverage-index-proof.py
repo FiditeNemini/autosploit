@@ -57,6 +57,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/context-session-efficiency-matrix",
     "/qa/evidence-lifecycle-coverage",
     "/qa/evidence-lifecycle-flow-matrix",
+    "/qa/cve-taxonomy-coverage",
     "/qa/cve-taxonomy-matrix",
     "/qa/cve-import-embedding-coverage",
     "/qa/settings-coverage",
@@ -97,6 +98,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/objective-flow-requirement-matrix",
     "/qa/objective-flow-execution-graph",
     "/qa/per-turn-runtime-contract",
+    "/qa/active-objective-audit",
 }
 
 REQUIRED_PROOFS = {
@@ -186,6 +188,7 @@ REQUIRED_PROOFS = {
     "objective-flow-requirement-matrix-proof.py",
     "objective-flow-execution-graph-proof.py",
     "per-turn-runtime-contract-proof.py",
+    "active-objective-audit-proof.py",
 }
 
 REQUIRED_GROUPS = {
@@ -878,6 +881,7 @@ def assert_coverage_index() -> None:
     beta_readiness = request("GET", "/qa/beta-readiness-coverage")
     objective_runtime = request("GET", "/qa/objective-runtime-coverage")
     objective_flow = request("GET", "/qa/objective-flow-requirement-matrix", timeout=35.0)
+    active_objective = request("GET", "/qa/active-objective-audit", timeout=35.0)
     if release_group.get("releaseRoute") != "/qa/release-readiness":
         raise AssertionError(f"coverage index release route mismatch: {release_group}")
     if release_group.get("releaseProofs") != release_coverage.get("proofs"):
@@ -928,6 +932,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index release group missing objective flow matrix route: {release_group}")
     if "objective-flow-requirement-matrix-proof.py" not in (release_group.get("proofs") or []):
         raise AssertionError(f"coverage index release group missing objective flow matrix proof: {release_group}")
+    if "/qa/active-objective-audit" not in (release_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index release group missing active objective audit route: {release_group}")
+    if "active-objective-audit-proof.py" not in (release_group.get("proofs") or []):
+        raise AssertionError(f"coverage index release group missing active objective audit proof: {release_group}")
     if objective_runtime.get("ok") is not True:
         raise AssertionError(f"objective runtime coverage route failed: {objective_runtime}")
     if release_group.get("objectiveRuntimeCoverageStatus") != objective_runtime.get("objectiveStatus"):
@@ -972,6 +980,24 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index objective runtime contract parity mismatch: {release_group}")
     if release_group.get("objectiveRuntimeCoverageProofFileParity") != objective_runtime.get("proofFileParity"):
         raise AssertionError(f"coverage index objective runtime proof-file parity mismatch: {release_group}")
+    if active_objective.get("ok") is not True:
+        raise AssertionError(f"active objective audit route failed: {active_objective}")
+    if release_group.get("activeObjectiveAuditRoute") != active_objective.get("route"):
+        raise AssertionError(f"coverage index active objective route mismatch: {release_group}")
+    if release_group.get("activeObjectiveAuditRequirementIds") != active_objective.get("requirementIds"):
+        raise AssertionError(f"coverage index active objective ids mismatch: {release_group}")
+    if release_group.get("activeObjectiveAuditRequirementCount") != active_objective.get("requirementCount"):
+        raise AssertionError(f"coverage index active objective requirement count mismatch: {release_group}")
+    if release_group.get("activeObjectiveAuditCoveredRequirementCount") != active_objective.get("coveredRequirementCount"):
+        raise AssertionError(f"coverage index active objective covered count mismatch: {release_group}")
+    if release_group.get("activeObjectiveAuditBlockedRequirementIds") != active_objective.get("blockedRequirementIds"):
+        raise AssertionError(f"coverage index active objective blocked IDs mismatch: {release_group}")
+    if release_group.get("activeObjectiveAuditKnownGapBoundary") != active_objective.get("knownGapBoundary"):
+        raise AssertionError(f"coverage index active objective known-gap boundary mismatch: {release_group}")
+    if release_group.get("activeObjectiveAuditCompletionClaimAllowed") != active_objective.get("completionClaimAllowed"):
+        raise AssertionError(f"coverage index active objective completion boundary mismatch: {release_group}")
+    if release_group.get("activeObjectiveAuditProofFileParity") != active_objective.get("proofFileParity"):
+        raise AssertionError(f"coverage index active objective proof parity mismatch: {release_group}")
     runtime_group = groups.get("runtimeAndCache") or {}
     if runtime_group.get("liveProofArtifactCount", 0) < 6:
         raise AssertionError(f"coverage index runtime live artifact count mismatch: {runtime_group}")
