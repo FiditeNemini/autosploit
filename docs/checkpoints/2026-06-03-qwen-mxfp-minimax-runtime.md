@@ -67,6 +67,19 @@ source-and-live-qwen-stress-backed` and mirrors the live artifact through
 `/qa/coverage-index`. This is a Qwen live batching proof only; MiniMax
 multi-request live batching remains a separate not-yet-run stress proof.
 
+## Streaming, parser, and Responses reuse addendum
+
+`scripts/streaming-parser-reuse-proof.py` now verifies
+`/qa/streaming-parser-reuse`. The route source-checks the Chat Completions SSE
+path, ChatService handling for content, reasoning, tool-call, usage, and
+cached-token deltas, the `/v1/responses` endpoint, Responses streaming events,
+`previous_response_id` session reuse, per-request reasoning parser state, and
+Qwen/MiniMax streaming tool parser files.
+
+This gate is source/API-contract-backed. It does not replace the separate live
+Qwen and MiniMax load/chat/cache artifacts, and it does not claim MiniMax live
+multi-request batching.
+
 ## MiniMax status
 
 The release app proof loaded `/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ`

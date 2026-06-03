@@ -17,6 +17,10 @@ APP_API = "http://127.0.0.1:9999"
 
 REQUIRED_CONTRACTS = {
     "streamingUsageMetrics",
+    "streamingContentDeltas",
+    "streamingReasoningDeltas",
+    "streamingToolCallDeltas",
+    "responsesEndpointReuse",
     "tokenCounters",
     "reasoningToggle",
     "reasoningCollapse",
@@ -53,6 +57,7 @@ REQUIRED_ROUTES = {
     "/qa/chat-new-context-confirm",
     "/qa/seed-chat-control-actions",
     "/qa/chat-control-action",
+    "/qa/streaming-parser-reuse",
 }
 
 REQUIRED_PROOFS = {
@@ -71,6 +76,7 @@ REQUIRED_PROOFS = {
     "visual-chat-interaction-proof.py",
     "visual-context-inspector-proof.py",
     "visual-request-audit-proof.py",
+    "streaming-parser-reuse-proof.py",
 }
 
 REQUIRED_VISUAL_MANIFESTS = {

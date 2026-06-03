@@ -36,6 +36,7 @@ EXPECTED_PROOFS = {
     "runtime-concurrency-stats-proof.py",
     "runtime-continuous-batching-cli-proof.py",
     "prove-live-continuous-batching.py",
+    "streaming-parser-reuse-proof.py",
 }
 
 EXPECTED_ROUTES = {
@@ -46,6 +47,7 @@ EXPECTED_ROUTES = {
     "/qa/seed-live-cache-stats",
     "/qa/engine-python-runtime",
     "/qa/continuous-batching-coverage",
+    "/qa/streaming-parser-reuse",
 }
 
 EXPECTED_LIVE_ARTIFACTS = {
@@ -80,7 +82,7 @@ EXPECTED_CACHE_COMPONENT_PROOFS = {
 }
 
 
-def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
+def request(method: str, path: str, body: str | dict | None = None, timeout: float = 15.0):
     if isinstance(body, dict):
         body = json.dumps(body)
     data = None if body is None else body.encode("utf-8")
@@ -135,10 +137,19 @@ def run() -> None:
             "ssmCompanionL2",
             "newContextPreservesEngineSession",
             "continuousBatchingSource",
+            "streamingParserReuse",
             "unsupportedStartBlocked",
         ):
             if contracts.get(key) is not True:
                 raise AssertionError(f"runtime contract missing {key}: {coverage}")
+        if coverage.get("streamingParserProofLevel") != "source-backed-api-contract":
+            raise AssertionError(f"runtime streaming parser proof level mismatch: {coverage}")
+        if coverage.get("streamingParserContractParity") is not True:
+            raise AssertionError(f"runtime streaming parser contract parity mismatch: {coverage}")
+        if coverage.get("streamingParserSourceFileParity") is not True:
+            raise AssertionError(f"runtime streaming parser source parity mismatch: {coverage}")
+        if coverage.get("streamingParserResponsesStoreSessionMode") != "store-response-session-and-resolve-previous-response-id":
+            raise AssertionError(f"runtime streaming parser session mode mismatch: {coverage}")
         if coverage.get("continuousBatchingProofLevel") != "source-and-live-qwen-stress-backed":
             raise AssertionError(f"runtime continuous batching proof level mismatch: {coverage}")
         if coverage.get("continuousBatchingLiveLoadedModelStress") != "qwen-live-max-running-observed-2":

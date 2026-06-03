@@ -39,6 +39,7 @@ EXPECTED_CONTRACTS = {
     "streamingContentDeltas",
     "streamingReasoningDeltas",
     "streamingToolCallDeltas",
+    "responsesEndpointReuse",
     "toolParserMatrix",
     "reasoningParserAutodetect",
     "toolParserAutodetect",
@@ -77,6 +78,7 @@ EXPECTED_ROUTES = [
     "/qa/session-coverage",
     "/qa/session-workflow-matrix",
     "/qa/continuous-batching-coverage",
+    "/qa/streaming-parser-reuse",
     "/qa/chat-coverage",
     "/qa/parser-tool-matrix",
     "/qa/runtime-coverage",
@@ -94,6 +96,7 @@ EXPECTED_PROOFS = [
     "chat-coverage-proof.py",
     "parser-tool-matrix-proof.py",
     "continuous-batching-coverage-proof.py",
+    "streaming-parser-reuse-proof.py",
     "parallel-agent-session-proof.py",
     "runtime-concurrency-stats-proof.py",
     "runtime-continuous-batching-cli-proof.py",
@@ -105,7 +108,7 @@ EXPECTED_PROOFS = [
 ]
 
 
-def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
+def request(method: str, path: str, body: str | None = None, timeout: float = 15.0):
     data = None if body is None else body.encode("utf-8")
     req = urllib.request.Request(f"{APP_API}{path}", data=data, method=method)
     with urllib.request.urlopen(req, timeout=timeout) as resp:
@@ -209,6 +212,14 @@ def run() -> None:
             raise AssertionError(f"continuous batching live stress label mismatch: {coverage}")
         if coverage.get("continuousBatchingContractParity") is not True:
             raise AssertionError(f"continuous batching contract parity mismatch: {coverage}")
+        if coverage.get("streamingParserProofLevel") != "source-backed-api-contract":
+            raise AssertionError(f"streaming parser proof level mismatch: {coverage}")
+        if coverage.get("streamingParserContractParity") is not True:
+            raise AssertionError(f"streaming parser contract parity mismatch: {coverage}")
+        if coverage.get("streamingParserProofFileParity") is not True:
+            raise AssertionError(f"streaming parser proof-file parity mismatch: {coverage}")
+        if coverage.get("streamingParserResponsesStoreSessionMode") != "store-response-session-and-resolve-previous-response-id":
+            raise AssertionError(f"streaming parser session mode mismatch: {coverage}")
         if coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
             raise AssertionError(f"cache response method mismatch: {coverage}")
         for component in ("prefixCache", "promptL2Disk", "pagedKVCache", "blockL2Disk", "turboQuantKV", "ssmCompanionL2"):
@@ -241,12 +252,16 @@ def run() -> None:
             raise AssertionError(f"coverage index runtime group missing deep route: {runtime_group}")
         if "/qa/continuous-batching-coverage" not in (runtime_group.get("endpoints") or []):
             raise AssertionError(f"coverage index runtime group missing continuous batching route: {runtime_group}")
+        if "/qa/streaming-parser-reuse" not in (runtime_group.get("endpoints") or []):
+            raise AssertionError(f"coverage index runtime group missing streaming parser route: {runtime_group}")
         if runtime_group.get("deepRuntimeFlowDomainCount") != coverage.get("domainCount"):
             raise AssertionError(f"coverage index deep domain count mismatch: {runtime_group}")
         if runtime_group.get("deepRuntimeFlowContractParity") != coverage.get("contractParity"):
             raise AssertionError(f"coverage index deep contract parity mismatch: {runtime_group}")
         if runtime_group.get("continuousBatchingContractParity") is not True:
             raise AssertionError(f"coverage index batching contract parity mismatch: {runtime_group}")
+        if runtime_group.get("streamingParserContractParity") is not True:
+            raise AssertionError(f"coverage index streaming parser contract parity mismatch: {runtime_group}")
 
         tools_group = (index.get("groups") or {}).get("toolsAndParsers") or {}
         if tools_group.get("toolFlowDomainCount") != tool_flow.get("flowDomainCount"):

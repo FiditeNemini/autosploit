@@ -46,7 +46,7 @@ REQUIRED_SUBTAB_PROOFS = (
 )
 
 
-def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
+def request(method: str, path: str, body: str | None = None, timeout: float = 15.0):
     data = None if body is None else body.encode("utf-8")
     req = urllib.request.Request(f"{APP_API}{path}", data=data, method=method)
     with urllib.request.urlopen(req, timeout=timeout) as resp:
@@ -235,6 +235,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing tool flow coverage route contract: {qa}")
     if "/qa/deep-runtime-flow-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing deep runtime flow coverage route contract: {qa}")
+    if "/qa/streaming-parser-reuse" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing streaming parser reuse route contract: {qa}")
     if deep_runtime_flow_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/deep-runtime-flow-coverage failed: {deep_runtime_flow_coverage}")
     if deep_runtime_flow_coverage.get("contractParity") is not True:

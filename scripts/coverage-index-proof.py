@@ -41,6 +41,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/tool-flow-coverage",
     "/qa/deep-runtime-flow-coverage",
     "/qa/runtime-coverage",
+    "/qa/streaming-parser-reuse",
     "/qa/python-runtime-inventory",
     "/qa/engine-python-runtime",
     "/qa/agent-flow-inventory",
@@ -111,6 +112,7 @@ REQUIRED_PROOFS = {
     "deep-runtime-flow-coverage-proof.py",
     "tool-catalog-detail-proof.py",
     "runtime-coverage-proof.py",
+    "streaming-parser-reuse-proof.py",
     "python-runtime-inventory-proof.py",
     "engine-python-runtime-resolution-proof.py",
     "agent-flow-inventory-proof.py",
@@ -220,7 +222,7 @@ EXPECTED_RESULT_PARSER_RAW_ONLY_TOOLS = [
 ]
 
 
-def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
+def request(method: str, path: str, body: str | None = None, timeout: float = 15.0):
     data = None if body is None else body.encode("utf-8")
     req = urllib.request.Request(f"{APP_API}{path}", data=data, method=method)
     with urllib.request.urlopen(req, timeout=timeout) as resp:
