@@ -148,6 +148,8 @@ def run() -> None:
 
         if rows["responsesSessionReuse"].get("testFile") != "testsuite/test_responses_session_store.py":
             raise AssertionError(f"Responses row test file mismatch: {rows['responsesSessionReuse']}")
+        if rows["responsesSessionReuse"].get("streamingSessionStore") is not True:
+            raise AssertionError(f"Responses row missing streamed session-store proof: {rows['responsesSessionReuse']}")
         if rows["toolParserAPIShape"].get("testFile") != "testsuite/test_tool_parser_api.py":
             raise AssertionError(f"tool parser row test file mismatch: {rows['toolParserAPIShape']}")
         if rows["reasoningContentDeltaFields"].get("streamingContractParity") != streaming.get("contractParity"):

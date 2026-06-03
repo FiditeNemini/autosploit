@@ -72,6 +72,7 @@ EXPECTED_CONTRACTS = {
     "toolChoiceRequiredErrors",
     "cacheReuseTelemetry",
     "responsesSessionStoreEngineTests",
+    "responsesStreamingSessionStore",
     "parserAPIShapeProof",
 }
 
