@@ -897,6 +897,7 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime cache response method mismatch: {runtime_group}")
     runtime_coverage = request("GET", "/qa/runtime-coverage")
     deep_runtime = request("GET", "/qa/deep-runtime-flow-coverage")
+    continuous_batching = request("GET", "/qa/continuous-batching-coverage")
     if runtime_group.get("runtimeContracts") != runtime_coverage.get("contracts"):
         raise AssertionError(f"coverage index runtime contract map mismatch: {runtime_group}")
     if runtime_group.get("runtimeContractCount") != len(runtime_coverage.get("contracts") or {}):
@@ -915,6 +916,12 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime group missing deep runtime flow route: {runtime_group}")
     if "deep-runtime-flow-coverage-proof.py" not in (runtime_group.get("proofs") or []):
         raise AssertionError(f"coverage index runtime group missing deep runtime proof: {runtime_group}")
+    if "/qa/continuous-batching-coverage" not in (runtime_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index runtime group missing continuous batching route: {runtime_group}")
+    if "continuous-batching-coverage-proof.py" not in (runtime_group.get("proofs") or []):
+        raise AssertionError(f"coverage index runtime group missing continuous batching proof: {runtime_group}")
+    if "parallel-agent-session-proof.py" not in (runtime_group.get("proofs") or []):
+        raise AssertionError(f"coverage index runtime group missing parallel agent proof: {runtime_group}")
     if runtime_group.get("deepRuntimeFlowDomains") != deep_runtime.get("domains"):
         raise AssertionError(f"coverage index deep runtime domains mismatch: {runtime_group}")
     if runtime_group.get("deepRuntimeFlowDomainCount") != deep_runtime.get("domainCount"):
@@ -929,6 +936,22 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index deep runtime route count mismatch: {runtime_group}")
     if runtime_group.get("deepRuntimeFlowProofFileParity") != deep_runtime.get("proofFileParity"):
         raise AssertionError(f"coverage index deep runtime proof parity mismatch: {runtime_group}")
+    if continuous_batching.get("ok") is not True:
+        raise AssertionError(f"continuous batching coverage route failed: {continuous_batching}")
+    if runtime_group.get("continuousBatchingContracts") != continuous_batching.get("contracts"):
+        raise AssertionError(f"coverage index continuous batching contract map mismatch: {runtime_group}")
+    if runtime_group.get("continuousBatchingContractCount") != continuous_batching.get("contractCount"):
+        raise AssertionError(f"coverage index continuous batching contract count mismatch: {runtime_group}")
+    if runtime_group.get("continuousBatchingContractParity") != continuous_batching.get("contractParity"):
+        raise AssertionError(f"coverage index continuous batching contract parity mismatch: {runtime_group}")
+    if runtime_group.get("continuousBatchingProofLevel") != continuous_batching.get("proofLevel"):
+        raise AssertionError(f"coverage index continuous batching proof level mismatch: {runtime_group}")
+    if runtime_group.get("continuousBatchingLiveLoadedModelStress") != continuous_batching.get("liveLoadedModelStress"):
+        raise AssertionError(f"coverage index continuous batching live stress label mismatch: {runtime_group}")
+    if runtime_group.get("continuousBatchingSourceFileParity") != continuous_batching.get("sourceFileParity"):
+        raise AssertionError(f"coverage index continuous batching source parity mismatch: {runtime_group}")
+    if runtime_group.get("continuousBatchingProofFileParity") != continuous_batching.get("proofFileParity"):
+        raise AssertionError(f"coverage index continuous batching proof parity mismatch: {runtime_group}")
     python_runtime = request("GET", "/qa/python-runtime-inventory")
     engine_python_runtime = request("GET", "/qa/engine-python-runtime")
     if python_runtime.get("ok") is not True:

@@ -26,6 +26,7 @@ EXPECTED_DOMAINS = [
     "requestAudit",
     "sessionWorkflows",
     "parallelAgents",
+    "continuousBatching",
     "parserMatrix",
     "runtimeCache",
     "liveCacheArtifacts",
@@ -45,6 +46,8 @@ EXPECTED_CONTRACTS = {
     "newContextPreservesCacheSession",
     "sessionWorkflowMatrix",
     "parallelAgentLimit",
+    "parallelAgentSessionProof",
+    "continuousBatchingSourceCoverage",
     "cveImportList",
     "semanticCVEEmbeddings",
     "supplyChainTools",
@@ -70,6 +73,7 @@ EXPECTED_ROUTES = [
     "/qa/cve-taxonomy-matrix",
     "/qa/session-coverage",
     "/qa/session-workflow-matrix",
+    "/qa/continuous-batching-coverage",
     "/qa/chat-coverage",
     "/qa/parser-tool-matrix",
     "/qa/runtime-coverage",
@@ -85,6 +89,8 @@ EXPECTED_PROOFS = [
     "session-coverage-proof.py",
     "chat-coverage-proof.py",
     "parser-tool-matrix-proof.py",
+    "continuous-batching-coverage-proof.py",
+    "parallel-agent-session-proof.py",
     "agent-loop-coverage-proof.py",
     "agent-autopilot-proof.py",
     "supply-chain-cve-ui-proof.py",
@@ -182,6 +188,12 @@ def run() -> None:
             raise AssertionError(f"context cap mismatch: {coverage}")
         if not 1 <= coverage.get("currentInjectedContextLimit", 0) <= 4:
             raise AssertionError(f"current context limit is not bounded: {coverage}")
+        if coverage.get("continuousBatchingProofLevel") != "source-backed-not-live-loaded-model-stress":
+            raise AssertionError(f"continuous batching proof level mismatch: {coverage}")
+        if coverage.get("continuousBatchingLiveLoadedModelStress") != "not-run-in-this-gate":
+            raise AssertionError(f"continuous batching live stress label mismatch: {coverage}")
+        if coverage.get("continuousBatchingContractParity") is not True:
+            raise AssertionError(f"continuous batching contract parity mismatch: {coverage}")
         if coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
             raise AssertionError(f"cache response method mismatch: {coverage}")
         for component in ("prefixCache", "promptL2Disk", "pagedKVCache", "blockL2Disk", "turboQuantKV", "ssmCompanionL2"):
@@ -204,10 +216,14 @@ def run() -> None:
         runtime_group = (index.get("groups") or {}).get("runtimeAndCache") or {}
         if "/qa/deep-runtime-flow-coverage" not in (runtime_group.get("endpoints") or []):
             raise AssertionError(f"coverage index runtime group missing deep route: {runtime_group}")
+        if "/qa/continuous-batching-coverage" not in (runtime_group.get("endpoints") or []):
+            raise AssertionError(f"coverage index runtime group missing continuous batching route: {runtime_group}")
         if runtime_group.get("deepRuntimeFlowDomainCount") != coverage.get("domainCount"):
             raise AssertionError(f"coverage index deep domain count mismatch: {runtime_group}")
         if runtime_group.get("deepRuntimeFlowContractParity") != coverage.get("contractParity"):
             raise AssertionError(f"coverage index deep contract parity mismatch: {runtime_group}")
+        if runtime_group.get("continuousBatchingContractParity") is not True:
+            raise AssertionError(f"coverage index batching contract parity mismatch: {runtime_group}")
 
         tools_group = (index.get("groups") or {}).get("toolsAndParsers") or {}
         if tools_group.get("toolFlowDomainCount") != tool_flow.get("flowDomainCount"):

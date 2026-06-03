@@ -106,6 +106,7 @@ def assert_testserver_smoke() -> None:
     tool_execution_matrix = request("GET", "/qa/tool-execution-matrix")
     tool_flow_coverage = request("GET", "/qa/tool-flow-coverage")
     deep_runtime_flow_coverage = request("GET", "/qa/deep-runtime-flow-coverage")
+    continuous_batching_coverage = request("GET", "/qa/continuous-batching-coverage")
     tool_coverage = request("GET", "/qa/tool-coverage")
     result_parser_coverage = request("GET", "/qa/result-parser-coverage")
     parser_tool_matrix = request("GET", "/qa/parser-tool-matrix")
@@ -418,6 +419,14 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/runtime-coverage failed: {runtime_coverage}")
     if runtime_coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"/qa/runtime-coverage cache method mismatch: {runtime_coverage}")
+    if continuous_batching_coverage.get("ok") is not True:
+        raise AssertionError(f"/qa/continuous-batching-coverage failed: {continuous_batching_coverage}")
+    if continuous_batching_coverage.get("proofLevel") != "source-backed-not-live-loaded-model-stress":
+        raise AssertionError(f"/qa/continuous-batching-coverage proof level mismatch: {continuous_batching_coverage}")
+    if continuous_batching_coverage.get("contractParity") is not True:
+        raise AssertionError(f"/qa/continuous-batching-coverage contract parity mismatch: {continuous_batching_coverage}")
+    if "/qa/continuous-batching-coverage" not in (state.get("qaCoverage") or {}).get("stateRoutes", []):
+        raise AssertionError(f"/state missing continuous batching route contract: {state.get('qaCoverage')}")
     expected_runtime_cache_components = [
         "prefixCache",
         "promptL2Disk",
@@ -1190,12 +1199,18 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index runtime proof-file parity mismatch: {coverage_index}")
     if "/qa/deep-runtime-flow-coverage" not in (runtime_group.get("endpoints") or []):
         raise AssertionError(f"/qa/coverage-index runtime group missing deep runtime route: {coverage_index}")
+    if "/qa/continuous-batching-coverage" not in (runtime_group.get("endpoints") or []):
+        raise AssertionError(f"/qa/coverage-index runtime group missing continuous batching route: {coverage_index}")
     if runtime_group.get("deepRuntimeFlowDomainCount") != deep_runtime_flow_coverage.get("domainCount"):
         raise AssertionError(f"/qa/coverage-index deep runtime domain count mismatch: {coverage_index}")
     if runtime_group.get("deepRuntimeFlowContractParity") != deep_runtime_flow_coverage.get("contractParity"):
         raise AssertionError(f"/qa/coverage-index deep runtime contract parity mismatch: {coverage_index}")
     if runtime_group.get("deepRuntimeFlowDomainProofFileParity") != deep_runtime_flow_coverage.get("domainProofFileParity"):
         raise AssertionError(f"/qa/coverage-index deep runtime domain proof parity mismatch: {coverage_index}")
+    if runtime_group.get("continuousBatchingContracts") != continuous_batching_coverage.get("contracts"):
+        raise AssertionError(f"/qa/coverage-index continuous batching contract map mismatch: {coverage_index}")
+    if runtime_group.get("continuousBatchingContractParity") is not True:
+        raise AssertionError(f"/qa/coverage-index continuous batching contract parity mismatch: {coverage_index}")
     if python_runtime_inventory.get("ok") is not True:
         raise AssertionError(f"/qa/python-runtime-inventory failed: {python_runtime_inventory}")
     if python_runtime_inventory.get("parseParity") is not True:

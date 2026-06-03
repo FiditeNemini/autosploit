@@ -82,6 +82,7 @@ The current beta DMG is published as a GitHub prerelease:
 - **Shell tool safety**: `run_shell` remains visible to the agent/tool catalogue, but destructive command samples are blocked through an auditable pattern policy covered by registry and QA proofs.
 - **Runtime packaging path**: release packaging bundles the vMLX Python engine, selects a valid bundled/runtime interpreter, verifies required modules, signs the app/DMG, and records manifest evidence.
 - **Qwen + MiniMax cache proofs**: live/release harnesses cover Qwen MXFP4-MTP hybrid SSM attention, MiniMax full-KV attention, TurboQuant KV cache, prefix cache, paged/block L2 cache, and repeat-prompt cache hits.
+- **Parallel/session + batching gates**: `scripts/parallel-agent-session-proof.py` drives two autonomous agents against a delayed mock Qwen engine and proves overlapping app requests (`max_in_flight=2`) plus live `workingCount`/status-line state; `/qa/continuous-batching-coverage` source-checks the vMLX server, BatchedEngine, LLM scheduler, MLLM scheduler, MLLM batch generator, BatchKV/BatchMamba cache, TurboQuant KV, L2 disk cache, and hybrid SSM companion contracts.
 - **Settings and persistence**: parser, generation, reasoning, engine cache, KV quantization, model path, session, terminal/tool path, and result-store state have QA proof coverage.
 - **UI status coverage**: chat, sidebar, active agent lists, supply-chain actions, CVE import/search, terminal path state, and visual proof screenshots have checkpoint coverage.
 - **Deep runtime/tool-flow gate**: `/qa/deep-runtime-flow-coverage` now rolls up tool flow, agent phases, bounded context, CVE taxonomy/import, semantic CVE embeddings, stash retrieval, parser matrix, streaming delta handling, session workflows, and Qwen/MiniMax cache contracts into one app-backed beta gate.
@@ -93,7 +94,7 @@ The current beta DMG is published as a GitHub prerelease:
 - **Qwen multimodal promotion**: Qwen-specific VL/multimodal runtime, multimodal prefix cache, and multimodal context-routing proofs are still pending.
 - **General chat quality**: broad reasoning/tool-call quality beyond bounded smoke prompts still needs longer realistic runs, especially MiniMax first-turn instruction-following.
 - **Full app UI pass**: source/API/proof coverage is broad and the website has been visually reviewed, but the native app still needs a final hands-on visual pass across every tab, status indicator, hover/detail state, and release build window before calling it polished.
-- **Parallel/session stress**: multi-agent settings, max-concurrent limits, and agent inheritance are route/proof covered, but realistic parallel sessions plus continuous batching under live model load still need a dedicated stress proof.
+- **Live loaded-model stress**: mock-engine parallel app sessions and continuous-batching source contracts are proven, but realistic continuous batching under live Qwen/MiniMax multi-request model load still needs a dedicated low-RAM stress proof.
 - **Security review**: supply-chain/pentest features are wired, but the release still needs a deliberate abuse-boundary, logging, and command-safety review before wider distribution.
 
 ## Screenshots

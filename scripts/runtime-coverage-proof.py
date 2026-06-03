@@ -31,6 +31,8 @@ EXPECTED_PROOFS = {
     "verify-live-models.py",
     "prove-block-l2-cache.py",
     "prove-ssm-rederive-status.py",
+    "continuous-batching-coverage-proof.py",
+    "parallel-agent-session-proof.py",
 }
 
 EXPECTED_ROUTES = {
@@ -40,6 +42,7 @@ EXPECTED_ROUTES = {
     "/qa/seed-settings-visual-state",
     "/qa/seed-live-cache-stats",
     "/qa/engine-python-runtime",
+    "/qa/continuous-batching-coverage",
 }
 
 EXPECTED_LIVE_ARTIFACTS = {
@@ -127,10 +130,19 @@ def run() -> None:
             "pagedCache",
             "ssmCompanionL2",
             "newContextPreservesEngineSession",
+            "continuousBatchingSource",
             "unsupportedStartBlocked",
         ):
             if contracts.get(key) is not True:
                 raise AssertionError(f"runtime contract missing {key}: {coverage}")
+        if coverage.get("continuousBatchingProofLevel") != "source-backed-not-live-loaded-model-stress":
+            raise AssertionError(f"runtime continuous batching proof level mismatch: {coverage}")
+        if coverage.get("continuousBatchingLiveLoadedModelStress") != "not-run-in-this-gate":
+            raise AssertionError(f"runtime continuous batching live stress label mismatch: {coverage}")
+        if coverage.get("continuousBatchingContractParity") is not True:
+            raise AssertionError(f"runtime continuous batching contract parity mismatch: {coverage}")
+        if coverage.get("continuousBatchingSourceFileParity") is not True:
+            raise AssertionError(f"runtime continuous batching source parity mismatch: {coverage}")
         if coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
             raise AssertionError(f"wrong cache response method: {coverage}")
         if coverage.get("cacheResponsesInferenceMethod") != "prefix-cache-l2-turboquant":
