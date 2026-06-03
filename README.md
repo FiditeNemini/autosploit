@@ -102,7 +102,7 @@ The current beta DMG is published as a GitHub prerelease:
 - **Objective runtime coverage map**: `/qa/objective-runtime-coverage` rolls tool flow, runtime, local model lanes, context/compaction, prompt-injection boundaries, CVE import/embeddings, stash retrieval, parallel sessions, Responses/streaming parser reuse, L2 cache, TurboQuant KV, hybrid SSM async rederive, proof ledgers, and release readiness into one auditable map. It intentionally reports `objectiveComplete=false` while known gaps remain, with zero blocked objective requirements at this checkpoint.
 - **Objective flow requirement matrix**: `/qa/objective-flow-requirement-matrix` expands the objective map into per-requirement rows with routes, proofs, evidence level, live-artifact parity, and streaming event details for tool flow, context/memory, CVEs, sessions, Responses reuse, L2 hits, TurboQuant KV, and hybrid SSM async rederive.
 - **Settings and persistence**: parser, generation, reasoning, engine cache, KV quantization, model path, session, terminal/tool path, and result-store state have QA proof coverage.
-- **UI status coverage**: chat, sidebar, active agent lists, supply-chain actions, CVE import/search, terminal path state, and visual proof screenshots have checkpoint coverage.
+- **UI status coverage**: chat, sidebar, active agent lists, supply-chain actions, CVE import/search, terminal path state, and visual proof screenshots have checkpoint coverage. `/qa/visual-coverage` now carries per-tab visual proof-family parity across recon, web, network, creds, exploit, post, supply-chain, OSINT, report, and stash.
 - **Deep runtime/tool-flow gate**: `/qa/deep-runtime-flow-coverage` now rolls up tool flow, agent phases, local model lane selection, session/context/cache lifecycle, prompt-injection boundaries, bounded context, CVE taxonomy/import, semantic CVE embeddings, stash retrieval, parser matrix, Responses/SSE streaming delta handling, session workflows, and Qwen/MiniMax cache contracts into one app-backed beta gate.
 - **Website refresh**: `exploit.bot` now points at the notarized beta DMG, uses the current dark app theme, preserves the logo treatment, includes cleaned current screenshot/proof assets, and has desktop/mobile browser verification across EN/KO/ZH/ES/JA.
 - **Website SEO/i18n**: the live site has current Open Graph/Twitter metadata, favicon/manifest assets, sitemap image entries, `llms.txt`, `llms-full.txt`, `security.txt`, localized visible copy, localized page title/description updates, and live Playwright coverage for missing i18n keys, broken images, and mobile overflow.
@@ -260,6 +260,7 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 - `python3 scripts/engine-api-cache-proof-matrix-proof.py`
 - `python3 scripts/state-dependent-contract-matrix-proof.py`
 - `python3 scripts/cache-artifact-matrix-proof.py`
+- `python3 scripts/visual-coverage-proof.py`
 - `python3 scripts/objective-runtime-coverage-proof.py`
 - `python3 scripts/supply-chain-cve-ui-proof.py`
 - `python3 scripts/cve-settings-actions-proof.py`

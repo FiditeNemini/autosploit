@@ -150,6 +150,7 @@ REQUIRED_VISUAL_TAB_PROOFS = {
     "creds": {"visual-creds-action-proof.py"},
     "exploit": {"visual-exploit-action-proof.py"},
     "post": {"visual-post-attribution-proof.py"},
+    "supplyChain": {"visual-cve-settings-status-proof.py"},
     "osint": {"visual-osint-screenshot-proof.py", "visual-osint-artifact-actions-proof.py"},
     "report": {"visual-report-export-proof.py", "visual-report-agent-proof.py"},
     "stash": {"visual-stash-retrieval-proof.py"},
