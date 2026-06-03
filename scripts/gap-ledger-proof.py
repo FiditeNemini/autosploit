@@ -22,16 +22,19 @@ EXPECTED_QWEN_PROMOTION_CRITERIA = [
         "id": "qwenMultimodalLoader",
         "status": "missing",
         "requiredProof": "live-qwen-multimodal-loader-proof.py",
+        "scriptExists": True,
     },
     {
         "id": "prefixCacheKeyDiscipline",
         "status": "missing",
         "requiredProof": "live-qwen-multimodal-prefix-cache-proof.py",
+        "scriptExists": False,
     },
     {
         "id": "multimodalContextPacketRouting",
         "status": "missing",
         "requiredProof": "live-qwen-multimodal-context-routing-proof.py",
+        "scriptExists": False,
     },
 ]
 
@@ -136,7 +139,7 @@ def assert_gap_ledger() -> None:
     if qwen_gap.get("missingPromotionProofs") != [item["requiredProof"] for item in EXPECTED_QWEN_PROMOTION_CRITERIA]:
         raise AssertionError(f"qwen multimodal missing promotion proof mismatch: {qwen_gap}")
     expected_promotion_proof_existence = {
-        item["requiredProof"]: False for item in EXPECTED_QWEN_PROMOTION_CRITERIA
+        item["requiredProof"]: item["scriptExists"] for item in EXPECTED_QWEN_PROMOTION_CRITERIA
     }
     if qwen_gap.get("promotionProofExistence") != expected_promotion_proof_existence:
         raise AssertionError(f"qwen multimodal promotion proof existence map mismatch: {qwen_gap}")
@@ -160,9 +163,11 @@ def assert_gap_ledger() -> None:
         raise AssertionError(f"gap ledger top-level qwen promotion proof existence parity mismatch: {ledger}")
     for expected, actual in zip(EXPECTED_QWEN_PROMOTION_CRITERIA, promotion_criteria):
         for key, value in expected.items():
+            if key == "scriptExists":
+                continue
             if actual.get(key) != value:
                 raise AssertionError(f"qwen multimodal promotion criterion {key} mismatch: {qwen_gap}")
-        if (ROOT / "scripts" / expected["requiredProof"]).exists():
+        if expected["scriptExists"] is False and (ROOT / "scripts" / expected["requiredProof"]).exists():
             raise AssertionError(f"qwen multimodal promotion proof unexpectedly exists before runtime support: {expected}")
     required_proofs = {
         "model-folder-warning-proof.py",

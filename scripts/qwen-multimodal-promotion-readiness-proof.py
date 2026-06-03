@@ -32,6 +32,11 @@ EXPECTED_ARTIFACTS = {
     proof: f"docs/live-proofs/{proof.removesuffix('.py')}.json"
     for proof in EXPECTED_LIVE_PROOFS
 }
+EXPECTED_SCRIPT_EXISTENCE = {
+    "live-qwen-multimodal-loader-proof.py": True,
+    "live-qwen-multimodal-prefix-cache-proof.py": False,
+    "live-qwen-multimodal-context-routing-proof.py": False,
+}
 
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 45.0):
@@ -90,9 +95,13 @@ def assert_payload(payload: dict, state: dict, index: dict, gap: dict) -> None:
         raise AssertionError(f"{ROUTE} live result artifact parity mismatch: {payload}")
     if payload.get("proofExistenceParity") is not True:
         raise AssertionError(f"{ROUTE} proof existence parity mismatch: {payload}")
-    if payload.get("missingLiveProofs") != EXPECTED_LIVE_PROOFS:
+    expected_missing_live_proofs = [
+        proof for proof in EXPECTED_LIVE_PROOFS
+        if EXPECTED_SCRIPT_EXISTENCE[proof] is False
+    ]
+    if payload.get("missingLiveProofs") != expected_missing_live_proofs:
         raise AssertionError(f"{ROUTE} should list the missing live proofs exactly: {payload}")
-    if payload.get("missingLiveProofCount") != len(EXPECTED_LIVE_PROOFS):
+    if payload.get("missingLiveProofCount") != len(expected_missing_live_proofs):
         raise AssertionError(f"{ROUTE} missing live proof count mismatch: {payload}")
     if payload.get("provenLiveProofs") != []:
         raise AssertionError(f"{ROUTE} should not report proven live Qwen multimodal proofs yet: {payload}")
@@ -104,15 +113,17 @@ def assert_payload(payload: dict, state: dict, index: dict, gap: dict) -> None:
     proof_existence = payload.get("proofExistence") or {}
     if sorted(proof_existence) != sorted(EXPECTED_LIVE_PROOFS):
         raise AssertionError(f"{ROUTE} proof existence keys mismatch: {payload}")
-    if any(proof_existence.get(name) is not False for name in EXPECTED_LIVE_PROOFS):
-        raise AssertionError(f"{ROUTE} live proof files should still be absent at this checkpoint: {payload}")
+    if proof_existence != EXPECTED_SCRIPT_EXISTENCE:
+        raise AssertionError(f"{ROUTE} live proof file existence mismatch: {payload}")
 
     for row in criteria:
-        if row.get("status") != "missing-live-proof":
-            raise AssertionError(f"{ROUTE} criteria should be live-proof gated: {row}")
         if row.get("requiredProof") not in EXPECTED_LIVE_PROOFS:
             raise AssertionError(f"{ROUTE} criterion required proof mismatch: {row}")
-        if row.get("proofExists") is not False:
+        expected_script_exists = EXPECTED_SCRIPT_EXISTENCE[row.get("requiredProof")]
+        expected_status = "missing-live-result" if expected_script_exists else "missing-live-proof"
+        if row.get("status") != expected_status:
+            raise AssertionError(f"{ROUTE} criteria status mismatch: {row}")
+        if row.get("proofExists") is not expected_script_exists or row.get("scriptExists") is not expected_script_exists:
             raise AssertionError(f"{ROUTE} criterion proof existence mismatch: {row}")
         if row.get("resultArtifact") != EXPECTED_ARTIFACTS.get(row.get("requiredProof")):
             raise AssertionError(f"{ROUTE} criterion result artifact mismatch: {row}")

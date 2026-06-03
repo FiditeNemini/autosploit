@@ -975,11 +975,14 @@ Current repeatable gates:
   Qwen multimodal loader, multimodal prefix-cache key discipline, and
   multimodal context packet routing as top-level promotion readiness, criteria
   count, missing criterion IDs, missing live proof names, and promotion proof
-  existence map/count/parity. The exact missing live proofs are
-  `live-qwen-multimodal-loader-proof.py`,
-  `live-qwen-multimodal-prefix-cache-proof.py`, and
+  existence map/count/parity. The guarded loader proof script
+  `live-qwen-multimodal-loader-proof.py` now exists and requires an explicit
+  Qwen/MiniMax multimodal folder before it writes a passing live result. The
+  remaining missing live proof scripts are
+  `live-qwen-multimodal-prefix-cache-proof.py` and
   `live-qwen-multimodal-context-routing-proof.py`; promotion remains false
-  until those proof scripts exist and pass. The runtime/cache group
+  until those proof scripts and all matching live-result artifacts exist and
+  pass. The runtime/cache group
   additionally exposes
   `supportedFamilies`, `cacheResponseMethod`, `cacheResponsesInferenceMethod`,
   `newModelSessionBehavior`, runtime contract map/count, route list/count,

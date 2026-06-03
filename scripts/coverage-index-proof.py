@@ -185,6 +185,7 @@ REQUIRED_PROOFS = {
     "gap-ledger-proof.py",
     "qwen-multimodal-promotion-readiness-proof.py",
     "qwen-multimodal-live-result-gate-proof.py",
+    "qwen-multimodal-loader-harness-gate-proof.py",
     "docs-inventory-parity-proof.py",
     "release-readiness-proof.py",
     "release-app-live-qwen-proof.py",
@@ -904,6 +905,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state missing qwen multimodal readiness proof: {app_state_group}")
     if "qwen-multimodal-live-result-gate-proof.py" not in (app_state_group.get("proofs") or []):
         raise AssertionError(f"coverage index app state missing qwen multimodal live result proof: {app_state_group}")
+    if "qwen-multimodal-loader-harness-gate-proof.py" not in (app_state_group.get("proofs") or []):
+        raise AssertionError(f"coverage index app state missing qwen multimodal loader harness proof: {app_state_group}")
     if app_state_group.get("qwenMultimodalPromotionGateMode") != gap.get("qwenMultimodalPromotionGateMode"):
         raise AssertionError(f"coverage index app state qwen promotion gate mode mismatch: {app_state_group}")
     if app_state_group.get("qwenMultimodalPromotionReadyRequiresLiveResults") != gap.get("qwenMultimodalPromotionReadyRequiresLiveResults"):

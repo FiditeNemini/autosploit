@@ -26,6 +26,11 @@ EXPECTED_ARTIFACTS = {
     proof: f"docs/live-proofs/{proof.removesuffix('.py')}.json"
     for proof in EXPECTED_LIVE_PROOFS
 }
+EXPECTED_SCRIPT_EXISTENCE = {
+    "live-qwen-multimodal-loader-proof.py": True,
+    "live-qwen-multimodal-prefix-cache-proof.py": False,
+    "live-qwen-multimodal-context-routing-proof.py": False,
+}
 
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 45.0):
@@ -87,14 +92,16 @@ def assert_live_result_gate(payload: dict, gap: dict, index: dict) -> None:
         proof = row.get("requiredProof")
         if row.get("resultArtifact") != EXPECTED_ARTIFACTS.get(proof):
             raise AssertionError(f"{ROUTE} result artifact mismatch: {row}")
-        if row.get("scriptExists") is not False:
-            raise AssertionError(f"{ROUTE} live script should still be absent at this checkpoint: {row}")
+        expected_script_exists = EXPECTED_SCRIPT_EXISTENCE[proof]
+        if row.get("scriptExists") is not expected_script_exists:
+            raise AssertionError(f"{ROUTE} live script existence mismatch at this checkpoint: {row}")
         if row.get("resultExists") is not False:
             raise AssertionError(f"{ROUTE} live result should still be absent at this checkpoint: {row}")
         if row.get("resultOK") is not False:
             raise AssertionError(f"{ROUTE} absent live result must not be treated as ok: {row}")
-        if row.get("status") != "missing-live-proof":
-            raise AssertionError(f"{ROUTE} absent script should be missing-live-proof: {row}")
+        expected_status = "missing-live-result" if expected_script_exists else "missing-live-proof"
+        if row.get("status") != expected_status:
+            raise AssertionError(f"{ROUTE} live result status mismatch: {row}")
 
     qwen_gap = (gap.get("gapContracts") or {}).get("qwenMultimodalRuntime") or {}
     if qwen_gap.get("promotionGateMode") != payload.get("promotionGateMode"):

@@ -1520,9 +1520,12 @@ Visual gates:
    promotion gates for the Qwen multimodal loader, multimodal prefix-cache key
    discipline, and multimodal context packet routing, including proof-script
    existence plus passing live-result artifact maps/counts/parity for the
-   required live proof scripts. The exact missing live proofs are
-   `live-qwen-multimodal-loader-proof.py`,
-   `live-qwen-multimodal-prefix-cache-proof.py`, and
+   required live proof scripts. The guarded loader proof script
+   `live-qwen-multimodal-loader-proof.py` now exists and refuses to write a
+   passing artifact unless an explicit Qwen/MiniMax multimodal folder really
+   loads through the engine and returns a multimodal chat response. The
+   remaining missing live proof scripts are
+   `live-qwen-multimodal-prefix-cache-proof.py` and
    `live-qwen-multimodal-context-routing-proof.py`; promotion remains false
-   until those proof scripts and their matching
+   until those proof scripts and all matching
    `docs/live-proofs/live-qwen-multimodal-*.json` artifacts exist and pass.
