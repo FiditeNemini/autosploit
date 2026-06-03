@@ -93,3 +93,15 @@ Verification after the contract update:
 - `python3 scripts/gap-ledger-proof.py`
 - `python3 scripts/coverage-index-proof.py`
 - `python3 scripts/app-qa-matrix-smoke-proof.py`
+
+Post-push release-readiness rerun:
+
+- `python3 scripts/proof-ledger-proof.py`
+- `python3 scripts/release-readiness-proof.py`
+- `python3 scripts/beta-readiness-coverage-proof.py`
+
+`release-readiness-proof.py` rebuilt and re-signed the ignored local
+`release/ExploitBot.app` and `release/ExploitBot-beta.dmg`; both passed
+`codesign --verify` after the rebuild. The first beta-readiness rerun failed
+against the stale unsigned local release app, and the rerun passed after the
+release-readiness rebuild refreshed those ignored artifacts.
