@@ -7,6 +7,9 @@ MIN_SYSTEM_VERSION="14.0"
 VERSION="${EXPLOITBOT_RELEASE_VERSION:-0.1.0-beta}"
 IDENTITY="${EXPLOITBOT_SIGN_IDENTITY:-Developer ID Application: ShieldStack LLC (55KGF2S5AY)}"
 NOTARY_PROFILE="${EXPLOITBOT_NOTARY_PROFILE:-}"
+NOTARIZE_APPLE_ID="${NOTARIZE_APPLE_ID:-}"
+NOTARIZE_TEAM_ID="${NOTARIZE_TEAM_ID:-}"
+NOTARIZE_PASSWORD="${NOTARIZE_PASSWORD:-}"
 DO_NOTARIZE=0
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -64,6 +67,13 @@ require_tool hdiutil
 require_tool xcrun
 require_tool rsync
 require_tool file
+
+notary_args=()
+if [[ -n "$NOTARY_PROFILE" ]]; then
+  notary_args=(--keychain-profile "$NOTARY_PROFILE")
+elif [[ -n "$NOTARIZE_APPLE_ID" && -n "$NOTARIZE_TEAM_ID" && -n "$NOTARIZE_PASSWORD" ]]; then
+  notary_args=(--apple-id "$NOTARIZE_APPLE_ID" --team-id "$NOTARIZE_TEAM_ID" --password "$NOTARIZE_PASSWORD")
+fi
 
 if ! security find-identity -p codesigning -v | grep -F "$IDENTITY" >/dev/null; then
   echo "signing identity not found: $IDENTITY" >&2
@@ -166,6 +176,22 @@ codesign --force \
 
 codesign --verify --deep --strict --verbose=2 "$APP_BUNDLE"
 
+NOTARIZATION_STATUS="not-submitted"
+if [[ "$DO_NOTARIZE" == "1" ]]; then
+  if [[ "${#notary_args[@]}" -eq 0 ]]; then
+    echo "--notarize requires --notary-profile/EXPLOITBOT_NOTARY_PROFILE or NOTARIZE_APPLE_ID, NOTARIZE_TEAM_ID, and NOTARIZE_PASSWORD" >&2
+    exit 1
+  fi
+  APP_ZIP="$RELEASE_DIR/$APP_NAME-beta-app.zip"
+  rm -f "$APP_ZIP"
+  /usr/bin/ditto -c -k --keepParent "$APP_BUNDLE" "$APP_ZIP"
+  xcrun notarytool submit "$APP_ZIP" "${notary_args[@]}" --wait
+  xcrun stapler staple "$APP_BUNDLE"
+  xcrun stapler validate "$APP_BUNDLE"
+  rm -f "$APP_ZIP"
+  NOTARIZATION_STATUS="app-submitted-and-stapled"
+fi
+
 cp -R "$APP_BUNDLE" "$RELEASE_DIR/dmg-root/"
 ln -s /Applications "$RELEASE_DIR/dmg-root/Applications"
 hdiutil create \
@@ -178,14 +204,10 @@ hdiutil create \
 codesign --force --timestamp --sign "$IDENTITY" "$DMG_PATH"
 codesign --verify --verbose=2 "$DMG_PATH"
 
-NOTARIZATION_STATUS="not-submitted"
 if [[ "$DO_NOTARIZE" == "1" ]]; then
-  if [[ -z "$NOTARY_PROFILE" ]]; then
-    echo "--notarize requires --notary-profile or EXPLOITBOT_NOTARY_PROFILE" >&2
-    exit 1
-  fi
-  xcrun notarytool submit "$DMG_PATH" --keychain-profile "$NOTARY_PROFILE" --wait
+  xcrun notarytool submit "$DMG_PATH" "${notary_args[@]}" --wait
   xcrun stapler staple "$DMG_PATH"
+  xcrun stapler validate "$DMG_PATH"
   NOTARIZATION_STATUS="submitted-and-stapled"
 fi
 
@@ -229,9 +251,9 @@ manifest = {
     "teamIdentifier": os.environ["TEAM_ID"],
     "hardenedRuntime": True,
     "notarizationStatus": os.environ["NOTARIZATION_STATUS"],
-    "notarizationGate": "requires-notary-profile",
-    "notaryProfileRequired": True,
-    "notarizationGateReason": "Notarization is intentionally skipped until EXPLOITBOT_NOTARY_PROFILE names a local notarytool keychain profile.",
+    "notarizationGate": "passed" if os.environ["NOTARIZATION_STATUS"] == "submitted-and-stapled" else "requires-notary-credentials",
+    "notaryProfileRequired": False,
+    "notarizationGateReason": "Notarization completed for the app and DMG." if os.environ["NOTARIZATION_STATUS"] == "submitted-and-stapled" else "Run with EXPLOITBOT_NOTARY_PROFILE or NOTARIZE_APPLE_ID/NOTARIZE_TEAM_ID/NOTARIZE_PASSWORD.",
     "artifacts": {
         "appPath": "release/ExploitBot.app",
         "dmgPath": "release/ExploitBot-beta.dmg",
@@ -247,9 +269,12 @@ manifest = {
     },
     "commands": {
         "packageUnsigned": "./script/package_release.sh --skip-notarize",
-        "notarize": "EXPLOITBOT_NOTARY_PROFILE=<profile-name> ./script/package_release.sh --notarize",
+        "notarizeWithProfile": "EXPLOITBOT_NOTARY_PROFILE=<profile-name> ./script/package_release.sh --notarize",
+        "notarizeWithEnv": "source /path/to/.env.signing && ./script/package_release.sh --notarize",
         "verifyAppSignature": "codesign --verify --deep --strict --verbose=2 release/ExploitBot.app",
         "verifyDmgSignature": "codesign --verify --verbose=2 release/ExploitBot-beta.dmg",
+        "validateStapledApp": "xcrun stapler validate release/ExploitBot.app",
+        "validateStapledDmg": "xcrun stapler validate release/ExploitBot-beta.dmg",
     },
 }
 

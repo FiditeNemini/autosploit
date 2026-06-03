@@ -64,7 +64,7 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 
 **Live Tool Telemetry** — Tool execution status updates are emitted per button/tab (queued, running, done, error), written to logs, and tracked in chat/panel history with CVE and stash workflow visibility.
 
-## Beta Readiness (May 26, 2026)
+## Beta Readiness (June 2, 2026)
 
 ### Done in the current beta lane
 
@@ -79,7 +79,7 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 
 ### Needs more work before public beta
 
-- **Notarization/stapling**: packaging is signed, but notarization is still profile-gated (`EXPLOITBOT_NOTARY_PROFILE` and `--notary-profile`).
+- **Notarization/stapling**: the release script supports notarized app and DMG output through either `EXPLOITBOT_NOTARY_PROFILE` or local notary environment variables; validate the current artifact manifest before publishing.
 - **Qwen multimodal promotion**: Qwen-specific VL/multimodal runtime, multimodal prefix cache, and multimodal context-routing proofs are still pending.
 - **General chat quality**: broad reasoning/tool-call quality beyond bounded smoke prompts still needs longer realistic runs, especially JANGTQ first-turn exact prompt-following.
 - **Full manual UI pass**: source/API/proof coverage is broad, but a final hands-on visual pass across every tab, status indicator, hover/detail state, and release build window is still required before calling it polished.
@@ -111,7 +111,7 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 
 ### Download
 
-Download the DMG from [Releases](https://github.com/jjang-ai/exploitbot/releases). Packaging defaults to unsigned output unless notarization is enabled.
+Download the beta DMG from [Releases](https://github.com/jjang-ai/exploitbot/releases). Release builds should be signed, notarized, stapled, and verified before publishing.
 
 Requires **macOS 14+** and **Apple Silicon** (M1/M2/M3/M4).
 
@@ -127,8 +127,13 @@ cd exploitbot
 # Package unsigned DMG for beta distribution
 ./script/package_release.sh --skip-notarize
 
-# Optional notarized DMG (requires local keychain profile)
-# EXPLOITBOT_NOTARY_PROFILE=<profile> ./script/package_release.sh --notary-profile "$EXPLOITBOT_NOTARY_PROFILE" --notarize
+# Notarized DMG using a keychain profile
+EXPLOITBOT_NOTARY_PROFILE=<profile> ./script/package_release.sh --notarize
+
+# Notarized DMG using local notary environment variables
+set +x
+source /path/to/private/.env.signing
+./script/package_release.sh --notarize
 ```
 
 **Prerequisites:**
@@ -194,7 +199,7 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 - **Terminal:** SwiftTerm (embedded pty)
 - **Reports:** HTML → PDF via WKWebView
 - **CVE DB:** SQLite + sqlite-vec (semantic search with nomic-embed-text)
-- **Packaging:** Hardened runtime and DMG signing path (notarization remains optional/profile-gated)
+- **Packaging:** Hardened runtime, app + DMG signing, app + DMG notarization/stapling, and release manifest hashes
 
 ## Documentation
 
@@ -204,6 +209,7 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 - [Tool Definitions](ExploitBot/Sources/ExploitBot/Services/ToolDefinitions.swift) — 42 tool schemas in-app
 - [Tool Registry](ExploitBotEngine/tools/registry.json) — external CLI mappings for supported binaries (39 entries)
 - [System Prompts](ExploitBotEngine/prompts/) — Base + per-tab LLM instruction templates
+- [Beta Release and Website Ops](docs/beta-release-and-website-ops.md) — safe release, notarization, verification, and website update checklist
 
 ### Runtime Verification
 
