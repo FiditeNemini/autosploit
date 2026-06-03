@@ -42,6 +42,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/deep-runtime-flow-coverage",
     "/qa/tool-engine-context-ops-matrix",
     "/qa/engine-api-cache-proof-matrix",
+    "/qa/state-dependent-contract-matrix",
     "/qa/session-context-cache-flow",
     "/qa/cache-artifact-matrix",
     "/qa/runtime-coverage",
@@ -120,6 +121,7 @@ REQUIRED_PROOFS = {
     "deep-runtime-flow-coverage-proof.py",
     "tool-engine-context-ops-matrix-proof.py",
     "engine-api-cache-proof-matrix-proof.py",
+    "state-dependent-contract-matrix-proof.py",
     "session-context-cache-flow-proof.py",
     "cache-artifact-matrix-proof.py",
     "tool-catalog-detail-proof.py",
@@ -971,6 +973,7 @@ def assert_coverage_index() -> None:
     deep_runtime = request("GET", "/qa/deep-runtime-flow-coverage")
     tool_engine_context = request("GET", "/qa/tool-engine-context-ops-matrix")
     engine_api_cache = request("GET", "/qa/engine-api-cache-proof-matrix")
+    state_dependent_contracts = request("GET", "/qa/state-dependent-contract-matrix")
     session_context_cache = request("GET", "/qa/session-context-cache-flow")
     live_agent_stress = request("GET", "/qa/live-loaded-model-agent-stress")
     cache_artifact_matrix = request("GET", "/qa/cache-artifact-matrix")
@@ -1001,6 +1004,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime group missing engine API/cache matrix route: {runtime_group}")
     if "engine-api-cache-proof-matrix-proof.py" not in (runtime_group.get("proofs") or []):
         raise AssertionError(f"coverage index runtime group missing engine API/cache matrix proof: {runtime_group}")
+    if "/qa/state-dependent-contract-matrix" not in (runtime_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index runtime group missing state-dependent matrix route: {runtime_group}")
+    if "state-dependent-contract-matrix-proof.py" not in (runtime_group.get("proofs") or []):
+        raise AssertionError(f"coverage index runtime group missing state-dependent matrix proof: {runtime_group}")
     if "/qa/session-context-cache-flow" not in (runtime_group.get("endpoints") or []):
         raise AssertionError(f"coverage index runtime group missing session/context/cache route: {runtime_group}")
     if "session-context-cache-flow-proof.py" not in (runtime_group.get("proofs") or []):
@@ -1067,6 +1074,16 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index engine API/cache test file list mismatch: {runtime_group}")
     if runtime_group.get("engineAPICacheProofTestFileParity") != engine_api_cache.get("engineTestFileParity"):
         raise AssertionError(f"coverage index engine API/cache test file parity mismatch: {runtime_group}")
+    if state_dependent_contracts.get("ok") is not True:
+        raise AssertionError(f"state-dependent contract matrix route failed: {state_dependent_contracts}")
+    if runtime_group.get("stateDependentSeedRequiredRows") != state_dependent_contracts.get("rowIds"):
+        raise AssertionError(f"coverage index runtime state-dependent row list mismatch: {runtime_group}")
+    if runtime_group.get("stateDependentSeededReadyRowCount") != state_dependent_contracts.get("seededReadyRowCount"):
+        raise AssertionError(f"coverage index runtime state-dependent ready count mismatch: {runtime_group}")
+    if runtime_group.get("stateDependentClassificationParity") != state_dependent_contracts.get("classificationParity"):
+        raise AssertionError(f"coverage index runtime state-dependent classification mismatch: {runtime_group}")
+    if runtime_group.get("stateDependentProofFileParity") != state_dependent_contracts.get("proofFileParity"):
+        raise AssertionError(f"coverage index runtime state-dependent proof parity mismatch: {runtime_group}")
     if session_context_cache.get("ok") is not True:
         raise AssertionError(f"session/context/cache flow route failed: {session_context_cache}")
     if runtime_group.get("sessionContextCacheFlowRows") != session_context_cache.get("flowRows"):
@@ -1642,6 +1659,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context cve taxonomy matrix evidence count mismatch: {chat_context_group}")
     if "/qa/cve-import-embedding-coverage" not in (chat_context_group.get("endpoints") or []):
         raise AssertionError(f"coverage index chat/context missing cve import embedding route: {chat_context_group}")
+    if "/qa/state-dependent-contract-matrix" not in (chat_context_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index chat/context missing state-dependent contract matrix route: {chat_context_group}")
+    if "state-dependent-contract-matrix-proof.py" not in (chat_context_group.get("proofs") or []):
+        raise AssertionError(f"coverage index chat/context missing state-dependent contract matrix proof: {chat_context_group}")
     if chat_context_group.get("cveImportEmbeddingProofLevel") != cve_import_embedding.get("proofLevel"):
         raise AssertionError(f"coverage index cve import embedding proof level mismatch: {chat_context_group}")
     if chat_context_group.get("cveImportEmbeddingImportFormats") != cve_import_embedding.get("importFormats"):
@@ -1656,6 +1677,18 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index cve import embedding flow contract parity mismatch: {chat_context_group}")
     if chat_context_group.get("cveImportEmbeddingProofFileParity") != cve_import_embedding.get("proofFileParity"):
         raise AssertionError(f"coverage index cve import embedding proof parity mismatch: {chat_context_group}")
+    if chat_context_group.get("stateDependentSeedRequiredRows") != state_dependent_contracts.get("rowIds"):
+        raise AssertionError(f"coverage index chat/context state-dependent row list mismatch: {chat_context_group}")
+    if chat_context_group.get("stateDependentSeedRequiredRowCount") != state_dependent_contracts.get("seedRequiredRowCount"):
+        raise AssertionError(f"coverage index chat/context state-dependent seed count mismatch: {chat_context_group}")
+    if chat_context_group.get("stateDependentSeededReadyRowCount") != state_dependent_contracts.get("seededReadyRowCount"):
+        raise AssertionError(f"coverage index chat/context state-dependent ready count mismatch: {chat_context_group}")
+    if chat_context_group.get("stateDependentFixtureRequiredRowCount") != state_dependent_contracts.get("fixtureRequiredRowCount"):
+        raise AssertionError(f"coverage index chat/context state-dependent fixture count mismatch: {chat_context_group}")
+    if chat_context_group.get("stateDependentClassificationParity") != state_dependent_contracts.get("classificationParity"):
+        raise AssertionError(f"coverage index chat/context state-dependent classification mismatch: {chat_context_group}")
+    if chat_context_group.get("stateDependentProofFileParity") != state_dependent_contracts.get("proofFileParity"):
+        raise AssertionError(f"coverage index chat/context state-dependent proof parity mismatch: {chat_context_group}")
     settings_visuals_group = groups.get("settingsAndVisuals") or {}
     settings_coverage = request("GET", "/qa/settings-coverage")
     settings_surface_matrix = request("GET", "/qa/settings-surface-matrix")
@@ -1890,6 +1923,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers missing tool/engine/context matrix route: {tools_parsers_group}")
     if "tool-engine-context-ops-matrix-proof.py" not in (tools_parsers_group.get("proofs") or []):
         raise AssertionError(f"coverage index tools/parsers missing tool/engine/context matrix proof: {tools_parsers_group}")
+    if "/qa/state-dependent-contract-matrix" not in (tools_parsers_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index tools/parsers missing state-dependent contract matrix route: {tools_parsers_group}")
+    if "state-dependent-contract-matrix-proof.py" not in (tools_parsers_group.get("proofs") or []):
+        raise AssertionError(f"coverage index tools/parsers missing state-dependent contract matrix proof: {tools_parsers_group}")
     if tools_parsers_group.get("toolEngineContextOpsRows") != tool_engine_context.get("rowIds"):
         raise AssertionError(f"coverage index tools/parsers tool/engine/context row list mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolEngineContextOpsRowCount") != tool_engine_context.get("rowCount"):
@@ -1902,6 +1939,14 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers tool/engine/context proof parity mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolEngineContextOpsToolSchemaCap") != tool_engine_context.get("toolSchemaCap"):
         raise AssertionError(f"coverage index tools/parsers tool/engine/context schema cap mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("stateDependentSeedRequiredRows") != state_dependent_contracts.get("rowIds"):
+        raise AssertionError(f"coverage index tools/parsers state-dependent row list mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("stateDependentSeededReadyRowCount") != state_dependent_contracts.get("seededReadyRowCount"):
+        raise AssertionError(f"coverage index tools/parsers state-dependent ready count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("stateDependentClassificationParity") != state_dependent_contracts.get("classificationParity"):
+        raise AssertionError(f"coverage index tools/parsers state-dependent classification mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("stateDependentProofFileParity") != state_dependent_contracts.get("proofFileParity"):
+        raise AssertionError(f"coverage index tools/parsers state-dependent proof parity mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("resultParserCounts") != result_parser.get("counts"):
         raise AssertionError(f"coverage index tools/parsers result-parser counts mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("resultParserParsedTools") != result_parser.get("parsedTools"):

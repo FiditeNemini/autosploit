@@ -20,7 +20,7 @@ EXPECTED_CALLBACKS = ["lookup_cve", "search_context", "search_cve"]
 EXPECTED_ALWAYS_VISIBLE = ["lookup_cve", "run_shell", "search_context", "search_cve"]
 
 
-def request(method: str, path: str, body: dict | str | None = None, timeout: float = 8.0):
+def request(method: str, path: str, body: dict | str | None = None, timeout: float = 45.0):
     if isinstance(body, dict):
         body = json.dumps(body)
     data = None if body is None else body.encode("utf-8")

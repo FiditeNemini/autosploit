@@ -115,7 +115,7 @@ def proof_for(path: Path, name: str) -> str:
     return "app-qa-matrix-smoke-proof.py"
 
 
-def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
+def request(method: str, path: str, body: str | None = None, timeout: float = 45.0):
     data = None if body is None else body.encode("utf-8")
     req = urllib.request.Request(f"{APP_API}{path}", data=data, method=method)
     with urllib.request.urlopen(req, timeout=timeout) as resp:

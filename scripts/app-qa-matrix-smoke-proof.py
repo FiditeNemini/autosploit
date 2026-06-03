@@ -114,6 +114,7 @@ def assert_testserver_smoke() -> None:
     tool_coverage = request("GET", "/qa/tool-coverage")
     result_parser_coverage = request("GET", "/qa/result-parser-coverage")
     parser_tool_matrix = request("GET", "/qa/parser-tool-matrix")
+    state_dependent_contract_matrix = request("GET", "/qa/state-dependent-contract-matrix")
     runtime_coverage = request("GET", "/qa/runtime-coverage")
     python_runtime_inventory = request("GET", "/qa/python-runtime-inventory")
     engine_python_runtime = request("GET", "/qa/engine-python-runtime")
@@ -293,6 +294,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing cve taxonomy matrix route contract: {qa}")
     if "/qa/cve-import-embedding-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing cve import embedding coverage route contract: {qa}")
+    if "/qa/state-dependent-contract-matrix" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing state-dependent contract matrix route contract: {qa}")
     if "/qa/settings-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing settings coverage route contract: {qa}")
     if "/qa/settings-surface-matrix" not in qa.get("stateRoutes", []):
@@ -1850,6 +1853,16 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/parser-tool-matrix execution parity mismatch: {parser_tool_matrix}")
     if parser_tool_matrix.get("proofFileParity") is not True:
         raise AssertionError(f"/qa/parser-tool-matrix proof parity mismatch: {parser_tool_matrix}")
+    if state_dependent_contract_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/state-dependent-contract-matrix failed: {state_dependent_contract_matrix}")
+    if state_dependent_contract_matrix.get("rowCount") != 5:
+        raise AssertionError(f"/qa/state-dependent-contract-matrix row count mismatch: {state_dependent_contract_matrix}")
+    if state_dependent_contract_matrix.get("seedRequiredRowCount") != 5:
+        raise AssertionError(f"/qa/state-dependent-contract-matrix seed count mismatch: {state_dependent_contract_matrix}")
+    if state_dependent_contract_matrix.get("classificationParity") is not True:
+        raise AssertionError(f"/qa/state-dependent-contract-matrix classification parity mismatch: {state_dependent_contract_matrix}")
+    if state_dependent_contract_matrix.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/state-dependent-contract-matrix proof parity mismatch: {state_dependent_contract_matrix}")
     if tools_parsers_group.get("parserToolMatrixCount") != parser_tool_matrix.get("toolCount"):
         raise AssertionError(f"/qa/coverage-index parser tool matrix count mismatch: {coverage_index}")
     if tools_parsers_group.get("parserToolMatrixParsedParity") != parser_tool_matrix.get("parsedParity"):

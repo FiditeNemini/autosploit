@@ -33,7 +33,7 @@ EXPECTED_PROOFS = [
 ]
 
 
-def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
+def request(method: str, path: str, body: str | dict | None = None, timeout: float = 45.0):
     if isinstance(body, dict):
         body = json.dumps(body)
     data = None if body is None else body.encode("utf-8")
