@@ -540,7 +540,7 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/context-coverage current context limit mismatch: {context_coverage}")
     if context_budget_compaction.get("ok") is not True:
         raise AssertionError(f"/qa/context-budget-compaction failed: {context_budget_compaction}")
-    if context_budget_compaction.get("policyStepCount") != 5:
+    if context_budget_compaction.get("policyStepCount") != 6:
         raise AssertionError(f"/qa/context-budget-compaction policy count mismatch: {context_budget_compaction}")
     if context_budget_compaction.get("contractParity") is not True:
         raise AssertionError(f"/qa/context-budget-compaction contract parity mismatch: {context_budget_compaction}")
@@ -550,6 +550,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/context-budget-compaction compaction format mismatch: {context_budget_compaction}")
     if context_budget_compaction.get("promptInjectionPolicy") != "search-on-demand-not-force-injected":
         raise AssertionError(f"/qa/context-budget-compaction prompt injection policy mismatch: {context_budget_compaction}")
+    if context_budget_compaction.get("contextPacketMaxCharacters") != 6000:
+        raise AssertionError(f"/qa/context-budget-compaction packet character budget mismatch: {context_budget_compaction}")
+    if context_budget_compaction.get("contextPacketMaxSelectedSnippets") != 8:
+        raise AssertionError(f"/qa/context-budget-compaction packet snippet budget mismatch: {context_budget_compaction}")
     if "/qa/context-budget-compaction" not in (state.get("qaCoverage") or {}).get("stateRoutes", []):
         raise AssertionError(f"/state missing context budget route contract: {state.get('qaCoverage')}")
     if context_prompt_injection_boundary.get("ok") is not True:
@@ -1459,6 +1463,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index context budget contract parity mismatch: {coverage_index}")
     if chat_context_group.get("contextBudgetProofFileParity") != context_budget_compaction.get("proofFileParity"):
         raise AssertionError(f"/qa/coverage-index context budget proof parity mismatch: {coverage_index}")
+    if chat_context_group.get("contextPacketMaxCharacters") != context_budget_compaction.get("contextPacketMaxCharacters"):
+        raise AssertionError(f"/qa/coverage-index context packet character budget mismatch: {coverage_index}")
+    if chat_context_group.get("contextPacketMaxSelectedSnippets") != context_budget_compaction.get("contextPacketMaxSelectedSnippets"):
+        raise AssertionError(f"/qa/coverage-index context packet snippet budget mismatch: {coverage_index}")
     if chat_context_group.get("contextBudgetCompactionFormat") != context_budget_compaction.get("compactionFormat"):
         raise AssertionError(f"/qa/coverage-index context budget compaction mismatch: {coverage_index}")
     if chat_context_group.get("contextRoutes") != context_coverage.get("routes"):

@@ -1427,6 +1427,8 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context missing context budget endpoint: {chat_context_group}")
     if "context-budget-compaction-proof.py" not in (chat_context_group.get("proofs") or []):
         raise AssertionError(f"coverage index chat/context missing context budget proof: {chat_context_group}")
+    if "context-packet-budget-proof.py" not in (chat_context_group.get("proofs") or []):
+        raise AssertionError(f"coverage index chat/context missing context packet budget proof: {chat_context_group}")
     if chat_context_group.get("contextBudgetPolicySteps") != context_budget.get("policySteps"):
         raise AssertionError(f"coverage index context budget policy steps mismatch: {chat_context_group}")
     if chat_context_group.get("contextBudgetPolicyStepCount") != context_budget.get("policyStepCount"):
@@ -1443,6 +1445,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index context budget max token mismatch: {chat_context_group}")
     if chat_context_group.get("contextBudgetMaxIterations") != context_budget.get("maxIterations"):
         raise AssertionError(f"coverage index context budget max iterations mismatch: {chat_context_group}")
+    if chat_context_group.get("contextPacketMaxCharacters") != context_budget.get("contextPacketMaxCharacters"):
+        raise AssertionError(f"coverage index context packet character budget mismatch: {chat_context_group}")
+    if chat_context_group.get("contextPacketMaxSelectedSnippets") != context_budget.get("contextPacketMaxSelectedSnippets"):
+        raise AssertionError(f"coverage index context packet snippet budget mismatch: {chat_context_group}")
     if chat_context_group.get("contextBudgetCompactionFormat") != context_budget.get("compactionFormat"):
         raise AssertionError(f"coverage index context budget compaction format mismatch: {chat_context_group}")
     if chat_context_group.get("contextBudgetPromptInjectionPolicy") != context_budget.get("promptInjectionPolicy"):

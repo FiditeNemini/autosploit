@@ -17,6 +17,7 @@ APP_API = "http://127.0.0.1:9999"
 
 EXPECTED_POLICY_STEPS = [
     "selectBoundedContext",
+    "applyHardContextPacketBudget",
     "compactCatalogSnippets",
     "applyMaxTokenBudget",
     "preserveCacheOnNewContext",
@@ -29,6 +30,7 @@ EXPECTED_CONTRACTS = {
     "maxTokensForwarded",
     "maxIterationsBounded",
     "compactCatalogFormatting",
+    "contextPacketHardBudget",
     "promptInjectionBoundedContext",
     "newContextPreservesEngineCache",
     "stashContextOnDemand",
@@ -38,6 +40,7 @@ EXPECTED_CONTRACTS = {
 
 EXPECTED_PROOFS = {
     "context-budget-compaction-proof.py",
+    "context-packet-budget-proof.py",
     "context-coverage-proof.py",
     "context-flow-matrix-proof.py",
     "context-window-cache-proof.py",
@@ -103,6 +106,10 @@ def run() -> None:
             raise AssertionError(f"context budget chat max tokens not tied to chat service: {budget}")
         if budget.get("maxIterations") != (state.get("chat") or {}).get("maxIterations"):
             raise AssertionError(f"context budget max iterations not tied to chat service: {budget}")
+        if budget.get("contextPacketMaxCharacters") != 6000:
+            raise AssertionError(f"context packet max character budget mismatch: {budget}")
+        if budget.get("contextPacketMaxSelectedSnippets") != 8:
+            raise AssertionError(f"context packet selected snippet budget mismatch: {budget}")
         if budget.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
             raise AssertionError(f"context budget cache response method mismatch: {budget}")
         if budget.get("newContextBehavior") != "clear-visible-chat-preserve-engine-cache-session":
