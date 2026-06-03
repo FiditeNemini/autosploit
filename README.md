@@ -79,7 +79,7 @@ Latest local beta package sanity build, not yet uploaded to the GitHub release:
 - Built: June 3, 2026
 - Command: `./script/package_release.sh --skip-notarize`
 - Local DMG: `release/ExploitBot-beta.dmg`
-- Local DMG SHA256: `9a35df008b2f31a34d923a92d55ffa32e4b1daa5778256776623c58023cdafdf`
+- Local DMG SHA256: `2eb845b5eba1a15bdb020067d93ce4deff6bd84b4ee6f7b137da12c4aebde08e`
 - Status: signed app and signed DMG verified locally; notarization still requires `EXPLOITBOT_NOTARY_PROFILE` or local notary environment variables before replacing the published release asset.
 
 ### Done in the current beta lane
