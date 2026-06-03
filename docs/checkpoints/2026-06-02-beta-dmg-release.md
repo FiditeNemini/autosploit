@@ -62,7 +62,7 @@ python3 -m json.tool release/release-manifest.json >/dev/null
   - CVE import/search
   - supply-chain scanning
   - Qwen/MiniMax cache/runtime proofing
-  - ZAYA visual beta path
+  - Qwen MXFP4-MTP and MiniMax JANG_K beta scope
 - Added a language selector with EN/KO/ZH/ES/JA text coverage for the primary
   hero/navigation/feature surfaces.
 - Uploaded current screenshot/proof assets for chat/tool status, recon, exploit,
@@ -141,9 +141,9 @@ python3 -m json.tool release/release-manifest.json >/dev/null
 - Public DMG URL: `https://github.com/jjang-ai/exploitbot/releases/download/v0.1.0-beta/ExploitBot-beta.dmg`
 - Version: `0.1.0-beta`
 - DMG: `release/ExploitBot-beta.dmg`
-- DMG size: `539 MB`
-- DMG SHA256: `078322b60ac1b4c4d490c7404ef4fa556da136df7ea864021b158df246e165a0`
-- App binary SHA256: `7c20926fd7e5f5dc5df0f17c83aae1847ec799d652f709bb101205f771cf05d9`
+- DMG size: `552 MB`
+- DMG SHA256: `647bfa9e662c21e37b0cb79473fcf415a6ce058c15097c321dfa23440660175e`
+- App binary SHA256: `855a02af65313950fa88944d1c2dc9d4fd4772ea1ec5c6a403893515a4ed0bce`
 - Notarization status: `submitted-and-stapled`
 - Team ID: `55KGF2S5AY`
 - Manifest: `release/release-manifest.json`
@@ -178,3 +178,15 @@ Notes:
 - `run_shell` remains available in the agent tool catalogue, and the destructive
   command blocklist is now exported through `/qa/tool-registry-coverage` and
   checked by the registry and coverage-index proofs.
+
+## June 3 notarized asset refresh
+
+- Rebuilt from `main` after narrowing the beta supported model lane to Qwen and
+  MiniMax.
+- App notarization submission accepted: `1f721d2f-9cb2-4b90-9ff8-6eac295a0235`.
+- DMG notarization submission accepted: `108fef54-aa6e-4532-8220-f3c58bb459d8`.
+- App and DMG stapling validated.
+- `spctl -a -vv --type execute release/ExploitBot.app` accepted the app as
+  `Notarized Developer ID`.
+- GitHub release assets were replaced with the refreshed notarized DMG and
+  manifest.

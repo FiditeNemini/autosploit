@@ -70,7 +70,7 @@ The current beta DMG is published as a GitHub prerelease:
 
 - Release: [ExploitBot 0.1.0 Beta](https://github.com/jjang-ai/exploitbot/releases/tag/v0.1.0-beta)
 - Download: [ExploitBot-beta.dmg](https://github.com/jjang-ai/exploitbot/releases/download/v0.1.0-beta/ExploitBot-beta.dmg)
-- DMG SHA256: `078322b60ac1b4c4d490c7404ef4fa556da136df7ea864021b158df246e165a0`
+- DMG SHA256: `647bfa9e662c21e37b0cb79473fcf415a6ce058c15097c321dfa23440660175e`
 - Signing: Developer ID Application, hardened runtime
 - Notarization: app and DMG submitted, stapled, and validated
 
