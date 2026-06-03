@@ -39,6 +39,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/tab-tool-function-flow",
     "/qa/tool-execution-matrix",
     "/qa/tool-flow-coverage",
+    "/qa/deep-runtime-flow-coverage",
     "/qa/runtime-coverage",
     "/qa/python-runtime-inventory",
     "/qa/engine-python-runtime",
@@ -107,6 +108,7 @@ REQUIRED_PROOFS = {
     "tab-tool-function-flow-proof.py",
     "tool-execution-matrix-proof.py",
     "tool-flow-coverage-proof.py",
+    "deep-runtime-flow-coverage-proof.py",
     "tool-catalog-detail-proof.py",
     "runtime-coverage-proof.py",
     "python-runtime-inventory-proof.py",
@@ -894,6 +896,7 @@ def assert_coverage_index() -> None:
     if runtime_group.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"coverage index runtime cache response method mismatch: {runtime_group}")
     runtime_coverage = request("GET", "/qa/runtime-coverage")
+    deep_runtime = request("GET", "/qa/deep-runtime-flow-coverage")
     if runtime_group.get("runtimeContracts") != runtime_coverage.get("contracts"):
         raise AssertionError(f"coverage index runtime contract map mismatch: {runtime_group}")
     if runtime_group.get("runtimeContractCount") != len(runtime_coverage.get("contracts") or {}):
@@ -908,6 +911,24 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime proof count mismatch: {runtime_group}")
     if runtime_group.get("runtimeProofFileParity") != runtime_coverage.get("proofFileParity"):
         raise AssertionError(f"coverage index runtime proof-file parity mismatch: {runtime_group}")
+    if "/qa/deep-runtime-flow-coverage" not in (runtime_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index runtime group missing deep runtime flow route: {runtime_group}")
+    if "deep-runtime-flow-coverage-proof.py" not in (runtime_group.get("proofs") or []):
+        raise AssertionError(f"coverage index runtime group missing deep runtime proof: {runtime_group}")
+    if runtime_group.get("deepRuntimeFlowDomains") != deep_runtime.get("domains"):
+        raise AssertionError(f"coverage index deep runtime domains mismatch: {runtime_group}")
+    if runtime_group.get("deepRuntimeFlowDomainCount") != deep_runtime.get("domainCount"):
+        raise AssertionError(f"coverage index deep runtime domain count mismatch: {runtime_group}")
+    if runtime_group.get("deepRuntimeFlowDomainParity") != deep_runtime.get("domainParity"):
+        raise AssertionError(f"coverage index deep runtime domain parity mismatch: {runtime_group}")
+    if runtime_group.get("deepRuntimeFlowDomainProofFileParity") != deep_runtime.get("domainProofFileParity"):
+        raise AssertionError(f"coverage index deep runtime proof-file parity mismatch: {runtime_group}")
+    if runtime_group.get("deepRuntimeFlowContractParity") != deep_runtime.get("contractParity"):
+        raise AssertionError(f"coverage index deep runtime contract parity mismatch: {runtime_group}")
+    if runtime_group.get("deepRuntimeFlowRouteCount") != deep_runtime.get("routeCount"):
+        raise AssertionError(f"coverage index deep runtime route count mismatch: {runtime_group}")
+    if runtime_group.get("deepRuntimeFlowProofFileParity") != deep_runtime.get("proofFileParity"):
+        raise AssertionError(f"coverage index deep runtime proof parity mismatch: {runtime_group}")
     python_runtime = request("GET", "/qa/python-runtime-inventory")
     engine_python_runtime = request("GET", "/qa/engine-python-runtime")
     if python_runtime.get("ok") is not True:
@@ -1513,6 +1534,14 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers tool-flow families mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolFlowFamilyCount") != len(tool_flow.get("families") or []):
         raise AssertionError(f"coverage index tools/parsers tool-flow family count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolFlowDomains") != tool_flow.get("flowDomains"):
+        raise AssertionError(f"coverage index tools/parsers tool-flow domains mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolFlowDomainCount") != tool_flow.get("flowDomainCount"):
+        raise AssertionError(f"coverage index tools/parsers tool-flow domain count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolFlowDomainParity") != tool_flow.get("flowDomainParity"):
+        raise AssertionError(f"coverage index tools/parsers tool-flow domain parity mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolFlowDomainProofFileParity") != tool_flow.get("flowDomainProofFileParity"):
+        raise AssertionError(f"coverage index tools/parsers tool-flow domain proof parity mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolFlowStateKeys") != tool_flow.get("stateKeys"):
         raise AssertionError(f"coverage index tools/parsers tool-flow state keys mismatch: {tools_parsers_group}")
     if tool_flow.get("stateKeyParity") is not True:

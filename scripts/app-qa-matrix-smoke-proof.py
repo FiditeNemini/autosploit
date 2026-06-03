@@ -105,6 +105,7 @@ def assert_testserver_smoke() -> None:
     tab_proof_family_matrix = request("GET", "/qa/tab-proof-family-matrix")
     tool_execution_matrix = request("GET", "/qa/tool-execution-matrix")
     tool_flow_coverage = request("GET", "/qa/tool-flow-coverage")
+    deep_runtime_flow_coverage = request("GET", "/qa/deep-runtime-flow-coverage")
     tool_coverage = request("GET", "/qa/tool-coverage")
     result_parser_coverage = request("GET", "/qa/result-parser-coverage")
     parser_tool_matrix = request("GET", "/qa/parser-tool-matrix")
@@ -230,6 +231,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing tool execution matrix route contract: {qa}")
     if "/qa/tool-flow-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing tool flow coverage route contract: {qa}")
+    if "/qa/deep-runtime-flow-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing deep runtime flow coverage route contract: {qa}")
+    if deep_runtime_flow_coverage.get("ok") is not True:
+        raise AssertionError(f"/qa/deep-runtime-flow-coverage failed: {deep_runtime_flow_coverage}")
+    if deep_runtime_flow_coverage.get("contractParity") is not True:
+        raise AssertionError(f"/qa/deep-runtime-flow-coverage contract parity mismatch: {deep_runtime_flow_coverage}")
     if "/qa/parser-tool-matrix" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing parser tool matrix route contract: {qa}")
     if "/qa/runtime-coverage" not in qa.get("stateRoutes", []):
@@ -379,6 +386,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/tool-flow-coverage raw mode count mismatch: {tool_flow_coverage}")
     if tool_flow_coverage.get("resultModeCountParity") is not True:
         raise AssertionError(f"/qa/tool-flow-coverage result mode parity mismatch: {tool_flow_coverage}")
+    if "supplyChain" not in (tool_flow_coverage.get("flowDomains") or []):
+        raise AssertionError(f"/qa/tool-flow-coverage missing supply-chain flow domain: {tool_flow_coverage}")
+    if tool_flow_coverage.get("flowDomainProofFileParity") is not True:
+        raise AssertionError(f"/qa/tool-flow-coverage flow-domain proof parity mismatch: {tool_flow_coverage}")
     if tool_flow_coverage.get("tabActivityStatuses") != ["running", "done", "failed", "canceled"]:
         raise AssertionError(f"/qa/tool-flow-coverage tab activity statuses mismatch: {tool_flow_coverage}")
     if tool_flow_coverage.get("tabActivityStatusCount") != 4:
@@ -1177,6 +1188,14 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/runtime-coverage proof-file parity mismatch: {runtime_coverage}")
     if runtime_group.get("runtimeProofFileParity") != runtime_coverage.get("proofFileParity"):
         raise AssertionError(f"/qa/coverage-index runtime proof-file parity mismatch: {coverage_index}")
+    if "/qa/deep-runtime-flow-coverage" not in (runtime_group.get("endpoints") or []):
+        raise AssertionError(f"/qa/coverage-index runtime group missing deep runtime route: {coverage_index}")
+    if runtime_group.get("deepRuntimeFlowDomainCount") != deep_runtime_flow_coverage.get("domainCount"):
+        raise AssertionError(f"/qa/coverage-index deep runtime domain count mismatch: {coverage_index}")
+    if runtime_group.get("deepRuntimeFlowContractParity") != deep_runtime_flow_coverage.get("contractParity"):
+        raise AssertionError(f"/qa/coverage-index deep runtime contract parity mismatch: {coverage_index}")
+    if runtime_group.get("deepRuntimeFlowDomainProofFileParity") != deep_runtime_flow_coverage.get("domainProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index deep runtime domain proof parity mismatch: {coverage_index}")
     if python_runtime_inventory.get("ok") is not True:
         raise AssertionError(f"/qa/python-runtime-inventory failed: {python_runtime_inventory}")
     if python_runtime_inventory.get("parseParity") is not True:
@@ -1676,6 +1695,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index tool-flow families mismatch: {coverage_index}")
     if tools_parsers_group.get("toolFlowFamilyCount") != len(tool_flow_coverage.get("families") or []):
         raise AssertionError(f"/qa/coverage-index tool-flow family count mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolFlowDomains") != tool_flow_coverage.get("flowDomains"):
+        raise AssertionError(f"/qa/coverage-index tool-flow domains mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolFlowDomainCount") != tool_flow_coverage.get("flowDomainCount"):
+        raise AssertionError(f"/qa/coverage-index tool-flow domain count mismatch: {coverage_index}")
+    if tools_parsers_group.get("toolFlowDomainProofFileParity") != tool_flow_coverage.get("flowDomainProofFileParity"):
+        raise AssertionError(f"/qa/coverage-index tool-flow domain proof parity mismatch: {coverage_index}")
     if tools_parsers_group.get("toolFlowStateKeys") != tool_flow_coverage.get("stateKeys"):
         raise AssertionError(f"/qa/coverage-index tool-flow state keys mismatch: {coverage_index}")
     if tool_flow_coverage.get("stateKeyParity") is not True:

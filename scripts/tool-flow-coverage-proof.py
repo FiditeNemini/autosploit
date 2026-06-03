@@ -37,6 +37,21 @@ EXPECTED_PROOFS = {
     "chat-tool-output-expand-proof.py",
 }
 EXPECTED_FAMILIES = {"recon", "web", "network", "creds", "exploit", "post", "osint"}
+EXPECTED_FLOW_DOMAINS = [
+    "toolRegistry",
+    "toolExecution",
+    "agentLoop",
+    "contextRetrieval",
+    "cveTaxonomy",
+    "supplyChain",
+    "shellSafety",
+    "streamingResponses",
+    "requestAudit",
+    "sessionWorkflows",
+    "parserMatrix",
+    "runtimeCache",
+    "stashMemory",
+]
 EXPECTED_STATE_KEYS = {
     "messages.toolCards",
     "tabActivities",
@@ -120,6 +135,20 @@ def run() -> None:
             raise AssertionError(f"tool flow proof file parity mismatch: {coverage}")
         if set(coverage.get("families") or []) != EXPECTED_FAMILIES:
             raise AssertionError(f"tool flow family coverage mismatch: {coverage}")
+        if coverage.get("flowDomains") != EXPECTED_FLOW_DOMAINS:
+            raise AssertionError(f"tool flow domain coverage mismatch: {coverage}")
+        if coverage.get("flowDomainCount") != len(EXPECTED_FLOW_DOMAINS):
+            raise AssertionError(f"tool flow domain count mismatch: {coverage}")
+        if coverage.get("flowDomainParity") is not True:
+            raise AssertionError(f"tool flow domain parity mismatch: {coverage}")
+        if coverage.get("flowDomainProofParity") is not True:
+            raise AssertionError(f"tool flow domain proof parity mismatch: {coverage}")
+        if coverage.get("flowDomainProofFileParity") is not True:
+            raise AssertionError(f"tool flow domain proof-file parity mismatch: {coverage}")
+        for domain, proof_names in (coverage.get("flowDomainProofs") or {}).items():
+            missing_domain_files = sorted(name for name in proof_names if not (ROOT / "scripts" / name).is_file())
+            if missing_domain_files:
+                raise AssertionError(f"tool flow domain {domain} names missing proof files {missing_domain_files}: {coverage}")
         if coverage.get("toolCount", 0) < 39:
             raise AssertionError(f"tool flow did not expose registry count: {coverage}")
         if coverage.get("callbackCount") != 3:
