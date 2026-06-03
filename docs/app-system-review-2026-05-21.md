@@ -1516,10 +1516,11 @@ Visual gates:
 1. Add the real Qwen multimodal runtime path and prefix-cache key discipline
    once the app intentionally promotes a multimodal Qwen model into the
    supported beta lane. Until then, Qwen VL folders are detected but blocked.
-   `/qa/gap-ledger` now exposes promotion gates for the Qwen multimodal loader,
-   multimodal prefix-cache key discipline, and multimodal context packet
-   routing, including a proof-existence map/count/parity for the required live
-   proof scripts. The exact missing live proofs are
+   `/qa/gap-ledger` and `/qa/qwen-multimodal-promotion-readiness` now expose
+   promotion gates for the Qwen multimodal loader, multimodal prefix-cache key
+   discipline, and multimodal context packet routing, including a
+   proof-existence map/count/parity for the required live proof scripts. The
+   exact missing live proofs are
    `live-qwen-multimodal-loader-proof.py`,
    `live-qwen-multimodal-prefix-cache-proof.py`, and
    `live-qwen-multimodal-context-routing-proof.py`; promotion remains false

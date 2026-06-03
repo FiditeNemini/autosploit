@@ -94,6 +94,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/checkpoint-ledger",
     "/qa/audit-ledger",
     "/qa/gap-ledger",
+    "/qa/qwen-multimodal-promotion-readiness",
     "/qa/release-readiness",
     "/qa/beta-readiness-coverage",
     "/qa/objective-runtime-coverage",
@@ -182,6 +183,7 @@ REQUIRED_PROOFS = {
     "checkpoint-ledger-proof.py",
     "audit-ledger-proof.py",
     "gap-ledger-proof.py",
+    "qwen-multimodal-promotion-readiness-proof.py",
     "docs-inventory-parity-proof.py",
     "release-readiness-proof.py",
     "release-app-live-qwen-proof.py",
@@ -290,6 +292,7 @@ def assert_coverage_index() -> None:
     checkpoint = request("GET", "/qa/checkpoint-ledger")
     audit = request("GET", "/qa/audit-ledger")
     gap = request("GET", "/qa/gap-ledger")
+    qwen_multimodal_readiness = request("GET", "/qa/qwen-multimodal-promotion-readiness")
 
     if index.get("ok") is not True:
         raise AssertionError(f"/qa/coverage-index failed: {index}")
@@ -880,6 +883,22 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index app state qwen promotion proof existence parity mismatch: {app_state_group}")
     if "qwenMultimodalRuntime" not in (app_state_group.get("openGapIds") or []):
         raise AssertionError(f"coverage index app state missing qwen multimodal gap id: {app_state_group}")
+    if qwen_multimodal_readiness.get("ok") is not True:
+        raise AssertionError(f"qwen multimodal promotion readiness route failed: {qwen_multimodal_readiness}")
+    if "/qa/qwen-multimodal-promotion-readiness" not in (app_state_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index app state missing qwen multimodal readiness route: {app_state_group}")
+    if "qwen-multimodal-promotion-readiness-proof.py" not in (app_state_group.get("proofs") or []):
+        raise AssertionError(f"coverage index app state missing qwen multimodal readiness proof: {app_state_group}")
+    if app_state_group.get("qwenMultimodalPromotionReadinessReady") != qwen_multimodal_readiness.get("promotionReady"):
+        raise AssertionError(f"coverage index app state qwen readiness promotion mismatch: {app_state_group}")
+    if app_state_group.get("qwenMultimodalPromotionReadinessMissingLiveProofs") != qwen_multimodal_readiness.get("missingLiveProofs"):
+        raise AssertionError(f"coverage index app state qwen readiness missing live proofs mismatch: {app_state_group}")
+    if app_state_group.get("qwenMultimodalPromotionReadinessMissingLiveProofCount") != qwen_multimodal_readiness.get("missingLiveProofCount"):
+        raise AssertionError(f"coverage index app state qwen readiness missing live proof count mismatch: {app_state_group}")
+    if app_state_group.get("qwenMultimodalPromotionReadinessCriteriaCount") != qwen_multimodal_readiness.get("criteriaCount"):
+        raise AssertionError(f"coverage index app state qwen readiness criteria count mismatch: {app_state_group}")
+    if app_state_group.get("qwenMultimodalPromotionReadinessProofExistenceParity") != qwen_multimodal_readiness.get("proofExistenceParity"):
+        raise AssertionError(f"coverage index app state qwen readiness proof existence parity mismatch: {app_state_group}")
     release_group = groups.get("releaseReadiness") or {}
     release_coverage = request("GET", "/qa/release-readiness")
     beta_readiness = request("GET", "/qa/beta-readiness-coverage")
