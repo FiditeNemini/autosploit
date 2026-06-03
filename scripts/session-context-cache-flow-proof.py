@@ -42,6 +42,7 @@ EXPECTED_CONTRACTS = {
     "parallelAgentProof",
     "continuousBatchingProof",
     "qwenLiveContinuousBatchingArtifact",
+    "qwenHighCardinalityLiveContinuousBatchingArtifact",
     "minimaxLiveContinuousBatchingArtifact",
     "qwenHybridSSMReDeriveArtifact",
     "turboQuantKVCache",
@@ -99,8 +100,10 @@ def run() -> None:
             raise AssertionError(f"new context cache mode mismatch: {payload}")
         if payload.get("responsesReuseMode") != "store-response-session-and-resolve-previous-response-id":
             raise AssertionError(f"Responses reuse mode mismatch: {payload}")
-        if payload.get("continuousBatchingProofLevel") != "source-and-live-qwen-minimax-stress-backed":
+        if payload.get("continuousBatchingProofLevel") != "source-and-live-qwen-minimax-plus-qwen-4way-stress-backed":
             raise AssertionError(f"continuous batching proof level mismatch: {payload}")
+        if payload.get("qwenHighCardinalityContinuousBatchingMaxRunningObserved", 0) < 4:
+            raise AssertionError(f"Qwen high-cardinality live batching not reflected in session/cache flow: {payload}")
         if payload.get("minimaxContinuousBatchingMaxRunningObserved", 0) < 2:
             raise AssertionError(f"MiniMax live batching not reflected in session/cache flow: {payload}")
         expected_deltas = {"delta.content", "delta.reasoning_content", "delta.tool_calls", "usage.prompt_tokens_details.cached_tokens"}

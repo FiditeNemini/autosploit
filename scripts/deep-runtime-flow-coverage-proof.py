@@ -68,6 +68,7 @@ EXPECTED_CONTRACTS = {
     "cacheArtifactMatrix",
     "hybridSSMAsyncReDerive",
     "liveQwenContinuousBatching",
+    "liveQwenHighCardinalityContinuousBatching",
     "liveMiniMaxContinuousBatching",
     "liveToolStatusUI",
     "stashRetrievalMemory",
@@ -252,9 +253,9 @@ def run() -> None:
             raise AssertionError(f"CVE import embedding proof parity mismatch: {coverage}")
         if coverage.get("cveImportEmbeddingSourceFileParity") is not True:
             raise AssertionError(f"CVE import embedding source parity mismatch: {coverage}")
-        if coverage.get("continuousBatchingProofLevel") != "source-and-live-qwen-minimax-stress-backed":
+        if coverage.get("continuousBatchingProofLevel") != "source-and-live-qwen-minimax-plus-qwen-4way-stress-backed":
             raise AssertionError(f"continuous batching proof level mismatch: {coverage}")
-        if coverage.get("continuousBatchingLiveLoadedModelStress") != "qwen-live-max-running-observed-2-minimax-live-max-running-observed-2":
+        if coverage.get("continuousBatchingLiveLoadedModelStress") != "qwen-live-max-running-observed-2-minimax-live-max-running-observed-2-qwen4-live-max-running-observed-4":
             raise AssertionError(f"continuous batching live stress label mismatch: {coverage}")
         if coverage.get("continuousBatchingContractParity") is not True:
             raise AssertionError(f"continuous batching contract parity mismatch: {coverage}")

@@ -22,6 +22,7 @@ LAUNCH_PY = ENGINE_DIR / "launch.py"
 DEFAULT_QWEN = Path("/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP")
 DEFAULT_MINIMAX = Path("/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ")
 DEFAULT_OUTPUT = ROOT / "docs" / "live-proofs" / "checkpoint-452-qwen-continuous-batching-live.json"
+REQUEST_LABELS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 
 def require(condition: bool, message: str, detail: Any = None) -> None:
@@ -124,7 +125,7 @@ def chat(base_url: str, model_name: str, prompt: str, barrier: threading.Barrier
     }
 
 
-def launch_engine(model: Path, port: int, cache_root: Path) -> subprocess.Popen[str]:
+def launch_engine(model: Path, port: int, cache_root: Path, max_num_seqs: int) -> subprocess.Popen[str]:
     cmd = [
         engine_python(),
         str(LAUNCH_PY),
@@ -153,7 +154,7 @@ def launch_engine(model: Path, port: int, cache_root: Path) -> subprocess.Popen[
         "--max-tokens",
         "32",
         "--max-num-seqs",
-        "2",
+        str(max_num_seqs),
         "--cache-memory-percent",
         "0.20",
         "--verbose",
@@ -185,6 +186,8 @@ def main() -> None:
     family_label = "MiniMax" if family == "minimax" else "Qwen"
     response_marker = "MINIMAX" if family == "minimax" else "QWEN"
     require(model.is_dir(), f"{family_label} model folder is missing: {model}")
+    max_num_seqs = int(os.environ.get("EXPLOITBOT_LIVE_BATCH_MAX_NUM_SEQS", "2"))
+    require(2 <= max_num_seqs <= len(REQUEST_LABELS), f"unsupported max num seqs: {max_num_seqs}")
 
     port = int(os.environ.get("EXPLOITBOT_LIVE_BATCH_PORT") or free_port())
     base_url = f"http://127.0.0.1:{port}"
@@ -196,12 +199,12 @@ def main() -> None:
         "startedAt": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
         "proofType": f"live-{family}-continuous-batching",
         "family": family,
-        "maxNumSeqs": 2,
+        "maxNumSeqs": max_num_seqs,
     }
 
     error: Exception | None = None
     try:
-        proc = launch_engine(model, port, Path(cache_tmp.name))
+        proc = launch_engine(model, port, Path(cache_tmp.name), max_num_seqs)
         health = wait_health(base_url, proc)
         model_name = health.get("model_name") or model.name
         cache_before = request_json("GET", f"{base_url}/v1/cache/stats", timeout=15.0)
@@ -219,7 +222,7 @@ def main() -> None:
         require((cache_config.get("prefix_cache") or {}).get("enabled") is True, "prefix cache not enabled", health)
         require((cache_config.get("paged_cache") or {}).get("enabled") is True, "paged cache not enabled", health)
 
-        barrier = threading.Barrier(2)
+        barrier = threading.Barrier(max_num_seqs)
         shared_context = (
             "Authorized ExploitBot continuous batching proof. "
             "The following repeated context is benign test data for cache storage: "
@@ -228,15 +231,15 @@ def main() -> None:
             "Cache proof segment two repeats the same harmless context so the prompt is long enough to create paged cache blocks. "
         )
         prompts = [
-            shared_context + f"Request A: reply briefly with BATCH-{response_marker}-A.",
-            shared_context + f"Request B: reply briefly with BATCH-{response_marker}-B.",
+            shared_context + f"Request {label}: reply briefly with BATCH-{response_marker}-{label}."
+            for label in REQUEST_LABELS[:max_num_seqs]
         ]
-        with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max_num_seqs) as executor:
             futures = [
                 executor.submit(chat, base_url, model_name, prompt, barrier)
                 for prompt in prompts
             ]
-            results = [future.result(timeout=300.0) for future in futures]
+            results = [future.result(timeout=360.0) for future in futures]
 
         cache_after = request_json("GET", f"{base_url}/v1/cache/stats", timeout=15.0)
         scheduler = cache_after.get("scheduler_stats") or {}
@@ -247,8 +250,16 @@ def main() -> None:
         overlap = max(w["startedAt"] for w in windows) < min(w["finishedAt"] for w in windows)
         require(overlap, "client requests did not overlap", windows)
         require(all(item.get("textPreview") for item in results), "one or more completions were empty", results)
-        require(int_at({"s": scheduler}, ("s", "num_requests_processed")) >= 2, "scheduler did not process both requests", scheduler)
-        require(int_at({"s": scheduler}, ("s", "max_running_observed")) >= 2, "scheduler did not observe two running requests", scheduler)
+        require(
+            int_at({"s": scheduler}, ("s", "num_requests_processed")) >= max_num_seqs,
+            "scheduler did not process all requests",
+            scheduler,
+        )
+        require(
+            int_at({"s": scheduler}, ("s", "max_running_observed")) >= max_num_seqs,
+            "scheduler did not observe all requests running",
+            scheduler,
+        )
         require(int_at(cache_after, ("kv_cache_quantization", "bits")) == 4, "KV cache quantization bits not reported as q4", cache_after)
 
         report.update(

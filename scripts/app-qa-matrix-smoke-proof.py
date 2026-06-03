@@ -451,7 +451,7 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/runtime-coverage cache method mismatch: {runtime_coverage}")
     if continuous_batching_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/continuous-batching-coverage failed: {continuous_batching_coverage}")
-    if continuous_batching_coverage.get("proofLevel") != "source-and-live-qwen-minimax-stress-backed":
+    if continuous_batching_coverage.get("proofLevel") != "source-and-live-qwen-minimax-plus-qwen-4way-stress-backed":
         raise AssertionError(f"/qa/continuous-batching-coverage proof level mismatch: {continuous_batching_coverage}")
     if continuous_batching_coverage.get("qwenContinuousBatchingArtifactOK") is not True:
         raise AssertionError(f"/qa/continuous-batching-coverage qwen live artifact mismatch: {continuous_batching_coverage}")
@@ -459,6 +459,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/continuous-batching-coverage qwen live concurrency mismatch: {continuous_batching_coverage}")
     if continuous_batching_coverage.get("qwenContinuousBatchingKVBits") != 4:
         raise AssertionError(f"/qa/continuous-batching-coverage qwen KV bits mismatch: {continuous_batching_coverage}")
+    if continuous_batching_coverage.get("qwenHighCardinalityContinuousBatchingArtifactOK") is not True:
+        raise AssertionError(f"/qa/continuous-batching-coverage qwen high-cardinality artifact mismatch: {continuous_batching_coverage}")
+    if continuous_batching_coverage.get("qwenHighCardinalityContinuousBatchingMaxRunningObserved", 0) < 4:
+        raise AssertionError(f"/qa/continuous-batching-coverage qwen high-cardinality concurrency mismatch: {continuous_batching_coverage}")
+    if continuous_batching_coverage.get("qwenHighCardinalityContinuousBatchingKVBits") != 4:
+        raise AssertionError(f"/qa/continuous-batching-coverage qwen high-cardinality KV bits mismatch: {continuous_batching_coverage}")
     if continuous_batching_coverage.get("minimaxContinuousBatchingArtifact") != "docs/live-proofs/checkpoint-464-minimax-continuous-batching-live.json":
         raise AssertionError(f"/qa/continuous-batching-coverage MiniMax artifact path mismatch: {continuous_batching_coverage}")
     if continuous_batching_coverage.get("minimaxContinuousBatchingArtifactOK") is not True:

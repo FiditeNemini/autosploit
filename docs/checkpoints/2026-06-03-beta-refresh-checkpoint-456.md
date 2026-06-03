@@ -28,11 +28,11 @@ python3 scripts/session-context-cache-flow-proof.py
 
 The route now mirrors:
 
-- `continuousBatchingProofLevel=source-and-live-qwen-minimax-stress-backed`
+- `continuousBatchingProofLevel=source-and-live-qwen-minimax-plus-qwen-4way-stress-backed`
 - `minimaxContinuousBatchingMaxRunningObserved=2`
 - `minimaxContinuousBatchingRequestsProcessed=2`
+- `qwenHighCardinalityContinuousBatchingMaxRunningObserved=4`
 
 ## Remaining
 
-- Higher-cardinality batching and loaded-model multi-agent stress remain
-  separate gates.
+- Loaded-model multi-agent stress remains a separate gate.

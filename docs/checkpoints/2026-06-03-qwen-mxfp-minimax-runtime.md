@@ -17,6 +17,7 @@ part of this checkpoint.
 - `docs/live-proofs/2026-06-03-release-app-qwen-mxfp4-live.json`
 - `docs/live-proofs/2026-06-03-qwen-mxfp4-mtp-block-l2-ssm-live.json`
 - `docs/live-proofs/checkpoint-452-qwen-continuous-batching-live.json`
+- `docs/live-proofs/checkpoint-465-qwen-continuous-batching-4-live.json`
 - `docs/live-proofs/2026-06-03-minimax-current-metadata.json`
 - `docs/live-proofs/2026-06-03-release-app-minimax-live.json`
 - `docs/live-proofs/2026-06-03-minimax-jang-k-current-metadata.json`
@@ -60,11 +61,26 @@ sent two concurrent non-streaming chat completions and recorded:
 - `ssm_companion.rederive.failed: 0`
 - `memory.active_mb: 14221.2`
 
-The QA surface now exposes this as the Qwen side of
+The stronger Qwen stress wrapper
+`scripts/prove-live-qwen-continuous-batching-4.py` also live-loaded the same
+smallest Qwen MXFP4-MTP folder with `--max-num-seqs 4`, sent four concurrent
+chat completions, and recorded:
+
+- `clientOverlap: true`
+- `max_running_observed: 4`
+- `max_waiting_observed: 4`
+- `num_requests_processed: 4`
+- `kv_cache_quantization.bits: 4`
+- `block_disk_cache.disk_writes: 5`
+- `ssm_companion.rederive.completed: 4`
+- `ssm_companion.rederive.failed: 0`
+- `memory.active_mb: 14671.1`
+
+The QA surface now exposes this as the Qwen high-cardinality side of
 `/qa/continuous-batching-coverage.proofLevel =
-source-and-live-qwen-minimax-stress-backed` and mirrors the live artifact
-through `/qa/runtime-coverage`, `/qa/deep-runtime-flow-coverage`, and
-`/qa/coverage-index`.
+source-and-live-qwen-minimax-plus-qwen-4way-stress-backed` and mirrors the live
+artifact through `/qa/runtime-coverage`, `/qa/deep-runtime-flow-coverage`,
+`/qa/session-context-cache-flow`, and `/qa/coverage-index`.
 
 ## MiniMax live batching addendum
 

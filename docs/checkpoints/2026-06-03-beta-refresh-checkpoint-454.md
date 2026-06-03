@@ -44,5 +44,5 @@ MiniMax live counters:
 
 ## Remaining
 
-- Higher-cardinality batching and loaded-model multi-agent stress are still
-  separate follow-up gates.
+- Superseded by Checkpoint 457 for Qwen 4-way live batching. Loaded-model
+  multi-agent stress is still a separate follow-up gate.

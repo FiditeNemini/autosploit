@@ -160,10 +160,14 @@ def run() -> None:
             raise AssertionError(f"runtime streaming parser session mode mismatch: {coverage}")
         if coverage.get("startupCacheDefaultsContractParity") is not True:
             raise AssertionError(f"runtime startup cache defaults parity mismatch: {coverage}")
-        if coverage.get("continuousBatchingProofLevel") != "source-and-live-qwen-minimax-stress-backed":
+        if coverage.get("continuousBatchingProofLevel") != "source-and-live-qwen-minimax-plus-qwen-4way-stress-backed":
             raise AssertionError(f"runtime continuous batching proof level mismatch: {coverage}")
-        if coverage.get("continuousBatchingLiveLoadedModelStress") != "qwen-live-max-running-observed-2-minimax-live-max-running-observed-2":
+        if coverage.get("continuousBatchingLiveLoadedModelStress") != "qwen-live-max-running-observed-2-minimax-live-max-running-observed-2-qwen4-live-max-running-observed-4":
             raise AssertionError(f"runtime continuous batching live stress label mismatch: {coverage}")
+        if coverage.get("qwenHighCardinalityContinuousBatchingArtifactOK") is not True:
+            raise AssertionError(f"runtime qwen high-cardinality batching artifact missing: {coverage}")
+        if coverage.get("qwenHighCardinalityContinuousBatchingMaxRunningObserved", 0) < 4:
+            raise AssertionError(f"runtime qwen high-cardinality batching concurrency too low: {coverage}")
         if coverage.get("continuousBatchingContractParity") is not True:
             raise AssertionError(f"runtime continuous batching contract parity mismatch: {coverage}")
         if coverage.get("continuousBatchingSourceFileParity") is not True:

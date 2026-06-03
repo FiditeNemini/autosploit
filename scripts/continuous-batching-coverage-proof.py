@@ -34,6 +34,7 @@ EXPECTED_CONTRACTS = {
     "mllmContinuousBatchServing",
     "qwenLiveLoadedModelStress",
     "minimaxLiveLoadedModelStress",
+    "qwenHighCardinalityLiveLoadedModelStress",
 }
 
 EXPECTED_SOURCE_FILES = {
@@ -53,6 +54,7 @@ EXPECTED_PROOFS = {
     "runtime-concurrency-stats-proof.py",
     "runtime-continuous-batching-cli-proof.py",
     "prove-live-continuous-batching.py",
+    "prove-live-qwen-continuous-batching-4.py",
     "prove-live-minimax-continuous-batching.py",
     "minimax-continuous-batching-readiness-proof.py",
 }
@@ -100,11 +102,11 @@ def run() -> None:
 
         if coverage.get("ok") is not True:
             raise AssertionError(f"continuous batching route failed: {coverage}")
-        if coverage.get("proofLevel") != "source-and-live-qwen-minimax-stress-backed":
+        if coverage.get("proofLevel") != "source-and-live-qwen-minimax-plus-qwen-4way-stress-backed":
             raise AssertionError(f"unexpected proof level: {coverage}")
-        if coverage.get("liveLoadedModelStress") != "qwen-live-max-running-observed-2-minimax-live-max-running-observed-2":
+        if coverage.get("liveLoadedModelStress") != "qwen-live-max-running-observed-2-minimax-live-max-running-observed-2-qwen4-live-max-running-observed-4":
             raise AssertionError(f"live stress label mismatch: {coverage}")
-        if coverage.get("liveLoadedModelStressScope") != "qwen-and-minimax-live-proven":
+        if coverage.get("liveLoadedModelStressScope") != "qwen-minimax-and-qwen-4way-live-proven":
             raise AssertionError(f"live stress scope mismatch: {coverage}")
         if coverage.get("qwenContinuousBatchingArtifact") != "docs/live-proofs/checkpoint-452-qwen-continuous-batching-live.json":
             raise AssertionError(f"qwen continuous batching artifact path mismatch: {coverage}")
@@ -128,6 +130,26 @@ def run() -> None:
             raise AssertionError(f"qwen continuous batching missing SSM rederive completions: {coverage}")
         if coverage.get("qwenContinuousBatchingSSMReDeriveFailed") != 0:
             raise AssertionError(f"qwen continuous batching had SSM rederive failures: {coverage}")
+        if coverage.get("qwenHighCardinalityContinuousBatchingArtifact") != "docs/live-proofs/checkpoint-465-qwen-continuous-batching-4-live.json":
+            raise AssertionError(f"qwen high-cardinality artifact path mismatch: {coverage}")
+        if coverage.get("qwenHighCardinalityContinuousBatchingArtifactOK") is not True:
+            raise AssertionError(f"qwen high-cardinality artifact not accepted: {coverage}")
+        if coverage.get("qwenHighCardinalityContinuousBatchingMaxNumSeqs") != 4:
+            raise AssertionError(f"qwen high-cardinality max-num-seqs mismatch: {coverage}")
+        if coverage.get("qwenHighCardinalityContinuousBatchingMaxRunningObserved", 0) < 4:
+            raise AssertionError(f"qwen high-cardinality max running too low: {coverage}")
+        if coverage.get("qwenHighCardinalityContinuousBatchingMaxWaitingObserved", 0) < 4:
+            raise AssertionError(f"qwen high-cardinality max waiting too low: {coverage}")
+        if coverage.get("qwenHighCardinalityContinuousBatchingRequestsProcessed", 0) < 4:
+            raise AssertionError(f"qwen high-cardinality processed too few requests: {coverage}")
+        if coverage.get("qwenHighCardinalityContinuousBatchingKVBits") != 4:
+            raise AssertionError(f"qwen high-cardinality KV bits mismatch: {coverage}")
+        if coverage.get("qwenHighCardinalityContinuousBatchingBlockL2DiskWrites", 0) < 1:
+            raise AssertionError(f"qwen high-cardinality block L2 writes missing: {coverage}")
+        if coverage.get("qwenHighCardinalityContinuousBatchingSSMReDeriveCompleted", 0) < 1:
+            raise AssertionError(f"qwen high-cardinality SSM rederive completions missing: {coverage}")
+        if coverage.get("qwenHighCardinalityContinuousBatchingSSMReDeriveFailed") != 0:
+            raise AssertionError(f"qwen high-cardinality SSM rederive failures: {coverage}")
         if coverage.get("minimaxContinuousBatchingModel") != "/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ":
             raise AssertionError(f"minimax continuous batching model path mismatch: {coverage}")
         if coverage.get("minimaxContinuousBatchingArtifact") != "docs/live-proofs/checkpoint-464-minimax-continuous-batching-live.json":
@@ -195,12 +217,16 @@ def run() -> None:
             raise AssertionError(f"runtime coverage missing qwen live batching artifact: {runtime}")
         if runtime.get("qwenContinuousBatchingMaxRunningObserved") != coverage.get("qwenContinuousBatchingMaxRunningObserved"):
             raise AssertionError(f"runtime coverage qwen live batching stats mismatch: {runtime}")
+        if runtime.get("qwenHighCardinalityContinuousBatchingArtifactOK") is not True:
+            raise AssertionError(f"runtime coverage missing qwen high-cardinality live batching artifact: {runtime}")
 
         deep_contracts = deep.get("contracts") or {}
         if deep_contracts.get("continuousBatchingSourceCoverage") is not True:
             raise AssertionError(f"deep runtime missing batching source contract: {deep}")
         if deep_contracts.get("liveQwenContinuousBatching") is not True:
             raise AssertionError(f"deep runtime missing qwen live batching contract: {deep}")
+        if deep_contracts.get("liveQwenHighCardinalityContinuousBatching") is not True:
+            raise AssertionError(f"deep runtime missing qwen high-cardinality batching contract: {deep}")
         if "continuousBatching" not in (deep.get("domains") or []):
             raise AssertionError(f"deep runtime missing batching domain: {deep}")
         if "/qa/continuous-batching-coverage" not in (deep.get("routes") or []):
@@ -219,6 +245,8 @@ def run() -> None:
             raise AssertionError(f"coverage index missing qwen live batching artifact: {runtime_group}")
         if runtime_group.get("qwenContinuousBatchingMaxRunningObserved") != coverage.get("qwenContinuousBatchingMaxRunningObserved"):
             raise AssertionError(f"coverage index qwen live batching stats mismatch: {runtime_group}")
+        if runtime_group.get("qwenHighCardinalityContinuousBatchingArtifactOK") is not True:
+            raise AssertionError(f"coverage index missing qwen high-cardinality live batching artifact: {runtime_group}")
 
         print("continuous-batching-coverage proof passed")
     finally:
