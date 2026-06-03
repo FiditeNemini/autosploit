@@ -285,6 +285,27 @@ The route is mirrored through the `releaseReadiness` group in
 `/qa/coverage-index`, including ready count, blocked count, blocked IDs, known
 gap IDs, contract parity, and proof-file parity.
 
+## Objective flow requirement matrix addendum
+
+`scripts/objective-flow-requirement-matrix-proof.py` now drives
+`/qa/objective-flow-requirement-matrix`. The route expands the aggregate
+objective map into one row per requested flow: tool usage, engine runtime,
+local model lanes, context carry/compaction, prompt-injection boundaries, CVE
+database and embeddings, stash/memory retrieval, parallel sessions and
+continuous batching, Responses reuse and streaming parser surfaces, L2 disk
+cache storage/hits, TurboQuant KV, hybrid SSM async rederive, proof ledgers,
+release readiness, and known-gap tracking.
+
+Each row carries the source objective route, status, evidence level, routes,
+proofs, proof-file parity, supporting contracts, and any live proof artifacts.
+The Responses row also exposes the expected streaming events including
+`response.created`, `response.output_text.delta`, `response.reasoning.delta`,
+`response.function_call_arguments.delta`, and `response.completed`.
+
+This is still not a completion claim: the matrix mirrors
+`objectiveComplete=false` and the current `qwenMultimodalRuntime` known gap from
+`/qa/objective-runtime-coverage`.
+
 ## MiniMax status
 
 The release app proof loaded `/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ`

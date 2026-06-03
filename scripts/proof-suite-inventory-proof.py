@@ -104,7 +104,7 @@ def expected_group(file_name: str) -> str:
         return "visualProofs"
     if any(token in file_name for token in ("release", "beta-readiness", "notar", "package")):
         return "releaseReadiness"
-    if any(token in file_name for token in ("runtime", "cache", "model", "qwen", "prove-", "python-runtime")):
+    if any(token in file_name for token in ("runtime", "cache", "model", "qwen", "objective", "prove-", "python-runtime")):
         return "runtimeAndCache"
     if any(token in file_name for token in ("tool", "parser", "fanout")):
         return "toolsAndParsers"

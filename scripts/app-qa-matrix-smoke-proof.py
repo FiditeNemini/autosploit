@@ -167,6 +167,7 @@ def assert_testserver_smoke() -> None:
     release_readiness = request("GET", "/qa/release-readiness")
     beta_readiness = request("GET", "/qa/beta-readiness-coverage")
     objective_runtime = request("GET", "/qa/objective-runtime-coverage")
+    objective_flow_matrix = request("GET", "/qa/objective-flow-requirement-matrix", timeout=35.0)
 
     required_state_keys = {
         "activeTab",
@@ -1301,6 +1302,22 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index objective runtime contract parity mismatch: {coverage_index}")
     if release_group.get("objectiveRuntimeCoverageProofFileParity") != objective_runtime.get("proofFileParity"):
         raise AssertionError(f"/qa/coverage-index objective runtime proof-file parity mismatch: {coverage_index}")
+    if objective_flow_matrix.get("ok") is not True:
+        raise AssertionError(f"/qa/objective-flow-requirement-matrix failed: {objective_flow_matrix}")
+    if objective_flow_matrix.get("objectiveComplete") is not False:
+        raise AssertionError(f"/qa/objective-flow-requirement-matrix should not claim full completion: {objective_flow_matrix}")
+    if objective_flow_matrix.get("rowProofFileParity") is not True or objective_flow_matrix.get("rowContractParity") is not True:
+        raise AssertionError(f"/qa/objective-flow-requirement-matrix row parity mismatch: {objective_flow_matrix}")
+    if objective_flow_matrix.get("liveArtifactParity") is not True:
+        raise AssertionError(f"/qa/objective-flow-requirement-matrix live artifact parity mismatch: {objective_flow_matrix}")
+    if "/qa/objective-flow-requirement-matrix" not in (release_group.get("endpoints") or []):
+        raise AssertionError(f"/qa/coverage-index release group missing objective flow matrix route: {coverage_index}")
+    if release_group.get("objectiveFlowRequirementRowCount") != objective_flow_matrix.get("rowCount"):
+        raise AssertionError(f"/qa/coverage-index objective flow row count mismatch: {coverage_index}")
+    if release_group.get("objectiveFlowRequirementLiveArtifactParity") != objective_flow_matrix.get("liveArtifactParity"):
+        raise AssertionError(f"/qa/coverage-index objective flow live artifact parity mismatch: {coverage_index}")
+    if release_group.get("objectiveFlowRequirementProofFileParity") != objective_flow_matrix.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index objective flow proof-file parity mismatch: {coverage_index}")
     runtime_group = index_groups.get("runtimeAndCache") or {}
     if runtime_group.get("runtimeContracts") != runtime_coverage.get("contracts"):
         raise AssertionError(f"/qa/coverage-index runtime contract map mismatch: {coverage_index}")

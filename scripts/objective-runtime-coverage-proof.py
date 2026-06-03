@@ -86,6 +86,7 @@ def run() -> None:
         wait_for_app()
 
         payload = request("GET", "/qa/objective-runtime-coverage")
+        matrix = request("GET", "/qa/objective-flow-requirement-matrix", timeout=35.0)
         if payload.get("ok") is not True:
             raise AssertionError(f"objective runtime coverage route failed: {payload}")
         if payload.get("route") != "/qa/objective-runtime-coverage":
@@ -113,6 +114,20 @@ def run() -> None:
             raise AssertionError(f"objective runtime should surface known gaps: {payload}")
         if "qwenMultimodalRuntime" not in (payload.get("knownGapIds") or []):
             raise AssertionError(f"objective runtime missing qwen multimodal known gap: {payload}")
+        if matrix.get("ok") is not True:
+            raise AssertionError(f"objective flow requirement matrix route failed: {matrix}")
+        if matrix.get("rowIds") != EXPECTED_REQUIREMENTS:
+            raise AssertionError(f"objective flow matrix requirement order mismatch: {matrix}")
+        if matrix.get("rowCount") != len(EXPECTED_REQUIREMENTS):
+            raise AssertionError(f"objective flow matrix row count mismatch: {matrix}")
+        if matrix.get("objectiveComplete") != payload.get("objectiveComplete"):
+            raise AssertionError(f"objective flow matrix completion drift: {matrix}")
+        if matrix.get("knownGapIds") != payload.get("knownGapIds"):
+            raise AssertionError(f"objective flow matrix known gap drift: {matrix}")
+        if matrix.get("rowProofFileParity") is not True or matrix.get("rowContractParity") is not True:
+            raise AssertionError(f"objective flow matrix row parity mismatch: {matrix}")
+        if matrix.get("liveArtifactParity") is not True:
+            raise AssertionError(f"objective flow matrix live artifact parity mismatch: {matrix}")
 
         evidence = payload.get("evidence") or {}
         for name in EXPECTED_REQUIREMENTS:
@@ -153,10 +168,16 @@ def run() -> None:
         release_group = (index.get("groups") or {}).get("releaseReadiness") or {}
         if "/qa/objective-runtime-coverage" not in (release_group.get("endpoints") or []):
             raise AssertionError(f"coverage index release group missing objective route: {release_group}")
+        if "/qa/objective-flow-requirement-matrix" not in (release_group.get("endpoints") or []):
+            raise AssertionError(f"coverage index release group missing objective flow matrix route: {release_group}")
         if release_group.get("objectiveRuntimeCoverageContractParity") is not True:
             raise AssertionError(f"coverage index missing objective parity: {release_group}")
         if release_group.get("objectiveRuntimeCoverageComplete") is not False:
             raise AssertionError(f"coverage index should not mark objective complete: {release_group}")
+        if release_group.get("objectiveFlowRequirementRowCount") != matrix.get("rowCount"):
+            raise AssertionError(f"coverage index objective flow matrix row count mismatch: {release_group}")
+        if release_group.get("objectiveFlowRequirementLiveArtifactParity") != matrix.get("liveArtifactParity"):
+            raise AssertionError(f"coverage index objective flow matrix live artifact parity mismatch: {release_group}")
 
         print("objective-runtime-coverage proof passed")
     finally:
