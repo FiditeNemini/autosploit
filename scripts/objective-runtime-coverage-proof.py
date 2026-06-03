@@ -127,6 +127,11 @@ def run() -> None:
             raise AssertionError(f"objective runtime L2 cache requirement should be ready: {payload}")
         if (evidence.get("cveDatabaseEmbeddings") or {}).get("status") != "ready":
             raise AssertionError(f"objective runtime CVE database/embedding requirement should be ready: {payload}")
+        session_parallel = evidence.get("sessionParallelContinuousBatching") or {}
+        if "/qa/live-loaded-model-agent-stress" not in (session_parallel.get("routes") or []):
+            raise AssertionError(f"objective runtime session/parallel evidence missing live agent route: {payload}")
+        if "live-loaded-model-agent-stress-proof.py" not in (session_parallel.get("proofs") or []):
+            raise AssertionError(f"objective runtime session/parallel evidence missing live agent proof: {payload}")
 
         contracts = payload.get("contracts") or {}
         missing_contracts = sorted(name for name in EXPECTED_CONTRACTS if contracts.get(name) is not True)

@@ -21,6 +21,7 @@ EXPECTED_FLOW_ROWS = [
     "boundedContextCompaction",
     "stashAndCVEOnDemandRetrieval",
     "parallelAgentSessions",
+    "liveLoadedModelAgentStress",
     "continuousBatchingConcurrency",
     "streamingDeltaParser",
     "runtimeCacheComponents",
@@ -40,6 +41,7 @@ EXPECTED_CONTRACTS = {
     "streamingToolCallDelta",
     "streamingUsageCachedTokens",
     "parallelAgentProof",
+    "liveLoadedModelAgentStress",
     "continuousBatchingProof",
     "qwenLiveContinuousBatchingArtifact",
     "qwenHighCardinalityLiveContinuousBatchingArtifact",
@@ -100,6 +102,12 @@ def run() -> None:
             raise AssertionError(f"new context cache mode mismatch: {payload}")
         if payload.get("responsesReuseMode") != "store-response-session-and-resolve-previous-response-id":
             raise AssertionError(f"Responses reuse mode mismatch: {payload}")
+        if payload.get("liveAgentStressArtifactOK") is not True:
+            raise AssertionError(f"live loaded-model agent stress not reflected in session/cache flow: {payload}")
+        if payload.get("liveAgentStressAppMaxWorkingObserved", 0) < 2:
+            raise AssertionError(f"live agent app concurrency too low in session/cache flow: {payload}")
+        if payload.get("liveAgentStressEngineMaxRunningObserved", 0) < 2:
+            raise AssertionError(f"live agent engine concurrency too low in session/cache flow: {payload}")
         if payload.get("continuousBatchingProofLevel") != "source-and-live-qwen-minimax-plus-qwen-4way-stress-backed":
             raise AssertionError(f"continuous batching proof level mismatch: {payload}")
         if payload.get("qwenHighCardinalityContinuousBatchingMaxRunningObserved", 0) < 4:

@@ -35,4 +35,4 @@ The route now mirrors:
 
 ## Remaining
 
-- Loaded-model multi-agent stress remains a separate gate.
+- Superseded by Checkpoint 458 for live loaded-model agent stress.

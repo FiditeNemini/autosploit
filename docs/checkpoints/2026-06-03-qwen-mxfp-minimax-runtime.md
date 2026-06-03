@@ -18,6 +18,7 @@ part of this checkpoint.
 - `docs/live-proofs/2026-06-03-qwen-mxfp4-mtp-block-l2-ssm-live.json`
 - `docs/live-proofs/checkpoint-452-qwen-continuous-batching-live.json`
 - `docs/live-proofs/checkpoint-465-qwen-continuous-batching-4-live.json`
+- `docs/live-proofs/checkpoint-466-qwen-live-agent-stress.json`
 - `docs/live-proofs/2026-06-03-minimax-current-metadata.json`
 - `docs/live-proofs/2026-06-03-release-app-minimax-live.json`
 - `docs/live-proofs/2026-06-03-minimax-jang-k-current-metadata.json`
@@ -81,6 +82,29 @@ The QA surface now exposes this as the Qwen high-cardinality side of
 source-and-live-qwen-minimax-plus-qwen-4way-stress-backed` and mirrors the live
 artifact through `/qa/runtime-coverage`, `/qa/deep-runtime-flow-coverage`,
 `/qa/session-context-cache-flow`, and `/qa/coverage-index`.
+
+## Qwen live loaded-model agent stress addendum
+
+`scripts/prove-live-loaded-model-agent-stress.py` live-loaded the same smallest
+Qwen MXFP4-MTP folder with `--max-num-seqs 2`, pointed two app-managed agents at
+that engine, and recorded:
+
+- `appMaxWorkingObserved: 2`
+- `max_running_observed: 2`
+- `num_requests_processed: 2`
+- `kv_cache_quantization.bits: 4`
+- `block_disk_cache.disk_writes: 181`
+- `ssm_companion.rederive.completed: 2`
+- `ssm_companion.rederive.failed: 0`
+- `memory.active_mb: 14426.2`
+- `memory.peak_mb: 18649.8`
+
+This closes the separate loaded-model multi-agent stress gap by proving the app
+agent loop can drive concurrent streamed requests into a real loaded Qwen engine.
+The route `/qa/live-loaded-model-agent-stress` now mirrors the artifact through
+`/qa/runtime-coverage`, `/qa/deep-runtime-flow-coverage`,
+`/qa/session-context-cache-flow`, `/qa/objective-runtime-coverage`, and
+`/qa/coverage-index`.
 
 ## MiniMax live batching addendum
 

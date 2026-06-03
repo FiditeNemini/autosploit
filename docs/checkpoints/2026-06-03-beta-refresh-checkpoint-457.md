@@ -43,4 +43,4 @@ Recorded in `docs/live-proofs/checkpoint-465-qwen-continuous-batching-4-live.jso
 
 ## Remaining
 
-- Loaded-model multi-agent stress remains a separate gate.
+- Superseded by Checkpoint 458 for live loaded-model agent stress.

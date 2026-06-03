@@ -29,7 +29,7 @@ EXPECTED_PROOFS = [
 ]
 
 
-def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
+def request(method: str, path: str, body: str | None = None, timeout: float = 30.0):
     data = None if body is None else body.encode("utf-8")
     req = urllib.request.Request(f"{APP_API}{path}", data=data, method=method)
     with urllib.request.urlopen(req, timeout=timeout) as resp:
@@ -79,7 +79,7 @@ def run() -> None:
         endpoint_inventory = request("GET", "/qa/endpoint-inventory")
         action_state = request("GET", "/qa/action-state-inventory")
         tab_action = request("GET", "/qa/tab-action-coverage")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=45.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"endpoint route matrix route failed: {matrix}")

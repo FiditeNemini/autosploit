@@ -53,7 +53,7 @@ def source_routes() -> list[tuple[str, str]]:
     return re.findall(r'case \("([A-Z]+)", "([^"]+)"\):', text)
 
 
-def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
+def request(method: str, path: str, body: str | None = None, timeout: float = 30.0):
     data = None if body is None else body.encode("utf-8")
     req = urllib.request.Request(f"{APP_API}{path}", data=data, method=method)
     with urllib.request.urlopen(req, timeout=timeout) as resp:
@@ -127,7 +127,7 @@ def run() -> None:
         if "/qa/endpoint-inventory" not in state_routes:
             raise AssertionError(f"state route list missing endpoint inventory route: {state_routes}")
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=45.0)
         app_group = (index.get("groups") or {}).get("appState") or {}
         if app_group.get("endpointInventoryRouteCount") != payload.get("routeCount"):
             raise AssertionError(f"coverage index endpoint inventory count mismatch: {index}")

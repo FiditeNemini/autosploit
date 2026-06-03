@@ -110,6 +110,7 @@ def assert_testserver_smoke() -> None:
     cache_artifact_matrix = request("GET", "/qa/cache-artifact-matrix")
     runtime_local_model_lane = request("GET", "/qa/runtime-local-model-lane")
     continuous_batching_coverage = request("GET", "/qa/continuous-batching-coverage")
+    live_agent_stress = request("GET", "/qa/live-loaded-model-agent-stress")
     tool_coverage = request("GET", "/qa/tool-coverage")
     result_parser_coverage = request("GET", "/qa/result-parser-coverage")
     parser_tool_matrix = request("GET", "/qa/parser-tool-matrix")
@@ -242,6 +243,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing deep runtime flow coverage route contract: {qa}")
     if "/qa/session-context-cache-flow" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing session context cache flow route contract: {qa}")
+    if "/qa/live-loaded-model-agent-stress" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing live loaded-model agent stress route contract: {qa}")
     if "/qa/cache-artifact-matrix" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing cache artifact matrix route contract: {qa}")
     if "/qa/streaming-parser-reuse" not in qa.get("stateRoutes", []):
@@ -449,6 +452,16 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/runtime-coverage failed: {runtime_coverage}")
     if runtime_coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"/qa/runtime-coverage cache method mismatch: {runtime_coverage}")
+    if live_agent_stress.get("ok") is not True:
+        raise AssertionError(f"/qa/live-loaded-model-agent-stress failed: {live_agent_stress}")
+    if live_agent_stress.get("artifactOK") is not True:
+        raise AssertionError(f"/qa/live-loaded-model-agent-stress artifact mismatch: {live_agent_stress}")
+    if live_agent_stress.get("appMaxWorkingObserved", 0) < 2:
+        raise AssertionError(f"/qa/live-loaded-model-agent-stress app concurrency mismatch: {live_agent_stress}")
+    if live_agent_stress.get("engineMaxRunningObserved", 0) < 2:
+        raise AssertionError(f"/qa/live-loaded-model-agent-stress engine concurrency mismatch: {live_agent_stress}")
+    if live_agent_stress.get("kvBits") != 4:
+        raise AssertionError(f"/qa/live-loaded-model-agent-stress KV bits mismatch: {live_agent_stress}")
     if continuous_batching_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/continuous-batching-coverage failed: {continuous_batching_coverage}")
     if continuous_batching_coverage.get("proofLevel") != "source-and-live-qwen-minimax-plus-qwen-4way-stress-backed":
@@ -1309,6 +1322,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index runtime group missing deep runtime route: {coverage_index}")
     if "/qa/session-context-cache-flow" not in (runtime_group.get("endpoints") or []):
         raise AssertionError(f"/qa/coverage-index runtime group missing session context cache route: {coverage_index}")
+    if "/qa/live-loaded-model-agent-stress" not in (runtime_group.get("endpoints") or []):
+        raise AssertionError(f"/qa/coverage-index runtime group missing live loaded-model agent route: {coverage_index}")
     if "/qa/cache-artifact-matrix" not in (runtime_group.get("endpoints") or []):
         raise AssertionError(f"/qa/coverage-index runtime group missing cache artifact matrix route: {coverage_index}")
     if "/qa/continuous-batching-coverage" not in (runtime_group.get("endpoints") or []):
@@ -1321,6 +1336,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index deep runtime domain proof parity mismatch: {coverage_index}")
     if runtime_group.get("sessionContextCacheFlowContractParity") != session_context_cache_flow.get("contractParity"):
         raise AssertionError(f"/qa/coverage-index session context cache parity mismatch: {coverage_index}")
+    if runtime_group.get("liveAgentStressArtifactOK") != live_agent_stress.get("artifactOK"):
+        raise AssertionError(f"/qa/coverage-index live loaded-model agent artifact mismatch: {coverage_index}")
+    if runtime_group.get("qwenLiveAgentStressEngineMaxRunningObserved") != live_agent_stress.get("engineMaxRunningObserved"):
+        raise AssertionError(f"/qa/coverage-index live loaded-model agent stats mismatch: {coverage_index}")
     if runtime_group.get("cacheArtifactMatrixContractParity") != cache_artifact_matrix.get("contractParity"):
         raise AssertionError(f"/qa/coverage-index cache artifact matrix parity mismatch: {coverage_index}")
     if runtime_group.get("continuousBatchingContracts") != continuous_batching_coverage.get("contracts"):

@@ -38,6 +38,8 @@ EXPECTED_PROOFS = {
     "runtime-concurrency-stats-proof.py",
     "runtime-continuous-batching-cli-proof.py",
     "prove-live-continuous-batching.py",
+    "prove-live-loaded-model-agent-stress.py",
+    "live-loaded-model-agent-stress-proof.py",
     "streaming-parser-reuse-proof.py",
     "startup-cache-defaults-proof.py",
 }
@@ -52,6 +54,7 @@ EXPECTED_ROUTES = {
     "/qa/cache-artifact-matrix",
     "/qa/runtime-local-model-lane",
     "/qa/continuous-batching-coverage",
+    "/qa/live-loaded-model-agent-stress",
     "/qa/streaming-parser-reuse",
     "/qa/startup-cache-defaults",
 }
@@ -65,6 +68,7 @@ EXPECTED_LIVE_ARTIFACTS = {
     "minimaxNoThinking": ("docs/live-proofs/checkpoint-114-minimax-no-thinking-live.json", "minimax"),
     "qwenHybridCataloguePrefixShape": ("docs/live-proofs/checkpoint-115-qwen-hybrid-catalogue-prefix-shape-live.json", "qwen"),
     "qwenContinuousBatchingLive": ("docs/live-proofs/checkpoint-452-qwen-continuous-batching-live.json", "qwen-continuous-batching"),
+    "qwenLiveAgentStress": ("docs/live-proofs/checkpoint-466-qwen-live-agent-stress.json", "qwen-live-agent-stress"),
 }
 
 EXPECTED_CACHE_COMPONENTS = [
@@ -143,6 +147,7 @@ def run() -> None:
             "ssmCompanionL2",
             "newContextPreservesEngineSession",
             "continuousBatchingSource",
+            "liveLoadedModelAgentStress",
             "streamingParserReuse",
             "startupCacheDefaults",
             "unsupportedStartBlocked",
@@ -168,6 +173,14 @@ def run() -> None:
             raise AssertionError(f"runtime qwen high-cardinality batching artifact missing: {coverage}")
         if coverage.get("qwenHighCardinalityContinuousBatchingMaxRunningObserved", 0) < 4:
             raise AssertionError(f"runtime qwen high-cardinality batching concurrency too low: {coverage}")
+        if coverage.get("qwenLiveAgentStressArtifactOK") is not True:
+            raise AssertionError(f"runtime live loaded-model agent stress artifact missing: {coverage}")
+        if coverage.get("qwenLiveAgentStressAppMaxWorkingObserved", 0) < 2:
+            raise AssertionError(f"runtime live loaded-model app concurrency too low: {coverage}")
+        if coverage.get("qwenLiveAgentStressEngineMaxRunningObserved", 0) < 2:
+            raise AssertionError(f"runtime live loaded-model engine concurrency too low: {coverage}")
+        if coverage.get("qwenLiveAgentStressKVBits") != 4:
+            raise AssertionError(f"runtime live loaded-model KV bits mismatch: {coverage}")
         if coverage.get("continuousBatchingContractParity") is not True:
             raise AssertionError(f"runtime continuous batching contract parity mismatch: {coverage}")
         if coverage.get("continuousBatchingSourceFileParity") is not True:
@@ -239,6 +252,8 @@ def run() -> None:
             raise AssertionError(f"runtime live proof missing qwen SSM rederive check: {coverage}")
         if qwen_live.get("continuousBatching") is not True:
             raise AssertionError(f"runtime live proof missing qwen continuous batching check: {coverage}")
+        if qwen_live.get("loadedModelAgentStress") is not True:
+            raise AssertionError(f"runtime live proof missing qwen loaded-model agent stress check: {coverage}")
         artifacts = coverage.get("liveProofArtifacts") or {}
         if coverage.get("liveProofArtifactCount") != len(EXPECTED_LIVE_ARTIFACTS):
             raise AssertionError(f"runtime live artifact count mismatch: {coverage}")
@@ -270,6 +285,25 @@ def run() -> None:
                     raise AssertionError(f"Qwen live batching artifact missing block L2 writes: {path} {payload}")
                 if ssm.get("completed", 0) < 1 or ssm.get("failed") != 0:
                     raise AssertionError(f"Qwen live batching artifact missing SSM rederive completion: {path} {payload}")
+                continue
+            if family == "qwen-live-agent-stress":
+                scheduler = (payload.get("cacheAfter") or {}).get("scheduler_stats") or {}
+                kv = (payload.get("cacheAfter") or {}).get("kv_cache_quantization") or {}
+                block = (payload.get("cacheAfter") or {}).get("block_disk_cache") or {}
+                ssm = ((payload.get("cacheAfter") or {}).get("ssm_companion") or {}).get("rederive") or {}
+                memory = (payload.get("cacheAfter") or {}).get("memory") or {}
+                if payload.get("appMaxWorkingObserved", 0) < 2:
+                    raise AssertionError(f"Qwen live agent stress app concurrency too low: {path} {payload}")
+                if scheduler.get("max_running_observed", 0) < 2 or scheduler.get("num_requests_processed", 0) < 2:
+                    raise AssertionError(f"Qwen live agent stress scheduler stats too low: {path} {payload}")
+                if kv.get("bits") != 4:
+                    raise AssertionError(f"Qwen live agent stress missing TurboQuant q4: {path} {payload}")
+                if block.get("disk_writes", 0) < 1:
+                    raise AssertionError(f"Qwen live agent stress missing block L2 writes: {path} {payload}")
+                if ssm.get("completed", 0) < 1 or ssm.get("failed") != 0:
+                    raise AssertionError(f"Qwen live agent stress missing SSM rederive completion: {path} {payload}")
+                if not (0 < float(memory.get("active_mb") or 0) < 20000):
+                    raise AssertionError(f"Qwen live agent stress memory outside low-RAM lane: {path} {payload}")
                 continue
             if family == "qwen-release-app":
                 replay = payload.get("replay") or {}

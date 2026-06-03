@@ -937,6 +937,7 @@ def assert_coverage_index() -> None:
     runtime_coverage = request("GET", "/qa/runtime-coverage")
     deep_runtime = request("GET", "/qa/deep-runtime-flow-coverage")
     session_context_cache = request("GET", "/qa/session-context-cache-flow")
+    live_agent_stress = request("GET", "/qa/live-loaded-model-agent-stress")
     cache_artifact_matrix = request("GET", "/qa/cache-artifact-matrix")
     continuous_batching = request("GET", "/qa/continuous-batching-coverage")
     if runtime_group.get("runtimeContracts") != runtime_coverage.get("contracts"):
@@ -975,6 +976,12 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime group missing MiniMax batching readiness proof: {runtime_group}")
     if "parallel-agent-session-proof.py" not in (runtime_group.get("proofs") or []):
         raise AssertionError(f"coverage index runtime group missing parallel agent proof: {runtime_group}")
+    if "/qa/live-loaded-model-agent-stress" not in (runtime_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index runtime group missing live loaded-model agent route: {runtime_group}")
+    if "live-loaded-model-agent-stress-proof.py" not in (runtime_group.get("proofs") or []):
+        raise AssertionError(f"coverage index runtime group missing live loaded-model agent proof: {runtime_group}")
+    if "prove-live-loaded-model-agent-stress.py" not in (runtime_group.get("proofs") or []):
+        raise AssertionError(f"coverage index runtime group missing live loaded-model agent live proof: {runtime_group}")
     if runtime_group.get("deepRuntimeFlowDomains") != deep_runtime.get("domains"):
         raise AssertionError(f"coverage index deep runtime domains mismatch: {runtime_group}")
     if runtime_group.get("deepRuntimeFlowDomainCount") != deep_runtime.get("domainCount"):
@@ -1003,6 +1010,52 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index session/context/cache contract parity mismatch: {runtime_group}")
     if runtime_group.get("sessionContextCacheFlowProofFileParity") != session_context_cache.get("proofFileParity"):
         raise AssertionError(f"coverage index session/context/cache proof parity mismatch: {runtime_group}")
+    if live_agent_stress.get("ok") is not True:
+        raise AssertionError(f"live loaded-model agent stress route failed: {live_agent_stress}")
+    for key in (
+        "liveAgentStressArtifact",
+        "liveAgentStressArtifactOK",
+        "liveAgentStressProofLevel",
+        "liveAgentStressContractParity",
+        "qwenLiveAgentStressArtifactOK",
+        "qwenLiveAgentStressAppMaxWorkingObserved",
+        "qwenLiveAgentStressEngineMaxRunningObserved",
+        "qwenLiveAgentStressEngineRequestsProcessed",
+        "qwenLiveAgentStressKVBits",
+        "qwenLiveAgentStressBlockL2DiskWrites",
+        "qwenLiveAgentStressSSMReDeriveCompleted",
+        "qwenLiveAgentStressSSMReDeriveFailed",
+        "qwenLiveAgentStressActiveMemoryMB",
+    ):
+        expected_key = key
+        if key == "liveAgentStressArtifact":
+            expected = live_agent_stress.get("artifact")
+        elif key == "liveAgentStressArtifactOK" or key == "qwenLiveAgentStressArtifactOK":
+            expected = live_agent_stress.get("artifactOK")
+        elif key == "liveAgentStressProofLevel":
+            expected = live_agent_stress.get("proofLevel")
+        elif key == "liveAgentStressContractParity":
+            expected = live_agent_stress.get("contractParity")
+        elif key == "qwenLiveAgentStressAppMaxWorkingObserved":
+            expected = live_agent_stress.get("appMaxWorkingObserved")
+        elif key == "qwenLiveAgentStressEngineMaxRunningObserved":
+            expected = live_agent_stress.get("engineMaxRunningObserved")
+        elif key == "qwenLiveAgentStressEngineRequestsProcessed":
+            expected = live_agent_stress.get("engineRequestsProcessed")
+        elif key == "qwenLiveAgentStressKVBits":
+            expected = live_agent_stress.get("kvBits")
+        elif key == "qwenLiveAgentStressBlockL2DiskWrites":
+            expected = live_agent_stress.get("blockL2DiskWrites")
+        elif key == "qwenLiveAgentStressSSMReDeriveCompleted":
+            expected = live_agent_stress.get("ssmReDeriveCompleted")
+        elif key == "qwenLiveAgentStressSSMReDeriveFailed":
+            expected = live_agent_stress.get("ssmReDeriveFailed")
+        elif key == "qwenLiveAgentStressActiveMemoryMB":
+            expected = live_agent_stress.get("activeMemoryMB")
+        else:
+            expected = None
+        if runtime_group.get(expected_key) != expected:
+            raise AssertionError(f"coverage index live loaded-model agent {key} mismatch: {runtime_group}")
     if cache_artifact_matrix.get("ok") is not True:
         raise AssertionError(f"cache artifact matrix route failed: {cache_artifact_matrix}")
     if runtime_group.get("cacheArtifactMatrixRows") != cache_artifact_matrix.get("rows"):

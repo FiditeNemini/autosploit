@@ -56,6 +56,7 @@ EXPECTED_CONTRACTS = {
     "sessionWorkflowMatrix",
     "parallelAgentLimit",
     "parallelAgentSessionProof",
+    "liveLoadedModelAgentStress",
     "continuousBatchingSourceCoverage",
     "cveImportList",
     "cveImportEmbeddingCoverage",
@@ -82,6 +83,7 @@ EXPECTED_ROUTES = [
     "/qa/agent-loop-coverage",
     "/qa/agent-loop-phase-matrix",
     "/qa/session-context-cache-flow",
+    "/qa/live-loaded-model-agent-stress",
     "/qa/context-prompt-injection-boundary",
     "/qa/runtime-local-model-lane",
     "/qa/cache-artifact-matrix",
@@ -104,6 +106,8 @@ EXPECTED_ROUTES = [
 EXPECTED_PROOFS = [
     "deep-runtime-flow-coverage-proof.py",
     "session-context-cache-flow-proof.py",
+    "live-loaded-model-agent-stress-proof.py",
+    "prove-live-loaded-model-agent-stress.py",
     "context-prompt-injection-boundary-proof.py",
     "runtime-local-model-lane-proof.py",
     "cache-artifact-matrix-proof.py",
@@ -215,6 +219,12 @@ def run() -> None:
             raise AssertionError(f"bounded per-turn tool schema cap missing: {coverage}")
         if coverage.get("agentToolSchemaMaxTools") != coverage.get("fullToolSchemaCount"):
             raise AssertionError(f"agent full-tool schema contract mismatch: {coverage}")
+        if coverage.get("liveAgentStressArtifactOK") is not True:
+            raise AssertionError(f"live loaded-model agent stress missing: {coverage}")
+        if coverage.get("liveAgentStressAppMaxWorkingObserved", 0) < 2:
+            raise AssertionError(f"live loaded-model app concurrency too low: {coverage}")
+        if coverage.get("liveAgentStressEngineMaxRunningObserved", 0) < 2:
+            raise AssertionError(f"live loaded-model engine concurrency too low: {coverage}")
         if coverage.get("contextSnippetCap") != 4:
             raise AssertionError(f"context cap mismatch: {coverage}")
         if not 1 <= coverage.get("currentInjectedContextLimit", 0) <= 4:
