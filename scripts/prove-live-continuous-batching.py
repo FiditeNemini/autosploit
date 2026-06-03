@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ENGINE_DIR = ROOT / "ExploitBotEngine"
 LAUNCH_PY = ENGINE_DIR / "launch.py"
 DEFAULT_QWEN = Path("/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP")
+DEFAULT_MINIMAX = Path("/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ")
 DEFAULT_OUTPUT = ROOT / "docs" / "live-proofs" / "checkpoint-452-qwen-continuous-batching-live.json"
 
 
@@ -174,9 +175,18 @@ def launch_engine(model: Path, port: int, cache_root: Path) -> subprocess.Popen[
 
 
 def main() -> None:
-    model = Path(os.environ.get("EXPLOITBOT_LIVE_BATCH_QWEN_MODEL", str(DEFAULT_QWEN))).expanduser()
+    family = os.environ.get("EXPLOITBOT_LIVE_BATCH_FAMILY", "qwen").lower()
+    default_model = DEFAULT_MINIMAX if family == "minimax" else DEFAULT_QWEN
+    model = Path(
+        os.environ.get("EXPLOITBOT_LIVE_BATCH_MODEL")
+        or os.environ.get("EXPLOITBOT_LIVE_BATCH_QWEN_MODEL")
+        or os.environ.get("EXPLOITBOT_LIVE_BATCH_MINIMAX_MODEL")
+        or str(default_model)
+    ).expanduser()
     output = Path(os.environ.get("EXPLOITBOT_LIVE_BATCH_OUTPUT", str(DEFAULT_OUTPUT))).expanduser()
-    require(model.is_dir(), f"Qwen model folder is missing: {model}")
+    family_label = "MiniMax" if family == "minimax" else "Qwen"
+    response_marker = "MINIMAX" if family == "minimax" else "QWEN"
+    require(model.is_dir(), f"{family_label} model folder is missing: {model}")
 
     port = int(os.environ.get("EXPLOITBOT_LIVE_BATCH_PORT") or free_port())
     base_url = f"http://127.0.0.1:{port}"
@@ -186,7 +196,8 @@ def main() -> None:
         "model": str(model),
         "baseUrl": base_url,
         "startedAt": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
-        "proofType": "live-qwen-continuous-batching",
+        "proofType": f"live-{family}-continuous-batching",
+        "family": family,
         "maxNumSeqs": 2,
     }
 
@@ -208,8 +219,8 @@ def main() -> None:
 
         barrier = threading.Barrier(2)
         prompts = [
-            "Authorized batch test A. Reply with the exact text BATCH-QWEN-A.",
-            "Authorized batch test B. Reply with the exact text BATCH-QWEN-B.",
+            f"Authorized batch test A. Reply with the exact text BATCH-{response_marker}-A.",
+            f"Authorized batch test B. Reply with the exact text BATCH-{response_marker}-B.",
         ]
         with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
             futures = [
@@ -255,7 +266,7 @@ def main() -> None:
 
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    print("live-continuous-batching proof passed")
+    print(f"live-{family}-continuous-batching proof passed")
 
 
 if __name__ == "__main__":

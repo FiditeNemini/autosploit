@@ -67,6 +67,26 @@ source-and-live-qwen-stress-backed` and mirrors the live artifact through
 `/qa/coverage-index`. This is a Qwen live batching proof only; MiniMax
 multi-request live batching remains a separate not-yet-run stress proof.
 
+## MiniMax live batching readiness addendum
+
+`scripts/minimax-continuous-batching-readiness-proof.py` now verifies that
+`/qa/continuous-batching-coverage` exposes a first-class MiniMax live batching
+lane instead of burying it in prose. The route records:
+
+- model: `/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ`
+- required artifact:
+  `docs/live-proofs/checkpoint-464-minimax-continuous-batching-live.json`
+- live wrapper: `scripts/prove-live-minimax-continuous-batching.py`
+- next command:
+  `EXPLOITBOT_LIVE_BATCH_MINIMAX_MODEL=/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ python3 scripts/prove-live-minimax-continuous-batching.py`
+
+The wrapper reuses `scripts/prove-live-continuous-batching.py` with
+`EXPLOITBOT_LIVE_BATCH_FAMILY=minimax`, `--max-num-seqs 2`, TurboQuant q4 KV,
+prefix cache, paged cache, and block L2 enabled. This checkpoint did not run
+that live MiniMax stress because another local Python job was already using
+about 82 GB RSS; the readiness route reports the missing artifact explicitly
+until the live proof can be generated on a quiet machine.
+
 ## Local low-RAM model lane addendum
 
 `scripts/runtime-local-model-lane-proof.py` now drives
@@ -286,6 +306,7 @@ Verification after the contract update:
 - `python3 scripts/runtime-concurrency-stats-proof.py`
 - `python3 scripts/runtime-continuous-batching-cli-proof.py`
 - `EXPLOITBOT_LIVE_BATCH_QWEN_MODEL=/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP python3 scripts/prove-live-continuous-batching.py`
+- `python3 scripts/minimax-continuous-batching-readiness-proof.py`
 - `python3 scripts/continuous-batching-coverage-proof.py`
 - `python3 scripts/context-budget-compaction-proof.py`
 - `python3 scripts/context-coverage-proof.py`

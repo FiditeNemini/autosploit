@@ -51,10 +51,12 @@ EXPECTED_PROOFS = {
     "runtime-concurrency-stats-proof.py",
     "runtime-continuous-batching-cli-proof.py",
     "prove-live-continuous-batching.py",
+    "prove-live-minimax-continuous-batching.py",
+    "minimax-continuous-batching-readiness-proof.py",
 }
 
 
-def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
+def request(method: str, path: str, body: str | dict | None = None, timeout: float = 20.0):
     if isinstance(body, dict):
         body = json.dumps(body)
     data = None if body is None else body.encode("utf-8")
@@ -124,6 +126,16 @@ def run() -> None:
             raise AssertionError(f"qwen continuous batching missing SSM rederive completions: {coverage}")
         if coverage.get("qwenContinuousBatchingSSMReDeriveFailed") != 0:
             raise AssertionError(f"qwen continuous batching had SSM rederive failures: {coverage}")
+        if coverage.get("minimaxContinuousBatchingModel") != "/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ":
+            raise AssertionError(f"minimax continuous batching model path mismatch: {coverage}")
+        if coverage.get("minimaxContinuousBatchingArtifact") != "docs/live-proofs/checkpoint-464-minimax-continuous-batching-live.json":
+            raise AssertionError(f"minimax continuous batching artifact path mismatch: {coverage}")
+        if coverage.get("minimaxContinuousBatchingArtifactRequired") is not True:
+            raise AssertionError(f"minimax continuous batching artifact should be required: {coverage}")
+        if coverage.get("minimaxContinuousBatchingLiveReady") not in {True, False}:
+            raise AssertionError(f"minimax continuous batching ready flag missing: {coverage}")
+        if not coverage.get("minimaxContinuousBatchingNextCommand"):
+            raise AssertionError(f"minimax continuous batching next command missing: {coverage}")
 
         contracts = coverage.get("contracts") or {}
         missing = sorted(name for name in EXPECTED_CONTRACTS if contracts.get(name) is not True)

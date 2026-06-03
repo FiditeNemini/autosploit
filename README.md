@@ -86,6 +86,7 @@ The current beta DMG is published as a GitHub prerelease:
 - **Local low-RAM Qwen lane**: `/qa/runtime-local-model-lane` pins the active small local Qwen beta target to `/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP`, verifies the release-app live chat/cache artifact, enforces a sub-20 GB active-memory ceiling for the Qwen smoke and batching artifacts, and keeps active beta families to Qwen/MiniMax only.
 - **Parallel/session + batching gates**: `scripts/parallel-agent-session-proof.py` drives two autonomous agents against a delayed mock Qwen engine and proves overlapping app requests (`max_in_flight=2`) plus live `workingCount`/status-line state; `/qa/continuous-batching-coverage` source-checks the vMLX server, launcher `--max-num-seqs` path, BatchedEngine, LLM scheduler, MLLM scheduler, MLLM batch generator, BatchKV/BatchMamba cache, TurboQuant KV, L2 disk cache, and hybrid SSM companion contracts.
 - **Qwen live continuous batching**: `scripts/prove-live-continuous-batching.py` live-loads `/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP` with `--max-num-seqs 2`, sends two concurrent chat completions, and records `max_running_observed=2`, `max_waiting_observed=2`, `num_requests_processed=2`, TurboQuant q4 KV, block L2 disk writes, and SSM companion async rederive completion in `docs/live-proofs/checkpoint-452-qwen-continuous-batching-live.json`.
+- **MiniMax live batching readiness gate**: `/qa/continuous-batching-coverage` now exposes the required MiniMax low-RAM batching artifact path, live-ready flag, and exact command (`python3 scripts/prove-live-minimax-continuous-batching.py`) instead of leaving the MiniMax stress gap implicit.
 - **Context budget + compaction gate**: `/qa/context-budget-compaction` proves bounded automatic context injection, single-line catalog snippet compaction, max-token/max-iteration forwarding, cache-preserving new-context behavior, and on-demand stash/CVE retrieval under the prompt-injection policy `search-on-demand-not-force-injected`.
 - **Prompt-injection boundary gate**: `/qa/context-prompt-injection-boundary` proves context is bounded/on-demand instead of broad prompt stuffing, callback CVE/context tools stay available, per-turn tool schemas are capped, full agent tool schemas remain separate, `run_shell` is visible but blocklisted for destructive samples, and streaming/Responses reuse surfaces are isolated.
 - **Streaming/parser + Responses reuse gate**: `/qa/streaming-parser-reuse` source-checks Chat Completions SSE deltas, ChatService content/reasoning/tool-call delta handling, streamed usage with cached-token telemetry, `/v1/responses` streaming events, `previous_response_id` session reuse, and Qwen/MiniMax streaming tool parser coverage. This is source/API-contract-backed; live model chat proof remains in the existing Qwen/MiniMax live artifacts.
@@ -103,7 +104,7 @@ The current beta DMG is published as a GitHub prerelease:
 - **Qwen multimodal promotion**: Qwen-specific VL/multimodal runtime, multimodal prefix cache, and multimodal context-routing proofs are still pending.
 - **General chat quality**: broad reasoning/tool-call quality beyond bounded smoke prompts still needs longer realistic runs, especially MiniMax first-turn instruction-following.
 - **Full app UI pass**: source/API/proof coverage is broad and the website has been visually reviewed, but the native app still needs a final hands-on visual pass across every tab, status indicator, hover/detail state, and release build window before calling it polished.
-- **MiniMax live batching stress**: Qwen live multi-request batching is proven, but MiniMax still needs a dedicated low-RAM multi-request batching proof beyond the existing MiniMax load/cache/parser proof.
+- **MiniMax live batching stress**: Qwen live multi-request batching is proven, and MiniMax now has a required readiness gate, but `docs/live-proofs/checkpoint-464-minimax-continuous-batching-live.json` still needs to be generated on a quiet machine with enough free RAM.
 - **Security review**: supply-chain/pentest features are wired, but the release still needs a deliberate abuse-boundary, logging, and command-safety review before wider distribution.
 
 ## Screenshots
@@ -240,6 +241,8 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 - `python3 scripts/release-app-live-qwen-proof.py`
 - `EXPLOITBOT_RELEASE_QWEN_MODEL=${EXPLOITBOT_RELEASE_QWEN_MODEL} python3 scripts/release-app-qwen-cross-restart-cache-proof.py`
 - `EXPLOITBOT_LIVE_BATCH_QWEN_MODEL=${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-MXFP4-MTP python3 scripts/prove-live-continuous-batching.py`
+- `EXPLOITBOT_LIVE_BATCH_MINIMAX_MODEL=${EXPLOITBOT_MODELS}/JANGQ/MiniMax-M2.7-Small-JANGTQ python3 scripts/prove-live-minimax-continuous-batching.py`
+- `python3 scripts/minimax-continuous-batching-readiness-proof.py`
 - `python3 scripts/verify-live-models.py --minimax ${EXPLOITBOT_MODELS}/dealign.ai/MiniMax-M2.7-JANG_K-CRACK --metadata-only`
 - `python3 scripts/release-app-live-minimax-proof.py`
 - `python3 scripts/agent-live-tool-status-proof.py`

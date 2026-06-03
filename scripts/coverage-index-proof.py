@@ -969,6 +969,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime group missing continuous batching route: {runtime_group}")
     if "continuous-batching-coverage-proof.py" not in (runtime_group.get("proofs") or []):
         raise AssertionError(f"coverage index runtime group missing continuous batching proof: {runtime_group}")
+    if "prove-live-minimax-continuous-batching.py" not in (runtime_group.get("proofs") or []):
+        raise AssertionError(f"coverage index runtime group missing MiniMax live batching proof: {runtime_group}")
+    if "minimax-continuous-batching-readiness-proof.py" not in (runtime_group.get("proofs") or []):
+        raise AssertionError(f"coverage index runtime group missing MiniMax batching readiness proof: {runtime_group}")
     if "parallel-agent-session-proof.py" not in (runtime_group.get("proofs") or []):
         raise AssertionError(f"coverage index runtime group missing parallel agent proof: {runtime_group}")
     if runtime_group.get("deepRuntimeFlowDomains") != deep_runtime.get("domains"):
@@ -1060,6 +1064,16 @@ def assert_coverage_index() -> None:
         "qwenContinuousBatchingSSMReDeriveCompleted",
         "qwenContinuousBatchingSSMReDeriveFailed",
         "qwenContinuousBatchingMemoryActiveMB",
+        "minimaxContinuousBatchingArtifact",
+        "minimaxContinuousBatchingArtifactExists",
+        "minimaxContinuousBatchingArtifactOK",
+        "minimaxContinuousBatchingLiveReady",
+        "minimaxContinuousBatchingNextCommand",
+        "minimaxContinuousBatchingReason",
+        "minimaxContinuousBatchingMaxRunningObserved",
+        "minimaxContinuousBatchingRequestsProcessed",
+        "minimaxContinuousBatchingKVBits",
+        "minimaxContinuousBatchingBlockL2DiskWrites",
     ):
         if runtime_group.get(key) != continuous_batching.get(key):
             raise AssertionError(f"coverage index continuous batching {key} mismatch: {runtime_group}")

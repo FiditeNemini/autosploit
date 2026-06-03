@@ -459,6 +459,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/continuous-batching-coverage qwen live concurrency mismatch: {continuous_batching_coverage}")
     if continuous_batching_coverage.get("qwenContinuousBatchingKVBits") != 4:
         raise AssertionError(f"/qa/continuous-batching-coverage qwen KV bits mismatch: {continuous_batching_coverage}")
+    if continuous_batching_coverage.get("minimaxContinuousBatchingArtifact") != "docs/live-proofs/checkpoint-464-minimax-continuous-batching-live.json":
+        raise AssertionError(f"/qa/continuous-batching-coverage MiniMax artifact path mismatch: {continuous_batching_coverage}")
+    if not continuous_batching_coverage.get("minimaxContinuousBatchingNextCommand"):
+        raise AssertionError(f"/qa/continuous-batching-coverage MiniMax next command missing: {continuous_batching_coverage}")
     if continuous_batching_coverage.get("contractParity") is not True:
         raise AssertionError(f"/qa/continuous-batching-coverage contract parity mismatch: {continuous_batching_coverage}")
     if "/qa/continuous-batching-coverage" not in (state.get("qaCoverage") or {}).get("stateRoutes", []):
