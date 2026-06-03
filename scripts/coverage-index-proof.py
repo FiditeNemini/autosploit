@@ -952,6 +952,23 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index continuous batching source parity mismatch: {runtime_group}")
     if runtime_group.get("continuousBatchingProofFileParity") != continuous_batching.get("proofFileParity"):
         raise AssertionError(f"coverage index continuous batching proof parity mismatch: {runtime_group}")
+    for key in (
+        "qwenContinuousBatchingArtifact",
+        "qwenContinuousBatchingArtifactOK",
+        "qwenContinuousBatchingModel",
+        "qwenContinuousBatchingClientOverlap",
+        "qwenContinuousBatchingMaxNumSeqs",
+        "qwenContinuousBatchingMaxRunningObserved",
+        "qwenContinuousBatchingMaxWaitingObserved",
+        "qwenContinuousBatchingRequestsProcessed",
+        "qwenContinuousBatchingKVBits",
+        "qwenContinuousBatchingBlockL2DiskWrites",
+        "qwenContinuousBatchingSSMReDeriveCompleted",
+        "qwenContinuousBatchingSSMReDeriveFailed",
+        "qwenContinuousBatchingMemoryActiveMB",
+    ):
+        if runtime_group.get(key) != continuous_batching.get(key):
+            raise AssertionError(f"coverage index continuous batching {key} mismatch: {runtime_group}")
     python_runtime = request("GET", "/qa/python-runtime-inventory")
     engine_python_runtime = request("GET", "/qa/engine-python-runtime")
     if python_runtime.get("ok") is not True:
@@ -992,8 +1009,19 @@ def assert_coverage_index() -> None:
         "qwenSSMReDeriveCompleted",
         "qwenSSMReDeriveNoFailures",
         "qwenSSMReDeriveLastNumTokens",
+        "qwenContinuousBatchingArtifact",
+        "qwenContinuousBatchingArtifactOK",
+        "qwenContinuousBatchingMaxRunningObserved",
+        "qwenContinuousBatchingRequestsProcessed",
+        "qwenContinuousBatchingKVBits",
     ):
         if runtime_group.get(key) != runtime_coverage.get(key):
+            raise AssertionError(f"coverage index runtime {key} mismatch: {runtime_group}")
+    for key, runtime_key in (
+        ("runtimeQwenContinuousBatchingArtifactOK", "qwenContinuousBatchingArtifactOK"),
+        ("runtimeQwenContinuousBatchingMaxRunningObserved", "qwenContinuousBatchingMaxRunningObserved"),
+    ):
+        if runtime_group.get(key) != runtime_coverage.get(runtime_key):
             raise AssertionError(f"coverage index runtime {key} mismatch: {runtime_group}")
     if runtime_group.get("cacheResponsesInferenceMethod") != runtime_coverage.get("cacheResponsesInferenceMethod"):
         raise AssertionError(f"coverage index runtime cache responses inference method mismatch: {runtime_group}")

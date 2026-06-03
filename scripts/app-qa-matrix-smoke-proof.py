@@ -421,8 +421,14 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/runtime-coverage cache method mismatch: {runtime_coverage}")
     if continuous_batching_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/continuous-batching-coverage failed: {continuous_batching_coverage}")
-    if continuous_batching_coverage.get("proofLevel") != "source-backed-not-live-loaded-model-stress":
+    if continuous_batching_coverage.get("proofLevel") != "source-and-live-qwen-stress-backed":
         raise AssertionError(f"/qa/continuous-batching-coverage proof level mismatch: {continuous_batching_coverage}")
+    if continuous_batching_coverage.get("qwenContinuousBatchingArtifactOK") is not True:
+        raise AssertionError(f"/qa/continuous-batching-coverage qwen live artifact mismatch: {continuous_batching_coverage}")
+    if continuous_batching_coverage.get("qwenContinuousBatchingMaxRunningObserved", 0) < 2:
+        raise AssertionError(f"/qa/continuous-batching-coverage qwen live concurrency mismatch: {continuous_batching_coverage}")
+    if continuous_batching_coverage.get("qwenContinuousBatchingKVBits") != 4:
+        raise AssertionError(f"/qa/continuous-batching-coverage qwen KV bits mismatch: {continuous_batching_coverage}")
     if continuous_batching_coverage.get("contractParity") is not True:
         raise AssertionError(f"/qa/continuous-batching-coverage contract parity mismatch: {continuous_batching_coverage}")
     if "/qa/continuous-batching-coverage" not in (state.get("qaCoverage") or {}).get("stateRoutes", []):
@@ -448,6 +454,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/runtime-coverage cache component proof parity mismatch: {runtime_coverage}")
     if runtime_coverage.get("liveProofArtifactCount", 0) < 6:
         raise AssertionError(f"/qa/runtime-coverage live artifact count mismatch: {runtime_coverage}")
+    if runtime_coverage.get("qwenContinuousBatchingArtifactOK") is not True:
+        raise AssertionError(f"/qa/runtime-coverage qwen live batching artifact mismatch: {runtime_coverage}")
     if context_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/context-coverage failed: {context_coverage}")
     if context_coverage.get("searchToolName") != "search_context":
@@ -1211,6 +1219,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index continuous batching contract map mismatch: {coverage_index}")
     if runtime_group.get("continuousBatchingContractParity") is not True:
         raise AssertionError(f"/qa/coverage-index continuous batching contract parity mismatch: {coverage_index}")
+    if runtime_group.get("qwenContinuousBatchingArtifactOK") is not True:
+        raise AssertionError(f"/qa/coverage-index qwen live batching artifact mismatch: {coverage_index}")
+    if runtime_group.get("qwenContinuousBatchingMaxRunningObserved") != continuous_batching_coverage.get("qwenContinuousBatchingMaxRunningObserved"):
+        raise AssertionError(f"/qa/coverage-index qwen live batching stats mismatch: {coverage_index}")
     if python_runtime_inventory.get("ok") is not True:
         raise AssertionError(f"/qa/python-runtime-inventory failed: {python_runtime_inventory}")
     if python_runtime_inventory.get("parseParity") is not True:
@@ -1247,6 +1259,11 @@ def assert_testserver_smoke() -> None:
         "qwenSSMReDeriveCompleted",
         "qwenSSMReDeriveNoFailures",
         "qwenSSMReDeriveLastNumTokens",
+        "qwenContinuousBatchingArtifact",
+        "qwenContinuousBatchingArtifactOK",
+        "qwenContinuousBatchingMaxRunningObserved",
+        "qwenContinuousBatchingRequestsProcessed",
+        "qwenContinuousBatchingKVBits",
     ):
         if runtime_group.get(key) != runtime_coverage.get(key):
             raise AssertionError(f"/qa/coverage-index runtime {key} mismatch: {coverage_index}")

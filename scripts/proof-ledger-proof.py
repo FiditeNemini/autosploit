@@ -21,6 +21,7 @@ SPECIAL_PROOFS = {
     "prove-parser-api.py",
     "prove-block-l2-cache.py",
     "prove-ssm-rederive-status.py",
+    "prove-live-continuous-batching.py",
 }
 
 

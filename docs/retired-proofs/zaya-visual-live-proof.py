@@ -9,7 +9,7 @@ from datetime import datetime
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 MODEL = Path(os.environ.get("EXPLOITBOT_ZAYA_VL_MODEL", "/Users/eric/models/Osaurus/ZAYA1-VL-8B-MXFP4"))
 IMAGE = MODEL / "osaurus-x-banner.png"
 OUTPUT = ROOT / "docs/live-proofs/checkpoint-464-zaya-visual-live.json"

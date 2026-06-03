@@ -56,6 +56,7 @@ EXPECTED_CONTRACTS = {
     "l2DiskPromptCache",
     "blockL2DiskCache",
     "hybridSSMAsyncReDerive",
+    "liveQwenContinuousBatching",
     "liveToolStatusUI",
     "stashRetrievalMemory",
     "promptInjectionBoundedContext",
@@ -91,6 +92,9 @@ EXPECTED_PROOFS = [
     "parser-tool-matrix-proof.py",
     "continuous-batching-coverage-proof.py",
     "parallel-agent-session-proof.py",
+    "runtime-concurrency-stats-proof.py",
+    "runtime-continuous-batching-cli-proof.py",
+    "prove-live-continuous-batching.py",
     "agent-loop-coverage-proof.py",
     "agent-autopilot-proof.py",
     "supply-chain-cve-ui-proof.py",
@@ -188,9 +192,9 @@ def run() -> None:
             raise AssertionError(f"context cap mismatch: {coverage}")
         if not 1 <= coverage.get("currentInjectedContextLimit", 0) <= 4:
             raise AssertionError(f"current context limit is not bounded: {coverage}")
-        if coverage.get("continuousBatchingProofLevel") != "source-backed-not-live-loaded-model-stress":
+        if coverage.get("continuousBatchingProofLevel") != "source-and-live-qwen-stress-backed":
             raise AssertionError(f"continuous batching proof level mismatch: {coverage}")
-        if coverage.get("continuousBatchingLiveLoadedModelStress") != "not-run-in-this-gate":
+        if coverage.get("continuousBatchingLiveLoadedModelStress") != "qwen-live-max-running-observed-2":
             raise AssertionError(f"continuous batching live stress label mismatch: {coverage}")
         if coverage.get("continuousBatchingContractParity") is not True:
             raise AssertionError(f"continuous batching contract parity mismatch: {coverage}")
@@ -206,6 +210,14 @@ def run() -> None:
         for key in ("qwenSSMReDeriveArtifactOK", "qwenSSMReDeriveRequested", "qwenSSMReDeriveCompleted", "qwenSSMReDeriveNoFailures"):
             if coverage.get(key) is not True:
                 raise AssertionError(f"Qwen SSM rederive flag missing {key}: {coverage}")
+        if coverage.get("qwenContinuousBatchingArtifactOK") is not True:
+            raise AssertionError(f"Qwen continuous batching artifact flag missing: {coverage}")
+        if coverage.get("qwenContinuousBatchingMaxRunningObserved", 0) < 2:
+            raise AssertionError(f"Qwen continuous batching max running too low: {coverage}")
+        if coverage.get("qwenContinuousBatchingRequestsProcessed", 0) < 2:
+            raise AssertionError(f"Qwen continuous batching request count too low: {coverage}")
+        if coverage.get("qwenContinuousBatchingKVBits") != 4:
+            raise AssertionError(f"Qwen continuous batching KV bits mismatch: {coverage}")
         if coverage.get("stashSurfaceCount", 0) < 6:
             raise AssertionError(f"stash surface coverage too low: {coverage}")
 
@@ -232,6 +244,8 @@ def run() -> None:
             raise AssertionError(f"coverage index tool flow domain proof parity mismatch: {tools_group}")
         if runtime.get("qwenSSMReDeriveArtifactOK") is not True:
             raise AssertionError(f"runtime route no longer backs Qwen SSM rederive: {runtime}")
+        if runtime.get("qwenContinuousBatchingArtifactOK") is not True:
+            raise AssertionError(f"runtime route no longer backs Qwen continuous batching: {runtime}")
 
         print("deep-runtime-flow-coverage proof passed")
     finally:

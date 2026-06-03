@@ -33,6 +33,9 @@ EXPECTED_PROOFS = {
     "prove-ssm-rederive-status.py",
     "continuous-batching-coverage-proof.py",
     "parallel-agent-session-proof.py",
+    "runtime-concurrency-stats-proof.py",
+    "runtime-continuous-batching-cli-proof.py",
+    "prove-live-continuous-batching.py",
 }
 
 EXPECTED_ROUTES = {
@@ -53,6 +56,7 @@ EXPECTED_LIVE_ARTIFACTS = {
     "qwenHybridFullPrefixSkip": ("docs/live-proofs/checkpoint-113-qwen-hybrid-full-prefix-skip-live.json", "qwen"),
     "minimaxNoThinking": ("docs/live-proofs/checkpoint-114-minimax-no-thinking-live.json", "minimax"),
     "qwenHybridCataloguePrefixShape": ("docs/live-proofs/checkpoint-115-qwen-hybrid-catalogue-prefix-shape-live.json", "qwen"),
+    "qwenContinuousBatchingLive": ("docs/live-proofs/checkpoint-452-qwen-continuous-batching-live.json", "qwen-continuous-batching"),
 }
 
 EXPECTED_CACHE_COMPONENTS = [
@@ -70,8 +74,8 @@ EXPECTED_CACHE_COMPONENT_PROOFS = {
     "promptL2Disk": ["engine-no-model-metadata-proof.py", "prove-block-l2-cache.py"],
     "pagedKVCache": ["engine-no-model-metadata-proof.py", "verify-live-models.py"],
     "blockL2Disk": ["prove-block-l2-cache.py", "live-cache-stats-ui-proof.py"],
-    "turboQuantKV": ["engine-no-model-metadata-proof.py", "cache-stats-state-proof.py"],
-    "ssmCompanionL2": ["prove-ssm-rederive-status.py", "live-cache-stats-ui-proof.py", "release-app-live-qwen-proof.py", "release-app-qwen-cross-restart-cache-proof.py"],
+    "turboQuantKV": ["engine-no-model-metadata-proof.py", "cache-stats-state-proof.py", "prove-live-continuous-batching.py"],
+    "ssmCompanionL2": ["prove-ssm-rederive-status.py", "live-cache-stats-ui-proof.py", "release-app-live-qwen-proof.py", "release-app-qwen-cross-restart-cache-proof.py", "prove-live-continuous-batching.py"],
     "newContextPreservesEngineSession": ["context-window-cache-proof.py", "chat-control-actions-proof.py"],
 }
 
@@ -135,9 +139,9 @@ def run() -> None:
         ):
             if contracts.get(key) is not True:
                 raise AssertionError(f"runtime contract missing {key}: {coverage}")
-        if coverage.get("continuousBatchingProofLevel") != "source-backed-not-live-loaded-model-stress":
+        if coverage.get("continuousBatchingProofLevel") != "source-and-live-qwen-stress-backed":
             raise AssertionError(f"runtime continuous batching proof level mismatch: {coverage}")
-        if coverage.get("continuousBatchingLiveLoadedModelStress") != "not-run-in-this-gate":
+        if coverage.get("continuousBatchingLiveLoadedModelStress") != "qwen-live-max-running-observed-2":
             raise AssertionError(f"runtime continuous batching live stress label mismatch: {coverage}")
         if coverage.get("continuousBatchingContractParity") is not True:
             raise AssertionError(f"runtime continuous batching contract parity mismatch: {coverage}")
@@ -187,6 +191,8 @@ def run() -> None:
         qwen_live = live.get("qwen") or {}
         if qwen_live.get("ssmReDerive") is not True:
             raise AssertionError(f"runtime live proof missing qwen SSM rederive check: {coverage}")
+        if qwen_live.get("continuousBatching") is not True:
+            raise AssertionError(f"runtime live proof missing qwen continuous batching check: {coverage}")
         artifacts = coverage.get("liveProofArtifacts") or {}
         if coverage.get("liveProofArtifactCount") != len(EXPECTED_LIVE_ARTIFACTS):
             raise AssertionError(f"runtime live artifact count mismatch: {coverage}")
@@ -201,6 +207,24 @@ def run() -> None:
             payload = json.loads(artifact_path.read_text(encoding="utf-8"))
             if payload.get("ok") is not True:
                 raise AssertionError(f"runtime live artifact not ok: {path} {payload}")
+            if family == "qwen-continuous-batching":
+                scheduler = (payload.get("cacheAfter") or {}).get("scheduler_stats") or {}
+                kv = (payload.get("cacheAfter") or {}).get("kv_cache_quantization") or {}
+                block = (payload.get("cacheAfter") or {}).get("block_disk_cache") or {}
+                ssm = ((payload.get("cacheAfter") or {}).get("ssm_companion") or {}).get("rederive") or {}
+                if payload.get("clientOverlap") is not True:
+                    raise AssertionError(f"Qwen live batching artifact missing client overlap: {path} {payload}")
+                if payload.get("maxNumSeqs") != 2:
+                    raise AssertionError(f"Qwen live batching artifact max-num-seqs mismatch: {path} {payload}")
+                if scheduler.get("max_running_observed", 0) < 2 or scheduler.get("num_requests_processed", 0) < 2:
+                    raise AssertionError(f"Qwen live batching artifact missing observed concurrency: {path} {payload}")
+                if kv.get("bits") != 4:
+                    raise AssertionError(f"Qwen live batching artifact missing TurboQuant q4: {path} {payload}")
+                if block.get("disk_writes", 0) < 1:
+                    raise AssertionError(f"Qwen live batching artifact missing block L2 writes: {path} {payload}")
+                if ssm.get("completed", 0) < 1 or ssm.get("failed") != 0:
+                    raise AssertionError(f"Qwen live batching artifact missing SSM rederive completion: {path} {payload}")
+                continue
             if family == "qwen-release-app":
                 replay = payload.get("replay") or {}
                 summary = replay.get("cacheSummary") or {}
@@ -229,6 +253,20 @@ def run() -> None:
             raise AssertionError(f"runtime qwen SSM rederive token count mismatch: {coverage}")
         if coverage.get("qwenSSMReDeriveArtifactOK") is not True:
             raise AssertionError(f"runtime qwen SSM rederive artifact check missing: {coverage}")
+        if coverage.get("qwenContinuousBatchingArtifact") != EXPECTED_LIVE_ARTIFACTS["qwenContinuousBatchingLive"][0]:
+            raise AssertionError(f"runtime qwen live batching artifact path mismatch: {coverage}")
+        if coverage.get("qwenContinuousBatchingArtifactOK") is not True:
+            raise AssertionError(f"runtime qwen live batching artifact check missing: {coverage}")
+        if coverage.get("qwenContinuousBatchingClientOverlap") is not True:
+            raise AssertionError(f"runtime qwen live batching overlap missing: {coverage}")
+        if coverage.get("qwenContinuousBatchingMaxRunningObserved", 0) < 2:
+            raise AssertionError(f"runtime qwen live batching max running too low: {coverage}")
+        if coverage.get("qwenContinuousBatchingRequestsProcessed", 0) < 2:
+            raise AssertionError(f"runtime qwen live batching request count too low: {coverage}")
+        if coverage.get("qwenContinuousBatchingKVBits") != 4:
+            raise AssertionError(f"runtime qwen live batching KV bits mismatch: {coverage}")
+        if coverage.get("qwenContinuousBatchingSSMReDeriveFailed") != 0:
+            raise AssertionError(f"runtime qwen live batching SSM failures mismatch: {coverage}")
 
         print("runtime-coverage proof passed")
     finally:

@@ -17,11 +17,15 @@ APP_API = "http://127.0.0.1:9999"
 
 EXPECTED_CONTRACTS = {
     "serverContinuousBatchingFlag",
+    "serverMaxNumSeqsFlag",
+    "launcherMaxNumSeqs",
     "serverBatchedEngineSelection",
     "llmWaitingRunningQueues",
+    "llmObservedConcurrencyStats",
     "llmPrefixCacheL2",
     "llmTurboQuantKV",
     "mllmSchedulerQueues",
+    "mllmObservedConcurrencyStats",
     "mllmBatchGenerator",
     "mllmBatchCacheMerge",
     "mllmAsyncEval",
@@ -31,6 +35,7 @@ EXPECTED_CONTRACTS = {
 }
 
 EXPECTED_SOURCE_FILES = {
+    "ExploitBotEngine/launch.py",
     "ExploitBotEngine/vmlx_engine/server.py",
     "ExploitBotEngine/vmlx_engine/engine/batched.py",
     "ExploitBotEngine/vmlx_engine/scheduler.py",
@@ -43,6 +48,9 @@ EXPECTED_PROOFS = {
     "continuous-batching-coverage-proof.py",
     "parallel-agent-session-proof.py",
     "runtime-coverage-proof.py",
+    "runtime-concurrency-stats-proof.py",
+    "runtime-continuous-batching-cli-proof.py",
+    "prove-live-continuous-batching.py",
 }
 
 
@@ -88,10 +96,34 @@ def run() -> None:
 
         if coverage.get("ok") is not True:
             raise AssertionError(f"continuous batching route failed: {coverage}")
-        if coverage.get("proofLevel") != "source-backed-not-live-loaded-model-stress":
+        if coverage.get("proofLevel") != "source-and-live-qwen-stress-backed":
             raise AssertionError(f"unexpected proof level: {coverage}")
-        if coverage.get("liveLoadedModelStress") != "not-run-in-this-gate":
-            raise AssertionError(f"live stress label must stay honest: {coverage}")
+        if coverage.get("liveLoadedModelStress") != "qwen-live-max-running-observed-2":
+            raise AssertionError(f"live stress label mismatch: {coverage}")
+        if coverage.get("liveLoadedModelStressScope") != "qwen-live-proven-minimax-live-batching-not-run":
+            raise AssertionError(f"live stress scope mismatch: {coverage}")
+        if coverage.get("qwenContinuousBatchingArtifact") != "docs/live-proofs/checkpoint-452-qwen-continuous-batching-live.json":
+            raise AssertionError(f"qwen continuous batching artifact path mismatch: {coverage}")
+        if coverage.get("qwenContinuousBatchingArtifactOK") is not True:
+            raise AssertionError(f"qwen continuous batching artifact not accepted: {coverage}")
+        if coverage.get("qwenContinuousBatchingClientOverlap") is not True:
+            raise AssertionError(f"qwen continuous batching did not expose overlap: {coverage}")
+        if coverage.get("qwenContinuousBatchingMaxNumSeqs") != 2:
+            raise AssertionError(f"qwen continuous batching max-num-seqs mismatch: {coverage}")
+        if coverage.get("qwenContinuousBatchingMaxRunningObserved", 0) < 2:
+            raise AssertionError(f"qwen continuous batching max running too low: {coverage}")
+        if coverage.get("qwenContinuousBatchingMaxWaitingObserved", 0) < 2:
+            raise AssertionError(f"qwen continuous batching max waiting too low: {coverage}")
+        if coverage.get("qwenContinuousBatchingRequestsProcessed", 0) < 2:
+            raise AssertionError(f"qwen continuous batching processed too few requests: {coverage}")
+        if coverage.get("qwenContinuousBatchingKVBits") != 4:
+            raise AssertionError(f"qwen continuous batching KV bits mismatch: {coverage}")
+        if coverage.get("qwenContinuousBatchingBlockL2DiskWrites", 0) < 1:
+            raise AssertionError(f"qwen continuous batching missing block L2 writes: {coverage}")
+        if coverage.get("qwenContinuousBatchingSSMReDeriveCompleted", 0) < 1:
+            raise AssertionError(f"qwen continuous batching missing SSM rederive completions: {coverage}")
+        if coverage.get("qwenContinuousBatchingSSMReDeriveFailed") != 0:
+            raise AssertionError(f"qwen continuous batching had SSM rederive failures: {coverage}")
 
         contracts = coverage.get("contracts") or {}
         missing = sorted(name for name in EXPECTED_CONTRACTS if contracts.get(name) is not True)
@@ -133,10 +165,16 @@ def run() -> None:
             raise AssertionError(f"runtime coverage batching contract map mismatch: {runtime}")
         if runtime.get("continuousBatchingProofLevel") != coverage.get("proofLevel"):
             raise AssertionError(f"runtime coverage batching proof level mismatch: {runtime}")
+        if runtime.get("qwenContinuousBatchingArtifactOK") is not True:
+            raise AssertionError(f"runtime coverage missing qwen live batching artifact: {runtime}")
+        if runtime.get("qwenContinuousBatchingMaxRunningObserved") != coverage.get("qwenContinuousBatchingMaxRunningObserved"):
+            raise AssertionError(f"runtime coverage qwen live batching stats mismatch: {runtime}")
 
         deep_contracts = deep.get("contracts") or {}
         if deep_contracts.get("continuousBatchingSourceCoverage") is not True:
             raise AssertionError(f"deep runtime missing batching source contract: {deep}")
+        if deep_contracts.get("liveQwenContinuousBatching") is not True:
+            raise AssertionError(f"deep runtime missing qwen live batching contract: {deep}")
         if "continuousBatching" not in (deep.get("domains") or []):
             raise AssertionError(f"deep runtime missing batching domain: {deep}")
         if "/qa/continuous-batching-coverage" not in (deep.get("routes") or []):
@@ -151,6 +189,10 @@ def run() -> None:
             raise AssertionError(f"coverage index batching contract parity mismatch: {runtime_group}")
         if runtime_group.get("continuousBatchingSourceFileParity") is not True:
             raise AssertionError(f"coverage index batching source parity mismatch: {runtime_group}")
+        if runtime_group.get("qwenContinuousBatchingArtifactOK") is not True:
+            raise AssertionError(f"coverage index missing qwen live batching artifact: {runtime_group}")
+        if runtime_group.get("qwenContinuousBatchingMaxRunningObserved") != coverage.get("qwenContinuousBatchingMaxRunningObserved"):
+            raise AssertionError(f"coverage index qwen live batching stats mismatch: {runtime_group}")
 
         print("continuous-batching-coverage proof passed")
     finally:

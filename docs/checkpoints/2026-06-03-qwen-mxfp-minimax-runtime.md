@@ -16,6 +16,7 @@ part of this checkpoint.
 - `docs/live-proofs/2026-06-03-qwen-mxfp4-current-metadata.json`
 - `docs/live-proofs/2026-06-03-release-app-qwen-mxfp4-live.json`
 - `docs/live-proofs/2026-06-03-qwen-mxfp4-mtp-block-l2-ssm-live.json`
+- `docs/live-proofs/checkpoint-452-qwen-continuous-batching-live.json`
 - `docs/live-proofs/2026-06-03-minimax-current-metadata.json`
 - `docs/live-proofs/2026-06-03-release-app-minimax-live.json`
 - `docs/live-proofs/2026-06-03-minimax-jang-k-current-metadata.json`
@@ -40,6 +41,31 @@ prompt L2 disabled on replay. It recorded:
 This proves the Qwen MXFP4-MTP hybrid SSM attention lane can load, chat, use the
 Qwen parser defaults, and restore block L2 plus SSM companion L2 state for the
 bounded prompt shape exercised here.
+
+## Qwen live continuous batching addendum
+
+`scripts/prove-live-continuous-batching.py` live-loaded
+`/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP` through
+`ExploitBotEngine/launch.py` with `--max-num-seqs 2`, TurboQuant q4 KV, prefix
+cache, paged cache, block L2 disk cache, and hybrid SSM companion enabled. It
+sent two concurrent non-streaming chat completions and recorded:
+
+- `clientOverlap: true`
+- `max_running_observed: 2`
+- `max_waiting_observed: 2`
+- `num_requests_processed: 2`
+- `kv_cache_quantization.bits: 4`
+- `block_disk_cache.disk_writes: 2`
+- `ssm_companion.rederive.completed: 2`
+- `ssm_companion.rederive.failed: 0`
+- `memory.active_mb: 14221.2`
+
+The QA surface now exposes this as
+`/qa/continuous-batching-coverage.proofLevel =
+source-and-live-qwen-stress-backed` and mirrors the live artifact through
+`/qa/runtime-coverage`, `/qa/deep-runtime-flow-coverage`, and
+`/qa/coverage-index`. This is a Qwen live batching proof only; MiniMax
+multi-request live batching remains a separate not-yet-run stress proof.
 
 ## MiniMax status
 
@@ -70,6 +96,8 @@ to avoid unnecessary RAM pressure.
 - MiniMax is partially proven: the smaller MiniMax text target loads and caches
   correctly in the release app, but instruction-following quality needs a real
   prompt-suite pass before calling it polished.
+- Qwen continuous batching is now live-model proven for the two-request low-RAM
+  gate above. MiniMax continuous batching is not live-model proven yet.
 - Full MiniMax JANG_K is artifact/metadata proven only at this checkpoint; it
   still needs a live load/chat/cache pass on a quiet machine.
 - The live `exploit.bot` website copy was updated after this scope correction:
@@ -89,6 +117,11 @@ Verification after the contract update:
 - `python3 scripts/model-folder-warning-proof.py`
 - `python3 scripts/unsupported-model-start-proof.py`
 - `python3 scripts/runtime-coverage-proof.py`
+- `python3 scripts/runtime-concurrency-stats-proof.py`
+- `python3 scripts/runtime-continuous-batching-cli-proof.py`
+- `EXPLOITBOT_LIVE_BATCH_QWEN_MODEL=/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP python3 scripts/prove-live-continuous-batching.py`
+- `python3 scripts/continuous-batching-coverage-proof.py`
+- `python3 scripts/deep-runtime-flow-coverage-proof.py`
 - `python3 scripts/settings-coverage-proof.py`
 - `python3 scripts/gap-ledger-proof.py`
 - `python3 scripts/coverage-index-proof.py`
