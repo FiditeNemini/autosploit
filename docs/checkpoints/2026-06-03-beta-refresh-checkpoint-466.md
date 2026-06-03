@@ -37,7 +37,7 @@ DMG, and wrote `release/release-manifest.json`.
 Fresh local DMG SHA256:
 
 ```text
-adec88db78ba8eda813ea16adf8d59d3016380a68442f810a7411aa74b3bf483
+37a1fcf1b97dfe78a07d8530209eab19abbfa36f5450a6e106442ba45b0e644d
 ```
 
 Manifest highlights:
