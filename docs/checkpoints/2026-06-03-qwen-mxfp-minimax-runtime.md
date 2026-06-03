@@ -92,6 +92,32 @@ semantic CVE context packet, and checks that the route reports the
 This makes the CVE import/filter/embedding flow visible in `/qa/coverage-index`
 instead of leaving it split across the CVE settings and semantic CVE proofs.
 
+## Session, context, and cache lifecycle addendum
+
+`scripts/session-context-cache-flow-proof.py` now drives
+`/qa/session-context-cache-flow`. The route rolls up the app-visible lifecycle
+for new-context behavior, context carrying, Responses session reuse, streaming
+delta parsing, stash/CVE on-demand retrieval, parallel agent sessions,
+continuous batching, and cache components.
+
+The proof checks:
+
+- flow rows for new-context cache preservation, `previous_response_id` reuse,
+  bounded context compaction, stash/CVE retrieval, parallel sessions,
+  continuous batching, streaming deltas, runtime cache components, and Qwen
+  hybrid SSM async rederive
+- `contextCarryMode = bounded-automatic-plus-on-demand-retrieval`
+- `newContextCacheMode = clear-visible-chat-preserve-engine-cache-session`
+- streaming delta surfaces for content, reasoning, tool calls, and cached-token
+  usage telemetry
+- cache components for prefix cache, prompt L2 disk, block L2 disk,
+  TurboQuant KV, and SSM companion L2
+- `/qa/deep-runtime-flow-coverage` and `/qa/coverage-index` mirrors
+
+This is an app-state plus existing-live-artifact gate. It does not replace the
+dedicated Qwen live batching proof, the dedicated CVE import/embedding proof, or
+the still-pending MiniMax live batching stress proof.
+
 ## MiniMax status
 
 The release app proof loaded `/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ`

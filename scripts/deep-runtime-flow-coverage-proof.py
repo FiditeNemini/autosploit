@@ -24,6 +24,7 @@ EXPECTED_DOMAINS = [
     "supplyChain",
     "streamingResponses",
     "requestAudit",
+    "sessionContextCache",
     "sessionWorkflows",
     "parallelAgents",
     "continuousBatching",
@@ -40,6 +41,7 @@ EXPECTED_CONTRACTS = {
     "streamingReasoningDeltas",
     "streamingToolCallDeltas",
     "responsesEndpointReuse",
+    "sessionContextCacheFlow",
     "toolParserMatrix",
     "reasoningParserAutodetect",
     "toolParserAutodetect",
@@ -51,6 +53,7 @@ EXPECTED_CONTRACTS = {
     "parallelAgentSessionProof",
     "continuousBatchingSourceCoverage",
     "cveImportList",
+    "cveImportEmbeddingCoverage",
     "semanticCVEEmbeddings",
     "supplyChainTools",
     "cacheResponseReuse",
@@ -70,11 +73,13 @@ EXPECTED_ROUTES = [
     "/qa/tool-execution-matrix",
     "/qa/agent-loop-coverage",
     "/qa/agent-loop-phase-matrix",
+    "/qa/session-context-cache-flow",
     "/qa/context-coverage",
     "/qa/context-budget-compaction",
     "/qa/context-flow-matrix",
     "/qa/cve-taxonomy-coverage",
     "/qa/cve-taxonomy-matrix",
+    "/qa/cve-import-embedding-coverage",
     "/qa/session-coverage",
     "/qa/session-workflow-matrix",
     "/qa/continuous-batching-coverage",
@@ -87,11 +92,13 @@ EXPECTED_ROUTES = [
 
 EXPECTED_PROOFS = [
     "deep-runtime-flow-coverage-proof.py",
+    "session-context-cache-flow-proof.py",
     "tool-flow-coverage-proof.py",
     "runtime-coverage-proof.py",
     "context-coverage-proof.py",
     "context-budget-compaction-proof.py",
     "cve-taxonomy-coverage-proof.py",
+    "cve-import-embedding-coverage-proof.py",
     "session-coverage-proof.py",
     "chat-coverage-proof.py",
     "parser-tool-matrix-proof.py",
@@ -206,6 +213,14 @@ def run() -> None:
             raise AssertionError(f"context budget compaction format mismatch: {coverage}")
         if coverage.get("contextBudgetPromptInjectionPolicy") != "search-on-demand-not-force-injected":
             raise AssertionError(f"context budget prompt-injection policy mismatch: {coverage}")
+        if coverage.get("sessionContextCacheFlowContractParity") is not True:
+            raise AssertionError(f"session/context/cache flow parity mismatch: {coverage}")
+        if coverage.get("sessionContextCacheResponsesReuseMode") != "store-response-session-and-resolve-previous-response-id":
+            raise AssertionError(f"session/context/cache Responses reuse mismatch: {coverage}")
+        if coverage.get("cveImportEmbeddingProofFileParity") is not True:
+            raise AssertionError(f"CVE import embedding proof parity mismatch: {coverage}")
+        if coverage.get("cveImportEmbeddingSourceFileParity") is not True:
+            raise AssertionError(f"CVE import embedding source parity mismatch: {coverage}")
         if coverage.get("continuousBatchingProofLevel") != "source-and-live-qwen-stress-backed":
             raise AssertionError(f"continuous batching proof level mismatch: {coverage}")
         if coverage.get("continuousBatchingLiveLoadedModelStress") != "qwen-live-max-running-observed-2":
@@ -250,6 +265,8 @@ def run() -> None:
         runtime_group = (index.get("groups") or {}).get("runtimeAndCache") or {}
         if "/qa/deep-runtime-flow-coverage" not in (runtime_group.get("endpoints") or []):
             raise AssertionError(f"coverage index runtime group missing deep route: {runtime_group}")
+        if "/qa/session-context-cache-flow" not in (runtime_group.get("endpoints") or []):
+            raise AssertionError(f"coverage index runtime group missing session/context/cache route: {runtime_group}")
         if "/qa/continuous-batching-coverage" not in (runtime_group.get("endpoints") or []):
             raise AssertionError(f"coverage index runtime group missing continuous batching route: {runtime_group}")
         if "/qa/streaming-parser-reuse" not in (runtime_group.get("endpoints") or []):

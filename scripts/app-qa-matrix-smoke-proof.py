@@ -106,6 +106,7 @@ def assert_testserver_smoke() -> None:
     tool_execution_matrix = request("GET", "/qa/tool-execution-matrix")
     tool_flow_coverage = request("GET", "/qa/tool-flow-coverage")
     deep_runtime_flow_coverage = request("GET", "/qa/deep-runtime-flow-coverage")
+    session_context_cache_flow = request("GET", "/qa/session-context-cache-flow")
     continuous_batching_coverage = request("GET", "/qa/continuous-batching-coverage")
     tool_coverage = request("GET", "/qa/tool-coverage")
     result_parser_coverage = request("GET", "/qa/result-parser-coverage")
@@ -235,12 +236,18 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing tool flow coverage route contract: {qa}")
     if "/qa/deep-runtime-flow-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing deep runtime flow coverage route contract: {qa}")
+    if "/qa/session-context-cache-flow" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing session context cache flow route contract: {qa}")
     if "/qa/streaming-parser-reuse" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing streaming parser reuse route contract: {qa}")
     if deep_runtime_flow_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/deep-runtime-flow-coverage failed: {deep_runtime_flow_coverage}")
     if deep_runtime_flow_coverage.get("contractParity") is not True:
         raise AssertionError(f"/qa/deep-runtime-flow-coverage contract parity mismatch: {deep_runtime_flow_coverage}")
+    if session_context_cache_flow.get("ok") is not True:
+        raise AssertionError(f"/qa/session-context-cache-flow failed: {session_context_cache_flow}")
+    if session_context_cache_flow.get("contractParity") is not True:
+        raise AssertionError(f"/qa/session-context-cache-flow contract parity mismatch: {session_context_cache_flow}")
     if "/qa/parser-tool-matrix" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing parser tool matrix route contract: {qa}")
     if "/qa/runtime-coverage" not in qa.get("stateRoutes", []):
@@ -1226,6 +1233,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index runtime proof-file parity mismatch: {coverage_index}")
     if "/qa/deep-runtime-flow-coverage" not in (runtime_group.get("endpoints") or []):
         raise AssertionError(f"/qa/coverage-index runtime group missing deep runtime route: {coverage_index}")
+    if "/qa/session-context-cache-flow" not in (runtime_group.get("endpoints") or []):
+        raise AssertionError(f"/qa/coverage-index runtime group missing session context cache route: {coverage_index}")
     if "/qa/continuous-batching-coverage" not in (runtime_group.get("endpoints") or []):
         raise AssertionError(f"/qa/coverage-index runtime group missing continuous batching route: {coverage_index}")
     if runtime_group.get("deepRuntimeFlowDomainCount") != deep_runtime_flow_coverage.get("domainCount"):
@@ -1234,6 +1243,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index deep runtime contract parity mismatch: {coverage_index}")
     if runtime_group.get("deepRuntimeFlowDomainProofFileParity") != deep_runtime_flow_coverage.get("domainProofFileParity"):
         raise AssertionError(f"/qa/coverage-index deep runtime domain proof parity mismatch: {coverage_index}")
+    if runtime_group.get("sessionContextCacheFlowContractParity") != session_context_cache_flow.get("contractParity"):
+        raise AssertionError(f"/qa/coverage-index session context cache parity mismatch: {coverage_index}")
     if runtime_group.get("continuousBatchingContracts") != continuous_batching_coverage.get("contracts"):
         raise AssertionError(f"/qa/coverage-index continuous batching contract map mismatch: {coverage_index}")
     if runtime_group.get("continuousBatchingContractParity") is not True:

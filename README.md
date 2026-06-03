@@ -87,9 +87,10 @@ The current beta DMG is published as a GitHub prerelease:
 - **Qwen live continuous batching**: `scripts/prove-live-continuous-batching.py` live-loads `/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP` with `--max-num-seqs 2`, sends two concurrent chat completions, and records `max_running_observed=2`, `max_waiting_observed=2`, `num_requests_processed=2`, TurboQuant q4 KV, block L2 disk writes, and SSM companion async rederive completion in `docs/live-proofs/checkpoint-452-qwen-continuous-batching-live.json`.
 - **Context budget + compaction gate**: `/qa/context-budget-compaction` proves bounded automatic context injection, single-line catalog snippet compaction, max-token/max-iteration forwarding, cache-preserving new-context behavior, and on-demand stash/CVE retrieval under the prompt-injection policy `search-on-demand-not-force-injected`.
 - **Streaming/parser + Responses reuse gate**: `/qa/streaming-parser-reuse` source-checks Chat Completions SSE deltas, ChatService content/reasoning/tool-call delta handling, streamed usage with cached-token telemetry, `/v1/responses` streaming events, `previous_response_id` session reuse, and Qwen/MiniMax streaming tool parser coverage. This is source/API-contract-backed; live model chat proof remains in the existing Qwen/MiniMax live artifacts.
+- **Session/context/cache lifecycle gate**: `/qa/session-context-cache-flow` ties new-context cache preservation, bounded context carry, stash/CVE on-demand retrieval, Responses `previous_response_id` reuse, streaming delta parser surfaces, parallel agent sessions, Qwen live continuous batching, TurboQuant KV, L2/block disk cache, and hybrid SSM async rederive into one app-backed matrix.
 - **Settings and persistence**: parser, generation, reasoning, engine cache, KV quantization, model path, session, terminal/tool path, and result-store state have QA proof coverage.
 - **UI status coverage**: chat, sidebar, active agent lists, supply-chain actions, CVE import/search, terminal path state, and visual proof screenshots have checkpoint coverage.
-- **Deep runtime/tool-flow gate**: `/qa/deep-runtime-flow-coverage` now rolls up tool flow, agent phases, bounded context, CVE taxonomy/import, semantic CVE embeddings, stash retrieval, parser matrix, Responses/SSE streaming delta handling, session workflows, and Qwen/MiniMax cache contracts into one app-backed beta gate.
+- **Deep runtime/tool-flow gate**: `/qa/deep-runtime-flow-coverage` now rolls up tool flow, agent phases, session/context/cache lifecycle, bounded context, CVE taxonomy/import, semantic CVE embeddings, stash retrieval, parser matrix, Responses/SSE streaming delta handling, session workflows, and Qwen/MiniMax cache contracts into one app-backed beta gate.
 - **Website refresh**: `exploit.bot` now points at the notarized beta DMG, uses the current dark app theme, preserves the logo treatment, includes cleaned current screenshot/proof assets, and has desktop/mobile browser verification across EN/KO/ZH/ES/JA.
 - **Website SEO/i18n**: the live site has current Open Graph/Twitter metadata, favicon/manifest assets, sitemap image entries, `llms.txt`, `llms-full.txt`, `security.txt`, localized visible copy, localized page title/description updates, and live Playwright coverage for missing i18n keys, broken images, and mobile overflow.
 
@@ -239,6 +240,7 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 - `python3 scripts/release-app-live-minimax-proof.py`
 - `python3 scripts/agent-live-tool-status-proof.py`
 - `python3 scripts/context-budget-compaction-proof.py`
+- `python3 scripts/session-context-cache-flow-proof.py`
 - `python3 scripts/supply-chain-cve-ui-proof.py`
 - `python3 scripts/cve-settings-actions-proof.py`
 - `python3 scripts/terminal-tool-paths-proof.py`

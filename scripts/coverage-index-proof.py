@@ -40,6 +40,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/tool-execution-matrix",
     "/qa/tool-flow-coverage",
     "/qa/deep-runtime-flow-coverage",
+    "/qa/session-context-cache-flow",
     "/qa/runtime-coverage",
     "/qa/streaming-parser-reuse",
     "/qa/python-runtime-inventory",
@@ -111,6 +112,7 @@ REQUIRED_PROOFS = {
     "tool-execution-matrix-proof.py",
     "tool-flow-coverage-proof.py",
     "deep-runtime-flow-coverage-proof.py",
+    "session-context-cache-flow-proof.py",
     "tool-catalog-detail-proof.py",
     "runtime-coverage-proof.py",
     "streaming-parser-reuse-proof.py",
@@ -901,6 +903,7 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime cache response method mismatch: {runtime_group}")
     runtime_coverage = request("GET", "/qa/runtime-coverage")
     deep_runtime = request("GET", "/qa/deep-runtime-flow-coverage")
+    session_context_cache = request("GET", "/qa/session-context-cache-flow")
     continuous_batching = request("GET", "/qa/continuous-batching-coverage")
     if runtime_group.get("runtimeContracts") != runtime_coverage.get("contracts"):
         raise AssertionError(f"coverage index runtime contract map mismatch: {runtime_group}")
@@ -920,6 +923,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime group missing deep runtime flow route: {runtime_group}")
     if "deep-runtime-flow-coverage-proof.py" not in (runtime_group.get("proofs") or []):
         raise AssertionError(f"coverage index runtime group missing deep runtime proof: {runtime_group}")
+    if "/qa/session-context-cache-flow" not in (runtime_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index runtime group missing session/context/cache route: {runtime_group}")
+    if "session-context-cache-flow-proof.py" not in (runtime_group.get("proofs") or []):
+        raise AssertionError(f"coverage index runtime group missing session/context/cache proof: {runtime_group}")
     if "/qa/continuous-batching-coverage" not in (runtime_group.get("endpoints") or []):
         raise AssertionError(f"coverage index runtime group missing continuous batching route: {runtime_group}")
     if "continuous-batching-coverage-proof.py" not in (runtime_group.get("proofs") or []):
@@ -940,6 +947,20 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index deep runtime route count mismatch: {runtime_group}")
     if runtime_group.get("deepRuntimeFlowProofFileParity") != deep_runtime.get("proofFileParity"):
         raise AssertionError(f"coverage index deep runtime proof parity mismatch: {runtime_group}")
+    if session_context_cache.get("ok") is not True:
+        raise AssertionError(f"session/context/cache flow route failed: {session_context_cache}")
+    if runtime_group.get("sessionContextCacheFlowRows") != session_context_cache.get("flowRows"):
+        raise AssertionError(f"coverage index session/context/cache row mismatch: {runtime_group}")
+    if runtime_group.get("sessionContextCacheFlowRowCount") != session_context_cache.get("flowRowCount"):
+        raise AssertionError(f"coverage index session/context/cache row count mismatch: {runtime_group}")
+    if runtime_group.get("sessionContextCacheFlowContextCarryMode") != session_context_cache.get("contextCarryMode"):
+        raise AssertionError(f"coverage index session/context/cache context mode mismatch: {runtime_group}")
+    if runtime_group.get("sessionContextCacheFlowResponsesReuseMode") != session_context_cache.get("responsesReuseMode"):
+        raise AssertionError(f"coverage index session/context/cache Responses mode mismatch: {runtime_group}")
+    if runtime_group.get("sessionContextCacheFlowContractParity") != session_context_cache.get("contractParity"):
+        raise AssertionError(f"coverage index session/context/cache contract parity mismatch: {runtime_group}")
+    if runtime_group.get("sessionContextCacheFlowProofFileParity") != session_context_cache.get("proofFileParity"):
+        raise AssertionError(f"coverage index session/context/cache proof parity mismatch: {runtime_group}")
     if continuous_batching.get("ok") is not True:
         raise AssertionError(f"continuous batching coverage route failed: {continuous_batching}")
     if runtime_group.get("continuousBatchingContracts") != continuous_batching.get("contracts"):
