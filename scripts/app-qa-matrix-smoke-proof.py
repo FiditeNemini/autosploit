@@ -115,6 +115,7 @@ def assert_testserver_smoke() -> None:
     engine_python_runtime = request("GET", "/qa/engine-python-runtime")
     agent_flow_inventory = request("GET", "/qa/agent-flow-inventory")
     context_coverage = request("GET", "/qa/context-coverage")
+    context_budget_compaction = request("GET", "/qa/context-budget-compaction")
     context_flow_matrix = request("GET", "/qa/context-flow-matrix")
     evidence_lifecycle_coverage = request("GET", "/qa/evidence-lifecycle-coverage")
     evidence_lifecycle_flow_matrix = request("GET", "/qa/evidence-lifecycle-flow-matrix")
@@ -464,6 +465,20 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/context-coverage context cap mismatch: {context_coverage}")
     if not 1 <= context_coverage.get("currentInjectedContextLimit", 0) <= 4:
         raise AssertionError(f"/qa/context-coverage current context limit mismatch: {context_coverage}")
+    if context_budget_compaction.get("ok") is not True:
+        raise AssertionError(f"/qa/context-budget-compaction failed: {context_budget_compaction}")
+    if context_budget_compaction.get("policyStepCount") != 5:
+        raise AssertionError(f"/qa/context-budget-compaction policy count mismatch: {context_budget_compaction}")
+    if context_budget_compaction.get("contractParity") is not True:
+        raise AssertionError(f"/qa/context-budget-compaction contract parity mismatch: {context_budget_compaction}")
+    if context_budget_compaction.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/context-budget-compaction proof parity mismatch: {context_budget_compaction}")
+    if context_budget_compaction.get("compactionFormat") != "single-line-snippet":
+        raise AssertionError(f"/qa/context-budget-compaction compaction format mismatch: {context_budget_compaction}")
+    if context_budget_compaction.get("promptInjectionPolicy") != "search-on-demand-not-force-injected":
+        raise AssertionError(f"/qa/context-budget-compaction prompt injection policy mismatch: {context_budget_compaction}")
+    if "/qa/context-budget-compaction" not in (state.get("qaCoverage") or {}).get("stateRoutes", []):
+        raise AssertionError(f"/state missing context budget route contract: {state.get('qaCoverage')}")
     expected_retrieval_sources = ["asset.port", "finding", "tool.output", "stash.note", "cve"]
     if context_coverage.get("retrievalSources") != expected_retrieval_sources:
         raise AssertionError(f"/qa/context-coverage retrieval source list mismatch: {context_coverage}")
@@ -1305,6 +1320,14 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index automatic context cap mismatch: {coverage_index}")
     if chat_context_group.get("currentInjectedContextLimit") != context_coverage.get("currentInjectedContextLimit"):
         raise AssertionError(f"/qa/coverage-index current context limit mismatch: {coverage_index}")
+    if chat_context_group.get("contextBudgetPolicySteps") != context_budget_compaction.get("policySteps"):
+        raise AssertionError(f"/qa/coverage-index context budget policy steps mismatch: {coverage_index}")
+    if chat_context_group.get("contextBudgetContractParity") != context_budget_compaction.get("contractParity"):
+        raise AssertionError(f"/qa/coverage-index context budget contract parity mismatch: {coverage_index}")
+    if chat_context_group.get("contextBudgetProofFileParity") != context_budget_compaction.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index context budget proof parity mismatch: {coverage_index}")
+    if chat_context_group.get("contextBudgetCompactionFormat") != context_budget_compaction.get("compactionFormat"):
+        raise AssertionError(f"/qa/coverage-index context budget compaction mismatch: {coverage_index}")
     if chat_context_group.get("contextRoutes") != context_coverage.get("routes"):
         raise AssertionError(f"/qa/coverage-index context route list mismatch: {coverage_index}")
     if chat_context_group.get("contextRouteCount") != len(context_coverage.get("routes") or []):

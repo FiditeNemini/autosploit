@@ -23,6 +23,7 @@ REQUIRED_CONTRACTS = {
     "embeddingAudit",
     "stashRetrieval",
     "newContextCachePreservation",
+    "contextBudgetCompaction",
 }
 
 REQUIRED_ROUTES = {
@@ -33,6 +34,7 @@ REQUIRED_ROUTES = {
     "/qa/seed-catalog-embeddings",
     "/qa/seed-stash-retrieval",
     "/qa/seed-semantic-cves",
+    "/qa/context-budget-compaction",
 }
 
 REQUIRED_PROOFS = {
@@ -46,6 +48,7 @@ REQUIRED_PROOFS = {
     "request-audit-proof.py",
     "context-window-cache-proof.py",
     "persistence-proof.py",
+    "context-budget-compaction-proof.py",
 }
 
 REQUIRED_STATE_KEYS = {

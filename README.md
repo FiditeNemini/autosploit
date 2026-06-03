@@ -84,6 +84,7 @@ The current beta DMG is published as a GitHub prerelease:
 - **Qwen + MiniMax cache proofs**: live/release harnesses cover Qwen MXFP4-MTP hybrid SSM attention, MiniMax full-KV attention, TurboQuant KV cache, prefix cache, paged/block L2 cache, and repeat-prompt cache hits.
 - **Parallel/session + batching gates**: `scripts/parallel-agent-session-proof.py` drives two autonomous agents against a delayed mock Qwen engine and proves overlapping app requests (`max_in_flight=2`) plus live `workingCount`/status-line state; `/qa/continuous-batching-coverage` source-checks the vMLX server, launcher `--max-num-seqs` path, BatchedEngine, LLM scheduler, MLLM scheduler, MLLM batch generator, BatchKV/BatchMamba cache, TurboQuant KV, L2 disk cache, and hybrid SSM companion contracts.
 - **Qwen live continuous batching**: `scripts/prove-live-continuous-batching.py` live-loads `/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP` with `--max-num-seqs 2`, sends two concurrent chat completions, and records `max_running_observed=2`, `max_waiting_observed=2`, `num_requests_processed=2`, TurboQuant q4 KV, block L2 disk writes, and SSM companion async rederive completion in `docs/live-proofs/checkpoint-452-qwen-continuous-batching-live.json`.
+- **Context budget + compaction gate**: `/qa/context-budget-compaction` proves bounded automatic context injection, single-line catalog snippet compaction, max-token/max-iteration forwarding, cache-preserving new-context behavior, and on-demand stash/CVE retrieval under the prompt-injection policy `search-on-demand-not-force-injected`.
 - **Settings and persistence**: parser, generation, reasoning, engine cache, KV quantization, model path, session, terminal/tool path, and result-store state have QA proof coverage.
 - **UI status coverage**: chat, sidebar, active agent lists, supply-chain actions, CVE import/search, terminal path state, and visual proof screenshots have checkpoint coverage.
 - **Deep runtime/tool-flow gate**: `/qa/deep-runtime-flow-coverage` now rolls up tool flow, agent phases, bounded context, CVE taxonomy/import, semantic CVE embeddings, stash retrieval, parser matrix, streaming delta handling, session workflows, and Qwen/MiniMax cache contracts into one app-backed beta gate.
@@ -235,6 +236,7 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 - `python3 scripts/verify-live-models.py --minimax ${EXPLOITBOT_MODELS}/dealign.ai/MiniMax-M2.7-JANG_K-CRACK --metadata-only`
 - `python3 scripts/release-app-live-minimax-proof.py`
 - `python3 scripts/agent-live-tool-status-proof.py`
+- `python3 scripts/context-budget-compaction-proof.py`
 - `python3 scripts/supply-chain-cve-ui-proof.py`
 - `python3 scripts/cve-settings-actions-proof.py`
 - `python3 scripts/terminal-tool-paths-proof.py`

@@ -111,6 +111,24 @@ families. `ModelFolderInspector` treats ZAYA-shaped folders as unsupported, and
 `unsupported-model-start-proof.py` verifies that both generic unsupported and
 ZAYA-shaped folders are blocked before engine launch.
 
+## Context budget and compaction addendum
+
+`/qa/context-budget-compaction` now records the context-management policy in one
+app-backed surface:
+
+- automatic injected context cap: `4`
+- policy steps: `selectBoundedContext`, `compactCatalogSnippets`,
+  `applyMaxTokenBudget`, `preserveCacheOnNewContext`,
+  `reuseStashAndCVEOnDemand`
+- compaction format: `single-line-snippet`
+- cache response method: `prefix-cache-l2-turboquant`
+- new context behavior: `clear-visible-chat-preserve-engine-cache-session`
+- prompt-injection policy: `search-on-demand-not-force-injected`
+
+The route mirrors retrieval sources and delivery modes from
+`/qa/context-coverage`, cache session fields from `/qa/chat-coverage`, and is
+rolled up through `/qa/deep-runtime-flow-coverage` plus `/qa/coverage-index`.
+
 Verification after the contract update:
 
 - `swift build --package-path ExploitBot -c debug`
@@ -121,6 +139,8 @@ Verification after the contract update:
 - `python3 scripts/runtime-continuous-batching-cli-proof.py`
 - `EXPLOITBOT_LIVE_BATCH_QWEN_MODEL=/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP python3 scripts/prove-live-continuous-batching.py`
 - `python3 scripts/continuous-batching-coverage-proof.py`
+- `python3 scripts/context-budget-compaction-proof.py`
+- `python3 scripts/context-coverage-proof.py`
 - `python3 scripts/deep-runtime-flow-coverage-proof.py`
 - `python3 scripts/settings-coverage-proof.py`
 - `python3 scripts/gap-ledger-proof.py`

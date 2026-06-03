@@ -43,6 +43,7 @@ EXPECTED_CONTRACTS = {
     "reasoningParserAutodetect",
     "toolParserAutodetect",
     "contextSnippetCap",
+    "contextBudgetCompaction",
     "newContextPreservesCacheSession",
     "sessionWorkflowMatrix",
     "parallelAgentLimit",
@@ -69,6 +70,7 @@ EXPECTED_ROUTES = [
     "/qa/agent-loop-coverage",
     "/qa/agent-loop-phase-matrix",
     "/qa/context-coverage",
+    "/qa/context-budget-compaction",
     "/qa/context-flow-matrix",
     "/qa/cve-taxonomy-coverage",
     "/qa/cve-taxonomy-matrix",
@@ -86,6 +88,7 @@ EXPECTED_PROOFS = [
     "tool-flow-coverage-proof.py",
     "runtime-coverage-proof.py",
     "context-coverage-proof.py",
+    "context-budget-compaction-proof.py",
     "cve-taxonomy-coverage-proof.py",
     "session-coverage-proof.py",
     "chat-coverage-proof.py",
@@ -192,6 +195,14 @@ def run() -> None:
             raise AssertionError(f"context cap mismatch: {coverage}")
         if not 1 <= coverage.get("currentInjectedContextLimit", 0) <= 4:
             raise AssertionError(f"current context limit is not bounded: {coverage}")
+        if coverage.get("contextBudgetContractParity") is not True:
+            raise AssertionError(f"context budget contract parity mismatch: {coverage}")
+        if coverage.get("contextBudgetProofFileParity") is not True:
+            raise AssertionError(f"context budget proof-file parity mismatch: {coverage}")
+        if coverage.get("contextBudgetCompactionFormat") != "single-line-snippet":
+            raise AssertionError(f"context budget compaction format mismatch: {coverage}")
+        if coverage.get("contextBudgetPromptInjectionPolicy") != "search-on-demand-not-force-injected":
+            raise AssertionError(f"context budget prompt-injection policy mismatch: {coverage}")
         if coverage.get("continuousBatchingProofLevel") != "source-and-live-qwen-stress-backed":
             raise AssertionError(f"continuous batching proof level mismatch: {coverage}")
         if coverage.get("continuousBatchingLiveLoadedModelStress") != "qwen-live-max-running-observed-2":

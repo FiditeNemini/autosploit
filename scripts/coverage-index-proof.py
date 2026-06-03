@@ -1098,6 +1098,7 @@ def assert_coverage_index() -> None:
     if chat_context_group.get("chatStateKeyCount") != len(chat_coverage.get("stateKeys") or []):
         raise AssertionError(f"coverage index chat/context chat state-key count mismatch: {chat_context_group}")
     context_coverage = request("GET", "/qa/context-coverage")
+    context_budget = request("GET", "/qa/context-budget-compaction")
     if chat_context_group.get("searchToolName") != context_coverage.get("searchToolName"):
         raise AssertionError(f"coverage index chat/context search tool mismatch: {chat_context_group}")
     if chat_context_group.get("automaticInjectedContextCap") != context_coverage.get("automaticInjectedContextCap"):
@@ -1150,6 +1151,32 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context delivery mode proof parity mismatch: {chat_context_group}")
     if chat_context_group.get("contextDeliveryModeProofFileParity") != context_coverage.get("contextDeliveryModeProofFileParity"):
         raise AssertionError(f"coverage index chat/context delivery mode proof-file parity mismatch: {chat_context_group}")
+    if context_budget.get("ok") is not True:
+        raise AssertionError(f"context budget route failed: {context_budget}")
+    if "/qa/context-budget-compaction" not in (chat_context_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index chat/context missing context budget endpoint: {chat_context_group}")
+    if "context-budget-compaction-proof.py" not in (chat_context_group.get("proofs") or []):
+        raise AssertionError(f"coverage index chat/context missing context budget proof: {chat_context_group}")
+    if chat_context_group.get("contextBudgetPolicySteps") != context_budget.get("policySteps"):
+        raise AssertionError(f"coverage index context budget policy steps mismatch: {chat_context_group}")
+    if chat_context_group.get("contextBudgetPolicyStepCount") != context_budget.get("policyStepCount"):
+        raise AssertionError(f"coverage index context budget policy step count mismatch: {chat_context_group}")
+    if chat_context_group.get("contextBudgetContracts") != context_budget.get("contracts"):
+        raise AssertionError(f"coverage index context budget contract map mismatch: {chat_context_group}")
+    if chat_context_group.get("contextBudgetContractParity") != context_budget.get("contractParity"):
+        raise AssertionError(f"coverage index context budget contract parity mismatch: {chat_context_group}")
+    if chat_context_group.get("contextBudgetProofs") != context_budget.get("proofs"):
+        raise AssertionError(f"coverage index context budget proof list mismatch: {chat_context_group}")
+    if chat_context_group.get("contextBudgetProofFileParity") != context_budget.get("proofFileParity"):
+        raise AssertionError(f"coverage index context budget proof parity mismatch: {chat_context_group}")
+    if chat_context_group.get("contextBudgetMaxTokens") != context_budget.get("maxTokens"):
+        raise AssertionError(f"coverage index context budget max token mismatch: {chat_context_group}")
+    if chat_context_group.get("contextBudgetMaxIterations") != context_budget.get("maxIterations"):
+        raise AssertionError(f"coverage index context budget max iterations mismatch: {chat_context_group}")
+    if chat_context_group.get("contextBudgetCompactionFormat") != context_budget.get("compactionFormat"):
+        raise AssertionError(f"coverage index context budget compaction format mismatch: {chat_context_group}")
+    if chat_context_group.get("contextBudgetPromptInjectionPolicy") != context_budget.get("promptInjectionPolicy"):
+        raise AssertionError(f"coverage index context budget prompt injection policy mismatch: {chat_context_group}")
     context_flow_matrix = request("GET", "/qa/context-flow-matrix")
     if context_flow_matrix.get("ok") is not True:
         raise AssertionError(f"context flow matrix route failed: {context_flow_matrix}")
