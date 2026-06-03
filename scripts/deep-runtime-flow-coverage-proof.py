@@ -258,7 +258,7 @@ def run() -> None:
             raise AssertionError(f"continuous batching live stress label mismatch: {coverage}")
         if coverage.get("continuousBatchingContractParity") is not True:
             raise AssertionError(f"continuous batching contract parity mismatch: {coverage}")
-        if coverage.get("streamingParserProofLevel") != "source-backed-api-contract":
+        if coverage.get("streamingParserProofLevel") != "app-source-and-engine-test-backed":
             raise AssertionError(f"streaming parser proof level mismatch: {coverage}")
         if coverage.get("streamingParserContractParity") is not True:
             raise AssertionError(f"streaming parser contract parity mismatch: {coverage}")

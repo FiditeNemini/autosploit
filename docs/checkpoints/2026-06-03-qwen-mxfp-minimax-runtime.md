@@ -126,10 +126,14 @@ cached-token deltas, the `/v1/responses` endpoint, Responses streaming events,
 `previous_response_id` session reuse, per-request reasoning parser state, and
 Qwen/MiniMax streaming tool parser files.
 
-This gate is source/API-contract-backed. It does not replace the separate live
-Qwen and MiniMax load/chat/cache artifacts, but MiniMax live multi-request
-batching is now covered by
-`docs/live-proofs/checkpoint-464-minimax-continuous-batching-live.json`.
+The gate is now app-source-and-engine-test-backed. It exposes and requires:
+
+- `cd ExploitBotEngine && PYTHONPATH=. .venv/bin/python -m pytest -q testsuite/test_responses_session_store.py testsuite/test_tool_parser_api.py`
+- `ExploitBotEngine/.venv/bin/python scripts/prove-parser-api.py`
+
+Those commands prove Responses session-chain replay and API-shaped
+reasoning/tool-call output without replacing the separate live Qwen and MiniMax
+load/chat/cache artifacts.
 
 ## CVE import, include filter, and embedding addendum
 

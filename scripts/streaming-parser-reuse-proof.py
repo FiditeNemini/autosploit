@@ -44,6 +44,17 @@ EXPECTED_TOOL_PARSERS = [
     "auto_tool_parser.py",
 ]
 
+EXPECTED_ENGINE_TEST_FILES = [
+    "ExploitBotEngine/testsuite/test_responses_session_store.py",
+    "ExploitBotEngine/testsuite/test_tool_parser_api.py",
+    "scripts/prove-parser-api.py",
+]
+
+EXPECTED_ENGINE_TEST_COMMANDS = [
+    "cd ExploitBotEngine && PYTHONPATH=. .venv/bin/python -m pytest -q testsuite/test_responses_session_store.py testsuite/test_tool_parser_api.py",
+    "ExploitBotEngine/.venv/bin/python scripts/prove-parser-api.py",
+]
+
 EXPECTED_CONTRACTS = {
     "chatCompletionsStreaming",
     "chatServiceUsageMetrics",
@@ -60,6 +71,8 @@ EXPECTED_CONTRACTS = {
     "reasoningParserPerRequest",
     "toolChoiceRequiredErrors",
     "cacheReuseTelemetry",
+    "responsesSessionStoreEngineTests",
+    "parserAPIShapeProof",
 }
 
 
@@ -96,7 +109,7 @@ def assert_source_files(payload: dict) -> None:
 def assert_payload(payload: dict) -> None:
     if payload.get("ok") is not True:
         raise AssertionError(f"streaming parser reuse route failed: {payload}")
-    if payload.get("proofLevel") != "source-backed-api-contract":
+    if payload.get("proofLevel") != "app-source-and-engine-test-backed":
         raise AssertionError(f"streaming parser proof level mismatch: {payload}")
     if payload.get("supportedFamilies") != ["qwen", "minimax"]:
         raise AssertionError(f"streaming parser supported family mismatch: {payload}")
@@ -112,6 +125,14 @@ def assert_payload(payload: dict) -> None:
         raise AssertionError(f"cache reuse surface mismatch: {payload}")
     if payload.get("liveLoadedModelProof") != "not-run-in-this-gate":
         raise AssertionError(f"streaming parser live proof label mismatch: {payload}")
+    if payload.get("engineTestFiles") != EXPECTED_ENGINE_TEST_FILES:
+        raise AssertionError(f"streaming parser engine test file list mismatch: {payload}")
+    if payload.get("engineTestFileParity") is not True:
+        raise AssertionError(f"streaming parser engine test file parity mismatch: {payload}")
+    if payload.get("engineTestCommands") != EXPECTED_ENGINE_TEST_COMMANDS:
+        raise AssertionError(f"streaming parser engine test command list mismatch: {payload}")
+    if payload.get("engineTestCommandCount") != len(EXPECTED_ENGINE_TEST_COMMANDS):
+        raise AssertionError(f"streaming parser engine test command count mismatch: {payload}")
     if payload.get("responsesStoreSessionMode") != "store-response-session-and-resolve-previous-response-id":
         raise AssertionError(f"Responses session store mode mismatch: {payload}")
     if payload.get("usageTelemetry") != "stream_options.include_usage-with-cached_tokens":

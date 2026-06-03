@@ -150,7 +150,7 @@ def run() -> None:
         ):
             if contracts.get(key) is not True:
                 raise AssertionError(f"runtime contract missing {key}: {coverage}")
-        if coverage.get("streamingParserProofLevel") != "source-backed-api-contract":
+        if coverage.get("streamingParserProofLevel") != "app-source-and-engine-test-backed":
             raise AssertionError(f"runtime streaming parser proof level mismatch: {coverage}")
         if coverage.get("streamingParserContractParity") is not True:
             raise AssertionError(f"runtime streaming parser contract parity mismatch: {coverage}")
