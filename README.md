@@ -88,6 +88,7 @@ The current beta DMG is published as a GitHub prerelease:
 - **Context budget + compaction gate**: `/qa/context-budget-compaction` proves bounded automatic context injection, single-line catalog snippet compaction, max-token/max-iteration forwarding, cache-preserving new-context behavior, and on-demand stash/CVE retrieval under the prompt-injection policy `search-on-demand-not-force-injected`.
 - **Streaming/parser + Responses reuse gate**: `/qa/streaming-parser-reuse` source-checks Chat Completions SSE deltas, ChatService content/reasoning/tool-call delta handling, streamed usage with cached-token telemetry, `/v1/responses` streaming events, `previous_response_id` session reuse, and Qwen/MiniMax streaming tool parser coverage. This is source/API-contract-backed; live model chat proof remains in the existing Qwen/MiniMax live artifacts.
 - **Session/context/cache lifecycle gate**: `/qa/session-context-cache-flow` ties new-context cache preservation, bounded context carry, stash/CVE on-demand retrieval, Responses `previous_response_id` reuse, streaming delta parser surfaces, parallel agent sessions, Qwen live continuous batching, TurboQuant KV, L2/block disk cache, and hybrid SSM async rederive into one app-backed matrix.
+- **Cache artifact matrix**: `/qa/cache-artifact-matrix` reads live proof JSON and exposes row-level counters for Qwen cross-restart scheduler/block/SSM disk hits, scheduler tokens saved, block-L2 store/read hits, TurboQuant q4 KV, Qwen continuous-batching block writes and SSM async rederive, plus MiniMax q4 KV and block-L2 writes.
 - **Settings and persistence**: parser, generation, reasoning, engine cache, KV quantization, model path, session, terminal/tool path, and result-store state have QA proof coverage.
 - **UI status coverage**: chat, sidebar, active agent lists, supply-chain actions, CVE import/search, terminal path state, and visual proof screenshots have checkpoint coverage.
 - **Deep runtime/tool-flow gate**: `/qa/deep-runtime-flow-coverage` now rolls up tool flow, agent phases, session/context/cache lifecycle, bounded context, CVE taxonomy/import, semantic CVE embeddings, stash retrieval, parser matrix, Responses/SSE streaming delta handling, session workflows, and Qwen/MiniMax cache contracts into one app-backed beta gate.
@@ -241,6 +242,7 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 - `python3 scripts/agent-live-tool-status-proof.py`
 - `python3 scripts/context-budget-compaction-proof.py`
 - `python3 scripts/session-context-cache-flow-proof.py`
+- `python3 scripts/cache-artifact-matrix-proof.py`
 - `python3 scripts/supply-chain-cve-ui-proof.py`
 - `python3 scripts/cve-settings-actions-proof.py`
 - `python3 scripts/terminal-tool-paths-proof.py`

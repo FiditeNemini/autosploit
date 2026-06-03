@@ -118,6 +118,32 @@ This is an app-state plus existing-live-artifact gate. It does not replace the
 dedicated Qwen live batching proof, the dedicated CVE import/embedding proof, or
 the still-pending MiniMax live batching stress proof.
 
+## Cache artifact matrix addendum
+
+`scripts/cache-artifact-matrix-proof.py` now drives
+`/qa/cache-artifact-matrix`. The route reads existing live proof JSON artifacts
+and exposes cache facts as row-level counters instead of only broad component
+labels.
+
+The matrix currently covers:
+
+- Qwen release-app cross-restart cache hit evidence:
+  `schedulerDiskHits >= 1`, `schedulerTokensSaved >= 1`,
+  `blockL2DiskHits >= 1`, and `ssmDiskHits >= 1`
+- block-L2 unit proof storage/read evidence:
+  `disk_writes >= 2` and `disk_hits >= 2`
+- Qwen hybrid SSM rederive evidence:
+  requested, completed, no failures, and a positive `last_num_tokens`
+- Qwen continuous-batching cache evidence:
+  TurboQuant q4 KV, block-L2 disk writes, and SSM rederive completion
+- MiniMax cache evidence:
+  TurboQuant q4 KV and block-L2 disk writes
+
+This route is mirrored through `/qa/runtime-coverage`,
+`/qa/deep-runtime-flow-coverage`, and `/qa/coverage-index`. It distinguishes
+storage/write proof from hit proof so a future agent does not overclaim cache
+hits where the artifact only proves cache population.
+
 ## MiniMax status
 
 The release app proof loaded `/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ`

@@ -30,6 +30,7 @@ EXPECTED_DOMAINS = [
     "continuousBatching",
     "parserMatrix",
     "runtimeCache",
+    "cacheArtifacts",
     "liveCacheArtifacts",
     "stashMemory",
 ]
@@ -60,6 +61,7 @@ EXPECTED_CONTRACTS = {
     "turboQuantKVCache",
     "l2DiskPromptCache",
     "blockL2DiskCache",
+    "cacheArtifactMatrix",
     "hybridSSMAsyncReDerive",
     "liveQwenContinuousBatching",
     "liveToolStatusUI",
@@ -74,6 +76,7 @@ EXPECTED_ROUTES = [
     "/qa/agent-loop-coverage",
     "/qa/agent-loop-phase-matrix",
     "/qa/session-context-cache-flow",
+    "/qa/cache-artifact-matrix",
     "/qa/context-coverage",
     "/qa/context-budget-compaction",
     "/qa/context-flow-matrix",
@@ -93,6 +96,7 @@ EXPECTED_ROUTES = [
 EXPECTED_PROOFS = [
     "deep-runtime-flow-coverage-proof.py",
     "session-context-cache-flow-proof.py",
+    "cache-artifact-matrix-proof.py",
     "tool-flow-coverage-proof.py",
     "runtime-coverage-proof.py",
     "context-coverage-proof.py",
@@ -217,6 +221,12 @@ def run() -> None:
             raise AssertionError(f"session/context/cache flow parity mismatch: {coverage}")
         if coverage.get("sessionContextCacheResponsesReuseMode") != "store-response-session-and-resolve-previous-response-id":
             raise AssertionError(f"session/context/cache Responses reuse mismatch: {coverage}")
+        if coverage.get("cacheArtifactMatrixContractParity") is not True:
+            raise AssertionError(f"cache artifact matrix parity mismatch: {coverage}")
+        if coverage.get("cacheArtifactMatrixArtifactFileParity") is not True:
+            raise AssertionError(f"cache artifact matrix artifact parity mismatch: {coverage}")
+        if coverage.get("cacheArtifactMatrixProofFileParity") is not True:
+            raise AssertionError(f"cache artifact matrix proof parity mismatch: {coverage}")
         if coverage.get("cveImportEmbeddingProofFileParity") is not True:
             raise AssertionError(f"CVE import embedding proof parity mismatch: {coverage}")
         if coverage.get("cveImportEmbeddingSourceFileParity") is not True:
@@ -267,6 +277,8 @@ def run() -> None:
             raise AssertionError(f"coverage index runtime group missing deep route: {runtime_group}")
         if "/qa/session-context-cache-flow" not in (runtime_group.get("endpoints") or []):
             raise AssertionError(f"coverage index runtime group missing session/context/cache route: {runtime_group}")
+        if "/qa/cache-artifact-matrix" not in (runtime_group.get("endpoints") or []):
+            raise AssertionError(f"coverage index runtime group missing cache artifact route: {runtime_group}")
         if "/qa/continuous-batching-coverage" not in (runtime_group.get("endpoints") or []):
             raise AssertionError(f"coverage index runtime group missing continuous batching route: {runtime_group}")
         if "/qa/streaming-parser-reuse" not in (runtime_group.get("endpoints") or []):

@@ -30,6 +30,7 @@ EXPECTED_PROOFS = {
     "release-app-live-minimax-proof.py",
     "verify-live-models.py",
     "prove-block-l2-cache.py",
+    "cache-artifact-matrix-proof.py",
     "prove-ssm-rederive-status.py",
     "continuous-batching-coverage-proof.py",
     "parallel-agent-session-proof.py",
@@ -46,6 +47,7 @@ EXPECTED_ROUTES = {
     "/qa/seed-settings-visual-state",
     "/qa/seed-live-cache-stats",
     "/qa/engine-python-runtime",
+    "/qa/cache-artifact-matrix",
     "/qa/continuous-batching-coverage",
     "/qa/streaming-parser-reuse",
 }
@@ -182,6 +184,21 @@ def run() -> None:
                 raise AssertionError(f"runtime cache component {component} names missing proof files {missing_component_files}: {coverage}")
         if coverage.get("cacheComponentProofFileParity") is not True:
             raise AssertionError(f"runtime cache component proof-file parity mismatch: {coverage}")
+        cache_matrix = request("GET", "/qa/cache-artifact-matrix")
+        if cache_matrix.get("ok") is not True:
+            raise AssertionError(f"runtime cache artifact matrix route failed: {cache_matrix}")
+        if coverage.get("cacheArtifactMatrixRoute") != "/qa/cache-artifact-matrix":
+            raise AssertionError(f"runtime cache artifact matrix route mismatch: {coverage}")
+        if coverage.get("cacheArtifactMatrixRows") != cache_matrix.get("rows"):
+            raise AssertionError(f"runtime cache artifact matrix row mismatch: {coverage}")
+        if coverage.get("cacheArtifactMatrixMetrics") != cache_matrix.get("metrics"):
+            raise AssertionError(f"runtime cache artifact matrix metrics mismatch: {coverage}")
+        if coverage.get("cacheArtifactMatrixContractParity") is not True:
+            raise AssertionError(f"runtime cache artifact matrix contract parity mismatch: {coverage}")
+        if coverage.get("cacheArtifactMatrixArtifactFileParity") is not True:
+            raise AssertionError(f"runtime cache artifact matrix artifact parity mismatch: {coverage}")
+        if coverage.get("cacheArtifactMatrixProofFileParity") is not True:
+            raise AssertionError(f"runtime cache artifact matrix proof parity mismatch: {coverage}")
         if not EXPECTED_PROOFS.issubset(set(coverage.get("proofs") or [])):
             raise AssertionError(f"runtime proof list missing entries: {coverage}")
         if coverage.get("proofCount", 0) < len(EXPECTED_PROOFS):

@@ -41,6 +41,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/tool-flow-coverage",
     "/qa/deep-runtime-flow-coverage",
     "/qa/session-context-cache-flow",
+    "/qa/cache-artifact-matrix",
     "/qa/runtime-coverage",
     "/qa/streaming-parser-reuse",
     "/qa/python-runtime-inventory",
@@ -113,6 +114,7 @@ REQUIRED_PROOFS = {
     "tool-flow-coverage-proof.py",
     "deep-runtime-flow-coverage-proof.py",
     "session-context-cache-flow-proof.py",
+    "cache-artifact-matrix-proof.py",
     "tool-catalog-detail-proof.py",
     "runtime-coverage-proof.py",
     "streaming-parser-reuse-proof.py",
@@ -904,6 +906,7 @@ def assert_coverage_index() -> None:
     runtime_coverage = request("GET", "/qa/runtime-coverage")
     deep_runtime = request("GET", "/qa/deep-runtime-flow-coverage")
     session_context_cache = request("GET", "/qa/session-context-cache-flow")
+    cache_artifact_matrix = request("GET", "/qa/cache-artifact-matrix")
     continuous_batching = request("GET", "/qa/continuous-batching-coverage")
     if runtime_group.get("runtimeContracts") != runtime_coverage.get("contracts"):
         raise AssertionError(f"coverage index runtime contract map mismatch: {runtime_group}")
@@ -927,6 +930,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime group missing session/context/cache route: {runtime_group}")
     if "session-context-cache-flow-proof.py" not in (runtime_group.get("proofs") or []):
         raise AssertionError(f"coverage index runtime group missing session/context/cache proof: {runtime_group}")
+    if "/qa/cache-artifact-matrix" not in (runtime_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index runtime group missing cache artifact matrix route: {runtime_group}")
+    if "cache-artifact-matrix-proof.py" not in (runtime_group.get("proofs") or []):
+        raise AssertionError(f"coverage index runtime group missing cache artifact matrix proof: {runtime_group}")
     if "/qa/continuous-batching-coverage" not in (runtime_group.get("endpoints") or []):
         raise AssertionError(f"coverage index runtime group missing continuous batching route: {runtime_group}")
     if "continuous-batching-coverage-proof.py" not in (runtime_group.get("proofs") or []):
@@ -961,6 +968,18 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index session/context/cache contract parity mismatch: {runtime_group}")
     if runtime_group.get("sessionContextCacheFlowProofFileParity") != session_context_cache.get("proofFileParity"):
         raise AssertionError(f"coverage index session/context/cache proof parity mismatch: {runtime_group}")
+    if cache_artifact_matrix.get("ok") is not True:
+        raise AssertionError(f"cache artifact matrix route failed: {cache_artifact_matrix}")
+    if runtime_group.get("cacheArtifactMatrixRows") != cache_artifact_matrix.get("rows"):
+        raise AssertionError(f"coverage index cache artifact matrix row mismatch: {runtime_group}")
+    if runtime_group.get("cacheArtifactMatrixMetrics") != cache_artifact_matrix.get("metrics"):
+        raise AssertionError(f"coverage index cache artifact matrix metric mismatch: {runtime_group}")
+    if runtime_group.get("cacheArtifactMatrixContractParity") != cache_artifact_matrix.get("contractParity"):
+        raise AssertionError(f"coverage index cache artifact matrix contract parity mismatch: {runtime_group}")
+    if runtime_group.get("cacheArtifactMatrixArtifactFileParity") != cache_artifact_matrix.get("artifactFileParity"):
+        raise AssertionError(f"coverage index cache artifact matrix artifact parity mismatch: {runtime_group}")
+    if runtime_group.get("cacheArtifactMatrixProofFileParity") != cache_artifact_matrix.get("proofFileParity"):
+        raise AssertionError(f"coverage index cache artifact matrix proof parity mismatch: {runtime_group}")
     if continuous_batching.get("ok") is not True:
         raise AssertionError(f"continuous batching coverage route failed: {continuous_batching}")
     if runtime_group.get("continuousBatchingContracts") != continuous_batching.get("contracts"):
