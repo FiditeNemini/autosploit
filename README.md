@@ -81,8 +81,7 @@ The current beta DMG is published as a GitHub prerelease:
 - **Supply-chain + CVE workflow**: first-class supply-chain tab, CVE search/import actions, SBOM/dependency/secrets actions, CLI routing, installer taxonomy, and per-action status state are wired.
 - **Shell tool safety**: `run_shell` remains visible to the agent/tool catalogue, but destructive command samples are blocked through an auditable pattern policy covered by registry and QA proofs.
 - **Runtime packaging path**: release packaging bundles the vMLX Python engine, selects a valid bundled/runtime interpreter, verifies required modules, signs the app/DMG, and records manifest evidence.
-- **Qwen + MiniMax cache proofs**: live/release harnesses cover Qwen hybrid SSM attention, MiniMax full-KV attention, TurboQuant KV cache, prefix cache, paged/block L2 cache, and repeat-prompt cache hits.
-- **Visual model path**: ZAYA1-VL has a real narrow MLX-VLM loader path and release proof; Qwen text bundles that carry vision metadata stay on the text path.
+- **Qwen + MiniMax cache proofs**: live/release harnesses cover Qwen MXFP4-MTP hybrid SSM attention, MiniMax full-KV attention, TurboQuant KV cache, prefix cache, paged/block L2 cache, and repeat-prompt cache hits.
 - **Settings and persistence**: parser, generation, reasoning, engine cache, KV quantization, model path, session, terminal/tool path, and result-store state have QA proof coverage.
 - **UI status coverage**: chat, sidebar, active agent lists, supply-chain actions, CVE import/search, terminal path state, and visual proof screenshots have checkpoint coverage.
 - **Website refresh**: `exploit.bot` now points at the notarized beta DMG, uses the current dark app theme, preserves the logo treatment, includes cleaned current screenshot/proof assets, and has desktop/mobile browser verification across EN/KO/ZH/ES/JA.
@@ -91,7 +90,7 @@ The current beta DMG is published as a GitHub prerelease:
 ### Needs more work before public beta
 
 - **Qwen multimodal promotion**: Qwen-specific VL/multimodal runtime, multimodal prefix cache, and multimodal context-routing proofs are still pending.
-- **General chat quality**: broad reasoning/tool-call quality beyond bounded smoke prompts still needs longer realistic runs, especially JANGTQ first-turn exact prompt-following.
+- **General chat quality**: broad reasoning/tool-call quality beyond bounded smoke prompts still needs longer realistic runs, especially MiniMax first-turn instruction-following.
 - **Full app UI pass**: source/API/proof coverage is broad and the website has been visually reviewed, but the native app still needs a final hands-on visual pass across every tab, status indicator, hover/detail state, and release build window before calling it polished.
 - **Security review**: supply-chain/pentest features are wired, but the release still needs a deliberate abuse-boundary, logging, and command-safety review before wider distribution.
 
@@ -157,25 +156,24 @@ source /path/to/private/.env.signing
 
 exploitbot is model-folder driven and currently supports:
 
-- **Qwen text** (`qwen`) with JANG/JANGTQ/MXFP4 folders.
-- **MiniMax text** (`minimax`).
-- **ZAYA1-VL** (`zaya1`/`zaya1-vl`).
+- **Qwen text** (`qwen`) with the active beta proof lane on MXFP4-MTP folders.
+- **MiniMax text** (`minimax`) with MiniMax JANG_K metadata proof and Small JANGTQ low-RAM load/cache proof.
 
 Use local folders from:
 
 ```bash
 export EXPLOITBOT_MODELS=/Users/eric/models
-export EXPLOITBOT_RELEASE_QWEN_MODEL=${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-JANG_4M-MTP
+export EXPLOITBOT_RELEASE_QWEN_MODEL=${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-MXFP4-MTP
 
 # Smallest local Qwen smoke target (lower RAM)
-${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-JANG_4M-MTP
+${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-MXFP4-MTP
 
-# JANGTQ and MXFP4 variants
-${EXPLOITBOT_MODELS}/dealign.ai/Qwen3.6-35B-A3B-JANGTQ-CRACK
+# Larger MXFP4 variant
 ${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-35B-A3B-MXFP4-MTP
 
-# Compact visual model
-${EXPLOITBOT_MODELS}/JANGQ/ZAYA1-VL-8B-JANGTQ4
+# MiniMax low-RAM proof target and full JANG metadata target
+${EXPLOITBOT_MODELS}/JANGQ/MiniMax-M2.7-Small-JANGTQ
+${EXPLOITBOT_MODELS}/dealign.ai/MiniMax-M2.7-JANG_K-CRACK
 ```
 
 For runtime checks, start with the smallest Qwen target first to keep RAM pressure low.
@@ -225,12 +223,12 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 
 - `swift build --package-path ExploitBot -c debug`
 - `python3 scripts/release-readiness-proof.py`
-- `python3 scripts/verify-live-models.py --qwen ${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-JANG_4M-MTP --metadata-only`
+- `python3 scripts/verify-live-models.py --qwen ${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-MXFP4-MTP --metadata-only`
 - `python3 scripts/verify-live-models.py --qwen ${EXPLOITBOT_RELEASE_QWEN_MODEL} --restart-replay --require-ssm-companion-hit`
 - `python3 scripts/release-app-live-qwen-proof.py`
 - `EXPLOITBOT_RELEASE_QWEN_MODEL=${EXPLOITBOT_RELEASE_QWEN_MODEL} python3 scripts/release-app-qwen-cross-restart-cache-proof.py`
+- `python3 scripts/verify-live-models.py --minimax ${EXPLOITBOT_MODELS}/dealign.ai/MiniMax-M2.7-JANG_K-CRACK --metadata-only`
 - `python3 scripts/release-app-live-minimax-proof.py`
-- `python3 scripts/zaya-visual-live-proof.py`
 - `python3 scripts/agent-live-tool-status-proof.py`
 - `python3 scripts/supply-chain-cve-ui-proof.py`
 - `python3 scripts/cve-settings-actions-proof.py`

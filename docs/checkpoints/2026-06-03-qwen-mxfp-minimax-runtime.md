@@ -1,0 +1,74 @@
+# 2026-06-03 Qwen MXFP MTP and MiniMax Runtime Checkpoint
+
+This checkpoint records the current runtime proof lane after narrowing the beta
+focus back to Qwen MXFP MTP and MiniMax text. ZAYA and visual-model work are not
+part of this checkpoint.
+
+## Scope
+
+- Qwen target: `/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP`.
+- MiniMax low-RAM live target: `/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ`.
+- MiniMax full JANG artifact inspected without live load:
+  `/Users/eric/models/dealign.ai/MiniMax-M2.7-JANG_K-CRACK`.
+
+## Proof artifacts
+
+- `docs/live-proofs/2026-06-03-qwen-mxfp4-current-metadata.json`
+- `docs/live-proofs/2026-06-03-release-app-qwen-mxfp4-live.json`
+- `docs/live-proofs/2026-06-03-qwen-mxfp4-mtp-block-l2-ssm-live.json`
+- `docs/live-proofs/2026-06-03-minimax-current-metadata.json`
+- `docs/live-proofs/2026-06-03-release-app-minimax-live.json`
+- `docs/live-proofs/2026-06-03-minimax-jang-k-current-metadata.json`
+
+## Qwen MXFP4-MTP status
+
+The release app proof loaded `Qwen3.6-27B-MXFP4-MTP` through
+`release/ExploitBot.app`, selected the bundled vMLX Python runtime, and returned
+`RELEASE-QWEN-OK` for both first and repeated chat requests.
+
+The stronger direct-engine restart proof used a long agent-context prompt with
+prompt L2 disabled on replay. It recorded:
+
+- `block_l2_hits_delta: 3`
+- `cached_tokens: 156`
+- `scheduler_disk_hits_delta: 3`
+- `scheduler_tokens_saved_delta: 156`
+- `ssm_l2_hits_delta: 1`
+- `ssm_companion_hit_checks.disk_hit: true`
+- `ssm_companion_hit_checks.no_rederive: true`
+
+This proves the Qwen MXFP4-MTP hybrid SSM attention lane can load, chat, use the
+Qwen parser defaults, and restore block L2 plus SSM companion L2 state for the
+bounded prompt shape exercised here.
+
+## MiniMax status
+
+The release app proof loaded `/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ`
+through the bundled vMLX Python runtime. Runtime health reported full-KV
+attention, MiniMax parser defaults, TurboQuant q4 KV cache, prefix cache, paged
+cache, and block L2 enabled. The repeated no-thinking request recorded:
+
+- `schedulerCacheHitsDelta: 1`
+- `schedulerHitsDelta: 1`
+- `schedulerTokensSavedDelta: 46`
+- `secondCachedTokens: 46`
+
+This is a valid MiniMax load/cache/parser proof for the smaller local target. It
+is not a broad chat-quality pass: the saved previews show the model repeating or
+analyzing the prompt instead of cleanly following the brief-answer instruction.
+
+`/Users/eric/models/dealign.ai/MiniMax-M2.7-JANG_K-CRACK` was inspected with
+`--metadata-only`. The artifact is present, supported as `minimax_m2`, has
+`jang_config`, uses full KV cache, and selects the MiniMax tool parser. It was
+not live-loaded in this pass because the folder is about 80 GB and the user asked
+to avoid unnecessary RAM pressure.
+
+## Current beta interpretation
+
+- Qwen MXFP4-MTP is the strongest current model lane: live release-app chat plus
+  direct restart replay proof covers hybrid SSM cache reuse.
+- MiniMax is partially proven: the smaller MiniMax text target loads and caches
+  correctly in the release app, but instruction-following quality needs a real
+  prompt-suite pass before calling it polished.
+- Full MiniMax JANG_K is artifact/metadata proven only at this checkpoint; it
+  still needs a live load/chat/cache pass on a quiet machine.
