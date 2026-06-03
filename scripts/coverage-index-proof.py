@@ -86,6 +86,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/gap-ledger",
     "/qa/release-readiness",
     "/qa/beta-readiness-coverage",
+    "/qa/objective-runtime-coverage",
 }
 
 REQUIRED_PROOFS = {
@@ -164,6 +165,7 @@ REQUIRED_PROOFS = {
     "release-app-qwen-cross-restart-cache-proof.py",
     "release-app-live-minimax-proof.py",
     "beta-readiness-coverage-proof.py",
+    "objective-runtime-coverage-proof.py",
 }
 
 REQUIRED_GROUPS = {
@@ -854,6 +856,7 @@ def assert_coverage_index() -> None:
     release_group = groups.get("releaseReadiness") or {}
     release_coverage = request("GET", "/qa/release-readiness")
     beta_readiness = request("GET", "/qa/beta-readiness-coverage")
+    objective_runtime = request("GET", "/qa/objective-runtime-coverage")
     if release_group.get("releaseRoute") != "/qa/release-readiness":
         raise AssertionError(f"coverage index release route mismatch: {release_group}")
     if release_group.get("releaseProofs") != release_coverage.get("proofs"):
@@ -896,6 +899,34 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index beta readiness proof list mismatch: {release_group}")
     if release_group.get("betaReadinessProofFileParity") != beta_readiness.get("proofFileParity"):
         raise AssertionError(f"coverage index beta readiness proof-file parity mismatch: {release_group}")
+    if "/qa/objective-runtime-coverage" not in (release_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index release group missing objective runtime route: {release_group}")
+    if "objective-runtime-coverage-proof.py" not in (release_group.get("proofs") or []):
+        raise AssertionError(f"coverage index release group missing objective runtime proof: {release_group}")
+    if objective_runtime.get("ok") is not True:
+        raise AssertionError(f"objective runtime coverage route failed: {objective_runtime}")
+    if release_group.get("objectiveRuntimeCoverageStatus") != objective_runtime.get("objectiveStatus"):
+        raise AssertionError(f"coverage index objective runtime status mismatch: {release_group}")
+    if release_group.get("objectiveRuntimeCoverageComplete") != objective_runtime.get("objectiveComplete"):
+        raise AssertionError(f"coverage index objective runtime completion mismatch: {release_group}")
+    if release_group.get("objectiveRuntimeCoverageRequirements") != objective_runtime.get("requirements"):
+        raise AssertionError(f"coverage index objective runtime requirement list mismatch: {release_group}")
+    if release_group.get("objectiveRuntimeCoverageRequirementCount") != objective_runtime.get("requirementCount"):
+        raise AssertionError(f"coverage index objective runtime requirement count mismatch: {release_group}")
+    if release_group.get("objectiveRuntimeCoverageReadyRequirementCount") != objective_runtime.get("readyRequirementCount"):
+        raise AssertionError(f"coverage index objective runtime ready count mismatch: {release_group}")
+    if release_group.get("objectiveRuntimeCoverageBlockedRequirementCount") != objective_runtime.get("blockedRequirementCount"):
+        raise AssertionError(f"coverage index objective runtime blocked count mismatch: {release_group}")
+    if release_group.get("objectiveRuntimeCoverageBlockedRequirementIds") != objective_runtime.get("blockedRequirementIds"):
+        raise AssertionError(f"coverage index objective runtime blocked ids mismatch: {release_group}")
+    if release_group.get("objectiveRuntimeCoverageKnownGapCount") != objective_runtime.get("knownGapCount"):
+        raise AssertionError(f"coverage index objective runtime known gap count mismatch: {release_group}")
+    if release_group.get("objectiveRuntimeCoverageKnownGapIds") != objective_runtime.get("knownGapIds"):
+        raise AssertionError(f"coverage index objective runtime known gap ids mismatch: {release_group}")
+    if release_group.get("objectiveRuntimeCoverageContractParity") != objective_runtime.get("contractParity"):
+        raise AssertionError(f"coverage index objective runtime contract parity mismatch: {release_group}")
+    if release_group.get("objectiveRuntimeCoverageProofFileParity") != objective_runtime.get("proofFileParity"):
+        raise AssertionError(f"coverage index objective runtime proof-file parity mismatch: {release_group}")
     runtime_group = groups.get("runtimeAndCache") or {}
     if runtime_group.get("liveProofArtifactCount", 0) < 6:
         raise AssertionError(f"coverage index runtime live artifact count mismatch: {runtime_group}")

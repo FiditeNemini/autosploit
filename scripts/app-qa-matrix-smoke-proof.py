@@ -165,6 +165,7 @@ def assert_testserver_smoke() -> None:
     gap_ledger = request("GET", "/qa/gap-ledger")
     release_readiness = request("GET", "/qa/release-readiness")
     beta_readiness = request("GET", "/qa/beta-readiness-coverage")
+    objective_runtime = request("GET", "/qa/objective-runtime-coverage")
 
     required_state_keys = {
         "activeTab",
@@ -1249,6 +1250,28 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index beta distribution-ready mismatch: {coverage_index}")
     if release_group.get("betaReadinessProofFileParity") != beta_readiness.get("proofFileParity"):
         raise AssertionError(f"/qa/coverage-index beta proof-file parity mismatch: {coverage_index}")
+    if objective_runtime.get("ok") is not True:
+        raise AssertionError(f"/qa/objective-runtime-coverage failed: {objective_runtime}")
+    if objective_runtime.get("objectiveComplete") is not False:
+        raise AssertionError(f"/qa/objective-runtime-coverage should not claim full completion: {objective_runtime}")
+    if objective_runtime.get("contractParity") is not True or objective_runtime.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/objective-runtime-coverage parity mismatch: {objective_runtime}")
+    if objective_runtime.get("blockedRequirementCount", 0) < 1:
+        raise AssertionError(f"/qa/objective-runtime-coverage missing blocked requirements: {objective_runtime}")
+    if "/qa/objective-runtime-coverage" not in (release_group.get("endpoints") or []):
+        raise AssertionError(f"/qa/coverage-index release group missing objective runtime route: {coverage_index}")
+    if release_group.get("objectiveRuntimeCoverageStatus") != objective_runtime.get("objectiveStatus"):
+        raise AssertionError(f"/qa/coverage-index objective runtime status mismatch: {coverage_index}")
+    if release_group.get("objectiveRuntimeCoverageComplete") != objective_runtime.get("objectiveComplete"):
+        raise AssertionError(f"/qa/coverage-index objective runtime completion mismatch: {coverage_index}")
+    if release_group.get("objectiveRuntimeCoverageBlockedRequirementCount") != objective_runtime.get("blockedRequirementCount"):
+        raise AssertionError(f"/qa/coverage-index objective runtime blocked count mismatch: {coverage_index}")
+    if release_group.get("objectiveRuntimeCoverageBlockedRequirementIds") != objective_runtime.get("blockedRequirementIds"):
+        raise AssertionError(f"/qa/coverage-index objective runtime blocked ids mismatch: {coverage_index}")
+    if release_group.get("objectiveRuntimeCoverageContractParity") != objective_runtime.get("contractParity"):
+        raise AssertionError(f"/qa/coverage-index objective runtime contract parity mismatch: {coverage_index}")
+    if release_group.get("objectiveRuntimeCoverageProofFileParity") != objective_runtime.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index objective runtime proof-file parity mismatch: {coverage_index}")
     runtime_group = index_groups.get("runtimeAndCache") or {}
     if runtime_group.get("runtimeContracts") != runtime_coverage.get("contracts"):
         raise AssertionError(f"/qa/coverage-index runtime contract map mismatch: {coverage_index}")

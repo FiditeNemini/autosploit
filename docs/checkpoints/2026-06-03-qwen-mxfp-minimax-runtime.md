@@ -191,6 +191,28 @@ This route is mirrored through `/qa/runtime-coverage`,
 storage/write proof from hit proof so a future agent does not overclaim cache
 hits where the artifact only proves cache population.
 
+## Objective runtime coverage addendum
+
+`scripts/objective-runtime-coverage-proof.py` now drives
+`/qa/objective-runtime-coverage`. The route aggregates the user's requested beta
+readiness surface into one app-backed map: tool flow usage, runtime engines,
+local Qwen/MiniMax lanes, context carry and compaction, prompt-injection
+boundary, CVE import/embedding flow, stash retrieval, parallel sessions,
+continuous batching, Responses reuse, streaming content/reasoning/tool-call
+deltas, L2 disk cache, TurboQuant KV, hybrid SSM async rederive, proof ledgers,
+and release package readiness.
+
+This is an objective coverage map, not a completion claim. It currently reports
+`objectiveComplete = false`, `objectiveStatus = covered-with-known-gaps`, and
+keeps blocked requirement IDs visible. At this checkpoint the aggregate route
+marks `cveDatabaseEmbeddings` and `l2DiskCacheStorageHit` as blocked when their
+underlying contracts do not prove full readiness, while `qwenMultimodalRuntime`
+remains the tracked known gap in `/qa/gap-ledger`.
+
+The route is mirrored through the `releaseReadiness` group in
+`/qa/coverage-index`, including ready count, blocked count, blocked IDs, known
+gap IDs, contract parity, and proof-file parity.
+
 ## MiniMax status
 
 The release app proof loaded `/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ`
@@ -268,6 +290,7 @@ Verification after the contract update:
 - `python3 scripts/deep-runtime-flow-coverage-proof.py`
 - `python3 scripts/settings-coverage-proof.py`
 - `python3 scripts/gap-ledger-proof.py`
+- `python3 scripts/objective-runtime-coverage-proof.py`
 - `python3 scripts/coverage-index-proof.py`
 - `python3 scripts/app-qa-matrix-smoke-proof.py`
 
