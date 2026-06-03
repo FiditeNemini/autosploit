@@ -68,6 +68,9 @@ python3 -m json.tool release/release-manifest.json >/dev/null
 - Uploaded current screenshot/proof assets for chat/tool status, recon, exploit,
   CVE import, runtime cache settings, tool paths, network, credentials, OSINT,
   and report export.
+- Updated the OSINT and report gallery cards to use cropped, versioned
+  screenshot assets so CDN immutable caching does not keep stale dark crops:
+  `osint-username-results-v3.png` and `report-export-status-v3.png`.
 - Backed up the previous server `index.html` under the server-local backup
   directory before replacing it.
 
@@ -76,13 +79,22 @@ python3 -m json.tool release/release-manifest.json >/dev/null
 - `curl -L --max-time 20 https://exploit.bot/`
 - `curl -I -L --max-time 20 https://exploit.bot/assets/screenshots/chat-tool-states.png`
 - `curl -I -L --max-time 20 https://exploit.bot/assets/screenshots/settings-cache-topology.png`
+- `curl -I -L --max-time 20 https://exploit.bot/assets/screenshots/osint-username-results-v3.png`
+- `curl -I -L --max-time 20 https://exploit.bot/assets/screenshots/report-export-status-v3.png`
 - `curl -I -L --max-time 20 https://github.com/jjang-ai/exploitbot/releases/download/v0.1.0-beta/ExploitBot-beta.dmg`
 - Parsed the live HTML with Python's standard `html.parser`.
 - Confirmed the live page includes `v0.1.0-beta` and the DMG SHA256.
-
-Local rendered screenshot verification was not completed in this pass because
-Playwright is not installed in the repo and the desktop automation plugin
-returned a configuration error. The HTTP/content verification passed.
+- Rendered verification used a temporary Playwright install under
+  `/tmp/exploitbot-pw`:
+  - desktop viewport: `1440x1000`
+  - mobile viewport: `390x844`
+  - all 11 images loaded
+  - no console errors
+  - no horizontal overflow
+  - DMG CTA href matched the GitHub beta asset
+  - language selector changed the hero text for KO/ZH/ES/JA/EN
+- Additional scrolled viewport screenshot confirmed the OSINT and report cards
+  render their active UI screenshots, not blank stale cached image slots.
 
 ## Current status
 

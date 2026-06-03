@@ -84,10 +84,10 @@ The current beta DMG is published as a GitHub prerelease:
 - **Visual model path**: ZAYA1-VL has a real narrow MLX-VLM loader path and release proof; Qwen text bundles that carry vision metadata stay on the text path.
 - **Settings and persistence**: parser, generation, reasoning, engine cache, KV quantization, model path, session, terminal/tool path, and result-store state have QA proof coverage.
 - **UI status coverage**: chat, sidebar, active agent lists, supply-chain actions, CVE import/search, terminal path state, and visual proof screenshots have checkpoint coverage.
+- **Website refresh**: `exploit.bot` now points at the notarized beta DMG, uses the current dark app theme, preserves the logo treatment, includes current screenshot/proof assets, and has desktop/mobile browser verification.
 
 ### Needs more work before public beta
 
-- **Website refresh**: `exploit.bot` still needs the new app-matched theme, current screenshots, mobile pass, i18n refresh, and updated download CTA.
 - **Qwen multimodal promotion**: Qwen-specific VL/multimodal runtime, multimodal prefix cache, and multimodal context-routing proofs are still pending.
 - **General chat quality**: broad reasoning/tool-call quality beyond bounded smoke prompts still needs longer realistic runs, especially JANGTQ first-turn exact prompt-following.
 - **Full manual UI pass**: source/API/proof coverage is broad, but a final hands-on visual pass across every tab, status indicator, hover/detail state, and release build window is still required before calling it polished.
