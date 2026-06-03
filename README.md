@@ -79,7 +79,7 @@ Latest local beta package sanity build, not yet uploaded to the GitHub release:
 - Built: June 3, 2026
 - Command: `./script/package_release.sh --skip-notarize`
 - Local DMG: `release/ExploitBot-beta.dmg`
-- Local DMG SHA256: `2eb845b5eba1a15bdb020067d93ce4deff6bd84b4ee6f7b137da12c4aebde08e`
+- Local DMG SHA256: `8bf94bf623a569bc82979b84962a96cb72b4d3742b7c12da352e128f042b3c42`
 - Status: signed app and signed DMG verified locally; notarization still requires `EXPLOITBOT_NOTARY_PROFILE` or local notary environment variables before replacing the published release asset.
 
 ### Done in the current beta lane
@@ -121,6 +121,7 @@ Latest local beta package sanity build, not yet uploaded to the GitHub release:
 - **Active objective audit**: `/qa/active-objective-audit` maps the current broad goal into explicit rows for tool flow, engine/runtime, cache/memory, prompt-injection boundaries, CVE embeds/import, max-token/context compaction, stash memory, sessions, parallel continuous batching, Responses reuse, content/reasoning/tool deltas, L2 disk hits, TurboQuant KV, hybrid SSM async rederive, tool status/logs, and the known-gap boundary. It keeps `completionClaimAllowed=false` while open gaps remain.
 - **Settings and persistence**: parser, generation, reasoning, engine cache, KV quantization, model path, session, terminal/tool path, and result-store state have QA proof coverage.
 - **UI status coverage**: chat, sidebar, active agent lists, supply-chain actions, CVE import/search, terminal path state, and visual proof screenshots have checkpoint coverage. `/qa/visual-coverage` now carries per-tab visual proof-family parity across recon, web, network, creds, exploit, post, supply-chain, OSINT, report, and stash.
+- **Live status/log/preview flow gate**: `/qa/live-status-preview-flow` ties tool status indicators, agent status lines, activity-feed telemetry, parsed result previews, stash context handoffs, report/finding management, and evidence lifecycle handoffs into one user-facing flow.
 - **Deep runtime/tool-flow gate**: `/qa/deep-runtime-flow-coverage` now rolls up tool flow, agent phases, local model lane selection, session/context/cache lifecycle, prompt-injection boundaries, bounded context, CVE taxonomy/import, semantic CVE embeddings, stash retrieval, parser matrix, Responses/SSE streaming delta handling, session workflows, and Qwen/MiniMax cache contracts into one app-backed beta gate.
 - **Website refresh**: `exploit.bot` now points at the notarized beta DMG, uses the current dark app theme, preserves the logo treatment, includes cleaned current screenshot/proof assets, and has desktop/mobile browser verification across EN/KO/ZH/ES/JA.
 - **Website SEO/i18n**: the live site has current Open Graph/Twitter metadata, favicon/manifest assets, sitemap image entries, `llms.txt`, `llms-full.txt`, `security.txt`, localized visible copy, localized page title/description updates, and live Playwright coverage for missing i18n keys, broken images, and mobile overflow.
@@ -287,6 +288,7 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 - `python3 scripts/turn-lifecycle-evidence-proof.py`
 - `python3 scripts/active-objective-audit-proof.py`
 - `python3 scripts/context-efficiency-invariants-proof.py`
+- `python3 scripts/live-status-preview-flow-proof.py`
 - `python3 scripts/supply-chain-cve-ui-proof.py`
 - `python3 scripts/cve-settings-actions-proof.py`
 - `python3 scripts/terminal-tool-paths-proof.py`

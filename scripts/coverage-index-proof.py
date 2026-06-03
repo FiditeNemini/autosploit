@@ -39,6 +39,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/tab-tool-function-flow",
     "/qa/tool-execution-matrix",
     "/qa/tool-flow-coverage",
+    "/qa/live-status-preview-flow",
     "/qa/deep-runtime-flow-coverage",
     "/qa/tool-engine-context-ops-matrix",
     "/qa/engine-api-cache-proof-matrix",
@@ -126,6 +127,7 @@ REQUIRED_PROOFS = {
     "tab-tool-function-flow-proof.py",
     "tool-execution-matrix-proof.py",
     "tool-flow-coverage-proof.py",
+    "live-status-preview-flow-proof.py",
     "deep-runtime-flow-coverage-proof.py",
     "tool-engine-context-ops-matrix-proof.py",
     "engine-api-cache-proof-matrix-proof.py",
@@ -2018,6 +2020,7 @@ def assert_coverage_index() -> None:
     if tools_parsers_group.get("stateKeyCount", 0) < 5:
         raise AssertionError(f"coverage index tools/parsers state key count mismatch: {tools_parsers_group}")
     tool_flow = request("GET", "/qa/tool-flow-coverage")
+    live_status_preview = request("GET", "/qa/live-status-preview-flow", timeout=35.0)
     tool_execution_matrix = request("GET", "/qa/tool-execution-matrix")
     security_boundary = request("GET", "/qa/security-abuse-boundary-matrix")
     tool_engine_context = request("GET", "/qa/tool-engine-context-ops-matrix")
@@ -2199,6 +2202,26 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers visual surface proof parity mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolVisualSurfaceProofFileParity") != tool_flow.get("toolVisualSurfaceProofFileParity"):
         raise AssertionError(f"coverage index tools/parsers visual surface proof-file parity mismatch: {tools_parsers_group}")
+    if live_status_preview.get("ok") is not True:
+        raise AssertionError(f"live status preview flow route failed: {live_status_preview}")
+    if "/qa/live-status-preview-flow" not in (tools_parsers_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index tools/parsers missing live status preview route: {tools_parsers_group}")
+    if "live-status-preview-flow-proof.py" not in (tools_parsers_group.get("proofs") or []):
+        raise AssertionError(f"coverage index tools/parsers missing live status preview proof: {tools_parsers_group}")
+    if tools_parsers_group.get("liveStatusPreviewFlowIds") != live_status_preview.get("flowIds"):
+        raise AssertionError(f"coverage index tools/parsers live status flow IDs mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("liveStatusPreviewFlowCount") != live_status_preview.get("flowCount"):
+        raise AssertionError(f"coverage index tools/parsers live status flow count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("liveStatusPreviewReadyFlowCount") != live_status_preview.get("readyFlowCount"):
+        raise AssertionError(f"coverage index tools/parsers live status ready flow count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("liveStatusPreviewBlockedFlowIds") != live_status_preview.get("blockedFlowIds"):
+        raise AssertionError(f"coverage index tools/parsers live status blocked flow IDs mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("liveStatusPreviewContractParity") != live_status_preview.get("contractParity"):
+        raise AssertionError(f"coverage index tools/parsers live status contract parity mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("liveStatusPreviewRouteParity") != live_status_preview.get("routeParity"):
+        raise AssertionError(f"coverage index tools/parsers live status route parity mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("liveStatusPreviewProofFileParity") != live_status_preview.get("proofFileParity"):
+        raise AssertionError(f"coverage index tools/parsers live status proof-file parity mismatch: {tools_parsers_group}")
     tabs_sessions_group = groups.get("tabsAndSessions") or {}
     tab_tool_function_flow = request("GET", "/qa/tab-tool-function-flow")
     if tabs_sessions_group.get("interactionModeCount", 0) < 3:
@@ -2383,6 +2406,18 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"agent tool authorization proof-file parity mismatch: {agent_tool_auth}")
     if tabs_sessions_group.get("agentToolAuthorizationProofFileParity") != agent_tool_auth.get("proofFileParity"):
         raise AssertionError(f"coverage index tabs/sessions agent tool authorization proof-file parity mismatch: {tabs_sessions_group}")
+    if "/qa/live-status-preview-flow" not in (tabs_sessions_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index tabs/sessions missing live status preview route: {tabs_sessions_group}")
+    if "live-status-preview-flow-proof.py" not in (tabs_sessions_group.get("proofs") or []):
+        raise AssertionError(f"coverage index tabs/sessions missing live status preview proof: {tabs_sessions_group}")
+    if tabs_sessions_group.get("liveStatusPreviewReadyFlowCount") != live_status_preview.get("readyFlowCount"):
+        raise AssertionError(f"coverage index tabs/sessions live status ready flow count mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("liveStatusPreviewContractParity") != live_status_preview.get("contractParity"):
+        raise AssertionError(f"coverage index tabs/sessions live status contract parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("liveStatusPreviewRouteParity") != live_status_preview.get("routeParity"):
+        raise AssertionError(f"coverage index tabs/sessions live status route parity mismatch: {tabs_sessions_group}")
+    if tabs_sessions_group.get("liveStatusPreviewProofFileParity") != live_status_preview.get("proofFileParity"):
+        raise AssertionError(f"coverage index tabs/sessions live status proof-file parity mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActivityStatuses") != tool_flow.get("tabActivityStatuses"):
         raise AssertionError(f"coverage index tabs/sessions tab activity statuses mismatch: {tabs_sessions_group}")
     if tabs_sessions_group.get("tabActivityStatusCount") != tool_flow.get("tabActivityStatusCount"):
