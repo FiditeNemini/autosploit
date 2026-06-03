@@ -101,6 +101,7 @@ Latest local beta package sanity build, not yet uploaded to the GitHub release:
 - **Startup cache/defaults gate**: `/qa/startup-cache-defaults` proves the app starts from required parser/cache defaults, Settings apply re-forces them, engine launch paths carry parser, TurboQuant, prefix/L2/paged/block cache, and `--max-num-seqs` flags, and settings/runtime coverage mirror the same contract.
 - **Context budget + compaction gate**: `/qa/context-budget-compaction` proves bounded automatic context injection, a hard 6,000-character/8-snippet `/qa/context-packet` budget, single-line catalog snippet compaction, max-token/max-iteration forwarding, cache-preserving new-context behavior, and on-demand stash/CVE retrieval under the prompt-injection policy `search-on-demand-not-force-injected`.
 - **Context/session efficiency matrix**: `/qa/context-session-efficiency-matrix` ties max-token forwarding, max-iteration budget, context cap, compaction format, new-context cache preservation, stash/CVE retrieval, Responses reuse, streaming usage telemetry, parallel sessions, Qwen/MiniMax batching, L2 hits, TurboQuant KV, and hybrid SSM async rederive into one counter-backed matrix.
+- **Context efficiency invariant gate**: `/qa/context-efficiency-invariants` hard-checks automatic context caps, 6,000-character/8-snippet packet budget, max-token forwarding, cache-preserving new context, stash/CVE retrieval, bounded prompt policy, Responses reuse, streaming deltas, parallel batching, sub-20 GB Qwen memory, L2 hits, q4 TurboQuant KV, and hybrid SSM async rederive.
 - **Tool/engine/context ops matrix**: `/qa/tool-engine-context-ops-matrix` joins live tool progress telemetry, tool execution coverage, engine parser/cache defaults, Responses streaming/reasoning/tool deltas, prompt-injection boundaries, CVE import/semantic embeddings, stash memory retrieval, context/session efficiency, Qwen/MiniMax batching, L2/TurboQuant/SSM cache counters, and local Qwen/MiniMax runtime lane proof into one auditable matrix.
 - **Engine API/cache proof matrix**: `/qa/engine-api-cache-proof-matrix` exposes an engine pytest-backed QA route for Responses `previous_response_id` session reuse, OpenAI-shaped reasoning/tool parser output, cache defaults, TurboQuant KV modes, prompt/block L2 disk cache, and hybrid SSM rederive status.
 - **Streamed Responses session reuse**: streamed `/v1/responses` turns now store replayable context when `store=true`, including streamed text and parsed tool calls, so later streamed requests can use `previous_response_id` while preserving reasoning/tool-call delta evidence.
@@ -285,6 +286,7 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 - `python3 scripts/objective-runtime-coverage-proof.py`
 - `python3 scripts/turn-lifecycle-evidence-proof.py`
 - `python3 scripts/active-objective-audit-proof.py`
+- `python3 scripts/context-efficiency-invariants-proof.py`
 - `python3 scripts/supply-chain-cve-ui-proof.py`
 - `python3 scripts/cve-settings-actions-proof.py`
 - `python3 scripts/terminal-tool-paths-proof.py`

@@ -55,6 +55,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/context-coverage",
     "/qa/context-flow-matrix",
     "/qa/context-session-efficiency-matrix",
+    "/qa/context-efficiency-invariants",
     "/qa/evidence-lifecycle-coverage",
     "/qa/evidence-lifecycle-flow-matrix",
     "/qa/cve-taxonomy-coverage",
@@ -142,6 +143,7 @@ REQUIRED_PROOFS = {
     "context-coverage-proof.py",
     "context-flow-matrix-proof.py",
     "context-session-efficiency-matrix-proof.py",
+    "context-efficiency-invariants-proof.py",
     "evidence-lifecycle-coverage-proof.py",
     "evidence-lifecycle-flow-matrix-proof.py",
     "cve-taxonomy-matrix-proof.py",
@@ -1011,6 +1013,7 @@ def assert_coverage_index() -> None:
     engine_api_cache = request("GET", "/qa/engine-api-cache-proof-matrix")
     state_dependent_contracts = request("GET", "/qa/state-dependent-contract-matrix")
     session_context_cache = request("GET", "/qa/session-context-cache-flow")
+    context_efficiency = request("GET", "/qa/context-efficiency-invariants", timeout=35.0)
     live_agent_stress = request("GET", "/qa/live-loaded-model-agent-stress")
     cache_artifact_matrix = request("GET", "/qa/cache-artifact-matrix")
     continuous_batching = request("GET", "/qa/continuous-batching-coverage")
@@ -1048,6 +1051,18 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime group missing session/context/cache route: {runtime_group}")
     if "session-context-cache-flow-proof.py" not in (runtime_group.get("proofs") or []):
         raise AssertionError(f"coverage index runtime group missing session/context/cache proof: {runtime_group}")
+    if context_efficiency.get("ok") is not True:
+        raise AssertionError(f"context efficiency invariants route failed: {context_efficiency}")
+    if "/qa/context-efficiency-invariants" not in (runtime_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index runtime group missing context efficiency invariants route: {runtime_group}")
+    if "context-efficiency-invariants-proof.py" not in (runtime_group.get("proofs") or []):
+        raise AssertionError(f"coverage index runtime group missing context efficiency invariants proof: {runtime_group}")
+    if runtime_group.get("contextEfficiencyReadyInvariantCount") != context_efficiency.get("readyInvariantCount"):
+        raise AssertionError(f"coverage index runtime context efficiency ready count mismatch: {runtime_group}")
+    if runtime_group.get("contextEfficiencyContractParity") != context_efficiency.get("contractParity"):
+        raise AssertionError(f"coverage index runtime context efficiency contract parity mismatch: {runtime_group}")
+    if runtime_group.get("contextEfficiencyProofFileParity") != context_efficiency.get("proofFileParity"):
+        raise AssertionError(f"coverage index runtime context efficiency proof parity mismatch: {runtime_group}")
     if "/qa/cache-artifact-matrix" not in (runtime_group.get("endpoints") or []):
         raise AssertionError(f"coverage index runtime group missing cache artifact matrix route: {runtime_group}")
     if "cache-artifact-matrix-proof.py" not in (runtime_group.get("proofs") or []):
@@ -1588,6 +1603,26 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index context/session efficiency responses reuse mismatch: {chat_context_group}")
     if chat_context_group.get("contextSessionEfficiencyLiveAgentStressArtifactOK") != context_session_efficiency.get("liveAgentStressArtifactOK"):
         raise AssertionError(f"coverage index context/session efficiency live agent flag mismatch: {chat_context_group}")
+    if context_efficiency.get("ok") is not True:
+        raise AssertionError(f"context efficiency invariants route failed: {context_efficiency}")
+    if "/qa/context-efficiency-invariants" not in (chat_context_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index chat/context missing context efficiency invariants endpoint: {chat_context_group}")
+    if "context-efficiency-invariants-proof.py" not in (chat_context_group.get("proofs") or []):
+        raise AssertionError(f"coverage index chat/context missing context efficiency invariants proof: {chat_context_group}")
+    if chat_context_group.get("contextEfficiencyInvariantIds") != context_efficiency.get("invariantIds"):
+        raise AssertionError(f"coverage index context efficiency invariant list mismatch: {chat_context_group}")
+    if chat_context_group.get("contextEfficiencyInvariantCount") != context_efficiency.get("invariantCount"):
+        raise AssertionError(f"coverage index context efficiency invariant count mismatch: {chat_context_group}")
+    if chat_context_group.get("contextEfficiencyReadyInvariantCount") != context_efficiency.get("readyInvariantCount"):
+        raise AssertionError(f"coverage index context efficiency ready count mismatch: {chat_context_group}")
+    if chat_context_group.get("contextEfficiencyBlockedInvariantIds") != context_efficiency.get("blockedInvariantIds"):
+        raise AssertionError(f"coverage index context efficiency blocked IDs mismatch: {chat_context_group}")
+    if chat_context_group.get("contextEfficiencyContractParity") != context_efficiency.get("contractParity"):
+        raise AssertionError(f"coverage index context efficiency contract parity mismatch: {chat_context_group}")
+    if chat_context_group.get("contextEfficiencyRouteParity") != context_efficiency.get("routeParity"):
+        raise AssertionError(f"coverage index context efficiency route parity mismatch: {chat_context_group}")
+    if chat_context_group.get("contextEfficiencyProofFileParity") != context_efficiency.get("proofFileParity"):
+        raise AssertionError(f"coverage index context efficiency proof parity mismatch: {chat_context_group}")
     tool_engine_context = request("GET", "/qa/tool-engine-context-ops-matrix")
     if "/qa/tool-engine-context-ops-matrix" not in (chat_context_group.get("endpoints") or []):
         raise AssertionError(f"coverage index chat/context missing tool/engine/context matrix endpoint: {chat_context_group}")
