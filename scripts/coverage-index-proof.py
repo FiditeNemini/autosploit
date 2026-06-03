@@ -93,6 +93,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/beta-readiness-coverage",
     "/qa/objective-runtime-coverage",
     "/qa/objective-flow-requirement-matrix",
+    "/qa/objective-flow-execution-graph",
 }
 
 REQUIRED_PROOFS = {
@@ -178,6 +179,7 @@ REQUIRED_PROOFS = {
     "beta-readiness-coverage-proof.py",
     "objective-runtime-coverage-proof.py",
     "objective-flow-requirement-matrix-proof.py",
+    "objective-flow-execution-graph-proof.py",
 }
 
 REQUIRED_GROUPS = {
