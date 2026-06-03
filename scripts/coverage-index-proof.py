@@ -94,6 +94,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/objective-runtime-coverage",
     "/qa/objective-flow-requirement-matrix",
     "/qa/objective-flow-execution-graph",
+    "/qa/per-turn-runtime-contract",
 }
 
 REQUIRED_PROOFS = {
@@ -180,6 +181,7 @@ REQUIRED_PROOFS = {
     "objective-runtime-coverage-proof.py",
     "objective-flow-requirement-matrix-proof.py",
     "objective-flow-execution-graph-proof.py",
+    "per-turn-runtime-contract-proof.py",
 }
 
 REQUIRED_GROUPS = {
