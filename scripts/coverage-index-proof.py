@@ -41,6 +41,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/tool-flow-coverage",
     "/qa/deep-runtime-flow-coverage",
     "/qa/tool-engine-context-ops-matrix",
+    "/qa/engine-api-cache-proof-matrix",
     "/qa/session-context-cache-flow",
     "/qa/cache-artifact-matrix",
     "/qa/runtime-coverage",
@@ -118,6 +119,7 @@ REQUIRED_PROOFS = {
     "tool-flow-coverage-proof.py",
     "deep-runtime-flow-coverage-proof.py",
     "tool-engine-context-ops-matrix-proof.py",
+    "engine-api-cache-proof-matrix-proof.py",
     "session-context-cache-flow-proof.py",
     "cache-artifact-matrix-proof.py",
     "tool-catalog-detail-proof.py",
@@ -968,6 +970,7 @@ def assert_coverage_index() -> None:
     runtime_coverage = request("GET", "/qa/runtime-coverage")
     deep_runtime = request("GET", "/qa/deep-runtime-flow-coverage")
     tool_engine_context = request("GET", "/qa/tool-engine-context-ops-matrix")
+    engine_api_cache = request("GET", "/qa/engine-api-cache-proof-matrix")
     session_context_cache = request("GET", "/qa/session-context-cache-flow")
     live_agent_stress = request("GET", "/qa/live-loaded-model-agent-stress")
     cache_artifact_matrix = request("GET", "/qa/cache-artifact-matrix")
@@ -994,6 +997,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime group missing tool/engine/context matrix route: {runtime_group}")
     if "tool-engine-context-ops-matrix-proof.py" not in (runtime_group.get("proofs") or []):
         raise AssertionError(f"coverage index runtime group missing tool/engine/context matrix proof: {runtime_group}")
+    if "/qa/engine-api-cache-proof-matrix" not in (runtime_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index runtime group missing engine API/cache matrix route: {runtime_group}")
+    if "engine-api-cache-proof-matrix-proof.py" not in (runtime_group.get("proofs") or []):
+        raise AssertionError(f"coverage index runtime group missing engine API/cache matrix proof: {runtime_group}")
     if "/qa/session-context-cache-flow" not in (runtime_group.get("endpoints") or []):
         raise AssertionError(f"coverage index runtime group missing session/context/cache route: {runtime_group}")
     if "session-context-cache-flow-proof.py" not in (runtime_group.get("proofs") or []):
@@ -1046,6 +1053,20 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tool/engine/context tool count mismatch: {runtime_group}")
     if runtime_group.get("toolEngineContextOpsCacheArtifactContractParity") != tool_engine_context.get("cacheArtifactContractParity"):
         raise AssertionError(f"coverage index tool/engine/context cache parity mismatch: {runtime_group}")
+    if runtime_group.get("engineAPICacheProofRows") != engine_api_cache.get("rowIds"):
+        raise AssertionError(f"coverage index engine API/cache row list mismatch: {runtime_group}")
+    if runtime_group.get("engineAPICacheProofRowCount") != engine_api_cache.get("rowCount"):
+        raise AssertionError(f"coverage index engine API/cache row count mismatch: {runtime_group}")
+    if runtime_group.get("engineAPICacheProofReadyRowCount") != engine_api_cache.get("readyRowCount"):
+        raise AssertionError(f"coverage index engine API/cache ready row count mismatch: {runtime_group}")
+    if runtime_group.get("engineAPICacheProofContractParity") != engine_api_cache.get("contractParity"):
+        raise AssertionError(f"coverage index engine API/cache contract parity mismatch: {runtime_group}")
+    if runtime_group.get("engineAPICacheProofFileParity") != engine_api_cache.get("proofFileParity"):
+        raise AssertionError(f"coverage index engine API/cache proof parity mismatch: {runtime_group}")
+    if runtime_group.get("engineAPICacheProofTestFiles") != engine_api_cache.get("engineTestFiles"):
+        raise AssertionError(f"coverage index engine API/cache test file list mismatch: {runtime_group}")
+    if runtime_group.get("engineAPICacheProofTestFileParity") != engine_api_cache.get("engineTestFileParity"):
+        raise AssertionError(f"coverage index engine API/cache test file parity mismatch: {runtime_group}")
     if session_context_cache.get("ok") is not True:
         raise AssertionError(f"session/context/cache flow route failed: {session_context_cache}")
     if runtime_group.get("sessionContextCacheFlowRows") != session_context_cache.get("flowRows"):
