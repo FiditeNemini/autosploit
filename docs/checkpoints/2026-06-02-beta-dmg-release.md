@@ -49,6 +49,41 @@ python3 -m json.tool release/release-manifest.json >/dev/null
 - Keep i18n pages/content in sync for English, Korean, Chinese, Spanish, and
   Japanese.
 
+## Website update completed
+
+- Live site: `https://exploit.bot/`
+- Replaced the old March landing page with a new app-matched dark operational
+  theme.
+- Preserved the exploitbot logo/icon treatment.
+- Added the published beta DMG URL and SHA256 in the hero and download sections.
+- Replaced stale `30+`/old model copy with current beta copy:
+  - autonomous agent loop
+  - 42 tool schemas
+  - CVE import/search
+  - supply-chain scanning
+  - Qwen/MiniMax cache/runtime proofing
+  - ZAYA visual beta path
+- Added a language selector with EN/KO/ZH/ES/JA text coverage for the primary
+  hero/navigation/feature surfaces.
+- Uploaded current screenshot/proof assets for chat/tool status, recon, exploit,
+  CVE import, runtime cache settings, tool paths, network, credentials, OSINT,
+  and report export.
+- Backed up the previous server `index.html` under the server-local backup
+  directory before replacing it.
+
+## Website verification
+
+- `curl -L --max-time 20 https://exploit.bot/`
+- `curl -I -L --max-time 20 https://exploit.bot/assets/screenshots/chat-tool-states.png`
+- `curl -I -L --max-time 20 https://exploit.bot/assets/screenshots/settings-cache-topology.png`
+- `curl -I -L --max-time 20 https://github.com/jjang-ai/exploitbot/releases/download/v0.1.0-beta/ExploitBot-beta.dmg`
+- Parsed the live HTML with Python's standard `html.parser`.
+- Confirmed the live page includes `v0.1.0-beta` and the DMG SHA256.
+
+Local rendered screenshot verification was not completed in this pass because
+Playwright is not installed in the repo and the desktop automation plugin
+returned a configuration error. The HTTP/content verification passed.
+
 ## Current status
 
 - Packaging completed.
