@@ -105,6 +105,7 @@ def assert_testserver_smoke() -> None:
     tab_proof_family_matrix = request("GET", "/qa/tab-proof-family-matrix")
     tool_execution_matrix = request("GET", "/qa/tool-execution-matrix")
     tool_flow_coverage = request("GET", "/qa/tool-flow-coverage")
+    security_boundary = request("GET", "/qa/security-abuse-boundary-matrix")
     deep_runtime_flow_coverage = request("GET", "/qa/deep-runtime-flow-coverage")
     session_context_cache_flow = request("GET", "/qa/session-context-cache-flow")
     cache_artifact_matrix = request("GET", "/qa/cache-artifact-matrix")
@@ -1807,6 +1808,26 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index tool execution matrix auth count mismatch: {coverage_index}")
     if tools_parsers_group.get("toolExecutionMatrixExecutionStateCount") != tool_execution_matrix.get("executionStateCount"):
         raise AssertionError(f"/qa/coverage-index tool execution matrix state count mismatch: {coverage_index}")
+    if security_boundary.get("ok") is not True:
+        raise AssertionError(f"/qa/security-abuse-boundary-matrix failed: {security_boundary}")
+    if security_boundary.get("contractParity") is not True:
+        raise AssertionError(f"/qa/security-abuse-boundary-matrix contract parity mismatch: {security_boundary}")
+    if security_boundary.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/security-abuse-boundary-matrix proof parity mismatch: {security_boundary}")
+    if security_boundary.get("cveIncludeFilterMode") != "includeOnly-cve-id-allowlist":
+        raise AssertionError(f"/qa/security-abuse-boundary-matrix CVE include mode mismatch: {security_boundary}")
+    if security_boundary.get("promptInjectionPolicy") != "search-on-demand-not-force-injected":
+        raise AssertionError(f"/qa/security-abuse-boundary-matrix prompt policy mismatch: {security_boundary}")
+    if "/qa/security-abuse-boundary-matrix" not in (state.get("qaCoverage") or {}).get("stateRoutes", []):
+        raise AssertionError(f"/state missing security boundary route contract: {state.get('qaCoverage')}")
+    if tools_parsers_group.get("securityBoundaryRows") != security_boundary.get("rows"):
+        raise AssertionError(f"/qa/coverage-index security boundary rows mismatch: {coverage_index}")
+    if tools_parsers_group.get("securityBoundaryContractParity") != security_boundary.get("contractParity"):
+        raise AssertionError(f"/qa/coverage-index security boundary parity mismatch: {coverage_index}")
+    if tools_parsers_group.get("securityBoundaryProofFileParity") != security_boundary.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index security boundary proof parity mismatch: {coverage_index}")
+    if tools_parsers_group.get("securityBoundaryAuthorizedToolCount") != security_boundary.get("authorizedToolCount"):
+        raise AssertionError(f"/qa/coverage-index security boundary tool count mismatch: {coverage_index}")
     if tools_parsers_group.get("tabActivityStatusProofs") != tool_flow_coverage.get("tabActivityStatusProofs"):
         raise AssertionError(f"/qa/coverage-index tool tab activity proof map mismatch: {coverage_index}")
     if tool_flow_coverage.get("tabActivityStatusProofFileParity") is not True:

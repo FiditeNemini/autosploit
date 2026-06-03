@@ -89,6 +89,7 @@ Latest local beta package sanity build, not yet uploaded to the GitHub release:
 - **Supply-chain + CVE workflow**: first-class supply-chain tab, CVE search/import actions, SBOM/dependency/secrets actions, CLI routing, installer taxonomy, and per-action status state are wired.
 - **CVE import/include + embeddings gate**: `/qa/cve-import-embedding-coverage` proves CVE list import with an `includeOnly` CVE-ID allowlist, selected/excluded import audit state, semantic CVE embedding search, on-demand CVE/context retrieval, and the bounded prompt-injection policy.
 - **Shell tool safety**: `run_shell` remains visible to the agent/tool catalogue, but destructive command samples are blocked through an auditable pattern policy covered by registry and QA proofs.
+- **Security abuse-boundary matrix**: `/qa/security-abuse-boundary-matrix` ties authorized pentest tooling, destructive shell blocklists, manual/copilot/autopilot authorization modes, supply-chain/CVE include-only guardrails, bounded prompt/context policy, and audit/tool-status logging into one app-visible QA contract.
 - **Runtime packaging path**: release packaging bundles the vMLX Python engine, selects a valid bundled/runtime interpreter, verifies required modules, signs the app/DMG, and records manifest evidence.
 - **Qwen + MiniMax cache proofs**: live/release harnesses cover Qwen MXFP4-MTP hybrid SSM attention, MiniMax full-KV attention, TurboQuant KV cache, prefix cache, paged/block L2 cache, and repeat-prompt cache hits.
 - **Local low-RAM Qwen lane**: `/qa/runtime-local-model-lane` pins the active small local Qwen beta target to `/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP`, verifies the release-app live chat/cache artifact, enforces a sub-20 GB active-memory ceiling for the Qwen smoke and batching artifacts, and keeps active beta families to Qwen/MiniMax only.
@@ -125,7 +126,7 @@ Latest local beta package sanity build, not yet uploaded to the GitHub release:
 - **Qwen multimodal promotion**: Qwen-specific VL/multimodal runtime, multimodal prefix cache, and multimodal context-routing proofs are still pending.
 - **General chat quality**: broad reasoning/tool-call quality beyond bounded smoke prompts still needs longer realistic runs, especially MiniMax first-turn instruction-following.
 - **Full app UI pass**: source/API/proof coverage is broad and the website has been visually reviewed, but the native app still needs a final hands-on visual pass across every tab, status indicator, hover/detail state, and release build window before calling it polished.
-- **Security review**: supply-chain/pentest features are wired, but the release still needs a deliberate abuse-boundary, logging, and command-safety review before wider distribution.
+- **Security review**: the app now exposes an abuse-boundary matrix, but the release still needs a manual adversarial review of logging, command safety, and operator misuse cases before wider distribution.
 
 ## Screenshots
 
@@ -267,6 +268,7 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 - `python3 scripts/verify-live-models.py --minimax ${EXPLOITBOT_MODELS}/dealign.ai/MiniMax-M2.7-JANG_K-CRACK --metadata-only`
 - `python3 scripts/release-app-live-minimax-proof.py`
 - `python3 scripts/agent-live-tool-status-proof.py`
+- `python3 scripts/security-abuse-boundary-matrix-proof.py`
 - `python3 scripts/context-budget-compaction-proof.py`
 - `python3 scripts/session-context-cache-flow-proof.py`
 - `python3 scripts/tool-engine-context-ops-matrix-proof.py`

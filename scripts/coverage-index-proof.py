@@ -1914,6 +1914,7 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers state key count mismatch: {tools_parsers_group}")
     tool_flow = request("GET", "/qa/tool-flow-coverage")
     tool_execution_matrix = request("GET", "/qa/tool-execution-matrix")
+    security_boundary = request("GET", "/qa/security-abuse-boundary-matrix")
     tool_engine_context = request("GET", "/qa/tool-engine-context-ops-matrix")
     result_parser = request("GET", "/qa/result-parser-coverage")
     parser_tool_matrix = request("GET", "/qa/parser-tool-matrix")
@@ -1931,6 +1932,26 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers tool execution state count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolExecutionMatrixSourceHookParity") != tool_execution_matrix.get("sourceHookParity"):
         raise AssertionError(f"coverage index tools/parsers tool execution source hook parity mismatch: {tools_parsers_group}")
+    if security_boundary.get("ok") is not True:
+        raise AssertionError(f"security abuse boundary matrix route failed: {security_boundary}")
+    if "/qa/security-abuse-boundary-matrix" not in (tools_parsers_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index tools/parsers missing security boundary route: {tools_parsers_group}")
+    if "security-abuse-boundary-matrix-proof.py" not in (tools_parsers_group.get("proofs") or []):
+        raise AssertionError(f"coverage index tools/parsers missing security boundary proof: {tools_parsers_group}")
+    if tools_parsers_group.get("securityBoundaryRows") != security_boundary.get("rows"):
+        raise AssertionError(f"coverage index security boundary row list mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("securityBoundaryRowCount") != security_boundary.get("rowCount"):
+        raise AssertionError(f"coverage index security boundary row count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("securityBoundaryContractParity") != security_boundary.get("contractParity"):
+        raise AssertionError(f"coverage index security boundary contract parity mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("securityBoundaryProofFileParity") != security_boundary.get("proofFileParity"):
+        raise AssertionError(f"coverage index security boundary proof parity mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("securityBoundaryAuthorizedToolCount") != security_boundary.get("authorizedToolCount"):
+        raise AssertionError(f"coverage index security boundary authorized tool count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("securityBoundaryPromptInjectionPolicy") != security_boundary.get("promptInjectionPolicy"):
+        raise AssertionError(f"coverage index security boundary prompt policy mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("securityBoundaryCVEIncludeFilterMode") != security_boundary.get("cveIncludeFilterMode"):
+        raise AssertionError(f"coverage index security boundary CVE include mode mismatch: {tools_parsers_group}")
     if "/qa/tool-engine-context-ops-matrix" not in (tools_parsers_group.get("endpoints") or []):
         raise AssertionError(f"coverage index tools/parsers missing tool/engine/context matrix route: {tools_parsers_group}")
     if "tool-engine-context-ops-matrix-proof.py" not in (tools_parsers_group.get("proofs") or []):
