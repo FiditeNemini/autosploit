@@ -368,6 +368,15 @@ The route mirrors retrieval sources and delivery modes from
 `/qa/context-coverage`, cache session fields from `/qa/chat-coverage`, and is
 rolled up through `/qa/deep-runtime-flow-coverage` plus `/qa/coverage-index`.
 
+`/qa/context-session-efficiency-matrix` now joins that context policy with
+session/cache counters. It exposes rows for max-token forwarding, max-iteration
+budget, compaction, new-context cache preservation, stash/CVE on-demand
+retrieval, Responses reuse, streaming usage telemetry, parallel sessions,
+Qwen/MiniMax continuous batching, live loaded-model agent stress, L2 disk
+hit/storage counters, TurboQuant KV, and hybrid SSM async rederive. The route is
+mirrored through the `chatAndContext` group in `/qa/coverage-index` and through
+the context/session rows in `/qa/objective-runtime-coverage`.
+
 Verification after the contract update:
 
 - `swift build --package-path ExploitBot -c debug`

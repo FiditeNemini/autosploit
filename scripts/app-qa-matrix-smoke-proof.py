@@ -46,7 +46,7 @@ REQUIRED_SUBTAB_PROOFS = (
 )
 
 
-def request(method: str, path: str, body: str | None = None, timeout: float = 15.0):
+def request(method: str, path: str, body: str | None = None, timeout: float = 45.0):
     data = None if body is None else body.encode("utf-8")
     req = urllib.request.Request(f"{APP_API}{path}", data=data, method=method)
     with urllib.request.urlopen(req, timeout=timeout) as resp:
@@ -122,6 +122,7 @@ def assert_testserver_smoke() -> None:
     context_budget_compaction = request("GET", "/qa/context-budget-compaction")
     context_prompt_injection_boundary = request("GET", "/qa/context-prompt-injection-boundary")
     context_flow_matrix = request("GET", "/qa/context-flow-matrix")
+    context_session_efficiency = request("GET", "/qa/context-session-efficiency-matrix", timeout=35.0)
     evidence_lifecycle_coverage = request("GET", "/qa/evidence-lifecycle-coverage")
     evidence_lifecycle_flow_matrix = request("GET", "/qa/evidence-lifecycle-flow-matrix")
     cve_taxonomy_matrix = request("GET", "/qa/cve-taxonomy-matrix")
@@ -1507,6 +1508,18 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index context flow matrix owner parity mismatch: {coverage_index}")
     if chat_context_group.get("contextFlowMatrixProofFileParity") != context_flow_matrix.get("proofFileParity"):
         raise AssertionError(f"/qa/coverage-index context flow matrix proof parity mismatch: {coverage_index}")
+    if context_session_efficiency.get("ok") is not True:
+        raise AssertionError(f"/qa/context-session-efficiency-matrix failed: {context_session_efficiency}")
+    if "/qa/context-session-efficiency-matrix" not in (chat_context_group.get("endpoints") or []):
+        raise AssertionError(f"/qa/coverage-index chat/context missing context/session efficiency route: {coverage_index}")
+    if chat_context_group.get("contextSessionEfficiencyRowCount") != context_session_efficiency.get("rowCount"):
+        raise AssertionError(f"/qa/coverage-index context/session efficiency row count mismatch: {coverage_index}")
+    if chat_context_group.get("contextSessionEfficiencyReadyRowCount") != context_session_efficiency.get("readyRowCount"):
+        raise AssertionError(f"/qa/coverage-index context/session efficiency ready row count mismatch: {coverage_index}")
+    if chat_context_group.get("contextSessionEfficiencyContractParity") != context_session_efficiency.get("contractParity"):
+        raise AssertionError(f"/qa/coverage-index context/session efficiency contract parity mismatch: {coverage_index}")
+    if chat_context_group.get("contextSessionEfficiencyProofFileParity") != context_session_efficiency.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index context/session efficiency proof parity mismatch: {coverage_index}")
     if chat_context_group.get("evidenceLifecycleFlowMatrixStageCount") != evidence_lifecycle_flow_matrix.get("stageCount"):
         raise AssertionError(f"/qa/coverage-index evidence lifecycle flow matrix stage count mismatch: {coverage_index}")
     if chat_context_group.get("evidenceLifecycleFlowMatrixStorageTargetCount") != evidence_lifecycle_flow_matrix.get("storageTargetCount"):

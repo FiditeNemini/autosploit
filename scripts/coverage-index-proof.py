@@ -49,6 +49,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/agent-flow-inventory",
     "/qa/context-coverage",
     "/qa/context-flow-matrix",
+    "/qa/context-session-efficiency-matrix",
     "/qa/evidence-lifecycle-coverage",
     "/qa/evidence-lifecycle-flow-matrix",
     "/qa/cve-taxonomy-matrix",
@@ -125,6 +126,7 @@ REQUIRED_PROOFS = {
     "agent-flow-inventory-proof.py",
     "context-coverage-proof.py",
     "context-flow-matrix-proof.py",
+    "context-session-efficiency-matrix-proof.py",
     "evidence-lifecycle-coverage-proof.py",
     "evidence-lifecycle-flow-matrix-proof.py",
     "cve-taxonomy-matrix-proof.py",
@@ -1422,6 +1424,29 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index context flow matrix owner parity mismatch: {chat_context_group}")
     if chat_context_group.get("contextFlowMatrixProofFileParity") != context_flow_matrix.get("proofFileParity"):
         raise AssertionError(f"coverage index context flow matrix proof parity mismatch: {chat_context_group}")
+    context_session_efficiency = request("GET", "/qa/context-session-efficiency-matrix", timeout=35.0)
+    if context_session_efficiency.get("ok") is not True:
+        raise AssertionError(f"context/session efficiency matrix route failed: {context_session_efficiency}")
+    if "/qa/context-session-efficiency-matrix" not in (chat_context_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index chat/context missing context/session efficiency endpoint: {chat_context_group}")
+    if "context-session-efficiency-matrix-proof.py" not in (chat_context_group.get("proofs") or []):
+        raise AssertionError(f"coverage index chat/context missing context/session efficiency proof: {chat_context_group}")
+    if chat_context_group.get("contextSessionEfficiencyRows") != context_session_efficiency.get("rowIds"):
+        raise AssertionError(f"coverage index context/session efficiency row list mismatch: {chat_context_group}")
+    if chat_context_group.get("contextSessionEfficiencyRowCount") != context_session_efficiency.get("rowCount"):
+        raise AssertionError(f"coverage index context/session efficiency row count mismatch: {chat_context_group}")
+    if chat_context_group.get("contextSessionEfficiencyReadyRowCount") != context_session_efficiency.get("readyRowCount"):
+        raise AssertionError(f"coverage index context/session efficiency ready row count mismatch: {chat_context_group}")
+    if chat_context_group.get("contextSessionEfficiencyContractParity") != context_session_efficiency.get("contractParity"):
+        raise AssertionError(f"coverage index context/session efficiency contract parity mismatch: {chat_context_group}")
+    if chat_context_group.get("contextSessionEfficiencyProofFileParity") != context_session_efficiency.get("proofFileParity"):
+        raise AssertionError(f"coverage index context/session efficiency proof parity mismatch: {chat_context_group}")
+    if chat_context_group.get("contextSessionEfficiencyMaxTokens") != context_session_efficiency.get("maxTokens"):
+        raise AssertionError(f"coverage index context/session efficiency maxTokens mismatch: {chat_context_group}")
+    if chat_context_group.get("contextSessionEfficiencyResponsesReuseMode") != context_session_efficiency.get("responsesReuseMode"):
+        raise AssertionError(f"coverage index context/session efficiency responses reuse mismatch: {chat_context_group}")
+    if chat_context_group.get("contextSessionEfficiencyLiveAgentStressArtifactOK") != context_session_efficiency.get("liveAgentStressArtifactOK"):
+        raise AssertionError(f"coverage index context/session efficiency live agent flag mismatch: {chat_context_group}")
     agent_flow_inventory = request("GET", "/qa/agent-flow-inventory")
     if agent_flow_inventory.get("ok") is not True:
         raise AssertionError(f"agent flow inventory route failed: {agent_flow_inventory}")
