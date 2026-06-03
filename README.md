@@ -123,13 +123,14 @@ Latest local beta package sanity build, not yet uploaded to the GitHub release:
 - **UI status coverage**: chat, sidebar, active agent lists, supply-chain actions, CVE import/search, terminal path state, and visual proof screenshots have checkpoint coverage. `/qa/visual-coverage` now carries per-tab visual proof-family parity across recon, web, network, creds, exploit, post, supply-chain, OSINT, report, and stash.
 - **Live status/log/preview flow gate**: `/qa/live-status-preview-flow` ties tool status indicators, agent status lines, activity-feed telemetry, parsed result previews, stash context handoffs, report/finding management, and evidence lifecycle handoffs into one user-facing flow.
 - **Qwen multimodal promotion boundary**: `/qa/qwen-multimodal-promotion-readiness` keeps Qwen VL promotion live-proof gated, names the exact missing loader/prefix-cache/context-routing proof commands, and keeps ZAYA/non-Qwen/MiniMax folders outside the active beta lane.
+- **Qwen multimodal live-result gate**: Qwen VL promotion now requires each promotion proof to have both the expected script and a passing `docs/live-proofs/live-qwen-multimodal-*.json` result artifact, so adding a proof file alone cannot mark loader/prefix-cache/context-routing work as proven.
 - **Deep runtime/tool-flow gate**: `/qa/deep-runtime-flow-coverage` now rolls up tool flow, agent phases, local model lane selection, session/context/cache lifecycle, prompt-injection boundaries, bounded context, CVE taxonomy/import, semantic CVE embeddings, stash retrieval, parser matrix, Responses/SSE streaming delta handling, session workflows, and Qwen/MiniMax cache contracts into one app-backed beta gate.
 - **Website refresh**: `exploit.bot` now points at the notarized beta DMG, uses the current dark app theme, preserves the logo treatment, includes cleaned current screenshot/proof assets, and has desktop/mobile browser verification across EN/KO/ZH/ES/JA.
 - **Website SEO/i18n**: the live site has current Open Graph/Twitter metadata, favicon/manifest assets, sitemap image entries, `llms.txt`, `llms-full.txt`, `security.txt`, localized visible copy, localized page title/description updates, and live Playwright coverage for missing i18n keys, broken images, and mobile overflow.
 
 ### Needs more work before public beta
 
-- **Qwen multimodal promotion**: Qwen-specific live loader, multimodal prefix-cache, and multimodal context-routing proofs are still pending; `/qa/qwen-multimodal-promotion-readiness` keeps the exact missing live proof list visible and blocks completion claims until they exist and pass.
+- **Qwen multimodal promotion**: Qwen-specific live loader, multimodal prefix-cache, and multimodal context-routing proofs are still pending; `/qa/qwen-multimodal-promotion-readiness` keeps the exact missing live proof list and live result artifact list visible, and blocks completion claims until both scripts and passing artifacts exist.
 - **General chat quality**: `/qa/chat-quality-evidence-matrix` now makes the bounded live evidence visible, but broad reasoning/tool-call quality still needs longer realistic runs, especially MiniMax first-turn instruction-following.
 - **Full app UI pass**: source/API/proof coverage is broad and the website has been visually reviewed, but the native app still needs a final hands-on visual pass across every tab, status indicator, hover/detail state, and release build window before calling it polished.
 - **Security review**: the app now exposes an abuse-boundary matrix, but the release still needs a manual adversarial review of logging, command safety, and operator misuse cases before wider distribution.
@@ -291,6 +292,7 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 - `python3 scripts/context-efficiency-invariants-proof.py`
 - `python3 scripts/live-status-preview-flow-proof.py`
 - `python3 scripts/qwen-multimodal-promotion-readiness-proof.py`
+- `python3 scripts/qwen-multimodal-live-result-gate-proof.py`
 - `python3 scripts/supply-chain-cve-ui-proof.py`
 - `python3 scripts/cve-settings-actions-proof.py`
 - `python3 scripts/terminal-tool-paths-proof.py`

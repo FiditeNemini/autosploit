@@ -201,6 +201,22 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"gap top-level qwen promotion proof existence count mismatch: {gap}")
     if gap.get("qwenMultimodalPromotionProofExistenceParity") != qwen_gap.get("promotionProofExistenceParity"):
         raise AssertionError(f"gap top-level qwen promotion proof existence parity mismatch: {gap}")
+    if gap.get("qwenMultimodalPromotionGateMode") != qwen_gap.get("promotionGateMode"):
+        raise AssertionError(f"gap top-level qwen promotion gate mode mismatch: {gap}")
+    if gap.get("qwenMultimodalPromotionReadyRequiresLiveResults") != qwen_gap.get("promotionReadyRequiresLiveResults"):
+        raise AssertionError(f"gap top-level qwen promotion live-result requirement mismatch: {gap}")
+    if gap.get("qwenMultimodalPromotionLiveResultArtifacts") != qwen_gap.get("promotionLiveResultArtifacts"):
+        raise AssertionError(f"gap top-level qwen live result artifacts mismatch: {gap}")
+    if gap.get("qwenMultimodalPromotionLiveResultArtifactParity") != qwen_gap.get("promotionLiveResultArtifactParity"):
+        raise AssertionError(f"gap top-level qwen live result artifact parity mismatch: {gap}")
+    if gap.get("qwenMultimodalPromotionLiveResultExistence") != qwen_gap.get("promotionLiveResultExistence"):
+        raise AssertionError(f"gap top-level qwen live result existence mismatch: {gap}")
+    if gap.get("qwenMultimodalPromotionLiveResultOK") != qwen_gap.get("promotionLiveResultOK"):
+        raise AssertionError(f"gap top-level qwen live result ok mismatch: {gap}")
+    if gap.get("qwenMultimodalMissingLiveResultArtifacts") != qwen_gap.get("missingPromotionLiveResultArtifacts"):
+        raise AssertionError(f"gap top-level qwen missing live result artifacts mismatch: {gap}")
+    if gap.get("qwenMultimodalPassingPromotionProofs") != qwen_gap.get("passingPromotionProofs"):
+        raise AssertionError(f"gap top-level qwen passing promotion proofs mismatch: {gap}")
     if audit.get("qwenMultimodalPromotionReady") != gap.get("qwenMultimodalPromotionReady"):
         raise AssertionError(f"audit qwen multimodal promotion-ready mismatch: {audit}")
     if audit.get("qwenMultimodalPromotionCriteriaCount") != gap.get("qwenMultimodalPromotionCriteriaCount"):
@@ -215,6 +231,24 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit qwen multimodal promotion proof existence count mismatch: {audit}")
     if audit.get("qwenMultimodalPromotionProofExistenceParity") != gap.get("qwenMultimodalPromotionProofExistenceParity"):
         raise AssertionError(f"audit qwen multimodal promotion proof existence parity mismatch: {audit}")
+    if audit.get("qwenMultimodalPromotionGateMode") != gap.get("qwenMultimodalPromotionGateMode"):
+        raise AssertionError(f"audit qwen multimodal promotion gate mode mismatch: {audit}")
+    if audit.get("qwenMultimodalPromotionReadyRequiresLiveResults") != gap.get("qwenMultimodalPromotionReadyRequiresLiveResults"):
+        raise AssertionError(f"audit qwen multimodal live-result requirement mismatch: {audit}")
+    if audit.get("qwenMultimodalPromotionLiveResultArtifacts") != gap.get("qwenMultimodalPromotionLiveResultArtifacts"):
+        raise AssertionError(f"audit qwen multimodal live result artifacts mismatch: {audit}")
+    if audit.get("qwenMultimodalPromotionLiveResultArtifactCount") != gap.get("qwenMultimodalPromotionLiveResultArtifactCount"):
+        raise AssertionError(f"audit qwen multimodal live result artifact count mismatch: {audit}")
+    if audit.get("qwenMultimodalPromotionLiveResultArtifactParity") != gap.get("qwenMultimodalPromotionLiveResultArtifactParity"):
+        raise AssertionError(f"audit qwen multimodal live result artifact parity mismatch: {audit}")
+    if audit.get("qwenMultimodalPromotionLiveResultExistence") != gap.get("qwenMultimodalPromotionLiveResultExistence"):
+        raise AssertionError(f"audit qwen multimodal live result existence mismatch: {audit}")
+    if audit.get("qwenMultimodalPromotionLiveResultOK") != gap.get("qwenMultimodalPromotionLiveResultOK"):
+        raise AssertionError(f"audit qwen multimodal live result ok mismatch: {audit}")
+    if audit.get("qwenMultimodalMissingLiveResultArtifacts") != gap.get("qwenMultimodalMissingLiveResultArtifacts"):
+        raise AssertionError(f"audit qwen multimodal missing live result artifacts mismatch: {audit}")
+    if audit.get("qwenMultimodalPassingPromotionProofs") != gap.get("qwenMultimodalPassingPromotionProofs"):
+        raise AssertionError(f"audit qwen multimodal passing promotion proofs mismatch: {audit}")
 
     qa = state.get("qaCoverage") or {}
     if "/qa/audit-ledger" not in qa.get("stateRoutes", []):

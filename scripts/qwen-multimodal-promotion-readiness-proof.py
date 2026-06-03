@@ -28,6 +28,10 @@ EXPECTED_LIVE_PROOFS = [
     "live-qwen-multimodal-prefix-cache-proof.py",
     "live-qwen-multimodal-context-routing-proof.py",
 ]
+EXPECTED_ARTIFACTS = {
+    proof: f"docs/live-proofs/{proof.removesuffix('.py')}.json"
+    for proof in EXPECTED_LIVE_PROOFS
+}
 
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 45.0):
@@ -62,6 +66,10 @@ def assert_payload(payload: dict, state: dict, index: dict, gap: dict) -> None:
         raise AssertionError(f"{ROUTE} active family scope mismatch: {payload}")
     if payload.get("inactiveFamilyPolicy") != "zaya-and-non-qwen-minimax-remain-outside-beta-lane":
         raise AssertionError(f"{ROUTE} inactive family policy mismatch: {payload}")
+    if payload.get("promotionGateMode") != "script-plus-live-result-artifact":
+        raise AssertionError(f"{ROUTE} promotion gate mode mismatch: {payload}")
+    if payload.get("promotionReadyRequiresLiveResults") is not True:
+        raise AssertionError(f"{ROUTE} must require live result artifacts: {payload}")
     if payload.get("promotionReady") is not False:
         raise AssertionError(f"{ROUTE} must not promote without live proofs: {payload}")
     if payload.get("completionClaimAllowed") is not False:
@@ -76,6 +84,10 @@ def assert_payload(payload: dict, state: dict, index: dict, gap: dict) -> None:
         raise AssertionError(f"{ROUTE} live proof list mismatch: {payload}")
     if payload.get("requiredLiveProofCount") != len(EXPECTED_LIVE_PROOFS):
         raise AssertionError(f"{ROUTE} live proof count mismatch: {payload}")
+    if payload.get("requiredLiveResultArtifacts") != EXPECTED_ARTIFACTS:
+        raise AssertionError(f"{ROUTE} live result artifact map mismatch: {payload}")
+    if payload.get("liveResultArtifactParity") is not True:
+        raise AssertionError(f"{ROUTE} live result artifact parity mismatch: {payload}")
     if payload.get("proofExistenceParity") is not True:
         raise AssertionError(f"{ROUTE} proof existence parity mismatch: {payload}")
     if payload.get("missingLiveProofs") != EXPECTED_LIVE_PROOFS:
@@ -84,6 +96,10 @@ def assert_payload(payload: dict, state: dict, index: dict, gap: dict) -> None:
         raise AssertionError(f"{ROUTE} missing live proof count mismatch: {payload}")
     if payload.get("provenLiveProofs") != []:
         raise AssertionError(f"{ROUTE} should not report proven live Qwen multimodal proofs yet: {payload}")
+    if payload.get("passingLiveProofs") != []:
+        raise AssertionError(f"{ROUTE} should not report passing live Qwen multimodal proofs yet: {payload}")
+    if payload.get("missingLiveResultArtifacts") != list(EXPECTED_ARTIFACTS.values()):
+        raise AssertionError(f"{ROUTE} missing live result artifacts mismatch: {payload}")
 
     proof_existence = payload.get("proofExistence") or {}
     if sorted(proof_existence) != sorted(EXPECTED_LIVE_PROOFS):
@@ -98,6 +114,10 @@ def assert_payload(payload: dict, state: dict, index: dict, gap: dict) -> None:
             raise AssertionError(f"{ROUTE} criterion required proof mismatch: {row}")
         if row.get("proofExists") is not False:
             raise AssertionError(f"{ROUTE} criterion proof existence mismatch: {row}")
+        if row.get("resultArtifact") != EXPECTED_ARTIFACTS.get(row.get("requiredProof")):
+            raise AssertionError(f"{ROUTE} criterion result artifact mismatch: {row}")
+        if row.get("resultExists") is not False or row.get("resultOK") is not False:
+            raise AssertionError(f"{ROUTE} absent live result should stay false: {row}")
         if not row.get("proofCommand", "").startswith("python3 scripts/live-qwen-multimodal-"):
             raise AssertionError(f"{ROUTE} criterion proof command missing: {row}")
 
@@ -123,6 +143,10 @@ def assert_payload(payload: dict, state: dict, index: dict, gap: dict) -> None:
         raise AssertionError(f"/qa/coverage-index missing live proof mirror mismatch: {app_state_group}")
     if app_state_group.get("qwenMultimodalPromotionReadinessProofExistenceParity") != payload.get("proofExistenceParity"):
         raise AssertionError(f"/qa/coverage-index proof parity mirror mismatch: {app_state_group}")
+    if app_state_group.get("qwenMultimodalPromotionReadinessLiveResultArtifactParity") != payload.get("liveResultArtifactParity"):
+        raise AssertionError(f"/qa/coverage-index live result artifact parity mirror mismatch: {app_state_group}")
+    if app_state_group.get("qwenMultimodalPromotionReadinessMissingLiveResultArtifacts") != payload.get("missingLiveResultArtifacts"):
+        raise AssertionError(f"/qa/coverage-index missing live result artifact mirror mismatch: {app_state_group}")
 
 
 def run() -> None:
