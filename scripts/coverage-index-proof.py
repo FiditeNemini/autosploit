@@ -46,6 +46,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/session-context-cache-flow",
     "/qa/cache-artifact-matrix",
     "/qa/chat-quality-evidence-matrix",
+    "/qa/turn-lifecycle-evidence",
     "/qa/runtime-coverage",
     "/qa/streaming-parser-reuse",
     "/qa/python-runtime-inventory",
@@ -129,6 +130,7 @@ REQUIRED_PROOFS = {
     "session-context-cache-flow-proof.py",
     "cache-artifact-matrix-proof.py",
     "chat-quality-evidence-matrix-proof.py",
+    "turn-lifecycle-evidence-proof.py",
     "tool-catalog-detail-proof.py",
     "runtime-coverage-proof.py",
     "streaming-parser-reuse-proof.py",
@@ -1028,6 +1030,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime group missing chat quality matrix route: {runtime_group}")
     if "chat-quality-evidence-matrix-proof.py" not in (runtime_group.get("proofs") or []):
         raise AssertionError(f"coverage index runtime group missing chat quality matrix proof: {runtime_group}")
+    if "/qa/turn-lifecycle-evidence" not in (runtime_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index runtime group missing turn lifecycle route: {runtime_group}")
+    if "turn-lifecycle-evidence-proof.py" not in (runtime_group.get("proofs") or []):
+        raise AssertionError(f"coverage index runtime group missing turn lifecycle proof: {runtime_group}")
     if "/qa/continuous-batching-coverage" not in (runtime_group.get("endpoints") or []):
         raise AssertionError(f"coverage index runtime group missing continuous batching route: {runtime_group}")
     if "continuous-batching-coverage-proof.py" not in (runtime_group.get("proofs") or []):
@@ -1185,6 +1191,21 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat quality artifact parity mismatch: {runtime_group}")
     if runtime_group.get("chatQualityProofFileParity") != chat_quality.get("proofFileParity"):
         raise AssertionError(f"coverage index chat quality proof parity mismatch: {runtime_group}")
+    turn_lifecycle = request("GET", "/qa/turn-lifecycle-evidence")
+    if turn_lifecycle.get("ok") is not True:
+        raise AssertionError(f"turn lifecycle evidence route failed: {turn_lifecycle}")
+    if turn_lifecycle.get("objectiveComplete") is not False:
+        raise AssertionError(f"turn lifecycle evidence should preserve objective boundary: {turn_lifecycle}")
+    if runtime_group.get("turnLifecyclePhaseIds") != turn_lifecycle.get("phaseIds"):
+        raise AssertionError(f"coverage index turn lifecycle phase mirror mismatch: {runtime_group}")
+    if runtime_group.get("turnLifecycleReadyPhaseCount") != turn_lifecycle.get("readyPhaseCount"):
+        raise AssertionError(f"coverage index turn lifecycle ready count mismatch: {runtime_group}")
+    if runtime_group.get("turnLifecycleKnownGapBoundary") != turn_lifecycle.get("knownGapBoundary"):
+        raise AssertionError(f"coverage index turn lifecycle gap boundary mismatch: {runtime_group}")
+    if runtime_group.get("turnLifecycleContractParity") != turn_lifecycle.get("contractParity"):
+        raise AssertionError(f"coverage index turn lifecycle contract parity mismatch: {runtime_group}")
+    if runtime_group.get("turnLifecycleProofFileParity") != turn_lifecycle.get("proofFileParity"):
+        raise AssertionError(f"coverage index turn lifecycle proof parity mismatch: {runtime_group}")
     runtime_local_model_lane = request("GET", "/qa/runtime-local-model-lane")
     if runtime_local_model_lane.get("ok") is not True:
         raise AssertionError(f"runtime local model lane route failed: {runtime_local_model_lane}")

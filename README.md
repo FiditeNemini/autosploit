@@ -116,6 +116,7 @@ Latest local beta package sanity build, not yet uploaded to the GitHub release:
 - **Objective flow requirement matrix**: `/qa/objective-flow-requirement-matrix` expands the objective map into per-requirement rows with routes, proofs, evidence level, live-artifact parity, and streaming event details for tool flow, context/memory, CVEs, sessions, Responses reuse, L2 hits, TurboQuant KV, and hybrid SSM async rederive.
 - **Objective execution graph**: `/qa/objective-flow-execution-graph` orders the objective rows into an end-to-end flow from session start through context budget/compaction, CVE include/semantic retrieval, stash retrieval, prompt-injection boundary, tool schema selection, Responses reuse, streaming deltas, reasoning/tool parser handling, parallel sessions, continuous batching, L2 disk cache, TurboQuant KV, hybrid SSM async rederive, beta readiness, and the known-gap boundary.
 - **Per-turn runtime contract**: `/qa/per-turn-runtime-contract` turns the objective graph into turn-level contracts with input requirements, visible status surfaces, route/proof evidence, max-token/context compaction, CVE include filters, stash retrieval, tool status, Responses reuse, streaming deltas, reasoning/tool parser, batching, L2, TurboQuant, SSM, and known-gap boundary rows.
+- **Turn lifecycle evidence**: `/qa/turn-lifecycle-evidence` presents the full per-turn chain in execution order: turn input, context budget/compaction, CVE include/semantic retrieval, stash retrieval, prompt-injection boundary, tool schema/live status, Responses reuse/streaming, reasoning/tool parser, parallel batching, L2 disk cache, TurboQuant KV, hybrid SSM async rederive, and result/known-gap boundary.
 - **Settings and persistence**: parser, generation, reasoning, engine cache, KV quantization, model path, session, terminal/tool path, and result-store state have QA proof coverage.
 - **UI status coverage**: chat, sidebar, active agent lists, supply-chain actions, CVE import/search, terminal path state, and visual proof screenshots have checkpoint coverage. `/qa/visual-coverage` now carries per-tab visual proof-family parity across recon, web, network, creds, exploit, post, supply-chain, OSINT, report, and stash.
 - **Deep runtime/tool-flow gate**: `/qa/deep-runtime-flow-coverage` now rolls up tool flow, agent phases, local model lane selection, session/context/cache lifecycle, prompt-injection boundaries, bounded context, CVE taxonomy/import, semantic CVE embeddings, stash retrieval, parser matrix, Responses/SSE streaming delta handling, session workflows, and Qwen/MiniMax cache contracts into one app-backed beta gate.
@@ -281,6 +282,7 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 - `python3 scripts/audit-ledger-proof.py`
 - `python3 scripts/visual-coverage-proof.py`
 - `python3 scripts/objective-runtime-coverage-proof.py`
+- `python3 scripts/turn-lifecycle-evidence-proof.py`
 - `python3 scripts/supply-chain-cve-ui-proof.py`
 - `python3 scripts/cve-settings-actions-proof.py`
 - `python3 scripts/terminal-tool-paths-proof.py`
