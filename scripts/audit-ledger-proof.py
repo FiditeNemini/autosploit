@@ -112,6 +112,12 @@ def assert_audit_ledger() -> None:
         raise AssertionError(f"audit known failed live proof count mismatch: {audit}")
     if audit.get("knownFailedLiveProofs") != artifact.get("knownFailedLiveProofs"):
         raise AssertionError(f"audit known failed live proof list mismatch: {audit}")
+    if audit.get("supersededFailedLiveProofCount") != artifact.get("supersededFailedLiveProofCount"):
+        raise AssertionError(f"audit superseded failed live proof count mismatch: {audit}")
+    if audit.get("supersededFailedLiveProofs") != artifact.get("supersededFailedLiveProofs"):
+        raise AssertionError(f"audit superseded failed live proof map mismatch: {audit}")
+    if audit.get("supersededReplacementStatus") != artifact.get("supersededReplacementStatus"):
+        raise AssertionError(f"audit superseded replacement status mismatch: {audit}")
     if audit.get("currentFailedLiveProofCount") != artifact.get("currentFailedLiveProofCount"):
         raise AssertionError(f"audit current failed live proof count mismatch: {audit}")
     if audit.get("currentFailedLiveProofs") != artifact.get("currentFailedLiveProofs"):

@@ -99,6 +99,7 @@ The current beta DMG is published as a GitHub prerelease:
 - **Streaming/parser + Responses reuse gate**: `/qa/streaming-parser-reuse` source-checks Chat Completions SSE deltas, ChatService content/reasoning/tool-call delta handling, streamed usage with cached-token telemetry, `/v1/responses` streaming events, `previous_response_id` session reuse, and Qwen/MiniMax streaming tool parser coverage. It now also names the engine pytest/parser proof commands that verify Responses session-chain replay and API-shaped reasoning/tool-call output.
 - **Session/context/cache lifecycle gate**: `/qa/session-context-cache-flow` ties new-context cache preservation, bounded context carry, stash/CVE on-demand retrieval, Responses `previous_response_id` reuse, streaming delta parser surfaces, parallel agent sessions, Qwen/MiniMax live continuous batching, TurboQuant KV, L2/block disk cache, and hybrid SSM async rederive into one app-backed matrix.
 - **Cache artifact matrix**: `/qa/cache-artifact-matrix` reads live proof JSON and exposes row-level counters for Qwen cross-restart scheduler/block/SSM disk hits, scheduler tokens saved, block-L2 store/read hits, TurboQuant q4 KV, Qwen continuous-batching block writes and SSM async rederive, plus MiniMax q4 KV and block-L2 writes.
+- **Live artifact ledger**: `/qa/artifact-ledger` keeps failed live-proof JSON visible, separates known historical failures from superseded failures, and requires a passing replacement artifact before clearing current live-proof failure status.
 - **Objective runtime coverage map**: `/qa/objective-runtime-coverage` rolls tool flow, runtime, local model lanes, context/compaction, prompt-injection boundaries, CVE import/embeddings, stash retrieval, parallel sessions, Responses/streaming parser reuse, L2 cache, TurboQuant KV, hybrid SSM async rederive, proof ledgers, and release readiness into one auditable map. It intentionally reports `objectiveComplete=false` while known gaps remain, with zero blocked objective requirements at this checkpoint.
 - **Objective flow requirement matrix**: `/qa/objective-flow-requirement-matrix` expands the objective map into per-requirement rows with routes, proofs, evidence level, live-artifact parity, and streaming event details for tool flow, context/memory, CVEs, sessions, Responses reuse, L2 hits, TurboQuant KV, and hybrid SSM async rederive.
 - **Settings and persistence**: parser, generation, reasoning, engine cache, KV quantization, model path, session, terminal/tool path, and result-store state have QA proof coverage.
@@ -260,6 +261,8 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 - `python3 scripts/engine-api-cache-proof-matrix-proof.py`
 - `python3 scripts/state-dependent-contract-matrix-proof.py`
 - `python3 scripts/cache-artifact-matrix-proof.py`
+- `python3 scripts/artifact-ledger-proof.py`
+- `python3 scripts/audit-ledger-proof.py`
 - `python3 scripts/visual-coverage-proof.py`
 - `python3 scripts/objective-runtime-coverage-proof.py`
 - `python3 scripts/supply-chain-cve-ui-proof.py`

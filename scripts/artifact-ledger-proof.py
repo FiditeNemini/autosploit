@@ -17,6 +17,9 @@ APP_API = "http://127.0.0.1:9999"
 KNOWN_FAILED_LIVE_PROOFS = [
     "docs/live-proofs/checkpoint-75-minimax-live.json",
 ]
+SUPERSEDED_FAILED_LIVE_PROOFS = {
+    "docs/live-proofs/checkpoint-485-qwen-mxfp-live-current.json": "docs/live-proofs/checkpoint-486-qwen-mxfp-27b-pass.json",
+}
 
 
 def request(method: str, path: str, body: str | None = None, timeout: float = 8.0):
@@ -123,9 +126,18 @@ def assert_artifact_ledger() -> None:
         raise AssertionError(f"artifact ledger known failed live proof list mismatch: {ledger}")
     if ledger.get("knownFailedLiveProofCount") != len(KNOWN_FAILED_LIVE_PROOFS):
         raise AssertionError(f"artifact ledger known failed live proof count mismatch: {ledger}")
-    if ledger.get("currentFailedLiveProofs") != sorted(set(expected_failed).difference(KNOWN_FAILED_LIVE_PROOFS)):
+    if ledger.get("supersededFailedLiveProofs") != SUPERSEDED_FAILED_LIVE_PROOFS:
+        raise AssertionError(f"artifact ledger superseded failed live proof map mismatch: {ledger}")
+    if ledger.get("supersededFailedLiveProofCount") != len(SUPERSEDED_FAILED_LIVE_PROOFS):
+        raise AssertionError(f"artifact ledger superseded failed live proof count mismatch: {ledger}")
+    replacement_status = ledger.get("supersededReplacementStatus") or {}
+    for failed, replacement in SUPERSEDED_FAILED_LIVE_PROOFS.items():
+        if replacement_status.get(failed) is not True:
+            raise AssertionError(f"artifact ledger replacement is not passing for {failed} -> {replacement}: {ledger}")
+    classified_failures = set(KNOWN_FAILED_LIVE_PROOFS).union(SUPERSEDED_FAILED_LIVE_PROOFS.keys())
+    if ledger.get("currentFailedLiveProofs") != sorted(set(expected_failed).difference(classified_failures)):
         raise AssertionError(f"artifact ledger current failed live proof list mismatch: {ledger}")
-    if ledger.get("currentFailedLiveProofCount") != len(set(expected_failed).difference(KNOWN_FAILED_LIVE_PROOFS)):
+    if ledger.get("currentFailedLiveProofCount") != len(set(expected_failed).difference(classified_failures)):
         raise AssertionError(f"artifact ledger current failed live proof count mismatch: {ledger}")
     if ledger.get("currentLiveProofFailureFree") is not True:
         raise AssertionError(f"artifact ledger should classify all current live proof failures: {ledger}")

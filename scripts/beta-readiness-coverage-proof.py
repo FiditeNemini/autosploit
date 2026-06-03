@@ -32,7 +32,7 @@ EXPECTED_GATES = [
 EXPECTED_STATUS = {
     "sourceProofMatrix": "ready",
     "visualArtifacts": "ready",
-    "liveArtifacts": "blocked",
+    "liveArtifacts": "ready",
     "checkpointLedger": "ready",
     "signedAppBundle": "ready",
     "signedDmg": "ready",
@@ -109,14 +109,14 @@ def assert_payload(payload: dict) -> None:
         raise AssertionError(f"beta readiness gate parity mismatch: {payload}")
     if payload.get("gateStatus") != EXPECTED_STATUS:
         raise AssertionError(f"beta readiness gate status mismatch: {payload}")
-    if payload.get("readyGateCount") != 8:
+    if payload.get("readyGateCount") != 9:
         raise AssertionError(f"beta readiness ready gate count mismatch: {payload}")
-    if payload.get("blockedGateCount") != 1:
+    if payload.get("blockedGateCount") != 0:
         raise AssertionError(f"beta readiness blocked gate count mismatch: {payload}")
     if payload.get("packageReady") is not True:
         raise AssertionError(f"beta readiness should mark signed package ready: {payload}")
     if payload.get("distributionReady") is not False:
-        raise AssertionError(f"beta readiness should not mark distribution ready while live-artifact gates are blocked: {payload}")
+        raise AssertionError(f"beta readiness should not mark distribution ready while known gaps remain: {payload}")
     notarization_gate = payload.get("notarizationGate")
     if notarization_gate not in {"passed", "requires-notary-credentials"}:
         raise AssertionError(f"beta readiness notarization gate mismatch: {payload}")
