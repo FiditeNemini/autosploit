@@ -118,8 +118,9 @@ Before editing the website:
   - 42 integrated tool schemas
   - CVE import/search
   - supply-chain scanning
-  - Qwen/MiniMax cache/runtime support
-  - ZAYA visual proof path
+  - Qwen MXFP4-MTP hybrid SSM cache/runtime support
+  - MiniMax full-KV cache/runtime support
+  - MiniMax JANG_K metadata scope when full live load is not part of the pass
 - Add or refresh screenshots for each major panel/tab:
   - Chat/autonomous agent loop with live tool status
   - Recon

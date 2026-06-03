@@ -72,3 +72,6 @@ to avoid unnecessary RAM pressure.
   prompt-suite pass before calling it polished.
 - Full MiniMax JANG_K is artifact/metadata proven only at this checkpoint; it
   still needs a live load/chat/cache pass on a quiet machine.
+- The live `exploit.bot` website copy was updated after this scope correction:
+  stale visual-lane public copy was replaced with Qwen MXFP4-MTP and MiniMax
+  JANG_K scope language.
