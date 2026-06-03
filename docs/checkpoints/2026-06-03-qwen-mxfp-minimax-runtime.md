@@ -203,11 +203,13 @@ deltas, L2 disk cache, TurboQuant KV, hybrid SSM async rederive, proof ledgers,
 and release package readiness.
 
 This is an objective coverage map, not a completion claim. It currently reports
-`objectiveComplete = false`, `objectiveStatus = covered-with-known-gaps`, and
-keeps blocked requirement IDs visible. At this checkpoint the aggregate route
-marks `cveDatabaseEmbeddings` and `l2DiskCacheStorageHit` as blocked when their
-underlying contracts do not prove full readiness, while `qwenMultimodalRuntime`
-remains the tracked known gap in `/qa/gap-ledger`.
+`objectiveComplete = false`, `objectiveStatus = covered-with-known-gaps`, 14
+ready requirements, zero blocked requirements, and one tracked known-gap
+requirement. At this checkpoint `cveDatabaseEmbeddings` is ready through the
+proof-backed CVE import/embedding flow parity plus the dedicated seeded semantic
+CVE proof, `l2DiskCacheStorageHit` is ready through the cache artifact matrix
+contracts, and `qwenMultimodalRuntime` remains the tracked known gap in
+`/qa/gap-ledger`.
 
 The route is mirrored through the `releaseReadiness` group in
 `/qa/coverage-index`, including ready count, blocked count, blocked IDs, known

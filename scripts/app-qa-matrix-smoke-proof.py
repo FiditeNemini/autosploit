@@ -1256,8 +1256,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/objective-runtime-coverage should not claim full completion: {objective_runtime}")
     if objective_runtime.get("contractParity") is not True or objective_runtime.get("proofFileParity") is not True:
         raise AssertionError(f"/qa/objective-runtime-coverage parity mismatch: {objective_runtime}")
-    if objective_runtime.get("blockedRequirementCount", 0) < 1:
-        raise AssertionError(f"/qa/objective-runtime-coverage missing blocked requirements: {objective_runtime}")
+    if objective_runtime.get("blockedRequirementCount") != 0:
+        raise AssertionError(f"/qa/objective-runtime-coverage should not report blocked requirements: {objective_runtime}")
     if "/qa/objective-runtime-coverage" not in (release_group.get("endpoints") or []):
         raise AssertionError(f"/qa/coverage-index release group missing objective runtime route: {coverage_index}")
     if release_group.get("objectiveRuntimeCoverageStatus") != objective_runtime.get("objectiveStatus"):

@@ -1457,6 +1457,12 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index cve import embedding import format mismatch: {chat_context_group}")
     if chat_context_group.get("cveImportEmbeddingContractParity") != cve_import_embedding.get("contractParity"):
         raise AssertionError(f"coverage index cve import embedding contract parity mismatch: {chat_context_group}")
+    if chat_context_group.get("cveImportEmbeddingFlowContracts") != cve_import_embedding.get("flowContracts"):
+        raise AssertionError(f"coverage index cve import embedding flow contract map mismatch: {chat_context_group}")
+    if chat_context_group.get("cveImportEmbeddingFlowContractCount") != cve_import_embedding.get("flowContractCount"):
+        raise AssertionError(f"coverage index cve import embedding flow contract count mismatch: {chat_context_group}")
+    if chat_context_group.get("cveImportEmbeddingFlowContractParity") != cve_import_embedding.get("flowContractParity"):
+        raise AssertionError(f"coverage index cve import embedding flow contract parity mismatch: {chat_context_group}")
     if chat_context_group.get("cveImportEmbeddingProofFileParity") != cve_import_embedding.get("proofFileParity"):
         raise AssertionError(f"coverage index cve import embedding proof parity mismatch: {chat_context_group}")
     settings_visuals_group = groups.get("settingsAndVisuals") or {}

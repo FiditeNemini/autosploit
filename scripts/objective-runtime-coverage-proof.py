@@ -100,14 +100,15 @@ def run() -> None:
             raise AssertionError(f"objective runtime requirement order mismatch: {payload}")
         if payload.get("requirementCount") != len(EXPECTED_REQUIREMENTS):
             raise AssertionError(f"objective runtime requirement count mismatch: {payload}")
-        if payload.get("readyRequirementCount") < 12:
+        if payload.get("readyRequirementCount") != 14:
             raise AssertionError(f"objective runtime ready requirement count too low: {payload}")
-        if payload.get("blockedRequirementCount", 0) < 1:
-            raise AssertionError(f"objective runtime should surface blocked requirements: {payload}")
+        if payload.get("blockedRequirementCount") != 0:
+            raise AssertionError(f"objective runtime should not report blocked requirements after proven CVE/L2 flows: {payload}")
         blocked_ids = payload.get("blockedRequirementIds") or []
-        for required_blocked in {"cveDatabaseEmbeddings", "l2DiskCacheStorageHit"}:
-            if required_blocked not in blocked_ids:
-                raise AssertionError(f"objective runtime missing blocked requirement {required_blocked}: {payload}")
+        if blocked_ids:
+            raise AssertionError(f"objective runtime blocked requirement list should be empty: {payload}")
+        if "l2DiskCacheStorageHit" in blocked_ids:
+            raise AssertionError(f"objective runtime should use cache matrix contracts for ready L2 evidence: {payload}")
         if payload.get("knownGapCount", 0) < 1:
             raise AssertionError(f"objective runtime should surface known gaps: {payload}")
         if "qwenMultimodalRuntime" not in (payload.get("knownGapIds") or []):
@@ -122,6 +123,10 @@ def run() -> None:
                 raise AssertionError(f"objective runtime requirement {name} missing routes: {payload}")
             if not row.get("proofs"):
                 raise AssertionError(f"objective runtime requirement {name} missing proofs: {payload}")
+        if (evidence.get("l2DiskCacheStorageHit") or {}).get("status") != "ready":
+            raise AssertionError(f"objective runtime L2 cache requirement should be ready: {payload}")
+        if (evidence.get("cveDatabaseEmbeddings") or {}).get("status") != "ready":
+            raise AssertionError(f"objective runtime CVE database/embedding requirement should be ready: {payload}")
 
         contracts = payload.get("contracts") or {}
         missing_contracts = sorted(name for name in EXPECTED_CONTRACTS if contracts.get(name) is not True)
