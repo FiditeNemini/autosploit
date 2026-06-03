@@ -50,28 +50,34 @@ def run() -> None:
         wait_for_app()
 
         with tempfile.TemporaryDirectory(prefix="exploitbot-unsupported-model-") as tmp:
-            model = Path(tmp) / "Gemma-Unsupported"
-            model.mkdir()
-            (model / "config.json").write_text(json.dumps({"model_type": "gemma3"}) + "\n", encoding="utf-8")
-            (model / "generation_config.json").write_text(json.dumps({"temperature": 0.7}) + "\n", encoding="utf-8")
-            response = request("POST", "/qa/model-folder", str(model))
-            if response.get("ok") is not True:
-                raise AssertionError(f"model folder route failed: {response}")
+            root = Path(tmp)
+            fixtures = [
+                ("Gemma-Unsupported", "gemma3"),
+                ("ZAYA1-VL-JANG", "zaya1_vl"),
+            ]
+            for folder_name, model_type in fixtures:
+                model = root / folder_name
+                model.mkdir()
+                (model / "config.json").write_text(json.dumps({"model_type": model_type}) + "\n", encoding="utf-8")
+                (model / "generation_config.json").write_text(json.dumps({"temperature": 0.7}) + "\n", encoding="utf-8")
+                response = request("POST", "/qa/model-folder", str(model))
+                if response.get("ok") is not True:
+                    raise AssertionError(f"model folder route failed: {response}")
 
-            started = request("POST", "/engine/start")
-            if started.get("ok") is not True:
-                raise AssertionError(f"engine start route failed: {started}")
-            time.sleep(0.7)
-            state = request("GET", "/state")
+                started = request("POST", "/engine/start")
+                if started.get("ok") is not True:
+                    raise AssertionError(f"engine start route failed: {started}")
+                time.sleep(0.7)
+                state = request("GET", "/state")
 
-            info = state.get("modelFolderInfo") or {}
-            if info.get("isSupported") is not False:
-                raise AssertionError(f"unsupported fixture was not marked unsupported: {info}")
-            if state.get("engineRunning") is True:
-                raise AssertionError(f"engine started for unsupported model folder: {state}")
-            error = state.get("engineError") or ""
-            if "Only Qwen and MiniMax" not in error or "blocked" not in error.lower():
-                raise AssertionError(f"unsupported start did not expose blocking error: {state}")
+                info = state.get("modelFolderInfo") or {}
+                if info.get("isSupported") is not False:
+                    raise AssertionError(f"unsupported fixture was not marked unsupported: {info}")
+                if state.get("engineRunning") is True:
+                    raise AssertionError(f"engine started for unsupported model folder: {state}")
+                error = state.get("engineError") or ""
+                if "Only Qwen and MiniMax" not in error or "blocked" not in error.lower():
+                    raise AssertionError(f"unsupported start did not expose blocking error: {state}")
 
         print("unsupported-model-start proof passed")
     finally:

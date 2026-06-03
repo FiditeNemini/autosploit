@@ -75,3 +75,21 @@ to avoid unnecessary RAM pressure.
 - The live `exploit.bot` website copy was updated after this scope correction:
   stale visual-lane public copy was replaced with Qwen MXFP4-MTP and MiniMax
   JANG_K scope language.
+
+## App supported-family contract
+
+The app and QA routes now expose only `qwen` and `minimax` as active beta
+families. `ModelFolderInspector` treats ZAYA-shaped folders as unsupported, and
+`unsupported-model-start-proof.py` verifies that both generic unsupported and
+ZAYA-shaped folders are blocked before engine launch.
+
+Verification after the contract update:
+
+- `swift build --package-path ExploitBot -c debug`
+- `python3 scripts/model-folder-warning-proof.py`
+- `python3 scripts/unsupported-model-start-proof.py`
+- `python3 scripts/runtime-coverage-proof.py`
+- `python3 scripts/settings-coverage-proof.py`
+- `python3 scripts/gap-ledger-proof.py`
+- `python3 scripts/coverage-index-proof.py`
+- `python3 scripts/app-qa-matrix-smoke-proof.py`

@@ -2104,7 +2104,7 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/gap-ledger failed: {gap_ledger}")
     if gap_ledger.get("currentGapCount") != 1:
         raise AssertionError(f"/qa/gap-ledger current gap count mismatch: {gap_ledger}")
-    if set(gap_ledger.get("supportedFamilies") or []) != {"qwen", "minimax", "zaya"}:
+    if set(gap_ledger.get("supportedFamilies") or []) != {"qwen", "minimax"}:
         raise AssertionError(f"/qa/gap-ledger supported families mismatch: {gap_ledger}")
     if gap_ledger.get("unsupportedMultimodalBlocked") is not False:
         raise AssertionError(f"/qa/gap-ledger Qwen VL hard block mismatch: {gap_ledger}")

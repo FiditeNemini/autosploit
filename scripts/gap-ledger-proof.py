@@ -97,7 +97,7 @@ def assert_gap_ledger() -> None:
         raise AssertionError(f"gap ledger current gaps mismatch expected {expected_gaps}: {ledger}")
     if ledger.get("unsupportedMultimodalBlocked") is not False:
         raise AssertionError(f"gap ledger should record Qwen VL as no longer hard-blocked: {ledger}")
-    if set(ledger.get("supportedFamilies") or []) != {"qwen", "minimax", "zaya"}:
+    if set(ledger.get("supportedFamilies") or []) != {"qwen", "minimax"}:
         raise AssertionError(f"gap ledger supported families mismatch: {ledger}")
     if "qwenMultimodalRuntime" not in (ledger.get("openGapIds") or []):
         raise AssertionError(f"gap ledger missing qwen multimodal gap id: {ledger}")

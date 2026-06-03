@@ -28,7 +28,6 @@ EXPECTED_PROOFS = {
     "release-app-live-qwen-proof.py",
     "release-app-qwen-cross-restart-cache-proof.py",
     "release-app-live-minimax-proof.py",
-    "zaya-visual-live-proof.py",
     "verify-live-models.py",
     "prove-block-l2-cache.py",
     "prove-ssm-rederive-status.py",
@@ -111,7 +110,7 @@ def run() -> None:
         coverage = request("GET", "/qa/runtime-coverage")
         if coverage.get("ok") is not True:
             raise AssertionError(f"runtime coverage route failed: {coverage}")
-        if set(coverage.get("supportedFamilies") or []) != {"qwen", "minimax", "zaya"}:
+        if set(coverage.get("supportedFamilies") or []) != {"qwen", "minimax"}:
             raise AssertionError(f"supported family contract mismatch: {coverage}")
         contracts = coverage.get("contracts") or {}
         for key in (

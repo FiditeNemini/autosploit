@@ -889,7 +889,7 @@ def assert_coverage_index() -> None:
     runtime_group = groups.get("runtimeAndCache") or {}
     if runtime_group.get("liveProofArtifactCount", 0) < 6:
         raise AssertionError(f"coverage index runtime live artifact count mismatch: {runtime_group}")
-    if set(runtime_group.get("supportedFamilies") or []) != {"qwen", "minimax", "zaya"}:
+    if set(runtime_group.get("supportedFamilies") or []) != {"qwen", "minimax"}:
         raise AssertionError(f"coverage index runtime supported family mismatch: {runtime_group}")
     if runtime_group.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"coverage index runtime cache response method mismatch: {runtime_group}")

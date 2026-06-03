@@ -72,10 +72,12 @@ def run() -> None:
             qwen = root / "Qwen3.5-JANG"
             qwen_vl = root / "Qwen3-VL-JANG"
             minimax = root / "MiniMax-M2-JANGTQ"
+            zaya = root / "ZAYA1-VL-JANG"
             unsupported = root / "Gemma-Unsupported"
             write_fixture(qwen, "qwen3")
             write_fixture(qwen_vl, "qwen3_vl")
             write_fixture(minimax, "minimax_text")
+            write_fixture(zaya, "zaya1_vl")
             write_fixture(unsupported, "gemma3")
 
             qwen_info = inspect_fixture(qwen)
@@ -100,6 +102,13 @@ def run() -> None:
                 raise AssertionError(f"minimax fixture not supported: {minimax_info}")
             if "full-KV" not in minimax_info.get("supportMessage", ""):
                 raise AssertionError(f"minimax support message did not mention full-KV cache topology: {minimax_info}")
+
+            zaya_info = inspect_fixture(zaya)
+            if zaya_info.get("family") != "Unsupported" or zaya_info.get("isSupported") is not False:
+                raise AssertionError(f"zaya fixture should be outside the active beta lane: {zaya_info}")
+            zaya_warning = zaya_info.get("supportMessage", "")
+            if "Only Qwen and MiniMax" not in zaya_warning or "parser/cache" not in zaya_warning:
+                raise AssertionError(f"zaya warning missing active beta lane language: {zaya_info}")
 
             unsupported_info = inspect_fixture(unsupported)
             if unsupported_info.get("isSupported") is not False:
