@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/jjang-ai/exploitbot/releases">
+  <a href="https://github.com/jjang-ai/exploitbot/releases/download/v0.1.0-beta/ExploitBot-beta.dmg">
     <img src="https://img.shields.io/badge/Download-DMG--beta-blue?style=for-the-badge&logo=apple" alt="Download DMG">
   </a>
 </p>
@@ -64,7 +64,15 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 
 **Live Tool Telemetry** — Tool execution status updates are emitted per button/tab (queued, running, done, error), written to logs, and tracked in chat/panel history with CVE and stash workflow visibility.
 
-## Beta Readiness (June 2, 2026)
+## Beta Release Status (June 2, 2026)
+
+The current beta DMG is published as a GitHub prerelease:
+
+- Release: [ExploitBot 0.1.0 Beta](https://github.com/jjang-ai/exploitbot/releases/tag/v0.1.0-beta)
+- Download: [ExploitBot-beta.dmg](https://github.com/jjang-ai/exploitbot/releases/download/v0.1.0-beta/ExploitBot-beta.dmg)
+- DMG SHA256: `078322b60ac1b4c4d490c7404ef4fa556da136df7ea864021b158df246e165a0`
+- Signing: Developer ID Application, hardened runtime
+- Notarization: app and DMG submitted, stapled, and validated
 
 ### Done in the current beta lane
 
@@ -79,7 +87,7 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 
 ### Needs more work before public beta
 
-- **Notarization/stapling**: the release script supports notarized app and DMG output through either `EXPLOITBOT_NOTARY_PROFILE` or local notary environment variables; validate the current artifact manifest before publishing.
+- **Website refresh**: `exploit.bot` still needs the new app-matched theme, current screenshots, mobile pass, i18n refresh, and updated download CTA.
 - **Qwen multimodal promotion**: Qwen-specific VL/multimodal runtime, multimodal prefix cache, and multimodal context-routing proofs are still pending.
 - **General chat quality**: broad reasoning/tool-call quality beyond bounded smoke prompts still needs longer realistic runs, especially JANGTQ first-turn exact prompt-following.
 - **Full manual UI pass**: source/API/proof coverage is broad, but a final hands-on visual pass across every tab, status indicator, hover/detail state, and release build window is still required before calling it polished.
@@ -111,7 +119,7 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 
 ### Download
 
-Download the beta DMG from [Releases](https://github.com/jjang-ai/exploitbot/releases). Release builds should be signed, notarized, stapled, and verified before publishing.
+Download the beta DMG from [Releases](https://github.com/jjang-ai/exploitbot/releases/tag/v0.1.0-beta). Release builds should be signed, notarized, stapled, and verified before publishing.
 
 Requires **macOS 14+** and **Apple Silicon** (M1/M2/M3/M4).
 

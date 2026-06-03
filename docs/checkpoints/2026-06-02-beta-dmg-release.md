@@ -59,6 +59,8 @@ python3 -m json.tool release/release-manifest.json >/dev/null
 
 ## Final artifact
 
+- GitHub prerelease: `https://github.com/jjang-ai/exploitbot/releases/tag/v0.1.0-beta`
+- Public DMG URL: `https://github.com/jjang-ai/exploitbot/releases/download/v0.1.0-beta/ExploitBot-beta.dmg`
 - Version: `0.1.0-beta`
 - DMG: `release/ExploitBot-beta.dmg`
 - DMG size: `539 MB`
@@ -77,3 +79,5 @@ python3 -m json.tool release/release-manifest.json >/dev/null
 - `spctl -a -vv --type execute release/ExploitBot.app`
 - `hdiutil verify release/ExploitBot-beta.dmg`
 - `python3 -m json.tool release/release-manifest.json`
+- `gh release view v0.1.0-beta --json name,tagName,isPrerelease,isDraft,url,assets,targetCommitish,publishedAt`
+- `curl -I -L --max-time 30 https://github.com/jjang-ai/exploitbot/releases/download/v0.1.0-beta/ExploitBot-beta.dmg`
