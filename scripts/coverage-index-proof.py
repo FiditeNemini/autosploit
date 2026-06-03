@@ -40,6 +40,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/tool-execution-matrix",
     "/qa/tool-flow-coverage",
     "/qa/deep-runtime-flow-coverage",
+    "/qa/tool-engine-context-ops-matrix",
     "/qa/session-context-cache-flow",
     "/qa/cache-artifact-matrix",
     "/qa/runtime-coverage",
@@ -116,6 +117,7 @@ REQUIRED_PROOFS = {
     "tool-execution-matrix-proof.py",
     "tool-flow-coverage-proof.py",
     "deep-runtime-flow-coverage-proof.py",
+    "tool-engine-context-ops-matrix-proof.py",
     "session-context-cache-flow-proof.py",
     "cache-artifact-matrix-proof.py",
     "tool-catalog-detail-proof.py",
@@ -234,7 +236,7 @@ EXPECTED_RESULT_PARSER_RAW_ONLY_TOOLS = [
 ]
 
 
-def request(method: str, path: str, body: str | None = None, timeout: float = 15.0):
+def request(method: str, path: str, body: str | None = None, timeout: float = 45.0):
     data = None if body is None else body.encode("utf-8")
     req = urllib.request.Request(f"{APP_API}{path}", data=data, method=method)
     with urllib.request.urlopen(req, timeout=timeout) as resp:
@@ -965,6 +967,7 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime cache response method mismatch: {runtime_group}")
     runtime_coverage = request("GET", "/qa/runtime-coverage")
     deep_runtime = request("GET", "/qa/deep-runtime-flow-coverage")
+    tool_engine_context = request("GET", "/qa/tool-engine-context-ops-matrix")
     session_context_cache = request("GET", "/qa/session-context-cache-flow")
     live_agent_stress = request("GET", "/qa/live-loaded-model-agent-stress")
     cache_artifact_matrix = request("GET", "/qa/cache-artifact-matrix")
@@ -987,6 +990,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime group missing deep runtime flow route: {runtime_group}")
     if "deep-runtime-flow-coverage-proof.py" not in (runtime_group.get("proofs") or []):
         raise AssertionError(f"coverage index runtime group missing deep runtime proof: {runtime_group}")
+    if "/qa/tool-engine-context-ops-matrix" not in (runtime_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index runtime group missing tool/engine/context matrix route: {runtime_group}")
+    if "tool-engine-context-ops-matrix-proof.py" not in (runtime_group.get("proofs") or []):
+        raise AssertionError(f"coverage index runtime group missing tool/engine/context matrix proof: {runtime_group}")
     if "/qa/session-context-cache-flow" not in (runtime_group.get("endpoints") or []):
         raise AssertionError(f"coverage index runtime group missing session/context/cache route: {runtime_group}")
     if "session-context-cache-flow-proof.py" not in (runtime_group.get("proofs") or []):
@@ -1025,6 +1032,20 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index deep runtime route count mismatch: {runtime_group}")
     if runtime_group.get("deepRuntimeFlowProofFileParity") != deep_runtime.get("proofFileParity"):
         raise AssertionError(f"coverage index deep runtime proof parity mismatch: {runtime_group}")
+    if runtime_group.get("toolEngineContextOpsRows") != tool_engine_context.get("rowIds"):
+        raise AssertionError(f"coverage index tool/engine/context row list mismatch: {runtime_group}")
+    if runtime_group.get("toolEngineContextOpsRowCount") != tool_engine_context.get("rowCount"):
+        raise AssertionError(f"coverage index tool/engine/context row count mismatch: {runtime_group}")
+    if runtime_group.get("toolEngineContextOpsReadyRowCount") != tool_engine_context.get("readyRowCount"):
+        raise AssertionError(f"coverage index tool/engine/context ready row count mismatch: {runtime_group}")
+    if runtime_group.get("toolEngineContextOpsContractParity") != tool_engine_context.get("contractParity"):
+        raise AssertionError(f"coverage index tool/engine/context contract parity mismatch: {runtime_group}")
+    if runtime_group.get("toolEngineContextOpsProofFileParity") != tool_engine_context.get("proofFileParity"):
+        raise AssertionError(f"coverage index tool/engine/context proof parity mismatch: {runtime_group}")
+    if runtime_group.get("toolEngineContextOpsToolCount") != tool_engine_context.get("toolCount"):
+        raise AssertionError(f"coverage index tool/engine/context tool count mismatch: {runtime_group}")
+    if runtime_group.get("toolEngineContextOpsCacheArtifactContractParity") != tool_engine_context.get("cacheArtifactContractParity"):
+        raise AssertionError(f"coverage index tool/engine/context cache parity mismatch: {runtime_group}")
     if session_context_cache.get("ok") is not True:
         raise AssertionError(f"session/context/cache flow route failed: {session_context_cache}")
     if runtime_group.get("sessionContextCacheFlowRows") != session_context_cache.get("flowRows"):
@@ -1447,6 +1468,21 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index context/session efficiency responses reuse mismatch: {chat_context_group}")
     if chat_context_group.get("contextSessionEfficiencyLiveAgentStressArtifactOK") != context_session_efficiency.get("liveAgentStressArtifactOK"):
         raise AssertionError(f"coverage index context/session efficiency live agent flag mismatch: {chat_context_group}")
+    tool_engine_context = request("GET", "/qa/tool-engine-context-ops-matrix")
+    if "/qa/tool-engine-context-ops-matrix" not in (chat_context_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index chat/context missing tool/engine/context matrix endpoint: {chat_context_group}")
+    if "tool-engine-context-ops-matrix-proof.py" not in (chat_context_group.get("proofs") or []):
+        raise AssertionError(f"coverage index chat/context missing tool/engine/context matrix proof: {chat_context_group}")
+    if chat_context_group.get("toolEngineContextOpsRows") != tool_engine_context.get("rowIds"):
+        raise AssertionError(f"coverage index chat/context tool/engine/context row list mismatch: {chat_context_group}")
+    if chat_context_group.get("toolEngineContextOpsRowCount") != tool_engine_context.get("rowCount"):
+        raise AssertionError(f"coverage index chat/context tool/engine/context row count mismatch: {chat_context_group}")
+    if chat_context_group.get("toolEngineContextOpsReadyRowCount") != tool_engine_context.get("readyRowCount"):
+        raise AssertionError(f"coverage index chat/context tool/engine/context ready row count mismatch: {chat_context_group}")
+    if chat_context_group.get("toolEngineContextOpsContractParity") != tool_engine_context.get("contractParity"):
+        raise AssertionError(f"coverage index chat/context tool/engine/context contract parity mismatch: {chat_context_group}")
+    if chat_context_group.get("toolEngineContextOpsProofFileParity") != tool_engine_context.get("proofFileParity"):
+        raise AssertionError(f"coverage index chat/context tool/engine/context proof parity mismatch: {chat_context_group}")
     agent_flow_inventory = request("GET", "/qa/agent-flow-inventory")
     if agent_flow_inventory.get("ok") is not True:
         raise AssertionError(f"agent flow inventory route failed: {agent_flow_inventory}")
@@ -1812,6 +1848,7 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers state key count mismatch: {tools_parsers_group}")
     tool_flow = request("GET", "/qa/tool-flow-coverage")
     tool_execution_matrix = request("GET", "/qa/tool-execution-matrix")
+    tool_engine_context = request("GET", "/qa/tool-engine-context-ops-matrix")
     result_parser = request("GET", "/qa/result-parser-coverage")
     parser_tool_matrix = request("GET", "/qa/parser-tool-matrix")
     if tool_execution_matrix.get("ok") is not True:
@@ -1828,6 +1865,22 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers tool execution state count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("toolExecutionMatrixSourceHookParity") != tool_execution_matrix.get("sourceHookParity"):
         raise AssertionError(f"coverage index tools/parsers tool execution source hook parity mismatch: {tools_parsers_group}")
+    if "/qa/tool-engine-context-ops-matrix" not in (tools_parsers_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index tools/parsers missing tool/engine/context matrix route: {tools_parsers_group}")
+    if "tool-engine-context-ops-matrix-proof.py" not in (tools_parsers_group.get("proofs") or []):
+        raise AssertionError(f"coverage index tools/parsers missing tool/engine/context matrix proof: {tools_parsers_group}")
+    if tools_parsers_group.get("toolEngineContextOpsRows") != tool_engine_context.get("rowIds"):
+        raise AssertionError(f"coverage index tools/parsers tool/engine/context row list mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolEngineContextOpsRowCount") != tool_engine_context.get("rowCount"):
+        raise AssertionError(f"coverage index tools/parsers tool/engine/context row count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolEngineContextOpsReadyRowCount") != tool_engine_context.get("readyRowCount"):
+        raise AssertionError(f"coverage index tools/parsers tool/engine/context ready row count mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolEngineContextOpsContractParity") != tool_engine_context.get("contractParity"):
+        raise AssertionError(f"coverage index tools/parsers tool/engine/context contract parity mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolEngineContextOpsProofFileParity") != tool_engine_context.get("proofFileParity"):
+        raise AssertionError(f"coverage index tools/parsers tool/engine/context proof parity mismatch: {tools_parsers_group}")
+    if tools_parsers_group.get("toolEngineContextOpsToolSchemaCap") != tool_engine_context.get("toolSchemaCap"):
+        raise AssertionError(f"coverage index tools/parsers tool/engine/context schema cap mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("resultParserCounts") != result_parser.get("counts"):
         raise AssertionError(f"coverage index tools/parsers result-parser counts mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("resultParserParsedTools") != result_parser.get("parsedTools"):
