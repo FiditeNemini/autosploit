@@ -39,6 +39,7 @@ EXPECTED_PROOFS = {
     "runtime-continuous-batching-cli-proof.py",
     "prove-live-continuous-batching.py",
     "streaming-parser-reuse-proof.py",
+    "startup-cache-defaults-proof.py",
 }
 
 EXPECTED_ROUTES = {
@@ -52,6 +53,7 @@ EXPECTED_ROUTES = {
     "/qa/runtime-local-model-lane",
     "/qa/continuous-batching-coverage",
     "/qa/streaming-parser-reuse",
+    "/qa/startup-cache-defaults",
 }
 
 EXPECTED_LIVE_ARTIFACTS = {
@@ -142,6 +144,7 @@ def run() -> None:
             "newContextPreservesEngineSession",
             "continuousBatchingSource",
             "streamingParserReuse",
+            "startupCacheDefaults",
             "unsupportedStartBlocked",
             "runtimeLocalModelLane",
         ):
@@ -155,6 +158,8 @@ def run() -> None:
             raise AssertionError(f"runtime streaming parser source parity mismatch: {coverage}")
         if coverage.get("streamingParserResponsesStoreSessionMode") != "store-response-session-and-resolve-previous-response-id":
             raise AssertionError(f"runtime streaming parser session mode mismatch: {coverage}")
+        if coverage.get("startupCacheDefaultsContractParity") is not True:
+            raise AssertionError(f"runtime startup cache defaults parity mismatch: {coverage}")
         if coverage.get("continuousBatchingProofLevel") != "source-and-live-qwen-stress-backed":
             raise AssertionError(f"runtime continuous batching proof level mismatch: {coverage}")
         if coverage.get("continuousBatchingLiveLoadedModelStress") != "qwen-live-max-running-observed-2":

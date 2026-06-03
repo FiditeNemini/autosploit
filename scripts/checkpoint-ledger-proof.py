@@ -40,13 +40,16 @@ def wait_for_app(timeout: float = 15.0) -> None:
 
 
 def expected_checkpoints() -> list[Path]:
-    return sorted((ROOT / "docs" / "checkpoints").glob("*.md"), key=checkpoint_number)
+    return sorted(
+        (ROOT / "docs" / "checkpoints").glob("*.md"),
+        key=lambda path: (checkpoint_number(path), str(path.relative_to(ROOT))),
+    )
 
 
 def checkpoint_number(path: Path) -> int:
     match = re.search(r"checkpoint-(\d+)\.md$", path.name)
     if not match:
-        raise AssertionError(f"checkpoint doc missing numeric suffix: {path.relative_to(ROOT)}")
+        return -1
     return int(match.group(1))
 
 

@@ -40,6 +40,7 @@ REQUIRED_ROUTES = {
     "/qa/seed-inference-log-actions",
     "/qa/inference-log-action",
     "/qa/agent-settings-action",
+    "/qa/startup-cache-defaults",
 }
 
 REQUIRED_CONTRACTS = {
@@ -55,6 +56,7 @@ REQUIRED_CONTRACTS = {
     "toolStatusAndActions",
     "inferenceLogActions",
     "visualSettingsProofs",
+    "startupCacheDefaults",
 }
 
 REQUIRED_PROOFS = {
@@ -75,6 +77,7 @@ REQUIRED_PROOFS = {
     "visual-cve-settings-status-proof.py",
     "visual-tool-settings-status-proof.py",
     "visual-live-cache-stats-proof.py",
+    "startup-cache-defaults-proof.py",
 }
 
 REQUIRED_VISUAL_MANIFESTS = {
@@ -206,6 +209,8 @@ def assert_settings_coverage() -> None:
         raise AssertionError(f"settings coverage category parity mismatch: {coverage}")
     if coverage.get("cacheResponseMethod") != "prefix-cache-l2-turboquant":
         raise AssertionError(f"settings coverage cache method mismatch: {coverage}")
+    if coverage.get("startupCacheDefaultsContractParity") is not True:
+        raise AssertionError(f"settings coverage startup defaults parity mismatch: {coverage}")
     if coverage.get("supportedFamilies") != ["qwen", "minimax"]:
         raise AssertionError(f"settings coverage supported family mismatch: {coverage}")
     if coverage.get("settingsSurfaces") != REQUIRED_SETTINGS_SURFACES:
