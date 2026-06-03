@@ -26,6 +26,7 @@ EXPECTED_DOMAINS = [
     "requestAudit",
     "sessionContextCache",
     "promptInjectionBoundary",
+    "localModelLane",
     "sessionWorkflows",
     "parallelAgents",
     "continuousBatching",
@@ -45,6 +46,7 @@ EXPECTED_CONTRACTS = {
     "responsesEndpointReuse",
     "sessionContextCacheFlow",
     "contextPromptInjectionBoundary",
+    "runtimeLocalModelLane",
     "toolParserMatrix",
     "reasoningParserAutodetect",
     "toolParserAutodetect",
@@ -79,6 +81,7 @@ EXPECTED_ROUTES = [
     "/qa/agent-loop-phase-matrix",
     "/qa/session-context-cache-flow",
     "/qa/context-prompt-injection-boundary",
+    "/qa/runtime-local-model-lane",
     "/qa/cache-artifact-matrix",
     "/qa/context-coverage",
     "/qa/context-budget-compaction",
@@ -100,6 +103,7 @@ EXPECTED_PROOFS = [
     "deep-runtime-flow-coverage-proof.py",
     "session-context-cache-flow-proof.py",
     "context-prompt-injection-boundary-proof.py",
+    "runtime-local-model-lane-proof.py",
     "cache-artifact-matrix-proof.py",
     "tool-flow-coverage-proof.py",
     "runtime-coverage-proof.py",
@@ -231,6 +235,12 @@ def run() -> None:
             raise AssertionError(f"context prompt-injection boundary proof parity mismatch: {coverage}")
         if coverage.get("contextPromptInjectionBoundaryPolicy") != "search-on-demand-not-force-injected":
             raise AssertionError(f"context prompt-injection boundary policy mismatch: {coverage}")
+        if coverage.get("runtimeLocalModelLaneContractParity") is not True:
+            raise AssertionError(f"runtime local model lane parity mismatch: {coverage}")
+        if coverage.get("runtimeLocalModelLaneArtifactFileParity") is not True:
+            raise AssertionError(f"runtime local model lane artifact parity mismatch: {coverage}")
+        if coverage.get("runtimeLocalModelLaneQwenTargetPath") != "/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP":
+            raise AssertionError(f"runtime local model lane Qwen target mismatch: {coverage}")
         if coverage.get("cacheArtifactMatrixContractParity") is not True:
             raise AssertionError(f"cache artifact matrix parity mismatch: {coverage}")
         if coverage.get("cacheArtifactMatrixArtifactFileParity") is not True:

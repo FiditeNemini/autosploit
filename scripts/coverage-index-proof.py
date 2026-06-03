@@ -980,6 +980,25 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index cache artifact matrix artifact parity mismatch: {runtime_group}")
     if runtime_group.get("cacheArtifactMatrixProofFileParity") != cache_artifact_matrix.get("proofFileParity"):
         raise AssertionError(f"coverage index cache artifact matrix proof parity mismatch: {runtime_group}")
+    runtime_local_model_lane = request("GET", "/qa/runtime-local-model-lane")
+    if runtime_local_model_lane.get("ok") is not True:
+        raise AssertionError(f"runtime local model lane route failed: {runtime_local_model_lane}")
+    if "/qa/runtime-local-model-lane" not in (runtime_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index runtime group missing local model lane route: {runtime_group}")
+    if "runtime-local-model-lane-proof.py" not in (runtime_group.get("proofs") or []):
+        raise AssertionError(f"coverage index runtime group missing local model lane proof: {runtime_group}")
+    if runtime_group.get("runtimeLocalModelLaneRows") != runtime_local_model_lane.get("rows"):
+        raise AssertionError(f"coverage index runtime local model lane rows mismatch: {runtime_group}")
+    if runtime_group.get("runtimeLocalModelLaneContractParity") != runtime_local_model_lane.get("contractParity"):
+        raise AssertionError(f"coverage index runtime local model lane parity mismatch: {runtime_group}")
+    if runtime_group.get("runtimeLocalModelLaneArtifactFileParity") != runtime_local_model_lane.get("artifactFileParity"):
+        raise AssertionError(f"coverage index runtime local model lane artifact parity mismatch: {runtime_group}")
+    if runtime_group.get("runtimeLocalModelLaneProofFileParity") != runtime_local_model_lane.get("proofFileParity"):
+        raise AssertionError(f"coverage index runtime local model lane proof parity mismatch: {runtime_group}")
+    if runtime_group.get("runtimeLocalModelLaneQwenTargetPath") != runtime_local_model_lane.get("qwenTargetPath"):
+        raise AssertionError(f"coverage index runtime local model lane Qwen path mismatch: {runtime_group}")
+    if runtime_group.get("runtimeLocalModelLaneActiveFamilies") != runtime_local_model_lane.get("activeFamilies"):
+        raise AssertionError(f"coverage index runtime local model lane active families mismatch: {runtime_group}")
     if continuous_batching.get("ok") is not True:
         raise AssertionError(f"continuous batching coverage route failed: {continuous_batching}")
     if runtime_group.get("continuousBatchingContracts") != continuous_batching.get("contracts"):

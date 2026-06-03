@@ -31,6 +31,7 @@ EXPECTED_PROOFS = {
     "verify-live-models.py",
     "prove-block-l2-cache.py",
     "cache-artifact-matrix-proof.py",
+    "runtime-local-model-lane-proof.py",
     "prove-ssm-rederive-status.py",
     "continuous-batching-coverage-proof.py",
     "parallel-agent-session-proof.py",
@@ -48,6 +49,7 @@ EXPECTED_ROUTES = {
     "/qa/seed-live-cache-stats",
     "/qa/engine-python-runtime",
     "/qa/cache-artifact-matrix",
+    "/qa/runtime-local-model-lane",
     "/qa/continuous-batching-coverage",
     "/qa/streaming-parser-reuse",
 }
@@ -141,6 +143,7 @@ def run() -> None:
             "continuousBatchingSource",
             "streamingParserReuse",
             "unsupportedStartBlocked",
+            "runtimeLocalModelLane",
         ):
             if contracts.get(key) is not True:
                 raise AssertionError(f"runtime contract missing {key}: {coverage}")
@@ -199,6 +202,12 @@ def run() -> None:
             raise AssertionError(f"runtime cache artifact matrix artifact parity mismatch: {coverage}")
         if coverage.get("cacheArtifactMatrixProofFileParity") is not True:
             raise AssertionError(f"runtime cache artifact matrix proof parity mismatch: {coverage}")
+        if coverage.get("runtimeLocalModelLaneContractParity") is not True:
+            raise AssertionError(f"runtime local model lane parity mismatch: {coverage}")
+        if coverage.get("runtimeLocalModelLaneArtifactFileParity") is not True:
+            raise AssertionError(f"runtime local model lane artifact parity mismatch: {coverage}")
+        if coverage.get("runtimeLocalModelLaneQwenTargetPath") != "/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP":
+            raise AssertionError(f"runtime local model lane Qwen target mismatch: {coverage}")
         if not EXPECTED_PROOFS.issubset(set(coverage.get("proofs") or [])):
             raise AssertionError(f"runtime proof list missing entries: {coverage}")
         if coverage.get("proofCount", 0) < len(EXPECTED_PROOFS):

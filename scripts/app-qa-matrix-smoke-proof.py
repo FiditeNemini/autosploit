@@ -108,6 +108,7 @@ def assert_testserver_smoke() -> None:
     deep_runtime_flow_coverage = request("GET", "/qa/deep-runtime-flow-coverage")
     session_context_cache_flow = request("GET", "/qa/session-context-cache-flow")
     cache_artifact_matrix = request("GET", "/qa/cache-artifact-matrix")
+    runtime_local_model_lane = request("GET", "/qa/runtime-local-model-lane")
     continuous_batching_coverage = request("GET", "/qa/continuous-batching-coverage")
     tool_coverage = request("GET", "/qa/tool-coverage")
     result_parser_coverage = request("GET", "/qa/result-parser-coverage")
@@ -256,6 +257,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/cache-artifact-matrix failed: {cache_artifact_matrix}")
     if cache_artifact_matrix.get("contractParity") is not True:
         raise AssertionError(f"/qa/cache-artifact-matrix contract parity mismatch: {cache_artifact_matrix}")
+    if runtime_local_model_lane.get("ok") is not True:
+        raise AssertionError(f"/qa/runtime-local-model-lane failed: {runtime_local_model_lane}")
+    if runtime_local_model_lane.get("contractParity") is not True:
+        raise AssertionError(f"/qa/runtime-local-model-lane contract parity mismatch: {runtime_local_model_lane}")
+    if runtime_local_model_lane.get("qwenTargetPath") != "/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP":
+        raise AssertionError(f"/qa/runtime-local-model-lane qwen target mismatch: {runtime_local_model_lane}")
     if "/qa/parser-tool-matrix" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing parser tool matrix route contract: {qa}")
     if "/qa/runtime-coverage" not in qa.get("stateRoutes", []):
@@ -478,6 +485,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/runtime-coverage cache artifact matrix parity mismatch: {runtime_coverage}")
     if runtime_coverage.get("cacheArtifactMatrixRows") != cache_artifact_matrix.get("rows"):
         raise AssertionError(f"/qa/runtime-coverage cache artifact matrix row mismatch: {runtime_coverage}")
+    if runtime_coverage.get("runtimeLocalModelLaneContractParity") is not True:
+        raise AssertionError(f"/qa/runtime-coverage local model lane parity mismatch: {runtime_coverage}")
+    if runtime_coverage.get("runtimeLocalModelLaneQwenTargetPath") != runtime_local_model_lane.get("qwenTargetPath"):
+        raise AssertionError(f"/qa/runtime-coverage local model lane qwen path mismatch: {runtime_coverage}")
+    if "/qa/runtime-local-model-lane" not in (state.get("qaCoverage") or {}).get("stateRoutes", []):
+        raise AssertionError(f"/state missing runtime local model lane route contract: {state.get('qaCoverage')}")
     if runtime_coverage.get("liveProofArtifactCount", 0) < 6:
         raise AssertionError(f"/qa/runtime-coverage live artifact count mismatch: {runtime_coverage}")
     if runtime_coverage.get("qwenContinuousBatchingArtifactOK") is not True:

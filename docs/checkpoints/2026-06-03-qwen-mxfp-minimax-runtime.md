@@ -67,6 +67,31 @@ source-and-live-qwen-stress-backed` and mirrors the live artifact through
 `/qa/coverage-index`. This is a Qwen live batching proof only; MiniMax
 multi-request live batching remains a separate not-yet-run stress proof.
 
+## Local low-RAM model lane addendum
+
+`scripts/runtime-local-model-lane-proof.py` now drives
+`/qa/runtime-local-model-lane`. The route pins the active small local Qwen beta
+target to `/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP` and reads the
+release-app live artifact
+`docs/live-proofs/2026-06-03-release-app-qwen-mxfp4-live.json`.
+
+The route proves:
+
+- Qwen release-app live chat returned `RELEASE-QWEN-OK`
+- repeat prompt cache reuse surfaced cached tokens / scheduler hits
+- active Qwen smoke memory stayed under the 20 GB low-RAM ceiling
+- Qwen topology is `hybrid_ssm_attention` with TurboQuant q4 KV, prefix cache,
+  paged cache, block L2, and SSM companion enabled
+- Qwen continuous batching uses the same local model path and also stays under
+  the 20 GB active-memory ceiling
+- MiniMax small release lane remains tracked at
+  `/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ`
+- active beta families are Qwen/MiniMax only, with ZAYA excluded from active
+  runtime artifacts
+
+The route is mirrored into `/qa/runtime-coverage`,
+`/qa/deep-runtime-flow-coverage`, and `/qa/coverage-index`.
+
 ## Streaming, parser, and Responses reuse addendum
 
 `scripts/streaming-parser-reuse-proof.py` now verifies
