@@ -50,6 +50,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/evidence-lifecycle-coverage",
     "/qa/evidence-lifecycle-flow-matrix",
     "/qa/cve-taxonomy-matrix",
+    "/qa/cve-import-embedding-coverage",
     "/qa/settings-coverage",
     "/qa/settings-surface-matrix",
     "/qa/visual-coverage",
@@ -121,6 +122,7 @@ REQUIRED_PROOFS = {
     "evidence-lifecycle-coverage-proof.py",
     "evidence-lifecycle-flow-matrix-proof.py",
     "cve-taxonomy-matrix-proof.py",
+    "cve-import-embedding-coverage-proof.py",
     "settings-coverage-proof.py",
     "settings-surface-matrix-proof.py",
     "visual-coverage-proof.py",
@@ -1291,6 +1293,7 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index evidence lifecycle flow matrix proof-file parity mismatch: {chat_context_group}")
     cve_taxonomy = request("GET", "/qa/cve-taxonomy-coverage")
     cve_taxonomy_matrix = request("GET", "/qa/cve-taxonomy-matrix")
+    cve_import_embedding = request("GET", "/qa/cve-import-embedding-coverage")
     if chat_context_group.get("cveTaxonomySourceFeeds") != cve_taxonomy.get("sourceFeeds"):
         raise AssertionError(f"coverage index chat/context cve taxonomy source feed mismatch: {chat_context_group}")
     if chat_context_group.get("cveTaxonomySourceFeedCount") != cve_taxonomy.get("sourceFeedCount"):
@@ -1333,6 +1336,16 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index chat/context cve taxonomy matrix row proof parity mismatch: {chat_context_group}")
     if chat_context_group.get("cveTaxonomyMatrixEvidenceFlowCount") != cve_taxonomy_matrix.get("evidenceFlowCount"):
         raise AssertionError(f"coverage index chat/context cve taxonomy matrix evidence count mismatch: {chat_context_group}")
+    if "/qa/cve-import-embedding-coverage" not in (chat_context_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index chat/context missing cve import embedding route: {chat_context_group}")
+    if chat_context_group.get("cveImportEmbeddingProofLevel") != cve_import_embedding.get("proofLevel"):
+        raise AssertionError(f"coverage index cve import embedding proof level mismatch: {chat_context_group}")
+    if chat_context_group.get("cveImportEmbeddingImportFormats") != cve_import_embedding.get("importFormats"):
+        raise AssertionError(f"coverage index cve import embedding import format mismatch: {chat_context_group}")
+    if chat_context_group.get("cveImportEmbeddingContractParity") != cve_import_embedding.get("contractParity"):
+        raise AssertionError(f"coverage index cve import embedding contract parity mismatch: {chat_context_group}")
+    if chat_context_group.get("cveImportEmbeddingProofFileParity") != cve_import_embedding.get("proofFileParity"):
+        raise AssertionError(f"coverage index cve import embedding proof parity mismatch: {chat_context_group}")
     settings_visuals_group = groups.get("settingsAndVisuals") or {}
     settings_coverage = request("GET", "/qa/settings-coverage")
     settings_surface_matrix = request("GET", "/qa/settings-surface-matrix")

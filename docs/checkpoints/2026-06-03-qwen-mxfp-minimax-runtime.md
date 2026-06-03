@@ -80,6 +80,18 @@ This gate is source/API-contract-backed. It does not replace the separate live
 Qwen and MiniMax load/chat/cache artifacts, and it does not claim MiniMax live
 multi-request batching.
 
+## CVE import, include filter, and embedding addendum
+
+`scripts/cve-import-embedding-coverage-proof.py` now drives
+`/qa/cve-import-embedding-coverage`. The proof imports a mixed CVE list,
+applies an `includeOnly` allowlist, verifies selected and excluded CVE IDs,
+seeds semantic CVE embeddings through the fake test embedder, requests a
+semantic CVE context packet, and checks that the route reports the
+`search-on-demand-not-force-injected` context policy.
+
+This makes the CVE import/filter/embedding flow visible in `/qa/coverage-index`
+instead of leaving it split across the CVE settings and semantic CVE proofs.
+
 ## MiniMax status
 
 The release app proof loaded `/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ`

@@ -261,6 +261,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing evidence lifecycle flow matrix route contract: {qa}")
     if "/qa/cve-taxonomy-matrix" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing cve taxonomy matrix route contract: {qa}")
+    if "/qa/cve-import-embedding-coverage" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing cve import embedding coverage route contract: {qa}")
     if "/qa/settings-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing settings coverage route contract: {qa}")
     if "/qa/settings-surface-matrix" not in qa.get("stateRoutes", []):

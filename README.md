@@ -79,6 +79,7 @@ The current beta DMG is published as a GitHub prerelease:
 - **Autonomous agent loop**: deployed agents run in autopilot mode, inherit model/settings state, expose live tool status, and can request the full registered tool schema set instead of only the active tab subset.
 - **Broad tool surface**: the in-app model tool catalogue covers recon, web, network, credentials, exploit, post-exploit, OSINT, supply-chain, CVE, context, and shell execution.
 - **Supply-chain + CVE workflow**: first-class supply-chain tab, CVE search/import actions, SBOM/dependency/secrets actions, CLI routing, installer taxonomy, and per-action status state are wired.
+- **CVE import/include + embeddings gate**: `/qa/cve-import-embedding-coverage` proves CVE list import with an `includeOnly` CVE-ID allowlist, selected/excluded import audit state, semantic CVE embedding search, on-demand CVE/context retrieval, and the bounded prompt-injection policy.
 - **Shell tool safety**: `run_shell` remains visible to the agent/tool catalogue, but destructive command samples are blocked through an auditable pattern policy covered by registry and QA proofs.
 - **Runtime packaging path**: release packaging bundles the vMLX Python engine, selects a valid bundled/runtime interpreter, verifies required modules, signs the app/DMG, and records manifest evidence.
 - **Qwen + MiniMax cache proofs**: live/release harnesses cover Qwen MXFP4-MTP hybrid SSM attention, MiniMax full-KV attention, TurboQuant KV cache, prefix cache, paged/block L2 cache, and repeat-prompt cache hits.
