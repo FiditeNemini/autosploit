@@ -74,6 +74,14 @@ The current beta DMG is published as a GitHub prerelease:
 - Signing: Developer ID Application, hardened runtime
 - Notarization: app and DMG submitted, stapled, and validated
 
+Latest local beta package sanity build, not yet uploaded to the GitHub release:
+
+- Built: June 3, 2026
+- Command: `./script/package_release.sh --skip-notarize`
+- Local DMG: `release/ExploitBot-beta.dmg`
+- Local DMG SHA256: `adec88db78ba8eda813ea16adf8d59d3016380a68442f810a7411aa74b3bf483`
+- Status: signed app and signed DMG verified locally; notarization still requires `EXPLOITBOT_NOTARY_PROFILE` or local notary environment variables before replacing the published release asset.
+
 ### Done in the current beta lane
 
 - **Autonomous agent loop**: deployed agents run in autopilot mode, inherit model/settings state, expose live tool status, and can request the full registered tool schema set instead of only the active tab subset.
