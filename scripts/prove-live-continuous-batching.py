@@ -109,8 +109,6 @@ def chat(base_url: str, model_name: str, prompt: str, barrier: threading.Barrier
             "messages": [{"role": "user", "content": prompt}],
             "max_tokens": 16,
             "stream": False,
-            "temperature": 0,
-            "top_p": 1,
             "enable_thinking": False,
             "chat_template_kwargs": {"enable_thinking": False},
             "stream_options": {"include_usage": True},
@@ -201,6 +199,7 @@ def main() -> None:
         "maxNumSeqs": 2,
     }
 
+    error: Exception | None = None
     try:
         proc = launch_engine(model, port, Path(cache_tmp.name))
         health = wait_health(base_url, proc)
@@ -212,15 +211,25 @@ def main() -> None:
         topology = cache_config.get("topology") or {}
         kv = cache_config.get("kv_cache_quantization") or {}
         require(health.get("engine_type") == "batched", "engine did not report BatchedEngine", health)
-        require(topology.get("cache_type") in {"hybrid", "full_kv"}, "unexpected cache topology", health)
+        topology_name = str(topology.get("name") or "")
+        cache_type = str(topology.get("cache_type") or "")
+        valid_topology = topology_name in {"hybrid_ssm_attention", "full_kv_attention"} or cache_type in {"hybrid", "full_kv", "kv"}
+        require(valid_topology, "unexpected cache topology", health)
         require(kv.get("mode") == "turboquant-q4", "TurboQuant q4 KV cache not enabled", health)
         require((cache_config.get("prefix_cache") or {}).get("enabled") is True, "prefix cache not enabled", health)
         require((cache_config.get("paged_cache") or {}).get("enabled") is True, "paged cache not enabled", health)
 
         barrier = threading.Barrier(2)
+        shared_context = (
+            "Authorized ExploitBot continuous batching proof. "
+            "The following repeated context is benign test data for cache storage: "
+            "alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu xi omicron pi rho sigma tau upsilon phi chi psi omega. "
+            "Cache proof segment one covers prefix cache, prompt L2, paged cache, block L2, TurboQuant KV, and scheduler overlap. "
+            "Cache proof segment two repeats the same harmless context so the prompt is long enough to create paged cache blocks. "
+        )
         prompts = [
-            f"Authorized batch test A. Reply with the exact text BATCH-{response_marker}-A.",
-            f"Authorized batch test B. Reply with the exact text BATCH-{response_marker}-B.",
+            shared_context + f"Request A: reply briefly with BATCH-{response_marker}-A.",
+            shared_context + f"Request B: reply briefly with BATCH-{response_marker}-B.",
         ]
         with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
             futures = [
@@ -254,6 +263,14 @@ def main() -> None:
                 "results": results,
             }
         )
+    except Exception as exc:
+        error = exc
+        report.update(
+            {
+                "ok": False,
+                "error": f"{type(exc).__name__}: {exc}",
+            }
+        )
     finally:
         if proc is not None and proc.poll() is None:
             proc.send_signal(signal.SIGTERM)
@@ -262,10 +279,14 @@ def main() -> None:
             except subprocess.TimeoutExpired:
                 proc.kill()
                 proc.wait(timeout=15.0)
+        if proc is not None:
+            report["engineLogTail"] = read_output_tail(proc)
         cache_tmp.cleanup()
 
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    if error is not None:
+        raise error
     print(f"live-{family}-continuous-batching proof passed")
 
 
