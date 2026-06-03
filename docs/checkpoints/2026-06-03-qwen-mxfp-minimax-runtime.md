@@ -92,6 +92,28 @@ semantic CVE context packet, and checks that the route reports the
 This makes the CVE import/filter/embedding flow visible in `/qa/coverage-index`
 instead of leaving it split across the CVE settings and semantic CVE proofs.
 
+## Prompt-injection boundary addendum
+
+`scripts/context-prompt-injection-boundary-proof.py` now drives
+`/qa/context-prompt-injection-boundary`. The route proves the app is using
+bounded automatic context plus on-demand tools instead of force-injecting broad
+CVE/stash/tool state into every prompt.
+
+The proof checks:
+
+- automatic context cap `4` and the active configured injected-context limit
+- on-demand callback tools: `search_context`, `search_cve`, and `lookup_cve`
+- stash/CVE retrieval via context delivery modes, not broad prompt stuffing
+- per-turn tool schema cap `12` with the full agent registry kept separate
+- `run_shell` visibility plus destructive-pattern blocklist samples
+- streaming delta surfaces for content, reasoning, tool calls, and Responses
+  `previous_response_id` reuse
+- `/qa/deep-runtime-flow-coverage` and `/qa/coverage-index` mirrors
+
+This is app-state/source-backed. It does not replace live Qwen/MiniMax model
+chat or cache artifacts; it proves the prompt/context/tool boundary around
+those runtime paths.
+
 ## Session, context, and cache lifecycle addendum
 
 `scripts/session-context-cache-flow-proof.py` now drives

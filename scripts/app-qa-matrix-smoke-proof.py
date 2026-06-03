@@ -118,6 +118,7 @@ def assert_testserver_smoke() -> None:
     agent_flow_inventory = request("GET", "/qa/agent-flow-inventory")
     context_coverage = request("GET", "/qa/context-coverage")
     context_budget_compaction = request("GET", "/qa/context-budget-compaction")
+    context_prompt_injection_boundary = request("GET", "/qa/context-prompt-injection-boundary")
     context_flow_matrix = request("GET", "/qa/context-flow-matrix")
     evidence_lifecycle_coverage = request("GET", "/qa/evidence-lifecycle-coverage")
     evidence_lifecycle_flow_matrix = request("GET", "/qa/evidence-lifecycle-flow-matrix")
@@ -267,6 +268,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/state missing agent flow inventory route contract: {qa}")
     if "/qa/context-coverage" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing context coverage route contract: {qa}")
+    if "/qa/context-prompt-injection-boundary" not in qa.get("stateRoutes", []):
+        raise AssertionError(f"/state missing context prompt-injection boundary route contract: {qa}")
     if "/qa/context-flow-matrix" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing context flow matrix route contract: {qa}")
     if "/qa/evidence-lifecycle-coverage" not in qa.get("stateRoutes", []):
@@ -501,6 +504,14 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/context-budget-compaction prompt injection policy mismatch: {context_budget_compaction}")
     if "/qa/context-budget-compaction" not in (state.get("qaCoverage") or {}).get("stateRoutes", []):
         raise AssertionError(f"/state missing context budget route contract: {state.get('qaCoverage')}")
+    if context_prompt_injection_boundary.get("ok") is not True:
+        raise AssertionError(f"/qa/context-prompt-injection-boundary failed: {context_prompt_injection_boundary}")
+    if context_prompt_injection_boundary.get("contractParity") is not True:
+        raise AssertionError(f"/qa/context-prompt-injection-boundary contract parity mismatch: {context_prompt_injection_boundary}")
+    if context_prompt_injection_boundary.get("proofFileParity") is not True:
+        raise AssertionError(f"/qa/context-prompt-injection-boundary proof parity mismatch: {context_prompt_injection_boundary}")
+    if context_prompt_injection_boundary.get("promptInjectionPolicy") != "search-on-demand-not-force-injected":
+        raise AssertionError(f"/qa/context-prompt-injection-boundary policy mismatch: {context_prompt_injection_boundary}")
     expected_retrieval_sources = ["asset.port", "finding", "tool.output", "stash.note", "cve"]
     if context_coverage.get("retrievalSources") != expected_retrieval_sources:
         raise AssertionError(f"/qa/context-coverage retrieval source list mismatch: {context_coverage}")

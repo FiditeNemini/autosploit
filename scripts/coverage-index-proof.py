@@ -1221,6 +1221,29 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index context budget compaction format mismatch: {chat_context_group}")
     if chat_context_group.get("contextBudgetPromptInjectionPolicy") != context_budget.get("promptInjectionPolicy"):
         raise AssertionError(f"coverage index context budget prompt injection policy mismatch: {chat_context_group}")
+    context_prompt_injection_boundary = request("GET", "/qa/context-prompt-injection-boundary")
+    if context_prompt_injection_boundary.get("ok") is not True:
+        raise AssertionError(f"context prompt-injection boundary route failed: {context_prompt_injection_boundary}")
+    if "/qa/context-prompt-injection-boundary" not in (chat_context_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index chat/context missing prompt-injection boundary endpoint: {chat_context_group}")
+    if "context-prompt-injection-boundary-proof.py" not in (chat_context_group.get("proofs") or []):
+        raise AssertionError(f"coverage index chat/context missing prompt-injection boundary proof: {chat_context_group}")
+    if chat_context_group.get("contextPromptInjectionBoundaryRows") != context_prompt_injection_boundary.get("rows"):
+        raise AssertionError(f"coverage index prompt-injection boundary row list mismatch: {chat_context_group}")
+    if chat_context_group.get("contextPromptInjectionBoundaryRowCount") != context_prompt_injection_boundary.get("rowCount"):
+        raise AssertionError(f"coverage index prompt-injection boundary row count mismatch: {chat_context_group}")
+    if chat_context_group.get("contextPromptInjectionBoundaryPolicy") != context_prompt_injection_boundary.get("promptInjectionPolicy"):
+        raise AssertionError(f"coverage index prompt-injection boundary policy mismatch: {chat_context_group}")
+    if chat_context_group.get("contextPromptInjectionBoundaryContracts") != context_prompt_injection_boundary.get("contracts"):
+        raise AssertionError(f"coverage index prompt-injection boundary contract map mismatch: {chat_context_group}")
+    if chat_context_group.get("contextPromptInjectionBoundaryContractCount") != context_prompt_injection_boundary.get("contractCount"):
+        raise AssertionError(f"coverage index prompt-injection boundary contract count mismatch: {chat_context_group}")
+    if chat_context_group.get("contextPromptInjectionBoundaryContractParity") != context_prompt_injection_boundary.get("contractParity"):
+        raise AssertionError(f"coverage index prompt-injection boundary contract parity mismatch: {chat_context_group}")
+    if chat_context_group.get("contextPromptInjectionBoundaryProofs") != context_prompt_injection_boundary.get("proofs"):
+        raise AssertionError(f"coverage index prompt-injection boundary proof list mismatch: {chat_context_group}")
+    if chat_context_group.get("contextPromptInjectionBoundaryProofFileParity") != context_prompt_injection_boundary.get("proofFileParity"):
+        raise AssertionError(f"coverage index prompt-injection boundary proof parity mismatch: {chat_context_group}")
     context_flow_matrix = request("GET", "/qa/context-flow-matrix")
     if context_flow_matrix.get("ok") is not True:
         raise AssertionError(f"context flow matrix route failed: {context_flow_matrix}")
