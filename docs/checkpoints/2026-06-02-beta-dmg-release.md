@@ -71,6 +71,14 @@ python3 -m json.tool release/release-manifest.json >/dev/null
 - Updated the OSINT and report gallery cards to use cropped, versioned
   screenshot assets so CDN immutable caching does not keep stale dark crops:
   `osint-username-results-v3.png` and `report-export-status-v3.png`.
+- Replaced notification-contaminated chat/tool screenshots with cleaned
+  versioned captures:
+  `chat-tool-states-v4.png` and `tool-settings-status-v4.png`.
+- Updated `robots.txt`, `sitemap.xml`, `llms.txt`, `llms-full.txt`,
+  `security.txt`, `.well-known/security.txt`, and `site.webmanifest` on the
+  server.
+- Added localized browser title/description updates and full visible-copy
+  i18n coverage for EN/KO/ZH/ES/JA.
 - Backed up the previous server `index.html` under the server-local backup
   directory before replacing it.
 
@@ -95,6 +103,29 @@ python3 -m json.tool release/release-manifest.json >/dev/null
   - language selector changed the hero text for KO/ZH/ES/JA/EN
 - Additional scrolled viewport screenshot confirmed the OSINT and report cards
   render their active UI screenshots, not blank stale cached image slots.
+- `node /tmp/exploitbot-pw/verify-site-i18n-visual.js`
+  - live desktop viewport: `1440x1000`
+  - live mobile viewport: `390x844`
+  - language modes checked: EN, KO, ZH, ES, JA
+  - all 11 images loaded in each language/viewport pair
+  - no console/page errors
+  - no missing `data-i18n` keys
+  - no empty translated labels
+  - no horizontal overflow
+  - localized page title/description updated per language
+  - DMG CTA href and SHA256 remained correct
+  - stale screenshot references were absent
+- Visual captures inspected:
+  - `/tmp/exploitbot-site-shots/desktop-en-full.png`
+  - `/tmp/exploitbot-site-shots/mobile-en-full.png`
+  - `/tmp/exploitbot-site-shots/mobile-ja-full.png`
+  - `/tmp/exploitbot-site-shots/desktop-gallery-en-current.png`
+  - `/tmp/exploitbot-site-shots/mobile-gallery-en-current.png`
+  - `/tmp/exploitbot-site-shots/mobile-gallery-i18n-current.png`
+- Cloudflare cache purge succeeded for the public metadata files. Cloudflare's
+  managed robots feature still prepends its Content-Signal block unless the
+  zone-level Bot Management setting is changed with broader Cloudflare
+  permissions; the origin `robots.txt` itself is current and clean.
 
 ## Current status
 
@@ -128,3 +159,22 @@ python3 -m json.tool release/release-manifest.json >/dev/null
 - `python3 -m json.tool release/release-manifest.json`
 - `gh release view v0.1.0-beta --json name,tagName,isPrerelease,isDraft,url,assets,targetCommitish,publishedAt`
 - `curl -I -L --max-time 30 https://github.com/jjang-ai/exploitbot/releases/download/v0.1.0-beta/ExploitBot-beta.dmg`
+
+## June 3 repo proof refresh
+
+- `python3 scripts/tool-registry-coverage-proof.py`
+- `python3 scripts/coverage-index-proof.py`
+- `python3 scripts/beta-readiness-coverage-proof.py`
+- `python3 scripts/release-readiness-proof.py`
+- `python3 scripts/agent-autopilot-proof.py`
+- `python3 scripts/app-qa-matrix-smoke-proof.py`
+
+Notes:
+
+- `release-readiness-proof.py` now supports both verified lanes: notarized and
+  stapled when notary credentials are present, or signed local package with
+  `requires-notary-credentials` when the ignored local `release/` artifacts are
+  rebuilt without notary credentials.
+- `run_shell` remains available in the agent tool catalogue, and the destructive
+  command blocklist is now exported through `/qa/tool-registry-coverage` and
+  checked by the registry and coverage-index proofs.

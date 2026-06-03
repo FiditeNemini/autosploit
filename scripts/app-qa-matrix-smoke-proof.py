@@ -1122,8 +1122,10 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index release artifact map mismatch: {coverage_index}")
     if release_group.get("releaseManifestFieldParity") is not True:
         raise AssertionError(f"/qa/coverage-index release manifest field parity mismatch: {coverage_index}")
-    if release_group.get("notarizationGate") != "requires-notary-profile":
+    if release_group.get("notarizationGate") != release_readiness.get("notarizationGate"):
         raise AssertionError(f"/qa/coverage-index release notarization gate mismatch: {coverage_index}")
+    if release_group.get("notarizationGate") not in {"passed", "requires-notary-credentials", "requires-notary-profile"}:
+        raise AssertionError(f"/qa/coverage-index release notarization gate is not recognized: {coverage_index}")
     if release_group.get("notaryProfileRequired") != release_readiness.get("notaryProfileRequired"):
         raise AssertionError(f"/qa/coverage-index release notary profile requirement mismatch: {coverage_index}")
     if release_group.get("notarizationGateReason") != release_readiness.get("notarizationGateReason"):
@@ -1146,7 +1148,7 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/beta-readiness-coverage package readiness mismatch: {beta_readiness}")
     if beta_readiness.get("distributionReady") is not False:
         raise AssertionError(f"/qa/beta-readiness-coverage distribution readiness mismatch: {beta_readiness}")
-    if beta_readiness.get("notarizationGate") != "requires-notary-profile":
+    if beta_readiness.get("notarizationGate") != release_readiness.get("notarizationGate"):
         raise AssertionError(f"/qa/beta-readiness-coverage notarization gate mismatch: {beta_readiness}")
     if release_group.get("betaReadinessGates") != beta_readiness.get("gates"):
         raise AssertionError(f"/qa/coverage-index beta readiness gates mismatch: {coverage_index}")

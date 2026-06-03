@@ -854,8 +854,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index release artifact map mismatch: {release_group}")
     if release_group.get("releaseManifestFields") != release_coverage.get("manifestFields"):
         raise AssertionError(f"coverage index release manifest fields mismatch: {release_group}")
-    if release_group.get("notarizationGate") != "requires-notary-profile":
+    if release_group.get("notarizationGate") != release_coverage.get("notarizationGate"):
         raise AssertionError(f"coverage index release notarization gate mismatch: {release_group}")
+    if release_group.get("notarizationGate") not in {"passed", "requires-notary-credentials"}:
+        raise AssertionError(f"coverage index release notarization gate is not a known beta gate: {release_group}")
     if release_group.get("notaryProfileRequired") != release_coverage.get("notaryProfileRequired"):
         raise AssertionError(f"coverage index release notary profile requirement mismatch: {release_group}")
     if release_group.get("notarizationGateReason") != release_coverage.get("notarizationGateReason"):
@@ -1419,10 +1421,14 @@ def assert_coverage_index() -> None:
         "executionCountParity",
         "resultModeCounts",
         "resultModeCountParity",
+        "shellSafetyPolicy",
     ):
         aggregate_key = "toolRegistry" + key[:1].upper() + key[1:]
         if tools_parsers_group.get(aggregate_key) != tool_coverage.get(key):
             raise AssertionError(f"coverage index tools/parsers registry detail {aggregate_key} mismatch: {tools_parsers_group}")
+    shell_policy = tools_parsers_group.get("toolRegistryShellSafetyPolicy") or {}
+    if shell_policy.get("availability") != "alwaysVisible" or shell_policy.get("dangerSampleBlocked") is not True:
+        raise AssertionError(f"coverage index shell safety policy mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("alwaysVisibleToolCount") != tool_coverage.get("alwaysVisibleCount"):
         raise AssertionError(f"coverage index tools/parsers always-visible tool count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("boundedCatalogueLimit") != tool_coverage.get("boundedCatalogueLimit"):

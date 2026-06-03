@@ -81,6 +81,25 @@ def run() -> None:
             if name not in raw_only:
                 raise AssertionError(f"expected raw-only tool not declared raw-only: {name} {tools.get(name)}")
 
+        shell_policy = coverage.get("shellSafetyPolicy") or {}
+        run_shell_policy = tools.get("run_shell", {}).get("shellSafety") or {}
+        if shell_policy != run_shell_policy:
+            raise AssertionError(f"run_shell row policy does not match registry policy: {coverage}")
+        if shell_policy.get("tool") != "run_shell":
+            raise AssertionError(f"shell policy tool mismatch: {shell_policy}")
+        if shell_policy.get("availability") != "alwaysVisible":
+            raise AssertionError(f"run_shell must remain visible to agent prompts: {shell_policy}")
+        if shell_policy.get("mode") != "allowWithDestructivePatternBlocklist":
+            raise AssertionError(f"shell policy mode mismatch: {shell_policy}")
+        if shell_policy.get("blockedPatternCount", 0) < 10:
+            raise AssertionError(f"shell blocklist too small to audit destructive patterns: {shell_policy}")
+        if shell_policy.get("safeSampleAllowed") is not True:
+            raise AssertionError(f"safe shell sample should stay allowed: {shell_policy}")
+        if shell_policy.get("dangerSampleBlocked") is not True:
+            raise AssertionError(f"dangerous shell sample should be blocked: {shell_policy}")
+        if shell_policy.get("dangerSamplePattern") != "rm -rf /":
+            raise AssertionError(f"danger sample pattern mismatch: {shell_policy}")
+
         structured = {tool["name"] for tool in coverage.get("tools", []) if tool.get("resultMode") == "structured"}
         for name in ("subfinder", "httpx", "nuclei", "nmap", "sqlmap", "hashcat", "impacket", "linpeas", "gowitness", "graphqlmap", "syft", "grype", "osv_scanner"):
             if name not in structured:

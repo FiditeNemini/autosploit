@@ -77,7 +77,15 @@ def main() -> None:
     require(SCRIPT.stat().st_mode & 0o111 != 0, "release package script is not executable")
     require(ENTITLEMENTS.is_file(), "release entitlements are missing")
 
-    packaged = run([str(SCRIPT), "--skip-notarize"])
+    has_notary_credentials = bool(
+        os.environ.get("EXPLOITBOT_NOTARY_PROFILE")
+        or (
+            os.environ.get("NOTARIZE_APPLE_ID")
+            and os.environ.get("NOTARIZE_TEAM_ID")
+            and os.environ.get("NOTARIZE_PASSWORD")
+        )
+    )
+    packaged = run([str(SCRIPT), "--notarize" if has_notary_credentials else "--skip-notarize"])
     require(packaged.returncode == 0, "release package script failed", packaged.stdout)
     require(APP.is_dir(), "signed release app was not created")
     require(DMG.is_file(), "release DMG was not created")
@@ -128,14 +136,23 @@ def main() -> None:
     require("Developer ID Application: ShieldStack LLC" in manifest.get("identity", ""), "manifest signing identity mismatch", str(manifest))
     require(manifest.get("teamIdentifier") == "55KGF2S5AY", "manifest team identifier mismatch", str(manifest))
     require(manifest.get("hardenedRuntime") is True, "manifest hardened runtime flag missing", str(manifest))
-    require(manifest.get("notarizationStatus") == "not-submitted", "manifest notarization status mismatch", str(manifest))
-    require(manifest.get("notarizationGate") == "requires-notary-profile", "manifest notarization gate mismatch", str(manifest))
-    require(manifest.get("notaryProfileRequired") is True, "manifest notary profile requirement missing", str(manifest))
-    require(
-        manifest.get("notarizationGateReason") == "Notarization is intentionally skipped until EXPLOITBOT_NOTARY_PROFILE names a local notarytool keychain profile.",
-        "manifest notarization gate reason mismatch",
-        str(manifest),
-    )
+    if has_notary_credentials:
+        require(manifest.get("notarizationStatus") == "submitted-and-stapled", "manifest notarization status mismatch", str(manifest))
+        require(manifest.get("notarizationGate") == "passed", "manifest notarization gate mismatch", str(manifest))
+        require(
+            manifest.get("notarizationGateReason") == "Notarization completed for the app and DMG.",
+            "manifest notarization gate reason mismatch",
+            str(manifest),
+        )
+    else:
+        require(manifest.get("notarizationStatus") == "not-submitted", "manifest notarization status mismatch", str(manifest))
+        require(manifest.get("notarizationGate") == "requires-notary-credentials", "manifest notarization gate mismatch", str(manifest))
+        require(
+            manifest.get("notarizationGateReason") == "Run with EXPLOITBOT_NOTARY_PROFILE or NOTARIZE_APPLE_ID/NOTARIZE_TEAM_ID/NOTARIZE_PASSWORD.",
+            "manifest notarization gate reason mismatch",
+            str(manifest),
+        )
+    require(manifest.get("notaryProfileRequired") is False, "manifest notary profile requirement mismatch", str(manifest))
     artifacts = manifest.get("artifacts", {})
     require(artifacts.get("appPath") == "release/ExploitBot.app", "manifest app path mismatch", str(manifest))
     require(artifacts.get("dmgPath") == "release/ExploitBot-beta.dmg", "manifest DMG path mismatch", str(manifest))
@@ -149,9 +166,12 @@ def main() -> None:
     require(resources.get("bundledPythonRuntime") is True, "manifest bundled Python runtime flag missing", str(manifest))
     commands = manifest.get("commands", {})
     require(commands.get("packageUnsigned") == "./script/package_release.sh --skip-notarize", "manifest skip-notarize command mismatch", str(manifest))
-    require(commands.get("notarize") == "EXPLOITBOT_NOTARY_PROFILE=<profile-name> ./script/package_release.sh --notarize", "manifest notarize command mismatch", str(manifest))
+    require(commands.get("notarizeWithProfile") == "EXPLOITBOT_NOTARY_PROFILE=<profile-name> ./script/package_release.sh --notarize", "manifest profile notarize command mismatch", str(manifest))
+    require(commands.get("notarizeWithEnv") == "source /path/to/.env.signing && ./script/package_release.sh --notarize", "manifest env notarize command mismatch", str(manifest))
     require(commands.get("verifyAppSignature") == "codesign --verify --deep --strict --verbose=2 release/ExploitBot.app", "manifest app signature command mismatch", str(manifest))
     require(commands.get("verifyDmgSignature") == "codesign --verify --verbose=2 release/ExploitBot-beta.dmg", "manifest dmg signature command mismatch", str(manifest))
+    require(commands.get("validateStapledApp") == "xcrun stapler validate release/ExploitBot.app", "manifest app stapler command mismatch", str(manifest))
+    require(commands.get("validateStapledDmg") == "xcrun stapler validate release/ExploitBot-beta.dmg", "manifest dmg stapler command mismatch", str(manifest))
 
     print("release-readiness proof passed")
 

@@ -32,13 +32,13 @@ EXPECTED_GATES = [
 EXPECTED_STATUS = {
     "sourceProofMatrix": "ready",
     "visualArtifacts": "ready",
-    "liveArtifacts": "ready",
+    "liveArtifacts": "blocked",
     "checkpointLedger": "ready",
     "signedAppBundle": "ready",
     "signedDmg": "ready",
     "releaseManifest": "ready",
     "knownGapLedger": "ready-with-known-gaps",
-    "notarizationProfile": "blocked-requires-profile",
+    "notarizationProfile": "ready",
 }
 
 EXPECTED_PROOFS = [
@@ -116,10 +116,11 @@ def assert_payload(payload: dict) -> None:
     if payload.get("packageReady") is not True:
         raise AssertionError(f"beta readiness should mark signed package ready: {payload}")
     if payload.get("distributionReady") is not False:
-        raise AssertionError(f"beta readiness should not mark distribution ready before notarization: {payload}")
-    if payload.get("notarizationGate") != "requires-notary-profile":
+        raise AssertionError(f"beta readiness should not mark distribution ready while live-artifact gates are blocked: {payload}")
+    notarization_gate = payload.get("notarizationGate")
+    if notarization_gate not in {"passed", "requires-notary-credentials"}:
         raise AssertionError(f"beta readiness notarization gate mismatch: {payload}")
-    if payload.get("notaryProfileRequired") is not True:
+    if payload.get("notaryProfileRequired") is not False:
         raise AssertionError(f"beta readiness notary profile requirement mismatch: {payload}")
     if payload.get("knownGapCount", 0) < 1:
         raise AssertionError(f"beta readiness should surface known gaps: {payload}")
