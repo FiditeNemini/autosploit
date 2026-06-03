@@ -109,6 +109,7 @@ def assert_testserver_smoke() -> None:
     deep_runtime_flow_coverage = request("GET", "/qa/deep-runtime-flow-coverage")
     session_context_cache_flow = request("GET", "/qa/session-context-cache-flow")
     cache_artifact_matrix = request("GET", "/qa/cache-artifact-matrix")
+    chat_quality_evidence = request("GET", "/qa/chat-quality-evidence-matrix")
     runtime_local_model_lane = request("GET", "/qa/runtime-local-model-lane")
     continuous_batching_coverage = request("GET", "/qa/continuous-batching-coverage")
     live_agent_stress = request("GET", "/qa/live-loaded-model-agent-stress")
@@ -265,6 +266,12 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/cache-artifact-matrix failed: {cache_artifact_matrix}")
     if cache_artifact_matrix.get("contractParity") is not True:
         raise AssertionError(f"/qa/cache-artifact-matrix contract parity mismatch: {cache_artifact_matrix}")
+    if chat_quality_evidence.get("ok") is not True:
+        raise AssertionError(f"/qa/chat-quality-evidence-matrix failed: {chat_quality_evidence}")
+    if chat_quality_evidence.get("broadQualityComplete") is not False:
+        raise AssertionError(f"/qa/chat-quality-evidence-matrix overclaims broad quality: {chat_quality_evidence}")
+    if chat_quality_evidence.get("readyRowCount", 0) < 3 or chat_quality_evidence.get("partialRowCount", 0) < 1:
+        raise AssertionError(f"/qa/chat-quality-evidence-matrix row status mismatch: {chat_quality_evidence}")
     if runtime_local_model_lane.get("ok") is not True:
         raise AssertionError(f"/qa/runtime-local-model-lane failed: {runtime_local_model_lane}")
     if runtime_local_model_lane.get("contractParity") is not True:
@@ -521,12 +528,18 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/runtime-coverage cache artifact matrix parity mismatch: {runtime_coverage}")
     if runtime_coverage.get("cacheArtifactMatrixRows") != cache_artifact_matrix.get("rows"):
         raise AssertionError(f"/qa/runtime-coverage cache artifact matrix row mismatch: {runtime_coverage}")
+    if runtime_coverage.get("chatQualityRows") != chat_quality_evidence.get("rows"):
+        raise AssertionError(f"/qa/runtime-coverage chat quality row mismatch: {runtime_coverage}")
+    if runtime_coverage.get("chatQualityBroadQualityComplete") != chat_quality_evidence.get("broadQualityComplete"):
+        raise AssertionError(f"/qa/runtime-coverage chat quality boundary mismatch: {runtime_coverage}")
     if runtime_coverage.get("runtimeLocalModelLaneContractParity") is not True:
         raise AssertionError(f"/qa/runtime-coverage local model lane parity mismatch: {runtime_coverage}")
     if runtime_coverage.get("runtimeLocalModelLaneQwenTargetPath") != runtime_local_model_lane.get("qwenTargetPath"):
         raise AssertionError(f"/qa/runtime-coverage local model lane qwen path mismatch: {runtime_coverage}")
     if "/qa/runtime-local-model-lane" not in (state.get("qaCoverage") or {}).get("stateRoutes", []):
         raise AssertionError(f"/state missing runtime local model lane route contract: {state.get('qaCoverage')}")
+    if "/qa/chat-quality-evidence-matrix" not in (state.get("qaCoverage") or {}).get("stateRoutes", []):
+        raise AssertionError(f"/state missing chat quality evidence route contract: {state.get('qaCoverage')}")
     if runtime_coverage.get("liveProofArtifactCount", 0) < 6:
         raise AssertionError(f"/qa/runtime-coverage live artifact count mismatch: {runtime_coverage}")
     if runtime_coverage.get("qwenContinuousBatchingArtifactOK") is not True:
@@ -1352,6 +1365,8 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index runtime group missing live loaded-model agent route: {coverage_index}")
     if "/qa/cache-artifact-matrix" not in (runtime_group.get("endpoints") or []):
         raise AssertionError(f"/qa/coverage-index runtime group missing cache artifact matrix route: {coverage_index}")
+    if "/qa/chat-quality-evidence-matrix" not in (runtime_group.get("endpoints") or []):
+        raise AssertionError(f"/qa/coverage-index runtime group missing chat quality matrix route: {coverage_index}")
     if "/qa/continuous-batching-coverage" not in (runtime_group.get("endpoints") or []):
         raise AssertionError(f"/qa/coverage-index runtime group missing continuous batching route: {coverage_index}")
     if runtime_group.get("deepRuntimeFlowDomainCount") != deep_runtime_flow_coverage.get("domainCount"):
@@ -1368,6 +1383,16 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/coverage-index live loaded-model agent stats mismatch: {coverage_index}")
     if runtime_group.get("cacheArtifactMatrixContractParity") != cache_artifact_matrix.get("contractParity"):
         raise AssertionError(f"/qa/coverage-index cache artifact matrix parity mismatch: {coverage_index}")
+    if runtime_group.get("chatQualityRows") != chat_quality_evidence.get("rows"):
+        raise AssertionError(f"/qa/coverage-index chat quality rows mismatch: {coverage_index}")
+    if runtime_group.get("chatQualityReadyRowCount") != chat_quality_evidence.get("readyRowCount"):
+        raise AssertionError(f"/qa/coverage-index chat quality ready count mismatch: {coverage_index}")
+    if runtime_group.get("chatQualityPartialRowCount") != chat_quality_evidence.get("partialRowCount"):
+        raise AssertionError(f"/qa/coverage-index chat quality partial count mismatch: {coverage_index}")
+    if runtime_group.get("chatQualityBroadQualityComplete") != chat_quality_evidence.get("broadQualityComplete"):
+        raise AssertionError(f"/qa/coverage-index chat quality boundary mismatch: {coverage_index}")
+    if runtime_group.get("chatQualityProofFileParity") != chat_quality_evidence.get("proofFileParity"):
+        raise AssertionError(f"/qa/coverage-index chat quality proof parity mismatch: {coverage_index}")
     if runtime_group.get("continuousBatchingContracts") != continuous_batching_coverage.get("contracts"):
         raise AssertionError(f"/qa/coverage-index continuous batching contract map mismatch: {coverage_index}")
     if runtime_group.get("continuousBatchingContractParity") is not True:

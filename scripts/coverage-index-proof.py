@@ -45,6 +45,7 @@ REQUIRED_ENDPOINTS = {
     "/qa/state-dependent-contract-matrix",
     "/qa/session-context-cache-flow",
     "/qa/cache-artifact-matrix",
+    "/qa/chat-quality-evidence-matrix",
     "/qa/runtime-coverage",
     "/qa/streaming-parser-reuse",
     "/qa/python-runtime-inventory",
@@ -127,6 +128,7 @@ REQUIRED_PROOFS = {
     "state-dependent-contract-matrix-proof.py",
     "session-context-cache-flow-proof.py",
     "cache-artifact-matrix-proof.py",
+    "chat-quality-evidence-matrix-proof.py",
     "tool-catalog-detail-proof.py",
     "runtime-coverage-proof.py",
     "streaming-parser-reuse-proof.py",
@@ -1022,6 +1024,10 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index runtime group missing cache artifact matrix route: {runtime_group}")
     if "cache-artifact-matrix-proof.py" not in (runtime_group.get("proofs") or []):
         raise AssertionError(f"coverage index runtime group missing cache artifact matrix proof: {runtime_group}")
+    if "/qa/chat-quality-evidence-matrix" not in (runtime_group.get("endpoints") or []):
+        raise AssertionError(f"coverage index runtime group missing chat quality matrix route: {runtime_group}")
+    if "chat-quality-evidence-matrix-proof.py" not in (runtime_group.get("proofs") or []):
+        raise AssertionError(f"coverage index runtime group missing chat quality matrix proof: {runtime_group}")
     if "/qa/continuous-batching-coverage" not in (runtime_group.get("endpoints") or []):
         raise AssertionError(f"coverage index runtime group missing continuous batching route: {runtime_group}")
     if "continuous-batching-coverage-proof.py" not in (runtime_group.get("proofs") or []):
@@ -1162,6 +1168,23 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index cache artifact matrix artifact parity mismatch: {runtime_group}")
     if runtime_group.get("cacheArtifactMatrixProofFileParity") != cache_artifact_matrix.get("proofFileParity"):
         raise AssertionError(f"coverage index cache artifact matrix proof parity mismatch: {runtime_group}")
+    chat_quality = request("GET", "/qa/chat-quality-evidence-matrix")
+    if chat_quality.get("ok") is not True:
+        raise AssertionError(f"chat quality evidence matrix route failed: {chat_quality}")
+    if chat_quality.get("broadQualityComplete") is not False:
+        raise AssertionError(f"chat quality evidence matrix overclaims broad quality: {chat_quality}")
+    if runtime_group.get("chatQualityRows") != chat_quality.get("rows"):
+        raise AssertionError(f"coverage index chat quality rows mismatch: {runtime_group}")
+    if runtime_group.get("chatQualityReadyRowCount") != chat_quality.get("readyRowCount"):
+        raise AssertionError(f"coverage index chat quality ready count mismatch: {runtime_group}")
+    if runtime_group.get("chatQualityPartialRowCount") != chat_quality.get("partialRowCount"):
+        raise AssertionError(f"coverage index chat quality partial count mismatch: {runtime_group}")
+    if runtime_group.get("chatQualityBroadQualityComplete") != chat_quality.get("broadQualityComplete"):
+        raise AssertionError(f"coverage index chat quality boundary mismatch: {runtime_group}")
+    if runtime_group.get("chatQualityArtifactFileParity") != chat_quality.get("artifactFileParity"):
+        raise AssertionError(f"coverage index chat quality artifact parity mismatch: {runtime_group}")
+    if runtime_group.get("chatQualityProofFileParity") != chat_quality.get("proofFileParity"):
+        raise AssertionError(f"coverage index chat quality proof parity mismatch: {runtime_group}")
     runtime_local_model_lane = request("GET", "/qa/runtime-local-model-lane")
     if runtime_local_model_lane.get("ok") is not True:
         raise AssertionError(f"runtime local model lane route failed: {runtime_local_model_lane}")

@@ -79,7 +79,7 @@ Latest local beta package sanity build, not yet uploaded to the GitHub release:
 - Built: June 3, 2026
 - Command: `./script/package_release.sh --skip-notarize`
 - Local DMG: `release/ExploitBot-beta.dmg`
-- Local DMG SHA256: `dbab053373655a044728a41314ca32f1335c5dd619140b4c1330665e90bc7f36`
+- Local DMG SHA256: `4de7f5fb3db041bcc395644ad9586391a4301ab164b1bea11440c9faf2ace055`
 - Status: signed app and signed DMG verified locally; notarization still requires `EXPLOITBOT_NOTARY_PROFILE` or local notary environment variables before replacing the published release asset.
 
 ### Done in the current beta lane
@@ -109,6 +109,7 @@ Latest local beta package sanity build, not yet uploaded to the GitHub release:
 - **Streaming/parser + Responses reuse gate**: `/qa/streaming-parser-reuse` source-checks Chat Completions SSE deltas, ChatService content/reasoning/tool-call delta handling, streamed usage with cached-token telemetry, `/v1/responses` streaming events, `previous_response_id` session reuse, and Qwen/MiniMax streaming tool parser coverage. It now also names the engine pytest/parser proof commands that verify Responses session-chain replay and API-shaped reasoning/tool-call output.
 - **Session/context/cache lifecycle gate**: `/qa/session-context-cache-flow` ties new-context cache preservation, bounded context carry, stash/CVE on-demand retrieval, Responses `previous_response_id` reuse, streaming delta parser surfaces, parallel agent sessions, Qwen/MiniMax live continuous batching, TurboQuant KV, L2/block disk cache, and hybrid SSM async rederive into one app-backed matrix.
 - **Cache artifact matrix**: `/qa/cache-artifact-matrix` reads live proof JSON and exposes row-level counters for Qwen cross-restart scheduler/block/SSM disk hits, scheduler tokens saved, block-L2 store/read hits, TurboQuant q4 KV, Qwen continuous-batching block writes and SSM async rederive, plus MiniMax q4 KV and block-L2 writes.
+- **Chat quality evidence matrix**: `/qa/chat-quality-evidence-matrix` reads the current Qwen MXFP4-MTP and MiniMax JANGTQ live artifacts, proves non-empty release-app chat responses, repeat/cache reuse, TurboQuant q4 KV, Qwen hybrid SSM/block-L2 replay, MiniMax continuous batching, and keeps `broadQualityComplete=false` while MiniMax first-turn instruction-following and broader reasoning/tool-call quality remain open.
 - **Live artifact ledger**: `/qa/artifact-ledger` keeps failed live-proof JSON visible, separates known historical failures from superseded failures, and requires a passing replacement artifact before clearing current live-proof failure status.
 - **Remaining false-flag classifier**: `/qa/coverage-false-flag-classification` reads the live `/qa/coverage-index` false booleans and classifies every remaining false value as a known gap, fixture-required state, intentional negative policy, distribution hold, not-required local gate, bundled-runtime info, historical artifact, or unsupported-multimodal inventory state.
 - **Objective runtime coverage map**: `/qa/objective-runtime-coverage` rolls tool flow, runtime, local model lanes, context/compaction, prompt-injection boundaries, CVE import/embeddings, stash retrieval, parallel sessions, Responses/streaming parser reuse, L2 cache, TurboQuant KV, hybrid SSM async rederive, proof ledgers, and release readiness into one auditable map. It intentionally reports `objectiveComplete=false` while known gaps remain, with zero blocked objective requirements at this checkpoint.
@@ -124,7 +125,7 @@ Latest local beta package sanity build, not yet uploaded to the GitHub release:
 ### Needs more work before public beta
 
 - **Qwen multimodal promotion**: Qwen-specific VL/multimodal runtime, multimodal prefix cache, and multimodal context-routing proofs are still pending.
-- **General chat quality**: broad reasoning/tool-call quality beyond bounded smoke prompts still needs longer realistic runs, especially MiniMax first-turn instruction-following.
+- **General chat quality**: `/qa/chat-quality-evidence-matrix` now makes the bounded live evidence visible, but broad reasoning/tool-call quality still needs longer realistic runs, especially MiniMax first-turn instruction-following.
 - **Full app UI pass**: source/API/proof coverage is broad and the website has been visually reviewed, but the native app still needs a final hands-on visual pass across every tab, status indicator, hover/detail state, and release build window before calling it polished.
 - **Security review**: the app now exposes an abuse-boundary matrix, but the release still needs a manual adversarial review of logging, command safety, and operator misuse cases before wider distribution.
 
@@ -271,6 +272,7 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 - `python3 scripts/security-abuse-boundary-matrix-proof.py`
 - `python3 scripts/context-budget-compaction-proof.py`
 - `python3 scripts/session-context-cache-flow-proof.py`
+- `python3 scripts/chat-quality-evidence-matrix-proof.py`
 - `python3 scripts/tool-engine-context-ops-matrix-proof.py`
 - `python3 scripts/engine-api-cache-proof-matrix-proof.py`
 - `python3 scripts/state-dependent-contract-matrix-proof.py`
