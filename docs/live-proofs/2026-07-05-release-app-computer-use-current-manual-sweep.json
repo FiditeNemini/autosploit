@@ -1,29 +1,6 @@
 {
-  "generatedAt": "2026-07-05T16:21:25-0700",
-  "status": "PARTIAL",
-  "sourceTrace": {
-    "repo": "/Users/eric/exploitbot",
-    "head": "a629567",
-    "originMain": "a629567",
-    "appPath": "/Users/eric/exploitbot/release/ExploitBot.app",
-    "bundleID": "ai.jangq.ExploitBot",
-    "pid": 66923,
-    "computerUseVersion": 857
-  },
+  "generatedAt": "2026-07-05T16:38:44-0700",
   "liveVerification": {
-    "computerUseAttached": true,
-    "primaryTabsClicked": [
-      "recon",
-      "web",
-      "network",
-      "creds",
-      "exploit",
-      "post",
-      "supply",
-      "osint",
-      "report",
-      "stash"
-    ],
     "activityEventsObserved": [
       "manualTabSwitch recon -> web",
       "manualTabSwitch web -> network",
@@ -35,6 +12,129 @@
       "manualTabSwitch osint -> report",
       "manualTabSwitch report -> stash"
     ],
+    "agentSettings": {
+      "authorizationGuardsVisible": true,
+      "forceFinalAfterTools": true,
+      "maxConcurrentAgents": 8,
+      "modePolicyVisible": [
+        "Autopilot",
+        "Copilot",
+        "Manual"
+      ],
+      "multiAgentMode": true,
+      "toolSchemaBudget": 32
+    },
+    "cacheSettings": {
+      "blockL2Disk": true,
+      "blockL2MaxGB": 10,
+      "blockSize": 64,
+      "kvCacheSelection": "TurboQuant Q4",
+      "kvGroupSize": 64,
+      "nativeQ4NotSelected": true,
+      "pagedCache": true,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "promptL2MaxGB": 10
+    },
+    "computerUseAttached": true,
+    "cveSettings": {
+      "cisaKevCount": 1631,
+      "controlsObserved": [
+        "Current Threat Intel",
+        "Quick Import (Critical+High, 2yr)",
+        "Full NVD Sync (slow)",
+        "Import Selected",
+        "Search",
+        "Add CVE"
+      ],
+      "lastSynced": "2026-07-05T22:37:31Z",
+      "totalCVEs": 1644
+    },
+    "logsSettings": {
+      "autoScrollToggleVisible": true,
+      "clearVisible": true,
+      "copyVisible": true,
+      "emptyState": "No logs yet - logs appear here when the engine is running",
+      "engineLogsVisible": true
+    },
+    "modelSettings": {
+      "controlsObserved": [
+        "Browse",
+        "Add Folder",
+        "Scan",
+        "Use"
+      ],
+      "modelCount": 14,
+      "qwenMtpEntriesVisible": [
+        "Qwen3.6-27B-MXFP4-CRACK-MTP",
+        "Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+        "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+      ],
+      "scanRoot": "/Users/eric/models/dealign.ai",
+      "selectedModel": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "supportedModelCount": 6
+    },
+    "primaryTabsClicked": [
+      "recon",
+      "web",
+      "network",
+      "creds",
+      "exploit",
+      "post",
+      "supplyChain",
+      "osint",
+      "report",
+      "stash"
+    ],
+    "processState": {
+      "appRows": [
+        "76483     1 171632 /Users/eric/exploitbot/release/ExploitBot.app/Contents/MacOS/ExploitBot"
+      ],
+      "engineProcessRows": [],
+      "engineStarted": false,
+      "modelLoaded": false,
+      "port9999Listeners": [
+        "COMMAND     PID USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME",
+        "ExploitBo 76483 eric   18u  IPv6 0x17c0a28bab178bb1      0t0  TCP *:9999 (LISTEN)"
+      ],
+      "releaseAppRSSBytesApprox": 156893184,
+      "vmStat": [
+        "Pages free:                             4451022.",
+        "Pages wired down:                        297953.",
+        "Pages occupied by compressor:            165862.",
+        "Swapins:                                    364.",
+        "Swapouts:                                  1988."
+      ]
+    },
+    "runtimeSettings": {
+      "maxIterationsVisible": 4,
+      "maxTokensVisible": 256,
+      "reasoningParserVisible": "Qwen3",
+      "reasoningVisibleOff": true,
+      "toolParserVisible": "Qwen",
+      "useModelGenerationDefaultsVisible": false
+    },
+    "sameProcessApi": {
+      "activeTab": "stash",
+      "enginePort": 0,
+      "engineRunning": false,
+      "feedEntries": 11,
+      "feedRecent": [
+        "scanModelLibrary 14 models from 1 roots",
+        "manualTabSwitch recon -> web",
+        "manualTabSwitch web -> network",
+        "manualTabSwitch network -> creds",
+        "manualTabSwitch creds -> exploit",
+        "manualTabSwitch exploit -> post",
+        "manualTabSwitch post -> supplyChain",
+        "manualTabSwitch supplyChain -> osint",
+        "manualTabSwitch osint -> report",
+        "manualTabSwitch report -> stash",
+        "openSettings"
+      ],
+      "pidOwnsPort9999": true
+    },
     "settingsPanelsObserved": [
       "engine",
       "model",
@@ -45,79 +145,9 @@
       "tools",
       "logs"
     ],
-    "modelSettings": {
-      "selectedModel": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
-      "scanRoot": "/Users/eric/models/dealign.ai",
-      "modelCount": 14,
-      "supportedModelCount": 6,
-      "controlsObserved": [
-        "Browse",
-        "Add Folder",
-        "Scan",
-        "Use model"
-      ],
-      "qwenMtpEntriesVisible": [
-        "Qwen3.6-27B-MXFP4-CRACK-MTP",
-        "Qwen3.6-27B-MXFP8-CRACK-MTP",
-        "Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
-        "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
-      ]
-    },
-    "runtimeSettings": {
-      "reasoningToggleChangedToOn": true,
-      "applyAppSettingsChangedToolbarToDisableReasoning": true,
-      "reasoningRestoredOff": true,
-      "applyAppSettingsChangedToolbarToEnableReasoning": true,
-      "reasoningParserVisible": "Qwen3",
-      "toolParserVisible": "Qwen",
-      "maxIterationsVisible": 4
-    },
-    "cacheSettings": {
-      "kvCacheSelection": "TurboQuant Q4",
-      "nativeQ4NotSelected": true,
-      "kvGroupSize": 64,
-      "prefixCache": true,
-      "promptL2Disk": true,
-      "pagedCache": true,
-      "blockSize": 64,
-      "blockL2Disk": true,
-      "promptL2MaxGB": 10.0,
-      "blockL2MaxGB": 10.0
-    },
-    "agentSettings": {
-      "modePolicyVisible": [
-        "Autopilot",
-        "Copilot",
-        "Manual"
-      ],
-      "toolSchemaBudget": 32,
-      "forceFinalAfterTools": true,
-      "multiAgentMode": true,
-      "maxConcurrentAgents": 8,
-      "authorizationGuardsVisible": true
-    },
-    "cveSettings": {
-      "totalCVEs": 1644,
-      "cisaKevCount": 1631,
-      "lastSynced": "2026-07-05T22:37:31Z",
-      "searchQueryTyped": "apache path traversal",
-      "searchResultsVisible": [
-        "CVE-2024-32113",
-        "CVE-2021-42013",
-        "CVE-2021-41773"
-      ],
-      "resultSignalsVisible": [
-        "HIGH",
-        "POC",
-        "KEV",
-        "source:cisa-kev"
-      ]
-    },
     "toolSettings": {
-      "installedCount": 42,
-      "missingCount": 0,
       "installAllMissingDisabled": true,
-      "queuedCommands": 0,
+      "installedCount": 42,
       "installedRowsObserved": [
         "curl",
         "nc",
@@ -126,6 +156,7 @@
         "subfinder",
         "dnsx",
         "nmap",
+        "masscan",
         "httpx",
         "katana",
         "theHarvester",
@@ -136,26 +167,33 @@
         "ffuf",
         "arjun",
         "wpscan",
-        "testssl"
-      ]
-    },
-    "logsSettings": {
-      "engineLogsVisible": true,
-      "autoScrollToggleVisible": true,
-      "clearVisible": true,
-      "copyVisible": true,
-      "emptyState": "No logs yet - logs appear here when the engine is running"
-    },
-    "processState": {
-      "engineStarted": false,
-      "modelLoaded": false,
-      "releaseAppRSSBytesApprox": 123142144
+        "testssl",
+        "graphqlmap"
+      ],
+      "missingCount": 0,
+      "queuedCommands": 0
     }
   },
+  "proofType": "release-app-computer-use-current-manual-sweep",
   "remainingGates": {
+    "fullContextAbove192k": "PARTIAL",
+    "loadedModelPromptToolCacheProof": "covered by separate Qwen artifacts, not this no-model UI sweep",
     "notarization": "BLOCKED",
     "publicReleaseTruth": "PARTIAL",
-    "fullContextAbove192k": "PARTIAL",
-    "reason": "This manual Computer Use sweep proves current release UI wiring and safe settings effects, but it does not replace loaded-model Qwen prompt/tool/cache artifacts or notarized distribution proof."
-  }
+    "reason": "This current Computer Use sweep proves rebuilt release UI wiring and safe settings visibility, but it does not replace loaded-model Qwen prompt/tool/cache artifacts or notarized distribution proof."
+  },
+  "sourceTrace": {
+    "appBinarySha256": "16821a81d9333eef49193ac0f60a9e3f8f806c7acb2a1cbad0c353f1bc355a51",
+    "appPath": "/Users/eric/exploitbot/release/ExploitBot.app",
+    "appPid": 76483,
+    "bundleID": "ai.jangq.ExploitBot",
+    "computerUseVersion": 857,
+    "dmgSha256": "8f6399c6a352b25550aca3a192fea233df308bcd703d5a64a63795042ad72b2c",
+    "head": "a7dcf2e",
+    "manifestSha256": "778a341e23be65abab5410bc8d47c3444c78e49cadd52dbe1b51b6cf4381f2d0",
+    "originMain": "a7dcf2e",
+    "repo": "/Users/eric/exploitbot",
+    "screenshot": "docs/live-proofs/2026-07-05-release-app-computer-use-current-manual-sweep.png"
+  },
+  "status": "PARTIAL"
 }
