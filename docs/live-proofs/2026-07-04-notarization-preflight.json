@@ -48,7 +48,7 @@
     "selectedCredentialMode": "not-configured"
   },
   "distributionStatus": "BLOCKED",
-  "finishedAt": "2026-07-05T15:58:41-0700",
+  "finishedAt": "2026-07-05T16:34:10-0700",
   "gatekeeper": {
     "app": {
       "output": "/Users/eric/exploitbot/release/ExploitBot.app: rejected\nsource=Insufficient Context",
@@ -57,7 +57,7 @@
       "status": "REJECTED"
     }
   },
-  "generatedAt": "2026-07-05T15:58:41-0700",
+  "generatedAt": "2026-07-05T16:34:10-0700",
   "keychainProfiles": {
     "defaultProfileProbe": {
       "profileNameProbe": "EXPLOITBOT_NOTARY_PROFILE",
@@ -84,10 +84,10 @@
       "hardenedRuntime": true,
       "identifier": "ai.jangq.ExploitBot",
       "path": "release/ExploitBot.app",
-      "rawSummary": "Executable=/Users/eric/exploitbot/release/ExploitBot.app/Contents/MacOS/ExploitBot\nIdentifier=ai.jangq.ExploitBot\nFormat=app bundle with Mach-O thin (arm64)\nCodeDirectory v=20500 size=41279 flags=0x10000(runtime) hashes=1279+7 location=embedded\nVersionPlatform=1\nVersionMin=917504\nVersionSDK=1704960\nHash type=sha256 size=32\nCandidateCDHash sha256=26d982d7281d6b162f93ba816d1da4cc4332c7e2\nCandidateCDHashFull sha256=26d982d7281d6b162f93ba816d1da4cc4332c7e269a052dd6b643a6dfc32033a\nHash choices=sha256\nCMSDigest=26d982d7281d6b162f93ba816d1da4cc4332c7e269a052dd6b643a6dfc32033a\nCMSDigestType=2\nExecutable Segment base=0\nExecutable Segment limit=8536064\nExecutable Segment flags=0x1\nPage size=16384\nCDHash=26d982d7281d6b162f93ba816d1da4cc4332c7e2\nSignature size=9051\nAuthority=Developer ID Application: ShieldStack LLC (55KGF2S5AY)\nAuthority=Developer ID Certification Authority\nAuthority=Apple Root CA\nTimestamp=Jul 5, 2026 at 3:57:53\u202fPM\nInfo.plist entries=12\nTeamIdentifier=55KGF2S5AY\nRuntime Version=26.4.0\nSealed Resources version=2 rules=13 files=29216\nInternal requirements count=1 size=180",
+      "rawSummary": "Executable=/Users/eric/exploitbot/release/ExploitBot.app/Contents/MacOS/ExploitBot\nIdentifier=ai.jangq.ExploitBot\nFormat=app bundle with Mach-O thin (arm64)\nCodeDirectory v=20500 size=41279 flags=0x10000(runtime) hashes=1279+7 location=embedded\nVersionPlatform=1\nVersionMin=917504\nVersionSDK=1704960\nHash type=sha256 size=32\nCandidateCDHash sha256=c7bb5ebd57cdbf64c7b04e837b6993dc592a33b9\nCandidateCDHashFull sha256=c7bb5ebd57cdbf64c7b04e837b6993dc592a33b90be9f4a2d8a72f07e5b3f44f\nHash choices=sha256\nCMSDigest=c7bb5ebd57cdbf64c7b04e837b6993dc592a33b90be9f4a2d8a72f07e5b3f44f\nCMSDigestType=2\nExecutable Segment base=0\nExecutable Segment limit=8536064\nExecutable Segment flags=0x1\nPage size=16384\nCDHash=c7bb5ebd57cdbf64c7b04e837b6993dc592a33b9\nSignature size=9049\nAuthority=Developer ID Application: ShieldStack LLC (55KGF2S5AY)\nAuthority=Developer ID Certification Authority\nAuthority=Apple Root CA\nTimestamp=Jul 5, 2026 at 4:33:04\u202fPM\nInfo.plist entries=12\nTeamIdentifier=55KGF2S5AY\nRuntime Version=26.4.0\nSealed Resources version=2 rules=13 files=29216\nInternal requirements count=1 size=180",
       "status": "PASS",
       "teamIdentifier": "55KGF2S5AY",
-      "timestamp": "Jul 5, 2026 at 3:57:53\u202fPM"
+      "timestamp": "Jul 5, 2026 at 4:33:04\u202fPM"
     },
     "appEntitlements": {
       "entitlements": {
@@ -128,5 +128,5 @@
       "status": "NO_STAPLED_TICKET"
     }
   },
-  "startedAt": "2026-07-05T15:58:37-0700"
+  "startedAt": "2026-07-05T16:34:06-0700"
 }
