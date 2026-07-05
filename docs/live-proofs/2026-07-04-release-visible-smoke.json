@@ -1,0 +1,41 @@
+{
+  "axTail": "window=ExploitBot\nentireContents=83\n1 role=AXGroup name=missing value value=missing value\n2 role=AXImage name=missing value value=missing value\n3 role=AXStaticText name=exploit value=exploit\n4 role=AXStaticText name=bot value=bot\n5 role=AXButton name=missing value value=missing value\n6 role=AXScrollArea name=missing value value=missing value\n7 role=AXButton name=missing value value=missing value\n8 role=AXButton name=missing value value=missing value\n9 role=AXButton name=missing value value=missing value\n10 role=AXButton name=missing value value=missing value\n11 role=AXButton name=missing value value=missing value\n12 role=AXButton name=missing value value=missing value\n13 role=AXButton name=missing value value=missing value\n14 role=AXButton name=missing value value=missing value\n15 role=AXButton name=missing value value=missing value\n16 role=AXButton name=missing value value=missing value\n17 role=AXUnknown name=missing value value=missing value\n18 role=AXUnknown name=missing value value=missing value\n19 role=AXStaticText name=OPS value=OPS\n20 role=AXButton name=missing value value=missing value\n21 role=AXStaticText name=/ value=/\n22 role=AXButton name=missing value value=missing value\n23 role=AXStaticText name=/ value=/\n24 role=AXButton name=missing value value=missing value\n25 role=AXStaticText name=0 tools value=0 tools\n26 role=AXStaticText name=Mapping attack surface value=Mapping attack surface\n27 role=AXButton name=missing value value=missing value\n28 role=AXScrollArea name=missing value value=missing value\n29 role=AXStaticText name=Release Visible Smoke value=Release Visible Smoke\n30 role=AXStaticText name=Autopilot \u00b7 0 findings value=Autopilot \u00b7 0 findings\n31 role=AXScrollArea name=missing value value=missing value\n32 role=AXButton name=missing value value=missing value\n33 role=AXButton name=missing value value=missing value\n34 role=AXButton name=missing value value=missing value\n35 role=AXButton name=missing value value=missing value\n36 role=AXButton name=missing value value=missing value\n37 role=AXTextField name=missing value value=\n38 role=AXButton name=missing value value=missing value\n39 role=AXButton name=missing value value=missing value\n40 role=AXStaticText name=exploitbot value=exploitbot\n41 role=AXStaticText name=0 msgs value=0 msgs\n42 role=AXStaticText name=ctx 0 value=ctx 0\n43 role=AXUnknown name=missing value value=missing value\n44 role=AXUnknown name=missing value value=missing value\n45 role=AXUnknown name=missing value value=missing value\n46 role=AXUnknown name=missing value value=missing value\n47 role=AXUnknown name=missing value value=missing value\n48 role=AXScrollArea name=missing value value=missing value\n49 role=AXStaticText name=No results yet value=No results yet\n50 role=AXStaticText name=Run a scan or ask exploitbot to enumerate targets value=Run a scan or ask exploitbot to enumerate targets\n51 role=AXStaticText name=ACTIVITY value=ACTIVITY\n52 role=AXButton name=missing value value=missing value\n53 role=AXButton name=missing value value=missing value\n54 role=AXButton name=missing value value=missing value\n55 role=AXButton name=missing value value=missing value\n56 role=AXButton name=missing value value=missing value\n57 role=AXStaticText name=0 value=0\n58 role=AXButton name=missing value value=missing value\n59 role=AXButton name=missing value value=missing value\n60 role=AXButton name=missing value value=missing value\n61 role=AXButton name=missing value value=missing value\n62 role=AXButton name=missing value value=missing value\n63 role=AXButton name=missing value value=missing value\n64 role=AXButton name=missing value value=missing value\n65 role=AXButton name=missing value value=missing value\n66 role=AXButton name=missing value value=missing value\n67 role=AXScrollArea name=missing value value=missing value\n68 role=AXOpaqueProviderGroup name=missing value value=missing value\n69 role=AXStaticText name=No activity yet value=No activity yet\n70 role=AXScrollArea name=missing value value=missing value\n71 role=AXOpaqueProviderGroup name=missing value value=missing value\n72 role=AXImage name=missing value value=missing value\n73 role=AXStaticText name=Ready to pentest value=Ready to pentest\n74 role=AXStaticText name=Give me a target and scope value=Give me a target and scope\n75 role=AXTextField name=missing value value=\n76 role=AXUnknown name=missing value value=missing value\n77 role=AXButton name=missing value value=missing value\n78 role=AXButton name=missing value value=missing value\n79 role=AXButton name=missing value value=missing value\n80 role=AXButton name=missing value value=missing value\n81 role=AXGroup name=missing value value=missing value\n82 role=AXButton name=missing value value=missing value\n83 role=AXStaticText name=ExploitBot value=ExploitBot\n\n",
+  "before": {
+    "engineRunning": false,
+    "showOnboarding": true
+  },
+  "finishedAt": "2026-07-05T15:29:37-0700",
+  "generatedAt": "2026-07-05T15:29:37-0700",
+  "notarization": {
+    "distributionStatus": "BLOCKED",
+    "generatedAt": "2026-07-05T14:31:23-0700",
+    "nextAction": "configure-notary-credentials-and-run-package-notarize"
+  },
+  "ok": true,
+  "proofLevel": "release-app-live-api-system-events-window-and-screenshot",
+  "proofType": "release-visible-smoke",
+  "releaseApp": "release/ExploitBot.app",
+  "releaseReadiness": {
+    "distributionStatus": "BLOCKED",
+    "generatedAt": "2026-07-05T15:29:20-0700",
+    "localPackageStatus": "PASS"
+  },
+  "screenshot": "docs/live-proofs/2026-07-04-release-visible-smoke.png",
+  "startedAt": "2026-07-05T15:29:33-0700",
+  "state": {
+    "activeOpName": "Release Visible Smoke",
+    "engineRunning": false,
+    "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+    "showOnboarding": false
+  },
+  "status": {
+    "apiStateAvailable": "PASS",
+    "distributionStatus": "BLOCKED",
+    "localDisplayStatus": "PASS",
+    "mainWorkspaceVisible": "PASS",
+    "noModelLoaded": "PASS",
+    "releaseAppArtifact": "PASS",
+    "screenshotCaptured": "PASS",
+    "visibleWindow": "PASS"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ok": true,
+  "generatedAt": "2026-07-05T02:08:57-0700",
+  "proofType": "computer-use-packaged-release-settings-smoke",
+  "proofLevel": "live-ui",
+  "computerUse": {
+    "appVersion": 857,
+    "app": "/Users/eric/exploitbot/release/ExploitBot.app",
+    "bundleIdentifier": "ai.jangq.ExploitBot",
+    "pidObserved": 81440,
+    "windowTitle": "ExploitBot"
+  },
+  "releaseArtifacts": {
+    "releaseReadinessProof": "docs/live-proofs/2026-07-04-release-readiness.json",
+    "releaseReadinessGeneratedAt": "2026-07-05T02:07:07-0700",
+    "appBinarySha256": "3e39ffadb254c5e65b6fc197bb51d8f969e2fbbcc16d4623787956f95c443846",
+    "dmgSha256": "d03be7172fc0a57ce58c4eb43ca5c99bb3c4473863533820caedda5c0fc2ea73"
+  },
+  "screenshots": {
+    "settingsAgents": "docs/live-proofs/2026-07-05-release-app-computer-use-settings-agents.png",
+    "settingsAgentsSha256": "fec35f02a77d154a18d0abfeef9d089df2247eb2683c9581e77605510b92cfab"
+  },
+  "observedControls": {
+    "mainWindow": [
+      "Recon",
+      "Web",
+      "Network",
+      "Creds",
+      "Exploit",
+      "Post",
+      "Supply",
+      "OSINT",
+      "Report",
+      "Stash",
+      "target input",
+      "chat input",
+      "Autopilot",
+      "Copilot",
+      "Manual",
+      "activity verbosity controls"
+    ],
+    "settingsCategories": [
+      "Engine",
+      "Model",
+      "Runtime",
+      "Context",
+      "Cache",
+      "Agents",
+      "CVE Database",
+      "Tools",
+      "Logs"
+    ],
+    "modelPane": {
+      "selectedModel": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "scanRoot": "/Users/eric/models/dealign.ai",
+      "scanCountText": "14 models from 1 roots",
+      "visibleQwenMtpModels": [
+        "Qwen3.6-27B-MXFP4-CRACK-MTP",
+        "Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+        "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+      ],
+      "folderAdderVisible": true,
+      "scanButtonVisible": true
+    },
+    "cachePane": {
+      "kvCacheDefault": "TurboQuant Q4",
+      "nativeQ4Selected": false,
+      "prefixCache": "on",
+      "promptL2Disk": "on",
+      "pagedCache": "on",
+      "blockL2Disk": "on",
+      "kvGroupSize": 64,
+      "blockSize": 64
+    },
+    "agentsPane": {
+      "maxIterations": 50,
+      "toolSchemaBudget": 12,
+      "includeUnavailableToolSchemas": "off",
+      "forceFinalAnswerAfterToolResults": "on",
+      "multiAgentMode": "off",
+      "modePolicyVisible": true,
+      "phaseRoutingVisible": true,
+      "authorizationGuardsVisible": true
+    }
+  },
+  "status": {
+    "uiAttach": "PASS",
+    "settingsNavigation": "PASS",
+    "modelSelectorAndFolderScanUi": "PASS",
+    "turboquantCacheUiDefault": "PASS",
+    "agentsControlsUi": "PASS",
+    "runtimeModelLoad": "NOT_RUN_IN_THIS_PROOF",
+    "notarization": "BLOCKED"
+  }
+}

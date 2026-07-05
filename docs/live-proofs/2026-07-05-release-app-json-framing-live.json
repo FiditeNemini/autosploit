@@ -1,0 +1,168 @@
+{
+  "app": {
+    "binarySha256": "f930010ca65b4e0680a474f1a6b5bc3f9096a4f82acbf543d33943c3efec46c0",
+    "distributionStatus": "BLOCKED",
+    "dmgPath": "release/ExploitBot-beta.dmg",
+    "dmgSha256": "95553fbf77ed7b31e1f65e0d6a9c5f25df482963f57354e83934b7bc33715c24",
+    "localPackageStatus": "PASS",
+    "path": "release/ExploitBot.app"
+  },
+  "appProcessRows": [
+    "46614 124560 /Users/eric/exploitbot/release/ExploitBot.app/Contents/MacOS/ExploitBot"
+  ],
+  "appSha256": "f930010ca65b4e0680a474f1a6b5bc3f9096a4f82acbf543d33943c3efec46c0",
+  "dmgSha256": "95553fbf77ed7b31e1f65e0d6a9c5f25df482963f57354e83934b7bc33715c24",
+  "engineProcessRows": [],
+  "generatedAt": "2026-07-05T15:33:00-0700",
+  "ok": true,
+  "polls": {
+    "cacheControlBad": false,
+    "cacheControlSamples": [
+      "no-store",
+      "no-store",
+      "no-store",
+      "no-store",
+      "no-store",
+      "no-store",
+      "no-store",
+      "no-store",
+      "no-store",
+      "no-store"
+    ],
+    "contentLengthMismatch": false,
+    "contentLengthMissing": false,
+    "contentLengthSamples": [
+      25344,
+      2,
+      25344,
+      2,
+      25344,
+      2,
+      25344,
+      2,
+      25344,
+      2
+    ],
+    "invalidCount": 0,
+    "invalidSamples": [],
+    "iterations": 240,
+    "maxStateBytes": 25344,
+    "messagesResponsesParsed": 240,
+    "sample": [
+      {
+        "bytes": 25344,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "25344",
+        "contentLengthMatchesBytes": true,
+        "i": 0,
+        "parsed": true,
+        "path": "/state",
+        "topLevelType": "dict"
+      },
+      {
+        "bytes": 2,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "2",
+        "contentLengthMatchesBytes": true,
+        "i": 0,
+        "parsed": true,
+        "path": "/messages",
+        "topLevelType": "list"
+      },
+      {
+        "bytes": 25344,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "25344",
+        "contentLengthMatchesBytes": true,
+        "i": 1,
+        "parsed": true,
+        "path": "/state",
+        "topLevelType": "dict"
+      },
+      {
+        "bytes": 2,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "2",
+        "contentLengthMatchesBytes": true,
+        "i": 1,
+        "parsed": true,
+        "path": "/messages",
+        "topLevelType": "list"
+      },
+      {
+        "bytes": 25344,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "25344",
+        "contentLengthMatchesBytes": true,
+        "i": 2,
+        "parsed": true,
+        "path": "/state",
+        "topLevelType": "dict"
+      },
+      {
+        "bytes": 2,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "2",
+        "contentLengthMatchesBytes": true,
+        "i": 2,
+        "parsed": true,
+        "path": "/messages",
+        "topLevelType": "list"
+      },
+      {
+        "bytes": 25344,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "25344",
+        "contentLengthMatchesBytes": true,
+        "i": 238,
+        "parsed": true,
+        "path": "/state",
+        "topLevelType": "dict"
+      },
+      {
+        "bytes": 2,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "2",
+        "contentLengthMatchesBytes": true,
+        "i": 238,
+        "parsed": true,
+        "path": "/messages",
+        "topLevelType": "list"
+      },
+      {
+        "bytes": 25344,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "25344",
+        "contentLengthMatchesBytes": true,
+        "i": 239,
+        "parsed": true,
+        "path": "/state",
+        "topLevelType": "dict"
+      },
+      {
+        "bytes": 2,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "2",
+        "contentLengthMatchesBytes": true,
+        "i": 239,
+        "parsed": true,
+        "path": "/messages",
+        "topLevelType": "list"
+      }
+    ],
+    "stateResponsesParsed": 240,
+    "totalResponses": 480
+  },
+  "proofType": "release-app-json-framing-live",
+  "releaseReadinessGeneratedAt": "2026-07-05T15:29:20-0700",
+  "status": {
+    "allMessagesResponsesParsed": "PASS",
+    "allStateResponsesParsed": "PASS",
+    "cacheControlNoStore": "PASS",
+    "contentLengthHeader": "PASS",
+    "contentLengthMatchesBytes": "PASS",
+    "distributionStatus": "BLOCKED",
+    "localPackageStatus": "PASS",
+    "noModelProcessSpawned": "PASS"
+  }
+}

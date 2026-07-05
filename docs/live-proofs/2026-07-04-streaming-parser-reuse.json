@@ -1,0 +1,159 @@
+{
+  "cacheReuseSurface": "previous_response_id-plus-prefix-cache-l2-turboquant",
+  "chatCompletionStreamFields": [
+    "data: [DONE]",
+    "choices",
+    "delta.content",
+    "delta.reasoning_content",
+    "delta.tool_calls",
+    "usage.prompt_tokens_details.cached_tokens"
+  ],
+  "contractCount": 18,
+  "contracts": {
+    "autoToolParserFallback": true,
+    "cacheReuseTelemetry": true,
+    "chatCompletionsStreaming": true,
+    "chatServiceContentDelta": true,
+    "chatServiceReasoningDelta": true,
+    "chatServiceToolCallDelta": true,
+    "chatServiceUsageMetrics": true,
+    "minimaxStreamingToolParser": true,
+    "parserAPIShapeProof": true,
+    "qwenStreamingToolParser": true,
+    "reasoningParserPerRequest": true,
+    "responsesEndpoint": true,
+    "responsesPreviousResponseReuse": true,
+    "responsesSessionStoreEngineTests": true,
+    "responsesStreamingEvents": true,
+    "responsesStreamingSessionStore": true,
+    "responsesUsageCachedTokens": true,
+    "toolChoiceRequiredErrors": true
+  },
+  "generatedAt": "2026-07-04T18:12:49-0700",
+  "liveLoadedModelProof": "not-run-in-this-gate",
+  "ok": true,
+  "proofLevel": "app-source-and-engine-test-backed",
+  "proofType": "streaming-parser-reuse",
+  "responsesStreamEvents": [
+    "response.created",
+    "response.output_text.delta",
+    "response.reasoning.delta",
+    "response.function_call_arguments.delta",
+    "response.usage",
+    "response.completed"
+  ],
+  "routeCoverage": {
+    "chatCoverageContainsStreamingParserReuse": true,
+    "coverageIndexChatContractParity": true,
+    "coverageIndexRuntimeContractParity": true,
+    "deepRuntimeCoverageContainsStreamingParserReuse": true,
+    "runtimeCoverageContainsStreamingParserReuse": true,
+    "stateRoutesContainStreamingParserReuse": true
+  },
+  "streamingEndpoints": [
+    "/v1/chat/completions",
+    "/v1/responses"
+  ],
+  "streamingPayload": {
+    "cacheReuseSurface": "previous_response_id-plus-prefix-cache-l2-turboquant",
+    "chatCompletionStreamFieldCount": 6,
+    "chatCompletionStreamFields": [
+      "data: [DONE]",
+      "choices",
+      "delta.content",
+      "delta.reasoning_content",
+      "delta.tool_calls",
+      "usage.prompt_tokens_details.cached_tokens"
+    ],
+    "contractCount": 18,
+    "contractParity": true,
+    "contracts": {
+      "autoToolParserFallback": true,
+      "cacheReuseTelemetry": true,
+      "chatCompletionsStreaming": true,
+      "chatServiceContentDelta": true,
+      "chatServiceReasoningDelta": true,
+      "chatServiceToolCallDelta": true,
+      "chatServiceUsageMetrics": true,
+      "minimaxStreamingToolParser": true,
+      "parserAPIShapeProof": true,
+      "qwenStreamingToolParser": true,
+      "reasoningParserPerRequest": true,
+      "responsesEndpoint": true,
+      "responsesPreviousResponseReuse": true,
+      "responsesSessionStoreEngineTests": true,
+      "responsesStreamingEvents": true,
+      "responsesStreamingSessionStore": true,
+      "responsesUsageCachedTokens": true,
+      "toolChoiceRequiredErrors": true
+    },
+    "engineTestCommandCount": 2,
+    "engineTestCommands": [
+      "cd ExploitBotEngine && PYTHONPATH=. .venv/bin/python -m pytest -q testsuite/test_responses_session_store.py testsuite/test_tool_parser_api.py",
+      "ExploitBotEngine/.venv/bin/python scripts/prove-parser-api.py"
+    ],
+    "engineTestFileCount": 3,
+    "engineTestFileParity": true,
+    "engineTestFiles": [
+      "ExploitBotEngine/testsuite/test_responses_session_store.py",
+      "ExploitBotEngine/testsuite/test_tool_parser_api.py",
+      "scripts/prove-parser-api.py"
+    ],
+    "liveLoadedModelProof": "not-run-in-this-gate",
+    "minimaxReasoningParser": true,
+    "ok": true,
+    "proofCount": 7,
+    "proofFileParity": true,
+    "proofLevel": "app-source-and-engine-test-backed",
+    "proofs": [
+      "streaming-parser-reuse-proof.py",
+      "chat-coverage-proof.py",
+      "runtime-coverage-proof.py",
+      "deep-runtime-flow-coverage-proof.py",
+      "parser-tool-matrix-proof.py",
+      "prove-parser-api.py",
+      "verify-live-models.py"
+    ],
+    "qwenReasoningParser": true,
+    "reasoningParserMode": "per-request-parser-instance",
+    "registryReasoningParserLookup": true,
+    "responsesStoreSessionMode": "store-response-session-and-resolve-previous-response-id",
+    "responsesStreamEventCount": 6,
+    "responsesStreamEvents": [
+      "response.created",
+      "response.output_text.delta",
+      "response.reasoning.delta",
+      "response.function_call_arguments.delta",
+      "response.usage",
+      "response.completed"
+    ],
+    "route": "/qa/streaming-parser-reuse",
+    "sourceFileCount": 7,
+    "sourceFileParity": true,
+    "sourceFiles": [
+      "ExploitBot/Sources/ExploitBot/Services/ChatService.swift",
+      "ExploitBotEngine/vmlx_engine/server.py",
+      "ExploitBotEngine/vmlx_engine/tool_parsers/qwen_tool_parser.py",
+      "ExploitBotEngine/vmlx_engine/tool_parsers/minimax_tool_parser.py",
+      "ExploitBotEngine/vmlx_engine/tool_parsers/auto_tool_parser.py",
+      "ExploitBotEngine/vmlx_engine/model_configs.py",
+      "ExploitBotEngine/vmlx_engine/model_config_registry.py"
+    ],
+    "streamingEndpoints": [
+      "/v1/chat/completions",
+      "/v1/responses"
+    ],
+    "supportedFamilies": [
+      "qwen",
+      "minimax"
+    ],
+    "toolParserFileCount": 3,
+    "toolParserFiles": [
+      "qwen_tool_parser.py",
+      "minimax_tool_parser.py",
+      "auto_tool_parser.py"
+    ],
+    "usageTelemetry": "stream_options.include_usage-with-cached_tokens"
+  },
+  "usageTelemetry": "stream_options.include_usage-with-cached_tokens"
+}

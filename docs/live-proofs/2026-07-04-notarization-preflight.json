@@ -1,0 +1,132 @@
+{
+  "artifacts": {
+    "appPath": "release/ExploitBot.app",
+    "dmgPath": "release/ExploitBot-beta.dmg"
+  },
+  "checks": {
+    "appStapledTicket": "BLOCKED",
+    "credentialLiveValidation": "NOT_RUN",
+    "developerIDSignature": "PASS",
+    "dmgStapledTicket": "BLOCKED",
+    "gatekeeperAssessment": "BLOCKED",
+    "hardenedRuntime": "PASS",
+    "manifestGate": "BLOCKED",
+    "notaryCredentials": "BLOCKED",
+    "notarytool": "PASS"
+  },
+  "credentialSetup": {
+    "envCommand": "export NOTARIZE_APPLE_ID=<apple-id> NOTARIZE_TEAM_ID=<team-id> NOTARIZE_PASSWORD=<app-specific-password>",
+    "notarizeWithEnv": "source /path/to/.env.signing && ./script/package_release.sh --notarize",
+    "notarizeWithProfile": "EXPLOITBOT_NOTARY_PROFILE=<profile-name> ./script/package_release.sh --notarize",
+    "postNotarizeVerification": [
+      "xcrun stapler validate release/ExploitBot.app",
+      "xcrun stapler validate release/ExploitBot-beta.dmg",
+      "python3 scripts/notarization-preflight-proof.py",
+      "python3 scripts/release-readiness-proof.py",
+      "python3 scripts/goal-requirement-audit-proof.py"
+    ],
+    "profileCommand": "xcrun notarytool store-credentials <profile-name> --apple-id <apple-id> --team-id <team-id> --password <app-specific-password>"
+  },
+  "credentials": {
+    "acceptedCredentialModes": [
+      "EXPLOITBOT_NOTARY_PROFILE",
+      "NOTARIZE_APPLE_ID+NOTARIZE_TEAM_ID+NOTARIZE_PASSWORD"
+    ],
+    "configuredInputs": [],
+    "credentialLiveValidation": "NOT_RUN",
+    "credentialLiveValidationReason": "Preflight checks local input presence and stapled-ticket state only; run ./script/package_release.sh --notarize to submit to Apple and staple artifacts.",
+    "credentialValidationStatus": "missing-credential-input",
+    "envCredentialValuesRedacted": false,
+    "envCredentialsConfigured": false,
+    "missingEnvInputs": [
+      "NOTARIZE_APPLE_ID",
+      "NOTARIZE_TEAM_ID",
+      "NOTARIZE_PASSWORD"
+    ],
+    "profileConfigured": false,
+    "profileNameRedacted": false,
+    "selectedCredentialMode": "not-configured"
+  },
+  "distributionStatus": "BLOCKED",
+  "finishedAt": "2026-07-05T15:58:41-0700",
+  "gatekeeper": {
+    "app": {
+      "output": "/Users/eric/exploitbot/release/ExploitBot.app: rejected\nsource=Insufficient Context",
+      "path": "release/ExploitBot.app",
+      "returnCode": 3,
+      "status": "REJECTED"
+    }
+  },
+  "generatedAt": "2026-07-05T15:58:41-0700",
+  "keychainProfiles": {
+    "defaultProfileProbe": {
+      "profileNameProbe": "EXPLOITBOT_NOTARY_PROFILE",
+      "profileNameRedacted": true,
+      "returnCode": 44,
+      "status": "NOT_FOUND"
+    }
+  },
+  "nextAction": "configure-notary-credentials-and-run-package-notarize",
+  "notarizationGate": "requires-notary-credentials",
+  "notarizationGateReason": "Run with EXPLOITBOT_NOTARY_PROFILE or NOTARIZE_APPLE_ID/NOTARIZE_TEAM_ID/NOTARIZE_PASSWORD.",
+  "notarizationStatus": "not-submitted",
+  "ok": true,
+  "proofLevel": "local-notarytool-credential-input-and-stapled-ticket-gate",
+  "proofType": "notarization-preflight",
+  "secretsRedacted": true,
+  "signing": {
+    "appDetails": {
+      "authorities": [
+        "Developer ID Application: ShieldStack LLC (55KGF2S5AY)",
+        "Developer ID Certification Authority",
+        "Apple Root CA"
+      ],
+      "hardenedRuntime": true,
+      "identifier": "ai.jangq.ExploitBot",
+      "path": "release/ExploitBot.app",
+      "rawSummary": "Executable=/Users/eric/exploitbot/release/ExploitBot.app/Contents/MacOS/ExploitBot\nIdentifier=ai.jangq.ExploitBot\nFormat=app bundle with Mach-O thin (arm64)\nCodeDirectory v=20500 size=41279 flags=0x10000(runtime) hashes=1279+7 location=embedded\nVersionPlatform=1\nVersionMin=917504\nVersionSDK=1704960\nHash type=sha256 size=32\nCandidateCDHash sha256=26d982d7281d6b162f93ba816d1da4cc4332c7e2\nCandidateCDHashFull sha256=26d982d7281d6b162f93ba816d1da4cc4332c7e269a052dd6b643a6dfc32033a\nHash choices=sha256\nCMSDigest=26d982d7281d6b162f93ba816d1da4cc4332c7e269a052dd6b643a6dfc32033a\nCMSDigestType=2\nExecutable Segment base=0\nExecutable Segment limit=8536064\nExecutable Segment flags=0x1\nPage size=16384\nCDHash=26d982d7281d6b162f93ba816d1da4cc4332c7e2\nSignature size=9051\nAuthority=Developer ID Application: ShieldStack LLC (55KGF2S5AY)\nAuthority=Developer ID Certification Authority\nAuthority=Apple Root CA\nTimestamp=Jul 5, 2026 at 3:57:53\u202fPM\nInfo.plist entries=12\nTeamIdentifier=55KGF2S5AY\nRuntime Version=26.4.0\nSealed Resources version=2 rules=13 files=29216\nInternal requirements count=1 size=180",
+      "status": "PASS",
+      "teamIdentifier": "55KGF2S5AY",
+      "timestamp": "Jul 5, 2026 at 3:57:53\u202fPM"
+    },
+    "appEntitlements": {
+      "entitlements": {
+        "com.apple.security.app-sandbox": false,
+        "com.apple.security.files.user-selected.read-write": true,
+        "com.apple.security.network.client": true,
+        "com.apple.security.network.server": true
+      },
+      "hasHardenedRuntimeUnsafeEntitlements": false,
+      "path": "release/ExploitBot.app",
+      "rawSummary": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"https://www.apple.com/DTDs/PropertyList-1.0.dtd\"><plist version=\"1.0\"><dict><key>com.apple.security.app-sandbox</key><false/><key>com.apple.security.files.user-selected.read-write</key><true/><key>com.apple.security.network.client</key><true/><key>com.apple.security.network.server</key><true/></dict></plist>\nExecutable=/Users/eric/exploitbot/release/ExploitBot.app/Contents/MacOS/ExploitBot\nwarning: Specifying ':' in the path is deprecated and will not work in a future release",
+      "status": "PASS"
+    },
+    "appVerify": {
+      "output": "/Users/eric/exploitbot/release/ExploitBot.app: valid on disk\n/Users/eric/exploitbot/release/ExploitBot.app: satisfies its Designated Requirement",
+      "path": "release/ExploitBot.app",
+      "returnCode": 0,
+      "status": "PASS"
+    },
+    "dmgVerify": {
+      "output": "/Users/eric/exploitbot/release/ExploitBot-beta.dmg: valid on disk\n/Users/eric/exploitbot/release/ExploitBot-beta.dmg: satisfies its Designated Requirement",
+      "path": "release/ExploitBot-beta.dmg",
+      "returnCode": 0,
+      "status": "PASS"
+    }
+  },
+  "stapler": {
+    "app": {
+      "output": "Processing: /Users/eric/exploitbot/release/ExploitBot.app\nExploitBot.app does not have a ticket stapled to it.",
+      "path": "release/ExploitBot.app",
+      "returnCode": 65,
+      "status": "NO_STAPLED_TICKET"
+    },
+    "dmg": {
+      "output": "Processing: /Users/eric/exploitbot/release/ExploitBot-beta.dmg\nExploitBot-beta.dmg does not have a ticket stapled to it.",
+      "path": "release/ExploitBot-beta.dmg",
+      "returnCode": 65,
+      "status": "NO_STAPLED_TICKET"
+    }
+  },
+  "startedAt": "2026-07-05T15:58:37-0700"
+}

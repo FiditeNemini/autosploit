@@ -1,0 +1,96 @@
+{
+  "generatedAt": "2026-07-05T02:54:29-0700",
+  "ok": true,
+  "proofType": "proof-ledger-per-turn-runtime-refresh",
+  "sourceChanges": [
+    "ExploitBot/Sources/ExploitBot/Models/AppState.swift",
+    "scripts/proof-category-matrix-proof.py",
+    "scripts/endpoint-route-matrix-proof.py",
+    "scripts/tool-execution-matrix-proof.py",
+    "scripts/live-status-preview-flow-proof.py",
+    "scripts/per-turn-runtime-contract-proof.py",
+    "scripts/cache-artifact-matrix-proof.py"
+  ],
+  "rootCauseEvidence": {
+    "proofLedgerInitialFailure": "categoryOtherCount was 47, above the proof-ledger-proof.py threshold of 30",
+    "proofCategoryInitialFailure": "coverage-index timed out under a 45s proof harness timeout",
+    "coverageIndexTimingSeconds": 74.86,
+    "perTurnInitialFailure": "hybridSSMAsyncReDerive row read only qwenBatchingSSMReDeriveCompleted=0 even though the Qwen hybrid artifact had completed rederive evidence"
+  },
+  "liveRouteSnapshot": {
+    "cacheArtifactMatrix": {
+      "contractParity": true,
+      "ok": true,
+      "qwenHybridSSMReDeriveCompleted": 1,
+      "qwenHybridSSMReDeriveFailed": 0
+    },
+    "proofCategoryMatrix": {
+      "categoryCount": 9,
+      "categoryProofFileParity": true,
+      "ok": true
+    },
+    "proofLedger": {
+      "categoryCounts": {
+        "agent": 12,
+        "chat": 12,
+        "context": 20,
+        "other": 4,
+        "release": 16,
+        "runtime": 54,
+        "settings": 13,
+        "tabs": 60,
+        "tools": 22,
+        "visual": 44
+      },
+      "categoryOtherCount": 4,
+      "proofCount": 257,
+      "proofFileParity": true,
+      "tabProofFamilyCount": 10
+    }
+  },
+  "seededPerTurnRuntimeProof": {
+    "command": "PYTHONPATH=ExploitBotEngine ExploitBotEngine/.venv/bin/python3 scripts/per-turn-runtime-contract-proof.py",
+    "result": "PASS",
+    "hybridSSMAsyncReDerive": {
+      "completed": 1,
+      "failed": 0,
+      "lastNumTokens": 113,
+      "status": "ready"
+    },
+    "note": "The direct unseeded /qa/per-turn-runtime-contract route still needs QA seed state for CVE/semantic rows; the proof script seeds that state before asserting the full contract."
+  },
+  "verificationCommands": [
+    {
+      "command": "PYTHONPATH=ExploitBotEngine ExploitBotEngine/.venv/bin/python3 scripts/proof-ledger-proof.py",
+      "result": "proof-ledger proof passed"
+    },
+    {
+      "command": "PYTHONPATH=ExploitBotEngine ExploitBotEngine/.venv/bin/python3 scripts/proof-category-matrix-proof.py",
+      "result": "proof-category-matrix proof passed"
+    },
+    {
+      "command": "PYTHONPATH=ExploitBotEngine ExploitBotEngine/.venv/bin/python3 scripts/endpoint-route-matrix-proof.py",
+      "result": "endpoint-route-matrix proof passed"
+    },
+    {
+      "command": "PYTHONPATH=ExploitBotEngine ExploitBotEngine/.venv/bin/python3 scripts/tool-execution-matrix-proof.py",
+      "result": "tool-execution-matrix proof passed"
+    },
+    {
+      "command": "PYTHONPATH=ExploitBotEngine ExploitBotEngine/.venv/bin/python3 scripts/live-status-preview-flow-proof.py",
+      "result": "live-status-preview-flow proof passed"
+    },
+    {
+      "command": "PYTHONPATH=ExploitBotEngine ExploitBotEngine/.venv/bin/python3 scripts/per-turn-runtime-contract-proof.py",
+      "result": "per-turn-runtime-contract proof passed"
+    },
+    {
+      "command": "PYTHONPATH=ExploitBotEngine ExploitBotEngine/.venv/bin/python3 scripts/cache-artifact-matrix-proof.py",
+      "result": "cache-artifact-matrix proof passed"
+    },
+    {
+      "command": "PYTHONPATH=ExploitBotEngine ExploitBotEngine/.venv/bin/python3 scripts/app-qa-matrix-smoke-proof.py",
+      "result": "app-qa-matrix-smoke proof passed"
+    }
+  ]
+}

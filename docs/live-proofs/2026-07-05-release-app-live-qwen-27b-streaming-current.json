@@ -1,0 +1,2223 @@
+{
+  "app": "/Users/eric/exploitbot/release/ExploitBot.app",
+  "cleanupTerminatedProcessRows": [],
+  "generatedAt": "2026-07-05T15:55:17-0700",
+  "health": {
+    "acceleration": {
+      "host": {
+        "brand": "Apple M5 Max",
+        "reason": null,
+        "supported": true
+      },
+      "kernel_type": "affine_quantized_matmul",
+      "metal_na_active_on_host": true,
+      "metal_na_capable": true,
+      "metal_na_symbols": {
+        "affine_gather_qmm_symbols": 1620,
+        "affine_qmm_symbols": 2592,
+        "available": true,
+        "nax_symbols": 0,
+        "naxtile_symbols": 0
+      },
+      "reason": null
+    },
+    "cache": {
+      "block_disk_cache": {
+        "blocks_on_disk": 0,
+        "disk_evictions": 0,
+        "disk_hits": 0,
+        "disk_misses": 0,
+        "disk_size_bytes": 0,
+        "disk_size_gb": 0.0,
+        "disk_writes": 0,
+        "total_accesses": 0,
+        "total_cached_tokens": 0,
+        "total_tokens_on_disk": 0
+      },
+      "disk_cache": {
+        "entries": 0,
+        "hit_rate": 0.0,
+        "hits": 0,
+        "max_size_gb": 10.0,
+        "misses": 0,
+        "pending_writes": 0,
+        "stores": 0,
+        "total_cached_tokens": 0,
+        "total_size_mb": 0.0,
+        "total_tokens_on_disk": 0
+      },
+      "scheduler_cache": {
+        "active_requests": 0,
+        "allocated_blocks": 1,
+        "block_size": 64,
+        "cache_hit_rate": 0,
+        "cache_hits": 0,
+        "cache_misses": 0,
+        "cow_copies": 0,
+        "disk_hits": 0,
+        "disk_misses": 0,
+        "entries_by_type": {
+          "assistant": 0,
+          "system": 0,
+          "user": 0
+        },
+        "evictions": 0,
+        "free_blocks": 999,
+        "hit_rate": 0,
+        "hits": 0,
+        "max_blocks": 1000,
+        "misses": 0,
+        "shared_blocks": 0,
+        "tokens_saved": 0,
+        "total_tokens_cached": 0,
+        "utilization": 0.001
+      },
+      "ssm_companion": {
+        "disk": {
+          "budget_bytes": 10737418240,
+          "budget_gb": 10.0,
+          "bytes": 0,
+          "bytes_mb": 0.0,
+          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-stream-home-l_stvqmr/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
+          "enabled": true,
+          "entries": 0,
+          "hit_rate": 0.0,
+          "hits": 0,
+          "misses": 0,
+          "stores": 0,
+          "total_cached_tokens": 0,
+          "total_tokens_on_disk": 0
+        },
+        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-stream-home-l_stvqmr/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
+        "disk_enabled": true,
+        "entries": 0,
+        "max_bytes": null,
+        "max_bytes_mb": null,
+        "max_entries": 8,
+        "nbytes": 0,
+        "nbytes_mb": 0.0
+      },
+      "totals": {
+        "l2_block_tokens_on_disk": 0,
+        "l2_prompt_tokens_on_disk": 0,
+        "l2_ssm_tokens_on_disk": 0,
+        "l2_tokens_on_disk": 0,
+        "l2_tokens_on_disk_note": "store_sum_across_prompt_block_ssm_l2; tiers_may_overlap",
+        "l2_tokens_on_disk_store_sum": 0,
+        "ram_tokens_cached": 0,
+        "ssm_tokens_on_disk": 0
+      }
+    },
+    "effective_config": {
+      "cache": {
+        "disk_cache": {
+          "block_l2": {
+            "dir": null,
+            "enabled": true,
+            "max_gb": 10.0
+          },
+          "prompt_l2": {
+            "dir": null,
+            "enabled": true,
+            "max_gb": 10.0
+          }
+        },
+        "kv_cache_quantization": {
+          "enabled": true,
+          "group_size": 64,
+          "mode": "turboquant-q4"
+        },
+        "paged_cache": {
+          "block_size": 64,
+          "enabled": true
+        },
+        "prefix_cache": {
+          "enabled": true,
+          "memory_percent": 0.3
+        },
+        "responses": {
+          "clears_conversation_state_only": true,
+          "method": "prefix-cache-l2-turboquant",
+          "new_context_preserves_engine_session": true,
+          "prefix_cache_required": true
+        },
+        "ssm_companion": {
+          "disk_l2_enabled": true,
+          "enabled": true,
+          "max_entries": 8,
+          "max_mb": null
+        },
+        "topology": {
+          "block_l2_active": true,
+          "cache_type": "hybrid",
+          "expected_components": [
+            "kv_cache",
+            "prefix_cache",
+            "prompt_l2",
+            "paged_cache",
+            "block_l2",
+            "kv_quantization",
+            "ssm_companion",
+            "ssm_l2"
+          ],
+          "kv_quantization_active": true,
+          "name": "hybrid_ssm_attention",
+          "prompt_l2_active": true,
+          "ssm_companion_required": true,
+          "warnings": []
+        }
+      },
+      "generation": {
+        "chat_template_kwargs": null,
+        "custom_chat_template": false,
+        "enable_thinking": true,
+        "max_tokens": 64,
+        "min_p": null,
+        "repetition_penalty": null,
+        "stop": null,
+        "temperature": 0.0,
+        "top_k": 20,
+        "top_p": 1.0
+      },
+      "model": {
+        "architecture_hints": {
+          "cache_topology": "hybrid_ssm_attention",
+          "ssm_companion_required": true
+        },
+        "cache_type": "hybrid",
+        "family": "qwen3_5",
+        "name": "dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "served_name": null,
+        "type": "text"
+      },
+      "parsers": {
+        "auto_tool_choice": true,
+        "reasoning": "qwen3",
+        "tool_call": "qwen"
+      },
+      "sources": {
+        "generation": {
+          "chat_template_kwargs": "unset",
+          "enable_thinking": "launcher_default",
+          "max_tokens": "cli",
+          "min_p": "unset",
+          "repetition_penalty": "unset",
+          "stop": "unset",
+          "temperature": "cli",
+          "top_k": "generation_config",
+          "top_p": "cli"
+        },
+        "parsers": {
+          "reasoning": "jang_capabilities",
+          "tool_call": "jang_capabilities"
+        }
+      }
+    },
+    "engine_type": "batched",
+    "kv_cache_quantization": {
+      "bits": 4,
+      "enabled": true,
+      "group_size": 64
+    },
+    "last_request_time": null,
+    "mcp": null,
+    "memory": {
+      "active_mb": 27751.1,
+      "cache_mb": 0.1,
+      "peak_mb": 27751.2
+    },
+    "model_loaded": true,
+    "model_name": "dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+    "model_type": "mllm",
+    "mtp": {
+      "artifact_available": true,
+      "cache_type": "hybrid",
+      "config_mtp_layer_source": "config.text_config.mtp_num_hidden_layers",
+      "config_num_nextn_predict_layers": 1,
+      "effective_depth": 3,
+      "effective_depth_source": "default",
+      "family": "qwen3_5",
+      "has_vision_config": true,
+      "has_vision_weights": true,
+      "index_has_mtp_tensors": true,
+      "index_mtp_layer_count": 1,
+      "issues": [],
+      "jang_drop_mtp": null,
+      "jang_mtp_layers": 1,
+      "mtp_tensor_count": 23,
+      "request_gate": "temperature=0,repetition_penalty=1.0",
+      "request_policy": "compatible-only",
+      "runtime_active": true,
+      "runtime_available": true,
+      "runtime_bundle_has_mtp": true,
+      "runtime_mtp_mode": "preserved_enabled",
+      "runtime_reason": "native MTP runtime is active for text+vl",
+      "runtime_scope": "text+vl",
+      "runtime_supported": true,
+      "runtime_validation_blocked": false,
+      "status": "native_runtime_active",
+      "vision_tensor_count": 333,
+      "vl_runtime_available": true
+    },
+    "native_cache": {
+      "attention_kv_storage_quantization": {
+        "applies_to": "attention_kv_layers_only",
+        "bits": 4,
+        "enabled": true,
+        "group_size": 64,
+        "mode": "storage_boundary",
+        "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+        "ssm_policy": "native_companion_state"
+      },
+      "block_disk_l2": true,
+      "cache_type": "hybrid_ssm_typed",
+      "components": [
+        "attention_kv",
+        "ssm_companion_state",
+        "async_rederive"
+      ],
+      "family": "hybrid",
+      "generic_turboquant_kv": {
+        "enabled": false,
+        "reason": "hybrid_ssm_state"
+      },
+      "kv_layer_indices": [],
+      "live_attention_tq_kv": {
+        "applies_to": "attention_kv_layers_only",
+        "attention_layers": [],
+        "companion_layers": [],
+        "enabled": false,
+        "mode": null,
+        "ssm_policy": "native_full_precision_companion_state"
+      },
+      "paged": true,
+      "prefix": true,
+      "schema": "hybrid_ssm_v1",
+      "ssm_entries": 0
+    },
+    "quantization": {
+      "backend": "mx.quantize",
+      "codec": "affine_quantized_matmul",
+      "config_bits": 8,
+      "group_size": 32,
+      "passthrough_bit_widths_used": [
+        16
+      ],
+      "passthrough_tensor_count": 693,
+      "profile": "MXFP8",
+      "sidecar": {
+        "jang_config": true,
+        "jangtq_runtime": false,
+        "prestacked_bundle": false
+      },
+      "target_bits": 8,
+      "weight_format": "mxfp8",
+      "weight_index": {
+        "index_file": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP/model.safetensors.index.json",
+        "mtp_tensor_count": 23,
+        "routed_layout_counts": {
+          "prestacked_switch": 0,
+          "split_expert": 0
+        },
+        "suffix_counts": {
+          "scales": 506,
+          "weight": 937
+        },
+        "total_tensors": 1705,
+        "tq_target_counts": {}
+      },
+      "weight_matmul_dispatch": {
+        "metal_na_eligible": true,
+        "primary": "mlx_affine_quantized_matmul",
+        "reason": null,
+        "uses_mlx_quantized_matmul": true
+      }
+    },
+    "quantization_format": {
+      "actual_bits": null,
+      "block_size": 64,
+      "target_bits": null,
+      "type": "jang"
+    },
+    "scheduler": {
+      "batch_generator": {},
+      "cache_hit_requests": 0,
+      "cache_hit_tokens": 0,
+      "cache_hit_tokens_by_detail": {},
+      "cache_reuse_partial_downgrades": 0,
+      "cache_reuse_partial_tokens": 0,
+      "cache_reuse_skip_tokens": 0,
+      "cache_reuse_skips": 0,
+      "engine_path": null,
+      "ewma_ttft_seconds": 0,
+      "hybrid_kv_without_ssm_hits": 0,
+      "hybrid_kv_without_ssm_tokens": 0,
+      "last_cache_reuse_partial": null,
+      "last_cache_reuse_skip": null,
+      "last_hybrid_kv_without_ssm": null,
+      "max_running_observed": 0,
+      "max_waiting_observed": 0,
+      "num_running": 0,
+      "num_waiting": 0,
+      "single_active_decode": false
+    },
+    "status": "healthy",
+    "turboquant_kv_cache": {
+      "enabled": false
+    }
+  },
+  "memoryPreflight": {
+    "allowConcurrentModel": false,
+    "availableGB": 114.95,
+    "enabled": true,
+    "heavyModelProcessCount": 0,
+    "heavyModelProcesses": [],
+    "requiredAvailableGB": 42.0,
+    "waitForMemorySlot": {
+      "attempts": 1,
+      "elapsedSeconds": 0.03,
+      "enabled": false,
+      "lastBlockedPreflight": null,
+      "pollSeconds": 5.0,
+      "waitSeconds": 0.0
+    }
+  },
+  "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+  "ok": true,
+  "postCleanupClean": true,
+  "postCleanupProcessRows": [],
+  "productionStopClean": true,
+  "productionStopProcessRows": [],
+  "proofType": "release-app-live-qwen-streaming",
+  "runtime": {
+    "candidateCount": 8,
+    "candidates": [
+      {
+        "error": "not executable",
+        "executable": false,
+        "missingModuleCount": 7,
+        "missingModules": [
+          "fastapi",
+          "uvicorn",
+          "mlx",
+          "mlx_lm",
+          "transformers",
+          "numpy",
+          "vmlx_engine"
+        ],
+        "path": "/Users/eric/exploitbot/release/ExploitBot.app/Contents/Resources/python/bin/python3",
+        "source": "app-bundled-python",
+        "valid": false,
+        "version": ""
+      },
+      {
+        "error": "",
+        "executable": true,
+        "missingModuleCount": 0,
+        "missingModules": [],
+        "path": "/Users/eric/exploitbot/release/ExploitBot.app/Contents/Resources/bundled-python/python/bin/python3",
+        "source": "app-bundled-vmlx-python",
+        "valid": true,
+        "version": "3.12.12"
+      },
+      {
+        "error": "not executable",
+        "executable": false,
+        "missingModuleCount": 7,
+        "missingModules": [
+          "fastapi",
+          "uvicorn",
+          "mlx",
+          "mlx_lm",
+          "transformers",
+          "numpy",
+          "vmlx_engine"
+        ],
+        "path": "/Users/eric/exploitbot/release/ExploitBot.app/Contents/Resources/ExploitBotEngine/.venv/bin/python3",
+        "source": "app-engine-venv",
+        "valid": false,
+        "version": ""
+      },
+      {
+        "error": "not executable",
+        "executable": false,
+        "missingModuleCount": 7,
+        "missingModules": [
+          "fastapi",
+          "uvicorn",
+          "mlx",
+          "mlx_lm",
+          "transformers",
+          "numpy",
+          "vmlx_engine"
+        ],
+        "path": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-stream-home-l_stvqmr/exploitbot/ExploitBotEngine/.venv/bin/python3",
+        "source": "repo-engine-venv",
+        "valid": false,
+        "version": ""
+      },
+      {
+        "error": "",
+        "executable": true,
+        "missingModuleCount": 0,
+        "missingModules": [],
+        "path": "/Applications/vMLX.app/Contents/Resources/bundled-python/python/bin/python3",
+        "source": "installed-vmlx-bundled-python",
+        "valid": true,
+        "version": "3.12.12"
+      },
+      {
+        "error": "missing modules: fastapi, uvicorn, mlx, mlx_lm, transformers, numpy",
+        "executable": true,
+        "missingModuleCount": 6,
+        "missingModules": [
+          "fastapi",
+          "uvicorn",
+          "mlx",
+          "mlx_lm",
+          "transformers",
+          "numpy"
+        ],
+        "path": "/opt/homebrew/bin/python3",
+        "source": "homebrew-python",
+        "valid": false,
+        "version": "3.14.6"
+      },
+      {
+        "error": "not executable",
+        "executable": false,
+        "missingModuleCount": 7,
+        "missingModules": [
+          "fastapi",
+          "uvicorn",
+          "mlx",
+          "mlx_lm",
+          "transformers",
+          "numpy",
+          "vmlx_engine"
+        ],
+        "path": "/usr/local/bin/python3",
+        "source": "local-python",
+        "valid": false,
+        "version": ""
+      },
+      {
+        "error": "missing modules: fastapi, uvicorn, mlx, mlx_lm, transformers, numpy",
+        "executable": true,
+        "missingModuleCount": 6,
+        "missingModules": [
+          "fastapi",
+          "uvicorn",
+          "mlx",
+          "mlx_lm",
+          "transformers",
+          "numpy"
+        ],
+        "path": "/usr/bin/python3",
+        "source": "system-python",
+        "valid": false,
+        "version": "3.9.6"
+      }
+    ],
+    "engineDir": "/Users/eric/exploitbot/release/ExploitBot.app/Contents/Resources/ExploitBotEngine",
+    "launchScript": "/Users/eric/exploitbot/release/ExploitBot.app/Contents/Resources/ExploitBotEngine/launch.py",
+    "missingAllCandidates": false,
+    "ok": true,
+    "requiredModules": [
+      "fastapi",
+      "uvicorn",
+      "mlx",
+      "mlx_lm",
+      "transformers",
+      "numpy",
+      "vmlx_engine"
+    ],
+    "selected": {
+      "error": "",
+      "executable": true,
+      "missingModuleCount": 0,
+      "missingModules": [],
+      "path": "/Users/eric/exploitbot/release/ExploitBot.app/Contents/Resources/bundled-python/python/bin/python3",
+      "source": "app-bundled-vmlx-python",
+      "valid": true,
+      "version": "3.12.12"
+    }
+  },
+  "startedAt": "2026-07-05T15:54:49-0700",
+  "state": {
+    "activeSubtabs": {
+      "creds": "Cracking",
+      "exploit": "Metasploit",
+      "network": "Protocols",
+      "osint": "Username",
+      "post": "PrivEsc",
+      "recon": "Subdomains",
+      "report": "Findings",
+      "supplyChain": "CVE Intel",
+      "web": "Vulns"
+    },
+    "activeTab": "recon",
+    "activityFeedActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "lastAction": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "agentActions": {
+      "agentCount": 0,
+      "agentId": "",
+      "agentName": "",
+      "agentType": "",
+      "deploySheetVisible": false,
+      "lastAction": "",
+      "messageCount": 0,
+      "status": "idle",
+      "stoppedGeneration": false,
+      "summary": "",
+      "taskSent": false
+    },
+    "agents": {
+      "activeAgents": 0,
+      "authorizationGuards": {
+        "explicitToolDeny": true,
+        "externalHighRiskRequiresScopeOrAuthorization": true,
+        "highRiskToolCount": 24
+      },
+      "details": [],
+      "forceFinalAnswerAfterToolResults": true,
+      "includeUnavailableToolSchemas": false,
+      "loopMaxIterations": 7,
+      "maxConcurrentAgents": 8,
+      "modePolicies": {
+        "autopilot": "execute",
+        "copilot": "approval",
+        "manual": "suggest"
+      },
+      "multiAgentEnabled": true,
+      "phaseRouting": {
+        "breach": [
+          "Credential Agent",
+          "Exploit Agent"
+        ],
+        "detect": [
+          "Web Vuln Agent",
+          "Network Agent",
+          "Supply Chain Agent"
+        ],
+        "scan": [
+          "Recon Agent",
+          "OSINT Agent"
+        ]
+      },
+      "streamingCount": 0,
+      "toolSchemaMaxTools": 12,
+      "workingCount": 0
+    },
+    "catalogEmbeddings": {
+      "recordCount": 0,
+      "sourceCounts": {},
+      "sources": [],
+      "vectorDimensions": 0
+    },
+    "chat": {
+      "enableReasoning": true,
+      "forceFinalAnswerAfterToolResults": true,
+      "includeUnavailableToolSchemas": false,
+      "maxIterations": 7,
+      "toolSchemaMaxTools": 12
+    },
+    "chatActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "lastAction": "",
+      "lastStashItemId": "",
+      "messageRole": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "chatControlActions": {
+      "contextGeneration": 0,
+      "contextInspectorVisible": false,
+      "enableReasoning": true,
+      "lastAction": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "contextCatalog": {
+      "cveMode": "current",
+      "enabled": true,
+      "includeAssets": false,
+      "includeFindings": true,
+      "includeRecentToolOutput": false,
+      "includeStash": true,
+      "maxSnippets": 3
+    },
+    "contextWindow": {
+      "blockL2Disk": true,
+      "cacheResponsesInferenceMethod": "prefix-cache-l2-turboquant",
+      "cacheResponsesMethod": "prefix-cache-l2-turboquant",
+      "declaredMaxContextTokens": 262144,
+      "engineSessionPreserved": true,
+      "generation": 0,
+      "highRiskOverrideEnv": "EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET",
+      "lastFailedTargets": [
+        200000,
+        224000,
+        258000
+      ],
+      "modelGenerationDefaults": false,
+      "newContextBehavior": "clear-chat-preserve-engine-cache",
+      "newModelSessionBehavior": "new-context-window-preserve-engine-cache-session",
+      "pagedCache": true,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "provenSafeTargetCeiling": 192000,
+      "sessionBoundaryMode": "new-context-window",
+      "turboQuantKV": true,
+      "unprovenTargetPolicy": "refuse-before-model-load"
+    },
+    "credsAction": {
+      "command": "",
+      "kind": "",
+      "resultCount": 0,
+      "status": "idle",
+      "summary": "",
+      "target": ""
+    },
+    "credsCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "credsLifecycle": {
+      "bruteforce": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "cracking": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "secrets": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "cveDatabase": {
+      "activeSettingsCategory": "",
+      "importProgress": "",
+      "isImporting": false,
+      "kevCount": 1631,
+      "lastSync": "2026-07-05T22:37:31Z",
+      "searchResultCount": 0,
+      "topResults": [],
+      "totalCount": 1644
+    },
+    "cveImportListAudit": {
+      "excludedIds": [],
+      "includeFilterMode": "none",
+      "includeIds": [],
+      "selectedIds": [],
+      "sourceIds": [],
+      "sourceMode": "none"
+    },
+    "cveSemantic": {
+      "candidateCount": 0,
+      "error": "",
+      "fallback": false,
+      "importProgress": "",
+      "query": "",
+      "resultCount": 0,
+      "usedEmbedding": false,
+      "vectorDimensions": 0
+    },
+    "cveSettingsActions": {
+      "addPanelVisible": false,
+      "kevCount": 0,
+      "lastAction": "",
+      "query": "",
+      "resultCount": 0,
+      "status": "idle",
+      "summary": "",
+      "totalCount": 0
+    },
+    "engineCacheStats": {
+      "blockL2Blocks": 0,
+      "blockL2Hits": 0,
+      "blockL2Misses": 0,
+      "memoryActiveMB": 27751.1,
+      "memoryCacheMB": 0.1,
+      "prefixCacheHits": 0,
+      "prefixCacheTokensSaved": 0,
+      "prefixCacheTotalTokens": 0,
+      "promptL2Entries": 0,
+      "promptL2Hits": 0,
+      "promptL2Misses": 0,
+      "ssmDiskEnabled": true,
+      "ssmDiskEntries": 0,
+      "ssmEntries": 0,
+      "ssmMaxEntries": 8,
+      "ssmReDeriveCompleted": 0,
+      "ssmReDeriveFailed": 0,
+      "ssmReDeriveQueued": 0,
+      "ssmReDeriveReason": "",
+      "ssmReDeriveState": "",
+      "turboQuantAttentionLayers": 0,
+      "turboQuantCompanionLayers": 0,
+      "turboQuantEnabled": true,
+      "turboQuantHybridPolicy": "",
+      "turboQuantMakeCache": "turboquant-q4 encode/decode"
+    },
+    "engineConfig": {
+      "blockDiskCacheMaxGB": 10,
+      "blockL2Disk": true,
+      "cacheMemoryPercent": 0.3,
+      "diskCacheMaxGB": 10,
+      "kvCacheGroupSize": 64,
+      "kvCacheQuantization": "turboquant-q4",
+      "maxTokens": 64,
+      "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "pagedCache": true,
+      "pagedCacheBlockSize": 64,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "reasoningParser": "auto",
+      "temperature": 0,
+      "toolCallParser": "auto",
+      "topP": 1,
+      "useModelGenerationDefaults": false
+    },
+    "engineError": "",
+    "engineMemoryPreflight": {
+      "allowConcurrentModel": false,
+      "allowed": true,
+      "availableGB": 114.56501770019531,
+      "heavyModelProcessCount": 0,
+      "heavyModelProcesses": [],
+      "reason": "",
+      "requiredAvailableGB": 42
+    },
+    "enginePort": 8100,
+    "engineRunning": true,
+    "engineStaleCleanup": {
+      "checked": true,
+      "checkedAt": "2026-07-05T22:54:52Z",
+      "cleaned": false,
+      "foundCount": 0,
+      "foundProcesses": [],
+      "launchScript": "/Users/eric/exploitbot/release/ExploitBot.app/Contents/Resources/ExploitBotEngine/launch.py",
+      "remainingCount": 0,
+      "remainingProcesses": [],
+      "warning": ""
+    },
+    "exploitAction": {
+      "command": "",
+      "kind": "",
+      "status": "idle",
+      "summary": "",
+      "target": "",
+      "tool": ""
+    },
+    "exploitActionHistory": [],
+    "exploitCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "exploitLifecycle": {
+      "implant": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "listener": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "script": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "feedEntries": 4,
+    "feedRecent": [
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "scanModelLibrary 14 models from 1 roots",
+        "tool": ""
+      },
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "scanModelLibrary 14 models from 1 roots",
+        "tool": ""
+      },
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "select model folder Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "tool": ""
+      },
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "startEngine Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "tool": ""
+      }
+    ],
+    "findings": 0,
+    "healthStatus": "running",
+    "inferenceLogActions": {
+      "clipboardPreview": "",
+      "engineLogChars": 0,
+      "isVisible": false,
+      "lastAction": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "isStreaming": false,
+    "isWorking": false,
+    "metrics": {
+      "cachedTokens": 0,
+      "completionTokens": 0,
+      "promptTokens": 0,
+      "tokPerSec": 0,
+      "ttft": 0
+    },
+    "mode": "copilot",
+    "modeSelection": {
+      "activeOpMode": "copilot",
+      "activeOpName": "Computer Use Live Proof",
+      "availableLabels": [
+        "Autopilot",
+        "Copilot",
+        "Manual"
+      ],
+      "availableModes": [
+        "autopilot",
+        "copilot",
+        "manual"
+      ],
+      "currentLabel": "Copilot",
+      "currentMode": "copilot",
+      "lastAction": "",
+      "pendingApprovalRejected": false,
+      "pendingApprovalVisible": false,
+      "showOnboarding": false,
+      "source": ""
+    },
+    "model": "Qwen3.6-27B-MXFP8-CRACK-MTP",
+    "modelFolderInfo": {
+      "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+      "family": "Qwen",
+      "hasConfig": true,
+      "hasGenerationConfig": true,
+      "hasJangConfig": true,
+      "hasJangtqConfig": false,
+      "hasTokenizerConfig": true,
+      "isMultimodal": true,
+      "isSupported": true,
+      "modelType": "qwen3_5",
+      "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+    },
+    "modelFolderPicker": {
+      "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+      "family": "Qwen",
+      "isSupported": true,
+      "isVisible": false,
+      "lastAction": "select",
+      "selectedPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "source": "settings",
+      "status": "done",
+      "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+    },
+    "modelLibrary": {
+      "entries": [
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "MiniMax",
+          "isMultimodal": false,
+          "isSupported": true,
+          "name": "MiniMax-M2.7-JANG_K-CRACK",
+          "path": "/Users/eric/models/dealign.ai/MiniMax-M2.7-JANG_K-CRACK",
+          "supportMessage": "Supported MiniMax family. The app auto-detects config.json, jang_config.json, jangtq_config.json, generation_config.json, reasoning parser, tool parser, and full-KV cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-27B-JANG_4M-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-JANG_4M-CRACK",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-27B-MXFP4-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-27B-MXFP8-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "DeepSeek-V4-Flash-JANG-CRACK",
+          "path": "/Users/eric/models/dealign.ai/DeepSeek-V4-Flash-JANG-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": true,
+          "isSupported": false,
+          "name": "Gemma-4-26B-A4B-it-JANG_4M-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Gemma-4-26B-A4B-it-JANG_4M-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "LFM2.5-8B-A1B-MXFP4-CRACK",
+          "path": "/Users/eric/models/dealign.ai/LFM2.5-8B-A1B-MXFP4-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "LFM2.5-8B-A1B-MXFP8-CRACK",
+          "path": "/Users/eric/models/dealign.ai/LFM2.5-8B-A1B-MXFP8-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "Nemotron-Omni-Nano-JANGTQ4-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Nemotron-Omni-Nano-JANGTQ4-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "Nemotron-Omni-Nano-MXFP4-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Nemotron-Omni-Nano-MXFP4-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": true,
+          "isSupported": false,
+          "name": "Step-3.7-Flash-JANG_2L-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Step-3.7-Flash-JANG_2L-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": true,
+          "isSupported": false,
+          "name": "Step-3.7-Flash-JANG_K-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Step-3.7-Flash-JANG_K-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        }
+      ],
+      "entryCount": 14,
+      "lastAction": "select",
+      "roots": [
+        "/Users/eric/models/dealign.ai"
+      ],
+      "selectedPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "status": "done",
+      "summary": "scanModelLibrary 14 models from 1 roots",
+      "supportedCount": 6
+    },
+    "msgs": 0,
+    "networkAction": {
+      "command": "",
+      "kind": "",
+      "protocol": "",
+      "status": "idle",
+      "summary": "",
+      "target": ""
+    },
+    "networkCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "networkLifecycle": {
+      "capture": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "mitm": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "tunnel": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "osintArtifactAction": {
+      "bytes": 0,
+      "history": [],
+      "lastAction": "",
+      "path": "",
+      "pathExists": false,
+      "status": "idle",
+      "summary": ""
+    },
+    "osintArtifacts": [],
+    "osintCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "osintLifecycle": {
+      "email": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "metadata": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "screenshot": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "username": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "phase": "scan",
+    "phaseActions": {
+      "fromPhase": "",
+      "lastAction": "",
+      "phaseGuidance": "",
+      "status": "idle",
+      "summary": "",
+      "toPhase": "",
+      "toolsRun": 0
+    },
+    "ports": 0,
+    "postAttribution": [],
+    "postCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "postLifecycle": {
+      "ad": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "lateral": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "privesc": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "qaChatVisual": {
+      "autoScrollLocked": null,
+      "cacheSessionIndicator": "prefix/l2/tq",
+      "contextInspectorVisible": false,
+      "hasUnreadWhileUnlocked": null,
+      "headerBadges": [
+        "0 msgs",
+        "ctx 0",
+        "cache preserved",
+        "prefix/l2/tq",
+        "new ctx keeps cache"
+      ],
+      "mode": "",
+      "newContextConfirm": {
+        "isVisible": false,
+        "lastAction": ""
+      },
+      "newContextSessionBoundary": "new ctx keeps cache",
+      "reasoningBlock": {
+        "isCollapsed": false,
+        "totalChars": 0,
+        "visibleChars": 0
+      },
+      "reasoningCollapsed": null,
+      "toolOutputExpansion": {
+        "hiddenLineCount": 0,
+        "isExpanded": false,
+        "toolName": "",
+        "totalLineCount": 0,
+        "visibleLineCount": 0
+      }
+    },
+    "qaCoverage": {
+      "contextHooks": [
+        "onContextUpdate",
+        "search_context",
+        "lastContextSummary",
+        "lastToolSchemaNames",
+        "context.catalog.maxSnippets"
+      ],
+      "stateRoutes": [
+        "/state",
+        "/messages",
+        "/results",
+        "/qa/subtab-coverage",
+        "/qa/subtab-lifecycle-matrix",
+        "/qa/endpoint-inventory",
+        "/qa/endpoint-route-matrix",
+        "/qa/action-state-inventory",
+        "/qa/view-inventory",
+        "/qa/function-flow-inventory",
+        "/qa/function-proof-matrix",
+        "/qa/service-inventory",
+        "/qa/service-function-matrix",
+        "/qa/model-state-inventory",
+        "/qa/model-state-function-matrix",
+        "/qa/theme-inventory",
+        "/qa/theme-token-matrix",
+        "/qa/python-runtime-inventory",
+        "/qa/engine-python-runtime",
+        "/qa/agent-flow-inventory",
+        "/qa/proof-suite-inventory",
+        "/qa/agent-loop-coverage",
+        "/qa/agent-loop-phase-matrix",
+        "/qa/agent-tool-authorization-coverage",
+        "/qa/tab-tool-function-flow",
+        "/qa/tab-proof-family-matrix",
+        "/qa/tool-execution-matrix",
+        "/qa/tool-flow-coverage",
+        "/qa/live-status-preview-flow",
+        "/qa/security-abuse-boundary-matrix",
+        "/qa/deep-runtime-flow-coverage",
+        "/qa/tool-engine-context-ops-matrix",
+        "/qa/engine-api-cache-proof-matrix",
+        "/qa/session-context-cache-flow",
+        "/qa/cache-artifact-matrix",
+        "/qa/chat-quality-evidence-matrix",
+        "/qa/turn-lifecycle-evidence",
+        "/qa/active-objective-audit",
+        "/qa/runtime-local-model-lane",
+        "/qa/continuous-batching-coverage",
+        "/qa/live-loaded-model-agent-stress",
+        "/qa/streaming-parser-reuse",
+        "/qa/startup-cache-defaults",
+        "/qa/runtime-coverage",
+        "/qa/context-coverage",
+        "/qa/context-budget-compaction",
+        "/qa/context-prompt-injection-boundary",
+        "/qa/context-flow-matrix",
+        "/qa/context-session-efficiency-matrix",
+        "/qa/context-efficiency-invariants",
+        "/qa/evidence-lifecycle-coverage",
+        "/qa/evidence-lifecycle-flow-matrix",
+        "/qa/cve-taxonomy-coverage",
+        "/qa/cve-taxonomy-matrix",
+        "/qa/cve-import-embedding-coverage",
+        "/qa/state-dependent-contract-matrix",
+        "/qa/settings-coverage",
+        "/qa/settings-surface-matrix",
+        "/qa/visual-coverage",
+        "/qa/visual-surface-matrix",
+        "/qa/session-coverage",
+        "/qa/session-workflow-matrix",
+        "/qa/tab-action-coverage",
+        "/qa/tab-action-surface-matrix",
+        "/qa/chat-coverage",
+        "/qa/recon-coverage",
+        "/qa/web-coverage",
+        "/qa/network-coverage",
+        "/qa/creds-coverage",
+        "/qa/exploit-coverage",
+        "/qa/post-coverage",
+        "/qa/supply-chain-coverage",
+        "/qa/osint-coverage",
+        "/qa/report-coverage",
+        "/qa/stash-coverage",
+        "/qa/coverage-index",
+        "/qa/coverage-false-flag-classification",
+        "/qa/proof-ledger",
+        "/qa/proof-category-matrix",
+        "/qa/artifact-ledger",
+        "/qa/artifact-manifest-matrix",
+        "/qa/result-parser-coverage",
+        "/qa/parser-tool-matrix",
+        "/qa/checkpoint-ledger",
+        "/qa/audit-ledger",
+        "/qa/gap-ledger",
+        "/qa/qwen-multimodal-promotion-readiness",
+        "/qa/release-readiness",
+        "/qa/beta-readiness-coverage",
+        "/qa/objective-runtime-coverage",
+        "/qa/objective-flow-requirement-matrix",
+        "/qa/objective-flow-execution-graph",
+        "/qa/per-turn-runtime-contract"
+      ],
+      "staticProfilesRemoved": true,
+      "subtabStateProofs": [
+        "recon-subtab-state-proof.py",
+        "web-subtab-state-proof.py",
+        "network-subtab-state-proof.py",
+        "creds-subtab-state-proof.py",
+        "exploit-subtab-state-proof.py",
+        "post-subtab-state-proof.py",
+        "supply-chain-cve-ui-proof.py",
+        "osint-subtab-state-proof.py",
+        "report-subtab-state-proof.py"
+      ],
+      "subtabStateTabs": [
+        "recon",
+        "web",
+        "network",
+        "creds",
+        "exploit",
+        "post",
+        "supplyChain",
+        "osint",
+        "report"
+      ],
+      "testServerSmoke": true
+    },
+    "qaSettingsVisual": {
+      "category": "",
+      "showSettings": false
+    },
+    "qaVisualSubtabs": {},
+    "reconAction": {
+      "command": "",
+      "kind": "",
+      "status": "idle",
+      "summary": "",
+      "target": ""
+    },
+    "reconCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "reportAction": {
+      "findingCount": 0,
+      "kind": "",
+      "prompt": "",
+      "status": "idle",
+      "summary": "",
+      "template": ""
+    },
+    "reportExport": {
+      "artifacts": [],
+      "error": "",
+      "findingCount": 0,
+      "status": "idle"
+    },
+    "reportFindingActions": {
+      "createLabel": "Create Finding",
+      "deleteLabel": "Delete finding",
+      "findingCount": 0,
+      "findings": [],
+      "lastAction": "",
+      "lastCreatedId": "",
+      "lastDeletedId": "",
+      "status": "idle",
+      "summary": "",
+      "wizardVisible": false
+    },
+    "reportRenderActions": {
+      "findingCount": 0,
+      "htmlChars": 0,
+      "htmlPreview": "",
+      "lastAction": "",
+      "status": "idle",
+      "summary": "",
+      "template": ""
+    },
+    "requestContext": {
+      "contextInjected": false,
+      "contextPreview": "",
+      "contextSnippetCount": 0,
+      "streamWarnings": [],
+      "toolSchemaCount": 0,
+      "toolSchemas": []
+    },
+    "settingsCategoryCoverage": {
+      "categories": [
+        {
+          "detail": "Watch the local engine, effective parser/cache metadata, and live cache counters.",
+          "id": "engine",
+          "pageSections": [
+            "engine status",
+            "effective runtime",
+            "live cache counters"
+          ],
+          "subtitle": "status, health, effective runtime",
+          "systemImage": "cpu",
+          "title": "Engine"
+        },
+        {
+          "detail": "Choose one model folder. Qwen and MiniMax are the supported beta families; config is picked up from that folder.",
+          "id": "model",
+          "pageSections": [
+            "model folder",
+            "supported family warning",
+            "generation config source"
+          ],
+          "subtitle": "folder selection and support checks",
+          "systemImage": "folder",
+          "title": "Model"
+        },
+        {
+          "detail": "Runtime defaults come from the model folder and engine registry, with only operational loop limits exposed here.",
+          "id": "runtime",
+          "pageSections": [
+            "model generation defaults",
+            "parser autodetect",
+            "tool-loop limits",
+            "autonomy"
+          ],
+          "subtitle": "generation, parsers, loop limits",
+          "systemImage": "slider.horizontal.3",
+          "title": "Runtime"
+        },
+        {
+          "detail": "Control the dynamic catalogue that decides which app facts are sent into each model turn.",
+          "id": "context",
+          "pageSections": [
+            "dynamic catalogue",
+            "retrieval sources",
+            "CVE assist mode",
+            "long-context safety"
+          ],
+          "subtitle": "catalogue and retrieval sources",
+          "systemImage": "square.stack.3d.up",
+          "title": "Context"
+        },
+        {
+          "detail": "Tune cache budgets while keeping the required prefix, paged, L2, and TurboQuant paths enabled.",
+          "id": "cache",
+          "pageSections": [
+            "prefix cache",
+            "prompt L2 disk",
+            "paged cache",
+            "block L2 disk",
+            "TurboQuant KV"
+          ],
+          "subtitle": "TurboQuant, prefix, L2 disk",
+          "systemImage": "internaldrive",
+          "title": "Cache"
+        },
+        {
+          "detail": "Configure full-auto and multi-agent behavior without mixing it into engine setup.",
+          "id": "agents",
+          "pageSections": [
+            "multi-agent mode",
+            "concurrency limit",
+            "agent defaults"
+          ],
+          "subtitle": "multi-agent controls",
+          "systemImage": "person.2",
+          "title": "Agents"
+        },
+        {
+          "detail": "Manage the local vulnerability knowledge base used by tools and context retrieval.",
+          "id": "cves",
+          "pageSections": [
+            "database import",
+            "CVE counts",
+            "search status"
+          ],
+          "subtitle": "local CVE data and search",
+          "systemImage": "cross.case",
+          "title": "CVE Database"
+        },
+        {
+          "detail": "Detect and install external command-line tools used by the agent loop.",
+          "id": "tools",
+          "pageSections": [
+            "installed tools",
+            "missing tools",
+            "install plan",
+            "install log"
+          ],
+          "subtitle": "tool install and detection",
+          "systemImage": "wrench.and.screwdriver",
+          "title": "Tools"
+        },
+        {
+          "detail": "Inspect engine logs separately from runtime controls.",
+          "id": "logs",
+          "pageSections": [
+            "engine log output",
+            "diagnostics"
+          ],
+          "subtitle": "engine output and diagnostics",
+          "systemImage": "doc.text.magnifyingglass",
+          "title": "Logs"
+        }
+      ],
+      "splitPages": true
+    },
+    "settingsEngineActions": {
+      "healthStatus": "running",
+      "isRunning": true,
+      "lastAction": "startEngine",
+      "model": "Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "status": "done",
+      "summary": "startEngine Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "wasRunning": false
+    },
+    "sidebarActions": {
+      "lastAction": "",
+      "opId": "",
+      "opName": "",
+      "opsCount": 0,
+      "status": "idle",
+      "stoppedGeneration": false,
+      "summary": ""
+    },
+    "stash": 0,
+    "stashActions": {
+      "actionLabels": [
+        "Add",
+        "Copy All",
+        "Copy",
+        "Send",
+        "Delete"
+      ],
+      "activeFilter": "all",
+      "addSheetVisible": false,
+      "clipboardPreview": "",
+      "filteredCount": 0,
+      "itemCount": 0,
+      "items": [],
+      "lastAction": "",
+      "lastDeletedId": "",
+      "lastItemId": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "stashRetrieval": {
+      "candidateCount": 0,
+      "query": "",
+      "returnedCount": 0,
+      "topLabels": [],
+      "topScore": 0
+    },
+    "subdomains": 0,
+    "subtabActions": {
+      "lastAction": "",
+      "status": "idle",
+      "subtab": "",
+      "summary": "",
+      "tab": "",
+      "validSubtabs": []
+    },
+    "supplyChainLifecycle": {
+      "cve": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "dependency": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "sbom": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "secrets": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "tabActivities": {
+      "creds": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "exploit": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "network": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "osint": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "post": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "recon": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "report": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "stash": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "supplyChain": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "web": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      }
+    },
+    "tabSwitchActions": {
+      "followAgent": true,
+      "fromTab": "",
+      "lastAction": "",
+      "status": "idle",
+      "summary": "",
+      "toTab": ""
+    },
+    "terminal": {
+      "activeCommand": {
+        "command": "",
+        "source": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "commandTranscripts": [],
+      "installedToolCount": 42,
+      "isVisible": false,
+      "surfaceContract": "terminal-visibility-command-transcripts",
+      "toolPathCount": 6,
+      "toolPaths": [
+        "/opt/homebrew/bin",
+        "/usr/local/bin",
+        "/Users/eric/.exploitbot/tools",
+        "/Users/eric/.local/bin",
+        "/usr/bin",
+        "/bin"
+      ]
+    },
+    "toolExecutor": {
+      "currentOutput": "",
+      "currentTool": "",
+      "isRunning": false
+    },
+    "toolSettings": {
+      "activeSettingsCategory": "",
+      "errorCount": 0,
+      "installCommands": [],
+      "installLog": "",
+      "installPlan": {
+        "commandCount": 0,
+        "installCommands": [],
+        "missingByCategory": {},
+        "missingByInstallMethod": {},
+        "missingCount": 0,
+        "requiresNetworkInstall": false
+      },
+      "installedCount": 42,
+      "installingCount": 0,
+      "isInstalling": false,
+      "missingByCategory": {},
+      "missingByInstallMethod": {},
+      "missingCount": 0,
+      "requiresNetworkInstall": false,
+      "tools": [
+        {
+          "category": "system",
+          "installMethod": "system",
+          "name": "curl",
+          "path": "/usr/bin/curl",
+          "status": "installed",
+          "version": "8.7.1"
+        },
+        {
+          "category": "system",
+          "installMethod": "system",
+          "name": "nc",
+          "path": "/usr/bin/nc",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "system",
+          "installMethod": "system",
+          "name": "python3",
+          "path": "/opt/homebrew/bin/python3",
+          "status": "installed",
+          "version": "3.14.6"
+        },
+        {
+          "category": "system",
+          "installMethod": "system",
+          "name": "zsh",
+          "path": "/bin/zsh",
+          "status": "installed",
+          "version": "5.9"
+        },
+        {
+          "category": "recon",
+          "installMethod": "go",
+          "name": "subfinder",
+          "path": "/Users/eric/.exploitbot/tools/subfinder",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "recon",
+          "installMethod": "go",
+          "name": "dnsx",
+          "path": "/Users/eric/.exploitbot/tools/dnsx",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "recon",
+          "installMethod": "homebrew",
+          "name": "nmap",
+          "path": "/opt/homebrew/bin/nmap",
+          "status": "installed",
+          "version": "7.99"
+        },
+        {
+          "category": "recon",
+          "installMethod": "homebrew",
+          "name": "masscan",
+          "path": "/opt/homebrew/bin/masscan",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "recon",
+          "installMethod": "go",
+          "name": "httpx",
+          "path": "/Users/eric/.exploitbot/tools/httpx",
+          "status": "installed",
+          "version": "1.9.0"
+        },
+        {
+          "category": "recon",
+          "installMethod": "go",
+          "name": "katana",
+          "path": "/Users/eric/.exploitbot/tools/katana",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "recon",
+          "installMethod": "uv",
+          "name": "theHarvester",
+          "path": "/Users/eric/.local/bin/theHarvester",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "go",
+          "name": "nuclei",
+          "path": "/opt/homebrew/bin/nuclei",
+          "status": "installed",
+          "version": "3.10.0"
+        },
+        {
+          "category": "web",
+          "installMethod": "uv",
+          "name": "sqlmap",
+          "path": "/opt/homebrew/bin/sqlmap",
+          "status": "installed",
+          "version": "1.10.7"
+        },
+        {
+          "category": "web",
+          "installMethod": "go",
+          "name": "dalfox",
+          "path": "/Users/eric/.exploitbot/tools/dalfox",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "homebrew",
+          "name": "feroxbuster",
+          "path": "/opt/homebrew/bin/feroxbuster",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "go",
+          "name": "ffuf",
+          "path": "/Users/eric/.exploitbot/tools/ffuf",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "uv",
+          "name": "arjun",
+          "path": "/Users/eric/.local/bin/arjun",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "homebrew",
+          "name": "wpscan",
+          "path": "/opt/homebrew/bin/wpscan",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "homebrew",
+          "name": "testssl",
+          "path": "/opt/homebrew/bin/testssl.sh",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "uv",
+          "name": "graphqlmap",
+          "path": "/Users/eric/.local/bin/graphqlmap",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "uv",
+          "name": "jwt_tool",
+          "path": "/Users/eric/.local/bin/jwt_tool",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "network",
+          "installMethod": "uv",
+          "name": "netexec",
+          "path": "/Users/eric/.local/bin/netexec",
+          "status": "installed",
+          "version": "1.5.1"
+        },
+        {
+          "category": "network",
+          "installMethod": "homebrew",
+          "name": "snmpwalk",
+          "path": "/usr/bin/snmpwalk",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "network",
+          "installMethod": "homebrew",
+          "name": "tshark",
+          "path": "/opt/homebrew/bin/tshark",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "network",
+          "installMethod": "homebrew",
+          "name": "bettercap",
+          "path": "/opt/homebrew/bin/bettercap",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "network",
+          "installMethod": "go",
+          "name": "chisel",
+          "path": "/Users/eric/.exploitbot/tools/chisel",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "credentials",
+          "installMethod": "homebrew",
+          "name": "hashcat",
+          "path": "/opt/homebrew/bin/hashcat",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "credentials",
+          "installMethod": "homebrew",
+          "name": "hydra",
+          "path": "/opt/homebrew/bin/hydra",
+          "status": "installed",
+          "version": "9.6"
+        },
+        {
+          "category": "credentials",
+          "installMethod": "ruby",
+          "name": "haiti",
+          "path": "/Users/eric/.local/bin/haiti",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "credentials",
+          "installMethod": "homebrew",
+          "name": "trufflehog",
+          "path": "/opt/homebrew/bin/trufflehog",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "supplychain",
+          "installMethod": "homebrew",
+          "name": "syft",
+          "path": "/opt/homebrew/bin/syft",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "supplychain",
+          "installMethod": "homebrew",
+          "name": "grype",
+          "path": "/opt/homebrew/bin/grype",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "supplychain",
+          "installMethod": "homebrew",
+          "name": "osv_scanner",
+          "path": "/opt/homebrew/bin/osv-scanner",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "exploit",
+          "installMethod": "homebrew",
+          "name": "metasploit",
+          "path": "/opt/homebrew/bin/msfconsole",
+          "status": "installed",
+          "version": "6.4.135"
+        },
+        {
+          "category": "exploit",
+          "installMethod": "uv",
+          "name": "pwncat",
+          "path": "/Users/eric/.local/bin/pwncat-cs",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "exploit",
+          "installMethod": "release",
+          "name": "sliver",
+          "path": "/Users/eric/.exploitbot/tools/sliver-client",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "post",
+          "installMethod": "uv",
+          "name": "impacket",
+          "path": "/Users/eric/.local/bin/secretsdump.py",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "post",
+          "installMethod": "script",
+          "name": "linpeas",
+          "path": "/Users/eric/.exploitbot/tools/linpeas.sh",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "osint",
+          "installMethod": "uv",
+          "name": "sherlock",
+          "path": "/Users/eric/.local/bin/sherlock",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "osint",
+          "installMethod": "uv",
+          "name": "holehe",
+          "path": "/Users/eric/.local/bin/holehe",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "osint",
+          "installMethod": "homebrew",
+          "name": "exiftool",
+          "path": "/opt/homebrew/bin/exiftool",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "osint",
+          "installMethod": "go",
+          "name": "gowitness",
+          "path": "/Users/eric/.exploitbot/tools/gowitness",
+          "status": "installed",
+          "version": ""
+        }
+      ]
+    },
+    "toolSettingsActions": {
+      "installedCount": 0,
+      "lastAction": "",
+      "missingCount": 0,
+      "status": "idle",
+      "summary": "",
+      "toolName": ""
+    },
+    "tools": 0,
+    "vulns": 0,
+    "webAction": {
+      "cve": "",
+      "kind": "",
+      "prompt": "",
+      "source": "",
+      "status": "idle",
+      "target": "",
+      "title": ""
+    },
+    "webCVERows": [],
+    "webDirectActions": {
+      "actionLabels": [
+        "Create Finding",
+        "Stash",
+        "Copy",
+        "Search Related CVEs"
+      ],
+      "clipboardPreview": "",
+      "cve": "",
+      "findingPrefill": {
+        "cve": "",
+        "description": "",
+        "severity": "high",
+        "target": "",
+        "title": ""
+      },
+      "findingWizardVisible": false,
+      "lastAction": "",
+      "lastPrompt": "",
+      "lastStashPreview": "",
+      "source": "",
+      "stashCount": 0,
+      "status": "idle",
+      "summary": "",
+      "target": "",
+      "title": ""
+    },
+    "windowOverlayActions": {
+      "findingWizardVisible": false,
+      "lastAction": "",
+      "settingsVisible": false,
+      "status": "idle",
+      "summary": "",
+      "terminalVisible": false
+    }
+  },
+  "status": {
+    "hybridSSMTopology": "PASS",
+    "nativeD3MTP": "PASS",
+    "pagedCache": "PASS",
+    "postCleanupClean": "PASS",
+    "prefixCache": "PASS",
+    "productionStopClean": "PASS",
+    "sseDoneFrame": "PASS",
+    "sseJsonFrames": "PASS",
+    "ssmCompanion": "PASS",
+    "streamContentOrReasoningDelta": "PASS",
+    "streamUsageTelemetry": "PASS",
+    "turboQuantKV": "PASS"
+  },
+  "stream": {
+    "cachedTokens": 0,
+    "cachedTokensFieldSeen": true,
+    "contentDeltaCount": 0,
+    "doneFrameSeen": true,
+    "rawDataLineCount": 28,
+    "rawPreview": [
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"role\": \"assistant\"}}]}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \"Here\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 1, \"total_tokens\": 19, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \"'s\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 2, \"total_tokens\": 20, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \" a thinking process:\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 6, \"total_tokens\": 24, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \"\\n\\n1. \"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 10, \"total_tokens\": 28, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \" **Analyze User\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 14, \"total_tokens\": 32, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \" Input:**\\n  \"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 18, \"total_tokens\": 36, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \" - **\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 20, \"total_tokens\": 38, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \"Prompt\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 21, \"total_tokens\": 39, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \":** \\\"Think\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 24, \"total_tokens\": 42, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \" briefly\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 25, \"total_tokens\": 43, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \", then answer\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 28, \"total_tokens\": 46, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \" exactly:\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 30, \"total_tokens\": 48, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \" STREAM\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 31, \"total_tokens\": 49, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \"-Q\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 32, \"total_tokens\": 50, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \"W\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 33, \"total_tokens\": 51, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \"EN\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 34, \"total_tokens\": 52, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \"-\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 35, \"total_tokens\": 53, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \"OK\\\"\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 37, \"total_tokens\": 55, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \"\\n  \"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 39, \"total_tokens\": 57, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \" - **\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 41, \"total_tokens\": 59, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \"Key Components\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 43, \"total_tokens\": 61, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \":** \\n\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 45, \"total_tokens\": 63, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}",
+      "data: {\"id\": \"chatcmpl-5f3f1e0f\", \"object\": \"chat.completion.chunk\", \"created\": 1783292106, \"model\": \"dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\", \"choices\": [{\"index\": 0, \"delta\": {\"reasoning_content\": \"     -\"}}], \"usage\": {\"prompt_tokens\": 18, \"completion_tokens\": 47, \"total_tokens\": 65, \"prompt_tokens_details\": {\"cached_tokens\": 0}}}"
+    ],
+    "reasoningDeltaCount": 24,
+    "reasoningPreview": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - **Prompt:** \"Think briefly, then answer exactly: STREAM-QWEN-OK\"\n   - **Key Components:** \n     - \"",
+    "request": {
+      "chat_template_kwargs": {
+        "enable_thinking": true
+      },
+      "enable_thinking": true,
+      "max_tokens": 48,
+      "messages": [
+        {
+          "content": "Think briefly, then answer exactly: STREAM-QWEN-OK",
+          "role": "user"
+        }
+      ],
+      "model": "dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "stream": true,
+      "stream_options": {
+        "include_usage": true
+      }
+    },
+    "sseJsonFrameCount": 27,
+    "textPreview": "",
+    "toolCallDeltaCount": 0,
+    "usageFrameSeen": true
+  }
+}

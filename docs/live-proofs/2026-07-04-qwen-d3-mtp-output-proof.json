@@ -1,0 +1,93 @@
+{
+  "generatedAt": "2026-07-04T19:40:24-0700",
+  "ok": true,
+  "proofLevel": "existing-live-artifact-runtime-decode-counter-backed",
+  "proofType": "qwen-d3-mtp-output-path",
+  "requirement": "Every Qwen model with MTP in the selected path/name must prove D3 MTP activation on the generation/output path.",
+  "rows": [
+    {
+      "acceptedTokens": 154,
+      "artifact": "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-27b.json",
+      "bundleHasMTP": true,
+      "checks": {
+        "acceptedOutputTokensPresent": true,
+        "artifactOk": true,
+        "bundleHasMTP": true,
+        "d3AcceptedTokensPresent": true,
+        "d3DraftedTokensPresent": true,
+        "draftedOutputTokensPresent": true,
+        "effectiveDepthAtLeast3": true,
+        "finalAssistantOutputProduced": true,
+        "lastNativeMTPPresent": true,
+        "modelNameContainsMTP": true,
+        "modelNameContainsQwen": true,
+        "mtpForwardPassesPresent": true,
+        "noMTPFallback": true,
+        "runtimeActive": true
+      },
+      "d3AcceptedTokens": 1,
+      "d3DraftedTokens": 12,
+      "depthAcceptanceRates": {
+        "d1": 0.6622807017543859,
+        "d2": 0.16666666666666666,
+        "d3": 0.08333333333333333
+      },
+      "draftedTokens": 252,
+      "effectiveDepth": 3,
+      "failures": [],
+      "fallbackReason": null,
+      "finalAssistantOutputProduced": true,
+      "finalDepth": 1,
+      "finishReason": "length",
+      "modelNameContainsMTP": true,
+      "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "mtpForwardPasses": 253,
+      "runtimeActive": true,
+      "status": "PASS"
+    },
+    {
+      "acceptedTokens": 3,
+      "artifact": "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-35b.json",
+      "bundleHasMTP": true,
+      "checks": {
+        "acceptedOutputTokensPresent": true,
+        "artifactOk": true,
+        "bundleHasMTP": true,
+        "d3AcceptedTokensPresent": true,
+        "d3DraftedTokensPresent": true,
+        "draftedOutputTokensPresent": true,
+        "effectiveDepthAtLeast3": true,
+        "finalAssistantOutputProduced": true,
+        "lastNativeMTPPresent": true,
+        "modelNameContainsMTP": true,
+        "modelNameContainsQwen": true,
+        "mtpForwardPassesPresent": true,
+        "noMTPFallback": true,
+        "runtimeActive": true
+      },
+      "d3AcceptedTokens": 1,
+      "d3DraftedTokens": 5,
+      "depthAcceptanceRates": {
+        "d1": 0.2,
+        "d2": 0.2,
+        "d3": 0.2
+      },
+      "draftedTokens": 15,
+      "effectiveDepth": 3,
+      "failures": [],
+      "fallbackReason": null,
+      "finalAssistantOutputProduced": true,
+      "finalDepth": 3,
+      "finishReason": "stop",
+      "modelNameContainsMTP": true,
+      "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "mtpForwardPasses": 18,
+      "runtimeActive": true,
+      "status": "PASS"
+    }
+  ],
+  "statusCounts": {
+    "FAIL": 0,
+    "PASS": 2
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "artifacts": {
+    "appBinarySha256": "ea535b8998a30d30f8f4fcbf1dd4a37c46414d8b4c3b95f01f18ba9617d29067",
+    "appPath": "release/ExploitBot.app",
+    "dmgPath": "release/ExploitBot-beta.dmg",
+    "dmgSha256": "d74b511aa971b3f53cfe41bfe2bce54fac17ced1fd9bfc48282377afb8edf034"
+  },
+  "checks": {
+    "appCodesign": "PASS",
+    "bundledRuntime": "PASS",
+    "dmgCodesign": "PASS",
+    "notarization": "BLOCKED"
+  },
+  "distributionStatus": "BLOCKED",
+  "finishedAt": "2026-07-05T15:58:37-0700",
+  "generatedAt": "2026-07-05T15:58:37-0700",
+  "hasNotaryCredentials": false,
+  "localPackageStatus": "PASS",
+  "notarizationGate": "requires-notary-credentials",
+  "notarizationGateReason": "Run with EXPLOITBOT_NOTARY_PROFILE or NOTARIZE_APPLE_ID/NOTARIZE_TEAM_ID/NOTARIZE_PASSWORD.",
+  "notarizationStatus": "not-submitted",
+  "ok": true,
+  "proofLevel": "local-package-signature-runtime-and-notarization-gate",
+  "proofType": "release-readiness",
+  "startedAt": "2026-07-05T15:56:53-0700"
+}

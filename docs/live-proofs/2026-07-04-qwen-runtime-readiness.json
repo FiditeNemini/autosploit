@@ -1,0 +1,283 @@
+{
+  "blockingEvidence": {
+    "longContext": {
+      "actualPromptTokensByTokenizer": 8227,
+      "artifact": "docs/live-proofs/2026-07-04-real-qwen-long-context-smoke-27b.json",
+      "memoryPreflight": {
+        "allowConcurrentModel": false,
+        "availableGB": 110.9503173828125,
+        "enabled": true,
+        "heavyModelProcessCount": 0,
+        "heavyModelProcesses": [],
+        "requiredAvailableGB": 42.0
+      },
+      "sessionMaxPromptTokens": 10275,
+      "status": "PASS"
+    },
+    "longContextStatus": "PASS"
+  },
+  "coreStatus": "PASS",
+  "cveLookup": {
+    "artifact": "docs/live-proofs/2026-07-04-real-qwen-35b-lookup-cve-first-try.json",
+    "componentStatus": {
+      "computerUseMCP": "BLOCKED_SEPARATE_TRANSPORT",
+      "finalAnswerMarker": "PASS",
+      "hybridSSM": "PASS",
+      "lookupCVECallbackDetail": "PASS",
+      "lookupCVEFirstTryArgumentPreserved": "PASS",
+      "modelLoaded": "PASS",
+      "pagedCache": "PASS",
+      "prefixCache": "PASS",
+      "q4KV": "PASS",
+      "q4TurboQuantKV": "PASS",
+      "screenshotCaptured": "PASS",
+      "ssmCompanionNotQuantized": "PASS",
+      "verboseToolTranscript": "PASS",
+      "visibleFinalMarker": "PASS",
+      "visibleLookupToolCard": "PASS",
+      "visibleTargetCVE": "PASS",
+      "visibleUIProof": "PASS",
+      "visibleWindow": "PASS"
+    },
+    "status": "PASS",
+    "targetCVE": "CVE-2025-49704",
+    "toolSequence": [
+      "lookup_cve"
+    ]
+  },
+  "generatedAt": "2026-07-05T14:13:35-0700",
+  "ok": true,
+  "overallStatus": "PASS",
+  "proofLevel": "existing-live-artifact-cache-parser-tool-streaming-d3-backed",
+  "proofType": "qwen-runtime-readiness",
+  "reasoning": {
+    "rows": [
+      {
+        "artifact": "docs/live-proofs/2026-07-04-real-qwen-27b-reasoning-on-1024.json",
+        "assistantHasMarker": true,
+        "label": "27b",
+        "status": "PASS",
+        "thinkingHasMarker": false,
+        "warningShown": false
+      },
+      {
+        "artifact": "docs/live-proofs/2026-07-04-real-qwen-35b-reasoning-on-1024.json",
+        "assistantHasMarker": true,
+        "label": "35b",
+        "status": "PASS",
+        "thinkingHasMarker": false,
+        "warningShown": false
+      }
+    ],
+    "status": "PASS"
+  },
+  "rows": [
+    {
+      "artifact": "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+      "cacheEvidence": {
+        "cacheTotals": {
+          "l2_block_tokens_on_disk": 12529,
+          "ssm_tokens_on_disk": 26929
+        },
+        "nativeCache": {
+          "attention_kv_storage_quantization": {
+            "applies_to": "attention_kv_layers_only",
+            "bits": 4,
+            "enabled": true,
+            "group_size": 64,
+            "mode": "storage_boundary",
+            "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+            "ssm_policy": "native_companion_state"
+          },
+          "block_disk_l2": true,
+          "cache_type": "hybrid_ssm_typed",
+          "components": [
+            "attention_kv",
+            "ssm_companion_state",
+            "async_rederive"
+          ],
+          "paged": true,
+          "prefix": true
+        },
+        "q4KV": {
+          "bits": 4,
+          "enabled": true,
+          "group_size": 64
+        },
+        "q4TurboQuantKV": {
+          "enabled": true,
+          "group_size": 64,
+          "mode": "turboquant-q4"
+        },
+        "scheduler": {
+          "block_size": 64,
+          "tokens_saved": 640,
+          "total_tokens_cached": 12529
+        },
+        "ssmCompanionNotQuantized": {
+          "applies_to": "attention_kv_layers_only",
+          "bits": 4,
+          "enabled": true,
+          "group_size": 64,
+          "mode": "storage_boundary",
+          "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+          "ssm_policy": "native_companion_state"
+        }
+      },
+      "checks": {
+        "artifactOk": true,
+        "d3MTPOutputPath": true,
+        "hybridAsyncRederive": true,
+        "modelNameQwenMXFP8MTP": true,
+        "prefixPagedBlockL2": true,
+        "q4TurboQuantKV": true,
+        "qwenParsers": true,
+        "ssmCompanionDiskL2": true,
+        "toolTranscriptVisible": true,
+        "topologyContract": true
+      },
+      "d3Evidence": {
+        "d3AcceptedTokens": 1,
+        "d3DraftedTokens": 12,
+        "effectiveDepth": 3,
+        "mtpForwardPasses": 253
+      },
+      "failures": [],
+      "label": "27b",
+      "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "parserEvidence": {
+        "auto_tool_choice": true,
+        "reasoning": "qwen3",
+        "tool_call": "qwen"
+      },
+      "status": "PASS"
+    },
+    {
+      "artifact": "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json",
+      "cacheEvidence": {
+        "cacheTotals": {
+          "l2_block_tokens_on_disk": 12580,
+          "ssm_tokens_on_disk": 27044
+        },
+        "nativeCache": {
+          "attention_kv_storage_quantization": {
+            "applies_to": "attention_kv_layers_only",
+            "bits": 4,
+            "enabled": true,
+            "group_size": 64,
+            "mode": "storage_boundary",
+            "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+            "ssm_policy": "native_companion_state"
+          },
+          "block_disk_l2": true,
+          "cache_type": "hybrid_ssm_typed",
+          "components": [
+            "attention_kv",
+            "ssm_companion_state",
+            "async_rederive"
+          ],
+          "paged": true,
+          "prefix": true
+        },
+        "q4KV": {
+          "bits": 4,
+          "enabled": true,
+          "group_size": 64
+        },
+        "q4TurboQuantKV": {
+          "enabled": true,
+          "group_size": 64,
+          "mode": "turboquant-q4"
+        },
+        "scheduler": {
+          "block_size": 64,
+          "tokens_saved": 640,
+          "total_tokens_cached": 12580
+        },
+        "ssmCompanionNotQuantized": {
+          "applies_to": "attention_kv_layers_only",
+          "bits": 4,
+          "enabled": true,
+          "group_size": 64,
+          "mode": "storage_boundary",
+          "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+          "ssm_policy": "native_companion_state"
+        }
+      },
+      "checks": {
+        "artifactOk": true,
+        "d3MTPOutputPath": true,
+        "hybridAsyncRederive": true,
+        "modelNameQwenMXFP8MTP": true,
+        "prefixPagedBlockL2": true,
+        "q4TurboQuantKV": true,
+        "qwenParsers": true,
+        "ssmCompanionDiskL2": true,
+        "toolTranscriptVisible": true,
+        "topologyContract": true
+      },
+      "d3Evidence": {
+        "d3AcceptedTokens": 1,
+        "d3DraftedTokens": 5,
+        "effectiveDepth": 3,
+        "mtpForwardPasses": 18
+      },
+      "failures": [],
+      "label": "35b",
+      "model": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "parserEvidence": {
+        "auto_tool_choice": true,
+        "reasoning": "qwen3",
+        "tool_call": "qwen"
+      },
+      "status": "PASS"
+    }
+  ],
+  "sourceArtifacts": [
+    "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+    "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json",
+    "docs/live-proofs/2026-07-04-real-qwen-27b-reasoning-on-1024.json",
+    "docs/live-proofs/2026-07-04-real-qwen-35b-reasoning-on-1024.json",
+    "docs/live-proofs/2026-07-04-qwen-d3-mtp-output-proof.json",
+    "docs/live-proofs/2026-07-04-streaming-parser-reuse.json",
+    "docs/live-proofs/2026-07-04-real-qwen-35b-lookup-cve-first-try.json",
+    "docs/live-proofs/2026-07-04-real-qwen-long-context-smoke-27b.json"
+  ],
+  "statusCounts": {
+    "FAIL": 0,
+    "PASS": 2
+  },
+  "streaming": {
+    "artifact": "docs/live-proofs/2026-07-04-streaming-parser-reuse.json",
+    "chatCompletionStreamFields": [
+      "data: [DONE]",
+      "choices",
+      "delta.content",
+      "delta.reasoning_content",
+      "delta.tool_calls",
+      "usage.prompt_tokens_details.cached_tokens"
+    ],
+    "contractCount": 18,
+    "missingContracts": [],
+    "requiredContracts": [
+      "chatCompletionsStreaming",
+      "chatServiceContentDelta",
+      "chatServiceReasoningDelta",
+      "chatServiceToolCallDelta",
+      "responsesStreamingEvents",
+      "responsesPreviousResponseReuse",
+      "responsesUsageCachedTokens",
+      "qwenStreamingToolParser",
+      "reasoningParserPerRequest"
+    ],
+    "responsesStreamEvents": [
+      "response.created",
+      "response.output_text.delta",
+      "response.reasoning.delta",
+      "response.function_call_arguments.delta",
+      "response.usage",
+      "response.completed"
+    ],
+    "status": "PASS"
+  }
+}

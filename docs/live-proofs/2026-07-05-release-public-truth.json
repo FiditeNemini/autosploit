@@ -1,0 +1,64 @@
+{
+  "assetDownloadPerformed": false,
+  "branch": "main",
+  "checks": {
+    "localDmgMatchesPublished": "BLOCKED",
+    "localManifestMatchesPublished": "BLOCKED",
+    "matchingReleaseFound": "PASS",
+    "notarizationGate": "BLOCKED",
+    "publishedDmgAsset": "PASS",
+    "publishedManifestAsset": "PASS",
+    "repoPublic": "PASS",
+    "sourceRevisionMatchesPublished": "BLOCKED"
+  },
+  "currentHead": "9d1cbf29a72aebaaac26723e432c35a7e20790df",
+  "distributionStatus": "BLOCKED",
+  "expectedReleaseTag": "v0.1.0-beta",
+  "finishedAt": "2026-07-05T15:29:34-0700",
+  "generatedAt": "2026-07-05T15:29:34-0700",
+  "localArtifacts": {
+    "dmgPath": "release/ExploitBot-beta.dmg",
+    "dmgSha256": "95553fbf77ed7b31e1f65e0d6a9c5f25df482963f57354e83934b7bc33715c24",
+    "manifestPath": "release/release-manifest.json",
+    "manifestSha256": "b84d0ae11da1a2775346bd1f0b7f96f28de836c4b63df558d7aeea87de42a78e"
+  },
+  "localPackageStatus": "PASS",
+  "nextAction": "notarize-staple-and-publish-current-release-assets",
+  "notarizationGate": "requires-notary-credentials",
+  "notarizationStatus": "not-submitted",
+  "ok": true,
+  "proofLevel": "github-public-release-metadata-local-manifest-hash-and-notary-boundary",
+  "proofType": "release-public-truth",
+  "publicReleaseStatus": "PARTIAL",
+  "publishedRelease": {
+    "dmgAsset": {
+      "digest": "sha256:647bfa9e662c21e37b0cb79473fcf415a6ce058c15097c321dfa23440660175e",
+      "name": "ExploitBot-beta.dmg",
+      "size": 578388689,
+      "state": "uploaded",
+      "url": "https://github.com/jjang-ai/exploitbot/releases/download/v0.1.0-beta/ExploitBot-beta.dmg"
+    },
+    "isDraft": false,
+    "isPrerelease": true,
+    "manifestAsset": {
+      "digest": "sha256:dff4b23d93b115ece727a4b87bcfeb2af1e1ffb49b72c730cf75166d3b779d7e",
+      "name": "release-manifest.json",
+      "size": 1506,
+      "state": "uploaded",
+      "url": "https://github.com/jjang-ai/exploitbot/releases/download/v0.1.0-beta/release-manifest.json"
+    },
+    "name": "ExploitBot 0.1.0 Beta",
+    "publishedAt": "2026-06-03T00:17:08Z",
+    "tagName": "v0.1.0-beta",
+    "targetCommitish": "afe3ece9c0ce06405a3ec5eaecf0e27bef079bf2",
+    "url": "https://github.com/jjang-ai/exploitbot/releases/tag/v0.1.0-beta"
+  },
+  "releaseClaimAllowed": false,
+  "repository": {
+    "nameWithOwner": "jjang-ai/exploitbot",
+    "url": "https://github.com/jjang-ai/exploitbot",
+    "visibility": "PUBLIC"
+  },
+  "secretsRead": false,
+  "startedAt": "2026-07-05T15:29:33-0700"
+}

@@ -1,0 +1,222 @@
+{
+  "generatedAt": "2026-07-05T15:37:51-0700",
+  "ok": true,
+  "status": {
+    "computerUseAttach": "PASS",
+    "sameProcessApi": "PASS",
+    "allPrimaryTabsClicked": "PASS",
+    "allSettingsPanelsObserved": "PASS",
+    "modelSelector27b35bMtpToggle": "PASS",
+    "runtimeReasoningToggle": "PASS",
+    "generationDefaultsToggle": "PASS",
+    "dynamicContextToggle": "PASS",
+    "turboQuantCacheDefault": "PASS",
+    "cveThreatIntelRefresh": "PASS",
+    "toolsInventoryVisible": "PASS",
+    "modelInferenceNotStarted": "PASS",
+    "releaseDistribution": "BLOCKED"
+  },
+  "computerUse": {
+    "cuaAppVersion": 857,
+    "attachedApp": "/Users/eric/exploitbot/release/ExploitBot.app",
+    "bundleID": "ai.jangq.ExploitBot",
+    "pidObserved": 47552,
+    "windowTitle": "ExploitBot",
+    "initialFocusedElement": "Target domain or IP",
+    "latestVisiblePanel": "Settings Logs"
+  },
+  "app": {
+    "path": "release/ExploitBot.app",
+    "binarySha256": "f930010ca65b4e0680a474f1a6b5bc3f9096a4f82acbf543d33943c3efec46c0",
+    "dmgPath": "release/ExploitBot-beta.dmg",
+    "dmgSha256": "95553fbf77ed7b31e1f65e0d6a9c5f25df482963f57354e83934b7bc33715c24",
+    "localhostPort": 9999,
+    "sameProcessOwnsPort": true,
+    "engineRunning": false
+  },
+  "primaryTabs": [
+    {
+      "tab": "recon",
+      "visibleControls": ["Subdomains", "Ports", "Web Hosts", "Crawl", "OSINT", "Full Recon"],
+      "visibleEmptyState": "No results yet"
+    },
+    {
+      "tab": "web",
+      "visibleControls": ["Vulns", "SQLi", "XSS", "Dirs", "Params", "SSL", "JWT", "Scan"],
+      "visibleEmptyState": "No vulnerabilities found yet"
+    },
+    {
+      "tab": "network",
+      "visibleControls": ["Protocols", "SNMP", "Capture", "MITM", "Tunnels", "SMB", "WinRM", "LDAP", "RDP", "SSH", "MSSQL", "Enum Shares", "Enum Users", "Sessions", "Dump SAM", "Dump LSA", "Exec Cmd"],
+      "visibleEmptyState": "No network hosts discovered yet"
+    },
+    {
+      "tab": "creds",
+      "visibleControls": ["Cracking", "Online Brute", "Secrets", "Vault", "Start Crack"],
+      "visibleEmptyState": "No cracking results yet"
+    },
+    {
+      "tab": "exploit",
+      "visibleControls": ["Metasploit", "Reverse Shells", "Custom", "C2 (Sliver)", "Search"],
+      "visibleEmptyState": "No active exploits"
+    },
+    {
+      "tab": "post",
+      "visibleControls": ["PrivEsc", "AD Attacks", "Lateral", "Run LinPEAS"],
+      "visibleEmptyState": "No post-exploitation results"
+    },
+    {
+      "tab": "supplyChain",
+      "visibleControls": ["CVE Intel", "Secrets", "SBOM", "Dependencies", "Search CVEs", "Import"],
+      "visibleEmptyState": "No CVE rows loaded"
+    },
+    {
+      "tab": "osint",
+      "visibleControls": ["Username", "Email", "Metadata", "Screenshots", "Search"],
+      "visibleEmptyState": "No OSINT results yet"
+    },
+    {
+      "tab": "report",
+      "visibleControls": ["Findings", "Preview", "Full Pentest Report", "Bug Bounty Submission", "Executive Brief", "Technical Writeup", "Create Finding"],
+      "visibleEmptyState": "No findings yet"
+    },
+    {
+      "tab": "stash",
+      "visibleControls": ["All", "Creds", "Hosts", "Vulns", "Code", "Raw", "Copy All", "+ Add"],
+      "visibleEmptyState": "Stash is empty"
+    }
+  ],
+  "settingsPanels": {
+    "engine": {
+      "visible": true,
+      "observedText": "Engine stopped",
+      "visibleControls": ["Start Engine"]
+    },
+    "model": {
+      "visible": true,
+      "modelFolderRestored": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "scanRoot": "/Users/eric/models/dealign.ai",
+      "visibleModelCount": 14,
+      "visibleSupportedCount": 6,
+      "observedSelections": [
+        "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+      ],
+      "visibleControls": ["Browse", "Add Folder", "Scan", "Use"]
+    },
+    "runtime": {
+      "visible": true,
+      "generationDefaultsInitial": false,
+      "generationDefaultsToggledOnThenRestoredOff": true,
+      "reasoningInitial": true,
+      "reasoningToggledOffThenRestoredOn": true,
+      "reasoningParser": "Auto",
+      "toolParser": "Auto",
+      "maxIterations": 7
+    },
+    "context": {
+      "visible": true,
+      "dynamicContextInitial": true,
+      "dynamicContextToggledOffThenRestoredOn": true,
+      "cveAssist": "Current",
+      "maxSnippets": 3,
+      "provenSafeTargetCeiling": 192000,
+      "declaredMaxContextTokens": 262144,
+      "unprovenTargetPolicy": "refuse-before-model-load",
+      "guardedTargets": [200000, 224000, 258000]
+    },
+    "cache": {
+      "visible": true,
+      "kvCacheMode": "TurboQuant Q4",
+      "nativeQ4Selected": false,
+      "fullKvSelected": false,
+      "kvGroupSize": 64,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "pagedCache": true,
+      "blockSize": 64,
+      "blockL2Disk": true
+    },
+    "agents": {
+      "visible": true,
+      "modePolicyVisible": ["Autopilot", "Copilot", "Manual"],
+      "maxIterations": 7,
+      "toolSchemaBudget": 12,
+      "includeUnavailableTools": false,
+      "forceFinalAfterTools": true,
+      "multiAgentMode": true,
+      "maxConcurrentAgents": 8,
+      "phaseRoutingVisible": ["Scan", "Detect", "Breach"],
+      "authorizationGuardsVisible": true
+    },
+    "cveDatabase": {
+      "visible": true,
+      "beforeRefresh": {
+        "totalCount": 1589,
+        "kevCount": 1577,
+        "lastSync": "2026-07-05T07:22:43Z"
+      },
+      "afterCurrentThreatIntelRefresh": {
+        "totalCount": 1644,
+        "kevCount": 1631,
+        "lastSync": "2026-07-05T22:37:31Z",
+        "importProgress": "Current Threat Intel refreshed: 1641 rows (1631 CISA KEV, 10 NVD critical), newest KEV CVE-2026-45659"
+      },
+      "visibleControls": ["Current Threat Intel", "Quick Import (Critical+High, 2yr)", "Full NVD Sync (slow)", "Import Selected", "Search", "+ Add CVE"]
+    },
+    "tools": {
+      "visible": true,
+      "installedCount": 42,
+      "missingCount": 0,
+      "installAllMissingDisabled": true,
+      "installPlanCommandCount": 0,
+      "sampleVisibleTools": ["curl", "nc", "python3", "zsh", "subfinder", "dnsx", "nmap", "masscan", "httpx", "katana", "theHarvester", "nuclei", "sqlmap", "dalfox", "feroxbuster", "ffuf", "arjun", "wpscan", "testsasl", "graphqlmap", "jwt_tool"]
+    },
+    "logs": {
+      "visible": true,
+      "engineLogChars": 0,
+      "autoScroll": true,
+      "visibleControls": ["Auto-scroll", "Clear", "Copy"]
+    }
+  },
+  "apiState": {
+    "endpoint": "http://127.0.0.1:9999/state",
+    "activeTab": "stash",
+    "engineRunning": false,
+    "cveDatabase": {
+      "totalCount": 1644,
+      "kevCount": 1631,
+      "lastSync": "2026-07-05T22:37:31Z",
+      "isImporting": false,
+      "searchResultCount": 0
+    },
+    "contextWindow": {
+      "turboQuantKV": true,
+      "cacheResponsesMethod": "prefix-cache-l2-turboquant",
+      "cacheResponsesInferenceMethod": "prefix-cache-l2-turboquant",
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "pagedCache": true,
+      "blockL2Disk": true,
+      "modelGenerationDefaults": false,
+      "declaredMaxContextTokens": 262144,
+      "provenSafeTargetCeiling": 192000,
+      "unprovenTargetPolicy": "refuse-before-model-load",
+      "lastFailedTargets": [200000, 224000, 258000]
+    }
+  },
+  "processEvidence": {
+    "matchingReleaseAppPid": 47552,
+    "matchingModelProcessRows": [],
+    "unrelatedWatcherRowsIgnored": [
+      "/Users/eric/mlx/vllm-mlx watcher shells"
+    ],
+    "swapouts": 1988
+  },
+  "limits": {
+    "modelPromptDeliveryNotClaimedByThisArtifact": true,
+    "loadedModelReasoningToggleEffectNotClaimedByThisArtifact": true,
+    "toolExecutionAgainstExternalTargetsNotStarted": true,
+    "notarizedDistributionNotClaimed": true
+  }
+}

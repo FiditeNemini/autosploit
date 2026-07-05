@@ -1,0 +1,453 @@
+{
+  "app": {
+    "appBinarySha256": "40ecca4e9a47ffc0f9a5565e5b0104ba0283fdbcfce7fcb58cb9f102fef66cb9",
+    "bundleIdentifier": null,
+    "dmgSha256": "29d3e1c2dce4a7e29c872a46236e0c1e19c63fe7133a6ef5ce95964b6b0a8993",
+    "localPackageStatus": "PASS",
+    "notarizationGate": "requires-notary-credentials",
+    "notarizationStatus": "not-submitted",
+    "path": "release/ExploitBot.app",
+    "version": null
+  },
+  "appEvidence": {
+    "activityShowsLookupCve": true,
+    "contextSelectedToolOutput": true,
+    "screenshot": "docs/live-proofs/2026-07-05-release-app-computer-use-35b-visible-tool-loop.png",
+    "visibleComputerUseScreenshot": true,
+    "visibleFinalMarker": true,
+    "visibleSupplyTab": true,
+    "visibleTargetCVE": true,
+    "visibleToolCard": true
+  },
+  "cacheEvidence": {
+    "block_disk_cache": {
+      "blocks_on_disk": 59,
+      "disk_evictions": 0,
+      "disk_hits": 0,
+      "disk_misses": 4,
+      "disk_size_bytes": 283471668,
+      "disk_size_gb": 0.264,
+      "disk_writes": 59,
+      "total_accesses": 0,
+      "total_cached_tokens": 3701,
+      "total_tokens_on_disk": 3701
+    },
+    "cache_totals": {
+      "l2_block_tokens_on_disk": 3701,
+      "l2_prompt_tokens_on_disk": 0,
+      "l2_ssm_tokens_on_disk": 9269,
+      "l2_tokens_on_disk": 12970,
+      "l2_tokens_on_disk_note": "store_sum_across_prompt_block_ssm_l2; tiers_may_overlap",
+      "l2_tokens_on_disk_store_sum": 12970,
+      "ram_tokens_cached": 3701,
+      "ssm_tokens_on_disk": 9269
+    },
+    "kv_cache_quantization": {
+      "bits": 4,
+      "enabled": true,
+      "group_size": 64
+    },
+    "memory": {
+      "active_mb": 36106.1,
+      "cache_mb": 223.3,
+      "peak_mb": 45084.3
+    },
+    "modelMetadataCache": {
+      "disk_cache": {
+        "block_l2": {
+          "dir": null,
+          "enabled": true,
+          "max_gb": 10.0
+        },
+        "prompt_l2": {
+          "dir": null,
+          "enabled": true,
+          "max_gb": 10.0
+        }
+      },
+      "kv_cache_quantization": {
+        "enabled": true,
+        "group_size": 64,
+        "mode": "turboquant-q4"
+      },
+      "paged_cache": {
+        "block_size": 64,
+        "enabled": true
+      },
+      "prefix_cache": {
+        "enabled": true,
+        "memory_percent": 0.3
+      },
+      "responses": {
+        "clears_conversation_state_only": true,
+        "method": "prefix-cache-l2-turboquant",
+        "new_context_preserves_engine_session": true,
+        "prefix_cache_required": true
+      },
+      "ssm_companion": {
+        "disk_l2_enabled": true,
+        "enabled": true,
+        "max_entries": 8,
+        "max_mb": null
+      },
+      "topology": {
+        "block_l2_active": true,
+        "cache_type": "hybrid",
+        "expected_components": [
+          "kv_cache",
+          "prefix_cache",
+          "prompt_l2",
+          "paged_cache",
+          "block_l2",
+          "kv_quantization",
+          "ssm_companion",
+          "ssm_l2"
+        ],
+        "kv_quantization_active": true,
+        "name": "hybrid_ssm_attention",
+        "prompt_l2_active": true,
+        "ssm_companion_required": true,
+        "warnings": []
+      }
+    },
+    "native_cache": {
+      "attention_kv_storage_quantization": {
+        "applies_to": "attention_kv_layers_only",
+        "bits": 4,
+        "enabled": true,
+        "group_size": 64,
+        "mode": "storage_boundary",
+        "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+        "ssm_policy": "native_companion_state"
+      },
+      "block_disk_l2": true,
+      "cache_type": "hybrid_ssm_typed",
+      "components": [
+        "attention_kv",
+        "ssm_companion_state",
+        "async_rederive"
+      ],
+      "family": "hybrid",
+      "generic_turboquant_kv": {
+        "enabled": false,
+        "reason": "hybrid_ssm_state"
+      },
+      "kv_layer_indices": [],
+      "live_attention_tq_kv": {
+        "applies_to": "attention_kv_layers_only",
+        "attention_layers": [],
+        "companion_layers": [],
+        "enabled": false,
+        "mode": null,
+        "ssm_policy": "native_full_precision_companion_state"
+      },
+      "paged": true,
+      "prefix": true,
+      "schema": "hybrid_ssm_v1",
+      "ssm_entries": 0
+    },
+    "scheduler_cache": {
+      "active_requests": 0,
+      "allocated_blocks": 60,
+      "block_size": 64,
+      "cache_hit_rate": 0.24096385542168675,
+      "cache_hits": 20,
+      "cache_misses": 63,
+      "cow_copies": 0,
+      "disk_hits": 0,
+      "disk_misses": 4,
+      "entries_by_type": {
+        "assistant": 2,
+        "system": 0,
+        "user": 0
+      },
+      "evictions": 0,
+      "free_blocks": 940,
+      "hit_rate": 0.5,
+      "hits": 1,
+      "max_blocks": 1000,
+      "misses": 1,
+      "pixel_cache_hits": 0,
+      "pixel_cache_misses": 0,
+      "pixel_cache_size": 0,
+      "pixel_hit_rate": 0.0,
+      "shared_blocks": 10,
+      "tokens_saved": 640,
+      "total_images_processed": 0,
+      "total_time_saved": 0.0,
+      "total_tokens_cached": 3701,
+      "utilization": 0.06
+    },
+    "scheduler_stats": {
+      "batch_generator": {
+        "generation_time": 1.4107555841328576,
+        "generation_tokens": 100,
+        "generation_tps": 70.88400083240963,
+        "hybrid_kv_without_ssm_hits": 1,
+        "hybrid_kv_without_ssm_tokens": 640,
+        "last_hybrid_kv_without_ssm": {
+          "cached_tokens": 640,
+          "reason": "no_ssm_companion_state",
+          "request_id": "chatcmpl-67dfc99d",
+          "ssm_prefix_lookup": {
+            "candidate_lengths": [],
+            "matched": false,
+            "max_len": 640,
+            "reason": "no_candidate_lengths",
+            "store_size": 2
+          }
+        },
+        "last_native_mtp": null,
+        "num_images_processed": 0,
+        "peak_memory": 47.274299288,
+        "prompt_time": 8.440801833989099,
+        "prompt_tokens": 4357,
+        "prompt_tps": 516.1831880065469,
+        "vision_encoding_time": 0
+      },
+      "cache_hit_requests": 0,
+      "cache_hit_tokens": 0,
+      "cache_hit_tokens_by_detail": {},
+      "cache_reuse_partial_downgrades": 0,
+      "cache_reuse_partial_tokens": 0,
+      "cache_reuse_skip_tokens": 0,
+      "cache_reuse_skips": 0,
+      "engine_path": null,
+      "ewma_ttft_seconds": 0,
+      "hybrid_kv_without_ssm_hits": 1,
+      "hybrid_kv_without_ssm_tokens": 640,
+      "last_cache_reuse_partial": null,
+      "last_cache_reuse_skip": null,
+      "last_hybrid_kv_without_ssm": {
+        "cached_tokens": 640,
+        "reason": "no_ssm_companion_state",
+        "request_id": "chatcmpl-67dfc99d",
+        "ssm_prefix_lookup": {
+          "candidate_lengths": [],
+          "matched": false,
+          "max_len": 640,
+          "reason": "no_candidate_lengths",
+          "store_size": 2
+        }
+      },
+      "max_running_observed": 1,
+      "max_waiting_observed": 1,
+      "num_requests_processed": 2,
+      "num_running": 0,
+      "num_waiting": 0,
+      "single_active_decode": false,
+      "total_completion_tokens": 100,
+      "total_prompt_tokens": 4343
+    },
+    "ssm_companion": {
+      "disk": {
+        "budget_bytes": 10737418240,
+        "budget_gb": 10.0,
+        "bytes": 329363023,
+        "bytes_mb": 314.11,
+        "directory": "/tmp/exploitbot-cua35-patched-home.L3NESz/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
+        "enabled": true,
+        "entries": 5,
+        "hit_rate": 0.0,
+        "hits": 0,
+        "misses": 1,
+        "stores": 5,
+        "total_cached_tokens": 9269,
+        "total_tokens_on_disk": 9269
+      },
+      "disk_directory": "/tmp/exploitbot-cua35-patched-home.L3NESz/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
+      "disk_enabled": true,
+      "entries": 5,
+      "max_entries": 8,
+      "nbytes": 329318400,
+      "nbytes_mb": 314.06
+    }
+  },
+  "computerUseEvidence": {
+    "clickReasoningToggle": true,
+    "clickSend": true,
+    "cuaVersion": 857,
+    "finalStateInlineScreenshotReturned": true,
+    "getAppStateAfterFinal": true,
+    "getAppStateBeforePrompt": true,
+    "setChatInputValue": true,
+    "visibleFinalMarker": true,
+    "visiblePrompt": true,
+    "visibleToolCard": true
+  },
+  "engine": {
+    "enginePortDuringProof": 8100,
+    "engineRunningDuringProof": true,
+    "generationSources": {
+      "chat_template_kwargs": "unset",
+      "enable_thinking": "launcher_default",
+      "max_tokens": "unset",
+      "min_p": "unset",
+      "repetition_penalty": "unset",
+      "stop": "unset",
+      "temperature": "generation_config",
+      "top_k": "generation_config",
+      "top_p": "generation_config"
+    },
+    "healthStatus": "healthy",
+    "modelName": "dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+    "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+    "parsers": {
+      "auto_tool_choice": true,
+      "reasoning": "qwen3",
+      "tool_call": "qwen"
+    },
+    "reasoningEnabled": false,
+    "runtime": "release bundled Python"
+  },
+  "generatedAt": "2026-07-05T03:32:27-0700",
+  "messages": [
+    {
+      "content": "Authorized patched release Computer Use proof for the local CVE library. Reasoning is off. Use the lookup_cve tool exactly once for CVE-2025-49704. After the tool result, answer with exact marker CUA35_PATCHED_TOOL_FINAL, the CVE ID, and one sentence summarizing impact.",
+      "role": "user"
+    },
+    {
+      "content": "",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 0 of 0 indexed items for phase SCAN, tab recon.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets: none yet.\nCVE assist: semantic embedding search is enabled when cve_embedder.py and stored CVE embeddings are available; otherwise",
+      "contextSnippetCount": 0,
+      "role": "assistant",
+      "toolSchemaCount": 12,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "run_shell",
+        "nmap",
+        "dnsx",
+        "httpx",
+        "nuclei",
+        "sqlmap",
+        "linpeas",
+        "hydra",
+        "snmpwalk"
+      ]
+    },
+    {
+      "content": "Tool request: lookup_cve\n$ echo handled by callback\nArguments:\n{\n  \"cve_id\" : \"CVE-2025-49704\"\n}\n\nCVE-2025-49704 [HIGH] CVSS:8.8 (CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H) | microsoft sharepoint_server\n  Tags: kev\n  Sources: cisa-kev, nvd, references, tags\n  Exploit: no | CISA KEV: YES\n  Affected: microsoft sharepoint_server from 2016\n  Description: Improper control of generation of code ('code injection') in Microsoft Office SharePoint allows an authorized attacker to execute code over a network.\n  Reference: https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-49704\n  Reference: https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-49704\n  Reference: https://www.microsoft.com/en-us/security/blog/2025/07/22/disrupting-active-exploitation-of-on-premises-sharepoint-vulnerabilities/\n",
+      "role": "toolCall",
+      "status": "ok 0.1s",
+      "tool": "lookup_cve"
+    },
+    {
+      "content": "CUA35_PATCHED_TOOL_FINAL\nCVE-2025-49704\nA critical code injection vulnerability in Microsoft SharePoint allows authenticated attackers to execute arbitrary code over the network, validated as a known exploited vulnerability by CISA.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 1 of 1 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] lookup_cve tags=tool,lookup_cve: CVE-2025-49704 [HIGH] CVSS:8.8 (CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:",
+      "contextSelections": [
+        {
+          "bodyHash": "18ee255b395450e0",
+          "source": "tool.output",
+          "tags": "tool,lookup_cve",
+          "title": "lookup_cve"
+        }
+      ],
+      "contextSnippetCount": 1,
+      "role": "assistant"
+    }
+  ],
+  "metrics": {
+    "cachedTokens": 0,
+    "completionTokens": 52,
+    "promptTokens": 1460,
+    "tokPerSec": 13.703889932981545,
+    "ttft": 2.914070963859558
+  },
+  "model": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+  "mtpEvidence": {
+    "artifact_available": true,
+    "cache_type": "hybrid",
+    "config_mtp_layer_source": "config.text_config.mtp_num_hidden_layers",
+    "config_num_nextn_predict_layers": 1,
+    "effective_depth": 3,
+    "effective_depth_source": "default",
+    "family": "qwen3_5_moe",
+    "has_vision_config": true,
+    "has_vision_weights": true,
+    "index_has_mtp_tensors": true,
+    "index_mtp_layer_count": 1,
+    "issues": [],
+    "jang_drop_mtp": null,
+    "jang_mtp_layers": 1,
+    "mtp_tensor_count": 31,
+    "request_gate": "temperature=0,repetition_penalty=1.0",
+    "request_policy": "compatible-only",
+    "runtime_active": true,
+    "runtime_available": true,
+    "runtime_bundle_has_mtp": true,
+    "runtime_mtp_mode": "preserved_enabled",
+    "runtime_reason": "native MTP runtime is active for text+vl",
+    "runtime_scope": "text+vl",
+    "runtime_supported": true,
+    "runtime_validation_blocked": false,
+    "status": "native_runtime_active",
+    "vision_tensor_count": 333,
+    "vl_runtime_available": true
+  },
+  "notes": [
+    "This artifact was captured after rebuilding release/ExploitBot.app at 2026-07-05T03:29:02-0700.",
+    "During active generation, one polling loop observed transient invalid JSON from /state and /messages; final /state and /messages parsed successfully after generation completed.",
+    "Release distribution remains blocked by notarization credentials/stapling, not by this local display proof."
+  ],
+  "ok": true,
+  "postCleanup": {
+    "enginePort": 0,
+    "engineRunning": false,
+    "engineStaleCleanup": {
+      "checked": true,
+      "checkedAt": "2026-07-05T10:31:47Z",
+      "cleaned": false,
+      "foundCount": 0,
+      "foundProcesses": [],
+      "launchScript": "/Users/eric/exploitbot/release/ExploitBot.app/Contents/Resources/ExploitBotEngine/launch.py",
+      "remainingCount": 0,
+      "remainingProcesses": [],
+      "warning": ""
+    },
+    "healthStatus": "stopped",
+    "processRowsAfterAppQuit": [],
+    "swapoutsAfter": 204,
+    "swapoutsBefore": 204
+  },
+  "prompt": "Authorized patched release Computer Use proof for the local CVE library. Reasoning is off. Use the lookup_cve tool exactly once for CVE-2025-49704. After the tool result, answer with exact marker CUA35_PATCHED_TOOL_FINAL, the CVE ID, and one sentence summarizing impact.",
+  "proofLevel": "patched-release-app-live-cua-visible-real-qwen35-tool-loop-cache-mtp-cleanup",
+  "proofType": "release-app-computer-use-35b-visible-tool-loop",
+  "sourceTraceEvidence": {
+    "appQaRoutes": "ExploitBot/Sources/ExploitBot/Models/AppState.swift lines 533-536, 1451-1469, 1903-1910, 2302-2304, 2353-2385, 2562-2580 current source",
+    "cacheStatsRoutes": "ExploitBotEngine/vmlx_engine/server.py lines 6654-6765 current source",
+    "engineManagerIntentionalStopGuard": "ExploitBot/Sources/ExploitBot/Services/EngineManager.swift lines 23, 46, 211, 331-333 current source",
+    "hybridSsmAsyncRederive": "ExploitBotEngine/vmlx_engine/mllm_batch_generator.py lines 2467-2530 current source",
+    "mtpRoute": "ExploitBotEngine/vmlx_engine/server.py lines 6361-6364 current source"
+  },
+  "status": {
+    "computerUseAttached": "PASS",
+    "computerUsePromptEntered": "PASS",
+    "computerUseSendClicked": "PASS",
+    "nativeMTPDepth3": "PASS",
+    "pagedCache": "PASS",
+    "prefixCache": "PASS",
+    "processCleanup": "PASS",
+    "q4TurboQuantKV": "PASS",
+    "realModelLoaded": "PASS",
+    "reasoningToggledOff": "PASS",
+    "ssmCompanionNotQuantized": "PASS",
+    "streamingPollJsonDuringGeneration": "PARTIAL",
+    "swapoutsUnchanged": "PASS",
+    "verboseToolTranscript": "PASS",
+    "visibleFinalMarker": "PASS",
+    "visibleToolCard": "PASS"
+  },
+  "toolLoop": {
+    "finalAnswer": "CUA35_PATCHED_TOOL_FINAL\nCVE-2025-49704\nA critical code injection vulnerability in Microsoft SharePoint allows authenticated attackers to execute arbitrary code over the network, validated as a known exploited vulnerability by CISA.",
+    "finalMarker": "CUA35_PATCHED_TOOL_FINAL",
+    "messageCount": 4,
+    "targetCVE": "CVE-2025-49704",
+    "toolSequence": [
+      "lookup_cve"
+    ],
+    "toolTranscriptContainsArguments": true
+  },
+  "visibleText": "Computer Use final app state showed: Supply tab selected; tool card \"lookup_cve ok 0.1s\"; Tool request: lookup_cve; Arguments include \"cve_id\" : \"CVE-2025-49704\"; final assistant text \"CUA35_PATCHED_TOOL_FINAL\" and \"CVE-2025-49704\"; metrics 13.7 tok/s, TTFT 2.91s, 1,460 prompt, 52 completion; header cache preserved prefix/l2/tq and native MTP depth 3."
+}

@@ -1,0 +1,73 @@
+{
+  "chatCompletionsInterleavedSequence": [
+    "delta.reasoning_content",
+    "delta.tool_calls",
+    "tool.result.appended",
+    "delta.content",
+    "usage.prompt_tokens_details.cached_tokens",
+    "data: [DONE]"
+  ],
+  "contractCount": 10,
+  "contracts": {
+    "chatFinalContentDelta": true,
+    "chatReasoningDelta": true,
+    "chatToolCallDelta": true,
+    "perRequestReasoningParser": true,
+    "reasoningBeforeToolArguments": true,
+    "responsesFinalTextDelta": true,
+    "responsesReasoningDelta": true,
+    "responsesToolArgumentDelta": true,
+    "toolResultBeforeFinalContent": true,
+    "usageIncludesCachedTokens": true
+  },
+  "finishedAt": "2026-07-05T14:55:14-0700",
+  "generatedAt": "2026-07-05T14:55:14-0700",
+  "interleavingStatus": "PASS",
+  "liveLoadedModelProof": "not-run-in-this-gate",
+  "modelLoadBoundary": "not-run-in-this-proof; relies on existing Qwen live cache/tool artifacts for model-loaded evidence",
+  "ok": true,
+  "proofLevel": "live-route-streaming-parser-contract-plus-explicit-interleaved-event-order",
+  "proofType": "interleaved-streaming-tool-reasoning",
+  "responsesInterleavedSequence": [
+    "response.created",
+    "response.reasoning.delta",
+    "response.function_call_arguments.delta",
+    "tool.result.appended",
+    "response.output_text.delta",
+    "response.usage",
+    "response.completed"
+  ],
+  "routeEvidence": {
+    "cacheReuseSurface": "previous_response_id-plus-prefix-cache-l2-turboquant",
+    "chatCompletionStreamFields": [
+      "data: [DONE]",
+      "choices",
+      "delta.content",
+      "delta.reasoning_content",
+      "delta.tool_calls",
+      "usage.prompt_tokens_details.cached_tokens"
+    ],
+    "coverageIndexChatContractParity": true,
+    "responsesStreamEvents": [
+      "response.created",
+      "response.output_text.delta",
+      "response.reasoning.delta",
+      "response.function_call_arguments.delta",
+      "response.usage",
+      "response.completed"
+    ],
+    "stateRouteListed": true,
+    "streamingParserReuseRoute": "/qa/streaming-parser-reuse",
+    "usageTelemetry": "stream_options.include_usage-with-cached_tokens"
+  },
+  "sourceStreamingContracts": {
+    "cacheReuseTelemetry": true,
+    "chatServiceContentDelta": true,
+    "chatServiceReasoningDelta": true,
+    "chatServiceToolCallDelta": true,
+    "reasoningParserPerRequest": true,
+    "responsesStreamingEvents": true,
+    "responsesStreamingSessionStore": true
+  },
+  "startedAt": "2026-07-05T14:53:58-0700"
+}
