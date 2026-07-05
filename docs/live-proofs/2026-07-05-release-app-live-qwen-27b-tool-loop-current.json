@@ -116,15 +116,15 @@
     },
     "scheduler_stats": {
       "batch_generator": {
-        "generation_time": 8.824432747001993,
+        "generation_time": 9.284224001166876,
         "generation_tokens": 120,
-        "generation_tps": 13.598607801818051,
+        "generation_tps": 12.925151308813525,
         "hybrid_kv_without_ssm_hits": 1,
         "hybrid_kv_without_ssm_tokens": 640,
         "last_hybrid_kv_without_ssm": {
           "cached_tokens": 640,
           "reason": "no_ssm_companion_state",
-          "request_id": "chatcmpl-38625dca",
+          "request_id": "chatcmpl-1845b75d",
           "ssm_prefix_lookup": {
             "candidate_lengths": [],
             "matched": false,
@@ -167,25 +167,25 @@
           },
           "init_emits": 2,
           "rejects": 24,
-          "request_id": "chatcmpl-38625dca",
+          "request_id": "chatcmpl-1845b75d",
           "timings_ms": {
-            "avg_cycle": 118.0386526066286,
-            "draft": 1455.72212402476,
-            "materialize": 0.28966215904802084,
-            "replay": 61.28516493481584,
-            "restore": 2.8246679285075516,
-            "sample": 3761.1154978803825,
-            "snapshot": 2.298457082360983,
-            "total": 5665.855325118173,
-            "verify": 382.3197511082981
+            "avg_cycle": 125.6752439136714,
+            "draft": 1460.2319569967221,
+            "materialize": 0.2919579856097698,
+            "replay": 66.61133500165306,
+            "restore": 2.9997499368619174,
+            "sample": 4042.218916962156,
+            "snapshot": 2.4633720167912543,
+            "total": 6032.411707856227,
+            "verify": 457.5944189564325
           },
           "verify_emits": 24
         },
         "num_images_processed": 0,
         "peak_memory": 57.085085404,
-        "prompt_time": 44.596449876000406,
+        "prompt_time": 46.6764651669946,
         "prompt_tokens": 6361,
-        "prompt_tps": 142.63467199040824,
+        "prompt_tps": 136.2785287455299,
         "vision_encoding_time": 0
       },
       "cache_hit_requests": 0,
@@ -204,7 +204,7 @@
       "last_hybrid_kv_without_ssm": {
         "cached_tokens": 640,
         "reason": "no_ssm_companion_state",
-        "request_id": "chatcmpl-38625dca",
+        "request_id": "chatcmpl-1845b75d",
         "ssm_prefix_lookup": {
           "candidate_lengths": [],
           "matched": false,
@@ -228,7 +228,7 @@
         "budget_gb": 10.0,
         "bytes": 784537278,
         "bytes_mb": 748.19,
-        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-felbbgjp/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
+        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-50_vd_49/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
         "enabled": true,
         "entries": 5,
         "hit_rate": 0.0,
@@ -238,7 +238,7 @@
         "total_cached_tokens": 13257,
         "total_tokens_on_disk": 13257
       },
-      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-felbbgjp/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
+      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-50_vd_49/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
       "disk_enabled": true,
       "entries": 5,
       "max_entries": 8,
@@ -506,7 +506,7 @@
     "engineMemoryPreflight": {
       "allowConcurrentModel": false,
       "allowed": true,
-      "availableGB": 114.38711547851562,
+      "availableGB": 114.21171569824219,
       "heavyModelProcessCount": 0,
       "heavyModelProcesses": [],
       "reason": "",
@@ -516,7 +516,7 @@
     "engineRunning": true,
     "engineStaleCleanup": {
       "checked": true,
-      "checkedAt": "2026-07-05T23:05:35Z",
+      "checkedAt": "2026-07-05T23:44:42Z",
       "cleaned": false,
       "foundCount": 0,
       "foundProcesses": [],
@@ -613,9 +613,9 @@
       "tokPerSec": 0,
       "ttft": 0
     },
-    "mode": "copilot",
+    "mode": "autopilot",
     "modeSelection": {
-      "activeOpMode": "copilot",
+      "activeOpMode": "autopilot",
       "activeOpName": "Computer Use Live Proof",
       "availableLabels": [
         "Autopilot",
@@ -627,8 +627,8 @@
         "copilot",
         "manual"
       ],
-      "currentLabel": "Copilot",
-      "currentMode": "copilot",
+      "currentLabel": "Autopilot",
+      "currentMode": "autopilot",
       "lastAction": "",
       "pendingApprovalRejected": false,
       "pendingApprovalVisible": false,
@@ -1860,7 +1860,7 @@
       "terminalVisible": false
     }
   },
-  "generatedAt": "2026-07-05T16:06:52-0700",
+  "generatedAt": "2026-07-05T16:46:00-0700",
   "health": {
     "acceleration": {
       "host": {
@@ -1937,7 +1937,7 @@
           "budget_gb": 10.0,
           "bytes": 0,
           "bytes_mb": 0.0,
-          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-felbbgjp/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
+          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-50_vd_49/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
           "enabled": true,
           "entries": 0,
           "hit_rate": 0.0,
@@ -1947,7 +1947,7 @@
           "total_cached_tokens": 0,
           "total_tokens_on_disk": 0
         },
-        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-felbbgjp/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
+        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-50_vd_49/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
         "disk_enabled": true,
         "entries": 0,
         "max_bytes": null,
@@ -2228,7 +2228,7 @@
   },
   "memoryPreflight": {
     "allowConcurrentModel": false,
-    "availableGB": 114.67,
+    "availableGB": 114.5,
     "enabled": true,
     "heavyModelProcessCount": 0,
     "heavyModelProcesses": [],
@@ -2291,7 +2291,7 @@
     {
       "content": "Tool request: lookup_cve\n$ echo handled by callback\nArguments:\n{\n  \"cve_id\" : \"CVE-2025-49704\"\n}\n\nCVE-2025-49704 [HIGH] CVSS:8.8 (CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H) | microsoft sharepoint_server\n  Tags: kev\n  Sources: cisa-kev, nvd, references, tags\n  Exploit: no | CISA KEV: YES\n  Affected: microsoft sharepoint_server from 2016\n  Description: Improper control of generation of code ('code injection') in Microsoft Office SharePoint allows an authorized attacker to execute code over a network.\n  Reference: https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-49704\n  Reference: https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-49704\n  Reference: https://www.microsoft.com/en-us/security/blog/2025/07/22/disrupting-active-exploitation-of-on-premises-sharepoint-vulnerabilities/\n",
       "role": "toolCall",
-      "status": "ok 0.4s",
+      "status": "ok 0.1s",
       "tool": "lookup_cve"
     },
     {
@@ -2371,7 +2371,7 @@
           "numpy",
           "vmlx_engine"
         ],
-        "path": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-felbbgjp/exploitbot/ExploitBotEngine/.venv/bin/python3",
+        "path": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-50_vd_49/exploitbot/ExploitBotEngine/.venv/bin/python3",
         "source": "repo-engine-venv",
         "valid": false,
         "version": ""
@@ -2466,7 +2466,7 @@
   "settings": {
     "ok": true
   },
-  "startedAt": "2026-07-05T16:05:35-0700",
+  "startedAt": "2026-07-05T16:44:41-0700",
   "state": {
     "activeSubtabs": {
       "creds": "Cracking",
@@ -2677,8 +2677,8 @@
       "blockL2Blocks": 80,
       "blockL2Hits": 0,
       "blockL2Misses": 4,
-      "memoryActiveMB": 28962.6,
-      "memoryCacheMB": 521.7,
+      "memoryActiveMB": 28974.7,
+      "memoryCacheMB": 513,
       "prefixCacheHits": 20,
       "prefixCacheTokensSaved": 640,
       "prefixCacheTotalTokens": 5081,
@@ -2723,7 +2723,7 @@
     "engineMemoryPreflight": {
       "allowConcurrentModel": false,
       "allowed": true,
-      "availableGB": 114.38711547851562,
+      "availableGB": 114.21171569824219,
       "heavyModelProcessCount": 0,
       "heavyModelProcesses": [],
       "reason": "",
@@ -2733,7 +2733,7 @@
     "engineRunning": true,
     "engineStaleCleanup": {
       "checked": true,
-      "checkedAt": "2026-07-05T23:05:35Z",
+      "checkedAt": "2026-07-05T23:44:42Z",
       "cleaned": false,
       "foundCount": 0,
       "foundProcesses": [],
@@ -2841,9 +2841,9 @@
         "tool": "lookup_cve"
       },
       {
-        "duration": 0.38066697120666504,
+        "duration": 0.09469091892242432,
         "icon": "OK",
-        "text": "lookup_cve: 10 lines (0.4s)",
+        "text": "lookup_cve: 10 lines (0.1s)",
         "tool": "lookup_cve"
       }
     ],
@@ -2863,8 +2863,8 @@
       "cachedTokens": 0,
       "completionTokens": 80,
       "promptTokens": 1265,
-      "tokPerSec": 5.279061408370285,
-      "ttft": 9.268486022949219
+      "tokPerSec": 5.056844307850822,
+      "ttft": 9.562444925308228
     },
     "mode": "autopilot",
     "modeSelection": {
@@ -3685,7 +3685,7 @@
           "outputPreview": "Running lookup_cve",
           "source": "activityFeed",
           "status": "RUN",
-          "timestamp": 1783292789.6837358,
+          "timestamp": 1783295136.99417,
           "tool": "lookup_cve"
         },
         {
@@ -3693,15 +3693,15 @@
           "outputPreview": "$ echo handled by callback",
           "source": "activityFeed",
           "status": "OUT",
-          "timestamp": 1783292789.683738,
+          "timestamp": 1783295136.994173,
           "tool": "lookup_cve"
         },
         {
-          "command": "lookup_cve: 10 lines (0.4s)",
-          "outputPreview": "lookup_cve: 10 lines (0.4s)",
+          "command": "lookup_cve: 10 lines (0.1s)",
+          "outputPreview": "lookup_cve: 10 lines (0.1s)",
           "source": "activityFeed",
           "status": "OK",
-          "timestamp": 1783292790.064674,
+          "timestamp": 1783295137.089031,
           "tool": "lookup_cve"
         },
         {
@@ -3709,7 +3709,7 @@
           "outputPreview": "CVE-2025-49704 [HIGH] CVSS:8.8 (CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H) | microsoft sharepoint_server\n  Tags: kev\n  Sources: cisa-kev, nvd, references, tags\n  Exploit: no | CISA KEV: YES\n  Affected: microsoft sharepoint_server from 2016\n  Description: Improper control of generation of code ('code injection') in Microsoft Office SharePoint allows an authorized attacker to execute code over a network.\n  Reference: https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-49704\n  Reference: https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-49704\n  Reference: https://www.microsoft.com/en-us/security/blog/2025/07/22/disrupting-active-exploitation-of-on-premises-sharepoint-vulnerabilities/\n",
           "source": "rawResults",
           "status": "captured",
-          "timestamp": 1783292790.064587,
+          "timestamp": 1783295137.0889812,
           "tool": "lookup_cve"
         },
         {
@@ -3718,7 +3718,7 @@
           "source": "tabActivities",
           "status": "done",
           "tab": "supplyChain",
-          "timestamp": 1783292790.06469,
+          "timestamp": 1783295137.08904,
           "tool": "lookup_cve"
         }
       ],

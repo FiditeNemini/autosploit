@@ -43,7 +43,7 @@
     "memory": {
       "active_mb": 35854.9,
       "cache_mb": 147.3,
-      "peak_mb": 36104.4
+      "peak_mb": 36101.2
     },
     "native_cache": {
       "attention_kv_storage_quantization": {
@@ -115,9 +115,9 @@
     },
     "scheduler_stats": {
       "batch_generator": {
-        "generation_time": 0.1124854160589166,
+        "generation_time": 0.1135094570054207,
         "generation_tokens": 7,
-        "generation_tps": 62.230289447776975,
+        "generation_tps": 61.668870459539875,
         "hybrid_kv_without_ssm_hits": 0,
         "hybrid_kv_without_ssm_tokens": 0,
         "last_hybrid_kv_without_ssm": null,
@@ -155,25 +155,25 @@
           },
           "init_emits": 2,
           "rejects": 2,
-          "request_id": "chatcmpl-2e73bed5",
+          "request_id": "chatcmpl-b8086a21",
           "timings_ms": {
-            "avg_cycle": 37.39227732876316,
-            "draft": 29.88224901491776,
-            "materialize": 0.024998997105285525,
-            "replay": 4.159083997365087,
-            "restore": 0.12429201160557568,
-            "sample": 67.08554300712422,
-            "snapshot": 0.09816497913561761,
-            "total": 112.17683198628947,
-            "verify": 10.802499979035929
+            "avg_cycle": 37.729971683196105,
+            "draft": 30.249667004682124,
+            "materialize": 0.02154201501980424,
+            "replay": 4.270832985639572,
+            "restore": 0.14195800758898258,
+            "sample": 67.68695803475566,
+            "snapshot": 0.09824897279031575,
+            "total": 113.18991504958831,
+            "verify": 10.720708029111847
           },
           "verify_emits": 2
         },
         "num_images_processed": 0,
-        "peak_memory": 37.858209268,
-        "prompt_time": 0.13109624999924563,
+        "peak_memory": 37.854888476,
+        "prompt_time": 0.12954816699493676,
         "prompt_tokens": 21,
-        "prompt_tps": 160.18764838903357,
+        "prompt_tps": 162.10186903548208,
         "vision_encoding_time": 0
       },
       "cache_hit_requests": 0,
@@ -205,7 +205,7 @@
         "budget_gb": 10.0,
         "bytes": 65872601,
         "bytes_mb": 62.82,
-        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-5it76kzf/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
+        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-c3jqtb4e/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
         "enabled": true,
         "entries": 1,
         "hit_rate": 0.0,
@@ -215,7 +215,7 @@
         "total_cached_tokens": 13,
         "total_tokens_on_disk": 13
       },
-      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-5it76kzf/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
+      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-c3jqtb4e/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
       "disk_enabled": true,
       "entries": 1,
       "max_entries": 8,
@@ -269,7 +269,7 @@
     "memory": {
       "active_mb": 35928.4,
       "cache_mb": 77.2,
-      "peak_mb": 36301.9
+      "peak_mb": 36298.0
     },
     "native_cache": {
       "attention_kv_storage_quantization": {
@@ -341,9 +341,9 @@
     },
     "scheduler_stats": {
       "batch_generator": {
-        "generation_time": 0.22574999806238338,
+        "generation_time": 0.22666720804409124,
         "generation_tokens": 14,
-        "generation_tps": 62.015504408249264,
+        "generation_tps": 61.76455836204028,
         "hybrid_kv_without_ssm_hits": 0,
         "hybrid_kv_without_ssm_tokens": 0,
         "last_hybrid_kv_without_ssm": null,
@@ -381,25 +381,25 @@
           },
           "init_emits": 2,
           "rejects": 2,
-          "request_id": "chatcmpl-a161495a",
+          "request_id": "chatcmpl-37a19351",
           "timings_ms": {
-            "avg_cycle": 37.66382000564287,
-            "draft": 30.177000007824972,
-            "materialize": 0.0163349905051291,
-            "replay": 4.432832996826619,
-            "restore": 0.13520900392904878,
-            "sample": 67.6452089974191,
-            "snapshot": 0.09604202932678163,
-            "total": 112.99146001692861,
-            "verify": 10.488831991096959
+            "avg_cycle": 37.618959351675585,
+            "draft": 28.979417023947462,
+            "materialize": 0.01662599970586598,
+            "replay": 4.292625002563,
+            "restore": 0.1426659873686731,
+            "sample": 67.98991697723977,
+            "snapshot": 0.09887604392133653,
+            "total": 112.85687805502675,
+            "verify": 11.336751020280644
           },
           "verify_emits": 2
         },
         "num_images_processed": 0,
-        "peak_memory": 38.065339248,
-        "prompt_time": 0.1989289170014672,
+        "peak_memory": 38.061161328,
+        "prompt_time": 0.19980737500009127,
         "prompt_tokens": 22,
-        "prompt_tps": 110.5922674873746,
+        "prompt_tps": 110.10604588539313,
         "vision_encoding_time": 0
       },
       "cache_hit_requests": 1,
@@ -433,7 +433,7 @@
         "budget_gb": 10.0,
         "bytes": 65872601,
         "bytes_mb": 62.82,
-        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-5it76kzf/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
+        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-c3jqtb4e/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
         "enabled": true,
         "entries": 1,
         "hit_rate": 0.0,
@@ -443,7 +443,7 @@
         "total_cached_tokens": 13,
         "total_tokens_on_disk": 13
       },
-      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-5it76kzf/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
+      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-c3jqtb4e/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
       "disk_enabled": true,
       "entries": 1,
       "max_entries": 8,
@@ -465,10 +465,12 @@
   "firstUsage": {
     "completion_tokens": 7,
     "prompt_tokens": 14,
-    "prompt_tokens_details": null,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
     "total_tokens": 21
   },
-  "generatedAt": "2026-07-05T15:46:06-0700",
+  "generatedAt": "2026-07-05T16:42:57-0700",
   "health": {
     "acceleration": {
       "host": {
@@ -545,7 +547,7 @@
           "budget_gb": 10.0,
           "bytes": 0,
           "bytes_mb": 0.0,
-          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-5it76kzf/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
+          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-c3jqtb4e/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
           "enabled": true,
           "entries": 0,
           "hit_rate": 0.0,
@@ -555,7 +557,7 @@
           "total_cached_tokens": 0,
           "total_tokens_on_disk": 0
         },
-        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-5it76kzf/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
+        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-c3jqtb4e/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
         "disk_enabled": true,
         "entries": 0,
         "max_bytes": null,
@@ -600,7 +602,7 @@
         },
         "prefix_cache": {
           "enabled": true,
-          "memory_percent": 0.3
+          "memory_percent": 0.2
         },
         "responses": {
           "clears_conversation_state_only": true,
@@ -638,7 +640,7 @@
         "chat_template_kwargs": null,
         "custom_chat_template": false,
         "enable_thinking": true,
-        "max_tokens": 64,
+        "max_tokens": 256,
         "min_p": null,
         "repetition_penalty": null,
         "stop": null,
@@ -676,8 +678,8 @@
           "top_p": "cli"
         },
         "parsers": {
-          "reasoning": "jang_capabilities",
-          "tool_call": "jang_capabilities"
+          "reasoning": "cli",
+          "tool_call": "cli"
         }
       }
     },
@@ -844,7 +846,7 @@
   },
   "memoryPreflight": {
     "allowConcurrentModel": false,
-    "availableGB": 114.66,
+    "availableGB": 113.87,
     "enabled": true,
     "heavyModelProcessCount": 0,
     "heavyModelProcesses": [],
@@ -926,7 +928,7 @@
           "numpy",
           "vmlx_engine"
         ],
-        "path": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-5it76kzf/exploitbot/ExploitBotEngine/.venv/bin/python3",
+        "path": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-c3jqtb4e/exploitbot/ExploitBotEngine/.venv/bin/python3",
         "source": "repo-engine-venv",
         "valid": false,
         "version": ""
@@ -1027,7 +1029,7 @@
     },
     "total_tokens": 21
   },
-  "startedAt": "2026-07-05T15:45:43-0700",
+  "startedAt": "2026-07-05T16:42:33-0700",
   "state": {
     "activeSubtabs": {
       "creds": "Cracking",
@@ -1070,8 +1072,8 @@
       },
       "details": [],
       "forceFinalAnswerAfterToolResults": true,
-      "includeUnavailableToolSchemas": false,
-      "loopMaxIterations": 7,
+      "includeUnavailableToolSchemas": true,
+      "loopMaxIterations": 4,
       "maxConcurrentAgents": 8,
       "modePolicies": {
         "autopilot": "execute",
@@ -1095,7 +1097,7 @@
         ]
       },
       "streamingCount": 0,
-      "toolSchemaMaxTools": 12,
+      "toolSchemaMaxTools": 32,
       "workingCount": 0
     },
     "catalogEmbeddings": {
@@ -1105,11 +1107,11 @@
       "vectorDimensions": 0
     },
     "chat": {
-      "enableReasoning": true,
+      "enableReasoning": false,
       "forceFinalAnswerAfterToolResults": true,
-      "includeUnavailableToolSchemas": false,
-      "maxIterations": 7,
-      "toolSchemaMaxTools": 12
+      "includeUnavailableToolSchemas": true,
+      "maxIterations": 4,
+      "toolSchemaMaxTools": 32
     },
     "chatActions": {
       "clipboardPreview": "",
@@ -1264,19 +1266,19 @@
     "engineConfig": {
       "blockDiskCacheMaxGB": 10,
       "blockL2Disk": true,
-      "cacheMemoryPercent": 0.3,
+      "cacheMemoryPercent": 0.2,
       "diskCacheMaxGB": 10,
       "kvCacheGroupSize": 64,
       "kvCacheQuantization": "turboquant-q4",
-      "maxTokens": 64,
+      "maxTokens": 256,
       "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
       "pagedCache": true,
       "pagedCacheBlockSize": 64,
       "prefixCache": true,
       "promptL2Disk": true,
-      "reasoningParser": "auto",
+      "reasoningParser": "qwen3",
       "temperature": 0,
-      "toolCallParser": "auto",
+      "toolCallParser": "qwen",
       "topP": 1,
       "useModelGenerationDefaults": false
     },
@@ -1284,7 +1286,7 @@
     "engineMemoryPreflight": {
       "allowConcurrentModel": false,
       "allowed": true,
-      "availableGB": 114.64012145996094,
+      "availableGB": 113.6064453125,
       "heavyModelProcessCount": 0,
       "heavyModelProcesses": [],
       "reason": "",
@@ -1294,7 +1296,7 @@
     "engineRunning": true,
     "engineStaleCleanup": {
       "checked": true,
-      "checkedAt": "2026-07-05T22:45:43Z",
+      "checkedAt": "2026-07-05T23:42:33Z",
       "cleaned": false,
       "foundCount": 0,
       "foundProcesses": [],
@@ -1385,9 +1387,9 @@
       "tokPerSec": 0,
       "ttft": 0
     },
-    "mode": "copilot",
+    "mode": "autopilot",
     "modeSelection": {
-      "activeOpMode": "copilot",
+      "activeOpMode": "autopilot",
       "activeOpName": "Computer Use Live Proof",
       "availableLabels": [
         "Autopilot",
@@ -1399,8 +1401,8 @@
         "copilot",
         "manual"
       ],
-      "currentLabel": "Copilot",
-      "currentMode": "copilot",
+      "currentLabel": "Autopilot",
+      "currentMode": "autopilot",
       "lastAction": "",
       "pendingApprovalRejected": false,
       "pendingApprovalVisible": false,

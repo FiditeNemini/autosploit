@@ -115,9 +115,9 @@
     },
     "scheduler_stats": {
       "batch_generator": {
-        "generation_time": 0.4447476239874959,
+        "generation_time": 0.4517429570259992,
         "generation_tokens": 7,
-        "generation_tps": 15.739263398958158,
+        "generation_tps": 15.495537652836342,
         "hybrid_kv_without_ssm_hits": 0,
         "hybrid_kv_without_ssm_tokens": 0,
         "last_hybrid_kv_without_ssm": null,
@@ -155,25 +155,25 @@
           },
           "init_emits": 2,
           "rejects": 2,
-          "request_id": "chatcmpl-184b0002",
+          "request_id": "chatcmpl-766ba7fc",
           "timings_ms": {
-            "avg_cycle": 148.12494401121512,
-            "draft": 116.4221260114573,
-            "materialize": 0.03170798299834132,
-            "replay": 5.006749997846782,
-            "restore": 0.2098740078508854,
-            "sample": 294.5854580029845,
-            "snapshot": 0.13824901543557644,
-            "total": 444.37483203364536,
-            "verify": 27.98066701507196
+            "avg_cycle": 150.4464170332843,
+            "draft": 118.68508302723058,
+            "materialize": 0.0392929941881448,
+            "replay": 4.841708025196567,
+            "restore": 0.2170420193579048,
+            "sample": 298.79741702461615,
+            "snapshot": 0.13766699703410268,
+            "total": 451.33925109985285,
+            "verify": 28.621041012229398
           },
           "verify_emits": 2
         },
         "num_images_processed": 0,
         "peak_memory": 29.8253822,
-        "prompt_time": 0.4005117919878103,
+        "prompt_time": 0.4328033329802565,
         "prompt_tokens": 21,
-        "prompt_tps": 52.43291313789618,
+        "prompt_tps": 48.520883273692284,
         "vision_encoding_time": 0
       },
       "cache_hit_requests": 0,
@@ -205,7 +205,7 @@
         "budget_gb": 10.0,
         "bytes": 156907452,
         "bytes_mb": 149.64,
-        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-7va8q7a5/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
+        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-2wcvy8c0/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
         "enabled": true,
         "entries": 1,
         "hit_rate": 0.0,
@@ -215,7 +215,7 @@
         "total_cached_tokens": 13,
         "total_tokens_on_disk": 13
       },
-      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-7va8q7a5/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
+      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-2wcvy8c0/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
       "disk_enabled": true,
       "entries": 1,
       "max_entries": 8,
@@ -341,9 +341,9 @@
     },
     "scheduler_stats": {
       "batch_generator": {
-        "generation_time": 0.8907545829424635,
+        "generation_time": 0.9042924160021357,
         "generation_tokens": 14,
-        "generation_tps": 15.71701147329859,
+        "generation_tps": 15.481717807491748,
         "hybrid_kv_without_ssm_hits": 0,
         "hybrid_kv_without_ssm_tokens": 0,
         "last_hybrid_kv_without_ssm": null,
@@ -381,25 +381,25 @@
           },
           "init_emits": 2,
           "rejects": 2,
-          "request_id": "chatcmpl-b05b7456",
+          "request_id": "chatcmpl-288625b5",
           "timings_ms": {
-            "avg_cycle": 148.5554163227789,
-            "draft": 117.20062501262873,
-            "materialize": 0.02300000051036477,
-            "replay": 4.807499994058162,
-            "restore": 0.20645797485485673,
-            "sample": 295.2251249807887,
-            "snapshot": 0.1287079940084368,
-            "total": 445.66624896833673,
-            "verify": 28.0748330114875
+            "avg_cycle": 150.72845934385745,
+            "draft": 120.54370902478695,
+            "materialize": 0.017624988686293364,
+            "replay": 5.143709015101194,
+            "restore": 0.22070901468396187,
+            "sample": 298.2312089879997,
+            "snapshot": 0.13441700139082968,
+            "total": 452.1853780315723,
+            "verify": 27.89399999892339
           },
           "verify_emits": 2
         },
         "num_images_processed": 0,
         "peak_memory": 30.250505084,
-        "prompt_time": 0.638127166981576,
+        "prompt_time": 0.6668386249803007,
         "prompt_tokens": 22,
-        "prompt_tps": 34.47588684252834,
+        "prompt_tps": 32.991490258456324,
         "vision_encoding_time": 0
       },
       "cache_hit_requests": 1,
@@ -431,9 +431,9 @@
       "disk": {
         "budget_bytes": 10737418240,
         "budget_gb": 10.0,
-        "bytes": 156907453,
+        "bytes": 156907452,
         "bytes_mb": 149.64,
-        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-7va8q7a5/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
+        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-2wcvy8c0/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
         "enabled": true,
         "entries": 1,
         "hit_rate": 0.0,
@@ -443,7 +443,7 @@
         "total_cached_tokens": 13,
         "total_tokens_on_disk": 13
       },
-      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-7va8q7a5/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
+      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-2wcvy8c0/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
       "disk_enabled": true,
       "entries": 1,
       "max_entries": 8,
@@ -465,10 +465,12 @@
   "firstUsage": {
     "completion_tokens": 7,
     "prompt_tokens": 14,
-    "prompt_tokens_details": null,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
     "total_tokens": 21
   },
-  "generatedAt": "2026-07-05T15:45:40-0700",
+  "generatedAt": "2026-07-05T16:42:13-0700",
   "health": {
     "acceleration": {
       "host": {
@@ -545,7 +547,7 @@
           "budget_gb": 10.0,
           "bytes": 0,
           "bytes_mb": 0.0,
-          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-7va8q7a5/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
+          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-2wcvy8c0/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
           "enabled": true,
           "entries": 0,
           "hit_rate": 0.0,
@@ -555,7 +557,7 @@
           "total_cached_tokens": 0,
           "total_tokens_on_disk": 0
         },
-        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-7va8q7a5/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
+        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-2wcvy8c0/.cache/vmlx-engine/block-cache/fd442c0a71f3/ssm_companion",
         "disk_enabled": true,
         "entries": 0,
         "max_bytes": null,
@@ -600,7 +602,7 @@
         },
         "prefix_cache": {
           "enabled": true,
-          "memory_percent": 0.3
+          "memory_percent": 0.2
         },
         "responses": {
           "clears_conversation_state_only": true,
@@ -638,7 +640,7 @@
         "chat_template_kwargs": null,
         "custom_chat_template": false,
         "enable_thinking": true,
-        "max_tokens": 64,
+        "max_tokens": 256,
         "min_p": null,
         "repetition_penalty": null,
         "stop": null,
@@ -676,8 +678,8 @@
           "top_p": "cli"
         },
         "parsers": {
-          "reasoning": "jang_capabilities",
-          "tool_call": "jang_capabilities"
+          "reasoning": "cli",
+          "tool_call": "cli"
         }
       }
     },
@@ -836,7 +838,7 @@
   },
   "memoryPreflight": {
     "allowConcurrentModel": false,
-    "availableGB": 115.15,
+    "availableGB": 113.95,
     "enabled": true,
     "heavyModelProcessCount": 0,
     "heavyModelProcesses": [],
@@ -918,7 +920,7 @@
           "numpy",
           "vmlx_engine"
         ],
-        "path": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-7va8q7a5/exploitbot/ExploitBotEngine/.venv/bin/python3",
+        "path": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-home-2wcvy8c0/exploitbot/ExploitBotEngine/.venv/bin/python3",
         "source": "repo-engine-venv",
         "valid": false,
         "version": ""
@@ -1019,7 +1021,7 @@
     },
     "total_tokens": 21
   },
-  "startedAt": "2026-07-05T15:45:17-0700",
+  "startedAt": "2026-07-05T16:41:48-0700",
   "state": {
     "activeSubtabs": {
       "creds": "Cracking",
@@ -1062,8 +1064,8 @@
       },
       "details": [],
       "forceFinalAnswerAfterToolResults": true,
-      "includeUnavailableToolSchemas": false,
-      "loopMaxIterations": 7,
+      "includeUnavailableToolSchemas": true,
+      "loopMaxIterations": 4,
       "maxConcurrentAgents": 8,
       "modePolicies": {
         "autopilot": "execute",
@@ -1087,7 +1089,7 @@
         ]
       },
       "streamingCount": 0,
-      "toolSchemaMaxTools": 12,
+      "toolSchemaMaxTools": 32,
       "workingCount": 0
     },
     "catalogEmbeddings": {
@@ -1097,11 +1099,11 @@
       "vectorDimensions": 0
     },
     "chat": {
-      "enableReasoning": true,
+      "enableReasoning": false,
       "forceFinalAnswerAfterToolResults": true,
-      "includeUnavailableToolSchemas": false,
-      "maxIterations": 7,
-      "toolSchemaMaxTools": 12
+      "includeUnavailableToolSchemas": true,
+      "maxIterations": 4,
+      "toolSchemaMaxTools": 32
     },
     "chatActions": {
       "clipboardPreview": "",
@@ -1256,19 +1258,19 @@
     "engineConfig": {
       "blockDiskCacheMaxGB": 10,
       "blockL2Disk": true,
-      "cacheMemoryPercent": 0.3,
+      "cacheMemoryPercent": 0.2,
       "diskCacheMaxGB": 10,
       "kvCacheGroupSize": 64,
       "kvCacheQuantization": "turboquant-q4",
-      "maxTokens": 64,
+      "maxTokens": 256,
       "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
       "pagedCache": true,
       "pagedCacheBlockSize": 64,
       "prefixCache": true,
       "promptL2Disk": true,
-      "reasoningParser": "auto",
+      "reasoningParser": "qwen3",
       "temperature": 0,
-      "toolCallParser": "auto",
+      "toolCallParser": "qwen",
       "topP": 1,
       "useModelGenerationDefaults": false
     },
@@ -1276,7 +1278,7 @@
     "engineMemoryPreflight": {
       "allowConcurrentModel": false,
       "allowed": true,
-      "availableGB": 115.05282592773438,
+      "availableGB": 113.34214782714844,
       "heavyModelProcessCount": 0,
       "heavyModelProcesses": [],
       "reason": "",
@@ -1286,7 +1288,7 @@
     "engineRunning": true,
     "engineStaleCleanup": {
       "checked": true,
-      "checkedAt": "2026-07-05T22:45:17Z",
+      "checkedAt": "2026-07-05T23:41:48Z",
       "cleaned": false,
       "foundCount": 0,
       "foundProcesses": [],
@@ -1377,9 +1379,9 @@
       "tokPerSec": 0,
       "ttft": 0
     },
-    "mode": "copilot",
+    "mode": "autopilot",
     "modeSelection": {
-      "activeOpMode": "copilot",
+      "activeOpMode": "autopilot",
       "activeOpName": "Computer Use Live Proof",
       "availableLabels": [
         "Autopilot",
@@ -1391,8 +1393,8 @@
         "copilot",
         "manual"
       ],
-      "currentLabel": "Copilot",
-      "currentMode": "copilot",
+      "currentLabel": "Autopilot",
+      "currentMode": "autopilot",
       "lastAction": "",
       "pendingApprovalRejected": false,
       "pendingApprovalVisible": false,

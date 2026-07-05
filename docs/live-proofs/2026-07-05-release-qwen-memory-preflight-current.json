@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-07-05T16:07:16-0700",
+  "generatedAt": "2026-07-05T16:41:31-0700",
   "modelLoadAttempted": false,
   "modelRows": [
     {
       "memoryPreflight": {
         "allowConcurrentModel": false,
-        "availableGB": 114.64,
+        "availableGB": 113.96,
         "enabled": true,
         "heavyModelProcessCount": 0,
         "heavyModelProcesses": [],
@@ -17,7 +17,7 @@
     {
       "memoryPreflight": {
         "allowConcurrentModel": false,
-        "availableGB": 114.64,
+        "availableGB": 113.96,
         "enabled": true,
         "heavyModelProcessCount": 0,
         "heavyModelProcesses": [],

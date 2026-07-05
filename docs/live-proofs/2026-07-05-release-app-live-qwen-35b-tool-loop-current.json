@@ -43,7 +43,7 @@
     },
     "memory": {
       "active_mb": 36106.1,
-      "cache_mb": 209.9,
+      "cache_mb": 209.7,
       "peak_mb": 51724.9
     },
     "native_cache": {
@@ -116,15 +116,15 @@
     },
     "scheduler_stats": {
       "batch_generator": {
-        "generation_time": 2.0157105409598444,
+        "generation_time": 1.641439044062281,
         "generation_tokens": 92,
-        "generation_tps": 45.641473877589235,
+        "generation_tps": 56.04838043349799,
         "hybrid_kv_without_ssm_hits": 1,
         "hybrid_kv_without_ssm_tokens": 640,
         "last_hybrid_kv_without_ssm": {
           "cached_tokens": 640,
           "reason": "no_ssm_companion_state",
-          "request_id": "chatcmpl-08397fbb",
+          "request_id": "chatcmpl-3c59b281",
           "ssm_prefix_lookup": {
             "candidate_lengths": [],
             "matched": false,
@@ -167,25 +167,25 @@
           },
           "init_emits": 2,
           "rejects": 21,
-          "request_id": "chatcmpl-08397fbb",
+          "request_id": "chatcmpl-3c59b281",
           "timings_ms": {
-            "avg_cycle": 39.65341142611578,
-            "draft": 327.99716806039214,
-            "materialize": 0.20433295867405832,
-            "replay": 56.64366710698232,
-            "restore": 1.8489139911253005,
-            "sample": 780.1063730148599,
-            "snapshot": 1.3722490111831576,
-            "total": 1308.5625770618208,
-            "verify": 140.38987291860394
+            "avg_cycle": 31.616204552295983,
+            "draft": 267.2100430645514,
+            "materialize": 0.19829106167890131,
+            "replay": 44.876539992401376,
+            "restore": 1.5339989913627505,
+            "sample": 616.2764580803923,
+            "snapshot": 1.07800101977773,
+            "total": 1043.3347502257675,
+            "verify": 112.16141801560298
           },
           "verify_emits": 21
         },
         "num_images_processed": 0,
         "peak_memory": 54.237499288,
-        "prompt_time": 15.99216479199822,
+        "prompt_time": 12.29728112500743,
         "prompt_tokens": 6361,
-        "prompt_tps": 397.75728193988886,
+        "prompt_tps": 517.26881213315,
         "vision_encoding_time": 0
       },
       "cache_hit_requests": 0,
@@ -204,7 +204,7 @@
       "last_hybrid_kv_without_ssm": {
         "cached_tokens": 640,
         "reason": "no_ssm_companion_state",
-        "request_id": "chatcmpl-08397fbb",
+        "request_id": "chatcmpl-3c59b281",
         "ssm_prefix_lookup": {
           "candidate_lengths": [],
           "matched": false,
@@ -226,9 +226,9 @@
       "disk": {
         "budget_bytes": 10737418240,
         "budget_gb": 10.0,
-        "bytes": 329363024,
+        "bytes": 329363022,
         "bytes_mb": 314.11,
-        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-uvm2wrn4/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
+        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-9wjc2_87/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
         "enabled": true,
         "entries": 5,
         "hit_rate": 0.0,
@@ -238,7 +238,7 @@
         "total_cached_tokens": 13257,
         "total_tokens_on_disk": 13257
       },
-      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-uvm2wrn4/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
+      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-9wjc2_87/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
       "disk_enabled": true,
       "entries": 5,
       "max_entries": 8,
@@ -506,7 +506,7 @@
     "engineMemoryPreflight": {
       "allowConcurrentModel": false,
       "allowed": true,
-      "availableGB": 113.88833618164062,
+      "availableGB": 114.2030029296875,
       "heavyModelProcessCount": 0,
       "heavyModelProcesses": [],
       "reason": "",
@@ -516,7 +516,7 @@
     "engineRunning": true,
     "engineStaleCleanup": {
       "checked": true,
-      "checkedAt": "2026-07-05T23:07:21Z",
+      "checkedAt": "2026-07-05T23:46:24Z",
       "cleaned": false,
       "foundCount": 0,
       "foundProcesses": [],
@@ -1860,7 +1860,7 @@
       "terminalVisible": false
     }
   },
-  "generatedAt": "2026-07-05T16:08:04-0700",
+  "generatedAt": "2026-07-05T16:47:02-0700",
   "health": {
     "acceleration": {
       "host": {
@@ -1937,7 +1937,7 @@
           "budget_gb": 10.0,
           "bytes": 0,
           "bytes_mb": 0.0,
-          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-uvm2wrn4/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
+          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-9wjc2_87/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
           "enabled": true,
           "entries": 0,
           "hit_rate": 0.0,
@@ -1947,7 +1947,7 @@
           "total_cached_tokens": 0,
           "total_tokens_on_disk": 0
         },
-        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-uvm2wrn4/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
+        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-9wjc2_87/.cache/vmlx-engine/block-cache/1153e4ca9de5/ssm_companion",
         "disk_enabled": true,
         "entries": 0,
         "max_bytes": null,
@@ -2236,7 +2236,7 @@
   },
   "memoryPreflight": {
     "allowConcurrentModel": false,
-    "availableGB": 114.13,
+    "availableGB": 114.17,
     "enabled": true,
     "heavyModelProcessCount": 0,
     "heavyModelProcesses": [],
@@ -2379,7 +2379,7 @@
           "numpy",
           "vmlx_engine"
         ],
-        "path": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-uvm2wrn4/exploitbot/ExploitBotEngine/.venv/bin/python3",
+        "path": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-release-qwen-tool-home-9wjc2_87/exploitbot/ExploitBotEngine/.venv/bin/python3",
         "source": "repo-engine-venv",
         "valid": false,
         "version": ""
@@ -2474,7 +2474,7 @@
   "settings": {
     "ok": true
   },
-  "startedAt": "2026-07-05T16:07:21-0700",
+  "startedAt": "2026-07-05T16:46:23-0700",
   "state": {
     "activeSubtabs": {
       "creds": "Cracking",
@@ -2682,14 +2682,14 @@
       "totalCount": 0
     },
     "engineCacheStats": {
-      "blockL2Blocks": 80,
+      "blockL2Blocks": 0,
       "blockL2Hits": 0,
-      "blockL2Misses": 4,
-      "memoryActiveMB": 36752.8,
-      "memoryCacheMB": 2298.1,
-      "prefixCacheHits": 20,
-      "prefixCacheTokensSaved": 640,
-      "prefixCacheTotalTokens": 5081,
+      "blockL2Misses": 2,
+      "memoryActiveMB": 36264.3,
+      "memoryCacheMB": 18.6,
+      "prefixCacheHits": 0,
+      "prefixCacheTokensSaved": 0,
+      "prefixCacheTotalTokens": 0,
       "promptL2Entries": 0,
       "promptL2Hits": 0,
       "promptL2Misses": 1,
@@ -2731,7 +2731,7 @@
     "engineMemoryPreflight": {
       "allowConcurrentModel": false,
       "allowed": true,
-      "availableGB": 113.88833618164062,
+      "availableGB": 114.2030029296875,
       "heavyModelProcessCount": 0,
       "heavyModelProcesses": [],
       "reason": "",
@@ -2741,7 +2741,7 @@
     "engineRunning": true,
     "engineStaleCleanup": {
       "checked": true,
-      "checkedAt": "2026-07-05T23:07:21Z",
+      "checkedAt": "2026-07-05T23:46:24Z",
       "cleaned": false,
       "foundCount": 0,
       "foundProcesses": [],
@@ -2849,7 +2849,7 @@
         "tool": "lookup_cve"
       },
       {
-        "duration": 0.09613502025604248,
+        "duration": 0.08352100849151611,
         "icon": "OK",
         "text": "lookup_cve: 10 lines (0.1s)",
         "tool": "lookup_cve"
@@ -2871,8 +2871,8 @@
       "cachedTokens": 0,
       "completionTokens": 52,
       "promptTokens": 1265,
-      "tokPerSec": 10.910193269123557,
-      "ttft": 3.2756290435791016
+      "tokPerSec": 14.303161327104277,
+      "ttft": 2.4573769569396973
     },
     "mode": "autopilot",
     "modeSelection": {
@@ -3693,7 +3693,7 @@
           "outputPreview": "Running lookup_cve",
           "source": "activityFeed",
           "status": "RUN",
-          "timestamp": 1783292872.402529,
+          "timestamp": 1783295210.819601,
           "tool": "lookup_cve"
         },
         {
@@ -3701,7 +3701,7 @@
           "outputPreview": "$ echo handled by callback",
           "source": "activityFeed",
           "status": "OUT",
-          "timestamp": 1783292872.402532,
+          "timestamp": 1783295210.819604,
           "tool": "lookup_cve"
         },
         {
@@ -3709,7 +3709,7 @@
           "outputPreview": "lookup_cve: 10 lines (0.1s)",
           "source": "activityFeed",
           "status": "OK",
-          "timestamp": 1783292872.498783,
+          "timestamp": 1783295210.903229,
           "tool": "lookup_cve"
         },
         {
@@ -3717,7 +3717,7 @@
           "outputPreview": "CVE-2025-49704 [HIGH] CVSS:8.8 (CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H) | microsoft sharepoint_server\n  Tags: kev\n  Sources: cisa-kev, nvd, references, tags\n  Exploit: no | CISA KEV: YES\n  Affected: microsoft sharepoint_server from 2016\n  Description: Improper control of generation of code ('code injection') in Microsoft Office SharePoint allows an authorized attacker to execute code over a network.\n  Reference: https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-49704\n  Reference: https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-49704\n  Reference: https://www.microsoft.com/en-us/security/blog/2025/07/22/disrupting-active-exploitation-of-on-premises-sharepoint-vulnerabilities/\n",
           "source": "rawResults",
           "status": "captured",
-          "timestamp": 1783292872.498749,
+          "timestamp": 1783295210.9031959,
           "tool": "lookup_cve"
         },
         {
@@ -3726,7 +3726,7 @@
           "source": "tabActivities",
           "status": "done",
           "tab": "supplyChain",
-          "timestamp": 1783292872.4987922,
+          "timestamp": 1783295210.903235,
           "tool": "lookup_cve"
         }
       ],
