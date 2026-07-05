@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-07-05T15:10:25-0700",
+  "ok": true,
+  "proofType": "computer-use-tools-inventory-current",
+  "proofLevel": "same-process-computer-use-visible-ui-plus-localhost-state",
+  "app": {
+    "path": "/Users/eric/exploitbot/dist/ExploitBot.app",
+    "bundleID": "ai.jangq.ExploitBot",
+    "pid": 29475,
+    "localhostPort": 9999,
+    "sameProcessOwnsPort": true
+  },
+  "computerUse": {
+    "cuaAppVersion": 857,
+    "attachedApp": "/Users/eric/exploitbot/dist/ExploitBot.app",
+    "visibleSettingsPanel": "Tools",
+    "visibleInstalledCount": 42,
+    "visibleMissingCount": 0,
+    "visibleInstallAllMissingDisabled": true,
+    "visibleInstallPlanCommandCount": 0,
+    "visibleInstallPlanRequiresNetworkInstall": false,
+    "screenshot": "docs/live-proofs/2026-07-05-computer-use-tools-inventory-42.png"
+  },
+  "localhostState": {
+    "engineRunning": false,
+    "installedCount": 42,
+    "missingCount": 0,
+    "errorCount": 0,
+    "installingCount": 0,
+    "requiresNetworkInstall": false,
+    "installPlan": {
+      "missingCount": 0,
+      "commandCount": 0,
+      "requiresNetworkInstall": false,
+      "missingByCategory": {},
+      "missingByInstallMethod": {},
+      "installCommands": []
+    },
+    "httpx": {
+      "status": "installed",
+      "path": "/Users/eric/.exploitbot/tools/httpx",
+      "version": "1.9.0",
+      "installMethod": "go"
+    }
+  },
+  "sourceEvidence": {
+    "installer": "ExploitBot/Sources/ExploitBot/Services/ToolInstaller.swift",
+    "contracts": "ExploitBotEngine/testsuite/test_tool_installer_install_command_contracts.py",
+    "inventoryArtifact": "docs/live-proofs/2026-07-04-tool-settings-real-inventory.json",
+    "installLog": "docs/live-proofs/tool-install-logs/2026-07-05-httpx-nocgo-reinstall.log"
+  },
+  "verificationEvidence": {
+    "toolInstallerContracts": "6 passed",
+    "buildOnly": "Build complete",
+    "toolSettingsInventory": {
+      "installedCount": 42,
+      "missingCount": 0,
+      "status": {
+        "fullPentestToolchainInstalled": "PASS",
+        "settingsCurrentMachineDetection": "PASS"
+      }
+    },
+    "individualToolchainCoverage": {
+      "ok": true,
+      "rowCount": 10,
+      "passRows": 10
+    }
+  },
+  "limits": [
+    "This proof did not start a model or run external target tools.",
+    "Full objective completion remains blocked by notarization/distribution and partial above-192k context stress."
+  ]
+}

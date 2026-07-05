@@ -1,0 +1,111 @@
+{
+  "generatedAt": "2026-07-05T03:46:33-0700",
+  "proofType": "release-app-computer-use-settings-cache-model",
+  "status": "PASS",
+  "app": {
+    "path": "/Users/eric/exploitbot/release/ExploitBot.app",
+    "bundleID": "ai.jangq.ExploitBot",
+    "pid": 20100,
+    "cuaAppVersion": "857",
+    "appBinarySha256": "46531ac650fd80b7d2b848032098b5f3053e277866d46b3cb051273381edcc26",
+    "dmgPath": "release/ExploitBot-beta.dmg",
+    "dmgSha256": "ea372f4b829bb24861bf4ec06ac96aab28bd8687322377f41519eebf2c24af03"
+  },
+  "computerUse": {
+    "attached": true,
+    "windowTitle": "ExploitBot",
+    "settingsOpened": true,
+    "verifiedPanels": [
+      "Engine",
+      "Model",
+      "Runtime",
+      "Context",
+      "Cache",
+      "Agents",
+      "CVE Database",
+      "Tools",
+      "Logs"
+    ],
+    "modelPanelObserved": true,
+    "cachePanelObserved": true
+  },
+  "stateEndpoint": {
+    "url": "http://127.0.0.1:9999/state",
+    "selectedModelPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+    "modelLibrary": {
+      "status": "done",
+      "entryCount": 14,
+      "supportedCount": 6,
+      "roots": [
+        "/Users/eric/models/dealign.ai"
+      ],
+      "requiredMxfp8MtpModels": [
+        {
+          "name": "Qwen3.6-27B-MXFP8-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+          "family": "Qwen",
+          "isSupported": true,
+          "isMultimodal": true,
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json"
+        },
+        {
+          "name": "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+          "family": "Qwen",
+          "isSupported": true,
+          "isMultimodal": true,
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json"
+        }
+      ]
+    },
+    "engineConfig": {
+      "kvCacheQuantization": "turboquant-q4",
+      "kvCacheGroupSize": 64,
+      "prefixCache": true,
+      "pagedCache": true,
+      "promptL2Disk": true,
+      "blockL2Disk": true,
+      "pagedCacheBlockSize": 64,
+      "cacheMemoryPercent": 0.3,
+      "useModelGenerationDefaults": true,
+      "reasoningParser": "auto",
+      "toolCallParser": "auto"
+    },
+    "contextWindow": {
+      "turboQuantKV": true,
+      "cacheResponsesMethod": "prefix-cache-l2-turboquant",
+      "cacheResponsesInferenceMethod": "prefix-cache-l2-turboquant",
+      "prefixCache": true,
+      "pagedCache": true,
+      "promptL2Disk": true,
+      "blockL2Disk": true
+    },
+    "cveDatabase": {
+      "totalCount": 1589,
+      "kevCount": 1577,
+      "lastSync": "2026-07-05T07:22:43Z"
+    },
+    "toolSettings": {
+      "installedCount": 13,
+      "missingCount": 29,
+      "errorCount": 0
+    },
+    "messagesEndpointShape": {
+      "url": "http://127.0.0.1:9999/messages",
+      "type": "array",
+      "count": 0
+    }
+  },
+  "processCheck": {
+    "appProcessOnly": true,
+    "modelProcessSpawned": false,
+    "matchingProcess": "20100 S 144656 /Users/eric/exploitbot/release/ExploitBot.app/Contents/MacOS/ExploitBot"
+  },
+  "statusEvidence": {
+    "computerUseAttach": "CUA get_app_state returned CUA App Version 857, bundleID ai.jangq.ExploitBot, pid 20100, and a visible ExploitBot window.",
+    "modelSettings": "CUA Model panel showed Add Folder, Scan, selected Qwen3.6-27B-MXFP8-CRACK-MTP, and Qwen3.6-35B-A3B-MXFP8-CRACK-MTP as a supported entry.",
+    "cacheSettings": "CUA Cache panel showed TurboQuant Q4 selected, Q4 and Full KV unselected, and prefix/paged/prompt L2/block L2 cache controls enabled.",
+    "stateEndpoint": "curl /state returned matching engineConfig and contextWindow cache values plus model library and CVE/tool inventory.",
+    "processSafety": "ps showed only the packaged app process for this check; no launch.py, Qwen3.6, or vmlx model process was running."
+  }
+}

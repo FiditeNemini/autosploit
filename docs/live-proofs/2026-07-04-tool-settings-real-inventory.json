@@ -1,0 +1,407 @@
+{
+  "errorPentestTools": [],
+  "finishedAt": "2026-07-05T15:22:55-0700",
+  "installedCount": 42,
+  "installedLoopbackTools": {
+    "curl": {
+      "category": "system",
+      "installMethod": "system",
+      "name": "curl",
+      "path": "/usr/bin/curl",
+      "status": "installed",
+      "version": "8.7.1"
+    },
+    "nc": {
+      "category": "system",
+      "installMethod": "system",
+      "name": "nc",
+      "path": "/usr/bin/nc",
+      "status": "installed",
+      "version": ""
+    },
+    "python3": {
+      "category": "system",
+      "installMethod": "system",
+      "name": "python3",
+      "path": "/opt/homebrew/bin/python3",
+      "status": "installed",
+      "version": "3.14.6"
+    }
+  },
+  "missingCount": 0,
+  "missingPentestTools": [],
+  "ok": true,
+  "proofType": "tool-settings-real-current-machine-inventory",
+  "startedAt": "2026-07-05T15:22:40-0700",
+  "status": {
+    "fullPentestToolchainInstalled": "PASS",
+    "settingsCurrentMachineDetection": "PASS"
+  },
+  "toolSettings": {
+    "activeSettingsCategory": "",
+    "errorCount": 0,
+    "installCommands": [],
+    "installLog": "\ndetectCurrentMachine: refreshed from current PATH",
+    "installPlan": {
+      "commandCount": 0,
+      "installCommands": [],
+      "missingByCategory": {},
+      "missingByInstallMethod": {},
+      "missingCount": 0,
+      "requiresNetworkInstall": false
+    },
+    "installedCount": 42,
+    "installingCount": 0,
+    "isInstalling": false,
+    "missingByCategory": {},
+    "missingByInstallMethod": {},
+    "missingCount": 0,
+    "requiresNetworkInstall": false,
+    "tools": [
+      {
+        "category": "system",
+        "installMethod": "system",
+        "name": "curl",
+        "path": "/usr/bin/curl",
+        "status": "installed",
+        "version": "8.7.1"
+      },
+      {
+        "category": "system",
+        "installMethod": "system",
+        "name": "nc",
+        "path": "/usr/bin/nc",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "system",
+        "installMethod": "system",
+        "name": "python3",
+        "path": "/opt/homebrew/bin/python3",
+        "status": "installed",
+        "version": "3.14.6"
+      },
+      {
+        "category": "system",
+        "installMethod": "system",
+        "name": "zsh",
+        "path": "/bin/zsh",
+        "status": "installed",
+        "version": "5.9"
+      },
+      {
+        "category": "recon",
+        "installMethod": "go",
+        "name": "subfinder",
+        "path": "/Users/eric/.exploitbot/tools/subfinder",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "recon",
+        "installMethod": "go",
+        "name": "dnsx",
+        "path": "/Users/eric/.exploitbot/tools/dnsx",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "recon",
+        "installMethod": "homebrew",
+        "name": "nmap",
+        "path": "/opt/homebrew/bin/nmap",
+        "status": "installed",
+        "version": "7.99"
+      },
+      {
+        "category": "recon",
+        "installMethod": "homebrew",
+        "name": "masscan",
+        "path": "/opt/homebrew/bin/masscan",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "recon",
+        "installMethod": "go",
+        "name": "httpx",
+        "path": "/Users/eric/.exploitbot/tools/httpx",
+        "status": "installed",
+        "version": "1.9.0"
+      },
+      {
+        "category": "recon",
+        "installMethod": "go",
+        "name": "katana",
+        "path": "/Users/eric/.exploitbot/tools/katana",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "recon",
+        "installMethod": "uv",
+        "name": "theHarvester",
+        "path": "/Users/eric/.local/bin/theHarvester",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "web",
+        "installMethod": "go",
+        "name": "nuclei",
+        "path": "/opt/homebrew/bin/nuclei",
+        "status": "installed",
+        "version": "3.10.0"
+      },
+      {
+        "category": "web",
+        "installMethod": "uv",
+        "name": "sqlmap",
+        "path": "/opt/homebrew/bin/sqlmap",
+        "status": "installed",
+        "version": "1.10.7"
+      },
+      {
+        "category": "web",
+        "installMethod": "go",
+        "name": "dalfox",
+        "path": "/Users/eric/.exploitbot/tools/dalfox",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "web",
+        "installMethod": "homebrew",
+        "name": "feroxbuster",
+        "path": "/opt/homebrew/bin/feroxbuster",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "web",
+        "installMethod": "go",
+        "name": "ffuf",
+        "path": "/Users/eric/.exploitbot/tools/ffuf",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "web",
+        "installMethod": "uv",
+        "name": "arjun",
+        "path": "/Users/eric/.local/bin/arjun",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "web",
+        "installMethod": "homebrew",
+        "name": "wpscan",
+        "path": "/opt/homebrew/bin/wpscan",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "web",
+        "installMethod": "homebrew",
+        "name": "testssl",
+        "path": "/opt/homebrew/bin/testssl.sh",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "web",
+        "installMethod": "uv",
+        "name": "graphqlmap",
+        "path": "/Users/eric/.local/bin/graphqlmap",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "web",
+        "installMethod": "uv",
+        "name": "jwt_tool",
+        "path": "/Users/eric/.local/bin/jwt_tool",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "network",
+        "installMethod": "uv",
+        "name": "netexec",
+        "path": "/Users/eric/.local/bin/netexec",
+        "status": "installed",
+        "version": "1.5.1"
+      },
+      {
+        "category": "network",
+        "installMethod": "homebrew",
+        "name": "snmpwalk",
+        "path": "/usr/bin/snmpwalk",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "network",
+        "installMethod": "homebrew",
+        "name": "tshark",
+        "path": "/opt/homebrew/bin/tshark",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "network",
+        "installMethod": "homebrew",
+        "name": "bettercap",
+        "path": "/opt/homebrew/bin/bettercap",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "network",
+        "installMethod": "go",
+        "name": "chisel",
+        "path": "/Users/eric/.exploitbot/tools/chisel",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "credentials",
+        "installMethod": "homebrew",
+        "name": "hashcat",
+        "path": "/opt/homebrew/bin/hashcat",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "credentials",
+        "installMethod": "homebrew",
+        "name": "hydra",
+        "path": "/opt/homebrew/bin/hydra",
+        "status": "installed",
+        "version": "9.6"
+      },
+      {
+        "category": "credentials",
+        "installMethod": "ruby",
+        "name": "haiti",
+        "path": "/Users/eric/.local/bin/haiti",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "credentials",
+        "installMethod": "homebrew",
+        "name": "trufflehog",
+        "path": "/opt/homebrew/bin/trufflehog",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "supplychain",
+        "installMethod": "homebrew",
+        "name": "syft",
+        "path": "/opt/homebrew/bin/syft",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "supplychain",
+        "installMethod": "homebrew",
+        "name": "grype",
+        "path": "/opt/homebrew/bin/grype",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "supplychain",
+        "installMethod": "homebrew",
+        "name": "osv_scanner",
+        "path": "/opt/homebrew/bin/osv-scanner",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "exploit",
+        "installMethod": "homebrew",
+        "name": "metasploit",
+        "path": "/opt/homebrew/bin/msfconsole",
+        "status": "installed",
+        "version": "6.4.135"
+      },
+      {
+        "category": "exploit",
+        "installMethod": "uv",
+        "name": "pwncat",
+        "path": "/Users/eric/.local/bin/pwncat-cs",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "exploit",
+        "installMethod": "release",
+        "name": "sliver",
+        "path": "/Users/eric/.exploitbot/tools/sliver-client",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "post",
+        "installMethod": "uv",
+        "name": "impacket",
+        "path": "/Users/eric/.local/bin/secretsdump.py",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "post",
+        "installMethod": "script",
+        "name": "linpeas",
+        "path": "/Users/eric/.exploitbot/tools/linpeas.sh",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "osint",
+        "installMethod": "uv",
+        "name": "sherlock",
+        "path": "/Users/eric/.local/bin/sherlock",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "osint",
+        "installMethod": "uv",
+        "name": "holehe",
+        "path": "/Users/eric/.local/bin/holehe",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "osint",
+        "installMethod": "homebrew",
+        "name": "exiftool",
+        "path": "/opt/homebrew/bin/exiftool",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "osint",
+        "installMethod": "go",
+        "name": "gowitness",
+        "path": "/Users/eric/.exploitbot/tools/gowitness",
+        "status": "installed",
+        "version": ""
+      }
+    ]
+  },
+  "toolSettingsActions": {
+    "installedCount": 42,
+    "lastAction": "detectCurrentMachine",
+    "missingCount": 0,
+    "status": "done",
+    "summary": "detect current machine tools",
+    "toolName": "all"
+  }
+}

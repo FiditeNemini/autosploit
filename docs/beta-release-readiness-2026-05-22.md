@@ -36,6 +36,8 @@ Validated local commands:
 
 ## Verification Result
 
+- Current local artifacts as of July 4, 2026 verify after refreshing `release/`
+  with `./script/package_release.sh --skip-notarize`.
 - App signature: valid on disk, satisfies designated requirement.
 - DMG signature: valid on disk, satisfies designated requirement.
 - App signing authority: Developer ID Application: ShieldStack LLC

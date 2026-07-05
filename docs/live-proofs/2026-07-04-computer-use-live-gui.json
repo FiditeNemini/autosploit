@@ -1,0 +1,100 @@
+{
+  "app": {
+    "bundleID": "ai.jangq.ExploitBot",
+    "name": "ExploitBot",
+    "pathObservedByComputerUse": "/Users/eric/exploitbot/release/ExploitBot.app/",
+    "pidObservedByComputerUse": 92320
+  },
+  "appEvidence": {
+    "activityLogShowedOpenSettings": true,
+    "engineLaunchCommandObserved": "/Users/eric/exploitbot/release/ExploitBot.app/Contents/Resources/bundled-python/python/bin/python3 /Users/eric/exploitbot/release/ExploitBot.app/Contents/Resources/ExploitBotEngine/launch.py --model /Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP --port 8100 --verbose --reasoning-parser auto --tool-call-parser auto --kv-cache-quantization turboquant-q4 --kv-cache-group-size 64 --enable-prefix-cache true --enable-disk-cache true --disk-cache-max-gb 10.0 --cache-memory-percent 0.3 --use-paged-cache true --paged-cache-block-size 64 --enable-block-disk-cache true --block-disk-cache-max-gb 10.0",
+    "engineLaunchObservedAndKilled": true,
+    "firstOpStepVisible": true,
+    "languageStepVisible": true,
+    "mainWorkspaceVisible": true,
+    "modelPathValidated": true,
+    "modelStepVisible": true,
+    "orphanEnginePidKilled": 92893,
+    "settingsCategoriesVisible": [
+      "Engine",
+      "Model",
+      "Runtime",
+      "Context",
+      "Cache",
+      "Agents",
+      "CVE Database",
+      "Tools",
+      "Logs"
+    ],
+    "settingsVisible": true
+  },
+  "computerUseEvidence": {
+    "clickedElements": [
+      {
+        "action": "Continue from language step",
+        "element": "11",
+        "result": "model step visible"
+      },
+      {
+        "action": "Continue from model step",
+        "element": "13",
+        "result": "first-op step visible"
+      },
+      {
+        "action": "Start Op",
+        "element": "19",
+        "result": "main workspace visible"
+      },
+      {
+        "action": "Open Settings",
+        "element": "17",
+        "result": "settings overlay visible"
+      }
+    ],
+    "firstGetAppStateReturnedPendingPermissionsThenSucceeded": true,
+    "inlineScreenshotsReturnedByGetAppStateAndClicks": true,
+    "listAppsReturnedExploitBotAndRunningApps": true,
+    "namespaceExposedThisTurn": true,
+    "setValues": [
+      {
+        "element": "8",
+        "result": "supported Qwen model validation visible",
+        "value": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP"
+      },
+      {
+        "element": "8",
+        "result": "Start Op enabled",
+        "value": "Computer Use Live Proof"
+      }
+    ]
+  },
+  "finishedAt": "2026-07-04T21:26:28-0700",
+  "generatedAt": "2026-07-04T21:26:28-0700",
+  "modelPathEntered": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+  "ok": true,
+  "opNameEntered": "Computer Use Live Proof",
+  "postCleanup": {
+    "matchingExploitBotProcesses": [],
+    "matchingModelEngineProcesses": [],
+    "memoryPressure": {
+      "swapouts": 0,
+      "systemWideMemoryFreePercentage": 94
+    }
+  },
+  "proofLevel": "live-mcp-computer-use-list-apps-get-state-click-set-value-inline-screenshot",
+  "proofType": "computer-use-live-gui-current-state",
+  "startedAt": "2026-07-04T21:20:49-0700",
+  "status": {
+    "autonomousVisibleModelToolLoop": "NOT_PROVEN_IN_THIS_ARTIFACT",
+    "clickOnboardingContinue": "PASS",
+    "computerUseNamespaceExposed": "PASS",
+    "engineLaunchTurboQuantKVCommandObserved": "PASS",
+    "getAppState": "PASS",
+    "inlineScreenshotEvidence": "PASS",
+    "listApps": "PASS",
+    "openSettings": "PASS",
+    "processCleanup": "PASS",
+    "setModelPath": "PASS",
+    "startOp": "PASS"
+  }
+}

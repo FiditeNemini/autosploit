@@ -1,0 +1,327 @@
+{
+  "finishedAt": "2026-07-04T12:10:48-0700",
+  "method": "live app API, no model load, workflow/tab/terminal state",
+  "ok": true,
+  "proofType": "workflow-panel-state",
+  "startedAt": "2026-07-04T12:10:45-0700",
+  "status": {
+    "manualTabSwitch": "PASS",
+    "noModelLoaded": "PASS",
+    "terminalActiveCommand": "PASS",
+    "terminalToggleVisible": "PASS",
+    "terminalTranscripts": "PASS",
+    "workflowLifecycleRows": "PASS",
+    "workflowTabActivities": "PASS"
+  },
+  "tabSwitch": {
+    "activeTab": "creds",
+    "tabSwitchActions": {
+      "followAgent": false,
+      "fromTab": "recon",
+      "lastAction": "manualTabSwitch",
+      "status": "done",
+      "summary": "manualTabSwitch recon -> creds",
+      "toTab": "creds"
+    }
+  },
+  "terminalSeed": {
+    "activeTab": "network",
+    "feedRecent": [
+      {
+        "duration": 0,
+        "icon": "RUN",
+        "text": "Running run_shell",
+        "tool": "run_shell"
+      },
+      {
+        "duration": 0,
+        "icon": "OUT",
+        "text": "$ printf qa-terminal-command-output",
+        "tool": "run_shell"
+      },
+      {
+        "duration": 0.1,
+        "icon": "OK",
+        "text": "run_shell: 1 lines output (0.1s)",
+        "tool": "run_shell"
+      }
+    ],
+    "terminal": {
+      "activeCommand": {
+        "command": "printf qa-terminal-command-output",
+        "source": "tabActivities",
+        "status": "running",
+        "summary": "qa terminal command running",
+        "tab": "network",
+        "tool": "run_shell"
+      },
+      "commandTranscripts": [
+        {
+          "command": "Running run_shell",
+          "outputPreview": "Running run_shell",
+          "source": "activityFeed",
+          "status": "RUN",
+          "timestamp": 1783192248.260473,
+          "tool": "run_shell"
+        },
+        {
+          "command": "printf qa-terminal-command-output",
+          "outputPreview": "$ printf qa-terminal-command-output",
+          "source": "activityFeed",
+          "status": "OUT",
+          "timestamp": 1783192248.260476,
+          "tool": "run_shell"
+        },
+        {
+          "command": "run_shell: 1 lines output (0.1s)",
+          "outputPreview": "run_shell: 1 lines output (0.1s)",
+          "source": "activityFeed",
+          "status": "OK",
+          "timestamp": 1783192248.260488,
+          "tool": "run_shell"
+        },
+        {
+          "command": "run_shell",
+          "outputPreview": "qa-terminal-command-output\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783192248.260491,
+          "tool": "run_shell"
+        },
+        {
+          "command": "Verify Apache CVE evidence",
+          "outputPreview": "verified",
+          "source": "tabActivities",
+          "status": "done",
+          "tab": "web",
+          "timestamp": 1783192248.1176438,
+          "tool": "search_cve"
+        },
+        {
+          "command": "printf qa-terminal-command-output",
+          "outputPreview": "qa terminal command running",
+          "source": "tabActivities",
+          "status": "running",
+          "tab": "network",
+          "timestamp": 1783192248.260542,
+          "tool": "run_shell"
+        },
+        {
+          "command": "hashcat sample hash",
+          "outputPreview": "wordlist missing",
+          "source": "tabActivities",
+          "status": "failed",
+          "tab": "creds",
+          "timestamp": 1783192248.117652,
+          "tool": "hashcat"
+        },
+        {
+          "command": "nc -lvnp 4444",
+          "outputPreview": "listener ready",
+          "source": "tabActivities",
+          "status": "done",
+          "tab": "exploit",
+          "timestamp": 1783192248.117652,
+          "tool": "run_shell"
+        },
+        {
+          "command": "linpeas proof",
+          "outputPreview": "stopped by user",
+          "source": "tabActivities",
+          "status": "canceled",
+          "tab": "post",
+          "timestamp": 1783192248.117653,
+          "tool": "run_shell"
+        },
+        {
+          "command": "sherlock qa-user",
+          "outputPreview": "searching platforms",
+          "source": "tabActivities",
+          "status": "running",
+          "tab": "osint",
+          "timestamp": 1783192248.117653,
+          "tool": "sherlock"
+        }
+      ],
+      "installedToolCount": 0,
+      "isVisible": true,
+      "surfaceContract": "terminal-visibility-command-transcripts",
+      "toolPathCount": 4,
+      "toolPaths": [
+        "/opt/homebrew/bin",
+        "/usr/local/bin",
+        "/Users/eric/.exploitbot/tools",
+        "/Users/eric/.local/bin"
+      ]
+    }
+  },
+  "visualSeed": {
+    "activeTab": "recon",
+    "feedRecent": [
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "scanModelLibrary 14 models from 2 roots",
+        "tool": ""
+      },
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "QA visual activity state seeded",
+        "tool": ""
+      }
+    ],
+    "lifecycle": {
+      "credsLifecycle": {
+        "bruteforce": {
+          "command": "hydra ssh",
+          "status": "done",
+          "summary": "complete",
+          "tool": "hydra"
+        },
+        "cracking": {
+          "command": "hashcat qa.hashes",
+          "status": "failed",
+          "summary": "wordlist missing",
+          "tool": "hashcat"
+        },
+        "secrets": {
+          "command": "trufflehog filesystem",
+          "status": "running",
+          "summary": "scanning",
+          "tool": "trufflehog"
+        }
+      },
+      "exploitLifecycle": {
+        "implant": {
+          "command": "sliver generate",
+          "status": "failed",
+          "summary": "missing profile",
+          "tool": "sliver"
+        },
+        "listener": {
+          "command": "nc -lvnp 4444",
+          "status": "running",
+          "summary": "listener ready",
+          "tool": "run_shell"
+        },
+        "script": {
+          "command": "custom exploit proof",
+          "status": "done",
+          "summary": "complete",
+          "tool": "run_shell"
+        }
+      },
+      "networkLifecycle": {
+        "capture": {
+          "command": "tshark -i en0",
+          "status": "running",
+          "summary": "capturing packets",
+          "tool": "run_shell"
+        },
+        "mitm": {
+          "command": "bettercap mitm",
+          "status": "done",
+          "summary": "ready",
+          "tool": "bettercap"
+        },
+        "tunnel": {
+          "command": "chisel client",
+          "status": "failed",
+          "summary": "no route",
+          "tool": "chisel"
+        }
+      },
+      "osintLifecycle": {
+        "email": {
+          "command": "holehe qa@example.test",
+          "status": "done",
+          "summary": "complete",
+          "tool": "holehe"
+        },
+        "metadata": {
+          "command": "exiftool missing.jpg",
+          "status": "failed",
+          "summary": "file missing",
+          "tool": "exiftool"
+        },
+        "screenshot": {
+          "command": "gowitness single",
+          "status": "done",
+          "summary": "captured",
+          "tool": "gowitness"
+        },
+        "username": {
+          "command": "sherlock qa-user",
+          "status": "running",
+          "summary": "searching platforms",
+          "tool": "sherlock"
+        }
+      },
+      "postLifecycle": {
+        "ad": {
+          "command": "secretsdump",
+          "status": "done",
+          "summary": "complete",
+          "tool": "impacket"
+        },
+        "lateral": {
+          "command": "netexec smb",
+          "status": "running",
+          "summary": "checking hosts",
+          "tool": "netexec"
+        },
+        "privesc": {
+          "command": "linpeas",
+          "status": "canceled",
+          "summary": "stopped by user",
+          "tool": "run_shell"
+        }
+      }
+    },
+    "tabActivities": {
+      "creds": {
+        "command": "hashcat sample hash",
+        "count": 1,
+        "lastTool": "hashcat",
+        "status": "failed",
+        "summary": "wordlist missing"
+      },
+      "exploit": {
+        "command": "nc -lvnp 4444",
+        "count": 1,
+        "lastTool": "run_shell",
+        "status": "done",
+        "summary": "listener ready"
+      },
+      "network": {
+        "command": "tshark capture proof",
+        "count": 1,
+        "lastTool": "run_shell",
+        "status": "running",
+        "summary": "capturing packets"
+      },
+      "osint": {
+        "command": "sherlock qa-user",
+        "count": 1,
+        "lastTool": "sherlock",
+        "status": "running",
+        "summary": "searching platforms"
+      },
+      "post": {
+        "command": "linpeas proof",
+        "count": 1,
+        "lastTool": "run_shell",
+        "status": "canceled",
+        "summary": "stopped by user"
+      },
+      "web": {
+        "command": "Verify Apache CVE evidence",
+        "count": 2,
+        "lastTool": "search_cve",
+        "status": "done",
+        "summary": "verified"
+      }
+    }
+  }
+}

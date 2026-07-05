@@ -1,0 +1,304 @@
+{
+  "computerUseEvidence": {
+    "app": "/Users/eric/exploitbot/dist/ExploitBot.app",
+    "cuaAppVersion": 857,
+    "liveObservedControls": [
+      "main tab bar",
+      "Settings category sidebar",
+      "Runtime reasoning toggle",
+      "Runtime parser selectors",
+      "Context dynamic-source toggles",
+      "Context long-context safety notice",
+      "Cache TurboQuant Q4 selector",
+      "Cache prefix/paged/L2 toggles",
+      "Agents loop controls",
+      "Agents authorization guards",
+      "CVE import/search controls",
+      "Tools install plan",
+      "Tools install-plan reviewed checkbox",
+      "Logs auto-scroll and empty-log state"
+    ],
+    "mainTabsClicked": [
+      "recon",
+      "web",
+      "network",
+      "creds",
+      "exploit",
+      "post",
+      "supplyChain",
+      "osint",
+      "report",
+      "stash"
+    ],
+    "pid": 38574,
+    "settingsPagesClicked": [
+      "engine",
+      "model",
+      "runtime",
+      "context",
+      "cache",
+      "agents",
+      "cves",
+      "tools",
+      "logs"
+    ]
+  },
+  "generatedAt": "2026-07-05T19:41:43Z",
+  "mainTabs": {
+    "expected": [
+      "recon",
+      "web",
+      "network",
+      "creds",
+      "exploit",
+      "post",
+      "supplyChain",
+      "osint",
+      "report",
+      "stash"
+    ],
+    "missing": [],
+    "observed": [
+      "recon",
+      "web",
+      "network",
+      "creds",
+      "exploit",
+      "post",
+      "supplyChain",
+      "osint",
+      "report",
+      "stash"
+    ]
+  },
+  "modelLibraryEvidence": {
+    "entryCount": 14,
+    "roots": [
+      "/Users/eric/models/dealign.ai"
+    ],
+    "selectedPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+    "supportedCount": 6,
+    "visibleSupportedMTPModels": [
+      "Qwen3.6-27B-MXFP4-CRACK-MTP",
+      "Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+      "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+    ]
+  },
+  "ok": true,
+  "processEvidence": {
+    "appRows": [
+      "38574 185248 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+    ],
+    "engineProcessRows": [],
+    "ignoredRows": [
+      "unrelated long-running zsh watchers under /Users/eric/mlx/vllm-mlx matched the broad rg pattern but were not ExploitBot model or engine processes"
+    ]
+  },
+  "proofType": "live-ui-surface-sweep",
+  "settingsPages": {
+    "expected": [
+      "engine",
+      "model",
+      "runtime",
+      "context",
+      "cache",
+      "agents",
+      "cves",
+      "tools",
+      "logs"
+    ],
+    "missing": [],
+    "observed": [
+      "engine",
+      "model",
+      "runtime",
+      "context",
+      "cache",
+      "agents",
+      "cves",
+      "tools",
+      "logs"
+    ],
+    "stateSections": {
+      "agents": [
+        "multi-agent mode",
+        "concurrency limit",
+        "agent defaults"
+      ],
+      "cache": [
+        "prefix cache",
+        "prompt L2 disk",
+        "paged cache",
+        "block L2 disk",
+        "TurboQuant KV"
+      ],
+      "context": [
+        "dynamic catalogue",
+        "retrieval sources",
+        "CVE assist mode",
+        "long-context safety"
+      ],
+      "cves": [
+        "database import",
+        "CVE counts",
+        "search status"
+      ],
+      "engine": [
+        "engine status",
+        "effective runtime",
+        "live cache counters"
+      ],
+      "logs": [
+        "engine log output",
+        "diagnostics"
+      ],
+      "model": [
+        "model folder",
+        "supported family warning",
+        "generation config source"
+      ],
+      "runtime": [
+        "model generation defaults",
+        "parser autodetect",
+        "tool-loop limits",
+        "autonomy"
+      ],
+      "tools": [
+        "installed tools",
+        "missing tools",
+        "install plan",
+        "install log"
+      ]
+    }
+  },
+  "stateEvidence": {
+    "agentLoopMaxIterations": 50,
+    "cache": {
+      "blockL2Disk": true,
+      "kvCacheGroupSize": 64,
+      "kvCacheQuantization": "turboquant-q4",
+      "pagedCache": true,
+      "prefixCache": true,
+      "promptL2Disk": true
+    },
+    "contextWindow": {
+      "blockL2Disk": true,
+      "cacheResponsesInferenceMethod": "prefix-cache-l2-turboquant",
+      "declaredMaxContextTokens": 262144,
+      "highRiskOverrideEnv": "EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET",
+      "lastFailedTargets": [
+        200000,
+        224000,
+        258000
+      ],
+      "pagedCache": true,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "provenSafeTargetCeiling": 192000,
+      "turboQuantKV": true,
+      "unprovenTargetPolicy": "refuse-before-model-load"
+    },
+    "enginePort": 0,
+    "engineRunning": false,
+    "healthStatus": "stopped",
+    "modelInferenceStarted": false,
+    "reasoningEnabled": true,
+    "toolSchemaMaxTools": 12
+  },
+  "status": {
+    "allMainTabsObserved": "PASS",
+    "allSettingsPagesObserved": "PASS",
+    "allToolRowsObserved": "PASS",
+    "computerUseAttach": "PASS",
+    "currentSourceBuild": "PASS",
+    "installAllReviewGateRestoredDisabled": "PASS",
+    "modelInferenceStarted": "NO"
+  },
+  "stressGates": {
+    "installAllMissing": {
+      "reason": "would start network installs for missing tools",
+      "status": "NOT_RUN_INTENTIONAL_HIGH_SIDE_EFFECT"
+    },
+    "jsonFraming": {
+      "artifact": "docs/live-proofs/2026-07-05-release-app-json-framing-live.json",
+      "status": "PASS"
+    },
+    "modelLoadStress": {
+      "existingQwenArtifacts": [
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-current.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-current.json",
+        "docs/live-proofs/2026-07-05-release-app-computer-use-35b-visible-tool-loop.json"
+      ],
+      "reason": "not rerun in this sweep because recent swapouts are nonzero",
+      "status": "DEFERRED_TO_EXISTING_QWEN_PROOFS"
+    },
+    "releasePackage": {
+      "artifact": "docs/live-proofs/2026-07-04-release-readiness.json",
+      "distributionStatus": "BLOCKED_NOTARIZATION",
+      "localPackageStatus": "PASS",
+      "status": "PASS"
+    },
+    "uiNavigation": {
+      "app": "/Users/eric/exploitbot/dist/ExploitBot.app",
+      "buildCommand": "EXPLOITBOT_TESTING=1 ./script/build_and_run.sh --verify",
+      "status": "PASS"
+    }
+  },
+  "toolInventory": {
+    "installedCount": 13,
+    "missingCount": 29,
+    "missingObserved": [],
+    "observedCount": 42,
+    "observedNames": [
+      "curl",
+      "nc",
+      "python3",
+      "zsh",
+      "subfinder",
+      "dnsx",
+      "nmap",
+      "masscan",
+      "httpx",
+      "katana",
+      "theHarvester",
+      "nuclei",
+      "sqlmap",
+      "dalfox",
+      "feroxbuster",
+      "ffuf",
+      "arjun",
+      "wpscan",
+      "testssl",
+      "graphqlmap",
+      "jwt_tool",
+      "netexec",
+      "snmpwalk",
+      "tshark",
+      "bettercap",
+      "chisel",
+      "hashcat",
+      "hydra",
+      "haiti",
+      "trufflehog",
+      "syft",
+      "grype",
+      "osv_scanner",
+      "metasploit",
+      "pwncat",
+      "sliver",
+      "impacket",
+      "linpeas",
+      "sherlock",
+      "holehe",
+      "exiftool",
+      "gowitness"
+    ],
+    "totalCount": 42
+  },
+  "vmEvidence": {
+    "pageouts": 91568,
+    "swapins": 260,
+    "swapouts": 1988
+  }
+}

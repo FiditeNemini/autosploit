@@ -1,0 +1,235 @@
+{
+  "assertions": {
+    "activityShowsScan": true,
+    "entryCountAtLeastRequestedModels": true,
+    "hasQwen27MXFP8MTP": true,
+    "hasQwen35MXFP8MTP": true,
+    "modelInfoHasGenerationConfig": true,
+    "modelInfoSupported": true,
+    "modelLibraryStateExposed": true,
+    "pickerSelectedQwen27MXFP8MTP": true,
+    "rootsContainDealign": true,
+    "scanActionRecorded": true,
+    "selectedQwen27MXFP8MTP": true,
+    "settingsVisible": true,
+    "supportedCountAtLeastTwo": true
+  },
+  "capturedAt": "2026-07-04T01:03:00-07:00",
+  "engineConfig": {
+    "blockDiskCacheMaxGB": 10,
+    "blockL2Disk": true,
+    "cacheMemoryPercent": 0.3,
+    "diskCacheMaxGB": 10,
+    "kvCacheGroupSize": 64,
+    "kvCacheQuantization": "turboquant-q4",
+    "maxTokens": 256,
+    "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+    "pagedCache": true,
+    "pagedCacheBlockSize": 64,
+    "prefixCache": true,
+    "promptL2Disk": true,
+    "reasoningParser": "auto",
+    "temperature": 0,
+    "toolCallParser": "auto",
+    "topP": 1,
+    "useModelGenerationDefaults": false
+  },
+  "feedRecent": [
+    {
+      "duration": 0,
+      "icon": "INF",
+      "text": "scanModelLibrary 14 models from 1 roots",
+      "tool": ""
+    },
+    {
+      "duration": 0,
+      "icon": "INF",
+      "text": "openSettings",
+      "tool": ""
+    },
+    {
+      "duration": 0,
+      "icon": "INF",
+      "text": "scanModelLibrary 14 models from 1 roots",
+      "tool": ""
+    },
+    {
+      "duration": 0,
+      "icon": "INF",
+      "text": "select model folder Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "tool": ""
+    },
+    {
+      "duration": 0,
+      "icon": "INF",
+      "text": "scanModelLibrary 14 models from 1 roots",
+      "tool": ""
+    }
+  ],
+  "method": "Computer Use opened Settings, selected Model category, observed Add Folder and Scan controls, clicked Qwen3.6 27B MXFP8 Use, then clicked Scan.",
+  "modelFolderInfo": {
+    "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+    "family": "Qwen",
+    "hasConfig": true,
+    "hasGenerationConfig": true,
+    "hasJangConfig": true,
+    "hasJangtqConfig": false,
+    "hasTokenizerConfig": true,
+    "isMultimodal": true,
+    "isSupported": true,
+    "modelType": "qwen3_5",
+    "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+    "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+  },
+  "modelFolderPicker": {
+    "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+    "family": "Qwen",
+    "isSupported": true,
+    "isVisible": false,
+    "lastAction": "select",
+    "selectedPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+    "source": "settings",
+    "status": "done",
+    "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+  },
+  "modelLibrary": {
+    "entries": [
+      {
+        "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+        "family": "MiniMax",
+        "isMultimodal": false,
+        "isSupported": true,
+        "name": "MiniMax-M2.7-JANG_K-CRACK",
+        "path": "/Users/eric/models/dealign.ai/MiniMax-M2.7-JANG_K-CRACK",
+        "supportMessage": "Supported MiniMax family. The app auto-detects config.json, jang_config.json, jangtq_config.json, generation_config.json, reasoning parser, tool parser, and full-KV cache topology."
+      },
+      {
+        "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+        "family": "Qwen",
+        "isMultimodal": true,
+        "isSupported": true,
+        "name": "Qwen3.6-27B-JANG_4M-CRACK",
+        "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-JANG_4M-CRACK",
+        "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+      },
+      {
+        "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+        "family": "Qwen",
+        "isMultimodal": true,
+        "isSupported": true,
+        "name": "Qwen3.6-27B-MXFP4-CRACK-MTP",
+        "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP",
+        "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+      },
+      {
+        "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+        "family": "Qwen",
+        "isMultimodal": true,
+        "isSupported": true,
+        "name": "Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+      },
+      {
+        "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+        "family": "Qwen",
+        "isMultimodal": true,
+        "isSupported": true,
+        "name": "Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+        "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+        "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+      },
+      {
+        "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+        "family": "Qwen",
+        "isMultimodal": true,
+        "isSupported": true,
+        "name": "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+        "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+        "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+      },
+      {
+        "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+        "family": "Unsupported",
+        "isMultimodal": false,
+        "isSupported": false,
+        "name": "DeepSeek-V4-Flash-JANG-CRACK",
+        "path": "/Users/eric/models/dealign.ai/DeepSeek-V4-Flash-JANG-CRACK",
+        "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+      },
+      {
+        "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+        "family": "Unsupported",
+        "isMultimodal": true,
+        "isSupported": false,
+        "name": "Gemma-4-26B-A4B-it-JANG_4M-CRACK",
+        "path": "/Users/eric/models/dealign.ai/Gemma-4-26B-A4B-it-JANG_4M-CRACK",
+        "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+      },
+      {
+        "configSummary": "Detected: config.json, generation_config.json, tokenizer_config.json",
+        "family": "Unsupported",
+        "isMultimodal": false,
+        "isSupported": false,
+        "name": "LFM2.5-8B-A1B-MXFP4-CRACK",
+        "path": "/Users/eric/models/dealign.ai/LFM2.5-8B-A1B-MXFP4-CRACK",
+        "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+      },
+      {
+        "configSummary": "Detected: config.json, generation_config.json, tokenizer_config.json",
+        "family": "Unsupported",
+        "isMultimodal": false,
+        "isSupported": false,
+        "name": "LFM2.5-8B-A1B-MXFP8-CRACK",
+        "path": "/Users/eric/models/dealign.ai/LFM2.5-8B-A1B-MXFP8-CRACK",
+        "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+      },
+      {
+        "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+        "family": "Unsupported",
+        "isMultimodal": false,
+        "isSupported": false,
+        "name": "Nemotron-Omni-Nano-JANGTQ4-CRACK",
+        "path": "/Users/eric/models/dealign.ai/Nemotron-Omni-Nano-JANGTQ4-CRACK",
+        "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+      },
+      {
+        "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+        "family": "Unsupported",
+        "isMultimodal": false,
+        "isSupported": false,
+        "name": "Nemotron-Omni-Nano-MXFP4-CRACK",
+        "path": "/Users/eric/models/dealign.ai/Nemotron-Omni-Nano-MXFP4-CRACK",
+        "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+      },
+      {
+        "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+        "family": "Unsupported",
+        "isMultimodal": true,
+        "isSupported": false,
+        "name": "Step-3.7-Flash-JANG_2L-CRACK",
+        "path": "/Users/eric/models/dealign.ai/Step-3.7-Flash-JANG_2L-CRACK",
+        "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+      },
+      {
+        "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+        "family": "Unsupported",
+        "isMultimodal": true,
+        "isSupported": false,
+        "name": "Step-3.7-Flash-JANG_K-CRACK",
+        "path": "/Users/eric/models/dealign.ai/Step-3.7-Flash-JANG_K-CRACK",
+        "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+      }
+    ],
+    "entryCount": 14,
+    "lastAction": "scan",
+    "roots": [
+      "/Users/eric/models/dealign.ai"
+    ],
+    "selectedPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+    "status": "done",
+    "summary": "scanModelLibrary 14 models from 1 roots",
+    "supportedCount": 6
+  },
+  "proofName": "settings-model-library-scan-select-live-ui"
+}

@@ -1,0 +1,57 @@
+{
+  "app": {
+    "bundleID": "ai.jangq.ExploitBot",
+    "name": "ExploitBot",
+    "pathObservedByComputerUse": "/Users/eric/exploitbot/dist/ExploitBot.app/",
+    "pidObservedByComputerUse": 54768,
+    "windowTitle": "ExploitBot"
+  },
+  "buildEvidence": {
+    "command": "./script/build_and_run.sh --verify",
+    "buildCompleted": true,
+    "launchedFreshDistApp": true
+  },
+  "computerUseEvidence": {
+    "cuaAppVersion": 857,
+    "getAppStateReturnedAccessibilityTree": true,
+    "getAppStateReturnedInlineScreenshot": true,
+    "nonDestructiveProbeOnly": true,
+    "observedElements": [
+      "Tab Recon",
+      "Tab Web",
+      "Tab Network",
+      "Tab Creds",
+      "Tab Exploit",
+      "Tab Post",
+      "Tab Supply",
+      "Tab OSINT",
+      "Tab Report",
+      "Tab Stash",
+      "Settings",
+      "Terminal",
+      "Target domain or IP...",
+      "Activity verbosity: Verbose",
+      "Mode Autopilot",
+      "Mode Copilot",
+      "Mode Manual",
+      "Disable Reasoning",
+      "Show Engine Logs",
+      "Ask exploitbot anything...",
+      "00:34 INF scanModelLibrary 14 models from 1 roots"
+    ]
+  },
+  "finishedAt": "2026-07-05T00:34:00-0700",
+  "generatedAt": "2026-07-05T00:34:00-0700",
+  "ok": true,
+  "proofLevel": "live-build-run-verify-plus-mcp-computer-use-dist-app-accessibility-tree-inline-screenshot",
+  "proofType": "computer-use-dist-app-smoke",
+  "status": {
+    "buildAndRunVerify": "PASS",
+    "distAppAttach": "PASS",
+    "accessibilityTree": "PASS",
+    "inlineScreenshotEvidence": "PASS",
+    "mainWorkspaceVisible": "PASS",
+    "modelLibraryScanVisible": "PASS",
+    "noModelInferenceStarted": "PASS"
+  }
+}

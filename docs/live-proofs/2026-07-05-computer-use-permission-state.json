@@ -1,0 +1,40 @@
+{
+  "finishedAt": "2026-07-05T00:16:58-0700",
+  "generatedAt": "2026-07-05T00:16:58-0700",
+  "ok": true,
+  "proofLevel": "live-mcp-computer-use-list-apps-system-settings-get-state-accessibility-tree-inline-screenshot",
+  "proofType": "computer-use-current-permission-state",
+  "computerUseEvidence": {
+    "cuaAppVersion": 857,
+    "toolNamespaceExposed": true,
+    "listAppsReturnedRunningApps": true,
+    "getAppStateReturnedAccessibilityTree": true,
+    "getAppStateReturnedInlineScreenshot": true,
+    "nonDestructiveProbeOnly": true
+  },
+  "app": {
+    "bundleID": "com.apple.systempreferences",
+    "name": "System Settings",
+    "pathObservedByComputerUse": "/System/Applications/System Settings.app/",
+    "pidObservedByComputerUse": 89956,
+    "windowTitle": "Screen & System Audio Recording"
+  },
+  "observedPermissionToggles": {
+    "AnyDesk": "on",
+    "Codex": "on",
+    "Codex Computer Use": "on",
+    "DockDoor": "on",
+    "MLXShot": "on",
+    "OBS": "on",
+    "old": "on",
+    "Warp(v0.2026.07.01.09.21.stable_01)": "on"
+  },
+  "status": {
+    "computerUseNamespaceExposed": "PASS",
+    "listApps": "PASS",
+    "getAppState": "PASS",
+    "accessibilityTree": "PASS",
+    "inlineScreenshotEvidence": "PASS",
+    "codexComputerUseScreenRecordingToggle": "PASS"
+  }
+}

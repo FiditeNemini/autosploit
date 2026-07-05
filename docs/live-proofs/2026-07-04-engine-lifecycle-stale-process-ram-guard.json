@@ -1,0 +1,20 @@
+{
+  "assertions": {
+    "devLauncherHasStaleCleanup": true,
+    "dummyLaunchProcessKilled": true,
+    "engineManagerHasDeinitStop": true,
+    "engineManagerHasStartupCleanup": true,
+    "noModelLoad": true,
+    "ports8100To8110ClearAfterVerify": true
+  },
+  "capturedAt": "2026-07-04T01:20:00-07:00",
+  "commands": [
+    "PYTHONPATH=ExploitBotEngine ExploitBotEngine/.venv/bin/python3 -m pytest -q ExploitBotEngine/testsuite/test_engine_lifecycle_ram_guards.py ...",
+    "swift build --package-path ExploitBot",
+    "dummy launch.py argv + script/build_and_run.sh --verify + lsof 8100-8110"
+  ],
+  "fix": "script/build_and_run.sh now terminates stale repo launch.py engines before app relaunch. EngineManager now cleans stale repo launch.py engines during startup and calls stop() in deinit for graceful exits.",
+  "method": "Spawned a dummy Python sleeper whose argv contained this repo ExploitBotEngine/launch.py, ran script/build_and_run.sh --verify, confirmed launcher cleanup killed the dummy and no engine ports 8100-8110 remained listening. No model was loaded.",
+  "proofName": "engine-lifecycle-stale-process-ram-guard-no-model-load",
+  "rootCause": "Repeated dev relaunches killed only the Swift ExploitBot process. If the app was killed before EngineManager.stop() ran, Python model engines launched through ExploitBotEngine/launch.py could survive as orphaned processes, keep ports 8100+, and retain model RAM. Subsequent app launches selected the next free port and could load additional models."
+}

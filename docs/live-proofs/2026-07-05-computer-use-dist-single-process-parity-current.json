@@ -1,0 +1,149 @@
+{
+  "ok": true,
+  "proofType": "computer-use-dist-single-process-parity-current",
+  "generatedAt": "2026-07-05T14:25:00-0700",
+  "completionClaimAllowed": false,
+  "modelInferenceStarted": false,
+  "app": {
+    "path": "/Users/eric/exploitbot/dist/ExploitBot.app",
+    "pid": 91569,
+    "cuaAppVersion": 857,
+    "api": "http://127.0.0.1:9999",
+    "apiListenerPid": 91569,
+    "singleProcessParity": true
+  },
+  "computerUseEvidence": {
+    "status": "PASS",
+    "initialAttach": "get_app_state returned the ExploitBot accessibility tree and inline screenshot for /Users/eric/exploitbot/dist/ExploitBot.app pid 91569",
+    "clickedTabs": [
+      "web",
+      "supplyChain",
+      "stash"
+    ],
+    "clickedSettingsPages": [
+      "engine",
+      "model",
+      "cache"
+    ],
+    "visibleControls": {
+      "web": [
+        "Vulns",
+        "SQLi",
+        "XSS",
+        "Dirs",
+        "Params",
+        "SSL",
+        "JWT",
+        "Target URL",
+        "Scan"
+      ],
+      "supplyChain": [
+        "CVE Intel",
+        "Secrets",
+        "SBOM",
+        "Dependencies",
+        "Search CVEs",
+        "Import"
+      ],
+      "stash": [
+        "All",
+        "Creds",
+        "Hosts",
+        "Vulns",
+        "Code",
+        "Raw",
+        "Search stash",
+        "+ Add"
+      ],
+      "settingsModel": [
+        "Model path field",
+        "Browse",
+        "Scan root field",
+        "Add Folder",
+        "Scan",
+        "Use buttons",
+        "27B MTP entries",
+        "35B MTP entries"
+      ],
+      "settingsCache": [
+        "TurboQuant Q4 selected",
+        "Q4 visible but not selected",
+        "Full KV visible but not selected",
+        "Prefix Cache on",
+        "Prompt L2 Disk on",
+        "Paged Cache on",
+        "Block L2 Disk on"
+      ]
+    }
+  },
+  "apiEvidence": {
+    "status": "PASS",
+    "activeTab": "stash",
+    "engineRunning": false,
+    "model": "",
+    "engineConfig": {
+      "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "kvCacheQuantization": "turboquant-q4",
+      "kvCacheGroupSize": 64,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "pagedCache": true,
+      "blockL2Disk": true
+    },
+    "agents": {
+      "multiAgentEnabled": true,
+      "maxConcurrentAgents": 8,
+      "loopMaxIterations": 7,
+      "toolSchemaMaxTools": 12,
+      "includeUnavailableToolSchemas": false,
+      "forceFinalAnswerAfterToolResults": true
+    },
+    "feedRecentEvidence": [
+      "scanModelLibrary 14 models from 1 roots",
+      "manualTabSwitch recon -> web",
+      "manualTabSwitch web -> supplyChain",
+      "manualTabSwitch supplyChain -> stash",
+      "openSettings"
+    ]
+  },
+  "modelLibraryEvidence": {
+    "scanRoot": "/Users/eric/models/dealign.ai",
+    "visibleModelCount": 14,
+    "visibleSupportedCount": 6,
+    "selectedVisibleModel": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+    "visibleMTPModels": [
+      "Qwen3.6-27B-MXFP4-CRACK-MTP",
+      "Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+      "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+    ]
+  },
+  "processEvidence": {
+    "exploitBotRows": [
+      "91569 155568 0.0 /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+    ],
+    "apiListenerRows": [
+      "ExploitBo 91569 eric 25u TCP *:9999 (LISTEN)"
+    ],
+    "engineOrModelRows": [],
+    "ignoredRows": [
+      "One low-RSS remote ssh control process matched the broad vllm-mlx text pattern; it was not a local ExploitBot app, engine, or model process."
+    ]
+  },
+  "vmStatAtProbe": {
+    "pagesFree": 2280958,
+    "pagesActive": 278877,
+    "pagesInactive": 5229328,
+    "pagesSpeculative": 61031,
+    "pagesWiredDown": 282881,
+    "pagesOccupiedByCompressor": 168790,
+    "swapins": 344,
+    "swapouts": 1988
+  },
+  "limits": {
+    "notAFullModelLoad": true,
+    "notAReleaseDistributionProof": true,
+    "purpose": "Closes the previous split-surface proof gap by proving Computer Use and localhost API state against the same current-source dist app process."
+  },
+  "status": "PASS"
+}

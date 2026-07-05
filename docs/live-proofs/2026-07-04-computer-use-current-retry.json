@@ -1,0 +1,45 @@
+{
+  "app": {
+    "bundleID": "ai.jangq.ExploitBot",
+    "name": "ExploitBot",
+    "pathObservedByComputerUse": "/Users/eric/exploitbot/release/ExploitBot.app/",
+    "pidObservedByComputerUse": 25991,
+    "windowTitle": "ExploitBot"
+  },
+  "computerUseEvidence": {
+    "cuaAppVersion": 857,
+    "getAppStateReturnedAccessibilityTree": true,
+    "getAppStateReturnedInlineScreenshot": true,
+    "listAppsReturnedRunningApps": true,
+    "listAppsReturnedReleaseExploitBot": true,
+    "mainWorkspaceVisible": true,
+    "nonDestructiveProbeOnly": true,
+    "observedElements": [
+      "Tab Recon",
+      "Tab Web",
+      "Tab Network",
+      "Tab Creds",
+      "Tab Exploit",
+      "Settings",
+      "Target domain or IP...",
+      "Activity verbosity: Verbose",
+      "Mode Autopilot",
+      "Mode Copilot",
+      "Ask exploitbot anything..."
+    ],
+    "settingsButtonElementIndex": "17"
+  },
+  "finishedAt": "2026-07-04T23:18:49-0700",
+  "generatedAt": "2026-07-04T23:18:49-0700",
+  "ok": true,
+  "proofLevel": "live-mcp-computer-use-list-apps-get-state-accessibility-tree-inline-screenshot",
+  "proofType": "computer-use-current-retry",
+  "status": {
+    "accessibilityTree": "PASS",
+    "computerUseNamespaceExposed": "PASS",
+    "getAppState": "PASS",
+    "inlineScreenshotEvidence": "PASS",
+    "listApps": "PASS",
+    "releaseAppAttach": "PASS"
+  }
+}

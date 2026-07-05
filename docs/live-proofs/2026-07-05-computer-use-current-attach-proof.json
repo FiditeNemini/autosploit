@@ -1,0 +1,38 @@
+{
+  "app": "/Users/eric/exploitbot/dist/ExploitBot.app",
+  "bundleID": "ai.jangq.ExploitBot",
+  "cuaAppVersion": "857",
+  "generatedAt": "2026-07-05T02:34:27-0700",
+  "ok": true,
+  "pid": 88511,
+  "proofType": "computer-use-current-attach",
+  "status": "PASS",
+  "userRequest": "computer usage should be ok now",
+  "verification": {
+    "accessibilityTreeReturned": true,
+    "actionsPerformed": [
+      "get_app_state"
+    ],
+    "chatInputVisible": true,
+    "mainWorkspaceVisible": true,
+    "modelInferenceStarted": false,
+    "screenshotReturned": true,
+    "settingsControlVisible": true,
+    "terminalControlVisible": true,
+    "visibleActivityEvidence": [
+      "scanModelLibrary 14 models from 1 roots"
+    ],
+    "visibleTabs": [
+      "Recon",
+      "Web",
+      "Network",
+      "Creds",
+      "Exploit",
+      "Post",
+      "Supply",
+      "OSINT",
+      "Report",
+      "Stash"
+    ]
+  }
+}

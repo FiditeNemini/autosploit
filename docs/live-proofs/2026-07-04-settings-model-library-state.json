@@ -1,0 +1,187 @@
+{
+  "finishedAt": "2026-07-04T12:10:43-0700",
+  "method": "live app API, no model load, isolated test home",
+  "modelRoot": "/Users/eric/models/dealign.ai",
+  "models": {
+    "qwen27": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+    "qwen35": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+  },
+  "ok": true,
+  "proofType": "settings-model-library-state",
+  "scanState": {
+    "entryCount": 14,
+    "feedRecent": [
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "scanModelLibrary 14 models from 1 roots",
+        "tool": ""
+      },
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "open model folder picker",
+        "tool": ""
+      },
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "scanModelLibrary 14 models from 1 roots",
+        "tool": ""
+      },
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "scanModelLibrary 14 models from 1 roots",
+        "tool": ""
+      }
+    ],
+    "lastAction": "scan",
+    "qwen27Entry": {
+      "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+      "family": "Qwen",
+      "isMultimodal": true,
+      "isSupported": true,
+      "name": "Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+    },
+    "qwen35Entry": {
+      "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+      "family": "Qwen",
+      "isMultimodal": true,
+      "isSupported": true,
+      "name": "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+    },
+    "roots": [
+      "/Users/eric/models/dealign.ai"
+    ],
+    "summary": "scanModelLibrary 14 models from 1 roots",
+    "supportedCount": 6
+  },
+  "selected27": {
+    "engineConfig": {
+      "blockDiskCacheMaxGB": 10,
+      "blockL2Disk": true,
+      "cacheMemoryPercent": 0.3,
+      "diskCacheMaxGB": 10,
+      "kvCacheGroupSize": 64,
+      "kvCacheQuantization": "turboquant-q4",
+      "maxTokens": 4096,
+      "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "pagedCache": true,
+      "pagedCacheBlockSize": 64,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "reasoningParser": "auto",
+      "temperature": 0.3,
+      "toolCallParser": "auto",
+      "topP": 0.9,
+      "useModelGenerationDefaults": true
+    },
+    "modelFolderInfo": {
+      "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+      "family": "Qwen",
+      "hasConfig": true,
+      "hasGenerationConfig": true,
+      "hasJangConfig": true,
+      "hasJangtqConfig": false,
+      "hasTokenizerConfig": true,
+      "isMultimodal": true,
+      "isSupported": true,
+      "modelType": "qwen3_5",
+      "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+    },
+    "modelFolderPicker": {
+      "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+      "family": "Qwen",
+      "isSupported": true,
+      "isVisible": false,
+      "lastAction": "select",
+      "selectedPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "source": "settings",
+      "status": "done",
+      "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+    },
+    "modelLibrary": {
+      "entryCount": 14,
+      "lastAction": "select",
+      "selectedPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "summary": "scanModelLibrary 14 models from 1 roots",
+      "supportedCount": 6
+    }
+  },
+  "selected35": {
+    "engineConfig": {
+      "blockDiskCacheMaxGB": 10,
+      "blockL2Disk": true,
+      "cacheMemoryPercent": 0.3,
+      "diskCacheMaxGB": 10,
+      "kvCacheGroupSize": 64,
+      "kvCacheQuantization": "turboquant-q4",
+      "maxTokens": 4096,
+      "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "pagedCache": true,
+      "pagedCacheBlockSize": 64,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "reasoningParser": "auto",
+      "temperature": 0.3,
+      "toolCallParser": "auto",
+      "topP": 0.9,
+      "useModelGenerationDefaults": true
+    },
+    "modelFolderInfo": {
+      "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+      "family": "Qwen",
+      "hasConfig": true,
+      "hasGenerationConfig": true,
+      "hasJangConfig": true,
+      "hasJangtqConfig": false,
+      "hasTokenizerConfig": true,
+      "isMultimodal": true,
+      "isSupported": true,
+      "modelType": "qwen3_5_moe",
+      "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+    },
+    "modelFolderPicker": {
+      "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+      "family": "Qwen",
+      "isSupported": true,
+      "isVisible": false,
+      "lastAction": "select",
+      "selectedPath": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "source": "settings",
+      "status": "done",
+      "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+    },
+    "modelLibrary": {
+      "entryCount": 14,
+      "lastAction": "select",
+      "selectedPath": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "summary": "scanModelLibrary 14 models from 1 roots",
+      "supportedCount": 6
+    }
+  },
+  "startedAt": "2026-07-04T12:10:39-0700",
+  "status": {
+    "activityFeedScanVisible": "PASS",
+    "addRoot": "PASS",
+    "blockL2Disk": "PASS",
+    "generationDefaultsToggleVisibleInState": "PASS",
+    "noModelLoaded": "PASS",
+    "pagedCache": "PASS",
+    "prefixCache": "PASS",
+    "promptL2Disk": "PASS",
+    "q4KV": "PASS",
+    "qwen27Selectable": "PASS",
+    "qwen27Visible": "PASS",
+    "qwen35Selectable": "PASS",
+    "qwen35Visible": "PASS",
+    "scan": "PASS"
+  }
+}

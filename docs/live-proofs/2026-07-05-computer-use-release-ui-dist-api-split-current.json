@@ -1,0 +1,156 @@
+{
+  "ok": true,
+  "proofType": "computer-use-release-ui-dist-api-split-current",
+  "generatedAt": "2026-07-05T14:21:42-0700",
+  "completionClaimAllowed": false,
+  "modelInferenceStarted": false,
+  "computerUse": {
+    "status": "PASS",
+    "cuaAppVersion": 857,
+    "attachedApp": "/Users/eric/exploitbot/release/ExploitBot.app",
+    "attachedPid": 89471,
+    "evidence": [
+      "get_app_state returned the ExploitBot accessibility tree and inline screenshot",
+      "clicks changed every top-level tab from Recon through Stash",
+      "manualTabSwitch activity entries appeared for the clicked tab sequence",
+      "Settings opened from the same visible window"
+    ]
+  },
+  "apiSurface": {
+    "status": "PASS",
+    "appApi": "http://127.0.0.1:9999",
+    "listenerApp": "/Users/eric/exploitbot/dist/ExploitBot.app",
+    "listenerPid": 89341,
+    "stateActiveTabAtProbe": "recon",
+    "engineRunning": false,
+    "model": "",
+    "messageCount": 0,
+    "engineConfig": {
+      "kvCacheQuantization": "turboquant-q4",
+      "prefixCache": true,
+      "pagedCache": true,
+      "promptL2Disk": true,
+      "blockL2Disk": true
+    },
+    "agents": {
+      "multiAgentEnabled": true,
+      "maxConcurrentAgents": 8,
+      "loopMaxIterations": 7,
+      "toolSchemaMaxTools": 12,
+      "includeUnavailableToolSchemas": false,
+      "forceFinalAnswerAfterToolResults": true,
+      "highRiskToolCount": 24,
+      "externalHighRiskRequiresScopeOrAuthorization": true,
+      "explicitToolDeny": true
+    }
+  },
+  "tabsClicked": [
+    "web",
+    "network",
+    "creds",
+    "exploit",
+    "post",
+    "supplyChain",
+    "osint",
+    "report",
+    "stash"
+  ],
+  "tabControlEvidence": {
+    "web": ["Vulns", "SQLi", "XSS", "Dirs", "Params", "SSL", "JWT", "Target URL", "Scan"],
+    "network": ["Protocols", "SNMP", "Capture", "MITM", "Tunnels", "SMB", "WinRM", "LDAP", "RDP", "SSH", "MSSQL"],
+    "creds": ["Cracking", "Online Brute", "Secrets", "Vault", "Start Crack"],
+    "exploit": ["Metasploit", "Reverse Shells", "Custom", "C2 (Sliver)", "Search modules"],
+    "post": ["PrivEsc", "AD Attacks", "Lateral", "Run LinPEAS"],
+    "supplyChain": ["CVE Intel", "Secrets", "SBOM", "Dependencies", "Search CVEs", "Import"],
+    "osint": ["Username", "Email", "Metadata", "Screenshots", "Search"],
+    "report": ["Findings", "Preview", "Full Pentest Report", "Bug Bounty Submission", "Executive Brief", "Technical Writeup"],
+    "stash": ["All", "Creds", "Hosts", "Vulns", "Code", "Raw", "Search stash", "Add"]
+  },
+  "settingsEvidence": {
+    "opened": true,
+    "categoriesObserved": [
+      "Engine",
+      "Model",
+      "Runtime",
+      "Cache",
+      "Agents",
+      "CVE Database",
+      "Tools"
+    ],
+    "model": {
+      "selectedVisiblePath": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "scanRoot": "/Users/eric/models/dealign.ai",
+      "visibleModels": 14,
+      "visibleSupportedModels": 6,
+      "folderControls": ["Browse", "Add Folder", "Scan"],
+      "visibleMTPFamilies": [
+        "Qwen3.6-27B-MXFP4-CRACK-MTP",
+        "Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+        "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+      ]
+    },
+    "runtime": {
+      "useModelGenerationDefaultsToggle": "visible",
+      "temperature": "0.0",
+      "topP": "1.0",
+      "maxTokens": "64",
+      "reasoningToggle": "visible on",
+      "reasoningParsers": ["Auto", "Qwen3", "MiniMax", "DeepSeek", "Think"],
+      "toolParsers": ["Auto", "Qwen", "MiniMax", "Hermes", "DeepSeek"],
+      "maxIterations": "7"
+    },
+    "cache": {
+      "selectedKVMode": "TurboQuant Q4",
+      "nativeQ4VisibleButNotDefault": true,
+      "fullKVVisibleButNotDefault": true,
+      "kvGroupSize": "64",
+      "prefixCache": "on",
+      "promptL2Disk": "on",
+      "pagedCache": "on",
+      "blockL2Disk": "on",
+      "promptL2MaxGB": "10.0",
+      "blockL2MaxGB": "10.0"
+    },
+    "agents": {
+      "modePoliciesVisible": ["Autopilot", "Copilot", "Manual"],
+      "maxIterations": "7",
+      "toolSchemaBudget": "12",
+      "includeUnavailableToolSchemas": "off",
+      "forceFinalAfterTools": "on",
+      "multiAgentMode": "on",
+      "maxConcurrentAgents": "8",
+      "phaseRoutingVisible": true,
+      "authorizationGuardsVisible": true
+    },
+    "cveDatabase": {
+      "totalCVEsVisible": 1589,
+      "cisaKevVisible": 1577,
+      "lastSyncedVisible": "2026-07-05T07:22:43Z",
+      "controls": ["Current Threat Intel", "Quick Import", "Full NVD Sync", "Import Selected", "Search", "Add CVE"]
+    },
+    "tools": {
+      "installedVisible": 13,
+      "missingVisible": 29,
+      "installAllMissingDisabledUntilReview": true,
+      "installPlanMethods": ["go: 7", "homebrew: 13", "pip: 9"],
+      "installPlanCategories": ["credentials: 3", "exploit: 2", "network: 3", "osint: 4", "post: 1", "recon: 5", "supplychain: 3", "web: 8"]
+    }
+  },
+  "splitSurfaceNote": "Computer Use attached to the release app window while localhost:9999 was owned by the dist app. This is valid visible packaged-app UI evidence plus separate current-source API state evidence, but it is not a single-process CUA/API parity proof.",
+  "processRowsAtProbe": [
+    "89341 118672 0.0 /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot",
+    "89471 154768 0.0 /Users/eric/exploitbot/release/ExploitBot.app/Contents/MacOS/ExploitBot"
+  ],
+  "vmStatAtProbe": {
+    "pagesFree": 2314214,
+    "pagesActive": 269248,
+    "pagesInactive": 5212809,
+    "pagesSpeculative": 54367,
+    "pagesWiredDown": 282336,
+    "pagesOccupiedByCompressor": 168877,
+    "swapins": 344,
+    "swapouts": 1988
+  },
+  "status": "PASS_WITH_SPLIT_SURFACE_NOTE"
+}

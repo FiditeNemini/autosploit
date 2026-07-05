@@ -1,0 +1,137 @@
+{
+  "ok": true,
+  "proofType": "computer-use-agent-settings-loop-ui",
+  "proofLevel": "live-computer-use-ui-plus-app-state-no-model-load",
+  "generatedAt": "2026-07-05T01:51:06-0700",
+  "app": {
+    "pathObservedByComputerUse": "/Users/eric/exploitbot/dist/ExploitBot.app/",
+    "bundleID": "ai.jangq.ExploitBot",
+    "pidObservedByComputerUse": 73761
+  },
+  "buildEvidence": {
+    "command": "./script/build_and_run.sh --verify",
+    "exitCode": 0,
+    "buildCompleted": true
+  },
+  "computerUseEvidence": {
+    "cuaAppVersion": 857,
+    "getAppStateReturnedAccessibilityTree": true,
+    "getAppStateReturnedInlineScreenshot": true,
+    "settingsOpened": true,
+    "agentsCategoryOpened": true,
+    "observedControls": [
+      "Mode Policy",
+      "Agent Max Iterations",
+      "Agent Tool Schema Budget",
+      "Include Unavailable Tool Schemas",
+      "Force Final Answer After Tool Results",
+      "Multi Agent Mode",
+      "Max Concurrent Agents",
+      "PHASE ROUTING",
+      "AUTHORIZATION GUARDS"
+    ],
+    "observedRoutingText": {
+      "scan": "Recon + OSINT",
+      "detect": "Web + Network + Supply",
+      "breach": "Creds + Exploit"
+    },
+    "observedAuthorizationGuardText": {
+      "highRiskToolsPrefix": "arjun, bettercap, chisel, dalfox, feroxbuster, ffuf, hashcat, hydra ...",
+      "externalTargets": "Requires scope or prompt authorization before high-risk Autopilot execution"
+    }
+  },
+  "uiActions": {
+    "before": {
+      "maxIterations": 50,
+      "toolSchemaMaxTools": 12,
+      "includeUnavailableToolSchemas": false,
+      "forceFinalAnswerAfterToolResults": true,
+      "multiAgentEnabled": false,
+      "maxConcurrentAgents": 5
+    },
+    "appliedViaComputerUse": {
+      "maxIterations": 7,
+      "toolSchemaMaxTools": 32,
+      "includeUnavailableToolSchemas": true,
+      "forceFinalAnswerAfterToolResults": false,
+      "multiAgentEnabled": true,
+      "maxConcurrentAgents": 3
+    },
+    "restoredViaQaApi": {
+      "maxIterations": 50,
+      "toolSchemaMaxTools": 12,
+      "includeUnavailableToolSchemas": false,
+      "forceFinalAnswerAfterToolResults": true,
+      "multiAgentEnabled": false,
+      "maxConcurrentAgents": 5
+    }
+  },
+  "stateEvidenceAfterApply": {
+    "chat": {
+      "maxIterations": 7,
+      "toolSchemaMaxTools": 32,
+      "includeUnavailableToolSchemas": true,
+      "forceFinalAnswerAfterToolResults": false
+    },
+    "agents": {
+      "multiAgentEnabled": true,
+      "maxConcurrentAgents": 3,
+      "loopMaxIterations": 7,
+      "toolSchemaMaxTools": 32,
+      "includeUnavailableToolSchemas": true,
+      "forceFinalAnswerAfterToolResults": false,
+      "phaseRouting": {
+        "scan": [
+          "Recon Agent",
+          "OSINT Agent"
+        ],
+        "detect": [
+          "Web Vuln Agent",
+          "Network Agent",
+          "Supply Chain Agent"
+        ],
+        "breach": [
+          "Credential Agent",
+          "Exploit Agent"
+        ]
+      },
+      "authorizationGuards": {
+        "explicitToolDeny": true,
+        "externalHighRiskRequiresScopeOrAuthorization": true,
+        "highRiskToolCount": 24
+      }
+    },
+    "engineRunning": false,
+    "model": ""
+  },
+  "stateEvidenceAfterRestore": {
+    "chat": {
+      "maxIterations": 50,
+      "toolSchemaMaxTools": 12,
+      "includeUnavailableToolSchemas": false,
+      "forceFinalAnswerAfterToolResults": true
+    },
+    "agents": {
+      "multiAgentEnabled": false,
+      "maxConcurrentAgents": 5,
+      "loopMaxIterations": 50,
+      "toolSchemaMaxTools": 12,
+      "includeUnavailableToolSchemas": false,
+      "forceFinalAnswerAfterToolResults": true
+    },
+    "engineRunning": false,
+    "model": ""
+  },
+  "status": {
+    "buildAndRunVerify": "PASS",
+    "computerUseDistAppAttach": "PASS",
+    "agentsPanelVisible": "PASS",
+    "modePolicyVisible": "PASS",
+    "loopControlsVisible": "PASS",
+    "phaseRoutingVisible": "PASS",
+    "authorizationGuardsVisible": "PASS",
+    "applyAppSettingsMirrorsToState": "PASS",
+    "settingsRestoredAfterProof": "PASS",
+    "modelInferenceNotStarted": "PASS"
+  }
+}

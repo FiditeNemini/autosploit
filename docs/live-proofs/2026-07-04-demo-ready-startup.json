@@ -1,0 +1,72 @@
+{
+  "before": {
+    "engineRunning": false,
+    "showOnboarding": true
+  },
+  "finishedAt": "2026-07-04T19:09:47-0700",
+  "firstLaunch": {
+    "activeOpName": "Demo Ready Qwen 27B",
+    "engineConfig": {
+      "blockDiskCacheMaxGB": 10,
+      "blockL2Disk": true,
+      "cacheMemoryPercent": 0.3,
+      "diskCacheMaxGB": 10,
+      "kvCacheGroupSize": 64,
+      "kvCacheQuantization": "turboquant-q4",
+      "maxTokens": 4096,
+      "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "pagedCache": true,
+      "pagedCacheBlockSize": 64,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "reasoningParser": "auto",
+      "temperature": 0.3,
+      "toolCallParser": "auto",
+      "topP": 0.9,
+      "useModelGenerationDefaults": true
+    },
+    "engineRunning": false,
+    "showOnboarding": false
+  },
+  "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+  "ok": true,
+  "proofLevel": "live-debug-app-isolated-data-dir-onboard-relaunch-no-model-load",
+  "proofType": "demo-ready-startup",
+  "relaunch": {
+    "activeOpName": "Demo Ready Qwen 27B",
+    "engineConfig": {
+      "blockDiskCacheMaxGB": 10,
+      "blockL2Disk": true,
+      "cacheMemoryPercent": 0.3,
+      "diskCacheMaxGB": 10,
+      "kvCacheGroupSize": 64,
+      "kvCacheQuantization": "turboquant-q4",
+      "maxTokens": 4096,
+      "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "pagedCache": true,
+      "pagedCacheBlockSize": 64,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "reasoningParser": "auto",
+      "temperature": 0.3,
+      "toolCallParser": "auto",
+      "topP": 0.9,
+      "useModelGenerationDefaults": true
+    },
+    "engineRunning": false,
+    "showOnboarding": false
+  },
+  "startedAt": "2026-07-04T19:09:42-0700",
+  "status": {
+    "blockL2Disk": "PASS",
+    "demoOpPersisted": "PASS",
+    "firstLaunchOnboardingDismissed": "PASS",
+    "modelPathPersisted": "PASS",
+    "noModelLoaded": "PASS",
+    "pagedCache": "PASS",
+    "prefixCache": "PASS",
+    "promptL2Disk": "PASS",
+    "q4KV": "PASS",
+    "relaunchOnboardingDismissed": "PASS"
+  }
+}

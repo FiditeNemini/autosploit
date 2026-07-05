@@ -1,0 +1,114 @@
+{
+  "computerUseEvidence": {
+    "bundleID": "ai.jangq.ExploitBot",
+    "cuaAppVersion": 857,
+    "observedControls": [
+      "Settings Tools",
+      "TOOL INSTALLER",
+      "Install All Missing",
+      "INSTALL PLAN",
+      "Missing by method",
+      "Missing by category",
+      "Commands queued",
+      "Review commands before installing all missing tools.",
+      "Install plan reviewed"
+    ],
+    "observedGateStates": [
+      {
+        "checkboxValue": 0,
+        "installAllButton": "disabled"
+      },
+      {
+        "checkboxValue": 1,
+        "installAllButton": "enabled"
+      },
+      {
+        "checkboxValue": 0,
+        "installAllButton": "disabled-restored"
+      }
+    ],
+    "observedPlanText": "go: 7, homebrew: 13, pip: 9; credentials: 3, exploit: 2, network: 3, osint: 4, post: 1, recon: 5, supplychain: 3, web: 8; Commands queued 29",
+    "pid": 33066
+  },
+  "generatedAt": "2026-07-05T12:30:33-07:00",
+  "liveStateEvidence": {
+    "firstInstallCommands": [
+      "go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest",
+      "go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest",
+      "brew install masscan",
+      "go install -v github.com/projectdiscovery/katana/cmd/katana@latest",
+      "pip3 install theHarvester"
+    ],
+    "installPlan": {
+      "commandCount": 29,
+      "missingByCategory": {
+        "credentials": 3,
+        "exploit": 2,
+        "network": 3,
+        "osint": 4,
+        "post": 1,
+        "recon": 5,
+        "supplychain": 3,
+        "web": 8
+      },
+      "missingByInstallMethod": {
+        "go": 7,
+        "homebrew": 13,
+        "pip": 9
+      },
+      "missingCount": 29,
+      "requiresNetworkInstall": true
+    },
+    "installedCount": 13,
+    "missingByCategory": {
+      "credentials": 3,
+      "exploit": 2,
+      "network": 3,
+      "osint": 4,
+      "post": 1,
+      "recon": 5,
+      "supplychain": 3,
+      "web": 8
+    },
+    "missingByInstallMethod": {
+      "go": 7,
+      "homebrew": 13,
+      "pip": 9
+    },
+    "missingCount": 29,
+    "requiresNetworkInstall": true
+  },
+  "memoryEvidence": [
+    "Pages free:                             5384695.",
+    "Pages active:                            990178.",
+    "Pages inactive:                         1171550.",
+    "Pages wired down:                        281670.",
+    "Pageouts:                                 91568.",
+    "Swapins:                                    256.",
+    "Swapouts:                                  1988."
+  ],
+  "ok": true,
+  "processEvidence": [
+    "33066 164848 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot",
+    "51195   2720 /bin/zsh         /bin/zsh -c source /Users/eric/.claude/shell-snapshots/snapshot-zsh-1783186643179-bjjrnr.sh 2>/dev/null || true && export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012: && setopt NO_EXTENDED_GLOB NO_BARE_GLOB_QUAL 2>/dev/null || true && eval 'cd /Users/eric/mlx/vllm-mlx && base=$(git rev-parse HEAD); while true; do head=$(git rev-parse HEAD 2>/dev/null || echo \"$base\"); mod=$(git diff --name-only vmlx_engine/memory_cache.py vmlx_engine/server.py 2>/dev/null); if [ \"$head\" != \"$base\" ] || [ -z \"$mod\" ]; then echo \"SIGNAL commit/revert detected: HEAD=$head (base=$base) fix_files_still_modified=[$mod] :: $(git log -1 --format=%s | cut -c1-70)\"; break; fi; sleep 60; done' < /dev/null && pwd -P >| /tmp/claude-7741-cwd",
+    "79312   2304 /bin/zsh         /bin/zsh -c source /Users/eric/.claude/shell-snapshots/snapshot-zsh-1783186643179-bjjrnr.sh 2>/dev/null || true && export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012export CODEX_COMPANION_SESSION_ID='506b31c5-b24d-4dcc-b60b-9dc684adc40b'\\012export CLAUDE_PLUGIN_DATA='/Users/eric/.claude/plugins/data/codex-openai-codex'\\012: && setopt NO_EXTENDED_GLOB NO_BARE_GLOB_QUAL 2>/dev/null || true && eval 'until [ -s /private/tmp/claude-501/-Users-eric-vmlx/4d34f8a6-4d54-4a9c-b498-0868485ea372/tasks/bx9qr6gjh.output ] && grep -q DONE /private/tmp/claude-501/-Users-eric-vmlx/4d34f8a6-4d54-4a9c-b498-0868485ea372/tasks/bx9qr6gjh.output 2>/dev/null; do sleep 5; done\\012cat /private/tmp/claude-501/-Users-eric-vmlx/4d34f8a6-4d54-4a9c-b498-0868485ea372/tasks/bx9qr6gjh.output' < /dev/null && pwd -P >| /tmp/claude-dd36-cwd"
+  ],
+  "proofType": "tool-settings-install-plan-live",
+  "sourceEvidence": {
+    "contract": "installPlanSnapshot plus visible INSTALL PLAN section and Install plan reviewed gate before install-all actions",
+    "files": [
+      "ExploitBot/Sources/ExploitBot/Services/ToolInstaller.swift",
+      "ExploitBot/Sources/ExploitBot/Models/AppState.swift",
+      "ExploitBot/Sources/ExploitBot/Views/Settings/ToolSettingsView.swift",
+      "ExploitBotEngine/testsuite/test_tool_settings_real_inventory_contracts.py"
+    ]
+  },
+  "status": {
+    "computerUseInstallPlanReviewGate": "PASS",
+    "computerUseVisibleInstallPlan": "PASS",
+    "currentSourceBuild": "PASS",
+    "installAllExecuted": "NOT_RUN_INTENTIONAL_HIGH_SIDE_EFFECT",
+    "modelInferenceStarted": "NO",
+    "stateInstallPlanSurface": "PASS"
+  }
+}

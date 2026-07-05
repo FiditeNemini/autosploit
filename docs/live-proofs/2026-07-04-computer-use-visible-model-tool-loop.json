@@ -1,0 +1,200 @@
+{
+  "app": {
+    "bundleID": "ai.jangq.ExploitBot",
+    "path": "/Users/eric/exploitbot/release/ExploitBot.app/",
+    "pid": 95349
+  },
+  "appEvidence": {
+    "activityShowsLookupCve": true,
+    "contextSelectedToolOutput": true,
+    "visibleComputerUseScreenshot": true,
+    "visibleFinalMarker": true,
+    "visibleSupplyTab": true,
+    "visibleTargetCVE": true,
+    "visibleToolCard": true
+  },
+  "cacheEvidence": {
+    "cacheAfterKVQuantization": {
+      "bits": 4,
+      "enabled": true,
+      "group_size": 64
+    },
+    "effectiveKVQuantization": {
+      "enabled": true,
+      "group_size": 64,
+      "mode": "turboquant-q4"
+    },
+    "nativeAttentionKVStorageQuantization": {
+      "applies_to": "attention_kv_layers_only",
+      "bits": 4,
+      "enabled": true,
+      "group_size": 64,
+      "mode": "storage_boundary",
+      "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+      "ssm_policy": "native_companion_state"
+    },
+    "schedulerCache": {
+      "active_requests": 0,
+      "allocated_blocks": 97,
+      "block_size": 64,
+      "cache_hit_rate": 0.16666666666666666,
+      "cache_hits": 20,
+      "cache_misses": 100,
+      "cow_copies": 0,
+      "disk_hits": 0,
+      "disk_misses": 4,
+      "entries_by_type": {
+        "assistant": 2,
+        "system": 0,
+        "user": 0
+      },
+      "evictions": 0,
+      "free_blocks": 903,
+      "hit_rate": 0.5,
+      "hits": 1,
+      "max_blocks": 1000,
+      "misses": 1,
+      "pixel_cache_hits": 0,
+      "pixel_cache_misses": 0,
+      "pixel_cache_size": 0,
+      "pixel_hit_rate": 0.0,
+      "shared_blocks": 10,
+      "tokens_saved": 640,
+      "total_images_processed": 0,
+      "total_time_saved": 0.0,
+      "total_tokens_cached": 6061,
+      "utilization": 0.097
+    }
+  },
+  "computerUseEvidence": {
+    "clickSend": true,
+    "finalStateInlineScreenshotReturned": true,
+    "getAppStateAfterFinal": true,
+    "getAppStateBeforePrompt": true,
+    "setChatInputValue": true,
+    "visibleFinalMarker": true,
+    "visiblePrompt": true,
+    "visibleToolCard": true
+  },
+  "engine": {
+    "healthStatus": "healthy",
+    "modelName": "dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+    "port": 8100,
+    "runtime": "release bundled Python"
+  },
+  "finishedAt": "2026-07-04T21:39:34-0700",
+  "generatedAt": "2026-07-04T21:39:34-0700",
+  "messages": [
+    {
+      "content": "Authorized visible Computer Use proof. Reasoning is off. Use the lookup_cve tool exactly once for CVE-2025-49704. After the tool result, answer with exact marker COMPUTER_USE_VISIBLE_TOOL_FINAL, the CVE ID, and one sentence summarizing impact.",
+      "role": "user"
+    },
+    {
+      "content": "",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 0 of 0 indexed items for phase SCAN, tab recon.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets: none yet.\nCVE assist: semantic embedding search is enabled when cve_embedder.py and stored CVE embeddings are available; otherwise",
+      "contextSnippetCount": 0,
+      "role": "assistant",
+      "toolSchemaCount": 32,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "run_shell",
+        "theharvester",
+        "nmap",
+        "dnsx",
+        "httpx",
+        "masscan",
+        "subfinder",
+        "nuclei",
+        "gowitness",
+        "hashcat",
+        "wpscan",
+        "sqlmap",
+        "jwt_tool",
+        "grype",
+        "osv_scanner",
+        "sherlock",
+        "syft",
+        "linpeas",
+        "exiftool",
+        "feroxbuster",
+        "pwncat",
+        "katana",
+        "dalfox",
+        "hydra",
+        "ffuf",
+        "graphqlmap",
+        "netexec",
+        "snmpwalk",
+        "tshark"
+      ]
+    },
+    {
+      "content": "Tool request: lookup_cve\n$ echo handled by callback\nArguments:\n{\n  \"cve_id\" : \"CVE-2025-49704\"\n}\n\nCVE-2025-49704 [HIGH] CVSS:8.8 (CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H) | microsoft sharepoint_server\n  Tags: kev\n  Sources: cisa-kev, nvd, references, tags\n  Exploit: no | CISA KEV: YES\n  Affected: microsoft sharepoint_server from 2016\n  Description: Improper control of generation of code ('code injection') in Microsoft Office SharePoint allows an authorized attacker to execute code over a network.\n  Reference: https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-49704\n  Reference: https://www.cisa.gov/known-exploited-vulnerabilities-catalog?field_cve=CVE-2025-49704\n  Reference: https://www.microsoft.com/en-us/security/blog/2025/07/22/disrupting-active-exploitation-of-on-premises-sharepoint-vulnerabilities/\n",
+      "role": "toolCall",
+      "status": "ok 0.1s",
+      "tool": "lookup_cve"
+    },
+    {
+      "content": "COMPUTER_USE_VISIBLE_TOOL_FINAL\n**CVE-2025-49704**\nA High-severity (CVSS 8.8) Known Exploited Vulnerability (KEV) in Microsoft SharePoint Server (2016+) allowing an authenticated attacker to execute arbitrary code via a code injection flaw.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 1 of 1 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] lookup_cve tags=tool,lookup_cve: CVE-2025-49704 [HIGH] CVSS:8.8 (CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:",
+      "contextSelections": [
+        {
+          "bodyHash": "18ee255b395450e0",
+          "source": "tool.output",
+          "tags": "tool,lookup_cve",
+          "title": "lookup_cve"
+        }
+      ],
+      "contextSnippetCount": 1,
+      "role": "assistant"
+    }
+  ],
+  "metrics": {
+    "cachedTokens": 0,
+    "completionTokens": 70,
+    "promptTokens": 1451,
+    "tokPerSec": 4.14542605129403,
+    "ttft": 11.538834929466248
+  },
+  "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+  "ok": true,
+  "postCleanup": {
+    "matchingExploitBotProcesses": [],
+    "matchingModelEngineProcesses": [],
+    "memoryPressure": {
+      "swapouts": 0,
+      "systemWideMemoryFreePercentage": 94
+    }
+  },
+  "prompt": "Authorized visible Computer Use proof. Reasoning is off. Use the lookup_cve tool exactly once for CVE-2025-49704. After the tool result, answer with exact marker COMPUTER_USE_VISIBLE_TOOL_FINAL, the CVE ID, and one sentence summarizing impact.",
+  "proofLevel": "live-computer-use-prompt-send-visible-tool-card-final-marker-plus-api-cache-proof",
+  "proofType": "computer-use-visible-real-model-tool-loop",
+  "startedAt": "2026-07-04T21:34:53-0700",
+  "status": {
+    "computerUsePromptEntered": "PASS",
+    "computerUseSendClicked": "PASS",
+    "lookupCVECallbackDetail": "PASS",
+    "pagedCache": "PASS",
+    "prefixCache": "PASS",
+    "processCleanup": "PASS",
+    "q4TurboQuantKV": "PASS",
+    "realModelLoaded": "PASS",
+    "ssmCompanionNotQuantized": "PASS",
+    "verboseToolTranscript": "PASS",
+    "visibleFinalMarker": "PASS",
+    "visibleToolCard": "PASS"
+  },
+  "toolLoop": {
+    "finalAnswer": "COMPUTER_USE_VISIBLE_TOOL_FINAL\n**CVE-2025-49704**\nA High-severity (CVSS 8.8) Known Exploited Vulnerability (KEV) in Microsoft SharePoint Server (2016+) allowing an authenticated attacker to execute arbitrary code via a code injection flaw.",
+    "finalMarker": "COMPUTER_USE_VISIBLE_TOOL_FINAL",
+    "messageCount": 4,
+    "targetCVE": "CVE-2025-49704",
+    "toolSequence": [
+      "lookup_cve"
+    ],
+    "toolTranscriptContainsArguments": false
+  },
+  "visibleText": "Computer Use final app state showed: Supply tab selected; tool card \"lookup_cve ok 0.1s\"; Tool request: lookup_cve; Arguments include \"cve_id\" : \"CVE-2025-49704\"; final assistant text \"COMPUTER_USE_VISIBLE_TOOL_FINAL\" and \"CVE-2025-49704\"; TTFT 11.54s, 1,451 prompt tokens, 70 completion tokens; cache preserved prefix/l2/tq."
+}

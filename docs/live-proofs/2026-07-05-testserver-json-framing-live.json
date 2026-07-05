@@ -1,0 +1,167 @@
+{
+  "app": "dist/ExploitBot.app",
+  "engineProcessRows": [],
+  "finalMessages": [
+    {
+      "content": "Show long tool output and keep it inspectable.",
+      "role": "user",
+      "status": null,
+      "tool": null
+    },
+    {
+      "content": "line 1: long tool output evidence\nline 2: long tool output evidence\nline 3: long tool output evidence\nline 4: long tool output evidence\nline 5: long tool output evidence\nline 6: long tool output evidence\nline 7: long tool output evidence\nline 8: long tool output evidence\nline 9: long tool output evidence\nline 10: long tool output evidence\nline 11: long tool output evidence\nline 12: long tool output evidence",
+      "role": "toolCall",
+      "status": "ok 2.4s",
+      "tool": "long_tool"
+    }
+  ],
+  "finalState": {
+    "cacheHeaders": {
+      "/messages": {
+        "Cache-Control": "no-store",
+        "Connection": "close",
+        "Content-Length": "568",
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      "/state": {
+        "Cache-Control": "no-store",
+        "Connection": "close",
+        "Content-Length": "25165",
+        "Content-Type": "application/json; charset=utf-8"
+      }
+    },
+    "engineRunning": false,
+    "healthStatus": "stopped",
+    "isStreaming": false,
+    "isWorking": true,
+    "msgs": 2
+  },
+  "generatedAt": "2026-07-05T03:37:21-0700",
+  "notes": [
+    "This proof uses rebuilt current-source dist/ExploitBot.app and no model load.",
+    "It validates the QA localhost HTTP framing layer that serves /state and /messages while chat state contains multi-line tool output."
+  ],
+  "ok": true,
+  "polls": {
+    "invalid": [],
+    "invalidCount": 0,
+    "iterations": 120,
+    "maxMessagesBytes": 568,
+    "maxStateBytes": 25165,
+    "sample": [
+      {
+        "bytes": 25165,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "25165",
+        "contentLengthMatchesBytes": true,
+        "contentType": "application/json; charset=utf-8",
+        "i": 0,
+        "parsed": true,
+        "path": "/state",
+        "topLevelType": "dict"
+      },
+      {
+        "bytes": 568,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "568",
+        "contentLengthMatchesBytes": true,
+        "contentType": "application/json; charset=utf-8",
+        "i": 0,
+        "parsed": true,
+        "path": "/messages",
+        "topLevelType": "list"
+      },
+      {
+        "bytes": 25165,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "25165",
+        "contentLengthMatchesBytes": true,
+        "contentType": "application/json; charset=utf-8",
+        "i": 1,
+        "parsed": true,
+        "path": "/state",
+        "topLevelType": "dict"
+      },
+      {
+        "bytes": 568,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "568",
+        "contentLengthMatchesBytes": true,
+        "contentType": "application/json; charset=utf-8",
+        "i": 1,
+        "parsed": true,
+        "path": "/messages",
+        "topLevelType": "list"
+      },
+      {
+        "bytes": 25165,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "25165",
+        "contentLengthMatchesBytes": true,
+        "contentType": "application/json; charset=utf-8",
+        "i": 118,
+        "parsed": true,
+        "path": "/state",
+        "topLevelType": "dict"
+      },
+      {
+        "bytes": 568,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "568",
+        "contentLengthMatchesBytes": true,
+        "contentType": "application/json; charset=utf-8",
+        "i": 118,
+        "parsed": true,
+        "path": "/messages",
+        "topLevelType": "list"
+      },
+      {
+        "bytes": 25165,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "25165",
+        "contentLengthMatchesBytes": true,
+        "contentType": "application/json; charset=utf-8",
+        "i": 119,
+        "parsed": true,
+        "path": "/state",
+        "topLevelType": "dict"
+      },
+      {
+        "bytes": 568,
+        "cacheControl": "no-store",
+        "contentLengthHeader": "568",
+        "contentLengthMatchesBytes": true,
+        "contentType": "application/json; charset=utf-8",
+        "i": 119,
+        "parsed": true,
+        "path": "/messages",
+        "topLevelType": "list"
+      }
+    ],
+    "totalResponses": 240
+  },
+  "processRows": [
+    "14588 Ss+  159184 /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+  ],
+  "proofLevel": "rebuilt-dist-app-live-qa-server-state-messages-json-poll",
+  "proofType": "testserver-json-framing-live",
+  "sourceTraceEvidence": {
+    "regressionTest": "ExploitBotEngine/testsuite/test_testserver_http_framing_contracts.py",
+    "testServerFraming": "ExploitBot/Sources/ExploitBot/Models/AppState.swift TestServer.handle uses responseBody.count Content-Length, Cache-Control: no-store, contentContext .defaultMessage, isComplete true"
+  },
+  "status": {
+    "allMessagesResponsesParsed": "PASS",
+    "allStateResponsesParsed": "PASS",
+    "cacheControlNoStore": "PASS",
+    "contentLengthHeader": "PASS",
+    "contentLengthMatchesBytes": "PASS",
+    "noModelProcessSpawned": "PASS"
+  },
+  "vmStat": [
+    "Pages free:                             1194356.",
+    "Pages inactive:                         5805214.",
+    "Pageouts:                                 25640.",
+    "Swapins:                                      8.",
+    "Swapouts:                                   204."
+  ]
+}

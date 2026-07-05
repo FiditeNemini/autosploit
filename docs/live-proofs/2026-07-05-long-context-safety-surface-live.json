@@ -1,0 +1,88 @@
+{
+  "generatedAt": "2026-07-05T04:00:50-0700",
+  "ok": true,
+  "proofType": "long-context-safety-surface-live",
+  "proofLevel": "current-source-state-and-computer-use-settings-context",
+  "app": {
+    "path": "dist/ExploitBot.app",
+    "bundleID": "ai.jangq.ExploitBot",
+    "cuaAppVersion": "857",
+    "pids": [
+      27959,
+      28166
+    ]
+  },
+  "computerUse": {
+    "attached": true,
+    "settingsOpened": true,
+    "contextSettingsOpened": true,
+    "visibleTextEvidence": [
+      "LONG-CONTEXT SAFETY",
+      "Proven Safe Ceiling 192k tokens",
+      "Declared Model Context 262144 tokens",
+      "Unproven Targets Refuse before model load",
+      "200k, 224k, and 258k attempts are guarded failures on this machine.",
+      "EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET"
+    ]
+  },
+  "stateEndpoint": {
+    "url": "http://127.0.0.1:9999/state",
+    "contextWindow": {
+      "declaredMaxContextTokens": 262144,
+      "provenSafeTargetCeiling": 192000,
+      "unprovenTargetPolicy": "refuse-before-model-load",
+      "highRiskOverrideEnv": "EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET",
+      "lastFailedTargets": [
+        200000,
+        224000,
+        258000
+      ],
+      "cacheResponsesMethod": "prefix-cache-l2-turboquant",
+      "cacheResponsesInferenceMethod": "prefix-cache-l2-turboquant",
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "pagedCache": true,
+      "blockL2Disk": true,
+      "turboQuantKV": true,
+      "modelGenerationDefaults": true,
+      "engineSessionPreserved": false
+    },
+    "settingsContextPageSections": [
+      "dynamic catalogue",
+      "retrieval sources",
+      "CVE assist mode",
+      "long-context safety"
+    ],
+    "engineRunning": false,
+    "enginePort": 0,
+    "modelLibrary": {
+      "entryCount": 14,
+      "supportedCount": 6,
+      "selectedPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP"
+    }
+  },
+  "processCheck": {
+    "appRows": [
+      "27959 R 142032 /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot",
+      "28166 S 107456 /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+    ],
+    "modelProcessSpawned": false,
+    "engineProcessSpawned": false
+  },
+  "vmStat": {
+    "swapouts": 204,
+    "swapins": 8,
+    "pageouts": 26445
+  },
+  "status": {
+    "stateSurface": "PASS",
+    "computerUseVisibleSettings": "PASS",
+    "modelProcessSpawned": "PASS",
+    "ramSwapoutsUnchanged": "PASS"
+  },
+  "notes": [
+    "This proof does not claim near-max context completion.",
+    "It proves the app now exposes the current 192k proven safe ceiling and refusal policy to users before they attempt unproven 200k+ targets.",
+    "No model engine was started for this proof."
+  ]
+}
