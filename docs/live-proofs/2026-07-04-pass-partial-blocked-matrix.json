@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-05T16:47:29-0700",
+  "generatedAt": "2026-07-05T16:55:34-0700",
   "ok": true,
   "proofType": "pass-partial-blocked-matrix",
   "rowCount": 26,
@@ -8,7 +8,8 @@
       "area": "27B Qwen3.6 MXFP8 MTP engine load/cache",
       "evidence": [
         "docs/live-proofs/2026-07-04-qwen36-27b-mxfp8-mtp-live-batch.json",
-        "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-current.json"
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-current.json",
+        "docs/live-proofs/2026-07-05-release-app-qwen-cross-restart-cache-27b-current.json"
       ],
       "notes": "Live engine proof reports q4 KV, prefix cache, paged cache, block L2 cache, hybrid SSM cache, and request processing. Current 2026-07-05 14:11 release-app proof adds PASS memory preflight, app-bundled runtime, TurboQuant q4, native D3 MTP active, repeat-prompt cache reuse, productionStopProcessRows=[], cleanupTerminatedProcessRows=[], and postCleanupProcessRows=[].",
       "status": "PASS"
@@ -18,7 +19,8 @@
       "evidence": [
         "docs/live-proofs/2026-07-04-qwen36-35b-a3b-mxfp8-mtp-live-batch.json",
         "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-current.json",
-        "docs/live-proofs/2026-07-05-release-app-computer-use-35b-visible-tool-loop.json"
+        "docs/live-proofs/2026-07-05-release-app-computer-use-35b-visible-tool-loop.json",
+        "docs/live-proofs/2026-07-05-release-app-qwen-cross-restart-cache-35b-current.json"
       ],
       "notes": "Live engine proof reports the same cache topology plus native MTP path. Current 2026-07-05 14:12 release-app proof adds PASS memory preflight, app-bundled runtime, TurboQuant q4, native D3 MTP active, repeat-prompt cache reuse, productionStopProcessRows=[], cleanupTerminatedProcessRows=[], and postCleanupProcessRows=[]. Patched release-app Computer Use proof adds visible 35B lookup_cve tool loop, q4 TurboQuant, prefix/paged/block-L2, native SSM companion/rederive, MTP effective depth 3, TTFT/tok-s metrics, and clean /engine/stop process cleanup.",
       "status": "PASS"
@@ -286,7 +288,9 @@
         "docs/live-proofs/2026-07-04-release-engine-stale-cleanup.json",
         "docs/live-proofs/2026-07-05-release-qwen-memory-preflight-current.json",
         "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-current.json",
-        "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-current.json"
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-current.json",
+        "docs/live-proofs/2026-07-05-release-app-qwen-cross-restart-cache-27b-current.json",
+        "docs/live-proofs/2026-07-05-release-app-qwen-cross-restart-cache-35b-current.json"
       ],
       "notes": "Proofs cover fail-before-launch memory preflight and stale engine cleanup in dev and packaged app paths. Current no-model release-Qwen memory preflight reports PASS for both 27B and 35B with heavyModelProcessCount=0 and safe-to-run next action; both bounded release-app live proofs then loaded real Qwen, proved productionStopProcessRows=[], cleanupTerminatedProcessRows=[], postCleanupProcessRows=[], and left no local ExploitBot/Qwen engine process rows after cleanup.",
       "status": "PASS"

@@ -26,7 +26,8 @@ EXPECTED_ROWS = [
 ]
 
 EXPECTED_ARTIFACTS = {
-    "docs/live-proofs/checkpoint-463-release-app-qwen-cross-restart-cache.json",
+    "docs/live-proofs/2026-07-05-release-app-qwen-cross-restart-cache-27b-current.json",
+    "docs/live-proofs/2026-07-05-release-app-qwen-cross-restart-cache-35b-current.json",
     "docs/live-proofs/checkpoint-112-qwen-hybrid-block-l2-ssm-restart-replay-live.json",
     "docs/live-proofs/2026-07-04-qwen36-27b-mxfp8-mtp-live-batch.json",
     "docs/live-proofs/checkpoint-110-minimax-restart-replay-live.json",
@@ -40,6 +41,11 @@ EXPECTED_CONTRACTS = {
     "qwenSchedulerTokensSaved",
     "qwenBlockL2DiskHit",
     "qwenSSMCompanionDiskHit",
+    "qwen35BReleaseCrossRestartOK",
+    "qwen35BSchedulerDiskHit",
+    "qwen35BSchedulerTokensSaved",
+    "qwen35BBlockL2DiskHit",
+    "qwen35BSSMCompanionDiskHit",
     "qwenBlockL2Store",
     "qwenBlockL2ReadHit",
     "qwenTurboQuantQ4",
@@ -104,6 +110,10 @@ def run() -> None:
             "qwenReleaseSchedulerTokensSaved": 1,
             "qwenReleaseBlockL2DiskHits": 1,
             "qwenReleaseSSMDiskHits": 1,
+            "qwen35BReleaseSchedulerDiskHits": 1,
+            "qwen35BReleaseSchedulerTokensSaved": 1,
+            "qwen35BReleaseBlockL2DiskHits": 1,
+            "qwen35BReleaseSSMDiskHits": 1,
             "blockL2ProofDiskWrites": 2,
             "blockL2ProofDiskHits": 2,
             "qwenHybridSSMReDeriveLastTokens": 1,

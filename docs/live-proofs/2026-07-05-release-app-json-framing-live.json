@@ -1,19 +1,19 @@
 {
   "app": {
-    "binarySha256": "f930010ca65b4e0680a474f1a6b5bc3f9096a4f82acbf543d33943c3efec46c0",
+    "binarySha256": "16821a81d9333eef49193ac0f60a9e3f8f806c7acb2a1cbad0c353f1bc355a51",
     "distributionStatus": "BLOCKED",
     "dmgPath": "release/ExploitBot-beta.dmg",
-    "dmgSha256": "95553fbf77ed7b31e1f65e0d6a9c5f25df482963f57354e83934b7bc33715c24",
+    "dmgSha256": "8f6399c6a352b25550aca3a192fea233df308bcd703d5a64a63795042ad72b2c",
     "localPackageStatus": "PASS",
     "path": "release/ExploitBot.app"
   },
   "appProcessRows": [
-    "46614 124560 /Users/eric/exploitbot/release/ExploitBot.app/Contents/MacOS/ExploitBot"
+    "85263 124736 /Users/eric/exploitbot/release/ExploitBot.app/Contents/MacOS/ExploitBot"
   ],
-  "appSha256": "f930010ca65b4e0680a474f1a6b5bc3f9096a4f82acbf543d33943c3efec46c0",
-  "dmgSha256": "95553fbf77ed7b31e1f65e0d6a9c5f25df482963f57354e83934b7bc33715c24",
+  "appSha256": "16821a81d9333eef49193ac0f60a9e3f8f806c7acb2a1cbad0c353f1bc355a51",
+  "dmgSha256": "8f6399c6a352b25550aca3a192fea233df308bcd703d5a64a63795042ad72b2c",
   "engineProcessRows": [],
-  "generatedAt": "2026-07-05T15:33:00-0700",
+  "generatedAt": "2026-07-05T16:50:59-0700",
   "ok": true,
   "polls": {
     "cacheControlBad": false,
@@ -32,27 +32,27 @@
     "contentLengthMismatch": false,
     "contentLengthMissing": false,
     "contentLengthSamples": [
-      25344,
+      25353,
       2,
-      25344,
+      25353,
       2,
-      25344,
+      25353,
       2,
-      25344,
+      25353,
       2,
-      25344,
+      25353,
       2
     ],
     "invalidCount": 0,
     "invalidSamples": [],
     "iterations": 240,
-    "maxStateBytes": 25344,
+    "maxStateBytes": 25353,
     "messagesResponsesParsed": 240,
     "sample": [
       {
-        "bytes": 25344,
+        "bytes": 25353,
         "cacheControl": "no-store",
-        "contentLengthHeader": "25344",
+        "contentLengthHeader": "25353",
         "contentLengthMatchesBytes": true,
         "i": 0,
         "parsed": true,
@@ -70,9 +70,9 @@
         "topLevelType": "list"
       },
       {
-        "bytes": 25344,
+        "bytes": 25353,
         "cacheControl": "no-store",
-        "contentLengthHeader": "25344",
+        "contentLengthHeader": "25353",
         "contentLengthMatchesBytes": true,
         "i": 1,
         "parsed": true,
@@ -90,9 +90,9 @@
         "topLevelType": "list"
       },
       {
-        "bytes": 25344,
+        "bytes": 25353,
         "cacheControl": "no-store",
-        "contentLengthHeader": "25344",
+        "contentLengthHeader": "25353",
         "contentLengthMatchesBytes": true,
         "i": 2,
         "parsed": true,
@@ -110,9 +110,9 @@
         "topLevelType": "list"
       },
       {
-        "bytes": 25344,
+        "bytes": 25353,
         "cacheControl": "no-store",
-        "contentLengthHeader": "25344",
+        "contentLengthHeader": "25353",
         "contentLengthMatchesBytes": true,
         "i": 238,
         "parsed": true,
@@ -130,9 +130,9 @@
         "topLevelType": "list"
       },
       {
-        "bytes": 25344,
+        "bytes": 25353,
         "cacheControl": "no-store",
-        "contentLengthHeader": "25344",
+        "contentLengthHeader": "25353",
         "contentLengthMatchesBytes": true,
         "i": 239,
         "parsed": true,
@@ -154,7 +154,7 @@
     "totalResponses": 480
   },
   "proofType": "release-app-json-framing-live",
-  "releaseReadinessGeneratedAt": "2026-07-05T15:29:20-0700",
+  "releaseReadinessGeneratedAt": "2026-07-05T16:33:59-0700",
   "status": {
     "allMessagesResponsesParsed": "PASS",
     "allStateResponsesParsed": "PASS",

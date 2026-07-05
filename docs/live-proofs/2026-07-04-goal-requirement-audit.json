@@ -6,7 +6,7 @@
   "currentPartialConditions": [
     "generation_reasoning_context"
   ],
-  "generatedAt": "2026-07-05T16:47:29-0700",
+  "generatedAt": "2026-07-05T16:55:34-0700",
   "matrixStatusCounts": {
     "BLOCKED": 1,
     "PARTIAL": 1,
@@ -65,6 +65,7 @@
         "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-current.json",
         "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-tool-loop-current.json",
         "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-tool-loop-current.json",
+        "docs/live-proofs/2026-07-05-release-app-qwen-cross-restart-cache-27b-current.json",
         "docs/live-validation-2026-07-04.md"
       ],
       "id": "qwen27_prompt_cache_multiturn",
@@ -88,6 +89,7 @@
         "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-tool-loop-current.json",
         "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-current.json",
         "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-tool-loop-current.json",
+        "docs/live-proofs/2026-07-05-release-app-qwen-cross-restart-cache-35b-current.json",
         "docs/live-validation-2026-07-04.md"
       ],
       "id": "qwen35_prompt_cache_multiturn",
@@ -299,6 +301,8 @@
         "docs/live-proofs/2026-07-04-release-engine-stale-cleanup.json",
         "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-current.json",
         "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-current.json",
+        "docs/live-proofs/2026-07-05-release-app-qwen-cross-restart-cache-27b-current.json",
+        "docs/live-proofs/2026-07-05-release-app-qwen-cross-restart-cache-35b-current.json",
         "docs/live-proofs/2026-07-05-release-qwen-memory-preflight-current.json"
       ],
       "id": "ram_lifecycle_guard",
