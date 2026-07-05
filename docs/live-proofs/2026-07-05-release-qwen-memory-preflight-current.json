@@ -1,0 +1,40 @@
+{
+  "generatedAt": "2026-07-05T16:07:16-0700",
+  "modelLoadAttempted": false,
+  "modelRows": [
+    {
+      "memoryPreflight": {
+        "allowConcurrentModel": false,
+        "availableGB": 114.64,
+        "enabled": true,
+        "heavyModelProcessCount": 0,
+        "heavyModelProcesses": [],
+        "requiredAvailableGB": 42.0
+      },
+      "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "status": "PASS"
+    },
+    {
+      "memoryPreflight": {
+        "allowConcurrentModel": false,
+        "availableGB": 114.64,
+        "enabled": true,
+        "heavyModelProcessCount": 0,
+        "heavyModelProcesses": [],
+        "requiredAvailableGB": 50.0
+      },
+      "model": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "status": "PASS"
+    }
+  ],
+  "nextAction": "safe to run bounded release-app-live-qwen-proof.py",
+  "ok": true,
+  "overallStatus": "PASS",
+  "proofLevel": "no-model-load-release-qwen-memory-preflight",
+  "proofType": "release-qwen-memory-preflight-current",
+  "sourceScript": "scripts/release-app-live-qwen-proof.py",
+  "statusCounts": {
+    "BLOCKED": 0,
+    "PASS": 2
+  }
+}

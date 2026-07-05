@@ -1,0 +1,158 @@
+{
+  "categoryCounts": {
+    "agent": 12,
+    "chat": 12,
+    "context": 20,
+    "other": 5,
+    "release": 21,
+    "runtime": 54,
+    "settings": 13,
+    "tabs": 60,
+    "tools": 25,
+    "visual": 44
+  },
+  "categoryOtherCount": 5,
+  "categorySurfaces": [
+    "agent",
+    "chat",
+    "context",
+    "release",
+    "runtime",
+    "settings",
+    "tabs",
+    "tools",
+    "visual"
+  ],
+  "generatedAt": "2026-07-05T16:09:03-0700",
+  "ok": true,
+  "processEvidence": {
+    "appRows": [
+      "63731 123008 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+    ],
+    "engineProcessRows": []
+  },
+  "proofCount": 266,
+  "proofType": "proof-ledger-current-live-route",
+  "sourceRoute": "/qa/proof-ledger",
+  "stateEvidence": {
+    "enginePort": 0,
+    "engineRunning": false,
+    "healthStatus": "stopped"
+  },
+  "status": {
+    "categoryParity": "PASS",
+    "modelInferenceStarted": "NO",
+    "proofFileParity": "PASS",
+    "routeParity": "PASS",
+    "tabProofFamilyParity": "PASS"
+  },
+  "tabProofFamilies": {
+    "creds": {
+      "count": 4,
+      "proofFileParity": true,
+      "proofs": [
+        "creds-action-results-proof.py",
+        "creds-copy-actions-proof.py",
+        "creds-coverage-proof.py",
+        "creds-subtab-state-proof.py"
+      ]
+    },
+    "exploit": {
+      "count": 4,
+      "proofFileParity": true,
+      "proofs": [
+        "exploit-action-differentiation-proof.py",
+        "exploit-copy-actions-proof.py",
+        "exploit-coverage-proof.py",
+        "exploit-subtab-state-proof.py"
+      ]
+    },
+    "network": {
+      "count": 4,
+      "proofFileParity": true,
+      "proofs": [
+        "network-copy-actions-proof.py",
+        "network-coverage-proof.py",
+        "network-protocol-action-proof.py",
+        "network-subtab-state-proof.py"
+      ]
+    },
+    "osint": {
+      "count": 5,
+      "proofFileParity": true,
+      "proofs": [
+        "osint-artifact-actions-proof.py",
+        "osint-copy-actions-proof.py",
+        "osint-coverage-proof.py",
+        "osint-screenshot-artifact-proof.py",
+        "osint-subtab-state-proof.py"
+      ]
+    },
+    "post": {
+      "count": 4,
+      "proofFileParity": true,
+      "proofs": [
+        "post-attribution-proof.py",
+        "post-copy-actions-proof.py",
+        "post-coverage-proof.py",
+        "post-subtab-state-proof.py"
+      ]
+    },
+    "recon": {
+      "count": 4,
+      "proofFileParity": true,
+      "proofs": [
+        "recon-action-status-proof.py",
+        "recon-copy-actions-proof.py",
+        "recon-coverage-proof.py",
+        "recon-subtab-state-proof.py"
+      ]
+    },
+    "report": {
+      "count": 8,
+      "proofFileParity": true,
+      "proofs": [
+        "report-agent-action-proof.py",
+        "report-coverage-proof.py",
+        "report-export-proof.py",
+        "report-finding-actions-proof.py",
+        "report-generate-action-proof.py",
+        "report-subtab-state-proof.py",
+        "report-visible-delete-wiring-proof.py",
+        "report-visible-export-actions-proof.py"
+      ]
+    },
+    "stash": {
+      "count": 6,
+      "proofFileParity": true,
+      "proofs": [
+        "stash-actions-proof.py",
+        "stash-add-sheet-proof.py",
+        "stash-coverage-proof.py",
+        "stash-retrieval-proof.py",
+        "stash-row-context-actions-proof.py",
+        "stash-send-chat-control-proof.py"
+      ]
+    },
+    "supplyChain": {
+      "count": 1,
+      "proofFileParity": true,
+      "proofs": [
+        "supply-chain-cve-ui-proof.py"
+      ]
+    },
+    "web": {
+      "count": 6,
+      "proofFileParity": true,
+      "proofs": [
+        "web-coverage-proof.py",
+        "web-direct-actions-proof.py",
+        "web-header-copy-proof.py",
+        "web-row-context-actions-proof.py",
+        "web-subtab-state-proof.py",
+        "web-verify-action-proof.py"
+      ]
+    }
+  },
+  "tabProofFamilyCount": 10
+}

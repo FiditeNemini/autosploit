@@ -1,0 +1,348 @@
+{
+  "completionClaimAllowed": false,
+  "currentBlockingConditions": [
+    "release_displayable"
+  ],
+  "currentPartialConditions": [
+    "generation_reasoning_context"
+  ],
+  "generatedAt": "2026-07-05T16:08:58-0700",
+  "matrixStatusCounts": {
+    "BLOCKED": 1,
+    "PARTIAL": 1,
+    "PASS": 24
+  },
+  "objectiveComplete": false,
+  "ok": true,
+  "overallStatus": "BLOCKED",
+  "proofLevel": "current-goal-pass-partial-blocked-matrix-backed",
+  "proofType": "goal-requirement-audit",
+  "requirementCount": 14,
+  "rows": [
+    {
+      "areas": [
+        "Current Computer Use GUI attach/control",
+        "Fully autonomous visible GUI demo"
+      ],
+      "evidence": [
+        "docs/live-proofs/2026-07-04-chained-tool-workflow.json",
+        "docs/live-proofs/2026-07-04-computer-use-current-retry.json",
+        "docs/live-proofs/2026-07-04-computer-use-live-gui.json",
+        "docs/live-proofs/2026-07-04-computer-use-transport-blocked.json",
+        "docs/live-proofs/2026-07-04-computer-use-visible-model-tool-loop.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-35b.json",
+        "docs/live-proofs/2026-07-05-all-tab-ordered-tool-flow.json",
+        "docs/live-proofs/2026-07-05-computer-use-agent-settings-loop-ui.json",
+        "docs/live-proofs/2026-07-05-computer-use-all-tabs-dist-current.json",
+        "docs/live-proofs/2026-07-05-computer-use-current-attach-proof.json",
+        "docs/live-proofs/2026-07-05-computer-use-current-direct-settings-cve-proof.json",
+        "docs/live-proofs/2026-07-05-computer-use-dist-app-smoke.json",
+        "docs/live-proofs/2026-07-05-computer-use-settings-cve-cache-ui.json",
+        "docs/live-proofs/2026-07-05-live-ui-surface-sweep.json",
+        "docs/live-proofs/2026-07-05-release-app-computer-use-35b-visible-tool-loop.json",
+        "docs/live-proofs/2026-07-05-release-computer-use-settings-cache-model.json",
+        "docs/live-proofs/2026-07-05-subtab-lifecycle-matrix.json",
+        "docs/live-proofs/2026-07-05-tab-action-surface-matrix.json"
+      ],
+      "id": "computer_use_live_gui",
+      "missingEvidence": "",
+      "requirement": "Use Computer Use for current live GUI/multiturn proof rather than only app/API proof.",
+      "status": "PASS"
+    },
+    {
+      "areas": [
+        "27B Qwen3.6 MXFP8 MTP engine load/cache",
+        "27B visible UI bounded multiturn",
+        "Real Qwen controls real installed safe-lab tools"
+      ],
+      "evidence": [
+        "docs/live-proofs/2026-07-04-chained-tool-workflow.json",
+        "docs/live-proofs/2026-07-04-qwen36-27b-mxfp8-mtp-live-batch.json",
+        "docs/live-proofs/2026-07-04-qwen36-27b-ui-bounded-multiturn-after-settings-fix.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-current.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-tool-loop-current.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-tool-loop-current.json",
+        "docs/live-validation-2026-07-04.md"
+      ],
+      "id": "qwen27_prompt_cache_multiturn",
+      "missingEvidence": "",
+      "requirement": "Qwen3.6 27B MXFP8 MTP receives prompts, supports multiturn, and proves q4/prefix/paged/hybrid/block-L2 cache topology.",
+      "status": "PASS"
+    },
+    {
+      "areas": [
+        "35B Qwen3.6 A3B MXFP8 MTP engine load/cache",
+        "35B visible UI bounded multiturn",
+        "Real Qwen controls real installed safe-lab tools"
+      ],
+      "evidence": [
+        "docs/live-proofs/2026-07-04-chained-tool-workflow.json",
+        "docs/live-proofs/2026-07-04-qwen36-35b-a3b-mxfp8-mtp-live-batch.json",
+        "docs/live-proofs/2026-07-04-qwen36-35b-ui-bounded-multiturn-after-settings-fix.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json",
+        "docs/live-proofs/2026-07-05-release-app-computer-use-35b-visible-tool-loop.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-tool-loop-current.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-current.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-tool-loop-current.json",
+        "docs/live-validation-2026-07-04.md"
+      ],
+      "id": "qwen35_prompt_cache_multiturn",
+      "missingEvidence": "",
+      "requirement": "Qwen3.6 35B A3B MXFP8 MTP receives prompts, supports multiturn, and proves q4/prefix/paged/hybrid/block-L2 cache topology.",
+      "status": "PASS"
+    },
+    {
+      "areas": [
+        "Qwen MTP D3 output path"
+      ],
+      "evidence": [
+        "docs/live-proofs/2026-07-04-qwen-d3-mtp-output-proof.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-35b.json"
+      ],
+      "id": "qwen_mtp_d3_output_path",
+      "missingEvidence": "",
+      "requirement": "Every selected Qwen model whose path/name contains MTP proves D3 MTP activation on the generation/output path.",
+      "status": "PASS"
+    },
+    {
+      "areas": [
+        "Settings model library scan/select",
+        "Settings runtime/cache toggles take effect"
+      ],
+      "evidence": [
+        "docs/live-proofs/2026-07-04-context-budget-compaction.json",
+        "docs/live-proofs/2026-07-04-settings-model-library-scan-select-live-ui.json",
+        "docs/live-proofs/2026-07-04-settings-model-library-state.json",
+        "docs/live-proofs/2026-07-04-system-events-settings-toggle.json",
+        "docs/live-proofs/2026-07-05-agent-settings-loop-controls.json",
+        "docs/live-proofs/2026-07-05-computer-use-agent-settings-loop-ui.json",
+        "docs/live-proofs/2026-07-05-computer-use-settings-cve-cache-ui.json",
+        "docs/live-proofs/2026-07-05-live-ui-surface-sweep.json",
+        "docs/live-proofs/2026-07-05-release-computer-use-settings-cache-model.json",
+        "docs/live-validation-2026-07-04.md"
+      ],
+      "id": "settings_model_selector_folder_scan",
+      "missingEvidence": "",
+      "requirement": "Settings exposes model selection, model folder adding/scanning, 27B/35B selection, and cache/runtime config state.",
+      "status": "PASS"
+    },
+    {
+      "areas": [
+        "Generation settings and context budget",
+        "Reasoning-on final assistant content",
+        "Full-context-length stress"
+      ],
+      "evidence": [
+        "docs/live-proofs/2026-07-04-context-budget-compaction.json",
+        "docs/live-proofs/2026-07-04-near-max-context-guard-refusal.json",
+        "docs/live-proofs/2026-07-04-near-max-context-preflight.json",
+        "docs/live-proofs/2026-07-04-near-max-context-runtime-attempt-summary.json",
+        "docs/live-proofs/2026-07-04-qwen-runtime-readiness.json",
+        "docs/live-proofs/2026-07-04-real-qwen-27b-reasoning-on-1024.json",
+        "docs/live-proofs/2026-07-04-real-qwen-27b-reasoning-on.json",
+        "docs/live-proofs/2026-07-04-real-qwen-35b-reasoning-on-1024.json",
+        "docs/live-proofs/2026-07-04-real-qwen-long-context-128k-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-long-context-160k-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-long-context-192k-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-long-context-64k-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-long-context-smoke-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-near-max-context-27b.json",
+        "docs/live-proofs/2026-07-04-reasoning-cap-recovery.json",
+        "docs/live-proofs/2026-07-05-long-context-200k-safety-refusal.json",
+        "docs/live-proofs/2026-07-05-long-context-224k-safety-refusal.json",
+        "docs/live-proofs/2026-07-05-long-context-safety-surface-live.json",
+        "docs/live-proofs/2026-07-05-proof-ledger-per-turn-runtime-refresh.json",
+        "docs/live-proofs/2026-07-05-real-qwen-long-context-200k-27b.json",
+        "docs/live-proofs/2026-07-05-real-qwen-long-context-224k-27b.json",
+        "docs/live-validation-2026-07-04.md"
+      ],
+      "id": "generation_reasoning_context",
+      "missingEvidence": "Reasoning-on final content and low-cap recovery are proven. 8k, 64k, 128k, 160k, and 192k long-context live Qwen completions are proven with post-generation cache writes. The 200k incremental retry and 224k graduated retry both reached live Qwen chunked prefill but failed safely after swapouts appeared; follow-up no-override proofs refuse above the 192k proven safe ceiling before model load unless an explicit high-risk override is set. Near-max resource preflight, target-token RAM refusal guard, exact-token route preflight, and 258k chunked-prefill entry are proven, but near-max final assistant output plus post-generation cache write proof are still missing.",
+      "requirement": "Generation parameters, reasoning toggles, context budget, and full-context behavior are applied and verified.",
+      "status": "PARTIAL"
+    },
+    {
+      "areas": [
+        "Verbose chat-side tool transcript",
+        "Terminal toggle and command transcript state"
+      ],
+      "evidence": [
+        "docs/live-proofs/2026-07-04-chained-tool-workflow.json",
+        "docs/live-proofs/2026-07-04-real-installed-tools-loopback.json",
+        "docs/live-proofs/2026-07-04-real-metasploit-safe-app.json",
+        "docs/live-proofs/2026-07-04-terminal-tool-visibility.json",
+        "docs/live-proofs/2026-07-04-workflow-panel-state.json",
+        "docs/live-proofs/2026-07-05-proof-ledger-per-turn-runtime-refresh.json",
+        "docs/live-proofs/2026-07-05-tool-family-fanout-all-tabs.json"
+      ],
+      "id": "verbose_tools_terminal_tabs",
+      "missingEvidence": "",
+      "requirement": "Tool usage, commands, active tab/workflow state, terminal toggle, transcripts, and raw results are visible.",
+      "status": "PASS"
+    },
+    {
+      "areas": [
+        "Streaming parser and SSE/tool delta coverage"
+      ],
+      "evidence": [
+        "docs/live-proofs/2026-07-04-streaming-parser-reuse.json",
+        "docs/live-proofs/2026-07-05-interleaved-streaming-tool-reasoning.json",
+        "docs/live-proofs/2026-07-05-proof-ledger-per-turn-runtime-refresh.json",
+        "docs/live-proofs/2026-07-05-release-app-json-framing-live.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-streaming-current.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-streaming-current.json",
+        "docs/live-proofs/2026-07-05-testserver-json-framing-live.json",
+        "docs/live-validation-2026-07-04.md"
+      ],
+      "id": "streaming_parser_reuse",
+      "missingEvidence": "",
+      "requirement": "Real streaming surfaces preserve content, reasoning, tool-call deltas, usage telemetry, parser reuse, and cache-reuse session metadata.",
+      "status": "PASS"
+    },
+    {
+      "areas": [
+        "Safe autonomous phase execution across recon/network/web/creds/exploit/post",
+        "Real installed loopback/local tools",
+        "Real Qwen controls real installed safe-lab tools",
+        "Real Qwen controls Metasploit"
+      ],
+      "evidence": [
+        "docs/live-proofs/2026-07-04-chained-tool-workflow.json",
+        "docs/live-proofs/2026-07-04-real-installed-tools-loopback.json",
+        "docs/live-proofs/2026-07-04-real-metasploit-safe-app.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-35b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-metasploit-safe-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-metasploit-safe-35b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-tool-loop-current.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-tool-loop-current.json"
+      ],
+      "id": "autonomous_pentest_real_tools",
+      "missingEvidence": "",
+      "requirement": "Real models can autonomously drive safe pentest tools and phase workflows through the app loop.",
+      "status": "PASS"
+    },
+    {
+      "areas": [
+        "Individual toolchain per-tool coverage"
+      ],
+      "evidence": [
+        "docs/live-proofs/2026-07-04-chained-tool-workflow.json",
+        "docs/live-proofs/2026-07-04-individual-toolchain-coverage.json",
+        "docs/live-proofs/2026-07-04-real-installed-tools-loopback.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-35b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json",
+        "docs/live-proofs/2026-07-05-all-tab-ordered-tool-flow.json",
+        "docs/live-proofs/2026-07-05-computer-use-settings-cve-cache-ui.json",
+        "docs/live-proofs/2026-07-05-live-ui-surface-sweep.json",
+        "docs/live-proofs/2026-07-05-subtab-lifecycle-matrix.json",
+        "docs/live-proofs/2026-07-05-tab-action-surface-matrix.json",
+        "docs/live-proofs/2026-07-05-tool-family-fanout-all-tabs.json",
+        "docs/live-proofs/2026-07-05-tool-settings-install-plan-live.json"
+      ],
+      "id": "individual_toolchain_per_tool",
+      "missingEvidence": "",
+      "requirement": "Individual pentest tools have per-tool chat transcript, terminal transcript, and result/tab evidence.",
+      "status": "PASS"
+    },
+    {
+      "areas": [
+        "All installed tools safe smoke coverage"
+      ],
+      "evidence": [
+        "docs/live-proofs/2026-07-04-tool-settings-real-inventory.json",
+        "docs/live-proofs/2026-07-05-all-installed-tools-smoke.json",
+        "docs/live-proofs/2026-07-05-computer-use-tools-inventory-42.json"
+      ],
+      "id": "all_installed_tools_safe_smoke",
+      "missingEvidence": "",
+      "requirement": "Every installed Settings tool has bounded current-machine executable smoke coverage separate from model/exploit execution proof.",
+      "status": "PASS"
+    },
+    {
+      "areas": [
+        "Modern CVE library and live feed refresh",
+        "Model-invoked search_cve final-answer loop",
+        "Model-invoked lookup_cve first-try argument preservation"
+      ],
+      "evidence": [
+        "docs/live-proofs/2026-07-04-cve-current-threat-intel-live.json",
+        "docs/live-proofs/2026-07-04-qwen36-35b-ui-cve-tool-loop-after-loop-fix.json",
+        "docs/live-proofs/2026-07-04-real-qwen-35b-lookup-cve-first-try-visible.png",
+        "docs/live-proofs/2026-07-04-real-qwen-35b-lookup-cve-first-try.json",
+        "docs/live-proofs/2026-07-05-computer-use-settings-cve-cache-ui.json",
+        "docs/live-proofs/2026-07-05-cve-live-source-freshness.json",
+        "docs/live-validation-2026-07-04.md"
+      ],
+      "id": "cve_library_current_intel",
+      "missingEvidence": "",
+      "requirement": "Modern CVE library/current threat intel is available and model-callable through app tools.",
+      "status": "PASS"
+    },
+    {
+      "areas": [
+        "RAM/process lifecycle guard"
+      ],
+      "evidence": [
+        "docs/live-proofs/2026-07-04-direct-verifier-ram-guard.json",
+        "docs/live-proofs/2026-07-04-engine-stale-cleanup-visible.json",
+        "docs/live-proofs/2026-07-04-engine-start-memory-preflight-block.json",
+        "docs/live-proofs/2026-07-04-release-engine-stale-cleanup.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-current.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-current.json",
+        "docs/live-proofs/2026-07-05-release-qwen-memory-preflight-current.json"
+      ],
+      "id": "ram_lifecycle_guard",
+      "missingEvidence": "",
+      "requirement": "Repeated testing must not flood RAM; stale engine cleanup and fail-before-launch guards must be proven.",
+      "status": "PASS"
+    },
+    {
+      "areas": [
+        "Release/distribution readiness"
+      ],
+      "evidence": [
+        "docs/live-proofs/2026-07-04-demo-ready-startup.json",
+        "docs/live-proofs/2026-07-04-notarization-preflight.json",
+        "docs/live-proofs/2026-07-04-release-readiness.json",
+        "docs/live-proofs/2026-07-04-release-visible-smoke.json",
+        "docs/live-proofs/2026-07-04-release-visible-smoke.png",
+        "docs/live-proofs/2026-07-05-release-app-json-framing-live.json",
+        "docs/live-proofs/2026-07-05-release-public-truth.json",
+        "docs/live-validation-2026-07-04.md",
+        "release/release-manifest.json"
+      ],
+      "id": "release_displayable",
+      "missingEvidence": "Local package, Developer ID signature, hardened runtime, and visible release smoke are proven, but notarization/distribution flow remains unrun: no accepted notary credential input/default keychain profile is configured, Gatekeeper rejects the app without notarization context, and app/DMG stapled tickets are missing.",
+      "releaseManifest": {
+        "artifacts": {
+          "appBinarySha256": "ea535b8998a30d30f8f4fcbf1dd4a37c46414d8b4c3b95f01f18ba9617d29067",
+          "appPath": "release/ExploitBot.app",
+          "dmgPath": "release/ExploitBot-beta.dmg",
+          "dmgSha256": "d74b511aa971b3f53cfe41bfe2bce54fac17ced1fd9bfc48282377afb8edf034"
+        },
+        "manifest": "release/release-manifest.json",
+        "notarizationGate": "requires-notary-credentials",
+        "notarizationGateReason": "Run with EXPLOITBOT_NOTARY_PROFILE or NOTARIZE_APPLE_ID/NOTARIZE_TEAM_ID/NOTARIZE_PASSWORD.",
+        "notarizationStatus": "not-submitted"
+      },
+      "requirement": "Project is displayable/distributable enough for semi-functional demo handoff.",
+      "status": "BLOCKED"
+    }
+  ],
+  "sourceMatrix": "docs/live-proofs/2026-07-04-pass-partial-blocked-matrix.json",
+  "statusCounts": {
+    "BLOCKED": 1,
+    "PARTIAL": 1,
+    "PASS": 12
+  }
+}

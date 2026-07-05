@@ -1,0 +1,339 @@
+{
+  "generatedAt": "2026-07-05T16:08:58-0700",
+  "ok": true,
+  "proofType": "pass-partial-blocked-matrix",
+  "rowCount": 26,
+  "rows": [
+    {
+      "area": "27B Qwen3.6 MXFP8 MTP engine load/cache",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-qwen36-27b-mxfp8-mtp-live-batch.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-current.json"
+      ],
+      "notes": "Live engine proof reports q4 KV, prefix cache, paged cache, block L2 cache, hybrid SSM cache, and request processing. Current 2026-07-05 14:11 release-app proof adds PASS memory preflight, app-bundled runtime, TurboQuant q4, native D3 MTP active, repeat-prompt cache reuse, productionStopProcessRows=[], cleanupTerminatedProcessRows=[], and postCleanupProcessRows=[].",
+      "status": "PASS"
+    },
+    {
+      "area": "35B Qwen3.6 A3B MXFP8 MTP engine load/cache",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-qwen36-35b-a3b-mxfp8-mtp-live-batch.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-current.json",
+        "docs/live-proofs/2026-07-05-release-app-computer-use-35b-visible-tool-loop.json"
+      ],
+      "notes": "Live engine proof reports the same cache topology plus native MTP path. Current 2026-07-05 14:12 release-app proof adds PASS memory preflight, app-bundled runtime, TurboQuant q4, native D3 MTP active, repeat-prompt cache reuse, productionStopProcessRows=[], cleanupTerminatedProcessRows=[], and postCleanupProcessRows=[]. Patched release-app Computer Use proof adds visible 35B lookup_cve tool loop, q4 TurboQuant, prefix/paged/block-L2, native SSM companion/rederive, MTP effective depth 3, TTFT/tok-s metrics, and clean /engine/stop process cleanup.",
+      "status": "PASS"
+    },
+    {
+      "area": "Qwen MTP D3 output path",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-qwen-d3-mtp-output-proof.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-35b.json"
+      ],
+      "notes": "Artifact-backed verifier proves both Qwen paths contain MTP, runtime MTP is active, D3 drafted and accepted output tokens are present, MTP forward passes are nonzero, no fallback reason is set, and final assistant output was produced.",
+      "status": "PASS"
+    },
+    {
+      "area": "27B visible UI bounded multiturn",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-qwen36-27b-ui-bounded-multiturn-after-settings-fix.json",
+        "docs/live-validation-2026-07-04.md"
+      ],
+      "notes": "Earlier Computer Use UI proof includes prompt receipt, same-chat second turn, TTFT, cached-token metrics, and settings propagation. Current Computer Use transport is separately blocked.",
+      "status": "PASS"
+    },
+    {
+      "area": "35B visible UI bounded multiturn",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-qwen36-35b-ui-bounded-multiturn-after-settings-fix.json",
+        "docs/live-validation-2026-07-04.md",
+        "docs/live-proofs/2026-07-05-release-app-computer-use-35b-visible-tool-loop.json"
+      ],
+      "notes": "Current patched release-app Computer Use proof shows prompt receipt, visible reasoning-off toggle, lookup_cve tool card/arguments, final marker, TTFT/tok-s metrics, native MTP depth 3, and clean stop cleanup for Qwen3.6 35B. Earlier proof still covers same-chat second turn.",
+      "status": "PASS"
+    },
+    {
+      "area": "Current Computer Use GUI attach/control",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-computer-use-current-retry.json",
+        "docs/live-proofs/2026-07-04-computer-use-live-gui.json",
+        "docs/live-proofs/2026-07-05-computer-use-dist-app-smoke.json",
+        "docs/live-proofs/2026-07-05-computer-use-settings-cve-cache-ui.json",
+        "docs/live-proofs/2026-07-05-computer-use-current-direct-settings-cve-proof.json",
+        "docs/live-proofs/2026-07-05-computer-use-agent-settings-loop-ui.json",
+        "docs/live-proofs/2026-07-05-computer-use-all-tabs-dist-current.json",
+        "docs/live-proofs/2026-07-05-computer-use-current-attach-proof.json",
+        "docs/live-proofs/2026-07-05-release-computer-use-settings-cache-model.json",
+        "docs/live-proofs/2026-07-05-live-ui-surface-sweep.json"
+      ],
+      "notes": "Computer Use is exposed and live: list_apps returned running apps, get_app_state returned ExploitBot accessibility tree and inline screenshot, clicks advanced onboarding, set_value entered the Qwen 27B model path and op name, Start Op reached the main workspace, Settings opened through a real Computer Use click, the freshly built dist app was attached directly, and the latest Settings/CVE/Agents runs exercised current UI controls without starting model inference. The 2026-07-05 02:34 direct retry attached to dist/ExploitBot.app with CUA version 857, PID 88511, screenshot/accessibility tree, main workspace, chat input, Settings, Terminal, and visible scanModelLibrary activity. The current direct retry proved reversible 35B selector change, restored 27B selection, restored TurboQuant Q4 after selecting native Q4, and returned visible Apache path traversal CVE search rows. The latest Agents run proved max iterations, tool schema budget, unavailable-tool schema toggle, final-after-tools toggle, multi-agent toggle, phase routing, and authorization guards through live Computer Use plus /state. The current clean dist all-tab Computer Use sweep attached to /Users/eric/exploitbot/dist/ExploitBot.app with CUA version 857, clicked Web -> Network -> Creds -> Exploit -> Post -> Supply -> OSINT -> Report -> Stash, verified /state activeTab=stash and all manualTabSwitch events, and did not start model inference. The release-app CUA checkpoint attached to release/ExploitBot.app with CUA version 857, opened Settings, observed Engine/Model/Runtime/Context/Cache/Agents/CVE Database/Tools/Logs, and paired the visible UI with /state cache/model/CVE/tool inventory without starting a model process. The current-source live UI surface sweep attached to dist/ExploitBot.app with CUA version 857, clicked every main tab, opened every Settings category, observed all 42 tool rows, confirmed the install-all review gate stayed disabled, and did not start model inference. The accidental release-engine Qwen 27B launch in the earlier proof was observed with turboquant-q4 flags then killed with cleanup/memory proof.",
+      "status": "PASS"
+    },
+    {
+      "area": "Settings model library scan/select",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-settings-model-library-scan-select-live-ui.json",
+        "docs/live-proofs/2026-07-04-settings-model-library-state.json",
+        "docs/live-validation-2026-07-04.md",
+        "docs/live-proofs/2026-07-05-release-computer-use-settings-cache-model.json",
+        "docs/live-proofs/2026-07-05-live-ui-surface-sweep.json"
+      ],
+      "notes": "Visible settings proof scanned model roots, exposed both Qwen model folders, and selected a scanned model without loading it. Fresh no-model app/API proof selects both 35B and 27B and verifies q4/prefix/paged/L2 cache settings in state. The release-app CUA checkpoint shows scan root /Users/eric/models/dealign.ai, 14 models, 6 supported, selected Qwen3.6-27B-MXFP8-CRACK-MTP, supported Qwen3.6-35B-A3B-MXFP8-CRACK-MTP, kvCacheQuantization=turboquant-q4, prefixCache=true, pagedCache=true, promptL2Disk=true, and blockL2Disk=true. The current-source live UI sweep repeats the no-model model-library observation in dist/ExploitBot.app with the same selected 27B MXFP8 MTP path, 14 scanned folders, 6 supported entries, and visible 27B/35B MTP Qwen entries.",
+      "status": "PASS"
+    },
+    {
+      "area": "Settings runtime/cache toggles take effect",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-system-events-settings-toggle.json",
+        "docs/live-proofs/2026-07-04-context-budget-compaction.json",
+        "docs/live-proofs/2026-07-05-computer-use-settings-cve-cache-ui.json",
+        "docs/live-proofs/2026-07-05-computer-use-agent-settings-loop-ui.json",
+        "docs/live-proofs/2026-07-05-agent-settings-loop-controls.json",
+        "docs/live-proofs/2026-07-05-live-ui-surface-sweep.json"
+      ],
+      "notes": "Native UI/System Events proof toggled Prefix Cache and verified /state.engineConfig changes after Apply App Settings; context proof verifies generation settings forwarding. Fresh Computer Use proof on the current dist app toggled cache KV mode TurboQuant Q4 -> Q4 -> TurboQuant Q4, Prefix Cache off/on, Reasoning off/on, and Reasoning Parser Auto -> Qwen3 -> Auto, restoring required defaults without starting model inference. Agent settings now expose and prove loop max iterations, tool schema budget, unavailable-tool schema visibility, forced final-answer continuation, phase routing, and authorization guards through live Computer Use, Apply App Settings, and /state. The current-source live UI sweep observed Runtime reasoning/parser/loop controls, Context dynamic-source controls plus 192k safety ceiling, Cache TurboQuant Q4/prefix/paged/L2 defaults, Agents loop controls, CVE controls, Tools, and Logs in one current build without starting inference.",
+      "status": "PASS"
+    },
+    {
+      "area": "Generation settings and context budget",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-context-budget-compaction.json",
+        "docs/live-proofs/2026-07-05-proof-ledger-per-turn-runtime-refresh.json"
+      ],
+      "notes": "Fresh live no-model app proof reports maxTokens=4096, chatMaxTokens=4096, maxIterations=50, bounded context packet budget, cache-preserving new context behavior, and proof parity. The 2026-07-05 per-turn runtime refresh also proves seeded per-turn contract coverage for context budget, Responses reuse, streaming deltas, parser routing, L2/TurboQuant cache rows, and hybrid SSM async rederive status with completed=1, failed=0, lastNumTokens=113.",
+      "status": "PASS"
+    },
+    {
+      "area": "Full-context-length stress",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-context-budget-compaction.json",
+        "docs/live-proofs/2026-07-04-near-max-context-preflight.json",
+        "docs/live-proofs/2026-07-04-near-max-context-guard-refusal.json",
+        "docs/live-proofs/2026-07-04-real-qwen-near-max-context-27b.json",
+        "docs/live-proofs/2026-07-04-near-max-context-runtime-attempt-summary.json",
+        "docs/live-proofs/2026-07-04-qwen-runtime-readiness.json",
+        "docs/live-proofs/2026-07-04-real-qwen-long-context-smoke-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-long-context-64k-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-long-context-128k-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-long-context-160k-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-long-context-192k-27b.json",
+        "docs/live-proofs/2026-07-05-real-qwen-long-context-200k-27b.json",
+        "docs/live-proofs/2026-07-05-long-context-200k-safety-refusal.json",
+        "docs/live-proofs/2026-07-05-real-qwen-long-context-224k-27b.json",
+        "docs/live-proofs/2026-07-05-long-context-224k-safety-refusal.json",
+        "docs/live-proofs/2026-07-05-long-context-safety-surface-live.json",
+        "docs/live-validation-2026-07-04.md"
+      ],
+      "notes": "Bounded context budget and forwarding are proven. Consolidated Qwen readiness reports coreStatus=PASS and overallStatus=PASS after the fixed tokenizer-counted 8227-token live smoke harness completed with q4 TurboQuant attention-KV, prefix cache, paged cache, hybrid SSM, native SSM companion L2, and block L2 evidence. The graduated 64k live Qwen proof completed final assistant output and post-generation cache writes: 64011 tokenizer-counted prompt tokens, usage.prompt_tokens=64016, q4TurboQuantKV=PASS, ssmCompanionNotQuantized=PASS, scheduler cache 63936 tokens, block L2 63936 tokens, SSM companion L2 128015 tokens, and cleanup with swapouts=0. The graduated 128k live Qwen proof also completes final assistant output and post-generation cache writes after fixing the paged/block-L2 cache capacity path: session max_prompt_tokens=130067, scheduler max_blocks=2034, block L2 budget=20.34GB, actualPromptTokensByTokenizer=128019, usage.prompt_tokens=128024, q4TurboQuantKV=PASS, ssmCompanionNotQuantized=PASS, scheduler cache 128023 tokens, block L2 128023 tokens with disk_evictions=0, SSM companion L2 256023 tokens, and cleanup with swapouts=0. The graduated 160k live Qwen proof completes final assistant output and post-generation cache writes after raising the cache-record validator total-record ceiling from 16 GiB to 32 GiB: generatedAt=2026-07-05T00:12:11-0700, actualPromptTokensByTokenizer=160005, usage.prompt_tokens=160010, session max_prompt_tokens=162053, q4TurboQuantKV=PASS, ssmCompanionNotQuantized=PASS, scheduler cache 160009 tokens, block L2 160009 tokens with disk_evictions=0 and disk_writes=2501, SSM companion L2 320009 tokens, and cleanup with swapouts=0. The 2026-07-05 192k retry completes final assistant output and post-generation cache writes: generatedAt=2026-07-05T01:03:13-0700, actualPromptTokensByTokenizer=192017, usage.prompt_tokens=192022, session max_prompt_tokens=194065, final marker LONG_CONTEXT_SMOKE_PASS, q4TurboQuantKV=PASS, ssmCompanionNotQuantized=PASS, block L2 192021 tokens with disk_evictions=0 and disk_writes=3001, SSM companion L2 384021 tokens, completion memory guard aborted=false, and max swapouts=0. A 2026-07-05 200k incremental retry reached live Qwen chunked prefill at seq_len=200037 with q4/paged/prefix/hybrid/block-L2 topology visible, but failed safely with CompletionMemoryGuardAbort after swapouts rose from baseline 16 to 204 before final output or post-generation cache writes; post-cleanup left no model process. A follow-up 200k no-override proof refused before model load with lastBlockReason=unproven_target_above_safe_ceiling and empty engineLogTail. A 2026-07-05 224k graduated retry reached live Qwen chunked prefill at 224003 tokenizer-counted prompt tokens but failed safely with CompletionMemoryGuardAbort after swapouts appeared; post-cleanup left no model process. The harness now samples memory faster for high-context runs, tracks new swapouts relative to the run baseline, and refuses targets above the 192k proven safe ceiling by default unless EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET=1 is set intentionally. Current app UI/state now also exposes the 192k proven safe ceiling, declared 262144-token model context, 200k/224k/258k guarded failures, and the refuse before model load policy in Settings > Context. Near-max preflight proves the model/tokenizer declare 262144 context and records the explicit high-risk 258k-token run command with that override. The real 258k attempt reached live Qwen chunked prefill with runtime seq_len=258044, exact lower-cap rejection, q4/paged/prefix/hybrid cache topology visible, and server timeout forwarded to 3600s, then ended through CompletionMemoryGuardAbort before final generation when sampled free memory reached 14%; sampled swapouts stayed 0. This row remains PARTIAL because true near-max final assistant output plus post-generation cache write proof are not present.",
+      "status": "PARTIAL"
+    },
+    {
+      "area": "Verbose chat-side tool transcript",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-workflow-panel-state.json",
+        "docs/live-proofs/2026-07-04-terminal-tool-visibility.json",
+        "docs/live-proofs/2026-07-04-real-installed-tools-loopback.json",
+        "docs/live-proofs/2026-07-04-real-metasploit-safe-app.json",
+        "docs/live-proofs/2026-07-04-chained-tool-workflow.json",
+        "docs/live-proofs/2026-07-05-tool-family-fanout-all-tabs.json",
+        "docs/live-proofs/2026-07-05-proof-ledger-per-turn-runtime-refresh.json"
+      ],
+      "notes": "Tool requests, commands, arguments, output, workflow tab status, terminal transcript entries, raw result output, and ordered chained tool-call continuation are visible through app state/proof artifacts. The all-tab fanout proof adds chat cards, activity entries, tab activity, parsed tab results, and context-catalog evidence for 10 representative family tools across recon/web/network/creds/exploit/post/supplyChain/osint/report/stash. The 2026-07-05 no-model route refresh additionally proves live-status preview flow coverage for tool status indicators, agent status line, activity telemetry, result previews, stash handoff, report finding management, and evidence lifecycle handoff.",
+      "status": "PASS"
+    },
+    {
+      "area": "Terminal toggle and command transcript state",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-terminal-tool-visibility.json",
+        "docs/live-proofs/2026-07-04-workflow-panel-state.json"
+      ],
+      "notes": "Fresh proof reports terminalVisible=PASS, commandTranscripts=PASS, activeCommand=PASS, feedCommandEvidence=PASS, workflowTabActivities=PASS, manualTabSwitch=PASS, and terminalActiveCommand=PASS.",
+      "status": "PASS"
+    },
+    {
+      "area": "Streaming parser and SSE/tool delta coverage",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-streaming-parser-reuse.json",
+        "docs/live-validation-2026-07-04.md",
+        "docs/live-proofs/2026-07-05-proof-ledger-per-turn-runtime-refresh.json",
+        "docs/live-proofs/2026-07-05-testserver-json-framing-live.json",
+        "docs/live-proofs/2026-07-05-release-app-json-framing-live.json",
+        "docs/live-proofs/2026-07-05-interleaved-streaming-tool-reasoning.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-streaming-current.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-streaming-current.json"
+      ],
+      "notes": "Live app QA proof covers chat completions streaming, Responses streaming events, content/reasoning/tool-call deltas, usage cached-token telemetry, previous_response_id reuse surface, parser family coverage, and coverage-index parity. Fresh interleaved streaming proof adds explicit interleaved reasoning/tool/final streaming order for Responses and Chat Completions: reasoning delta, tool-call/function-argument delta, tool result append, final content delta, cached-token usage, and completion/DONE event. packaged release-app Qwen 27B/35B streaming artifacts now prove live SSE JSON frames, DONE frames, reasoning deltas, usage.prompt_tokens_details.cached_tokens telemetry, TurboQuant q4 KV, hybrid SSM, prefix/paged/SSM companion, native D3 MTP effective depth 3, and clean engine stop. The 2026-07-05 per-turn runtime proof rerun passed after aligning coverage-index proof timeouts to the observed 74.86s route latency and plumbing completed Qwen hybrid SSM rederive metrics into the per-turn cache row. Current-source QA server framing proof adds byte Content-Length, no-store headers, complete NWConnection sends, and 240/240 parsed /state + /messages responses with zero invalid JSON while seeded chat/tool-output state is active. Rebuilt release-app framing proof was refreshed after the long-context safety and Tools install-plan Settings source changes and adds the same 240/240 parsed /state + /messages responses and matching Content-Length headers on the packaged app/DMG hashes from 2026-07-05T12:34:34-0700.",
+      "status": "PASS"
+    },
+    {
+      "area": "Modern CVE library and live feed refresh",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-cve-current-threat-intel-live.json",
+        "docs/live-proofs/2026-07-05-computer-use-settings-cve-cache-ui.json",
+        "docs/live-proofs/2026-07-05-cve-live-source-freshness.json"
+      ],
+      "notes": "Live app route refreshed current CISA KEV and NVD critical rows at 2026-07-05T03:50:53-0700 without loading a model: CISA catalog 2026.07.01 released 2026-07-01T19:00:06.9016Z, authoritative CISA total 1631, latest KEV CVE-2026-45659, NVD 45-day critical rows bounded to 10 imported records, app totalCount=1641, kevCount=1631, exact searchResultCount=1, and source attribution includes cisa-kev/nvd/references/tags. Fresh live-source freshness proof re-fetched authoritative CISA KEV and NVD metadata at 2026-07-05T13:53:10-0700 and confirms the app artifact still matches CISA catalog version, release timestamp, latest CVE, CISA total, app top-result source attribution, and NVD 45-day critical coverage. The refresh now imports the full current CISA KEV catalog instead of only the previous 25 newest KEV slice. Earlier Computer Use proof separately pressed Current Threat Intel in the dist app, updated the visible CVE Settings panel, and exact search for CVE-2026-45659 returned the SharePoint KEV row with source tags.",
+      "status": "PASS"
+    },
+    {
+      "area": "Model-invoked search_cve final-answer loop",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-qwen36-35b-ui-cve-tool-loop-after-loop-fix.json",
+        "docs/live-validation-2026-07-04.md"
+      ],
+      "notes": "Visible 35B UI proof used search_cve, showed verbose transcript, and produced the requested final marker.",
+      "status": "PASS"
+    },
+    {
+      "area": "Model-invoked lookup_cve first-try argument preservation",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-real-qwen-35b-lookup-cve-first-try.json",
+        "docs/live-proofs/2026-07-04-real-qwen-35b-lookup-cve-first-try-visible.png"
+      ],
+      "notes": "Fresh real Qwen 35B proof passes first-try lookup_cve argument preservation, callback detail output, final marker, q4/paged/prefix/hybrid cache evidence, and native visible UI proof through System Events plus screenshot. Computer Use remains blocked separately, but this row no longer depends on Computer Use for visible evidence.",
+      "status": "PASS"
+    },
+    {
+      "area": "Safe autonomous phase execution across recon/network/web/creds/exploit/post",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-35b.json",
+        "docs/live-proofs/2026-07-04-chained-tool-workflow.json"
+      ],
+      "notes": "Real Qwen 27B and 35B app/API proofs reached final marker and phase completion across the six phase tabs with verbose tool transcripts. The chained workflow proof validates ordered nmap/netexec/sqlmap/hydra/metasploit/linpeas phase chains and final assistant continuation after the last tool call.",
+      "status": "PASS"
+    },
+    {
+      "area": "Real installed loopback/local tools",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-real-installed-tools-loopback.json"
+      ],
+      "notes": "Real installed nmap, httpx, nuclei, hydra, netexec, linpeas, curl, nc, and Metasploit inventory are proven through safe loopback/local app tool paths.",
+      "status": "PASS"
+    },
+    {
+      "area": "Real Qwen controls real installed safe-lab tools",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json",
+        "docs/live-proofs/2026-07-04-chained-tool-workflow.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-tool-loop-current.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-tool-loop-current.json"
+      ],
+      "notes": "Real Qwen 27B and 35B drove real installed nmap/httpx/nuclei/hydra/netexec/linpeas/curl/nc through the app loop to final answer with cache proof. Ordered-chain proof validates the required nmap/httpx/nuclei/hydra/netexec/linpeas/run_shell/run_shell sequence before final assistant continuation. Fresh packaged release-app 27B/35B tool-loop artifacts prove the bundled app engine starts through /engine/start, the app /send path receives the prompt, exactly one lookup_cve tool executes with verbose transcript, final marker is returned, TurboQuant q4 KV plus hybrid SSM/prefix/paged/SSM companion/native D3 MTP are active, and production stop plus post-cleanup leave no bundled engine process.",
+      "status": "PASS"
+    },
+    {
+      "area": "Real Qwen controls Metasploit",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-real-metasploit-safe-app.json",
+        "docs/live-proofs/2026-07-04-real-qwen-metasploit-safe-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-metasploit-safe-35b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json"
+      ],
+      "notes": "Real Qwen 27B and 35B both drove real msfconsole safely through the app loop with command `version; exit`, final marker, verbose chat transcript, terminal transcript, raw results, and q4/paged/prefix/block-L2 cache proof.",
+      "status": "PASS"
+    },
+    {
+      "area": "Individual toolchain per-tool coverage",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-individual-toolchain-coverage.json",
+        "docs/live-proofs/2026-07-04-real-installed-tools-loopback.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-35b.json",
+        "docs/live-proofs/2026-07-04-chained-tool-workflow.json",
+        "docs/live-proofs/2026-07-05-all-tab-ordered-tool-flow.json",
+        "docs/live-proofs/2026-07-05-tool-family-fanout-all-tabs.json",
+        "docs/live-proofs/2026-07-05-subtab-lifecycle-matrix.json",
+        "docs/live-proofs/2026-07-05-tab-action-surface-matrix.json",
+        "docs/live-proofs/2026-07-05-computer-use-settings-cve-cache-ui.json",
+        "docs/live-proofs/2026-07-05-tool-settings-install-plan-live.json",
+        "docs/live-proofs/2026-07-05-live-ui-surface-sweep.json"
+      ],
+      "notes": "Per-tool verifier proves chat transcript, terminal transcript, and result/tab evidence for nmap, httpx, nuclei, hydra, netexec, linpeas, curl, nc, Metasploit, and sqlmap, with Qwen 27B/35B model-driven evidence where applicable. Chained proof additionally proves ordered multi-tool workflows rather than isolated tool mentions only. Fresh all-tab ordered-flow proof adds 9 PASS workflow rows across recon/web/network/creds/exploit/post/supplyChain/osint/report/stash, validates tab-tool-function, tab-action-surface, and tool-execution route parity, proves reverse/repeated-tab order diversity, links to existing Qwen 27B/35B ordered tool-chain evidence, and records aggregate 42/42 registered tool workflow coverage with execution owners, source hooks, and the 3-mode authorization policy map. Fresh all-tab fanout proof adds 10 PASS family rows for nmap/nuclei/netexec/hashcat/metasploit/linpeas/search_cve/gowitness/search_context/search_context, each with chat card, activity entry, tab activity, parsed tab result, and context-catalog evidence. Fresh subtab/action artifacts prove 38 subtab lifecycle rows and 10 tab-action surfaces with route parity, proof-owner file parity, action-state owners, route owners, and no model inference. Fresh Computer Use proof confirms the current dist app Tools settings inventory is visible with 13 installed and 29 missing tools, including installed nmap/httpx/nuclei/sqlmap/netexec/hydra/metasploit/linpeas rows. Fresh current-source Computer Use proof adds the visible Tools INSTALL PLAN before install-all actions: Missing by method go: 7, homebrew: 13, pip: 9; Missing by category credentials: 3, exploit: 2, network: 3, osint: 4, post: 1, recon: 5, supplychain: 3, web: 8; Commands queued 29; install-all intentionally not run because it would install network tools. The same proof verifies the Install plan reviewed checkbox gates Install All Missing: disabled at value 0, enabled at value 1, and restored disabled at value 0 without executing installers. The current live UI surface sweep observed all 42 tool rows in one accessibility tree, including metasploit and linpeas, with missingObserved=[] and no run_shell pseudo-tool.",
+      "status": "PASS"
+    },
+    {
+      "area": "All installed tools safe smoke coverage",
+      "evidence": [
+        "docs/live-proofs/2026-07-05-all-installed-tools-smoke.json",
+        "docs/live-proofs/2026-07-04-tool-settings-real-inventory.json",
+        "docs/live-proofs/2026-07-05-computer-use-tools-inventory-42.json"
+      ],
+      "notes": "All installed Settings tool executables have bounded safe current-machine smoke coverage: 42 PASS / 0 FAIL, safeSmokeOnly=true, externalTargetExecution=not-started, modelDrivenEvidence=not-claimed. This complements, but does not replace, model-driven Qwen safe-lab tool proof.",
+      "status": "PASS"
+    },
+    {
+      "area": "Reasoning-on final assistant content",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-real-qwen-27b-reasoning-on-1024.json",
+        "docs/live-proofs/2026-07-04-real-qwen-35b-reasoning-on-1024.json",
+        "docs/live-proofs/2026-07-04-real-qwen-27b-reasoning-on.json",
+        "docs/live-proofs/2026-07-04-reasoning-cap-recovery.json"
+      ],
+      "notes": "1024-token live app/API proofs pass for 27B and 35B with PASS_FINAL_ASSISTANT_CONTENT and final-content markers. Lower 64/512 token caps can still exhaust inside reasoning, but this is now handled as a bounded recovery path: the recovery proof reports sourceWarningStatus=PASS, legacy512Status=PASS_WARNING_ARTIFACT, live1024Status=PASS, recommendedRecoveryMaxTokens=1024, and doesNotChangeGenerationSettings=true.",
+      "status": "PASS"
+    },
+    {
+      "area": "RAM/process lifecycle guard",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-direct-verifier-ram-guard.json",
+        "docs/live-proofs/2026-07-04-engine-start-memory-preflight-block.json",
+        "docs/live-proofs/2026-07-04-engine-stale-cleanup-visible.json",
+        "docs/live-proofs/2026-07-04-release-engine-stale-cleanup.json",
+        "docs/live-proofs/2026-07-05-release-qwen-memory-preflight-current.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-current.json",
+        "docs/live-proofs/2026-07-05-release-app-live-qwen-35b-current.json"
+      ],
+      "notes": "Proofs cover fail-before-launch memory preflight and stale engine cleanup in dev and packaged app paths. Current no-model release-Qwen memory preflight reports PASS for both 27B and 35B with heavyModelProcessCount=0 and safe-to-run next action; both bounded release-app live proofs then loaded real Qwen, proved productionStopProcessRows=[], cleanupTerminatedProcessRows=[], postCleanupProcessRows=[], and left no local ExploitBot/Qwen engine process rows after cleanup.",
+      "status": "PASS"
+    },
+    {
+      "area": "Release/distribution readiness",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-demo-ready-startup.json",
+        "docs/live-proofs/2026-07-04-notarization-preflight.json",
+        "docs/live-proofs/2026-07-04-release-visible-smoke.json",
+        "docs/live-proofs/2026-07-04-release-visible-smoke.png",
+        "docs/live-proofs/2026-07-04-release-readiness.json",
+        "docs/live-validation-2026-07-04.md",
+        "docs/live-proofs/2026-07-05-release-app-json-framing-live.json",
+        "docs/live-proofs/2026-07-05-release-public-truth.json"
+      ],
+      "notes": "Local package/signature/bundled-runtime readiness is proven by durable release artifact, demo-ready startup is proven after one onboarding preload/relaunch, and the signed release app has a local visible-window/screenshot smoke proof. Notarization preflight now proves the release app and DMG codesign checks pass, the app is Developer ID signed by ShieldStack LLC (55KGF2S5AY), hardened runtime is enabled, app entitlements are parsed, notarytool is available, no accepted notary credential input or default keychain profile is configured, Gatekeeper rejects the app with insufficient notarization context, and the app/DMG have no stapled tickets. Distribution remains blocked until notarization credentials/flow are run and tickets are stapled. The current-source release app/DMG was rebuilt after the QA JSON framing fix; local visible smoke and release-bundle /state+/messages framing proof pass on the refreshed hashes, while notarization remains the distribution blocker. The public GitHub release truth proof shows repo visibility PASS and matching v0.1.0-beta release/DMG asset PASS, but current local DMG hash, manifest hash, source revision, and notarization gate do not match a publishable current release, so releaseClaimAllowed remains false.",
+      "status": "BLOCKED"
+    },
+    {
+      "area": "Fully autonomous visible GUI demo",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-chained-tool-workflow.json",
+        "docs/live-proofs/2026-07-05-all-tab-ordered-tool-flow.json",
+        "docs/live-proofs/2026-07-04-computer-use-current-retry.json",
+        "docs/live-proofs/2026-07-04-computer-use-live-gui.json",
+        "docs/live-proofs/2026-07-04-computer-use-transport-blocked.json",
+        "docs/live-proofs/2026-07-04-computer-use-visible-model-tool-loop.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-35b.json",
+        "docs/live-proofs/2026-07-05-release-app-computer-use-35b-visible-tool-loop.json",
+        "docs/live-proofs/2026-07-05-computer-use-all-tabs-dist-current.json",
+        "docs/live-proofs/2026-07-05-subtab-lifecycle-matrix.json",
+        "docs/live-proofs/2026-07-05-tab-action-surface-matrix.json"
+      ],
+      "notes": "Computer Use GUI attach/control is proven, and the release app now has a Computer Use-visible real Qwen 27B tool loop: Computer Use entered the prompt, clicked Send, the live model invoked lookup_cve, the visible chat showed the verbose tool card/arguments/final marker, and API/cache evidence proves TurboQuant q4 attention-KV plus native SSM companion/rederive during the run. Existing app/API artifacts continue to cover broader real-model safe tool chains. The patched 35B release-app CUA proof now adds the same visible Computer Use send path for 35B with verbose tool transcript, final marker, cache/MTP evidence, screenshot, and cleanup proof. Fresh no-model live route artifacts now preserve the exhaustive GUI surface map: current Computer Use dist click-sweep through all 10 main tabs, 38 subtab lifecycle rows across 9 subtabbed tabs, 10 tab-action surfaces across all 10 tabs, and 9 ordered all-tab workflow rows covering recon/web/network/creds/exploit/post/supplyChain/osint/report/stash in forward, reverse, non-linear, CVE-first, post-to-recon, and repeated report/stash orders, with aggregate 42/42 tool workflow/execution/source-hook/authorization coverage, reverse/repeated-tab order diversity, route parity, proof-owner file parity, and empty engine process rows.",
+      "status": "PASS"
+    }
+  ],
+  "statusCounts": {
+    "BLOCKED": 1,
+    "PARTIAL": 1,
+    "PASS": 24
+  },
+  "summary": {
+    "blocked": 1,
+    "partial": 1,
+    "pass": 24
+  }
+}
