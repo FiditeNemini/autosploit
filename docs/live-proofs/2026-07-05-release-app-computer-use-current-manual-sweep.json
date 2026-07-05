@@ -1,0 +1,161 @@
+{
+  "generatedAt": "2026-07-05T16:21:25-0700",
+  "status": "PARTIAL",
+  "sourceTrace": {
+    "repo": "/Users/eric/exploitbot",
+    "head": "a629567",
+    "originMain": "a629567",
+    "appPath": "/Users/eric/exploitbot/release/ExploitBot.app",
+    "bundleID": "ai.jangq.ExploitBot",
+    "pid": 66923,
+    "computerUseVersion": 857
+  },
+  "liveVerification": {
+    "computerUseAttached": true,
+    "primaryTabsClicked": [
+      "recon",
+      "web",
+      "network",
+      "creds",
+      "exploit",
+      "post",
+      "supply",
+      "osint",
+      "report",
+      "stash"
+    ],
+    "activityEventsObserved": [
+      "manualTabSwitch recon -> web",
+      "manualTabSwitch web -> network",
+      "manualTabSwitch network -> creds",
+      "manualTabSwitch creds -> exploit",
+      "manualTabSwitch exploit -> post",
+      "manualTabSwitch post -> supplyChain",
+      "manualTabSwitch supplyChain -> osint",
+      "manualTabSwitch osint -> report",
+      "manualTabSwitch report -> stash"
+    ],
+    "settingsPanelsObserved": [
+      "engine",
+      "model",
+      "runtime",
+      "cache",
+      "agents",
+      "cveDatabase",
+      "tools",
+      "logs"
+    ],
+    "modelSettings": {
+      "selectedModel": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "scanRoot": "/Users/eric/models/dealign.ai",
+      "modelCount": 14,
+      "supportedModelCount": 6,
+      "controlsObserved": [
+        "Browse",
+        "Add Folder",
+        "Scan",
+        "Use model"
+      ],
+      "qwenMtpEntriesVisible": [
+        "Qwen3.6-27B-MXFP4-CRACK-MTP",
+        "Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+        "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+      ]
+    },
+    "runtimeSettings": {
+      "reasoningToggleChangedToOn": true,
+      "applyAppSettingsChangedToolbarToDisableReasoning": true,
+      "reasoningRestoredOff": true,
+      "applyAppSettingsChangedToolbarToEnableReasoning": true,
+      "reasoningParserVisible": "Qwen3",
+      "toolParserVisible": "Qwen",
+      "maxIterationsVisible": 4
+    },
+    "cacheSettings": {
+      "kvCacheSelection": "TurboQuant Q4",
+      "nativeQ4NotSelected": true,
+      "kvGroupSize": 64,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "pagedCache": true,
+      "blockSize": 64,
+      "blockL2Disk": true,
+      "promptL2MaxGB": 10.0,
+      "blockL2MaxGB": 10.0
+    },
+    "agentSettings": {
+      "modePolicyVisible": [
+        "Autopilot",
+        "Copilot",
+        "Manual"
+      ],
+      "toolSchemaBudget": 32,
+      "forceFinalAfterTools": true,
+      "multiAgentMode": true,
+      "maxConcurrentAgents": 8,
+      "authorizationGuardsVisible": true
+    },
+    "cveSettings": {
+      "totalCVEs": 1644,
+      "cisaKevCount": 1631,
+      "lastSynced": "2026-07-05T22:37:31Z",
+      "searchQueryTyped": "apache path traversal",
+      "searchResultsVisible": [
+        "CVE-2024-32113",
+        "CVE-2021-42013",
+        "CVE-2021-41773"
+      ],
+      "resultSignalsVisible": [
+        "HIGH",
+        "POC",
+        "KEV",
+        "source:cisa-kev"
+      ]
+    },
+    "toolSettings": {
+      "installedCount": 42,
+      "missingCount": 0,
+      "installAllMissingDisabled": true,
+      "queuedCommands": 0,
+      "installedRowsObserved": [
+        "curl",
+        "nc",
+        "python3",
+        "zsh",
+        "subfinder",
+        "dnsx",
+        "nmap",
+        "httpx",
+        "katana",
+        "theHarvester",
+        "nuclei",
+        "sqlmap",
+        "dalfox",
+        "feroxbuster",
+        "ffuf",
+        "arjun",
+        "wpscan",
+        "testssl"
+      ]
+    },
+    "logsSettings": {
+      "engineLogsVisible": true,
+      "autoScrollToggleVisible": true,
+      "clearVisible": true,
+      "copyVisible": true,
+      "emptyState": "No logs yet - logs appear here when the engine is running"
+    },
+    "processState": {
+      "engineStarted": false,
+      "modelLoaded": false,
+      "releaseAppRSSBytesApprox": 123142144
+    }
+  },
+  "remainingGates": {
+    "notarization": "BLOCKED",
+    "publicReleaseTruth": "PARTIAL",
+    "fullContextAbove192k": "PARTIAL",
+    "reason": "This manual Computer Use sweep proves current release UI wiring and safe settings effects, but it does not replace loaded-model Qwen prompt/tool/cache artifacts or notarized distribution proof."
+  }
+}
