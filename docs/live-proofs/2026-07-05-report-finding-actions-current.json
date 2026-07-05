@@ -1,0 +1,44 @@
+{
+  "checks": {
+    "activityTelemetry": "PASS",
+    "createFinding": "PASS",
+    "deleteFinding": "PASS",
+    "modelInferenceStarted": "NO",
+    "seedReportState": "PASS",
+    "submitFinding": "PASS",
+    "wizardDismissed": "PASS"
+  },
+  "createdFindingId": "82282F1F-C280-4475-89B5-4611F3619680",
+  "finishedAt": "2026-07-05T16:26:07-0700",
+  "generatedAt": "2026-07-05T16:26:07-0700",
+  "noModelLoaded": true,
+  "ok": true,
+  "proofType": "report-finding-actions-live",
+  "reportActivity": {
+    "command": "Delete finding: 82282F1F-C280-4475-89B5-4611F3619680",
+    "count": 3,
+    "lastTool": "delete_finding",
+    "status": "done",
+    "summary": "deleted finding"
+  },
+  "reportFindingActions": {
+    "createLabel": "Create Finding",
+    "deleteLabel": "Delete finding",
+    "findingCount": 0,
+    "findings": [],
+    "lastAction": "deleted",
+    "lastCreatedId": "82282F1F-C280-4475-89B5-4611F3619680",
+    "lastDeletedId": "82282F1F-C280-4475-89B5-4611F3619680",
+    "status": "done",
+    "summary": "deleted finding",
+    "wizardVisible": false
+  },
+  "sourceRoutes": [
+    "/qa/seed-report-finding-actions",
+    "/qa/report-create-finding",
+    "/qa/report-submit-finding",
+    "/qa/report-delete-finding"
+  ],
+  "startedAt": "2026-07-05T16:26:04-0700",
+  "status": "PASS"
+}

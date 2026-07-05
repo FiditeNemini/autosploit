@@ -1,0 +1,45 @@
+{
+  "checks": {
+    "activityTelemetry": "PASS",
+    "findingCount": "PASS",
+    "generateAction": "PASS",
+    "generatedPreview": "PASS",
+    "modelInferenceStarted": "NO",
+    "renderDone": "PASS",
+    "seedReportState": "PASS"
+  },
+  "feedRecent": [
+    {
+      "duration": 0,
+      "icon": "INF",
+      "text": "seed report generate action",
+      "tool": ""
+    },
+    {
+      "duration": 0,
+      "icon": "INF",
+      "text": "generateReport 1 findings",
+      "tool": ""
+    }
+  ],
+  "finishedAt": "2026-07-05T16:26:09-0700",
+  "generatedAt": "2026-07-05T16:26:09-0700",
+  "noModelLoaded": true,
+  "ok": true,
+  "proofType": "report-generate-action-live",
+  "reportRenderActions": {
+    "findingCount": 1,
+    "htmlChars": 3225,
+    "htmlPreview": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n<style>\nbody { font-family: Georgia, serif; font-size: 13px; line-height: 1.7; color: #1a1a1a; max-width: 800px; margin: 40px auto; padding: 0 20px; }\nh1 { font-family: -apple-system, sans-serif; font-size: 22px; margin-bottom: 4px; }\nh2 { font-family: -apple-system, sans-serif; font-size: 16px; margin-top: 24px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }\nh3 { font-family: -apple-system, sans-serif; font-size: 14px; margin-top: 16px; }\n.confidential { text-align: center; font-family: monospace; font-size: 10px; letter-spacing: 3px; color: #999; text-transform: uppercase; margin-bottom: 30px; }\n.meta { font-size: 11px; color: #888; font-family: monospace; margin-bottom: 20px; }\ntable { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; }\nth { background: #f5f5f5; border-bottom: 2px solid #ddd; padding: 6px 10px; text-align: left; font-family: -apple-system, sans-serif; }\ntd { padding: 6px 10px; border-bottom: 1px solid #eee; }\n.finding { border: 1px solid #ddd; border-radius: 6px; padding: 12px; margin: 10px 0; }\n.finding.critical { border-left: 4px solid #ef4444; }\n.finding.high { border-left: 4px solid #f97316; }\n.finding.medium { border-left: 4px solid #f59e0b; }\n.finding.low { border-left: 4px solid #3b82f6; }\n.sev { font-family: monospace; font-size: 10px; font-weight: bold; padding: 1px 6px; border-radius: 3px; }\n.sev.critical { background: #fef2f2; color: #dc2626; }\n.sev.high { background: #fff7ed; color: #ea580c; }\n.sev.medium { background: #fffbeb; color: #d97706; }\n.sev.low { background: #eff6ff; color: #2563eb; }\ncode { font-family: monospace; font-size: 11px; background: #f0f0f0; padding: 1px 4px; border-radius: 2px; }\n@media print { body { margin: 0; } .finding { break-inside: avoid; } }\n</style>\n</head>\n<body>\n<div class=\"confidential\">CONFIDENTIAL</div>\n<h1>Penetration Test Report</h1>\n<div class=\"meta\">\nClient: Computer Use Live Proof<br>\nAssessment Date: July 5, 2026<br>\nAssessor: exploitbot (autonomous)<br>\nClassification: Confidential\n</div>\n\n<h2>1. Executive Summary</h2>\n<p>A penetration test was conducted against <strong>Computer Use Live Proof</strong>. The assessment identified <strong>1 vulnerabilities</strong> including 1 critical, 0 high, 0 medium, and 0 low severity findings.</p>\n\n<h2>2. Findings Summary</h2>\n<table>\n<tr><th>#</th><th>Finding</th><th>Severity</th><th>CVSS</th><th>Target</th><th>Status</th></tr>\n<tr><td>1</td><td>QA Report Generate Critical</td><td><span class=\"sev critical\">CRITICAL</span></td><td>9.8</td><td><code>https://report-generate.example.test</code></td><td>confirmed</td></tr>\n</table>\n\n<h2>3. Detailed Findings</h2>\n<div class=\"finding critical\">\n<h3><span class=\"sev critical\">CRITICAL</span> QA Report Generate Critical</h3>\n<p><strong>Target:</strong> <code>https://report-generate.example.test</code></p>\n<p><strong>CVSS:</strong> 9.8</p>\n<p><strong>CVE:</strong> CVE-2021-41773</p>\n<p><strong>Description:</strong> Deterministic finding used to prove visible report generation.</p>\n<h3>Impact</h3><p>Sensitive file disclosure.</p>\n<h3>Remediation</h3><p>Upgrade affected service and block traversal payloads.</p>\n</div>\n\n</body>\n</html>",
+    "lastAction": "generate",
+    "status": "done",
+    "summary": "generateReport 1 findings",
+    "template": "Full Pentest Report"
+  },
+  "sourceRoutes": [
+    "/qa/seed-report-generate-action",
+    "/qa/report-generate-action"
+  ],
+  "startedAt": "2026-07-05T16:26:07-0700",
+  "status": "PASS"
+}

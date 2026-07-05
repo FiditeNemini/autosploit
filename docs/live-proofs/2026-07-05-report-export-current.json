@@ -1,0 +1,60 @@
+{
+  "artifactChecks": {
+    "html": true,
+    "json": true,
+    "markdown": true,
+    "pdf": true
+  },
+  "checks": {
+    "exportStatus": "PASS",
+    "findingCount": "PASS",
+    "htmlArtifact": "PASS",
+    "jsonArtifact": "PASS",
+    "markdownArtifact": "PASS",
+    "modelInferenceStarted": "NO",
+    "pdfArtifact": "PASS",
+    "seedReportState": "PASS"
+  },
+  "finishedAt": "2026-07-05T16:26:11-0700",
+  "generatedAt": "2026-07-05T16:26:11-0700",
+  "noModelLoaded": true,
+  "ok": true,
+  "proofType": "report-export-live",
+  "reportExport": {
+    "artifacts": [
+      {
+        "bytes": 3206,
+        "exists": true,
+        "format": "html",
+        "path": "QA-Report-Proof.html"
+      },
+      {
+        "bytes": 695,
+        "exists": true,
+        "format": "markdown",
+        "path": "QA-Report-Proof.md"
+      },
+      {
+        "bytes": 479,
+        "exists": true,
+        "format": "json",
+        "path": "QA-Report-Proof.json"
+      },
+      {
+        "bytes": 973,
+        "exists": true,
+        "format": "pdf",
+        "path": "QA-Report-Proof.pdf"
+      }
+    ],
+    "error": "",
+    "findingCount": 1,
+    "status": "done"
+  },
+  "sourceRoutes": [
+    "/qa/seed-report-export",
+    "/qa/report-export-action"
+  ],
+  "startedAt": "2026-07-05T16:26:09-0700",
+  "status": "PASS"
+}
