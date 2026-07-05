@@ -5,6 +5,8 @@ import argparse
 import importlib.util
 import json
 import os
+import re
+import signal
 import socket
 import subprocess
 import sys
@@ -19,12 +21,25 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 ENGINE_DIR = ROOT / "ExploitBotEngine"
 LAUNCH_PY = ENGINE_DIR / "launch.py"
+HEAVY_MODEL_MARKERS = (
+    "ExploitBotEngine/launch.py",
+    "vmlx_engine.server",
+    "osaurus-evals run",
+    "mlx_lm.server",
+    "llama-server",
+)
 
 
 class VerificationError(RuntimeError):
     def __init__(self, message: str, reports: dict[str, Any] | None = None):
         super().__init__(message)
         self.reports = reports or {}
+
+
+class MemoryPreflightError(RuntimeError):
+    def __init__(self, message: str, report: dict[str, Any]):
+        super().__init__(message + "\n" + json.dumps(report, indent=2, sort_keys=True))
+        self.report = report
 
 
 def _read_output_tail(stream: Any, max_lines: int = 80) -> str:
@@ -178,6 +193,130 @@ def build_live_engine_command(
     return cmd
 
 
+def parse_vm_stat_available_gb(text: str) -> float | None:
+    page_size_match = re.search(r"page size of (\d+) bytes", text)
+    if not page_size_match:
+        return None
+    page_size = int(page_size_match.group(1))
+    wanted = {"Pages free", "Pages inactive", "Pages speculative"}
+    pages = 0
+    for line in text.splitlines():
+        name, sep, raw_value = line.partition(":")
+        if sep and name.strip() in wanted:
+            pages += int("".join(ch for ch in raw_value if ch.isdigit()) or "0")
+    return (pages * page_size) / (1024 ** 3)
+
+
+def current_available_memory_gb() -> float | None:
+    try:
+        output = subprocess.check_output(["/usr/bin/vm_stat"], text=True)
+    except Exception:
+        return None
+    return parse_vm_stat_available_gb(output)
+
+
+def heavy_model_processes_from_ps(ps_text: str, current_pid: int | None = None) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for line in ps_text.splitlines():
+        parts = line.strip().split(None, 3)
+        if len(parts) != 4 or not parts[0].isdigit():
+            continue
+        pid = int(parts[0])
+        if current_pid is not None and pid == current_pid:
+            continue
+        ppid = int(parts[1]) if parts[1].isdigit() else 0
+        rss_kb = int(parts[2]) if parts[2].isdigit() else 0
+        rss_mb = rss_kb / 1024
+        command = parts[3]
+        is_light_shell_wrapper = (
+            rss_mb < 128
+            and command.startswith(("/bin/zsh -c", "/bin/sh -c", "zsh -c", "sh -c"))
+        )
+        if is_light_shell_wrapper:
+            continue
+        if any(marker in command for marker in HEAVY_MODEL_MARKERS):
+            rows.append({
+                "pid": pid,
+                "ppid": ppid,
+                "rss_mb": round(rss_mb, 1),
+                "command": command[:500],
+            })
+    return rows
+
+
+def current_heavy_model_processes() -> list[dict[str, Any]]:
+    try:
+        output = subprocess.check_output(
+            ["/bin/ps", "-axo", "pid=,ppid=,rss=,command="],
+            text=True,
+        )
+    except Exception:
+        return []
+    return heavy_model_processes_from_ps(output, current_pid=os.getpid())
+
+
+def required_available_memory_gb(model: Path, max_num_seqs: int) -> float:
+    override = os.environ.get("EXPLOITBOT_VERIFY_LIVE_MODELS_MIN_AVAILABLE_GB")
+    if override:
+        return float(override)
+    name = str(model).lower()
+    if "35b" in name:
+        return 50.0
+    if "27b" in name:
+        return 42.0
+    return max(24.0, 16.0 + (max_num_seqs * 4.0))
+
+
+def live_model_memory_preflight(model: Path, max_num_seqs: int) -> dict[str, Any]:
+    if os.environ.get("EXPLOITBOT_VERIFY_LIVE_MODELS_SKIP_MEMORY_GUARD") == "1":
+        return {"enabled": False, "skippedBy": "EXPLOITBOT_VERIFY_LIVE_MODELS_SKIP_MEMORY_GUARD"}
+
+    available_gb = current_available_memory_gb()
+    required_gb = required_available_memory_gb(model, max_num_seqs)
+    heavy_processes = current_heavy_model_processes()
+    allow_concurrent = os.environ.get("EXPLOITBOT_VERIFY_LIVE_MODELS_ALLOW_CONCURRENT_MODEL") == "1"
+    report = {
+        "enabled": True,
+        "availableGB": available_gb,
+        "requiredAvailableGB": required_gb,
+        "heavyModelProcessCount": len(heavy_processes),
+        "heavyModelProcesses": heavy_processes[:8],
+        "allowConcurrentModel": allow_concurrent,
+    }
+    if heavy_processes and not allow_concurrent:
+        raise MemoryPreflightError(
+            "memory preflight refused to stack verify-live-models on another heavyweight model/eval process",
+            report,
+        )
+    if available_gb is not None and available_gb < required_gb:
+        raise MemoryPreflightError(
+            "memory preflight refused to start verify-live-models with insufficient available memory",
+            report,
+        )
+    return report
+
+
+def terminate_engine_process(proc: subprocess.Popen[str]) -> None:
+    if proc.poll() is not None:
+        return
+    try:
+        os.killpg(proc.pid, signal.SIGTERM)
+    except ProcessLookupError:
+        return
+    except Exception:
+        proc.terminate()
+    try:
+        proc.wait(timeout=10)
+    except subprocess.TimeoutExpired:
+        try:
+            os.killpg(proc.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            return
+        except Exception:
+            proc.kill()
+        proc.wait()
+
+
 def _find_free_port() -> int:
     with socket.socket() as sock:
         sock.bind(("127.0.0.1", 0))
@@ -249,7 +388,22 @@ def _assert_runtime_metadata(report: dict[str, Any], health: dict[str, Any], mod
         raise RuntimeError(f"missing runtime metadata checks: {', '.join(missing)}")
 
 
-def _assert_completion(completion: dict[str, Any]) -> None:
+def _completion_text(completion: dict[str, Any]) -> str:
+    parts: list[str] = []
+    for choice in completion.get("choices") or []:
+        message = choice.get("message") or {}
+        for key in ("content", "reasoning_content"):
+            value = message.get(key)
+            if value:
+                parts.append(str(value))
+        for tool_call in message.get("tool_calls") or []:
+            function = tool_call.get("function") or {}
+            parts.append(str(function.get("name") or ""))
+            parts.append(str(function.get("arguments") or ""))
+    return "\n".join(part for part in parts if part)
+
+
+def _assert_completion(completion: dict[str, Any], expect_text: str | None = None) -> None:
     usage = completion.get("usage") or {}
     choices = completion.get("choices") or []
     token_count = usage.get("completion_tokens") or 0
@@ -263,6 +417,8 @@ def _assert_completion(completion: dict[str, Any]) -> None:
         if token_count > 0:
             raise RuntimeError("empty assistant message: token usage reported without content/reasoning/tool_calls")
         raise RuntimeError("empty completion: model returned no tokens/content")
+    if expect_text and expect_text not in _completion_text(completion):
+        raise RuntimeError(f"completion quality check failed: expected {expect_text!r} in assistant output")
 
 
 def _resolve_smoke_thinking(family: str, mode: str = "auto") -> bool:
@@ -446,6 +602,7 @@ def _launch_and_complete_once(
     phase: str,
     enable_prompt_disk: bool = True,
     enable_thinking_mode: str = "auto",
+    expect_text: str | None = None,
 ) -> dict[str, Any]:
     port = _find_free_port()
     report: dict[str, Any] = {
@@ -460,9 +617,18 @@ def _launch_and_complete_once(
         cache_root=cache_root,
         enable_prompt_disk=enable_prompt_disk,
     )
+    report["memory_preflight"] = live_model_memory_preflight(path, max_num_seqs=2)
     env = os.environ.copy()
     env["PYTHONPATH"] = str(ENGINE_DIR) + (":" + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
-    proc = subprocess.Popen(cmd, cwd=ROOT, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    proc = subprocess.Popen(
+        cmd,
+        cwd=ROOT,
+        env=env,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        start_new_session=True,
+    )
     report["launch_command"] = cmd
     try:
         health = _wait_health(report["base_url"], timeout, proc=proc, report=report)
@@ -480,7 +646,7 @@ def _launch_and_complete_once(
         )
         cache = _request_json("GET", f"{report['base_url']}/v1/cache/stats")
         _assert_runtime_metadata(report, health, models, cache)
-        _assert_completion(completion)
+        _assert_completion(completion, expect_text=expect_text)
         report.update({
             "health": health,
             "models": models,
@@ -491,12 +657,7 @@ def _launch_and_complete_once(
         })
         return report
     finally:
-        if proc.poll() is None:
-            proc.terminate()
-            try:
-                proc.wait(timeout=10)
-            except subprocess.TimeoutExpired:
-                proc.kill()
+        terminate_engine_process(proc)
         if proc.stdout and "engine_log_tail" not in report:
             report["engine_log_tail"] = "".join(proc.stdout.readlines()[-60:])
 
@@ -512,6 +673,7 @@ def verify_live_model(
     require_ssm_rederive: bool = False,
     require_ssm_companion_hit: bool = False,
     enable_thinking_mode: str = "auto",
+    expect_text: str | None = None,
 ) -> dict[str, Any]:
     port = _find_free_port()
     path = Path(path).expanduser().resolve()
@@ -547,6 +709,7 @@ def verify_live_model(
                 phase="populate",
                 enable_prompt_disk=not block_l2_only_replay,
                 enable_thinking_mode=enable_thinking_mode,
+                expect_text=expect_text,
             )
             replay_run = _launch_and_complete_once(
                 path=path,
@@ -557,6 +720,7 @@ def verify_live_model(
                 phase="replay",
                 enable_prompt_disk=not block_l2_only_replay,
                 enable_thinking_mode=enable_thinking_mode,
+                expect_text=expect_text,
             )
             report.update({
                 "first_run": first_run,
@@ -620,7 +784,16 @@ def verify_live_model(
     ]
     env = os.environ.copy()
     env["PYTHONPATH"] = str(ENGINE_DIR) + (":" + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
-    proc = subprocess.Popen(cmd, cwd=ROOT, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    report["memory_preflight"] = live_model_memory_preflight(path, max_num_seqs=2)
+    proc = subprocess.Popen(
+        cmd,
+        cwd=ROOT,
+        env=env,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        start_new_session=True,
+    )
     base_url = f"http://127.0.0.1:{port}"
     report["base_url"] = base_url
     report["launch_command"] = cmd
@@ -657,19 +830,14 @@ def verify_live_model(
             "repeat_completion_preview": json.dumps(repeat_completion.get("choices", []))[:500],
             "repeat_cache_stats": repeat_cache,
         })
-        _assert_completion(completion)
-        _assert_completion(repeat_completion)
+        _assert_completion(completion, expect_text=expect_text)
+        _assert_completion(repeat_completion, expect_text=expect_text)
         _assert_repeat_cache_behavior(report, cache, repeat_cache, repeat_completion)
         return report
     except Exception as exc:
         raise VerificationError(f"{family} live verification failed: {exc}", {family: report}) from exc
     finally:
-        if proc.poll() is None:
-            proc.terminate()
-            try:
-                proc.wait(timeout=10)
-            except subprocess.TimeoutExpired:
-                proc.kill()
+        terminate_engine_process(proc)
         if proc.stdout and "engine_log_tail" not in report:
             report["engine_log_tail"] = "".join(proc.stdout.readlines()[-60:])
         cache_tmp.cleanup()
@@ -678,9 +846,9 @@ def verify_live_model(
 def run(args: argparse.Namespace) -> dict[str, Any]:
     reports: dict[str, Any] = {}
     if args.qwen:
-        reports["qwen"] = verify_live_model(args.qwen, "qwen", args.prompt, args.timeout, args.metadata_only, args.restart_replay, args.block_l2_only_replay, args.require_ssm_rederive, args.require_ssm_companion_hit, args.enable_thinking)
+        reports["qwen"] = verify_live_model(args.qwen, "qwen", args.prompt, args.timeout, args.metadata_only, args.restart_replay, args.block_l2_only_replay, args.require_ssm_rederive, args.require_ssm_companion_hit, args.enable_thinking, args.expect_text)
     if args.minimax:
-        reports["minimax"] = verify_live_model(args.minimax, "minimax", args.prompt, args.timeout, args.metadata_only, args.restart_replay, args.block_l2_only_replay, args.require_ssm_rederive, args.require_ssm_companion_hit, args.enable_thinking)
+        reports["minimax"] = verify_live_model(args.minimax, "minimax", args.prompt, args.timeout, args.metadata_only, args.restart_replay, args.block_l2_only_replay, args.require_ssm_rederive, args.require_ssm_companion_hit, args.enable_thinking, args.expect_text)
     if args.unsupported:
         reports["unsupported"] = inspect_model_folder(args.unsupported, expected_family="unsupported")
         if reports["unsupported"]["supported"]:
@@ -703,6 +871,7 @@ def main() -> int:
     parser.add_argument("--enable-thinking", choices=("auto", "true", "false"), default="auto", help="Chat-completion thinking flag for live smoke requests; auto enables it for MiniMax only")
     parser.add_argument("--timeout", type=float, default=900.0, help="Seconds to wait for each live model to load/respond")
     parser.add_argument("--prompt", default="Reply with one short sentence for an ExploitBot cache/parser smoke test.")
+    parser.add_argument("--expect-text", help="Require this exact text in each live assistant response")
     parser.add_argument("--output", help="Optional JSON report path")
     args = parser.parse_args()
 

@@ -18,6 +18,7 @@ DMG = ROOT / "release" / "ExploitBot-beta.dmg"
 MANIFEST = ROOT / "release" / "release-manifest.json"
 ENTITLEMENTS = ROOT / "ExploitBot" / "ExploitBot.entitlements"
 APP_API = "http://127.0.0.1:9999"
+DEFAULT_OUTPUT = ROOT / "docs/live-proofs/2026-07-04-release-readiness.json"
 
 
 def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
@@ -32,6 +33,10 @@ def run_no_bytecode(cmd: list[str]) -> subprocess.CompletedProcess[str]:
 def require(condition: bool, message: str, detail: str = "") -> None:
     if not condition:
         raise AssertionError(f"{message}\n{detail}".strip())
+
+
+def timestamp() -> str:
+    return time.strftime("%Y-%m-%dT%H:%M:%S%z")
 
 
 def request(path: str, timeout: float = 8.0):
@@ -53,7 +58,7 @@ def wait_for_app(timeout: float = 15.0) -> None:
     raise RuntimeError(f"release app test server did not become ready: {last_error}")
 
 
-def assert_release_app_uses_bundled_runtime() -> None:
+def assert_release_app_uses_bundled_runtime() -> str:
     subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     env = {**os.environ, "EXPLOITBOT_TESTING": "1", "PYTHONDONTWRITEBYTECODE": "1"}
     app = subprocess.Popen([str(APP / "Contents" / "MacOS" / "ExploitBot")], cwd=ROOT, env=env)
@@ -66,13 +71,56 @@ def assert_release_app_uses_bundled_runtime() -> None:
         require(selected.get("source") == "app-bundled-vmlx-python", f"release app did not select the app-bundled vMLX Python runtime: {payload}")
         require(str(APP / "Contents" / "Resources" / "bundled-python") in selected.get("path", ""), f"release app selected runtime is outside app resources: {payload}")
         require(selected.get("missingModuleCount") == 0, f"release app selected runtime has missing modules: {payload}")
+        return str(selected.get("source") or "")
     finally:
         subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         if app.poll() is None:
             app.send_signal(signal.SIGTERM)
 
 
+def build_report(
+    *,
+    started_at: str,
+    finished_at: str,
+    manifest: dict,
+    app_codesign: str,
+    dmg_codesign: str,
+    bundled_runtime_source: str,
+    has_notary_credentials: bool,
+) -> dict:
+    notarization_gate = manifest.get("notarizationGate")
+    distribution_status = "PASS" if notarization_gate == "passed" else "BLOCKED"
+    local_package_status = "PASS"
+    return {
+        "ok": local_package_status == "PASS",
+        "proofType": "release-readiness",
+        "proofLevel": "local-package-signature-runtime-and-notarization-gate",
+        "startedAt": started_at,
+        "finishedAt": finished_at,
+        "generatedAt": finished_at,
+        "localPackageStatus": local_package_status,
+        "distributionStatus": distribution_status,
+        "hasNotaryCredentials": has_notary_credentials,
+        "notarizationStatus": manifest.get("notarizationStatus"),
+        "notarizationGate": notarization_gate,
+        "notarizationGateReason": manifest.get("notarizationGateReason"),
+        "artifacts": manifest.get("artifacts") or {},
+        "checks": {
+            "appCodesign": "PASS" if "valid on disk" in app_codesign else "FAIL",
+            "dmgCodesign": "PASS" if "valid on disk" in dmg_codesign else "FAIL",
+            "bundledRuntime": "PASS" if bundled_runtime_source == "app-bundled-vmlx-python" else "FAIL",
+            "notarization": "PASS" if notarization_gate == "passed" else "BLOCKED",
+        },
+    }
+
+
+def write_report(report: dict, output: Path = DEFAULT_OUTPUT) -> None:
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
 def main() -> None:
+    started_at = timestamp()
     require(SCRIPT.is_file(), "release package script is missing")
     require(SCRIPT.stat().st_mode & 0o111 != 0, "release package script is not executable")
     require(ENTITLEMENTS.is_file(), "release entitlements are missing")
@@ -126,7 +174,7 @@ def main() -> None:
     dmg_signed = run(["codesign", "--verify", "--verbose=2", str(DMG)])
     require(dmg_signed.returncode == 0, "release DMG codesign verification failed", dmg_signed.stdout)
 
-    assert_release_app_uses_bundled_runtime()
+    bundled_runtime_source = assert_release_app_uses_bundled_runtime()
     signed_after_launch = run(["codesign", "--verify", "--deep", "--strict", "--verbose=2", str(APP)])
     require(signed_after_launch.returncode == 0, "release app codesign verification failed after bundled-runtime launch", signed_after_launch.stdout)
 
@@ -173,6 +221,17 @@ def main() -> None:
     require(commands.get("validateStapledApp") == "xcrun stapler validate release/ExploitBot.app", "manifest app stapler command mismatch", str(manifest))
     require(commands.get("validateStapledDmg") == "xcrun stapler validate release/ExploitBot-beta.dmg", "manifest dmg stapler command mismatch", str(manifest))
 
+    write_report(
+        build_report(
+            started_at=started_at,
+            finished_at=timestamp(),
+            manifest=manifest,
+            app_codesign=signed_after_launch.stdout,
+            dmg_codesign=dmg_signed.stdout,
+            bundled_runtime_source=bundled_runtime_source,
+            has_notary_credentials=has_notary_credentials,
+        )
+    )
     print("release-readiness proof passed")
 
 

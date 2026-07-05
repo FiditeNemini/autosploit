@@ -1,0 +1,97 @@
+{
+  "ok": true,
+  "proofType": "computer-use-all-tabs-dist-current",
+  "generatedAt": "2026-07-05T14:02:40-0700",
+  "proofLevel": "live-computer-use-dist-app-all-tab-click-sweep",
+  "computerUseEvidence": {
+    "cuaAppVersion": 857,
+    "appPath": "/Users/eric/exploitbot/dist/ExploitBot.app/",
+    "bundleID": "ai.jangq.ExploitBot",
+    "pidObservedByComputerUse": 76058,
+    "getAppStateReturnedAccessibilityTree": true,
+    "getAppStateReturnedInlineScreenshot": true,
+    "clickedTabsInOrder": [
+      "web",
+      "network",
+      "creds",
+      "exploit",
+      "post",
+      "supplyChain",
+      "osint",
+      "report",
+      "stash"
+    ],
+    "visibleInitialTab": "recon",
+    "visibleFinalTab": "stash",
+    "observedTabButtons": [
+      "Recon",
+      "Web",
+      "Network",
+      "Creds",
+      "Exploit",
+      "Post",
+      "Supply",
+      "OSINT",
+      "Report",
+      "Stash"
+    ],
+    "observedFinalControls": [
+      "Search stash...",
+      "Copy All",
+      "+ Add",
+      "Mode Autopilot",
+      "Mode Copilot",
+      "Mode Manual",
+      "Ask exploitbot anything...",
+      "Send Message"
+    ],
+    "nonDestructiveProbeOnly": true
+  },
+  "stateEvidence": {
+    "sourceRoute": "http://127.0.0.1:9999/state",
+    "activeTab": "stash",
+    "engineRunning": false,
+    "enginePort": 0,
+    "healthStatus": "stopped",
+    "manualTabSwitchEvents": [
+      "manualTabSwitch recon -> web",
+      "manualTabSwitch web -> network",
+      "manualTabSwitch network -> creds",
+      "manualTabSwitch creds -> exploit",
+      "manualTabSwitch exploit -> post",
+      "manualTabSwitch post -> supplyChain",
+      "manualTabSwitch supplyChain -> osint",
+      "manualTabSwitch osint -> report",
+      "manualTabSwitch report -> stash"
+    ],
+    "manualTabSwitchEventCount": 9,
+    "allTabsVisited": true
+  },
+  "visibleSurfaceEvidence": {
+    "recon": "Target domain or IP, Full Recon, Subdomains/Ports/Web Hosts/Crawl/OSINT subtabs visible during initial state",
+    "web": "Target URL, Scan, Vulns/SQLi/XSS/Dirs/Params/SSL/JWT subtabs visible",
+    "network": "Target IP or range, SMB/WinRM/LDAP/RDP/SSH/MSSQL controls and authentication quick actions visible",
+    "creds": "Cracking/Online Brute/Secrets/Vault subtabs and Start Crack visible",
+    "exploit": "Metasploit/Reverse Shells/Custom/C2 subtabs and Search visible",
+    "post": "PrivEsc/AD Attacks/Lateral subtabs and Run LinPEAS visible",
+    "supplyChain": "CVE Intel/Secrets/SBOM/Dependencies subtabs and CVE Search/Import visible",
+    "osint": "Username/Email/Metadata/Screenshots subtabs and Search visible",
+    "report": "Findings/Preview subtabs, report templates, Create Finding, Generate/Agent/PDF/MD controls visible",
+    "stash": "All/Creds/Hosts/Vulns/Code/Raw filters, Search stash, Copy All, and + Add visible"
+  },
+  "status": {
+    "computerUseDistAppAttach": "PASS",
+    "tabButtonsVisible": "PASS",
+    "allTabsClickedInOrder": "PASS",
+    "activityLogManualSwitchSequence": "PASS",
+    "noModelLoaded": "PASS",
+    "singleDistAppObserved": "PASS"
+  },
+  "processEvidence": {
+    "appRows": [
+      "76058 145680 0.0 /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+    ],
+    "engineProcessRows": [],
+    "port9999Listener": "ExploitBo 76058 TCP *:9999 (LISTEN)"
+  }
+}

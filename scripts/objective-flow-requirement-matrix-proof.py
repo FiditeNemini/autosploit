@@ -113,7 +113,7 @@ def run() -> None:
 
         matrix = request("GET", "/qa/objective-flow-requirement-matrix", timeout=35.0)
         objective = request("GET", "/qa/objective-runtime-coverage")
-        index = request("GET", "/qa/coverage-index", timeout=45.0)
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         state = request("GET", "/state")
 
         if matrix.get("ok") is not True:

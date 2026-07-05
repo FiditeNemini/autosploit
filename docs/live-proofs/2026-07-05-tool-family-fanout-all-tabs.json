@@ -1,0 +1,277 @@
+{
+  "failures": [],
+  "families": {
+    "creds": {
+      "activityEntry": true,
+      "chatCard": true,
+      "contextCatalog": true,
+      "tabActivity": true,
+      "tabResult": true,
+      "tool": "hashcat"
+    },
+    "exploit": {
+      "activityEntry": true,
+      "chatCard": true,
+      "contextCatalog": true,
+      "tabActivity": true,
+      "tabResult": true,
+      "tool": "metasploit"
+    },
+    "network": {
+      "activityEntry": true,
+      "chatCard": true,
+      "contextCatalog": true,
+      "tabActivity": true,
+      "tabResult": true,
+      "tool": "netexec"
+    },
+    "osint": {
+      "activityEntry": true,
+      "chatCard": true,
+      "contextCatalog": true,
+      "tabActivity": true,
+      "tabResult": true,
+      "tool": "gowitness"
+    },
+    "post": {
+      "activityEntry": true,
+      "chatCard": true,
+      "contextCatalog": true,
+      "tabActivity": true,
+      "tabResult": true,
+      "tool": "linpeas"
+    },
+    "recon": {
+      "activityEntry": true,
+      "chatCard": true,
+      "contextCatalog": true,
+      "tabActivity": true,
+      "tabResult": true,
+      "tool": "nmap"
+    },
+    "report": {
+      "activityEntry": true,
+      "chatCard": true,
+      "contextCatalog": true,
+      "tabActivity": true,
+      "tabResult": true,
+      "tool": "search_context"
+    },
+    "stash": {
+      "activityEntry": true,
+      "chatCard": true,
+      "contextCatalog": true,
+      "tabActivity": true,
+      "tabResult": true,
+      "tool": "search_context"
+    },
+    "supplyChain": {
+      "activityEntry": true,
+      "chatCard": true,
+      "contextCatalog": true,
+      "tabActivity": true,
+      "tabResult": true,
+      "tool": "search_cve"
+    },
+    "web": {
+      "activityEntry": true,
+      "chatCard": true,
+      "contextCatalog": true,
+      "tabActivity": true,
+      "tabResult": true,
+      "tool": "nuclei"
+    }
+  },
+  "familyCount": 10,
+  "familyTools": {
+    "creds": "hashcat",
+    "exploit": "metasploit",
+    "network": "netexec",
+    "osint": "gowitness",
+    "post": "linpeas",
+    "recon": "nmap",
+    "report": "search_context",
+    "stash": "search_context",
+    "supplyChain": "search_cve",
+    "web": "nuclei"
+  },
+  "generatedAt": "2026-07-05T15:12:44-0700",
+  "messageToolCards": [
+    "nmap",
+    "nuclei",
+    "netexec",
+    "hashcat",
+    "metasploit",
+    "linpeas",
+    "search_cve",
+    "gowitness",
+    "search_context",
+    "search_context"
+  ],
+  "ok": true,
+  "processEvidence": {
+    "appRows": [
+      "31209 146064 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+    ],
+    "engineProcessRows": []
+  },
+  "proofType": "tool-family-fanout-all-tabs-live-route",
+  "seedRoute": "/qa/seed-tool-family-fanout-fixture",
+  "sourceRoute": "/qa/tool-family-fanout-coverage",
+  "stateEvidence": {
+    "activeTab": "recon",
+    "enginePort": 0,
+    "engineRunning": false,
+    "feedRecent": [
+      {
+        "duration": 0,
+        "icon": "STH",
+        "text": "Stashed: STASH-FANOUT-MARKER",
+        "tool": ""
+      },
+      {
+        "duration": 0.1,
+        "icon": "OK",
+        "text": "search_context: qa family fanout (0.1s)",
+        "tool": "search_context"
+      },
+      {
+        "duration": 0.1,
+        "icon": "OK",
+        "text": "nmap: qa family fanout visible refresh (0.1s)",
+        "tool": "nmap"
+      },
+      {
+        "duration": 0.1,
+        "icon": "OK",
+        "text": "nuclei: qa family fanout visible refresh (0.1s)",
+        "tool": "nuclei"
+      },
+      {
+        "duration": 0.1,
+        "icon": "OK",
+        "text": "netexec: qa family fanout visible refresh (0.1s)",
+        "tool": "netexec"
+      },
+      {
+        "duration": 0.1,
+        "icon": "OK",
+        "text": "hashcat: qa family fanout visible refresh (0.1s)",
+        "tool": "hashcat"
+      },
+      {
+        "duration": 0.1,
+        "icon": "OK",
+        "text": "metasploit: qa family fanout visible refresh (0.1s)",
+        "tool": "metasploit"
+      },
+      {
+        "duration": 0.1,
+        "icon": "OK",
+        "text": "linpeas: qa family fanout visible refresh (0.1s)",
+        "tool": "linpeas"
+      },
+      {
+        "duration": 0.1,
+        "icon": "OK",
+        "text": "search_cve: qa family fanout visible refresh (0.1s)",
+        "tool": "search_cve"
+      },
+      {
+        "duration": 0.1,
+        "icon": "OK",
+        "text": "gowitness: qa family fanout visible refresh (0.1s)",
+        "tool": "gowitness"
+      },
+      {
+        "duration": 0.1,
+        "icon": "OK",
+        "text": "search_context: qa family fanout visible refresh (0.1s)",
+        "tool": "search_context"
+      },
+      {
+        "duration": 0.1,
+        "icon": "OK",
+        "text": "search_context: qa family fanout visible refresh (0.1s)",
+        "tool": "search_context"
+      }
+    ],
+    "healthStatus": "stopped",
+    "tabActivities": {
+      "creds": {
+        "command": "hashcat qa-family-proof",
+        "count": 1,
+        "lastTool": "hashcat",
+        "status": "done",
+        "summary": "qa family fanout"
+      },
+      "exploit": {
+        "command": "metasploit qa-family-proof",
+        "count": 1,
+        "lastTool": "metasploit",
+        "status": "done",
+        "summary": "qa family fanout"
+      },
+      "network": {
+        "command": "netexec qa-family-proof",
+        "count": 1,
+        "lastTool": "netexec",
+        "status": "done",
+        "summary": "qa family fanout"
+      },
+      "osint": {
+        "command": "gowitness qa-family-proof",
+        "count": 1,
+        "lastTool": "gowitness",
+        "status": "done",
+        "summary": "qa family fanout"
+      },
+      "post": {
+        "command": "linpeas qa-family-proof",
+        "count": 1,
+        "lastTool": "linpeas",
+        "status": "done",
+        "summary": "qa family fanout"
+      },
+      "recon": {
+        "command": "nmap qa-family-proof",
+        "count": 1,
+        "lastTool": "nmap",
+        "status": "done",
+        "summary": "qa family fanout"
+      },
+      "report": {
+        "command": "search_context qa-family-proof",
+        "count": 1,
+        "lastTool": "search_context",
+        "status": "done",
+        "summary": "qa family fanout"
+      },
+      "stash": {
+        "command": "search_context qa-family-proof",
+        "count": 1,
+        "lastTool": "search_context",
+        "status": "done",
+        "summary": "qa family fanout"
+      },
+      "supplyChain": {
+        "command": "search_cve qa-family-proof",
+        "count": 1,
+        "lastTool": "search_cve",
+        "status": "done",
+        "summary": "qa family fanout"
+      },
+      "web": {
+        "command": "nuclei qa-family-proof",
+        "count": 1,
+        "lastTool": "nuclei",
+        "status": "done",
+        "summary": "qa family fanout"
+      }
+    }
+  },
+  "statusCounts": {
+    "FAIL": 0,
+    "PASS": 10
+  }
+}

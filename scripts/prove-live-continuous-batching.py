@@ -4,6 +4,7 @@ from __future__ import annotations
 import concurrent.futures
 import json
 import os
+import re
 import signal
 import socket
 import subprocess
@@ -19,10 +20,23 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 ENGINE_DIR = ROOT / "ExploitBotEngine"
 LAUNCH_PY = ENGINE_DIR / "launch.py"
-DEFAULT_QWEN = Path("/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP")
+DEFAULT_QWEN = Path("/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP")
 DEFAULT_MINIMAX = Path("/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ")
-DEFAULT_OUTPUT = ROOT / "docs" / "live-proofs" / "checkpoint-452-qwen-continuous-batching-live.json"
+DEFAULT_OUTPUT = ROOT / "docs" / "live-proofs" / "2026-07-04-qwen36-27b-mxfp8-mtp-live-batch.json"
 REQUEST_LABELS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+HEAVY_MODEL_MARKERS = (
+    "ExploitBotEngine/launch.py",
+    "vmlx_engine.server",
+    "osaurus-evals run",
+    "mlx_lm.server",
+    "llama-server",
+)
+
+
+class MemoryPreflightError(RuntimeError):
+    def __init__(self, message: str, report: dict[str, Any]):
+        super().__init__(message + "\n" + json.dumps(report, indent=2, sort_keys=True))
+        self.report = report
 
 
 def require(condition: bool, message: str, detail: Any = None) -> None:
@@ -97,6 +111,113 @@ def int_at(data: dict[str, Any], path: tuple[str, ...]) -> int:
             return 0
         value = value.get(key)
     return int(value or 0) if isinstance(value, (int, float)) else 0
+
+
+def parse_vm_stat_available_gb(text: str) -> float | None:
+    page_size_match = re.search(r"page size of (\d+) bytes", text)
+    if not page_size_match:
+        return None
+    page_size = int(page_size_match.group(1))
+    wanted = {"Pages free", "Pages inactive", "Pages speculative"}
+    pages = 0
+    for line in text.splitlines():
+        name, sep, raw_value = line.partition(":")
+        if sep and name.strip() in wanted:
+            pages += int(raw_value.strip().rstrip("."))
+    return (pages * page_size) / (1024 ** 3)
+
+
+def current_available_memory_gb() -> float | None:
+    try:
+        output = subprocess.check_output(["/usr/bin/vm_stat"], text=True)
+    except Exception:
+        return None
+    return parse_vm_stat_available_gb(output)
+
+
+def heavy_model_processes_from_ps(ps_text: str, current_pid: int | None = None) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for line in ps_text.splitlines():
+        parts = line.strip().split(None, 3)
+        if len(parts) != 4 or not parts[0].isdigit():
+            continue
+        pid = int(parts[0])
+        if current_pid is not None and pid == current_pid:
+            continue
+        ppid = int(parts[1]) if parts[1].isdigit() else 0
+        rss_kb = int(parts[2]) if parts[2].isdigit() else 0
+        rss_mb = rss_kb / 1024
+        command = parts[3]
+        is_light_shell_wrapper = (
+            rss_mb < 128
+            and command.startswith(("/bin/zsh -c", "/bin/sh -c", "zsh -c", "sh -c"))
+        )
+        if is_light_shell_wrapper:
+            continue
+        if any(marker in command for marker in HEAVY_MODEL_MARKERS):
+            rows.append(
+                {
+                    "pid": pid,
+                    "ppid": ppid,
+                    "rss_mb": round(rss_mb, 1),
+                    "command": command[:500],
+                }
+            )
+    return rows
+
+
+def current_heavy_model_processes() -> list[dict[str, Any]]:
+    try:
+        output = subprocess.check_output(
+            ["/bin/ps", "-axo", "pid=,ppid=,rss=,command="],
+            text=True,
+        )
+    except Exception:
+        return []
+    return heavy_model_processes_from_ps(output, current_pid=os.getpid())
+
+
+def required_available_memory_gb(model: Path, max_num_seqs: int) -> float:
+    override = os.environ.get("EXPLOITBOT_LIVE_BATCH_MIN_AVAILABLE_GB")
+    if override:
+        return float(override)
+    name = str(model).lower()
+    if "35b" in name:
+        return 50.0
+    if "27b" in name:
+        return 42.0
+    return max(24.0, 16.0 + (max_num_seqs * 4.0))
+
+
+def live_batch_memory_preflight(model: Path, max_num_seqs: int) -> dict[str, Any]:
+    if os.environ.get("EXPLOITBOT_LIVE_BATCH_SKIP_MEMORY_GUARD") == "1":
+        return {"enabled": False, "skippedBy": "EXPLOITBOT_LIVE_BATCH_SKIP_MEMORY_GUARD"}
+
+    available_gb = current_available_memory_gb()
+    required_gb = required_available_memory_gb(model, max_num_seqs)
+    heavy_processes = current_heavy_model_processes()
+    allow_concurrent = os.environ.get("EXPLOITBOT_LIVE_BATCH_ALLOW_CONCURRENT_MODEL") == "1"
+    report = {
+        "enabled": True,
+        "availableGB": available_gb,
+        "requiredAvailableGB": required_gb,
+        "heavyModelProcessCount": len(heavy_processes),
+        "heavyModelProcesses": heavy_processes[:8],
+        "allowConcurrentModel": allow_concurrent,
+    }
+
+    if heavy_processes and not allow_concurrent:
+        raise MemoryPreflightError(
+            "memory preflight refused to stack this live model proof on top of "
+            "another heavyweight model/eval process",
+            report,
+        )
+    if available_gb is not None and available_gb < required_gb:
+        raise MemoryPreflightError(
+            "memory preflight refused to start live model proof with insufficient available memory",
+            report,
+        )
+    return report
 
 
 def chat(base_url: str, model_name: str, prompt: str, barrier: threading.Barrier) -> dict[str, Any]:
@@ -191,7 +312,7 @@ def main() -> None:
 
     port = int(os.environ.get("EXPLOITBOT_LIVE_BATCH_PORT") or free_port())
     base_url = f"http://127.0.0.1:{port}"
-    cache_tmp = tempfile.TemporaryDirectory(prefix="exploitbot-live-batch-cache-")
+    cache_tmp = None
     proc: subprocess.Popen[str] | None = None
     report: dict[str, Any] = {
         "model": str(model),
@@ -204,6 +325,12 @@ def main() -> None:
 
     error: Exception | None = None
     try:
+        try:
+            report["memoryPreflight"] = live_batch_memory_preflight(model, max_num_seqs)
+        except MemoryPreflightError as exc:
+            report["memoryPreflight"] = exc.report
+            raise
+        cache_tmp = tempfile.TemporaryDirectory(prefix="exploitbot-live-batch-cache-")
         proc = launch_engine(model, port, Path(cache_tmp.name), max_num_seqs)
         health = wait_health(base_url, proc)
         model_name = health.get("model_name") or model.name
@@ -292,7 +419,8 @@ def main() -> None:
                 proc.wait(timeout=15.0)
         if proc is not None:
             report["engineLogTail"] = read_output_tail(proc)
-        cache_tmp.cleanup()
+        if cache_tmp is not None:
+            cache_tmp.cleanup()
 
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")

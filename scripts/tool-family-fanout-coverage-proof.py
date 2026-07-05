@@ -12,9 +12,12 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
+from app_proof_lock import app_proof_lock
+
 
 ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
+ARTIFACT = ROOT / "docs/live-proofs/2026-07-05-tool-family-fanout-all-tabs.json"
 
 
 EXPECTED_FAMILIES = {
@@ -24,7 +27,10 @@ EXPECTED_FAMILIES = {
     "creds": "hashcat",
     "exploit": "metasploit",
     "post": "linpeas",
+    "supplyChain": "search_cve",
     "osint": "gowitness",
+    "report": "search_context",
+    "stash": "search_context",
 }
 
 
@@ -51,10 +57,73 @@ def wait_for_app(timeout: float = 15.0) -> None:
     raise RuntimeError(f"app test server did not become ready: {last_error}")
 
 
+def timestamp() -> str:
+    return time.strftime("%Y-%m-%dT%H:%M:%S%z")
+
+
+def process_evidence() -> dict:
+    output = subprocess.check_output(["ps", "-axo", "pid,rss,comm,args"], text=True)
+    app_rows: list[str] = []
+    engine_rows: list[str] = []
+    engine_tokens = (
+        "ExploitBotEngine/launch.py",
+        "vmlx_engine.server",
+        "mlx_server",
+        "Qwen3.6",
+        "MiniMax-M",
+    )
+    for line in output.splitlines():
+        parts = line.split(None, 3)
+        comm = parts[2] if len(parts) >= 3 else ""
+        args = parts[3] if len(parts) >= 4 else ""
+        if "ExploitBot.app/Contents/MacOS/ExploitBot" in line:
+            app_rows.append(line.strip())
+        shell_or_watcher = comm.endswith(("/zsh", "/bash", "/sh")) or "/.claude/" in args
+        if not shell_or_watcher and any(token in line for token in engine_tokens):
+            engine_rows.append(line.strip())
+    return {
+        "appRows": app_rows,
+        "engineProcessRows": engine_rows,
+    }
+
+
+def write_artifact(coverage: dict, state: dict, messages: list[dict]) -> None:
+    families = coverage.get("families") or {}
+    status_counts = {
+        "PASS": sum(1 for item in families.values() if all(item.get(key) is True for key in ("chatCard", "activityEntry", "tabActivity", "tabResult", "contextCatalog"))),
+        "FAIL": len(families) - sum(1 for item in families.values() if all(item.get(key) is True for key in ("chatCard", "activityEntry", "tabActivity", "tabResult", "contextCatalog"))),
+    }
+    report = {
+        "ok": coverage.get("ok") is True and set(families) == set(EXPECTED_FAMILIES),
+        "proofType": "tool-family-fanout-all-tabs-live-route",
+        "generatedAt": timestamp(),
+        "sourceRoute": "/qa/tool-family-fanout-coverage",
+        "seedRoute": "/qa/seed-tool-family-fanout-fixture",
+        "familyCount": len(families),
+        "familyTools": EXPECTED_FAMILIES,
+        "families": families,
+        "failures": coverage.get("failures") or [],
+        "statusCounts": status_counts,
+        "messageToolCards": [message.get("tool") for message in messages if message.get("tool")],
+        "stateEvidence": {
+            "activeTab": state.get("activeTab"),
+            "tabActivities": state.get("tabActivities") or {},
+            "feedRecent": state.get("feedRecent") or [],
+            "healthStatus": state.get("healthStatus"),
+            "engineRunning": bool(state.get("engineRunning")),
+            "enginePort": state.get("enginePort"),
+        },
+        "processEvidence": process_evidence(),
+    }
+    ARTIFACT.parent.mkdir(parents=True, exist_ok=True)
+    ARTIFACT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
 def run() -> None:
     with tempfile.TemporaryDirectory(prefix="exploitbot-family-fanout-home-") as home:
         env = os.environ.copy()
         env["EXPLOITBOT_TESTING"] = "1"
+        env["EXPLOITBOT_SKIP_APP_PROOF_LOCK"] = "1"
         env["HOME"] = home
         env["EXPLOITBOT_DATA_DIR"] = str(Path(home) / ".exploitbot" / "data")
         subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -101,7 +170,8 @@ def run() -> None:
             if not set(EXPECTED_FAMILIES.values()).issubset(recent_tools):
                 raise AssertionError(f"/state.feedRecent missing family tools: {state.get('feedRecent')}")
 
-            print("tool-family-fanout-coverage proof passed")
+            write_artifact(coverage, state, messages)
+            print(f"tool-family-fanout-coverage proof passed and wrote {ARTIFACT}")
         finally:
             subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             if app.poll() is None:
@@ -110,7 +180,8 @@ def run() -> None:
 
 if __name__ == "__main__":
     try:
-        run()
+        with app_proof_lock("tool-family-fanout-coverage-proof.py"):
+            run()
     except (AssertionError, RuntimeError, urllib.error.URLError, TimeoutError, socket.timeout, subprocess.CalledProcessError) as exc:
         print(f"tool-family-fanout-coverage proof failed: {exc}", flush=True)
         raise SystemExit(1)

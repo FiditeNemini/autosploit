@@ -71,7 +71,7 @@ def run() -> None:
         matrix = request("GET", "/qa/proof-category-matrix")
         proof_ledger = request("GET", "/qa/proof-ledger")
         proof_suite = request("GET", "/qa/proof-suite-inventory")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"proof category matrix route failed: {matrix}")

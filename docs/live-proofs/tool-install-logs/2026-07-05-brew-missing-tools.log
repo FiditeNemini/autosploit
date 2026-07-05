@@ -1,0 +1,45 @@
+startedAt=2026-07-05T15:01:24-0700
+brew=/opt/homebrew/bin/brew
+==> Auto-updating Homebrew...
+Adjust how often this is run with `$HOMEBREW_AUTO_UPDATE_SECS` or disable with
+`$HOMEBREW_NO_AUTO_UPDATE=1`. Hide these hints with `$HOMEBREW_NO_ENV_HINTS=1` (see `man brew`).
+==> Auto-updated Homebrew!
+==> Updated Homebrew from 9a25a9d04e to 6.0.6 (aae17639c9).
+Updated 2 taps (homebrew/core and homebrew/cask).
+==> New Formulae
+bbrew: TUI for managing Homebrew, Flatpak, and Mac App Store packages
+bomctl: Format-agnostic SBOM tooling for the stages between SBOM generation and analysis
+kotofetch: Small, configurable CLI that displays Japanese quotes in the terminal
+zero: Terminal coding agent you own
+==> New Casks
+font-caacupe-one
+font-scoutie-sans
+muesli: Local-first dictation and meeting transcription
+zush: AI-powered file renamer and organiser
+
+You have 22 outdated formulae and 2 outdated casks installed.
+
+
+The 6.0.0 release notes are available on the Homebrew Blog:
+  https://brew.sh/blog/6.0.0
+The 6.0.6 changelog can be found at:
+  https://github.com/Homebrew/brew/releases/tag/6.0.6
+==> Tapping wpscanteam/tap
+Cloning into '/opt/homebrew/Library/Taps/wpscanteam/homebrew-tap'...
+Tapped 1 formula (15 files, 41.3KB).
+==> Trusted formula wpscanteam/tap/wpscan
+Warning: No available formula with the name "sliver". Did you mean slides?
+==> Searching for similarly named formulae and casks...
+==> Formulae
+slides
+
+To install slides, run:
+  brew install slides
+
+==> Casks
+slicer
+slite
+
+To install slicer, run:
+  brew install --cask slicer
+finishedAt=2026-07-05T15:01:31-0700

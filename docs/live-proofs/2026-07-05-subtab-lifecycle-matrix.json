@@ -1,0 +1,744 @@
+{
+  "generatedAt": "2026-07-05T15:16:42-0700",
+  "ok": true,
+  "processEvidence": {
+    "appRows": [
+      "33456 698784 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+    ],
+    "engineProcessRows": []
+  },
+  "proofType": "subtab-lifecycle-matrix-live-route",
+  "proofs": [
+    "subtab-lifecycle-matrix-proof.py",
+    "subtab-coverage-proof.py",
+    "tab-tool-function-flow-proof.py",
+    "session-workflow-matrix-proof.py",
+    "visual-surface-matrix-proof.py",
+    "coverage-index-proof.py",
+    "app-qa-matrix-smoke-proof.py"
+  ],
+  "routeCounts": {
+    "coverageIndexSubtabLifecycleMatrixCount": 38,
+    "sessionWorkflowMatrixCount": 9,
+    "tabToolFunctionFlowCount": 10,
+    "visualSurfaceMatrixCount": 9
+  },
+  "routes": {
+    "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+    "stateRoutePresent": true,
+    "subtabCoverageRoute": "/qa/subtab-coverage",
+    "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+    "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+  },
+  "sourceRoute": "/qa/subtab-lifecycle-matrix",
+  "stateEvidence": {
+    "activeSubtabs": {
+      "creds": "Cracking",
+      "exploit": "Metasploit",
+      "network": "Protocols",
+      "osint": "Username",
+      "post": "PrivEsc",
+      "recon": "Subdomains",
+      "report": "Findings",
+      "supplyChain": "CVE Intel",
+      "web": "Vulns"
+    },
+    "enginePort": 0,
+    "engineRunning": false,
+    "healthStatus": "stopped"
+  },
+  "status": {
+    "currentSourceBuild": "PASS",
+    "modelInferenceStarted": "NO",
+    "proofFileParity": "PASS",
+    "proofOwnerFileParity": "PASS",
+    "routeParity": "PASS"
+  },
+  "subtabCount": 38,
+  "subtabRows": [
+    {
+      "active": "Cracking",
+      "default": "Cracking",
+      "isActive": true,
+      "isDefault": true,
+      "proofOwnerExists": true,
+      "proofs": [
+        "creds-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Cracking",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "creds",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Cracking",
+      "default": "Cracking",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "creds-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Online Brute",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "creds",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Cracking",
+      "default": "Cracking",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "creds-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Secrets",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "creds",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Cracking",
+      "default": "Cracking",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "creds-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Vault",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "creds",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Metasploit",
+      "default": "Metasploit",
+      "isActive": true,
+      "isDefault": true,
+      "proofOwnerExists": true,
+      "proofs": [
+        "exploit-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Metasploit",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "exploit",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Metasploit",
+      "default": "Metasploit",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "exploit-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Reverse Shells",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "exploit",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Metasploit",
+      "default": "Metasploit",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "exploit-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Custom",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "exploit",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Metasploit",
+      "default": "Metasploit",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "exploit-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "C2 (Sliver)",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "exploit",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Protocols",
+      "default": "Protocols",
+      "isActive": true,
+      "isDefault": true,
+      "proofOwnerExists": true,
+      "proofs": [
+        "network-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Protocols",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "network",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Protocols",
+      "default": "Protocols",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "network-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "SNMP",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "network",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Protocols",
+      "default": "Protocols",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "network-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Capture",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "network",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Protocols",
+      "default": "Protocols",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "network-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "MITM",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "network",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Protocols",
+      "default": "Protocols",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "network-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Tunnels",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "network",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Username",
+      "default": "Username",
+      "isActive": true,
+      "isDefault": true,
+      "proofOwnerExists": true,
+      "proofs": [
+        "osint-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Username",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "osint",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Username",
+      "default": "Username",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "osint-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Email",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "osint",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Username",
+      "default": "Username",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "osint-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Metadata",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "osint",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Username",
+      "default": "Username",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "osint-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Screenshots",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "osint",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "PrivEsc",
+      "default": "PrivEsc",
+      "isActive": true,
+      "isDefault": true,
+      "proofOwnerExists": true,
+      "proofs": [
+        "post-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "PrivEsc",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "post",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "PrivEsc",
+      "default": "PrivEsc",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "post-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "AD Attacks",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "post",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "PrivEsc",
+      "default": "PrivEsc",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "post-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Lateral",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "post",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Subdomains",
+      "default": "Subdomains",
+      "isActive": true,
+      "isDefault": true,
+      "proofOwnerExists": true,
+      "proofs": [
+        "recon-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Subdomains",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "recon",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Subdomains",
+      "default": "Subdomains",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "recon-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Ports",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "recon",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Subdomains",
+      "default": "Subdomains",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "recon-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Web Hosts",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "recon",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Subdomains",
+      "default": "Subdomains",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "recon-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Crawl",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "recon",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Subdomains",
+      "default": "Subdomains",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "recon-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "OSINT",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "recon",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Findings",
+      "default": "Findings",
+      "isActive": true,
+      "isDefault": true,
+      "proofOwnerExists": true,
+      "proofs": [
+        "report-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Findings",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "report",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Findings",
+      "default": "Findings",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "report-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Preview",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "report",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "CVE Intel",
+      "default": "CVE Intel",
+      "isActive": true,
+      "isDefault": true,
+      "proofOwnerExists": true,
+      "proofs": [
+        "supply-chain-cve-ui-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "CVE Intel",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "supplyChain",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "CVE Intel",
+      "default": "CVE Intel",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "supply-chain-cve-ui-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Secrets",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "supplyChain",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "CVE Intel",
+      "default": "CVE Intel",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "supply-chain-cve-ui-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "SBOM",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "supplyChain",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "CVE Intel",
+      "default": "CVE Intel",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "supply-chain-cve-ui-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Dependencies",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "supplyChain",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Vulns",
+      "default": "Vulns",
+      "isActive": true,
+      "isDefault": true,
+      "proofOwnerExists": true,
+      "proofs": [
+        "web-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Vulns",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "web",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Vulns",
+      "default": "Vulns",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "web-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "SQLi",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "web",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Vulns",
+      "default": "Vulns",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "web-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "XSS",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "web",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Vulns",
+      "default": "Vulns",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "web-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Dirs",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "web",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Vulns",
+      "default": "Vulns",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "web-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "Params",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "web",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Vulns",
+      "default": "Vulns",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "web-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "SSL",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "web",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    },
+    {
+      "active": "Vulns",
+      "default": "Vulns",
+      "isActive": false,
+      "isDefault": false,
+      "proofOwnerExists": true,
+      "proofs": [
+        "web-subtab-state-proof.py"
+      ],
+      "route": "/qa/tool-subtab",
+      "sessionWorkflowMatrixRoute": "/qa/session-workflow-matrix",
+      "subtab": "JWT",
+      "subtabCoverageRoute": "/qa/subtab-coverage",
+      "tab": "web",
+      "tabToolFunctionFlowRoute": "/qa/tab-tool-function-flow",
+      "visualRoute": "/qa/visual-subtab",
+      "visualSurfaceMatrixRoute": "/qa/visual-surface-matrix"
+    }
+  ]
+}

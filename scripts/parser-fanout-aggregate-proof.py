@@ -71,7 +71,7 @@ def run() -> None:
                 raise AssertionError(f"tool family fanout aggregate missing ok=true: {fanout}")
             if fanout.get("failures"):
                 raise AssertionError(f"tool family fanout failures: {fanout}")
-            if sorted((fanout.get("families") or {}).keys()) != ["creds", "exploit", "network", "osint", "post", "recon", "web"]:
+            if sorted((fanout.get("families") or {}).keys()) != ["creds", "exploit", "network", "osint", "post", "recon", "report", "stash", "supplyChain", "web"]:
                 raise AssertionError(f"tool family fanout family set mismatch: {fanout}")
 
             print("parser-fanout-aggregate proof passed")

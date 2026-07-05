@@ -1,0 +1,6 @@
+startedAt=2026-07-05T15:04:57-0700
+  File "/Users/eric/.local/bin/jwt_tool.py", line 2
+    exec /Users/eric/.local/bin/uv run --quiet --with ratelimit --with pycryptodomex --with termcolor --with requests /Users/eric/.local/bin/jwt_tool.py "$@"
+                     ^
+SyntaxError: invalid syntax
+finishedAt=2026-07-05T15:04:57-0700

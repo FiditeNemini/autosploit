@@ -1,0 +1,32 @@
+Resolved 6 packages in 1ms
+Installed 6 packages in 4ms
+ + certifi==2026.6.17
+ + charset-normalizer==3.4.7
+ + graphqlmap==0.0.1 (from git+https://github.com/swisskyrepo/GraphQLmap.git@59305d7570c8fbbb04a324e869ec9a196c150936)
+ + idna==3.18
+ + requests==2.34.2
+ + urllib3==2.7.0
+Installed 1 executable: graphqlmap
+/Users/eric/.local/bin/graphqlmap:25: SyntaxWarning: invalid escape sequence '\|'
+  print("  / ____|               | |    / __ \| |                           ")
+/Users/eric/.local/bin/graphqlmap:27: SyntaxWarning: invalid escape sequence '\|'
+  print(" | | |_ | '__/ _` | '_ \| '_ \| |  | | |    | '_ ` _ \ / _` | '_ \ ")
+/Users/eric/.local/bin/graphqlmap:29: SyntaxWarning: invalid escape sequence '\_'
+  print("  \_____|_|  \__,_| .__/|_| |_|\___\_\______|_| |_| |_|\__,_| .__/ ")
+/Users/eric/.local/share/uv/tools/graphqlmap/lib/python3.13/site-packages/graphqlmap/attacks.py:142: SyntaxWarning: invalid escape sequence '\d'
+  regex = re.compile("GRAPHQL_INCREMENT_(\d*)")
+/Users/eric/.local/share/uv/tools/graphqlmap/lib/python3.13/site-packages/graphqlmap/attacks.py:153: SyntaxWarning: invalid escape sequence '\d'
+  regex = re.compile("BATCHING_(\d*)")
+/Users/eric/.local/share/uv/tools/graphqlmap/lib/python3.13/site-packages/graphqlmap/utils.py:48: SyntaxWarning: invalid escape sequence '\ '
+  print("\033[91m/!\ API didn't respond correctly to a POST method !\033[0m")
+usage: graphqlmap [-h] [-u URL] [-v [VERBOSITY]] [--method [METHOD]]
+                  [--headers [HEADERS]] [--json [USE_JSON]] [--proxy [PROXY]]
+
+options:
+  -h, --help           show this help message and exit
+  -u URL               URL to query : example.com/graphql?query={}
+  -v [VERBOSITY]       Enable verbosity
+  --method [METHOD]    HTTP Method to use interact with /graphql endpoint
+  --headers [HEADERS]  HTTP Headers sent to /graphql endpoint
+  --json [USE_JSON]    Use JSON encoding, implies POST
+  --proxy [PROXY]      HTTP proxy to log requests

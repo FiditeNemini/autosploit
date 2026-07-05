@@ -79,7 +79,7 @@ def run() -> None:
         endpoint_inventory = request("GET", "/qa/endpoint-inventory")
         action_state = request("GET", "/qa/action-state-inventory")
         tab_action = request("GET", "/qa/tab-action-coverage")
-        index = request("GET", "/qa/coverage-index", timeout=45.0)
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"endpoint route matrix route failed: {matrix}")

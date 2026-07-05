@@ -1,0 +1,65 @@
+{
+  "generatedAt": "2026-07-05T01:53:07-0700",
+  "ok": true,
+  "proofLevel": "app-api-state-backed-no-model-load",
+  "proofType": "agent-settings-loop-controls",
+  "stateEvidence": {
+    "agents": {
+      "activeAgents": 0,
+      "authorizationGuards": {
+        "explicitToolDeny": true,
+        "externalHighRiskRequiresScopeOrAuthorization": true,
+        "highRiskToolCount": 24
+      },
+      "details": [],
+      "forceFinalAnswerAfterToolResults": false,
+      "includeUnavailableToolSchemas": true,
+      "loopMaxIterations": 7,
+      "maxConcurrentAgents": 3,
+      "modePolicies": {
+        "autopilot": "execute",
+        "copilot": "approval",
+        "manual": "suggest"
+      },
+      "multiAgentEnabled": true,
+      "phaseRouting": {
+        "breach": [
+          "Credential Agent",
+          "Exploit Agent"
+        ],
+        "detect": [
+          "Web Vuln Agent",
+          "Network Agent",
+          "Supply Chain Agent"
+        ],
+        "scan": [
+          "Recon Agent",
+          "OSINT Agent"
+        ]
+      },
+      "streamingCount": 0,
+      "toolSchemaMaxTools": 32,
+      "workingCount": 0
+    },
+    "chat": {
+      "enableReasoning": true,
+      "forceFinalAnswerAfterToolResults": false,
+      "includeUnavailableToolSchemas": true,
+      "maxIterations": 7,
+      "toolSchemaMaxTools": 32
+    },
+    "engineRunning": false,
+    "model": ""
+  },
+  "status": {
+    "authorizationGuards": "PASS",
+    "forceFinalAnswerAfterToolResults": "PASS",
+    "includeUnavailableToolSchemas": "PASS",
+    "loopMaxIterations": "PASS",
+    "maxConcurrentAgents": "PASS",
+    "modelInferenceNotStarted": "PASS",
+    "multiAgentToggle": "PASS",
+    "phaseRouting": "PASS",
+    "toolSchemaBudget": "PASS"
+  }
+}

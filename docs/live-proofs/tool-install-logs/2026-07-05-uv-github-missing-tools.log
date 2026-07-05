@@ -1,0 +1,100 @@
+startedAt=2026-07-05T15:04:02-0700
+   Updating https://github.com/laramies/theHarvester.git (HEAD)
+    Updated https://github.com/laramies/theHarvester.git (656e0ac6add73ed0bd102ecfd95021e488957c26)
+Resolved 70 packages in 413ms
+   Building shodan==1.31.0
+   Building theharvester @ git+https://github.com/laramies/theHarvester.git@656e0ac6add73ed0bd102ecfd95021e488957c26
+Downloading uvloop (1.3MiB)
+Downloading lxml (8.2MiB)
+Downloading playwright (40.3MiB)
+      Built shodan==1.31.0
+ Downloaded uvloop
+      Built theharvester @ git+https://github.com/laramies/theHarvester.git@656e0ac6add73ed0bd102ecfd95021e488957c26
+ Downloaded lxml
+ Downloaded playwright
+Prepared 30 packages in 562ms
+Installed 70 packages in 89ms
+ + aiodns==4.0.4
+ + aiofiles==25.1.0
+ + aiohappyeyeballs==2.7.1
+ + aiohttp==3.14.1
+ + aiohttp-socks==0.11.0
+ + aiomultiprocess==0.9.1
+ + aiosignal==1.4.0
+ + aiosqlite==0.22.1
+ + annotated-doc==0.0.4
+ + annotated-types==0.7.0
+ + anyio==4.14.1
+ + argcomplete==3.7.0
+ + attrs==26.1.0
+ + backoff==2.2.1
+ + beautifulsoup4==4.15.0
+ + censys==2.2.19
+ + certifi==2026.6.17
+ + cffi==2.0.0
+ + charset-normalizer==3.4.7
+ + click==8.4.2
+ + click-plugins==1.1.1.2
+ + colorama==0.4.6
+ + deprecated==1.3.1
+ + dnspython==2.8.0
+ + fastapi==0.138.1
+ + filelock==3.29.5
+ + frozenlist==1.8.0
+ + greenlet==3.5.3
+ + h11==0.16.0
+ + httpcore==1.0.9
+ + httpx==0.28.1
+ + idna==3.18
+ + limits==5.8.0
+ + lxml==6.1.1
+ + markdown-it-py==4.2.0
+ + mdurl==0.1.2
+ + multidict==6.7.1
+ + netaddr==1.3.0
+ + packaging==26.2
+ + playwright==1.60.0
+ + propcache==0.5.2
+ + pycares==5.0.1
+ + pycparser==3.0
+ + pydantic==2.13.4
+ + pydantic-core==2.46.4
+ + pyee==13.0.1
+ + pygments==2.20.0
+ + python-dateutil==2.9.0.post0
+ + python-socks==2.8.2
+ + pyyaml==6.0.3
+ + requests==2.34.2
+ + requests-file==3.0.1
+ + retrying==1.4.2
+ + rich==15.0.0
+ + shodan==1.31.0
+ + six==1.17.0
+ + slowapi==0.1.10
+ + soupsieve==2.8.4
+ + starlette==1.3.1
+ + theharvester==4.11.1 (from git+https://github.com/laramies/theHarvester.git@656e0ac6add73ed0bd102ecfd95021e488957c26)
+ + tldextract==5.3.1
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.2
+ + ujson==5.13.0
+ + urllib3==2.7.0
+ + uvicorn==0.49.0
+ + uvloop==0.22.1
+ + wrapt==2.2.2
+ + xlsxwriter==3.2.9
+ + yarl==1.24.2
+Installed 2 executables: restfulHarvest, theHarvester
+   Updating https://github.com/swisskyrepo/GraphQLmap.git (HEAD)
+    Updated https://github.com/swisskyrepo/GraphQLmap.git (59305d7570c8fbbb04a324e869ec9a196c150936)
+Resolved 1 package in 0.25ms
+   Building graphqlmap @ git+https://github.com/swisskyrepo/GraphQLmap.git@59305d7570c8fbbb04a324e869ec9a196c150936
+      Built graphqlmap @ git+https://github.com/swisskyrepo/GraphQLmap.git@59305d7570c8fbbb04a324e869ec9a196c150936
+Prepared 1 package in 123ms
+Installed 1 package in 1ms
+ + graphqlmap==0.0.1 (from git+https://github.com/swisskyrepo/GraphQLmap.git@59305d7570c8fbbb04a324e869ec9a196c150936)
+Installed 1 executable: graphqlmap
+   Updating https://github.com/ticarpi/jwt_tool.git (HEAD)
+    Updated https://github.com/ticarpi/jwt_tool.git (3bc7407cf2222d6a821dcc19c776e5a1b1cb9a9b)
+error: /Users/eric/.cache/uv/git-v0/checkouts/70a073b117c78526/3bc7407 does not appear to be a Python project, as neither `pyproject.toml` nor `setup.py` are present in the directory
+finishedAt=2026-07-05T15:04:09-0700

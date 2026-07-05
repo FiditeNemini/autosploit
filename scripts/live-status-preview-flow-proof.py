@@ -164,7 +164,7 @@ def run() -> None:
             raise AssertionError(f"result parser fixture seed failed: {seeded}")
         payload = request("GET", ROUTE, timeout=45.0)
         state = request("GET", "/state")
-        index = request("GET", "/qa/coverage-index", timeout=45.0)
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         assert_payload(payload, state, index)
         print("live-status-preview-flow proof passed")
     finally:

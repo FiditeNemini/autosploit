@@ -14,6 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
+DEFAULT_OUTPUT = ROOT / "docs/live-proofs/2026-07-04-streaming-parser-reuse.json"
 
 EXPECTED_ENDPOINTS = [
     "/v1/chat/completions",
@@ -152,6 +153,49 @@ def assert_payload(payload: dict) -> None:
     assert_source_files(payload)
 
 
+def write_report(
+    payload: dict,
+    state: dict,
+    chat: dict,
+    runtime: dict,
+    deep: dict,
+    index: dict,
+) -> None:
+    report = {
+        "ok": True,
+        "proofType": "streaming-parser-reuse",
+        "proofLevel": payload.get("proofLevel"),
+        "generatedAt": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "streamingPayload": payload,
+        "routeCoverage": {
+            "stateRoutesContainStreamingParserReuse": "/qa/streaming-parser-reuse"
+            in ((state.get("qaCoverage") or {}).get("stateRoutes") or []),
+            "chatCoverageContainsStreamingParserReuse": "/qa/streaming-parser-reuse"
+            in (chat.get("routes") or []),
+            "runtimeCoverageContainsStreamingParserReuse": "/qa/streaming-parser-reuse"
+            in (runtime.get("routes") or []),
+            "deepRuntimeCoverageContainsStreamingParserReuse": "/qa/streaming-parser-reuse"
+            in (deep.get("routes") or []),
+            "coverageIndexChatContractParity": ((index.get("groups") or {}).get("chatAndContext") or {}).get(
+                "streamingParserContractParity"
+            ),
+            "coverageIndexRuntimeContractParity": ((index.get("groups") or {}).get("runtimeAndCache") or {}).get(
+                "streamingParserContractParity"
+            ),
+        },
+        "contracts": payload.get("contracts") or {},
+        "contractCount": payload.get("contractCount"),
+        "streamingEndpoints": payload.get("streamingEndpoints"),
+        "responsesStreamEvents": payload.get("responsesStreamEvents"),
+        "chatCompletionStreamFields": payload.get("chatCompletionStreamFields"),
+        "cacheReuseSurface": payload.get("cacheReuseSurface"),
+        "usageTelemetry": payload.get("usageTelemetry"),
+        "liveLoadedModelProof": payload.get("liveLoadedModelProof"),
+    }
+    DEFAULT_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    DEFAULT_OUTPUT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
 def run() -> None:
     env = os.environ.copy()
     env["EXPLOITBOT_TESTING"] = "1"
@@ -168,7 +212,7 @@ def run() -> None:
         chat = request("GET", "/qa/chat-coverage")
         runtime = request("GET", "/qa/runtime-coverage")
         deep = request("GET", "/qa/deep-runtime-flow-coverage")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         assert_payload(payload)
 
@@ -193,6 +237,7 @@ def run() -> None:
         if runtime_group.get("streamingParserContractParity") is not True:
             raise AssertionError(f"coverage index runtime group missing streaming contract parity: {runtime_group}")
 
+        write_report(payload, state, chat, runtime, deep, index)
         print("streaming-parser-reuse proof passed")
     finally:
         subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

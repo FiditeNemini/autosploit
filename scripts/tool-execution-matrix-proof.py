@@ -11,6 +11,8 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
+from app_proof_lock import app_proof_lock
+
 
 ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
@@ -60,6 +62,7 @@ def wait_for_app(timeout: float = 15.0) -> None:
 def run() -> None:
     env = os.environ.copy()
     env["EXPLOITBOT_TESTING"] = "1"
+    env["EXPLOITBOT_SKIP_APP_PROOF_LOCK"] = "1"
     subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     app = subprocess.Popen([str(ROOT / "script" / "build_and_run.sh"), "--verify"], cwd=ROOT, env=env)
 
@@ -73,7 +76,7 @@ def run() -> None:
         registry = request("GET", "/qa/tool-coverage")
         tool_flow = request("GET", "/qa/tool-flow-coverage")
         auth = request("GET", "/qa/agent-tool-authorization-coverage")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"tool execution matrix route failed: {matrix}")
@@ -159,7 +162,8 @@ def run() -> None:
 
 if __name__ == "__main__":
     try:
-        run()
+        with app_proof_lock("tool-execution-matrix-proof.py"):
+            run()
     except (AssertionError, RuntimeError, urllib.error.URLError, TimeoutError, socket.timeout) as exc:
         print(f"tool-execution-matrix proof failed: {exc}", flush=True)
         raise SystemExit(1)

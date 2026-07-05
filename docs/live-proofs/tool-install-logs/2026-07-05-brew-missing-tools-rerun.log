@@ -1,0 +1,224 @@
+startedAt=2026-07-05T15:01:37-0700
+Warning: The following taps are not trusted:
+  hudochenkov/sshpass
+
+Homebrew is currently ignoring formulae, casks and commands from these taps because tap trust is required.
+Prefer trusting only the specific formulae, casks or commands you need.
+Trust installed formulae from these taps with:
+  brew trust --formula hudochenkov/sshpass/sshpass
+Trust other specific casks and commands with:
+  brew trust --cask <user>/<tap>/<cask>
+  brew trust --command <user>/<tap>/<command>
+Whole-tap trust is broader and includes all current and future formulae,
+casks and commands from the listed taps. Trust whole taps with:
+  brew trust hudochenkov/sshpass
+Untap them with:
+  brew untap hudochenkov/sshpass
+To disable trust checks:
+  export HOMEBREW_NO_REQUIRE_TAP_TRUST=1
+This is not recommended and will be removed in a later release.
+For more information, see:
+  https://docs.brew.sh/Tap-Trust
+==> Would install 12 formulae:
+masscan feroxbuster testssl bettercap hashcat trufflehog syft grype osv-scanner exiftool wpscan wireshark
+==> Downloading https://ghcr.io/v2/homebrew/core/masscan/manifests/1.3.2
+==> Downloading https://ghcr.io/v2/homebrew/core/feroxbuster/manifests/2.13.1
+==> Downloading https://ghcr.io/v2/homebrew/core/testssl/manifests/3.2.3-2
+==> Would install 1 dependency for testssl:
+openssl@4
+==> Downloading https://ghcr.io/v2/homebrew/core/bettercap/manifests/2.41.7
+==> Downloading https://ghcr.io/v2/homebrew/core/hashcat/manifests/7.1.2-2
+==> Would install 1 dependency for hashcat:
+minizip
+==> Downloading https://ghcr.io/v2/homebrew/core/trufflehog/manifests/3.95.8
+==> Downloading https://ghcr.io/v2/homebrew/core/syft/manifests/1.46.0
+==> Downloading https://ghcr.io/v2/homebrew/core/grype/manifests/0.115.0
+==> Downloading https://ghcr.io/v2/homebrew/core/osv-scanner/manifests/2.4.0
+==> Downloading https://ghcr.io/v2/homebrew/core/exiftool/manifests/13.55
+==> Would install 2 dependencies for wpscan:
+libyaml
+ruby@3.4
+==> Downloading https://ghcr.io/v2/homebrew/core/wireshark/manifests/4.6.6
+==> Would install 11 dependencies for wireshark:
+json-c
+gmp
+libtasn1
+nettle
+p11-kit
+gnutls
+libgpg-error
+libgcrypt
+libmaxminddb
+libsmi
+speexdsp
+==> Would upgrade 2 dependencies for wireshark:
+glib
+libnghttp3
+==> Fetching downloads for: masscan, feroxbuster, testssl, bettercap, hashcat, trufflehog, syft, grype, osv-scanner, exiftool, wpscan and wireshark
+✔︎ Bottle masscan (1.3.2)
+✔︎ Bottle feroxbuster (2.13.1)
+✔︎ Bottle Manifest openssl@4 (4.0.1)
+✔︎ Bottle testssl (3.2.3)
+✔︎ Bottle Manifest minizip (1.3.2_1)
+✔︎ Bottle minizip (1.3.2_1)
+✔︎ Bottle Manifest libyaml (0.2.5)
+✔︎ Bottle libyaml (0.2.5)
+✔︎ Bottle Manifest ruby@3.4 (3.4.10)
+✔︎ Bottle Manifest json-c (0.19)
+✔︎ Bottle Manifest json-c (0.19)
+✔︎ Bottle json-c (0.19)
+✔︎ Bottle Manifest glib (2.88.2)
+✔︎ Bottle Manifest libtasn1 (4.21.0)
+✔︎ Bottle Manifest nettle (4.0)
+✔︎ Bottle Manifest p11-kit (0.26.2)
+✔︎ Bottle Manifest libgpg-error (1.61)
+✔︎ Bottle Manifest gnutls (3.8.13_2)
+✔︎ Bottle Manifest libgcrypt (1.12.2)
+✔︎ Bottle Manifest libmaxminddb (1.13.3)
+✔︎ Bottle grype (0.115.0)
+✔︎ Bottle Manifest gmp (6.3.0)
+✔︎ Bottle libtasn1 (4.21.0)
+✔︎ Bottle Manifest libnghttp3 (1.17.0)
+✔︎ Bottle Manifest libsmi (0.5.0)
+✔︎ Bottle Manifest speexdsp (1.2.1)
+✔︎ Bottle libgpg-error (1.61)
+✔︎ Bottle libmaxminddb (1.13.3)
+✔︎ Bottle openssl@4 (4.0.1)
+✔︎ Bottle gmp (6.3.0)
+✔︎ Bottle libgcrypt (1.12.2)
+✔︎ Bottle osv-scanner (2.4.0)
+✔︎ Bottle libnghttp3 (1.17.0)
+✔︎ Bottle nettle (4.0)
+✔︎ Bottle speexdsp (1.2.1)
+✔︎ Bottle libsmi (0.5.0)
+✔︎ Bottle trufflehog (3.95.8)
+✔︎ Bottle glib (2.88.2)
+✔︎ Bottle p11-kit (0.26.2)
+✔︎ Bottle gnutls (3.8.13_2)
+✔︎ Bottle exiftool (13.55)
+✔︎ Bottle bettercap (2.41.7)
+✔︎ Bottle wireshark (4.6.6)
+✔︎ Bottle hashcat (7.1.2)
+✔︎ Formula wpscan (4.0.0)
+✔︎ Bottle syft (1.46.0)
+✔︎ Bottle ruby@3.4 (3.4.10)
+==> Pouring masscan--1.3.2.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/masscan/1.3.2: 6 files, 417.3KB
+==> Running `brew cleanup masscan`...
+Disable this behaviour by setting `HOMEBREW_NO_INSTALL_CLEANUP=1`.
+Hide these hints with `HOMEBREW_NO_ENV_HINTS=1` (see `man brew`).
+==> Pouring feroxbuster--2.13.1.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/feroxbuster/2.13.1: 11 files, 6.2MB
+==> Running `brew cleanup feroxbuster`...
+==> Installing testssl dependency: openssl@4
+==> Pouring openssl@4--4.0.1.arm64_tahoe.bottle.1.tar.gz
+🍺  /opt/homebrew/Cellar/openssl@4/4.0.1: 7,723 files, 37.7MB
+==> Pouring testssl--3.2.3.all.bottle.2.tar.gz
+🍺  /opt/homebrew/Cellar/testssl/3.2.3: 27 files, 3.8MB
+==> Running `brew cleanup testssl`...
+==> Pouring bettercap--2.41.7.arm64_tahoe.bottle.tar.gz
+==> Caveats
+bettercap requires root privileges so you will need to run `sudo bettercap`.
+You should be certain that you trust any software you grant root privileges.
+==> Summary
+🍺  /opt/homebrew/Cellar/bettercap/2.41.7: 6 files, 69.8MB
+==> Running `brew cleanup bettercap`...
+==> Installing hashcat dependency: minizip
+==> Pouring minizip--1.3.2_1.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/minizip/1.3.2_1: 16 files, 282.9KB
+==> Pouring hashcat--7.1.2.arm64_tahoe.bottle.2.tar.gz
+🍺  /opt/homebrew/Cellar/hashcat/7.1.2: 2,492 files, 180.4MB
+==> Running `brew cleanup hashcat`...
+==> Pouring trufflehog--3.95.8.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/trufflehog/3.95.8: 7 files, 116MB
+==> Running `brew cleanup trufflehog`...
+==> Pouring syft--1.46.0.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/syft/1.46.0: 10 files, 80.4MB
+==> Running `brew cleanup syft`...
+==> Pouring grype--0.115.0.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/grype/0.115.0: 9 files, 83.2MB
+==> Running `brew cleanup grype`...
+==> Pouring osv-scanner--2.4.0.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/osv-scanner/2.4.0: 7 files, 53MB
+==> Running `brew cleanup osv-scanner`...
+==> Pouring exiftool--13.55.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/exiftool/13.55: 1,276 files, 57MB
+==> Running `brew cleanup exiftool`...
+==> Installing wpscan from wpscanteam/tap
+==> Installing dependencies for wpscanteam/tap/wpscan: libyaml and ruby@3.4
+==> Installing wpscanteam/tap/wpscan dependency: libyaml
+==> Pouring libyaml--0.2.5.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/libyaml/0.2.5: 11 files, 359.3KB
+==> Installing wpscanteam/tap/wpscan dependency: ruby@3.4
+==> Pouring ruby@3.4--3.4.10.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/ruby@3.4/3.4.10: 20,599 files, 57.0MB
+==> Installing wpscanteam/tap/wpscan
+==> gem install bundler
+==> /opt/homebrew/Cellar/wpscan/4.0.0/libexec/gems/bundler-4.0.15/exe/bundle ins
+==> /opt/homebrew/Cellar/wpscan/4.0.0/bin/wpscan --update
+🍺  /opt/homebrew/Cellar/wpscan/4.0.0: 10,539 files, 148.4MB, built in 22 seconds
+==> Running `brew cleanup wpscan`...
+==> Installing dependencies for wireshark: json-c, gmp, libtasn1, nettle, p11-kit, gnutls, libgpg-error, libgcrypt, libmaxminddb, libsmi and speexdsp
+==> Installing wireshark dependency: json-c
+==> Pouring json-c--0.19.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/json-c/0.19: 34 files, 377.9KB
+==> Installing wireshark dependency: gmp
+==> Pouring gmp--6.3.0.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/gmp/6.3.0: 22 files, 3.4MB
+==> Installing wireshark dependency: libtasn1
+==> Pouring libtasn1--4.21.0.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/libtasn1/4.21.0: 64 files, 722.4KB
+==> Installing wireshark dependency: nettle
+==> Pouring nettle--4.0.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/nettle/4.0: 93 files, 2.9MB
+==> Installing wireshark dependency: p11-kit
+==> Pouring p11-kit--0.26.2.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/p11-kit/0.26.2: 33 files, 4.9MB
+==> Installing wireshark dependency: gnutls
+==> Pouring gnutls--3.8.13_2.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/gnutls/3.8.13_2: 1,289 files, 11.2MB
+==> Installing wireshark dependency: libgpg-error
+==> Pouring libgpg-error--1.61.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/libgpg-error/1.61: 50 files, 1.9MB
+==> Installing wireshark dependency: libgcrypt
+==> Pouring libgcrypt--1.12.2.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/libgcrypt/1.12.2: 24 files, 4MB
+==> Installing wireshark dependency: libmaxminddb
+==> Pouring libmaxminddb--1.13.3.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/libmaxminddb/1.13.3: 31 files, 276.9KB
+==> Installing wireshark dependency: libsmi
+==> Pouring libsmi--0.5.0.arm64_tahoe.bottle.1.tar.gz
+🍺  /opt/homebrew/Cellar/libsmi/0.5.0: 477 files, 21.4MB
+==> Installing wireshark dependency: speexdsp
+==> Pouring speexdsp--1.2.1.arm64_tahoe.bottle.tar.gz
+🍺  /opt/homebrew/Cellar/speexdsp/1.2.1: 20 files, 674.2KB
+==> Installing wireshark
+==> Pouring wireshark--4.6.6.arm64_tahoe.bottle.tar.gz
+==> Caveats
+This formula only installs the command-line utilities by default.
+
+Install Wireshark.app with Homebrew Cask:
+  brew install wireshark-app
+
+If your list of available capture interfaces is empty
+(default macOS behavior), install ChmodBPF:
+  brew install --cask wireshark-chmodbpf
+==> Summary
+🍺  /opt/homebrew/Cellar/wireshark/4.6.6: 1,046 files, 124.2MB
+==> Running `brew cleanup wireshark`...
+==> Caveats
+zsh completions have been installed to:
+  /opt/homebrew/share/zsh/site-functions
+==> bettercap
+bettercap requires root privileges so you will need to run `sudo bettercap`.
+You should be certain that you trust any software you grant root privileges.
+==> wireshark
+This formula only installs the command-line utilities by default.
+
+Install Wireshark.app with Homebrew Cask:
+  brew install wireshark-app
+
+If your list of available capture interfaces is empty
+(default macOS behavior), install ChmodBPF:
+  brew install --cask wireshark-chmodbpf
+finishedAt=2026-07-05T15:02:51-0700

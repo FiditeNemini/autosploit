@@ -1,0 +1,36 @@
+{
+  "appApi": "http://127.0.0.1:9999",
+  "finishedAt": "2026-07-05T14:19:09-0700",
+  "generatedAt": "2026-07-05T14:19:09-0700",
+  "noModelLoaded": true,
+  "notes": "Runs the Swift debug app in EXPLOITBOT_TESTING mode and exercises broad QA routes without loading a local model.",
+  "ok": true,
+  "proofLevel": "live-debug-app-route-matrix-no-model-load",
+  "proofType": "app-qa-matrix-smoke",
+  "requiredSubtabProofs": [
+    "recon-subtab-state-proof.py",
+    "web-subtab-state-proof.py",
+    "network-subtab-state-proof.py",
+    "creds-subtab-state-proof.py",
+    "exploit-subtab-state-proof.py",
+    "post-subtab-state-proof.py",
+    "supply-chain-cve-ui-proof.py",
+    "osint-subtab-state-proof.py",
+    "report-subtab-state-proof.py"
+  ],
+  "routeFamilies": [
+    "subtabs",
+    "agent-loop",
+    "tool-execution",
+    "security-boundary",
+    "runtime",
+    "context",
+    "cve",
+    "settings",
+    "visual",
+    "session",
+    "artifacts",
+    "ledgers"
+  ],
+  "startedAt": "2026-07-05T14:17:11-0700"
+}

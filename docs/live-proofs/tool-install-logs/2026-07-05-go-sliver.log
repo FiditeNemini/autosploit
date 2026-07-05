@@ -1,0 +1,7 @@
+startedAt=2026-07-05T15:04:03-0700
+go: downloading github.com/BishopFox/sliver v1.7.5
+go: github.com/BishopFox/sliver/client@latest (in github.com/BishopFox/sliver@v1.7.5):
+	The go.mod file for the module providing named packages contains one or
+	more replace directives. It must not contain directives that would cause
+	it to be interpreted differently than if it were the main module.
+finishedAt=2026-07-05T15:04:05-0700

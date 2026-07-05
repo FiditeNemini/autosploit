@@ -146,7 +146,7 @@ def wait_for_app(timeout: float = 15.0) -> None:
     last_error: Exception | None = None
     while time.time() < deadline:
         try:
-            request("GET", "/state", timeout=1.0)
+            request("GET", "/messages", timeout=2.0)
             return
         except Exception as exc:
             last_error = exc
@@ -177,7 +177,7 @@ def run() -> None:
 
         state = request("GET", "/state")
         coverage = request("GET", "/qa/deep-runtime-flow-coverage")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         tool_flow = request("GET", "/qa/tool-flow-coverage")
         runtime = request("GET", "/qa/runtime-coverage")
 
@@ -251,7 +251,7 @@ def run() -> None:
             raise AssertionError(f"runtime local model lane parity mismatch: {coverage}")
         if coverage.get("runtimeLocalModelLaneArtifactFileParity") is not True:
             raise AssertionError(f"runtime local model lane artifact parity mismatch: {coverage}")
-        if coverage.get("runtimeLocalModelLaneQwenTargetPath") != "/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP":
+        if coverage.get("runtimeLocalModelLaneQwenTargetPath") != "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP":
             raise AssertionError(f"runtime local model lane Qwen target mismatch: {coverage}")
         if coverage.get("cacheArtifactMatrixContractParity") is not True:
             raise AssertionError(f"cache artifact matrix parity mismatch: {coverage}")

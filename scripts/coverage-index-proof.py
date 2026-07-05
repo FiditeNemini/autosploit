@@ -216,7 +216,10 @@ EXPECTED_FAMILY_FANOUT_TOOLS = {
     "creds": "hashcat",
     "exploit": "metasploit",
     "post": "linpeas",
+    "supplyChain": "search_cve",
     "osint": "gowitness",
+    "report": "search_context",
+    "stash": "search_context",
 }
 
 EXPECTED_RESULT_PARSER_STRUCTURED_TOOLS = [
@@ -287,7 +290,7 @@ def assert_coverage_index() -> None:
     if seeded.get("ok") is not True:
         raise AssertionError(f"result parser fixture seed failed: {seeded}")
     state = request("GET", "/state")
-    index = request("GET", "/qa/coverage-index")
+    index = request("GET", "/qa/coverage-index", timeout=120.0)
     proof = request("GET", "/qa/proof-ledger")
     artifact = request("GET", "/qa/artifact-ledger")
     artifact_manifest_matrix = request("GET", "/qa/artifact-manifest-matrix")
@@ -2058,7 +2061,7 @@ def assert_coverage_index() -> None:
         raise AssertionError(f"coverage index tools/parsers always-visible tool count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("boundedCatalogueLimit") != tool_coverage.get("boundedCatalogueLimit"):
         raise AssertionError(f"coverage index tools/parsers bounded catalogue limit mismatch: {tools_parsers_group}")
-    if tools_parsers_group.get("familyFanoutCount", 0) < 7:
+    if tools_parsers_group.get("familyFanoutCount", 0) < 10:
         raise AssertionError(f"coverage index tools/parsers family fanout count mismatch: {tools_parsers_group}")
     if tools_parsers_group.get("familyFanoutTools") != EXPECTED_FAMILY_FANOUT_TOOLS:
         raise AssertionError(f"coverage index tools/parsers family fanout tool map mismatch: {tools_parsers_group}")

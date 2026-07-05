@@ -1,0 +1,88 @@
+Resolved 40 packages in 193ms
+   Building netifaces==0.11.0
+      Built netifaces==0.11.0
+Prepared 7 packages in 1.03s
+Installed 40 packages in 47ms
+ + bcrypt==5.0.0
+ + btrees==6.4
+ + certifi==2026.6.17
+ + cffi==2.0.0
+ + charset-normalizer==3.4.7
+ + colorama==0.4.6
+ + commonmark==0.9.2
+ + cryptography==49.0.0
+ + idna==3.18
+ + jinja2==3.1.6
+ + markupsafe==3.0.3
+ + netifaces==0.11.0
+ + packaging==20.9
+ + paramiko-ng==2.9.0
+ + persistent==6.7
+ + prompt-toolkit==3.0.52
+ + pwncat-cs==0.5.4
+ + pycparser==3.0
+ + pycryptodome==3.23.0
+ + pygments==2.20.0
+ + pynacl==1.6.2
+ + pyparsing==3.3.2
+ + python-rapidjson==1.23
+ + requests==2.34.2
+ + rich==10.16.2
+ + setuptools==80.10.2
+ + transaction==5.1
+ + urllib3==2.7.0
+ + wcwidth==0.8.2
+ + zc-lockfile==4.0
+ + zconfig==4.3
+ + zdaemon==5.2.1
+ + zeo==6.2
+ + zodb==6.3
+ + zodb3==3.11.0
+ + zodbpickle==4.4
+ + zodburi==2.6.0
+ + zope-deferredimport==6.1.1
+ + zope-interface==8.5
+ + zope-proxy==7.2
+Installed 1 executable: pwncat-cs
+/Users/eric/.local/share/uv/tools/pwncat-cs/lib/python3.11/site-packages/zodburi/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import iter_entry_points
+0.5.4
+/Users/eric/.local/share/uv/tools/pwncat-cs/lib/python3.11/site-packages/zodburi/__init__.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  from pkg_resources import iter_entry_points
+usage: pwncat-cs [-h] [--version] [--download-plugins] [--config CONFIG]
+                 [--ssl] [--ssl-cert SSL_CERT] [--ssl-key SSL_KEY]
+                 [--identity IDENTITY] [--listen] [--platform PLATFORM]
+                 [--port PORT] [--list] [--verbose]
+                 [[protocol://][user[:password]@][host][:port]] [port]
+
+Start interactive pwncat session and optionally connect to existing victim via
+a known platform and channel type. This entrypoint can also be used to list
+known implants on previous targets.
+
+positional arguments:
+  [protocol://][user[:password]@][host][:port]
+                        Connection string describing victim
+  port                  Alternative port number to support netcat-style syntax
+
+options:
+  -h, --help            show this help message and exit
+  --version, -v         Show version number and exit
+  --download-plugins    Pre-download all Windows builtin plugins and exit
+                        immediately
+  --config CONFIG, -c CONFIG
+                        Custom configuration file (default: ./pwncatrc)
+  --ssl                 Connect or listen with SSL
+  --ssl-cert SSL_CERT   Certificate for SSL-encrypted listeners (PEM)
+  --ssl-key SSL_KEY     Key for SSL-encrypted listeners (PEM)
+  --identity IDENTITY, -i IDENTITY
+                        Private key for SSH authentication
+  --listen, -l          Enable the `bind` protocol (supports netcat-style
+                        syntax)
+  --platform PLATFORM, -m PLATFORM
+                        Name of the platform to use (default: linux)
+  --port PORT, -p PORT  Alternative way to specify port to support netcat-
+                        style syntax
+  --list                List installed implants with remote connection
+                        capability
+  --verbose, -V         Enable verbose output for the remote commands executed
+                        by `pwncat`

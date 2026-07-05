@@ -1,0 +1,40 @@
+{
+  "blockedReport": {
+    "allowConcurrentModel": false,
+    "availableGB": 100.0,
+    "enabled": true,
+    "heavyModelProcessCount": 1,
+    "heavyModelProcesses": [
+      {
+        "command": "/Users/eric/exploitbot/ExploitBotEngine/.venv/bin/python3 /Users/eric/exploitbot/ExploitBotEngine/launch.py --model Qwen3.6-27B-MXFP8",
+        "pid": 4242,
+        "ppid": 1,
+        "rss_mb": 32768.0
+      }
+    ],
+    "requiredAvailableGB": 42.0
+  },
+  "finishedAt": "2026-07-04T06:22:07-0700",
+  "heavyProcessPgrep": {
+    "output": "55552 /bin/zsh -lc pgrep -alf 'vmlx_engine.server|ExploitBotEngine/launch.py|Qwen3.6|osaurus-evals run|mlx_lm.server|llama-server' || true",
+    "returncode": 0
+  },
+  "memoryPressure": {
+    "output": "The system has 137438953472 (8388608 pages with a page size of 16384).\n\nStats: \nPages free: 2803916 \nPages purgeable: 14469 \nPages purged: 418489 \n\nSwap I/O:\nSwapins: 0 \nSwapouts: 0 \n\nPage Q counts:\nPages active: 1178459 \nPages inactive: 3997395 \nPages speculative: 31371 \nPages throttled: 0 \nPages wired down: 289413 \n\nCompressor Stats:\nPages used by compressor: 4811 \nPages decompressed: 12814 \nPages compressed: 28125 \n\nFile I/O:\nPageins: 30432172 \nPageouts: 3112 \n\nSystem-wide memory free percentage: 96%",
+    "returncode": 0
+  },
+  "ok": true,
+  "preflightBlock": "PASS_BLOCKED_BEFORE_LAUNCH",
+  "proofType": "direct-verify-live-models-ram-guard-no-model-load",
+  "source": {
+    "hasPreflight": true,
+    "hasProcessGroupTermination": true,
+    "usesStartNewSession": true,
+    "verifier": "/Users/eric/exploitbot/scripts/verify-live-models.py"
+  },
+  "startedAt": "2026-07-04T06:22:07-0700",
+  "swapUsage": {
+    "output": "vm.swapusage: total = 0.00M  used = 0.00M  free = 0.00M  (encrypted)",
+    "returncode": 0
+  }
+}

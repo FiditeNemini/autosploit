@@ -14,6 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
+DEFAULT_OUTPUT = ROOT / "docs/live-proofs/2026-07-04-context-budget-compaction.json"
 
 EXPECTED_POLICY_STEPS = [
     "selectBoundedContext",
@@ -63,7 +64,7 @@ def wait_for_app(timeout: float = 15.0) -> None:
     last_error: Exception | None = None
     while time.time() < deadline:
         try:
-            request("GET", "/state", timeout=1.0)
+            request("GET", "/messages", timeout=2.0)
             return
         except Exception as exc:
             last_error = exc
@@ -74,6 +75,13 @@ def wait_for_app(timeout: float = 15.0) -> None:
 def run() -> None:
     env = os.environ.copy()
     env["EXPLOITBOT_TESTING"] = "1"
+    output = Path(os.environ.get("EXPLOITBOT_CONTEXT_BUDGET_OUTPUT", str(DEFAULT_OUTPUT))).expanduser()
+    report = {
+        "ok": False,
+        "proofType": "context-budget-compaction",
+        "startedAt": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "appApi": APP_API,
+    }
     subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     app = subprocess.Popen([str(ROOT / "script" / "build_and_run.sh"), "--verify"], cwd=ROOT, env=env)
 
@@ -86,7 +94,13 @@ def run() -> None:
         budget = request("GET", "/qa/context-budget-compaction")
         context = request("GET", "/qa/context-coverage")
         chat = request("GET", "/qa/chat-coverage")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
+        report["stateEngineConfig"] = state.get("engineConfig")
+        report["stateChat"] = state.get("chat")
+        report["budget"] = budget
+        report["context"] = context
+        report["chat"] = chat
+        report["coverageChatAndContext"] = (index.get("groups") or {}).get("chatAndContext")
 
         if budget.get("ok") is not True:
             raise AssertionError(f"context budget route failed: {budget}")
@@ -149,7 +163,25 @@ def run() -> None:
         if group.get("contextBudgetProofFileParity") is not True:
             raise AssertionError(f"coverage index context budget proof parity mismatch: {group}")
 
-        print("context-budget-compaction proof passed")
+        report["ok"] = True
+        report["status"] = {
+            "policySteps": "PASS",
+            "maxTokensForwarded": "PASS",
+            "maxIterationsBounded": "PASS",
+            "contextPacketBudget": "PASS",
+            "cachePreservingNewContext": "PASS",
+            "coverageIndexParity": "PASS",
+        }
+        report["finishedAt"] = time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+        print(f"context-budget-compaction proof passed; wrote {output}")
+    except Exception as exc:
+        report["error"] = str(exc)
+        report["finishedAt"] = time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+        raise
     finally:
         subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         if app.poll() is None:

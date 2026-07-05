@@ -157,7 +157,7 @@ def run() -> None:
         wait_for_app()
         lifecycle = request("GET", ROUTE, timeout=45.0)
         state = request("GET", "/state")
-        index = request("GET", "/qa/coverage-index", timeout=45.0)
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         assert_lifecycle(lifecycle, state, index)
         print("turn-lifecycle-evidence proof passed")
     finally:

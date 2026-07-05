@@ -1,0 +1,403 @@
+{
+  "generatedAt": "2026-07-05T15:15:23-0700",
+  "ok": true,
+  "processEvidence": {
+    "appRows": [
+      "31916 698928 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+    ],
+    "engineProcessRows": []
+  },
+  "proofType": "tab-action-surface-matrix-live-route",
+  "proofs": [
+    "tab-action-surface-matrix-proof.py",
+    "tab-action-coverage-proof.py",
+    "action-state-inventory-proof.py",
+    "function-proof-matrix-proof.py",
+    "coverage-index-proof.py",
+    "app-qa-matrix-smoke-proof.py"
+  ],
+  "routeCounts": {
+    "actionStateCount": 30,
+    "coverageIndexTabActionSurfaceMatrixCount": 10,
+    "functionProofMatrixCount": 829
+  },
+  "routes": {
+    "actionStateInventoryRoute": "/qa/action-state-inventory",
+    "functionProofMatrixRoute": "/qa/function-proof-matrix",
+    "stateRoutePresent": true,
+    "tabActionCoverageRoute": "/qa/tab-action-coverage"
+  },
+  "sourceRoute": "/qa/tab-action-surface-matrix",
+  "stateEvidence": {
+    "activeTab": "recon",
+    "enginePort": 0,
+    "engineRunning": false,
+    "healthStatus": "stopped",
+    "tabActivities": {
+      "creds": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "exploit": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "network": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "osint": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "post": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "recon": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "report": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "stash": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "supplyChain": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "web": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      }
+    }
+  },
+  "status": {
+    "currentSourceBuild": "PASS",
+    "modelInferenceStarted": "NO",
+    "proofFileParity": "PASS",
+    "proofOwnerFileParity": "PASS",
+    "routeParity": "PASS"
+  },
+  "surfaceCount": 10,
+  "surfaceNames": [
+    "reconActions",
+    "webActions",
+    "networkActions",
+    "credsActions",
+    "exploitActions",
+    "postActions",
+    "supplyChainActions",
+    "osintActions",
+    "reportActions",
+    "stashActions"
+  ],
+  "surfaceRows": [
+    {
+      "actionStateInventoryRoute": "/qa/action-state-inventory",
+      "actionStateKeys": [
+        "reconAction",
+        "reconCopyActions",
+        "tabActivities"
+      ],
+      "functionProofMatrixRoute": "/qa/function-proof-matrix",
+      "proofOwnerExists": true,
+      "proofs": [
+        "recon-action-status-proof.py",
+        "recon-copy-actions-proof.py"
+      ],
+      "routes": [
+        "/qa/seed-recon-action-status",
+        "/qa/seed-recon-copy-actions",
+        "/qa/recon-copy"
+      ],
+      "surface": "reconActions",
+      "tabActionCoverageRoute": "/qa/tab-action-coverage",
+      "tabs": [
+        "recon"
+      ]
+    },
+    {
+      "actionStateInventoryRoute": "/qa/action-state-inventory",
+      "actionStateKeys": [
+        "webAction",
+        "webDirectActions",
+        "tabActivities"
+      ],
+      "functionProofMatrixRoute": "/qa/function-proof-matrix",
+      "proofOwnerExists": true,
+      "proofs": [
+        "web-direct-actions-proof.py",
+        "web-header-copy-proof.py",
+        "web-row-context-actions-proof.py",
+        "web-verify-action-proof.py"
+      ],
+      "routes": [
+        "/qa/seed-web-direct-actions",
+        "/qa/web-create-finding",
+        "/qa/web-stash",
+        "/qa/web-copy",
+        "/qa/web-copy-all",
+        "/qa/web-row-action",
+        "/qa/web-search-related",
+        "/qa/seed-web-verify-action"
+      ],
+      "surface": "webActions",
+      "tabActionCoverageRoute": "/qa/tab-action-coverage",
+      "tabs": [
+        "web"
+      ]
+    },
+    {
+      "actionStateInventoryRoute": "/qa/action-state-inventory",
+      "actionStateKeys": [
+        "networkAction",
+        "networkCopyActions",
+        "networkLifecycle",
+        "tabActivities"
+      ],
+      "functionProofMatrixRoute": "/qa/function-proof-matrix",
+      "proofOwnerExists": true,
+      "proofs": [
+        "network-protocol-action-proof.py",
+        "network-copy-actions-proof.py"
+      ],
+      "routes": [
+        "/qa/seed-network-protocol-action",
+        "/qa/seed-network-copy-actions",
+        "/qa/network-copy"
+      ],
+      "surface": "networkActions",
+      "tabActionCoverageRoute": "/qa/tab-action-coverage",
+      "tabs": [
+        "network"
+      ]
+    },
+    {
+      "actionStateInventoryRoute": "/qa/action-state-inventory",
+      "actionStateKeys": [
+        "credsAction",
+        "credsCopyActions",
+        "credsLifecycle",
+        "tabActivities"
+      ],
+      "functionProofMatrixRoute": "/qa/function-proof-matrix",
+      "proofOwnerExists": true,
+      "proofs": [
+        "creds-action-results-proof.py",
+        "creds-copy-actions-proof.py"
+      ],
+      "routes": [
+        "/qa/seed-creds-action-results",
+        "/qa/seed-creds-copy-actions",
+        "/qa/creds-copy"
+      ],
+      "surface": "credsActions",
+      "tabActionCoverageRoute": "/qa/tab-action-coverage",
+      "tabs": [
+        "creds"
+      ]
+    },
+    {
+      "actionStateInventoryRoute": "/qa/action-state-inventory",
+      "actionStateKeys": [
+        "exploitAction",
+        "exploitCopyActions",
+        "exploitActionHistory",
+        "exploitLifecycle",
+        "tabActivities"
+      ],
+      "functionProofMatrixRoute": "/qa/function-proof-matrix",
+      "proofOwnerExists": true,
+      "proofs": [
+        "exploit-action-differentiation-proof.py",
+        "exploit-copy-actions-proof.py"
+      ],
+      "routes": [
+        "/qa/seed-exploit-action-differentiation",
+        "/qa/seed-exploit-copy-actions",
+        "/qa/exploit-copy"
+      ],
+      "surface": "exploitActions",
+      "tabActionCoverageRoute": "/qa/tab-action-coverage",
+      "tabs": [
+        "exploit"
+      ]
+    },
+    {
+      "actionStateInventoryRoute": "/qa/action-state-inventory",
+      "actionStateKeys": [
+        "postLifecycle",
+        "postAttribution",
+        "postCopyActions",
+        "tabActivities"
+      ],
+      "functionProofMatrixRoute": "/qa/function-proof-matrix",
+      "proofOwnerExists": true,
+      "proofs": [
+        "post-attribution-proof.py",
+        "post-copy-actions-proof.py"
+      ],
+      "routes": [
+        "/qa/seed-post-attribution",
+        "/qa/seed-post-copy-actions",
+        "/qa/post-copy"
+      ],
+      "surface": "postActions",
+      "tabActionCoverageRoute": "/qa/tab-action-coverage",
+      "tabs": [
+        "post"
+      ]
+    },
+    {
+      "actionStateInventoryRoute": "/qa/action-state-inventory",
+      "actionStateKeys": [
+        "supplyChainLifecycle",
+        "cveService",
+        "contextCatalog",
+        "tabActivities"
+      ],
+      "functionProofMatrixRoute": "/qa/function-proof-matrix",
+      "proofOwnerExists": true,
+      "proofs": [
+        "supply-chain-cve-ui-proof.py"
+      ],
+      "routes": [
+        "/qa/supply-chain-coverage"
+      ],
+      "surface": "supplyChainActions",
+      "tabActionCoverageRoute": "/qa/tab-action-coverage",
+      "tabs": [
+        "supplyChain"
+      ]
+    },
+    {
+      "actionStateInventoryRoute": "/qa/action-state-inventory",
+      "actionStateKeys": [
+        "osintLifecycle",
+        "osintArtifactAction",
+        "osintCopyActions",
+        "tabActivities"
+      ],
+      "functionProofMatrixRoute": "/qa/function-proof-matrix",
+      "proofOwnerExists": true,
+      "proofs": [
+        "osint-copy-actions-proof.py",
+        "osint-screenshot-artifact-proof.py",
+        "osint-artifact-actions-proof.py"
+      ],
+      "routes": [
+        "/qa/seed-osint-screenshot-artifact",
+        "/qa/seed-osint-copy-actions",
+        "/qa/osint-copy",
+        "/qa/osint-artifact-action"
+      ],
+      "surface": "osintActions",
+      "tabActionCoverageRoute": "/qa/tab-action-coverage",
+      "tabs": [
+        "osint"
+      ]
+    },
+    {
+      "actionStateInventoryRoute": "/qa/action-state-inventory",
+      "actionStateKeys": [
+        "reportExport",
+        "reportAction",
+        "reportRenderActions",
+        "reportFindingActions",
+        "tabActivities"
+      ],
+      "functionProofMatrixRoute": "/qa/function-proof-matrix",
+      "proofOwnerExists": true,
+      "proofs": [
+        "report-generate-action-proof.py",
+        "report-finding-actions-proof.py",
+        "report-visible-delete-wiring-proof.py",
+        "report-export-proof.py",
+        "report-visible-export-actions-proof.py",
+        "report-agent-action-proof.py"
+      ],
+      "routes": [
+        "/qa/seed-report-export",
+        "/qa/seed-report-generate-action",
+        "/qa/report-generate-action",
+        "/qa/seed-report-agent-action",
+        "/qa/seed-report-finding-actions",
+        "/qa/report-create-finding",
+        "/qa/report-submit-finding",
+        "/qa/report-delete-finding",
+        "/qa/report-export-action"
+      ],
+      "surface": "reportActions",
+      "tabActionCoverageRoute": "/qa/tab-action-coverage",
+      "tabs": [
+        "report"
+      ]
+    },
+    {
+      "actionStateInventoryRoute": "/qa/action-state-inventory",
+      "actionStateKeys": [
+        "stashActions",
+        "tabActivities"
+      ],
+      "functionProofMatrixRoute": "/qa/function-proof-matrix",
+      "proofOwnerExists": true,
+      "proofs": [
+        "stash-actions-proof.py",
+        "stash-row-context-actions-proof.py",
+        "stash-add-sheet-proof.py",
+        "stash-send-chat-control-proof.py"
+      ],
+      "routes": [
+        "/qa/seed-stash-actions",
+        "/qa/stash-add",
+        "/qa/stash-add-sheet",
+        "/qa/stash-filter",
+        "/qa/stash-copy-all",
+        "/qa/stash-copy",
+        "/qa/stash-row-action",
+        "/qa/stash-send",
+        "/qa/stash-delete"
+      ],
+      "surface": "stashActions",
+      "tabActionCoverageRoute": "/qa/tab-action-coverage",
+      "tabs": [
+        "stash"
+      ]
+    }
+  ]
+}

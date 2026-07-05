@@ -11,9 +11,12 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
+from app_proof_lock import app_proof_lock
+
 
 ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
+ARTIFACT = ROOT / "docs" / "live-proofs" / "2026-07-05-subtab-lifecycle-matrix.json"
 DOCS = [
     ROOT / "docs" / "app-system-review-2026-05-21.md",
     ROOT / "docs" / "app-flow-inventory-2026-05-21.md",
@@ -68,9 +71,88 @@ def assert_file_proofs_exist(proofs: list[str], label: str) -> None:
         raise AssertionError(f"{label} names missing proof files: {missing}")
 
 
+def timestamp() -> str:
+    return time.strftime("%Y-%m-%dT%H:%M:%S%z")
+
+
+def process_evidence() -> dict:
+    output = subprocess.check_output(["ps", "-axo", "pid,rss,comm,args"], text=True)
+    app_rows: list[str] = []
+    engine_rows: list[str] = []
+    engine_tokens = (
+        "ExploitBotEngine/launch.py",
+        "vmlx_engine.server",
+        "mlx_server",
+        "Qwen3.6",
+        "MiniMax-M",
+    )
+    for line in output.splitlines():
+        parts = line.split(None, 3)
+        comm = parts[2] if len(parts) >= 3 else ""
+        args = parts[3] if len(parts) >= 4 else ""
+        if "ExploitBot.app/Contents/MacOS/ExploitBot" in line:
+            app_rows.append(line.strip())
+        shell_or_watcher = comm.endswith(("/zsh", "/bash", "/sh")) or "/.claude/" in args
+        if not shell_or_watcher and any(token in line for token in engine_tokens):
+            engine_rows.append(line.strip())
+    return {
+        "appRows": app_rows,
+        "engineProcessRows": engine_rows,
+    }
+
+
+def write_artifact(
+    state: dict,
+    matrix: dict,
+    index: dict,
+) -> None:
+    tabs_group = (index.get("groups") or {}).get("tabsAndSessions") or {}
+    state_routes = (state.get("qaCoverage") or {}).get("stateRoutes") or []
+    model_inference_started = bool(state.get("engineRunning")) or bool(state.get("enginePort"))
+    report = {
+        "ok": True,
+        "proofType": "subtab-lifecycle-matrix-live-route",
+        "generatedAt": timestamp(),
+        "sourceRoute": "/qa/subtab-lifecycle-matrix",
+        "status": {
+            "currentSourceBuild": "PASS",
+            "routeParity": "PASS" if matrix.get("rowParity") is True else "FAIL",
+            "proofFileParity": "PASS" if matrix.get("proofFileParity") is True else "FAIL",
+            "proofOwnerFileParity": "PASS" if matrix.get("proofOwnerFileParity") is True else "FAIL",
+            "modelInferenceStarted": "YES" if model_inference_started else "NO",
+        },
+        "subtabCount": matrix.get("subtabCount"),
+        "subtabRows": matrix.get("subtabRows") or [],
+        "proofs": matrix.get("proofs") or [],
+        "routeCounts": {
+            "tabToolFunctionFlowCount": matrix.get("tabToolFunctionFlowCount"),
+            "sessionWorkflowMatrixCount": matrix.get("sessionWorkflowMatrixCount"),
+            "visualSurfaceMatrixCount": matrix.get("visualSurfaceMatrixCount"),
+            "coverageIndexSubtabLifecycleMatrixCount": tabs_group.get("subtabLifecycleMatrixCount"),
+        },
+        "routes": {
+            "stateRoutePresent": "/qa/subtab-lifecycle-matrix" in state_routes,
+            "subtabCoverageRoute": matrix.get("subtabCoverageRoute"),
+            "tabToolFunctionFlowRoute": matrix.get("tabToolFunctionFlowRoute"),
+            "sessionWorkflowMatrixRoute": matrix.get("sessionWorkflowMatrixRoute"),
+            "visualSurfaceMatrixRoute": matrix.get("visualSurfaceMatrixRoute"),
+        },
+        "stateEvidence": {
+            "engineRunning": bool(state.get("engineRunning")),
+            "enginePort": state.get("enginePort"),
+            "healthStatus": state.get("healthStatus"),
+            "activeSubtabs": state.get("activeSubtabs") or {},
+        },
+        "processEvidence": process_evidence(),
+    }
+    ARTIFACT.parent.mkdir(parents=True, exist_ok=True)
+    ARTIFACT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
 def run() -> None:
     env = os.environ.copy()
     env["EXPLOITBOT_TESTING"] = "1"
+    env["EXPLOITBOT_SKIP_APP_PROOF_LOCK"] = "1"
     subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     app = subprocess.Popen([str(ROOT / "script" / "build_and_run.sh"), "--verify"], cwd=ROOT, env=env)
 
@@ -85,7 +167,7 @@ def run() -> None:
         tab_tool_flow = request("GET", "/qa/tab-tool-function-flow")
         session_workflow = request("GET", "/qa/session-workflow-matrix")
         visual_surface = request("GET", "/qa/visual-surface-matrix")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"subtab lifecycle matrix route failed: {matrix}")
@@ -150,7 +232,8 @@ def run() -> None:
             if token not in docs_text:
                 raise AssertionError(f"docs missing subtab lifecycle matrix token {token}")
 
-        print("subtab-lifecycle-matrix proof passed")
+        write_artifact(state=state, matrix=matrix, index=index)
+        print(f"subtab-lifecycle-matrix proof passed and wrote {ARTIFACT}")
     finally:
         subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         if app.poll() is None:
@@ -159,7 +242,8 @@ def run() -> None:
 
 if __name__ == "__main__":
     try:
-        run()
+        with app_proof_lock("subtab-lifecycle-matrix-proof.py"):
+            run()
     except (AssertionError, RuntimeError, urllib.error.URLError, TimeoutError, socket.timeout) as exc:
         print(f"subtab-lifecycle-matrix proof failed: {exc}", flush=True)
         raise SystemExit(1)

@@ -1,0 +1,192 @@
+{
+  "generatedAt": "2026-07-05T15:08:30-0700",
+  "ok": true,
+  "proofLevel": "existing-live-artifact-per-tool-transcript-backed",
+  "proofType": "individual-toolchain-coverage",
+  "rows": [
+    {
+      "chatTranscript": true,
+      "evidence": [
+        "docs/live-proofs/2026-07-04-real-installed-tools-loopback.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-35b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json"
+      ],
+      "qwenModelDrivenEvidence": [
+        "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+      ],
+      "requiredLevel": "real-loopback",
+      "resultOrTabEvidence": true,
+      "status": "PASS",
+      "terminalTranscript": true,
+      "tool": "nmap"
+    },
+    {
+      "chatTranscript": true,
+      "evidence": [
+        "docs/live-proofs/2026-07-04-real-installed-tools-loopback.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json"
+      ],
+      "qwenModelDrivenEvidence": [
+        "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+      ],
+      "requiredLevel": "real-loopback",
+      "resultOrTabEvidence": true,
+      "status": "PASS",
+      "terminalTranscript": true,
+      "tool": "httpx"
+    },
+    {
+      "chatTranscript": true,
+      "evidence": [
+        "docs/live-proofs/2026-07-04-real-installed-tools-loopback.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json"
+      ],
+      "qwenModelDrivenEvidence": [
+        "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+      ],
+      "requiredLevel": "real-loopback",
+      "resultOrTabEvidence": true,
+      "status": "PASS",
+      "terminalTranscript": true,
+      "tool": "nuclei"
+    },
+    {
+      "chatTranscript": true,
+      "evidence": [
+        "docs/live-proofs/2026-07-04-real-installed-tools-loopback.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-35b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json"
+      ],
+      "qwenModelDrivenEvidence": [
+        "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+      ],
+      "requiredLevel": "real-loopback",
+      "resultOrTabEvidence": true,
+      "status": "PASS",
+      "terminalTranscript": true,
+      "tool": "hydra"
+    },
+    {
+      "chatTranscript": true,
+      "evidence": [
+        "docs/live-proofs/2026-07-04-real-installed-tools-loopback.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-35b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json"
+      ],
+      "qwenModelDrivenEvidence": [
+        "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+      ],
+      "requiredLevel": "real-loopback",
+      "resultOrTabEvidence": true,
+      "status": "PASS",
+      "terminalTranscript": true,
+      "tool": "netexec"
+    },
+    {
+      "chatTranscript": true,
+      "evidence": [
+        "docs/live-proofs/2026-07-04-real-installed-tools-loopback.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-35b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json"
+      ],
+      "qwenModelDrivenEvidence": [
+        "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+      ],
+      "requiredLevel": "real-loopback",
+      "resultOrTabEvidence": true,
+      "status": "PASS",
+      "terminalTranscript": true,
+      "tool": "linpeas"
+    },
+    {
+      "chatTranscript": true,
+      "evidence": [
+        "docs/live-proofs/2026-07-04-real-installed-tools-loopback.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json"
+      ],
+      "qwenModelDrivenEvidence": [
+        "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+      ],
+      "requiredLevel": "real-loopback-via-run-shell",
+      "resultOrTabEvidence": true,
+      "status": "PASS",
+      "terminalTranscript": true,
+      "tool": "curl"
+    },
+    {
+      "chatTranscript": true,
+      "evidence": [
+        "docs/live-proofs/2026-07-04-real-installed-tools-loopback.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json"
+      ],
+      "qwenModelDrivenEvidence": [
+        "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+      ],
+      "requiredLevel": "real-loopback-via-run-shell",
+      "resultOrTabEvidence": true,
+      "status": "PASS",
+      "terminalTranscript": true,
+      "tool": "nc"
+    },
+    {
+      "chatTranscript": true,
+      "evidence": [
+        "docs/live-proofs/2026-07-04-real-metasploit-safe-app.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-35b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-metasploit-safe-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-metasploit-safe-35b.json"
+      ],
+      "qwenModelDrivenEvidence": [
+        "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+      ],
+      "requiredLevel": "safe-version-command",
+      "resultOrTabEvidence": true,
+      "status": "PASS",
+      "terminalTranscript": true,
+      "tool": "metasploit"
+    },
+    {
+      "chatTranscript": true,
+      "evidence": [
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-35b.json"
+      ],
+      "qwenModelDrivenEvidence": [
+        "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+      ],
+      "requiredLevel": "autonomous-phase-loopback",
+      "resultOrTabEvidence": true,
+      "status": "PASS",
+      "terminalTranscript": true,
+      "tool": "sqlmap"
+    }
+  ],
+  "statusCounts": {
+    "FAIL": 0,
+    "PASS": 10
+  },
+  "toolCount": 10
+}

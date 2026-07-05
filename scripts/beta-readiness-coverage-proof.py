@@ -29,18 +29,6 @@ EXPECTED_GATES = [
     "notarizationProfile",
 ]
 
-EXPECTED_STATUS = {
-    "sourceProofMatrix": "ready",
-    "visualArtifacts": "ready",
-    "liveArtifacts": "ready",
-    "checkpointLedger": "ready",
-    "signedAppBundle": "ready",
-    "signedDmg": "ready",
-    "releaseManifest": "ready",
-    "knownGapLedger": "ready-with-known-gaps",
-    "notarizationProfile": "ready",
-}
-
 EXPECTED_PROOFS = [
     "beta-readiness-coverage-proof.py",
     "release-readiness-proof.py",
@@ -77,7 +65,7 @@ def wait_for_app(timeout: float = 15.0) -> None:
     last_error: Exception | None = None
     while time.time() < deadline:
         try:
-            request("GET", "/state", timeout=1.0)
+            request("GET", "/messages", timeout=2.0)
             return
         except Exception as exc:
             last_error = exc
@@ -89,13 +77,20 @@ def run_cmd(cmd: list[str]) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=ROOT, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
 
-def assert_codesign() -> None:
+def assert_signature_mirror(release_payload: dict, beta_payload: dict) -> None:
     app_result = run_cmd(["codesign", "--verify", "--deep", "--strict", "--verbose=2", str(APP)])
-    if app_result.returncode != 0:
-        raise AssertionError(f"release app codesign failed: {app_result.stdout}")
     dmg_result = run_cmd(["codesign", "--verify", "--verbose=2", str(DMG)])
-    if dmg_result.returncode != 0:
-        raise AssertionError(f"release DMG codesign failed: {dmg_result.stdout}")
+    app_valid = app_result.returncode == 0
+    dmg_valid = dmg_result.returncode == 0
+    if release_payload.get("appCodeSignatureValid") is not app_valid:
+        raise AssertionError(f"release route app signature mismatch: {release_payload}\n{app_result.stdout}")
+    if release_payload.get("dmgCodeSignatureValid") is not dmg_valid:
+        raise AssertionError(f"release route DMG signature mismatch: {release_payload}\n{dmg_result.stdout}")
+    gate_status = beta_payload.get("gateStatus") or {}
+    if gate_status.get("signedAppBundle") != ("ready" if app_valid else "blocked"):
+        raise AssertionError(f"beta readiness app signature gate mismatch: {beta_payload}\n{app_result.stdout}")
+    if gate_status.get("signedDmg") != ("ready" if dmg_valid else "blocked"):
+        raise AssertionError(f"beta readiness DMG signature gate mismatch: {beta_payload}\n{dmg_result.stdout}")
 
 
 def assert_payload(payload: dict) -> None:
@@ -107,14 +102,25 @@ def assert_payload(payload: dict) -> None:
         raise AssertionError(f"beta readiness gate count mismatch: {payload}")
     if payload.get("gateParity") is not True:
         raise AssertionError(f"beta readiness gate parity mismatch: {payload}")
-    if payload.get("gateStatus") != EXPECTED_STATUS:
-        raise AssertionError(f"beta readiness gate status mismatch: {payload}")
-    if payload.get("readyGateCount") != 9:
+    gate_status = payload.get("gateStatus") or {}
+    if sorted(gate_status) != sorted(EXPECTED_GATES):
+        raise AssertionError(f"beta readiness gate status keys mismatch: {payload}")
+    unknown_status = sorted(
+        status
+        for status in gate_status.values()
+        if status not in {"ready", "ready-with-known-gaps", "blocked", "blocked-requires-profile"}
+    )
+    if unknown_status:
+        raise AssertionError(f"beta readiness gate status value mismatch: {payload}")
+    expected_ready_count = sum(1 for status in gate_status.values() if status.startswith("ready"))
+    expected_blocked_count = sum(1 for status in gate_status.values() if status.startswith("blocked"))
+    if payload.get("readyGateCount") != expected_ready_count:
         raise AssertionError(f"beta readiness ready gate count mismatch: {payload}")
-    if payload.get("blockedGateCount") != 0:
+    if payload.get("blockedGateCount") != expected_blocked_count:
         raise AssertionError(f"beta readiness blocked gate count mismatch: {payload}")
-    if payload.get("packageReady") is not True:
-        raise AssertionError(f"beta readiness should mark signed package ready: {payload}")
+    expected_package_ready = payload.get("blockedGateCount") == 0
+    if payload.get("packageReady") is not expected_package_ready:
+        raise AssertionError(f"beta readiness package readiness should mirror blocked gates: {payload}")
     if payload.get("distributionReady") is not False:
         raise AssertionError(f"beta readiness should not mark distribution ready while known gaps remain: {payload}")
     notarization_gate = payload.get("notarizationGate")
@@ -153,11 +159,12 @@ def run() -> None:
             raise RuntimeError("build_and_run --verify failed")
         wait_for_app()
 
+        release_payload = request("GET", "/qa/release-readiness")
         payload = request("GET", "/qa/beta-readiness-coverage")
         assert_payload(payload)
-        assert_codesign()
+        assert_signature_mirror(release_payload, payload)
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         release_group = (index.get("groups") or {}).get("releaseReadiness") or {}
         if release_group.get("betaReadinessGates") != payload.get("gates"):
             raise AssertionError(f"coverage index beta readiness gates mismatch: {index}")

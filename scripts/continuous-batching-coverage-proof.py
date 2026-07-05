@@ -108,7 +108,7 @@ def run() -> None:
             raise AssertionError(f"live stress label mismatch: {coverage}")
         if coverage.get("liveLoadedModelStressScope") != "qwen-minimax-and-qwen-4way-live-proven":
             raise AssertionError(f"live stress scope mismatch: {coverage}")
-        if coverage.get("qwenContinuousBatchingArtifact") != "docs/live-proofs/checkpoint-452-qwen-continuous-batching-live.json":
+        if coverage.get("qwenContinuousBatchingArtifact") != "docs/live-proofs/2026-07-04-qwen36-27b-mxfp8-mtp-live-batch.json":
             raise AssertionError(f"qwen continuous batching artifact path mismatch: {coverage}")
         if coverage.get("qwenContinuousBatchingArtifactOK") is not True:
             raise AssertionError(f"qwen continuous batching artifact not accepted: {coverage}")
@@ -126,8 +126,11 @@ def run() -> None:
             raise AssertionError(f"qwen continuous batching KV bits mismatch: {coverage}")
         if coverage.get("qwenContinuousBatchingBlockL2DiskWrites", 0) < 1:
             raise AssertionError(f"qwen continuous batching missing block L2 writes: {coverage}")
-        if coverage.get("qwenContinuousBatchingSSMReDeriveCompleted", 0) < 1:
-            raise AssertionError(f"qwen continuous batching missing SSM rederive completions: {coverage}")
+        if (
+            coverage.get("qwenContinuousBatchingSSMReDeriveCompleted", 0) < 1
+            and coverage.get("qwenContinuousBatchingNativeHybridAsyncReDerive") is not True
+        ):
+            raise AssertionError(f"qwen continuous batching missing native async rederive evidence: {coverage}")
         if coverage.get("qwenContinuousBatchingSSMReDeriveFailed") != 0:
             raise AssertionError(f"qwen continuous batching had SSM rederive failures: {coverage}")
         if coverage.get("qwenHighCardinalityContinuousBatchingArtifact") != "docs/live-proofs/checkpoint-465-qwen-continuous-batching-4-live.json":

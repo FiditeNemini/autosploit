@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import importlib.util
 import os
 import signal
 import subprocess
@@ -15,10 +16,12 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 APP = ROOT / "release" / "ExploitBot.app"
 APP_BINARY = APP / "Contents" / "MacOS" / "ExploitBot"
+ENGINE_LAUNCH = APP / "Contents" / "Resources" / "ExploitBotEngine" / "launch.py"
 APP_API = "http://127.0.0.1:9999"
 DEFAULT_QWEN = Path("/Users/eric/models/JANGQ/Qwen3.6-27B-JANG_4M-MTP")
 DEFAULT_OUTPUT = ROOT / "docs" / "live-proofs" / "checkpoint-463-release-app-qwen-cross-restart-cache.json"
 PROMPT = "Reply exactly: RELEASE-QWEN-WARM-PASS-OK"
+RELEASE_QWEN_PREFLIGHT_SCRIPT = ROOT / "scripts" / "release-app-live-qwen-proof.py"
 
 
 def require(condition: bool, message: str, detail: Any = None) -> None:
@@ -127,7 +130,92 @@ def cache_summary(cache: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def release_engine_process_rows() -> list[dict[str, Any]]:
+    output = subprocess.check_output(["/bin/ps", "-axo", "pid=,ppid=,pgid=,rss=,command="], text=True)
+    rows: list[dict[str, Any]] = []
+    current_pid = os.getpid()
+    marker = str(ENGINE_LAUNCH)
+    for line in output.splitlines():
+        parts = line.split(maxsplit=4)
+        if len(parts) != 5:
+            continue
+        pid_text, ppid_text, pgid_text, rss_text, command = parts
+        if marker not in command:
+            continue
+        pid = int(pid_text)
+        if pid == current_pid:
+            continue
+        rows.append(
+            {
+                "pid": pid,
+                "ppid": int(ppid_text),
+                "pgid": int(pgid_text),
+                "rssKB": int(rss_text),
+                "command": command[:800],
+            }
+        )
+    return rows
+
+
+def terminate_release_engine_processes() -> dict[str, Any]:
+    before = release_engine_process_rows()
+    for row in before:
+        try:
+            os.killpg(int(row["pgid"]), signal.SIGTERM)
+        except ProcessLookupError:
+            pass
+        except Exception:
+            try:
+                os.kill(int(row["pid"]), signal.SIGTERM)
+            except ProcessLookupError:
+                pass
+    deadline = time.time() + 5.0
+    after_term = release_engine_process_rows()
+    while after_term and time.time() < deadline:
+        time.sleep(0.25)
+        after_term = release_engine_process_rows()
+    for row in after_term:
+        try:
+            os.killpg(int(row["pgid"]), signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        except Exception:
+            try:
+                os.kill(int(row["pid"]), signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+    deadline = time.time() + 5.0
+    after = release_engine_process_rows()
+    while after and time.time() < deadline:
+        time.sleep(0.25)
+        after = release_engine_process_rows()
+    return {"before": before, "afterTerm": after_term, "after": after}
+
+
+def assert_no_release_engine_processes(rows: list[dict[str, Any]]) -> None:
+    require(not rows, "release bundled engine launcher still running after cleanup", rows)
+
+
+def assert_production_stop_clean(rows: list[dict[str, Any]]) -> None:
+    require(not rows, "release app stop left bundled engine launcher running before harness cleanup", rows)
+
+
+def release_qwen_memory_preflight(model: Path) -> dict[str, Any]:
+    spec = importlib.util.spec_from_file_location("release_app_live_qwen_proof", RELEASE_QWEN_PREFLIGHT_SCRIPT)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.release_qwen_memory_preflight(model)
+
+
+def wait_for_release_qwen_memory_slot(model: Path) -> dict[str, Any]:
+    spec = importlib.util.spec_from_file_location("release_app_live_qwen_proof", RELEASE_QWEN_PREFLIGHT_SCRIPT)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.wait_for_release_qwen_memory_slot(model)
+
+
 def launch_app(home: str) -> subprocess.Popen[bytes]:
+    terminate_release_engine_processes()
     subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     env = {
         **os.environ,
@@ -140,18 +228,22 @@ def launch_app(home: str) -> subprocess.Popen[bytes]:
     return app
 
 
-def stop_app(app: subprocess.Popen[bytes] | None) -> None:
+def stop_app(app: subprocess.Popen[bytes] | None) -> dict[str, Any]:
     try:
-        app_request("POST", "/engine/stop", timeout=5.0)
+        app_request("POST", "/engine/stop", timeout=20.0)
     except Exception:
         pass
-    subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    production_stop_rows = release_engine_process_rows()
     if app is not None and app.poll() is None:
         app.send_signal(signal.SIGTERM)
         try:
             app.wait(timeout=5)
         except subprocess.TimeoutExpired:
             app.kill()
+    subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    cleanup = terminate_release_engine_processes()
+    cleanup["productionStopRows"] = production_stop_rows
+    return cleanup
 
 
 def run_phase(home: str, model: Path, phase: str) -> dict[str, Any]:
@@ -201,7 +293,14 @@ def run_phase(home: str, model: Path, phase: str) -> dict[str, Any]:
         )
         return report
     finally:
-        stop_app(app)
+        cleanup = stop_app(app)
+        report["productionStopProcessRows"] = cleanup["productionStopRows"]
+        report["productionStopClean"] = not cleanup["productionStopRows"]
+        report["cleanupTerminatedProcessRows"] = cleanup["before"]
+        report["postCleanupProcessRows"] = cleanup["after"]
+        report["postCleanupClean"] = not cleanup["after"]
+        assert_production_stop_clean(cleanup["productionStopRows"])
+        assert_no_release_engine_processes(cleanup["after"])
 
 
 def main() -> None:
@@ -219,6 +318,7 @@ def main() -> None:
         "home": "temporary-shared-across-two-release-app-launches",
     }
     try:
+        report["memoryPreflight"] = wait_for_release_qwen_memory_slot(model)
         populate = run_phase(home_tmp.name, model, "populate")
         replay = run_phase(home_tmp.name, model, "replay")
         populate_summary = populate.get("cacheSummary") or {}

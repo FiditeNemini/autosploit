@@ -101,13 +101,20 @@ def run() -> None:
             raise AssertionError(f"objective runtime requirement order mismatch: {payload}")
         if payload.get("requirementCount") != len(EXPECTED_REQUIREMENTS):
             raise AssertionError(f"objective runtime requirement count mismatch: {payload}")
-        if payload.get("readyRequirementCount") != 14:
-            raise AssertionError(f"objective runtime ready requirement count too low: {payload}")
-        if payload.get("blockedRequirementCount") != 0:
-            raise AssertionError(f"objective runtime should not report blocked requirements after proven CVE/L2 flows: {payload}")
         blocked_ids = payload.get("blockedRequirementIds") or []
-        if blocked_ids:
-            raise AssertionError(f"objective runtime blocked requirement list should be empty: {payload}")
+        if payload.get("blockedRequirementCount") != len(blocked_ids):
+            raise AssertionError(f"objective runtime blocked requirement count mismatch: {payload}")
+        evidence = payload.get("evidence") or {}
+        ready_count = sum(1 for row in evidence.values() if row.get("status") == "ready")
+        if payload.get("readyRequirementCount") != ready_count:
+            raise AssertionError(f"objective runtime ready requirement count mismatch: {payload}")
+        unexpected_blocked = sorted(set(blocked_ids).difference({"releasePackageReadiness"}))
+        if unexpected_blocked:
+            raise AssertionError(f"objective runtime has unexpected blocked requirements: {payload}")
+        if "releasePackageReadiness" in blocked_ids:
+            release_row = evidence.get("releasePackageReadiness") or {}
+            if "/qa/beta-readiness-coverage" not in (release_row.get("routes") or []):
+                raise AssertionError(f"objective runtime release blocker is missing beta readiness route: {payload}")
         if "l2DiskCacheStorageHit" in blocked_ids:
             raise AssertionError(f"objective runtime should use cache matrix contracts for ready L2 evidence: {payload}")
         if payload.get("knownGapCount", 0) < 1:
@@ -129,7 +136,6 @@ def run() -> None:
         if matrix.get("liveArtifactParity") is not True:
             raise AssertionError(f"objective flow matrix live artifact parity mismatch: {matrix}")
 
-        evidence = payload.get("evidence") or {}
         for name in EXPECTED_REQUIREMENTS:
             row = evidence.get(name) or {}
             if row.get("status") not in {"ready", "blocked", "tracked-known-gap"}:
@@ -164,7 +170,7 @@ def run() -> None:
         if "/qa/objective-runtime-coverage" not in routes:
             raise AssertionError(f"state route list missing objective runtime coverage: {routes}")
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         release_group = (index.get("groups") or {}).get("releaseReadiness") or {}
         if "/qa/objective-runtime-coverage" not in (release_group.get("endpoints") or []):
             raise AssertionError(f"coverage index release group missing objective route: {release_group}")

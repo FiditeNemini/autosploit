@@ -1,0 +1,99 @@
+{
+  "appApi": "http://127.0.0.1:9999",
+  "feedRecent": [
+    {
+      "duration": 0,
+      "icon": "RUN",
+      "text": "Running run_shell",
+      "tool": "run_shell"
+    },
+    {
+      "duration": 0,
+      "icon": "OUT",
+      "text": "$ printf qa-terminal-command-output",
+      "tool": "run_shell"
+    },
+    {
+      "duration": 0.1,
+      "icon": "OK",
+      "text": "run_shell: 1 lines output (0.1s)",
+      "tool": "run_shell"
+    }
+  ],
+  "finishedAt": "2026-07-05T15:16:47-0700",
+  "ok": true,
+  "proofType": "terminal-tool-visibility",
+  "seeded": {
+    "ok": true
+  },
+  "startedAt": "2026-07-05T15:16:44-0700",
+  "status": {
+    "activeCommand": "PASS",
+    "commandTranscripts": "PASS",
+    "feedCommandEvidence": "PASS",
+    "terminalVisible": "PASS"
+  },
+  "terminal": {
+    "activeCommand": {
+      "command": "printf qa-terminal-command-output",
+      "source": "tabActivities",
+      "status": "running",
+      "summary": "qa terminal command running",
+      "tab": "network",
+      "tool": "run_shell"
+    },
+    "commandTranscripts": [
+      {
+        "command": "Running run_shell",
+        "outputPreview": "Running run_shell",
+        "source": "activityFeed",
+        "status": "RUN",
+        "timestamp": 1783289807.3599,
+        "tool": "run_shell"
+      },
+      {
+        "command": "printf qa-terminal-command-output",
+        "outputPreview": "$ printf qa-terminal-command-output",
+        "source": "activityFeed",
+        "status": "OUT",
+        "timestamp": 1783289807.3599029,
+        "tool": "run_shell"
+      },
+      {
+        "command": "run_shell: 1 lines output (0.1s)",
+        "outputPreview": "run_shell: 1 lines output (0.1s)",
+        "source": "activityFeed",
+        "status": "OK",
+        "timestamp": 1783289807.359921,
+        "tool": "run_shell"
+      },
+      {
+        "command": "run_shell",
+        "outputPreview": "qa-terminal-command-output\n",
+        "source": "rawResults",
+        "status": "captured",
+        "timestamp": 1783289807.3599238,
+        "tool": "run_shell"
+      },
+      {
+        "command": "printf qa-terminal-command-output",
+        "outputPreview": "qa terminal command running",
+        "source": "tabActivities",
+        "status": "running",
+        "tab": "network",
+        "timestamp": 1783289807.360033,
+        "tool": "run_shell"
+      }
+    ],
+    "installedToolCount": 0,
+    "isVisible": true,
+    "surfaceContract": "terminal-visibility-command-transcripts",
+    "toolPathCount": 4,
+    "toolPaths": [
+      "/opt/homebrew/bin",
+      "/usr/local/bin",
+      "/Users/eric/.exploitbot/tools",
+      "/Users/eric/.local/bin"
+    ]
+  }
+}

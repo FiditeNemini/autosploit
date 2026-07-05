@@ -1,0 +1,10 @@
+startedAt=2026-07-05T15:05:06-0700
+usage: jwt_tool.py [-h] [-b] [-t TARGETURL] [-r REQUEST] [-rt RATE] [-i]
+                   [-rc COOKIES] [-rh HEADERS] [-pd POSTDATA]
+                   [-cv CANARYVALUE] [-np] [-nr] [-M MODE] [-X EXPLOIT]
+                   [-ju JWKSURL] [-S SIGN] [-pr PRIVKEY] [-T] [-I]
+                   [-hc HEADERCLAIM] [-pc PAYLOADCLAIM] [-hv HEADERVALUE]
+                   [-pv PAYLOADVALUE] [-C] [-d DICT] [-p PASSWORD]
+                   [-kf KEYFILE] [-V] [-pk PUBKEY] [-jw JWKSFILE] [-Q QUERY]
+                   [-v]
+finishedAt=2026-07-05T15:05:10-0700

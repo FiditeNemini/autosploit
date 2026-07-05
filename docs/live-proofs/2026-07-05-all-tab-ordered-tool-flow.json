@@ -1,0 +1,3683 @@
+{
+  "actionSurfaceRouteParity": true,
+  "allToolCoverage": {
+    "allToolsExecutableAndAuthorized": true,
+    "allToolsHaveAuthorizationPolicies": true,
+    "allToolsHaveExecutionOwners": true,
+    "allToolsHaveSourceHooks": true,
+    "allToolsInOrderedWorkflows": true,
+    "authorizationPolicyCount": 3,
+    "coveredToolCount": 42,
+    "coveredTools": [
+      "arjun",
+      "bettercap",
+      "chisel",
+      "dalfox",
+      "dnsx",
+      "exiftool",
+      "feroxbuster",
+      "ffuf",
+      "gowitness",
+      "graphqlmap",
+      "grype",
+      "haiti",
+      "hashcat",
+      "holehe",
+      "httpx",
+      "hydra",
+      "impacket",
+      "jwt_tool",
+      "katana",
+      "linpeas",
+      "lookup_cve",
+      "masscan",
+      "metasploit",
+      "netexec",
+      "nmap",
+      "nuclei",
+      "osv_scanner",
+      "pwncat",
+      "run_shell",
+      "search_context",
+      "search_cve",
+      "sherlock",
+      "sliver",
+      "snmpwalk",
+      "sqlmap",
+      "subfinder",
+      "syft",
+      "testssl",
+      "theharvester",
+      "trufflehog",
+      "tshark",
+      "wpscan"
+    ],
+    "executionCounts": {
+      "callback": 3,
+      "subprocess": 39
+    },
+    "missingAuthorizationPolicies": [],
+    "missingExecutionOwners": [],
+    "missingSourceHooks": [],
+    "missingWorkflowTools": [],
+    "toolCount": 42,
+    "toolTabs": {
+      "arjun": [
+        "web"
+      ],
+      "bettercap": [
+        "network"
+      ],
+      "chisel": [
+        "network",
+        "post"
+      ],
+      "dalfox": [
+        "web"
+      ],
+      "dnsx": [
+        "recon"
+      ],
+      "exiftool": [
+        "osint"
+      ],
+      "feroxbuster": [
+        "web"
+      ],
+      "ffuf": [
+        "web"
+      ],
+      "gowitness": [
+        "osint"
+      ],
+      "graphqlmap": [
+        "web"
+      ],
+      "grype": [
+        "supplyChain"
+      ],
+      "haiti": [
+        "creds"
+      ],
+      "hashcat": [
+        "creds"
+      ],
+      "holehe": [
+        "osint"
+      ],
+      "httpx": [
+        "recon",
+        "web"
+      ],
+      "hydra": [
+        "creds"
+      ],
+      "impacket": [
+        "exploit",
+        "post"
+      ],
+      "jwt_tool": [
+        "web"
+      ],
+      "katana": [
+        "web"
+      ],
+      "linpeas": [
+        "post"
+      ],
+      "lookup_cve": [
+        "report",
+        "stash",
+        "supplyChain"
+      ],
+      "masscan": [
+        "network",
+        "recon"
+      ],
+      "metasploit": [
+        "exploit"
+      ],
+      "netexec": [
+        "creds",
+        "network",
+        "post"
+      ],
+      "nmap": [
+        "network",
+        "recon"
+      ],
+      "nuclei": [
+        "exploit",
+        "supplyChain",
+        "web"
+      ],
+      "osv_scanner": [
+        "supplyChain"
+      ],
+      "pwncat": [
+        "exploit",
+        "post"
+      ],
+      "run_shell": [
+        "supplyChain"
+      ],
+      "search_context": [
+        "report",
+        "stash",
+        "supplyChain"
+      ],
+      "search_cve": [
+        "stash",
+        "supplyChain"
+      ],
+      "sherlock": [
+        "osint"
+      ],
+      "sliver": [
+        "exploit",
+        "post"
+      ],
+      "snmpwalk": [
+        "network"
+      ],
+      "sqlmap": [
+        "web"
+      ],
+      "subfinder": [
+        "recon"
+      ],
+      "syft": [
+        "supplyChain"
+      ],
+      "testssl": [
+        "web"
+      ],
+      "theharvester": [
+        "osint",
+        "recon"
+      ],
+      "trufflehog": [
+        "creds",
+        "supplyChain"
+      ],
+      "tshark": [
+        "network"
+      ],
+      "wpscan": [
+        "web"
+      ]
+    }
+  },
+  "generatedAt": "2026-07-05T15:12:40-0700",
+  "modelChainEvidence": {
+    "artifact": "docs/live-proofs/2026-07-04-chained-tool-workflow.json",
+    "hasQwen27": true,
+    "hasQwen35": true,
+    "models": [
+      "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+    ],
+    "ok": true,
+    "orderedToolChains": {
+      "qwen27_phase_chain": [
+        "nmap",
+        "netexec",
+        "sqlmap",
+        "hydra",
+        "metasploit",
+        "linpeas"
+      ],
+      "qwen27_real_installed_loopback_chain": [
+        "nmap",
+        "httpx",
+        "nuclei",
+        "hydra",
+        "netexec",
+        "linpeas",
+        "run_shell",
+        "run_shell"
+      ],
+      "qwen35_phase_chain": [
+        "nmap",
+        "netexec",
+        "sqlmap",
+        "hydra",
+        "metasploit",
+        "linpeas"
+      ],
+      "qwen35_real_installed_loopback_chain": [
+        "nmap",
+        "httpx",
+        "nuclei",
+        "hydra",
+        "netexec",
+        "linpeas",
+        "run_shell",
+        "run_shell"
+      ],
+      "real_installed_loopback_chain": [
+        "nmap",
+        "httpx",
+        "nuclei",
+        "hydra",
+        "netexec",
+        "linpeas",
+        "run_shell",
+        "run_shell"
+      ]
+    },
+    "proofType": "chained-tool-workflow",
+    "qwenPassRowCount": 4,
+    "rowCount": 5
+  },
+  "ok": true,
+  "orderDiversity": {
+    "firstTabCount": 7,
+    "firstTabs": [
+      "network",
+      "osint",
+      "post",
+      "recon",
+      "report",
+      "stash",
+      "supplyChain"
+    ],
+    "hasFullForwardOrder": true,
+    "hasFullReverseOrder": true,
+    "hasRepeatedTabWorkflow": true,
+    "lastTabCount": 2,
+    "lastTabs": [
+      "recon",
+      "stash"
+    ],
+    "repeatedTabWorkflowIds": [
+      "report_stash_reopen_loop"
+    ],
+    "workflowIds": [
+      "user_named_full_surface_order",
+      "external_discovery_to_report_and_stash",
+      "credentialed_network_path",
+      "osint_to_credential_path",
+      "reverse_full_surface_order",
+      "cve_first_supply_chain_retriage",
+      "report_stash_reopen_loop",
+      "post_to_recon_retriage",
+      "osint_first_public_to_supply_chain"
+    ]
+  },
+  "processEvidence": {
+    "appRows": [
+      "30482 698992 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+    ],
+    "engineProcessRows": []
+  },
+  "proofLevel": "live-route-all-tab-wiring-plus-existing-real-qwen-ordered-tool-chain",
+  "proofType": "all-tab-ordered-tool-flow-live-route",
+  "routeEvidence": {
+    "tabActionSurfaceMatrix": {
+      "coverageIndexMirror": 10,
+      "proofFileParity": true,
+      "route": "/qa/tab-action-surface-matrix",
+      "surfaceCount": 10
+    },
+    "tabToolFunctionFlow": {
+      "coverageIndexMirror": 10,
+      "proofFileParity": true,
+      "route": "/qa/tab-tool-function-flow",
+      "tabCount": 10
+    },
+    "toolExecutionMatrix": {
+      "coverageIndexMirror": 42,
+      "proofFileParity": true,
+      "route": "/qa/tool-execution-matrix",
+      "toolCount": 42
+    }
+  },
+  "stateEvidence": {
+    "activeTab": "recon",
+    "enginePort": 0,
+    "engineRunning": false,
+    "healthStatus": "stopped"
+  },
+  "statusCounts": {
+    "FAIL": 0,
+    "PASS": 9
+  },
+  "tabCount": 10,
+  "tabFlowRouteParity": true,
+  "tabs": [
+    "recon",
+    "web",
+    "network",
+    "creds",
+    "exploit",
+    "post",
+    "supplyChain",
+    "osint",
+    "report",
+    "stash"
+  ],
+  "toolExecutionRouteParity": true,
+  "workflowCount": 9,
+  "workflowRows": [
+    {
+      "actionSurfaceSequence": [
+        "reconActions",
+        "webActions",
+        "networkActions",
+        "credsActions",
+        "exploitActions",
+        "postActions",
+        "supplyChainActions",
+        "osintActions",
+        "reportActions",
+        "stashActions"
+      ],
+      "failures": [],
+      "id": "user_named_full_surface_order",
+      "proofSequence": [
+        "creds-action-results-proof.py",
+        "creds-copy-actions-proof.py",
+        "exploit-action-differentiation-proof.py",
+        "exploit-copy-actions-proof.py",
+        "network-copy-actions-proof.py",
+        "network-protocol-action-proof.py",
+        "osint-artifact-actions-proof.py",
+        "osint-copy-actions-proof.py",
+        "osint-screenshot-artifact-proof.py",
+        "post-attribution-proof.py",
+        "post-copy-actions-proof.py",
+        "recon-action-status-proof.py",
+        "recon-copy-actions-proof.py",
+        "report-agent-action-proof.py",
+        "report-export-proof.py",
+        "report-finding-actions-proof.py",
+        "report-generate-action-proof.py",
+        "report-visible-delete-wiring-proof.py",
+        "report-visible-export-actions-proof.py",
+        "stash-actions-proof.py",
+        "stash-add-sheet-proof.py",
+        "stash-row-context-actions-proof.py",
+        "stash-send-chat-control-proof.py",
+        "supply-chain-cve-ui-proof.py",
+        "web-direct-actions-proof.py",
+        "web-header-copy-proof.py",
+        "web-row-context-actions-proof.py",
+        "web-verify-action-proof.py"
+      ],
+      "routeSequence": [
+        "/qa/seed-recon-action-status",
+        "/qa/seed-web-direct-actions",
+        "/qa/seed-network-protocol-action",
+        "/qa/seed-creds-action-results",
+        "/qa/seed-exploit-action-differentiation",
+        "/qa/seed-post-attribution",
+        "/qa/supply-chain-coverage",
+        "/qa/seed-osint-screenshot-artifact",
+        "/qa/seed-report-export",
+        "/qa/seed-stash-actions"
+      ],
+      "stateKeySequence": [
+        "contextCatalog",
+        "credsAction",
+        "credsCopyActions",
+        "credsLifecycle",
+        "cveService",
+        "exploitAction",
+        "exploitActionHistory",
+        "exploitCopyActions",
+        "exploitLifecycle",
+        "networkAction",
+        "networkCopyActions",
+        "networkLifecycle",
+        "osintArtifactAction",
+        "osintCopyActions",
+        "osintLifecycle",
+        "postAttribution",
+        "postCopyActions",
+        "postLifecycle",
+        "reconAction",
+        "reconCopyActions",
+        "reportAction",
+        "reportExport",
+        "reportFindingActions",
+        "reportRenderActions",
+        "stashActions",
+        "supplyChainLifecycle",
+        "tabActivities",
+        "webAction",
+        "webDirectActions"
+      ],
+      "status": "PASS",
+      "tabRows": [
+        {
+          "actionSurface": "reconActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "recon-action-status-proof.py",
+            "recon-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-recon-action-status",
+            "/qa/seed-recon-copy-actions",
+            "/qa/recon-copy"
+          ],
+          "stateKeys": [
+            "reconAction",
+            "reconCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 5,
+          "tab": "recon",
+          "toolCount": 6,
+          "tools": [
+            "dnsx",
+            "httpx",
+            "masscan",
+            "nmap",
+            "subfinder",
+            "theharvester"
+          ],
+          "view": "ReconTabView"
+        },
+        {
+          "actionSurface": "webActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "web-direct-actions-proof.py",
+            "web-header-copy-proof.py",
+            "web-row-context-actions-proof.py",
+            "web-verify-action-proof.py"
+          ],
+          "routeCount": 8,
+          "routes": [
+            "/qa/seed-web-direct-actions",
+            "/qa/web-create-finding",
+            "/qa/web-stash",
+            "/qa/web-copy",
+            "/qa/web-copy-all",
+            "/qa/web-row-action",
+            "/qa/web-search-related",
+            "/qa/seed-web-verify-action"
+          ],
+          "stateKeys": [
+            "webAction",
+            "webDirectActions",
+            "tabActivities"
+          ],
+          "subtabCount": 7,
+          "tab": "web",
+          "toolCount": 12,
+          "tools": [
+            "arjun",
+            "dalfox",
+            "feroxbuster",
+            "ffuf",
+            "graphqlmap",
+            "httpx",
+            "jwt_tool",
+            "katana",
+            "nuclei",
+            "sqlmap",
+            "testssl",
+            "wpscan"
+          ],
+          "view": "WebTabView"
+        },
+        {
+          "actionSurface": "networkActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "network-protocol-action-proof.py",
+            "network-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-network-protocol-action",
+            "/qa/seed-network-copy-actions",
+            "/qa/network-copy"
+          ],
+          "stateKeys": [
+            "networkAction",
+            "networkCopyActions",
+            "networkLifecycle",
+            "tabActivities"
+          ],
+          "subtabCount": 5,
+          "tab": "network",
+          "toolCount": 7,
+          "tools": [
+            "bettercap",
+            "chisel",
+            "masscan",
+            "netexec",
+            "nmap",
+            "snmpwalk",
+            "tshark"
+          ],
+          "view": "NetworkTabView"
+        },
+        {
+          "actionSurface": "credsActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "creds-action-results-proof.py",
+            "creds-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-creds-action-results",
+            "/qa/seed-creds-copy-actions",
+            "/qa/creds-copy"
+          ],
+          "stateKeys": [
+            "credsAction",
+            "credsCopyActions",
+            "credsLifecycle",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "creds",
+          "toolCount": 5,
+          "tools": [
+            "haiti",
+            "hashcat",
+            "hydra",
+            "netexec",
+            "trufflehog"
+          ],
+          "view": "CredsTabView"
+        },
+        {
+          "actionSurface": "exploitActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "exploit-action-differentiation-proof.py",
+            "exploit-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-exploit-action-differentiation",
+            "/qa/seed-exploit-copy-actions",
+            "/qa/exploit-copy"
+          ],
+          "stateKeys": [
+            "exploitAction",
+            "exploitCopyActions",
+            "exploitActionHistory",
+            "exploitLifecycle",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "exploit",
+          "toolCount": 5,
+          "tools": [
+            "impacket",
+            "metasploit",
+            "nuclei",
+            "pwncat",
+            "sliver"
+          ],
+          "view": "ExploitTabView"
+        },
+        {
+          "actionSurface": "postActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "post-attribution-proof.py",
+            "post-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-post-attribution",
+            "/qa/seed-post-copy-actions",
+            "/qa/post-copy"
+          ],
+          "stateKeys": [
+            "postLifecycle",
+            "postAttribution",
+            "postCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 3,
+          "tab": "post",
+          "toolCount": 6,
+          "tools": [
+            "chisel",
+            "impacket",
+            "linpeas",
+            "netexec",
+            "pwncat",
+            "sliver"
+          ],
+          "view": "PostExploitTabView"
+        },
+        {
+          "actionSurface": "supplyChainActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback",
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "supply-chain-cve-ui-proof.py"
+          ],
+          "routeCount": 1,
+          "routes": [
+            "/qa/supply-chain-coverage"
+          ],
+          "stateKeys": [
+            "supplyChainLifecycle",
+            "cveService",
+            "contextCatalog",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "supplyChain",
+          "toolCount": 9,
+          "tools": [
+            "grype",
+            "lookup_cve",
+            "nuclei",
+            "osv_scanner",
+            "run_shell",
+            "search_context",
+            "search_cve",
+            "syft",
+            "trufflehog"
+          ],
+          "view": "SupplyChainTabView"
+        },
+        {
+          "actionSurface": "osintActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "osint-copy-actions-proof.py",
+            "osint-screenshot-artifact-proof.py",
+            "osint-artifact-actions-proof.py"
+          ],
+          "routeCount": 4,
+          "routes": [
+            "/qa/seed-osint-screenshot-artifact",
+            "/qa/seed-osint-copy-actions",
+            "/qa/osint-copy",
+            "/qa/osint-artifact-action"
+          ],
+          "stateKeys": [
+            "osintLifecycle",
+            "osintArtifactAction",
+            "osintCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "osint",
+          "toolCount": 5,
+          "tools": [
+            "exiftool",
+            "gowitness",
+            "holehe",
+            "sherlock",
+            "theharvester"
+          ],
+          "view": "OSINTTabView"
+        },
+        {
+          "actionSurface": "reportActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "report-generate-action-proof.py",
+            "report-finding-actions-proof.py",
+            "report-visible-delete-wiring-proof.py",
+            "report-export-proof.py",
+            "report-visible-export-actions-proof.py",
+            "report-agent-action-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-report-export",
+            "/qa/seed-report-generate-action",
+            "/qa/report-generate-action",
+            "/qa/seed-report-agent-action",
+            "/qa/seed-report-finding-actions",
+            "/qa/report-create-finding",
+            "/qa/report-submit-finding",
+            "/qa/report-delete-finding",
+            "/qa/report-export-action"
+          ],
+          "stateKeys": [
+            "reportExport",
+            "reportAction",
+            "reportRenderActions",
+            "reportFindingActions",
+            "tabActivities"
+          ],
+          "subtabCount": 2,
+          "tab": "report",
+          "toolCount": 2,
+          "tools": [
+            "lookup_cve",
+            "search_context"
+          ],
+          "view": "ReportTabView"
+        },
+        {
+          "actionSurface": "stashActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": false,
+          "proofs": [
+            "stash-actions-proof.py",
+            "stash-row-context-actions-proof.py",
+            "stash-add-sheet-proof.py",
+            "stash-send-chat-control-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-stash-actions",
+            "/qa/stash-add",
+            "/qa/stash-add-sheet",
+            "/qa/stash-filter",
+            "/qa/stash-copy-all",
+            "/qa/stash-copy",
+            "/qa/stash-row-action",
+            "/qa/stash-send",
+            "/qa/stash-delete"
+          ],
+          "stateKeys": [
+            "stashActions",
+            "tabActivities"
+          ],
+          "subtabCount": 0,
+          "tab": "stash",
+          "toolCount": 3,
+          "tools": [
+            "lookup_cve",
+            "search_context",
+            "search_cve"
+          ],
+          "view": "StashTabView"
+        }
+      ],
+      "tabs": [
+        "recon",
+        "web",
+        "network",
+        "creds",
+        "exploit",
+        "post",
+        "supplyChain",
+        "osint",
+        "report",
+        "stash"
+      ],
+      "toolSequence": [
+        "dnsx",
+        "arjun",
+        "bettercap",
+        "haiti",
+        "impacket",
+        "chisel",
+        "grype",
+        "exiftool",
+        "lookup_cve",
+        "lookup_cve"
+      ]
+    },
+    {
+      "actionSurfaceSequence": [
+        "reconActions",
+        "webActions",
+        "supplyChainActions",
+        "exploitActions",
+        "postActions",
+        "reportActions",
+        "stashActions"
+      ],
+      "failures": [],
+      "id": "external_discovery_to_report_and_stash",
+      "proofSequence": [
+        "exploit-action-differentiation-proof.py",
+        "exploit-copy-actions-proof.py",
+        "post-attribution-proof.py",
+        "post-copy-actions-proof.py",
+        "recon-action-status-proof.py",
+        "recon-copy-actions-proof.py",
+        "report-agent-action-proof.py",
+        "report-export-proof.py",
+        "report-finding-actions-proof.py",
+        "report-generate-action-proof.py",
+        "report-visible-delete-wiring-proof.py",
+        "report-visible-export-actions-proof.py",
+        "stash-actions-proof.py",
+        "stash-add-sheet-proof.py",
+        "stash-row-context-actions-proof.py",
+        "stash-send-chat-control-proof.py",
+        "supply-chain-cve-ui-proof.py",
+        "web-direct-actions-proof.py",
+        "web-header-copy-proof.py",
+        "web-row-context-actions-proof.py",
+        "web-verify-action-proof.py"
+      ],
+      "routeSequence": [
+        "/qa/seed-recon-action-status",
+        "/qa/seed-web-direct-actions",
+        "/qa/supply-chain-coverage",
+        "/qa/seed-exploit-action-differentiation",
+        "/qa/seed-post-attribution",
+        "/qa/seed-report-export",
+        "/qa/seed-stash-actions"
+      ],
+      "stateKeySequence": [
+        "contextCatalog",
+        "cveService",
+        "exploitAction",
+        "exploitActionHistory",
+        "exploitCopyActions",
+        "exploitLifecycle",
+        "postAttribution",
+        "postCopyActions",
+        "postLifecycle",
+        "reconAction",
+        "reconCopyActions",
+        "reportAction",
+        "reportExport",
+        "reportFindingActions",
+        "reportRenderActions",
+        "stashActions",
+        "supplyChainLifecycle",
+        "tabActivities",
+        "webAction",
+        "webDirectActions"
+      ],
+      "status": "PASS",
+      "tabRows": [
+        {
+          "actionSurface": "reconActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "recon-action-status-proof.py",
+            "recon-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-recon-action-status",
+            "/qa/seed-recon-copy-actions",
+            "/qa/recon-copy"
+          ],
+          "stateKeys": [
+            "reconAction",
+            "reconCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 5,
+          "tab": "recon",
+          "toolCount": 6,
+          "tools": [
+            "dnsx",
+            "httpx",
+            "masscan",
+            "nmap",
+            "subfinder",
+            "theharvester"
+          ],
+          "view": "ReconTabView"
+        },
+        {
+          "actionSurface": "webActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "web-direct-actions-proof.py",
+            "web-header-copy-proof.py",
+            "web-row-context-actions-proof.py",
+            "web-verify-action-proof.py"
+          ],
+          "routeCount": 8,
+          "routes": [
+            "/qa/seed-web-direct-actions",
+            "/qa/web-create-finding",
+            "/qa/web-stash",
+            "/qa/web-copy",
+            "/qa/web-copy-all",
+            "/qa/web-row-action",
+            "/qa/web-search-related",
+            "/qa/seed-web-verify-action"
+          ],
+          "stateKeys": [
+            "webAction",
+            "webDirectActions",
+            "tabActivities"
+          ],
+          "subtabCount": 7,
+          "tab": "web",
+          "toolCount": 12,
+          "tools": [
+            "arjun",
+            "dalfox",
+            "feroxbuster",
+            "ffuf",
+            "graphqlmap",
+            "httpx",
+            "jwt_tool",
+            "katana",
+            "nuclei",
+            "sqlmap",
+            "testssl",
+            "wpscan"
+          ],
+          "view": "WebTabView"
+        },
+        {
+          "actionSurface": "supplyChainActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback",
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "supply-chain-cve-ui-proof.py"
+          ],
+          "routeCount": 1,
+          "routes": [
+            "/qa/supply-chain-coverage"
+          ],
+          "stateKeys": [
+            "supplyChainLifecycle",
+            "cveService",
+            "contextCatalog",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "supplyChain",
+          "toolCount": 9,
+          "tools": [
+            "grype",
+            "lookup_cve",
+            "nuclei",
+            "osv_scanner",
+            "run_shell",
+            "search_context",
+            "search_cve",
+            "syft",
+            "trufflehog"
+          ],
+          "view": "SupplyChainTabView"
+        },
+        {
+          "actionSurface": "exploitActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "exploit-action-differentiation-proof.py",
+            "exploit-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-exploit-action-differentiation",
+            "/qa/seed-exploit-copy-actions",
+            "/qa/exploit-copy"
+          ],
+          "stateKeys": [
+            "exploitAction",
+            "exploitCopyActions",
+            "exploitActionHistory",
+            "exploitLifecycle",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "exploit",
+          "toolCount": 5,
+          "tools": [
+            "impacket",
+            "metasploit",
+            "nuclei",
+            "pwncat",
+            "sliver"
+          ],
+          "view": "ExploitTabView"
+        },
+        {
+          "actionSurface": "postActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "post-attribution-proof.py",
+            "post-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-post-attribution",
+            "/qa/seed-post-copy-actions",
+            "/qa/post-copy"
+          ],
+          "stateKeys": [
+            "postLifecycle",
+            "postAttribution",
+            "postCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 3,
+          "tab": "post",
+          "toolCount": 6,
+          "tools": [
+            "chisel",
+            "impacket",
+            "linpeas",
+            "netexec",
+            "pwncat",
+            "sliver"
+          ],
+          "view": "PostExploitTabView"
+        },
+        {
+          "actionSurface": "reportActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "report-generate-action-proof.py",
+            "report-finding-actions-proof.py",
+            "report-visible-delete-wiring-proof.py",
+            "report-export-proof.py",
+            "report-visible-export-actions-proof.py",
+            "report-agent-action-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-report-export",
+            "/qa/seed-report-generate-action",
+            "/qa/report-generate-action",
+            "/qa/seed-report-agent-action",
+            "/qa/seed-report-finding-actions",
+            "/qa/report-create-finding",
+            "/qa/report-submit-finding",
+            "/qa/report-delete-finding",
+            "/qa/report-export-action"
+          ],
+          "stateKeys": [
+            "reportExport",
+            "reportAction",
+            "reportRenderActions",
+            "reportFindingActions",
+            "tabActivities"
+          ],
+          "subtabCount": 2,
+          "tab": "report",
+          "toolCount": 2,
+          "tools": [
+            "lookup_cve",
+            "search_context"
+          ],
+          "view": "ReportTabView"
+        },
+        {
+          "actionSurface": "stashActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": false,
+          "proofs": [
+            "stash-actions-proof.py",
+            "stash-row-context-actions-proof.py",
+            "stash-add-sheet-proof.py",
+            "stash-send-chat-control-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-stash-actions",
+            "/qa/stash-add",
+            "/qa/stash-add-sheet",
+            "/qa/stash-filter",
+            "/qa/stash-copy-all",
+            "/qa/stash-copy",
+            "/qa/stash-row-action",
+            "/qa/stash-send",
+            "/qa/stash-delete"
+          ],
+          "stateKeys": [
+            "stashActions",
+            "tabActivities"
+          ],
+          "subtabCount": 0,
+          "tab": "stash",
+          "toolCount": 3,
+          "tools": [
+            "lookup_cve",
+            "search_context",
+            "search_cve"
+          ],
+          "view": "StashTabView"
+        }
+      ],
+      "tabs": [
+        "recon",
+        "web",
+        "supplyChain",
+        "exploit",
+        "post",
+        "report",
+        "stash"
+      ],
+      "toolSequence": [
+        "dnsx",
+        "arjun",
+        "grype",
+        "impacket",
+        "chisel",
+        "lookup_cve",
+        "lookup_cve"
+      ]
+    },
+    {
+      "actionSurfaceSequence": [
+        "networkActions",
+        "credsActions",
+        "exploitActions",
+        "postActions",
+        "reportActions",
+        "stashActions"
+      ],
+      "failures": [],
+      "id": "credentialed_network_path",
+      "proofSequence": [
+        "creds-action-results-proof.py",
+        "creds-copy-actions-proof.py",
+        "exploit-action-differentiation-proof.py",
+        "exploit-copy-actions-proof.py",
+        "network-copy-actions-proof.py",
+        "network-protocol-action-proof.py",
+        "post-attribution-proof.py",
+        "post-copy-actions-proof.py",
+        "report-agent-action-proof.py",
+        "report-export-proof.py",
+        "report-finding-actions-proof.py",
+        "report-generate-action-proof.py",
+        "report-visible-delete-wiring-proof.py",
+        "report-visible-export-actions-proof.py",
+        "stash-actions-proof.py",
+        "stash-add-sheet-proof.py",
+        "stash-row-context-actions-proof.py",
+        "stash-send-chat-control-proof.py"
+      ],
+      "routeSequence": [
+        "/qa/seed-network-protocol-action",
+        "/qa/seed-creds-action-results",
+        "/qa/seed-exploit-action-differentiation",
+        "/qa/seed-post-attribution",
+        "/qa/seed-report-export",
+        "/qa/seed-stash-actions"
+      ],
+      "stateKeySequence": [
+        "credsAction",
+        "credsCopyActions",
+        "credsLifecycle",
+        "exploitAction",
+        "exploitActionHistory",
+        "exploitCopyActions",
+        "exploitLifecycle",
+        "networkAction",
+        "networkCopyActions",
+        "networkLifecycle",
+        "postAttribution",
+        "postCopyActions",
+        "postLifecycle",
+        "reportAction",
+        "reportExport",
+        "reportFindingActions",
+        "reportRenderActions",
+        "stashActions",
+        "tabActivities"
+      ],
+      "status": "PASS",
+      "tabRows": [
+        {
+          "actionSurface": "networkActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "network-protocol-action-proof.py",
+            "network-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-network-protocol-action",
+            "/qa/seed-network-copy-actions",
+            "/qa/network-copy"
+          ],
+          "stateKeys": [
+            "networkAction",
+            "networkCopyActions",
+            "networkLifecycle",
+            "tabActivities"
+          ],
+          "subtabCount": 5,
+          "tab": "network",
+          "toolCount": 7,
+          "tools": [
+            "bettercap",
+            "chisel",
+            "masscan",
+            "netexec",
+            "nmap",
+            "snmpwalk",
+            "tshark"
+          ],
+          "view": "NetworkTabView"
+        },
+        {
+          "actionSurface": "credsActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "creds-action-results-proof.py",
+            "creds-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-creds-action-results",
+            "/qa/seed-creds-copy-actions",
+            "/qa/creds-copy"
+          ],
+          "stateKeys": [
+            "credsAction",
+            "credsCopyActions",
+            "credsLifecycle",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "creds",
+          "toolCount": 5,
+          "tools": [
+            "haiti",
+            "hashcat",
+            "hydra",
+            "netexec",
+            "trufflehog"
+          ],
+          "view": "CredsTabView"
+        },
+        {
+          "actionSurface": "exploitActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "exploit-action-differentiation-proof.py",
+            "exploit-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-exploit-action-differentiation",
+            "/qa/seed-exploit-copy-actions",
+            "/qa/exploit-copy"
+          ],
+          "stateKeys": [
+            "exploitAction",
+            "exploitCopyActions",
+            "exploitActionHistory",
+            "exploitLifecycle",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "exploit",
+          "toolCount": 5,
+          "tools": [
+            "impacket",
+            "metasploit",
+            "nuclei",
+            "pwncat",
+            "sliver"
+          ],
+          "view": "ExploitTabView"
+        },
+        {
+          "actionSurface": "postActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "post-attribution-proof.py",
+            "post-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-post-attribution",
+            "/qa/seed-post-copy-actions",
+            "/qa/post-copy"
+          ],
+          "stateKeys": [
+            "postLifecycle",
+            "postAttribution",
+            "postCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 3,
+          "tab": "post",
+          "toolCount": 6,
+          "tools": [
+            "chisel",
+            "impacket",
+            "linpeas",
+            "netexec",
+            "pwncat",
+            "sliver"
+          ],
+          "view": "PostExploitTabView"
+        },
+        {
+          "actionSurface": "reportActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "report-generate-action-proof.py",
+            "report-finding-actions-proof.py",
+            "report-visible-delete-wiring-proof.py",
+            "report-export-proof.py",
+            "report-visible-export-actions-proof.py",
+            "report-agent-action-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-report-export",
+            "/qa/seed-report-generate-action",
+            "/qa/report-generate-action",
+            "/qa/seed-report-agent-action",
+            "/qa/seed-report-finding-actions",
+            "/qa/report-create-finding",
+            "/qa/report-submit-finding",
+            "/qa/report-delete-finding",
+            "/qa/report-export-action"
+          ],
+          "stateKeys": [
+            "reportExport",
+            "reportAction",
+            "reportRenderActions",
+            "reportFindingActions",
+            "tabActivities"
+          ],
+          "subtabCount": 2,
+          "tab": "report",
+          "toolCount": 2,
+          "tools": [
+            "lookup_cve",
+            "search_context"
+          ],
+          "view": "ReportTabView"
+        },
+        {
+          "actionSurface": "stashActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": false,
+          "proofs": [
+            "stash-actions-proof.py",
+            "stash-row-context-actions-proof.py",
+            "stash-add-sheet-proof.py",
+            "stash-send-chat-control-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-stash-actions",
+            "/qa/stash-add",
+            "/qa/stash-add-sheet",
+            "/qa/stash-filter",
+            "/qa/stash-copy-all",
+            "/qa/stash-copy",
+            "/qa/stash-row-action",
+            "/qa/stash-send",
+            "/qa/stash-delete"
+          ],
+          "stateKeys": [
+            "stashActions",
+            "tabActivities"
+          ],
+          "subtabCount": 0,
+          "tab": "stash",
+          "toolCount": 3,
+          "tools": [
+            "lookup_cve",
+            "search_context",
+            "search_cve"
+          ],
+          "view": "StashTabView"
+        }
+      ],
+      "tabs": [
+        "network",
+        "creds",
+        "exploit",
+        "post",
+        "report",
+        "stash"
+      ],
+      "toolSequence": [
+        "bettercap",
+        "haiti",
+        "impacket",
+        "chisel",
+        "lookup_cve",
+        "lookup_cve"
+      ]
+    },
+    {
+      "actionSurfaceSequence": [
+        "osintActions",
+        "reconActions",
+        "networkActions",
+        "credsActions",
+        "reportActions",
+        "stashActions"
+      ],
+      "failures": [],
+      "id": "osint_to_credential_path",
+      "proofSequence": [
+        "creds-action-results-proof.py",
+        "creds-copy-actions-proof.py",
+        "network-copy-actions-proof.py",
+        "network-protocol-action-proof.py",
+        "osint-artifact-actions-proof.py",
+        "osint-copy-actions-proof.py",
+        "osint-screenshot-artifact-proof.py",
+        "recon-action-status-proof.py",
+        "recon-copy-actions-proof.py",
+        "report-agent-action-proof.py",
+        "report-export-proof.py",
+        "report-finding-actions-proof.py",
+        "report-generate-action-proof.py",
+        "report-visible-delete-wiring-proof.py",
+        "report-visible-export-actions-proof.py",
+        "stash-actions-proof.py",
+        "stash-add-sheet-proof.py",
+        "stash-row-context-actions-proof.py",
+        "stash-send-chat-control-proof.py"
+      ],
+      "routeSequence": [
+        "/qa/seed-osint-screenshot-artifact",
+        "/qa/seed-recon-action-status",
+        "/qa/seed-network-protocol-action",
+        "/qa/seed-creds-action-results",
+        "/qa/seed-report-export",
+        "/qa/seed-stash-actions"
+      ],
+      "stateKeySequence": [
+        "credsAction",
+        "credsCopyActions",
+        "credsLifecycle",
+        "networkAction",
+        "networkCopyActions",
+        "networkLifecycle",
+        "osintArtifactAction",
+        "osintCopyActions",
+        "osintLifecycle",
+        "reconAction",
+        "reconCopyActions",
+        "reportAction",
+        "reportExport",
+        "reportFindingActions",
+        "reportRenderActions",
+        "stashActions",
+        "tabActivities"
+      ],
+      "status": "PASS",
+      "tabRows": [
+        {
+          "actionSurface": "osintActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "osint-copy-actions-proof.py",
+            "osint-screenshot-artifact-proof.py",
+            "osint-artifact-actions-proof.py"
+          ],
+          "routeCount": 4,
+          "routes": [
+            "/qa/seed-osint-screenshot-artifact",
+            "/qa/seed-osint-copy-actions",
+            "/qa/osint-copy",
+            "/qa/osint-artifact-action"
+          ],
+          "stateKeys": [
+            "osintLifecycle",
+            "osintArtifactAction",
+            "osintCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "osint",
+          "toolCount": 5,
+          "tools": [
+            "exiftool",
+            "gowitness",
+            "holehe",
+            "sherlock",
+            "theharvester"
+          ],
+          "view": "OSINTTabView"
+        },
+        {
+          "actionSurface": "reconActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "recon-action-status-proof.py",
+            "recon-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-recon-action-status",
+            "/qa/seed-recon-copy-actions",
+            "/qa/recon-copy"
+          ],
+          "stateKeys": [
+            "reconAction",
+            "reconCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 5,
+          "tab": "recon",
+          "toolCount": 6,
+          "tools": [
+            "dnsx",
+            "httpx",
+            "masscan",
+            "nmap",
+            "subfinder",
+            "theharvester"
+          ],
+          "view": "ReconTabView"
+        },
+        {
+          "actionSurface": "networkActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "network-protocol-action-proof.py",
+            "network-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-network-protocol-action",
+            "/qa/seed-network-copy-actions",
+            "/qa/network-copy"
+          ],
+          "stateKeys": [
+            "networkAction",
+            "networkCopyActions",
+            "networkLifecycle",
+            "tabActivities"
+          ],
+          "subtabCount": 5,
+          "tab": "network",
+          "toolCount": 7,
+          "tools": [
+            "bettercap",
+            "chisel",
+            "masscan",
+            "netexec",
+            "nmap",
+            "snmpwalk",
+            "tshark"
+          ],
+          "view": "NetworkTabView"
+        },
+        {
+          "actionSurface": "credsActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "creds-action-results-proof.py",
+            "creds-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-creds-action-results",
+            "/qa/seed-creds-copy-actions",
+            "/qa/creds-copy"
+          ],
+          "stateKeys": [
+            "credsAction",
+            "credsCopyActions",
+            "credsLifecycle",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "creds",
+          "toolCount": 5,
+          "tools": [
+            "haiti",
+            "hashcat",
+            "hydra",
+            "netexec",
+            "trufflehog"
+          ],
+          "view": "CredsTabView"
+        },
+        {
+          "actionSurface": "reportActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "report-generate-action-proof.py",
+            "report-finding-actions-proof.py",
+            "report-visible-delete-wiring-proof.py",
+            "report-export-proof.py",
+            "report-visible-export-actions-proof.py",
+            "report-agent-action-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-report-export",
+            "/qa/seed-report-generate-action",
+            "/qa/report-generate-action",
+            "/qa/seed-report-agent-action",
+            "/qa/seed-report-finding-actions",
+            "/qa/report-create-finding",
+            "/qa/report-submit-finding",
+            "/qa/report-delete-finding",
+            "/qa/report-export-action"
+          ],
+          "stateKeys": [
+            "reportExport",
+            "reportAction",
+            "reportRenderActions",
+            "reportFindingActions",
+            "tabActivities"
+          ],
+          "subtabCount": 2,
+          "tab": "report",
+          "toolCount": 2,
+          "tools": [
+            "lookup_cve",
+            "search_context"
+          ],
+          "view": "ReportTabView"
+        },
+        {
+          "actionSurface": "stashActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": false,
+          "proofs": [
+            "stash-actions-proof.py",
+            "stash-row-context-actions-proof.py",
+            "stash-add-sheet-proof.py",
+            "stash-send-chat-control-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-stash-actions",
+            "/qa/stash-add",
+            "/qa/stash-add-sheet",
+            "/qa/stash-filter",
+            "/qa/stash-copy-all",
+            "/qa/stash-copy",
+            "/qa/stash-row-action",
+            "/qa/stash-send",
+            "/qa/stash-delete"
+          ],
+          "stateKeys": [
+            "stashActions",
+            "tabActivities"
+          ],
+          "subtabCount": 0,
+          "tab": "stash",
+          "toolCount": 3,
+          "tools": [
+            "lookup_cve",
+            "search_context",
+            "search_cve"
+          ],
+          "view": "StashTabView"
+        }
+      ],
+      "tabs": [
+        "osint",
+        "recon",
+        "network",
+        "creds",
+        "report",
+        "stash"
+      ],
+      "toolSequence": [
+        "exiftool",
+        "dnsx",
+        "bettercap",
+        "haiti",
+        "lookup_cve",
+        "lookup_cve"
+      ]
+    },
+    {
+      "actionSurfaceSequence": [
+        "stashActions",
+        "reportActions",
+        "osintActions",
+        "supplyChainActions",
+        "postActions",
+        "exploitActions",
+        "credsActions",
+        "networkActions",
+        "webActions",
+        "reconActions"
+      ],
+      "failures": [],
+      "id": "reverse_full_surface_order",
+      "proofSequence": [
+        "creds-action-results-proof.py",
+        "creds-copy-actions-proof.py",
+        "exploit-action-differentiation-proof.py",
+        "exploit-copy-actions-proof.py",
+        "network-copy-actions-proof.py",
+        "network-protocol-action-proof.py",
+        "osint-artifact-actions-proof.py",
+        "osint-copy-actions-proof.py",
+        "osint-screenshot-artifact-proof.py",
+        "post-attribution-proof.py",
+        "post-copy-actions-proof.py",
+        "recon-action-status-proof.py",
+        "recon-copy-actions-proof.py",
+        "report-agent-action-proof.py",
+        "report-export-proof.py",
+        "report-finding-actions-proof.py",
+        "report-generate-action-proof.py",
+        "report-visible-delete-wiring-proof.py",
+        "report-visible-export-actions-proof.py",
+        "stash-actions-proof.py",
+        "stash-add-sheet-proof.py",
+        "stash-row-context-actions-proof.py",
+        "stash-send-chat-control-proof.py",
+        "supply-chain-cve-ui-proof.py",
+        "web-direct-actions-proof.py",
+        "web-header-copy-proof.py",
+        "web-row-context-actions-proof.py",
+        "web-verify-action-proof.py"
+      ],
+      "routeSequence": [
+        "/qa/seed-stash-actions",
+        "/qa/seed-report-export",
+        "/qa/seed-osint-screenshot-artifact",
+        "/qa/supply-chain-coverage",
+        "/qa/seed-post-attribution",
+        "/qa/seed-exploit-action-differentiation",
+        "/qa/seed-creds-action-results",
+        "/qa/seed-network-protocol-action",
+        "/qa/seed-web-direct-actions",
+        "/qa/seed-recon-action-status"
+      ],
+      "stateKeySequence": [
+        "contextCatalog",
+        "credsAction",
+        "credsCopyActions",
+        "credsLifecycle",
+        "cveService",
+        "exploitAction",
+        "exploitActionHistory",
+        "exploitCopyActions",
+        "exploitLifecycle",
+        "networkAction",
+        "networkCopyActions",
+        "networkLifecycle",
+        "osintArtifactAction",
+        "osintCopyActions",
+        "osintLifecycle",
+        "postAttribution",
+        "postCopyActions",
+        "postLifecycle",
+        "reconAction",
+        "reconCopyActions",
+        "reportAction",
+        "reportExport",
+        "reportFindingActions",
+        "reportRenderActions",
+        "stashActions",
+        "supplyChainLifecycle",
+        "tabActivities",
+        "webAction",
+        "webDirectActions"
+      ],
+      "status": "PASS",
+      "tabRows": [
+        {
+          "actionSurface": "stashActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": false,
+          "proofs": [
+            "stash-actions-proof.py",
+            "stash-row-context-actions-proof.py",
+            "stash-add-sheet-proof.py",
+            "stash-send-chat-control-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-stash-actions",
+            "/qa/stash-add",
+            "/qa/stash-add-sheet",
+            "/qa/stash-filter",
+            "/qa/stash-copy-all",
+            "/qa/stash-copy",
+            "/qa/stash-row-action",
+            "/qa/stash-send",
+            "/qa/stash-delete"
+          ],
+          "stateKeys": [
+            "stashActions",
+            "tabActivities"
+          ],
+          "subtabCount": 0,
+          "tab": "stash",
+          "toolCount": 3,
+          "tools": [
+            "lookup_cve",
+            "search_context",
+            "search_cve"
+          ],
+          "view": "StashTabView"
+        },
+        {
+          "actionSurface": "reportActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "report-generate-action-proof.py",
+            "report-finding-actions-proof.py",
+            "report-visible-delete-wiring-proof.py",
+            "report-export-proof.py",
+            "report-visible-export-actions-proof.py",
+            "report-agent-action-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-report-export",
+            "/qa/seed-report-generate-action",
+            "/qa/report-generate-action",
+            "/qa/seed-report-agent-action",
+            "/qa/seed-report-finding-actions",
+            "/qa/report-create-finding",
+            "/qa/report-submit-finding",
+            "/qa/report-delete-finding",
+            "/qa/report-export-action"
+          ],
+          "stateKeys": [
+            "reportExport",
+            "reportAction",
+            "reportRenderActions",
+            "reportFindingActions",
+            "tabActivities"
+          ],
+          "subtabCount": 2,
+          "tab": "report",
+          "toolCount": 2,
+          "tools": [
+            "lookup_cve",
+            "search_context"
+          ],
+          "view": "ReportTabView"
+        },
+        {
+          "actionSurface": "osintActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "osint-copy-actions-proof.py",
+            "osint-screenshot-artifact-proof.py",
+            "osint-artifact-actions-proof.py"
+          ],
+          "routeCount": 4,
+          "routes": [
+            "/qa/seed-osint-screenshot-artifact",
+            "/qa/seed-osint-copy-actions",
+            "/qa/osint-copy",
+            "/qa/osint-artifact-action"
+          ],
+          "stateKeys": [
+            "osintLifecycle",
+            "osintArtifactAction",
+            "osintCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "osint",
+          "toolCount": 5,
+          "tools": [
+            "exiftool",
+            "gowitness",
+            "holehe",
+            "sherlock",
+            "theharvester"
+          ],
+          "view": "OSINTTabView"
+        },
+        {
+          "actionSurface": "supplyChainActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback",
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "supply-chain-cve-ui-proof.py"
+          ],
+          "routeCount": 1,
+          "routes": [
+            "/qa/supply-chain-coverage"
+          ],
+          "stateKeys": [
+            "supplyChainLifecycle",
+            "cveService",
+            "contextCatalog",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "supplyChain",
+          "toolCount": 9,
+          "tools": [
+            "grype",
+            "lookup_cve",
+            "nuclei",
+            "osv_scanner",
+            "run_shell",
+            "search_context",
+            "search_cve",
+            "syft",
+            "trufflehog"
+          ],
+          "view": "SupplyChainTabView"
+        },
+        {
+          "actionSurface": "postActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "post-attribution-proof.py",
+            "post-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-post-attribution",
+            "/qa/seed-post-copy-actions",
+            "/qa/post-copy"
+          ],
+          "stateKeys": [
+            "postLifecycle",
+            "postAttribution",
+            "postCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 3,
+          "tab": "post",
+          "toolCount": 6,
+          "tools": [
+            "chisel",
+            "impacket",
+            "linpeas",
+            "netexec",
+            "pwncat",
+            "sliver"
+          ],
+          "view": "PostExploitTabView"
+        },
+        {
+          "actionSurface": "exploitActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "exploit-action-differentiation-proof.py",
+            "exploit-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-exploit-action-differentiation",
+            "/qa/seed-exploit-copy-actions",
+            "/qa/exploit-copy"
+          ],
+          "stateKeys": [
+            "exploitAction",
+            "exploitCopyActions",
+            "exploitActionHistory",
+            "exploitLifecycle",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "exploit",
+          "toolCount": 5,
+          "tools": [
+            "impacket",
+            "metasploit",
+            "nuclei",
+            "pwncat",
+            "sliver"
+          ],
+          "view": "ExploitTabView"
+        },
+        {
+          "actionSurface": "credsActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "creds-action-results-proof.py",
+            "creds-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-creds-action-results",
+            "/qa/seed-creds-copy-actions",
+            "/qa/creds-copy"
+          ],
+          "stateKeys": [
+            "credsAction",
+            "credsCopyActions",
+            "credsLifecycle",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "creds",
+          "toolCount": 5,
+          "tools": [
+            "haiti",
+            "hashcat",
+            "hydra",
+            "netexec",
+            "trufflehog"
+          ],
+          "view": "CredsTabView"
+        },
+        {
+          "actionSurface": "networkActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "network-protocol-action-proof.py",
+            "network-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-network-protocol-action",
+            "/qa/seed-network-copy-actions",
+            "/qa/network-copy"
+          ],
+          "stateKeys": [
+            "networkAction",
+            "networkCopyActions",
+            "networkLifecycle",
+            "tabActivities"
+          ],
+          "subtabCount": 5,
+          "tab": "network",
+          "toolCount": 7,
+          "tools": [
+            "bettercap",
+            "chisel",
+            "masscan",
+            "netexec",
+            "nmap",
+            "snmpwalk",
+            "tshark"
+          ],
+          "view": "NetworkTabView"
+        },
+        {
+          "actionSurface": "webActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "web-direct-actions-proof.py",
+            "web-header-copy-proof.py",
+            "web-row-context-actions-proof.py",
+            "web-verify-action-proof.py"
+          ],
+          "routeCount": 8,
+          "routes": [
+            "/qa/seed-web-direct-actions",
+            "/qa/web-create-finding",
+            "/qa/web-stash",
+            "/qa/web-copy",
+            "/qa/web-copy-all",
+            "/qa/web-row-action",
+            "/qa/web-search-related",
+            "/qa/seed-web-verify-action"
+          ],
+          "stateKeys": [
+            "webAction",
+            "webDirectActions",
+            "tabActivities"
+          ],
+          "subtabCount": 7,
+          "tab": "web",
+          "toolCount": 12,
+          "tools": [
+            "arjun",
+            "dalfox",
+            "feroxbuster",
+            "ffuf",
+            "graphqlmap",
+            "httpx",
+            "jwt_tool",
+            "katana",
+            "nuclei",
+            "sqlmap",
+            "testssl",
+            "wpscan"
+          ],
+          "view": "WebTabView"
+        },
+        {
+          "actionSurface": "reconActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "recon-action-status-proof.py",
+            "recon-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-recon-action-status",
+            "/qa/seed-recon-copy-actions",
+            "/qa/recon-copy"
+          ],
+          "stateKeys": [
+            "reconAction",
+            "reconCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 5,
+          "tab": "recon",
+          "toolCount": 6,
+          "tools": [
+            "dnsx",
+            "httpx",
+            "masscan",
+            "nmap",
+            "subfinder",
+            "theharvester"
+          ],
+          "view": "ReconTabView"
+        }
+      ],
+      "tabs": [
+        "stash",
+        "report",
+        "osint",
+        "supplyChain",
+        "post",
+        "exploit",
+        "creds",
+        "network",
+        "web",
+        "recon"
+      ],
+      "toolSequence": [
+        "lookup_cve",
+        "lookup_cve",
+        "exiftool",
+        "grype",
+        "chisel",
+        "impacket",
+        "haiti",
+        "bettercap",
+        "arjun",
+        "dnsx"
+      ]
+    },
+    {
+      "actionSurfaceSequence": [
+        "supplyChainActions",
+        "webActions",
+        "reconActions",
+        "networkActions",
+        "reportActions",
+        "stashActions"
+      ],
+      "failures": [],
+      "id": "cve_first_supply_chain_retriage",
+      "proofSequence": [
+        "network-copy-actions-proof.py",
+        "network-protocol-action-proof.py",
+        "recon-action-status-proof.py",
+        "recon-copy-actions-proof.py",
+        "report-agent-action-proof.py",
+        "report-export-proof.py",
+        "report-finding-actions-proof.py",
+        "report-generate-action-proof.py",
+        "report-visible-delete-wiring-proof.py",
+        "report-visible-export-actions-proof.py",
+        "stash-actions-proof.py",
+        "stash-add-sheet-proof.py",
+        "stash-row-context-actions-proof.py",
+        "stash-send-chat-control-proof.py",
+        "supply-chain-cve-ui-proof.py",
+        "web-direct-actions-proof.py",
+        "web-header-copy-proof.py",
+        "web-row-context-actions-proof.py",
+        "web-verify-action-proof.py"
+      ],
+      "routeSequence": [
+        "/qa/supply-chain-coverage",
+        "/qa/seed-web-direct-actions",
+        "/qa/seed-recon-action-status",
+        "/qa/seed-network-protocol-action",
+        "/qa/seed-report-export",
+        "/qa/seed-stash-actions"
+      ],
+      "stateKeySequence": [
+        "contextCatalog",
+        "cveService",
+        "networkAction",
+        "networkCopyActions",
+        "networkLifecycle",
+        "reconAction",
+        "reconCopyActions",
+        "reportAction",
+        "reportExport",
+        "reportFindingActions",
+        "reportRenderActions",
+        "stashActions",
+        "supplyChainLifecycle",
+        "tabActivities",
+        "webAction",
+        "webDirectActions"
+      ],
+      "status": "PASS",
+      "tabRows": [
+        {
+          "actionSurface": "supplyChainActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback",
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "supply-chain-cve-ui-proof.py"
+          ],
+          "routeCount": 1,
+          "routes": [
+            "/qa/supply-chain-coverage"
+          ],
+          "stateKeys": [
+            "supplyChainLifecycle",
+            "cveService",
+            "contextCatalog",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "supplyChain",
+          "toolCount": 9,
+          "tools": [
+            "grype",
+            "lookup_cve",
+            "nuclei",
+            "osv_scanner",
+            "run_shell",
+            "search_context",
+            "search_cve",
+            "syft",
+            "trufflehog"
+          ],
+          "view": "SupplyChainTabView"
+        },
+        {
+          "actionSurface": "webActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "web-direct-actions-proof.py",
+            "web-header-copy-proof.py",
+            "web-row-context-actions-proof.py",
+            "web-verify-action-proof.py"
+          ],
+          "routeCount": 8,
+          "routes": [
+            "/qa/seed-web-direct-actions",
+            "/qa/web-create-finding",
+            "/qa/web-stash",
+            "/qa/web-copy",
+            "/qa/web-copy-all",
+            "/qa/web-row-action",
+            "/qa/web-search-related",
+            "/qa/seed-web-verify-action"
+          ],
+          "stateKeys": [
+            "webAction",
+            "webDirectActions",
+            "tabActivities"
+          ],
+          "subtabCount": 7,
+          "tab": "web",
+          "toolCount": 12,
+          "tools": [
+            "arjun",
+            "dalfox",
+            "feroxbuster",
+            "ffuf",
+            "graphqlmap",
+            "httpx",
+            "jwt_tool",
+            "katana",
+            "nuclei",
+            "sqlmap",
+            "testssl",
+            "wpscan"
+          ],
+          "view": "WebTabView"
+        },
+        {
+          "actionSurface": "reconActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "recon-action-status-proof.py",
+            "recon-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-recon-action-status",
+            "/qa/seed-recon-copy-actions",
+            "/qa/recon-copy"
+          ],
+          "stateKeys": [
+            "reconAction",
+            "reconCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 5,
+          "tab": "recon",
+          "toolCount": 6,
+          "tools": [
+            "dnsx",
+            "httpx",
+            "masscan",
+            "nmap",
+            "subfinder",
+            "theharvester"
+          ],
+          "view": "ReconTabView"
+        },
+        {
+          "actionSurface": "networkActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "network-protocol-action-proof.py",
+            "network-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-network-protocol-action",
+            "/qa/seed-network-copy-actions",
+            "/qa/network-copy"
+          ],
+          "stateKeys": [
+            "networkAction",
+            "networkCopyActions",
+            "networkLifecycle",
+            "tabActivities"
+          ],
+          "subtabCount": 5,
+          "tab": "network",
+          "toolCount": 7,
+          "tools": [
+            "bettercap",
+            "chisel",
+            "masscan",
+            "netexec",
+            "nmap",
+            "snmpwalk",
+            "tshark"
+          ],
+          "view": "NetworkTabView"
+        },
+        {
+          "actionSurface": "reportActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "report-generate-action-proof.py",
+            "report-finding-actions-proof.py",
+            "report-visible-delete-wiring-proof.py",
+            "report-export-proof.py",
+            "report-visible-export-actions-proof.py",
+            "report-agent-action-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-report-export",
+            "/qa/seed-report-generate-action",
+            "/qa/report-generate-action",
+            "/qa/seed-report-agent-action",
+            "/qa/seed-report-finding-actions",
+            "/qa/report-create-finding",
+            "/qa/report-submit-finding",
+            "/qa/report-delete-finding",
+            "/qa/report-export-action"
+          ],
+          "stateKeys": [
+            "reportExport",
+            "reportAction",
+            "reportRenderActions",
+            "reportFindingActions",
+            "tabActivities"
+          ],
+          "subtabCount": 2,
+          "tab": "report",
+          "toolCount": 2,
+          "tools": [
+            "lookup_cve",
+            "search_context"
+          ],
+          "view": "ReportTabView"
+        },
+        {
+          "actionSurface": "stashActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": false,
+          "proofs": [
+            "stash-actions-proof.py",
+            "stash-row-context-actions-proof.py",
+            "stash-add-sheet-proof.py",
+            "stash-send-chat-control-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-stash-actions",
+            "/qa/stash-add",
+            "/qa/stash-add-sheet",
+            "/qa/stash-filter",
+            "/qa/stash-copy-all",
+            "/qa/stash-copy",
+            "/qa/stash-row-action",
+            "/qa/stash-send",
+            "/qa/stash-delete"
+          ],
+          "stateKeys": [
+            "stashActions",
+            "tabActivities"
+          ],
+          "subtabCount": 0,
+          "tab": "stash",
+          "toolCount": 3,
+          "tools": [
+            "lookup_cve",
+            "search_context",
+            "search_cve"
+          ],
+          "view": "StashTabView"
+        }
+      ],
+      "tabs": [
+        "supplyChain",
+        "web",
+        "recon",
+        "network",
+        "report",
+        "stash"
+      ],
+      "toolSequence": [
+        "grype",
+        "arjun",
+        "dnsx",
+        "bettercap",
+        "lookup_cve",
+        "lookup_cve"
+      ]
+    },
+    {
+      "actionSurfaceSequence": [
+        "reportActions",
+        "stashActions",
+        "reconActions",
+        "osintActions",
+        "supplyChainActions",
+        "reportActions",
+        "stashActions"
+      ],
+      "failures": [],
+      "id": "report_stash_reopen_loop",
+      "proofSequence": [
+        "osint-artifact-actions-proof.py",
+        "osint-copy-actions-proof.py",
+        "osint-screenshot-artifact-proof.py",
+        "recon-action-status-proof.py",
+        "recon-copy-actions-proof.py",
+        "report-agent-action-proof.py",
+        "report-export-proof.py",
+        "report-finding-actions-proof.py",
+        "report-generate-action-proof.py",
+        "report-visible-delete-wiring-proof.py",
+        "report-visible-export-actions-proof.py",
+        "stash-actions-proof.py",
+        "stash-add-sheet-proof.py",
+        "stash-row-context-actions-proof.py",
+        "stash-send-chat-control-proof.py",
+        "supply-chain-cve-ui-proof.py"
+      ],
+      "routeSequence": [
+        "/qa/seed-report-export",
+        "/qa/seed-stash-actions",
+        "/qa/seed-recon-action-status",
+        "/qa/seed-osint-screenshot-artifact",
+        "/qa/supply-chain-coverage",
+        "/qa/seed-report-export",
+        "/qa/seed-stash-actions"
+      ],
+      "stateKeySequence": [
+        "contextCatalog",
+        "cveService",
+        "osintArtifactAction",
+        "osintCopyActions",
+        "osintLifecycle",
+        "reconAction",
+        "reconCopyActions",
+        "reportAction",
+        "reportExport",
+        "reportFindingActions",
+        "reportRenderActions",
+        "stashActions",
+        "supplyChainLifecycle",
+        "tabActivities"
+      ],
+      "status": "PASS",
+      "tabRows": [
+        {
+          "actionSurface": "reportActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "report-generate-action-proof.py",
+            "report-finding-actions-proof.py",
+            "report-visible-delete-wiring-proof.py",
+            "report-export-proof.py",
+            "report-visible-export-actions-proof.py",
+            "report-agent-action-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-report-export",
+            "/qa/seed-report-generate-action",
+            "/qa/report-generate-action",
+            "/qa/seed-report-agent-action",
+            "/qa/seed-report-finding-actions",
+            "/qa/report-create-finding",
+            "/qa/report-submit-finding",
+            "/qa/report-delete-finding",
+            "/qa/report-export-action"
+          ],
+          "stateKeys": [
+            "reportExport",
+            "reportAction",
+            "reportRenderActions",
+            "reportFindingActions",
+            "tabActivities"
+          ],
+          "subtabCount": 2,
+          "tab": "report",
+          "toolCount": 2,
+          "tools": [
+            "lookup_cve",
+            "search_context"
+          ],
+          "view": "ReportTabView"
+        },
+        {
+          "actionSurface": "stashActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": false,
+          "proofs": [
+            "stash-actions-proof.py",
+            "stash-row-context-actions-proof.py",
+            "stash-add-sheet-proof.py",
+            "stash-send-chat-control-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-stash-actions",
+            "/qa/stash-add",
+            "/qa/stash-add-sheet",
+            "/qa/stash-filter",
+            "/qa/stash-copy-all",
+            "/qa/stash-copy",
+            "/qa/stash-row-action",
+            "/qa/stash-send",
+            "/qa/stash-delete"
+          ],
+          "stateKeys": [
+            "stashActions",
+            "tabActivities"
+          ],
+          "subtabCount": 0,
+          "tab": "stash",
+          "toolCount": 3,
+          "tools": [
+            "lookup_cve",
+            "search_context",
+            "search_cve"
+          ],
+          "view": "StashTabView"
+        },
+        {
+          "actionSurface": "reconActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "recon-action-status-proof.py",
+            "recon-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-recon-action-status",
+            "/qa/seed-recon-copy-actions",
+            "/qa/recon-copy"
+          ],
+          "stateKeys": [
+            "reconAction",
+            "reconCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 5,
+          "tab": "recon",
+          "toolCount": 6,
+          "tools": [
+            "dnsx",
+            "httpx",
+            "masscan",
+            "nmap",
+            "subfinder",
+            "theharvester"
+          ],
+          "view": "ReconTabView"
+        },
+        {
+          "actionSurface": "osintActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "osint-copy-actions-proof.py",
+            "osint-screenshot-artifact-proof.py",
+            "osint-artifact-actions-proof.py"
+          ],
+          "routeCount": 4,
+          "routes": [
+            "/qa/seed-osint-screenshot-artifact",
+            "/qa/seed-osint-copy-actions",
+            "/qa/osint-copy",
+            "/qa/osint-artifact-action"
+          ],
+          "stateKeys": [
+            "osintLifecycle",
+            "osintArtifactAction",
+            "osintCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "osint",
+          "toolCount": 5,
+          "tools": [
+            "exiftool",
+            "gowitness",
+            "holehe",
+            "sherlock",
+            "theharvester"
+          ],
+          "view": "OSINTTabView"
+        },
+        {
+          "actionSurface": "supplyChainActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback",
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "supply-chain-cve-ui-proof.py"
+          ],
+          "routeCount": 1,
+          "routes": [
+            "/qa/supply-chain-coverage"
+          ],
+          "stateKeys": [
+            "supplyChainLifecycle",
+            "cveService",
+            "contextCatalog",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "supplyChain",
+          "toolCount": 9,
+          "tools": [
+            "grype",
+            "lookup_cve",
+            "nuclei",
+            "osv_scanner",
+            "run_shell",
+            "search_context",
+            "search_cve",
+            "syft",
+            "trufflehog"
+          ],
+          "view": "SupplyChainTabView"
+        },
+        {
+          "actionSurface": "reportActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "report-generate-action-proof.py",
+            "report-finding-actions-proof.py",
+            "report-visible-delete-wiring-proof.py",
+            "report-export-proof.py",
+            "report-visible-export-actions-proof.py",
+            "report-agent-action-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-report-export",
+            "/qa/seed-report-generate-action",
+            "/qa/report-generate-action",
+            "/qa/seed-report-agent-action",
+            "/qa/seed-report-finding-actions",
+            "/qa/report-create-finding",
+            "/qa/report-submit-finding",
+            "/qa/report-delete-finding",
+            "/qa/report-export-action"
+          ],
+          "stateKeys": [
+            "reportExport",
+            "reportAction",
+            "reportRenderActions",
+            "reportFindingActions",
+            "tabActivities"
+          ],
+          "subtabCount": 2,
+          "tab": "report",
+          "toolCount": 2,
+          "tools": [
+            "lookup_cve",
+            "search_context"
+          ],
+          "view": "ReportTabView"
+        },
+        {
+          "actionSurface": "stashActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": false,
+          "proofs": [
+            "stash-actions-proof.py",
+            "stash-row-context-actions-proof.py",
+            "stash-add-sheet-proof.py",
+            "stash-send-chat-control-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-stash-actions",
+            "/qa/stash-add",
+            "/qa/stash-add-sheet",
+            "/qa/stash-filter",
+            "/qa/stash-copy-all",
+            "/qa/stash-copy",
+            "/qa/stash-row-action",
+            "/qa/stash-send",
+            "/qa/stash-delete"
+          ],
+          "stateKeys": [
+            "stashActions",
+            "tabActivities"
+          ],
+          "subtabCount": 0,
+          "tab": "stash",
+          "toolCount": 3,
+          "tools": [
+            "lookup_cve",
+            "search_context",
+            "search_cve"
+          ],
+          "view": "StashTabView"
+        }
+      ],
+      "tabs": [
+        "report",
+        "stash",
+        "recon",
+        "osint",
+        "supplyChain",
+        "report",
+        "stash"
+      ],
+      "toolSequence": [
+        "lookup_cve",
+        "lookup_cve",
+        "dnsx",
+        "exiftool",
+        "grype",
+        "lookup_cve",
+        "lookup_cve"
+      ]
+    },
+    {
+      "actionSurfaceSequence": [
+        "postActions",
+        "exploitActions",
+        "reconActions",
+        "webActions",
+        "networkActions",
+        "reportActions",
+        "stashActions"
+      ],
+      "failures": [],
+      "id": "post_to_recon_retriage",
+      "proofSequence": [
+        "exploit-action-differentiation-proof.py",
+        "exploit-copy-actions-proof.py",
+        "network-copy-actions-proof.py",
+        "network-protocol-action-proof.py",
+        "post-attribution-proof.py",
+        "post-copy-actions-proof.py",
+        "recon-action-status-proof.py",
+        "recon-copy-actions-proof.py",
+        "report-agent-action-proof.py",
+        "report-export-proof.py",
+        "report-finding-actions-proof.py",
+        "report-generate-action-proof.py",
+        "report-visible-delete-wiring-proof.py",
+        "report-visible-export-actions-proof.py",
+        "stash-actions-proof.py",
+        "stash-add-sheet-proof.py",
+        "stash-row-context-actions-proof.py",
+        "stash-send-chat-control-proof.py",
+        "web-direct-actions-proof.py",
+        "web-header-copy-proof.py",
+        "web-row-context-actions-proof.py",
+        "web-verify-action-proof.py"
+      ],
+      "routeSequence": [
+        "/qa/seed-post-attribution",
+        "/qa/seed-exploit-action-differentiation",
+        "/qa/seed-recon-action-status",
+        "/qa/seed-web-direct-actions",
+        "/qa/seed-network-protocol-action",
+        "/qa/seed-report-export",
+        "/qa/seed-stash-actions"
+      ],
+      "stateKeySequence": [
+        "exploitAction",
+        "exploitActionHistory",
+        "exploitCopyActions",
+        "exploitLifecycle",
+        "networkAction",
+        "networkCopyActions",
+        "networkLifecycle",
+        "postAttribution",
+        "postCopyActions",
+        "postLifecycle",
+        "reconAction",
+        "reconCopyActions",
+        "reportAction",
+        "reportExport",
+        "reportFindingActions",
+        "reportRenderActions",
+        "stashActions",
+        "tabActivities",
+        "webAction",
+        "webDirectActions"
+      ],
+      "status": "PASS",
+      "tabRows": [
+        {
+          "actionSurface": "postActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "post-attribution-proof.py",
+            "post-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-post-attribution",
+            "/qa/seed-post-copy-actions",
+            "/qa/post-copy"
+          ],
+          "stateKeys": [
+            "postLifecycle",
+            "postAttribution",
+            "postCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 3,
+          "tab": "post",
+          "toolCount": 6,
+          "tools": [
+            "chisel",
+            "impacket",
+            "linpeas",
+            "netexec",
+            "pwncat",
+            "sliver"
+          ],
+          "view": "PostExploitTabView"
+        },
+        {
+          "actionSurface": "exploitActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "exploit-action-differentiation-proof.py",
+            "exploit-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-exploit-action-differentiation",
+            "/qa/seed-exploit-copy-actions",
+            "/qa/exploit-copy"
+          ],
+          "stateKeys": [
+            "exploitAction",
+            "exploitCopyActions",
+            "exploitActionHistory",
+            "exploitLifecycle",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "exploit",
+          "toolCount": 5,
+          "tools": [
+            "impacket",
+            "metasploit",
+            "nuclei",
+            "pwncat",
+            "sliver"
+          ],
+          "view": "ExploitTabView"
+        },
+        {
+          "actionSurface": "reconActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "recon-action-status-proof.py",
+            "recon-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-recon-action-status",
+            "/qa/seed-recon-copy-actions",
+            "/qa/recon-copy"
+          ],
+          "stateKeys": [
+            "reconAction",
+            "reconCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 5,
+          "tab": "recon",
+          "toolCount": 6,
+          "tools": [
+            "dnsx",
+            "httpx",
+            "masscan",
+            "nmap",
+            "subfinder",
+            "theharvester"
+          ],
+          "view": "ReconTabView"
+        },
+        {
+          "actionSurface": "webActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "web-direct-actions-proof.py",
+            "web-header-copy-proof.py",
+            "web-row-context-actions-proof.py",
+            "web-verify-action-proof.py"
+          ],
+          "routeCount": 8,
+          "routes": [
+            "/qa/seed-web-direct-actions",
+            "/qa/web-create-finding",
+            "/qa/web-stash",
+            "/qa/web-copy",
+            "/qa/web-copy-all",
+            "/qa/web-row-action",
+            "/qa/web-search-related",
+            "/qa/seed-web-verify-action"
+          ],
+          "stateKeys": [
+            "webAction",
+            "webDirectActions",
+            "tabActivities"
+          ],
+          "subtabCount": 7,
+          "tab": "web",
+          "toolCount": 12,
+          "tools": [
+            "arjun",
+            "dalfox",
+            "feroxbuster",
+            "ffuf",
+            "graphqlmap",
+            "httpx",
+            "jwt_tool",
+            "katana",
+            "nuclei",
+            "sqlmap",
+            "testssl",
+            "wpscan"
+          ],
+          "view": "WebTabView"
+        },
+        {
+          "actionSurface": "networkActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "network-protocol-action-proof.py",
+            "network-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-network-protocol-action",
+            "/qa/seed-network-copy-actions",
+            "/qa/network-copy"
+          ],
+          "stateKeys": [
+            "networkAction",
+            "networkCopyActions",
+            "networkLifecycle",
+            "tabActivities"
+          ],
+          "subtabCount": 5,
+          "tab": "network",
+          "toolCount": 7,
+          "tools": [
+            "bettercap",
+            "chisel",
+            "masscan",
+            "netexec",
+            "nmap",
+            "snmpwalk",
+            "tshark"
+          ],
+          "view": "NetworkTabView"
+        },
+        {
+          "actionSurface": "reportActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "report-generate-action-proof.py",
+            "report-finding-actions-proof.py",
+            "report-visible-delete-wiring-proof.py",
+            "report-export-proof.py",
+            "report-visible-export-actions-proof.py",
+            "report-agent-action-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-report-export",
+            "/qa/seed-report-generate-action",
+            "/qa/report-generate-action",
+            "/qa/seed-report-agent-action",
+            "/qa/seed-report-finding-actions",
+            "/qa/report-create-finding",
+            "/qa/report-submit-finding",
+            "/qa/report-delete-finding",
+            "/qa/report-export-action"
+          ],
+          "stateKeys": [
+            "reportExport",
+            "reportAction",
+            "reportRenderActions",
+            "reportFindingActions",
+            "tabActivities"
+          ],
+          "subtabCount": 2,
+          "tab": "report",
+          "toolCount": 2,
+          "tools": [
+            "lookup_cve",
+            "search_context"
+          ],
+          "view": "ReportTabView"
+        },
+        {
+          "actionSurface": "stashActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": false,
+          "proofs": [
+            "stash-actions-proof.py",
+            "stash-row-context-actions-proof.py",
+            "stash-add-sheet-proof.py",
+            "stash-send-chat-control-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-stash-actions",
+            "/qa/stash-add",
+            "/qa/stash-add-sheet",
+            "/qa/stash-filter",
+            "/qa/stash-copy-all",
+            "/qa/stash-copy",
+            "/qa/stash-row-action",
+            "/qa/stash-send",
+            "/qa/stash-delete"
+          ],
+          "stateKeys": [
+            "stashActions",
+            "tabActivities"
+          ],
+          "subtabCount": 0,
+          "tab": "stash",
+          "toolCount": 3,
+          "tools": [
+            "lookup_cve",
+            "search_context",
+            "search_cve"
+          ],
+          "view": "StashTabView"
+        }
+      ],
+      "tabs": [
+        "post",
+        "exploit",
+        "recon",
+        "web",
+        "network",
+        "report",
+        "stash"
+      ],
+      "toolSequence": [
+        "chisel",
+        "impacket",
+        "dnsx",
+        "arjun",
+        "bettercap",
+        "lookup_cve",
+        "lookup_cve"
+      ]
+    },
+    {
+      "actionSurfaceSequence": [
+        "osintActions",
+        "supplyChainActions",
+        "webActions",
+        "reconActions",
+        "reportActions",
+        "stashActions"
+      ],
+      "failures": [],
+      "id": "osint_first_public_to_supply_chain",
+      "proofSequence": [
+        "osint-artifact-actions-proof.py",
+        "osint-copy-actions-proof.py",
+        "osint-screenshot-artifact-proof.py",
+        "recon-action-status-proof.py",
+        "recon-copy-actions-proof.py",
+        "report-agent-action-proof.py",
+        "report-export-proof.py",
+        "report-finding-actions-proof.py",
+        "report-generate-action-proof.py",
+        "report-visible-delete-wiring-proof.py",
+        "report-visible-export-actions-proof.py",
+        "stash-actions-proof.py",
+        "stash-add-sheet-proof.py",
+        "stash-row-context-actions-proof.py",
+        "stash-send-chat-control-proof.py",
+        "supply-chain-cve-ui-proof.py",
+        "web-direct-actions-proof.py",
+        "web-header-copy-proof.py",
+        "web-row-context-actions-proof.py",
+        "web-verify-action-proof.py"
+      ],
+      "routeSequence": [
+        "/qa/seed-osint-screenshot-artifact",
+        "/qa/supply-chain-coverage",
+        "/qa/seed-web-direct-actions",
+        "/qa/seed-recon-action-status",
+        "/qa/seed-report-export",
+        "/qa/seed-stash-actions"
+      ],
+      "stateKeySequence": [
+        "contextCatalog",
+        "cveService",
+        "osintArtifactAction",
+        "osintCopyActions",
+        "osintLifecycle",
+        "reconAction",
+        "reconCopyActions",
+        "reportAction",
+        "reportExport",
+        "reportFindingActions",
+        "reportRenderActions",
+        "stashActions",
+        "supplyChainLifecycle",
+        "tabActivities",
+        "webAction",
+        "webDirectActions"
+      ],
+      "status": "PASS",
+      "tabRows": [
+        {
+          "actionSurface": "osintActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "osint-copy-actions-proof.py",
+            "osint-screenshot-artifact-proof.py",
+            "osint-artifact-actions-proof.py"
+          ],
+          "routeCount": 4,
+          "routes": [
+            "/qa/seed-osint-screenshot-artifact",
+            "/qa/seed-osint-copy-actions",
+            "/qa/osint-copy",
+            "/qa/osint-artifact-action"
+          ],
+          "stateKeys": [
+            "osintLifecycle",
+            "osintArtifactAction",
+            "osintCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "osint",
+          "toolCount": 5,
+          "tools": [
+            "exiftool",
+            "gowitness",
+            "holehe",
+            "sherlock",
+            "theharvester"
+          ],
+          "view": "OSINTTabView"
+        },
+        {
+          "actionSurface": "supplyChainActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback",
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "supply-chain-cve-ui-proof.py"
+          ],
+          "routeCount": 1,
+          "routes": [
+            "/qa/supply-chain-coverage"
+          ],
+          "stateKeys": [
+            "supplyChainLifecycle",
+            "cveService",
+            "contextCatalog",
+            "tabActivities"
+          ],
+          "subtabCount": 4,
+          "tab": "supplyChain",
+          "toolCount": 9,
+          "tools": [
+            "grype",
+            "lookup_cve",
+            "nuclei",
+            "osv_scanner",
+            "run_shell",
+            "search_context",
+            "search_cve",
+            "syft",
+            "trufflehog"
+          ],
+          "view": "SupplyChainTabView"
+        },
+        {
+          "actionSurface": "webActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "web-direct-actions-proof.py",
+            "web-header-copy-proof.py",
+            "web-row-context-actions-proof.py",
+            "web-verify-action-proof.py"
+          ],
+          "routeCount": 8,
+          "routes": [
+            "/qa/seed-web-direct-actions",
+            "/qa/web-create-finding",
+            "/qa/web-stash",
+            "/qa/web-copy",
+            "/qa/web-copy-all",
+            "/qa/web-row-action",
+            "/qa/web-search-related",
+            "/qa/seed-web-verify-action"
+          ],
+          "stateKeys": [
+            "webAction",
+            "webDirectActions",
+            "tabActivities"
+          ],
+          "subtabCount": 7,
+          "tab": "web",
+          "toolCount": 12,
+          "tools": [
+            "arjun",
+            "dalfox",
+            "feroxbuster",
+            "ffuf",
+            "graphqlmap",
+            "httpx",
+            "jwt_tool",
+            "katana",
+            "nuclei",
+            "sqlmap",
+            "testssl",
+            "wpscan"
+          ],
+          "view": "WebTabView"
+        },
+        {
+          "actionSurface": "reconActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "subprocess"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "recon-action-status-proof.py",
+            "recon-copy-actions-proof.py"
+          ],
+          "routeCount": 3,
+          "routes": [
+            "/qa/seed-recon-action-status",
+            "/qa/seed-recon-copy-actions",
+            "/qa/recon-copy"
+          ],
+          "stateKeys": [
+            "reconAction",
+            "reconCopyActions",
+            "tabActivities"
+          ],
+          "subtabCount": 5,
+          "tab": "recon",
+          "toolCount": 6,
+          "tools": [
+            "dnsx",
+            "httpx",
+            "masscan",
+            "nmap",
+            "subfinder",
+            "theharvester"
+          ],
+          "view": "ReconTabView"
+        },
+        {
+          "actionSurface": "reportActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": true,
+          "proofs": [
+            "report-generate-action-proof.py",
+            "report-finding-actions-proof.py",
+            "report-visible-delete-wiring-proof.py",
+            "report-export-proof.py",
+            "report-visible-export-actions-proof.py",
+            "report-agent-action-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-report-export",
+            "/qa/seed-report-generate-action",
+            "/qa/report-generate-action",
+            "/qa/seed-report-agent-action",
+            "/qa/seed-report-finding-actions",
+            "/qa/report-create-finding",
+            "/qa/report-submit-finding",
+            "/qa/report-delete-finding",
+            "/qa/report-export-action"
+          ],
+          "stateKeys": [
+            "reportExport",
+            "reportAction",
+            "reportRenderActions",
+            "reportFindingActions",
+            "tabActivities"
+          ],
+          "subtabCount": 2,
+          "tab": "report",
+          "toolCount": 2,
+          "tools": [
+            "lookup_cve",
+            "search_context"
+          ],
+          "view": "ReportTabView"
+        },
+        {
+          "actionSurface": "stashActions",
+          "authorizationPolicyCount": 3,
+          "executionSources": [
+            "callback"
+          ],
+          "hasSubtabs": false,
+          "proofs": [
+            "stash-actions-proof.py",
+            "stash-row-context-actions-proof.py",
+            "stash-add-sheet-proof.py",
+            "stash-send-chat-control-proof.py"
+          ],
+          "routeCount": 9,
+          "routes": [
+            "/qa/seed-stash-actions",
+            "/qa/stash-add",
+            "/qa/stash-add-sheet",
+            "/qa/stash-filter",
+            "/qa/stash-copy-all",
+            "/qa/stash-copy",
+            "/qa/stash-row-action",
+            "/qa/stash-send",
+            "/qa/stash-delete"
+          ],
+          "stateKeys": [
+            "stashActions",
+            "tabActivities"
+          ],
+          "subtabCount": 0,
+          "tab": "stash",
+          "toolCount": 3,
+          "tools": [
+            "lookup_cve",
+            "search_context",
+            "search_cve"
+          ],
+          "view": "StashTabView"
+        }
+      ],
+      "tabs": [
+        "osint",
+        "supplyChain",
+        "web",
+        "recon",
+        "report",
+        "stash"
+      ],
+      "toolSequence": [
+        "exiftool",
+        "grype",
+        "arjun",
+        "dnsx",
+        "lookup_cve",
+        "lookup_cve"
+      ]
+    }
+  ]
+}

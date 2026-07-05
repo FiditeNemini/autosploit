@@ -1,0 +1,6 @@
+WARNING:  You don't have /Users/eric/.gem/ruby/3.4.0/bin in your PATH,
+	  gem executables (haiti, haiti_console) will not run.
+Successfully installed paint-2.3.0
+Successfully installed docopt-0.6.1
+Successfully installed haiti-hash-1.5.0
+3 gems installed

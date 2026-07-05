@@ -1,0 +1,19 @@
+github.com/shirou/gopsutil/v3/mem
+github.com/shirou/gopsutil/v3/cpu
+github.com/shirou/gopsutil/v3/process
+github.com/projectdiscovery/utils/process
+github.com/projectdiscovery/utils/update
+github.com/projectdiscovery/asnmap/libs
+github.com/projectdiscovery/mapcidr/asn
+github.com/projectdiscovery/dnsx/internal/runner
+github.com/projectdiscovery/dnsx/cmd/dnsx
+
+      _             __  __
+   __| | _ __   ___ \ \/ /
+  / _' || '_ \ / __| \  /
+ | (_| || | | |\__ \ /  \
+  \__,_||_| |_||___//_/\_\
+
+		projectdiscovery.io
+
+[[34mINF[0m] Current Version: 1.2.3

@@ -1,0 +1,65 @@
+{
+  "actualPromptTokensByTokenizer": 258032,
+  "attemptArtifact": "docs/live-proofs/2026-07-04-real-qwen-near-max-context-27b.json",
+  "attemptFinishedAt": "2026-07-05T01:36:14-0700",
+  "attemptStartedAt": "2026-07-05T01:07:59-0700",
+  "chunkedPrefillEvidence": {
+    "clientDisconnected": false,
+    "entered": true,
+    "oneShotBufferMessagePresent": true
+  },
+  "generatedAt": "2026-07-05T01:36:25-0700",
+  "lowerCapRejectResponse": {
+    "json": {
+      "error": {
+        "code": "prompt_too_long",
+        "message": "Prompt too long (prompt: ~258,032 tokens). This would need ~100.8GB of KV cache memory, exceeding the configured prompt/context limit of ~129,016 tokens. Shorten the prompt, raise --max-prompt-tokens, or use a model/session with a larger prompt/context cap.",
+        "type": "invalid_request_error"
+      }
+    },
+    "status": 413
+  },
+  "missingEvidence": "The 258k-token request reached Qwen chunked prefill but did not complete a final assistant response or post-generation cache write proof.",
+  "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+  "modelLoadMemoryPreflight": {
+    "allowConcurrentModel": false,
+    "availableGB": 110.17109680175781,
+    "enabled": true,
+    "heavyModelProcessCount": 0,
+    "heavyModelProcesses": [],
+    "requiredAvailableGB": 42.0
+  },
+  "ok": false,
+  "operatorStopReason": "",
+  "proofLevel": "live-near-max-attempt-artifact-and-engine-log-backed",
+  "proofType": "near-max-context-runtime-attempt-summary",
+  "runtimeSeqLen": 258044,
+  "serverTimeoutSeconds": 3600,
+  "sessionMaxPromptTokens": 260080,
+  "status": {
+    "chunkedPrefillEntered": "PASS",
+    "exactLowerCapRejection": "PASS",
+    "finalGenerationCompleted": "FAIL",
+    "modelLoadMemoryPreflight": "PASS",
+    "serverTimeoutForwarded": "PASS",
+    "targetMemoryPreflight": "PASS"
+  },
+  "targetMemoryPreflight": {
+    "allowConcurrentModel": false,
+    "availableGB": 110.707763671875,
+    "enabled": true,
+    "heavyModelProcessCount": 0,
+    "heavyModelProcesses": [],
+    "memorySlotWait": {
+      "enabled": false,
+      "sampleIntervalSeconds": 15.0,
+      "samples": [],
+      "timeoutSeconds": 0.0
+    },
+    "modelRequiredAvailableGB": 42.0,
+    "preflightKind": "targetContext",
+    "targetPromptTokens": 258000,
+    "targetRequiredAvailableGB": 80.0
+  },
+  "targetPromptTokens": 258000
+}

@@ -11,6 +11,8 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
+from app_proof_lock import app_proof_lock
+
 
 ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
@@ -35,6 +37,34 @@ EXPECTED_POLICIES = {
         "executesWithoutApproval": True,
         "createsPendingApproval": False,
         "terminalStatus": "runningOrComplete",
+        "explicitToolDeny": True,
+        "explicitToolDenyMessage": "\\(toolName) was explicitly disallowed by the latest user prompt.",
+        "highRiskAutopilotTools": [
+            "arjun",
+            "bettercap",
+            "chisel",
+            "dalfox",
+            "feroxbuster",
+            "ffuf",
+            "hashcat",
+            "hydra",
+            "impacket",
+            "linpeas",
+            "masscan",
+            "metasploit",
+            "msfconsole",
+            "netexec",
+            "nmap",
+            "nxc",
+            "pwncat",
+            "run_shell",
+            "sliver",
+            "sqlmap",
+            "testssl",
+            "testssl.sh",
+            "tshark",
+            "wpscan",
+        ],
     },
 }
 
@@ -88,6 +118,7 @@ EXPECTED_PROOFS = {
     "mode-selection-flow-proof.py",
     "agent-loop-coverage-proof.py",
     "tool-fanout-status-proof.py",
+    "autopilot-tool-policy-proof.py",
 }
 
 
@@ -192,6 +223,7 @@ def assert_pending_snapshot(expected_pending: bool, expected_tool: str = "") -> 
 def run() -> None:
     env = os.environ.copy()
     env["EXPLOITBOT_TESTING"] = "1"
+    env["EXPLOITBOT_SKIP_APP_PROOF_LOCK"] = "1"
     subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     app = subprocess.Popen([str(ROOT / "script" / "build_and_run.sh"), "--verify"], cwd=ROOT, env=env)
 
@@ -231,7 +263,8 @@ def run() -> None:
 
 if __name__ == "__main__":
     try:
-        run()
+        with app_proof_lock("agent-tool-authorization-proof.py"):
+            run()
     except (AssertionError, RuntimeError, urllib.error.URLError, TimeoutError, socket.timeout, subprocess.CalledProcessError) as exc:
         print(f"agent-tool-authorization proof failed: {exc}", flush=True)
         raise SystemExit(1)

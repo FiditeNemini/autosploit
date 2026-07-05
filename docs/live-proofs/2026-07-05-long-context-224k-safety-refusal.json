@@ -1,0 +1,37 @@
+{
+  "engineLogTail": "",
+  "error": "MemoryPreflightError: long-context target preflight refused to start above the proven safe target ceiling; set EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET=1 only for an intentional high-risk proof run\n{\n  \"allowConcurrentModel\": false,\n  \"allowUnprovenNearMaxTarget\": false,\n  \"availableGB\": 109.83001708984375,\n  \"enabled\": true,\n  \"heavyModelProcessCount\": 0,\n  \"heavyModelProcesses\": [],\n  \"memorySlotWait\": {\n    \"enabled\": false,\n    \"lastBlockReason\": \"unproven_target_above_safe_ceiling\",\n    \"sampleIntervalSeconds\": 15.0,\n    \"samples\": [],\n    \"timedOut\": false,\n    \"timeoutSeconds\": 0.0\n  },\n  \"modelRequiredAvailableGB\": 42.0,\n  \"preflightKind\": \"targetContext\",\n  \"provenSafeTargetCeiling\": 192000,\n  \"targetPromptTokens\": 224000,\n  \"targetRequiredAvailableGB\": 72.0,\n  \"unprovenTargetOverrideEnv\": \"EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET\"\n}",
+  "finishedAt": "2026-07-05T01:59:58-0700",
+  "generatedAt": "2026-07-05T01:59:58-0700",
+  "marker": "LONG_CONTEXT_SMOKE_PASS",
+  "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+  "ok": false,
+  "proofType": "real-qwen-long-context-smoke",
+  "pythonExecutable": "/Users/eric/exploitbot/ExploitBotEngine/.venv/bin/python3",
+  "reexecedIntoEngineVenv": false,
+  "scope": "long-context smoke, not a full 262144-token max-context proof",
+  "startedAt": "2026-07-05T01:59:58-0700",
+  "targetMemoryPreflight": {
+    "allowConcurrentModel": false,
+    "allowUnprovenNearMaxTarget": false,
+    "availableGB": 109.83001708984375,
+    "enabled": true,
+    "heavyModelProcessCount": 0,
+    "heavyModelProcesses": [],
+    "memorySlotWait": {
+      "enabled": false,
+      "lastBlockReason": "unproven_target_above_safe_ceiling",
+      "sampleIntervalSeconds": 15.0,
+      "samples": [],
+      "timedOut": false,
+      "timeoutSeconds": 0.0
+    },
+    "modelRequiredAvailableGB": 42.0,
+    "preflightKind": "targetContext",
+    "provenSafeTargetCeiling": 192000,
+    "targetPromptTokens": 224000,
+    "targetRequiredAvailableGB": 72.0,
+    "unprovenTargetOverrideEnv": "EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET"
+  },
+  "targetPromptTokens": 224000
+}

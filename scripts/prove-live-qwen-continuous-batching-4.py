@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_MODEL = "/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP"
+DEFAULT_MODEL = "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP"
 DEFAULT_OUTPUT = ROOT / "docs" / "live-proofs" / "checkpoint-465-qwen-continuous-batching-4-live.json"
 
 

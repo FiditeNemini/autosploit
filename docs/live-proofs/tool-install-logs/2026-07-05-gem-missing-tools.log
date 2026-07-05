@@ -1,0 +1,9 @@
+startedAt=2026-07-05T15:03:01-0700
+WARNING:  You don't have /Users/eric/.gem/ruby/2.6.0/bin in your PATH,
+	  gem executables will not run.
+ERROR:  Error installing haiti-hash:
+	The last version of haiti-hash (>= 0) to support your Ruby & RubyGems was 1.5.0. Try installing it with `gem install haiti-hash -v 1.5.0`
+	haiti-hash requires Ruby version >= 3.2.0, < 5.0. The current ruby version is 2.6.10.210.
+Successfully installed paint-2.3.0
+Successfully installed docopt-0.6.1
+finishedAt=2026-07-05T15:03:14-0700

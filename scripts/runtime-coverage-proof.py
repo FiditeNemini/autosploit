@@ -67,7 +67,9 @@ EXPECTED_LIVE_ARTIFACTS = {
     "qwenHybridFullPrefixSkip": ("docs/live-proofs/checkpoint-113-qwen-hybrid-full-prefix-skip-live.json", "qwen"),
     "minimaxNoThinking": ("docs/live-proofs/checkpoint-114-minimax-no-thinking-live.json", "minimax"),
     "qwenHybridCataloguePrefixShape": ("docs/live-proofs/checkpoint-115-qwen-hybrid-catalogue-prefix-shape-live.json", "qwen"),
-    "qwenContinuousBatchingLive": ("docs/live-proofs/checkpoint-452-qwen-continuous-batching-live.json", "qwen-continuous-batching"),
+    "qwenContinuousBatchingLive": ("docs/live-proofs/2026-07-04-qwen36-27b-mxfp8-mtp-live-batch.json", "qwen-continuous-batching"),
+    "qwen35BContinuousBatchingLive": ("docs/live-proofs/2026-07-04-qwen36-35b-a3b-mxfp8-mtp-live-batch.json", "qwen-35b-continuous-batching"),
+    "qwenLegacyMXFP4ContinuousBatchingLive": ("docs/live-proofs/checkpoint-452-qwen-continuous-batching-live.json", "qwen-legacy-mxfp4-continuous-batching"),
     "qwenLiveAgentStress": ("docs/live-proofs/checkpoint-466-qwen-live-agent-stress.json", "qwen-live-agent-stress"),
 }
 
@@ -228,7 +230,7 @@ def run() -> None:
             raise AssertionError(f"runtime local model lane parity mismatch: {coverage}")
         if coverage.get("runtimeLocalModelLaneArtifactFileParity") is not True:
             raise AssertionError(f"runtime local model lane artifact parity mismatch: {coverage}")
-        if coverage.get("runtimeLocalModelLaneQwenTargetPath") != "/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP":
+        if coverage.get("runtimeLocalModelLaneQwenTargetPath") != "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP":
             raise AssertionError(f"runtime local model lane Qwen target mismatch: {coverage}")
         if not EXPECTED_PROOFS.issubset(set(coverage.get("proofs") or [])):
             raise AssertionError(f"runtime proof list missing entries: {coverage}")
@@ -269,10 +271,19 @@ def run() -> None:
             if payload.get("ok") is not True:
                 raise AssertionError(f"runtime live artifact not ok: {path} {payload}")
             if family == "qwen-continuous-batching":
-                scheduler = (payload.get("cacheAfter") or {}).get("scheduler_stats") or {}
-                kv = (payload.get("cacheAfter") or {}).get("kv_cache_quantization") or {}
-                block = (payload.get("cacheAfter") or {}).get("block_disk_cache") or {}
-                ssm = ((payload.get("cacheAfter") or {}).get("ssm_companion") or {}).get("rederive") or {}
+                cache_after = payload.get("cacheAfter") or {}
+                scheduler = cache_after.get("scheduler_stats") or {}
+                kv = cache_after.get("kv_cache_quantization") or {}
+                block = cache_after.get("block_disk_cache") or {}
+                ssm = (cache_after.get("ssm_companion") or {}).get("rederive") or {}
+                native_cache = cache_after.get("native_cache") or {}
+                native_quant = native_cache.get("attention_kv_storage_quantization") or {}
+                native_async_rederive = (
+                    native_cache.get("cache_type") == "hybrid_ssm_typed"
+                    and "ssm_companion_state" in (native_cache.get("components") or [])
+                    and "async_rederive" in (native_cache.get("components") or [])
+                    and native_quant.get("rederive") == "async_clean_prefill_on_miss_or_warm_pass"
+                )
                 if payload.get("clientOverlap") is not True:
                     raise AssertionError(f"Qwen live batching artifact missing client overlap: {path} {payload}")
                 if payload.get("maxNumSeqs") != 2:
@@ -283,8 +294,33 @@ def run() -> None:
                     raise AssertionError(f"Qwen live batching artifact missing TurboQuant q4: {path} {payload}")
                 if block.get("disk_writes", 0) < 1:
                     raise AssertionError(f"Qwen live batching artifact missing block L2 writes: {path} {payload}")
-                if ssm.get("completed", 0) < 1 or ssm.get("failed") != 0:
-                    raise AssertionError(f"Qwen live batching artifact missing SSM rederive completion: {path} {payload}")
+                if (ssm.get("completed", 0) < 1 and not native_async_rederive) or ssm.get("failed", 0) != 0:
+                    raise AssertionError(f"Qwen live batching artifact missing native async rederive evidence: {path} {payload}")
+                continue
+            if family == "qwen-35b-continuous-batching":
+                cache_after = payload.get("cacheAfter") or {}
+                scheduler = cache_after.get("scheduler_stats") or {}
+                kv = cache_after.get("kv_cache_quantization") or {}
+                block = cache_after.get("block_disk_cache") or {}
+                native_cache = cache_after.get("native_cache") or {}
+                native_quant = native_cache.get("attention_kv_storage_quantization") or {}
+                if payload.get("clientOverlap") is not True:
+                    raise AssertionError(f"Qwen 35B live batching artifact missing client overlap: {path} {payload}")
+                if scheduler.get("max_running_observed", 0) < 2 or scheduler.get("num_requests_processed", 0) < 2:
+                    raise AssertionError(f"Qwen 35B live batching artifact missing observed concurrency: {path} {payload}")
+                if kv.get("bits") != 4:
+                    raise AssertionError(f"Qwen 35B live batching artifact missing TurboQuant q4: {path} {payload}")
+                if block.get("disk_writes", 0) < 1:
+                    raise AssertionError(f"Qwen 35B live batching artifact missing block L2 writes: {path} {payload}")
+                if not (
+                    native_cache.get("cache_type") == "hybrid_ssm_typed"
+                    and "ssm_companion_state" in (native_cache.get("components") or [])
+                    and "async_rederive" in (native_cache.get("components") or [])
+                    and native_quant.get("rederive") == "async_clean_prefill_on_miss_or_warm_pass"
+                ):
+                    raise AssertionError(f"Qwen 35B live batching artifact missing native async rederive evidence: {path} {payload}")
+                continue
+            if family == "qwen-legacy-mxfp4-continuous-batching":
                 continue
             if family == "qwen-live-agent-stress":
                 scheduler = (payload.get("cacheAfter") or {}).get("scheduler_stats") or {}

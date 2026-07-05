@@ -1,0 +1,315 @@
+{
+  "completedLongContextProofs": [
+    {
+      "artifact": "docs/live-proofs/2026-07-04-real-qwen-long-context-smoke-27b.json",
+      "summary": {
+        "actualPromptTokensByTokenizer": 8227,
+        "failedRows": [],
+        "generatedAt": "2026-07-04T21:14:42-0700",
+        "missingRows": [],
+        "ok": true,
+        "requiredRows": [
+          "declared262kContext",
+          "lowerPerRequestCapRejected",
+          "longPromptCompleted",
+          "usagePromptTokensReported",
+          "q4KV",
+          "prefixCache",
+          "pagedCache",
+          "hybridSSM",
+          "blockL2"
+        ],
+        "sessionMaxPromptTokens": 10275,
+        "targetPromptTokens": 8192,
+        "usagePromptTokens": 8232
+      },
+      "targetPromptTokens": 8192
+    },
+    {
+      "artifact": "docs/live-proofs/2026-07-04-real-qwen-long-context-64k-27b.json",
+      "summary": {
+        "actualPromptTokensByTokenizer": 64011,
+        "failedRows": [],
+        "generatedAt": "2026-07-04T21:59:01-0700",
+        "missingRows": [],
+        "ok": true,
+        "requiredRows": [
+          "declared262kContext",
+          "lowerPerRequestCapRejected",
+          "longPromptCompleted",
+          "usagePromptTokensReported",
+          "q4KV",
+          "prefixCache",
+          "pagedCache",
+          "hybridSSM",
+          "blockL2"
+        ],
+        "sessionMaxPromptTokens": 66059,
+        "targetPromptTokens": 64000,
+        "usagePromptTokens": 64016
+      },
+      "targetPromptTokens": 64000
+    },
+    {
+      "artifact": "docs/live-proofs/2026-07-04-real-qwen-long-context-128k-27b.json",
+      "summary": {
+        "actualPromptTokensByTokenizer": 128019,
+        "failedRows": [],
+        "generatedAt": "2026-07-04T22:53:46-0700",
+        "missingRows": [],
+        "ok": true,
+        "requiredRows": [
+          "declared262kContext",
+          "lowerPerRequestCapRejected",
+          "longPromptCompleted",
+          "usagePromptTokensReported",
+          "q4KV",
+          "prefixCache",
+          "pagedCache",
+          "hybridSSM",
+          "blockL2"
+        ],
+        "sessionMaxPromptTokens": 130067,
+        "targetPromptTokens": 128000,
+        "usagePromptTokens": 128024
+      },
+      "targetPromptTokens": 128000
+    },
+    {
+      "artifact": "docs/live-proofs/2026-07-04-real-qwen-long-context-160k-27b.json",
+      "summary": {
+        "actualPromptTokensByTokenizer": 160005,
+        "failedRows": [],
+        "generatedAt": "2026-07-05T00:12:11-0700",
+        "missingRows": [],
+        "ok": true,
+        "requiredRows": [
+          "declared262kContext",
+          "lowerPerRequestCapRejected",
+          "longPromptCompleted",
+          "usagePromptTokensReported",
+          "q4KV",
+          "prefixCache",
+          "pagedCache",
+          "hybridSSM",
+          "blockL2"
+        ],
+        "sessionMaxPromptTokens": 162053,
+        "targetPromptTokens": 160000,
+        "usagePromptTokens": 160010
+      },
+      "targetPromptTokens": 160000
+    },
+    {
+      "artifact": "docs/live-proofs/2026-07-04-real-qwen-long-context-192k-27b.json",
+      "summary": {
+        "actualPromptTokensByTokenizer": 192017,
+        "failedRows": [],
+        "generatedAt": "2026-07-05T01:03:13-0700",
+        "missingRows": [],
+        "ok": true,
+        "requiredRows": [
+          "declared262kContext",
+          "lowerPerRequestCapRejected",
+          "longPromptCompleted",
+          "usagePromptTokensReported",
+          "q4KV",
+          "prefixCache",
+          "pagedCache",
+          "hybridSSM",
+          "blockL2"
+        ],
+        "sessionMaxPromptTokens": 194065,
+        "targetPromptTokens": 192000,
+        "usagePromptTokens": 192022
+      },
+      "targetPromptTokens": 192000
+    }
+  ],
+  "declaredContext": {
+    "configTextMaxPositionEmbeddings": 262144,
+    "modelType": "qwen3_5",
+    "ropeParameters": {
+      "mrope_interleaved": true,
+      "mrope_section": [
+        11,
+        11,
+        10
+      ],
+      "partial_rotary_factor": 0.25,
+      "rope_theta": 10000000,
+      "rope_type": "default"
+    },
+    "textModelType": "qwen3_5_text",
+    "tokenizerModelMaxLength": 262144
+  },
+  "declaredMaxContextTokens": 262144,
+  "explicitNearMaxRunCommand": [
+    "env",
+    "EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET=1",
+    "EXPLOITBOT_LONG_CONTEXT_TARGET_TOKENS=258000",
+    "EXPLOITBOT_LONG_CONTEXT_TIMEOUT=3600",
+    "PYTHONPATH=ExploitBotEngine",
+    "ExploitBotEngine/.venv/bin/python3",
+    "scripts/real-qwen-long-context-smoke-proof.py"
+  ],
+  "generatedAt": "2026-07-05T02:24:23-0700",
+  "heavyModelProcesses": [],
+  "highTargetAttempt": {
+    "actualPromptTokensByTokenizer": 224003,
+    "artifact": "docs/live-proofs/2026-07-05-real-qwen-long-context-224k-27b.json",
+    "completionMemoryGuard": {
+      "abortFreePercent": 15,
+      "abortReason": "swapouts_detected",
+      "aborted": true,
+      "enabled": true,
+      "maxSwapouts": 16,
+      "minFreePercent": 53,
+      "sampleCount": 32
+    },
+    "error": "CompletionMemoryGuardAbort: long-context completion memory guard aborted the engine",
+    "generatedAt": "2026-07-05T01:58:14-0700",
+    "ok": false,
+    "sessionMaxPromptTokens": 226051,
+    "targetMemoryPreflight": {
+      "allowConcurrentModel": false,
+      "availableGB": 109.52885437011719,
+      "enabled": true,
+      "heavyModelProcessCount": 0,
+      "heavyModelProcesses": [],
+      "memorySlotWait": {
+        "enabled": false,
+        "sampleIntervalSeconds": 15.0,
+        "samples": [],
+        "timeoutSeconds": 0.0
+      },
+      "modelRequiredAvailableGB": 42.0,
+      "preflightKind": "targetContext",
+      "targetPromptTokens": 224000,
+      "targetRequiredAvailableGB": 72.0
+    },
+    "targetPromptTokens": 224000
+  },
+  "highTargetSafetyRefusal": {
+    "allowUnprovenNearMaxTarget": false,
+    "artifact": "docs/live-proofs/2026-07-05-long-context-224k-safety-refusal.json",
+    "engineLogTailEmpty": true,
+    "error": "MemoryPreflightError: long-context target preflight refused to start above the proven safe target ceiling; set EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET=1 only for an intentional high-risk proof run\n{\n  \"allowConcurrentModel\": false,\n  \"allowUnprovenNearMaxTarget\": false,\n  \"availableGB\": 109.83001708984375,\n  \"enabled\": true,\n  \"heavyModelProcessCount\": 0,\n  \"heavyModelProcesses\": [],\n  \"memorySlotWait\": {\n    \"enabled\": false,\n    \"lastBlockReason\": \"unproven_target_above_safe_ceiling\",\n    \"sampleIntervalSeconds\": 15.0,\n    \"samples\": [],\n    \"timedOut\": false,\n    \"timeoutSeconds\": 0.0\n  },\n  \"modelRequiredAvailableGB\": 42.0,\n  \"preflightKind\": \"targetContext\",\n  \"provenSafeTargetCeiling\": 192000,\n  \"targetPromptTokens\": 224000,\n  \"targetRequiredAvailableGB\": 72.0,\n  \"unprovenTargetOverrideEnv\": \"EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET\"\n}",
+    "generatedAt": "2026-07-05T01:59:58-0700",
+    "lastBlockReason": "unproven_target_above_safe_ceiling",
+    "ok": false,
+    "overrideEnv": "EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET",
+    "provenSafeTargetCeiling": 192000,
+    "targetPromptTokens": 224000
+  },
+  "incrementalHighTargetAttempt": {
+    "actualPromptTokensByTokenizer": 200025,
+    "artifact": "docs/live-proofs/2026-07-05-real-qwen-long-context-200k-27b.json",
+    "completionMemoryGuard": {
+      "abortFreePercent": 15,
+      "abortReason": "new_swapouts_detected",
+      "aborted": true,
+      "enabled": true,
+      "maxSwapouts": 204,
+      "minFreePercent": 43,
+      "sampleCount": 347
+    },
+    "error": "CompletionMemoryGuardAbort: long-context completion memory guard aborted the engine",
+    "generatedAt": "2026-07-05T02:19:35-0700",
+    "ok": false,
+    "sessionMaxPromptTokens": 202073,
+    "targetMemoryPreflight": {
+      "allowConcurrentModel": false,
+      "allowUnprovenNearMaxTarget": true,
+      "availableGB": 108.67210388183594,
+      "enabled": true,
+      "heavyModelProcessCount": 0,
+      "heavyModelProcesses": [],
+      "memorySlotWait": {
+        "enabled": false,
+        "sampleIntervalSeconds": 15.0,
+        "samples": [],
+        "timeoutSeconds": 0.0
+      },
+      "modelRequiredAvailableGB": 42.0,
+      "preflightKind": "targetContext",
+      "provenSafeTargetCeiling": 192000,
+      "targetPromptTokens": 200000,
+      "targetRequiredAvailableGB": 72.0,
+      "unprovenTargetOverrideEnv": "EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET"
+    },
+    "targetPromptTokens": 200000
+  },
+  "incrementalHighTargetSafetyRefusal": {
+    "allowUnprovenNearMaxTarget": false,
+    "artifact": "docs/live-proofs/2026-07-05-long-context-200k-safety-refusal.json",
+    "engineLogTailEmpty": true,
+    "error": "MemoryPreflightError: long-context target preflight refused to start above the proven safe target ceiling; set EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET=1 only for an intentional high-risk proof run\n{\n  \"allowConcurrentModel\": false,\n  \"allowUnprovenNearMaxTarget\": false,\n  \"availableGB\": 109.38795471191406,\n  \"enabled\": true,\n  \"heavyModelProcessCount\": 0,\n  \"heavyModelProcesses\": [],\n  \"memorySlotWait\": {\n    \"enabled\": false,\n    \"lastBlockReason\": \"unproven_target_above_safe_ceiling\",\n    \"sampleIntervalSeconds\": 15.0,\n    \"samples\": [],\n    \"timedOut\": false,\n    \"timeoutSeconds\": 0.0\n  },\n  \"modelRequiredAvailableGB\": 42.0,\n  \"preflightKind\": \"targetContext\",\n  \"provenSafeTargetCeiling\": 192000,\n  \"targetPromptTokens\": 200000,\n  \"targetRequiredAvailableGB\": 72.0,\n  \"unprovenTargetOverrideEnv\": \"EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET\"\n}",
+    "generatedAt": "2026-07-05T02:23:33-0700",
+    "lastBlockReason": "unproven_target_above_safe_ceiling",
+    "ok": false,
+    "overrideEnv": "EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET",
+    "provenSafeTargetCeiling": 192000,
+    "targetPromptTokens": 200000
+  },
+  "largestCompletedPromptTokens": 192017,
+  "memoryPreflight": {
+    "availableGBEstimate": 120.32,
+    "freePercent": 94,
+    "requiredAvailableGB": 80.0,
+    "status": "PASS",
+    "swapouts": 204
+  },
+  "missingEvidence": "A real 258k near-max Qwen attempt exists, but it did not complete final assistant output or post-generation cache writes. The latest attempt reached 258032 tokenizer-counted prompt tokens and ended with CompletionMemoryGuardAbort: long-context completion memory guard aborted the engine. A 200k incremental retry also failed safely with new_swapouts_detected after reaching 200025 tokenizer-counted prompt tokens and entering live chunked prefill. A 224k graduated retry also failed safely with swapouts_detected after reaching 224003 tokenizer-counted prompt tokens.",
+  "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+  "nearMaxAttempt": {
+    "actualPromptTokensByTokenizer": 258032,
+    "artifact": "docs/live-proofs/2026-07-04-real-qwen-near-max-context-27b.json",
+    "completionMemoryGuard": {
+      "abortFreePercent": 15,
+      "abortReason": "free_memory_below_threshold",
+      "aborted": true,
+      "enabled": true,
+      "maxSwapouts": 0,
+      "minFreePercent": 14,
+      "sampleCount": 335
+    },
+    "error": "CompletionMemoryGuardAbort: long-context completion memory guard aborted the engine",
+    "generatedAt": "2026-07-05T01:36:14-0700",
+    "ok": false,
+    "sessionMaxPromptTokens": 260080,
+    "targetMemoryPreflight": {
+      "allowConcurrentModel": false,
+      "availableGB": 110.707763671875,
+      "enabled": true,
+      "heavyModelProcessCount": 0,
+      "heavyModelProcesses": [],
+      "memorySlotWait": {
+        "enabled": false,
+        "sampleIntervalSeconds": 15.0,
+        "samples": [],
+        "timeoutSeconds": 0.0
+      },
+      "modelRequiredAvailableGB": 42.0,
+      "preflightKind": "targetContext",
+      "targetPromptTokens": 258000,
+      "targetRequiredAvailableGB": 80.0
+    },
+    "targetPromptTokens": 258000
+  },
+  "nearMaxTargetPromptTokens": 258000,
+  "ok": true,
+  "proofLevel": "source-config-smoke-artifact-and-resource-preflight",
+  "proofType": "near-max-context-preflight",
+  "provenSafeTargetCeiling": 192000,
+  "smokeArtifact": "docs/live-proofs/2026-07-04-real-qwen-long-context-smoke-27b.json",
+  "status": {
+    "declared262kContext": "PASS",
+    "nearMaxLiveStatus": "FAILED_GUARDED_ATTEMPT",
+    "resourcePreflight": "PASS",
+    "smokeTopologyProof": "PASS"
+  },
+  "tokenizerMaxLength": 262144,
+  "unprovenGapTokens": 70127,
+  "unprovenTargetOverrideEnv": "EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET"
+}

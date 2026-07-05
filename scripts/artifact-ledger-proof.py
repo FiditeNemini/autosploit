@@ -14,11 +14,25 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
+ARTIFACT = ROOT / "docs" / "live-proofs" / "2026-07-05-artifact-ledger-current.json"
 KNOWN_FAILED_LIVE_PROOFS = [
     "docs/live-proofs/checkpoint-75-minimax-live.json",
 ]
+EXPECTED_NON_PASSING_LIVE_PROOFS = {
+    "docs/live-proofs/2026-07-04-live-batch-memory-preflight-blocked.json": "intentional memory preflight block before model load",
+    "docs/live-proofs/2026-07-04-near-max-context-guard-refusal.json": "intentional near-max resource guard refusal",
+    "docs/live-proofs/2026-07-04-near-max-context-runtime-attempt-summary.json": "partial near-max runtime attempt without final generation",
+    "docs/live-proofs/2026-07-04-real-qwen-near-max-context-27b.json": "partial near-max long-context attempt without final generation",
+    "docs/live-proofs/2026-07-05-long-context-200k-safety-refusal.json": "intentional above-safe-ceiling refusal",
+    "docs/live-proofs/2026-07-05-long-context-224k-safety-refusal.json": "intentional above-safe-ceiling refusal",
+    "docs/live-proofs/2026-07-05-real-qwen-long-context-200k-27b.json": "partial 200k long-context attempt stopped by memory guard",
+    "docs/live-proofs/2026-07-05-real-qwen-long-context-224k-27b.json": "partial 224k long-context attempt stopped by memory guard",
+}
 SUPERSEDED_FAILED_LIVE_PROOFS = {
     "docs/live-proofs/checkpoint-485-qwen-mxfp-live-current.json": "docs/live-proofs/checkpoint-486-qwen-mxfp-27b-pass.json",
+    "docs/live-proofs/qwen27-mxfp4-mtp-live-cache-20260605.json": "docs/live-proofs/2026-07-04-qwen36-27b-mxfp8-mtp-live-batch.json",
+    "docs/live-proofs/2026-07-04-qwen36-35b-ui-cve-tool-loop-partial.json": "docs/live-proofs/2026-07-04-qwen36-35b-ui-cve-tool-loop-after-loop-fix.json",
+    "docs/live-proofs/2026-07-04-real-qwen-27b-reasoning-on.json": "docs/live-proofs/2026-07-04-real-qwen-27b-reasoning-on-1024.json",
 }
 
 
@@ -43,6 +57,36 @@ def wait_for_app(timeout: float = 15.0) -> None:
     raise RuntimeError(f"app test server did not become ready: {last_error}")
 
 
+def timestamp() -> str:
+    return time.strftime("%Y-%m-%dT%H:%M:%S%z")
+
+
+def process_evidence() -> dict:
+    output = subprocess.check_output(["ps", "-axo", "pid,rss,comm,args"], text=True)
+    app_rows: list[str] = []
+    engine_rows: list[str] = []
+    engine_tokens = (
+        "ExploitBotEngine/launch.py",
+        "vmlx_engine.server",
+        "mlx_server",
+        "Qwen3.6",
+        "MiniMax-M",
+    )
+    for line in output.splitlines():
+        parts = line.split(None, 3)
+        comm = parts[2] if len(parts) >= 3 else ""
+        args = parts[3] if len(parts) >= 4 else ""
+        if "ExploitBot.app/Contents/MacOS/ExploitBot" in line:
+            app_rows.append(line.strip())
+        shell_or_watcher = comm.endswith(("/zsh", "/bash", "/sh")) or "/.claude/" in args
+        if not shell_or_watcher and any(token in line for token in engine_tokens):
+            engine_rows.append(line.strip())
+    return {
+        "appRows": app_rows,
+        "engineProcessRows": engine_rows,
+    }
+
+
 def expected_visual_manifests() -> list[Path]:
     return sorted((ROOT / "docs" / "visual-proofs").glob("checkpoint-*/manifest.json"))
 
@@ -53,7 +97,18 @@ def expected_live_proofs() -> list[Path]:
 
 def live_proof_ok(path: Path) -> bool:
     payload = json.loads(path.read_text(encoding="utf-8"))
-    return payload.get("ok") is True or payload.get("status") == "passed"
+    status = payload.get("status")
+    if payload.get("ok") is True or (isinstance(status, str) and status in {"passed", "PASS"}):
+        return True
+    verdict = payload.get("verdict") or {}
+    if isinstance(verdict, dict) and any(str(value).startswith("FAIL") for value in verdict.values()):
+        return False
+    assertions = payload.get("assertions") or {}
+    if isinstance(assertions, dict) and assertions:
+        bool_values = [value for value in assertions.values() if isinstance(value, bool)]
+        if bool_values:
+            return all(value is True for value in bool_values)
+    return False
 
 
 def manifest_capture_count(manifests: list[Path]) -> int:
@@ -126,6 +181,10 @@ def assert_artifact_ledger() -> None:
         raise AssertionError(f"artifact ledger known failed live proof list mismatch: {ledger}")
     if ledger.get("knownFailedLiveProofCount") != len(KNOWN_FAILED_LIVE_PROOFS):
         raise AssertionError(f"artifact ledger known failed live proof count mismatch: {ledger}")
+    if ledger.get("expectedNonPassingLiveProofs") != EXPECTED_NON_PASSING_LIVE_PROOFS:
+        raise AssertionError(f"artifact ledger expected non-passing live proof map mismatch: {ledger}")
+    if ledger.get("expectedNonPassingLiveProofCount") != len(EXPECTED_NON_PASSING_LIVE_PROOFS):
+        raise AssertionError(f"artifact ledger expected non-passing live proof count mismatch: {ledger}")
     if ledger.get("supersededFailedLiveProofs") != SUPERSEDED_FAILED_LIVE_PROOFS:
         raise AssertionError(f"artifact ledger superseded failed live proof map mismatch: {ledger}")
     if ledger.get("supersededFailedLiveProofCount") != len(SUPERSEDED_FAILED_LIVE_PROOFS):
@@ -134,7 +193,7 @@ def assert_artifact_ledger() -> None:
     for failed, replacement in SUPERSEDED_FAILED_LIVE_PROOFS.items():
         if replacement_status.get(failed) is not True:
             raise AssertionError(f"artifact ledger replacement is not passing for {failed} -> {replacement}: {ledger}")
-    classified_failures = set(KNOWN_FAILED_LIVE_PROOFS).union(SUPERSEDED_FAILED_LIVE_PROOFS.keys())
+    classified_failures = set(KNOWN_FAILED_LIVE_PROOFS).union(EXPECTED_NON_PASSING_LIVE_PROOFS.keys()).union(SUPERSEDED_FAILED_LIVE_PROOFS.keys())
     if ledger.get("currentFailedLiveProofs") != sorted(set(expected_failed).difference(classified_failures)):
         raise AssertionError(f"artifact ledger current failed live proof list mismatch: {ledger}")
     if ledger.get("currentFailedLiveProofCount") != len(set(expected_failed).difference(classified_failures)):
@@ -145,6 +204,42 @@ def assert_artifact_ledger() -> None:
     qa = state.get("qaCoverage") or {}
     if "/qa/artifact-ledger" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing artifact-ledger route contract: {qa}")
+
+    model_inference_started = bool(state.get("engineRunning")) or bool(state.get("enginePort"))
+    report = {
+        "ok": True,
+        "proofType": "artifact-ledger-current-live-route",
+        "generatedAt": timestamp(),
+        "sourceRoute": "/qa/artifact-ledger",
+        "status": {
+            "routeParity": "PASS",
+            "visualManifestFileParity": "PASS" if ledger.get("visualManifestFileParity") is True else "FAIL",
+            "liveProofFileParity": "PASS" if ledger.get("liveProofFileParity") is True else "FAIL",
+            "currentLiveProofFailureFree": "PASS" if ledger.get("currentLiveProofFailureFree") is True else "FAIL",
+            "modelInferenceStarted": "YES" if model_inference_started else "NO",
+        },
+        "visualManifestCount": ledger.get("visualManifestCount"),
+        "visualCaptureCount": ledger.get("visualCaptureCount"),
+        "liveProofCount": ledger.get("liveProofCount"),
+        "liveProofOkCount": ledger.get("liveProofOkCount"),
+        "failedLiveProofCount": ledger.get("failedLiveProofCount"),
+        "failedLiveProofs": ledger.get("failedLiveProofs") or [],
+        "knownFailedLiveProofs": ledger.get("knownFailedLiveProofs") or [],
+        "expectedNonPassingLiveProofs": ledger.get("expectedNonPassingLiveProofs") or {},
+        "supersededFailedLiveProofs": ledger.get("supersededFailedLiveProofs") or {},
+        "currentFailedLiveProofCount": ledger.get("currentFailedLiveProofCount"),
+        "currentFailedLiveProofs": ledger.get("currentFailedLiveProofs") or [],
+        "liveProofs": ledger.get("liveProofs") or [],
+        "liveProofStatus": ledger.get("liveProofStatus") or {},
+        "stateEvidence": {
+            "engineRunning": bool(state.get("engineRunning")),
+            "enginePort": state.get("enginePort"),
+            "healthStatus": state.get("healthStatus"),
+        },
+        "processEvidence": process_evidence(),
+    }
+    ARTIFACT.parent.mkdir(parents=True, exist_ok=True)
+    ARTIFACT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
 def run() -> None:
@@ -158,7 +253,7 @@ def run() -> None:
             raise RuntimeError("build_and_run --verify failed")
         wait_for_app()
         assert_artifact_ledger()
-        print("artifact-ledger proof passed")
+        print(f"artifact-ledger proof passed and wrote {ARTIFACT}")
     finally:
         subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         if app.poll() is None:

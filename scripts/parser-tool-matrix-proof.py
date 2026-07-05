@@ -42,7 +42,7 @@ def wait_for_app(timeout: float = 15.0) -> None:
     last_error: Exception | None = None
     while time.time() < deadline:
         try:
-            request("GET", "/state", timeout=1.0)
+            request("GET", "/messages", timeout=2.0)
             return
         except Exception as exc:
             last_error = exc
@@ -75,7 +75,7 @@ def run() -> None:
         matrix = request("GET", "/qa/parser-tool-matrix")
         result_parser = request("GET", "/qa/result-parser-coverage")
         tool_execution = request("GET", "/qa/tool-execution-matrix")
-        coverage_index = request("GET", "/qa/coverage-index")
+        coverage_index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         tools_group = (coverage_index.get("groups") or {}).get("toolsAndParsers") or {}
         expected_structured = tools_group.get("resultParserStructuredTools") or []

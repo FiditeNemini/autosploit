@@ -14,6 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
+ARTIFACT = ROOT / "docs" / "live-proofs" / "2026-07-05-proof-ledger-current.json"
 
 SPECIAL_PROOFS = {
     "live-turn-harness.py",
@@ -45,6 +46,36 @@ def wait_for_app(timeout: float = 15.0) -> None:
             last_error = exc
             time.sleep(0.25)
     raise RuntimeError(f"app test server did not become ready: {last_error}")
+
+
+def timestamp() -> str:
+    return time.strftime("%Y-%m-%dT%H:%M:%S%z")
+
+
+def process_evidence() -> dict:
+    output = subprocess.check_output(["ps", "-axo", "pid,rss,comm,args"], text=True)
+    app_rows: list[str] = []
+    engine_rows: list[str] = []
+    engine_tokens = (
+        "ExploitBotEngine/launch.py",
+        "vmlx_engine.server",
+        "mlx_server",
+        "Qwen3.6",
+        "MiniMax-M",
+    )
+    for line in output.splitlines():
+        parts = line.split(None, 3)
+        comm = parts[2] if len(parts) >= 3 else ""
+        args = parts[3] if len(parts) >= 4 else ""
+        if "ExploitBot.app/Contents/MacOS/ExploitBot" in line:
+            app_rows.append(line.strip())
+        shell_or_watcher = comm.endswith(("/zsh", "/bash", "/sh")) or "/.claude/" in args
+        if not shell_or_watcher and any(token in line for token in engine_tokens):
+            engine_rows.append(line.strip())
+    return {
+        "appRows": app_rows,
+        "engineProcessRows": engine_rows,
+    }
 
 
 def expected_proofs() -> list[str]:
@@ -155,6 +186,35 @@ def assert_proof_ledger() -> None:
     if "/qa/proof-ledger" not in qa.get("stateRoutes", []):
         raise AssertionError(f"/state missing proof-ledger route contract: {qa}")
 
+    model_inference_started = bool(state.get("engineRunning")) or bool(state.get("enginePort"))
+    report = {
+        "ok": True,
+        "proofType": "proof-ledger-current-live-route",
+        "generatedAt": timestamp(),
+        "sourceRoute": "/qa/proof-ledger",
+        "status": {
+            "routeParity": "PASS",
+            "proofFileParity": "PASS" if ledger.get("proofFileParity") is True else "FAIL",
+            "categoryParity": "PASS" if ledger.get("categoryParity") is True else "FAIL",
+            "tabProofFamilyParity": "PASS" if ledger.get("tabProofFamilyParity") is True else "FAIL",
+            "modelInferenceStarted": "YES" if model_inference_started else "NO",
+        },
+        "proofCount": ledger.get("proofCount"),
+        "categorySurfaces": ledger.get("categorySurfaces") or [],
+        "categoryCounts": ledger.get("categoryCounts") or {},
+        "categoryOtherCount": ledger.get("categoryOtherCount"),
+        "tabProofFamilyCount": ledger.get("tabProofFamilyCount"),
+        "tabProofFamilies": ledger.get("tabProofFamilies") or {},
+        "stateEvidence": {
+            "engineRunning": bool(state.get("engineRunning")),
+            "enginePort": state.get("enginePort"),
+            "healthStatus": state.get("healthStatus"),
+        },
+        "processEvidence": process_evidence(),
+    }
+    ARTIFACT.parent.mkdir(parents=True, exist_ok=True)
+    ARTIFACT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
 
 def run() -> None:
     env = os.environ.copy()
@@ -167,7 +227,7 @@ def run() -> None:
             raise RuntimeError("build_and_run --verify failed")
         wait_for_app()
         assert_proof_ledger()
-        print("proof-ledger proof passed")
+        print(f"proof-ledger proof passed and wrote {ARTIFACT}")
     finally:
         subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         if app.poll() is None:

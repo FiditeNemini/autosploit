@@ -55,6 +55,12 @@ def run() -> None:
         before = request("GET", "/state")
         request("POST", "/qa/apply-app-settings", {
             "maxIterations": 7,
+            "engine": {
+                "useModelGenerationDefaults": False,
+                "temperature": 0.0,
+                "topP": 1.0,
+                "maxTokens": 64,
+            },
             "context": {
                 "enabled": True,
                 "maxSnippets": 3,
@@ -75,6 +81,10 @@ def run() -> None:
         assert after["healthStatus"] == before["healthStatus"], (before, after)
         assert after["model"] == before["model"], (before, after)
         assert after["chat"]["maxIterations"] == 7, after
+        assert after["engineConfig"]["useModelGenerationDefaults"] is False, after
+        assert after["engineConfig"]["temperature"] == 0.0, after
+        assert after["engineConfig"]["topP"] == 1.0, after
+        assert after["engineConfig"]["maxTokens"] == 64, after
         assert after["contextCatalog"]["maxSnippets"] == 3, after
         assert after["contextCatalog"]["includeAssets"] is False, after
         assert after["contextCatalog"]["includeRecentToolOutput"] is False, after
@@ -83,6 +93,10 @@ def run() -> None:
         assert after["contextCatalog"]["cveMode"] == "current", after
         assert after["agents"]["multiAgentEnabled"] is True, after
         assert after["agents"]["maxConcurrentAgents"] == 8, after
+        budget = request("GET", "/qa/context-budget-compaction")
+        assert budget["maxTokens"] == 64, budget
+        assert budget["chatMaxTokens"] == 64, budget
+        assert budget["contracts"]["maxTokensForwarded"] is True, budget
 
         print("settings-apply proof passed")
     finally:

@@ -1,0 +1,787 @@
+{
+  "actualPromptTokensByTokenizer": 224003,
+  "baseUrl": "http://127.0.0.1:58119",
+  "cacheAtErrorError": "URLError: <urlopen error [Errno 61] Connection refused>",
+  "completionMemoryGuard": {
+    "abortFreePercent": 15,
+    "abortReason": "swapouts_detected",
+    "aborted": true,
+    "cacheAtAbort": {
+      "block_disk_cache": {
+        "blocks_on_disk": 0,
+        "disk_evictions": 0,
+        "disk_hits": 0,
+        "disk_misses": 2,
+        "disk_size_bytes": 0,
+        "disk_size_gb": 0.0,
+        "disk_writes": 0,
+        "total_accesses": 0,
+        "total_cached_tokens": 0,
+        "total_tokens_on_disk": 0
+      },
+      "cache_totals": {
+        "l2_block_tokens_on_disk": 0,
+        "l2_prompt_tokens_on_disk": 0,
+        "l2_ssm_tokens_on_disk": 0,
+        "l2_tokens_on_disk": 0,
+        "l2_tokens_on_disk_note": "store_sum_across_prompt_block_ssm_l2; tiers_may_overlap",
+        "l2_tokens_on_disk_store_sum": 0,
+        "ram_tokens_cached": 0,
+        "ssm_tokens_on_disk": 0
+      },
+      "disk_cache": {
+        "entries": 0,
+        "hit_rate": 0.0,
+        "hits": 0,
+        "max_size_gb": 10.0,
+        "misses": 1,
+        "pending_writes": 0,
+        "stores": 0,
+        "total_cached_tokens": 0,
+        "total_size_mb": 0.0,
+        "total_tokens_on_disk": 0
+      },
+      "kv_cache_quantization": {
+        "bits": 4,
+        "enabled": true,
+        "group_size": 64
+      },
+      "memory": {
+        "active_mb": 40084.1,
+        "cache_mb": 12567.7,
+        "peak_mb": 42467.3
+      },
+      "native_cache": {
+        "attention_kv_storage_quantization": {
+          "applies_to": "attention_kv_layers_only",
+          "bits": 4,
+          "enabled": true,
+          "group_size": 64,
+          "mode": "storage_boundary",
+          "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+          "ssm_policy": "native_companion_state"
+        },
+        "block_disk_l2": true,
+        "cache_type": "hybrid_ssm_typed",
+        "components": [
+          "attention_kv",
+          "ssm_companion_state",
+          "async_rederive"
+        ],
+        "family": "hybrid",
+        "generic_turboquant_kv": {
+          "enabled": false,
+          "reason": "hybrid_ssm_state"
+        },
+        "kv_layer_indices": [],
+        "live_attention_tq_kv": {
+          "applies_to": "attention_kv_layers_only",
+          "attention_layers": [],
+          "companion_layers": [],
+          "enabled": false,
+          "mode": null,
+          "ssm_policy": "native_full_precision_companion_state"
+        },
+        "paged": true,
+        "prefix": true,
+        "schema": "hybrid_ssm_v1",
+        "ssm_entries": 0
+      },
+      "scheduler_cache": {
+        "active_requests": 0,
+        "allocated_blocks": 1,
+        "block_size": 64,
+        "cache_hit_rate": 0.0,
+        "cache_hits": 0,
+        "cache_misses": 2,
+        "cow_copies": 0,
+        "disk_hits": 0,
+        "disk_misses": 2,
+        "entries_by_type": {
+          "assistant": 0,
+          "system": 0,
+          "user": 0
+        },
+        "evictions": 0,
+        "free_blocks": 3533,
+        "hit_rate": 0.0,
+        "hits": 0,
+        "max_blocks": 3534,
+        "misses": 1,
+        "pixel_cache_hits": 0,
+        "pixel_cache_misses": 0,
+        "pixel_cache_size": 0,
+        "pixel_hit_rate": 0.0,
+        "shared_blocks": 0,
+        "tokens_saved": 0,
+        "total_images_processed": 0,
+        "total_time_saved": 0.0,
+        "total_tokens_cached": 0,
+        "utilization": 0.0002829654782116582
+      },
+      "scheduler_stats": {
+        "batch_generator": {
+          "generation_time": 0,
+          "generation_tokens": 0,
+          "generation_tps": 0,
+          "hybrid_kv_without_ssm_hits": 0,
+          "hybrid_kv_without_ssm_tokens": 0,
+          "last_hybrid_kv_without_ssm": null,
+          "last_native_mtp": null,
+          "num_images_processed": 0,
+          "peak_memory": 44.530173692,
+          "prompt_time": 0,
+          "prompt_tokens": 224015,
+          "prompt_tps": 0,
+          "vision_encoding_time": 0
+        },
+        "cache_hit_requests": 0,
+        "cache_hit_tokens": 0,
+        "cache_hit_tokens_by_detail": {},
+        "cache_reuse_partial_downgrades": 0,
+        "cache_reuse_partial_tokens": 0,
+        "cache_reuse_skip_tokens": 0,
+        "cache_reuse_skips": 0,
+        "engine_path": null,
+        "ewma_ttft_seconds": 0,
+        "hybrid_kv_without_ssm_hits": 0,
+        "hybrid_kv_without_ssm_tokens": 0,
+        "last_cache_reuse_partial": null,
+        "last_cache_reuse_skip": null,
+        "last_hybrid_kv_without_ssm": null,
+        "max_running_observed": 1,
+        "max_waiting_observed": 1,
+        "num_requests_processed": 0,
+        "num_running": 1,
+        "num_waiting": 0,
+        "single_active_decode": false,
+        "total_completion_tokens": 0,
+        "total_prompt_tokens": 0
+      },
+      "ssm_companion": {
+        "disk": {
+          "budget_bytes": 37946036060,
+          "budget_gb": 35.34,
+          "bytes": 0,
+          "bytes_mb": 0.0,
+          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-0xen26du/block/ssm_companion",
+          "enabled": true,
+          "entries": 0,
+          "hit_rate": 0.0,
+          "hits": 0,
+          "misses": 0,
+          "stores": 0,
+          "total_cached_tokens": 0,
+          "total_tokens_on_disk": 0
+        },
+        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-0xen26du/block/ssm_companion",
+        "disk_enabled": true,
+        "entries": 0,
+        "max_entries": 8,
+        "nbytes": 0,
+        "nbytes_mb": 0.0
+      },
+      "turboquant_kv_cache": {
+        "enabled": false
+      }
+    },
+    "enabled": true,
+    "guardKind": "completionMemory",
+    "sampleIntervalSeconds": 5.0,
+    "samples": [
+      {
+        "freePercent": 72,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:55:26-0700"
+      },
+      {
+        "freePercent": 94,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:55:31-0700"
+      },
+      {
+        "freePercent": 94,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:55:36-0700"
+      },
+      {
+        "freePercent": 94,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:55:41-0700"
+      },
+      {
+        "freePercent": 64,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:55:46-0700"
+      },
+      {
+        "freePercent": 69,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:55:51-0700"
+      },
+      {
+        "freePercent": 62,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:55:56-0700"
+      },
+      {
+        "freePercent": 61,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:56:01-0700"
+      },
+      {
+        "freePercent": 61,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:56:06-0700"
+      },
+      {
+        "freePercent": 61,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:56:11-0700"
+      },
+      {
+        "freePercent": 68,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:56:16-0700"
+      },
+      {
+        "freePercent": 60,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:56:21-0700"
+      },
+      {
+        "freePercent": 60,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:56:26-0700"
+      },
+      {
+        "freePercent": 59,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:56:31-0700"
+      },
+      {
+        "freePercent": 62,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:56:36-0700"
+      },
+      {
+        "freePercent": 59,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:56:41-0700"
+      },
+      {
+        "freePercent": 60,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:56:46-0700"
+      },
+      {
+        "freePercent": 58,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:56:51-0700"
+      },
+      {
+        "freePercent": 58,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:56:56-0700"
+      },
+      {
+        "freePercent": 67,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:57:02-0700"
+      },
+      {
+        "freePercent": 57,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:57:07-0700"
+      },
+      {
+        "freePercent": 68,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:57:12-0700"
+      },
+      {
+        "freePercent": 57,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:57:17-0700"
+      },
+      {
+        "freePercent": 67,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:57:22-0700"
+      },
+      {
+        "freePercent": 56,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:57:27-0700"
+      },
+      {
+        "freePercent": 67,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:57:32-0700"
+      },
+      {
+        "freePercent": 56,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:57:37-0700"
+      },
+      {
+        "freePercent": 67,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:57:42-0700"
+      },
+      {
+        "freePercent": 55,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:57:47-0700"
+      },
+      {
+        "freePercent": 61,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:57:52-0700"
+      },
+      {
+        "freePercent": 55,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:57:57-0700"
+      },
+      {
+        "freePercent": 53,
+        "swapouts": 16,
+        "timestamp": "2026-07-05T01:58:02-0700"
+      }
+    ]
+  },
+  "declaredContext": {
+    "configTextMaxPositionEmbeddings": 262144,
+    "modelType": "qwen3_5",
+    "ropeParameters": {
+      "mrope_interleaved": true,
+      "mrope_section": [
+        11,
+        11,
+        10
+      ],
+      "partial_rotary_factor": 0.25,
+      "rope_theta": 10000000,
+      "rope_type": "default"
+    },
+    "textModelType": "qwen3_5_text",
+    "tokenizerModelMaxLength": 262144
+  },
+  "engineLogTail": "Launching: /Users/eric/exploitbot/ExploitBotEngine/.venv/bin/python3 -m vmlx_engine.server --model /Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP --port 58119 --host 127.0.0.1 --timeout 3600.0 --continuous-batching --max-num-seqs 1 --enable-auto-tool-choice --reasoning-parser qwen3 --tool-call-parser qwen --default-temperature 1.0 --default-top-p 0.95 --default-top-k 20 --max-tokens 32 --max-prompt-tokens 226051 --default-enable-thinking true --effective-config-sources {\"generation\": {\"chat_template_kwargs\": \"unset\", \"enable_thinking\": \"launcher_default\", \"max_tokens\": \"cli\", \"min_p\": \"unset\", \"repetition_penalty\": \"unset\", \"stop\": \"unset\", \"temperature\": \"generation_config\", \"top_k\": \"generation_config\", \"top_p\": \"generation_config\"}, \"parsers\": {\"reasoning\": \"cli\", \"tool_call\": \"cli\"}} --enable-prefix-cache true --enable-disk-cache true --disk-cache-dir /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-0xen26du/prompt --disk-cache-max-gb 10.0 --cache-memory-percent 0.2 --use-paged-cache true --paged-cache-block-size 64 --enable-block-disk-cache true --block-disk-cache-dir /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-0xen26du/block --kv-cache-quantization turboquant-q4 --kv-cache-group-size 64\nModel folder defaults: {'temperature': 1.0, 'top_p': 0.95, 'top_k': 20, 'min_p': None, 'repetition_penalty': None, 'stop': None, 'max_tokens': None, 'enable_thinking': None, 'chat_template_kwargs': None, 'reasoning_parser': 'qwen3', 'tool_call_parser': 'qwen', '__sources': {'temperature': 'generation_config', 'top_p': 'generation_config', 'top_k': 'generation_config', 'reasoning_parser': 'jang_capabilities', 'tool_call_parser': 'jang_capabilities'}}\nINFO:__main__:============================================================\nINFO:__main__:SECURITY CONFIGURATION\nINFO:__main__:============================================================\nWARNING:__main__:  Authentication: DISABLED - Use --api-key to enable\nWARNING:__main__:  Rate limiting: DISABLED - Use --rate-limit to enable\nINFO:__main__:  Request timeout: 3600.0s\nINFO:__main__:============================================================\nINFO:__main__:Reasoning parser enabled: qwen3\nINFO:__main__:Tool calling enabled (parser: qwen)\nINFO:__main__:System memory before load: 108.5GB available / 128.0GB total (15.2% used)\nINFO:__main__:Loading model with BatchedEngine: /Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\nINFO:vmlx_engine:is_mllm_model(/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP): tier=native_mtp_vl_artifact result=True\nINFO:__main__:Model loaded (batched mode): /Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\nINFO:vmlx_engine.model_config_registry:Model config: detection_source=jang_stamped family=qwen3_5 reasoning_parser=qwen3 tool_parser=qwen think_in_template=True cache_type=hybrid cache_subtype=None is_mllm=True\nINFO:__main__:Max prompt/context length: ~226,051 tokens (explicit --max-prompt-tokens)\nINFO:__main__:Metal GPU memory after load: 0.00GB active, 0.00GB peak\nINFO:__main__:System memory after load: 108.5GB available (15.2% used)\nINFO:__main__:Default max tokens override: 32\nINFO:     Started server process [75174]\nINFO:     Waiting for application startup.\nINFO:__main__:Started caffeinate system wake lock for PID 75174\nINFO:vmlx_engine.models.mllm:Loading JANG VL model: /Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\nINFO:vmlx_engine.utils.jang_loader:JANG v2 VLM detected \u2014 loading via mmap (instant)\nINFO:vmlx_engine.patches.mlx_lm_mtp.qwen35_model:Qwen3.5/3.6 MTP model adapter applied\nINFO:vmlx_engine.patches.mlx_lm_mtp:mlx-lm MTP adapters applied\nINFO:vmlx_engine.patches.mlx_vlm_mtp.qwen35_vl:mlx-vlm Qwen3.5/3.6 MTP language adapter applied\nINFO:vmlx_engine.patches.mlx_vlm_mtp:mlx-vlm native MTP adapters applied\nINFO:vmlx_engine.native_mtp:Native MTP runtime active for /Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP (family=qwen3_5 layers=1 tensors=23 cache=hybrid depth=3/default)\nINFO:vmlx_engine.utils.jang_loader:  Qwen3.5/3.6 native-MTP VL artifact detected by tensor metadata; using the real mlx-vlm loader with vMLX MTP/VL runtime adapters.\nINFO:vmlx_engine.utils.jang_loader:  Wired limit set to 46 GB (model 29 GB)\nINFO:vmlx_engine.utils.jang_loader:  TurboQuant: not enabled (jang_config has no `turboquant` block; default is off \u2014 set turboquant.enabled=true in jang_config.json to opt in, or VMLX_FORCE_TQ_AUTO=1 for legacy auto)\nINFO:vmlx_engine.utils.jang_loader:JANG v2 VLM loaded in 3.2s\nINFO:vmlx_engine.models.mllm:JANG VL model loaded: /Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP\nINFO:vmlx_engine.mllm_scheduler:VLM hybrid model detected (MambaCache + KVCache layers). Mamba batching support enabled.\nINFO:vmlx_engine.block_disk_store:BlockDiskStore initialized: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-0xen26du/block, max_size=35.3GB, entries=0, size=0.00GB\nINFO:vmlx_engine.mllm_scheduler:VLM block disk cache enabled: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-0xen26du/block, max=35.339999999999996GB\nINFO:vmlx_engine.mllm_scheduler:VLM hybrid SSM companion L2 enabled: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-0xen26du/block/ssm_companion, max=35.3GB\nINFO:vmlx_engine.paged_cache:PagedCacheManager initialized: block_size=64, max_blocks=3534, max_tokens=226176\nINFO:vmlx_engine.mllm_scheduler:VLM Paged cache enabled: block_size=64, max_blocks=3534\nINFO:vmlx_engine.disk_cache:Disk cache initialized: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-0xen26du/prompt/Qwen3.6-27B-MXFP8-CRACK-MTP_1b0f3dc1837a, max_size=10.0GB, entries=0\nINFO:vmlx_engine.mllm_scheduler:VLM disk cache (L2) enabled: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-0xen26du/prompt/Qwen3.6-27B-MXFP8-CRACK-MTP_1b0f3dc1837a\nINFO:vmlx_engine.mllm_scheduler:VLM KV quant round-trip test passed: bits=4, group_size=64\nINFO:vmlx_engine.mllm_scheduler:VLM KV cache quantization enabled: turboquant-q4 (bits=4, group_size=64)\nINFO:vmlx_engine.mllm_scheduler:Runtime cache layout: model_type=qwen3_5 layers=64 layout=0:ArraysCache;1:ArraysCache;2:ArraysCache;3:KVCache;4:ArraysCache;5:ArraysCache;6:ArraysCache;7:KVCache;8:ArraysCache;9:ArraysCache;10:ArraysCache;11:KVCache;12:ArraysCache;13:ArraysCache;14:ArraysCache;15:KVCache;16:ArraysCache;17:ArraysCache;18:ArraysCache;19:KVCache;20:ArraysCache;21:ArraysCache;22:ArraysCache;23:KVCache;24:ArraysCache;25:ArraysCache;26:ArraysCache;27:KVCache;28:ArraysCache;29:ArraysCache;30:ArraysCache;31:KVCache;32:ArraysCache;33:ArraysCache;34:ArraysCache;35:KVCache;36:ArraysCache;37:ArraysCache;38:ArraysCache;39:KVCache;40:ArraysCache;41:ArraysCache;42:ArraysCache;43:KVCache;44:ArraysCache;45:ArraysCache;46:ArraysCache;47:KVCache;48:ArraysCache;49:ArraysCache;50:ArraysCache;51:KVCache;52:ArraysCache;53:ArraysCache;54:ArraysCache;55:KVCache;56:ArraysCache;57:ArraysCache;58:ArraysCache;59:KVCache;60:ArraysCache;61:ArraysCache;62:ArraysCache;63:KVCache\nINFO:vmlx_engine.mllm_scheduler:MLLM Scheduler initialized: cache_mode=paged, hybrid=True, zaya_cca=False, kv_quant=turboquant-q4, prompt_l2=True, block_l2=True, max_seqs=1\nINFO:vmlx_engine.mllm_scheduler:MLLM Scheduler started with max_num_seqs=1\nINFO:vmlx_engine.engine.batched:MLLM Scheduler started with continuous batching: max_num_seqs=1, prefill_batch=512, completion_batch=512\nINFO:vmlx_engine.engine.batched:BatchedEngine loaded: /Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP (mllm=True)\nERROR:__main__:Failed to discover MCP config \u2014 continuing without MCP: No module named 'vmlx_engine.mcp'\nINFO:     Application startup complete.\nINFO:     Uvicorn running on http://127.0.0.1:58119 (Press CTRL+C to quit)\nINFO:     127.0.0.1:58126 - \"GET /health HTTP/1.1\" 200 OK\nWARNING:__main__:SECURITY WARNING: Server running without API key authentication. Anyone can access the API. Use --api-key to enable authentication.\nINFO:__main__:Request model '/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP' differs from served model 'dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP' \u2014 using loaded model (single-model server). This is expected when routing tools like Claude Code, opencode, or CCSwitch at vMLX \u2014 they send their own model alias.\nINFO:     127.0.0.1:58127 - \"POST /v1/chat/completions HTTP/1.1\" 413 Content Too Large\nINFO:     127.0.0.1:58128 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 32, 'enable_thinking': False}\nINFO:vmlx_engine.mllm_batch_generator:MLLMBatchGenerator: Using VLM's language_model for batched generation\nINFO:vmlx_engine.mllm_batch_generator:MLLMBatchGenerator: Vision cache enabled (size=16)\nINFO:vmlx_engine.mllm_batch_generator:Metal cache limit set to 26.88GB (max_ws=107.5GB, active=27.1GB, free=80.4GB; base=26.88GB safety=40.21GB; mlxstudio#78)\nINFO:vmlx_engine.mllm_batch_generator:Hybrid model (family=qwen3_5_text) seq_len=224015: one-shot attention buffer 2991.1 GB exceeds Metal single-buffer limit (~9.5 GB). Enabling chunked prefill \u2014 spot-check output for correctness on non-Qwen3.5 hybrid families. Set VMLX_DISABLE_HYBRID_AUTO_CHUNK=1 to raise an OOM error instead of chunking.\nINFO:     127.0.0.1:58188 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nINFO:     Shutting down\nINFO:     Waiting for connections to close. (CTRL+C to force quit)",
+  "error": "CompletionMemoryGuardAbort: long-context completion memory guard aborted the engine",
+  "finishedAt": "2026-07-05T01:58:14-0700",
+  "generatedAt": "2026-07-05T01:58:14-0700",
+  "health": {
+    "acceleration": {
+      "host": {
+        "brand": "Apple M5 Max",
+        "reason": null,
+        "supported": true
+      },
+      "kernel_type": "affine_quantized_matmul",
+      "metal_na_active_on_host": true,
+      "metal_na_capable": true,
+      "metal_na_symbols": {
+        "affine_gather_qmm_symbols": 3456,
+        "affine_qmm_symbols": 4212,
+        "available": true,
+        "nax_symbols": 4668,
+        "naxtile_symbols": 4154
+      },
+      "reason": null
+    },
+    "cache": {
+      "block_disk_cache": {
+        "blocks_on_disk": 0,
+        "disk_evictions": 0,
+        "disk_hits": 0,
+        "disk_misses": 0,
+        "disk_size_bytes": 0,
+        "disk_size_gb": 0.0,
+        "disk_writes": 0,
+        "total_accesses": 0,
+        "total_cached_tokens": 0,
+        "total_tokens_on_disk": 0
+      },
+      "disk_cache": {
+        "entries": 0,
+        "hit_rate": 0.0,
+        "hits": 0,
+        "max_size_gb": 10.0,
+        "misses": 0,
+        "pending_writes": 0,
+        "stores": 0,
+        "total_cached_tokens": 0,
+        "total_size_mb": 0.0,
+        "total_tokens_on_disk": 0
+      },
+      "scheduler_cache": {
+        "active_requests": 0,
+        "allocated_blocks": 1,
+        "block_size": 64,
+        "cache_hit_rate": 0,
+        "cache_hits": 0,
+        "cache_misses": 0,
+        "cow_copies": 0,
+        "disk_hits": 0,
+        "disk_misses": 0,
+        "entries_by_type": {
+          "assistant": 0,
+          "system": 0,
+          "user": 0
+        },
+        "evictions": 0,
+        "free_blocks": 3533,
+        "hit_rate": 0,
+        "hits": 0,
+        "max_blocks": 3534,
+        "misses": 0,
+        "shared_blocks": 0,
+        "tokens_saved": 0,
+        "total_tokens_cached": 0,
+        "utilization": 0.0002829654782116582
+      },
+      "ssm_companion": {
+        "disk": {
+          "budget_bytes": 37946036060,
+          "budget_gb": 35.34,
+          "bytes": 0,
+          "bytes_mb": 0.0,
+          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-0xen26du/block/ssm_companion",
+          "enabled": true,
+          "entries": 0,
+          "hit_rate": 0.0,
+          "hits": 0,
+          "misses": 0,
+          "stores": 0,
+          "total_cached_tokens": 0,
+          "total_tokens_on_disk": 0
+        },
+        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-0xen26du/block/ssm_companion",
+        "disk_enabled": true,
+        "entries": 0,
+        "max_bytes": null,
+        "max_bytes_mb": null,
+        "max_entries": 8,
+        "nbytes": 0,
+        "nbytes_mb": 0.0
+      },
+      "totals": {
+        "l2_block_tokens_on_disk": 0,
+        "l2_prompt_tokens_on_disk": 0,
+        "l2_ssm_tokens_on_disk": 0,
+        "l2_tokens_on_disk": 0,
+        "l2_tokens_on_disk_note": "store_sum_across_prompt_block_ssm_l2; tiers_may_overlap",
+        "l2_tokens_on_disk_store_sum": 0,
+        "ram_tokens_cached": 0,
+        "ssm_tokens_on_disk": 0
+      }
+    },
+    "effective_config": {
+      "cache": {
+        "disk_cache": {
+          "block_l2": {
+            "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-0xen26du/block",
+            "enabled": true,
+            "max_gb": 35.339999999999996
+          },
+          "prompt_l2": {
+            "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-0xen26du/prompt",
+            "enabled": true,
+            "max_gb": 10.0
+          }
+        },
+        "kv_cache_quantization": {
+          "enabled": true,
+          "group_size": 64,
+          "mode": "turboquant-q4"
+        },
+        "paged_cache": {
+          "block_size": 64,
+          "enabled": true
+        },
+        "prefix_cache": {
+          "enabled": true,
+          "memory_percent": 0.2
+        },
+        "responses": {
+          "clears_conversation_state_only": true,
+          "method": "prefix-cache-l2-turboquant",
+          "new_context_preserves_engine_session": true,
+          "prefix_cache_required": true
+        },
+        "ssm_companion": {
+          "disk_l2_enabled": true,
+          "enabled": true,
+          "max_entries": 8,
+          "max_mb": null
+        },
+        "topology": {
+          "block_l2_active": true,
+          "cache_type": "hybrid",
+          "expected_components": [
+            "kv_cache",
+            "prefix_cache",
+            "prompt_l2",
+            "paged_cache",
+            "block_l2",
+            "kv_quantization",
+            "ssm_companion",
+            "ssm_l2"
+          ],
+          "kv_quantization_active": true,
+          "name": "hybrid_ssm_attention",
+          "prompt_l2_active": true,
+          "ssm_companion_required": true,
+          "warnings": []
+        }
+      },
+      "generation": {
+        "chat_template_kwargs": null,
+        "custom_chat_template": false,
+        "enable_thinking": true,
+        "max_tokens": 32,
+        "min_p": null,
+        "repetition_penalty": null,
+        "stop": null,
+        "temperature": 1.0,
+        "top_k": 20,
+        "top_p": 0.95
+      },
+      "model": {
+        "architecture_hints": {
+          "cache_topology": "hybrid_ssm_attention",
+          "ssm_companion_required": true
+        },
+        "cache_type": "hybrid",
+        "family": "qwen3_5",
+        "name": "dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "served_name": null,
+        "type": "text"
+      },
+      "parsers": {
+        "auto_tool_choice": true,
+        "reasoning": "qwen3",
+        "tool_call": "qwen"
+      },
+      "sources": {
+        "generation": {
+          "chat_template_kwargs": "unset",
+          "enable_thinking": "launcher_default",
+          "max_tokens": "cli",
+          "min_p": "unset",
+          "repetition_penalty": "unset",
+          "stop": "unset",
+          "temperature": "generation_config",
+          "top_k": "generation_config",
+          "top_p": "generation_config"
+        },
+        "parsers": {
+          "reasoning": "cli",
+          "tool_call": "cli"
+        }
+      }
+    },
+    "engine_type": "batched",
+    "kv_cache_quantization": {
+      "bits": 4,
+      "enabled": true,
+      "group_size": 64
+    },
+    "last_request_time": null,
+    "max_prompt_tokens": 226051,
+    "mcp": null,
+    "memory": {
+      "active_mb": 27751.1,
+      "cache_mb": 0.1,
+      "peak_mb": 27751.2
+    },
+    "model_loaded": true,
+    "model_name": "dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+    "model_type": "mllm",
+    "mtp": {
+      "artifact_available": true,
+      "cache_type": "hybrid",
+      "config_mtp_layer_source": "config.text_config.mtp_num_hidden_layers",
+      "config_num_nextn_predict_layers": 1,
+      "effective_depth": 3,
+      "effective_depth_source": "default",
+      "family": "qwen3_5",
+      "has_vision_config": true,
+      "has_vision_weights": true,
+      "index_has_mtp_tensors": true,
+      "index_mtp_layer_count": 1,
+      "issues": [],
+      "jang_drop_mtp": null,
+      "jang_mtp_layers": 1,
+      "mtp_tensor_count": 23,
+      "request_gate": "temperature=0,repetition_penalty=1.0",
+      "request_policy": "compatible-only",
+      "runtime_active": true,
+      "runtime_available": true,
+      "runtime_bundle_has_mtp": true,
+      "runtime_mtp_mode": "preserved_enabled",
+      "runtime_reason": "native MTP runtime is active for text+vl",
+      "runtime_scope": "text+vl",
+      "runtime_supported": true,
+      "runtime_validation_blocked": false,
+      "status": "native_runtime_active",
+      "vision_tensor_count": 333,
+      "vl_runtime_available": true
+    },
+    "native_cache": {
+      "attention_kv_storage_quantization": {
+        "applies_to": "attention_kv_layers_only",
+        "bits": 4,
+        "enabled": true,
+        "group_size": 64,
+        "mode": "storage_boundary",
+        "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+        "ssm_policy": "native_companion_state"
+      },
+      "block_disk_l2": true,
+      "cache_type": "hybrid_ssm_typed",
+      "components": [
+        "attention_kv",
+        "ssm_companion_state",
+        "async_rederive"
+      ],
+      "family": "hybrid",
+      "generic_turboquant_kv": {
+        "enabled": false,
+        "reason": "hybrid_ssm_state"
+      },
+      "kv_layer_indices": [],
+      "live_attention_tq_kv": {
+        "applies_to": "attention_kv_layers_only",
+        "attention_layers": [],
+        "companion_layers": [],
+        "enabled": false,
+        "mode": null,
+        "ssm_policy": "native_full_precision_companion_state"
+      },
+      "paged": true,
+      "prefix": true,
+      "schema": "hybrid_ssm_v1",
+      "ssm_entries": 0
+    },
+    "quantization": {
+      "backend": "mx.quantize",
+      "codec": "affine_quantized_matmul",
+      "config_bits": 8,
+      "group_size": 32,
+      "passthrough_bit_widths_used": [
+        16
+      ],
+      "passthrough_tensor_count": 693,
+      "profile": "MXFP8",
+      "sidecar": {
+        "jang_config": true,
+        "jangtq_runtime": false,
+        "prestacked_bundle": false
+      },
+      "target_bits": 8,
+      "weight_format": "mxfp8",
+      "weight_index": {
+        "index_file": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP/model.safetensors.index.json",
+        "mtp_tensor_count": 23,
+        "routed_layout_counts": {
+          "prestacked_switch": 0,
+          "split_expert": 0
+        },
+        "suffix_counts": {
+          "scales": 506,
+          "weight": 937
+        },
+        "total_tensors": 1705,
+        "tq_target_counts": {}
+      },
+      "weight_matmul_dispatch": {
+        "metal_na_eligible": true,
+        "primary": "mlx_affine_quantized_matmul",
+        "reason": null,
+        "uses_mlx_quantized_matmul": true
+      }
+    },
+    "quantization_format": {
+      "actual_bits": null,
+      "block_size": 64,
+      "target_bits": null,
+      "type": "jang"
+    },
+    "scheduler": {
+      "batch_generator": {},
+      "cache_hit_requests": 0,
+      "cache_hit_tokens": 0,
+      "cache_hit_tokens_by_detail": {},
+      "cache_reuse_partial_downgrades": 0,
+      "cache_reuse_partial_tokens": 0,
+      "cache_reuse_skip_tokens": 0,
+      "cache_reuse_skips": 0,
+      "engine_path": null,
+      "ewma_ttft_seconds": 0,
+      "hybrid_kv_without_ssm_hits": 0,
+      "hybrid_kv_without_ssm_tokens": 0,
+      "last_cache_reuse_partial": null,
+      "last_cache_reuse_skip": null,
+      "last_hybrid_kv_without_ssm": null,
+      "max_running_observed": 0,
+      "max_waiting_observed": 0,
+      "num_running": 0,
+      "num_waiting": 0,
+      "single_active_decode": false
+    },
+    "status": "healthy",
+    "turboquant_kv_cache": {
+      "enabled": false
+    }
+  },
+  "lowerCapForRejection": 112001,
+  "lowerCapRejectResponse": {
+    "json": {
+      "error": {
+        "code": "prompt_too_long",
+        "message": "Prompt too long (prompt: ~224,003 tokens). This would need ~87.5GB of KV cache memory, exceeding the configured prompt/context limit of ~112,001 tokens. Shorten the prompt, raise --max-prompt-tokens, or use a model/session with a larger prompt/context cap.",
+        "type": "invalid_request_error"
+      }
+    },
+    "status": 413
+  },
+  "marker": "LONG_CONTEXT_SMOKE_PASS",
+  "memoryPreflight": {
+    "allowConcurrentModel": false,
+    "availableGB": 108.65394592285156,
+    "enabled": true,
+    "heavyModelProcessCount": 0,
+    "heavyModelProcesses": [],
+    "requiredAvailableGB": 42.0
+  },
+  "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+  "ok": false,
+  "proofType": "real-qwen-long-context-smoke",
+  "pythonExecutable": "/Users/eric/exploitbot/ExploitBotEngine/.venv/bin/python3",
+  "reexecedIntoEngineVenv": false,
+  "scope": "long-context smoke, not a full 262144-token max-context proof",
+  "sessionMaxPromptTokens": 226051,
+  "startedAt": "2026-07-05T01:55:18-0700",
+  "targetMemoryPreflight": {
+    "allowConcurrentModel": false,
+    "availableGB": 109.52885437011719,
+    "enabled": true,
+    "heavyModelProcessCount": 0,
+    "heavyModelProcesses": [],
+    "memorySlotWait": {
+      "enabled": false,
+      "sampleIntervalSeconds": 15.0,
+      "samples": [],
+      "timeoutSeconds": 0.0
+    },
+    "modelRequiredAvailableGB": 42.0,
+    "preflightKind": "targetContext",
+    "targetPromptTokens": 224000,
+    "targetRequiredAvailableGB": 72.0
+  },
+  "targetPromptTokens": 224000
+}

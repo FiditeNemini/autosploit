@@ -1,0 +1,26 @@
+{
+  "engineLogTail": "",
+  "error": "long-context target preflight refused to start with insufficient available memory for target prompt tokens\n{\n  \"allowConcurrentModel\": false,\n  \"availableGB\": 117.34626770019531,\n  \"enabled\": true,\n  \"heavyModelProcessCount\": 0,\n  \"heavyModelProcesses\": [],\n  \"modelRequiredAvailableGB\": 42.0,\n  \"preflightKind\": \"targetContext\",\n  \"targetPromptTokens\": 258000,\n  \"targetRequiredAvailableGB\": 999.0\n}",
+  "finishedAt": "2026-07-04T20:03:00-0700",
+  "generatedAt": "2026-07-04T20:03:00-0700",
+  "marker": "LONG_CONTEXT_SMOKE_PASS",
+  "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+  "ok": false,
+  "proofType": "real-qwen-long-context-smoke",
+  "pythonExecutable": "/Users/eric/exploitbot/ExploitBotEngine/.venv/bin/python3",
+  "reexecedIntoEngineVenv": false,
+  "scope": "near-max 262144-token context stress proof with explicit RAM/process guard",
+  "startedAt": "2026-07-04T20:03:00-0700",
+  "targetMemoryPreflight": {
+    "allowConcurrentModel": false,
+    "availableGB": 117.34626770019531,
+    "enabled": true,
+    "heavyModelProcessCount": 0,
+    "heavyModelProcesses": [],
+    "modelRequiredAvailableGB": 42.0,
+    "preflightKind": "targetContext",
+    "targetPromptTokens": 258000,
+    "targetRequiredAvailableGB": 999.0
+  },
+  "targetPromptTokens": 258000
+}

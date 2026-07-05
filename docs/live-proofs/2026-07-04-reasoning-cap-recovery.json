@@ -1,0 +1,54 @@
+{
+  "blockedLiveRefresh": "Skipped fresh low-cap model rerun while unrelated 35B eval remains active; this proof preserves existing live model artifacts and current source/build evidence.",
+  "doesNotChangeGenerationSettings": true,
+  "generatedAt": "2026-07-04T18:49:08-0700",
+  "legacy512": {
+    "artifact": "docs/live-proofs/2026-07-04-real-qwen-27b-reasoning-on.json",
+    "maxTokens": 512,
+    "ok": false,
+    "status": "FAIL_MARKER_ONLY_IN_REASONING",
+    "thinkingHasMarker": true,
+    "warningShown": true
+  },
+  "legacy512Status": "PASS_WARNING_ARTIFACT",
+  "live1024Rows": [
+    {
+      "artifact": "docs/live-proofs/2026-07-04-real-qwen-27b-reasoning-on-1024.json",
+      "assistantHasMarker": true,
+      "label": "27b",
+      "maxTokens": 1024,
+      "ok": true,
+      "status": "PASS_FINAL_ASSISTANT_CONTENT",
+      "thinkingHasMarker": false,
+      "warningShown": false
+    },
+    {
+      "artifact": "docs/live-proofs/2026-07-04-real-qwen-35b-reasoning-on-1024.json",
+      "assistantHasMarker": true,
+      "label": "35b",
+      "maxTokens": 1024,
+      "ok": true,
+      "status": "PASS_FINAL_ASSISTANT_CONTENT",
+      "thinkingHasMarker": false,
+      "warningShown": false
+    }
+  ],
+  "live1024Status": "PASS",
+  "ok": true,
+  "proofLevel": "source-warning-contract-plus-existing-live-qwen-artifacts",
+  "proofType": "reasoning-cap-recovery",
+  "recommendedRecoveryMaxTokens": 1024,
+  "sourceArtifacts": [
+    "ExploitBot/Sources/ExploitBot/Services/ChatService.swift",
+    "docs/live-proofs/2026-07-04-real-qwen-27b-reasoning-on.json",
+    "docs/live-proofs/2026-07-04-real-qwen-27b-reasoning-on-1024.json",
+    "docs/live-proofs/2026-07-04-real-qwen-35b-reasoning-on-1024.json"
+  ],
+  "sourceChecks": {
+    "doesNotChangeSettings": true,
+    "names1024Recovery": true,
+    "namesCurrentCap": true,
+    "warningPathStillTriggered": true
+  },
+  "sourceWarningStatus": "PASS"
+}

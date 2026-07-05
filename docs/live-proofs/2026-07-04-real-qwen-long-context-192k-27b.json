@@ -1,0 +1,2490 @@
+{
+  "actualPromptTokensByTokenizer": 192017,
+  "assistantPreview": "LONG_CONTEXT_SMOKE_PASS",
+  "baseUrl": "http://127.0.0.1:55704",
+  "cacheAfter": {
+    "block_disk_cache": {
+      "blocks_on_disk": 3001,
+      "disk_evictions": 0,
+      "disk_hits": 0,
+      "disk_misses": 2,
+      "disk_size_bytes": 25336042886,
+      "disk_size_gb": 23.596,
+      "disk_writes": 3001,
+      "total_accesses": 0,
+      "total_cached_tokens": 192021,
+      "total_tokens_on_disk": 192021
+    },
+    "cache_totals": {
+      "l2_block_tokens_on_disk": 192021,
+      "l2_prompt_tokens_on_disk": 0,
+      "l2_ssm_tokens_on_disk": 384021,
+      "l2_tokens_on_disk": 576042,
+      "l2_tokens_on_disk_note": "store_sum_across_prompt_block_ssm_l2; tiers_may_overlap",
+      "l2_tokens_on_disk_store_sum": 576042,
+      "ram_tokens_cached": 192021,
+      "ssm_tokens_on_disk": 384021
+    },
+    "disk_cache": {
+      "entries": 0,
+      "hit_rate": 0.0,
+      "hits": 0,
+      "max_size_gb": 10.0,
+      "misses": 1,
+      "pending_writes": 0,
+      "stores": 0,
+      "total_cached_tokens": 0,
+      "total_size_mb": 0.0,
+      "total_tokens_on_disk": 0
+    },
+    "kv_cache_quantization": {
+      "bits": 4,
+      "enabled": true,
+      "group_size": 64
+    },
+    "memory": {
+      "active_mb": 28051.1,
+      "cache_mb": 28081.9,
+      "peak_mb": 93338.7
+    },
+    "native_cache": {
+      "attention_kv_storage_quantization": {
+        "applies_to": "attention_kv_layers_only",
+        "bits": 4,
+        "enabled": true,
+        "group_size": 64,
+        "mode": "storage_boundary",
+        "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+        "ssm_policy": "native_companion_state"
+      },
+      "block_disk_l2": true,
+      "cache_type": "hybrid_ssm_typed",
+      "components": [
+        "attention_kv",
+        "ssm_companion_state",
+        "async_rederive"
+      ],
+      "family": "hybrid",
+      "generic_turboquant_kv": {
+        "enabled": false,
+        "reason": "hybrid_ssm_state"
+      },
+      "kv_layer_indices": [],
+      "live_attention_tq_kv": {
+        "applies_to": "attention_kv_layers_only",
+        "attention_layers": [],
+        "companion_layers": [],
+        "enabled": false,
+        "mode": null,
+        "ssm_policy": "native_full_precision_companion_state"
+      },
+      "paged": true,
+      "prefix": true,
+      "schema": "hybrid_ssm_v1",
+      "ssm_entries": 0
+    },
+    "scheduler_cache": {
+      "active_requests": 0,
+      "allocated_blocks": 3002,
+      "block_size": 64,
+      "cache_hit_rate": 0.0,
+      "cache_hits": 0,
+      "cache_misses": 3003,
+      "cow_copies": 0,
+      "disk_hits": 0,
+      "disk_misses": 2,
+      "entries_by_type": {
+        "assistant": 1,
+        "system": 0,
+        "user": 0
+      },
+      "evictions": 0,
+      "free_blocks": 32,
+      "hit_rate": 0.0,
+      "hits": 0,
+      "max_blocks": 3034,
+      "misses": 1,
+      "pixel_cache_hits": 0,
+      "pixel_cache_misses": 0,
+      "pixel_cache_size": 0,
+      "pixel_hit_rate": 0.0,
+      "shared_blocks": 0,
+      "tokens_saved": 0,
+      "total_images_processed": 0,
+      "total_time_saved": 0.0,
+      "total_tokens_cached": 192021,
+      "utilization": 0.989452867501648
+    },
+    "scheduler_stats": {
+      "batch_generator": {
+        "generation_time": 1.2517947080050362,
+        "generation_tokens": 7,
+        "generation_tps": 5.591971235567676,
+        "hybrid_kv_without_ssm_hits": 0,
+        "hybrid_kv_without_ssm_tokens": 0,
+        "last_hybrid_kv_without_ssm": null,
+        "last_native_mtp": {
+          "acceptance_rate": 0.2222222222222222,
+          "accepted_by_depth": [
+            1,
+            1,
+            0
+          ],
+          "accepted_tokens": 2,
+          "accepts": 0,
+          "bonus_emits": 0,
+          "cycles": 3,
+          "depth_acceptance_rates": {
+            "d1": 0.3333333333333333,
+            "d2": 0.3333333333333333,
+            "d3": 0.0
+          },
+          "draft_emits": 2,
+          "drafted_by_depth": [
+            3,
+            3,
+            3
+          ],
+          "drafted_tokens": 9,
+          "fallback_reason": null,
+          "final_depth": 3,
+          "finish_reason": "stop",
+          "forwards": {
+            "mtp": 12,
+            "replay_main": 3,
+            "seed_main": 1,
+            "verify_main": 3
+          },
+          "init_emits": 2,
+          "rejects": 3,
+          "request_id": "chatcmpl-703bf79f",
+          "timings_ms": {
+            "avg_cycle": 417.1414996720462,
+            "draft": 431.04916700394824,
+            "materialize": 0.022416003048419952,
+            "replay": 7.817999998223968,
+            "restore": 0.3548330132616684,
+            "sample": 783.2285830081673,
+            "snapshot": 0.13258299441076815,
+            "total": 1251.4244990161387,
+            "verify": 28.818916995078325
+          },
+          "verify_emits": 3
+        },
+        "num_images_processed": 0,
+        "peak_memory": 97.8726705,
+        "prompt_time": 1588.2451025829941,
+        "prompt_tokens": 192029,
+        "prompt_tps": 120.9064014664358,
+        "vision_encoding_time": 0
+      },
+      "cache_hit_requests": 0,
+      "cache_hit_tokens": 0,
+      "cache_hit_tokens_by_detail": {},
+      "cache_reuse_partial_downgrades": 0,
+      "cache_reuse_partial_tokens": 0,
+      "cache_reuse_skip_tokens": 0,
+      "cache_reuse_skips": 0,
+      "engine_path": null,
+      "ewma_ttft_seconds": 0,
+      "hybrid_kv_without_ssm_hits": 0,
+      "hybrid_kv_without_ssm_tokens": 0,
+      "last_cache_reuse_partial": null,
+      "last_cache_reuse_skip": null,
+      "last_hybrid_kv_without_ssm": null,
+      "max_running_observed": 1,
+      "max_waiting_observed": 1,
+      "num_requests_processed": 1,
+      "num_running": 0,
+      "num_waiting": 0,
+      "single_active_decode": false,
+      "total_completion_tokens": 7,
+      "total_prompt_tokens": 192022
+    },
+    "ssm_companion": {
+      "disk": {
+        "budget_bytes": 32577326940,
+        "budget_gb": 30.34,
+        "bytes": 313814922,
+        "bytes_mb": 299.28,
+        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-voq2gtrn/block/ssm_companion",
+        "enabled": true,
+        "entries": 2,
+        "hit_rate": 0.0,
+        "hits": 0,
+        "misses": 0,
+        "stores": 2,
+        "total_cached_tokens": 384021,
+        "total_tokens_on_disk": 384021
+      },
+      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-voq2gtrn/block/ssm_companion",
+      "disk_enabled": true,
+      "entries": 2,
+      "max_entries": 8,
+      "nbytes": 313786368,
+      "nbytes_mb": 299.25
+    },
+    "turboquant_kv_cache": {
+      "enabled": false
+    }
+  },
+  "cacheBefore": {
+    "block_disk_cache": {
+      "blocks_on_disk": 0,
+      "disk_evictions": 0,
+      "disk_hits": 0,
+      "disk_misses": 0,
+      "disk_size_bytes": 0,
+      "disk_size_gb": 0.0,
+      "disk_writes": 0,
+      "total_accesses": 0,
+      "total_cached_tokens": 0,
+      "total_tokens_on_disk": 0
+    },
+    "cache_totals": {
+      "l2_block_tokens_on_disk": 0,
+      "l2_prompt_tokens_on_disk": 0,
+      "l2_ssm_tokens_on_disk": 0,
+      "l2_tokens_on_disk": 0,
+      "l2_tokens_on_disk_note": "store_sum_across_prompt_block_ssm_l2; tiers_may_overlap",
+      "l2_tokens_on_disk_store_sum": 0,
+      "ram_tokens_cached": 0,
+      "ssm_tokens_on_disk": 0
+    },
+    "disk_cache": {
+      "entries": 0,
+      "hit_rate": 0.0,
+      "hits": 0,
+      "max_size_gb": 10.0,
+      "misses": 0,
+      "pending_writes": 0,
+      "stores": 0,
+      "total_cached_tokens": 0,
+      "total_size_mb": 0.0,
+      "total_tokens_on_disk": 0
+    },
+    "kv_cache_quantization": {
+      "bits": 4,
+      "enabled": true,
+      "group_size": 64
+    },
+    "memory": {
+      "active_mb": 27751.1,
+      "cache_mb": 0.1,
+      "peak_mb": 27751.2
+    },
+    "native_cache": {
+      "attention_kv_storage_quantization": {
+        "applies_to": "attention_kv_layers_only",
+        "bits": 4,
+        "enabled": true,
+        "group_size": 64,
+        "mode": "storage_boundary",
+        "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+        "ssm_policy": "native_companion_state"
+      },
+      "block_disk_l2": true,
+      "cache_type": "hybrid_ssm_typed",
+      "components": [
+        "attention_kv",
+        "ssm_companion_state",
+        "async_rederive"
+      ],
+      "family": "hybrid",
+      "generic_turboquant_kv": {
+        "enabled": false,
+        "reason": "hybrid_ssm_state"
+      },
+      "kv_layer_indices": [],
+      "live_attention_tq_kv": {
+        "applies_to": "attention_kv_layers_only",
+        "attention_layers": [],
+        "companion_layers": [],
+        "enabled": false,
+        "mode": null,
+        "ssm_policy": "native_full_precision_companion_state"
+      },
+      "paged": true,
+      "prefix": true,
+      "schema": "hybrid_ssm_v1",
+      "ssm_entries": 0
+    },
+    "scheduler_cache": {
+      "active_requests": 0,
+      "allocated_blocks": 1,
+      "block_size": 64,
+      "cache_hit_rate": 0,
+      "cache_hits": 0,
+      "cache_misses": 0,
+      "cow_copies": 0,
+      "disk_hits": 0,
+      "disk_misses": 0,
+      "entries_by_type": {
+        "assistant": 0,
+        "system": 0,
+        "user": 0
+      },
+      "evictions": 0,
+      "free_blocks": 3033,
+      "hit_rate": 0,
+      "hits": 0,
+      "max_blocks": 3034,
+      "misses": 0,
+      "shared_blocks": 0,
+      "tokens_saved": 0,
+      "total_tokens_cached": 0,
+      "utilization": 0.0003295978905735003
+    },
+    "scheduler_stats": {
+      "batch_generator": {},
+      "cache_hit_requests": 0,
+      "cache_hit_tokens": 0,
+      "cache_hit_tokens_by_detail": {},
+      "cache_reuse_partial_downgrades": 0,
+      "cache_reuse_partial_tokens": 0,
+      "cache_reuse_skip_tokens": 0,
+      "cache_reuse_skips": 0,
+      "engine_path": null,
+      "ewma_ttft_seconds": 0,
+      "hybrid_kv_without_ssm_hits": 0,
+      "hybrid_kv_without_ssm_tokens": 0,
+      "last_cache_reuse_partial": null,
+      "last_cache_reuse_skip": null,
+      "last_hybrid_kv_without_ssm": null,
+      "max_running_observed": 0,
+      "max_waiting_observed": 0,
+      "num_requests_processed": 0,
+      "num_running": 0,
+      "num_waiting": 0,
+      "single_active_decode": false,
+      "total_completion_tokens": 0,
+      "total_prompt_tokens": 0
+    },
+    "ssm_companion": {
+      "disk": {
+        "budget_bytes": 32577326940,
+        "budget_gb": 30.34,
+        "bytes": 0,
+        "bytes_mb": 0.0,
+        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-voq2gtrn/block/ssm_companion",
+        "enabled": true,
+        "entries": 0,
+        "hit_rate": 0.0,
+        "hits": 0,
+        "misses": 0,
+        "stores": 0,
+        "total_cached_tokens": 0,
+        "total_tokens_on_disk": 0
+      },
+      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-voq2gtrn/block/ssm_companion",
+      "disk_enabled": true,
+      "entries": 0,
+      "max_bytes": null,
+      "max_bytes_mb": null,
+      "max_entries": 8,
+      "nbytes": 0,
+      "nbytes_mb": 0.0
+    },
+    "turboquant_kv_cache": {
+      "enabled": false
+    }
+  },
+  "completion": {
+    "json": {
+      "choices": [
+        {
+          "finish_reason": "stop",
+          "index": 0,
+          "message": {
+            "content": "LONG_CONTEXT_SMOKE_PASS",
+            "reasoning_content": null,
+            "role": "assistant",
+            "tool_calls": null
+          }
+        }
+      ],
+      "created": 1783238591,
+      "id": "chatcmpl-703bf79f",
+      "model": "dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "object": "chat.completion",
+      "usage": {
+        "completion_tokens": 7,
+        "prompt_tokens": 192022,
+        "prompt_tokens_details": null,
+        "total_tokens": 192029
+      }
+    },
+    "status": 200
+  },
+  "completionMemoryGuard": {
+    "abortFreePercent": 15,
+    "aborted": false,
+    "enabled": true,
+    "guardKind": "completionMemory",
+    "sampleIntervalSeconds": 5.0,
+    "samples": [
+      {
+        "freePercent": 72,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:36:20-0700"
+      },
+      {
+        "freePercent": 93,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:36:25-0700"
+      },
+      {
+        "freePercent": 93,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:36:30-0700"
+      },
+      {
+        "freePercent": 64,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:36:35-0700"
+      },
+      {
+        "freePercent": 69,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:36:40-0700"
+      },
+      {
+        "freePercent": 62,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:36:45-0700"
+      },
+      {
+        "freePercent": 61,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:36:50-0700"
+      },
+      {
+        "freePercent": 61,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:36:55-0700"
+      },
+      {
+        "freePercent": 60,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:37:00-0700"
+      },
+      {
+        "freePercent": 69,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:37:05-0700"
+      },
+      {
+        "freePercent": 60,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:37:10-0700"
+      },
+      {
+        "freePercent": 61,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:37:15-0700"
+      },
+      {
+        "freePercent": 59,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:37:20-0700"
+      },
+      {
+        "freePercent": 61,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:37:25-0700"
+      },
+      {
+        "freePercent": 58,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:37:30-0700"
+      },
+      {
+        "freePercent": 59,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:37:35-0700"
+      },
+      {
+        "freePercent": 68,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:37:40-0700"
+      },
+      {
+        "freePercent": 58,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:37:45-0700"
+      },
+      {
+        "freePercent": 58,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:37:50-0700"
+      },
+      {
+        "freePercent": 57,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:37:55-0700"
+      },
+      {
+        "freePercent": 59,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:38:00-0700"
+      },
+      {
+        "freePercent": 56,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:38:05-0700"
+      },
+      {
+        "freePercent": 56,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:38:10-0700"
+      },
+      {
+        "freePercent": 55,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:38:15-0700"
+      },
+      {
+        "freePercent": 57,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:38:20-0700"
+      },
+      {
+        "freePercent": 54,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:38:25-0700"
+      },
+      {
+        "freePercent": 56,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:38:30-0700"
+      },
+      {
+        "freePercent": 54,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:38:35-0700"
+      },
+      {
+        "freePercent": 55,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:38:40-0700"
+      },
+      {
+        "freePercent": 53,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:38:45-0700"
+      },
+      {
+        "freePercent": 54,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:38:51-0700"
+      },
+      {
+        "freePercent": 52,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:38:56-0700"
+      },
+      {
+        "freePercent": 53,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:39:01-0700"
+      },
+      {
+        "freePercent": 59,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:39:06-0700"
+      },
+      {
+        "freePercent": 52,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:39:11-0700"
+      },
+      {
+        "freePercent": 52,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:39:16-0700"
+      },
+      {
+        "freePercent": 52,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:39:21-0700"
+      },
+      {
+        "freePercent": 50,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:39:26-0700"
+      },
+      {
+        "freePercent": 51,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:39:31-0700"
+      },
+      {
+        "freePercent": 49,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:39:36-0700"
+      },
+      {
+        "freePercent": 51,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:39:41-0700"
+      },
+      {
+        "freePercent": 49,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:39:46-0700"
+      },
+      {
+        "freePercent": 51,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:39:51-0700"
+      },
+      {
+        "freePercent": 48,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:39:56-0700"
+      },
+      {
+        "freePercent": 51,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:40:01-0700"
+      },
+      {
+        "freePercent": 48,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:40:06-0700"
+      },
+      {
+        "freePercent": 50,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:40:11-0700"
+      },
+      {
+        "freePercent": 47,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:40:16-0700"
+      },
+      {
+        "freePercent": 50,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:40:21-0700"
+      },
+      {
+        "freePercent": 48,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:40:26-0700"
+      },
+      {
+        "freePercent": 50,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:40:31-0700"
+      },
+      {
+        "freePercent": 47,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:40:36-0700"
+      },
+      {
+        "freePercent": 65,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:40:41-0700"
+      },
+      {
+        "freePercent": 48,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:40:46-0700"
+      },
+      {
+        "freePercent": 45,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:40:51-0700"
+      },
+      {
+        "freePercent": 47,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:40:56-0700"
+      },
+      {
+        "freePercent": 45,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:41:01-0700"
+      },
+      {
+        "freePercent": 49,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:41:06-0700"
+      },
+      {
+        "freePercent": 45,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:41:11-0700"
+      },
+      {
+        "freePercent": 48,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:41:16-0700"
+      },
+      {
+        "freePercent": 45,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:41:21-0700"
+      },
+      {
+        "freePercent": 50,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:41:26-0700"
+      },
+      {
+        "freePercent": 46,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:41:31-0700"
+      },
+      {
+        "freePercent": 43,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:41:36-0700"
+      },
+      {
+        "freePercent": 45,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:41:41-0700"
+      },
+      {
+        "freePercent": 43,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:41:46-0700"
+      },
+      {
+        "freePercent": 46,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:41:51-0700"
+      },
+      {
+        "freePercent": 43,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:41:56-0700"
+      },
+      {
+        "freePercent": 40,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:42:01-0700"
+      },
+      {
+        "freePercent": 44,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:42:06-0700"
+      },
+      {
+        "freePercent": 41,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:42:11-0700"
+      },
+      {
+        "freePercent": 45,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:42:16-0700"
+      },
+      {
+        "freePercent": 41,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:42:21-0700"
+      },
+      {
+        "freePercent": 62,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:42:26-0700"
+      },
+      {
+        "freePercent": 43,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:42:31-0700"
+      },
+      {
+        "freePercent": 40,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:42:36-0700"
+      },
+      {
+        "freePercent": 44,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:42:41-0700"
+      },
+      {
+        "freePercent": 41,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:42:46-0700"
+      },
+      {
+        "freePercent": 62,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:42:51-0700"
+      },
+      {
+        "freePercent": 41,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:42:56-0700"
+      },
+      {
+        "freePercent": 40,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:43:01-0700"
+      },
+      {
+        "freePercent": 43,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:43:06-0700"
+      },
+      {
+        "freePercent": 40,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:43:11-0700"
+      },
+      {
+        "freePercent": 39,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:43:16-0700"
+      },
+      {
+        "freePercent": 41,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:43:21-0700"
+      },
+      {
+        "freePercent": 40,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:43:26-0700"
+      },
+      {
+        "freePercent": 42,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:43:31-0700"
+      },
+      {
+        "freePercent": 40,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:43:36-0700"
+      },
+      {
+        "freePercent": 39,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:43:41-0700"
+      },
+      {
+        "freePercent": 41,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:43:46-0700"
+      },
+      {
+        "freePercent": 39,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:43:51-0700"
+      },
+      {
+        "freePercent": 61,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:43:56-0700"
+      },
+      {
+        "freePercent": 41,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:44:01-0700"
+      },
+      {
+        "freePercent": 39,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:44:06-0700"
+      },
+      {
+        "freePercent": 41,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:44:11-0700"
+      },
+      {
+        "freePercent": 40,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:44:16-0700"
+      },
+      {
+        "freePercent": 38,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:44:21-0700"
+      },
+      {
+        "freePercent": 40,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:44:26-0700"
+      },
+      {
+        "freePercent": 39,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:44:31-0700"
+      },
+      {
+        "freePercent": 38,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:44:36-0700"
+      },
+      {
+        "freePercent": 40,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:44:41-0700"
+      },
+      {
+        "freePercent": 38,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:44:46-0700"
+      },
+      {
+        "freePercent": 60,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:44:51-0700"
+      },
+      {
+        "freePercent": 39,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:44:56-0700"
+      },
+      {
+        "freePercent": 38,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:45:01-0700"
+      },
+      {
+        "freePercent": 40,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:45:06-0700"
+      },
+      {
+        "freePercent": 39,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:45:11-0700"
+      },
+      {
+        "freePercent": 38,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:45:16-0700"
+      },
+      {
+        "freePercent": 40,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:45:21-0700"
+      },
+      {
+        "freePercent": 39,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:45:26-0700"
+      },
+      {
+        "freePercent": 37,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:45:31-0700"
+      },
+      {
+        "freePercent": 40,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:45:36-0700"
+      },
+      {
+        "freePercent": 38,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:45:41-0700"
+      },
+      {
+        "freePercent": 37,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:45:46-0700"
+      },
+      {
+        "freePercent": 39,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:45:51-0700"
+      },
+      {
+        "freePercent": 38,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:45:56-0700"
+      },
+      {
+        "freePercent": 59,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:46:01-0700"
+      },
+      {
+        "freePercent": 38,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:46:06-0700"
+      },
+      {
+        "freePercent": 38,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:46:11-0700"
+      },
+      {
+        "freePercent": 58,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:46:16-0700"
+      },
+      {
+        "freePercent": 38,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:46:21-0700"
+      },
+      {
+        "freePercent": 37,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:46:26-0700"
+      },
+      {
+        "freePercent": 58,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:46:31-0700"
+      },
+      {
+        "freePercent": 38,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:46:36-0700"
+      },
+      {
+        "freePercent": 36,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:46:41-0700"
+      },
+      {
+        "freePercent": 60,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:46:46-0700"
+      },
+      {
+        "freePercent": 37,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:46:51-0700"
+      },
+      {
+        "freePercent": 37,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:46:56-0700"
+      },
+      {
+        "freePercent": 37,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:47:01-0700"
+      },
+      {
+        "freePercent": 54,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:47:06-0700"
+      },
+      {
+        "freePercent": 54,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:47:11-0700"
+      },
+      {
+        "freePercent": 38,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:47:17-0700"
+      },
+      {
+        "freePercent": 35,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:47:22-0700"
+      },
+      {
+        "freePercent": 37,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:47:27-0700"
+      },
+      {
+        "freePercent": 37,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:47:32-0700"
+      },
+      {
+        "freePercent": 46,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:47:37-0700"
+      },
+      {
+        "freePercent": 34,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:47:42-0700"
+      },
+      {
+        "freePercent": 36,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:47:47-0700"
+      },
+      {
+        "freePercent": 35,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:47:52-0700"
+      },
+      {
+        "freePercent": 53,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:47:57-0700"
+      },
+      {
+        "freePercent": 43,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:48:02-0700"
+      },
+      {
+        "freePercent": 48,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:48:07-0700"
+      },
+      {
+        "freePercent": 35,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:48:12-0700"
+      },
+      {
+        "freePercent": 34,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:48:17-0700"
+      },
+      {
+        "freePercent": 33,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:48:22-0700"
+      },
+      {
+        "freePercent": 35,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:48:27-0700"
+      },
+      {
+        "freePercent": 34,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:48:32-0700"
+      },
+      {
+        "freePercent": 33,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:48:37-0700"
+      },
+      {
+        "freePercent": 32,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:48:42-0700"
+      },
+      {
+        "freePercent": 34,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:48:47-0700"
+      },
+      {
+        "freePercent": 33,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:48:52-0700"
+      },
+      {
+        "freePercent": 33,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:48:57-0700"
+      },
+      {
+        "freePercent": 32,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:49:02-0700"
+      },
+      {
+        "freePercent": 50,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:49:07-0700"
+      },
+      {
+        "freePercent": 53,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:49:12-0700"
+      },
+      {
+        "freePercent": 35,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:49:17-0700"
+      },
+      {
+        "freePercent": 35,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:49:22-0700"
+      },
+      {
+        "freePercent": 33,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:49:27-0700"
+      },
+      {
+        "freePercent": 33,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:49:32-0700"
+      },
+      {
+        "freePercent": 37,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:49:37-0700"
+      },
+      {
+        "freePercent": 47,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:49:42-0700"
+      },
+      {
+        "freePercent": 36,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:49:47-0700"
+      },
+      {
+        "freePercent": 32,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:49:52-0700"
+      },
+      {
+        "freePercent": 32,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:49:57-0700"
+      },
+      {
+        "freePercent": 42,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:50:02-0700"
+      },
+      {
+        "freePercent": 54,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:50:07-0700"
+      },
+      {
+        "freePercent": 32,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:50:12-0700"
+      },
+      {
+        "freePercent": 35,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:50:17-0700"
+      },
+      {
+        "freePercent": 51,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:50:22-0700"
+      },
+      {
+        "freePercent": 32,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:50:27-0700"
+      },
+      {
+        "freePercent": 32,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:50:32-0700"
+      },
+      {
+        "freePercent": 52,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:50:37-0700"
+      },
+      {
+        "freePercent": 30,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:50:42-0700"
+      },
+      {
+        "freePercent": 30,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:50:47-0700"
+      },
+      {
+        "freePercent": 53,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:50:52-0700"
+      },
+      {
+        "freePercent": 31,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:50:57-0700"
+      },
+      {
+        "freePercent": 51,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:51:02-0700"
+      },
+      {
+        "freePercent": 29,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:51:07-0700"
+      },
+      {
+        "freePercent": 50,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:51:12-0700"
+      },
+      {
+        "freePercent": 31,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:51:17-0700"
+      },
+      {
+        "freePercent": 51,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:51:22-0700"
+      },
+      {
+        "freePercent": 29,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:51:27-0700"
+      },
+      {
+        "freePercent": 50,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:51:32-0700"
+      },
+      {
+        "freePercent": 28,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:51:37-0700"
+      },
+      {
+        "freePercent": 52,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:51:42-0700"
+      },
+      {
+        "freePercent": 29,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:51:47-0700"
+      },
+      {
+        "freePercent": 51,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:51:52-0700"
+      },
+      {
+        "freePercent": 28,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:51:57-0700"
+      },
+      {
+        "freePercent": 49,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:52:02-0700"
+      },
+      {
+        "freePercent": 34,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:52:07-0700"
+      },
+      {
+        "freePercent": 29,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:52:12-0700"
+      },
+      {
+        "freePercent": 50,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:52:17-0700"
+      },
+      {
+        "freePercent": 56,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:52:22-0700"
+      },
+      {
+        "freePercent": 32,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:52:27-0700"
+      },
+      {
+        "freePercent": 40,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:52:32-0700"
+      },
+      {
+        "freePercent": 28,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:52:37-0700"
+      },
+      {
+        "freePercent": 50,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:52:42-0700"
+      },
+      {
+        "freePercent": 32,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:52:47-0700"
+      },
+      {
+        "freePercent": 29,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:52:52-0700"
+      },
+      {
+        "freePercent": 50,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:52:57-0700"
+      },
+      {
+        "freePercent": 27,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:53:02-0700"
+      },
+      {
+        "freePercent": 26,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:53:07-0700"
+      },
+      {
+        "freePercent": 51,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:53:12-0700"
+      },
+      {
+        "freePercent": 28,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:53:17-0700"
+      },
+      {
+        "freePercent": 27,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:53:22-0700"
+      },
+      {
+        "freePercent": 50,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:53:27-0700"
+      },
+      {
+        "freePercent": 34,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:53:32-0700"
+      },
+      {
+        "freePercent": 28,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:53:37-0700"
+      },
+      {
+        "freePercent": 54,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:53:42-0700"
+      },
+      {
+        "freePercent": 46,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:53:47-0700"
+      },
+      {
+        "freePercent": 26,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:53:52-0700"
+      },
+      {
+        "freePercent": 25,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:53:57-0700"
+      },
+      {
+        "freePercent": 51,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:54:02-0700"
+      },
+      {
+        "freePercent": 31,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:54:07-0700"
+      },
+      {
+        "freePercent": 26,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:54:12-0700"
+      },
+      {
+        "freePercent": 29,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:54:17-0700"
+      },
+      {
+        "freePercent": 48,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:54:22-0700"
+      },
+      {
+        "freePercent": 34,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:54:27-0700"
+      },
+      {
+        "freePercent": 26,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:54:32-0700"
+      },
+      {
+        "freePercent": 25,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:54:37-0700"
+      },
+      {
+        "freePercent": 49,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:54:42-0700"
+      },
+      {
+        "freePercent": 54,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:54:47-0700"
+      },
+      {
+        "freePercent": 26,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:54:52-0700"
+      },
+      {
+        "freePercent": 26,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:54:57-0700"
+      },
+      {
+        "freePercent": 25,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:55:02-0700"
+      },
+      {
+        "freePercent": 49,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:55:07-0700"
+      },
+      {
+        "freePercent": 47,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:55:12-0700"
+      },
+      {
+        "freePercent": 28,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:55:17-0700"
+      },
+      {
+        "freePercent": 25,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:55:22-0700"
+      },
+      {
+        "freePercent": 25,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:55:27-0700"
+      },
+      {
+        "freePercent": 24,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:55:33-0700"
+      },
+      {
+        "freePercent": 48,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:55:38-0700"
+      },
+      {
+        "freePercent": 49,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:55:43-0700"
+      },
+      {
+        "freePercent": 38,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:55:48-0700"
+      },
+      {
+        "freePercent": 24,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:55:53-0700"
+      },
+      {
+        "freePercent": 23,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:55:58-0700"
+      },
+      {
+        "freePercent": 23,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:56:03-0700"
+      },
+      {
+        "freePercent": 26,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:56:08-0700"
+      },
+      {
+        "freePercent": 52,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:56:13-0700"
+      },
+      {
+        "freePercent": 49,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:56:18-0700"
+      },
+      {
+        "freePercent": 48,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:56:23-0700"
+      },
+      {
+        "freePercent": 41,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:56:28-0700"
+      },
+      {
+        "freePercent": 27,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:56:33-0700"
+      },
+      {
+        "freePercent": 24,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:56:38-0700"
+      },
+      {
+        "freePercent": 23,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:56:43-0700"
+      },
+      {
+        "freePercent": 23,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:56:48-0700"
+      },
+      {
+        "freePercent": 22,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:56:53-0700"
+      },
+      {
+        "freePercent": 21,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:56:58-0700"
+      },
+      {
+        "freePercent": 25,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:57:03-0700"
+      },
+      {
+        "freePercent": 28,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:57:08-0700"
+      },
+      {
+        "freePercent": 43,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:57:13-0700"
+      },
+      {
+        "freePercent": 51,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:57:18-0700"
+      },
+      {
+        "freePercent": 49,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:57:23-0700"
+      },
+      {
+        "freePercent": 49,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:57:28-0700"
+      },
+      {
+        "freePercent": 49,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:57:33-0700"
+      },
+      {
+        "freePercent": 48,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:57:38-0700"
+      },
+      {
+        "freePercent": 47,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:57:43-0700"
+      },
+      {
+        "freePercent": 47,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:57:48-0700"
+      },
+      {
+        "freePercent": 48,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:57:53-0700"
+      },
+      {
+        "freePercent": 49,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:57:58-0700"
+      },
+      {
+        "freePercent": 48,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:58:03-0700"
+      },
+      {
+        "freePercent": 48,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:58:08-0700"
+      },
+      {
+        "freePercent": 47,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:58:13-0700"
+      },
+      {
+        "freePercent": 49,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:58:18-0700"
+      },
+      {
+        "freePercent": 52,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:58:23-0700"
+      },
+      {
+        "freePercent": 26,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:58:28-0700"
+      },
+      {
+        "freePercent": 21,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:58:33-0700"
+      },
+      {
+        "freePercent": 20,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:58:38-0700"
+      },
+      {
+        "freePercent": 54,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:58:43-0700"
+      },
+      {
+        "freePercent": 22,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:58:48-0700"
+      },
+      {
+        "freePercent": 21,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:58:53-0700"
+      },
+      {
+        "freePercent": 21,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:58:58-0700"
+      },
+      {
+        "freePercent": 20,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:59:03-0700"
+      },
+      {
+        "freePercent": 30,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:59:08-0700"
+      },
+      {
+        "freePercent": 32,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:59:13-0700"
+      },
+      {
+        "freePercent": 38,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:59:18-0700"
+      },
+      {
+        "freePercent": 47,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:59:23-0700"
+      },
+      {
+        "freePercent": 47,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:59:28-0700"
+      },
+      {
+        "freePercent": 30,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:59:33-0700"
+      },
+      {
+        "freePercent": 50,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:59:38-0700"
+      },
+      {
+        "freePercent": 21,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:59:43-0700"
+      },
+      {
+        "freePercent": 20,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:59:48-0700"
+      },
+      {
+        "freePercent": 20,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:59:53-0700"
+      },
+      {
+        "freePercent": 19,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T00:59:58-0700"
+      },
+      {
+        "freePercent": 32,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:00:03-0700"
+      },
+      {
+        "freePercent": 30,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:00:08-0700"
+      },
+      {
+        "freePercent": 45,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:00:13-0700"
+      },
+      {
+        "freePercent": 47,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:00:18-0700"
+      },
+      {
+        "freePercent": 19,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:00:23-0700"
+      },
+      {
+        "freePercent": 18,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:00:28-0700"
+      },
+      {
+        "freePercent": 52,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:00:33-0700"
+      },
+      {
+        "freePercent": 20,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:00:38-0700"
+      },
+      {
+        "freePercent": 28,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:00:43-0700"
+      },
+      {
+        "freePercent": 45,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:00:48-0700"
+      },
+      {
+        "freePercent": 47,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:00:53-0700"
+      },
+      {
+        "freePercent": 17,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:00:58-0700"
+      },
+      {
+        "freePercent": 17,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:01:03-0700"
+      },
+      {
+        "freePercent": 19,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:01:08-0700"
+      },
+      {
+        "freePercent": 18,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:01:13-0700"
+      },
+      {
+        "freePercent": 28,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:01:18-0700"
+      },
+      {
+        "freePercent": 46,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:01:23-0700"
+      },
+      {
+        "freePercent": 41,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:01:28-0700"
+      },
+      {
+        "freePercent": 29,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:01:33-0700"
+      },
+      {
+        "freePercent": 18,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:01:38-0700"
+      },
+      {
+        "freePercent": 18,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:01:43-0700"
+      },
+      {
+        "freePercent": 25,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:01:48-0700"
+      },
+      {
+        "freePercent": 45,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:01:53-0700"
+      },
+      {
+        "freePercent": 46,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:01:58-0700"
+      },
+      {
+        "freePercent": 21,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:02:03-0700"
+      },
+      {
+        "freePercent": 18,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:02:08-0700"
+      },
+      {
+        "freePercent": 17,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:02:13-0700"
+      },
+      {
+        "freePercent": 42,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:02:18-0700"
+      },
+      {
+        "freePercent": 48,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:02:23-0700"
+      },
+      {
+        "freePercent": 31,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:02:28-0700"
+      },
+      {
+        "freePercent": 49,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:02:33-0700"
+      },
+      {
+        "freePercent": 25,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:02:38-0700"
+      },
+      {
+        "freePercent": 34,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:02:43-0700"
+      },
+      {
+        "freePercent": 53,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:02:48-0700"
+      },
+      {
+        "freePercent": 48,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:02:53-0700"
+      },
+      {
+        "freePercent": 94,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:02:58-0700"
+      },
+      {
+        "freePercent": 94,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:03:03-0700"
+      },
+      {
+        "freePercent": 94,
+        "swapouts": 0,
+        "timestamp": "2026-07-05T01:03:08-0700"
+      }
+    ]
+  },
+  "declaredContext": {
+    "configTextMaxPositionEmbeddings": 262144,
+    "modelType": "qwen3_5",
+    "ropeParameters": {
+      "mrope_interleaved": true,
+      "mrope_section": [
+        11,
+        11,
+        10
+      ],
+      "partial_rotary_factor": 0.25,
+      "rope_theta": 10000000,
+      "rope_type": "default"
+    },
+    "textModelType": "qwen3_5_text",
+    "tokenizerModelMaxLength": 262144
+  },
+  "engineLogTail": "INFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2835 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2836 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2837 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2838 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2839 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2840 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2841 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2842 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2843 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2844 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2845 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2846 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2847 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2848 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2849 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2850 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2851 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2852 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2853 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2854 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2855 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2856 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2857 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2858 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2859 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2860 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2861 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2862 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2863 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2864 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2865 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2866 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2867 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2868 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2869 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2870 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2871 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2872 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2873 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2874 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2875 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2876 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2877 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2878 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2879 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2880 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2881 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2882 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2883 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2884 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2885 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2886 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2887 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2888 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2889 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2890 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2891 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2892 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2893 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2894 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2895 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2896 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2897 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2898 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2899 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2900 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2901 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2902 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2903 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2904 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2905 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2906 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2907 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2908 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2909 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2910 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2911 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2912 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2913 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2914 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2915 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2916 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2917 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2918 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2919 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2920 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2921 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2922 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2923 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2924 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2925 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2926 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2927 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2928 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2929 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2930 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2931 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2932 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2933 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2934 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2935 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2936 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2937 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2938 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2939 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2940 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2941 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2942 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2943 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2944 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2945 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2946 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2947 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2948 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2949 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2950 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2951 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2952 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2953 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2954 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2955 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2956 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2957 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2958 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2959 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2960 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2961 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2962 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2963 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2964 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2965 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2966 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2967 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2968 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2969 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2970 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2971 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2972 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2973 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2974 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2975 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2976 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2977 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2978 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2979 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2980 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2981 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2982 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2983 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2984 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2985 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2986 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2987 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2988 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2989 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2990 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2991 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2992 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2993 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2994 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2995 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2996 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2997 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2998 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2999 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 3000 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 3001 (16 kv layers, cumulative=48, 21 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 3001 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-703bf79f: 64 layers, truncated to 192021 tokens\nINFO:__main__:Chat completion: 7 tokens in 1610.98s (0.0 tok/s)\nINFO:     127.0.0.1:55723 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:56365 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nINFO:     Shutting down\nINFO:     Waiting for application shutdown.\nINFO:vmlx_engine.mllm_scheduler:MLLM Scheduler stopped\nINFO:vmlx_engine.engine.batched:BatchedEngine stopped\nINFO:__main__:Engine stopped\nINFO:__main__:Caffeinate process terminated\nINFO:     Application shutdown complete.\nINFO:     Finished server process [55443]",
+  "finishedAt": "2026-07-05T01:03:13-0700",
+  "generatedAt": "2026-07-05T01:03:13-0700",
+  "health": {
+    "acceleration": {
+      "host": {
+        "brand": "Apple M5 Max",
+        "reason": null,
+        "supported": true
+      },
+      "kernel_type": "affine_quantized_matmul",
+      "metal_na_active_on_host": true,
+      "metal_na_capable": true,
+      "metal_na_symbols": {
+        "affine_gather_qmm_symbols": 3456,
+        "affine_qmm_symbols": 4212,
+        "available": true,
+        "nax_symbols": 4668,
+        "naxtile_symbols": 4154
+      },
+      "reason": null
+    },
+    "cache": {
+      "block_disk_cache": {
+        "blocks_on_disk": 0,
+        "disk_evictions": 0,
+        "disk_hits": 0,
+        "disk_misses": 0,
+        "disk_size_bytes": 0,
+        "disk_size_gb": 0.0,
+        "disk_writes": 0,
+        "total_accesses": 0,
+        "total_cached_tokens": 0,
+        "total_tokens_on_disk": 0
+      },
+      "disk_cache": {
+        "entries": 0,
+        "hit_rate": 0.0,
+        "hits": 0,
+        "max_size_gb": 10.0,
+        "misses": 0,
+        "pending_writes": 0,
+        "stores": 0,
+        "total_cached_tokens": 0,
+        "total_size_mb": 0.0,
+        "total_tokens_on_disk": 0
+      },
+      "scheduler_cache": {
+        "active_requests": 0,
+        "allocated_blocks": 1,
+        "block_size": 64,
+        "cache_hit_rate": 0,
+        "cache_hits": 0,
+        "cache_misses": 0,
+        "cow_copies": 0,
+        "disk_hits": 0,
+        "disk_misses": 0,
+        "entries_by_type": {
+          "assistant": 0,
+          "system": 0,
+          "user": 0
+        },
+        "evictions": 0,
+        "free_blocks": 3033,
+        "hit_rate": 0,
+        "hits": 0,
+        "max_blocks": 3034,
+        "misses": 0,
+        "shared_blocks": 0,
+        "tokens_saved": 0,
+        "total_tokens_cached": 0,
+        "utilization": 0.0003295978905735003
+      },
+      "ssm_companion": {
+        "disk": {
+          "budget_bytes": 32577326940,
+          "budget_gb": 30.34,
+          "bytes": 0,
+          "bytes_mb": 0.0,
+          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-voq2gtrn/block/ssm_companion",
+          "enabled": true,
+          "entries": 0,
+          "hit_rate": 0.0,
+          "hits": 0,
+          "misses": 0,
+          "stores": 0,
+          "total_cached_tokens": 0,
+          "total_tokens_on_disk": 0
+        },
+        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-voq2gtrn/block/ssm_companion",
+        "disk_enabled": true,
+        "entries": 0,
+        "max_bytes": null,
+        "max_bytes_mb": null,
+        "max_entries": 8,
+        "nbytes": 0,
+        "nbytes_mb": 0.0
+      },
+      "totals": {
+        "l2_block_tokens_on_disk": 0,
+        "l2_prompt_tokens_on_disk": 0,
+        "l2_ssm_tokens_on_disk": 0,
+        "l2_tokens_on_disk": 0,
+        "l2_tokens_on_disk_note": "store_sum_across_prompt_block_ssm_l2; tiers_may_overlap",
+        "l2_tokens_on_disk_store_sum": 0,
+        "ram_tokens_cached": 0,
+        "ssm_tokens_on_disk": 0
+      }
+    },
+    "effective_config": {
+      "cache": {
+        "disk_cache": {
+          "block_l2": {
+            "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-voq2gtrn/block",
+            "enabled": true,
+            "max_gb": 30.339999999999996
+          },
+          "prompt_l2": {
+            "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-long-context-cache-voq2gtrn/prompt",
+            "enabled": true,
+            "max_gb": 10.0
+          }
+        },
+        "kv_cache_quantization": {
+          "enabled": true,
+          "group_size": 64,
+          "mode": "turboquant-q4"
+        },
+        "paged_cache": {
+          "block_size": 64,
+          "enabled": true
+        },
+        "prefix_cache": {
+          "enabled": true,
+          "memory_percent": 0.2
+        },
+        "responses": {
+          "clears_conversation_state_only": true,
+          "method": "prefix-cache-l2-turboquant",
+          "new_context_preserves_engine_session": true,
+          "prefix_cache_required": true
+        },
+        "ssm_companion": {
+          "disk_l2_enabled": true,
+          "enabled": true,
+          "max_entries": 8,
+          "max_mb": null
+        },
+        "topology": {
+          "block_l2_active": true,
+          "cache_type": "hybrid",
+          "expected_components": [
+            "kv_cache",
+            "prefix_cache",
+            "prompt_l2",
+            "paged_cache",
+            "block_l2",
+            "kv_quantization",
+            "ssm_companion",
+            "ssm_l2"
+          ],
+          "kv_quantization_active": true,
+          "name": "hybrid_ssm_attention",
+          "prompt_l2_active": true,
+          "ssm_companion_required": true,
+          "warnings": []
+        }
+      },
+      "generation": {
+        "chat_template_kwargs": null,
+        "custom_chat_template": false,
+        "enable_thinking": true,
+        "max_tokens": 32,
+        "min_p": null,
+        "repetition_penalty": null,
+        "stop": null,
+        "temperature": 1.0,
+        "top_k": 20,
+        "top_p": 0.95
+      },
+      "model": {
+        "architecture_hints": {
+          "cache_topology": "hybrid_ssm_attention",
+          "ssm_companion_required": true
+        },
+        "cache_type": "hybrid",
+        "family": "qwen3_5",
+        "name": "dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "served_name": null,
+        "type": "text"
+      },
+      "parsers": {
+        "auto_tool_choice": true,
+        "reasoning": "qwen3",
+        "tool_call": "qwen"
+      },
+      "sources": {
+        "generation": {
+          "chat_template_kwargs": "unset",
+          "enable_thinking": "launcher_default",
+          "max_tokens": "cli",
+          "min_p": "unset",
+          "repetition_penalty": "unset",
+          "stop": "unset",
+          "temperature": "generation_config",
+          "top_k": "generation_config",
+          "top_p": "generation_config"
+        },
+        "parsers": {
+          "reasoning": "cli",
+          "tool_call": "cli"
+        }
+      }
+    },
+    "engine_type": "batched",
+    "kv_cache_quantization": {
+      "bits": 4,
+      "enabled": true,
+      "group_size": 64
+    },
+    "last_request_time": null,
+    "max_prompt_tokens": 194065,
+    "mcp": null,
+    "memory": {
+      "active_mb": 27751.1,
+      "cache_mb": 0.1,
+      "peak_mb": 27751.2
+    },
+    "model_loaded": true,
+    "model_name": "dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+    "model_type": "mllm",
+    "mtp": {
+      "artifact_available": true,
+      "cache_type": "hybrid",
+      "config_mtp_layer_source": "config.text_config.mtp_num_hidden_layers",
+      "config_num_nextn_predict_layers": 1,
+      "effective_depth": 3,
+      "effective_depth_source": "default",
+      "family": "qwen3_5",
+      "has_vision_config": true,
+      "has_vision_weights": true,
+      "index_has_mtp_tensors": true,
+      "index_mtp_layer_count": 1,
+      "issues": [],
+      "jang_drop_mtp": null,
+      "jang_mtp_layers": 1,
+      "mtp_tensor_count": 23,
+      "request_gate": "temperature=0,repetition_penalty=1.0",
+      "request_policy": "compatible-only",
+      "runtime_active": true,
+      "runtime_available": true,
+      "runtime_bundle_has_mtp": true,
+      "runtime_mtp_mode": "preserved_enabled",
+      "runtime_reason": "native MTP runtime is active for text+vl",
+      "runtime_scope": "text+vl",
+      "runtime_supported": true,
+      "runtime_validation_blocked": false,
+      "status": "native_runtime_active",
+      "vision_tensor_count": 333,
+      "vl_runtime_available": true
+    },
+    "native_cache": {
+      "attention_kv_storage_quantization": {
+        "applies_to": "attention_kv_layers_only",
+        "bits": 4,
+        "enabled": true,
+        "group_size": 64,
+        "mode": "storage_boundary",
+        "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+        "ssm_policy": "native_companion_state"
+      },
+      "block_disk_l2": true,
+      "cache_type": "hybrid_ssm_typed",
+      "components": [
+        "attention_kv",
+        "ssm_companion_state",
+        "async_rederive"
+      ],
+      "family": "hybrid",
+      "generic_turboquant_kv": {
+        "enabled": false,
+        "reason": "hybrid_ssm_state"
+      },
+      "kv_layer_indices": [],
+      "live_attention_tq_kv": {
+        "applies_to": "attention_kv_layers_only",
+        "attention_layers": [],
+        "companion_layers": [],
+        "enabled": false,
+        "mode": null,
+        "ssm_policy": "native_full_precision_companion_state"
+      },
+      "paged": true,
+      "prefix": true,
+      "schema": "hybrid_ssm_v1",
+      "ssm_entries": 0
+    },
+    "quantization": {
+      "backend": "mx.quantize",
+      "codec": "affine_quantized_matmul",
+      "config_bits": 8,
+      "group_size": 32,
+      "passthrough_bit_widths_used": [
+        16
+      ],
+      "passthrough_tensor_count": 693,
+      "profile": "MXFP8",
+      "sidecar": {
+        "jang_config": true,
+        "jangtq_runtime": false,
+        "prestacked_bundle": false
+      },
+      "target_bits": 8,
+      "weight_format": "mxfp8",
+      "weight_index": {
+        "index_file": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP/model.safetensors.index.json",
+        "mtp_tensor_count": 23,
+        "routed_layout_counts": {
+          "prestacked_switch": 0,
+          "split_expert": 0
+        },
+        "suffix_counts": {
+          "scales": 506,
+          "weight": 937
+        },
+        "total_tensors": 1705,
+        "tq_target_counts": {}
+      },
+      "weight_matmul_dispatch": {
+        "metal_na_eligible": true,
+        "primary": "mlx_affine_quantized_matmul",
+        "reason": null,
+        "uses_mlx_quantized_matmul": true
+      }
+    },
+    "quantization_format": {
+      "actual_bits": null,
+      "block_size": 64,
+      "target_bits": null,
+      "type": "jang"
+    },
+    "scheduler": {
+      "batch_generator": {},
+      "cache_hit_requests": 0,
+      "cache_hit_tokens": 0,
+      "cache_hit_tokens_by_detail": {},
+      "cache_reuse_partial_downgrades": 0,
+      "cache_reuse_partial_tokens": 0,
+      "cache_reuse_skip_tokens": 0,
+      "cache_reuse_skips": 0,
+      "engine_path": null,
+      "ewma_ttft_seconds": 0,
+      "hybrid_kv_without_ssm_hits": 0,
+      "hybrid_kv_without_ssm_tokens": 0,
+      "last_cache_reuse_partial": null,
+      "last_cache_reuse_skip": null,
+      "last_hybrid_kv_without_ssm": null,
+      "max_running_observed": 0,
+      "max_waiting_observed": 0,
+      "num_running": 0,
+      "num_waiting": 0,
+      "single_active_decode": false
+    },
+    "status": "healthy",
+    "turboquant_kv_cache": {
+      "enabled": false
+    }
+  },
+  "lowerCapForRejection": 96008,
+  "lowerCapRejectResponse": {
+    "json": {
+      "error": {
+        "code": "prompt_too_long",
+        "message": "Prompt too long (prompt: ~192,017 tokens). This would need ~75.0GB of KV cache memory, exceeding the configured prompt/context limit of ~96,008 tokens. Shorten the prompt, raise --max-prompt-tokens, or use a model/session with a larger prompt/context cap.",
+        "type": "invalid_request_error"
+      }
+    },
+    "status": 413
+  },
+  "marker": "LONG_CONTEXT_SMOKE_PASS",
+  "memoryPreflight": {
+    "allowConcurrentModel": false,
+    "availableGB": 108.9527587890625,
+    "enabled": true,
+    "heavyModelProcessCount": 0,
+    "heavyModelProcesses": [],
+    "requiredAvailableGB": 42.0
+  },
+  "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+  "ok": true,
+  "proofType": "real-qwen-long-context-smoke",
+  "pythonExecutable": "/Users/eric/exploitbot/ExploitBotEngine/.venv/bin/python3",
+  "reexecedIntoEngineVenv": false,
+  "scope": "long-context smoke, not a full 262144-token max-context proof",
+  "sessionMaxPromptTokens": 194065,
+  "startedAt": "2026-07-05T00:36:13-0700",
+  "status": {
+    "blockL2": "PASS",
+    "declared262kContext": "PASS",
+    "engineSessionPromptCap": "PASS",
+    "hybridSSM": "PASS",
+    "longPromptCompleted": "PASS",
+    "lowerPerRequestCapRejected": "PASS",
+    "pagedCache": "PASS",
+    "prefixCache": "PASS",
+    "q4KV": "PASS",
+    "q4TurboQuantKV": "PASS",
+    "ssmCompanionNotQuantized": "PASS",
+    "usagePromptTokensReported": "PASS"
+  },
+  "targetMemoryPreflight": {
+    "allowConcurrentModel": false,
+    "availableGB": 109.53633117675781,
+    "enabled": true,
+    "heavyModelProcessCount": 0,
+    "heavyModelProcesses": [],
+    "memorySlotWait": {
+      "enabled": false,
+      "sampleIntervalSeconds": 15.0,
+      "samples": [],
+      "timeoutSeconds": 0.0
+    },
+    "modelRequiredAvailableGB": 42.0,
+    "preflightKind": "targetContext",
+    "targetPromptTokens": 192000,
+    "targetRequiredAvailableGB": 72.0
+  },
+  "targetPromptTokens": 192000,
+  "usage": {
+    "completion_tokens": 7,
+    "prompt_tokens": 192022,
+    "prompt_tokens_details": null,
+    "total_tokens": 192029
+  }
+}

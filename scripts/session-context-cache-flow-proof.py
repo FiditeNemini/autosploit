@@ -66,7 +66,7 @@ def wait_for_app(timeout: float = 15.0) -> None:
     last_error: Exception | None = None
     while time.time() < deadline:
         try:
-            request("GET", "/state", timeout=1.0)
+            request("GET", "/messages", timeout=2.0)
             return
         except Exception as exc:
             last_error = exc
@@ -143,7 +143,7 @@ def run() -> None:
         if deep.get("sessionContextCacheFlowContractParity") is not True:
             raise AssertionError(f"deep runtime flow missing session/context/cache parity: {deep}")
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         runtime_group = (index.get("groups") or {}).get("runtimeAndCache") or {}
         if "/qa/session-context-cache-flow" not in (runtime_group.get("endpoints") or []):
             raise AssertionError(f"coverage index runtime group missing session/context/cache route: {runtime_group}")

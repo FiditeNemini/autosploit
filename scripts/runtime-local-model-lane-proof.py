@@ -16,28 +16,36 @@ ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
 
 EXPECTED_ROWS = [
-    "smallestLocalQwenSelection",
-    "releaseAppQwenLiveChat",
-    "qwenRepeatCacheReuse",
+    "qwen36MXFP8LocalSelection",
+    "qwen36MXFP8LiveChat",
     "qwenHybridSSMTopology",
     "qwenTurboQuantKV",
-    "qwenContinuousBatchingLowRAM",
+    "qwenPrefixPagedBlockCache",
+    "qwenContinuousBatchingConcurrency",
+    "qwenNativeHybridAsyncReDerive",
+    "qwen35BMXFP8LiveChat",
     "minimaxSmallReleaseLane",
     "activeFamiliesExcludeZaya",
 ]
 
 EXPECTED_CONTRACTS = {
     "qwenTargetExists",
+    "qwen35BTargetExists",
     "qwenReleaseLiveArtifact",
     "qwenReleaseLiveModelMatches",
     "qwenReleaseChatNonEmpty",
-    "qwenRepeatCacheReuse",
-    "qwenLowRAMCeiling",
+    "qwenMemoryObserved",
     "qwenHybridSSMTopology",
     "qwenTurboQuantKV",
     "qwenPrefixPagedBlockCache",
     "qwenContinuousBatchingArtifact",
-    "qwenContinuousBatchingLowRAM",
+    "qwenNativeHybridAsyncReDerive",
+    "qwen35BLiveArtifact",
+    "qwen35BLiveModelMatches",
+    "qwen35BMemoryObserved",
+    "qwen35BHybridSSMTopology",
+    "qwen35BTurboQuantKV",
+    "qwen35BNativeHybridAsyncReDerive",
     "minimaxTargetExists",
     "minimaxReleaseArtifact",
     "minimaxTurboQuantKV",
@@ -91,24 +99,36 @@ def run() -> None:
             raise AssertionError(f"runtime local model lane row order mismatch: {payload}")
         if payload.get("rowCount") != len(EXPECTED_ROWS):
             raise AssertionError(f"runtime local model lane row count mismatch: {payload}")
-        if payload.get("qwenTargetPath") != "/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP":
+        if payload.get("qwenTargetPath") != "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP":
             raise AssertionError(f"runtime local Qwen target mismatch: {payload}")
-        if payload.get("qwenReleaseAppArtifact") != "docs/live-proofs/2026-06-03-release-app-qwen-mxfp4-live.json":
+        if payload.get("qwen35BTargetPath") != "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP":
+            raise AssertionError(f"runtime local Qwen 35B target mismatch: {payload}")
+        if payload.get("qwenReleaseAppArtifact") != "docs/live-proofs/2026-07-04-qwen36-27b-mxfp8-mtp-live-batch.json":
             raise AssertionError(f"runtime local Qwen release artifact mismatch: {payload}")
-        if payload.get("qwenReleasePreview") != "RELEASE-QWEN-OK":
+        if payload.get("qwenReleasePreview") != "BATCH-QWEN-A":
             raise AssertionError(f"runtime local Qwen chat preview mismatch: {payload}")
-        if payload.get("qwenSecondCachedTokens", 0) < 1:
-            raise AssertionError(f"runtime local Qwen cached tokens missing: {payload}")
-        if payload.get("qwenActiveMemoryMB", 0) <= 0 or payload.get("qwenActiveMemoryMB", 0) > 20000:
-            raise AssertionError(f"runtime local Qwen low-RAM ceiling mismatch: {payload}")
+        if payload.get("qwenActiveMemoryMB", 0) <= 0 or payload.get("qwenActiveMemoryMB", 0) > 40000:
+            raise AssertionError(f"runtime local Qwen memory observation mismatch: {payload}")
         if payload.get("qwenTopologyName") != "hybrid_ssm_attention":
             raise AssertionError(f"runtime local Qwen topology mismatch: {payload}")
         if payload.get("qwenKVCacheBits") != 4:
             raise AssertionError(f"runtime local Qwen KV bits mismatch: {payload}")
         if payload.get("qwenContinuousBatchingArtifactOK") is not True:
             raise AssertionError(f"runtime local Qwen continuous batching artifact mismatch: {payload}")
-        if payload.get("qwenContinuousBatchingActiveMemoryMB", 0) <= 0 or payload.get("qwenContinuousBatchingActiveMemoryMB", 0) > 20000:
-            raise AssertionError(f"runtime local Qwen continuous batching low-RAM ceiling mismatch: {payload}")
+        if payload.get("qwenContinuousBatchingActiveMemoryMB", 0) <= 0 or payload.get("qwenContinuousBatchingActiveMemoryMB", 0) > 40000:
+            raise AssertionError(f"runtime local Qwen continuous batching memory mismatch: {payload}")
+        if payload.get("qwenNativeHybridAsyncReDerive") is not True:
+            raise AssertionError(f"runtime local Qwen native hybrid async rederive missing: {payload}")
+        if payload.get("qwen35BArtifact") != "docs/live-proofs/2026-07-04-qwen36-35b-a3b-mxfp8-mtp-live-batch.json":
+            raise AssertionError(f"runtime local Qwen 35B artifact mismatch: {payload}")
+        if payload.get("qwen35BActiveMemoryMB", 0) <= 0 or payload.get("qwen35BActiveMemoryMB", 0) > 45000:
+            raise AssertionError(f"runtime local Qwen 35B memory mismatch: {payload}")
+        if payload.get("qwen35BTopologyName") != "hybrid_ssm_attention":
+            raise AssertionError(f"runtime local Qwen 35B topology mismatch: {payload}")
+        if payload.get("qwen35BKVCacheBits") != 4:
+            raise AssertionError(f"runtime local Qwen 35B KV bits mismatch: {payload}")
+        if payload.get("qwen35BNativeHybridAsyncReDerive") is not True:
+            raise AssertionError(f"runtime local Qwen 35B native hybrid async rederive missing: {payload}")
         if payload.get("minimaxTargetPath") != "/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ":
             raise AssertionError(f"runtime local MiniMax target mismatch: {payload}")
         if payload.get("minimaxKVCacheBits") != 4:

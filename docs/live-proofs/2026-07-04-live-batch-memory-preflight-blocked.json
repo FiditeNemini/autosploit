@@ -1,0 +1,25 @@
+{
+  "baseUrl": "http://127.0.0.1:57495",
+  "error": "MemoryPreflightError: memory preflight refused to stack this live model proof on top of another heavyweight model/eval process\n{\n  \"allowConcurrentModel\": false,\n  \"availableGB\": 46.977325439453125,\n  \"enabled\": true,\n  \"heavyModelProcessCount\": 1,\n  \"heavyModelProcesses\": [\n    {\n      \"command\": \"Packages/OsaurusEvals/.build/arm64-apple-macosx/debug/osaurus-evals run --suite Packages/OsaurusEvals/Suites/AgentLoop --model JANGQ-AI/OsaurusAgent-35B-A3B-MXFP4 --out /Users/eric/models/evals_agentloop_mxfp4.json\",\n      \"pid\": 75822,\n      \"ppid\": 75818,\n      \"rss_mb\": 1885.8\n    }\n  ],\n  \"requiredAvailableGB\": 42.0\n}",
+  "family": "qwen",
+  "maxNumSeqs": 2,
+  "memoryPreflight": {
+    "allowConcurrentModel": false,
+    "availableGB": 46.977325439453125,
+    "enabled": true,
+    "heavyModelProcessCount": 1,
+    "heavyModelProcesses": [
+      {
+        "command": "Packages/OsaurusEvals/.build/arm64-apple-macosx/debug/osaurus-evals run --suite Packages/OsaurusEvals/Suites/AgentLoop --model JANGQ-AI/OsaurusAgent-35B-A3B-MXFP4 --out /Users/eric/models/evals_agentloop_mxfp4.json",
+        "pid": 75822,
+        "ppid": 75818,
+        "rss_mb": 1885.8
+      }
+    ],
+    "requiredAvailableGB": 42.0
+  },
+  "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+  "ok": false,
+  "proofType": "live-qwen-continuous-batching",
+  "startedAt": "2026-07-04T02:51:24-0700"
+}

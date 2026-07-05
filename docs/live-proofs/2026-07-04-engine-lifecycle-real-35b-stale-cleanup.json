@@ -1,0 +1,108 @@
+{
+  "run_id": "2026-07-04-engine-lifecycle-real-35b-stale-cleanup",
+  "timestamp_local": "2026-07-04T00:00:00-07:00",
+  "workspace": "/Users/eric/exploitbot",
+  "purpose": "Live-verify that dev app relaunch cleanup removes a resident 35B model engine instead of leaving an orphan process that can flood RAM across repeated proof runs.",
+  "source_trace": {
+    "launcher_cleanup": {
+      "file": "script/build_and_run.sh",
+      "lines": "18-30",
+      "evidence": [
+        "ENGINE_LAUNCH is set to this repo's ExploitBotEngine/launch.py",
+        "cleanup_stale_engines checks pgrep -f \"$ENGINE_LAUNCH\"",
+        "cleanup_stale_engines sends TERM, waits, then sends KILL",
+        "cleanup_stale_engines runs before pkill -x ExploitBot"
+      ]
+    },
+    "app_startup_cleanup": {
+      "file": "ExploitBot/Sources/ExploitBot/Services/EngineManager.swift",
+      "lines": "34-40,486-501",
+      "evidence": [
+        "EngineManager resolves launchScript and calls cleanupStaleEngineProcesses during init",
+        "deinit calls stop() for graceful teardown",
+        "cleanupStaleEngineProcesses runs pkill -TERM/-KILL -f launchScript"
+      ]
+    },
+    "old_failure_mechanism": {
+      "file": "ExploitBot/Sources/ExploitBot/Services/EngineManager.swift",
+      "lines": "197-218,350-386",
+      "evidence": [
+        "stop() only terminates the tracked Process if the Swift app gets to run it",
+        "findAvailablePort scans 8100-8199, so a stale engine can cause the next launch to choose another port"
+      ]
+    }
+  },
+  "live_verification": {
+    "model_path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+    "settings_applied_through_app_qa": {
+      "engine.modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "engine.useModelGenerationDefaults": false,
+      "engine.temperature": 0,
+      "engine.topP": 1,
+      "engine.maxTokens": 64,
+      "engine.prefixCache": true,
+      "engine.diskCache": true,
+      "engine.pagedCache": true,
+      "engine.blockDiskCache": true,
+      "engine.kvCacheQuantization": "turboquant-q4",
+      "engine.kvCacheGroupSize": 64,
+      "chat.maxIterations": 4,
+      "chat.enableReasoning": false
+    },
+    "pre_relaunch_state": {
+      "qa_engineRunning": true,
+      "qa_healthStatus": "healthy",
+      "qa_enginePort": 8100,
+      "qa_model": "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "server_pid": 8561,
+      "launcher_pid": 8560,
+      "server_rss_kb": 37265296,
+      "listener": "127.0.0.1:8100",
+      "cache_stats": {
+        "memoryActiveMB": 35792,
+        "turboQuantEnabled": true,
+        "turboQuantMakeCache": "turboquant-q4 encode/decode",
+        "prefixCacheTotalTokens": 0,
+        "blockL2Blocks": 797,
+        "ssmDiskEnabled": true,
+        "ssmDiskEntries": 55
+      }
+    },
+    "action": {
+      "command": "script/build_and_run.sh --verify",
+      "observed_stdout_contains": "Stopping stale ExploitBot engine processes...",
+      "result": "Build complete! (0.63s)"
+    },
+    "post_relaunch_state": {
+      "old_launcher_pid_8560_present": false,
+      "old_server_pid_8561_present": false,
+      "qa_engineRunning": false,
+      "qa_healthStatus": "stopped",
+      "qa_enginePort": 0,
+      "engine_processes": "none",
+      "listeners_8100_8110": "none",
+      "remaining_processes": "Swift app only: /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot",
+      "vm_stat": {
+        "pages_occupied_by_compressor": 1442,
+        "swapins": 0,
+        "swapouts": 0
+      }
+    }
+  },
+  "assertions": {
+    "started_real_35b_through_app": true,
+    "pre_relaunch_35b_healthy": true,
+    "pre_relaunch_real_model_memory_observed": true,
+    "pre_relaunch_single_engine_listener_observed": true,
+    "dev_relaunch_stale_cleanup_message_observed": true,
+    "old_35b_launcher_pid_gone_after_relaunch": true,
+    "old_35b_server_pid_gone_after_relaunch": true,
+    "no_8100_8110_engine_listeners_after_relaunch": true,
+    "app_reports_engine_stopped_after_relaunch": true,
+    "no_second_model_engine_loaded_after_relaunch": true
+  },
+  "status": {
+    "35b_dev_relaunch_ram_guard": "PASS",
+    "packaged_app_user_visible_cleanup_warning": "PARTIAL_NOT_IMPLEMENTED"
+  }
+}

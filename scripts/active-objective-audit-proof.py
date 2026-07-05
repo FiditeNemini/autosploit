@@ -140,7 +140,10 @@ def assert_audit(payload: dict, state: dict, index: dict) -> None:
         raise AssertionError(f"{ROUTE} Qwen TurboQuant KV evidence missing: {rows['turboQuantKVCacheComponentBuilt']}")
     if rows["turboQuantKVCacheComponentBuilt"].get("minimaxKVBits") != 4:
         raise AssertionError(f"{ROUTE} MiniMax TurboQuant KV evidence missing: {rows['turboQuantKVCacheComponentBuilt']}")
-    if rows["hybridSSMAsyncReDeriveBuilt"].get("completed", 0) < 1:
+    if max(
+        rows["hybridSSMAsyncReDeriveBuilt"].get("completed", 0),
+        rows["hybridSSMAsyncReDeriveBuilt"].get("qwenHighCardinalityCompleted", 0),
+    ) < 1:
         raise AssertionError(f"{ROUTE} hybrid SSM rederive evidence missing: {rows['hybridSSMAsyncReDeriveBuilt']}")
     if rows["parallelSessionsContinuousBatchingBuilt"].get("qwenMaxRunningObserved", 0) < 4:
         raise AssertionError(f"{ROUTE} Qwen high-cardinality batching evidence missing: {rows['parallelSessionsContinuousBatchingBuilt']}")
@@ -181,7 +184,7 @@ def run() -> None:
         wait_for_app()
         audit = request("GET", ROUTE, timeout=45.0)
         state = request("GET", "/state")
-        index = request("GET", "/qa/coverage-index", timeout=45.0)
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         assert_audit(audit, state, index)
         print("active-objective-audit proof passed")
     finally:

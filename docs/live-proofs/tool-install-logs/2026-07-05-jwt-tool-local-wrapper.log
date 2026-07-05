@@ -1,0 +1,6 @@
+startedAt=2026-07-05T15:04:36-0700
+Traceback (most recent call last):
+  File "/Users/eric/.local/bin/jwt_tool.py", line 26, in <module>
+    from ratelimit import limits, RateLimitException, sleep_and_retry
+ModuleNotFoundError: No module named 'ratelimit'
+finishedAt=2026-07-05T15:04:36-0700

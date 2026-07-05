@@ -28,7 +28,7 @@ EXPECTED_ROWS = [
 EXPECTED_ARTIFACTS = {
     "docs/live-proofs/checkpoint-463-release-app-qwen-cross-restart-cache.json",
     "docs/live-proofs/checkpoint-112-qwen-hybrid-block-l2-ssm-restart-replay-live.json",
-    "docs/live-proofs/checkpoint-452-qwen-continuous-batching-live.json",
+    "docs/live-proofs/2026-07-04-qwen36-27b-mxfp8-mtp-live-batch.json",
     "docs/live-proofs/checkpoint-110-minimax-restart-replay-live.json",
     "docs/live-proofs/checkpoint-111-minimax-block-l2-restart-replay-live.json",
     "docs/live-proofs/checkpoint-102-block-l2-partial-proof.json",
@@ -108,7 +108,7 @@ def run() -> None:
             "blockL2ProofDiskHits": 2,
             "qwenHybridSSMReDeriveLastTokens": 1,
             "qwenBatchingBlockL2DiskWrites": 1,
-            "qwenBatchingSSMReDeriveCompleted": 1,
+            "qwenBatchingNativeHybridAsyncReDerive": 1,
             "minimaxBlockL2DiskWrites": 1,
         }
         for key, minimum in minimums.items():
@@ -141,7 +141,7 @@ def run() -> None:
         if runtime.get("cacheArtifactMatrixContractParity") is not True:
             raise AssertionError(f"runtime coverage missing cache artifact matrix parity: {runtime}")
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         runtime_group = (index.get("groups") or {}).get("runtimeAndCache") or {}
         if "/qa/cache-artifact-matrix" not in (runtime_group.get("endpoints") or []):
             raise AssertionError(f"coverage index runtime group missing cache artifact matrix route: {runtime_group}")

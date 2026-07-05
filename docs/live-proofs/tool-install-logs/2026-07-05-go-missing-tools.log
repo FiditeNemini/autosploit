@@ -1,0 +1,905 @@
+startedAt=2026-07-05T15:03:01-0700
+go: downloading github.com/projectdiscovery/subfinder/v2 v2.14.0
+go: downloading github.com/projectdiscovery/subfinder v2.8.0+incompatible
+go: downloading github.com/projectdiscovery/dnsx v1.2.3
+go: downloading github.com/projectdiscovery/utils v0.10.1
+go: downloading github.com/hako/durafmt v0.0.0-20210316092057-3a2c319c1acd
+go: downloading github.com/projectdiscovery/chaos-client v0.5.2
+go: downloading golang.org/x/exp v0.0.0-20250106191152-7588d65b2ba8
+go: downloading github.com/rs/xid v1.5.0
+go: downloading github.com/projectdiscovery/ratelimit v0.0.85
+go: downloading github.com/corpix/uarand v0.2.0
+go: downloading github.com/cnf/structhash v0.0.0-20201127153200-e1b16c1ebc08
+go: downloading github.com/lib/pq v1.10.9
+go: downloading github.com/tomnomnom/linkheader v0.0.0-20180905144013-02ca5825eb80
+go: downloading github.com/projectdiscovery/retryablehttp-go v1.3.8
+go: downloading github.com/projectdiscovery/cdncheck v1.2.32
+go: downloading github.com/miekg/dns v1.1.62
+go: downloading github.com/projectdiscovery/retryabledns v1.0.114
+go: downloading golang.org/x/time v0.5.0
+go: downloading golang.org/x/text v0.32.0
+go: downloading github.com/Masterminds/semver/v3 v3.2.1
+go: downloading github.com/cheggaaa/pb/v3 v3.1.4
+go: downloading github.com/google/uuid v1.3.1
+go: downloading golang.org/x/oauth2 v0.27.0
+go: downloading golang.org/x/net v0.48.0
+go: downloading github.com/tidwall/match v1.1.1
+go: downloading github.com/muesli/termenv v0.15.3-0.20240618155329-98d742f6907a
+go: downloading github.com/yuin/goldmark v1.7.4
+go: downloading golang.org/x/term v0.38.0
+go: downloading golang.org/x/crypto v0.46.0
+go: downloading github.com/shirou/gopsutil/v4 v4.26.3
+go: downloading github.com/projectdiscovery/fastdialer v0.5.6
+go: downloading github.com/gaissmai/bart v0.26.1
+go: downloading github.com/weppos/publicsuffix-go v0.50.3-0.20260104170930-90713dec78f2
+go: downloading github.com/fatih/color v1.15.0
+go: downloading github.com/mattn/go-colorable v0.1.13
+go: downloading github.com/projectdiscovery/networkpolicy v0.1.36
+go: downloading github.com/tklauser/go-sysconf v0.3.16
+go: downloading github.com/ebitengine/purego v0.10.0
+go: downloading github.com/akrylysov/pogreb v0.10.1
+go: downloading github.com/tidwall/buntdb v1.3.0
+go: downloading go.etcd.io/bbolt v1.3.7
+go: downloading github.com/tidwall/btree v1.6.0
+go: downloading github.com/lucasb-eyer/go-colorful v1.2.0
+golang.org/x/text/internal/utf8internal
+golang.org/x/text/encoding/internal/identifier
+golang.org/x/net/internal/iana
+golang.org/x/crypto/internal/alias
+golang.org/x/crypto/cryptobyte/asn1
+github.com/tidwall/match
+golang.org/x/net/html/atom
+github.com/projectdiscovery/utils/conversion
+golang.org/x/exp/constraints
+github.com/gaissmai/bart/internal/art
+github.com/gaissmai/bart/internal/bitset
+github.com/projectdiscovery/utils/ptr
+github.com/ebitengine/purego/internal/cgo
+github.com/ebitengine/purego/internal/strings
+github.com/shirou/gopsutil/v4/common
+github.com/lib/pq/oid
+github.com/gaissmai/bart/internal/lpm
+github.com/gaissmai/bart/internal/allot
+github.com/gaissmai/bart/internal/sparse
+github.com/projectdiscovery/utils/os
+golang.org/x/exp/maps
+github.com/tidwall/btree
+github.com/projectdiscovery/utils/consts
+golang.org/x/text/transform
+golang.org/x/crypto/openpgp/errors
+golang.org/x/crypto/cast5
+golang.org/x/crypto/internal/poly1305
+github.com/ebitengine/purego/internal/xreflect
+golang.org/x/crypto/blake2b
+github.com/projectdiscovery/utils/slice
+github.com/projectdiscovery/utils/context
+github.com/corpix/uarand
+github.com/projectdiscovery/utils/sync/semaphore
+golang.org/x/crypto/openpgp/armor
+golang.org/x/crypto/openpgp/s2k
+golang.org/x/text/encoding
+golang.org/x/text/runes
+github.com/projectdiscovery/utils/env
+github.com/projectdiscovery/utils/reader/rawmode
+golang.org/x/text/unicode/norm
+golang.org/x/text/encoding/internal
+github.com/hako/durafmt
+golang.org/x/time/rate
+golang.org/x/net/bpf
+golang.org/x/crypto/cryptobyte
+golang.org/x/net/internal/socket
+golang.org/x/crypto/chacha20
+golang.org/x/crypto/hkdf
+github.com/projectdiscovery/utils/errkit
+golang.org/x/crypto/sha3
+github.com/akrylysov/pogreb/internal/errors
+github.com/akrylysov/pogreb/internal/hash
+github.com/akrylysov/pogreb/fs
+golang.org/x/text/encoding/unicode
+github.com/tidwall/gjson
+go.etcd.io/bbolt
+golang.org/x/net/html
+golang.org/x/net/internal/socks
+github.com/gaissmai/bart/internal/value
+golang.org/x/text/unicode/bidi
+golang.org/x/crypto/ed25519
+github.com/bodgit/sevenzip/internal/aes7z
+github.com/gaissmai/bart/internal/nodes
+golang.org/x/net/http2/hpack
+github.com/projectdiscovery/utils/sync/sizedpool
+golang.org/x/text/encoding/simplifiedchinese
+github.com/Masterminds/semver/v3
+github.com/refraction-networking/utls/internal/helper
+golang.org/x/crypto/chacha20poly1305
+github.com/tidwall/grect
+golang.org/x/net/proxy
+github.com/akrylysov/pogreb
+github.com/projectdiscovery/ratelimit
+github.com/projectdiscovery/utils/reader
+golang.org/x/text/secure/bidirule
+golang.org/x/net/ipv6
+golang.org/x/net/ipv4
+github.com/spf13/afero
+github.com/refraction-networking/utls/internal/hpke
+github.com/tidwall/buntdb
+github.com/lucasb-eyer/go-colorful
+github.com/gaissmai/bart
+github.com/yuin/goldmark/util
+golang.org/x/term
+github.com/cheggaaa/pb/v3/termutil
+golang.org/x/net/idna
+github.com/mattn/go-colorable
+github.com/microcosm-cc/bluemonday
+golang.org/x/crypto/openpgp/elgamal
+github.com/refraction-networking/utls
+github.com/google/uuid
+github.com/fatih/color
+golang.org/x/crypto/pbkdf2
+golang.org/x/crypto/openpgp/packet
+github.com/tklauser/go-sysconf
+github.com/ebitengine/purego
+golang.org/x/oauth2/internal
+github.com/miekg/dns
+github.com/cnf/structhash
+golang.org/x/crypto/scrypt
+github.com/muesli/termenv
+github.com/projectdiscovery/utils/permission
+github.com/cheggaaa/pb/v3
+github.com/projectdiscovery/utils/time
+github.com/weppos/publicsuffix-go/publicsuffix
+github.com/projectdiscovery/hmap/store/disk
+golang.org/x/net/http/httpguts
+golang.org/x/oauth2
+github.com/projectdiscovery/utils/strings
+github.com/lib/pq/scram
+aead.dev/minisign
+github.com/tomnomnom/linkheader
+golang.org/x/net/internal/httpcommon
+github.com/rs/xid
+github.com/projectdiscovery/utils/file
+github.com/projectdiscovery/utils/ip
+github.com/projectdiscovery/utils/http
+github.com/minio/selfupdate
+golang.org/x/net/http2
+github.com/lib/pq
+github.com/projectdiscovery/utils/log
+github.com/projectdiscovery/fastdialer/fastdialer/utils
+github.com/shirou/gopsutil/v4/internal/common
+github.com/charmbracelet/lipgloss
+github.com/projectdiscovery/retryabledns/hostsfile
+github.com/projectdiscovery/hmap/store/hybrid
+github.com/bodgit/sevenzip
+golang.org/x/crypto/openpgp
+github.com/zmap/zcrypto/x509
+github.com/shirou/gopsutil/v4/mem
+github.com/shirou/gopsutil/v4/cpu
+github.com/shirou/gopsutil/v4/net
+github.com/google/go-github/v30/github
+github.com/charmbracelet/lipgloss/table
+github.com/shirou/gopsutil/v4/process
+github.com/mholt/archives
+github.com/projectdiscovery/utils/process
+github.com/zmap/zcrypto/tls
+github.com/projectdiscovery/gologger/writer
+github.com/projectdiscovery/gologger
+github.com/projectdiscovery/utils/crypto
+github.com/projectdiscovery/retryabledns/doh
+github.com/projectdiscovery/utils/maps
+github.com/projectdiscovery/retryabledns
+github.com/projectdiscovery/utils/url
+github.com/projectdiscovery/utils/folder
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping
+github.com/projectdiscovery/goflags
+github.com/projectdiscovery/networkpolicy
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/bevigil
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/anubis
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/builtwith
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/crtsh
+github.com/projectdiscovery/fastdialer/fastdialer/metafiles
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/censys
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/commoncrawl
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/chinaz
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/c99
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/alienvault
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/certspotter
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/bufferover
+github.com/projectdiscovery/cdncheck
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/digitalyama
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/digitorus
+github.com/projectdiscovery/fastdialer/fastdialer/ja3/impersonate
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/dnsdb
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/dnsdumpster
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/domainsproject
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/dnsrepo
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/driftnet
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/fofa
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/fullhunt
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/github
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/hackertarget
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/hudsonrock
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/intelx
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/leakix
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/merklemap
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/netlas
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/onyphe
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/profundis
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/pugrecon
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/quake
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/rapiddns
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/reconeer
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/redhuntlabs
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/robtex
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/rsecloud
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/securitytrails
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/shodan
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/sitedossier
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/submd
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/thc
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/threatbook
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/threatcrowd
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/urlscan
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/virustotal
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/waybackarchive
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/whoisxmlapi
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/windvane
+github.com/projectdiscovery/fastdialer/fastdialer
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/zoomeyeapi
+github.com/projectdiscovery/dnsx/libs/dnsx
+github.com/yuin/goldmark/text
+github.com/yuin/goldmark/ast
+github.com/projectdiscovery/subfinder/v2/pkg/resolve
+github.com/yuin/goldmark/renderer
+github.com/yuin/goldmark/extension/ast
+github.com/yuin/goldmark/parser
+github.com/yuin/goldmark-emoji/ast
+github.com/yuin/goldmark/renderer/html
+github.com/charmbracelet/glamour/ansi
+github.com/projectdiscovery/retryablehttp-go
+github.com/yuin/goldmark
+github.com/yuin/goldmark-emoji
+github.com/yuin/goldmark/extension
+github.com/charmbracelet/glamour/styles
+github.com/charmbracelet/glamour
+github.com/projectdiscovery/utils/update
+github.com/projectdiscovery/chaos-client/pkg/chaos
+github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/chaos
+github.com/projectdiscovery/subfinder/v2/pkg/passive
+github.com/projectdiscovery/subfinder/v2/pkg/runner
+github.com/projectdiscovery/subfinder/v2/cmd/subfinder
+go: downloading github.com/projectdiscovery/gologger v1.1.62
+go: downloading github.com/projectdiscovery/hmap v0.0.98
+go: downloading github.com/projectdiscovery/ratelimit v0.0.82
+go: downloading github.com/projectdiscovery/retryabledns v1.0.111
+go: downloading github.com/projectdiscovery/utils v0.7.3
+go: downloading github.com/projectdiscovery/cdncheck v1.2.13
+go: downloading golang.org/x/net v0.47.0
+go: downloading golang.org/x/sys v0.38.0
+go: downloading github.com/weppos/publicsuffix-go v0.40.3-0.20250408071509-6074bbe7fd39
+go: downloading github.com/projectdiscovery/retryablehttp-go v1.1.0
+go: downloading golang.org/x/term v0.37.0
+go: downloading github.com/projectdiscovery/machineid v0.0.0-20240226150047-2e2c51e35983
+go: downloading github.com/mholt/archives v0.1.0
+go: downloading gopkg.in/djherbis/times.v1 v1.3.0
+go: downloading github.com/shirou/gopsutil/v3 v3.23.7
+go: downloading golang.org/x/crypto v0.45.0
+go: downloading github.com/projectdiscovery/fastdialer v0.4.19
+go: downloading github.com/klauspost/compress v1.17.11
+go: downloading github.com/andybalholm/brotli v1.1.1
+go: downloading github.com/bodgit/sevenzip v1.6.0
+go: downloading github.com/STARRY-S/zip v0.2.1
+go: downloading github.com/nwaples/rardecode/v2 v2.2.0
+go: downloading github.com/pierrec/lz4/v4 v4.1.21
+go: downloading github.com/sorairolake/lzip-go v0.3.5
+go: downloading github.com/therootcompany/xz v1.0.1
+go: downloading golang.org/x/text v0.31.0
+go: downloading github.com/projectdiscovery/networkpolicy v0.1.31
+go: downloading github.com/refraction-networking/utls v1.7.1
+go: downloading github.com/zmap/zcrypto v0.0.0-20230422215203-9a665e1e9968
+go: downloading golang.org/x/sync v0.18.0
+go: downloading github.com/hashicorp/go-multierror v1.1.1
+go: downloading github.com/hashicorp/errwrap v1.1.0
+go: downloading github.com/cloudflare/circl v1.6.1
+github.com/pierrec/lz4/v4/internal/lz4errors
+github.com/projectdiscovery/gologger/levels
+golang.org/x/text/encoding/internal/identifier
+golang.org/x/net/internal/iana
+golang.org/x/text/internal/utf8internal
+github.com/klauspost/compress/internal/race
+golang.org/x/net/html/atom
+github.com/projectdiscovery/utils/conversion
+golang.org/x/crypto/cryptobyte/asn1
+github.com/cloudflare/circl/pke/kyber/internal/common/params
+github.com/cloudflare/circl/sign/internal/dilithium/params
+golang.org/x/crypto/internal/alias
+github.com/refraction-networking/utls/internal/byteorder
+github.com/refraction-networking/utls/dicttls
+github.com/refraction-networking/utls/internal/fips140tls
+github.com/klauspost/compress
+github.com/zmap/zcrypto/cryptobyte/asn1
+github.com/projectdiscovery/utils/ptr
+github.com/shirou/gopsutil/v3/common
+github.com/cloudflare/circl/sign/internal/dilithium
+github.com/projectdiscovery/utils/os
+github.com/projectdiscovery/utils/consts
+github.com/cloudflare/circl/kem
+github.com/cloudflare/circl/sign
+golang.org/x/text/transform
+github.com/zmap/zcrypto/internal/randutil
+golang.org/x/crypto/openpgp/errors
+github.com/bodgit/sevenzip/internal/util
+github.com/hashicorp/errwrap
+github.com/pierrec/lz4/v4/internal/lz4block
+github.com/pierrec/lz4/v4/internal/xxh32
+github.com/klauspost/compress/internal/snapref
+github.com/klauspost/compress/zstd/internal/xxhash
+github.com/projectdiscovery/utils/slice
+github.com/cloudflare/circl/internal/sha3
+github.com/projectdiscovery/utils/context
+golang.org/x/crypto/cast5
+github.com/projectdiscovery/hmap/store/cache
+golang.org/x/crypto/blake2b
+golang.org/x/crypto/internal/poly1305
+golang.org/x/crypto/openpgp/armor
+golang.org/x/crypto/openpgp/s2k
+golang.org/x/net/bpf
+golang.org/x/sys/unix
+github.com/andybalholm/brotli/matchfinder
+github.com/STARRY-S/zip
+github.com/projectdiscovery/gologger/formatter
+golang.org/x/text/runes
+golang.org/x/text/encoding
+go4.org/syncutil
+github.com/hashicorp/go-multierror
+github.com/bodgit/sevenzip/internal/bzip2
+github.com/bodgit/sevenzip/internal/bra
+github.com/bodgit/sevenzip/internal/delta
+github.com/klauspost/compress/flate
+github.com/bodgit/sevenzip/internal/pool
+github.com/bodgit/sevenzip/internal/lzma
+github.com/bodgit/sevenzip/internal/lzma2
+github.com/klauspost/compress/fse
+github.com/andybalholm/brotli
+github.com/klauspost/compress/s2
+github.com/klauspost/compress/internal/godebug
+golang.org/x/text/encoding/internal
+github.com/nwaples/rardecode/v2
+github.com/sorairolake/lzip-go
+gopkg.in/djherbis/times.v1
+github.com/pierrec/lz4/v4/internal/lz4stream
+github.com/therootcompany/xz
+golang.org/x/net/html
+github.com/projectdiscovery/utils/env
+github.com/bodgit/sevenzip/internal/bcj2
+golang.org/x/net/internal/socks
+golang.org/x/sys/cpu
+golang.org/x/crypto/cryptobyte
+golang.org/x/text/encoding/unicode
+github.com/klauspost/compress/huff0
+github.com/projectdiscovery/utils/errkit
+golang.org/x/crypto/chacha20
+github.com/pierrec/lz4/v4
+golang.org/x/crypto/hkdf
+golang.org/x/net/proxy
+github.com/cloudflare/circl/math
+github.com/refraction-networking/utls/internal/boring
+github.com/refraction-networking/utls/internal/hkdf
+github.com/bodgit/sevenzip/internal/aes7z
+github.com/refraction-networking/utls/internal/quicvarint/protocol
+github.com/cloudflare/circl/internal/conv
+github.com/refraction-networking/utls/internal/helper
+github.com/cloudflare/circl/simd/keccakf1600
+github.com/refraction-networking/utls/internal/tls12
+github.com/refraction-networking/utls/internal/tls13
+github.com/refraction-networking/utls/internal/quicvarint
+golang.org/x/crypto/sha3
+golang.org/x/crypto/chacha20poly1305
+github.com/cloudflare/circl/math/fp25519
+github.com/cloudflare/circl/math/fp448
+github.com/cloudflare/circl/math/mlsbset
+github.com/zmap/zcrypto/dsa
+github.com/zmap/zcrypto/json
+golang.org/x/text/unicode/bidi
+github.com/zmap/zcrypto/encoding/asn1
+golang.org/x/text/unicode/norm
+github.com/cloudflare/circl/pke/kyber/internal/common
+github.com/cloudflare/circl/sign/dilithium/mode2/internal
+github.com/klauspost/compress/zstd
+github.com/cloudflare/circl/sign/dilithium/mode3/internal
+github.com/cloudflare/circl/dh/x25519
+github.com/cloudflare/circl/dh/x448
+github.com/cloudflare/circl/sign/dilithium/mode5/internal
+github.com/bodgit/sevenzip/internal/deflate
+github.com/bodgit/sevenzip/internal/lz4
+github.com/klauspost/compress/gzip
+github.com/klauspost/compress/zip
+github.com/klauspost/compress/zlib
+golang.org/x/net/internal/socket
+github.com/klauspost/pgzip
+github.com/microcosm-cc/bluemonday
+github.com/mattn/go-isatty
+github.com/cloudflare/circl/pke/kyber/kyber768/internal
+github.com/cloudflare/circl/sign/dilithium/mode2
+github.com/cloudflare/circl/sign/ed25519
+github.com/cloudflare/circl/sign/dilithium/mode5
+github.com/cloudflare/circl/ecc/goldilocks
+github.com/cloudflare/circl/sign/dilithium/mode3
+github.com/cloudflare/circl/sign/mldsa/mldsa44/internal
+github.com/cloudflare/circl/sign/mldsa/mldsa65/internal
+github.com/cloudflare/circl/sign/mldsa/mldsa87/internal
+github.com/cloudflare/circl/pke/kyber/kyber768
+github.com/refraction-networking/utls/internal/hpke
+go.etcd.io/bbolt
+golang.org/x/text/secure/bidirule
+github.com/zmap/zcrypto/cryptobyte
+github.com/cloudflare/circl/kem/kyber/kyber768
+github.com/cloudflare/circl/kem/mlkem/mlkem768
+github.com/cloudflare/circl/sign/mldsa/mldsa44
+golang.org/x/net/ipv6
+github.com/cloudflare/circl/sign/eddilithium2
+golang.org/x/net/ipv4
+github.com/zmap/zcrypto/util
+github.com/cloudflare/circl/sign/mldsa/mldsa65
+github.com/cloudflare/circl/sign/ed448
+github.com/cloudflare/circl/sign/mldsa/mldsa87
+github.com/zmap/zcrypto/x509/ct
+github.com/cloudflare/circl/kem/xwing
+github.com/projectdiscovery/utils/strings
+github.com/zmap/zcrypto/x509/pkix
+golang.org/x/crypto/ed25519
+golang.org/x/sync/singleflight
+github.com/projectdiscovery/utils/reader/rawmode
+golang.org/x/net/http2/hpack
+golang.org/x/term
+github.com/cloudflare/circl/sign/eddilithium3
+github.com/cloudflare/circl/hpke
+github.com/projectdiscovery/utils/reader
+github.com/projectdiscovery/utils/ip
+github.com/projectdiscovery/utils/file
+github.com/muesli/termenv
+github.com/projectdiscovery/mapcidr
+github.com/cloudflare/circl/sign/schemes
+github.com/mattn/go-colorable
+golang.org/x/crypto/openpgp/elgamal
+golang.org/x/net/idna
+golang.org/x/crypto/pbkdf2
+github.com/cloudflare/circl/pki
+github.com/projectdiscovery/fastdialer/fastdialer/utils
+github.com/projectdiscovery/machineid
+github.com/fatih/color
+github.com/miekg/dns
+golang.org/x/crypto/openpgp/packet
+golang.org/x/crypto/scrypt
+github.com/shirou/gopsutil/v3/internal/common
+github.com/tklauser/go-sysconf
+github.com/projectdiscovery/utils/errors
+aead.dev/minisign
+github.com/projectdiscovery/utils/reflect
+github.com/cheggaaa/pb/v3
+github.com/projectdiscovery/utils/permission
+github.com/projectdiscovery/clistats
+github.com/projectdiscovery/goconfig
+github.com/projectdiscovery/utils/time
+github.com/minio/selfupdate
+github.com/projectdiscovery/retryabledns/hostsfile
+github.com/charmbracelet/lipgloss
+github.com/shirou/gopsutil/v3/net
+github.com/weppos/publicsuffix-go/publicsuffix
+golang.org/x/net/http/httpguts
+github.com/projectdiscovery/ratelimit
+github.com/projectdiscovery/hmap/store/disk
+golang.org/x/net/internal/httpcommon
+golang.org/x/net/http2
+golang.org/x/crypto/openpgp
+github.com/zmap/zcrypto/x509
+github.com/charmbracelet/glamour/ansi
+github.com/projectdiscovery/hmap/store/hybrid
+github.com/bodgit/sevenzip/internal/zstd
+github.com/google/go-github/v30/github
+github.com/charmbracelet/glamour/styles
+github.com/charmbracelet/glamour
+github.com/zmap/zcrypto/tls
+github.com/shirou/gopsutil/v3/mem
+github.com/bodgit/sevenzip/internal/brotli
+github.com/shirou/gopsutil/v3/cpu
+github.com/refraction-networking/utls
+github.com/bodgit/sevenzip
+github.com/projectdiscovery/retryabledns/doh
+github.com/projectdiscovery/utils/maps
+github.com/projectdiscovery/utils/crypto
+github.com/projectdiscovery/utils/folder
+github.com/projectdiscovery/utils/url
+github.com/projectdiscovery/retryabledns
+github.com/projectdiscovery/goflags
+github.com/mholt/archives
+github.com/projectdiscovery/networkpolicy
+github.com/projectdiscovery/fastdialer/fastdialer/metafiles
+github.com/projectdiscovery/cdncheck
+github.com/projectdiscovery/gologger/writer
+github.com/projectdiscovery/gologger
+github.com/projectdiscovery/dnsx/libs/dnsx
+github.com/projectdiscovery/fastdialer/fastdialer/ja3/impersonate
+github.com/shirou/gopsutil/v3/process
+github.com/projectdiscovery/fastdialer/fastdialer
+github.com/projectdiscovery/utils/process
+github.com/projectdiscovery/utils/update
+github.com/projectdiscovery/retryablehttp-go
+github.com/projectdiscovery/utils/auth/pdcp
+github.com/projectdiscovery/asnmap/libs
+github.com/projectdiscovery/mapcidr/asn
+github.com/projectdiscovery/dnsx/internal/runner
+github.com/projectdiscovery/dnsx/cmd/dnsx
+go: downloading github.com/projectdiscovery/katana v1.6.1
+go: downloading github.com/mitchellh/mapstructure v1.5.0
+go: downloading github.com/projectdiscovery/dsl v0.8.17
+go: downloading github.com/stoewer/go-strcase v1.3.0
+go: downloading github.com/valyala/fasttemplate v1.2.2
+go: downloading golang.org/x/net v0.52.0
+go: downloading gopkg.in/yaml.v2 v2.4.0
+go: downloading github.com/projectdiscovery/wappalyzergo v0.2.79
+go: downloading github.com/projectdiscovery/ratelimit v0.0.86
+go: downloading github.com/projectdiscovery/networkpolicy v0.1.37
+go: downloading github.com/remeh/sizedwaitgroup v1.0.0
+go: downloading golang.org/x/exp v0.0.0-20260218203240-3dfff04db8fa
+go: downloading github.com/lmittmann/tint v1.0.6
+go: downloading github.com/projectdiscovery/retryablehttp-go v1.3.10
+go: downloading github.com/lukasbob/srcset v0.0.0-20190730101422-86b742e617f3
+go: downloading github.com/Mzack9999/jsluice v0.0.0-20260306161058-30114a312f98
+go: downloading golang.org/x/sync v0.20.0
+go: downloading golang.org/x/sys v0.42.0
+go: downloading github.com/google/pprof v0.0.0-20250423184734-337e5dd93bb4
+go: downloading github.com/adrianbrad/queue v1.3.0
+go: downloading github.com/dominikbraun/graph v0.23.0
+go: downloading golang.org/x/term v0.41.0
+go: downloading golang.org/x/crypto v0.49.0
+go: downloading github.com/valyala/bytebufferpool v1.0.0
+go: downloading github.com/Knetic/govaluate v3.0.0+incompatible
+go: downloading github.com/kataras/jwt v0.1.8
+go: downloading golang.org/x/text v0.35.0
+go: downloading github.com/spf13/cast v1.10.0
+go: downloading github.com/odvcencio/gotreesitter v0.6.1-0.20260306002001-fbe5983c6f41
+go: downloading github.com/ditashi/jsbeautifier-go v0.0.0-20141206144643-2520a8026a9c
+golang.org/x/net/html/atom
+golang.org/x/net/internal/iana
+golang.org/x/exp/constraints
+golang.org/x/text/internal/utf8internal
+golang.org/x/text/encoding/internal/identifier
+github.com/projectdiscovery/katana/pkg/engine
+github.com/ditashi/jsbeautifier-go/optargs
+github.com/projectdiscovery/katana/pkg/engine/headless/browser/stealth
+github.com/ditashi/jsbeautifier-go/utils
+golang.org/x/crypto/cryptobyte/asn1
+golang.org/x/crypto/internal/alias
+golang.org/x/exp/maps
+golang.org/x/exp/slices
+golang.org/x/text/transform
+golang.org/x/text/internal/tag
+github.com/valyala/bytebufferpool
+github.com/projectdiscovery/utils/html
+github.com/stoewer/go-strcase
+github.com/lukasbob/srcset
+github.com/ditashi/jsbeautifier-go/tokenizer
+github.com/adrianbrad/queue
+golang.org/x/net/internal/httpsfv
+golang.org/x/crypto/internal/poly1305
+github.com/remeh/sizedwaitgroup
+golang.org/x/crypto/openpgp/errors
+github.com/projectdiscovery/katana/pkg/engine/headless/captcha/js
+golang.org/x/sync/semaphore
+golang.org/x/crypto/cast5
+github.com/projectdiscovery/katana/pkg/utils/queue
+golang.org/x/sys/unix
+golang.org/x/net/html
+github.com/projectdiscovery/utils/errkit
+golang.org/x/net/bpf
+golang.org/x/text/encoding
+golang.org/x/text/runes
+golang.org/x/text/unicode/norm
+github.com/lmittmann/tint
+github.com/projectdiscovery/katana/pkg/engine/headless/types
+github.com/mitchellh/mapstructure
+github.com/Knetic/govaluate
+github.com/projectdiscovery/utils/rand
+golang.org/x/text/internal/language
+github.com/kataras/jwt
+github.com/projectdiscovery/dsl/llm
+github.com/projectdiscovery/katana/pkg/engine/headless/browser/cookie
+golang.org/x/net/internal/socks
+github.com/projectdiscovery/utils/hex
+github.com/projectdiscovery/katana/pkg/engine/headless/js
+github.com/spf13/cast/internal
+github.com/valyala/fasttemplate
+golang.org/x/net/publicsuffix
+golang.org/x/text/encoding/internal
+gopkg.in/yaml.v2
+github.com/ditashi/jsbeautifier-go/unpackers
+github.com/odvcencio/gotreesitter
+go/token
+github.com/spf13/cast
+github.com/projectdiscovery/utils/generic
+golang.org/x/text/encoding/unicode
+github.com/dominikbraun/graph
+golang.org/x/net/proxy
+github.com/ditashi/jsbeautifier-go/jsbeautifier
+golang.org/x/crypto/cryptobyte
+golang.org/x/crypto/chacha20
+golang.org/x/crypto/hkdf
+github.com/dominikbraun/graph/draw
+golang.org/x/sys/cpu
+go/internal/scannerhooks
+go/scanner
+github.com/projectdiscovery/katana/pkg/engine/headless/graph
+github.com/bodgit/sevenzip/internal/aes7z
+golang.org/x/text/unicode/bidi
+golang.org/x/crypto/ed25519
+golang.org/x/sync/singleflight
+github.com/projectdiscovery/katana/pkg/utils/scope
+golang.org/x/crypto/chacha20poly1305
+github.com/projectdiscovery/ratelimit
+github.com/refraction-networking/utls/internal/helper
+github.com/refraction-networking/utls/internal/hpke
+golang.org/x/net/http2/hpack
+github.com/projectdiscovery/utils/reader
+github.com/projectdiscovery/utils/sync/semaphore
+golang.org/x/crypto/sha3
+golang.org/x/text/encoding/simplifiedchinese
+github.com/projectdiscovery/utils/proxy
+github.com/projectdiscovery/utils/sync/sizedpool
+golang.org/x/text/internal/language/compact
+github.com/microcosm-cc/bluemonday
+github.com/andybalholm/cascadia
+github.com/projectdiscovery/wappalyzergo
+github.com/refraction-networking/utls
+golang.org/x/text/secure/bidirule
+golang.org/x/crypto/openpgp/s2k
+golang.org/x/crypto/openpgp/armor
+golang.org/x/crypto/openpgp/elgamal
+golang.org/x/crypto/pbkdf2
+golang.org/x/crypto/blake2b
+github.com/mfonda/simhash
+golang.org/x/text/language
+github.com/spf13/afero
+golang.org/x/net/idna
+golang.org/x/crypto/scrypt
+github.com/google/pprof/profile
+github.com/projectdiscovery/katana/pkg/engine/headless/crawler/normalizer/simhash
+aead.dev/minisign
+golang.org/x/crypto/openpgp/packet
+github.com/projectdiscovery/utils/strings
+github.com/PuerkitoBio/goquery
+golang.org/x/text/internal
+github.com/mattn/go-isatty
+golang.org/x/net/internal/socket
+golang.org/x/term
+go.etcd.io/bbolt
+github.com/tklauser/go-sysconf
+github.com/shirou/gopsutil/v4/mem
+golang.org/x/text/cases
+github.com/minio/selfupdate
+github.com/projectdiscovery/utils/ip
+github.com/projectdiscovery/utils/file
+github.com/projectdiscovery/mapcidr
+github.com/weppos/publicsuffix-go/publicsuffix
+golang.org/x/net/http/httpguts
+github.com/muesli/termenv
+github.com/mattn/go-colorable
+github.com/projectdiscovery/dsl/randomip
+github.com/projectdiscovery/fastdialer/fastdialer/utils
+golang.org/x/net/internal/httpcommon
+github.com/fatih/color
+github.com/vulncheck-oss/go-exploit/transform
+golang.org/x/net/ipv4
+golang.org/x/net/ipv6
+github.com/cheggaaa/pb/v3
+golang.org/x/net/http2
+github.com/projectdiscovery/retryabledns/hostsfile
+github.com/shirou/gopsutil/v4/cpu
+github.com/charmbracelet/lipgloss
+golang.org/x/crypto/openpgp
+github.com/vulncheck-oss/go-exploit/dotnet
+github.com/shirou/gopsutil/v4/process
+github.com/projectdiscovery/katana/pkg/navigation
+github.com/happyhackingspace/dit/captcha
+github.com/happyhackingspace/dit/internal/htmlutil
+github.com/projectdiscovery/katana/pkg/engine/headless/crawler/normalizer
+github.com/google/go-github/v30/github
+github.com/bodgit/sevenzip
+github.com/projectdiscovery/utils/http
+github.com/miekg/dns
+github.com/felixge/fgprof
+github.com/happyhackingspace/dit/internal/storage
+github.com/happyhackingspace/dit/classifier
+github.com/projectdiscovery/dsl/deserialization
+github.com/projectdiscovery/hmap/store/disk
+github.com/projectdiscovery/utils/process
+github.com/zmap/zcrypto/x509
+github.com/charmbracelet/glamour/ansi
+github.com/happyhackingspace/dit
+github.com/mholt/archives
+github.com/charmbracelet/glamour/styles
+github.com/projectdiscovery/hmap/store/hybrid
+github.com/charmbracelet/glamour
+github.com/odvcencio/gotreesitter/grammars
+github.com/projectdiscovery/katana/pkg/utils/filters
+github.com/zmap/zcrypto/tls
+github.com/projectdiscovery/gologger/writer
+github.com/projectdiscovery/gologger
+github.com/projectdiscovery/katana/pkg/engine/headless/captcha
+github.com/projectdiscovery/utils/pprof
+github.com/projectdiscovery/katana/pkg/engine/headless/captcha/capsolver
+github.com/projectdiscovery/utils/crypto
+github.com/projectdiscovery/utils/maps
+github.com/projectdiscovery/retryabledns/doh
+github.com/projectdiscovery/fastdialer/fastdialer/ja3/impersonate
+github.com/projectdiscovery/utils/structs
+github.com/projectdiscovery/utils/folder
+github.com/projectdiscovery/katana/pkg/engine/headless/crawler/diagnostics
+github.com/projectdiscovery/utils/conn/connpool
+github.com/projectdiscovery/utils/url
+github.com/projectdiscovery/retryabledns
+github.com/projectdiscovery/utils/update
+github.com/projectdiscovery/goflags
+github.com/projectdiscovery/utils/crypto/jarm
+github.com/projectdiscovery/katana/pkg/utils/extensions
+github.com/projectdiscovery/networkpolicy
+github.com/projectdiscovery/dsl
+github.com/projectdiscovery/fastdialer/fastdialer/metafiles
+github.com/projectdiscovery/fastdialer/fastdialer
+github.com/projectdiscovery/katana/pkg/output
+github.com/projectdiscovery/retryablehttp-go
+github.com/projectdiscovery/utils/auth/pdcp
+github.com/Mzack9999/jsluice
+github.com/projectdiscovery/asnmap/libs
+github.com/projectdiscovery/katana/pkg/utils
+github.com/projectdiscovery/mapcidr/asn
+github.com/projectdiscovery/katana/pkg/engine/headless/browser
+github.com/projectdiscovery/katana/pkg/engine/parser
+github.com/projectdiscovery/katana/pkg/engine/parser/files
+github.com/projectdiscovery/katana/pkg/types
+github.com/projectdiscovery/katana/pkg/engine/headless/crawler
+github.com/projectdiscovery/katana/pkg/engine/common
+github.com/projectdiscovery/katana/pkg/engine/headless
+github.com/projectdiscovery/katana/pkg/engine/hybrid
+github.com/projectdiscovery/katana/pkg/engine/standard
+github.com/projectdiscovery/katana/internal/runner
+github.com/projectdiscovery/katana/cmd/katana
+go: downloading github.com/hahwul/dalfox/v2 v2.13.0
+go: downloading github.com/hahwul/dalfox v1.2.1
+go: downloading github.com/briandowns/spinner v1.23.2
+go: downloading github.com/spf13/cobra v1.10.1
+go: downloading github.com/hahwul/volt v1.0.7
+go: downloading github.com/spf13/pflag v1.0.10
+go: downloading github.com/labstack/echo/v4 v4.15.2
+go: downloading github.com/mark3labs/mcp-go v0.52.0
+go: downloading github.com/swaggo/echo-swagger v1.5.2
+go: downloading github.com/tylerb/graceful v1.2.15
+go: downloading golang.org/x/term v0.42.0
+go: downloading github.com/PuerkitoBio/goquery v1.12.0
+go: downloading github.com/chromedp/cdproto v0.0.0-20250724212937-08a3db8b4327
+go: downloading github.com/chromedp/chromedp v0.14.2
+go: downloading github.com/sirupsen/logrus v1.9.4
+go: downloading github.com/tidwall/sjson v1.2.5
+go: downloading github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
+go: downloading github.com/swaggo/swag v1.16.6
+go: downloading github.com/swaggo/files/v2 v2.0.0
+go: downloading github.com/swaggo/swag/v2 v2.0.0-rc4
+go: downloading sigs.k8s.io/yaml v1.3.0
+go: downloading github.com/olekukonko/tablewriter v1.1.4
+go: downloading golang.org/x/sys v0.43.0
+go: downloading golang.org/x/net v0.53.0
+go: downloading github.com/go-json-experiment/json v0.0.0-20250725192818-e39067aee2d2
+go: downloading github.com/gobwas/ws v1.4.0
+go: downloading github.com/tidwall/gjson v1.14.2
+go: downloading github.com/labstack/gommon v0.5.0
+go: downloading golang.org/x/crypto v0.50.0
+go: downloading golang.org/x/time v0.15.0
+go: downloading github.com/mattn/go-isatty v0.0.22
+go: downloading github.com/google/jsonschema-go v0.4.2
+go: downloading github.com/spf13/cast v1.7.1
+go: downloading github.com/yosida95/uritemplate/v3 v3.0.2
+go: downloading github.com/santhosh-tekuri/jsonschema/v6 v6.0.2
+go: downloading github.com/mattn/go-runewidth v0.0.19
+go: downloading github.com/olekukonko/errors v1.2.0
+go: downloading github.com/olekukonko/ll v0.1.6
+go: downloading github.com/KyleBanks/depth v1.2.1
+go: downloading github.com/go-openapi/spec v0.20.9
+go: downloading golang.org/x/tools v0.43.0
+go: downloading github.com/sv-tools/openapi v0.2.1
+go: downloading github.com/chromedp/sysutil v1.1.0
+go: downloading github.com/clipperhouse/uax29/v2 v2.6.0
+go: downloading github.com/clipperhouse/displaywidth v0.10.0
+go: downloading github.com/gobwas/httphead v0.1.0
+go: downloading github.com/gobwas/pool v0.2.1
+go: downloading golang.org/x/text v0.36.0
+go: downloading github.com/olekukonko/cat v0.0.0-20250911104152-50322a0618f6
+go: downloading github.com/cespare/xxhash/v2 v2.3.0
+go: downloading github.com/go-openapi/jsonpointer v0.19.6
+go: downloading github.com/go-openapi/jsonreference v0.20.2
+go: downloading github.com/go-openapi/swag v0.22.3
+go: downloading github.com/tidwall/pretty v1.2.0
+go: downloading github.com/antonfisher/nested-logrus-formatter v1.3.1
+go: downloading github.com/mailru/easyjson v0.9.0
+go: downloading github.com/josharian/intern v1.0.0
+go: downloading golang.org/x/mod v0.34.0
+go: downloading github.com/ffuf/ffuf/v2 v2.1.0
+go: downloading github.com/ffuf/ffuf v1.5.0
+go: downloading github.com/adrg/xdg v0.4.0
+go: downloading github.com/pelletier/go-toml v1.9.5
+go: downloading github.com/andybalholm/brotli v1.0.5
+go: downloading github.com/ffuf/pencode v0.0.0-20230421231718-2cea7e60a693
+go: downloading github.com/PuerkitoBio/goquery v1.8.0
+go: downloading golang.org/x/net v0.7.0
+go: downloading github.com/andybalholm/cascadia v1.3.1
+go: downloading github.com/jpillora/chisel v1.11.7
+go: downloading github.com/fsnotify/fsnotify v1.9.0
+go: downloading github.com/gorilla/websocket v1.5.3
+go: downloading github.com/jpillora/requestlog v1.0.0
+go: downloading github.com/jpillora/sizestr v1.0.0
+go: downloading github.com/jpillora/backoff v1.0.0
+go: downloading golang.org/x/net v0.50.0
+go: downloading github.com/armon/go-socks5 v0.0.0-20160902184237-e75332964ef5
+go: downloading github.com/jpillora/ansi v1.0.3
+go: downloading github.com/andrew-d/go-termutil v0.0.0-20150726205930-009166a695a2
+go: downloading github.com/tomasen/realip v0.0.0-20180522021738-f0c99a92ddce
+go: downloading github.com/sensepost/gowitness v0.0.0-20260422172756-4f562901bc23
+go: downloading github.com/charmbracelet/lipgloss v1.1.1-0.20250404203927-76690c660834
+go: downloading github.com/glebarez/sqlite v1.11.0
+go: downloading github.com/charmbracelet/x/term v0.2.2
+go: downloading github.com/spf13/cobra v1.10.2
+go: downloading gorm.io/gorm v1.31.1
+go: downloading github.com/charmbracelet/glamour v1.0.0
+go: downloading github.com/chromedp/cdproto v0.0.0-20260405000525-47a8ff65b46a
+go: downloading github.com/projectdiscovery/wappalyzergo v0.2.77
+go: downloading github.com/chromedp/chromedp v0.15.1
+go: downloading gorm.io/driver/mysql v1.6.0
+go: downloading gorm.io/driver/postgres v1.6.0
+go: downloading github.com/go-chi/chi/v5 v5.2.5
+go: downloading github.com/charmbracelet/log v1.0.0
+go: downloading github.com/lair-framework/go-nmap v0.0.0-20191202052157-3507e0b03523
+go: downloading github.com/go-chi/cors v1.2.2
+go: downloading github.com/swaggo/http-swagger v1.3.4
+go: downloading github.com/ysmood/got v0.42.4
+go: downloading github.com/glebarez/go-sqlite v1.22.0
+go: downloading modernc.org/sqlite v1.49.1
+go: downloading github.com/jackc/pgx/v5 v5.9.2
+go: downloading github.com/yuin/goldmark v1.8.2
+go: downloading github.com/yuin/goldmark-emoji v1.0.6
+go: downloading github.com/go-json-experiment/json v0.0.0-20260214004413-d219187c3433
+go: downloading github.com/charmbracelet/x/ansi v0.11.7
+go: downloading github.com/charmbracelet/x/cellbuf v0.0.15
+go: downloading github.com/swaggo/files v1.0.1
+go: downloading modernc.org/libc v1.72.0
+go: downloading github.com/jackc/pgpassfile v1.0.0
+go: downloading github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761
+go: downloading github.com/alecthomas/chroma/v2 v2.23.1
+go: downloading github.com/charmbracelet/x/exp/slice v0.0.0-20260422141420-a6cbdff8a7e2
+go: downloading github.com/lucasb-eyer/go-colorful v1.4.0
+go: downloading github.com/mattn/go-isatty v0.0.21
+go: downloading github.com/go-logfmt/logfmt v0.6.1
+go: downloading github.com/jinzhu/now v1.1.5
+go: downloading github.com/jinzhu/inflection v1.0.0
+go: downloading github.com/go-openapi/spec v0.22.4
+go: downloading golang.org/x/tools v0.44.0
+go: downloading github.com/jackc/puddle/v2 v2.2.2
+go: downloading github.com/mattn/go-runewidth v0.0.23
+go: downloading github.com/charmbracelet/colorprofile v0.4.3
+go: downloading filippo.io/edwards25519 v1.2.0
+go: downloading github.com/clipperhouse/displaywidth v0.11.0
+go: downloading github.com/clipperhouse/uax29/v2 v2.7.0
+go: downloading github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e
+go: downloading github.com/go-openapi/jsonpointer v0.23.1
+go: downloading github.com/go-openapi/jsonreference v0.21.5
+go: downloading github.com/go-openapi/swag/jsonname v0.26.0
+go: downloading github.com/go-openapi/swag/jsonutils v0.26.0
+go: downloading github.com/go-openapi/swag/loading v0.26.0
+go: downloading github.com/go-openapi/swag/stringutils v0.26.0
+go: downloading github.com/dlclark/regexp2 v1.12.0
+go: downloading github.com/go-openapi/swag/typeutils v0.26.0
+go: downloading github.com/go-openapi/swag/conv v0.26.0
+go: downloading github.com/go-openapi/swag/yamlutils v0.26.0
+go: downloading go.yaml.in/yaml/v3 v3.0.4
+go: downloading golang.org/x/mod v0.35.0
+go: downloading modernc.org/mathutil v1.7.1
+go: downloading modernc.org/memory v1.11.0
+go: downloading github.com/ncruces/go-strftime v1.0.0
+go: downloading github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec
+finishedAt=2026-07-05T15:03:40-0700

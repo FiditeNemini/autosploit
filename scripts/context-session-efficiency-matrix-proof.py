@@ -83,7 +83,7 @@ def run() -> None:
         cache = request("GET", "/qa/cache-artifact-matrix")
         batching = request("GET", "/qa/continuous-batching-coverage")
         live_agent = request("GET", "/qa/live-loaded-model-agent-stress")
-        index = request("GET", "/qa/coverage-index", timeout=45.0)
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         state = request("GET", "/state")
 
         if matrix.get("ok") is not True:

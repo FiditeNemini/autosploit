@@ -15,6 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
+DEFAULT_OUTPUT = ROOT / "docs/live-proofs/2026-07-05-agent-settings-loop-controls.json"
 
 
 def request(method: str, path: str, body: str | dict | None = None, timeout: float = 8.0):
@@ -43,12 +44,26 @@ def wait_for_app(timeout: float = 15.0) -> None:
 def assert_settings_action(action: str, *, enabled: bool, max_agents: int, active_agents: int) -> None:
     state = request("GET", "/state")
     agents = state.get("agents") or {}
+    chat = state.get("chat") or {}
     if agents.get("multiAgentEnabled") is not enabled:
         raise AssertionError(f"multi-agent enabled mismatch after {action}: {agents}")
     if agents.get("maxConcurrentAgents") != max_agents:
         raise AssertionError(f"max concurrent mismatch after {action}: {agents}")
     if agents.get("activeAgents") != active_agents:
         raise AssertionError(f"active agent count mismatch after {action}: {agents}")
+    if agents.get("loopMaxIterations") != chat.get("maxIterations"):
+        raise AssertionError(f"agent loop max iterations did not mirror chat settings after {action}: {agents} {chat}")
+    if agents.get("toolSchemaMaxTools") != chat.get("toolSchemaMaxTools"):
+        raise AssertionError(f"agent tool schema budget did not mirror chat settings after {action}: {agents} {chat}")
+    if agents.get("includeUnavailableToolSchemas") != chat.get("includeUnavailableToolSchemas"):
+        raise AssertionError(f"agent unavailable-tool setting did not mirror chat settings after {action}: {agents} {chat}")
+    if agents.get("forceFinalAnswerAfterToolResults") != chat.get("forceFinalAnswerAfterToolResults"):
+        raise AssertionError(f"agent final-answer setting did not mirror chat settings after {action}: {agents} {chat}")
+    if agents.get("modePolicies") != {"autopilot": "execute", "copilot": "approval", "manual": "suggest"}:
+        raise AssertionError(f"agent mode policy summary missing after {action}: {agents}")
+    guards = agents.get("authorizationGuards") or {}
+    if guards.get("externalHighRiskRequiresScopeOrAuthorization") is not True:
+        raise AssertionError(f"agent authorization guards missing after {action}: {agents}")
     actions = state.get("agentActions") or {}
     if actions.get("lastAction") != action or actions.get("status") != "done":
         raise AssertionError(f"agent settings action missing after {action}: {actions}")
@@ -62,6 +77,13 @@ def assert_settings_action(action: str, *, enabled: bool, max_agents: int, activ
 def run() -> None:
     app = None
     temp_home = tempfile.TemporaryDirectory(prefix="exploitbot-agent-settings-home-")
+    report = {
+        "ok": False,
+        "proofType": "agent-settings-loop-controls",
+        "proofLevel": "app-api-state-backed-no-model-load",
+        "generatedAt": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "status": {},
+    }
     try:
         env = os.environ.copy()
         env["EXPLOITBOT_TESTING"] = "1"
@@ -92,6 +114,57 @@ def run() -> None:
         if response.get("ok") is not True:
             raise AssertionError(f"agent enable setting failed: {response}")
         assert_settings_action("setMultiAgentEnabled", enabled=True, max_agents=2, active_agents=0)
+
+        response = request("POST", "/qa/apply-app-settings", {
+            "maxIterations": 7,
+            "toolSchemaMaxTools": 32,
+            "includeUnavailableToolSchemas": True,
+            "forceFinalAnswerAfterToolResults": False,
+            "agents": {
+                "multiAgentEnabled": True,
+                "maxConcurrentAgents": 3,
+            },
+        })
+        if response.get("ok") is not True:
+            raise AssertionError(f"agent loop apply settings failed: {response}")
+        state = request("GET", "/state")
+        agents = state.get("agents") or {}
+        chat = state.get("chat") or {}
+        if chat.get("maxIterations") != 7 or agents.get("loopMaxIterations") != 7:
+            raise AssertionError(f"agent loop max iterations did not apply: {state}")
+        if chat.get("toolSchemaMaxTools") != 32 or agents.get("toolSchemaMaxTools") != 32:
+            raise AssertionError(f"agent tool schema budget did not apply: {state}")
+        if chat.get("includeUnavailableToolSchemas") is not True or agents.get("includeUnavailableToolSchemas") is not True:
+            raise AssertionError(f"agent unavailable schema setting did not apply: {state}")
+        if chat.get("forceFinalAnswerAfterToolResults") is not False or agents.get("forceFinalAnswerAfterToolResults") is not False:
+            raise AssertionError(f"agent final-answer setting did not apply: {state}")
+        if "detect" not in (agents.get("phaseRouting") or {}):
+            raise AssertionError(f"agent phase routing summary missing: {agents}")
+        if (agents.get("authorizationGuards") or {}).get("highRiskToolCount", 0) < 10:
+            raise AssertionError(f"agent authorization high-risk tool count missing: {agents}")
+
+        report.update({
+            "ok": True,
+            "status": {
+                "multiAgentToggle": "PASS",
+                "maxConcurrentAgents": "PASS",
+                "loopMaxIterations": "PASS",
+                "toolSchemaBudget": "PASS",
+                "includeUnavailableToolSchemas": "PASS",
+                "forceFinalAnswerAfterToolResults": "PASS",
+                "phaseRouting": "PASS",
+                "authorizationGuards": "PASS",
+                "modelInferenceNotStarted": "PASS",
+            },
+            "stateEvidence": {
+                "chat": chat,
+                "agents": agents,
+                "engineRunning": state.get("engineRunning"),
+                "model": state.get("model"),
+            },
+        })
+        DEFAULT_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+        DEFAULT_OUTPUT.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
         print("agent-settings-actions proof passed")
     finally:

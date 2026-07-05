@@ -1,0 +1,2097 @@
+{
+  "chatContainsHttpxOutput": true,
+  "chatContainsHydraOutput": true,
+  "chatContainsLinpeasOutput": true,
+  "chatContainsNetexecOutput": true,
+  "chatContainsNmapOutput": true,
+  "chatContainsNucleiOutput": true,
+  "chatContainsRealToolOutput": true,
+  "finishedAt": "2026-07-04T07:50:59-0700",
+  "httpxPath": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-installed-tools-home-16y4ouhj/.exploitbot/tools/httpx",
+  "httpxVersion": "1.9.0",
+  "hydraPath": "/opt/homebrew/bin/hydra",
+  "hydraVersion": [
+    "Hydra v9.6 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).",
+    "",
+    "Syntax: hydra [[[-l LOGIN|-L FILE] [-p PASS|-P FILE]] | [-C FILE]] [-e nsr] [-o FILE] [-t TASKS] [-M FILE [-T TASKS]] [-w TIME] [-W TIME] [-f] [-s PORT] [-x MIN:MAX:CHARSET] [-c TIME] [-ISOuvVd46] [-m MODULE_OPT] [service://server[:PORT][/OPT]]"
+  ],
+  "labUrl": "http://127.0.0.1:52689/proof",
+  "linpeasPath": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-installed-tools-home-16y4ouhj/.exploitbot/tools/linpeas.sh",
+  "messages": [
+    {
+      "content": "Authorized safe lab proof. Use nmap, httpx, nuclei, hydra, netexec, linpeas, and run_shell only against loopback 127.0.0.1 or the local host. Execute the real installed nmap, httpx, nuclei, hydra, netexec, linpeas, curl, and nc checks requested by the engine, then produce the final marker.",
+      "role": "user"
+    },
+    {
+      "content": "Executing real installed loopback tools through run_shell.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 0 of 0 indexed items for phase SCAN, tab recon.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets: none yet.\nCVE assist: semantic embedding search is enabled when cve_embedder.py and stored CVE embeddings are available; otherwise",
+      "contextSnippetCount": 0,
+      "role": "assistant",
+      "toolSchemaCount": 16,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "run_shell",
+        "dnsx",
+        "nmap",
+        "theharvester",
+        "httpx",
+        "masscan",
+        "subfinder",
+        "hashcat",
+        "linpeas",
+        "wpscan",
+        "nuclei",
+        "netexec",
+        "gowitness"
+      ]
+    },
+    {
+      "content": "Tool request: nmap\n$ nmap -p 52689 -sV -oN - 127.0.0.1\nArguments:\n{\n  \"ports\" : \"52689\",\n  \"service_detection\" : true,\n  \"target\" : \"127.0.0.1\"\n}\n\n# Nmap 7.99 scan initiated Sat Jul  4 07:50:26 2026 as: /opt/homebrew/bin/nmap -p 52689 -sV -oN - 127.0.0.1\nNmap scan report for localhost (127.0.0.1)\nHost is up (0.000060s latency).\n\nPORT      STATE SERVICE VERSION\n52689/tcp open  http    BaseHTTPServer 0.6 (Python 3.14.6)\n\nService detection performed. Please report any incorrect results at https://nmap.org/submit/ .\n# Nmap done at Sat Jul  4 07:50:32 2026 -- 1 IP address (1 host up) scanned in 6.11 seconds\n",
+      "role": "toolCall",
+      "status": "ok 6.1s",
+      "tool": "nmap"
+    },
+    {
+      "content": "Tool request: httpx\n$ /bin/sh -c echo 'http://127.0.0.1:52689/httpx' | tr ',' '\\n' | httpx -sc -title -tech-detect -json -silent -duc -timeout 5 2>/dev/null || curl -s -o /dev/null -w '{\"url\":\"http://127.0.0.1:52689/httpx\",\"status_code\":%{http_code},\"title\":\"\",\"webserver\":\"%{content_type}\"}' 'http://127.0.0.1:52689/httpx'\nArguments:\n{\n  \"status_code\" : true,\n  \"targets\" : \"http:\\/\\/127.0.0.1:52689\\/httpx\",\n  \"tech_detect\" : true,\n  \"title\" : true\n}\n\n{\"timestamp\":\"2026-07-04T07:50:32.525067-07:00\",\"port\":\"52689\",\"url\":\"http://127.0.0.1:52689/httpx\",\"input\":\"http://127.0.0.1:52689/httpx\",\"title\":\"ExploitBot HTTPX Lab\",\"scheme\":\"http\",\"webserver\":\"BaseHTTP/0.6 Python/3.14.6\",\"content_type\":\"text/html\",\"method\":\"GET\",\"host\":\"127.0.0.1\",\"host_ip\":\"127.0.0.1\",\"path\":\"/httpx\",\"time\":\"336.917\u00b5s\",\"a\":[\"127.0.0.1\"],\"tech\":[\"Python:3.14.6\"],\"words\":3,\"lines\":1,\"status_code\":200,\"content_length\":72,\"failed\":false,\"knowledgebase\":{\"pHash\":0}}\n",
+      "role": "toolCall",
+      "status": "ok 0.2s",
+      "tool": "httpx"
+    },
+    {
+      "content": "Tool request: nuclei\n$ nuclei -u http://127.0.0.1:52689 -t /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-installed-tools-home-16y4ouhj/.exploitbot/nuclei-templates/exploitbot-loopback.yaml -jsonl -silent\nArguments:\n{\n  \"target\" : \"http:\\/\\/127.0.0.1:52689\",\n  \"templates\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-installed-tools-home-16y4ouhj\\/.exploitbot\\/nuclei-templates\\/exploitbot-loopback.yaml\"\n}\n\n{\"template-id\":\"exploitbot-loopback-header\",\"template-path\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-installed-tools-home-16y4ouhj/.exploitbot/nuclei-templates/exploitbot-loopback.yaml\",\"template-encoded\":\"aWQ6IGV4cGxvaXRib3QtbG9vcGJhY2staGVhZGVyCgppbmZvOgogIG5hbWU6IEVYUExPSVRCT1RfTlVDTEVJX0xBQl9PSwogIGF1dGhvcjogZXhwbG9pdGJvdAogIHNldmVyaXR5OiBoaWdoCgpodHRwOgogIC0gbWV0aG9kOiBHRVQKICAgIHBhdGg6CiAgICAgIC0gInt7QmFzZVVSTH19L3Z1bG4iCiAgICBtYXRjaGVyczoKICAgICAgLSB0eXBlOiB3b3JkCiAgICAgICAgcGFydDogYm9keQogICAgICAgIHdvcmRzOgogICAgICAgICAgLSAiRVhQTE9JVEJPVF9OVUNMRUlfTEFCX09LIgo=\",\"info\":{\"name\":\"EXPLOITBOT_NUCLEI_LAB_OK\",\"author\":[\"exploitbot\"],\"tags\":null,\"severity\":\"high\"},\"type\":\"http\",\"host\":\"127.0.0.1\",\"port\":\"52689\",\"scheme\":\"http\",\"url\":\"http://127.0.0.1:52689\",\"matched-at\":\"http://127.0.0.1:52689/vuln\",\"request\":\"GET /vuln HTTP/1.1\\r\\nHost: 127.0.0.1:52689\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Version/15.5 Safari/537.36\\r\\nAccept: */*\\r\\nAccept-Language: en\\r\\nAccept-Encoding: gzip\\r\\n\\r\\n\",\"response\":\"HTTP/1.1 200 OK\\r\\nContent-Length: 25\\r\\nContent-Type: text/plain\\r\\nDate: Sat, 04 Jul 2026 14:50:41 GMT\\r\\nServer: BaseHTTP/0.6 Python/3.14.6\\r\\nX-Exploitbot-Lab: loopback-real-tool\\r\\nX-Exploitbot-Vuln: nuclei-proof\\r\\n\\r\\nEXPLOITBOT_NUCLEI_LAB_OK\\n\",\"ip\":\"127.0.0.1\",\"timestamp\":\"2026-07-04T07:50:41.40076-07:00\",\"curl-command\":\"curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Version/15.5 Safari/537.36' 'http://127.0.0.1:52689/vuln'\",\"matcher-status\":true}\n",
+      "role": "toolCall",
+      "status": "ok 8.9s",
+      "tool": "nuclei"
+    },
+    {
+      "content": "Tool request: hydra\n$ hydra -l admin -P /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-installed-tools-home-16y4ouhj/.exploitbot/hydra-passwords.txt -s 52689 -V -f 127.0.0.1 http-get /protected\nArguments:\n{\n  \"password_file\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-installed-tools-home-16y4ouhj\\/.exploitbot\\/hydra-passwords.txt\",\n  \"path\" : \"\\/protected\",\n  \"port\" : 52689,\n  \"protocol\" : \"http-get\",\n  \"target\" : \"127.0.0.1\",\n  \"username\" : \"admin\"\n}\n\nHydra v9.6 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).\n\nHydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2026-07-04 07:50:41\n[DATA] max 2 tasks per 1 server, overall 2 tasks, 2 login tries (l:1/p:2), ~1 try per task\n[DATA] attacking http-get://127.0.0.1:52689/protected\n[ATTEMPT] target 127.0.0.1 - login \"admin\" - pass \"wrongpass\" - 1 of 2 [child 0] (0/0)\n[ATTEMPT] target 127.0.0.1 - login \"admin\" - pass \"letmein\" - 2 of 2 [child 1] (0/0)\n[52689][http-get] host: 127.0.0.1   misc: /protected   login: admin   password: letmein\n1 of 1 target successfully completed, 1 valid password found\nHydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2026-07-04 07:50:41\n",
+      "role": "toolCall",
+      "status": "ok 0.3s",
+      "tool": "hydra"
+    },
+    {
+      "content": "Tool request: netexec\n$ netexec smb 127.0.0.1 --no-progress --shares --timeout 2 --smb-timeout 2\nArguments:\n{\n  \"protocol\" : \"smb\",\n  \"shares\" : true,\n  \"smb_timeout\" : 2,\n  \"target\" : \"127.0.0.1\",\n  \"timeout\" : 2\n}\n\nSMB                      127.0.0.1       445    ERICS-M5-MAX2    [*] Windows 6.1 Build 7600 (name:ERICS-M5-MAX2) (domain:ERICS-M5-MAX2) (signing:True) (SMBv1:False)\nSMB                      127.0.0.1       445    ERICS-M5-MAX2    [-] Error enumerating shares: Error while reading from remote\n",
+      "role": "toolCall",
+      "status": "ok 0.7s",
+      "tool": "netexec"
+    },
+    {
+      "content": "Tool request: linpeas\n$ linpeas.sh -q -N -o system_information\nArguments:\n{\n  \"flags\" : \"-q -N -o system_information\"\n}\n\n\n\n          MacPEAS-ng by carlospolop\n\nADVISORY: This script should be used for authorized penetration testing and/or educational purposes only. Any misuse of this software will not be the responsibility of the author or of any other collaborator. Use it at your own computers and/or with the computer owner's permission.\n\nLinux Privesc Checklist: https://book.hacktricks.wiki/en/linux-hardening/linux-privilege-escalation-checklist.html\nBest Linux PE & Hardening course: https://hacktricks-training.com/courses/lhe/\n [1;4mLEGEND[0m:\n  RED/YELLOW: 95% a PE vector\n  RED: You should take a look into it\n  LightCyan: Users with console\n  Blue: Users without console & mounted devs\n  Green: Common things (users, groups, SUID/SGID, mounts, .sh scripts, cronjobs) \n  LightMagenta: Your username\n\n Starting MacPEAS. Caching Writable Folders...\n                               \u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2563 Basic information \u2560\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n                               \u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\nOS: Darwin erics-m5-max2 25.4.0 Darwin Kernel Version 25.4.0: Thu Mar 19 19:33:50 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T6050 arm64\nUser & Groups: uid=501(eric) gid=20(staff) groups=20(staff),12(everyone),61(localaccounts),79(_appserverusr),80(admin),81(_appserveradm),398(com.apple.access_screensharing),701(com.apple.sharepoint.group.1),33(_appstore),98(_lpadmin),100(_lpoperator),204(_developer),250(_analyticsusers),395(com.apple.access_ftp),399(com.apple.access_ssh),400(com.apple.access_remote_ae)\nHostname: erics-m5-max2\n\n[+] /usr/bin/fping is available for network discovery (MacPEAS can discover hosts, learn more with -h)\n[+] /bin/bash is available for network discovery, port scanning and port forwarding (MacPEAS can discover hosts, scan ports, and forward ports. Learn more with -h)\n[+] /usr/bin/nc is available for network discovery & port scanning (MacPEAS can discover hosts and scan ports, learn more with -h)\n[+] nmap is available for network discovery & port scanning, you should use it yourself\n\n\n                              \u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2563 System Information \u2560\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n                              \u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\n\u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2563 Operative system (T1082)\n\u255a https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/index.html#kernel-exploits\nDarwin erics-m5-max2 25.4.0 Darwin Kernel Version 25.4.0: Thu Mar 19 19:33:50 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T6050 arm64\nlsb_release Not Found\nSoftware:\n\n    System Software Overview:\n\n      System Version: macOS 26.4 (25E246)\n      Kernel Version: Darwin 25.4.0\n      Boot Volume: Macintosh HD\n      Boot Mode: Normal\n      Computer Name: erics-m5-max2\n      User Name: Eric (eric)\n      Secure Virtual Memory: Enabled\n      System Integrity Protection: Enabled\n      Time since b",
+      "role": "toolCall",
+      "status": "ok 13.9s",
+      "tool": "linpeas"
+    },
+    {
+      "content": "Tool request: run_shell\n$ /bin/zsh -c curl -sS -i 'http://127.0.0.1:52689/proof?tool=curl'\nArguments:\n{\n  \"command\" : \"curl -sS -i 'http:\\/\\/127.0.0.1:52689\\/proof?tool=curl'\"\n}\n\nHTTP/1.1 200 OK\r\nServer: BaseHTTP/0.6 Python/3.14.6\r\nDate: Sat, 04 Jul 2026 14:50:56 GMT\r\nContent-Type: text/plain\r\nX-ExploitBot-Lab: loopback-real-tool\r\nContent-Length: 85\r\n\r\nEXPLOITBOT_LOOPBACK_LAB_OK\nservice=lab-http\ncve=CVE-2026-45659\npath=/proof?tool=curl\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "run_shell"
+    },
+    {
+      "content": "Tool request: run_shell\n$ /bin/zsh -c printf 'GET /proof?tool=nc HTTP/1.1\\r\\nHost: 127.0.0.1:52689\\r\\nConnection: close\\r\\n\\r\\n' | nc 127.0.0.1 52689\nArguments:\n{\n  \"command\" : \"printf 'GET \\/proof?tool=nc HTTP\\/1.1\\\\r\\\\nHost: 127.0.0.1:52689\\\\r\\\\nConnection: close\\\\r\\\\n\\\\r\\\\n' | nc 127.0.0.1 52689\"\n}\n\nHTTP/1.1 200 OK\r\nServer: BaseHTTP/0.6 Python/3.14.6\r\nDate: Sat, 04 Jul 2026 14:50:56 GMT\r\nContent-Type: text/plain\r\nX-ExploitBot-Lab: loopback-real-tool\r\nContent-Length: 83\r\n\r\nEXPLOITBOT_LOOPBACK_LAB_OK\nservice=lab-http\ncve=CVE-2026-45659\npath=/proof?tool=nc\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "run_shell"
+    },
+    {
+      "content": "REAL_INSTALLED_TOOLS_FINAL: nmap, httpx, nuclei, hydra, netexec, linpeas, curl, and nc loopback outputs were captured in chat, terminal transcripts, activity feed, and raw results.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 15 indexed items for phase SCAN, tab post.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=1 subdomains=0 web=1 vulns=2 network=2 osint=0 stash=0 cves=0\nSelected snippets:\n- [finding] CRITICAL Valid Credentials Found tags=vuln,critical,hydra,credentials,brute-force: target [52689][http-get] host: 127.",
+      "contextSelections": [
+        {
+          "bodyHash": "448cd9021e47116b",
+          "source": "finding",
+          "tags": "vuln,critical,hydra,credentials,brute-force",
+          "title": "CRITICAL Valid Credentials Found"
+        },
+        {
+          "bodyHash": "e0ab624b740bf3c5",
+          "source": "tool.output",
+          "tags": "tool,nuclei",
+          "title": "nuclei"
+        },
+        {
+          "bodyHash": "ad3a2dca13f4a5ff",
+          "source": "tool.output",
+          "tags": "tool,linpeas",
+          "title": "linpeas"
+        },
+        {
+          "bodyHash": "8d3dd9b599888a3c",
+          "source": "tool.output",
+          "tags": "tool,run_shell",
+          "title": "run_shell"
+        }
+      ],
+      "contextSnippetCount": 4,
+      "role": "assistant",
+      "toolSchemaCount": 16,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "run_shell",
+        "linpeas",
+        "netexec",
+        "pwncat",
+        "dnsx",
+        "hashcat",
+        "chisel",
+        "sliver",
+        "impacket",
+        "nmap",
+        "wpscan",
+        "nuclei",
+        "theharvester"
+      ]
+    }
+  ],
+  "mockRequestCount": 2,
+  "netexecPath": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-installed-tools-home-16y4ouhj/.local/bin/netexec",
+  "netexecVersion": "1.5.1",
+  "nmapPath": "/opt/homebrew/bin/nmap",
+  "nmapVersion": [
+    "Nmap version 7.99 ( https://nmap.org )",
+    "Platform: arm-apple-darwin25.3.0",
+    "Compiled with: nmap-liblua-5.4.8 openssl-3.6.3 libssh2-1.11.1 libz-1.2.12 libpcre2-10.47 nmap-libpcap-1.10.6 nmap-libdnet-1.18.0 ipv6"
+  ],
+  "nucleiPath": "/opt/homebrew/bin/nuclei",
+  "nucleiVersion": [],
+  "ok": true,
+  "proofType": "real-installed-tools-loopback",
+  "results": {
+    "creds": [
+      {
+        "badge": "BRUTE",
+        "description": "[52689][http-get] host: 127.0.0.1   misc: /protected   login: admin   password: letmein",
+        "label": "[52689][http-get] host: 127.0.0.1   misc: /protected   login: admin   password: letmein",
+        "severity": "critical",
+        "source": "hydra",
+        "target": "[52689][http-get] host: 127.0.0.1   misc: /protected   login: admin   password: letmein",
+        "title": "Valid Credentials Found"
+      }
+    ],
+    "osint": [],
+    "ports": [
+      {
+        "port": 52689,
+        "service": "http",
+        "version": "BaseHTTPServer 0.6 (Python 3.14.6)"
+      }
+    ],
+    "postAttribution": [
+      {
+        "host": "erics-m5-max2",
+        "label": "linpeas-host",
+        "sessionId": "",
+        "summary": "host erics-m5-max2, user eric",
+        "tool": "linpeas",
+        "user": "eric"
+      }
+    ],
+    "rawResults": [
+      {
+        "outputPreview": "# Nmap 7.99 scan initiated Sat Jul  4 07:50:26 2026 as: /opt/homebrew/bin/nmap -p 52689 -sV -oN - 127.0.0.1\nNmap scan report for localhost (127.0.0.1)\nHost is up (0.000060s latency).\n\nPORT      STATE SERVICE VERSION\n52689/tcp open  http    BaseHTTPServer 0.6 (Python 3.14.6)\n\nService detection performed. Please report any incorrect results at https://nmap.org/submit/ .\n# Nmap done at Sat Jul  4 07:50:32 2026 -- 1 IP address (1 host up) scanned in 6.11 seconds\n",
+        "timestamp": 1783176632.2977672,
+        "tool": "nmap"
+      },
+      {
+        "outputPreview": "{\"timestamp\":\"2026-07-04T07:50:32.525067-07:00\",\"port\":\"52689\",\"url\":\"http://127.0.0.1:52689/httpx\",\"input\":\"http://127.0.0.1:52689/httpx\",\"title\":\"ExploitBot HTTPX Lab\",\"scheme\":\"http\",\"webserver\":\"BaseHTTP/0.6 Python/3.14.6\",\"content_type\":\"text/html\",\"method\":\"GET\",\"host\":\"127.0.0.1\",\"host_ip\":\"127.0.0.1\",\"path\":\"/httpx\",\"time\":\"336.917\u00b5s\",\"a\":[\"127.0.0.1\"],\"tech\":[\"Python:3.14.6\"],\"words\":3,\"lines\":1,\"status_code\":200,\"content_length\":72,\"failed\":false,\"knowledgebase\":{\"pHash\":0}}\n",
+        "timestamp": 1783176632.528445,
+        "tool": "httpx"
+      },
+      {
+        "outputPreview": "{\"template-id\":\"exploitbot-loopback-header\",\"template-path\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-installed-tools-home-16y4ouhj/.exploitbot/nuclei-templates/exploitbot-loopback.yaml\",\"template-encoded\":\"aWQ6IGV4cGxvaXRib3QtbG9vcGJhY2staGVhZGVyCgppbmZvOgogIG5hbWU6IEVYUExPSVRCT1RfTlVDTEVJX0xBQl9PSwogIGF1dGhvcjogZXhwbG9pdGJvdAogIHNldmVyaXR5OiBoaWdoCgpodHRwOgogIC0gbWV0aG9kOiBHRVQKICAgIHBhdGg6CiAgICAgIC0gInt7QmFzZVVSTH19L3Z1bG4iCiAgICBtYXRjaGVyczoKICAgICAgLSB0eXBlOiB3b3JkCiAgICAgICAgcGFydDogYm9keQogICAgICAgIHdvcmRzOgogICAgICAgICAgLSAiRVhQTE9JVEJPVF9OVUNMRUlfTEFCX09LIgo=\",\"info\":{\"name\":\"EXPLOITBOT_NUCLEI_LAB_OK\",\"author\":[\"exploitbot\"],\"tags\":null,\"severity\":\"high\"},\"type\":\"http\",\"host\":\"127.0.0.1\",\"port\":\"52689\",\"scheme\":\"http\",\"url\":\"http://127.0.0.1:52689\",\"matched-at\":\"http://127.0.0.1:52689/vuln\",\"request\":\"GET /vuln HTTP/1.1\\r\\nHost: 127.0.0.1:52689\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Version/15.5 Safari/537.36\\r\\nAccept: */*\\r\\nAccept-Language: en\\r\\nAccept-Encoding: gzip\\r\\n\\r\\n\",\"response\":\"HTTP/1.1 200 OK\\r\\nContent-Length: 25\\r\\nContent-Type: text/plain\\r\\nDate: Sat, 04 Jul 2026 14:50:41 GMT\\r\\nServer: BaseHTTP/0.6 Python/3.14.6\\r\\nX-Exploitbot-Lab: loopback-real-tool\\r\\nX-Exploitbot-Vuln: nuclei-proof\\r\\n\\r\\nEXPLOITBOT_NUCLEI_LAB_OK\\n\",\"ip\":\"127.0.0.1\",\"timestamp\":\"2026-07-04T07:50:41.40076-07:00\",\"curl-command\":\"curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Version/15.5 Safari/537.36' 'http://127.0.0.1:52689/vuln'\",\"matcher-status\":true}\n",
+        "timestamp": 1783176641.404655,
+        "tool": "nuclei"
+      },
+      {
+        "outputPreview": "Hydra v9.6 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).\n\nHydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2026-07-04 07:50:41\n[DATA] max 2 tasks per 1 server, overall 2 tasks, 2 login tries (l:1/p:2), ~1 try per task\n[DATA] attacking http-get://127.0.0.1:52689/protected\n[ATTEMPT] target 127.0.0.1 - login \"admin\" - pass \"wrongpass\" - 1 of 2 [child 0] (0/0)\n[ATTEMPT] target 127.0.0.1 - login \"admin\" - pass \"letmein\" - 2 of 2 [child 1] (0/0)\n[52689][http-get] host: 127.0.0.1   misc: /protected   login: admin   password: letmein\n1 of 1 target successfully completed, 1 valid password found\nHydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2026-07-04 07:50:41\n",
+        "timestamp": 1783176641.743134,
+        "tool": "hydra"
+      },
+      {
+        "outputPreview": "SMB                      127.0.0.1       445    ERICS-M5-MAX2    [*] Windows 6.1 Build 7600 (name:ERICS-M5-MAX2) (domain:ERICS-M5-MAX2) (signing:True) (SMBv1:False)\nSMB                      127.0.0.1       445    ERICS-M5-MAX2    [-] Error enumerating shares: Error while reading from remote\n",
+        "timestamp": 1783176642.405479,
+        "tool": "netexec"
+      },
+      {
+        "outputPreview": "\n\n          MacPEAS-ng by carlospolop\n\nADVISORY: This script should be used for authorized penetration testing and/or educational purposes only. Any misuse of this software will not be the responsibility of the author or of any other collaborator. Use it at your own computers and/or with the computer owner's permission.\n\nLinux Privesc Checklist: https://book.hacktricks.wiki/en/linux-hardening/linux-privilege-escalation-checklist.html\nBest Linux PE & Hardening course: https://hacktricks-training.com/courses/lhe/\n [1;4mLEGEND[0m:\n  RED/YELLOW: 95% a PE vector\n  RED: You should take a look into it\n  LightCyan: Users with console\n  Blue: Users without console & mounted devs\n  Green: Common things (users, groups, SUID/SGID, mounts, .sh scripts, cronjobs) \n  LightMagenta: Your username\n\n Starting MacPEAS. Caching Writable Folders...\n                               \u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2563 Basic information \u2560\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n                               \u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\nOS: Darwin erics-m5-max2 25.4.0 Darwin Kernel Version 25.4.0: Thu Mar 19 19:33:50 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T6050 arm64\nUser & Groups: uid=501(eric) gid=20(staff) groups=20(staff),12(everyone),61(localaccounts),79(_appserverusr),80(admin),81(_appserveradm),398(com.apple.access_screensharing),701(com.apple.sharepoint.group.1),33(_appstore),98(_lpadmin),100(_lpoperator),204(_developer),250(_analyticsusers),395(com.apple.access_ftp),399(com.apple.access_ssh),400(com.apple.access_remote_ae)\nHostname: erics-m5-max2\n\n[+] /usr/bin/fping is available for network discovery (MacPEAS can discover hosts, learn more with -h)\n[+] /bin/bash is available for network discovery, port scanning and port forwarding (MacPEAS can discover hosts, scan ports, and forward ports. Learn more with -h)\n[+] /usr/bin/nc is available for network discovery & port scanning (MacPEAS can discover hosts and scan ports, learn more with -h)\n[+] nmap is available for network ",
+        "timestamp": 1783176656.26302,
+        "tool": "linpeas"
+      },
+      {
+        "outputPreview": "HTTP/1.1 200 OK\r\nServer: BaseHTTP/0.6 Python/3.14.6\r\nDate: Sat, 04 Jul 2026 14:50:56 GMT\r\nContent-Type: text/plain\r\nX-ExploitBot-Lab: loopback-real-tool\r\nContent-Length: 85\r\n\r\nEXPLOITBOT_LOOPBACK_LAB_OK\nservice=lab-http\ncve=CVE-2026-45659\npath=/proof?tool=curl\n",
+        "timestamp": 1783176656.273024,
+        "tool": "run_shell"
+      },
+      {
+        "outputPreview": "HTTP/1.1 200 OK\r\nServer: BaseHTTP/0.6 Python/3.14.6\r\nDate: Sat, 04 Jul 2026 14:50:56 GMT\r\nContent-Type: text/plain\r\nX-ExploitBot-Lab: loopback-real-tool\r\nContent-Length: 83\r\n\r\nEXPLOITBOT_LOOPBACK_LAB_OK\nservice=lab-http\ncve=CVE-2026-45659\npath=/proof?tool=nc\n",
+        "timestamp": 1783176656.284189,
+        "tool": "run_shell"
+      }
+    ],
+    "subdomains": [],
+    "vulns": [
+      {
+        "severity": "high",
+        "target": "http://127.0.0.1:52689/vuln",
+        "title": "exploitbot-loopback-header"
+      },
+      {
+        "severity": "critical",
+        "target": "[52689][http-get] host: 127.0.0.1   misc: /protected   login: admin   password: letmein",
+        "title": "Valid Credentials Found"
+      }
+    ]
+  },
+  "resultsContainHttpxOutput": true,
+  "resultsContainHydraOutput": true,
+  "resultsContainLinpeasOutput": true,
+  "resultsContainNetexecOutput": true,
+  "resultsContainNmapOutput": true,
+  "resultsContainNucleiOutput": true,
+  "resultsContainRealToolOutput": true,
+  "startedAt": "2026-07-04T07:50:23-0700",
+  "state": {
+    "activeSubtabs": {
+      "creds": "Cracking",
+      "exploit": "Metasploit",
+      "network": "Protocols",
+      "osint": "Username",
+      "post": "PrivEsc",
+      "recon": "Subdomains",
+      "report": "Findings",
+      "supplyChain": "CVE Intel",
+      "web": "Vulns"
+    },
+    "activeTab": "post",
+    "activityFeedActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "lastAction": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "agentActions": {
+      "agentCount": 0,
+      "agentId": "",
+      "agentName": "",
+      "agentType": "",
+      "deploySheetVisible": false,
+      "lastAction": "",
+      "messageCount": 0,
+      "status": "idle",
+      "stoppedGeneration": false,
+      "summary": "",
+      "taskSent": false
+    },
+    "agents": {
+      "activeAgents": 0,
+      "details": [],
+      "maxConcurrentAgents": 5,
+      "multiAgentEnabled": false,
+      "streamingCount": 0,
+      "workingCount": 0
+    },
+    "catalogEmbeddings": {
+      "recordCount": 15,
+      "sourceCounts": {
+        "asset.network": 2,
+        "asset.port": 1,
+        "asset.web": 1,
+        "finding": 2,
+        "post.attribution": 1,
+        "tool.output": 8
+      },
+      "sources": [
+        "asset.network",
+        "asset.port",
+        "asset.web",
+        "finding",
+        "post.attribution",
+        "tool.output"
+      ],
+      "vectorDimensions": 16
+    },
+    "chat": {
+      "enableReasoning": false,
+      "forceFinalAnswerAfterToolResults": false,
+      "maxIterations": 4
+    },
+    "chatActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "lastAction": "",
+      "lastStashItemId": "",
+      "messageRole": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "chatControlActions": {
+      "contextGeneration": 0,
+      "contextInspectorVisible": false,
+      "enableReasoning": false,
+      "lastAction": "send",
+      "status": "done",
+      "summary": "send chat message"
+    },
+    "contextCatalog": {
+      "cveMode": "semantic",
+      "enabled": true,
+      "includeAssets": true,
+      "includeFindings": true,
+      "includeRecentToolOutput": true,
+      "includeStash": true,
+      "maxSnippets": 4
+    },
+    "contextWindow": {
+      "blockL2Disk": true,
+      "cacheResponsesInferenceMethod": "prefix-cache-l2-turboquant",
+      "cacheResponsesMethod": "prefix-cache-l2-turboquant",
+      "engineSessionPreserved": true,
+      "generation": 0,
+      "modelGenerationDefaults": true,
+      "newContextBehavior": "clear-chat-preserve-engine-cache",
+      "newModelSessionBehavior": "new-context-window-preserve-engine-cache-session",
+      "pagedCache": true,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "sessionBoundaryMode": "new-context-window",
+      "turboQuantKV": true
+    },
+    "credsAction": {
+      "command": "",
+      "kind": "",
+      "resultCount": 0,
+      "status": "idle",
+      "summary": "",
+      "target": ""
+    },
+    "credsCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "credsLifecycle": {
+      "bruteforce": {
+        "command": "hydra -l admin -P /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-installed-tools-home-16y4ouhj/.exploitbot/hydra-passwords.txt -s 52689 -V -f 127.0.0.1 http-get /protected",
+        "status": "done",
+        "summary": "9 lines output",
+        "tool": "hydra"
+      },
+      "cracking": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "secrets": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "cveDatabase": {
+      "activeSettingsCategory": "",
+      "importProgress": "",
+      "isImporting": false,
+      "kevCount": 1552,
+      "lastSync": "",
+      "searchResultCount": 0,
+      "totalCount": 1552
+    },
+    "cveImportListAudit": {
+      "excludedIds": [],
+      "includeFilterMode": "none",
+      "includeIds": [],
+      "selectedIds": [],
+      "sourceIds": [],
+      "sourceMode": "none"
+    },
+    "cveSemantic": {
+      "candidateCount": 0,
+      "error": "embedder returned invalid vector",
+      "fallback": true,
+      "importProgress": "",
+      "query": "Authorized safe lab proof. Use nmap, httpx, nuclei, hydra, netexec, linpeas, and run_shell only against loopback 127.0.0.1 or the local host. Execute the real installed nmap, httpx, nuclei, hydra, netexec, linpeas, curl, and nc checks requested by the engine, then produce the final marker.",
+      "resultCount": 0,
+      "usedEmbedding": false,
+      "vectorDimensions": 0
+    },
+    "cveSettingsActions": {
+      "addPanelVisible": false,
+      "kevCount": 0,
+      "lastAction": "",
+      "query": "",
+      "resultCount": 0,
+      "status": "idle",
+      "summary": "",
+      "totalCount": 0
+    },
+    "engineCacheStats": null,
+    "engineConfig": {
+      "blockDiskCacheMaxGB": 10,
+      "blockL2Disk": true,
+      "cacheMemoryPercent": 0.3,
+      "diskCacheMaxGB": 10,
+      "kvCacheGroupSize": 64,
+      "kvCacheQuantization": "turboquant-q4",
+      "maxTokens": 4096,
+      "modelPath": "",
+      "pagedCache": true,
+      "pagedCacheBlockSize": 64,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "reasoningParser": "auto",
+      "temperature": 0.3,
+      "toolCallParser": "auto",
+      "topP": 0.9,
+      "useModelGenerationDefaults": true
+    },
+    "engineError": "",
+    "engineMemoryPreflight": null,
+    "enginePort": 18997,
+    "engineRunning": true,
+    "engineStaleCleanup": {
+      "checked": false,
+      "checkedAt": "",
+      "cleaned": false,
+      "foundCount": 0,
+      "foundProcesses": [],
+      "launchScript": "",
+      "remainingCount": 0,
+      "remainingProcesses": [],
+      "warning": ""
+    },
+    "exploitAction": {
+      "command": "",
+      "kind": "",
+      "status": "idle",
+      "summary": "",
+      "target": "",
+      "tool": ""
+    },
+    "exploitActionHistory": [],
+    "exploitCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "exploitLifecycle": {
+      "implant": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "listener": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "script": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "feedEntries": 30,
+    "feedRecent": [
+      {
+        "duration": 0,
+        "icon": "RUN",
+        "text": "Running netexec",
+        "tool": "netexec"
+      },
+      {
+        "duration": 0,
+        "icon": "OUT",
+        "text": "$ netexec smb 127.0.0.1 --no-progress --shares --timeout 2 --smb-timeout 2",
+        "tool": "netexec"
+      },
+      {
+        "duration": 0.6615970134735107,
+        "icon": "OK",
+        "text": "netexec: 2 lines output (0.7s)",
+        "tool": "netexec"
+      },
+      {
+        "duration": 0,
+        "icon": "RUN",
+        "text": "Running linpeas",
+        "tool": "linpeas"
+      },
+      {
+        "duration": 0,
+        "icon": "OUT",
+        "text": "$ linpeas.sh -q -N -o system_information",
+        "tool": "linpeas"
+      },
+      {
+        "duration": 13.857123970985413,
+        "icon": "OK",
+        "text": "linpeas: 194 lines output (13.9s)",
+        "tool": "linpeas"
+      },
+      {
+        "duration": 0,
+        "icon": "RUN",
+        "text": "Running run_shell",
+        "tool": "run_shell"
+      },
+      {
+        "duration": 0,
+        "icon": "OUT",
+        "text": "$ /bin/zsh -c curl -sS -i 'http://127.0.0.1:52689/proof?tool=curl'",
+        "tool": "run_shell"
+      },
+      {
+        "duration": 0.009518027305603027,
+        "icon": "OK",
+        "text": "run_shell: 10 lines output (0.0s)",
+        "tool": "run_shell"
+      },
+      {
+        "duration": 0,
+        "icon": "RUN",
+        "text": "Running run_shell",
+        "tool": "run_shell"
+      },
+      {
+        "duration": 0,
+        "icon": "OUT",
+        "text": "$ /bin/zsh -c printf 'GET /proof?tool=nc HTTP/1.1\\r\\nHost: 127.0.0.1:52689\\r\\nConnection: close\\r\\n\\r\\n' | nc 127.0.0.1 52689",
+        "tool": "run_shell"
+      },
+      {
+        "duration": 0.010901093482971191,
+        "icon": "OK",
+        "text": "run_shell: 10 lines output (0.0s)",
+        "tool": "run_shell"
+      }
+    ],
+    "findings": 0,
+    "healthStatus": "mock engine connected",
+    "inferenceLogActions": {
+      "clipboardPreview": "",
+      "engineLogChars": 0,
+      "isVisible": false,
+      "lastAction": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "isStreaming": false,
+    "isWorking": false,
+    "metrics": {
+      "cachedTokens": 128,
+      "completionTokens": 24,
+      "promptTokens": 420,
+      "tokPerSec": 833.015805762897,
+      "ttft": 0.001777052879333496
+    },
+    "mode": "autopilot",
+    "modeSelection": {
+      "activeOpMode": "",
+      "activeOpName": "",
+      "availableLabels": [
+        "Autopilot",
+        "Copilot",
+        "Manual"
+      ],
+      "availableModes": [
+        "autopilot",
+        "copilot",
+        "manual"
+      ],
+      "currentLabel": "Autopilot",
+      "currentMode": "autopilot",
+      "lastAction": "select-mode",
+      "pendingApprovalRejected": false,
+      "pendingApprovalVisible": false,
+      "showOnboarding": true,
+      "source": "api"
+    },
+    "model": "mock-qwen-jang",
+    "modelFolderInfo": {
+      "configSummary": "No recognized model config files found.",
+      "family": "Unknown",
+      "hasConfig": false,
+      "hasGenerationConfig": false,
+      "hasJangConfig": false,
+      "hasJangtqConfig": false,
+      "hasTokenizerConfig": false,
+      "isMultimodal": false,
+      "isSupported": false,
+      "modelType": "",
+      "path": "",
+      "supportMessage": "Select a model folder. Only Qwen and MiniMax model families are supported in this beta."
+    },
+    "modelFolderPicker": {
+      "configSummary": "",
+      "family": "",
+      "isSupported": false,
+      "isVisible": false,
+      "lastAction": "",
+      "selectedPath": "",
+      "source": "",
+      "status": "idle",
+      "supportMessage": ""
+    },
+    "modelLibrary": {
+      "entries": [
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "MiniMax",
+          "isMultimodal": false,
+          "isSupported": true,
+          "name": "MiniMax-M2.7-JANG_K-CRACK",
+          "path": "/Users/eric/models/dealign.ai/MiniMax-M2.7-JANG_K-CRACK",
+          "supportMessage": "Supported MiniMax family. The app auto-detects config.json, jang_config.json, jangtq_config.json, generation_config.json, reasoning parser, tool parser, and full-KV cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-27B-JANG_4M-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-JANG_4M-CRACK",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-27B-MXFP4-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-27B-MXFP8-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "DeepSeek-V4-Flash-JANG-CRACK",
+          "path": "/Users/eric/models/dealign.ai/DeepSeek-V4-Flash-JANG-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": true,
+          "isSupported": false,
+          "name": "Gemma-4-26B-A4B-it-JANG_4M-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Gemma-4-26B-A4B-it-JANG_4M-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "LFM2.5-8B-A1B-MXFP4-CRACK",
+          "path": "/Users/eric/models/dealign.ai/LFM2.5-8B-A1B-MXFP4-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "LFM2.5-8B-A1B-MXFP8-CRACK",
+          "path": "/Users/eric/models/dealign.ai/LFM2.5-8B-A1B-MXFP8-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "Nemotron-Omni-Nano-JANGTQ4-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Nemotron-Omni-Nano-JANGTQ4-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "Nemotron-Omni-Nano-MXFP4-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Nemotron-Omni-Nano-MXFP4-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": true,
+          "isSupported": false,
+          "name": "Step-3.7-Flash-JANG_2L-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Step-3.7-Flash-JANG_2L-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": true,
+          "isSupported": false,
+          "name": "Step-3.7-Flash-JANG_K-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Step-3.7-Flash-JANG_K-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        }
+      ],
+      "entryCount": 14,
+      "lastAction": "load",
+      "roots": [
+        "/Users/eric/models/dealign.ai"
+      ],
+      "selectedPath": "",
+      "status": "done",
+      "summary": "scanModelLibrary 14 models from 1 roots",
+      "supportedCount": 6
+    },
+    "msgs": 11,
+    "networkAction": {
+      "command": "",
+      "kind": "",
+      "protocol": "",
+      "status": "idle",
+      "summary": "",
+      "target": ""
+    },
+    "networkCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "networkLifecycle": {
+      "capture": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "mitm": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "tunnel": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "osintArtifactAction": {
+      "bytes": 0,
+      "history": [],
+      "lastAction": "",
+      "path": "",
+      "pathExists": false,
+      "status": "idle",
+      "summary": ""
+    },
+    "osintArtifacts": [],
+    "osintCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "osintLifecycle": {
+      "email": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "metadata": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "screenshot": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "username": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "phase": "scan",
+    "phaseActions": {
+      "fromPhase": "",
+      "lastAction": "",
+      "phaseGuidance": "",
+      "status": "idle",
+      "summary": "",
+      "toPhase": "",
+      "toolsRun": 0
+    },
+    "ports": 1,
+    "postAttribution": [
+      {
+        "host": "erics-m5-max2",
+        "label": "linpeas-host",
+        "sessionId": "",
+        "summary": "host erics-m5-max2, user eric",
+        "tool": "linpeas",
+        "user": "eric"
+      }
+    ],
+    "postCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "postLifecycle": {
+      "ad": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "lateral": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "privesc": {
+        "command": "linpeas.sh -q -N -o system_information",
+        "status": "done",
+        "summary": "194 lines output",
+        "tool": "linpeas"
+      }
+    },
+    "qaChatVisual": {
+      "autoScrollLocked": null,
+      "cacheSessionIndicator": null,
+      "contextInspectorVisible": false,
+      "hasUnreadWhileUnlocked": null,
+      "headerBadges": [
+        "11 msgs",
+        "ctx 0"
+      ],
+      "mode": "",
+      "newContextConfirm": {
+        "isVisible": false,
+        "lastAction": "send"
+      },
+      "newContextSessionBoundary": null,
+      "reasoningBlock": {
+        "isCollapsed": false,
+        "totalChars": 0,
+        "visibleChars": 0
+      },
+      "reasoningCollapsed": null,
+      "toolOutputExpansion": {
+        "hiddenLineCount": 14,
+        "isExpanded": false,
+        "toolName": "nmap",
+        "totalLineCount": 19,
+        "visibleLineCount": 5
+      }
+    },
+    "qaCoverage": {
+      "contextHooks": [
+        "onContextUpdate",
+        "search_context",
+        "lastContextSummary",
+        "lastToolSchemaNames",
+        "context.catalog.maxSnippets"
+      ],
+      "stateRoutes": [
+        "/state",
+        "/messages",
+        "/results",
+        "/qa/subtab-coverage",
+        "/qa/subtab-lifecycle-matrix",
+        "/qa/endpoint-inventory",
+        "/qa/endpoint-route-matrix",
+        "/qa/action-state-inventory",
+        "/qa/view-inventory",
+        "/qa/function-flow-inventory",
+        "/qa/function-proof-matrix",
+        "/qa/service-inventory",
+        "/qa/service-function-matrix",
+        "/qa/model-state-inventory",
+        "/qa/model-state-function-matrix",
+        "/qa/theme-inventory",
+        "/qa/theme-token-matrix",
+        "/qa/python-runtime-inventory",
+        "/qa/engine-python-runtime",
+        "/qa/agent-flow-inventory",
+        "/qa/proof-suite-inventory",
+        "/qa/agent-loop-coverage",
+        "/qa/agent-loop-phase-matrix",
+        "/qa/agent-tool-authorization-coverage",
+        "/qa/tab-tool-function-flow",
+        "/qa/tab-proof-family-matrix",
+        "/qa/tool-execution-matrix",
+        "/qa/tool-flow-coverage",
+        "/qa/live-status-preview-flow",
+        "/qa/security-abuse-boundary-matrix",
+        "/qa/deep-runtime-flow-coverage",
+        "/qa/tool-engine-context-ops-matrix",
+        "/qa/engine-api-cache-proof-matrix",
+        "/qa/session-context-cache-flow",
+        "/qa/cache-artifact-matrix",
+        "/qa/chat-quality-evidence-matrix",
+        "/qa/turn-lifecycle-evidence",
+        "/qa/active-objective-audit",
+        "/qa/runtime-local-model-lane",
+        "/qa/continuous-batching-coverage",
+        "/qa/live-loaded-model-agent-stress",
+        "/qa/streaming-parser-reuse",
+        "/qa/startup-cache-defaults",
+        "/qa/runtime-coverage",
+        "/qa/context-coverage",
+        "/qa/context-budget-compaction",
+        "/qa/context-prompt-injection-boundary",
+        "/qa/context-flow-matrix",
+        "/qa/context-session-efficiency-matrix",
+        "/qa/context-efficiency-invariants",
+        "/qa/evidence-lifecycle-coverage",
+        "/qa/evidence-lifecycle-flow-matrix",
+        "/qa/cve-taxonomy-coverage",
+        "/qa/cve-taxonomy-matrix",
+        "/qa/cve-import-embedding-coverage",
+        "/qa/state-dependent-contract-matrix",
+        "/qa/settings-coverage",
+        "/qa/settings-surface-matrix",
+        "/qa/visual-coverage",
+        "/qa/visual-surface-matrix",
+        "/qa/session-coverage",
+        "/qa/session-workflow-matrix",
+        "/qa/tab-action-coverage",
+        "/qa/tab-action-surface-matrix",
+        "/qa/chat-coverage",
+        "/qa/recon-coverage",
+        "/qa/web-coverage",
+        "/qa/network-coverage",
+        "/qa/creds-coverage",
+        "/qa/exploit-coverage",
+        "/qa/post-coverage",
+        "/qa/supply-chain-coverage",
+        "/qa/osint-coverage",
+        "/qa/report-coverage",
+        "/qa/stash-coverage",
+        "/qa/coverage-index",
+        "/qa/coverage-false-flag-classification",
+        "/qa/proof-ledger",
+        "/qa/proof-category-matrix",
+        "/qa/artifact-ledger",
+        "/qa/artifact-manifest-matrix",
+        "/qa/result-parser-coverage",
+        "/qa/parser-tool-matrix",
+        "/qa/checkpoint-ledger",
+        "/qa/audit-ledger",
+        "/qa/gap-ledger",
+        "/qa/qwen-multimodal-promotion-readiness",
+        "/qa/release-readiness",
+        "/qa/beta-readiness-coverage",
+        "/qa/objective-runtime-coverage",
+        "/qa/objective-flow-requirement-matrix",
+        "/qa/objective-flow-execution-graph",
+        "/qa/per-turn-runtime-contract"
+      ],
+      "staticProfilesRemoved": true,
+      "subtabStateProofs": [
+        "recon-subtab-state-proof.py",
+        "web-subtab-state-proof.py",
+        "network-subtab-state-proof.py",
+        "creds-subtab-state-proof.py",
+        "exploit-subtab-state-proof.py",
+        "post-subtab-state-proof.py",
+        "supply-chain-cve-ui-proof.py",
+        "osint-subtab-state-proof.py",
+        "report-subtab-state-proof.py"
+      ],
+      "subtabStateTabs": [
+        "recon",
+        "web",
+        "network",
+        "creds",
+        "exploit",
+        "post",
+        "supplyChain",
+        "osint",
+        "report"
+      ],
+      "testServerSmoke": true
+    },
+    "qaSettingsVisual": {
+      "category": "",
+      "showSettings": false
+    },
+    "qaVisualSubtabs": {},
+    "reconAction": {
+      "command": "",
+      "kind": "",
+      "status": "idle",
+      "summary": "",
+      "target": ""
+    },
+    "reconCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "reportAction": {
+      "findingCount": 0,
+      "kind": "",
+      "prompt": "",
+      "status": "idle",
+      "summary": "",
+      "template": ""
+    },
+    "reportExport": {
+      "artifacts": [],
+      "error": "",
+      "findingCount": 0,
+      "status": "idle"
+    },
+    "reportFindingActions": {
+      "createLabel": "Create Finding",
+      "deleteLabel": "Delete finding",
+      "findingCount": 0,
+      "findings": [],
+      "lastAction": "",
+      "lastCreatedId": "",
+      "lastDeletedId": "",
+      "status": "idle",
+      "summary": "",
+      "wizardVisible": false
+    },
+    "reportRenderActions": {
+      "findingCount": 0,
+      "htmlChars": 0,
+      "htmlPreview": "",
+      "lastAction": "",
+      "status": "idle",
+      "summary": "",
+      "template": ""
+    },
+    "requestContext": {
+      "contextInjected": true,
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 15 indexed items for phase SCAN, tab post.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=1 subdomains=0 web=1 vulns=2 network=2 osint=0 stash=0 cves=0\nSelected snippets:\n- [finding] CRITICAL Valid Credentials Found tags=vuln,critical,hydra,credentials,brute-force: target [52689][http-get] host: 127.",
+      "contextSnippetCount": 4,
+      "streamWarnings": [],
+      "toolSchemaCount": 16,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "run_shell",
+        "linpeas",
+        "netexec",
+        "pwncat",
+        "dnsx",
+        "hashcat",
+        "chisel",
+        "sliver",
+        "impacket",
+        "nmap",
+        "wpscan",
+        "nuclei",
+        "theharvester"
+      ]
+    },
+    "settingsCategoryCoverage": {
+      "categories": [
+        {
+          "detail": "Watch the local engine, effective parser/cache metadata, and live cache counters.",
+          "id": "engine",
+          "pageSections": [
+            "engine status",
+            "effective runtime",
+            "live cache counters"
+          ],
+          "subtitle": "status, health, effective runtime",
+          "systemImage": "cpu",
+          "title": "Engine"
+        },
+        {
+          "detail": "Choose one model folder. Qwen and MiniMax are the supported beta families; config is picked up from that folder.",
+          "id": "model",
+          "pageSections": [
+            "model folder",
+            "supported family warning",
+            "generation config source"
+          ],
+          "subtitle": "folder selection and support checks",
+          "systemImage": "folder",
+          "title": "Model"
+        },
+        {
+          "detail": "Runtime defaults come from the model folder and engine registry, with only operational loop limits exposed here.",
+          "id": "runtime",
+          "pageSections": [
+            "model generation defaults",
+            "parser autodetect",
+            "tool-loop limits",
+            "autonomy"
+          ],
+          "subtitle": "generation, parsers, loop limits",
+          "systemImage": "slider.horizontal.3",
+          "title": "Runtime"
+        },
+        {
+          "detail": "Control the dynamic catalogue that decides which app facts are sent into each model turn.",
+          "id": "context",
+          "pageSections": [
+            "dynamic catalogue",
+            "retrieval sources",
+            "CVE assist mode"
+          ],
+          "subtitle": "catalogue and retrieval sources",
+          "systemImage": "square.stack.3d.up",
+          "title": "Context"
+        },
+        {
+          "detail": "Tune cache budgets while keeping the required prefix, paged, L2, and TurboQuant paths enabled.",
+          "id": "cache",
+          "pageSections": [
+            "prefix cache",
+            "prompt L2 disk",
+            "paged cache",
+            "block L2 disk",
+            "TurboQuant KV"
+          ],
+          "subtitle": "TurboQuant, prefix, L2 disk",
+          "systemImage": "internaldrive",
+          "title": "Cache"
+        },
+        {
+          "detail": "Configure full-auto and multi-agent behavior without mixing it into engine setup.",
+          "id": "agents",
+          "pageSections": [
+            "multi-agent mode",
+            "concurrency limit",
+            "agent defaults"
+          ],
+          "subtitle": "multi-agent controls",
+          "systemImage": "person.2",
+          "title": "Agents"
+        },
+        {
+          "detail": "Manage the local vulnerability knowledge base used by tools and context retrieval.",
+          "id": "cves",
+          "pageSections": [
+            "database import",
+            "CVE counts",
+            "search status"
+          ],
+          "subtitle": "local CVE data and search",
+          "systemImage": "cross.case",
+          "title": "CVE Database"
+        },
+        {
+          "detail": "Detect and install external command-line tools used by the agent loop.",
+          "id": "tools",
+          "pageSections": [
+            "installed tools",
+            "missing tools",
+            "install log"
+          ],
+          "subtitle": "tool install and detection",
+          "systemImage": "wrench.and.screwdriver",
+          "title": "Tools"
+        },
+        {
+          "detail": "Inspect engine logs separately from runtime controls.",
+          "id": "logs",
+          "pageSections": [
+            "engine log output",
+            "diagnostics"
+          ],
+          "subtitle": "engine output and diagnostics",
+          "systemImage": "doc.text.magnifyingglass",
+          "title": "Logs"
+        }
+      ],
+      "splitPages": true
+    },
+    "settingsEngineActions": {
+      "healthStatus": "",
+      "isRunning": false,
+      "lastAction": "",
+      "model": "",
+      "status": "idle",
+      "summary": "",
+      "wasRunning": false
+    },
+    "sidebarActions": {
+      "lastAction": "",
+      "opId": "",
+      "opName": "",
+      "opsCount": 0,
+      "status": "idle",
+      "stoppedGeneration": false,
+      "summary": ""
+    },
+    "stash": 0,
+    "stashActions": {
+      "actionLabels": [
+        "Add",
+        "Copy All",
+        "Copy",
+        "Send",
+        "Delete"
+      ],
+      "activeFilter": "all",
+      "addSheetVisible": false,
+      "clipboardPreview": "",
+      "filteredCount": 0,
+      "itemCount": 0,
+      "items": [],
+      "lastAction": "",
+      "lastDeletedId": "",
+      "lastItemId": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "stashRetrieval": {
+      "candidateCount": 0,
+      "query": "Authorized safe lab proof. Use nmap, httpx, nuclei, hydra, netexec, linpeas, and run_shell only against loopback 127.0.0.1 or the local host. Execute the real installed nmap, httpx, nuclei, hydra, netexec, linpeas, curl, and nc checks requested by the engine, then produce the final marker.",
+      "returnedCount": 0,
+      "topLabels": [],
+      "topScore": 0
+    },
+    "subdomains": 0,
+    "subtabActions": {
+      "lastAction": "",
+      "status": "idle",
+      "subtab": "",
+      "summary": "",
+      "tab": "",
+      "validSubtabs": []
+    },
+    "supplyChainLifecycle": {
+      "cve": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "dependency": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "sbom": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "secrets": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "tabActivities": {
+      "creds": {
+        "command": "hydra -l admin -P /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-installed-tools-home-16y4ouhj/.exploitbot/hydra-passwords.txt -s 52689 -V -f 127.0.0.1 http-get /protected",
+        "count": 1,
+        "lastTool": "hydra",
+        "status": "done",
+        "summary": "9 lines output"
+      },
+      "exploit": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "network": {
+        "command": "netexec smb 127.0.0.1 --no-progress --shares --timeout 2 --smb-timeout 2",
+        "count": 1,
+        "lastTool": "netexec",
+        "status": "done",
+        "summary": "2 lines output"
+      },
+      "osint": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "post": {
+        "command": "/bin/zsh -c printf 'GET /proof?tool=nc HTTP/1.1\\r\\nHost: 127.0.0.1:52689\\r\\nConnection: close\\r\\n\\r\\n' | nc 127.0.0.1 52689",
+        "count": 3,
+        "lastTool": "run_shell",
+        "status": "done",
+        "summary": "10 lines output"
+      },
+      "recon": {
+        "command": "/bin/sh -c echo 'http://127.0.0.1:52689/httpx' | tr ',' '\\n' | httpx -sc -title -tech-detect -json -silent -duc -timeout 5 2>/dev/null || curl -s -o /dev/null -w '{\"url\":\"http://127.0.0.1:52689/httpx\",\"status_code\":%{http_code},\"title\":\"\",\"webserver\":\"%{content_type}\"}' 'http://127.0.0.1:52689/httpx'",
+        "count": 2,
+        "lastTool": "httpx",
+        "status": "done",
+        "summary": "1 lines output"
+      },
+      "report": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "stash": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "supplyChain": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "web": {
+        "command": "nuclei -u http://127.0.0.1:52689 -t /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-installed-tools-home-16y4ouhj/.exploitbot/nuclei-templates/exploitbot-loopback.yaml -jsonl -silent",
+        "count": 1,
+        "lastTool": "nuclei",
+        "status": "done",
+        "summary": "1 lines output"
+      }
+    },
+    "tabSwitchActions": {
+      "followAgent": true,
+      "fromTab": "",
+      "lastAction": "",
+      "status": "idle",
+      "summary": "",
+      "toTab": ""
+    },
+    "terminal": {
+      "activeCommand": {
+        "command": "",
+        "source": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "commandTranscripts": [
+        {
+          "command": "netexec smb 127.0.0.1 --no-progress --shares --timeout 2 --smb-timeout 2",
+          "outputPreview": "$ netexec smb 127.0.0.1 --no-progress --shares --timeout 2 --smb-timeout 2",
+          "source": "activityFeed",
+          "status": "OUT",
+          "timestamp": 1783176641.743684,
+          "tool": "netexec"
+        },
+        {
+          "command": "netexec: 2 lines output (0.7s)",
+          "outputPreview": "netexec: 2 lines output (0.7s)",
+          "source": "activityFeed",
+          "status": "OK",
+          "timestamp": 1783176642.405435,
+          "tool": "netexec"
+        },
+        {
+          "command": "Running linpeas",
+          "outputPreview": "Running linpeas",
+          "source": "activityFeed",
+          "status": "RUN",
+          "timestamp": 1783176642.4056082,
+          "tool": "linpeas"
+        },
+        {
+          "command": "linpeas.sh -q -N -o system_information",
+          "outputPreview": "$ linpeas.sh -q -N -o system_information",
+          "source": "activityFeed",
+          "status": "OUT",
+          "timestamp": 1783176642.4056082,
+          "tool": "linpeas"
+        },
+        {
+          "command": "linpeas: 194 lines output (13.9s)",
+          "outputPreview": "linpeas: 194 lines output (13.9s)",
+          "source": "activityFeed",
+          "status": "OK",
+          "timestamp": 1783176656.262974,
+          "tool": "linpeas"
+        },
+        {
+          "command": "Running run_shell",
+          "outputPreview": "Running run_shell",
+          "source": "activityFeed",
+          "status": "RUN",
+          "timestamp": 1783176656.263381,
+          "tool": "run_shell"
+        },
+        {
+          "command": "/bin/zsh -c curl -sS -i 'http://127.0.0.1:52689/proof?tool=curl'",
+          "outputPreview": "$ /bin/zsh -c curl -sS -i 'http://127.0.0.1:52689/proof?tool=curl'",
+          "source": "activityFeed",
+          "status": "OUT",
+          "timestamp": 1783176656.263381,
+          "tool": "run_shell"
+        },
+        {
+          "command": "run_shell: 10 lines output (0.0s)",
+          "outputPreview": "run_shell: 10 lines output (0.0s)",
+          "source": "activityFeed",
+          "status": "OK",
+          "timestamp": 1783176656.272996,
+          "tool": "run_shell"
+        },
+        {
+          "command": "Running run_shell",
+          "outputPreview": "Running run_shell",
+          "source": "activityFeed",
+          "status": "RUN",
+          "timestamp": 1783176656.273169,
+          "tool": "run_shell"
+        },
+        {
+          "command": "/bin/zsh -c printf 'GET /proof?tool=nc HTTP/1.1\\r\\nHost: 127.0.0.1:52689\\r\\nConnection: close\\r\\n\\r\\n' | nc 127.0.0.1 52689",
+          "outputPreview": "$ /bin/zsh -c printf 'GET /proof?tool=nc HTTP/1.1\\r\\nHost: 127.0.0.1:52689\\r\\nConnection: close\\r\\n\\r\\n' | nc 127.0.0.1 52689",
+          "source": "activityFeed",
+          "status": "OUT",
+          "timestamp": 1783176656.273169,
+          "tool": "run_shell"
+        },
+        {
+          "command": "run_shell: 10 lines output (0.0s)",
+          "outputPreview": "run_shell: 10 lines output (0.0s)",
+          "source": "activityFeed",
+          "status": "OK",
+          "timestamp": 1783176656.284169,
+          "tool": "run_shell"
+        },
+        {
+          "command": "nmap",
+          "outputPreview": "# Nmap 7.99 scan initiated Sat Jul  4 07:50:26 2026 as: /opt/homebrew/bin/nmap -p 52689 -sV -oN - 127.0.0.1\nNmap scan report for localhost (127.0.0.1)\nHost is up (0.000060s latency).\n\nPORT      STATE SERVICE VERSION\n52689/tcp open  http    BaseHTTPServer 0.6 (Python 3.14.6)\n\nService detection performed. Please report any incorrect results at https://nmap.org/submit/ .\n# Nmap done at Sat Jul  4 07:50:32 2026 -- 1 IP address (1 host up) scanned in 6.11 seconds\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783176632.2977672,
+          "tool": "nmap"
+        },
+        {
+          "command": "httpx",
+          "outputPreview": "{\"timestamp\":\"2026-07-04T07:50:32.525067-07:00\",\"port\":\"52689\",\"url\":\"http://127.0.0.1:52689/httpx\",\"input\":\"http://127.0.0.1:52689/httpx\",\"title\":\"ExploitBot HTTPX Lab\",\"scheme\":\"http\",\"webserver\":\"BaseHTTP/0.6 Python/3.14.6\",\"content_type\":\"text/html\",\"method\":\"GET\",\"host\":\"127.0.0.1\",\"host_ip\":\"127.0.0.1\",\"path\":\"/httpx\",\"time\":\"336.917\u00b5s\",\"a\":[\"127.0.0.1\"],\"tech\":[\"Python:3.14.6\"],\"words\":3,\"lines\":1,\"status_code\":200,\"content_length\":72,\"failed\":false,\"knowledgebase\":{\"pHash\":0}}\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783176632.528445,
+          "tool": "httpx"
+        },
+        {
+          "command": "nuclei",
+          "outputPreview": "{\"template-id\":\"exploitbot-loopback-header\",\"template-path\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-installed-tools-home-16y4ouhj/.exploitbot/nuclei-templates/exploitbot-loopback.yaml\",\"template-encoded\":\"aWQ6IGV4cGxvaXRib3QtbG9vcGJhY2staGVhZGVyCgppbmZvOgogIG5hbWU6IEVYUExPSVRCT1RfTlVDTEVJX0xBQl9PSwogIGF1dGhvcjogZXhwbG9pdGJvdAogIHNldmVyaXR5OiBoaWdoCgpodHRwOgogIC0gbWV0aG9kOiBHRVQKICAgIHBhdGg6CiAgICAgIC0gInt7QmFzZVVSTH19L3Z1bG4iCiAgICBtYXRjaGVyczoKICAgICAgLSB0eXBlOiB3b3JkCiAgICAgICAgcGFydDogYm9keQogICAgICAgIHdvcmRzOgogICAgICAgICAgLSAiRVhQTE9JVEJPVF9OVUNMRUlfTEFCX09LIgo=\",\"info\":{\"name\":\"EXPLOITBOT_NUCLEI_LAB_OK\",\"author\":[\"exploitbot\"],\"tags\":null,\"severity\":\"high\"},\"type\":\"http\",\"host\":\"127.0.0.1\",\"port\":\"52689\",\"scheme\":\"http\",\"url\":\"http://127.0.0.1:52689\",\"matched-at\":\"http://127.0.0.1:52689/vuln\",\"request\":\"GET /vuln HTTP/1.1\\r\\nHost: 127.0.0.1:52689\\r\\nUser-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Version/15.5 Safari/537.36\\r\\nAccept: */*\\r\\nAccept-Language: en\\r\\nAccept-Encoding: gzip\\r\\n\\r\\n\",\"response\":\"HTTP/1.1 200 OK\\r\\nContent-Length: 25\\r\\nContent-Type: text/plain\\r\\nDate: Sat, 04 Jul 2026 14:50:41 GMT\\r\\nServer: BaseHTTP/0.6 Python/3.14.6\\r\\nX-Exploitbot-Lab: loopback-real-tool\\r\\nX-Exploitbot-Vuln: nuclei-proof\\r\\n\\r\\nEXPLOITBOT_NUCLEI_LAB_OK\\n\",\"ip\":\"127.0.0.1\",\"timestamp\":\"2026-07-04T07:50:41.40076-07:00\",\"curl-command\":\"curl -X 'GET' -d '' -H 'Accept: */*' -H 'Accept-Language: en' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Version/15.5 Safari/537.36' 'http://127.0.0.1:52689/vuln'\",\"matcher-status\":true}\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783176641.404655,
+          "tool": "nuclei"
+        },
+        {
+          "command": "hydra",
+          "outputPreview": "Hydra v9.6 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).\n\nHydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2026-07-04 07:50:41\n[DATA] max 2 tasks per 1 server, overall 2 tasks, 2 login tries (l:1/p:2), ~1 try per task\n[DATA] attacking http-get://127.0.0.1:52689/protected\n[ATTEMPT] target 127.0.0.1 - login \"admin\" - pass \"wrongpass\" - 1 of 2 [child 0] (0/0)\n[ATTEMPT] target 127.0.0.1 - login \"admin\" - pass \"letmein\" - 2 of 2 [child 1] (0/0)\n[52689][http-get] host: 127.0.0.1   misc: /protected   login: admin   password: letmein\n1 of 1 target successfully completed, 1 valid password found\nHydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2026-07-04 07:50:41\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783176641.743134,
+          "tool": "hydra"
+        },
+        {
+          "command": "netexec",
+          "outputPreview": "SMB                      127.0.0.1       445    ERICS-M5-MAX2    [*] Windows 6.1 Build 7600 (name:ERICS-M5-MAX2) (domain:ERICS-M5-MAX2) (signing:True) (SMBv1:False)\nSMB                      127.0.0.1       445    ERICS-M5-MAX2    [-] Error enumerating shares: Error while reading from remote\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783176642.405479,
+          "tool": "netexec"
+        },
+        {
+          "command": "linpeas",
+          "outputPreview": "\n\n          MacPEAS-ng by carlospolop\n\nADVISORY: This script should be used for authorized penetration testing and/or educational purposes only. Any misuse of this software will not be the responsibility of the author or of any other collaborator. Use it at your own computers and/or with the computer owner's permission.\n\nLinux Privesc Checklist: https://book.hacktricks.wiki/en/linux-hardening/linux-privilege-escalation-checklist.html\nBest Linux PE & Hardening course: https://hacktricks-training.com/courses/lhe/\n [1;4mLEGEND[0m:\n  RED/YELLOW: 95% a PE vector\n  RED: You should take a look into it\n  LightCyan: Users with console\n  Blue: Users without console & mounted devs\n  Green: Common things (users, groups, SUID/SGID, mounts, .sh scripts, cronjobs) \n  LightMagenta: Your username\n\n Starting MacPEAS. Caching Writable Folders...\n                               \u2554\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2557\n\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2563 Basic information \u2560\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\n                               \u255a\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u255d\nOS: Darwin erics-m5-max2 25.4.0 Darwin Kernel Version 25.4.0: Thu Mar 19 19:33:50 PDT 2026; root:xnu-12377.101.15~1/RELEASE_ARM64_T6050 arm64\nUser & Groups: uid=501(eric) gid=20(staff) groups=20(staff),12(everyone),61(localaccounts),79(_appserverusr),80(admin),81(_appserveradm),398(com.apple.access_screensharing),701(com.apple.sharepoint.group.1),33(_appstore),98(_lpadmin),100(_lpoperator),204(_developer),250(_analyticsusers),395(com.apple.access_ftp),399(com.apple.access_ssh),400(com.apple.access_remote_ae)\nHostname: erics-m5-max2\n\n[+] /usr/bin/fping is available for network discovery (MacPEAS can discover hosts, learn more with -h)\n[+] /bin/bash is available for network discovery, port scanning and port forwarding (MacPEAS can discover hosts, scan ports, and forward ports. Learn more with -h)\n[+] /usr/bin/nc is available for network discovery & port scanning (MacPEAS can discover hosts and scan ports, learn more with -h)\n[+] nmap is available for network ",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783176656.26302,
+          "tool": "linpeas"
+        },
+        {
+          "command": "run_shell",
+          "outputPreview": "HTTP/1.1 200 OK\r\nServer: BaseHTTP/0.6 Python/3.14.6\r\nDate: Sat, 04 Jul 2026 14:50:56 GMT\r\nContent-Type: text/plain\r\nX-ExploitBot-Lab: loopback-real-tool\r\nContent-Length: 85\r\n\r\nEXPLOITBOT_LOOPBACK_LAB_OK\nservice=lab-http\ncve=CVE-2026-45659\npath=/proof?tool=curl\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783176656.273024,
+          "tool": "run_shell"
+        },
+        {
+          "command": "run_shell",
+          "outputPreview": "HTTP/1.1 200 OK\r\nServer: BaseHTTP/0.6 Python/3.14.6\r\nDate: Sat, 04 Jul 2026 14:50:56 GMT\r\nContent-Type: text/plain\r\nX-ExploitBot-Lab: loopback-real-tool\r\nContent-Length: 83\r\n\r\nEXPLOITBOT_LOOPBACK_LAB_OK\nservice=lab-http\ncve=CVE-2026-45659\npath=/proof?tool=nc\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783176656.284189,
+          "tool": "run_shell"
+        },
+        {
+          "command": "/bin/sh -c echo 'http://127.0.0.1:52689/httpx' | tr ',' '\\n' | httpx -sc -title -tech-detect -json -silent -duc -timeout 5 2>/dev/null || curl -s -o /dev/null -w '{\"url\":\"http://127.0.0.1:52689/httpx\",\"status_code\":%{http_code},\"title\":\"\",\"webserver\":\"%{content_type}\"}' 'http://127.0.0.1:52689/httpx'",
+          "outputPreview": "1 lines output",
+          "source": "tabActivities",
+          "status": "done",
+          "tab": "recon",
+          "timestamp": 1783176632.528436,
+          "tool": "httpx"
+        },
+        {
+          "command": "nuclei -u http://127.0.0.1:52689 -t /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-installed-tools-home-16y4ouhj/.exploitbot/nuclei-templates/exploitbot-loopback.yaml -jsonl -silent",
+          "outputPreview": "1 lines output",
+          "source": "tabActivities",
+          "status": "done",
+          "tab": "web",
+          "timestamp": 1783176641.404646,
+          "tool": "nuclei"
+        },
+        {
+          "command": "netexec smb 127.0.0.1 --no-progress --shares --timeout 2 --smb-timeout 2",
+          "outputPreview": "2 lines output",
+          "source": "tabActivities",
+          "status": "done",
+          "tab": "network",
+          "timestamp": 1783176642.405445,
+          "tool": "netexec"
+        },
+        {
+          "command": "hydra -l admin -P /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-installed-tools-home-16y4ouhj/.exploitbot/hydra-passwords.txt -s 52689 -V -f 127.0.0.1 http-get /protected",
+          "outputPreview": "9 lines output",
+          "source": "tabActivities",
+          "status": "done",
+          "tab": "creds",
+          "timestamp": 1783176641.74297,
+          "tool": "hydra"
+        },
+        {
+          "command": "/bin/zsh -c printf 'GET /proof?tool=nc HTTP/1.1\\r\\nHost: 127.0.0.1:52689\\r\\nConnection: close\\r\\n\\r\\n' | nc 127.0.0.1 52689",
+          "outputPreview": "10 lines output",
+          "source": "tabActivities",
+          "status": "done",
+          "tab": "post",
+          "timestamp": 1783176656.2841759,
+          "tool": "run_shell"
+        }
+      ],
+      "installedToolCount": 13,
+      "isVisible": false,
+      "surfaceContract": "terminal-visibility-command-transcripts",
+      "toolPathCount": 6,
+      "toolPaths": [
+        "/opt/homebrew/bin",
+        "/usr/local/bin",
+        "/Users/eric/.exploitbot/tools",
+        "/Users/eric/.local/bin",
+        "/usr/bin",
+        "/bin"
+      ]
+    },
+    "toolExecutor": {
+      "currentOutput": "HTTP/1.1 200 OK\r\nServer: BaseHTTP/0.6 Python/3.14.6\r\nDate: Sat, 04 Jul 2026 14:50:56 GMT\r\nContent-Type: text/plain\r\nX-ExploitBot-Lab: loopback-real-tool\r\nContent-Length: 83\r\n\r\nEXPLOITBOT_LOOPBACK_LAB_OK\nservice=lab-http\ncve=CVE-2026-45659\npath=/proof?tool=nc\n",
+      "currentTool": "",
+      "isRunning": false
+    },
+    "toolSettings": {
+      "activeSettingsCategory": "",
+      "errorCount": 0,
+      "installLog": "",
+      "installedCount": 13,
+      "installingCount": 0,
+      "isInstalling": false,
+      "missingCount": 29,
+      "tools": [
+        {
+          "category": "system",
+          "installMethod": "system",
+          "name": "curl",
+          "path": "/usr/bin/curl",
+          "status": "installed",
+          "version": "8.7.1"
+        },
+        {
+          "category": "system",
+          "installMethod": "system",
+          "name": "nc",
+          "path": "/usr/bin/nc",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "system",
+          "installMethod": "system",
+          "name": "python3",
+          "path": "/opt/homebrew/bin/python3",
+          "status": "installed",
+          "version": "3.14.6"
+        },
+        {
+          "category": "system",
+          "installMethod": "system",
+          "name": "zsh",
+          "path": "/bin/zsh",
+          "status": "installed",
+          "version": "5.9"
+        },
+        {
+          "category": "recon",
+          "installMethod": "go",
+          "name": "subfinder",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "recon",
+          "installMethod": "go",
+          "name": "dnsx",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "recon",
+          "installMethod": "homebrew",
+          "name": "nmap",
+          "path": "/opt/homebrew/bin/nmap",
+          "status": "installed",
+          "version": "7.99"
+        },
+        {
+          "category": "recon",
+          "installMethod": "homebrew",
+          "name": "masscan",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "recon",
+          "installMethod": "go",
+          "name": "httpx",
+          "path": "/Users/eric/.exploitbot/tools/httpx",
+          "status": "installed",
+          "version": "1.9.0"
+        },
+        {
+          "category": "recon",
+          "installMethod": "go",
+          "name": "katana",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "recon",
+          "installMethod": "pip",
+          "name": "theHarvester",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "go",
+          "name": "nuclei",
+          "path": "/opt/homebrew/bin/nuclei",
+          "status": "installed",
+          "version": "3.10.0"
+        },
+        {
+          "category": "web",
+          "installMethod": "pip",
+          "name": "sqlmap",
+          "path": "/opt/homebrew/bin/sqlmap",
+          "status": "installed",
+          "version": "1.10.7"
+        },
+        {
+          "category": "web",
+          "installMethod": "go",
+          "name": "dalfox",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "homebrew",
+          "name": "feroxbuster",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "go",
+          "name": "ffuf",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "pip",
+          "name": "arjun",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "homebrew",
+          "name": "wpscan",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "homebrew",
+          "name": "testssl",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "pip",
+          "name": "graphqlmap",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "pip",
+          "name": "jwt_tool",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "network",
+          "installMethod": "pip",
+          "name": "netexec",
+          "path": "/Users/eric/.local/bin/netexec",
+          "status": "installed",
+          "version": "1.5.1"
+        },
+        {
+          "category": "network",
+          "installMethod": "homebrew",
+          "name": "snmpwalk",
+          "path": "/usr/bin/snmpwalk",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "network",
+          "installMethod": "homebrew",
+          "name": "tshark",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "network",
+          "installMethod": "homebrew",
+          "name": "bettercap",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "network",
+          "installMethod": "go",
+          "name": "chisel",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "credentials",
+          "installMethod": "homebrew",
+          "name": "hashcat",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "credentials",
+          "installMethod": "homebrew",
+          "name": "hydra",
+          "path": "/opt/homebrew/bin/hydra",
+          "status": "installed",
+          "version": "9.6"
+        },
+        {
+          "category": "credentials",
+          "installMethod": "pip",
+          "name": "haiti",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "credentials",
+          "installMethod": "homebrew",
+          "name": "trufflehog",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "supplychain",
+          "installMethod": "homebrew",
+          "name": "syft",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "supplychain",
+          "installMethod": "homebrew",
+          "name": "grype",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "supplychain",
+          "installMethod": "homebrew",
+          "name": "osv_scanner",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "exploit",
+          "installMethod": "homebrew",
+          "name": "metasploit",
+          "path": "/opt/homebrew/bin/msfconsole",
+          "status": "installed",
+          "version": "6.4.135"
+        },
+        {
+          "category": "exploit",
+          "installMethod": "pip",
+          "name": "pwncat",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "exploit",
+          "installMethod": "homebrew",
+          "name": "sliver",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "post",
+          "installMethod": "pip",
+          "name": "impacket",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "post",
+          "installMethod": "script",
+          "name": "linpeas",
+          "path": "/Users/eric/.exploitbot/tools/linpeas.sh",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "osint",
+          "installMethod": "pip",
+          "name": "sherlock",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "osint",
+          "installMethod": "pip",
+          "name": "holehe",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "osint",
+          "installMethod": "homebrew",
+          "name": "exiftool",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        },
+        {
+          "category": "osint",
+          "installMethod": "go",
+          "name": "gowitness",
+          "path": "",
+          "status": "missing",
+          "version": ""
+        }
+      ]
+    },
+    "toolSettingsActions": {
+      "installedCount": 0,
+      "lastAction": "",
+      "missingCount": 0,
+      "status": "idle",
+      "summary": "",
+      "toolName": ""
+    },
+    "tools": 8,
+    "vulns": 2,
+    "webAction": {
+      "cve": "",
+      "kind": "",
+      "prompt": "",
+      "source": "",
+      "status": "idle",
+      "target": "",
+      "title": ""
+    },
+    "webCVERows": [],
+    "webDirectActions": {
+      "actionLabels": [
+        "Create Finding",
+        "Stash",
+        "Copy",
+        "Search Related CVEs"
+      ],
+      "clipboardPreview": "",
+      "cve": "",
+      "findingPrefill": {
+        "cve": "",
+        "description": "",
+        "severity": "high",
+        "target": "",
+        "title": ""
+      },
+      "findingWizardVisible": false,
+      "lastAction": "",
+      "lastPrompt": "",
+      "lastStashPreview": "",
+      "source": "",
+      "stashCount": 0,
+      "status": "idle",
+      "summary": "",
+      "target": "",
+      "title": ""
+    },
+    "windowOverlayActions": {
+      "findingWizardVisible": false,
+      "lastAction": "",
+      "settingsVisible": false,
+      "status": "idle",
+      "summary": "",
+      "terminalVisible": false
+    }
+  },
+  "status": {
+    "fullPentestToolchainInstalled": "PASS",
+    "missingPentestTools": [],
+    "realInstalledCurlNcLoopback": "PASS",
+    "realInstalledHttpxLoopback": "PASS",
+    "realInstalledHydraLoopback": "PASS",
+    "realInstalledLinpeasLocal": "PASS",
+    "realInstalledNetexecLoopback": "PASS",
+    "realInstalledNmapLoopback": "PASS",
+    "realInstalledNucleiLoopback": "PASS"
+  },
+  "terminalContainsHttpxOutput": true,
+  "terminalContainsHydraOutput": true,
+  "terminalContainsLinpeasOutput": true,
+  "terminalContainsNetexecOutput": true,
+  "terminalContainsNmapOutput": true,
+  "terminalContainsNucleiOutput": true,
+  "terminalContainsRealToolOutput": true,
+  "toolInventory": {
+    "installed": {
+      "curl": "/usr/bin/curl",
+      "httpx": "/Users/eric/.exploitbot/tools/httpx",
+      "hydra": "/opt/homebrew/bin/hydra",
+      "linpeas.sh": "/Users/eric/.exploitbot/tools/linpeas.sh",
+      "msfconsole": "/opt/homebrew/bin/msfconsole",
+      "nc": "/usr/bin/nc",
+      "netexec": "/Users/eric/.local/bin/netexec",
+      "nmap": "/opt/homebrew/bin/nmap",
+      "nuclei": "/opt/homebrew/bin/nuclei",
+      "python3": "/opt/homebrew/bin/python3",
+      "sqlmap": "/opt/homebrew/bin/sqlmap"
+    },
+    "missingPentestTools": [],
+    "optionalLoopbackToolsPresent": {
+      "httpx": true,
+      "hydra": true,
+      "linpeas.sh": true,
+      "netexec": true,
+      "nuclei": true
+    },
+    "requiredRealToolsPresent": true
+  }
+}

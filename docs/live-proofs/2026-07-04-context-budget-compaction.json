@@ -1,0 +1,1197 @@
+{
+  "appApi": "http://127.0.0.1:9999",
+  "budget": {
+    "automaticInjectedContextCap": 4,
+    "cacheResponseMethod": "prefix-cache-l2-turboquant",
+    "cacheResponsesInferenceMethod": "prefix-cache-l2-turboquant",
+    "cacheSessionFields": [
+      "cacheResponsesMethod",
+      "cacheResponsesInferenceMethod",
+      "sessionBoundaryMode",
+      "newModelSessionBehavior",
+      "prefixCache",
+      "promptL2Disk",
+      "pagedCache",
+      "blockL2Disk",
+      "turboQuantKV"
+    ],
+    "chatMaxTokens": 64,
+    "compactionFormat": "single-line-snippet",
+    "configuredMaxSnippets": 3,
+    "contextDeliveryModes": [
+      "automaticBoundedInjection",
+      "onDemandSearchContext",
+      "persistedTurnAudit",
+      "durableEmbeddingIndex",
+      "activeScopeStashRetrieval"
+    ],
+    "contextPacketMaxCharacters": 6000,
+    "contextPacketMaxSelectedSnippets": 8,
+    "contractCount": 11,
+    "contractParity": true,
+    "contracts": {
+      "automaticContextCap": true,
+      "cacheSessionBadges": true,
+      "compactCatalogFormatting": true,
+      "configuredContextLimitBounded": true,
+      "contextPacketHardBudget": true,
+      "cveContextOnDemand": true,
+      "maxIterationsBounded": true,
+      "maxTokensForwarded": true,
+      "newContextPreservesEngineCache": true,
+      "promptInjectionBoundedContext": true,
+      "stashContextOnDemand": true
+    },
+    "currentInjectedContextLimit": 3,
+    "maxIterations": 7,
+    "maxTokens": 64,
+    "newContextBehavior": "clear-visible-chat-preserve-engine-cache-session",
+    "newModelSessionBehavior": "new-context-window-preserve-engine-cache-session",
+    "ok": true,
+    "policyStepCount": 6,
+    "policySteps": [
+      "selectBoundedContext",
+      "applyHardContextPacketBudget",
+      "compactCatalogSnippets",
+      "applyMaxTokenBudget",
+      "preserveCacheOnNewContext",
+      "reuseStashAndCVEOnDemand"
+    ],
+    "promptInjectionPolicy": "search-on-demand-not-force-injected",
+    "proofCount": 8,
+    "proofFileParity": true,
+    "proofs": [
+      "context-budget-compaction-proof.py",
+      "context-packet-budget-proof.py",
+      "context-coverage-proof.py",
+      "context-flow-matrix-proof.py",
+      "context-window-cache-proof.py",
+      "chat-coverage-proof.py",
+      "stash-retrieval-proof.py",
+      "semantic-cve-proof.py"
+    ],
+    "retrievalSources": [
+      "asset.port",
+      "finding",
+      "tool.output",
+      "stash.note",
+      "cve"
+    ],
+    "route": "/qa/context-budget-compaction"
+  },
+  "chat": {
+    "cacheResponseMethod": "prefix-cache-l2-turboquant",
+    "cacheResponsesInferenceMethod": "prefix-cache-l2-turboquant",
+    "cacheSessionFieldCount": 9,
+    "cacheSessionFieldParity": true,
+    "cacheSessionFieldProofCount": 9,
+    "cacheSessionFieldProofParity": true,
+    "cacheSessionFieldProofs": {
+      "blockL2Disk": [
+        "context-window-cache-proof.py"
+      ],
+      "cacheResponsesInferenceMethod": [
+        "context-window-cache-proof.py",
+        "chat-new-context-confirm-proof.py"
+      ],
+      "cacheResponsesMethod": [
+        "context-window-cache-proof.py",
+        "chat-new-context-confirm-proof.py"
+      ],
+      "newModelSessionBehavior": [
+        "context-window-cache-proof.py",
+        "chat-new-context-confirm-proof.py"
+      ],
+      "pagedCache": [
+        "context-window-cache-proof.py"
+      ],
+      "prefixCache": [
+        "context-window-cache-proof.py",
+        "visual-chat-proof.py"
+      ],
+      "promptL2Disk": [
+        "context-window-cache-proof.py"
+      ],
+      "sessionBoundaryMode": [
+        "context-window-cache-proof.py",
+        "chat-new-context-confirm-proof.py"
+      ],
+      "turboQuantKV": [
+        "context-window-cache-proof.py",
+        "visual-chat-proof.py"
+      ]
+    },
+    "cacheSessionFields": [
+      "cacheResponsesMethod",
+      "cacheResponsesInferenceMethod",
+      "sessionBoundaryMode",
+      "newModelSessionBehavior",
+      "prefixCache",
+      "promptL2Disk",
+      "pagedCache",
+      "blockL2Disk",
+      "turboQuantKV"
+    ],
+    "cacheSessionIndicator": "prefix/l2/tq",
+    "contracts": {
+      "approvalControls": true,
+      "contextInspector": true,
+      "copyAndStashActions": true,
+      "newContextCachePreservation": true,
+      "reasoningCollapse": true,
+      "reasoningToggle": true,
+      "requestAuditBadges": true,
+      "responsesEndpointReuse": true,
+      "scrollLockVisuals": true,
+      "sendStopClear": true,
+      "stashSendChatControl": true,
+      "streamingContentDeltas": true,
+      "streamingReasoningDeltas": true,
+      "streamingToolCallDeltas": true,
+      "streamingUsageMetrics": true,
+      "tokenCounters": true,
+      "toolActionChatControl": true,
+      "toolOutputExpansion": true,
+      "visibleCacheSessionBadges": true
+    },
+    "headerCacheBadgeCount": 4,
+    "headerCacheBadgeParity": true,
+    "headerCacheBadgeProofCount": 4,
+    "headerCacheBadgeProofParity": true,
+    "headerCacheBadgeProofs": {
+      "cache preserved": [
+        "context-window-cache-proof.py",
+        "visual-chat-proof.py"
+      ],
+      "ctx": [
+        "visual-chat-proof.py",
+        "chat-control-actions-proof.py"
+      ],
+      "new ctx keeps cache": [
+        "chat-new-context-confirm-proof.py",
+        "visual-chat-proof.py"
+      ],
+      "prefix/l2/tq": [
+        "context-window-cache-proof.py",
+        "visual-chat-proof.py"
+      ]
+    },
+    "headerCacheBadges": [
+      "ctx",
+      "cache preserved",
+      "prefix/l2/tq",
+      "new ctx keeps cache"
+    ],
+    "newContextBehavior": "clear-visible-chat-preserve-engine-cache-session",
+    "newContextSessionBoundary": "new ctx keeps cache",
+    "newModelSessionBehavior": "new-context-window-preserve-engine-cache-session",
+    "ok": true,
+    "proofCount": 16,
+    "proofFileParity": true,
+    "proofs": [
+      "live-turn-harness.py",
+      "chat-actions-proof.py",
+      "chat-control-actions-proof.py",
+      "chat-turn-controls-proof.py",
+      "chat-tool-output-expand-proof.py",
+      "chat-reasoning-collapse-proof.py",
+      "chat-new-context-confirm-proof.py",
+      "context-window-cache-proof.py",
+      "request-audit-proof.py",
+      "stash-send-chat-control-proof.py",
+      "tool-action-chat-control-proof.py",
+      "visual-chat-proof.py",
+      "visual-chat-interaction-proof.py",
+      "visual-context-inspector-proof.py",
+      "visual-request-audit-proof.py",
+      "streaming-parser-reuse-proof.py"
+    ],
+    "routes": [
+      "/send",
+      "/stop",
+      "/reasoning",
+      "/approve",
+      "/reject",
+      "/context/new",
+      "/messages",
+      "/qa/seed-chat-visual-states",
+      "/qa/chat-visual-mode",
+      "/qa/seed-chat-tool-output-expand",
+      "/qa/chat-tool-output-expand",
+      "/qa/seed-chat-reasoning-collapse",
+      "/qa/chat-reasoning-collapse",
+      "/qa/seed-chat-actions",
+      "/qa/chat-action",
+      "/qa/seed-chat-request-audit-visual",
+      "/qa/chat-context-inspector",
+      "/qa/chat-new-context-confirm",
+      "/qa/seed-chat-control-actions",
+      "/qa/chat-control-action",
+      "/qa/streaming-parser-reuse"
+    ],
+    "stateKeys": [
+      "chatActions",
+      "chatControlActions",
+      "chat",
+      "messages",
+      "requestContext",
+      "contextWindow",
+      "qaChatVisual.headerBadges",
+      "qaChatVisual.toolOutputExpansion",
+      "qaChatVisual.reasoningBlock",
+      "qaChatVisual.newContextConfirm",
+      "stashActions",
+      "feedRecent"
+    ],
+    "streamingParserContractCount": 18,
+    "streamingParserContractParity": true,
+    "streamingParserProofLevel": "app-source-and-engine-test-backed",
+    "streamingParserResponsesStoreSessionMode": "store-response-session-and-resolve-previous-response-id",
+    "streamingParserUsageTelemetry": "stream_options.include_usage-with-cached_tokens",
+    "visualManifests": [
+      "docs/visual-proofs/checkpoint-71/manifest.json",
+      "docs/visual-proofs/checkpoint-72/manifest.json",
+      "docs/visual-proofs/checkpoint-84/manifest.json",
+      "docs/visual-proofs/checkpoint-87/manifest.json"
+    ]
+  },
+  "context": {
+    "automaticInjectedContextCap": 4,
+    "contextDeliveryModeCount": 5,
+    "contextDeliveryModeParity": true,
+    "contextDeliveryModeProofCount": 5,
+    "contextDeliveryModeProofFileParity": true,
+    "contextDeliveryModeProofParity": true,
+    "contextDeliveryModeProofs": {
+      "activeScopeStashRetrieval": [
+        "stash-retrieval-proof.py"
+      ],
+      "automaticBoundedInjection": [
+        "context-catalog-proof.py",
+        "request-audit-proof.py"
+      ],
+      "durableEmbeddingIndex": [
+        "catalog-embedding-audit-proof.py"
+      ],
+      "onDemandSearchContext": [
+        "agent-search-context-proof.py"
+      ],
+      "persistedTurnAudit": [
+        "request-audit-proof.py",
+        "persistence-proof.py"
+      ]
+    },
+    "contextDeliveryModes": [
+      "automaticBoundedInjection",
+      "onDemandSearchContext",
+      "persistedTurnAudit",
+      "durableEmbeddingIndex",
+      "activeScopeStashRetrieval"
+    ],
+    "contracts": {
+      "agentSearchContext": true,
+      "boundedCatalog": true,
+      "contextBudgetCompaction": true,
+      "embeddingAudit": true,
+      "newContextCachePreservation": true,
+      "requestAudit": true,
+      "resultToContext": true,
+      "stashRetrieval": true
+    },
+    "currentConfiguredMaxSnippets": 3,
+    "currentInjectedContextLimit": 3,
+    "maxSnippetsDefault": 4,
+    "ok": true,
+    "proofCount": 11,
+    "proofFileParity": true,
+    "proofs": [
+      "context-catalog-proof.py",
+      "result-context-catalog-proof.py",
+      "agent-search-context-proof.py",
+      "catalog-embedding-audit-proof.py",
+      "stash-retrieval-proof.py",
+      "semantic-cve-proof.py",
+      "tool-fanout-status-proof.py",
+      "request-audit-proof.py",
+      "context-window-cache-proof.py",
+      "persistence-proof.py",
+      "context-budget-compaction-proof.py"
+    ],
+    "retrievalSourceCount": 5,
+    "retrievalSourceParity": true,
+    "retrievalSourceProofCount": 5,
+    "retrievalSourceProofFileParity": true,
+    "retrievalSourceProofParity": true,
+    "retrievalSourceProofs": {
+      "asset.port": [
+        "context-catalog-proof.py",
+        "result-context-catalog-proof.py"
+      ],
+      "cve": [
+        "semantic-cve-proof.py",
+        "agent-search-context-proof.py"
+      ],
+      "finding": [
+        "context-catalog-proof.py"
+      ],
+      "stash.note": [
+        "context-catalog-proof.py",
+        "stash-retrieval-proof.py"
+      ],
+      "tool.output": [
+        "result-context-catalog-proof.py",
+        "tool-fanout-status-proof.py"
+      ]
+    },
+    "retrievalSources": [
+      "asset.port",
+      "finding",
+      "tool.output",
+      "stash.note",
+      "cve"
+    ],
+    "routes": [
+      "/context/new",
+      "/qa/context-packet",
+      "/qa/seed-context",
+      "/qa/seed-context-scope",
+      "/qa/seed-catalog-embeddings",
+      "/qa/seed-stash-retrieval",
+      "/qa/seed-semantic-cves",
+      "/qa/context-budget-compaction"
+    ],
+    "searchToolName": "search_context",
+    "stateKeys": [
+      "contextCatalog",
+      "requestContext",
+      "contextWindow",
+      "catalogEmbeddings",
+      "stashRetrieval",
+      "cveSemantic",
+      "messages.contextSelections",
+      "messages.toolSchemas"
+    ]
+  },
+  "coverageChatAndContext": {
+    "agentFlowInventoryCallbackCount": 38,
+    "agentFlowInventoryFileCount": 8,
+    "agentFlowInventoryFunctionCount": 616,
+    "agentFlowInventoryGroupCounts": {
+      "activityTelemetry": 1,
+      "agentManager": 1,
+      "appStateWiring": 1,
+      "contextCatalogue": 1,
+      "conversationLoop": 1,
+      "resultIngestion": 1,
+      "toolCatalogue": 1,
+      "toolExecution": 1
+    },
+    "agentFlowInventoryPhaseCoverageParity": true,
+    "agentFlowInventoryPhases": [
+      "sendGuard",
+      "contextCatalogue",
+      "toolSchemaRanking",
+      "streamCompletion",
+      "reasoningAndMetrics",
+      "toolCallAccumulation",
+      "manualSuggestion",
+      "copilotApproval",
+      "scopeEnforcement",
+      "builtinCallbackExecution",
+      "subprocessExecution",
+      "resultIngestion",
+      "activityTelemetry",
+      "phaseAdvance",
+      "loopContinuation",
+      "stopCancel"
+    ],
+    "agentFlowInventoryProofFileParity": true,
+    "agentFlowInventoryTypeCount": 67,
+    "automaticInjectedContextCap": 4,
+    "cacheResponsesInferenceMethod": "prefix-cache-l2-turboquant",
+    "cacheSessionFieldCount": 9,
+    "cacheSessionFieldParity": true,
+    "cacheSessionFieldProofCount": 9,
+    "cacheSessionFieldProofParity": true,
+    "cacheSessionFieldProofs": {
+      "blockL2Disk": [
+        "context-window-cache-proof.py"
+      ],
+      "cacheResponsesInferenceMethod": [
+        "context-window-cache-proof.py",
+        "chat-new-context-confirm-proof.py"
+      ],
+      "cacheResponsesMethod": [
+        "context-window-cache-proof.py",
+        "chat-new-context-confirm-proof.py"
+      ],
+      "newModelSessionBehavior": [
+        "context-window-cache-proof.py",
+        "chat-new-context-confirm-proof.py"
+      ],
+      "pagedCache": [
+        "context-window-cache-proof.py"
+      ],
+      "prefixCache": [
+        "context-window-cache-proof.py",
+        "visual-chat-proof.py"
+      ],
+      "promptL2Disk": [
+        "context-window-cache-proof.py"
+      ],
+      "sessionBoundaryMode": [
+        "context-window-cache-proof.py",
+        "chat-new-context-confirm-proof.py"
+      ],
+      "turboQuantKV": [
+        "context-window-cache-proof.py",
+        "visual-chat-proof.py"
+      ]
+    },
+    "cacheSessionFields": [
+      "cacheResponsesMethod",
+      "cacheResponsesInferenceMethod",
+      "sessionBoundaryMode",
+      "newModelSessionBehavior",
+      "prefixCache",
+      "promptL2Disk",
+      "pagedCache",
+      "blockL2Disk",
+      "turboQuantKV"
+    ],
+    "cacheSessionIndicator": "prefix/l2/tq",
+    "chatContractCount": 19,
+    "chatContracts": {
+      "approvalControls": true,
+      "contextInspector": true,
+      "copyAndStashActions": true,
+      "newContextCachePreservation": true,
+      "reasoningCollapse": true,
+      "reasoningToggle": true,
+      "requestAuditBadges": true,
+      "responsesEndpointReuse": true,
+      "scrollLockVisuals": true,
+      "sendStopClear": true,
+      "stashSendChatControl": true,
+      "streamingContentDeltas": true,
+      "streamingReasoningDeltas": true,
+      "streamingToolCallDeltas": true,
+      "streamingUsageMetrics": true,
+      "tokenCounters": true,
+      "toolActionChatControl": true,
+      "toolOutputExpansion": true,
+      "visibleCacheSessionBadges": true
+    },
+    "chatProofCount": 16,
+    "chatProofFileParity": true,
+    "chatProofs": [
+      "live-turn-harness.py",
+      "chat-actions-proof.py",
+      "chat-control-actions-proof.py",
+      "chat-turn-controls-proof.py",
+      "chat-tool-output-expand-proof.py",
+      "chat-reasoning-collapse-proof.py",
+      "chat-new-context-confirm-proof.py",
+      "context-window-cache-proof.py",
+      "request-audit-proof.py",
+      "stash-send-chat-control-proof.py",
+      "tool-action-chat-control-proof.py",
+      "visual-chat-proof.py",
+      "visual-chat-interaction-proof.py",
+      "visual-context-inspector-proof.py",
+      "visual-request-audit-proof.py",
+      "streaming-parser-reuse-proof.py"
+    ],
+    "chatRouteCount": 21,
+    "chatRoutes": [
+      "/send",
+      "/stop",
+      "/reasoning",
+      "/approve",
+      "/reject",
+      "/context/new",
+      "/messages",
+      "/qa/seed-chat-visual-states",
+      "/qa/chat-visual-mode",
+      "/qa/seed-chat-tool-output-expand",
+      "/qa/chat-tool-output-expand",
+      "/qa/seed-chat-reasoning-collapse",
+      "/qa/chat-reasoning-collapse",
+      "/qa/seed-chat-actions",
+      "/qa/chat-action",
+      "/qa/seed-chat-request-audit-visual",
+      "/qa/chat-context-inspector",
+      "/qa/chat-new-context-confirm",
+      "/qa/seed-chat-control-actions",
+      "/qa/chat-control-action",
+      "/qa/streaming-parser-reuse"
+    ],
+    "chatStateKeyCount": 12,
+    "chatStateKeys": [
+      "chatActions",
+      "chatControlActions",
+      "chat",
+      "messages",
+      "requestContext",
+      "contextWindow",
+      "qaChatVisual.headerBadges",
+      "qaChatVisual.toolOutputExpansion",
+      "qaChatVisual.reasoningBlock",
+      "qaChatVisual.newContextConfirm",
+      "stashActions",
+      "feedRecent"
+    ],
+    "contextBudgetCompactionFormat": "single-line-snippet",
+    "contextBudgetContractCount": 11,
+    "contextBudgetContractParity": true,
+    "contextBudgetContracts": {
+      "automaticContextCap": true,
+      "cacheSessionBadges": true,
+      "compactCatalogFormatting": true,
+      "configuredContextLimitBounded": true,
+      "contextPacketHardBudget": true,
+      "cveContextOnDemand": true,
+      "maxIterationsBounded": true,
+      "maxTokensForwarded": true,
+      "newContextPreservesEngineCache": true,
+      "promptInjectionBoundedContext": true,
+      "stashContextOnDemand": true
+    },
+    "contextBudgetMaxIterations": 7,
+    "contextBudgetMaxTokens": 64,
+    "contextBudgetPolicyStepCount": 6,
+    "contextBudgetPolicySteps": [
+      "selectBoundedContext",
+      "applyHardContextPacketBudget",
+      "compactCatalogSnippets",
+      "applyMaxTokenBudget",
+      "preserveCacheOnNewContext",
+      "reuseStashAndCVEOnDemand"
+    ],
+    "contextBudgetPromptInjectionPolicy": "search-on-demand-not-force-injected",
+    "contextBudgetProofCount": 8,
+    "contextBudgetProofFileParity": true,
+    "contextBudgetProofs": [
+      "context-budget-compaction-proof.py",
+      "context-packet-budget-proof.py",
+      "context-coverage-proof.py",
+      "context-flow-matrix-proof.py",
+      "context-window-cache-proof.py",
+      "chat-coverage-proof.py",
+      "stash-retrieval-proof.py",
+      "semantic-cve-proof.py"
+    ],
+    "contextContractCount": 8,
+    "contextContracts": {
+      "agentSearchContext": true,
+      "boundedCatalog": true,
+      "contextBudgetCompaction": true,
+      "embeddingAudit": true,
+      "newContextCachePreservation": true,
+      "requestAudit": true,
+      "resultToContext": true,
+      "stashRetrieval": true
+    },
+    "contextDeliveryModeCount": 5,
+    "contextDeliveryModeParity": true,
+    "contextDeliveryModeProofCount": 5,
+    "contextDeliveryModeProofFileParity": true,
+    "contextDeliveryModeProofParity": true,
+    "contextDeliveryModeProofs": {
+      "activeScopeStashRetrieval": [
+        "stash-retrieval-proof.py"
+      ],
+      "automaticBoundedInjection": [
+        "context-catalog-proof.py",
+        "request-audit-proof.py"
+      ],
+      "durableEmbeddingIndex": [
+        "catalog-embedding-audit-proof.py"
+      ],
+      "onDemandSearchContext": [
+        "agent-search-context-proof.py"
+      ],
+      "persistedTurnAudit": [
+        "request-audit-proof.py",
+        "persistence-proof.py"
+      ]
+    },
+    "contextDeliveryModes": [
+      "automaticBoundedInjection",
+      "onDemandSearchContext",
+      "persistedTurnAudit",
+      "durableEmbeddingIndex",
+      "activeScopeStashRetrieval"
+    ],
+    "contextEfficiencyBlockedInvariantIds": [
+      "hybridSSMAsyncReDerive"
+    ],
+    "contextEfficiencyContractParity": false,
+    "contextEfficiencyInvariantCount": 13,
+    "contextEfficiencyInvariantIds": [
+      "automaticContextCap",
+      "contextPacketBudget",
+      "maxTokenAndIterationForwarding",
+      "newContextPreservesCache",
+      "stashAndCVEOnDemandRetrieval",
+      "promptInjectionBoundedContext",
+      "responsesPreviousResponseReuse",
+      "streamingDeltaCoverage",
+      "parallelSessionBatching",
+      "qwenMemoryCeiling",
+      "l2DiskCacheHit",
+      "turboQuantKVQ4",
+      "hybridSSMAsyncReDerive"
+    ],
+    "contextEfficiencyProofFileParity": true,
+    "contextEfficiencyReadyInvariantCount": 12,
+    "contextEfficiencyRouteParity": true,
+    "contextFlowMatrixDeliveryModeCount": 5,
+    "contextFlowMatrixProofFileParity": true,
+    "contextFlowMatrixProofOwnerFileParity": true,
+    "contextFlowMatrixRetrievalSourceCount": 5,
+    "contextPacketMaxCharacters": 6000,
+    "contextPacketMaxSelectedSnippets": 8,
+    "contextPromptInjectionBoundaryContractCount": 17,
+    "contextPromptInjectionBoundaryContractParity": true,
+    "contextPromptInjectionBoundaryContracts": {
+      "alwaysVisibleCallbackTools": true,
+      "automaticContextCap": true,
+      "configuredContextLimitBounded": true,
+      "contextSearchOnDemandTool": true,
+      "coverageIndexMirror": true,
+      "cveSearchOnDemandTool": true,
+      "deepRuntimeMirror": true,
+      "destructiveShellPolicy": true,
+      "fullAgentSchemaSeparate": true,
+      "lookupCVEOnDemandTool": true,
+      "responsesPreviousResponseReuse": true,
+      "shellRunVisible": true,
+      "stashRetrievalOnDemand": true,
+      "streamingContentDelta": true,
+      "streamingReasoningDelta": true,
+      "streamingToolCallDelta": true,
+      "toolSchemaCap": true
+    },
+    "contextPromptInjectionBoundaryPolicy": "search-on-demand-not-force-injected",
+    "contextPromptInjectionBoundaryProofFileParity": true,
+    "contextPromptInjectionBoundaryProofs": [
+      "context-prompt-injection-boundary-proof.py",
+      "context-budget-compaction-proof.py",
+      "context-coverage-proof.py",
+      "context-flow-matrix-proof.py",
+      "cve-import-embedding-coverage-proof.py",
+      "tool-registry-coverage-proof.py",
+      "tool-flow-coverage-proof.py",
+      "streaming-parser-reuse-proof.py",
+      "session-context-cache-flow-proof.py",
+      "deep-runtime-flow-coverage-proof.py",
+      "coverage-index-proof.py"
+    ],
+    "contextPromptInjectionBoundaryRowCount": 9,
+    "contextPromptInjectionBoundaryRows": [
+      "boundedAutomaticContext",
+      "onDemandContextSearch",
+      "onDemandCVERetrieval",
+      "stashRetrievalOnDemand",
+      "tabRankedToolSchemaCap",
+      "fullAgentSchemaSeparation",
+      "shellDestructivePatternPolicy",
+      "streamingDeltaIsolation",
+      "responsesSessionReuse"
+    ],
+    "contextProofCount": 11,
+    "contextProofFileParity": true,
+    "contextProofs": [
+      "context-catalog-proof.py",
+      "result-context-catalog-proof.py",
+      "agent-search-context-proof.py",
+      "catalog-embedding-audit-proof.py",
+      "stash-retrieval-proof.py",
+      "semantic-cve-proof.py",
+      "tool-fanout-status-proof.py",
+      "request-audit-proof.py",
+      "context-window-cache-proof.py",
+      "persistence-proof.py",
+      "context-budget-compaction-proof.py"
+    ],
+    "contextRouteCount": 8,
+    "contextRoutes": [
+      "/context/new",
+      "/qa/context-packet",
+      "/qa/seed-context",
+      "/qa/seed-context-scope",
+      "/qa/seed-catalog-embeddings",
+      "/qa/seed-stash-retrieval",
+      "/qa/seed-semantic-cves",
+      "/qa/context-budget-compaction"
+    ],
+    "contextSessionEfficiencyContractParity": true,
+    "contextSessionEfficiencyLiveAgentStressArtifactOK": true,
+    "contextSessionEfficiencyMaxTokens": 64,
+    "contextSessionEfficiencyProofFileParity": true,
+    "contextSessionEfficiencyReadyRowCount": 15,
+    "contextSessionEfficiencyResponsesReuseMode": "store-response-session-and-resolve-previous-response-id",
+    "contextSessionEfficiencyRowCount": 15,
+    "contextSessionEfficiencyRows": [
+      "automaticContextCap",
+      "maxTokenForwarding",
+      "maxIterationBudget",
+      "compactionFormat",
+      "newContextCachePreservation",
+      "stashCVEOnDemand",
+      "responsesPreviousResponseReuse",
+      "streamingDeltaUsageTelemetry",
+      "parallelSessionConcurrency",
+      "qwenContinuousBatching",
+      "minimaxContinuousBatching",
+      "liveLoadedModelAgentStress",
+      "l2DiskHitStorage",
+      "turboQuantKV",
+      "hybridSSMAsyncReDerive"
+    ],
+    "contextStateKeyCount": 8,
+    "contextStateKeys": [
+      "contextCatalog",
+      "requestContext",
+      "contextWindow",
+      "catalogEmbeddings",
+      "stashRetrieval",
+      "cveSemantic",
+      "messages.contextSelections",
+      "messages.toolSchemas"
+    ],
+    "currentInjectedContextLimit": 3,
+    "cveImportEmbeddingContractCount": 12,
+    "cveImportEmbeddingContractParity": false,
+    "cveImportEmbeddingContracts": {
+      "contextPacketSemanticCVE": false,
+      "coverageIndexMirror": true,
+      "cveIdExtraction": true,
+      "includeOnlyAllowlist": true,
+      "onDemandCVERetrieval": true,
+      "promptInjectionBoundedContext": true,
+      "semanticEmbedderPath": true,
+      "semanticEmbeddingState": false,
+      "semanticFixtureSeed": true,
+      "settingsImportListAction": true,
+      "supplyChainStatusTelemetry": true,
+      "testingImportAvoidsNetwork": true
+    },
+    "cveImportEmbeddingExcludedImportIds": [],
+    "cveImportEmbeddingFlowContractCount": 10,
+    "cveImportEmbeddingFlowContractParity": true,
+    "cveImportEmbeddingFlowContracts": {
+      "coverageIndexMirror": true,
+      "cveIdExtraction": true,
+      "includeOnlyAllowlist": true,
+      "onDemandCVERetrieval": true,
+      "promptInjectionBoundedContext": true,
+      "semanticEmbedderPath": true,
+      "semanticFixtureSeed": true,
+      "settingsImportListAction": true,
+      "supplyChainStatusTelemetry": true,
+      "testingImportAvoidsNetwork": true
+    },
+    "cveImportEmbeddingImportFormats": [
+      "inline-text",
+      "csv",
+      "json",
+      "file-path"
+    ],
+    "cveImportEmbeddingPromptInjectionPolicy": "search-on-demand-not-force-injected",
+    "cveImportEmbeddingProofFileParity": true,
+    "cveImportEmbeddingProofLevel": "app-state-and-source-backed",
+    "cveImportEmbeddingSelectedImportIds": [],
+    "cveImportEmbeddingSemanticUsedEmbedding": false,
+    "cveTaxonomyAgentToolNames": [
+      "search_cve",
+      "lookup_cve",
+      "search_context"
+    ],
+    "cveTaxonomyBoundedContextContract": "search-on-demand-not-force-injected",
+    "cveTaxonomyEvidenceFlow": [
+      "scanEvidence",
+      "serviceFingerprint",
+      "productNormalize",
+      "cveSearch",
+      "riskRank",
+      "findingDraft",
+      "contextCatalog",
+      "reportSection"
+    ],
+    "cveTaxonomyEvidenceFlowParity": true,
+    "cveTaxonomyMatrixCount": 60,
+    "cveTaxonomyMatrixEvidenceFlowCount": 8,
+    "cveTaxonomyMatrixProofFileParity": true,
+    "cveTaxonomyMatrixRowProofFileParity": true,
+    "cveTaxonomyReportingContract": "asset-surface-evidence-vuln-exploit-result-remediation",
+    "cveTaxonomyRiskSignalParity": true,
+    "cveTaxonomyRiskSignals": [
+      "cisaKev",
+      "cvss",
+      "exploitAvailable",
+      "ransomwareUse",
+      "internetFacing",
+      "assetCriticality",
+      "observedEvidence"
+    ],
+    "cveTaxonomySoftwareFamilies": [
+      "webServers",
+      "appServers",
+      "cmsAndEcommerce",
+      "identityAndDirectory",
+      "vpnAndEdge",
+      "networkAppliances",
+      "cloudAndKubernetes",
+      "containersAndRegistries",
+      "ciCdAndSourceControl",
+      "databasesAndCaches",
+      "emailAndCollaboration",
+      "fileTransferAndMft",
+      "virtualizationAndBackup",
+      "loggingAndObservability",
+      "endpointsAndEdr",
+      "otAndIcs",
+      "remoteManagement",
+      "webAppsAndApis",
+      "secretsAndSupplyChain"
+    ],
+    "cveTaxonomySoftwareFamilyCount": 19,
+    "cveTaxonomySoftwareFamilyParity": true,
+    "cveTaxonomySourceFeedCount": 5,
+    "cveTaxonomySourceFeedParity": true,
+    "cveTaxonomySourceFeeds": [
+      "CISA KEV",
+      "NVD CVE API 2.0",
+      "OWASP Top 10",
+      "MITRE CWE Top 25",
+      "local custom CVEs"
+    ],
+    "cveTaxonomyVulnerabilityClassCount": 21,
+    "cveTaxonomyVulnerabilityClassParity": true,
+    "cveTaxonomyVulnerabilityClasses": [
+      "rce",
+      "authBypass",
+      "privilegeEscalation",
+      "pathTraversal",
+      "fileReadOrDisclosure",
+      "deserialization",
+      "sqlInjection",
+      "xss",
+      "ssrf",
+      "xxe",
+      "commandInjection",
+      "fileUpload",
+      "memoryCorruption",
+      "cryptoFailure",
+      "credentialExposure",
+      "accessControl",
+      "misconfiguration",
+      "supplyChain",
+      "containerEscape",
+      "adAbuse",
+      "webshellPersistence"
+    ],
+    "endpointCount": 16,
+    "endpoints": [
+      "/qa/chat-coverage",
+      "/qa/streaming-parser-reuse",
+      "/qa/context-coverage",
+      "/qa/context-budget-compaction",
+      "/qa/context-prompt-injection-boundary",
+      "/qa/context-flow-matrix",
+      "/qa/context-session-efficiency-matrix",
+      "/qa/context-efficiency-invariants",
+      "/qa/tool-engine-context-ops-matrix",
+      "/qa/evidence-lifecycle-coverage",
+      "/qa/evidence-lifecycle-flow-matrix",
+      "/qa/cve-taxonomy-coverage",
+      "/qa/cve-taxonomy-matrix",
+      "/qa/cve-import-embedding-coverage",
+      "/qa/state-dependent-contract-matrix",
+      "/qa/agent-flow-inventory"
+    ],
+    "evidenceLifecycleContextPolicy": {
+      "automaticInjection": "bounded",
+      "automaticSnippetCap": 4,
+      "forceInjectAllEvidence": false,
+      "persistTurnAudit": true,
+      "targetedRetrieval": "search_context"
+    },
+    "evidenceLifecycleContextPolicyParity": true,
+    "evidenceLifecycleFlowMatrixHandoffCount": 12,
+    "evidenceLifecycleFlowMatrixProofFileParity": true,
+    "evidenceLifecycleFlowMatrixProofOwnerFileParity": true,
+    "evidenceLifecycleFlowMatrixStageCount": 11,
+    "evidenceLifecycleFlowMatrixStorageTargetCount": 11,
+    "evidenceLifecycleHandoffCount": 12,
+    "evidenceLifecycleHandoffParity": true,
+    "evidenceLifecycleHandoffs": [
+      "toolOutputToParser",
+      "parserToResultsTab",
+      "parserToContextCatalog",
+      "webVulnToFindingWizard",
+      "findingWizardToFindingsStore",
+      "findingToReportPreview",
+      "findingToReportExport",
+      "findingToAgentDraft",
+      "findingToContextCatalog",
+      "stashToContextCatalog",
+      "stashToChatHandoff",
+      "searchContextToAgentLoop"
+    ],
+    "evidenceLifecycleProofCount": 12,
+    "evidenceLifecycleProofFileParity": true,
+    "evidenceLifecycleProofs": [
+      "evidence-lifecycle-coverage-proof.py",
+      "result-parser-routing-proof.py",
+      "result-context-catalog-proof.py",
+      "context-catalog-proof.py",
+      "stash-retrieval-proof.py",
+      "stash-actions-proof.py",
+      "stash-send-chat-control-proof.py",
+      "web-direct-actions-proof.py",
+      "finding-wizard-submit-proof.py",
+      "report-generate-action-proof.py",
+      "report-export-proof.py",
+      "report-agent-action-proof.py"
+    ],
+    "evidenceLifecycleRouteCount": 14,
+    "evidenceLifecycleRouteParity": true,
+    "evidenceLifecycleRoutes": [
+      "/qa/evidence-lifecycle-coverage",
+      "/qa/seed-result-parser-fixture",
+      "/qa/context-packet",
+      "/qa/finding-wizard-submit",
+      "/qa/report-generate-action",
+      "/qa/report-export-action",
+      "/qa/report-create-finding",
+      "/qa/report-submit-finding",
+      "/qa/stash-add",
+      "/qa/stash-send",
+      "/qa/result-parser-coverage",
+      "/qa/context-coverage",
+      "/qa/report-coverage",
+      "/qa/stash-coverage"
+    ],
+    "evidenceLifecycleStageCount": 11,
+    "evidenceLifecycleStageParity": true,
+    "evidenceLifecycleStages": [
+      "toolOutputCaptured",
+      "parsedResultStored",
+      "findingDraftCreated",
+      "findingPersisted",
+      "stashNoteCreated",
+      "reportSectionGenerated",
+      "reportArtifactExported",
+      "agentDraftQueued",
+      "contextCatalogIndexed",
+      "boundedContextSelected",
+      "searchContextRetrieves"
+    ],
+    "evidenceLifecycleStorageTargetCount": 11,
+    "evidenceLifecycleStorageTargetParity": true,
+    "evidenceLifecycleStorageTargets": [
+      "resultsStore.rawResults",
+      "resultsStore.parsedAssets",
+      "resultsStore.vulns",
+      "findings",
+      "stashItems",
+      "generatedReport",
+      "reportExport",
+      "contextCatalog",
+      "catalogEmbeddings",
+      "requestContext",
+      "activityFeed"
+    ],
+    "headerCacheBadgeCount": 4,
+    "headerCacheBadgeParity": true,
+    "headerCacheBadgeProofCount": 4,
+    "headerCacheBadgeProofParity": true,
+    "headerCacheBadgeProofs": {
+      "cache preserved": [
+        "context-window-cache-proof.py",
+        "visual-chat-proof.py"
+      ],
+      "ctx": [
+        "visual-chat-proof.py",
+        "chat-control-actions-proof.py"
+      ],
+      "new ctx keeps cache": [
+        "chat-new-context-confirm-proof.py",
+        "visual-chat-proof.py"
+      ],
+      "prefix/l2/tq": [
+        "context-window-cache-proof.py",
+        "visual-chat-proof.py"
+      ]
+    },
+    "headerCacheBadges": [
+      "ctx",
+      "cache preserved",
+      "prefix/l2/tq",
+      "new ctx keeps cache"
+    ],
+    "newContextSessionBoundary": "new ctx keeps cache",
+    "newModelSessionBehavior": "new-context-window-preserve-engine-cache-session",
+    "ok": true,
+    "proofCount": 17,
+    "proofFileParity": true,
+    "proofs": [
+      "chat-coverage-proof.py",
+      "streaming-parser-reuse-proof.py",
+      "context-coverage-proof.py",
+      "context-budget-compaction-proof.py",
+      "context-packet-budget-proof.py",
+      "context-prompt-injection-boundary-proof.py",
+      "context-flow-matrix-proof.py",
+      "context-session-efficiency-matrix-proof.py",
+      "context-efficiency-invariants-proof.py",
+      "tool-engine-context-ops-matrix-proof.py",
+      "evidence-lifecycle-coverage-proof.py",
+      "evidence-lifecycle-flow-matrix-proof.py",
+      "cve-taxonomy-coverage-proof.py",
+      "cve-taxonomy-matrix-proof.py",
+      "cve-import-embedding-coverage-proof.py",
+      "state-dependent-contract-matrix-proof.py",
+      "agent-flow-inventory-proof.py"
+    ],
+    "retrievalSourceCount": 5,
+    "retrievalSourceParity": true,
+    "retrievalSourceProofCount": 5,
+    "retrievalSourceProofFileParity": true,
+    "retrievalSourceProofParity": true,
+    "retrievalSourceProofs": {
+      "asset.port": [
+        "context-catalog-proof.py",
+        "result-context-catalog-proof.py"
+      ],
+      "cve": [
+        "semantic-cve-proof.py",
+        "agent-search-context-proof.py"
+      ],
+      "finding": [
+        "context-catalog-proof.py"
+      ],
+      "stash.note": [
+        "context-catalog-proof.py",
+        "stash-retrieval-proof.py"
+      ],
+      "tool.output": [
+        "result-context-catalog-proof.py",
+        "tool-fanout-status-proof.py"
+      ]
+    },
+    "retrievalSources": [
+      "asset.port",
+      "finding",
+      "tool.output",
+      "stash.note",
+      "cve"
+    ],
+    "searchToolName": "search_context",
+    "stateDependentClassificationParity": true,
+    "stateDependentFixtureRequiredRowCount": 5,
+    "stateDependentProofFileParity": true,
+    "stateDependentSeedRequiredRowCount": 5,
+    "stateDependentSeedRequiredRows": [
+      "cveSemanticEmbeddingState",
+      "cveContextPacketSemanticHit",
+      "parserToolMatrixFixture",
+      "toolEngineContextOpsStatefulCVE",
+      "deepRuntimeFlowStatefulCVE"
+    ],
+    "stateDependentSeededReadyRowCount": 0,
+    "stateKeyCount": 19,
+    "streamingParserContractCount": 18,
+    "streamingParserContractParity": true,
+    "streamingParserContracts": {
+      "autoToolParserFallback": true,
+      "cacheReuseTelemetry": true,
+      "chatCompletionsStreaming": true,
+      "chatServiceContentDelta": true,
+      "chatServiceReasoningDelta": true,
+      "chatServiceToolCallDelta": true,
+      "chatServiceUsageMetrics": true,
+      "minimaxStreamingToolParser": true,
+      "parserAPIShapeProof": true,
+      "qwenStreamingToolParser": true,
+      "reasoningParserPerRequest": true,
+      "responsesEndpoint": true,
+      "responsesPreviousResponseReuse": true,
+      "responsesSessionStoreEngineTests": true,
+      "responsesStreamingEvents": true,
+      "responsesStreamingSessionStore": true,
+      "responsesUsageCachedTokens": true,
+      "toolChoiceRequiredErrors": true
+    },
+    "streamingParserProofFileParity": true,
+    "streamingParserProofLevel": "app-source-and-engine-test-backed",
+    "streamingParserProofs": [
+      "streaming-parser-reuse-proof.py",
+      "chat-coverage-proof.py",
+      "runtime-coverage-proof.py",
+      "deep-runtime-flow-coverage-proof.py",
+      "parser-tool-matrix-proof.py",
+      "prove-parser-api.py",
+      "verify-live-models.py"
+    ],
+    "streamingParserResponsesStoreSessionMode": "store-response-session-and-resolve-previous-response-id",
+    "streamingParserUsageTelemetry": "stream_options.include_usage-with-cached_tokens",
+    "toolEngineContextOpsContractParity": false,
+    "toolEngineContextOpsProofFileParity": true,
+    "toolEngineContextOpsReadyRowCount": 10,
+    "toolEngineContextOpsRowCount": 12,
+    "toolEngineContextOpsRows": [
+      "toolRegistryExecution",
+      "liveToolProgressTelemetry",
+      "engineParserCacheDefaults",
+      "responsesStreamingReasoningTools",
+      "promptInjectionBoundary",
+      "cveImportSemanticEmbeddings",
+      "contextSessionEfficiency",
+      "stashMemoryRetrieval",
+      "parallelAgentsContinuousBatching",
+      "l2TurboQuantHybridSSMCache",
+      "localQwenMiniMaxRuntimeLane",
+      "coverageIndexMirrors"
+    ]
+  },
+  "finishedAt": "2026-07-04T12:36:37-0700",
+  "ok": true,
+  "proofType": "context-budget-compaction",
+  "startedAt": "2026-07-04T12:35:19-0700",
+  "stateChat": {
+    "enableReasoning": true,
+    "forceFinalAnswerAfterToolResults": true,
+    "maxIterations": 7
+  },
+  "stateEngineConfig": {
+    "blockDiskCacheMaxGB": 10,
+    "blockL2Disk": true,
+    "cacheMemoryPercent": 0.3,
+    "diskCacheMaxGB": 10,
+    "kvCacheGroupSize": 64,
+    "kvCacheQuantization": "turboquant-q4",
+    "maxTokens": 64,
+    "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+    "pagedCache": true,
+    "pagedCacheBlockSize": 64,
+    "prefixCache": false,
+    "promptL2Disk": true,
+    "reasoningParser": "auto",
+    "temperature": 0,
+    "toolCallParser": "auto",
+    "topP": 1,
+    "useModelGenerationDefaults": false
+  },
+  "status": {
+    "cachePreservingNewContext": "PASS",
+    "contextPacketBudget": "PASS",
+    "coverageIndexParity": "PASS",
+    "maxIterationsBounded": "PASS",
+    "maxTokensForwarded": "PASS",
+    "policySteps": "PASS"
+  }
+}
