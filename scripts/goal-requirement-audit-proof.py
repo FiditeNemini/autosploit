@@ -91,7 +91,7 @@ REQUIREMENTS = [
         "requirement": "Real models can choose scenario tool order from a natural-language objective without exact tool-call blocks or app-side exact-call recovery.",
         "areas": ["Independent natural-language scenario tool selection"],
         "expectedStatus": "PARTIAL",
-        "missingEvidence": "Current scenario matrix labels real-Qwen webserver, loopback, phase, and repo/codebase rows as exact_tool_call_prompt_with_app_recovery. The first 27B natural-language objective fixture proof has no exact tool-call blocks and model-selected tools, but timed out after httpx plus repeated run_shell route probing before nuclei/sqlmap/CVE proof; 27B and 35B PASS artifacts are still missing.",
+        "missingEvidence": "Current scenario matrix labels real-Qwen webserver, loopback, phase, and repo/codebase rows as exact_tool_call_prompt_with_app_recovery. The tool-schema exclusion proof passes for hiding run_shell from a scenario-focused catalog and blocking it if emitted anyway. The latest saved 27B natural-language fixture proof has no exact tool-call blocks and receives web schemas with run_shell excluded, but loops on httpx before the required katana/sqlmap/search_cve chain, SQLi proof, final marker, or report proof; 27B and 35B PASS artifacts are still missing.",
     },
     {
         "id": "individual_toolchain_per_tool",

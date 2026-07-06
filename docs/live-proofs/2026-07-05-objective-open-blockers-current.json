@@ -13,7 +13,7 @@
     "generation_reasoning_context",
     "independent_model_tool_choice"
   ],
-  "generatedAt": "2026-07-06T02:12:27-0700",
+  "generatedAt": "2026-07-06T02:41:16-0700",
   "longContextPolicy": {
     "aboveCeilingPolicy": "requires explicit high-risk override and fresh memory headroom",
     "modelLoadForAboveCeilingWithoutOverride": "refuse before model load",
@@ -65,10 +65,11 @@
       "evidence": [
         "docs/live-proofs/2026-07-06-autonomous-scenario-matrix.json",
         "docs/live-proofs/2026-07-06-autonomous-scenario-catalog.json",
+        "docs/live-proofs/2026-07-06-tool-schema-profile-exclusion.json",
         "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-27b.json",
         "docs/live-validation-2026-07-04.md"
       ],
-      "missingEvidence": "Current scenario matrix labels real-Qwen webserver, loopback, phase, and repo/codebase rows as exact_tool_call_prompt_with_app_recovery. The first 27B natural-language objective fixture proof has no exact tool-call blocks and model-selected tools, but timed out after httpx plus repeated run_shell route probing before nuclei/sqlmap/CVE proof; 27B and 35B PASS artifacts are still missing.",
+      "missingEvidence": "Current scenario matrix labels real-Qwen webserver, loopback, phase, and repo/codebase rows as exact_tool_call_prompt_with_app_recovery. The tool-schema exclusion proof passes for hiding run_shell from a scenario-focused catalog and blocking it if emitted anyway. The latest saved 27B natural-language fixture proof has no exact tool-call blocks and receives web schemas with run_shell excluded, but loops on httpx before the required katana/sqlmap/search_cve chain, SQLi proof, final marker, or report proof; 27B and 35B PASS artifacts are still missing.",
       "requiredNextEvidence": [
         "Run a local-fixture webserver/repo/codebase scenario with a natural-language objective only.",
         "no exact tool-call blocks",

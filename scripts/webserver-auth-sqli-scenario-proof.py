@@ -272,6 +272,29 @@ print(json.dumps({{
 """,
     )
     write_executable(
+        tools_dir / "katana",
+        f"""#!/usr/bin/python3
+print("{lab_url}")
+print("{lab_url}/login")
+print("{lab_url}/search?q=test")
+""",
+    )
+    write_executable(
+        tools_dir / "feroxbuster",
+        f"""#!/usr/bin/python3
+print("200      GET      {lab_url}/")
+print("200      GET      {lab_url}/login")
+print("200      GET      {lab_url}/search?q=test")
+""",
+    )
+    write_executable(
+        tools_dir / "ffuf",
+        f"""#!/usr/bin/python3
+print("search                  [Status: 200, Size: 7, Words: 2, Lines: 1]")
+print("{lab_url}/search?q=test")
+""",
+    )
+    write_executable(
         tools_dir / "sqlmap",
         """#!/usr/bin/python3
 print("[INFO] testing GET parameter 'q'")

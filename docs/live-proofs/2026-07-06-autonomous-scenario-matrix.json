@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-06T01:45:54-0700",
+  "generatedAt": "2026-07-06T02:40:33-0700",
   "notes": [
     "Rows aggregate existing live artifacts; artifact generatedAt values show whether evidence is fresh or older.",
     "Webserver SQLi and repo/codebase supply-chain rows are fresh 2026-07-06 app-backed scenarios added for this matrix.",
@@ -22,7 +22,7 @@
       "artifacts": [
         {
           "artifact": "docs/live-proofs/2026-07-06-webserver-auth-sqli-scenario.json",
-          "generatedAt": "2026-07-06T00:51:05-0700",
+          "generatedAt": "2026-07-06T02:40:27-0700",
           "proofType": "webserver-auth-sqli-scenario-live",
           "status": "PASS"
         },

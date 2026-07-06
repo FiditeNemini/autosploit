@@ -28,7 +28,7 @@ EXPECTED_NON_PASSING_LIVE_PROOFS = {
     "docs/live-proofs/2026-07-05-real-qwen-long-context-200k-27b.json": "partial 200k long-context attempt stopped by memory guard",
     "docs/live-proofs/2026-07-05-real-qwen-long-context-224k-27b.json": "partial 224k long-context attempt stopped by memory guard",
     "docs/live-proofs/2026-07-05-release-app-computer-use-current-manual-sweep.json": "partial manual release UI sweep with notarization and loaded-model gates still open",
-    "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-27b.json": "partial independent natural-language Qwen 27B tool-choice attempt timed out before sqlmap/nuclei/CVE proof",
+    "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-27b.json": "partial independent natural-language Qwen 27B tool-choice attempt without stable katana/sqlmap/search_cve/final-report proof",
 }
 SUPERSEDED_FAILED_LIVE_PROOFS = {
     "docs/live-proofs/checkpoint-485-qwen-mxfp-live-current.json": "docs/live-proofs/checkpoint-486-qwen-mxfp-27b-pass.json",

@@ -1,0 +1,138 @@
+{
+  "catalog": {
+    "count": 8,
+    "ok": true,
+    "toolNames": [
+      "search_cve",
+      "lookup_cve",
+      "search_context",
+      "httpx",
+      "katana",
+      "ffuf",
+      "nuclei",
+      "sqlmap"
+    ]
+  },
+  "chat": {
+    "enableReasoning": false,
+    "forceFinalAnswerAfterToolResults": false,
+    "includeUnavailableToolSchemas": false,
+    "maxIterations": 2,
+    "toolSchemaExcludedTools": [
+      "run_shell"
+    ],
+    "toolSchemaMaxTools": 8
+  },
+  "checks": {
+    "catalogExcludedRunShell": "PASS",
+    "excludedShellCommandNotExecuted": "PASS",
+    "excludedToolBlocked": "PASS",
+    "mockEngineOnly": "PASS",
+    "modelAttemptedExcludedTool": "PASS",
+    "stateRecordedExcludedTool": "PASS"
+  },
+  "finishedAt": "2026-07-06T02:40:21-0700",
+  "generatedAt": "2026-07-06T02:40:21-0700",
+  "messageCount": 4,
+  "messages": [
+    {
+      "content": "Authorized local fixture only. Use dedicated web tools and do not run shell.",
+      "role": "user"
+    },
+    {
+      "content": "Attempting a generic shell call that the active profile should block.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 1 of 1 indexed items for phase SCAN, tab web.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=1 cves=0\nSelected snippets:\n- [stash.note] Apache 2.4.49 test note tags=stash,note: Apache 2.4.49 requires CVE-2021-41773 and CVE-2021-42013 checks.\nSelected au",
+      "contextSelections": [
+        {
+          "bodyHash": "089264a78263be70",
+          "source": "stash.note",
+          "tags": "stash,note",
+          "title": "Apache 2.4.49 test note"
+        }
+      ],
+      "contextSnippetCount": 1,
+      "role": "assistant",
+      "toolSchemaCount": 8,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "nuclei",
+        "sqlmap",
+        "httpx",
+        "katana",
+        "feroxbuster"
+      ]
+    },
+    {
+      "content": "Tool request: run_shell\nArguments:\n{\n  \"command\" : \"printf SHOULD_NOT_RUN\"\n}\n\nTool 'run_shell' is excluded by the active tool schema profile.",
+      "role": "toolCall",
+      "status": "blocked",
+      "tool": "run_shell"
+    },
+    {
+      "content": "TOOL_SCHEMA_PROFILE_FINAL",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 1 of 1 indexed items for phase SCAN, tab web.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=1 cves=0\nSelected snippets:\n- [stash.note] Apache 2.4.49 test note tags=stash,note: Apache 2.4.49 requires CVE-2021-41773 and CVE-2021-42013 checks.\nSelected au",
+      "contextSelections": [
+        {
+          "bodyHash": "089264a78263be70",
+          "source": "stash.note",
+          "tags": "stash,note",
+          "title": "Apache 2.4.49 test note"
+        }
+      ],
+      "contextSnippetCount": 1,
+      "role": "assistant",
+      "toolSchemaCount": 8,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "nuclei",
+        "sqlmap",
+        "httpx",
+        "katana",
+        "feroxbuster"
+      ]
+    }
+  ],
+  "modelRequestToolNames": [
+    "search_cve",
+    "lookup_cve",
+    "search_context",
+    "nuclei",
+    "sqlmap",
+    "httpx",
+    "katana",
+    "feroxbuster",
+    "search_cve",
+    "lookup_cve",
+    "search_context",
+    "nuclei",
+    "sqlmap",
+    "httpx",
+    "katana",
+    "feroxbuster"
+  ],
+  "ok": true,
+  "proofType": "tool-schema-profile-exclusion-live-app",
+  "requestContext": {
+    "contextInjected": true,
+    "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 1 of 1 indexed items for phase SCAN, tab web.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=1 cves=0\nSelected snippets:\n- [stash.note] Apache 2.4.49 test note tags=stash,note: Apache 2.4.49 requires CVE-2021-41773 and CVE-2021-42013 checks.\nSelected au",
+    "contextSnippetCount": 1,
+    "streamWarnings": [],
+    "toolSchemaCount": 8,
+    "toolSchemas": [
+      "search_cve",
+      "lookup_cve",
+      "search_context",
+      "nuclei",
+      "sqlmap",
+      "httpx",
+      "katana",
+      "feroxbuster"
+    ]
+  },
+  "startedAt": "2026-07-06T02:40:18-0700",
+  "status": "PASS"
+}
