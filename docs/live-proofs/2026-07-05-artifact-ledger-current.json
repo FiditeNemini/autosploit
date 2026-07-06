@@ -29,12 +29,12 @@
     "docs/live-proofs/checkpoint-75-minimax-live.json",
     "docs/live-proofs/qwen27-mxfp4-mtp-live-cache-20260605.json"
   ],
-  "generatedAt": "2026-07-05T17:57:22-0700",
+  "generatedAt": "2026-07-05T18:02:47-0700",
   "knownFailedLiveProofs": [
     "docs/live-proofs/checkpoint-75-minimax-live.json"
   ],
-  "liveProofCount": 172,
-  "liveProofOkCount": 158,
+  "liveProofCount": 173,
+  "liveProofOkCount": 159,
   "liveProofStatus": {
     "docs/live-proofs/2026-06-03-minimax-current-metadata.json": true,
     "docs/live-proofs/2026-06-03-minimax-jang-k-current-metadata.json": true,
@@ -124,6 +124,7 @@
     "docs/live-proofs/2026-07-05-long-context-200k-safety-refusal.json": false,
     "docs/live-proofs/2026-07-05-long-context-224k-safety-refusal.json": false,
     "docs/live-proofs/2026-07-05-long-context-safety-surface-live.json": true,
+    "docs/live-proofs/2026-07-05-objective-open-blockers-current.json": true,
     "docs/live-proofs/2026-07-05-proof-ledger-current.json": true,
     "docs/live-proofs/2026-07-05-proof-ledger-per-turn-runtime-refresh.json": true,
     "docs/live-proofs/2026-07-05-real-qwen-long-context-200k-27b.json": false,
@@ -298,6 +299,7 @@
     "docs/live-proofs/2026-07-05-long-context-200k-safety-refusal.json",
     "docs/live-proofs/2026-07-05-long-context-224k-safety-refusal.json",
     "docs/live-proofs/2026-07-05-long-context-safety-surface-live.json",
+    "docs/live-proofs/2026-07-05-objective-open-blockers-current.json",
     "docs/live-proofs/2026-07-05-proof-ledger-current.json",
     "docs/live-proofs/2026-07-05-proof-ledger-per-turn-runtime-refresh.json",
     "docs/live-proofs/2026-07-05-real-qwen-long-context-200k-27b.json",
@@ -386,7 +388,7 @@
   "ok": true,
   "processEvidence": {
     "appRows": [
-      "20989 129040 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+      "23102 129312 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
     ],
     "engineProcessRows": []
   },

@@ -1,0 +1,96 @@
+{
+  "allEvidencePathsExist": true,
+  "completionClaimAllowed": false,
+  "counts": {
+    "BLOCKED": 1,
+    "PARTIAL": 1,
+    "PASS": 24
+  },
+  "currentBlockingConditions": [
+    "release_displayable"
+  ],
+  "currentPartialConditions": [
+    "generation_reasoning_context"
+  ],
+  "generatedAt": "2026-07-05T18:02:03-0700",
+  "longContextPolicy": {
+    "aboveCeilingPolicy": "requires explicit high-risk override and fresh memory headroom",
+    "modelLoadForAboveCeilingWithoutOverride": "refuse before model load",
+    "provenSafeCeilingTokens": 192000
+  },
+  "modelLoadBoundary": "no model load in this proof",
+  "noCompletionClaim": true,
+  "objectiveComplete": false,
+  "ok": true,
+  "openRowCount": 2,
+  "openRows": [
+    {
+      "area": "Full-context-length stress",
+      "blockingCondition": "near_max_final_output_and_cache_write_missing",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-context-budget-compaction.json",
+        "docs/live-proofs/2026-07-04-near-max-context-guard-refusal.json",
+        "docs/live-proofs/2026-07-04-near-max-context-preflight.json",
+        "docs/live-proofs/2026-07-04-near-max-context-runtime-attempt-summary.json",
+        "docs/live-proofs/2026-07-04-qwen-runtime-readiness.json",
+        "docs/live-proofs/2026-07-04-real-qwen-27b-reasoning-on-1024.json",
+        "docs/live-proofs/2026-07-04-real-qwen-27b-reasoning-on.json",
+        "docs/live-proofs/2026-07-04-real-qwen-35b-reasoning-on-1024.json",
+        "docs/live-proofs/2026-07-04-real-qwen-long-context-128k-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-long-context-160k-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-long-context-192k-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-long-context-64k-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-long-context-smoke-27b.json",
+        "docs/live-proofs/2026-07-04-real-qwen-near-max-context-27b.json",
+        "docs/live-proofs/2026-07-04-reasoning-cap-recovery.json",
+        "docs/live-proofs/2026-07-05-long-context-200k-safety-refusal.json",
+        "docs/live-proofs/2026-07-05-long-context-224k-safety-refusal.json",
+        "docs/live-proofs/2026-07-05-long-context-safety-surface-live.json",
+        "docs/live-proofs/2026-07-05-proof-ledger-per-turn-runtime-refresh.json",
+        "docs/live-proofs/2026-07-05-real-qwen-long-context-200k-27b.json",
+        "docs/live-proofs/2026-07-05-real-qwen-long-context-224k-27b.json",
+        "docs/live-validation-2026-07-04.md"
+      ],
+      "missingEvidence": "192k live Qwen completion is proven with final assistant output and post-generation cache write evidence, but true near-max final assistant output plus post-generation cache write proof above that ceiling is still missing.",
+      "notes": "Bounded context budget and forwarding are proven. Consolidated Qwen readiness reports coreStatus=PASS and overallStatus=PASS after the fixed tokenizer-counted 8227-token live smoke harness completed with q4 TurboQuant attention-KV, prefix cache, paged cache, hybrid SSM, native SSM companion L2, and block L2 evidence. The graduated 64k live Qwen proof completed final assistant output and post-generation cache writes: 64011 tokenizer-counted prompt tokens, usage.prompt_tokens=64016, q4TurboQuantKV=PASS, ssmCompanionNotQuantized=PASS, scheduler cache 63936 tokens, block L2 63936 tokens, SSM companion L2 128015 tokens, and cleanup with swapouts=0. The graduated 128k live Qwen proof also completes final assistant output and post-generation cache writes after fixing the paged/block-L2 cache capacity path: session max_prompt_tokens=130067, scheduler max_blocks=2034, block L2 budget=20.34GB, actualPromptTokensByTokenizer=128019, usage.prompt_tokens=128024, q4TurboQuantKV=PASS, ssmCompanionNotQuantized=PASS, scheduler cache 128023 tokens, block L2 128023 tokens with disk_evictions=0, SSM companion L2 256023 tokens, and cleanup with swapouts=0. The graduated 160k live Qwen proof completes final assistant output and post-generation cache writes after raising the cache-record validator total-record ceiling from 16 GiB to 32 GiB: generatedAt=2026-07-05T00:12:11-0700, actualPromptTokensByTokenizer=160005, usage.prompt_tokens=160010, session max_prompt_tokens=162053, q4TurboQuantKV=PASS, ssmCompanionNotQuantized=PASS, scheduler cache 160009 tokens, block L2 160009 tokens with disk_evictions=0 and disk_writes=2501, SSM companion L2 320009 tokens, and cleanup with swapouts=0. The 2026-07-05 192k retry completes final assistant output and post-generation cache writes: generatedAt=2026-07-05T01:03:13-0700, actualPromptTokensByTokenizer=192017, usage.prompt_tokens=192022, session max_prompt_tokens=194065, final marker LONG_CONTEXT_SMOKE_PASS, q4TurboQuantKV=PASS, ssmCompanionNotQuantized=PASS, block L2 192021 tokens with disk_evictions=0 and disk_writes=3001, SSM companion L2 384021 tokens, completion memory guard aborted=false, and max swapouts=0. A 2026-07-05 200k incremental retry reached live Qwen chunked prefill at seq_len=200037 with q4/paged/prefix/hybrid/block-L2 topology visible, but failed safely with CompletionMemoryGuardAbort after swapouts rose from baseline 16 to 204 before final output or post-generation cache writes; post-cleanup left no model process. A follow-up 200k no-override proof refused before model load with lastBlockReason=unproven_target_above_safe_ceiling and empty engineLogTail. A 2026-07-05 224k graduated retry reached live Qwen chunked prefill at 224003 tokenizer-counted prompt tokens but failed safely with CompletionMemoryGuardAbort after swapouts appeared; post-cleanup left no model process. The harness now samples memory faster for high-context runs, tracks new swapouts relative to the run baseline, and refuses targets above the 192k proven safe ceiling by default unless EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET=1 is set intentionally. Current app UI/state now also exposes the 192k proven safe ceiling, declared 262144-token model context, 200k/224k/258k guarded failures, and the refuse before model load policy in Settings > Context. Near-max preflight proves the model/tokenizer declare 262144 context and records the explicit high-risk 258k-token run command with that override. The real 258k attempt reached live Qwen chunked prefill with runtime seq_len=258044, exact lower-cap rejection, q4/paged/prefix/hybrid cache topology visible, and server timeout forwarded to 3600s, then ended through CompletionMemoryGuardAbort before final generation when sampled free memory reached 14%; sampled swapouts stayed 0. This row remains PARTIAL because true near-max final assistant output plus post-generation cache write proof are not present.",
+      "requiredNextEvidence": "Run an explicit high-risk long-context target above the 192k proven safe ceiling with fresh memory headroom, then capture final assistant output plus post-generation q4 TurboQuant KV, paged/prefix, block-L2, and SSM companion cache writes.",
+      "requirementId": "generation_reasoning_context",
+      "safeCeilingTokens": 192000,
+      "status": "PARTIAL"
+    },
+    {
+      "area": "Release/distribution readiness",
+      "blockingCondition": "notarization_credentials_and_stapled_tickets_missing",
+      "evidence": [
+        "docs/live-proofs/2026-07-04-demo-ready-startup.json",
+        "docs/live-proofs/2026-07-04-notarization-preflight.json",
+        "docs/live-proofs/2026-07-04-release-readiness.json",
+        "docs/live-proofs/2026-07-04-release-visible-smoke.json",
+        "docs/live-proofs/2026-07-04-release-visible-smoke.png",
+        "docs/live-proofs/2026-07-05-release-app-json-framing-live.json",
+        "docs/live-proofs/2026-07-05-release-public-truth.json",
+        "docs/live-validation-2026-07-04.md",
+        "release/release-manifest.json"
+      ],
+      "missingEvidence": "No accepted notary credential input/default keychain profile is configured, Gatekeeper rejects the app without notarization context, and app/DMG stapled tickets are missing.",
+      "notes": "Local package/signature/bundled-runtime readiness is proven by durable release artifact, demo-ready startup is proven after one onboarding preload/relaunch, and the signed release app has a local visible-window/screenshot smoke proof. The 17:53 release readiness refresh proves app codesign PASS, DMG codesign PASS, bundled runtime PASS, local DMG sha256 150feff5f76da1a406ec868170f7b5abfba5d8f28c9e308735c9ad60032cb7fb, and local manifest sha256 d5b0e41b94ef2c8b912307486585a950e79929407ccc7aebb8cccf637a663d07. Notarization preflight proves the release app and DMG codesign checks pass, the app is Developer ID signed by ShieldStack LLC (55KGF2S5AY), hardened runtime is enabled, app entitlements are parsed, notarytool is available, no accepted notary credential input or default keychain profile is configured, Gatekeeper rejects the app with insufficient notarization context, and the app/DMG have no stapled tickets. Distribution remains blocked until notarization credentials/flow are run and tickets are stapled. The public GitHub release truth proof shows repo visibility PASS and v0.1.0-beta release/DMG asset presence PASS, but current local DMG hash, manifest hash, source revision, and notarization gate do not match a publishable current release, so releaseClaimAllowed remains false.",
+      "publicTruthNextAction": "notarize-staple-and-publish-current-release-assets",
+      "releaseNextAction": "configure-notary-credentials-and-run-package-notarize",
+      "requiredNextEvidence": [
+        "Configure notary credentials without exposing secrets.",
+        "Run package/notarize flow.",
+        "Validate stapled app and DMG tickets.",
+        "Pass Gatekeeper assessment.",
+        "Publish release assets whose hashes match the current local manifest."
+      ],
+      "requirementId": "release_displayable",
+      "status": "BLOCKED"
+    }
+  ],
+  "overallStatus": "BLOCKED",
+  "proofLevel": "matrix-and-goal-audit-derived-no-model-load",
+  "proofType": "objective-open-blockers",
+  "releaseNextAction": "configure-notary-credentials-and-run-package-notarize",
+  "sourceGoalAudit": "docs/live-proofs/2026-07-04-goal-requirement-audit.json",
+  "sourceMatrix": "docs/live-proofs/2026-07-04-pass-partial-blocked-matrix.json"
+}
