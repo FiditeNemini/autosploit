@@ -29,12 +29,12 @@
     "docs/live-proofs/checkpoint-75-minimax-live.json",
     "docs/live-proofs/qwen27-mxfp4-mtp-live-cache-20260605.json"
   ],
-  "generatedAt": "2026-07-06T13:52:02-0700",
+  "generatedAt": "2026-07-06T13:58:59-0700",
   "knownFailedLiveProofs": [
     "docs/live-proofs/checkpoint-75-minimax-live.json"
   ],
-  "liveProofCount": 201,
-  "liveProofOkCount": 187,
+  "liveProofCount": 203,
+  "liveProofOkCount": 189,
   "liveProofStatus": {
     "docs/live-proofs/2026-06-03-minimax-current-metadata.json": true,
     "docs/live-proofs/2026-06-03-minimax-jang-k-current-metadata.json": true,
@@ -167,6 +167,8 @@
     "docs/live-proofs/2026-07-06-container-iac-supply-chain-scenario.json": true,
     "docs/live-proofs/2026-07-06-i18n-language-toggle.json": true,
     "docs/live-proofs/2026-07-06-network-credential-post-scenario.json": true,
+    "docs/live-proofs/2026-07-06-real-qwen-codebase-static-patch-27b.json": true,
+    "docs/live-proofs/2026-07-06-real-qwen-codebase-static-patch-35b.json": true,
     "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-27b.json": true,
     "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-35b.json": true,
     "docs/live-proofs/2026-07-06-real-qwen-network-credential-post-27b.json": true,
@@ -370,6 +372,8 @@
     "docs/live-proofs/2026-07-06-container-iac-supply-chain-scenario.json",
     "docs/live-proofs/2026-07-06-i18n-language-toggle.json",
     "docs/live-proofs/2026-07-06-network-credential-post-scenario.json",
+    "docs/live-proofs/2026-07-06-real-qwen-codebase-static-patch-27b.json",
+    "docs/live-proofs/2026-07-06-real-qwen-codebase-static-patch-35b.json",
     "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-27b.json",
     "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-35b.json",
     "docs/live-proofs/2026-07-06-real-qwen-network-credential-post-27b.json",
@@ -444,7 +448,7 @@
   "ok": true,
   "processEvidence": {
     "appRows": [
-      "13756 134016 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+      "17421 130240 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
     ],
     "engineProcessRows": []
   },

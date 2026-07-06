@@ -143,7 +143,11 @@ SCENARIOS = [
     ScenarioSpec(
         scenario_id="codebase_static_to_patch_review_chain",
         label="Local codebase static analysis to proof to patch report",
-        artifacts=("docs/live-proofs/2026-07-06-codebase-static-patch-scenario.json",),
+        artifacts=(
+            "docs/live-proofs/2026-07-06-codebase-static-patch-scenario.json",
+            "docs/live-proofs/2026-07-06-real-qwen-codebase-static-patch-27b.json",
+            "docs/live-proofs/2026-07-06-real-qwen-codebase-static-patch-35b.json",
+        ),
         required_tools=("run_shell", "semgrep", "bandit", "search_context"),
         stage_evidence={
             "surface": ["run_shell file inventory and vulnerable sink grep"],
@@ -153,9 +157,10 @@ SCENARIOS = [
             "evidence": ["/messages", "/results", "/state terminal transcripts"],
             "report": ["report finding action and report generate route"],
         },
-        tool_choice_mode="scripted_mock_tool_sequence",
-        model_tool_choice_evidence="not_proven",
-        autonomy_boundary="Live app/tool/report wiring is proven against a local codebase fixture, but no real Qwen artifact is attached to this row yet.",
+        tool_choice_mode="exact_tool_call_prompt_with_app_recovery",
+        model_tool_choice_evidence="prompt_specified_exact_calls",
+        autonomy_boundary="Real Qwen 27B/35B artifacts prove schema receipt, ordered codebase static-analysis and patch-review tool execution, cache/MTP, second turn, and report output, but the ordered tool plan was exact-prompt guided.",
+        model_required=True,
         current_run_required=True,
     ),
     ScenarioSpec(
