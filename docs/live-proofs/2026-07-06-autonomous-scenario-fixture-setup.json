@@ -1,0 +1,113 @@
+{
+  "finishedAt": "2026-07-06T03:29:18-0700",
+  "fixtureRoot": "/tmp/exploitbot-autonomous-scenario-fixtures",
+  "generatedAt": "2026-07-06T03:29:18-0700",
+  "notes": [
+    "No model inference is started by this proof.",
+    "All targets are loopback services or local files under /tmp; fake credentials and tokens are canaries only."
+  ],
+  "ok": true,
+  "proofLevel": "local-fixture-materialization-no-model-load",
+  "proofType": "autonomous-scenario-fixture-setup",
+  "recreateCommand": "python3 scripts/autonomous-scenario-fixture-setup-proof.py",
+  "scenarioCount": 6,
+  "scenarios": [
+    {
+      "checks": {
+        "loopbackOnly": "PASS",
+        "rootMarker": "PASS",
+        "sqlInjectionMarker": "PASS"
+      },
+      "ok": true,
+      "proofMarkers": [
+        "EXPLOITBOT_WEBAPP_LAB_OK",
+        "EXPLOITBOT_SQLI_PROOF_USER=alice"
+      ],
+      "scenarioId": "webserver_auth_sqli_report_chain",
+      "setupMode": "loopback_http_server",
+      "target": "http://127.0.0.1:50358"
+    },
+    {
+      "checks": {
+        "fileReadCanary": "PASS",
+        "loopbackOnly": "PASS",
+        "ssrfCanary": "PASS"
+      },
+      "ok": true,
+      "proofMarkers": [
+        "EXPLOITBOT_SSRF_CANARY_OK",
+        "EXPLOITBOT_FILE_READ_CANARY_OK"
+      ],
+      "scenarioId": "webserver_ssrf_file_read_chain",
+      "setupMode": "loopback_http_server",
+      "target": "http://127.0.0.1:50361"
+    },
+    {
+      "checks": {
+        "cveHint": "PASS",
+        "dependencyPin": "PASS",
+        "fakeSecretCanary": "PASS",
+        "gitRepo": "PASS"
+      },
+      "ok": true,
+      "proofMarkers": [
+        "EXPLOITBOT_FAKE_TOKEN_DO_NOT_USE",
+        "lodash@4.17.11",
+        "CVE-2021-23337"
+      ],
+      "scenarioId": "github_repo_secret_dependency_chain",
+      "setupMode": "local_git_repo",
+      "target": "/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-vulnerable-repo"
+    },
+    {
+      "checks": {
+        "appFile": "PASS",
+        "patchHint": "PASS",
+        "pathTraversalMarker": "PASS"
+      },
+      "ok": true,
+      "proofMarkers": [
+        "EXPLOITBOT_PATH_TRAVERSAL_PROOF",
+        "app.py:17",
+        "pathlib resolve allowlist"
+      ],
+      "scenarioId": "codebase_static_to_patch_review_chain",
+      "setupMode": "local_codebase",
+      "target": "/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-codebase-review"
+    },
+    {
+      "checks": {
+        "dockerfile": "PASS",
+        "iacRisk": "PASS",
+        "vulnerableImageTag": "PASS"
+      },
+      "ok": true,
+      "proofMarkers": [
+        "EXPLOITBOT_CONTAINER_IAC_PROOF",
+        "allowPrivilegeEscalation: true",
+        "nginx:1.16"
+      ],
+      "scenarioId": "container_iac_supply_chain_chain",
+      "setupMode": "local_container_iac_repo",
+      "target": "/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac"
+    },
+    {
+      "checks": {
+        "loginCanary": "PASS",
+        "loopbackOnly": "PASS",
+        "postCheckCanary": "PASS"
+      },
+      "ok": true,
+      "proofMarkers": [
+        "EXPLOITBOT_NETWORK_LOGIN_OK",
+        "EXPLOITBOT_LINPEAS_FIXTURE_OK"
+      ],
+      "scenarioId": "network_service_credential_post_chain",
+      "setupMode": "loopback_network_service",
+      "target": "http://127.0.0.1:50364"
+    }
+  ],
+  "serverLifecycle": "loopback HTTP services are proof-run-only and are stopped before artifact write",
+  "startedAt": "2026-07-06T03:29:17-0700",
+  "status": "PASS"
+}

@@ -17,6 +17,7 @@ class ScenarioCatalogRow:
     scenarioId: str
     label: str
     targetEmulation: str
+    fixtureSetup: dict[str, object]
     requiredTools: list[str]
     stagePlan: dict[str, list[str]]
     promptTask: str
@@ -32,6 +33,12 @@ SCENARIOS = [
         scenarioId="webserver_auth_sqli_report_chain",
         label="Emulated web app: discovery to SQL injection proof to report",
         targetEmulation="ThreadingHTTPServer with login form, search endpoint, seeded vulnerable SQLite fixture, and local-only proof marker.",
+        fixtureSetup={
+            "setupMode": "loopback_http_server",
+            "entrypoint": "scripts/autonomous-scenario-fixture-setup-proof.py",
+            "targetHint": "http://127.0.0.1:<allocated>/search?q=1",
+            "proofMarkers": ["EXPLOITBOT_WEBAPP_LAB_OK", "EXPLOITBOT_SQLI_PROOF_USER=alice"],
+        },
         requiredTools=["httpx", "nuclei", "sqlmap", "run_shell", "search_cve", "create_finding", "generate_report"],
         stagePlan={
             "surface": ["Discover local HTTP service and routes with httpx and a run_shell route inventory."],
@@ -53,6 +60,12 @@ SCENARIOS = [
         scenarioId="webserver_ssrf_file_read_chain",
         label="Emulated web app: SSRF and local file-read validation",
         targetEmulation="Loopback webserver with /fetch?url= and /download?path= endpoints wired to harmless fixture files.",
+        fixtureSetup={
+            "setupMode": "loopback_http_server",
+            "entrypoint": "scripts/autonomous-scenario-fixture-setup-proof.py",
+            "targetHint": "http://127.0.0.1:<allocated>/fetch?url=http://127.0.0.1:<allocated>/canary",
+            "proofMarkers": ["EXPLOITBOT_SSRF_CANARY_OK", "EXPLOITBOT_FILE_READ_CANARY_OK"],
+        },
         requiredTools=["httpx", "nuclei", "run_shell", "search_cve", "create_finding", "generate_report"],
         stagePlan={
             "surface": ["Discover SSRF/file-read endpoints and fixture allowlist from local routes."],
@@ -74,6 +87,12 @@ SCENARIOS = [
         scenarioId="github_repo_secret_dependency_chain",
         label="Emulated GitHub repo: secrets, SBOM, dependency CVEs",
         targetEmulation="Throwaway local git repo with commit history, package lockfiles, fake token canary, and vulnerable dependency pins.",
+        fixtureSetup={
+            "setupMode": "local_git_repo",
+            "entrypoint": "scripts/autonomous-scenario-fixture-setup-proof.py",
+            "targetHint": "<tmp>/synthetic-vulnerable-repo",
+            "proofMarkers": ["EXPLOITBOT_FAKE_TOKEN_DO_NOT_USE", "lodash@4.17.11", "CVE-2021-23337"],
+        },
         requiredTools=["run_shell", "trufflehog", "syft", "grype", "osv_scanner", "search_cve", "create_finding", "generate_report"],
         stagePlan={
             "surface": ["Inspect repo tree, git history, manifests, and lockfiles."],
@@ -99,6 +118,12 @@ SCENARIOS = [
         scenarioId="codebase_static_to_patch_review_chain",
         label="Codebase review: static analysis to proof to patch recommendation",
         targetEmulation="Local Python/Node codebase fixture with path traversal, command injection sink, and unit-testable remediation hints.",
+        fixtureSetup={
+            "setupMode": "local_codebase",
+            "entrypoint": "scripts/autonomous-scenario-fixture-setup-proof.py",
+            "targetHint": "<tmp>/synthetic-codebase-review",
+            "proofMarkers": ["EXPLOITBOT_PATH_TRAVERSAL_PROOF", "app.py:17", "pathlib resolve allowlist"],
+        },
         requiredTools=["run_shell", "semgrep", "bandit", "search_context", "create_finding", "generate_report"],
         stagePlan={
             "surface": ["Map source files, framework entrypoints, routes, and risky sinks."],
@@ -120,6 +145,12 @@ SCENARIOS = [
         scenarioId="container_iac_supply_chain_chain",
         label="Container/IaC: Dockerfile and Kubernetes exposure review",
         targetEmulation="Local repo fixture with Dockerfile, compose file, Kubernetes manifest, vulnerable image tag, and overly broad capabilities.",
+        fixtureSetup={
+            "setupMode": "local_container_iac_repo",
+            "entrypoint": "scripts/autonomous-scenario-fixture-setup-proof.py",
+            "targetHint": "<tmp>/synthetic-container-iac",
+            "proofMarkers": ["EXPLOITBOT_CONTAINER_IAC_PROOF", "allowPrivilegeEscalation: true", "nginx:1.16"],
+        },
         requiredTools=["run_shell", "syft", "grype", "trivy", "checkov", "search_cve", "create_finding", "generate_report"],
         stagePlan={
             "surface": ["Inventory container, compose, and Kubernetes/IaC files."],
@@ -141,6 +172,12 @@ SCENARIOS = [
         scenarioId="network_service_credential_post_chain",
         label="Emulated network service: discovery, credential proof, post-check",
         targetEmulation="Loopback TCP/HTTP services with seeded weak demo credential and harmless post-auth proof endpoint.",
+        fixtureSetup={
+            "setupMode": "loopback_network_service",
+            "entrypoint": "scripts/autonomous-scenario-fixture-setup-proof.py",
+            "targetHint": "http://127.0.0.1:<allocated>/login",
+            "proofMarkers": ["EXPLOITBOT_NETWORK_LOGIN_OK", "EXPLOITBOT_LINPEAS_FIXTURE_OK"],
+        },
         requiredTools=["nmap", "httpx", "hydra", "netexec", "run_shell", "linpeas", "create_finding", "generate_report"],
         stagePlan={
             "surface": ["Discover local TCP/HTTP service ports with nmap and httpx."],
@@ -170,6 +207,8 @@ def build_report(*, generated_at: str | None = None) -> dict:
     ok = all(
         row["status"] == "READY_TO_RUN"
         and row["safetyBoundary"] == "local_fixture_only"
+        and isinstance(row["fixtureSetup"], dict)
+        and row["fixtureSetup"].get("setupMode")
         and all(stage in row["stagePlan"] for stage in REQUIRED_STAGES)
         and row["finalMarker"]
         for row in rows

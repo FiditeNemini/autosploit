@@ -32,6 +32,14 @@ REQUIRED_ROUTE_TOOLS = {
     "github_repo_secret_dependency_chain": {"trufflehog", "syft", "grype", "osv_scanner", "search_cve"},
     "network_service_credential_post_chain": {"nmap", "httpx", "hydra", "netexec", "linpeas"},
 }
+REQUIRED_SETUP_MODES = {
+    "webserver_auth_sqli_report_chain": "loopback_http_server",
+    "webserver_ssrf_file_read_chain": "loopback_http_server",
+    "github_repo_secret_dependency_chain": "local_git_repo",
+    "codebase_static_to_patch_review_chain": "local_codebase",
+    "container_iac_supply_chain_chain": "local_container_iac_repo",
+    "network_service_credential_post_chain": "loopback_network_service",
+}
 
 
 def timestamp() -> str:
@@ -87,6 +95,13 @@ def validate_catalog(route_payload: dict[str, Any]) -> dict[str, Any]:
         missing_tools = sorted(REQUIRED_ROUTE_TOOLS.get(scenario_id, set()) - tools)
         if missing_tools:
             failures.append("missing_tools:" + ",".join(missing_tools))
+        fixture_setup = row.get("fixtureSetup") or {}
+        if fixture_setup.get("setupMode") != REQUIRED_SETUP_MODES[scenario_id]:
+            failures.append("missing_fixture_setup_mode")
+        if not fixture_setup.get("entrypoint"):
+            failures.append("missing_fixture_setup_entrypoint")
+        if not fixture_setup.get("proofMarkers"):
+            failures.append("missing_fixture_setup_markers")
         if failures:
             scenario_failures[scenario_id] = failures
 

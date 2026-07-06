@@ -11,8 +11,8 @@
     "scenarioCount": "PASS"
   },
   "executionBoundary": "local-emulated-targets-only",
-  "finishedAt": "2026-07-06T03:15:28-0700",
-  "generatedAt": "2026-07-06T03:15:28-0700",
+  "finishedAt": "2026-07-06T03:29:52-0700",
+  "generatedAt": "2026-07-06T03:29:52-0700",
   "missingScenarios": [],
   "noModelLoaded": true,
   "notes": [
@@ -41,6 +41,6 @@
   ],
   "scenarioFailures": {},
   "sourceRoute": "/qa/autonomous-scenario-catalog",
-  "startedAt": "2026-07-06T03:15:14-0700",
+  "startedAt": "2026-07-06T03:29:38-0700",
   "status": "PASS"
 }
