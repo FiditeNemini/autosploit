@@ -56,7 +56,7 @@ def run() -> None:
         tool_settings = state.get("toolSettings") or {}
         expected = {
             "installedCount": 2,
-            "missingCount": 1,
+            "missingCount": 2,
             "installingCount": 1,
             "errorCount": 1,
             "isInstalling": True,
@@ -66,7 +66,7 @@ def run() -> None:
             if tool_settings.get(key) != value:
                 raise AssertionError(f"tool settings {key}={tool_settings.get(key)!r}; expected {value!r}: {state}")
         names = [tool.get("name") for tool in tool_settings.get("tools", [])]
-        for expected_name in ("nmap", "httpx", "sqlmap", "hashcat", "sherlock"):
+        for expected_name in ("nmap", "httpx", "sqlmap", "hashcat", "sherlock", "syft"):
             if expected_name not in names:
                 raise AssertionError(f"missing tool row {expected_name}: {tool_settings}")
         statuses = {tool.get("name"): tool.get("status") for tool in tool_settings.get("tools", [])}

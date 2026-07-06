@@ -1,5 +1,5 @@
 {
-  "finishedAt": "2026-07-04T12:10:43-0700",
+  "finishedAt": "2026-07-05T18:39:06-0700",
   "method": "live app API, no model load, isolated test home",
   "modelRoot": "/Users/eric/models/dealign.ai",
   "models": {
@@ -167,7 +167,7 @@
       "supportedCount": 6
     }
   },
-  "startedAt": "2026-07-04T12:10:39-0700",
+  "startedAt": "2026-07-05T18:39:02-0700",
   "status": {
     "activityFeedScanVisible": "PASS",
     "addRoot": "PASS",

@@ -1,0 +1,114 @@
+{
+  "app": {
+    "bundleID": "ai.jangq.ExploitBot",
+    "pathObservedByComputerUse": "/Users/eric/exploitbot/release/ExploitBot.app/",
+    "pidObservedByComputerUse": 32071,
+    "testServerEvidence": "ExploitBot[32071] [TestServer] listening on :9999"
+  },
+  "currentHeadAtObservation": "d9529b15cb008fa8ba441ef82fd3580d8fc18c52",
+  "generatedAt": "2026-07-05T18:40:56-0700",
+  "method": "live Computer Use native macOS accessibility and screenshot observations, followed by live app QA route probes",
+  "modelInferenceStarted": false,
+  "ok": true,
+  "observedMainTabs": [
+    "Recon",
+    "Web",
+    "Network",
+    "Creds",
+    "Exploit",
+    "Post",
+    "Supply",
+    "OSINT",
+    "Report",
+    "Stash"
+  ],
+  "observedSettingsPanels": [
+    "Engine",
+    "Model",
+    "Runtime",
+    "Context",
+    "Cache",
+    "Agents",
+    "CVE Database",
+    "Tools",
+    "Logs"
+  ],
+  "proofType": "release-app-computer-use-continuation-current",
+  "settingsEvidence": {
+    "agentsPanel": {
+      "authorizationGuardsVisible": true,
+      "finalAfterToolsVisible": true,
+      "maxConcurrentAgentsVisible": true,
+      "multiAgentModeVisible": true,
+      "phaseRoutingVisible": true,
+      "toolSchemaBudgetVisible": true
+    },
+    "cachePanel": {
+      "blockL2DiskVisibleOn": true,
+      "kvSelection": "TurboQuant Q4",
+      "pagedCacheVisibleOn": true,
+      "prefixCacheVisibleOn": true,
+      "promptL2DiskVisibleOn": true
+    },
+    "contextPanel": {
+      "declaredModelContextTokens": 262144,
+      "dynamicContextVisibleOn": true,
+      "provenSafeCeilingTokens": 192000,
+      "unprovenTargetPolicy": "refuse-before-model-load"
+    },
+    "cvePanel": {
+      "cisaKevCountVisible": 1631,
+      "currentThreatIntelButtonVisible": true,
+      "fullNvdSyncButtonVisible": true,
+      "totalCvesVisible": 1644
+    },
+    "modelPanel": {
+      "scanRootVisible": "/Users/eric/models/dealign.ai",
+      "scannedModelCountVisible": 14,
+      "selectedModelPathVisible": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "supportedModelCountVisible": 6,
+      "visibleMtpModels": [
+        "Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+      ]
+    },
+    "runtimePanel": {
+      "maxTokensVisible": 256,
+      "reasoningParserVisible": "Qwen3",
+      "reasoningToggleVisibleOff": true,
+      "toolParserVisible": "Qwen",
+      "useModelGenerationDefaultsVisibleOff": true
+    },
+    "toolsPanel": {
+      "installAllMissingDisabled": true,
+      "installPlanCommandCountVisible": 0,
+      "installedCountVisible": 42,
+      "missingCountVisible": 0
+    }
+  },
+  "status": {
+    "allPrimaryTabsClicked": "PASS",
+    "allSettingsPanelsObserved": "PASS",
+    "computerUseAttach": "PASS",
+    "cveLibraryVisible": "PASS",
+    "modelInferenceNotStarted": "PASS",
+    "modelLibraryMtpEntriesVisible": "PASS",
+    "releaseDistribution": "BLOCKED",
+    "toolsInventoryVisible": "PASS",
+    "turboQuantCacheDefault": "PASS"
+  },
+  "verification": {
+    "settingsCoverageRoute": {
+      "categoryCount": 9,
+      "ok": true,
+      "settingsSurfaceCount": 7
+    },
+    "settingsSurfaceMatrixRoute": {
+      "categoryCount": 9,
+      "ok": true,
+      "proofFileParity": true,
+      "surfaceCount": 7,
+      "surfaceProofFileParity": true
+    }
+  }
+}

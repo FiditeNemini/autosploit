@@ -162,7 +162,11 @@ run_selected_mode() {
       /usr/bin/log stream --info --style compact --predicate "subsystem == \"$BUNDLE_ID\""
       ;;
     --verify|verify)
-      open_app
+      if [[ "${EXPLOITBOT_TESTING:-0}" == "1" ]]; then
+        "$APP_BINARY" >/dev/null 2>&1 &
+      else
+        open_app
+      fi
       sleep 1
       pgrep -x "$APP_NAME" >/dev/null
       ;;

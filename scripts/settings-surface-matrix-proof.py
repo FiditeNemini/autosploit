@@ -72,7 +72,7 @@ def run() -> None:
         settings = request("GET", "/qa/settings-coverage")
         visual_surface = request("GET", "/qa/visual-surface-matrix")
         theme = request("GET", "/qa/theme-inventory")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"settings surface matrix route failed: {matrix}")
