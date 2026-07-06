@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-06T00:51:22-0700",
+  "generatedAt": "2026-07-06T01:00:33-0700",
   "notes": [
     "Rows aggregate existing live artifacts; artifact generatedAt values show whether evidence is fresh or older.",
     "Webserver SQLi and repo/codebase supply-chain rows are fresh 2026-07-06 app-backed scenarios added for this matrix.",
@@ -24,18 +24,30 @@
           "generatedAt": "2026-07-06T00:51:05-0700",
           "proofType": "webserver-auth-sqli-scenario-live",
           "status": "PASS"
+        },
+        {
+          "artifact": "docs/live-proofs/2026-07-06-real-qwen-webserver-auth-sqli-27b.json",
+          "generatedAt": "2026-07-06T00:58:43-0700",
+          "proofType": "real-qwen-webserver-auth-sqli",
+          "status": "PASS"
+        },
+        {
+          "artifact": "docs/live-proofs/2026-07-06-real-qwen-webserver-auth-sqli-35b.json",
+          "generatedAt": "2026-07-06T00:59:52-0700",
+          "proofType": "real-qwen-webserver-auth-sqli",
+          "status": "PASS"
         }
       ],
       "cacheProof": {
-        "hybridSSM": false,
-        "paged": false,
-        "prefix": false,
-        "q4KV": false
+        "hybridSSM": true,
+        "paged": true,
+        "prefix": true,
+        "q4KV": true
       },
       "currentRunStatus": "PASS",
       "failures": [],
       "label": "Emulated web app discovery to SQL injection proof to report",
-      "modelRequired": false,
+      "modelRequired": true,
       "observedTools": [
         "httpx",
         "nuclei",

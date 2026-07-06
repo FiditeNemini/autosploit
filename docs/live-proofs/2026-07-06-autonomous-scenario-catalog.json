@@ -1,6 +1,6 @@
 {
   "executionBoundary": "local-emulated-targets-only",
-  "generatedAt": "2026-07-06T00:51:22-0700",
+  "generatedAt": "2026-07-06T01:00:33-0700",
   "notes": [
     "Catalog rows are scenario definitions, not live model pass evidence.",
     "Each scenario is scoped to local fixtures so exploit validation is demonstrable without external targeting.",

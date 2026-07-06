@@ -28,7 +28,11 @@ SCENARIOS = [
     ScenarioSpec(
         scenario_id="webserver_auth_sqli_report_chain",
         label="Emulated web app discovery to SQL injection proof to report",
-        artifacts=("docs/live-proofs/2026-07-06-webserver-auth-sqli-scenario.json",),
+        artifacts=(
+            "docs/live-proofs/2026-07-06-webserver-auth-sqli-scenario.json",
+            "docs/live-proofs/2026-07-06-real-qwen-webserver-auth-sqli-27b.json",
+            "docs/live-proofs/2026-07-06-real-qwen-webserver-auth-sqli-35b.json",
+        ),
         required_tools=("run_shell", "httpx", "nuclei", "sqlmap", "search_cve"),
         stage_evidence={
             "surface": ["run_shell route inventory", "httpx local web probe"],
@@ -38,6 +42,7 @@ SCENARIOS = [
             "evidence": ["/messages", "/results", "/state terminal transcripts"],
             "report": ["report finding action and report generate route"],
         },
+        model_required=True,
         current_run_required=True,
     ),
     ScenarioSpec(
