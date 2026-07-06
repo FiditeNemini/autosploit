@@ -1,19 +1,19 @@
 {
   "app": {
-    "binarySha256": "16821a81d9333eef49193ac0f60a9e3f8f806c7acb2a1cbad0c353f1bc355a51",
+    "binarySha256": "3d149769ebe5e63774610a2edd79582ebaf6b060fb325094b7b9948898e3c353",
     "distributionStatus": "BLOCKED",
     "dmgPath": "release/ExploitBot-beta.dmg",
-    "dmgSha256": "8f6399c6a352b25550aca3a192fea233df308bcd703d5a64a63795042ad72b2c",
+    "dmgSha256": "35d6d654d48cd7f9c5e1c5f6e9d555886cbe0cf69b9d711eadafa7c828c39fc7",
     "localPackageStatus": "PASS",
     "path": "release/ExploitBot.app"
   },
   "appProcessRows": [
-    "85263 124736 /Users/eric/exploitbot/release/ExploitBot.app/Contents/MacOS/ExploitBot"
+    "95707 124416 /Users/eric/exploitbot/release/ExploitBot.app/Contents/MacOS/ExploitBot"
   ],
-  "appSha256": "16821a81d9333eef49193ac0f60a9e3f8f806c7acb2a1cbad0c353f1bc355a51",
-  "dmgSha256": "8f6399c6a352b25550aca3a192fea233df308bcd703d5a64a63795042ad72b2c",
+  "appSha256": "3d149769ebe5e63774610a2edd79582ebaf6b060fb325094b7b9948898e3c353",
+  "dmgSha256": "35d6d654d48cd7f9c5e1c5f6e9d555886cbe0cf69b9d711eadafa7c828c39fc7",
   "engineProcessRows": [],
-  "generatedAt": "2026-07-05T16:50:59-0700",
+  "generatedAt": "2026-07-05T17:04:48-0700",
   "ok": true,
   "polls": {
     "cacheControlBad": false,
@@ -154,7 +154,7 @@
     "totalResponses": 480
   },
   "proofType": "release-app-json-framing-live",
-  "releaseReadinessGeneratedAt": "2026-07-05T16:33:59-0700",
+  "releaseReadinessGeneratedAt": "2026-07-05T17:04:40-0700",
   "status": {
     "allMessagesResponsesParsed": "PASS",
     "allStateResponsesParsed": "PASS",
