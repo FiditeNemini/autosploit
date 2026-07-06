@@ -1,0 +1,241 @@
+{
+  "generatedAt": "2026-07-05T17:14:59-0700",
+  "proofType": "release-app-computer-use-current-refresh",
+  "ok": true,
+  "status": {
+    "computerUseAttach": "PASS",
+    "sameProcessApi": "PASS",
+    "allPrimaryTabsClicked": "PASS",
+    "allSettingsPanelsObserved": "PASS",
+    "runtimeReasoningApplyAndRestore": "PASS",
+    "generationDefaultsApplyAndRestore": "PASS",
+    "turboQuantCacheDefault": "PASS",
+    "cveSearchUi": "PASS",
+    "toolsInventoryVisible": "PASS",
+    "modelInferenceNotStarted": "PASS",
+    "releaseDistribution": "BLOCKED"
+  },
+  "sourceTrace": {
+    "repo": "/Users/eric/exploitbot",
+    "head": "daedd64",
+    "originMain": "daedd64",
+    "appPath": "/Users/eric/exploitbot/release/ExploitBot.app",
+    "appPid": 98612,
+    "bundleID": "ai.jangq.ExploitBot",
+    "computerUseVersion": 857,
+    "appBinarySha256": "3d149769ebe5e63774610a2edd79582ebaf6b060fb325094b7b9948898e3c353",
+    "dmgSha256": "35d6d654d48cd7f9c5e1c5f6e9d555886cbe0cf69b9d711eadafa7c828c39fc7",
+    "manifestSha256": "4f0038f01f378a8d8855e550e1f9db6995971133c73a77e7baae964313c44dcd",
+    "screenshot": "docs/live-proofs/2026-07-05-release-app-computer-use-current-refresh.png"
+  },
+  "liveVerification": {
+    "primaryTabsClicked": [
+      "recon",
+      "web",
+      "network",
+      "creds",
+      "exploit",
+      "post",
+      "supplyChain",
+      "osint",
+      "report",
+      "stash"
+    ],
+    "primaryTabFeedEventsObserved": [
+      "manualTabSwitch recon -> web",
+      "manualTabSwitch web -> network",
+      "manualTabSwitch network -> creds",
+      "manualTabSwitch creds -> exploit",
+      "manualTabSwitch exploit -> post",
+      "manualTabSwitch post -> supplyChain",
+      "manualTabSwitch supplyChain -> osint",
+      "manualTabSwitch osint -> report",
+      "manualTabSwitch report -> stash"
+    ],
+    "settingsPanelsObserved": [
+      "engine",
+      "model",
+      "runtime",
+      "context",
+      "cache",
+      "agents",
+      "cveDatabase",
+      "tools",
+      "logs"
+    ],
+    "modelSettings": {
+      "selectedModel": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "scanRoot": "/Users/eric/models/dealign.ai",
+      "modelCount": 14,
+      "supportedModelCount": 6,
+      "qwenMtpEntriesVisible": [
+        "Qwen3.6-27B-MXFP4-CRACK-MTP",
+        "Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+        "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
+      ],
+      "controlsObserved": [
+        "Browse",
+        "Add Folder",
+        "Scan",
+        "Use"
+      ]
+    },
+    "runtimeSettings": {
+      "reasoningInitial": false,
+      "reasoningToggledOnApplied": true,
+      "reasoningApiMirroredOn": true,
+      "reasoningRestoredOff": true,
+      "reasoningApiMirroredOff": true,
+      "generationDefaultsInitial": false,
+      "generationDefaultsToggledOnApplied": true,
+      "generationDefaultsApiMirroredOn": true,
+      "generationDefaultsRestoredOff": true,
+      "generationDefaultsApiMirroredOff": true,
+      "reasoningParser": "Qwen3",
+      "toolParser": "Qwen",
+      "maxIterations": 4,
+      "feedObservation": "Applying generation-default changes also emitted setReasoning off in feedRecent; state mirrored modelGenerationDefaults correctly."
+    },
+    "contextSettings": {
+      "dynamicContext": true,
+      "cveAssist": "Current",
+      "maxSnippets": 3,
+      "provenSafeTargetCeiling": 192000,
+      "declaredMaxContextTokens": 262144,
+      "unprovenTargetPolicy": "refuse-before-model-load"
+    },
+    "cacheSettings": {
+      "kvCacheSelection": "TurboQuant Q4",
+      "nativeQ4Selected": false,
+      "fullKvSelected": false,
+      "kvGroupSize": 64,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "pagedCache": true,
+      "blockSize": 64,
+      "blockL2Disk": true
+    },
+    "agentSettings": {
+      "modePolicyVisible": [
+        "Autopilot",
+        "Copilot",
+        "Manual"
+      ],
+      "maxIterations": 4,
+      "toolSchemaBudget": 32,
+      "includeUnavailableTools": true,
+      "forceFinalAfterTools": true,
+      "multiAgentMode": true,
+      "maxConcurrentAgents": 8,
+      "phaseRoutingVisible": [
+        "Scan",
+        "Detect",
+        "Breach"
+      ],
+      "authorizationGuardsVisible": true
+    },
+    "cveSettings": {
+      "totalCVEs": 1644,
+      "cisaKevCount": 1631,
+      "lastSynced": "2026-07-05T22:37:31Z",
+      "searchQuery": "apache path traversal",
+      "searchResultCount": 2,
+      "topResults": [
+        "CVE-QA-SEARCH-1",
+        "CVE-QA-SEARCH-2"
+      ]
+    },
+    "toolSettings": {
+      "installedCount": 42,
+      "missingCount": 0,
+      "installAllMissingDisabled": true,
+      "queuedCommands": 0,
+      "installedRowsObserved": [
+        "curl",
+        "nc",
+        "python3",
+        "zsh",
+        "subfinder",
+        "dnsx",
+        "nmap",
+        "masscan",
+        "httpx",
+        "katana",
+        "theHarvester",
+        "nuclei",
+        "sqlmap",
+        "dalfox",
+        "feroxbuster",
+        "ffuf",
+        "arjun",
+        "wpscan",
+        "testssl",
+        "graphqlmap"
+      ]
+    },
+    "logsSettings": {
+      "engineLogChars": 0,
+      "autoScroll": true,
+      "emptyState": "No logs yet - logs appear here when the engine is running"
+    },
+    "sameProcessApi": {
+      "endpoint": "http://127.0.0.1:9999/state",
+      "pidOwnsPort9999": true,
+      "activeTab": "stash",
+      "engineRunning": false,
+      "enginePort": 0,
+      "chat": {
+        "toolSchemaMaxTools": 32,
+        "enableReasoning": false,
+        "includeUnavailableToolSchemas": true,
+        "forceFinalAnswerAfterToolResults": true,
+        "maxIterations": 4
+      },
+      "contextWindow": {
+        "modelGenerationDefaults": false,
+        "turboQuantKV": true,
+        "prefixCache": true,
+        "pagedCache": true,
+        "promptL2Disk": true,
+        "blockL2Disk": true,
+        "declaredMaxContextTokens": 262144,
+        "provenSafeTargetCeiling": 192000,
+        "unprovenTargetPolicy": "refuse-before-model-load"
+      },
+      "feedRecent": [
+        "manualTabSwitch supplyChain -> osint",
+        "manualTabSwitch osint -> report",
+        "manualTabSwitch report -> stash",
+        "openSettings",
+        "setReasoning on",
+        "setReasoning off",
+        "setReasoning off",
+        "setReasoning off",
+        "Running search_cve",
+        "$ search_cve apache path traversal",
+        "search_cve: QA search apache path traversal (0.0s)",
+        "search apache path traversal"
+      ]
+    },
+    "processState": {
+      "port9999Listener": "ExploitBo 98612 eric TCP *:9999 (LISTEN)",
+      "releaseAppRSSKiB": 165024,
+      "engineProcessRows": [],
+      "vmStat": [
+        "Pages free: 132565",
+        "Pages wired down: 290798",
+        "Pages occupied by compressor: 155914",
+        "Swapins: 444",
+        "Swapouts: 1988"
+      ]
+    }
+  },
+  "remainingGates": {
+    "loadedModelPromptToolCacheProof": "covered by separate Qwen artifacts, not this no-model UI/settings sweep",
+    "fullContextAbove192k": "PARTIAL",
+    "notarization": "BLOCKED",
+    "publicReleaseTruth": "PARTIAL",
+    "reason": "This current Computer Use sweep proves rebuilt release UI wiring and selected settings/API mirrors without starting model inference. It does not replace loaded-model Qwen prompt/tool/cache artifacts or notarized distribution proof."
+  }
+}
