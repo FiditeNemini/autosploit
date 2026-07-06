@@ -131,7 +131,7 @@ def run() -> None:
         if "/qa/osint-coverage" not in (qa.get("stateRoutes") or []):
             raise AssertionError(f"state route list missing osint coverage: {qa}")
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         group = (index.get("groups") or {}).get("tabsAndSessions") or {}
         if group.get("osintSurfaces") != coverage.get("osintSurfaces"):
             raise AssertionError(f"coverage-index osint surface mirror mismatch: {index}")

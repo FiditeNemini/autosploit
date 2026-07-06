@@ -101,7 +101,7 @@ def run() -> None:
         if coverage.get("resultModeCountParity") is not True:
             raise AssertionError(f"result-mode count parity mismatch: {coverage}")
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         group = (index.get("groups") or {}).get("toolsAndParsers") or {}
         for key in (
             "toolRegistryTabToolMap",

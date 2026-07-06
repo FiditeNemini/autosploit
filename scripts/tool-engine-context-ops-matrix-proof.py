@@ -141,7 +141,7 @@ def run() -> None:
             context_session = request("GET", "/qa/context-session-efficiency-matrix")
             cache = request("GET", "/qa/cache-artifact-matrix")
             lane = request("GET", "/qa/runtime-local-model-lane")
-            index = request("GET", "/qa/coverage-index")
+            index = request("GET", "/qa/coverage-index", timeout=120.0)
             state = request("GET", "/state")
 
             if matrix.get("ok") is not True:

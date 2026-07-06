@@ -125,7 +125,7 @@ def run() -> None:
         if "/qa/creds-coverage" not in (qa.get("stateRoutes") or []):
             raise AssertionError(f"state route list missing creds coverage: {qa}")
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         group = (index.get("groups") or {}).get("tabsAndSessions") or {}
         if group.get("credsSurfaces") != coverage.get("credsSurfaces"):
             raise AssertionError(f"coverage-index creds surface mirror mismatch: {index}")

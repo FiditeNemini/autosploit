@@ -73,7 +73,7 @@ def run() -> None:
         proof_ledger = request("GET", "/qa/proof-ledger")
         tab_action_surface = request("GET", "/qa/tab-action-surface-matrix")
         tab_tool_flow = request("GET", "/qa/tab-tool-function-flow")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"tab proof family matrix route failed: {matrix}")

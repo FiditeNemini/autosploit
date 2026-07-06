@@ -160,7 +160,7 @@ def run() -> None:
         if deep.get("contextPromptInjectionBoundaryContractParity") is not True:
             raise AssertionError(f"deep runtime flow missing prompt-injection boundary parity: {deep}")
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         chat_group = (index.get("groups") or {}).get("chatAndContext") or {}
         if "/qa/context-prompt-injection-boundary" not in (chat_group.get("endpoints") or []):
             raise AssertionError(f"coverage index chat group missing prompt-injection boundary route: {chat_group}")

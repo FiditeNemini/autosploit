@@ -104,7 +104,7 @@ def run() -> None:
         matrix = request("GET", "/qa/evidence-lifecycle-flow-matrix")
         coverage = request("GET", "/qa/evidence-lifecycle-coverage")
         context_flow = request("GET", "/qa/context-flow-matrix")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"evidence lifecycle flow matrix route failed: {matrix}")

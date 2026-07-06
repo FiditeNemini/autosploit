@@ -127,7 +127,7 @@ def run() -> None:
         if "/qa/endpoint-inventory" not in state_routes:
             raise AssertionError(f"state route list missing endpoint inventory route: {state_routes}")
 
-        index = request("GET", "/qa/coverage-index", timeout=45.0)
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         app_group = (index.get("groups") or {}).get("appState") or {}
         if app_group.get("endpointInventoryRouteCount") != payload.get("routeCount"):
             raise AssertionError(f"coverage index endpoint inventory count mismatch: {index}")

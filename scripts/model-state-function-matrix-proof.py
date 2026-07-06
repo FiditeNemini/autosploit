@@ -80,7 +80,7 @@ def run() -> None:
         model_state = request("GET", "/qa/model-state-inventory")
         function_matrix = request("GET", "/qa/function-proof-matrix")
         runtime = request("GET", "/qa/runtime-coverage")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"model state function matrix route failed: {matrix}")

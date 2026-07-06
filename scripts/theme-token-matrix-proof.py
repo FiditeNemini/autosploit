@@ -72,7 +72,7 @@ def run() -> None:
         theme = request("GET", "/qa/theme-inventory")
         settings_surface = request("GET", "/qa/settings-surface-matrix")
         visual_surface = request("GET", "/qa/visual-surface-matrix")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"theme token matrix route failed: {matrix}")

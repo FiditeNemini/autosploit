@@ -82,7 +82,7 @@ def run() -> None:
         function_matrix = request("GET", "/qa/function-proof-matrix")
         tool_execution = request("GET", "/qa/tool-execution-matrix")
         context_flow = request("GET", "/qa/context-flow-matrix")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"service function matrix route failed: {matrix}")

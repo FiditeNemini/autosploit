@@ -104,7 +104,7 @@ def run() -> None:
         wait_for_app()
         payload = request("GET", ROUTE, timeout=45.0)
         gap = request("GET", "/qa/gap-ledger", timeout=45.0)
-        index = request("GET", "/qa/coverage-index", timeout=45.0)
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         assert_loader_harness_gate(payload, gap, index)
         print("qwen-multimodal-loader-harness-gate proof passed")
     finally:

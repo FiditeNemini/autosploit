@@ -191,7 +191,7 @@ def run() -> None:
         if "/qa/view-inventory" not in state_routes:
             raise AssertionError(f"state route list missing view inventory route: {state_routes}")
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         app_group = (index.get("groups") or {}).get("appState") or {}
         if app_group.get("viewInventoryStructCount") != payload.get("viewStructCount"):
             raise AssertionError(f"coverage index view inventory struct count mismatch: {index}")

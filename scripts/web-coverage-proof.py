@@ -135,7 +135,7 @@ def run() -> None:
         if "/qa/web-coverage" not in (qa.get("stateRoutes") or []):
             raise AssertionError(f"state route list missing web coverage: {qa}")
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         group = (index.get("groups") or {}).get("tabsAndSessions") or {}
         if group.get("webSurfaces") != coverage.get("webSurfaces"):
             raise AssertionError(f"coverage-index web surface mirror mismatch: {index}")

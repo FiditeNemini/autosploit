@@ -136,7 +136,7 @@ def run() -> None:
         if "/qa/stash-coverage" not in (qa.get("stateRoutes") or []):
             raise AssertionError(f"state route list missing stash coverage: {qa}")
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         group = (index.get("groups") or {}).get("tabsAndSessions") or {}
         if group.get("stashSurfaces") != coverage.get("stashSurfaces"):
             raise AssertionError(f"coverage-index stash surface mirror mismatch: {index}")

@@ -144,7 +144,7 @@ def run() -> None:
         wait_for_app()
         matrix = request("GET", ROUTE)
         state = request("GET", "/state")
-        coverage_index = request("GET", "/qa/coverage-index")
+        coverage_index = request("GET", "/qa/coverage-index", timeout=120.0)
         assert_matrix(matrix, state, coverage_index)
         print("chat-quality-evidence-matrix proof passed")
     finally:

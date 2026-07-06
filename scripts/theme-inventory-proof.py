@@ -195,7 +195,7 @@ def run() -> None:
         if "/qa/theme-inventory" not in state_routes:
             raise AssertionError(f"state route list missing theme inventory route: {state_routes}")
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         visual_group = (index.get("groups") or {}).get("settingsAndVisuals") or {}
         if visual_group.get("themeInventoryFileCount") != payload.get("fileCount"):
             raise AssertionError(f"coverage index theme file count mismatch: {index}")

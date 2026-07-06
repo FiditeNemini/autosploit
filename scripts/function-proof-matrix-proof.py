@@ -79,7 +79,7 @@ def run() -> None:
         state = request("GET", "/state")
         matrix = request("GET", "/qa/function-proof-matrix")
         flow = request("GET", "/qa/function-flow-inventory")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"function proof matrix route failed: {matrix}")

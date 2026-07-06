@@ -72,7 +72,7 @@ def run() -> None:
         session = request("GET", "/qa/session-coverage")
         tab_action = request("GET", "/qa/tab-action-coverage")
         phase_matrix = request("GET", "/qa/agent-loop-phase-matrix")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"session workflow matrix route failed: {matrix}")

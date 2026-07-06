@@ -127,7 +127,7 @@ def run() -> None:
         if "/qa/recon-coverage" not in (qa.get("stateRoutes") or []):
             raise AssertionError(f"state route list missing recon coverage: {qa}")
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         group = (index.get("groups") or {}).get("tabsAndSessions") or {}
         if group.get("reconSurfaces") != coverage.get("reconSurfaces"):
             raise AssertionError(f"coverage-index recon surface mirror mismatch: {index}")

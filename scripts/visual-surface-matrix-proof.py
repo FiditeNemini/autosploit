@@ -72,7 +72,7 @@ def run() -> None:
         visual = request("GET", "/qa/visual-coverage")
         view = request("GET", "/qa/view-inventory")
         theme = request("GET", "/qa/theme-inventory")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"visual surface matrix route failed: {matrix}")

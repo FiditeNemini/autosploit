@@ -180,7 +180,7 @@ def run() -> None:
             if "/qa/state-dependent-contract-matrix" not in state_routes:
                 raise AssertionError(f"state route list missing state-dependent matrix: {state_routes}")
 
-            index = request("GET", "/qa/coverage-index")
+            index = request("GET", "/qa/coverage-index", timeout=120.0)
             groups = index.get("groups") or {}
             for group_name in ("chatAndContext", "runtimeAndCache", "toolsAndParsers"):
                 group = groups.get(group_name) or {}

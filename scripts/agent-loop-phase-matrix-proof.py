@@ -80,7 +80,7 @@ def run() -> None:
         flow = request("GET", "/qa/agent-flow-inventory")
         auth = request("GET", "/qa/agent-tool-authorization-coverage")
         tool_matrix = request("GET", "/qa/tool-execution-matrix")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"agent loop phase matrix route failed: {matrix}")

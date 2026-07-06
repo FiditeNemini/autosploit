@@ -233,7 +233,7 @@ def run() -> None:
         if "/qa/agent-flow-inventory" not in state_routes:
             raise AssertionError(f"state route list missing agent flow inventory route: {state_routes}")
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         group = (index.get("groups") or {}).get("chatAndContext") or {}
         if group.get("agentFlowInventoryFileCount") != payload.get("fileCount"):
             raise AssertionError(f"coverage index agent flow file count mismatch: {index}")

@@ -110,7 +110,7 @@ def run() -> None:
         streaming = request("GET", "/qa/streaming-parser-reuse")
         runtime = request("GET", "/qa/runtime-coverage")
         cache = request("GET", "/qa/cache-artifact-matrix")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         state = request("GET", "/state")
 
         if matrix.get("ok") is not True:

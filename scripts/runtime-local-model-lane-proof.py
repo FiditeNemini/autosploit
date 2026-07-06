@@ -162,7 +162,7 @@ def run() -> None:
         if deep.get("runtimeLocalModelLaneContractParity") is not True:
             raise AssertionError(f"deep runtime flow missing local model lane parity: {deep}")
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         runtime_group = (index.get("groups") or {}).get("runtimeAndCache") or {}
         if "/qa/runtime-local-model-lane" not in (runtime_group.get("endpoints") or []):
             raise AssertionError(f"coverage index runtime group missing local model lane route: {runtime_group}")

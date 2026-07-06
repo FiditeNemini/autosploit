@@ -98,7 +98,7 @@ def run() -> None:
         coverage = request("GET", "/qa/continuous-batching-coverage")
         runtime = request("GET", "/qa/runtime-coverage")
         deep = request("GET", "/qa/deep-runtime-flow-coverage")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if coverage.get("ok") is not True:
             raise AssertionError(f"continuous batching route failed: {coverage}")

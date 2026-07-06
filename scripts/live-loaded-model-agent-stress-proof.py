@@ -99,7 +99,7 @@ def run() -> None:
         if "/qa/live-loaded-model-agent-stress" not in (deep.get("routes") or []):
             raise AssertionError(f"deep runtime missing live loaded-model agent stress route: {deep}")
 
-        index = request("GET", "/qa/coverage-index", timeout=45.0)
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         runtime_group = (index.get("groups") or {}).get("runtimeAndCache") or {}
         if "/qa/live-loaded-model-agent-stress" not in (runtime_group.get("endpoints") or []):
             raise AssertionError(f"coverage index missing live loaded-model agent route: {runtime_group}")

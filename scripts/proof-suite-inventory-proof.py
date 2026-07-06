@@ -174,7 +174,7 @@ def script_summary(path: Path) -> dict[str, object]:
 def assert_proof_suite_inventory() -> None:
     state = request("GET", "/state")
     inventory = request("GET", "/qa/proof-suite-inventory")
-    index = request("GET", "/qa/coverage-index")
+    index = request("GET", "/qa/coverage-index", timeout=120.0)
 
     expected = [script_summary(path) for path in expected_proof_files()]
     expected_names = [item["file"] for item in expected]

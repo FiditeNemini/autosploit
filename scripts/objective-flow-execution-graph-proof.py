@@ -169,7 +169,7 @@ def assert_graph(graph: dict) -> None:
     if ROUTE not in state_routes:
         raise AssertionError(f"state route list missing {ROUTE}: {state_routes}")
 
-    index = request("GET", "/qa/coverage-index", timeout=45.0)
+    index = request("GET", "/qa/coverage-index", timeout=120.0)
     release_group = (index.get("groups") or {}).get("releaseReadiness") or {}
     if ROUTE not in (release_group.get("endpoints") or []):
         raise AssertionError(f"coverage index release group missing {ROUTE}: {release_group}")

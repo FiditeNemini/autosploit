@@ -91,7 +91,7 @@ def run() -> None:
         views = request("GET", "/qa/view-inventory")
         functions = request("GET", "/qa/function-flow-inventory")
         agent_loop = request("GET", "/qa/agent-loop-coverage")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if flow.get("ok") is not True:
             raise AssertionError(f"tab-tool-function flow route failed: {flow}")

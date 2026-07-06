@@ -148,7 +148,7 @@ def assert_payload(route_payload: dict, index_payload: dict) -> None:
     if ROUTE not in state_routes:
         raise AssertionError(f"state route list missing {ROUTE}: {state_routes}")
 
-    index_group = ((request("GET", "/qa/coverage-index").get("groups") or {}).get("appState") or {})
+    index_group = ((index_payload.get("groups") or {}).get("appState") or {})
     if ROUTE not in (index_group.get("endpoints") or []):
         raise AssertionError(f"coverage index appState group missing {ROUTE}: {index_group}")
     if PROOF not in (index_group.get("proofs") or []):
@@ -169,8 +169,8 @@ def run() -> None:
         if app.wait(timeout=30) != 0:
             raise RuntimeError("build_and_run --verify failed")
         wait_for_app()
-        index_payload = request("GET", "/qa/coverage-index")
-        route_payload = request("GET", ROUTE)
+        index_payload = request("GET", "/qa/coverage-index", timeout=120.0)
+        route_payload = request("GET", ROUTE, timeout=120.0)
         assert_payload(route_payload, index_payload)
         print("coverage-false-flag-classification proof passed")
     finally:

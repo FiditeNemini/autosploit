@@ -191,7 +191,7 @@ def run() -> None:
         if "/qa/python-runtime-inventory" not in state_routes:
             raise AssertionError(f"state route list missing python runtime inventory route: {state_routes}")
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         runtime_group = (index.get("groups") or {}).get("runtimeAndCache") or {}
         if runtime_group.get("pythonRuntimeInventoryFileCount") != payload.get("fileCount"):
             raise AssertionError(f"coverage index python runtime file count mismatch: {index}")

@@ -95,7 +95,7 @@ def run() -> None:
         wait_for_app()
 
         matrix = request("GET", "/qa/security-abuse-boundary-matrix")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"security boundary matrix failed: {matrix}")

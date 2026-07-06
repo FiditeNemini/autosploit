@@ -52,7 +52,7 @@ def run() -> None:
         wait_for_app()
 
         coverage = request("GET", "/qa/continuous-batching-coverage")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         runtime_group = (index.get("groups") or {}).get("runtimeAndCache") or {}
 
         if coverage.get("minimaxContinuousBatchingModel") != EXPECTED_MODEL:

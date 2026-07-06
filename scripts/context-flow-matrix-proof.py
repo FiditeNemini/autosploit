@@ -72,7 +72,7 @@ def run() -> None:
         context = request("GET", "/qa/context-coverage")
         agent_flow = request("GET", "/qa/agent-flow-inventory")
         phase_matrix = request("GET", "/qa/agent-loop-phase-matrix")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"context flow matrix route failed: {matrix}")

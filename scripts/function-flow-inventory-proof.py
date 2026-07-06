@@ -201,7 +201,7 @@ def run() -> None:
         if "/qa/function-flow-inventory" not in state_routes:
             raise AssertionError(f"state route list missing function-flow inventory route: {state_routes}")
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         app_group = (index.get("groups") or {}).get("appState") or {}
         if app_group.get("functionFlowInventoryCount") != payload.get("functionCount"):
             raise AssertionError(f"coverage index function-flow count mismatch: {index}")

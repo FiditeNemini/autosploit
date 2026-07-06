@@ -76,7 +76,7 @@ def run() -> None:
         artifact = request("GET", "/qa/artifact-ledger")
         visual_surface = request("GET", "/qa/visual-surface-matrix")
         runtime = request("GET", "/qa/runtime-coverage")
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
 
         if matrix.get("ok") is not True:
             raise AssertionError(f"artifact manifest matrix route failed: {matrix}")

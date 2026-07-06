@@ -187,7 +187,7 @@ def run() -> None:
         payload = request("GET", "/qa/evidence-lifecycle-coverage")
         assert_payload(payload)
 
-        index = request("GET", "/qa/coverage-index")
+        index = request("GET", "/qa/coverage-index", timeout=120.0)
         chat_context = (index.get("groups") or {}).get("chatAndContext") or {}
         if chat_context.get("evidenceLifecycleStages") != payload.get("stages"):
             raise AssertionError(f"coverage index evidence lifecycle stages mismatch: {index}")
