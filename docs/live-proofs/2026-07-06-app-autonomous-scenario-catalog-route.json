@@ -1,0 +1,46 @@
+{
+  "appApi": "http://127.0.0.1:9999",
+  "checks": {
+    "allRequiredScenariosPresent": "PASS",
+    "allScenarioContractsReady": "PASS",
+    "executionBoundary": "PASS",
+    "noModelLoaded": "PASS",
+    "proofType": "PASS",
+    "requiredStages": "PASS",
+    "routeOk": "PASS",
+    "scenarioCount": "PASS"
+  },
+  "executionBoundary": "local-emulated-targets-only",
+  "finishedAt": "2026-07-06T03:15:28-0700",
+  "generatedAt": "2026-07-06T03:15:28-0700",
+  "missingScenarios": [],
+  "noModelLoaded": true,
+  "notes": [
+    "Live app route proof only; this does not load a model.",
+    "The route exposes local_fixture_only scenarios for model-driving harnesses and UI QA."
+  ],
+  "ok": true,
+  "proofLevel": "live-debug-app-route-no-model-load",
+  "proofType": "app-autonomous-scenario-catalog-route-live",
+  "requiredStages": [
+    "surface",
+    "probe",
+    "prove",
+    "exploit_or_validate",
+    "evidence",
+    "report"
+  ],
+  "routeScenarioCount": 6,
+  "routeScenarioIds": [
+    "codebase_static_to_patch_review_chain",
+    "container_iac_supply_chain_chain",
+    "github_repo_secret_dependency_chain",
+    "network_service_credential_post_chain",
+    "webserver_auth_sqli_report_chain",
+    "webserver_ssrf_file_read_chain"
+  ],
+  "scenarioFailures": {},
+  "sourceRoute": "/qa/autonomous-scenario-catalog",
+  "startedAt": "2026-07-06T03:15:14-0700",
+  "status": "PASS"
+}
