@@ -30,12 +30,12 @@
     "docs/live-proofs/checkpoint-75-minimax-live.json",
     "docs/live-proofs/qwen27-mxfp4-mtp-live-cache-20260605.json"
   ],
-  "generatedAt": "2026-07-06T01:22:43-0700",
+  "generatedAt": "2026-07-06T01:30:25-0700",
   "knownFailedLiveProofs": [
     "docs/live-proofs/checkpoint-75-minimax-live.json"
   ],
-  "liveProofCount": 184,
-  "liveProofOkCount": 170,
+  "liveProofCount": 185,
+  "liveProofOkCount": 171,
   "liveProofStatus": {
     "docs/live-proofs/2026-06-03-minimax-current-metadata.json": true,
     "docs/live-proofs/2026-06-03-minimax-jang-k-current-metadata.json": true,
@@ -165,6 +165,7 @@
     "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-35b.json": true,
     "docs/live-proofs/2026-07-06-real-qwen-webserver-auth-sqli-27b.json": true,
     "docs/live-proofs/2026-07-06-real-qwen-webserver-auth-sqli-35b.json": true,
+    "docs/live-proofs/2026-07-06-release-app-computer-use-tools-inventory-44.json": true,
     "docs/live-proofs/2026-07-06-repo-codebase-supply-chain-scenario.json": true,
     "docs/live-proofs/2026-07-06-webserver-auth-sqli-scenario.json": true,
     "docs/live-proofs/beta-small-qwen-live-smoke.json": true,
@@ -351,6 +352,7 @@
     "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-35b.json",
     "docs/live-proofs/2026-07-06-real-qwen-webserver-auth-sqli-27b.json",
     "docs/live-proofs/2026-07-06-real-qwen-webserver-auth-sqli-35b.json",
+    "docs/live-proofs/2026-07-06-release-app-computer-use-tools-inventory-44.json",
     "docs/live-proofs/2026-07-06-repo-codebase-supply-chain-scenario.json",
     "docs/live-proofs/2026-07-06-webserver-auth-sqli-scenario.json",
     "docs/live-proofs/beta-small-qwen-live-smoke.json",
@@ -411,7 +413,7 @@
   "ok": true,
   "processEvidence": {
     "appRows": [
-      "4264 126896 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+      "10446 133168 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
     ],
     "engineProcessRows": []
   },

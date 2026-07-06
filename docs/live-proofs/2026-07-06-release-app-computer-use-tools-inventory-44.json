@@ -1,0 +1,89 @@
+{
+  "boundary": {
+    "externalTargetExecution": "not-started",
+    "modelInference": "not-claimed",
+    "notarizedDistribution": "PARTIAL: package was built with --skip-notarize; notarization requires configured Apple notary credentials.",
+    "releaseDisplayableApp": "PASS",
+    "releaseDmgLocalSignature": "PASS"
+  },
+  "checks": {
+    "apiToolSettings44Installed0Missing": "PASS",
+    "appCodesignValid": "PASS",
+    "banditInstalledVisibleAndApi": "PASS",
+    "computerUseAttachedToReleaseApp": "PASS",
+    "dmgCodesignValid": "PASS",
+    "notarization": "PARTIAL",
+    "packageScriptRefreshedDmg": "PASS",
+    "packageScriptRefreshedReleaseBundle": "PASS",
+    "sameProcessOwnsPort9999": "PASS",
+    "semgrepInstalledVisibleAndApi": "PASS",
+    "visibleToolsPanel44Installed0Missing": "PASS"
+  },
+  "codesign": {
+    "appExitCode": 0,
+    "appOutput": "release/ExploitBot.app: valid on disk\nrelease/ExploitBot.app: satisfies its Designated Requirement\n",
+    "dmgExitCode": 0,
+    "dmgOutput": "release/ExploitBot-beta.dmg: valid on disk\nrelease/ExploitBot-beta.dmg: satisfies its Designated Requirement\n"
+  },
+  "computerUse": {
+    "appPath": "/Users/eric/exploitbot/release/ExploitBot.app",
+    "bundleID": "ai.jangq.ExploitBot",
+    "cuaAppVersion": 857,
+    "observedAccessibilityText": "Tools Detect and install external command-line tools used by the agent loop. TOOL INSTALLER 44 installed 0 missing",
+    "observedInstallAllMissing": "disabled",
+    "pid": 9817,
+    "screenshot": "docs/live-proofs/2026-07-06-release-app-computer-use-tools-inventory-44.png",
+    "screenshotSha256": "efbc4e1a9938dbb8cf6feece4c7d7230db866782dacf9e83cdf823017bf5733d"
+  },
+  "generatedAt": "2026-07-06T01:29:49-0700",
+  "ok": true,
+  "proofType": "release-app-computer-use-tools-inventory-44",
+  "releaseManifest": {
+    "appBinarySha256": "19b67929f2bd84652d1e616e2e2090a1d14824f88b0893214ce80b9e77650fcf",
+    "dmgSha256": "67b891ff49614f98f29309ce74bfbb72ebab03b3261517b562cd9b3022c20b61",
+    "notarizationGate": "requires-notary-credentials",
+    "notarizationStatus": "not-submitted",
+    "path": "release/release-manifest.json",
+    "resources": {
+      "appIcon": true,
+      "bundledPythonRuntime": true,
+      "pythonEngine": true,
+      "pythonEngineVenv": false,
+      "starterCvesDb": true
+    }
+  },
+  "sameProcessApi": {
+    "bandit": {
+      "category": "supplychain",
+      "installMethod": "uv",
+      "name": "bandit",
+      "path": "/Users/eric/.local/bin/bandit",
+      "status": "installed",
+      "version": "1.9.4"
+    },
+    "enginePort": 0,
+    "engineRunning": false,
+    "errorCount": 0,
+    "installPlan": {
+      "commandCount": 0,
+      "installCommands": [],
+      "missingByCategory": {},
+      "missingByInstallMethod": {},
+      "missingCount": 0,
+      "requiresNetworkInstall": false
+    },
+    "installedCount": 44,
+    "lsofPort9999": "COMMAND    PID USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME\nExploitBo 9817 eric   18u  IPv6 0x239884d71b148df7      0t0  TCP *:9999 (LISTEN)\n",
+    "missingCount": 0,
+    "semgrep": {
+      "category": "supplychain",
+      "installMethod": "uv",
+      "name": "semgrep",
+      "path": "/Users/eric/.local/bin/semgrep",
+      "status": "installed",
+      "version": "1.168.0"
+    },
+    "toolCount": 44
+  },
+  "status": "PARTIAL"
+}
