@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-07-06T00:45:17-0700",
+  "generatedAt": "2026-07-06T00:51:22-0700",
   "notes": [
     "Rows aggregate existing live artifacts; artifact generatedAt values show whether evidence is fresh or older.",
-    "Repo/codebase supply-chain row is the fresh 2026-07-06 app-backed scenario added for this matrix.",
+    "Webserver SQLi and repo/codebase supply-chain rows are fresh 2026-07-06 app-backed scenarios added for this matrix.",
     "Real-Qwen rows are not rerun by this aggregator; rerun the Qwen proof scripts for fresh model evidence."
   ],
   "ok": true,
@@ -17,6 +17,75 @@
     "report"
   ],
   "rows": [
+    {
+      "artifacts": [
+        {
+          "artifact": "docs/live-proofs/2026-07-06-webserver-auth-sqli-scenario.json",
+          "generatedAt": "2026-07-06T00:51:05-0700",
+          "proofType": "webserver-auth-sqli-scenario-live",
+          "status": "PASS"
+        }
+      ],
+      "cacheProof": {
+        "hybridSSM": false,
+        "paged": false,
+        "prefix": false,
+        "q4KV": false
+      },
+      "currentRunStatus": "PASS",
+      "failures": [],
+      "label": "Emulated web app discovery to SQL injection proof to report",
+      "modelRequired": false,
+      "observedTools": [
+        "httpx",
+        "nuclei",
+        "run_shell",
+        "search_cve",
+        "sqlmap"
+      ],
+      "requiredTools": [
+        "run_shell",
+        "httpx",
+        "nuclei",
+        "sqlmap",
+        "search_cve"
+      ],
+      "scenarioId": "webserver_auth_sqli_report_chain",
+      "stageEvidence": {
+        "evidence": [
+          "/messages",
+          "/results",
+          "/state terminal transcripts"
+        ],
+        "exploit_or_validate": [
+          "bounded local SQL injection validation only"
+        ],
+        "probe": [
+          "nuclei local template",
+          "sqlmap local query parameter test"
+        ],
+        "prove": [
+          "q parameter SQL injection proof marker",
+          "nuclei structured finding"
+        ],
+        "report": [
+          "report finding action and report generate route"
+        ],
+        "surface": [
+          "run_shell route inventory",
+          "httpx local web probe"
+        ]
+      },
+      "stages": [
+        "surface",
+        "probe",
+        "prove",
+        "exploit_or_validate",
+        "evidence",
+        "report"
+      ],
+      "status": "PASS"
+    },
     {
       "artifacts": [
         {
@@ -301,10 +370,10 @@
       "status": "PASS"
     }
   ],
-  "scenarioCount": 4,
+  "scenarioCount": 5,
   "status": "PASS",
   "statusCounts": {
     "FAIL": 0,
-    "PASS": 4
+    "PASS": 5
   }
 }

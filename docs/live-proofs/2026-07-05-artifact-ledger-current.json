@@ -30,12 +30,12 @@
     "docs/live-proofs/checkpoint-75-minimax-live.json",
     "docs/live-proofs/qwen27-mxfp4-mtp-live-cache-20260605.json"
   ],
-  "generatedAt": "2026-07-06T00:45:19-0700",
+  "generatedAt": "2026-07-06T00:51:24-0700",
   "knownFailedLiveProofs": [
     "docs/live-proofs/checkpoint-75-minimax-live.json"
   ],
-  "liveProofCount": 179,
-  "liveProofOkCount": 165,
+  "liveProofCount": 180,
+  "liveProofOkCount": 166,
   "liveProofStatus": {
     "docs/live-proofs/2026-06-03-minimax-current-metadata.json": true,
     "docs/live-proofs/2026-06-03-minimax-jang-k-current-metadata.json": true,
@@ -162,6 +162,7 @@
     "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-27b.json": true,
     "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-35b.json": true,
     "docs/live-proofs/2026-07-06-repo-codebase-supply-chain-scenario.json": true,
+    "docs/live-proofs/2026-07-06-webserver-auth-sqli-scenario.json": true,
     "docs/live-proofs/beta-small-qwen-live-smoke.json": true,
     "docs/live-proofs/checkpoint-102-block-l2-partial-proof.json": true,
     "docs/live-proofs/checkpoint-103-ssm-rederive-status-proof.json": true,
@@ -343,6 +344,7 @@
     "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-27b.json",
     "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-35b.json",
     "docs/live-proofs/2026-07-06-repo-codebase-supply-chain-scenario.json",
+    "docs/live-proofs/2026-07-06-webserver-auth-sqli-scenario.json",
     "docs/live-proofs/beta-small-qwen-live-smoke.json",
     "docs/live-proofs/checkpoint-102-block-l2-partial-proof.json",
     "docs/live-proofs/checkpoint-103-ssm-rederive-status-proof.json",
@@ -401,7 +403,7 @@
   "ok": true,
   "processEvidence": {
     "appRows": [
-      "91457 132432 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+      "93168 126208 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
     ],
     "engineProcessRows": []
   },

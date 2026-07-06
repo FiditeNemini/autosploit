@@ -26,6 +26,21 @@ class ScenarioSpec:
 
 SCENARIOS = [
     ScenarioSpec(
+        scenario_id="webserver_auth_sqli_report_chain",
+        label="Emulated web app discovery to SQL injection proof to report",
+        artifacts=("docs/live-proofs/2026-07-06-webserver-auth-sqli-scenario.json",),
+        required_tools=("run_shell", "httpx", "nuclei", "sqlmap", "search_cve"),
+        stage_evidence={
+            "surface": ["run_shell route inventory", "httpx local web probe"],
+            "probe": ["nuclei local template", "sqlmap local query parameter test"],
+            "prove": ["q parameter SQL injection proof marker", "nuclei structured finding"],
+            "exploit_or_validate": ["bounded local SQL injection validation only"],
+            "evidence": ["/messages", "/results", "/state terminal transcripts"],
+            "report": ["report finding action and report generate route"],
+        },
+        current_run_required=True,
+    ),
+    ScenarioSpec(
         scenario_id="loopback_webserver_real_tools",
         label="Local loopback webserver with real installed tools",
         artifacts=(
@@ -245,7 +260,7 @@ def build_report(
         "rows": rows,
         "notes": [
             "Rows aggregate existing live artifacts; artifact generatedAt values show whether evidence is fresh or older.",
-            "Repo/codebase supply-chain row is the fresh 2026-07-06 app-backed scenario added for this matrix.",
+            "Webserver SQLi and repo/codebase supply-chain rows are fresh 2026-07-06 app-backed scenarios added for this matrix.",
             "Real-Qwen rows are not rerun by this aggregator; rerun the Qwen proof scripts for fresh model evidence.",
         ],
     }

