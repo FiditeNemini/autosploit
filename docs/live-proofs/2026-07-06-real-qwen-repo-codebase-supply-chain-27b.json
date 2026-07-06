@@ -1,0 +1,2234 @@
+{
+  "baseUrl": "http://127.0.0.1:62259",
+  "engineLogTail": "INFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 288 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 289 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 290 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 291 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 292 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 293 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 294 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 295 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 296 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 297 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 298 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 299 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 300 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 301 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 302 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 303 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 304 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 305 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 306 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 307 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 308 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 309 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 310 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 311 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 312 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 313 (16 kv layers, cumulative=48, 29 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 113 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-fc1fe30d: 64 layers, truncated to 7837 tokens\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 256, 'enable_thinking': False}\nINFO:     127.0.0.1:62882 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-0d2b7591: 10 blocks, 640 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 16/64 layers (48 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-0d2b7591: 640 cached (KV+SSM), 7679 remaining (incl. 7-token gen-prompt suffix)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-0d2b7591 (48 layers, key=8256 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-0d2b7591 (48 layers, key=8311 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-0d2b7591 (48 layers, 8256-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-0d2b7591 (48 layers, 8311-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-0d2b7591 depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-0d2b7591] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.167,d3=0.083]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-0d2b7591] finish=stop cycles=97 accepted=47/121 (38.8%) emits[init=2,draft=47,bonus=38,verify=58]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-0d2b7591] accept_by_depth[d1=44/97,d2=2/12,d3=1/12] forwards[seed_main=1,verify_main=97,replay_main=58,mtp=122]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-0d2b7591] timings_ms[verify=767.88 sample=8089.19 draft=3565.06 snapshot=4.61 restore=6.97 replay=143.86 materialize=0.62 avg_cycle=129.67]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=7671, num_new_blocks=120, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 16 positional layers (out of 64 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 314 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 315 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 316 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 317 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 318 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 319 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 320 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 321 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 322 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 323 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 324 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 325 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 326 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 327 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 328 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 329 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 330 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 331 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 332 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 333 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 334 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 335 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 336 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 337 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 338 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 339 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 340 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 341 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 342 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 343 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 344 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 345 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 346 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 347 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 348 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 349 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 350 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 351 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 352 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 353 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 354 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 355 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 356 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 357 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 358 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 359 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 360 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 361 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 362 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 363 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 364 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 365 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 366 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 367 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 368 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 369 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 370 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 371 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 372 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 373 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 374 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 375 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 376 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 377 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 378 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 379 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 380 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 381 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 382 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 383 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 384 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 385 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 386 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 387 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 388 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 389 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 390 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 391 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 392 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 393 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 394 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 395 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 396 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 397 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 398 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 399 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 400 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 401 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 402 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 403 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 404 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 405 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 406 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 407 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 408 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 409 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 410 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 411 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 412 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 413 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 414 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 415 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 416 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 417 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 418 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 419 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 420 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 421 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 422 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 423 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 424 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 425 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 426 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 427 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 428 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 429 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 430 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 431 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 432 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 433 (16 kv layers, cumulative=48, 55 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 120 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-0d2b7591: 64 layers, truncated to 8311 tokens\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 256, 'enable_thinking': False}\nINFO:     127.0.0.1:63093 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-f29d2ea2: 10 blocks, 640 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 16/64 layers (48 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-f29d2ea2: 640 cached (KV+SSM), 8115 remaining (incl. 7-token gen-prompt suffix)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-f29d2ea2 (48 layers, key=8704 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-f29d2ea2 (48 layers, key=8747 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-f29d2ea2 (48 layers, 8704-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-f29d2ea2 (48 layers, 8747-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-f29d2ea2 depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-f29d2ea2] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.167,d3=0.167]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-f29d2ea2] finish=stop cycles=103 accepted=49/127 (38.6%) emits[init=2,draft=49,bonus=40,verify=62]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-f29d2ea2] accept_by_depth[d1=45/103,d2=2/12,d3=2/12] forwards[seed_main=1,verify_main=103,replay_main=62,mtp=128]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-f29d2ea2] timings_ms[verify=816.43 sample=8521.37 draft=3753.33 snapshot=4.93 restore=7.40 replay=153.09 materialize=0.67 avg_cycle=128.71]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=8107, num_new_blocks=127, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 16 positional layers (out of 64 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 434 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 435 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 436 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 437 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 438 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 439 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 440 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 441 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 442 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 443 (16 kv layers, 64 tokens)",
+  "error": "StalledFinalAnswer: assistant stream made no observable progress for 45.0s",
+  "finalAnswerAttempts": [
+    {
+      "attempt": 1,
+      "lastAssistantPreview": "### Phase 5: Secret Scanning (Trufflehog)\nProbe the repo for \"leaked\" secrets. Even if `.env.example` is a template",
+      "note": "assistant stream made no observable progress for 45.0s",
+      "status": "stalled-final-answer",
+      "toolSequence": [
+        "run_shell",
+        "syft",
+        "grype",
+        "osv_scanner"
+      ]
+    }
+  ],
+  "finishedAt": "2026-07-05T23:03:49-0700",
+  "memoryPreflight": {
+    "allowConcurrentModel": false,
+    "availableGB": 103.24778747558594,
+    "enabled": true,
+    "heavyModelProcessCount": 0,
+    "heavyModelProcesses": [],
+    "requiredAvailableGB": 42.0
+  },
+  "messages": [
+    {
+      "content": "Authorized local repo/codebase supply-chain proof. Reasoning is off. Use only this throwaway local repo path and do not touch external targets: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo. Surface files, probe secrets/SBOM/dependencies, prove known vulnerable packages, validate safely without exploitation, then summarize evidence for the report. Emit these exact Qwen XML tool calls now, with valid JSON. After tool results,",
+      "role": "user"
+    },
+    {
+      "content": "You are exploitbot. You are running locally on Apple Silicon.\nTarget: `/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo`\nPhase: SCAN (Supply Chain Focus)\n\n### Phase 1: Surface & Inventory\nFirst, map the file structure, generate an SBOM, and run a secret scan.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 0 of 0 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets: none yet.\nCVE assist: semantic embedding search is enabled when cve_embedder.py and stored CVE embeddings are available; oth",
+      "contextSnippetCount": 0,
+      "role": "assistant",
+      "toolSchemaCount": 37,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "run_shell",
+        "trufflehog",
+        "gowitness",
+        "httpx",
+        "theharvester",
+        "jwt_tool",
+        "osv_scanner",
+        "exiftool",
+        "nuclei",
+        "grype",
+        "syft",
+        "sherlock",
+        "nmap",
+        "sqlmap",
+        "hashcat",
+        "pwncat",
+        "linpeas",
+        "dnsx",
+        "masscan",
+        "wpscan",
+        "metasploit",
+        "feroxbuster",
+        "dalfox",
+        "graphqlmap",
+        "netexec",
+        "subfinder",
+        "katana",
+        "ffuf",
+        "tshark",
+        "haiti",
+        "hydra",
+        "snmpwalk",
+        "chisel",
+        "impacket"
+      ]
+    },
+    {
+      "content": "Tool request: run_shell\n$ /bin/zsh -c find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo -maxdepth 3 -type f | sort\nArguments:\n{\n  \"command\" : \"find \\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-snnuwa3j\\/synthetic-vulnerable-repo -maxdepth 3 -type f | sort\"\n}\n\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo/.env.example\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo/Dockerfile\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo/package-lock.json\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo/package.json\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "run_shell"
+    },
+    {
+      "content": "### Phase 2: SBOM & Dependency Scan\nNow, generate the SBOM (Software Bill of Materials) andrun `grype` and `osv-scanner` against the repo to surface known vulnerable packages.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 1 of 1 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fi",
+      "contextSelections": [
+        {
+          "bodyHash": "18c46aaef41bc9bc",
+          "source": "tool.output",
+          "tags": "tool,run_shell",
+          "title": "run_shell"
+        }
+      ],
+      "contextSnippetCount": 1,
+      "role": "assistant",
+      "toolSchemaCount": 37,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "run_shell",
+        "trufflehog",
+        "gowitness",
+        "httpx",
+        "theharvester",
+        "jwt_tool",
+        "osv_scanner",
+        "exiftool",
+        "nuclei",
+        "grype",
+        "syft",
+        "sherlock",
+        "nmap",
+        "sqlmap",
+        "hashcat",
+        "pwncat",
+        "linpeas",
+        "dnsx",
+        "masscan",
+        "wpscan",
+        "metasploit",
+        "feroxbuster",
+        "dalfox",
+        "graphqlmap",
+        "netexec",
+        "subfinder",
+        "katana",
+        "ffuf",
+        "tshark",
+        "haiti",
+        "hydra",
+        "snmpwalk",
+        "chisel",
+        "impacket"
+      ]
+    },
+    {
+      "content": "Tool request: syft\n$ syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo -o json\nArguments:\n{\n  \"output\" : \"json\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-snnuwa3j\\/synthetic-vulnerable-repo\"\n}\n\n{\"artifacts\": [{\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, {\"name\": \"minimist\", \"version\": \"0.0.8\", \"type\": \"npm\"}], \"source\": {\"type\": \"directory\", \"target\": \"synthetic-vulnerable-repo\"}}\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "syft"
+    },
+    {
+      "content": "### Phase 3: Vulnerability Scanning (Grype & OSV)\nRun `grype` (focusedon `critical` failures) and `osv-scanner` to map the SBOM against live CVE databases.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 4 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=2 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fi",
+      "contextSelections": [
+        {
+          "bodyHash": "18c46aaef41bc9bc",
+          "source": "tool.output",
+          "tags": "tool,run_shell",
+          "title": "run_shell"
+        },
+        {
+          "bodyHash": "b6ca138d4189fdff",
+          "source": "tool.output",
+          "tags": "tool,syft",
+          "title": "syft"
+        },
+        {
+          "bodyHash": "9f06aa14328357f7",
+          "source": "finding",
+          "tags": "vuln,info,syft,sbom,dependency,npm",
+          "title": "INFO SBOM Component: lodash"
+        },
+        {
+          "bodyHash": "cc1668d57d5a365a",
+          "source": "finding",
+          "tags": "vuln,info,syft,sbom,dependency,npm",
+          "title": "INFO SBOM Component: minimist"
+        }
+      ],
+      "contextSnippetCount": 4,
+      "role": "assistant",
+      "toolSchemaCount": 37,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "run_shell",
+        "trufflehog",
+        "gowitness",
+        "httpx",
+        "theharvester",
+        "jwt_tool",
+        "osv_scanner",
+        "exiftool",
+        "nuclei",
+        "grype",
+        "syft",
+        "sherlock",
+        "nmap",
+        "sqlmap",
+        "hashcat",
+        "pwncat",
+        "linpeas",
+        "dnsx",
+        "masscan",
+        "wpscan",
+        "metasploit",
+        "feroxbuster",
+        "dalfox",
+        "graphqlmap",
+        "netexec",
+        "subfinder",
+        "katana",
+        "ffuf",
+        "tshark",
+        "haiti",
+        "hydra",
+        "snmpwalk",
+        "chisel",
+        "impacket"
+      ]
+    },
+    {
+      "content": "Tool request: grype\n$ grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo -o json --fail-on critical\nArguments:\n{\n  \"fail_on\" : \"critical\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-snnuwa3j\\/synthetic-vulnerable-repo\"\n}\n\n{\"matches\": [{\"vulnerability\": {\"id\": \"CVE-2021-23337\", \"severity\": \"High\"}, \"artifact\": {\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, \"matchDetails\": [{\"type\": \"exact-direct-match\"}]}]}\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "grype"
+    },
+    {
+      "content": "### Phase 4: OSV-Scanner & Secret Hunt\nRun `osv-scanner` for a second opinion on the SBOM, then run `trufflehog` to hunt for hardcoded secrets in the `.env.example` or `Dockerfile`.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 6 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=3 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fi",
+      "contextSelections": [
+        {
+          "bodyHash": "18c46aaef41bc9bc",
+          "source": "tool.output",
+          "tags": "tool,run_shell",
+          "title": "run_shell"
+        },
+        {
+          "bodyHash": "c21d23076be48c0c",
+          "source": "finding",
+          "tags": "vuln,high,grype,dependency,supply-chain,grype,CVE-2021-23337",
+          "title": "HIGH CVE-2021-23337"
+        },
+        {
+          "bodyHash": "b6ca138d4189fdff",
+          "source": "tool.output",
+          "tags": "tool,syft",
+          "title": "syft"
+        },
+        {
+          "bodyHash": "9f06aa14328357f7",
+          "source": "finding",
+          "tags": "vuln,info,syft,sbom,dependency,npm",
+          "title": "INFO SBOM Component: lodash"
+        }
+      ],
+      "contextSnippetCount": 4,
+      "role": "assistant",
+      "toolSchemaCount": 37,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "run_shell",
+        "trufflehog",
+        "gowitness",
+        "httpx",
+        "theharvester",
+        "jwt_tool",
+        "osv_scanner",
+        "exiftool",
+        "nuclei",
+        "grype",
+        "syft",
+        "sherlock",
+        "nmap",
+        "sqlmap",
+        "hashcat",
+        "pwncat",
+        "linpeas",
+        "dnsx",
+        "masscan",
+        "wpscan",
+        "metasploit",
+        "feroxbuster",
+        "dalfox",
+        "graphqlmap",
+        "netexec",
+        "subfinder",
+        "katana",
+        "ffuf",
+        "tshark",
+        "haiti",
+        "hydra",
+        "snmpwalk",
+        "chisel",
+        "impacket"
+      ]
+    },
+    {
+      "content": "Tool request: osv_scanner\n$ osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo --format json\nArguments:\n{\n  \"format\" : \"json\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-snnuwa3j\\/synthetic-vulnerable-repo\"\n}\n\n{\"results\": [{\"packageSource\": {\"path\": \"package-lock.json\"}, \"packages\": [{\"package\": {\"name\": \"lodash\", \"ecosystem\": \"npm\"}, \"vulnerabilities\": [{\"id\": \"GHSA-35jh-r3h4-6jhm\"}]}]}]}\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "osv_scanner"
+    },
+    {
+      "content": "### Phase 5: Secret Scanning (Trufflehog)\nProbe the repo for \"leaked\" secrets. Even if `.env.example` is a template",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 8 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=4 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fi",
+      "contextSelections": [
+        {
+          "bodyHash": "18c46aaef41bc9bc",
+          "source": "tool.output",
+          "tags": "tool,run_shell",
+          "title": "run_shell"
+        },
+        {
+          "bodyHash": "c21d23076be48c0c",
+          "source": "finding",
+          "tags": "vuln,high,grype,dependency,supply-chain,grype,CVE-2021-23337",
+          "title": "HIGH CVE-2021-23337"
+        },
+        {
+          "bodyHash": "0bccb143415f6577",
+          "source": "finding",
+          "tags": "vuln,info,osv_scanner,dependency,supply-chain,osv,npm",
+          "title": "INFO GHSA-35jh-r3h4-6jhm"
+        },
+        {
+          "bodyHash": "b6ca138d4189fdff",
+          "source": "tool.output",
+          "tags": "tool,syft",
+          "title": "syft"
+        }
+      ],
+      "contextSnippetCount": 4,
+      "role": "assistant",
+      "toolSchemaCount": 37,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "run_shell",
+        "trufflehog",
+        "gowitness",
+        "httpx",
+        "theharvester",
+        "jwt_tool",
+        "osv_scanner",
+        "exiftool",
+        "nuclei",
+        "grype",
+        "syft",
+        "sherlock",
+        "nmap",
+        "sqlmap",
+        "hashcat",
+        "pwncat",
+        "linpeas",
+        "dnsx",
+        "masscan",
+        "wpscan",
+        "metasploit",
+        "feroxbuster",
+        "dalfox",
+        "graphqlmap",
+        "netexec",
+        "subfinder",
+        "katana",
+        "ffuf",
+        "tshark",
+        "haiti",
+        "hydra",
+        "snmpwalk",
+        "chisel",
+        "impacket"
+      ]
+    }
+  ],
+  "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+  "modelLoadAttempted": true,
+  "ok": false,
+  "preflightToolCatalog": {
+    "count": 37,
+    "ok": true,
+    "toolNames": [
+      "search_cve",
+      "lookup_cve",
+      "search_context",
+      "run_shell",
+      "trufflehog",
+      "gowitness",
+      "httpx",
+      "theharvester",
+      "jwt_tool",
+      "osv_scanner",
+      "exiftool",
+      "nuclei",
+      "grype",
+      "syft",
+      "sherlock",
+      "nmap",
+      "sqlmap",
+      "hashcat",
+      "pwncat",
+      "linpeas",
+      "dnsx",
+      "masscan",
+      "wpscan",
+      "metasploit",
+      "feroxbuster",
+      "dalfox",
+      "graphqlmap",
+      "netexec",
+      "subfinder",
+      "katana",
+      "ffuf",
+      "tshark",
+      "haiti",
+      "hydra",
+      "snmpwalk",
+      "chisel",
+      "impacket"
+    ]
+  },
+  "proofLevel": "live-app-real-qwen-real-tool-loop-local-repo-fixture",
+  "proofType": "real-qwen-repo-codebase-supply-chain",
+  "startedAt": "2026-07-05T22:59:08-0700",
+  "state": {
+    "activeSubtabs": {
+      "creds": "Cracking",
+      "exploit": "Metasploit",
+      "network": "Protocols",
+      "osint": "Username",
+      "post": "PrivEsc",
+      "recon": "Subdomains",
+      "report": "Findings",
+      "supplyChain": "CVE Intel",
+      "web": "Vulns"
+    },
+    "activeTab": "supplyChain",
+    "activityFeedActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "lastAction": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "agentActions": {
+      "agentCount": 0,
+      "agentId": "",
+      "agentName": "",
+      "agentType": "",
+      "deploySheetVisible": false,
+      "lastAction": "",
+      "messageCount": 0,
+      "status": "idle",
+      "stoppedGeneration": false,
+      "summary": "",
+      "taskSent": false
+    },
+    "agents": {
+      "activeAgents": 0,
+      "authorizationGuards": {
+        "explicitToolDeny": true,
+        "externalHighRiskRequiresScopeOrAuthorization": true,
+        "highRiskToolCount": 24
+      },
+      "details": [],
+      "forceFinalAnswerAfterToolResults": false,
+      "includeUnavailableToolSchemas": false,
+      "loopMaxIterations": 8,
+      "maxConcurrentAgents": 5,
+      "modePolicies": {
+        "autopilot": "execute",
+        "copilot": "approval",
+        "manual": "suggest"
+      },
+      "multiAgentEnabled": false,
+      "phaseRouting": {
+        "breach": [
+          "Credential Agent",
+          "Exploit Agent"
+        ],
+        "detect": [
+          "Web Vuln Agent",
+          "Network Agent",
+          "Supply Chain Agent"
+        ],
+        "scan": [
+          "Recon Agent",
+          "OSINT Agent"
+        ]
+      },
+      "streamingCount": 0,
+      "toolSchemaMaxTools": 64,
+      "workingCount": 0
+    },
+    "catalogEmbeddings": {
+      "recordCount": 8,
+      "sourceCounts": {
+        "finding": 4,
+        "tool.output": 4
+      },
+      "sources": [
+        "finding",
+        "tool.output"
+      ],
+      "vectorDimensions": 16
+    },
+    "chat": {
+      "enableReasoning": false,
+      "forceFinalAnswerAfterToolResults": false,
+      "includeUnavailableToolSchemas": false,
+      "maxIterations": 8,
+      "toolSchemaMaxTools": 64
+    },
+    "chatActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "lastAction": "",
+      "lastStashItemId": "",
+      "messageRole": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "chatControlActions": {
+      "contextGeneration": 0,
+      "contextInspectorVisible": false,
+      "enableReasoning": false,
+      "lastAction": "send",
+      "status": "done",
+      "summary": "send chat message"
+    },
+    "contextCatalog": {
+      "cveMode": "semantic",
+      "enabled": true,
+      "includeAssets": true,
+      "includeFindings": true,
+      "includeRecentToolOutput": true,
+      "includeStash": true,
+      "maxSnippets": 4
+    },
+    "contextWindow": {
+      "blockL2Disk": true,
+      "cacheResponsesInferenceMethod": "prefix-cache-l2-turboquant",
+      "cacheResponsesMethod": "prefix-cache-l2-turboquant",
+      "declaredMaxContextTokens": 262144,
+      "engineSessionPreserved": true,
+      "generation": 0,
+      "highRiskOverrideEnv": "EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET",
+      "lastFailedTargets": [
+        200000,
+        224000,
+        258000
+      ],
+      "modelGenerationDefaults": false,
+      "newContextBehavior": "clear-chat-preserve-engine-cache",
+      "newModelSessionBehavior": "new-context-window-preserve-engine-cache-session",
+      "pagedCache": true,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "provenSafeTargetCeiling": 192000,
+      "sessionBoundaryMode": "new-context-window",
+      "turboQuantKV": true,
+      "unprovenTargetPolicy": "refuse-before-model-load"
+    },
+    "credsAction": {
+      "command": "",
+      "kind": "",
+      "resultCount": 0,
+      "status": "idle",
+      "summary": "",
+      "target": ""
+    },
+    "credsCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "credsLifecycle": {
+      "bruteforce": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "cracking": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "secrets": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "cveDatabase": {
+      "activeSettingsCategory": "",
+      "importProgress": "",
+      "isImporting": false,
+      "kevCount": 1552,
+      "lastSync": "",
+      "searchResultCount": 0,
+      "topResults": [],
+      "totalCount": 1553
+    },
+    "cveImportListAudit": {
+      "excludedIds": [],
+      "includeFilterMode": "none",
+      "includeIds": [],
+      "selectedIds": [],
+      "sourceIds": [],
+      "sourceMode": "none"
+    },
+    "cveSemantic": {
+      "candidateCount": 0,
+      "error": "embedder returned invalid vector",
+      "fallback": true,
+      "importProgress": "",
+      "query": "Authorized local repo/codebase supply-chain proof. Reasoning is off. Use only this throwaway local repo path and do not touch external targets: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo. Surface files, probe secrets/SBOM/dependencies, prove known vulnerable packages, validate safely without exploitation, then summarize evidence for the report. Emit these exact Qwen XML tool calls now, with valid JSON. After tool results, answer with marker REAL_QWEN_REPO_SUPPLY_CHAIN_FINAL and summarize the captured tool evidence.\n<tool_call>{\"name\":\"run_shell\",\"arguments\":{\"command\":\"find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo -maxdepth 2 -type f | sort\"}}</tool_call>\n<tool_call>{\"name\":\"trufflehog\",\"arguments\":{\"source_type\":\"filesystem\",\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo\",\"verified_only\":false}}</tool_call>\n<tool_call>{\"name\":\"syft\",\"arguments\":{\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo\",\"output\":\"json\"}}</tool_call>\n<tool_call>{\"name\":\"grype\",\"arguments\":{\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo\",\"fail_on\":\"critical\"}}</tool_call>\n<tool_call>{\"name\":\"osv_scanner\",\"arguments\":{\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo\",\"format\":\"json\"}}</tool_call>\n<tool_call>{\"name\":\"search_cve\",\"arguments\":{\"query\":\"lodash 4.17.11 CVE\",\"product\":\"lodash\",\"max_results\":5}}</tool_call>",
+      "resultCount": 0,
+      "usedEmbedding": false,
+      "vectorDimensions": 0
+    },
+    "cveSettingsActions": {
+      "addPanelVisible": false,
+      "kevCount": 0,
+      "lastAction": "",
+      "query": "",
+      "resultCount": 0,
+      "status": "idle",
+      "summary": "",
+      "totalCount": 0
+    },
+    "engineCacheStats": null,
+    "engineConfig": {
+      "blockDiskCacheMaxGB": 10,
+      "blockL2Disk": true,
+      "cacheMemoryPercent": 0.2,
+      "diskCacheMaxGB": 10,
+      "kvCacheGroupSize": 64,
+      "kvCacheQuantization": "turboquant-q4",
+      "maxTokens": 256,
+      "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "pagedCache": true,
+      "pagedCacheBlockSize": 64,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "reasoningParser": "qwen3",
+      "temperature": 0,
+      "toolCallParser": "qwen",
+      "topP": 1,
+      "useModelGenerationDefaults": false
+    },
+    "engineError": "",
+    "engineMemoryPreflight": null,
+    "enginePort": 62259,
+    "engineRunning": true,
+    "engineStaleCleanup": {
+      "checked": false,
+      "checkedAt": "",
+      "cleaned": false,
+      "foundCount": 0,
+      "foundProcesses": [],
+      "launchScript": "",
+      "remainingCount": 0,
+      "remainingProcesses": [],
+      "warning": ""
+    },
+    "exploitAction": {
+      "command": "",
+      "kind": "",
+      "status": "idle",
+      "summary": "",
+      "target": "",
+      "tool": ""
+    },
+    "exploitActionHistory": [],
+    "exploitCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "exploitLifecycle": {
+      "implant": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "listener": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "script": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "feedEntries": 19,
+    "feedRecent": [
+      {
+        "duration": 0.008601069450378418,
+        "icon": "OK",
+        "text": "run_shell: 4 lines output (0.0s)",
+        "tool": "run_shell"
+      },
+      {
+        "duration": 0,
+        "icon": "RUN",
+        "text": "Running syft",
+        "tool": "syft"
+      },
+      {
+        "duration": 0,
+        "icon": "OUT",
+        "text": "$ syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo -o json",
+        "tool": "syft"
+      },
+      {
+        "duration": 0.02209007740020752,
+        "icon": "OK",
+        "text": "syft: 1 lines output (0.0s)",
+        "tool": "syft"
+      },
+      {
+        "duration": 0,
+        "icon": "RUN",
+        "text": "Running grype",
+        "tool": "grype"
+      },
+      {
+        "duration": 0,
+        "icon": "OUT",
+        "text": "$ grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo -o json --fail-on critical",
+        "tool": "grype"
+      },
+      {
+        "duration": 0.02252805233001709,
+        "icon": "OK",
+        "text": "grype: 1 lines output (0.0s)",
+        "tool": "grype"
+      },
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "Auto CVE lookup: CVE-2021-23337",
+        "tool": ""
+      },
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "CVE enriched: CVE-2021-23337",
+        "tool": ""
+      },
+      {
+        "duration": 0,
+        "icon": "RUN",
+        "text": "Running osv_scanner",
+        "tool": "osv_scanner"
+      },
+      {
+        "duration": 0,
+        "icon": "OUT",
+        "text": "$ osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo --format json",
+        "tool": "osv_scanner"
+      },
+      {
+        "duration": 0.022848963737487793,
+        "icon": "OK",
+        "text": "osv_scanner: 1 lines output (0.0s)",
+        "tool": "osv_scanner"
+      }
+    ],
+    "findings": 0,
+    "healthStatus": "mock engine connected",
+    "inferenceLogActions": {
+      "clipboardPreview": "",
+      "engineLogChars": 0,
+      "isVisible": false,
+      "lastAction": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "isStreaming": true,
+    "isWorking": true,
+    "metrics": {
+      "cachedTokens": 640,
+      "completionTokens": 152,
+      "promptTokens": 8748,
+      "tokPerSec": 2.9592048250952097,
+      "ttft": 38.16208505630493
+    },
+    "mode": "autopilot",
+    "modeSelection": {
+      "activeOpMode": "",
+      "activeOpName": "",
+      "availableLabels": [
+        "Autopilot",
+        "Copilot",
+        "Manual"
+      ],
+      "availableModes": [
+        "autopilot",
+        "copilot",
+        "manual"
+      ],
+      "currentLabel": "Autopilot",
+      "currentMode": "autopilot",
+      "lastAction": "select-mode",
+      "pendingApprovalRejected": false,
+      "pendingApprovalVisible": false,
+      "showOnboarding": true,
+      "source": "api"
+    },
+    "model": "mock-qwen-jang",
+    "modelFolderInfo": {
+      "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+      "family": "Qwen",
+      "hasConfig": true,
+      "hasGenerationConfig": true,
+      "hasJangConfig": true,
+      "hasJangtqConfig": false,
+      "hasTokenizerConfig": true,
+      "isMultimodal": true,
+      "isSupported": true,
+      "modelType": "qwen3_5",
+      "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+    },
+    "modelFolderPicker": {
+      "configSummary": "",
+      "family": "",
+      "isSupported": false,
+      "isVisible": false,
+      "lastAction": "",
+      "selectedPath": "",
+      "source": "",
+      "status": "idle",
+      "supportMessage": ""
+    },
+    "modelLibrary": {
+      "entries": [
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "MiniMax",
+          "isMultimodal": false,
+          "isSupported": true,
+          "name": "MiniMax-M2.7-JANG_K-CRACK",
+          "path": "/Users/eric/models/dealign.ai/MiniMax-M2.7-JANG_K-CRACK",
+          "supportMessage": "Supported MiniMax family. The app auto-detects config.json, jang_config.json, jangtq_config.json, generation_config.json, reasoning parser, tool parser, and full-KV cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-27B-JANG_4M-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-JANG_4M-CRACK",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-27B-MXFP4-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-27B-MXFP8-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "DeepSeek-V4-Flash-JANG-CRACK",
+          "path": "/Users/eric/models/dealign.ai/DeepSeek-V4-Flash-JANG-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": true,
+          "isSupported": false,
+          "name": "Gemma-4-26B-A4B-it-JANG_4M-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Gemma-4-26B-A4B-it-JANG_4M-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "LFM2.5-8B-A1B-MXFP4-CRACK",
+          "path": "/Users/eric/models/dealign.ai/LFM2.5-8B-A1B-MXFP4-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "LFM2.5-8B-A1B-MXFP8-CRACK",
+          "path": "/Users/eric/models/dealign.ai/LFM2.5-8B-A1B-MXFP8-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "Nemotron-Omni-Nano-JANGTQ4-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Nemotron-Omni-Nano-JANGTQ4-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "Nemotron-Omni-Nano-MXFP4-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Nemotron-Omni-Nano-MXFP4-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": true,
+          "isSupported": false,
+          "name": "Step-3.7-Flash-JANG_2L-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Step-3.7-Flash-JANG_2L-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": true,
+          "isSupported": false,
+          "name": "Step-3.7-Flash-JANG_K-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Step-3.7-Flash-JANG_K-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        }
+      ],
+      "entryCount": 14,
+      "lastAction": "load",
+      "roots": [
+        "/Users/eric/models/dealign.ai"
+      ],
+      "selectedPath": "",
+      "status": "done",
+      "summary": "scanModelLibrary 14 models from 1 roots",
+      "supportedCount": 6
+    },
+    "msgs": 10,
+    "networkAction": {
+      "command": "",
+      "kind": "",
+      "protocol": "",
+      "status": "idle",
+      "summary": "",
+      "target": ""
+    },
+    "networkCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "networkLifecycle": {
+      "capture": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "mitm": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "tunnel": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "osintArtifactAction": {
+      "bytes": 0,
+      "history": [],
+      "lastAction": "",
+      "path": "",
+      "pathExists": false,
+      "status": "idle",
+      "summary": ""
+    },
+    "osintArtifacts": [],
+    "osintCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "osintLifecycle": {
+      "email": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "metadata": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "screenshot": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "username": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "phase": "scan",
+    "phaseActions": {
+      "fromPhase": "",
+      "lastAction": "",
+      "phaseGuidance": "",
+      "status": "idle",
+      "summary": "",
+      "toPhase": "",
+      "toolsRun": 0
+    },
+    "ports": 0,
+    "postAttribution": [],
+    "postCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "postLifecycle": {
+      "ad": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "lateral": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "privesc": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "qaChatVisual": {
+      "autoScrollLocked": null,
+      "cacheSessionIndicator": null,
+      "contextInspectorVisible": false,
+      "hasUnreadWhileUnlocked": null,
+      "headerBadges": [
+        "10 msgs",
+        "ctx 0",
+        "streaming"
+      ],
+      "mode": "",
+      "newContextConfirm": {
+        "isVisible": false,
+        "lastAction": "send"
+      },
+      "newContextSessionBoundary": null,
+      "reasoningBlock": {
+        "isCollapsed": false,
+        "totalChars": 0,
+        "visibleChars": 0
+      },
+      "reasoningCollapsed": null,
+      "toolOutputExpansion": {
+        "hiddenLineCount": 7,
+        "isExpanded": false,
+        "toolName": "run_shell",
+        "totalLineCount": 12,
+        "visibleLineCount": 5
+      }
+    },
+    "qaCoverage": {
+      "contextHooks": [
+        "onContextUpdate",
+        "search_context",
+        "lastContextSummary",
+        "lastToolSchemaNames",
+        "context.catalog.maxSnippets"
+      ],
+      "stateRoutes": [
+        "/state",
+        "/messages",
+        "/results",
+        "/qa/subtab-coverage",
+        "/qa/subtab-lifecycle-matrix",
+        "/qa/endpoint-inventory",
+        "/qa/endpoint-route-matrix",
+        "/qa/action-state-inventory",
+        "/qa/view-inventory",
+        "/qa/function-flow-inventory",
+        "/qa/function-proof-matrix",
+        "/qa/service-inventory",
+        "/qa/service-function-matrix",
+        "/qa/model-state-inventory",
+        "/qa/model-state-function-matrix",
+        "/qa/theme-inventory",
+        "/qa/theme-token-matrix",
+        "/qa/python-runtime-inventory",
+        "/qa/engine-python-runtime",
+        "/qa/agent-flow-inventory",
+        "/qa/proof-suite-inventory",
+        "/qa/agent-loop-coverage",
+        "/qa/agent-loop-phase-matrix",
+        "/qa/agent-tool-authorization-coverage",
+        "/qa/tab-tool-function-flow",
+        "/qa/tab-proof-family-matrix",
+        "/qa/tool-execution-matrix",
+        "/qa/tool-flow-coverage",
+        "/qa/live-status-preview-flow",
+        "/qa/security-abuse-boundary-matrix",
+        "/qa/deep-runtime-flow-coverage",
+        "/qa/tool-engine-context-ops-matrix",
+        "/qa/engine-api-cache-proof-matrix",
+        "/qa/session-context-cache-flow",
+        "/qa/cache-artifact-matrix",
+        "/qa/chat-quality-evidence-matrix",
+        "/qa/turn-lifecycle-evidence",
+        "/qa/active-objective-audit",
+        "/qa/runtime-local-model-lane",
+        "/qa/continuous-batching-coverage",
+        "/qa/live-loaded-model-agent-stress",
+        "/qa/streaming-parser-reuse",
+        "/qa/startup-cache-defaults",
+        "/qa/runtime-coverage",
+        "/qa/context-coverage",
+        "/qa/context-budget-compaction",
+        "/qa/context-prompt-injection-boundary",
+        "/qa/context-flow-matrix",
+        "/qa/context-session-efficiency-matrix",
+        "/qa/context-efficiency-invariants",
+        "/qa/evidence-lifecycle-coverage",
+        "/qa/evidence-lifecycle-flow-matrix",
+        "/qa/cve-taxonomy-coverage",
+        "/qa/cve-taxonomy-matrix",
+        "/qa/cve-import-embedding-coverage",
+        "/qa/state-dependent-contract-matrix",
+        "/qa/settings-coverage",
+        "/qa/settings-surface-matrix",
+        "/qa/visual-coverage",
+        "/qa/visual-surface-matrix",
+        "/qa/session-coverage",
+        "/qa/session-workflow-matrix",
+        "/qa/tab-action-coverage",
+        "/qa/tab-action-surface-matrix",
+        "/qa/chat-coverage",
+        "/qa/recon-coverage",
+        "/qa/web-coverage",
+        "/qa/network-coverage",
+        "/qa/creds-coverage",
+        "/qa/exploit-coverage",
+        "/qa/post-coverage",
+        "/qa/supply-chain-coverage",
+        "/qa/osint-coverage",
+        "/qa/report-coverage",
+        "/qa/stash-coverage",
+        "/qa/coverage-index",
+        "/qa/coverage-false-flag-classification",
+        "/qa/proof-ledger",
+        "/qa/proof-category-matrix",
+        "/qa/artifact-ledger",
+        "/qa/artifact-manifest-matrix",
+        "/qa/result-parser-coverage",
+        "/qa/parser-tool-matrix",
+        "/qa/checkpoint-ledger",
+        "/qa/audit-ledger",
+        "/qa/gap-ledger",
+        "/qa/qwen-multimodal-promotion-readiness",
+        "/qa/release-readiness",
+        "/qa/beta-readiness-coverage",
+        "/qa/objective-runtime-coverage",
+        "/qa/objective-flow-requirement-matrix",
+        "/qa/objective-flow-execution-graph",
+        "/qa/per-turn-runtime-contract"
+      ],
+      "staticProfilesRemoved": true,
+      "subtabStateProofs": [
+        "recon-subtab-state-proof.py",
+        "web-subtab-state-proof.py",
+        "network-subtab-state-proof.py",
+        "creds-subtab-state-proof.py",
+        "exploit-subtab-state-proof.py",
+        "post-subtab-state-proof.py",
+        "supply-chain-cve-ui-proof.py",
+        "osint-subtab-state-proof.py",
+        "report-subtab-state-proof.py"
+      ],
+      "subtabStateTabs": [
+        "recon",
+        "web",
+        "network",
+        "creds",
+        "exploit",
+        "post",
+        "supplyChain",
+        "osint",
+        "report"
+      ],
+      "testServerSmoke": true
+    },
+    "qaSettingsVisual": {
+      "category": "",
+      "showSettings": false
+    },
+    "qaVisualSubtabs": {},
+    "reconAction": {
+      "command": "",
+      "kind": "",
+      "status": "idle",
+      "summary": "",
+      "target": ""
+    },
+    "reconCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "reportAction": {
+      "findingCount": 0,
+      "kind": "",
+      "prompt": "",
+      "status": "idle",
+      "summary": "",
+      "template": ""
+    },
+    "reportExport": {
+      "artifacts": [],
+      "error": "",
+      "findingCount": 0,
+      "status": "idle"
+    },
+    "reportFindingActions": {
+      "createLabel": "Create Finding",
+      "deleteLabel": "Delete finding",
+      "findingCount": 0,
+      "findings": [],
+      "lastAction": "",
+      "lastCreatedId": "",
+      "lastDeletedId": "",
+      "status": "idle",
+      "summary": "",
+      "wizardVisible": false
+    },
+    "reportRenderActions": {
+      "findingCount": 0,
+      "htmlChars": 0,
+      "htmlPreview": "",
+      "lastAction": "",
+      "status": "idle",
+      "summary": "",
+      "template": ""
+    },
+    "requestContext": {
+      "contextInjected": true,
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 8 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=4 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fi",
+      "contextSnippetCount": 4,
+      "streamWarnings": [],
+      "toolSchemaCount": 37,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "run_shell",
+        "trufflehog",
+        "gowitness",
+        "httpx",
+        "theharvester",
+        "jwt_tool",
+        "osv_scanner",
+        "exiftool",
+        "nuclei",
+        "grype",
+        "syft",
+        "sherlock",
+        "nmap",
+        "sqlmap",
+        "hashcat",
+        "pwncat",
+        "linpeas",
+        "dnsx",
+        "masscan",
+        "wpscan",
+        "metasploit",
+        "feroxbuster",
+        "dalfox",
+        "graphqlmap",
+        "netexec",
+        "subfinder",
+        "katana",
+        "ffuf",
+        "tshark",
+        "haiti",
+        "hydra",
+        "snmpwalk",
+        "chisel",
+        "impacket"
+      ]
+    },
+    "settingsCategoryCoverage": {
+      "categories": [
+        {
+          "detail": "Watch the local engine, effective parser/cache metadata, and live cache counters.",
+          "id": "engine",
+          "pageSections": [
+            "engine status",
+            "effective runtime",
+            "live cache counters"
+          ],
+          "subtitle": "status, health, effective runtime",
+          "systemImage": "cpu",
+          "title": "Engine"
+        },
+        {
+          "detail": "Choose one model folder. Qwen and MiniMax are the supported beta families; config is picked up from that folder.",
+          "id": "model",
+          "pageSections": [
+            "model folder",
+            "supported family warning",
+            "generation config source"
+          ],
+          "subtitle": "folder selection and support checks",
+          "systemImage": "folder",
+          "title": "Model"
+        },
+        {
+          "detail": "Runtime defaults come from the model folder and engine registry, with only operational loop limits exposed here.",
+          "id": "runtime",
+          "pageSections": [
+            "model generation defaults",
+            "parser autodetect",
+            "tool-loop limits",
+            "autonomy"
+          ],
+          "subtitle": "generation, parsers, loop limits",
+          "systemImage": "slider.horizontal.3",
+          "title": "Runtime"
+        },
+        {
+          "detail": "Control the dynamic catalogue that decides which app facts are sent into each model turn.",
+          "id": "context",
+          "pageSections": [
+            "dynamic catalogue",
+            "retrieval sources",
+            "CVE assist mode",
+            "long-context safety"
+          ],
+          "subtitle": "catalogue and retrieval sources",
+          "systemImage": "square.stack.3d.up",
+          "title": "Context"
+        },
+        {
+          "detail": "Tune cache budgets while keeping the required prefix, paged, L2, and TurboQuant paths enabled.",
+          "id": "cache",
+          "pageSections": [
+            "prefix cache",
+            "prompt L2 disk",
+            "paged cache",
+            "block L2 disk",
+            "TurboQuant KV"
+          ],
+          "subtitle": "TurboQuant, prefix, L2 disk",
+          "systemImage": "internaldrive",
+          "title": "Cache"
+        },
+        {
+          "detail": "Configure full-auto and multi-agent behavior without mixing it into engine setup.",
+          "id": "agents",
+          "pageSections": [
+            "multi-agent mode",
+            "concurrency limit",
+            "agent defaults"
+          ],
+          "subtitle": "multi-agent controls",
+          "systemImage": "person.2",
+          "title": "Agents"
+        },
+        {
+          "detail": "Manage the local vulnerability knowledge base used by tools and context retrieval.",
+          "id": "cves",
+          "pageSections": [
+            "database import",
+            "CVE counts",
+            "search status"
+          ],
+          "subtitle": "local CVE data and search",
+          "systemImage": "cross.case",
+          "title": "CVE Database"
+        },
+        {
+          "detail": "Detect and install external command-line tools used by the agent loop.",
+          "id": "tools",
+          "pageSections": [
+            "installed tools",
+            "missing tools",
+            "install plan",
+            "install log"
+          ],
+          "subtitle": "tool install and detection",
+          "systemImage": "wrench.and.screwdriver",
+          "title": "Tools"
+        },
+        {
+          "detail": "Inspect engine logs separately from runtime controls.",
+          "id": "logs",
+          "pageSections": [
+            "engine log output",
+            "diagnostics"
+          ],
+          "subtitle": "engine output and diagnostics",
+          "systemImage": "doc.text.magnifyingglass",
+          "title": "Logs"
+        }
+      ],
+      "splitPages": true
+    },
+    "settingsEngineActions": {
+      "healthStatus": "",
+      "isRunning": false,
+      "lastAction": "",
+      "model": "",
+      "status": "idle",
+      "summary": "",
+      "wasRunning": false
+    },
+    "sidebarActions": {
+      "lastAction": "",
+      "opId": "",
+      "opName": "",
+      "opsCount": 0,
+      "status": "idle",
+      "stoppedGeneration": false,
+      "summary": ""
+    },
+    "stash": 0,
+    "stashActions": {
+      "actionLabels": [
+        "Add",
+        "Copy All",
+        "Copy",
+        "Send",
+        "Delete"
+      ],
+      "activeFilter": "all",
+      "addSheetVisible": false,
+      "clipboardPreview": "",
+      "filteredCount": 0,
+      "itemCount": 0,
+      "items": [],
+      "lastAction": "",
+      "lastDeletedId": "",
+      "lastItemId": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "stashRetrieval": {
+      "candidateCount": 0,
+      "query": "Authorized local repo/codebase supply-chain proof. Reasoning is off. Use only this throwaway local repo path and do not touch external targets: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo. Surface files, probe secrets/SBOM/dependencies, prove known vulnerable packages, validate safely without exploitation, then summarize evidence for the report. Emit these exact Qwen XML tool calls now, with valid JSON. After tool results, answer with marker REAL_QWEN_REPO_SUPPLY_CHAIN_FINAL and summarize the captured tool evidence.\n<tool_call>{\"name\":\"run_shell\",\"arguments\":{\"command\":\"find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo -maxdepth 2 -type f | sort\"}}</tool_call>\n<tool_call>{\"name\":\"trufflehog\",\"arguments\":{\"source_type\":\"filesystem\",\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo\",\"verified_only\":false}}</tool_call>\n<tool_call>{\"name\":\"syft\",\"arguments\":{\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo\",\"output\":\"json\"}}</tool_call>\n<tool_call>{\"name\":\"grype\",\"arguments\":{\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo\",\"fail_on\":\"critical\"}}</tool_call>\n<tool_call>{\"name\":\"osv_scanner\",\"arguments\":{\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo\",\"format\":\"json\"}}</tool_call>\n<tool_call>{\"name\":\"search_cve\",\"arguments\":{\"query\":\"lodash 4.17.11 CVE\",\"product\":\"lodash\",\"max_results\":5}}</tool_call>",
+      "returnedCount": 0,
+      "topLabels": [],
+      "topScore": 0
+    },
+    "subdomains": 0,
+    "subtabActions": {
+      "lastAction": "",
+      "status": "idle",
+      "subtab": "",
+      "summary": "",
+      "tab": "",
+      "validSubtabs": []
+    },
+    "supplyChainLifecycle": {
+      "cve": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "dependency": {
+        "command": "osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo --format json",
+        "status": "done",
+        "summary": "1 lines output",
+        "tool": "osv_scanner"
+      },
+      "sbom": {
+        "command": "syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo -o json",
+        "status": "done",
+        "summary": "1 lines output",
+        "tool": "syft"
+      },
+      "secrets": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "tabActivities": {
+      "creds": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "exploit": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "network": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "osint": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "post": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "recon": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "report": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "stash": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "supplyChain": {
+        "command": "osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo --format json",
+        "count": 4,
+        "lastTool": "osv_scanner",
+        "status": "done",
+        "summary": "1 lines output"
+      },
+      "web": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      }
+    },
+    "tabSwitchActions": {
+      "followAgent": true,
+      "fromTab": "",
+      "lastAction": "",
+      "status": "idle",
+      "summary": "",
+      "toTab": ""
+    },
+    "terminal": {
+      "activeCommand": {
+        "command": "",
+        "source": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "commandTranscripts": [
+        {
+          "command": "Running run_shell",
+          "outputPreview": "Running run_shell",
+          "source": "activityFeed",
+          "status": "RUN",
+          "timestamp": 1783317602.635196,
+          "tool": "run_shell"
+        },
+        {
+          "command": "/bin/zsh -c find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo -maxdepth 3 -type f | sort",
+          "outputPreview": "$ /bin/zsh -c find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo -maxdepth 3 -type f | sort",
+          "source": "activityFeed",
+          "status": "OUT",
+          "timestamp": 1783317602.6351972,
+          "tool": "run_shell"
+        },
+        {
+          "command": "run_shell: 4 lines output (0.0s)",
+          "outputPreview": "run_shell: 4 lines output (0.0s)",
+          "source": "activityFeed",
+          "status": "OK",
+          "timestamp": 1783317602.643996,
+          "tool": "run_shell"
+        },
+        {
+          "command": "Running syft",
+          "outputPreview": "Running syft",
+          "source": "activityFeed",
+          "status": "RUN",
+          "timestamp": 1783317645.957834,
+          "tool": "syft"
+        },
+        {
+          "command": "syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo -o json",
+          "outputPreview": "$ syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo -o json",
+          "source": "activityFeed",
+          "status": "OUT",
+          "timestamp": 1783317645.957835,
+          "tool": "syft"
+        },
+        {
+          "command": "syft: 1 lines output (0.0s)",
+          "outputPreview": "syft: 1 lines output (0.0s)",
+          "source": "activityFeed",
+          "status": "OK",
+          "timestamp": 1783317645.980041,
+          "tool": "syft"
+        },
+        {
+          "command": "Running grype",
+          "outputPreview": "Running grype",
+          "source": "activityFeed",
+          "status": "RUN",
+          "timestamp": 1783317691.736672,
+          "tool": "grype"
+        },
+        {
+          "command": "grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo -o json --fail-on critical",
+          "outputPreview": "$ grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo -o json --fail-on critical",
+          "source": "activityFeed",
+          "status": "OUT",
+          "timestamp": 1783317691.736675,
+          "tool": "grype"
+        },
+        {
+          "command": "grype: 1 lines output (0.0s)",
+          "outputPreview": "grype: 1 lines output (0.0s)",
+          "source": "activityFeed",
+          "status": "OK",
+          "timestamp": 1783317691.759458,
+          "tool": "grype"
+        },
+        {
+          "command": "Running osv_scanner",
+          "outputPreview": "Running osv_scanner",
+          "source": "activityFeed",
+          "status": "RUN",
+          "timestamp": 1783317741.425006,
+          "tool": "osv_scanner"
+        },
+        {
+          "command": "osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo --format json",
+          "outputPreview": "$ osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo --format json",
+          "source": "activityFeed",
+          "status": "OUT",
+          "timestamp": 1783317741.4250112,
+          "tool": "osv_scanner"
+        },
+        {
+          "command": "osv_scanner: 1 lines output (0.0s)",
+          "outputPreview": "osv_scanner: 1 lines output (0.0s)",
+          "source": "activityFeed",
+          "status": "OK",
+          "timestamp": 1783317741.448128,
+          "tool": "osv_scanner"
+        },
+        {
+          "command": "run_shell",
+          "outputPreview": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo/.env.example\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo/Dockerfile\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo/package-lock.json\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo/package.json\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783317602.644048,
+          "tool": "run_shell"
+        },
+        {
+          "command": "syft",
+          "outputPreview": "{\"artifacts\": [{\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, {\"name\": \"minimist\", \"version\": \"0.0.8\", \"type\": \"npm\"}], \"source\": {\"type\": \"directory\", \"target\": \"synthetic-vulnerable-repo\"}}\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783317645.980084,
+          "tool": "syft"
+        },
+        {
+          "command": "grype",
+          "outputPreview": "{\"matches\": [{\"vulnerability\": {\"id\": \"CVE-2021-23337\", \"severity\": \"High\"}, \"artifact\": {\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, \"matchDetails\": [{\"type\": \"exact-direct-match\"}]}]}\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783317691.759567,
+          "tool": "grype"
+        },
+        {
+          "command": "osv_scanner",
+          "outputPreview": "{\"results\": [{\"packageSource\": {\"path\": \"package-lock.json\"}, \"packages\": [{\"package\": {\"name\": \"lodash\", \"ecosystem\": \"npm\"}, \"vulnerabilities\": [{\"id\": \"GHSA-35jh-r3h4-6jhm\"}]}]}]}\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783317741.448266,
+          "tool": "osv_scanner"
+        },
+        {
+          "command": "osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-snnuwa3j/synthetic-vulnerable-repo --format json",
+          "outputPreview": "1 lines output",
+          "source": "tabActivities",
+          "status": "done",
+          "tab": "supplyChain",
+          "timestamp": 1783317741.4481668,
+          "tool": "osv_scanner"
+        }
+      ],
+      "installedToolCount": 42,
+      "isVisible": false,
+      "surfaceContract": "terminal-visibility-command-transcripts",
+      "toolPathCount": 6,
+      "toolPaths": [
+        "/opt/homebrew/bin",
+        "/usr/local/bin",
+        "/Users/eric/.exploitbot/tools",
+        "/Users/eric/.local/bin",
+        "/usr/bin",
+        "/bin"
+      ]
+    },
+    "toolExecutor": {
+      "currentOutput": "{\"results\": [{\"packageSource\": {\"path\": \"package-lock.json\"}, \"packages\": [{\"package\": {\"name\": \"lodash\", \"ecosystem\": \"npm\"}, \"vulnerabilities\": [{\"id\": \"GHSA-35jh-r3h4-6jhm\"}]}]}]}\n",
+      "currentTool": "",
+      "isRunning": false
+    },
+    "toolSettings": {
+      "activeSettingsCategory": "",
+      "errorCount": 0,
+      "installCommands": [],
+      "installLog": "",
+      "installPlan": {
+        "commandCount": 0,
+        "installCommands": [],
+        "missingByCategory": {},
+        "missingByInstallMethod": {},
+        "missingCount": 0,
+        "requiresNetworkInstall": false
+      },
+      "installedCount": 42,
+      "installingCount": 0,
+      "isInstalling": false,
+      "missingByCategory": {},
+      "missingByInstallMethod": {},
+      "missingCount": 0,
+      "requiresNetworkInstall": false,
+      "tools": [
+        {
+          "category": "system",
+          "installMethod": "system",
+          "name": "curl",
+          "path": "/usr/bin/curl",
+          "status": "installed",
+          "version": "8.7.1"
+        },
+        {
+          "category": "system",
+          "installMethod": "system",
+          "name": "nc",
+          "path": "/usr/bin/nc",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "system",
+          "installMethod": "system",
+          "name": "python3",
+          "path": "/opt/homebrew/bin/python3",
+          "status": "installed",
+          "version": "3.14.6"
+        },
+        {
+          "category": "system",
+          "installMethod": "system",
+          "name": "zsh",
+          "path": "/bin/zsh",
+          "status": "installed",
+          "version": "5.9"
+        },
+        {
+          "category": "recon",
+          "installMethod": "go",
+          "name": "subfinder",
+          "path": "/Users/eric/.exploitbot/tools/subfinder",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "recon",
+          "installMethod": "go",
+          "name": "dnsx",
+          "path": "/Users/eric/.exploitbot/tools/dnsx",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "recon",
+          "installMethod": "homebrew",
+          "name": "nmap",
+          "path": "/opt/homebrew/bin/nmap",
+          "status": "installed",
+          "version": "7.99"
+        },
+        {
+          "category": "recon",
+          "installMethod": "homebrew",
+          "name": "masscan",
+          "path": "/opt/homebrew/bin/masscan",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "recon",
+          "installMethod": "go",
+          "name": "httpx",
+          "path": "/Users/eric/.exploitbot/tools/httpx",
+          "status": "installed",
+          "version": "1.9.0"
+        },
+        {
+          "category": "recon",
+          "installMethod": "go",
+          "name": "katana",
+          "path": "/Users/eric/.exploitbot/tools/katana",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "recon",
+          "installMethod": "uv",
+          "name": "theHarvester",
+          "path": "/Users/eric/.local/bin/theHarvester",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "go",
+          "name": "nuclei",
+          "path": "/opt/homebrew/bin/nuclei",
+          "status": "installed",
+          "version": "3.10.0"
+        },
+        {
+          "category": "web",
+          "installMethod": "uv",
+          "name": "sqlmap",
+          "path": "/opt/homebrew/bin/sqlmap",
+          "status": "installed",
+          "version": "1.10.7"
+        },
+        {
+          "category": "web",
+          "installMethod": "go",
+          "name": "dalfox",
+          "path": "/Users/eric/.exploitbot/tools/dalfox",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "homebrew",
+          "name": "feroxbuster",
+          "path": "/opt/homebrew/bin/feroxbuster",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "go",
+          "name": "ffuf",
+          "path": "/Users/eric/.exploitbot/tools/ffuf",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "uv",
+          "name": "arjun",
+          "path": "/Users/eric/.local/bin/arjun",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "homebrew",
+          "name": "wpscan",
+          "path": "/opt/homebrew/bin/wpscan",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "homebrew",
+          "name": "testssl",
+          "path": "/opt/homebrew/bin/testssl.sh",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "uv",
+          "name": "graphqlmap",
+          "path": "/Users/eric/.local/bin/graphqlmap",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "uv",
+          "name": "jwt_tool",
+          "path": "/Users/eric/.local/bin/jwt_tool",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "network",
+          "installMethod": "uv",
+          "name": "netexec",
+          "path": "/Users/eric/.local/bin/netexec",
+          "status": "installed",
+          "version": "1.5.1"
+        },
+        {
+          "category": "network",
+          "installMethod": "homebrew",
+          "name": "snmpwalk",
+          "path": "/usr/bin/snmpwalk",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "network",
+          "installMethod": "homebrew",
+          "name": "tshark",
+          "path": "/opt/homebrew/bin/tshark",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "network",
+          "installMethod": "homebrew",
+          "name": "bettercap",
+          "path": "/opt/homebrew/bin/bettercap",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "network",
+          "installMethod": "go",
+          "name": "chisel",
+          "path": "/Users/eric/.exploitbot/tools/chisel",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "credentials",
+          "installMethod": "homebrew",
+          "name": "hashcat",
+          "path": "/opt/homebrew/bin/hashcat",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "credentials",
+          "installMethod": "homebrew",
+          "name": "hydra",
+          "path": "/opt/homebrew/bin/hydra",
+          "status": "installed",
+          "version": "9.6"
+        },
+        {
+          "category": "credentials",
+          "installMethod": "ruby",
+          "name": "haiti",
+          "path": "/Users/eric/.local/bin/haiti",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "credentials",
+          "installMethod": "homebrew",
+          "name": "trufflehog",
+          "path": "/opt/homebrew/bin/trufflehog",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "supplychain",
+          "installMethod": "homebrew",
+          "name": "syft",
+          "path": "/opt/homebrew/bin/syft",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "supplychain",
+          "installMethod": "homebrew",
+          "name": "grype",
+          "path": "/opt/homebrew/bin/grype",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "supplychain",
+          "installMethod": "homebrew",
+          "name": "osv_scanner",
+          "path": "/opt/homebrew/bin/osv-scanner",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "exploit",
+          "installMethod": "homebrew",
+          "name": "metasploit",
+          "path": "/opt/homebrew/bin/msfconsole",
+          "status": "installed",
+          "version": "6.4.135"
+        },
+        {
+          "category": "exploit",
+          "installMethod": "uv",
+          "name": "pwncat",
+          "path": "/Users/eric/.local/bin/pwncat-cs",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "exploit",
+          "installMethod": "release",
+          "name": "sliver",
+          "path": "/Users/eric/.exploitbot/tools/sliver-client",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "post",
+          "installMethod": "uv",
+          "name": "impacket",
+          "path": "/Users/eric/.local/bin/secretsdump.py",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "post",
+          "installMethod": "script",
+          "name": "linpeas",
+          "path": "/Users/eric/.exploitbot/tools/linpeas.sh",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "osint",
+          "installMethod": "uv",
+          "name": "sherlock",
+          "path": "/Users/eric/.local/bin/sherlock",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "osint",
+          "installMethod": "uv",
+          "name": "holehe",
+          "path": "/Users/eric/.local/bin/holehe",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "osint",
+          "installMethod": "homebrew",
+          "name": "exiftool",
+          "path": "/opt/homebrew/bin/exiftool",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "osint",
+          "installMethod": "go",
+          "name": "gowitness",
+          "path": "/Users/eric/.exploitbot/tools/gowitness",
+          "status": "installed",
+          "version": ""
+        }
+      ]
+    },
+    "toolSettingsActions": {
+      "installedCount": 0,
+      "lastAction": "",
+      "missingCount": 0,
+      "status": "idle",
+      "summary": "",
+      "toolName": ""
+    },
+    "tools": 4,
+    "vulns": 4,
+    "webAction": {
+      "cve": "",
+      "kind": "",
+      "prompt": "",
+      "source": "",
+      "status": "idle",
+      "target": "",
+      "title": ""
+    },
+    "webCVERows": [
+      {
+        "cve": "CVE-2021-23337",
+        "hasDetails": false,
+        "progressLabel": "CVE pending",
+        "status": "pending",
+        "target": "lodash@4.17.11",
+        "title": "CVE-2021-23337"
+      }
+    ],
+    "webDirectActions": {
+      "actionLabels": [
+        "Create Finding",
+        "Stash",
+        "Copy",
+        "Search Related CVEs"
+      ],
+      "clipboardPreview": "",
+      "cve": "",
+      "findingPrefill": {
+        "cve": "",
+        "description": "",
+        "severity": "high",
+        "target": "",
+        "title": ""
+      },
+      "findingWizardVisible": false,
+      "lastAction": "",
+      "lastPrompt": "",
+      "lastStashPreview": "",
+      "source": "",
+      "stashCount": 0,
+      "status": "idle",
+      "summary": "",
+      "target": "",
+      "title": ""
+    },
+    "windowOverlayActions": {
+      "findingWizardVisible": false,
+      "lastAction": "",
+      "settingsVisible": false,
+      "status": "idle",
+      "summary": "",
+      "terminalVisible": false
+    }
+  },
+  "status": {
+    "memoryPreflight": "PASS",
+    "overall": "FAIL"
+  }
+}
