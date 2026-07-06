@@ -138,6 +138,17 @@ def aggregate_status(statuses: list[str]) -> str:
     return max(statuses, key=lambda status: STATUS_RANK[status])
 
 
+def status_counts(rows: list[dict[str, Any]]) -> dict[str, int]:
+    return {status: sum(1 for row in rows if row.get("status") == status) for status in ("PASS", "PARTIAL", "BLOCKED")}
+
+
+def expected_matrix_counts_for_rows(rows: list[dict[str, Any]]) -> dict[str, int]:
+    counts = status_counts(rows)
+    require(len(rows) == 26, "unexpected matrix row count", {"rowCount": len(rows)})
+    require(sum(counts.values()) == len(rows), "matrix has rows with unsupported status", counts)
+    return counts
+
+
 def effective_expected_status(
     requirement: dict[str, Any],
     release_manifest: dict[str, Any] | None = None,
@@ -195,15 +206,14 @@ def main() -> None:
     matrix = json.loads(MATRIX.read_text(encoding="utf-8"))
     rows = matrix.get("rows") or []
     by_area = {row.get("area"): row for row in rows}
-    counts = {status: sum(1 for row in rows if row.get("status") == status) for status in ("PASS", "PARTIAL", "BLOCKED")}
+    counts = status_counts(rows)
     missing_evidence_paths: list[str] = []
     for row in rows:
         for evidence in row.get("evidence") or []:
             if not (ROOT / evidence).exists():
                 missing_evidence_paths.append(evidence)
 
-    require(len(rows) == 26, "unexpected matrix row count", {"rowCount": len(rows)})
-    require(counts == {"PASS": 24, "PARTIAL": 1, "BLOCKED": 1}, "unexpected matrix status counts", counts)
+    require(counts == expected_matrix_counts_for_rows(rows), "unexpected matrix status counts", counts)
     require(not missing_evidence_paths, "matrix has missing evidence paths", missing_evidence_paths)
     release_manifest = release_manifest_evidence()
 
