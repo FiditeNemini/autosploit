@@ -78,7 +78,8 @@ def process_rows(pattern: str) -> list[str]:
 
 
 def engine_process_rows() -> list[str]:
-    needles = ("ExploitBotEngine/launch.py", "vmlx_engine.server", "Qwen3.6", "MiniMax-M", "vllm-mlx")
+    engine_needles = ("ExploitBotEngine/launch.py", "-m vmlx_engine.server")
+    model_needles = ("Qwen3.6", "MiniMax-M")
     result = subprocess.run(
         ["ps", "-axo", "pid,rss,command"],
         cwd=ROOT,
@@ -88,7 +89,9 @@ def engine_process_rows() -> list[str]:
     )
     rows = []
     for line in result.stdout.splitlines():
-        if any(needle in line for needle in needles) and "codex" not in line:
+        is_engine = any(needle in line for needle in engine_needles)
+        is_local_model = str(ROOT) in line and any(needle in line for needle in model_needles)
+        if (is_engine or is_local_model) and "codex" not in line:
             rows.append(line.strip())
     return rows
 

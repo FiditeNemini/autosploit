@@ -4,11 +4,11 @@
     "engineRunning": false,
     "showOnboarding": true
   },
-  "finishedAt": "2026-07-05T17:05:11-0700",
-  "generatedAt": "2026-07-05T17:05:11-0700",
+  "finishedAt": "2026-07-06T14:41:24-0700",
+  "generatedAt": "2026-07-06T14:41:24-0700",
   "notarization": {
     "distributionStatus": "BLOCKED",
-    "generatedAt": "2026-07-05T17:04:48-0700",
+    "generatedAt": "2026-07-06T14:41:08-0700",
     "nextAction": "configure-notary-credentials-and-run-package-notarize"
   },
   "ok": true,
@@ -17,11 +17,11 @@
   "releaseApp": "release/ExploitBot.app",
   "releaseReadiness": {
     "distributionStatus": "BLOCKED",
-    "generatedAt": "2026-07-05T17:04:40-0700",
+    "generatedAt": "2026-07-06T14:41:00-0700",
     "localPackageStatus": "PASS"
   },
   "screenshot": "docs/live-proofs/2026-07-04-release-visible-smoke.png",
-  "startedAt": "2026-07-05T17:05:07-0700",
+  "startedAt": "2026-07-06T14:41:17-0700",
   "state": {
     "activeOpName": "Release Visible Smoke",
     "engineRunning": false,
