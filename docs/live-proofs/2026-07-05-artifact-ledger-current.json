@@ -29,12 +29,12 @@
     "docs/live-proofs/checkpoint-75-minimax-live.json",
     "docs/live-proofs/qwen27-mxfp4-mtp-live-cache-20260605.json"
   ],
-  "generatedAt": "2026-07-06T03:16:41-0700",
+  "generatedAt": "2026-07-06T03:22:52-0700",
   "knownFailedLiveProofs": [
     "docs/live-proofs/checkpoint-75-minimax-live.json"
   ],
-  "liveProofCount": 190,
-  "liveProofOkCount": 176,
+  "liveProofCount": 191,
+  "liveProofOkCount": 177,
   "liveProofStatus": {
     "docs/live-proofs/2026-06-03-minimax-current-metadata.json": true,
     "docs/live-proofs/2026-06-03-minimax-jang-k-current-metadata.json": true,
@@ -157,6 +157,7 @@
     "docs/live-proofs/2026-07-05-tool-family-fanout-all-tabs.json": true,
     "docs/live-proofs/2026-07-05-tool-settings-install-plan-live.json": true,
     "docs/live-proofs/2026-07-06-app-autonomous-scenario-catalog-route.json": true,
+    "docs/live-proofs/2026-07-06-app-autonomous-scenario-prepare-route.json": true,
     "docs/live-proofs/2026-07-06-autonomous-scenario-catalog.json": true,
     "docs/live-proofs/2026-07-06-autonomous-scenario-matrix.json": true,
     "docs/live-proofs/2026-07-06-codebase-static-patch-scenario.json": true,
@@ -349,6 +350,7 @@
     "docs/live-proofs/2026-07-05-tool-family-fanout-all-tabs.json",
     "docs/live-proofs/2026-07-05-tool-settings-install-plan-live.json",
     "docs/live-proofs/2026-07-06-app-autonomous-scenario-catalog-route.json",
+    "docs/live-proofs/2026-07-06-app-autonomous-scenario-prepare-route.json",
     "docs/live-proofs/2026-07-06-autonomous-scenario-catalog.json",
     "docs/live-proofs/2026-07-06-autonomous-scenario-matrix.json",
     "docs/live-proofs/2026-07-06-codebase-static-patch-scenario.json",
@@ -422,7 +424,7 @@
   "ok": true,
   "processEvidence": {
     "appRows": [
-      "47588 122704 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+      "49924 122928 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
     ],
     "engineProcessRows": []
   },

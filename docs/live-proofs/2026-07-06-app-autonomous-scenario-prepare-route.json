@@ -1,0 +1,42 @@
+{
+  "appApi": "http://127.0.0.1:9999",
+  "checks": {
+    "isWorking": "PASS",
+    "modeAutopilot": "PASS",
+    "noModelLoaded": "PASS",
+    "repoFinalMarker": "PASS",
+    "repoPrepareOk": "PASS",
+    "repoPromptDrafted": "PASS",
+    "repoRequiredTools": "PASS",
+    "repoTab": "PASS",
+    "sendToChatFalse": "PASS",
+    "toolSchemaBudget": "PASS",
+    "webFinalMarker": "PASS",
+    "webPrepareOk": "PASS",
+    "webPromptDrafted": "PASS",
+    "webRequiredTools": "PASS",
+    "webTab": "PASS"
+  },
+  "finishedAt": "2026-07-06T03:21:43-0700",
+  "generatedAt": "2026-07-06T03:21:43-0700",
+  "isWorking": false,
+  "noModelLoaded": true,
+  "notes": [
+    "Live app route proof only; it prepares scenario prompts and tool-profile state without starting model inference.",
+    "Prepared prompts remain scoped to local fixtures and require app tools/evidence/report stages."
+  ],
+  "ok": true,
+  "preparedScenarios": [
+    "webserver_auth_sqli_report_chain",
+    "github_repo_secret_dependency_chain"
+  ],
+  "proofLevel": "live-debug-app-route-no-model-load",
+  "proofType": "app-autonomous-scenario-prepare-route-live",
+  "repoMessageCount": 1,
+  "repoSelectedTab": "supplyChain",
+  "sourceRoute": "/qa/autonomous-scenario-prepare",
+  "startedAt": "2026-07-06T03:21:41-0700",
+  "status": "PASS",
+  "webMessageCount": 1,
+  "webSelectedTab": "web"
+}
