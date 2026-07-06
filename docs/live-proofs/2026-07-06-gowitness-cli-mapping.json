@@ -1,38 +1,66 @@
 {
-  "binaryPath": null,
-  "boundary": "No screenshot or target action is run; help/preflight only.",
-  "generatedAt": "2026-07-06T16:44:18-0700",
-  "missingLiveEvidence": [
-    "gowitness binary is not installed on this machine, so scan single help could not be live-verified."
-  ],
+  "binaryPath": "/Users/eric/.exploitbot/tools/gowitness",
+  "boundary": "Runs only help commands and a screenshot against a temporary 127.0.0.1 fixture.",
+  "generatedAt": "2026-07-06T16:49:46-0700",
+  "missingLiveEvidence": [],
   "ok": true,
   "oldSingleHelp": {
     "cmd": [
-      "gowitness",
+      "/Users/eric/.exploitbot/tools/gowitness",
       "single",
       "--help"
     ],
-    "returncode": 127,
-    "stderrPreview": "[Errno 2] No such file or directory: 'gowitness'"
+    "returncode": 1,
+    "stderrPreview": "",
+    "stdoutPreview": "\n  An error has occured. The error was:                                        \n                                                                              \n  unknown command \"single\" for \"gowitness\"                                    \n\n\n"
   },
   "proofLevel": "source-contract-plus-current-machine-cli-preflight",
   "proofType": "gowitness-cli-mapping",
+  "safeLoopbackScreenshot": {
+    "command": {
+      "cmd": [
+        "/Users/eric/.exploitbot/tools/gowitness",
+        "scan",
+        "single",
+        "--url",
+        "http://127.0.0.1:55486/",
+        "--screenshot-path",
+        "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-gowitness-proof-57xuq1to/screens",
+        "--screenshot-format",
+        "png",
+        "--write-jsonl",
+        "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-gowitness-proof-57xuq1to/gowitness.jsonl"
+      ],
+      "returncode": 0,
+      "stderrPreview": "2026/07/06 16:49:45 INFO result \ud83e\udd16 target=http://127.0.0.1:55486/ status-code=200 title=\"ExploitBot Gowitness Fixture\" have-screenshot=true\n",
+      "stdoutPreview": ""
+    },
+    "jsonlExists": false,
+    "screenshotCount": 1,
+    "screenshots": [
+      "http---127.0.0.1-55486-.png"
+    ],
+    "status": "PASS",
+    "url": "http://127.0.0.1:55486/"
+  },
   "scanSingleHelp": {
     "cmd": [
-      "gowitness",
+      "/Users/eric/.exploitbot/tools/gowitness",
       "scan",
       "single",
       "--help"
     ],
-    "returncode": 127,
-    "stderrPreview": "[Errno 2] No such file or directory: 'gowitness'"
+    "returncode": 0,
+    "stderrPreview": "",
+    "stdoutPreview": "               _ _                   \n ___ ___ _ _ _|_| |_ __ ___ ___ ___ \n| . | . | | | | |  _|  | -_|_ -|_ -|\n|_  |___|_____|_|_||_|_|___|___|___|\n|___|    v3, with <3 by @leonjza\n\n\n  # scan single                                                               \n                                                                              \n  Scan a single URL target.                                                   \n                                                                              \n  **Note**: By default, no metadata is saved except for screenshots that are  \n  stored in the configured --screenshot-path. For later parsing (i.e., using  \n  the                                                                         \n  gowitness reporting feature), you need to specify where to write results    \n  (db,                                                                        \n  csv, jsonl) using the *--write-** set of flags. See *--help* for available  \n  flags.\n\nUsage:\n  gowitness scan single [flags]\n\nExamples:\n\n                                                                              \n  \u2022 gowitness scan single -u https://sensepost.com                            \n  \u2022 gowitness scan single -u https://sensepost.com --write-jsonl              \n\n\n\nFlags:\n  -h, --help         help for single\n  -u, --url string   The target to screenshot\n\nGlobal Flags:\n      --chrome-header stringArray     Extra headers to add to requests. Supports multiple --chrome-header flags\n      --chrome-path string            The path to a Google Chrome binary to use (downloads a platform-appropriate binary by default)\n      --chrome-proxy string           An HTTP/SOCKS5 proxy server to use. Specify the proxy using this format: proto://address:port\n      --chrome-user-agent string      The user-agent string to use (default \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36\")\n      --chrome-window-x int           The Chro"
   },
   "source": "ExploitBot/Sources/ExploitBot/Services/ToolDefinitions.swift",
   "status": {
-    "binaryPresent": "BLOCKED",
-    "oldSingleHelpRejected": "BLOCKED",
-    "overall": "PARTIAL",
-    "scanSingleHelpRuns": "BLOCKED",
+    "binaryPresent": "PASS",
+    "oldSingleHelpRejected": "PASS",
+    "overall": "PASS",
+    "safeLoopbackScreenshot": "PASS",
+    "scanSingleHelpRuns": "PASS",
     "sourceUsesScanSingle": "PASS"
   }
 }

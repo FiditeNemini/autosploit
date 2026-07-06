@@ -3,8 +3,12 @@ from __future__ import annotations
 
 import json
 import shutil
+import socket
 import subprocess
+import tempfile
+import threading
 import time
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 
@@ -12,6 +16,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 TOOL_DEFINITIONS = ROOT / "ExploitBot/Sources/ExploitBot/Services/ToolDefinitions.swift"
 ARTIFACT = ROOT / "docs/live-proofs/2026-07-06-gowitness-cli-mapping.json"
+FIXTURE_MARKER = "EXPLOITBOT_GOWITNESS_FIXTURE_OK"
 
 
 def timestamp() -> str:
@@ -38,11 +43,93 @@ def gowitness_build_case() -> str:
     return case[: case.index('case "search_cve"')]
 
 
+def candidate_binaries() -> list[Path]:
+    candidates = [
+        Path.home() / ".exploitbot" / "tools" / "gowitness",
+        Path.home() / "go" / "bin" / "gowitness",
+    ]
+    path_binary = shutil.which("gowitness")
+    if path_binary:
+        candidates.append(Path(path_binary))
+    return candidates
+
+
+def find_gowitness_binary() -> str | None:
+    for candidate in candidate_binaries():
+        if candidate.exists() and candidate.is_file():
+            return str(candidate)
+    return None
+
+
+class FixtureHandler(BaseHTTPRequestHandler):
+    def log_message(self, fmt: str, *args: Any) -> None:
+        return
+
+    def do_GET(self) -> None:
+        body = (
+            "<html><head><title>ExploitBot Gowitness Fixture</title></head>"
+            f"<body>{FIXTURE_MARKER}</body></html>"
+        ).encode("utf-8")
+        self.send_response(200)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+
+def free_port() -> int:
+    with socket.socket() as sock:
+        sock.bind(("127.0.0.1", 0))
+        return int(sock.getsockname()[1])
+
+
+def safe_loopback_screenshot(binary: str | None) -> dict[str, Any]:
+    if not binary:
+        return {"status": "BLOCKED", "missingEvidence": "gowitness binary missing"}
+
+    port = free_port()
+    server = ThreadingHTTPServer(("127.0.0.1", port), FixtureHandler)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    with tempfile.TemporaryDirectory(prefix="exploitbot-gowitness-proof-") as tmp:
+        screenshot_dir = Path(tmp) / "screens"
+        screenshot_dir.mkdir(parents=True, exist_ok=True)
+        jsonl_path = Path(tmp) / "gowitness.jsonl"
+        url = f"http://127.0.0.1:{port}/"
+        try:
+            proc = run([
+                binary,
+                "scan",
+                "single",
+                "--url",
+                url,
+                "--screenshot-path",
+                str(screenshot_dir),
+                "--screenshot-format",
+                "png",
+                "--write-jsonl",
+                str(jsonl_path),
+            ])
+            screenshots = sorted(path.name for path in screenshot_dir.glob("*.png"))
+            return {
+                "status": "PASS" if proc.get("returncode") == 0 and screenshots else "FAIL",
+                "url": url,
+                "command": proc,
+                "screenshotCount": len(screenshots),
+                "screenshots": screenshots,
+                "jsonlExists": jsonl_path.exists(),
+            }
+        finally:
+            server.shutdown()
+            thread.join(timeout=5.0)
+
+
 def build_report() -> dict[str, Any]:
     case = gowitness_build_case()
-    binary = shutil.which("gowitness")
+    binary = find_gowitness_binary()
     old_help = run([binary or "gowitness", "single", "--help"])
     new_help = run([binary or "gowitness", "scan", "single", "--help"])
+    screenshot = safe_loopback_screenshot(binary)
     source_status = (
         "PASS"
         if '["single", "--url"' not in case
@@ -59,6 +146,7 @@ def build_report() -> dict[str, Any]:
         "scanSingleHelpRuns": (
             "PASS" if binary and new_help.get("returncode") == 0 else "BLOCKED"
         ),
+        "safeLoopbackScreenshot": screenshot.get("status", "FAIL"),
     }
     if source_status == "FAIL":
         overall = "FAIL"
@@ -77,8 +165,9 @@ def build_report() -> dict[str, Any]:
         "binaryPath": binary,
         "oldSingleHelp": old_help,
         "scanSingleHelp": new_help,
-        "missingLiveEvidence": [] if binary else ["gowitness binary is not installed on this machine, so scan single help could not be live-verified."],
-        "boundary": "No screenshot or target action is run; help/preflight only.",
+        "safeLoopbackScreenshot": screenshot,
+        "missingLiveEvidence": [] if binary else ["gowitness binary is not installed on this machine, so scan single help and safe loopback screenshot could not be live-verified."],
+        "boundary": "Runs only help commands and a screenshot against a temporary 127.0.0.1 fixture.",
     }
 
 
