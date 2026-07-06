@@ -153,7 +153,7 @@
     "ExploitBotEngine/.venv/bin/python3",
     "scripts/real-qwen-long-context-smoke-proof.py"
   ],
-  "generatedAt": "2026-07-05T02:24:23-0700",
+  "generatedAt": "2026-07-05T17:08:26-0700",
   "heavyModelProcesses": [],
   "highTargetAttempt": {
     "actualPromptTokensByTokenizer": 224003,
@@ -258,7 +258,7 @@
     "freePercent": 94,
     "requiredAvailableGB": 80.0,
     "status": "PASS",
-    "swapouts": 204
+    "swapouts": 1988
   },
   "missingEvidence": "A real 258k near-max Qwen attempt exists, but it did not complete final assistant output or post-generation cache writes. The latest attempt reached 258032 tokenizer-counted prompt tokens and ended with CompletionMemoryGuardAbort: long-context completion memory guard aborted the engine. A 200k incremental retry also failed safely with new_swapouts_detected after reaching 200025 tokenizer-counted prompt tokens and entering live chunked prefill. A 224k graduated retry also failed safely with swapouts_detected after reaching 224003 tokenizer-counted prompt tokens.",
   "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
