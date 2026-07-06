@@ -17,6 +17,7 @@ DEFAULT_OUTPUT = ROOT / "docs/live-proofs/2026-07-05-objective-open-blockers-cur
 
 FULL_CONTEXT_AREA = "Full-context-length stress"
 RELEASE_AREA = "Release/distribution readiness"
+INDEPENDENT_TOOL_CHOICE_AREA = "Independent natural-language scenario tool selection"
 
 
 def require(condition: bool, message: str, detail: Any = None) -> None:
@@ -113,6 +114,25 @@ def build_release_row(
     }
 
 
+def build_independent_tool_choice_row(row: dict[str, Any], requirement: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "area": INDEPENDENT_TOOL_CHOICE_AREA,
+        "status": row.get("status"),
+        "requirementId": "independent_model_tool_choice",
+        "blockingCondition": "independent_model_tool_choice_not_proven",
+        "missingEvidence": requirement.get("missingEvidence") or (
+            "A real Qwen 27B/35B natural-language objective proof must show the model choosing the surface/probe/prove/report tool order without exact tool-call blocks."
+        ),
+        "evidence": row.get("evidence") or [],
+        "requiredNextEvidence": [
+            "Run a local-fixture webserver/repo/codebase scenario with a natural-language objective only.",
+            "no exact tool-call blocks",
+            "Provide allowed tool schemas but no exact tool-call blocks or forced function-specific retry.",
+            "Prove the model-selected ordered tool chain, verbose transcripts, final answer, and cache/MTP evidence for 27B and 35B.",
+        ],
+    }
+
+
 def build_report_from_payloads(
     matrix: dict[str, Any],
     goal_audit: dict[str, Any],
@@ -133,20 +153,24 @@ def build_report_from_payloads(
         "stored": matrix.get("statusCounts"),
         "computed": counts,
     })
-    require(matrix.get("rowCount") == 26, "unexpected matrix row count", matrix.get("rowCount"))
+    require(matrix.get("rowCount") == 27, "unexpected matrix row count", matrix.get("rowCount"))
     missing_evidence = validate_evidence_paths(rows)
     require(not missing_evidence, "matrix has missing evidence paths", missing_evidence)
 
     by_area = {row.get("area"): row for row in rows}
     goal_by_id = {row.get("id"): row for row in goal_audit.get("rows") or []}
     full_context = by_area[FULL_CONTEXT_AREA]
+    independent_tool_choice = by_area[INDEPENDENT_TOOL_CHOICE_AREA]
     release = by_area[RELEASE_AREA]
     require(full_context.get("status") in {"PASS", "PARTIAL"}, "full-context row status drifted", full_context)
+    require(independent_tool_choice.get("status") in {"PASS", "PARTIAL"}, "independent tool-choice row status drifted", independent_tool_choice)
     require(release.get("status") in {"PASS", "BLOCKED"}, "release row status drifted", release)
 
     expected_open_areas: set[str] = set()
     if full_context.get("status") == "PARTIAL":
         expected_open_areas.add(FULL_CONTEXT_AREA)
+    if independent_tool_choice.get("status") == "PARTIAL":
+        expected_open_areas.add(INDEPENDENT_TOOL_CHOICE_AREA)
     if release.get("status") == "BLOCKED":
         expected_open_areas.add(RELEASE_AREA)
     actual_open_areas = open_blocker_areas(rows)
@@ -158,6 +182,8 @@ def build_report_from_payloads(
     report_rows = []
     if full_context.get("status") == "PARTIAL":
         report_rows.append(build_full_context_row(full_context, goal_by_id["generation_reasoning_context"]))
+    if independent_tool_choice.get("status") == "PARTIAL":
+        report_rows.append(build_independent_tool_choice_row(independent_tool_choice, goal_by_id["independent_model_tool_choice"]))
     if release.get("status") == "BLOCKED":
         report_rows.append(build_release_row(release, goal_by_id["release_displayable"], notarization, public_truth))
 
@@ -187,7 +213,14 @@ def build_report_from_payloads(
         "openRowCount": len(report_rows),
         "openRows": report_rows,
         "currentBlockingConditions": ["release_displayable"] if release.get("status") == "BLOCKED" else [],
-        "currentPartialConditions": ["generation_reasoning_context"] if full_context.get("status") == "PARTIAL" else [],
+        "currentPartialConditions": [
+            condition
+            for condition, active in (
+                ("generation_reasoning_context", full_context.get("status") == "PARTIAL"),
+                ("independent_model_tool_choice", independent_tool_choice.get("status") == "PARTIAL"),
+            )
+            if active
+        ],
         "releaseNextAction": notarization.get("nextAction"),
         "longContextPolicy": {
             "provenSafeCeilingTokens": 192000,

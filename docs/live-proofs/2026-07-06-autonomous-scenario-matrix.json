@@ -1,9 +1,10 @@
 {
-  "generatedAt": "2026-07-06T01:12:19-0700",
+  "generatedAt": "2026-07-06T01:45:54-0700",
   "notes": [
     "Rows aggregate existing live artifacts; artifact generatedAt values show whether evidence is fresh or older.",
     "Webserver SQLi and repo/codebase supply-chain rows are fresh 2026-07-06 app-backed scenarios added for this matrix.",
-    "Real-Qwen rows are not rerun by this aggregator; rerun the Qwen proof scripts for fresh model evidence."
+    "Real-Qwen rows are not rerun by this aggregator; rerun the Qwen proof scripts for fresh model evidence.",
+    "toolChoiceMode separates exact-prompt/app-recovered tool execution from independent model tool-choice evidence."
   ],
   "ok": true,
   "proofLevel": "artifact-backed-scenario-coverage",
@@ -38,6 +39,7 @@
           "status": "PASS"
         }
       ],
+      "autonomyBoundary": "Real Qwen 27B/35B received schemas and completed the loop, but tool order came from exact prompt blocks with app-side exact-call recovery; not independent tool selection.",
       "cacheProof": {
         "hybridSSM": true,
         "paged": true,
@@ -48,6 +50,7 @@
       "failures": [],
       "label": "Emulated web app discovery to SQL injection proof to report",
       "modelRequired": true,
+      "modelToolChoiceEvidence": "prompt_specified_exact_calls",
       "observedTools": [
         "httpx",
         "nuclei",
@@ -96,7 +99,8 @@
         "evidence",
         "report"
       ],
-      "status": "PASS"
+      "status": "PASS",
+      "toolChoiceMode": "exact_tool_call_prompt_with_app_recovery"
     },
     {
       "artifacts": [
@@ -119,6 +123,7 @@
           "status": "PASS"
         }
       ],
+      "autonomyBoundary": "Real Qwen 27B/35B executed real installed loopback/local tools, but the proof prompt serialized exact tool calls; not independent tool selection.",
       "cacheProof": {
         "hybridSSM": true,
         "paged": true,
@@ -129,6 +134,7 @@
       "failures": [],
       "label": "Local loopback webserver with real installed tools",
       "modelRequired": true,
+      "modelToolChoiceEvidence": "prompt_specified_exact_calls",
       "observedTools": [],
       "requiredTools": [
         "nmap",
@@ -174,7 +180,8 @@
         "evidence",
         "report"
       ],
-      "status": "PASS"
+      "status": "PASS",
+      "toolChoiceMode": "exact_tool_call_prompt_with_app_recovery"
     },
     {
       "artifacts": [
@@ -191,6 +198,7 @@
           "status": "PASS"
         }
       ],
+      "autonomyBoundary": "Real Qwen 27B/35B completed six phases with cache proof, but the prompt contained the exact phase tool calls; not independent tool selection.",
       "cacheProof": {
         "hybridSSM": true,
         "paged": true,
@@ -201,6 +209,7 @@
       "failures": [],
       "label": "Autonomous phase chain through safe exploit/post stages",
       "modelRequired": true,
+      "modelToolChoiceEvidence": "prompt_specified_exact_calls",
       "observedTools": [],
       "requiredTools": [
         "nmap",
@@ -240,7 +249,8 @@
         "evidence",
         "report"
       ],
-      "status": "PASS"
+      "status": "PASS",
+      "toolChoiceMode": "exact_tool_call_prompt_with_app_recovery"
     },
     {
       "artifacts": [
@@ -249,18 +259,32 @@
           "generatedAt": "2026-07-06T00:42:49-0700",
           "proofType": "repo-codebase-supply-chain-scenario-live",
           "status": "PASS"
+        },
+        {
+          "artifact": "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-27b.json",
+          "generatedAt": "2026-07-06T00:41:54-0700",
+          "proofType": "real-qwen-repo-codebase-supply-chain",
+          "status": "PASS"
+        },
+        {
+          "artifact": "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-35b.json",
+          "generatedAt": "2026-07-06T00:44:11-0700",
+          "proofType": "real-qwen-repo-codebase-supply-chain",
+          "status": "PASS"
         }
       ],
+      "autonomyBoundary": "Real Qwen 27B/35B artifacts prove schema receipt, ordered tool execution, cache/MTP, second turn, and report output, but the ordered tool plan was exact-prompt guided.",
       "cacheProof": {
-        "hybridSSM": false,
-        "paged": false,
-        "prefix": false,
-        "q4KV": false
+        "hybridSSM": true,
+        "paged": true,
+        "prefix": true,
+        "q4KV": true
       },
       "currentRunStatus": "PASS",
       "failures": [],
       "label": "Synthetic repo/codebase supply-chain scenario",
-      "modelRequired": false,
+      "modelRequired": true,
+      "modelToolChoiceEvidence": "prompt_specified_exact_calls",
       "observedTools": [
         "grype",
         "osv_scanner",
@@ -311,7 +335,8 @@
         "evidence",
         "report"
       ],
-      "status": "PASS"
+      "status": "PASS",
+      "toolChoiceMode": "exact_tool_call_prompt_with_app_recovery"
     },
     {
       "artifacts": [
@@ -322,6 +347,7 @@
           "status": "PASS"
         }
       ],
+      "autonomyBoundary": "Live app/tool/report wiring is proven against a local codebase fixture, but no real Qwen artifact is attached to this row yet.",
       "cacheProof": {
         "hybridSSM": false,
         "paged": false,
@@ -332,6 +358,7 @@
       "failures": [],
       "label": "Local codebase static analysis to proof to patch report",
       "modelRequired": false,
+      "modelToolChoiceEvidence": "not_proven",
       "observedTools": [
         "bandit",
         "run_shell",
@@ -377,7 +404,8 @@
         "evidence",
         "report"
       ],
-      "status": "PASS"
+      "status": "PASS",
+      "toolChoiceMode": "scripted_mock_tool_sequence"
     },
     {
       "artifacts": [
@@ -400,6 +428,7 @@
           "status": "PASS"
         }
       ],
+      "autonomyBoundary": "Report actions prove app/export wiring from confirmed evidence; this row is not intended to prove model tool selection.",
       "cacheProof": {
         "hybridSSM": false,
         "paged": false,
@@ -410,6 +439,7 @@
       "failures": [],
       "label": "Report generation/export from confirmed findings",
       "modelRequired": false,
+      "modelToolChoiceEvidence": "not_required",
       "observedTools": [],
       "requiredTools": [
         "create_finding",
@@ -445,7 +475,8 @@
         "evidence",
         "report"
       ],
-      "status": "PASS"
+      "status": "PASS",
+      "toolChoiceMode": "direct_app_action_proof"
     }
   ],
   "scenarioCount": 6,

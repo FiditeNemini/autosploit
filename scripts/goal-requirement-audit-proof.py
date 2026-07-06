@@ -87,6 +87,13 @@ REQUIREMENTS = [
         "expectedStatus": "PASS",
     },
     {
+        "id": "independent_model_tool_choice",
+        "requirement": "Real models can choose scenario tool order from a natural-language objective without exact tool-call blocks or app-side exact-call recovery.",
+        "areas": ["Independent natural-language scenario tool selection"],
+        "expectedStatus": "PARTIAL",
+        "missingEvidence": "Current scenario matrix labels real-Qwen webserver, loopback, phase, and repo/codebase rows as exact_tool_call_prompt_with_app_recovery. A fresh 27B/35B natural-language objective fixture proof with no exact tool-call blocks is still missing.",
+    },
+    {
         "id": "individual_toolchain_per_tool",
         "requirement": "Individual pentest tools have per-tool chat transcript, terminal transcript, and result/tab evidence.",
         "areas": ["Individual toolchain per-tool coverage"],
@@ -144,7 +151,7 @@ def status_counts(rows: list[dict[str, Any]]) -> dict[str, int]:
 
 def expected_matrix_counts_for_rows(rows: list[dict[str, Any]]) -> dict[str, int]:
     counts = status_counts(rows)
-    require(len(rows) == 26, "unexpected matrix row count", {"rowCount": len(rows)})
+    require(len(rows) == 27, "unexpected matrix row count", {"rowCount": len(rows)})
     require(sum(counts.values()) == len(rows), "matrix has rows with unsupported status", counts)
     return counts
 

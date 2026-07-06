@@ -20,6 +20,9 @@ class ScenarioSpec:
     artifacts: tuple[str, ...]
     required_tools: tuple[str, ...]
     stage_evidence: dict[str, list[str]]
+    tool_choice_mode: str
+    model_tool_choice_evidence: str
+    autonomy_boundary: str
     model_required: bool = False
     current_run_required: bool = False
 
@@ -42,6 +45,9 @@ SCENARIOS = [
             "evidence": ["/messages", "/results", "/state terminal transcripts"],
             "report": ["report finding action and report generate route"],
         },
+        tool_choice_mode="exact_tool_call_prompt_with_app_recovery",
+        model_tool_choice_evidence="prompt_specified_exact_calls",
+        autonomy_boundary="Real Qwen 27B/35B received schemas and completed the loop, but tool order came from exact prompt blocks with app-side exact-call recovery; not independent tool selection.",
         model_required=True,
         current_run_required=True,
     ),
@@ -62,6 +68,9 @@ SCENARIOS = [
             "evidence": ["verbose chat tool cards", "terminal transcripts", "results raw output"],
             "report": ["covered by report_generation_from_evidence scenario"],
         },
+        tool_choice_mode="exact_tool_call_prompt_with_app_recovery",
+        model_tool_choice_evidence="prompt_specified_exact_calls",
+        autonomy_boundary="Real Qwen 27B/35B executed real installed loopback/local tools, but the proof prompt serialized exact tool calls; not independent tool selection.",
         model_required=True,
     ),
     ScenarioSpec(
@@ -80,12 +89,19 @@ SCENARIOS = [
             "evidence": ["ordered tool transcript and final assistant continuation"],
             "report": ["covered by report_generation_from_evidence scenario"],
         },
+        tool_choice_mode="exact_tool_call_prompt_with_app_recovery",
+        model_tool_choice_evidence="prompt_specified_exact_calls",
+        autonomy_boundary="Real Qwen 27B/35B completed six phases with cache proof, but the prompt contained the exact phase tool calls; not independent tool selection.",
         model_required=True,
     ),
     ScenarioSpec(
         scenario_id="repo_codebase_supply_chain",
         label="Synthetic repo/codebase supply-chain scenario",
-        artifacts=("docs/live-proofs/2026-07-06-repo-codebase-supply-chain-scenario.json",),
+        artifacts=(
+            "docs/live-proofs/2026-07-06-repo-codebase-supply-chain-scenario.json",
+            "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-27b.json",
+            "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-35b.json",
+        ),
         required_tools=("run_shell", "trufflehog", "syft", "grype", "osv_scanner", "search_cve"),
         stage_evidence={
             "surface": ["run_shell file inventory over temp repo"],
@@ -95,6 +111,10 @@ SCENARIOS = [
             "evidence": ["/messages", "/results", "/state terminal transcripts"],
             "report": ["report finding action and report generate route"],
         },
+        tool_choice_mode="exact_tool_call_prompt_with_app_recovery",
+        model_tool_choice_evidence="prompt_specified_exact_calls",
+        autonomy_boundary="Real Qwen 27B/35B artifacts prove schema receipt, ordered tool execution, cache/MTP, second turn, and report output, but the ordered tool plan was exact-prompt guided.",
+        model_required=True,
         current_run_required=True,
     ),
     ScenarioSpec(
@@ -110,6 +130,9 @@ SCENARIOS = [
             "evidence": ["/messages", "/results", "/state terminal transcripts"],
             "report": ["report finding action and report generate route"],
         },
+        tool_choice_mode="scripted_mock_tool_sequence",
+        model_tool_choice_evidence="not_proven",
+        autonomy_boundary="Live app/tool/report wiring is proven against a local codebase fixture, but no real Qwen artifact is attached to this row yet.",
         current_run_required=True,
     ),
     ScenarioSpec(
@@ -129,6 +152,9 @@ SCENARIOS = [
             "evidence": ["HTML/Markdown/JSON/PDF artifact checks"],
             "report": ["full report generation and export"],
         },
+        tool_choice_mode="direct_app_action_proof",
+        model_tool_choice_evidence="not_required",
+        autonomy_boundary="Report actions prove app/export wiring from confirmed evidence; this row is not intended to prove model tool selection.",
     ),
 ]
 
@@ -246,6 +272,9 @@ def row_for_spec(
         "requiredTools": list(spec.required_tools),
         "observedTools": observed_tools,
         "artifacts": artifact_rows,
+        "toolChoiceMode": spec.tool_choice_mode,
+        "modelToolChoiceEvidence": spec.model_tool_choice_evidence,
+        "autonomyBoundary": spec.autonomy_boundary,
         "modelRequired": spec.model_required,
         "cacheProof": cache,
         "currentRunStatus": current_run_status,
@@ -282,6 +311,7 @@ def build_report(
             "Rows aggregate existing live artifacts; artifact generatedAt values show whether evidence is fresh or older.",
             "Webserver SQLi and repo/codebase supply-chain rows are fresh 2026-07-06 app-backed scenarios added for this matrix.",
             "Real-Qwen rows are not rerun by this aggregator; rerun the Qwen proof scripts for fresh model evidence.",
+            "toolChoiceMode separates exact-prompt/app-recovered tool execution from independent model tool-choice evidence.",
         ],
     }
 
