@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-07-06T16:53:48-0700",
+  "proofType": "nuclei-app-managed-install",
+  "source": "ExploitBot/Sources/ExploitBot/Services/ToolInstaller.swift",
+  "package": "github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest",
+  "status": {
+    "sourceUsesAppManagedGoBin": "PASS",
+    "appManagedBinaryPresent": "PASS",
+    "appManagedBinaryVersionRuns": "PASS",
+    "overall": "PASS"
+  },
+  "sourceLine": "ToolDef(name: \"nuclei\", binary: \"nuclei\", altBinaries: [], category: \"web\", installMethod: \"go\", installCommand: #\"mkdir -p \"$HOME/.exploitbot/tools\" && GOBIN=\"$HOME/.exploitbot/tools\" go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest\"#),",
+  "binaryPath": "/Users/eric/.exploitbot/tools/nuclei",
+  "versionCommand": {
+    "cmd": [
+      "/Users/eric/.exploitbot/tools/nuclei",
+      "-version"
+    ],
+    "returncode": 0,
+    "stdoutPreview": "",
+    "stderrPreview": "[\u001b[34mINF\u001b[0m] Nuclei Engine Version: v3.11.0\n[\u001b[34mINF\u001b[0m] Nuclei Config Directory: /Users/eric/Library/Application Support/nuclei\n[\u001b[34mINF\u001b[0m] Nuclei Cache Directory: /Users/eric/Library/Caches/nuclei\n[\u001b[34mINF\u001b[0m] PDCP Directory: /Users/eric/.pdcp\n"
+  },
+  "boundary": "Verifies installer command shape plus current-machine app-managed nuclei binary/version only; no target scan is run."
+}
