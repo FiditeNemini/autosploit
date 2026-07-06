@@ -138,17 +138,24 @@ def aggregate_status(statuses: list[str]) -> str:
     return max(statuses, key=lambda status: STATUS_RANK[status])
 
 
+def effective_expected_status(requirement: dict[str, Any], release_manifest: dict[str, Any] | None = None) -> str:
+    if requirement.get("id") == "release_displayable":
+        gate = (release_manifest or {}).get("notarizationGate")
+        require(
+            gate in {"passed", "requires-notary-credentials"},
+            "release manifest notarizationGate is not recognized",
+            release_manifest,
+        )
+        return "PASS" if gate == "passed" else "BLOCKED"
+    return requirement["expectedStatus"]
+
+
 def release_manifest_evidence() -> dict[str, Any]:
     require(RELEASE_MANIFEST.is_file(), "release manifest is missing", str(RELEASE_MANIFEST))
     manifest = json.loads(RELEASE_MANIFEST.read_text(encoding="utf-8"))
     require(
         manifest.get("notarizationGate") in {"passed", "requires-notary-credentials"},
         "release manifest notarizationGate is not recognized",
-        manifest,
-    )
-    require(
-        manifest.get("notarizationGate") == "requires-notary-credentials",
-        "release displayability audit expected distribution to remain blocked until notarization passes",
         manifest,
     )
     artifacts = manifest.get("artifacts") or {}
@@ -188,8 +195,9 @@ def main() -> None:
         require(not missing_areas, f"requirement {requirement['id']} references missing matrix areas", missing_areas)
         evidence_rows = [by_area[area] for area in areas]
         status = aggregate_status([row["status"] for row in evidence_rows])
-        require(status == requirement["expectedStatus"], f"requirement {requirement['id']} status drifted", {
-            "expected": requirement["expectedStatus"],
+        expected_status = effective_expected_status(requirement, release_manifest)
+        require(status == expected_status, f"requirement {requirement['id']} status drifted", {
+            "expected": expected_status,
             "actual": status,
             "areas": areas,
         })
