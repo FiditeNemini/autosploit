@@ -6,7 +6,7 @@
   "currentPartialConditions": [
     "generation_reasoning_context"
   ],
-  "generatedAt": "2026-07-05T17:54:26-0700",
+  "generatedAt": "2026-07-05T17:57:17-0700",
   "matrixStatusCounts": {
     "BLOCKED": 1,
     "PARTIAL": 1,
@@ -41,6 +41,7 @@
         "docs/live-proofs/2026-07-05-computer-use-settings-cve-cache-ui.json",
         "docs/live-proofs/2026-07-05-live-ui-surface-sweep.json",
         "docs/live-proofs/2026-07-05-release-app-computer-use-35b-visible-tool-loop.json",
+        "docs/live-proofs/2026-07-05-release-app-computer-use-retry-current.json",
         "docs/live-proofs/2026-07-05-release-computer-use-settings-cache-model.json",
         "docs/live-proofs/2026-07-05-subtab-lifecycle-matrix.json",
         "docs/live-proofs/2026-07-05-tab-action-surface-matrix.json"
