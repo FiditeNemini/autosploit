@@ -166,7 +166,11 @@ SCENARIOS = [
     ScenarioSpec(
         scenario_id="container_iac_supply_chain_chain",
         label="Local container and IaC supply-chain scenario",
-        artifacts=("docs/live-proofs/2026-07-06-container-iac-supply-chain-scenario.json",),
+        artifacts=(
+            "docs/live-proofs/2026-07-06-container-iac-supply-chain-scenario.json",
+            "docs/live-proofs/2026-07-06-real-qwen-container-iac-supply-chain-27b.json",
+            "docs/live-proofs/2026-07-06-real-qwen-container-iac-supply-chain-35b.json",
+        ),
         required_tools=("run_shell", "syft", "grype", "trivy", "checkov", "search_cve"),
         stage_evidence={
             "surface": ["run_shell Dockerfile/compose/Kubernetes manifest inventory"],
@@ -176,9 +180,10 @@ SCENARIOS = [
             "evidence": ["/messages", "/results", "/state terminal transcripts"],
             "report": ["report finding action and report generate route"],
         },
-        tool_choice_mode="scripted_mock_tool_sequence",
-        model_tool_choice_evidence="not_proven",
-        autonomy_boundary="Live app/tool/report wiring is proven against a local container/IaC fixture, but no real Qwen artifact is attached to this row yet.",
+        tool_choice_mode="exact_tool_call_prompt_with_app_recovery",
+        model_tool_choice_evidence="prompt_specified_exact_calls",
+        autonomy_boundary="Real Qwen 27B/35B artifacts prove schema receipt, ordered container/IaC supply-chain tool execution, cache/MTP, second turn, and report output, but the ordered tool plan was exact-prompt guided.",
+        model_required=True,
         current_run_required=True,
     ),
     ScenarioSpec(

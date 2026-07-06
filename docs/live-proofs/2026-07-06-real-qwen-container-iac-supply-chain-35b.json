@@ -1,0 +1,3134 @@
+{
+  "baseUrl": "http://127.0.0.1:54424",
+  "cacheAfter": {
+    "block_disk_cache": {
+      "blocks_on_disk": 125,
+      "disk_evictions": 0,
+      "disk_hits": 0,
+      "disk_misses": 4,
+      "disk_size_bytes": 456802493,
+      "disk_size_gb": 0.425,
+      "disk_writes": 125,
+      "total_accesses": 0,
+      "total_cached_tokens": 7929,
+      "total_tokens_on_disk": 7929
+    },
+    "cache_totals": {
+      "l2_block_tokens_on_disk": 7929,
+      "l2_prompt_tokens_on_disk": 0,
+      "l2_ssm_tokens_on_disk": 18105,
+      "l2_tokens_on_disk": 26034,
+      "l2_tokens_on_disk_note": "store_sum_across_prompt_block_ssm_l2; tiers_may_overlap",
+      "l2_tokens_on_disk_store_sum": 26034,
+      "ram_tokens_cached": 7929,
+      "ssm_tokens_on_disk": 18105
+    },
+    "disk_cache": {
+      "entries": 0,
+      "hit_rate": 0.0,
+      "hits": 0,
+      "max_size_gb": 10.0,
+      "misses": 1,
+      "pending_writes": 0,
+      "stores": 0,
+      "total_cached_tokens": 0,
+      "total_size_mb": 0.0,
+      "total_tokens_on_disk": 0
+    },
+    "kv_cache_quantization": {
+      "bits": 4,
+      "enabled": true,
+      "group_size": 64
+    },
+    "memory": {
+      "active_mb": 36106.1,
+      "cache_mb": 404.3,
+      "peak_mb": 50565.1
+    },
+    "native_cache": {
+      "attention_kv_storage_quantization": {
+        "applies_to": "attention_kv_layers_only",
+        "bits": 4,
+        "enabled": true,
+        "group_size": 64,
+        "mode": "storage_boundary",
+        "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+        "ssm_policy": "native_companion_state"
+      },
+      "block_disk_l2": true,
+      "cache_type": "hybrid_ssm_typed",
+      "components": [
+        "attention_kv",
+        "ssm_companion_state",
+        "async_rederive"
+      ],
+      "family": "hybrid",
+      "generic_turboquant_kv": {
+        "enabled": false,
+        "reason": "hybrid_ssm_state"
+      },
+      "kv_layer_indices": [],
+      "live_attention_tq_kv": {
+        "applies_to": "attention_kv_layers_only",
+        "attention_layers": [],
+        "companion_layers": [],
+        "enabled": false,
+        "mode": null,
+        "ssm_policy": "native_full_precision_companion_state"
+      },
+      "paged": true,
+      "prefix": true,
+      "schema": "hybrid_ssm_v1",
+      "ssm_entries": 0
+    },
+    "scheduler_cache": {
+      "active_requests": 0,
+      "allocated_blocks": 126,
+      "block_size": 64,
+      "cache_hit_rate": 0.1568627450980392,
+      "cache_hits": 24,
+      "cache_misses": 129,
+      "cow_copies": 0,
+      "disk_hits": 0,
+      "disk_misses": 4,
+      "entries_by_type": {
+        "assistant": 2,
+        "system": 0,
+        "user": 0
+      },
+      "evictions": 0,
+      "free_blocks": 874,
+      "hit_rate": 0.5,
+      "hits": 1,
+      "max_blocks": 1000,
+      "misses": 1,
+      "pixel_cache_hits": 0,
+      "pixel_cache_misses": 0,
+      "pixel_cache_size": 0,
+      "pixel_hit_rate": 0.0,
+      "shared_blocks": 12,
+      "tokens_saved": 768,
+      "total_images_processed": 0,
+      "total_time_saved": 0.0,
+      "total_tokens_cached": 7929,
+      "utilization": 0.126
+    },
+    "scheduler_stats": {
+      "batch_generator": {
+        "generation_time": 7.642061211750843,
+        "generation_tokens": 397,
+        "generation_tps": 51.94933526435925,
+        "hybrid_kv_without_ssm_hits": 1,
+        "hybrid_kv_without_ssm_tokens": 768,
+        "last_hybrid_kv_without_ssm": {
+          "cached_tokens": 768,
+          "reason": "no_ssm_companion_state",
+          "request_id": "chatcmpl-72ee070a",
+          "ssm_prefix_lookup": {
+            "candidate_lengths": [],
+            "matched": false,
+            "max_len": 768,
+            "reason": "no_candidate_lengths",
+            "store_size": 2
+          }
+        },
+        "last_native_mtp": {
+          "acceptance_rate": 0.35537190082644626,
+          "accepted_by_depth": [
+            41,
+            1,
+            1
+          ],
+          "accepted_tokens": 43,
+          "accepts": 41,
+          "bonus_emits": 40,
+          "cycles": 97,
+          "depth_acceptance_rates": {
+            "d1": 0.422680412371134,
+            "d2": 0.08333333333333333,
+            "d3": 0.08333333333333333
+          },
+          "draft_emits": 43,
+          "drafted_by_depth": [
+            97,
+            12,
+            12
+          ],
+          "drafted_tokens": 121,
+          "fallback_reason": null,
+          "final_depth": 1,
+          "finish_reason": "stop",
+          "forwards": {
+            "mtp": 122,
+            "replay_main": 56,
+            "seed_main": 1,
+            "verify_main": 97
+          },
+          "init_emits": 2,
+          "rejects": 56,
+          "request_id": "chatcmpl-72ee070a",
+          "timings_ms": {
+            "avg_cycle": 32.59836341891697,
+            "draft": 738.3735010225791,
+            "materialize": 0.5395449697971344,
+            "replay": 132.31770010315813,
+            "restore": 4.6013320970814675,
+            "sample": 1940.0945878005587,
+            "snapshot": 3.3818338706623763,
+            "total": 3162.041251634946,
+            "verify": 342.7327517711092
+          },
+          "verify_emits": 56
+        },
+        "num_images_processed": 0,
+        "peak_memory": 53.021380516,
+        "prompt_time": 14.977340916986577,
+        "prompt_tokens": 8713,
+        "prompt_tps": 581.745454569852,
+        "vision_encoding_time": 0
+      },
+      "cache_hit_requests": 0,
+      "cache_hit_tokens": 0,
+      "cache_hit_tokens_by_detail": {},
+      "cache_reuse_partial_downgrades": 0,
+      "cache_reuse_partial_tokens": 0,
+      "cache_reuse_skip_tokens": 0,
+      "cache_reuse_skips": 0,
+      "engine_path": null,
+      "ewma_ttft_seconds": 0,
+      "hybrid_kv_without_ssm_hits": 1,
+      "hybrid_kv_without_ssm_tokens": 768,
+      "last_cache_reuse_partial": null,
+      "last_cache_reuse_skip": null,
+      "last_hybrid_kv_without_ssm": {
+        "cached_tokens": 768,
+        "reason": "no_ssm_companion_state",
+        "request_id": "chatcmpl-72ee070a",
+        "ssm_prefix_lookup": {
+          "candidate_lengths": [],
+          "matched": false,
+          "max_len": 768,
+          "reason": "no_candidate_lengths",
+          "store_size": 2
+        }
+      },
+      "max_running_observed": 1,
+      "max_waiting_observed": 1,
+      "num_requests_processed": 2,
+      "num_running": 0,
+      "num_waiting": 0,
+      "single_active_decode": false,
+      "total_completion_tokens": 397,
+      "total_prompt_tokens": 8699
+    },
+    "ssm_companion": {
+      "disk": {
+        "budget_bytes": 10737418240,
+        "budget_gb": 10.0,
+        "bytes": 329363029,
+        "bytes_mb": 314.11,
+        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-container-iac-cache-_ytjzmil/block/ssm_companion",
+        "enabled": true,
+        "entries": 5,
+        "hit_rate": 0.0,
+        "hits": 0,
+        "misses": 1,
+        "stores": 5,
+        "total_cached_tokens": 18105,
+        "total_tokens_on_disk": 18105
+      },
+      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-container-iac-cache-_ytjzmil/block/ssm_companion",
+      "disk_enabled": true,
+      "entries": 5,
+      "max_entries": 8,
+      "nbytes": 329318400,
+      "nbytes_mb": 314.06
+    },
+    "turboquant_kv_cache": {
+      "enabled": false
+    }
+  },
+  "cacheBefore": {
+    "block_disk_cache": {
+      "blocks_on_disk": 0,
+      "disk_evictions": 0,
+      "disk_hits": 0,
+      "disk_misses": 0,
+      "disk_size_bytes": 0,
+      "disk_size_gb": 0.0,
+      "disk_writes": 0,
+      "total_accesses": 0,
+      "total_cached_tokens": 0,
+      "total_tokens_on_disk": 0
+    },
+    "cache_totals": {
+      "l2_block_tokens_on_disk": 0,
+      "l2_prompt_tokens_on_disk": 0,
+      "l2_ssm_tokens_on_disk": 0,
+      "l2_tokens_on_disk": 0,
+      "l2_tokens_on_disk_note": "store_sum_across_prompt_block_ssm_l2; tiers_may_overlap",
+      "l2_tokens_on_disk_store_sum": 0,
+      "ram_tokens_cached": 0,
+      "ssm_tokens_on_disk": 0
+    },
+    "disk_cache": {
+      "entries": 0,
+      "hit_rate": 0.0,
+      "hits": 0,
+      "max_size_gb": 10.0,
+      "misses": 0,
+      "pending_writes": 0,
+      "stores": 0,
+      "total_cached_tokens": 0,
+      "total_size_mb": 0.0,
+      "total_tokens_on_disk": 0
+    },
+    "kv_cache_quantization": {
+      "bits": 4,
+      "enabled": true,
+      "group_size": 64
+    },
+    "memory": {
+      "active_mb": 35792.0,
+      "cache_mb": 0.1,
+      "peak_mb": 35792.0
+    },
+    "native_cache": {
+      "attention_kv_storage_quantization": {
+        "applies_to": "attention_kv_layers_only",
+        "bits": 4,
+        "enabled": true,
+        "group_size": 64,
+        "mode": "storage_boundary",
+        "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+        "ssm_policy": "native_companion_state"
+      },
+      "block_disk_l2": true,
+      "cache_type": "hybrid_ssm_typed",
+      "components": [
+        "attention_kv",
+        "ssm_companion_state",
+        "async_rederive"
+      ],
+      "family": "hybrid",
+      "generic_turboquant_kv": {
+        "enabled": false,
+        "reason": "hybrid_ssm_state"
+      },
+      "kv_layer_indices": [],
+      "live_attention_tq_kv": {
+        "applies_to": "attention_kv_layers_only",
+        "attention_layers": [],
+        "companion_layers": [],
+        "enabled": false,
+        "mode": null,
+        "ssm_policy": "native_full_precision_companion_state"
+      },
+      "paged": true,
+      "prefix": true,
+      "schema": "hybrid_ssm_v1",
+      "ssm_entries": 0
+    },
+    "scheduler_cache": {
+      "active_requests": 0,
+      "allocated_blocks": 1,
+      "block_size": 64,
+      "cache_hit_rate": 0,
+      "cache_hits": 0,
+      "cache_misses": 0,
+      "cow_copies": 0,
+      "disk_hits": 0,
+      "disk_misses": 0,
+      "entries_by_type": {
+        "assistant": 0,
+        "system": 0,
+        "user": 0
+      },
+      "evictions": 0,
+      "free_blocks": 999,
+      "hit_rate": 0,
+      "hits": 0,
+      "max_blocks": 1000,
+      "misses": 0,
+      "shared_blocks": 0,
+      "tokens_saved": 0,
+      "total_tokens_cached": 0,
+      "utilization": 0.001
+    },
+    "scheduler_stats": {
+      "batch_generator": {},
+      "cache_hit_requests": 0,
+      "cache_hit_tokens": 0,
+      "cache_hit_tokens_by_detail": {},
+      "cache_reuse_partial_downgrades": 0,
+      "cache_reuse_partial_tokens": 0,
+      "cache_reuse_skip_tokens": 0,
+      "cache_reuse_skips": 0,
+      "engine_path": null,
+      "ewma_ttft_seconds": 0,
+      "hybrid_kv_without_ssm_hits": 0,
+      "hybrid_kv_without_ssm_tokens": 0,
+      "last_cache_reuse_partial": null,
+      "last_cache_reuse_skip": null,
+      "last_hybrid_kv_without_ssm": null,
+      "max_running_observed": 0,
+      "max_waiting_observed": 0,
+      "num_requests_processed": 0,
+      "num_running": 0,
+      "num_waiting": 0,
+      "single_active_decode": false,
+      "total_completion_tokens": 0,
+      "total_prompt_tokens": 0
+    },
+    "ssm_companion": {
+      "disk": {
+        "budget_bytes": 10737418240,
+        "budget_gb": 10.0,
+        "bytes": 0,
+        "bytes_mb": 0.0,
+        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-container-iac-cache-_ytjzmil/block/ssm_companion",
+        "enabled": true,
+        "entries": 0,
+        "hit_rate": 0.0,
+        "hits": 0,
+        "misses": 0,
+        "stores": 0,
+        "total_cached_tokens": 0,
+        "total_tokens_on_disk": 0
+      },
+      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-container-iac-cache-_ytjzmil/block/ssm_companion",
+      "disk_enabled": true,
+      "entries": 0,
+      "max_bytes": null,
+      "max_bytes_mb": null,
+      "max_entries": 8,
+      "nbytes": 0,
+      "nbytes_mb": 0.0
+    },
+    "turboquant_kv_cache": {
+      "enabled": false
+    }
+  },
+  "engineLogTail": "INFO:vmlx_engine.models.mllm:JANG VL model loaded: /Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP\nINFO:vmlx_engine.mllm_scheduler:VLM hybrid model detected (MambaCache + KVCache layers). Mamba batching support enabled.\nINFO:vmlx_engine.block_disk_store:BlockDiskStore initialized: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-container-iac-cache-_ytjzmil/block, max_size=10.0GB, entries=0, size=0.00GB\nINFO:vmlx_engine.mllm_scheduler:VLM block disk cache enabled: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-container-iac-cache-_ytjzmil/block, max=10.0GB\nINFO:vmlx_engine.mllm_scheduler:VLM hybrid SSM companion L2 enabled: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-container-iac-cache-_ytjzmil/block/ssm_companion, max=10GB\nINFO:vmlx_engine.paged_cache:PagedCacheManager initialized: block_size=64, max_blocks=1000, max_tokens=64000\nINFO:vmlx_engine.mllm_scheduler:VLM Paged cache enabled: block_size=64, max_blocks=1000\nINFO:vmlx_engine.disk_cache:Disk cache initialized: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-container-iac-cache-_ytjzmil/prompt/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP_55fd681f4e4c, max_size=10.0GB, entries=0\nINFO:vmlx_engine.mllm_scheduler:VLM disk cache (L2) enabled: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-container-iac-cache-_ytjzmil/prompt/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP_55fd681f4e4c\nINFO:vmlx_engine.mllm_scheduler:VLM KV quant round-trip test passed: bits=4, group_size=64\nINFO:vmlx_engine.mllm_scheduler:VLM KV cache quantization enabled: turboquant-q4 (bits=4, group_size=64)\nINFO:vmlx_engine.mllm_scheduler:Runtime cache layout: model_type=qwen3_5_moe layers=40 layout=0:ArraysCache;1:ArraysCache;2:ArraysCache;3:KVCache;4:ArraysCache;5:ArraysCache;6:ArraysCache;7:KVCache;8:ArraysCache;9:ArraysCache;10:ArraysCache;11:KVCache;12:ArraysCache;13:ArraysCache;14:ArraysCache;15:KVCache;16:ArraysCache;17:ArraysCache;18:ArraysCache;19:KVCache;20:ArraysCache;21:ArraysCache;22:ArraysCache;23:KVCache;24:ArraysCache;25:ArraysCache;26:ArraysCache;27:KVCache;28:ArraysCache;29:ArraysCache;30:ArraysCache;31:KVCache;32:ArraysCache;33:ArraysCache;34:ArraysCache;35:KVCache;36:ArraysCache;37:ArraysCache;38:ArraysCache;39:KVCache\nINFO:vmlx_engine.mllm_scheduler:MLLM Scheduler initialized: cache_mode=paged, hybrid=True, zaya_cca=False, kv_quant=turboquant-q4, prompt_l2=True, block_l2=True, max_seqs=1\nINFO:vmlx_engine.mllm_scheduler:MLLM Scheduler started with max_num_seqs=1\nINFO:vmlx_engine.engine.batched:MLLM Scheduler started with continuous batching: max_num_seqs=1, prefill_batch=512, completion_batch=512\nINFO:vmlx_engine.engine.batched:BatchedEngine loaded: /Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP (mllm=True)\nERROR:__main__:Failed to discover MCP config \u2014 continuing without MCP: No module named 'vmlx_engine.mcp'\nINFO:     Application startup complete.\nINFO:     Uvicorn running on http://127.0.0.1:54424 (Press CTRL+C to quit)\nINFO:     127.0.0.1:54435 - \"GET /health HTTP/1.1\" 200 OK\nWARNING:__main__:SECURITY WARNING: Server running without API key authentication. Anyone can access the API. Use --api-key to enable authentication.\nINFO:     127.0.0.1:54436 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nINFO:__main__:Request model 'mock-qwen-jang' differs from served model 'dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP' \u2014 using loaded model (single-model server). This is expected when routing tools like Claude Code, opencode, or CCSwitch at vMLX \u2014 they send their own model alias.\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 256, 'enable_thinking': False}\nINFO:     127.0.0.1:54448 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nINFO:vmlx_engine.mllm_batch_generator:MLLMBatchGenerator: Using VLM's language_model for batched generation\nINFO:vmlx_engine.mllm_batch_generator:MLLMBatchGenerator: Vision cache enabled (size=16)\nINFO:vmlx_engine.mllm_batch_generator:Metal cache limit set to 26.88GB (max_ws=107.5GB, active=35.0GB, free=72.6GB; base=26.88GB safety=36.28GB; mlxstudio#78)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-59026165 (30 layers, key=3776 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-59026165 (30 layers, key=3815 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-59026165 (30 layers, 3776-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-59026165 (30 layers, 3815-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-59026165 depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-59026165] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.083,d3=0.000]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-59026165] finish=length cycles=155 accepted=100/179 (55.9%) emits[init=2,draft=100,bonus=96,verify=58]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-59026165] accept_by_depth[d1=99/155,d2=1/12,d3=0/12] forwards[seed_main=1,verify_main=155,replay_main=58,mtp=180]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-59026165] timings_ms[verify=542.24 sample=2982.93 draft=782.03 snapshot=5.21 restore=4.70 replay=138.15 materialize=0.85 avg_cycle=28.75]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=3815, num_new_blocks=60, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 10 positional layers (out of 40 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 1 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 3 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 4 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 5 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 6 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 7 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 8 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 9 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 10 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 11 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 12 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 13 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 14 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 15 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 16 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 17 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 18 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 19 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 20 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 21 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 22 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 23 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 24 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 25 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 26 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 27 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 28 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 29 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 30 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 31 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 32 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 33 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 34 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 35 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 36 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 37 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 38 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 39 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 40 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 41 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 42 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 43 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 44 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 45 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 46 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 47 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 48 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 49 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 50 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 51 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 52 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 53 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 54 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 55 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 56 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 57 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 58 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 59 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 60 (10 kv layers, cumulative=30, 39 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 60 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-59026165: 40 layers, truncated to 3815 tokens\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 256, 'enable_thinking': False}\nINFO:     127.0.0.1:54503 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-72ee070a: 12 blocks, 768 tokens\nINFO:vmlx_engine.utils.ssm_companion_cache:SSM fetch MISS: N=768 hash=f6330278db42 store_size=2 store_keys[:3]=['b38641e78e45', 'e992ddd71151']\nINFO:vmlx_engine.mllm_batch_generator:VLM prefix cache MISS for chatcmpl-72ee070a: 768 KV blocks found but no SSM companion state \u2014 full prefill required\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-72ee070a (30 layers, key=768 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-72ee070a (30 layers, key=4864 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-72ee070a (30 layers, key=4882 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-72ee070a (30 layers, 768-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-72ee070a (30 layers, 4864-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-72ee070a (30 layers, 4882-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-72ee070a depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-72ee070a] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.083,d3=0.083]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-72ee070a] finish=stop cycles=97 accepted=43/121 (35.5%) emits[init=2,draft=43,bonus=40,verify=56]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-72ee070a] accept_by_depth[d1=41/97,d2=1/12,d3=1/12] forwards[seed_main=1,verify_main=97,replay_main=56,mtp=122]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-72ee070a] timings_ms[verify=342.73 sample=1940.09 draft=738.37 snapshot=3.38 restore=4.60 replay=132.32 materialize=0.54 avg_cycle=32.60]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=4114, num_new_blocks=65, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 10 positional layers (out of 40 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 61 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 62 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 63 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 64 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 65 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 66 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 67 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 68 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 69 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 70 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 71 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 72 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 73 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 74 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 75 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 76 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 77 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 78 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 79 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 80 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 81 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 82 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 83 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 84 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 85 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 86 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 87 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 88 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 89 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 90 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 91 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 92 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 93 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 94 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 95 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 96 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 97 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 98 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 99 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 100 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 101 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 102 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 103 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 104 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 105 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 106 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 107 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 108 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 109 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 110 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 111 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 112 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 113 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 114 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 115 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 116 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 117 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 118 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 119 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 120 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 121 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 122 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 123 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 124 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 125 (10 kv layers, cumulative=30, 18 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 65 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-72ee070a: 40 layers, truncated to 4882 tokens\nINFO:     127.0.0.1:54568 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nINFO:     Shutting down\nINFO:     Waiting for application shutdown.\nINFO:vmlx_engine.mllm_scheduler:MLLM Scheduler stopped\nINFO:vmlx_engine.engine.batched:BatchedEngine stopped\nINFO:__main__:Engine stopped\nINFO:__main__:Caffeinate process terminated\nINFO:     Application shutdown complete.\nINFO:     Finished server process [20040]",
+  "expectedToolSequence": [
+    "run_shell",
+    "syft",
+    "grype",
+    "trivy",
+    "checkov",
+    "search_cve"
+  ],
+  "finalAnswerAttempts": [
+    {
+      "attempt": 1,
+      "note": "assistant marker reached",
+      "status": "success"
+    },
+    {
+      "attempt": "second-model-turn-1",
+      "note": "assistant second marker reached",
+      "status": "success"
+    }
+  ],
+  "finishedAt": "2026-07-06T14:04:29-0700",
+  "fixturePath": "/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac",
+  "generatedAt": "2026-07-06T14:04:29-0700",
+  "health": {
+    "acceleration": {
+      "host": {
+        "brand": "Apple M5 Max",
+        "reason": null,
+        "supported": true
+      },
+      "kernel_type": "affine_quantized_matmul",
+      "metal_na_active_on_host": true,
+      "metal_na_capable": true,
+      "metal_na_symbols": {
+        "affine_gather_qmm_symbols": 3456,
+        "affine_qmm_symbols": 4212,
+        "available": true,
+        "nax_symbols": 4668,
+        "naxtile_symbols": 4154
+      },
+      "reason": null
+    },
+    "cache": {
+      "block_disk_cache": {
+        "blocks_on_disk": 0,
+        "disk_evictions": 0,
+        "disk_hits": 0,
+        "disk_misses": 0,
+        "disk_size_bytes": 0,
+        "disk_size_gb": 0.0,
+        "disk_writes": 0,
+        "total_accesses": 0,
+        "total_cached_tokens": 0,
+        "total_tokens_on_disk": 0
+      },
+      "disk_cache": {
+        "entries": 0,
+        "hit_rate": 0.0,
+        "hits": 0,
+        "max_size_gb": 10.0,
+        "misses": 0,
+        "pending_writes": 0,
+        "stores": 0,
+        "total_cached_tokens": 0,
+        "total_size_mb": 0.0,
+        "total_tokens_on_disk": 0
+      },
+      "scheduler_cache": {
+        "active_requests": 0,
+        "allocated_blocks": 1,
+        "block_size": 64,
+        "cache_hit_rate": 0,
+        "cache_hits": 0,
+        "cache_misses": 0,
+        "cow_copies": 0,
+        "disk_hits": 0,
+        "disk_misses": 0,
+        "entries_by_type": {
+          "assistant": 0,
+          "system": 0,
+          "user": 0
+        },
+        "evictions": 0,
+        "free_blocks": 999,
+        "hit_rate": 0,
+        "hits": 0,
+        "max_blocks": 1000,
+        "misses": 0,
+        "shared_blocks": 0,
+        "tokens_saved": 0,
+        "total_tokens_cached": 0,
+        "utilization": 0.001
+      },
+      "ssm_companion": {
+        "disk": {
+          "budget_bytes": 10737418240,
+          "budget_gb": 10.0,
+          "bytes": 0,
+          "bytes_mb": 0.0,
+          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-container-iac-cache-_ytjzmil/block/ssm_companion",
+          "enabled": true,
+          "entries": 0,
+          "hit_rate": 0.0,
+          "hits": 0,
+          "misses": 0,
+          "stores": 0,
+          "total_cached_tokens": 0,
+          "total_tokens_on_disk": 0
+        },
+        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-container-iac-cache-_ytjzmil/block/ssm_companion",
+        "disk_enabled": true,
+        "entries": 0,
+        "max_bytes": null,
+        "max_bytes_mb": null,
+        "max_entries": 8,
+        "nbytes": 0,
+        "nbytes_mb": 0.0
+      },
+      "totals": {
+        "l2_block_tokens_on_disk": 0,
+        "l2_prompt_tokens_on_disk": 0,
+        "l2_ssm_tokens_on_disk": 0,
+        "l2_tokens_on_disk": 0,
+        "l2_tokens_on_disk_note": "store_sum_across_prompt_block_ssm_l2; tiers_may_overlap",
+        "l2_tokens_on_disk_store_sum": 0,
+        "ram_tokens_cached": 0,
+        "ssm_tokens_on_disk": 0
+      }
+    },
+    "effective_config": {
+      "cache": {
+        "disk_cache": {
+          "block_l2": {
+            "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-container-iac-cache-_ytjzmil/block",
+            "enabled": true,
+            "max_gb": 10.0
+          },
+          "prompt_l2": {
+            "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-container-iac-cache-_ytjzmil/prompt",
+            "enabled": true,
+            "max_gb": 10.0
+          }
+        },
+        "kv_cache_quantization": {
+          "enabled": true,
+          "group_size": 64,
+          "mode": "turboquant-q4"
+        },
+        "paged_cache": {
+          "block_size": 64,
+          "enabled": true
+        },
+        "prefix_cache": {
+          "enabled": true,
+          "memory_percent": 0.2
+        },
+        "responses": {
+          "clears_conversation_state_only": true,
+          "method": "prefix-cache-l2-turboquant",
+          "new_context_preserves_engine_session": true,
+          "prefix_cache_required": true
+        },
+        "ssm_companion": {
+          "disk_l2_enabled": true,
+          "enabled": true,
+          "max_entries": 8,
+          "max_mb": null
+        },
+        "topology": {
+          "block_l2_active": true,
+          "cache_type": "hybrid",
+          "expected_components": [
+            "kv_cache",
+            "prefix_cache",
+            "prompt_l2",
+            "paged_cache",
+            "block_l2",
+            "kv_quantization",
+            "ssm_companion",
+            "ssm_l2"
+          ],
+          "kv_quantization_active": true,
+          "name": "hybrid_ssm_attention",
+          "prompt_l2_active": true,
+          "ssm_companion_required": true,
+          "warnings": []
+        }
+      },
+      "generation": {
+        "chat_template_kwargs": null,
+        "custom_chat_template": false,
+        "enable_thinking": true,
+        "max_tokens": 256,
+        "min_p": null,
+        "repetition_penalty": null,
+        "stop": null,
+        "temperature": 1.0,
+        "top_k": 20,
+        "top_p": 0.95
+      },
+      "model": {
+        "architecture_hints": {
+          "cache_topology": "hybrid_ssm_attention",
+          "ssm_companion_required": true
+        },
+        "cache_type": "hybrid",
+        "family": "qwen3_5_moe",
+        "name": "dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+        "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+        "served_name": null,
+        "type": "text"
+      },
+      "parsers": {
+        "auto_tool_choice": true,
+        "reasoning": "qwen3",
+        "tool_call": "qwen"
+      },
+      "sources": {
+        "generation": {
+          "chat_template_kwargs": "unset",
+          "enable_thinking": "launcher_default",
+          "max_tokens": "cli",
+          "min_p": "unset",
+          "repetition_penalty": "unset",
+          "stop": "unset",
+          "temperature": "generation_config",
+          "top_k": "generation_config",
+          "top_p": "generation_config"
+        },
+        "parsers": {
+          "reasoning": "cli",
+          "tool_call": "cli"
+        }
+      }
+    },
+    "engine_type": "batched",
+    "kv_cache_quantization": {
+      "bits": 4,
+      "enabled": true,
+      "group_size": 64
+    },
+    "last_request_time": null,
+    "mcp": null,
+    "memory": {
+      "active_mb": 35792.0,
+      "cache_mb": 0.1,
+      "peak_mb": 35792.0
+    },
+    "model_loaded": true,
+    "model_name": "dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+    "model_type": "mllm",
+    "mtp": {
+      "artifact_available": true,
+      "cache_type": "hybrid",
+      "config_mtp_layer_source": "config.text_config.mtp_num_hidden_layers",
+      "config_num_nextn_predict_layers": 1,
+      "effective_depth": 3,
+      "effective_depth_source": "default",
+      "family": "qwen3_5_moe",
+      "has_vision_config": true,
+      "has_vision_weights": true,
+      "index_has_mtp_tensors": true,
+      "index_mtp_layer_count": 1,
+      "issues": [],
+      "jang_drop_mtp": null,
+      "jang_mtp_layers": 1,
+      "mtp_tensor_count": 31,
+      "request_gate": "temperature=0,repetition_penalty=1.0",
+      "request_policy": "compatible-only",
+      "runtime_active": true,
+      "runtime_available": true,
+      "runtime_bundle_has_mtp": true,
+      "runtime_mtp_mode": "preserved_enabled",
+      "runtime_reason": "native MTP runtime is active for text+vl",
+      "runtime_scope": "text+vl",
+      "runtime_supported": true,
+      "runtime_validation_blocked": false,
+      "status": "native_runtime_active",
+      "vision_tensor_count": 333,
+      "vl_runtime_available": true
+    },
+    "native_cache": {
+      "attention_kv_storage_quantization": {
+        "applies_to": "attention_kv_layers_only",
+        "bits": 4,
+        "enabled": true,
+        "group_size": 64,
+        "mode": "storage_boundary",
+        "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+        "ssm_policy": "native_companion_state"
+      },
+      "block_disk_l2": true,
+      "cache_type": "hybrid_ssm_typed",
+      "components": [
+        "attention_kv",
+        "ssm_companion_state",
+        "async_rederive"
+      ],
+      "family": "hybrid",
+      "generic_turboquant_kv": {
+        "enabled": false,
+        "reason": "hybrid_ssm_state"
+      },
+      "kv_layer_indices": [],
+      "live_attention_tq_kv": {
+        "applies_to": "attention_kv_layers_only",
+        "attention_layers": [],
+        "companion_layers": [],
+        "enabled": false,
+        "mode": null,
+        "ssm_policy": "native_full_precision_companion_state"
+      },
+      "paged": true,
+      "prefix": true,
+      "schema": "hybrid_ssm_v1",
+      "ssm_entries": 0
+    },
+    "quantization": {
+      "backend": "mx.quantize",
+      "codec": "affine_quantized_matmul",
+      "config_bits": 8,
+      "group_size": 32,
+      "passthrough_bit_widths_used": [
+        16
+      ],
+      "passthrough_tensor_count": 643,
+      "profile": "MXFP8",
+      "sidecar": {
+        "jang_config": true,
+        "jangtq_runtime": false,
+        "prestacked_bundle": false
+      },
+      "target_bits": 8,
+      "weight_format": "mxfp8",
+      "weight_index": {
+        "index_file": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP/model.safetensors.index.json",
+        "mtp_tensor_count": 31,
+        "routed_layout_counts": {
+          "prestacked_switch": 246,
+          "split_expert": 0
+        },
+        "suffix_counts": {
+          "scales": 443,
+          "weight": 860
+        },
+        "total_tensors": 1529,
+        "tq_target_counts": {}
+      },
+      "weight_matmul_dispatch": {
+        "metal_na_eligible": true,
+        "primary": "mlx_affine_quantized_matmul",
+        "reason": null,
+        "uses_mlx_quantized_matmul": true
+      }
+    },
+    "quantization_format": {
+      "actual_bits": null,
+      "block_size": 64,
+      "target_bits": null,
+      "type": "jang"
+    },
+    "routing": {
+      "effective_active_experts": 8,
+      "effective_active_experts_source": "trained_default",
+      "n_routed_experts": 256,
+      "override_env": null,
+      "trained_active_experts": 8,
+      "trained_active_experts_source": "config.text_config.num_experts_per_tok"
+    },
+    "scheduler": {
+      "batch_generator": {},
+      "cache_hit_requests": 0,
+      "cache_hit_tokens": 0,
+      "cache_hit_tokens_by_detail": {},
+      "cache_reuse_partial_downgrades": 0,
+      "cache_reuse_partial_tokens": 0,
+      "cache_reuse_skip_tokens": 0,
+      "cache_reuse_skips": 0,
+      "engine_path": null,
+      "ewma_ttft_seconds": 0,
+      "hybrid_kv_without_ssm_hits": 0,
+      "hybrid_kv_without_ssm_tokens": 0,
+      "last_cache_reuse_partial": null,
+      "last_cache_reuse_skip": null,
+      "last_hybrid_kv_without_ssm": null,
+      "max_running_observed": 0,
+      "max_waiting_observed": 0,
+      "num_running": 0,
+      "num_waiting": 0,
+      "single_active_decode": false
+    },
+    "status": "healthy",
+    "turboquant_kv_cache": {
+      "enabled": false
+    }
+  },
+  "memoryPreflight": {
+    "allowConcurrentModel": false,
+    "availableGB": 100.03802490234375,
+    "enabled": true,
+    "heavyModelProcessCount": 0,
+    "heavyModelProcesses": [],
+    "requiredAvailableGB": 50.0
+  },
+  "messages": [
+    {
+      "content": "Authorized local container/IaC lab only. Reasoning is off. Use only this throwaway local fixture path and no external targets or registries: /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac. Surface Dockerfile and Kubernetes files, run SBOM/vulnerability/IaC scanners, prove nginx:1.16, CVE-2019-20372, CKV_K8S_20, EXPLOITBOT_CONTAINER_IAC_PROOF, and allowPrivilegeEscalation: true, then summarize evidence for the report. Emit these exact Qwen XML tool calls now, with valid JSON",
+      "role": "user"
+    },
+    {
+      "content": "direct prompt-specified exact tool-call fallback",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 0 of 0 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets: none yet.\nCVE assist: semantic embedding search is enabled when cve_embedder.py and stored CVE embeddings are available; oth",
+      "contextSnippetCount": 0,
+      "role": "assistant",
+      "toolSchemaCount": 42,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "run_shell",
+        "trivy",
+        "semgrep",
+        "checkov",
+        "nuclei",
+        "syft",
+        "osv_scanner",
+        "bandit",
+        "gowitness",
+        "httpx",
+        "theharvester",
+        "grype",
+        "jwt_tool",
+        "exiftool",
+        "nmap",
+        "metasploit",
+        "sherlock",
+        "trufflehog",
+        "pwncat",
+        "sqlmap",
+        "linpeas",
+        "dnsx",
+        "feroxbuster",
+        "dalfox",
+        "hashcat",
+        "graphqlmap",
+        "netexec",
+        "tshark",
+        "masscan",
+        "wpscan",
+        "katana",
+        "ffuf",
+        "haiti",
+        "subfinder",
+        "hydra",
+        "snmpwalk",
+        "bettercap",
+        "chisel",
+        "sliver"
+      ]
+    },
+    {
+      "content": "Tool request: run_shell\n$ /bin/zsh -c find /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -maxdepth 3 -type f | sort && grep -R \"EXPLOITBOT_CONTAINER_IAC_PROOF\\|nginx:1.16\\|allowPrivilegeEscalation: true\" -n /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac\nArguments:\n{\n  \"command\" : \"find \\/tmp\\/exploitbot-autonomous-scenario-fixtures\\/synthetic-container-iac -maxdepth 3 -type f | sort && grep -R \\\"EXPLOITBOT_CONTAINER_IAC_PROOF\\\\|nginx:1.16\\\\|allowPrivilegeEscalation: true\\\" -n \\/tmp\\/exploitbot-autonomous-scenario-fixtures\\/synthetic-container-iac\"\n}\n\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/Dockerfile\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/docker-compose.yml\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/k8s/deployment.yaml\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/Dockerfile:1:FROM nginx:1.16\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/Dockerfile:2:LABEL proof=EXPLOITBOT_CONTAINER_IAC_PROOF\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/k8s/deployment.yaml:10:          image: nginx:1.16\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/k8s/deployment.yaml:12:            allowPrivilegeEscalation: true\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/docker-compose.yml:3:    image: nginx:1.16\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "run_shell"
+    },
+    {
+      "content": "Tool request: syft\n$ syft /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -o json\nArguments:\n{\n  \"output\" : \"json\",\n  \"target\" : \"\\/tmp\\/exploitbot-autonomous-scenario-fixtures\\/synthetic-container-iac\"\n}\n\n{\"source\": {\"target\": \"synthetic-container-iac\"}, \"artifacts\": [{\"name\": \"nginx\", \"version\": \"1.16\", \"type\": \"deb\"}, {\"name\": \"openssl\", \"version\": \"1.1.1\", \"type\": \"deb\"}]}\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "syft"
+    },
+    {
+      "content": "Tool request: grype\n$ grype /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -o json --fail-on high\nArguments:\n{\n  \"fail_on\" : \"high\",\n  \"target\" : \"\\/tmp\\/exploitbot-autonomous-scenario-fixtures\\/synthetic-container-iac\"\n}\n\n{\"matches\": [{\"vulnerability\": {\"id\": \"CVE-2019-20372\", \"severity\": \"High\"}, \"artifact\": {\"name\": \"nginx\", \"version\": \"1.16\"}}]}\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "grype"
+    },
+    {
+      "content": "Tool request: trivy\n$ trivy fs --format json --quiet --severity HIGH,CRITICAL /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac\nArguments:\n{\n  \"scan_type\" : \"fs\",\n  \"severity\" : \"HIGH,CRITICAL\",\n  \"target\" : \"\\/tmp\\/exploitbot-autonomous-scenario-fixtures\\/synthetic-container-iac\"\n}\n\n{\"Results\": [{\"Target\": \"Dockerfile\", \"Vulnerabilities\": [{\"VulnerabilityID\": \"CVE-2019-20372\", \"PkgName\": \"nginx\", \"InstalledVersion\": \"1.16\", \"Severity\": \"HIGH\", \"Title\": \"nginx vulnerable image package\", \"Description\": \"nginx:1.16 package evidence for EXPLOITBOT_CONTAINER_IAC_PROOF\"}]}, {\"Target\": \"k8s/deployment.yaml\", \"Misconfigurations\": [{\"ID\": \"AVD-KSV-0012\", \"Title\": \"Container allows privilege escalation\", \"Severity\": \"HIGH\", \"Message\": \"allowPrivilegeEscalation: true is present in the local Kubernetes fixture\"}]}]}\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "trivy"
+    },
+    {
+      "content": "Tool request: checkov\n$ checkov -d /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -o json --quiet --framework kubernetes\nArguments:\n{\n  \"framework\" : \"kubernetes\",\n  \"target\" : \"\\/tmp\\/exploitbot-autonomous-scenario-fixtures\\/synthetic-container-iac\"\n}\n\n{\"results\": {\"failed_checks\": [{\"check_id\": \"CKV_K8S_20\", \"check_name\": \"Containers should not run with allowPrivilegeEscalation\", \"file_path\": \"/k8s/deployment.yaml\", \"resource\": \"Deployment.exploitbot-container-iac-proof.web\", \"severity\": \"HIGH\", \"guideline\": \"Set securityContext.allowPrivilegeEscalation to false for the local fixture workload.\"}]}}\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "checkov"
+    },
+    {
+      "content": "Tool request: search_cve\n$ echo handled by callback\nArguments:\n{\n  \"max_results\" : 5,\n  \"query\" : \"CVE-2019-20372 nginx 1.16 container\",\n  \"tags\" : \"container,nginx,cve\"\n}\n\nNo CVEs found for query: CVE-2019-20372 nginx 1.16 container",
+      "role": "toolCall",
+      "status": "ok 0.1s",
+      "tool": "search_cve"
+    },
+    {
+      "content": "REAL_QWEN_CONTAINER_IAC_SUPPLY_CHAIN_FINAL\n**Evidence Summary**\n1.  **Scope & Artifacts**:\n    *   Target: `/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac`\n    *   Files: `Dockerfile`, `docker-compose.yml`, `k8s/deployment.yaml`\n    *   Proof Label: `EXPLOITBOT_CONTAINER_IAC_PROOF` found in `Dockerfile:2`.\n2.  **SBOM (syft)**:\n    *   Identified `nginx:1.16` (deb) and `openssl:1.1.1` (deb).\n3.  **Vulnerability Scanning (grype & trivy)**:\n    *   **grype**: Matched `CVE-2019",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 12 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=6 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] trivy tags=tool,trivy: {\"Results\": [{\"Target\": \"Dockerfile\", \"Vulnerabilities\": [{\"VulnerabilityID\": \"CVE-2",
+      "contextSelections": [
+        {
+          "bodyHash": "a80450e75459f0bd",
+          "source": "tool.output",
+          "tags": "tool,trivy",
+          "title": "trivy"
+        },
+        {
+          "bodyHash": "3e78dd54d819f622",
+          "source": "tool.output",
+          "tags": "tool,checkov",
+          "title": "checkov"
+        },
+        {
+          "bodyHash": "a96a1fb5cdcdbff9",
+          "source": "finding",
+          "tags": "vuln,high,checkov,iac,policy,checkov,ckv_k8s_20",
+          "title": "HIGH CKV_K8S_20 Containers should not run with allowPrivilegeEscalation"
+        },
+        {
+          "bodyHash": "0737b9c415ce27b1",
+          "source": "tool.output",
+          "tags": "tool,run_shell",
+          "title": "run_shell"
+        }
+      ],
+      "contextSnippetCount": 4,
+      "role": "assistant"
+    },
+    {
+      "content": "Do not call tools, do not use shell, do not emit XML, and do not emit JSON. Use only the existing transcript evidence. Reply as plain text in one concise sentence that starts with this exact marker: REAL_QWEN_CONTAINER_IAC_SUPPLY_CHAIN_SECOND_TURN. Mention EXPLOITBOT_CONTAINER_IAC_PROOF, CVE-2019-20372, CKV_K8S_20, allowPrivilegeEscalation: true, trivyEvidence, checkovEvidence, and local container/IaC evidence.",
+      "role": "user"
+    },
+    {
+      "content": "REAL_QWEN_CONTAINER_IAC_SUPPLY_CHAIN_SECOND_TURN\nLeveraging the local fixture at `/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac`, we confirmed `EXPLOITBOT_CONTAINER_IAC_PROOF` via `Dockerfile` labels, validated `nginx:1.16` through`syft` and `grype`, and correlated `CVE-2019-20372` (High) and `CKV_K8S_20` (`allowPrivilegeEscalation: true`) using `trivyEvidence` and `checkovEvidence` respectively, proving the container/IaC attack surface.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 12 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=6 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [finding] HIGH CKV_K8S_20 Containers should not run with allowPrivilegeEscalation tags=vuln,high,checkov,iac,policy,check",
+      "contextSelections": [
+        {
+          "bodyHash": "a96a1fb5cdcdbff9",
+          "source": "finding",
+          "tags": "vuln,high,checkov,iac,policy,checkov,ckv_k8s_20",
+          "title": "HIGH CKV_K8S_20 Containers should not run with allowPrivilegeEscalation"
+        },
+        {
+          "bodyHash": "0f5f33b24fd5c5d0",
+          "source": "finding",
+          "tags": "vuln,high,trivy,container,supply-chain,trivy,nginx,CVE-2019-20372",
+          "title": "HIGH CVE-2019-20372"
+        },
+        {
+          "bodyHash": "a80450e75459f0bd",
+          "source": "tool.output",
+          "tags": "tool,trivy",
+          "title": "trivy"
+        },
+        {
+          "bodyHash": "3e78dd54d819f622",
+          "source": "tool.output",
+          "tags": "tool,checkov",
+          "title": "checkov"
+        }
+      ],
+      "contextSnippetCount": 4,
+      "role": "assistant",
+      "toolSchemaCount": 4,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "run_shell"
+      ]
+    }
+  ],
+  "model": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+  "modelLoadAttempted": true,
+  "notes": [
+    "This proof uses a throwaway local container/IaC fixture and deterministic local syft/grype/trivy/checkov/search_cve tool shims on isolated PATH.",
+    "The model endpoint is a real Qwen app engine route; scanner outputs are local fixtures for deterministic safety.",
+    "PASS requires q4 TurboQuant KV, hybrid_ssm_typed native cache, paged cache, prefix cache, block disk cache, and SSM rederive without failures.",
+    "No Docker daemon, privileged container, external registry, or external target is used."
+  ],
+  "ok": true,
+  "preflightToolCatalog": {
+    "count": 42,
+    "ok": true,
+    "toolNames": [
+      "search_cve",
+      "lookup_cve",
+      "search_context",
+      "run_shell",
+      "trivy",
+      "semgrep",
+      "checkov",
+      "nuclei",
+      "syft",
+      "osv_scanner",
+      "bandit",
+      "gowitness",
+      "httpx",
+      "theharvester",
+      "grype",
+      "jwt_tool",
+      "exiftool",
+      "nmap",
+      "metasploit",
+      "sherlock",
+      "trufflehog",
+      "pwncat",
+      "sqlmap",
+      "linpeas",
+      "dnsx",
+      "feroxbuster",
+      "dalfox",
+      "hashcat",
+      "graphqlmap",
+      "netexec",
+      "tshark",
+      "masscan",
+      "wpscan",
+      "katana",
+      "ffuf",
+      "haiti",
+      "subfinder",
+      "hydra",
+      "snmpwalk",
+      "bettercap",
+      "chisel",
+      "sliver"
+    ]
+  },
+  "proofLevel": "live-app-real-qwen-real-tool-loop-local-container-iac-fixture",
+  "proofType": "real-qwen-container-iac-supply-chain",
+  "reportRenderActions": {
+    "findingCount": 1,
+    "htmlChars": 3559,
+    "htmlPreview": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n<style>\nbody { font-family: Georgia, serif; font-size: 13px; line-height: 1.7; color: #1a1a1a; max-width: 800px; margin: 40px auto; padding: 0 20px; }\nh1 { font-family: -apple-system, sans-serif; font-size: 22px; margin-bottom: 4px; }\nh2 { font-family: -apple-system, sans-serif; font-size: 16px; margin-top: 24px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }\nh3 { font-family: -apple-system, sans-serif; font-size: 14px; margin-top: 16px; }\n.confidential { text-align: center; font-family: monospace; font-size: 10px; letter-spacing: 3px; color: #999; text-transform: uppercase; margin-bottom: 30px; }\n.meta { font-size: 11px; color: #888; font-family: monospace; margin-bottom: 20px; }\ntable { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; }\nth { background: #f5f5f5; border-bottom: 2px solid #ddd; padding: 6px 10px; text-align: left; font-family: -apple-system, sans-serif; }\ntd { padding: 6px 10px; border-bottom: 1px solid #eee; }\n.finding { border: 1px solid #ddd; border-radius: 6px; padding: 12px; margin: 10px 0; }\n.finding.critical { border-left: 4px solid #ef4444; }\n.finding.high { border-left: 4px solid #f97316; }\n.finding.medium { border-left: 4px solid #f59e0b; }\n.finding.low { border-left: 4px solid #3b82f6; }\n.sev { font-family: monospace; font-size: 10px; font-weight: bold; padding: 1px 6px; border-radius: 3px; }\n.sev.critical { background: #fef2f2; color: #dc2626; }\n.sev.high { background: #fff7ed; color: #ea580c; }\n.sev.medium { background: #fffbeb; color: #d97706; }\n.sev.low { background: #eff6ff; color: #2563eb; }\ncode { font-family: monospace; font-size: 11px; background: #f0f0f0; padding: 1px 4px; border-radius: 2px; }\n@media print { body { margin: 0; } .finding { break-inside: avoid; } }\n</style>\n</head>\n<body>\n<div class=\"confidential\">CONFIDENTIAL</div>\n<h1>Penetration Test Report</h1>\n<div class=\"meta\">\nClient: Unknown<br>\nAssessment Date: July 6, 2026<br>\nAssessor: exploitbot (autonomous)<br>\nClassification: Confidential\n</div>\n\n<h2>1. Executive Summary</h2>\n<p>A penetration test was conducted against <strong>Unknown</strong>. The assessment identified <strong>1 vulnerabilities</strong> including 0 critical, 1 high, 0 medium, and 0 low severity findings.</p>\n\n<h2>2. Findings Summary</h2>\n<table>\n<tr><th>#</th><th>Finding</th><th>Severity</th><th>CVSS</th><th>Target</th><th>Status</th></tr>\n<tr><td>1</td><td>Container and Kubernetes IaC risk in local fixture</td><td><span class=\"sev high\">HIGH</span></td><td>8.0</td><td><code>/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/Dockerfile and k8s/deployment.yaml</code></td><td>confirmed</td></tr>\n</table>\n\n<h2>3. Detailed Findings</h2>\n<div class=\"finding high\">\n<h3><span class=\"sev high\">HIGH</span> Container and Kubernetes IaC risk in local fixture</h3>\n<p><strong>Target:</strong> <code>/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/Dockerfile and k8s/deployment.yaml</code></p>\n<p><strong>CVSS:</strong> 8.0</p>\n<p><strong>CVE:</strong> CVE-2019-20372</p>\n<p><strong>Description:</strong> The local fixture uses nginx:1.16 and permits allowPrivilegeEscalation: true. EXPLOITBOT_CONTAINER_IAC_PROOF</p>\n<h3>Impact</h3><p>A vulnerable image tag combined with permissive container security context increases exploit blast radius.</p>\n<h3>Remediation</h3><p>Use a patched image tag, pin digest provenance, set allowPrivilegeEscalation false, and enforce least-privilege pod security controls.</p>\n</div>\n\n</body>\n</html>",
+    "lastAction": "generate",
+    "status": "done",
+    "summary": "generateReport 1 findings",
+    "template": "Full Pentest Report"
+  },
+  "results": {
+    "creds": [],
+    "osint": [],
+    "ports": [],
+    "postAttribution": [],
+    "rawResults": [
+      {
+        "outputPreview": "/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/Dockerfile\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/docker-compose.yml\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/k8s/deployment.yaml\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/Dockerfile:1:FROM nginx:1.16\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/Dockerfile:2:LABEL proof=EXPLOITBOT_CONTAINER_IAC_PROOF\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/k8s/deployment.yaml:10:          image: nginx:1.16\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/k8s/deployment.yaml:12:            allowPrivilegeEscalation: true\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/docker-compose.yml:3:    image: nginx:1.16\n",
+        "timestamp": 1783371845.60422,
+        "tool": "run_shell"
+      },
+      {
+        "outputPreview": "{\"source\": {\"target\": \"synthetic-container-iac\"}, \"artifacts\": [{\"name\": \"nginx\", \"version\": \"1.16\", \"type\": \"deb\"}, {\"name\": \"openssl\", \"version\": \"1.1.1\", \"type\": \"deb\"}]}\n",
+        "timestamp": 1783371845.625212,
+        "tool": "syft"
+      },
+      {
+        "outputPreview": "{\"matches\": [{\"vulnerability\": {\"id\": \"CVE-2019-20372\", \"severity\": \"High\"}, \"artifact\": {\"name\": \"nginx\", \"version\": \"1.16\"}}]}\n",
+        "timestamp": 1783371845.646327,
+        "tool": "grype"
+      },
+      {
+        "outputPreview": "{\"Results\": [{\"Target\": \"Dockerfile\", \"Vulnerabilities\": [{\"VulnerabilityID\": \"CVE-2019-20372\", \"PkgName\": \"nginx\", \"InstalledVersion\": \"1.16\", \"Severity\": \"HIGH\", \"Title\": \"nginx vulnerable image package\", \"Description\": \"nginx:1.16 package evidence for EXPLOITBOT_CONTAINER_IAC_PROOF\"}]}, {\"Target\": \"k8s/deployment.yaml\", \"Misconfigurations\": [{\"ID\": \"AVD-KSV-0012\", \"Title\": \"Container allows privilege escalation\", \"Severity\": \"HIGH\", \"Message\": \"allowPrivilegeEscalation: true is present in the local Kubernetes fixture\"}]}]}\n",
+        "timestamp": 1783371845.66775,
+        "tool": "trivy"
+      },
+      {
+        "outputPreview": "{\"results\": {\"failed_checks\": [{\"check_id\": \"CKV_K8S_20\", \"check_name\": \"Containers should not run with allowPrivilegeEscalation\", \"file_path\": \"/k8s/deployment.yaml\", \"resource\": \"Deployment.exploitbot-container-iac-proof.web\", \"severity\": \"HIGH\", \"guideline\": \"Set securityContext.allowPrivilegeEscalation to false for the local fixture workload.\"}]}}\n",
+        "timestamp": 1783371845.690256,
+        "tool": "checkov"
+      },
+      {
+        "outputPreview": "No CVEs found for query: CVE-2019-20372 nginx 1.16 container",
+        "timestamp": 1783371845.691036,
+        "tool": "search_cve"
+      }
+    ],
+    "subdomains": [],
+    "vulns": [
+      {
+        "cve": "",
+        "cvss": 0,
+        "description": "nginx 1.16 deb",
+        "severity": "info",
+        "source": "syft",
+        "tags": [
+          "sbom",
+          "dependency",
+          "deb"
+        ],
+        "target": "synthetic-container-iac",
+        "title": "SBOM Component: nginx"
+      },
+      {
+        "cve": "",
+        "cvss": 0,
+        "description": "openssl 1.1.1 deb",
+        "severity": "info",
+        "source": "syft",
+        "tags": [
+          "sbom",
+          "dependency",
+          "deb"
+        ],
+        "target": "synthetic-container-iac",
+        "title": "SBOM Component: openssl"
+      },
+      {
+        "cve": "CVE-2019-20372",
+        "cvss": 8.1,
+        "description": "Vulnerable dependency nginx 1.16 reported by grype as CVE-2019-20372.",
+        "severity": "high",
+        "source": "grype",
+        "tags": [
+          "dependency",
+          "supply-chain",
+          "grype"
+        ],
+        "target": "nginx@1.16",
+        "title": "CVE-2019-20372"
+      },
+      {
+        "cve": "CVE-2019-20372",
+        "cvss": 8.1,
+        "description": "nginx:1.16 package evidence for EXPLOITBOT_CONTAINER_IAC_PROOF",
+        "severity": "high",
+        "source": "trivy",
+        "tags": [
+          "container",
+          "supply-chain",
+          "trivy",
+          "nginx"
+        ],
+        "target": "Dockerfile nginx 1.16",
+        "title": "CVE-2019-20372"
+      },
+      {
+        "cve": "",
+        "cvss": 8.1,
+        "description": "allowPrivilegeEscalation: true is present in the local Kubernetes fixture",
+        "severity": "high",
+        "source": "trivy",
+        "tags": [
+          "iac",
+          "misconfiguration",
+          "trivy"
+        ],
+        "target": "k8s/deployment.yaml",
+        "title": "AVD-KSV-0012"
+      },
+      {
+        "cve": "",
+        "cvss": 8.1,
+        "description": "Set securityContext.allowPrivilegeEscalation to false for the local fixture workload.",
+        "severity": "high",
+        "source": "checkov",
+        "tags": [
+          "iac",
+          "policy",
+          "checkov",
+          "ckv_k8s_20"
+        ],
+        "target": "/k8s/deployment.yaml Deployment.exploitbot-container-iac-proof.web",
+        "title": "CKV_K8S_20 Containers should not run with allowPrivilegeEscalation"
+      }
+    ]
+  },
+  "resultsSummary": {
+    "rawResultCount": 6,
+    "rawTools": [
+      "run_shell",
+      "syft",
+      "grype",
+      "trivy",
+      "checkov",
+      "search_cve"
+    ],
+    "vulnCount": 6,
+    "vulnSources": [
+      "checkov",
+      "grype",
+      "syft",
+      "trivy"
+    ]
+  },
+  "scenarioChecks": {
+    "checkovEvidence": "PASS",
+    "containerSurfaceEvidence": "PASS",
+    "cveContextEvidence": "PASS",
+    "grypeEvidence": "PASS",
+    "iacRiskProof": "PASS",
+    "modelContinuedAfterTools": "PASS",
+    "modelReceivedContainerIacToolSchemas": "PASS",
+    "orderedToolSequence": "PASS",
+    "rawResultEvidence": "PASS",
+    "reportGeneratedFromEvidence": "PASS",
+    "safeLocalBoundary": "PASS",
+    "syftEvidence": "PASS",
+    "terminalTranscripts": "PASS",
+    "trivyEvidence": "PASS",
+    "verboseToolTranscript": "PASS"
+  },
+  "scenarioId": "real_qwen_container_iac_supply_chain",
+  "stages": [
+    "surface",
+    "probe",
+    "prove",
+    "exploit_or_validate",
+    "evidence",
+    "report"
+  ],
+  "startedAt": "2026-07-06T14:03:53-0700",
+  "state": {
+    "activeSubtabs": {
+      "creds": "Cracking",
+      "exploit": "Metasploit",
+      "network": "Protocols",
+      "osint": "Username",
+      "post": "PrivEsc",
+      "recon": "Subdomains",
+      "report": "Findings",
+      "supplyChain": "CVE Intel",
+      "web": "Vulns"
+    },
+    "activeTab": "supplyChain",
+    "activityFeedActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "lastAction": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "agentActions": {
+      "agentCount": 0,
+      "agentId": "",
+      "agentName": "",
+      "agentType": "",
+      "deploySheetVisible": false,
+      "lastAction": "",
+      "messageCount": 0,
+      "status": "idle",
+      "stoppedGeneration": false,
+      "summary": "",
+      "taskSent": false
+    },
+    "agents": {
+      "activeAgents": 0,
+      "authorizationGuards": {
+        "explicitToolDeny": true,
+        "externalHighRiskRequiresScopeOrAuthorization": true,
+        "highRiskToolCount": 24
+      },
+      "details": [],
+      "forceFinalAnswerAfterToolResults": true,
+      "includeUnavailableToolSchemas": false,
+      "loopMaxIterations": 8,
+      "maxConcurrentAgents": 5,
+      "modePolicies": {
+        "autopilot": "execute",
+        "copilot": "approval",
+        "manual": "suggest"
+      },
+      "multiAgentEnabled": false,
+      "phaseRouting": {
+        "breach": [
+          "Credential Agent",
+          "Exploit Agent"
+        ],
+        "detect": [
+          "Web Vuln Agent",
+          "Network Agent",
+          "Supply Chain Agent"
+        ],
+        "scan": [
+          "Recon Agent",
+          "OSINT Agent"
+        ]
+      },
+      "streamingCount": 0,
+      "toolSchemaExcludedTools": [],
+      "toolSchemaMaxTools": 1,
+      "workingCount": 0
+    },
+    "catalogEmbeddings": {
+      "recordCount": 12,
+      "sourceCounts": {
+        "finding": 6,
+        "tool.output": 6
+      },
+      "sources": [
+        "finding",
+        "tool.output"
+      ],
+      "vectorDimensions": 16
+    },
+    "chat": {
+      "enableReasoning": false,
+      "forceFinalAnswerAfterToolResults": true,
+      "includeUnavailableToolSchemas": false,
+      "maxIterations": 8,
+      "toolSchemaExcludedTools": [],
+      "toolSchemaMaxTools": 1
+    },
+    "chatActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "lastAction": "",
+      "lastStashItemId": "",
+      "messageRole": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "chatControlActions": {
+      "contextGeneration": 0,
+      "contextInspectorVisible": false,
+      "enableReasoning": false,
+      "lastAction": "send",
+      "status": "done",
+      "summary": "send chat message"
+    },
+    "contextCatalog": {
+      "cveMode": "semantic",
+      "enabled": true,
+      "includeAssets": true,
+      "includeFindings": true,
+      "includeRecentToolOutput": true,
+      "includeStash": true,
+      "maxSnippets": 4
+    },
+    "contextWindow": {
+      "blockL2Disk": true,
+      "cacheResponsesInferenceMethod": "prefix-cache-l2-turboquant",
+      "cacheResponsesMethod": "prefix-cache-l2-turboquant",
+      "declaredMaxContextTokens": 262144,
+      "engineSessionPreserved": true,
+      "generation": 0,
+      "highRiskOverrideEnv": "EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET",
+      "lastFailedTargets": [
+        200000,
+        224000,
+        258000
+      ],
+      "modelGenerationDefaults": false,
+      "newContextBehavior": "clear-chat-preserve-engine-cache",
+      "newModelSessionBehavior": "new-context-window-preserve-engine-cache-session",
+      "pagedCache": true,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "provenSafeTargetCeiling": 192000,
+      "sessionBoundaryMode": "new-context-window",
+      "turboQuantKV": true,
+      "unprovenTargetPolicy": "refuse-before-model-load"
+    },
+    "credsAction": {
+      "command": "",
+      "kind": "",
+      "resultCount": 0,
+      "status": "idle",
+      "summary": "",
+      "target": ""
+    },
+    "credsCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "credsLifecycle": {
+      "bruteforce": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "cracking": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "secrets": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "cveDatabase": {
+      "activeSettingsCategory": "",
+      "importProgress": "",
+      "isImporting": false,
+      "kevCount": 1552,
+      "lastSync": "",
+      "searchResultCount": 0,
+      "topResults": [],
+      "totalCount": 1553
+    },
+    "cveImportListAudit": {
+      "excludedIds": [],
+      "includeFilterMode": "none",
+      "includeIds": [],
+      "selectedIds": [],
+      "sourceIds": [],
+      "sourceMode": "none"
+    },
+    "cveSemantic": {
+      "candidateCount": 0,
+      "error": "embedder returned invalid vector",
+      "fallback": true,
+      "importProgress": "",
+      "query": "Do not call tools, do not use shell, do not emit XML, and do not emit JSON. Use only the existing transcript evidence. Reply as plain text in one concise sentence that starts with this exact marker: REAL_QWEN_CONTAINER_IAC_SUPPLY_CHAIN_SECOND_TURN. Mention EXPLOITBOT_CONTAINER_IAC_PROOF, CVE-2019-20372, CKV_K8S_20, allowPrivilegeEscalation: true, trivyEvidence, checkovEvidence, and local container/IaC evidence.",
+      "resultCount": 0,
+      "usedEmbedding": false,
+      "vectorDimensions": 0
+    },
+    "cveSettingsActions": {
+      "addPanelVisible": false,
+      "kevCount": 0,
+      "lastAction": "",
+      "query": "",
+      "resultCount": 0,
+      "status": "idle",
+      "summary": "",
+      "totalCount": 0
+    },
+    "engineCacheStats": null,
+    "engineConfig": {
+      "blockDiskCacheMaxGB": 10,
+      "blockL2Disk": true,
+      "cacheMemoryPercent": 0.2,
+      "diskCacheMaxGB": 10,
+      "kvCacheGroupSize": 64,
+      "kvCacheQuantization": "turboquant-q4",
+      "maxTokens": 256,
+      "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "pagedCache": true,
+      "pagedCacheBlockSize": 64,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "reasoningParser": "qwen3",
+      "temperature": 0,
+      "toolCallParser": "qwen",
+      "topP": 1,
+      "useModelGenerationDefaults": false
+    },
+    "engineError": "",
+    "engineMemoryPreflight": null,
+    "enginePort": 54424,
+    "engineRunning": true,
+    "engineStaleCleanup": {
+      "checked": false,
+      "checkedAt": "",
+      "cleaned": false,
+      "foundCount": 0,
+      "foundProcesses": [],
+      "launchScript": "",
+      "noticeSeverity": "",
+      "noticeTitle": "",
+      "remainingCount": 0,
+      "remainingProcesses": [],
+      "warning": ""
+    },
+    "exploitAction": {
+      "command": "",
+      "kind": "",
+      "status": "idle",
+      "summary": "",
+      "target": "",
+      "tool": ""
+    },
+    "exploitActionHistory": [],
+    "exploitCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "exploitLifecycle": {
+      "implant": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "listener": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "script": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "feedEntries": 28,
+    "feedRecent": [
+      {
+        "duration": 0,
+        "icon": "OUT",
+        "text": "$ trivy fs --format json --quiet --severity HIGH,CRITICAL /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac",
+        "tool": "trivy"
+      },
+      {
+        "duration": 0.021000027656555176,
+        "icon": "OK",
+        "text": "trivy: 1 lines output (0.0s)",
+        "tool": "trivy"
+      },
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "Auto CVE lookup: CVE-2019-20372",
+        "tool": ""
+      },
+      {
+        "duration": 0,
+        "icon": "RUN",
+        "text": "Running checkov",
+        "tool": "checkov"
+      },
+      {
+        "duration": 0,
+        "icon": "OUT",
+        "text": "$ checkov -d /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -o json --quiet --framework kubernetes",
+        "tool": "checkov"
+      },
+      {
+        "duration": 0.02205502986907959,
+        "icon": "OK",
+        "text": "checkov: 1 lines output (0.0s)",
+        "tool": "checkov"
+      },
+      {
+        "duration": 0,
+        "icon": "RUN",
+        "text": "Running search_cve",
+        "tool": "search_cve"
+      },
+      {
+        "duration": 0,
+        "icon": "OUT",
+        "text": "$ echo handled by callback",
+        "tool": "search_cve"
+      },
+      {
+        "duration": 0.1,
+        "icon": "OK",
+        "text": "search_cve: 1 lines (0.1s)",
+        "tool": "search_cve"
+      },
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "CVE enriched: CVE-2019-20372",
+        "tool": ""
+      },
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "CVE enriched: CVE-2019-20372",
+        "tool": ""
+      },
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "send chat message",
+        "tool": ""
+      }
+    ],
+    "findings": 0,
+    "healthStatus": "mock engine connected",
+    "inferenceLogActions": {
+      "clipboardPreview": "",
+      "engineLogChars": 0,
+      "isVisible": false,
+      "lastAction": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "isStreaming": false,
+    "isWorking": false,
+    "metrics": {
+      "cachedTokens": 0,
+      "completionTokens": 141,
+      "promptTokens": 4883,
+      "tokPerSec": 12.054613067952697,
+      "ttft": 8.318444967269897
+    },
+    "mode": "autopilot",
+    "modeSelection": {
+      "activeOpMode": "",
+      "activeOpName": "",
+      "availableLabels": [
+        "Autopilot",
+        "Copilot",
+        "Manual"
+      ],
+      "availableModes": [
+        "autopilot",
+        "copilot",
+        "manual"
+      ],
+      "currentLabel": "Autopilot",
+      "currentMode": "autopilot",
+      "lastAction": "select-mode",
+      "pendingApprovalRejected": false,
+      "pendingApprovalVisible": false,
+      "showOnboarding": true,
+      "source": "api"
+    },
+    "model": "mock-qwen-jang",
+    "modelFolderInfo": {
+      "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+      "family": "Qwen",
+      "hasConfig": true,
+      "hasGenerationConfig": true,
+      "hasJangConfig": true,
+      "hasJangtqConfig": false,
+      "hasTokenizerConfig": true,
+      "isMultimodal": true,
+      "isSupported": true,
+      "modelType": "qwen3_5_moe",
+      "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+    },
+    "modelFolderPicker": {
+      "configSummary": "",
+      "family": "",
+      "isSupported": false,
+      "isVisible": false,
+      "lastAction": "",
+      "selectedPath": "",
+      "source": "",
+      "status": "idle",
+      "supportMessage": ""
+    },
+    "modelLibrary": {
+      "entries": [
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "MiniMax",
+          "isMultimodal": false,
+          "isSupported": true,
+          "name": "MiniMax-M2.7-JANG_K-CRACK",
+          "path": "/Users/eric/models/dealign.ai/MiniMax-M2.7-JANG_K-CRACK",
+          "supportMessage": "Supported MiniMax family. The app auto-detects config.json, jang_config.json, jangtq_config.json, generation_config.json, reasoning parser, tool parser, and full-KV cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-27B-JANG_4M-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-JANG_4M-CRACK",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-27B-MXFP4-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-27B-MXFP8-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "DeepSeek-V4-Flash-JANG-CRACK",
+          "path": "/Users/eric/models/dealign.ai/DeepSeek-V4-Flash-JANG-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": true,
+          "isSupported": false,
+          "name": "Gemma-4-26B-A4B-it-JANG_4M-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Gemma-4-26B-A4B-it-JANG_4M-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "LFM2.5-8B-A1B-MXFP4-CRACK",
+          "path": "/Users/eric/models/dealign.ai/LFM2.5-8B-A1B-MXFP4-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "LFM2.5-8B-A1B-MXFP8-CRACK",
+          "path": "/Users/eric/models/dealign.ai/LFM2.5-8B-A1B-MXFP8-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "Nemotron-Omni-Nano-JANGTQ4-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Nemotron-Omni-Nano-JANGTQ4-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "Nemotron-Omni-Nano-MXFP4-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Nemotron-Omni-Nano-MXFP4-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": true,
+          "isSupported": false,
+          "name": "Step-3.7-Flash-JANG_2L-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Step-3.7-Flash-JANG_2L-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": true,
+          "isSupported": false,
+          "name": "Step-3.7-Flash-JANG_K-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Step-3.7-Flash-JANG_K-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        }
+      ],
+      "entryCount": 14,
+      "lastAction": "load",
+      "roots": [
+        "/Users/eric/models/dealign.ai"
+      ],
+      "selectedPath": "",
+      "status": "done",
+      "summary": "scanModelLibrary 14 models from 1 roots",
+      "supportedCount": 6
+    },
+    "msgs": 11,
+    "networkAction": {
+      "command": "",
+      "kind": "",
+      "protocol": "",
+      "status": "idle",
+      "summary": "",
+      "target": ""
+    },
+    "networkCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "networkLifecycle": {
+      "capture": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "mitm": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "tunnel": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "osintArtifactAction": {
+      "bytes": 0,
+      "history": [],
+      "lastAction": "",
+      "path": "",
+      "pathExists": false,
+      "status": "idle",
+      "summary": ""
+    },
+    "osintArtifacts": [],
+    "osintCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "osintLifecycle": {
+      "email": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "metadata": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "screenshot": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "username": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "phase": "scan",
+    "phaseActions": {
+      "fromPhase": "",
+      "lastAction": "",
+      "phaseGuidance": "",
+      "status": "idle",
+      "summary": "",
+      "toPhase": "",
+      "toolsRun": 0
+    },
+    "ports": 0,
+    "postAttribution": [],
+    "postCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "postLifecycle": {
+      "ad": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "lateral": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "privesc": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "qaChatVisual": {
+      "autoScrollLocked": null,
+      "cacheSessionIndicator": null,
+      "contextInspectorVisible": false,
+      "hasUnreadWhileUnlocked": null,
+      "headerBadges": [
+        "11 msgs",
+        "ctx 0"
+      ],
+      "mode": "",
+      "newContextConfirm": {
+        "isVisible": false,
+        "lastAction": "send"
+      },
+      "newContextSessionBoundary": null,
+      "reasoningBlock": {
+        "isCollapsed": false,
+        "totalChars": 0,
+        "visibleChars": 0
+      },
+      "reasoningCollapsed": null,
+      "toolOutputExpansion": {
+        "hiddenLineCount": 11,
+        "isExpanded": false,
+        "toolName": "run_shell",
+        "totalLineCount": 16,
+        "visibleLineCount": 5
+      }
+    },
+    "qaCoverage": {
+      "contextHooks": [
+        "onContextUpdate",
+        "search_context",
+        "lastContextSummary",
+        "lastToolSchemaNames",
+        "context.catalog.maxSnippets"
+      ],
+      "stateRoutes": [
+        "/state",
+        "/messages",
+        "/results",
+        "/qa/subtab-coverage",
+        "/qa/subtab-lifecycle-matrix",
+        "/qa/endpoint-inventory",
+        "/qa/endpoint-route-matrix",
+        "/qa/action-state-inventory",
+        "/qa/view-inventory",
+        "/qa/function-flow-inventory",
+        "/qa/function-proof-matrix",
+        "/qa/service-inventory",
+        "/qa/service-function-matrix",
+        "/qa/model-state-inventory",
+        "/qa/model-state-function-matrix",
+        "/qa/theme-inventory",
+        "/qa/theme-token-matrix",
+        "/qa/python-runtime-inventory",
+        "/qa/engine-python-runtime",
+        "/qa/agent-flow-inventory",
+        "/qa/proof-suite-inventory",
+        "/qa/agent-loop-coverage",
+        "/qa/agent-loop-phase-matrix",
+        "/qa/agent-tool-authorization-coverage",
+        "/qa/tab-tool-function-flow",
+        "/qa/tab-proof-family-matrix",
+        "/qa/tool-execution-matrix",
+        "/qa/tool-flow-coverage",
+        "/qa/live-status-preview-flow",
+        "/qa/security-abuse-boundary-matrix",
+        "/qa/deep-runtime-flow-coverage",
+        "/qa/tool-engine-context-ops-matrix",
+        "/qa/engine-api-cache-proof-matrix",
+        "/qa/session-context-cache-flow",
+        "/qa/cache-artifact-matrix",
+        "/qa/chat-quality-evidence-matrix",
+        "/qa/turn-lifecycle-evidence",
+        "/qa/active-objective-audit",
+        "/qa/runtime-local-model-lane",
+        "/qa/continuous-batching-coverage",
+        "/qa/live-loaded-model-agent-stress",
+        "/qa/streaming-parser-reuse",
+        "/qa/startup-cache-defaults",
+        "/qa/runtime-coverage",
+        "/qa/context-coverage",
+        "/qa/context-budget-compaction",
+        "/qa/context-prompt-injection-boundary",
+        "/qa/context-flow-matrix",
+        "/qa/context-session-efficiency-matrix",
+        "/qa/context-efficiency-invariants",
+        "/qa/evidence-lifecycle-coverage",
+        "/qa/evidence-lifecycle-flow-matrix",
+        "/qa/cve-taxonomy-coverage",
+        "/qa/cve-taxonomy-matrix",
+        "/qa/cve-import-embedding-coverage",
+        "/qa/state-dependent-contract-matrix",
+        "/qa/settings-coverage",
+        "/qa/settings-surface-matrix",
+        "/qa/visual-coverage",
+        "/qa/visual-surface-matrix",
+        "/qa/session-coverage",
+        "/qa/session-workflow-matrix",
+        "/qa/tab-action-coverage",
+        "/qa/tab-action-surface-matrix",
+        "/qa/chat-coverage",
+        "/qa/recon-coverage",
+        "/qa/web-coverage",
+        "/qa/network-coverage",
+        "/qa/creds-coverage",
+        "/qa/exploit-coverage",
+        "/qa/post-coverage",
+        "/qa/supply-chain-coverage",
+        "/qa/osint-coverage",
+        "/qa/report-coverage",
+        "/qa/stash-coverage",
+        "/qa/coverage-index",
+        "/qa/coverage-false-flag-classification",
+        "/qa/proof-ledger",
+        "/qa/proof-category-matrix",
+        "/qa/artifact-ledger",
+        "/qa/artifact-manifest-matrix",
+        "/qa/result-parser-coverage",
+        "/qa/parser-tool-matrix",
+        "/qa/checkpoint-ledger",
+        "/qa/audit-ledger",
+        "/qa/gap-ledger",
+        "/qa/qwen-multimodal-promotion-readiness",
+        "/qa/release-readiness",
+        "/qa/beta-readiness-coverage",
+        "/qa/objective-runtime-coverage",
+        "/qa/objective-flow-requirement-matrix",
+        "/qa/objective-flow-execution-graph",
+        "/qa/per-turn-runtime-contract"
+      ],
+      "staticProfilesRemoved": true,
+      "subtabStateProofs": [
+        "recon-subtab-state-proof.py",
+        "web-subtab-state-proof.py",
+        "network-subtab-state-proof.py",
+        "creds-subtab-state-proof.py",
+        "exploit-subtab-state-proof.py",
+        "post-subtab-state-proof.py",
+        "supply-chain-cve-ui-proof.py",
+        "osint-subtab-state-proof.py",
+        "report-subtab-state-proof.py"
+      ],
+      "subtabStateTabs": [
+        "recon",
+        "web",
+        "network",
+        "creds",
+        "exploit",
+        "post",
+        "supplyChain",
+        "osint",
+        "report"
+      ],
+      "testServerSmoke": true
+    },
+    "qaSettingsVisual": {
+      "category": "",
+      "showSettings": false
+    },
+    "qaVisualSubtabs": {},
+    "reconAction": {
+      "command": "",
+      "kind": "",
+      "status": "idle",
+      "summary": "",
+      "target": ""
+    },
+    "reconCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "reportAction": {
+      "findingCount": 0,
+      "kind": "",
+      "prompt": "",
+      "status": "idle",
+      "summary": "",
+      "template": ""
+    },
+    "reportExport": {
+      "artifacts": [],
+      "error": "",
+      "findingCount": 0,
+      "status": "idle"
+    },
+    "reportFindingActions": {
+      "createLabel": "Create Finding",
+      "deleteLabel": "Delete finding",
+      "findingCount": 0,
+      "findings": [],
+      "lastAction": "",
+      "lastCreatedId": "",
+      "lastDeletedId": "",
+      "status": "idle",
+      "summary": "",
+      "wizardVisible": false
+    },
+    "reportRenderActions": {
+      "findingCount": 0,
+      "htmlChars": 0,
+      "htmlPreview": "",
+      "lastAction": "",
+      "status": "idle",
+      "summary": "",
+      "template": ""
+    },
+    "requestContext": {
+      "contextInjected": true,
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 12 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=6 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [finding] HIGH CKV_K8S_20 Containers should not run with allowPrivilegeEscalation tags=vuln,high,checkov,iac,policy,check",
+      "contextSnippetCount": 4,
+      "streamWarnings": [],
+      "toolSchemaCount": 4,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "run_shell"
+      ]
+    },
+    "settingsCategoryCoverage": {
+      "categories": [
+        {
+          "detail": "Watch the local engine, effective parser/cache metadata, and live cache counters.",
+          "id": "engine",
+          "pageSections": [
+            "engine status",
+            "effective runtime",
+            "live cache counters"
+          ],
+          "subtitle": "status, health, effective runtime",
+          "systemImage": "cpu",
+          "title": "Engine"
+        },
+        {
+          "detail": "Choose one model folder. Qwen and MiniMax are the supported beta families; config is picked up from that folder.",
+          "id": "model",
+          "pageSections": [
+            "model folder",
+            "supported family warning",
+            "generation config source"
+          ],
+          "subtitle": "folder selection and support checks",
+          "systemImage": "folder",
+          "title": "Model"
+        },
+        {
+          "detail": "Runtime defaults come from the model folder and engine registry, with only operational loop limits exposed here.",
+          "id": "runtime",
+          "pageSections": [
+            "model generation defaults",
+            "parser autodetect",
+            "tool-loop limits",
+            "autonomy"
+          ],
+          "subtitle": "generation, parsers, loop limits",
+          "systemImage": "slider.horizontal.3",
+          "title": "Runtime"
+        },
+        {
+          "detail": "Control the dynamic catalogue that decides which app facts are sent into each model turn.",
+          "id": "context",
+          "pageSections": [
+            "dynamic catalogue",
+            "retrieval sources",
+            "CVE assist mode",
+            "long-context safety"
+          ],
+          "subtitle": "catalogue and retrieval sources",
+          "systemImage": "square.stack.3d.up",
+          "title": "Context"
+        },
+        {
+          "detail": "Tune cache budgets while keeping the required prefix, paged, L2, and TurboQuant paths enabled.",
+          "id": "cache",
+          "pageSections": [
+            "prefix cache",
+            "prompt L2 disk",
+            "paged cache",
+            "block L2 disk",
+            "TurboQuant KV"
+          ],
+          "subtitle": "TurboQuant, prefix, L2 disk",
+          "systemImage": "internaldrive",
+          "title": "Cache"
+        },
+        {
+          "detail": "Configure full-auto and multi-agent behavior without mixing it into engine setup.",
+          "id": "agents",
+          "pageSections": [
+            "multi-agent mode",
+            "concurrency limit",
+            "agent defaults"
+          ],
+          "subtitle": "multi-agent controls",
+          "systemImage": "person.2",
+          "title": "Agents"
+        },
+        {
+          "detail": "Manage the local vulnerability knowledge base used by tools and context retrieval.",
+          "id": "cves",
+          "pageSections": [
+            "database import",
+            "CVE counts",
+            "search status"
+          ],
+          "subtitle": "local CVE data and search",
+          "systemImage": "cross.case",
+          "title": "CVE Database"
+        },
+        {
+          "detail": "Detect and install external command-line tools used by the agent loop.",
+          "id": "tools",
+          "pageSections": [
+            "installed tools",
+            "missing tools",
+            "install plan",
+            "install log"
+          ],
+          "subtitle": "tool install and detection",
+          "systemImage": "wrench.and.screwdriver",
+          "title": "Tools"
+        },
+        {
+          "detail": "Inspect engine logs separately from runtime controls.",
+          "id": "logs",
+          "pageSections": [
+            "engine log output",
+            "diagnostics"
+          ],
+          "subtitle": "engine output and diagnostics",
+          "systemImage": "doc.text.magnifyingglass",
+          "title": "Logs"
+        }
+      ],
+      "splitPages": true
+    },
+    "settingsEngineActions": {
+      "healthStatus": "",
+      "isRunning": false,
+      "lastAction": "",
+      "model": "",
+      "status": "idle",
+      "summary": "",
+      "wasRunning": false
+    },
+    "sidebarActions": {
+      "lastAction": "",
+      "opId": "",
+      "opName": "",
+      "opsCount": 0,
+      "status": "idle",
+      "stoppedGeneration": false,
+      "summary": ""
+    },
+    "stash": 0,
+    "stashActions": {
+      "actionLabels": [
+        "Add",
+        "Copy All",
+        "Copy",
+        "Send",
+        "Delete"
+      ],
+      "activeFilter": "all",
+      "addSheetVisible": false,
+      "clipboardPreview": "",
+      "filteredCount": 0,
+      "itemCount": 0,
+      "items": [],
+      "lastAction": "",
+      "lastDeletedId": "",
+      "lastItemId": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "stashRetrieval": {
+      "candidateCount": 0,
+      "query": "Do not call tools, do not use shell, do not emit XML, and do not emit JSON. Use only the existing transcript evidence. Reply as plain text in one concise sentence that starts with this exact marker: REAL_QWEN_CONTAINER_IAC_SUPPLY_CHAIN_SECOND_TURN. Mention EXPLOITBOT_CONTAINER_IAC_PROOF, CVE-2019-20372, CKV_K8S_20, allowPrivilegeEscalation: true, trivyEvidence, checkovEvidence, and local container/IaC evidence.",
+      "returnedCount": 0,
+      "topLabels": [],
+      "topScore": 0
+    },
+    "subdomains": 0,
+    "subtabActions": {
+      "lastAction": "",
+      "status": "idle",
+      "subtab": "",
+      "summary": "",
+      "tab": "",
+      "validSubtabs": []
+    },
+    "supplyChainLifecycle": {
+      "cve": {
+        "command": "echo handled by callback",
+        "status": "done",
+        "summary": "1 lines",
+        "tool": "search_cve"
+      },
+      "dependency": {
+        "command": "checkov -d /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -o json --quiet --framework kubernetes",
+        "status": "done",
+        "summary": "1 lines output",
+        "tool": "checkov"
+      },
+      "sbom": {
+        "command": "syft /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -o json",
+        "status": "done",
+        "summary": "1 lines output",
+        "tool": "syft"
+      },
+      "secrets": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "tabActivities": {
+      "creds": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "exploit": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "network": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "osint": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "post": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "recon": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "report": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "stash": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "supplyChain": {
+        "command": "echo handled by callback",
+        "count": 6,
+        "lastTool": "search_cve",
+        "status": "done",
+        "summary": "1 lines"
+      },
+      "web": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      }
+    },
+    "tabSwitchActions": {
+      "followAgent": true,
+      "fromTab": "",
+      "lastAction": "",
+      "status": "idle",
+      "summary": "",
+      "toTab": ""
+    },
+    "terminal": {
+      "activeCommand": {
+        "command": "",
+        "source": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "commandTranscripts": [
+        {
+          "command": "/bin/zsh -c find /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -maxdepth 3 -type f | sort && grep -R \"EXPLOITBOT_CONTAINER_IAC_PROOF\\|nginx:1.16\\|allowPrivilegeEscalation: true\" -n /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac",
+          "outputPreview": "$ /bin/zsh -c find /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -maxdepth 3 -type f | sort && grep -R \"EXPLOITBOT_CONTAINER_IAC_PROOF\\|nginx:1.16\\|allowPrivilegeEscalation: true\" -n /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac",
+          "source": "activityFeed",
+          "status": "OUT",
+          "timestamp": 1783371845.589786,
+          "tool": "run_shell"
+        },
+        {
+          "command": "run_shell: 8 lines output (0.0s)",
+          "outputPreview": "run_shell: 8 lines output (0.0s)",
+          "source": "activityFeed",
+          "status": "OK",
+          "timestamp": 1783371845.6040812,
+          "tool": "run_shell"
+        },
+        {
+          "command": "Running syft",
+          "outputPreview": "Running syft",
+          "source": "activityFeed",
+          "status": "RUN",
+          "timestamp": 1783371845.604543,
+          "tool": "syft"
+        },
+        {
+          "command": "syft /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -o json",
+          "outputPreview": "$ syft /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -o json",
+          "source": "activityFeed",
+          "status": "OUT",
+          "timestamp": 1783371845.604543,
+          "tool": "syft"
+        },
+        {
+          "command": "syft: 1 lines output (0.0s)",
+          "outputPreview": "syft: 1 lines output (0.0s)",
+          "source": "activityFeed",
+          "status": "OK",
+          "timestamp": 1783371845.6251779,
+          "tool": "syft"
+        },
+        {
+          "command": "Running grype",
+          "outputPreview": "Running grype",
+          "source": "activityFeed",
+          "status": "RUN",
+          "timestamp": 1783371845.625468,
+          "tool": "grype"
+        },
+        {
+          "command": "grype /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -o json --fail-on high",
+          "outputPreview": "$ grype /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -o json --fail-on high",
+          "source": "activityFeed",
+          "status": "OUT",
+          "timestamp": 1783371845.625469,
+          "tool": "grype"
+        },
+        {
+          "command": "grype: 1 lines output (0.0s)",
+          "outputPreview": "grype: 1 lines output (0.0s)",
+          "source": "activityFeed",
+          "status": "OK",
+          "timestamp": 1783371845.6462831,
+          "tool": "grype"
+        },
+        {
+          "command": "Running trivy",
+          "outputPreview": "Running trivy",
+          "source": "activityFeed",
+          "status": "RUN",
+          "timestamp": 1783371845.646589,
+          "tool": "trivy"
+        },
+        {
+          "command": "trivy fs --format json --quiet --severity HIGH,CRITICAL /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac",
+          "outputPreview": "$ trivy fs --format json --quiet --severity HIGH,CRITICAL /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac",
+          "source": "activityFeed",
+          "status": "OUT",
+          "timestamp": 1783371845.64659,
+          "tool": "trivy"
+        },
+        {
+          "command": "trivy: 1 lines output (0.0s)",
+          "outputPreview": "trivy: 1 lines output (0.0s)",
+          "source": "activityFeed",
+          "status": "OK",
+          "timestamp": 1783371845.667702,
+          "tool": "trivy"
+        },
+        {
+          "command": "Running checkov",
+          "outputPreview": "Running checkov",
+          "source": "activityFeed",
+          "status": "RUN",
+          "timestamp": 1783371845.668034,
+          "tool": "checkov"
+        },
+        {
+          "command": "checkov -d /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -o json --quiet --framework kubernetes",
+          "outputPreview": "$ checkov -d /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -o json --quiet --framework kubernetes",
+          "source": "activityFeed",
+          "status": "OUT",
+          "timestamp": 1783371845.668035,
+          "tool": "checkov"
+        },
+        {
+          "command": "checkov: 1 lines output (0.0s)",
+          "outputPreview": "checkov: 1 lines output (0.0s)",
+          "source": "activityFeed",
+          "status": "OK",
+          "timestamp": 1783371845.690208,
+          "tool": "checkov"
+        },
+        {
+          "command": "Running search_cve",
+          "outputPreview": "Running search_cve",
+          "source": "activityFeed",
+          "status": "RUN",
+          "timestamp": 1783371845.690682,
+          "tool": "search_cve"
+        },
+        {
+          "command": "echo handled by callback",
+          "outputPreview": "$ echo handled by callback",
+          "source": "activityFeed",
+          "status": "OUT",
+          "timestamp": 1783371845.690683,
+          "tool": "search_cve"
+        },
+        {
+          "command": "search_cve: 1 lines (0.1s)",
+          "outputPreview": "search_cve: 1 lines (0.1s)",
+          "source": "activityFeed",
+          "status": "OK",
+          "timestamp": 1783371845.691046,
+          "tool": "search_cve"
+        },
+        {
+          "command": "run_shell",
+          "outputPreview": "/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/Dockerfile\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/docker-compose.yml\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/k8s/deployment.yaml\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/Dockerfile:1:FROM nginx:1.16\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/Dockerfile:2:LABEL proof=EXPLOITBOT_CONTAINER_IAC_PROOF\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/k8s/deployment.yaml:10:          image: nginx:1.16\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/k8s/deployment.yaml:12:            allowPrivilegeEscalation: true\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/docker-compose.yml:3:    image: nginx:1.16\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783371845.60422,
+          "tool": "run_shell"
+        },
+        {
+          "command": "syft",
+          "outputPreview": "{\"source\": {\"target\": \"synthetic-container-iac\"}, \"artifacts\": [{\"name\": \"nginx\", \"version\": \"1.16\", \"type\": \"deb\"}, {\"name\": \"openssl\", \"version\": \"1.1.1\", \"type\": \"deb\"}]}\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783371845.625212,
+          "tool": "syft"
+        },
+        {
+          "command": "grype",
+          "outputPreview": "{\"matches\": [{\"vulnerability\": {\"id\": \"CVE-2019-20372\", \"severity\": \"High\"}, \"artifact\": {\"name\": \"nginx\", \"version\": \"1.16\"}}]}\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783371845.646327,
+          "tool": "grype"
+        },
+        {
+          "command": "trivy",
+          "outputPreview": "{\"Results\": [{\"Target\": \"Dockerfile\", \"Vulnerabilities\": [{\"VulnerabilityID\": \"CVE-2019-20372\", \"PkgName\": \"nginx\", \"InstalledVersion\": \"1.16\", \"Severity\": \"HIGH\", \"Title\": \"nginx vulnerable image package\", \"Description\": \"nginx:1.16 package evidence for EXPLOITBOT_CONTAINER_IAC_PROOF\"}]}, {\"Target\": \"k8s/deployment.yaml\", \"Misconfigurations\": [{\"ID\": \"AVD-KSV-0012\", \"Title\": \"Container allows privilege escalation\", \"Severity\": \"HIGH\", \"Message\": \"allowPrivilegeEscalation: true is present in the local Kubernetes fixture\"}]}]}\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783371845.66775,
+          "tool": "trivy"
+        },
+        {
+          "command": "checkov",
+          "outputPreview": "{\"results\": {\"failed_checks\": [{\"check_id\": \"CKV_K8S_20\", \"check_name\": \"Containers should not run with allowPrivilegeEscalation\", \"file_path\": \"/k8s/deployment.yaml\", \"resource\": \"Deployment.exploitbot-container-iac-proof.web\", \"severity\": \"HIGH\", \"guideline\": \"Set securityContext.allowPrivilegeEscalation to false for the local fixture workload.\"}]}}\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783371845.690256,
+          "tool": "checkov"
+        },
+        {
+          "command": "search_cve",
+          "outputPreview": "No CVEs found for query: CVE-2019-20372 nginx 1.16 container",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783371845.691036,
+          "tool": "search_cve"
+        },
+        {
+          "command": "echo handled by callback",
+          "outputPreview": "1 lines",
+          "source": "tabActivities",
+          "status": "done",
+          "tab": "supplyChain",
+          "timestamp": 1783371845.691049,
+          "tool": "search_cve"
+        }
+      ],
+      "installedToolCount": 46,
+      "isVisible": false,
+      "surfaceContract": "terminal-visibility-command-transcripts",
+      "toolPathCount": 6,
+      "toolPaths": [
+        "/opt/homebrew/bin",
+        "/usr/local/bin",
+        "/Users/eric/.exploitbot/tools",
+        "/Users/eric/.local/bin",
+        "/usr/bin",
+        "/bin"
+      ]
+    },
+    "toolExecutor": {
+      "currentOutput": "{\"results\": {\"failed_checks\": [{\"check_id\": \"CKV_K8S_20\", \"check_name\": \"Containers should not run with allowPrivilegeEscalation\", \"file_path\": \"/k8s/deployment.yaml\", \"resource\": \"Deployment.exploitbot-container-iac-proof.web\", \"severity\": \"HIGH\", \"guideline\": \"Set securityContext.allowPrivilegeEscalation to false for the local fixture workload.\"}]}}\n",
+      "currentTool": "",
+      "isRunning": false
+    },
+    "toolSettings": {
+      "activeSettingsCategory": "",
+      "errorCount": 0,
+      "installCommands": [],
+      "installLog": "",
+      "installPlan": {
+        "commandCount": 0,
+        "installCommands": [],
+        "missingByCategory": {},
+        "missingByInstallMethod": {},
+        "missingCount": 0,
+        "requiresNetworkInstall": false
+      },
+      "installedCount": 46,
+      "installingCount": 0,
+      "isInstalling": false,
+      "missingByCategory": {},
+      "missingByInstallMethod": {},
+      "missingCount": 0,
+      "requiresNetworkInstall": false,
+      "tools": [
+        {
+          "category": "system",
+          "installMethod": "system",
+          "name": "curl",
+          "path": "/usr/bin/curl",
+          "status": "installed",
+          "version": "8.7.1"
+        },
+        {
+          "category": "system",
+          "installMethod": "system",
+          "name": "nc",
+          "path": "/usr/bin/nc",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "system",
+          "installMethod": "system",
+          "name": "python3",
+          "path": "/opt/homebrew/bin/python3",
+          "status": "installed",
+          "version": "3.14.6"
+        },
+        {
+          "category": "system",
+          "installMethod": "system",
+          "name": "zsh",
+          "path": "/bin/zsh",
+          "status": "installed",
+          "version": "5.9"
+        },
+        {
+          "category": "recon",
+          "installMethod": "go",
+          "name": "subfinder",
+          "path": "/Users/eric/.exploitbot/tools/subfinder",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "recon",
+          "installMethod": "go",
+          "name": "dnsx",
+          "path": "/Users/eric/.exploitbot/tools/dnsx",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "recon",
+          "installMethod": "homebrew",
+          "name": "nmap",
+          "path": "/opt/homebrew/bin/nmap",
+          "status": "installed",
+          "version": "7.99"
+        },
+        {
+          "category": "recon",
+          "installMethod": "homebrew",
+          "name": "masscan",
+          "path": "/opt/homebrew/bin/masscan",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "recon",
+          "installMethod": "go",
+          "name": "httpx",
+          "path": "/Users/eric/.exploitbot/tools/httpx",
+          "status": "installed",
+          "version": "1.9.0"
+        },
+        {
+          "category": "recon",
+          "installMethod": "go",
+          "name": "katana",
+          "path": "/Users/eric/.exploitbot/tools/katana",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "recon",
+          "installMethod": "uv",
+          "name": "theHarvester",
+          "path": "/Users/eric/.local/bin/theHarvester",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "go",
+          "name": "nuclei",
+          "path": "/opt/homebrew/bin/nuclei",
+          "status": "installed",
+          "version": "3.10.0"
+        },
+        {
+          "category": "web",
+          "installMethod": "uv",
+          "name": "sqlmap",
+          "path": "/opt/homebrew/bin/sqlmap",
+          "status": "installed",
+          "version": "1.10.7"
+        },
+        {
+          "category": "web",
+          "installMethod": "go",
+          "name": "dalfox",
+          "path": "/Users/eric/.exploitbot/tools/dalfox",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "homebrew",
+          "name": "feroxbuster",
+          "path": "/opt/homebrew/bin/feroxbuster",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "go",
+          "name": "ffuf",
+          "path": "/Users/eric/.exploitbot/tools/ffuf",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "uv",
+          "name": "arjun",
+          "path": "/Users/eric/.local/bin/arjun",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "homebrew",
+          "name": "wpscan",
+          "path": "/opt/homebrew/bin/wpscan",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "homebrew",
+          "name": "testssl",
+          "path": "/opt/homebrew/bin/testssl.sh",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "uv",
+          "name": "graphqlmap",
+          "path": "/Users/eric/.local/bin/graphqlmap",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "web",
+          "installMethod": "uv",
+          "name": "jwt_tool",
+          "path": "/Users/eric/.local/bin/jwt_tool",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "network",
+          "installMethod": "uv",
+          "name": "netexec",
+          "path": "/Users/eric/.local/bin/netexec",
+          "status": "installed",
+          "version": "1.5.1"
+        },
+        {
+          "category": "network",
+          "installMethod": "homebrew",
+          "name": "snmpwalk",
+          "path": "/usr/bin/snmpwalk",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "network",
+          "installMethod": "homebrew",
+          "name": "tshark",
+          "path": "/opt/homebrew/bin/tshark",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "network",
+          "installMethod": "homebrew",
+          "name": "bettercap",
+          "path": "/opt/homebrew/bin/bettercap",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "network",
+          "installMethod": "go",
+          "name": "chisel",
+          "path": "/Users/eric/.exploitbot/tools/chisel",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "credentials",
+          "installMethod": "homebrew",
+          "name": "hashcat",
+          "path": "/opt/homebrew/bin/hashcat",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "credentials",
+          "installMethod": "homebrew",
+          "name": "hydra",
+          "path": "/opt/homebrew/bin/hydra",
+          "status": "installed",
+          "version": "9.6"
+        },
+        {
+          "category": "credentials",
+          "installMethod": "ruby",
+          "name": "haiti",
+          "path": "/Users/eric/.local/bin/haiti",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "credentials",
+          "installMethod": "homebrew",
+          "name": "trufflehog",
+          "path": "/opt/homebrew/bin/trufflehog",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "supplychain",
+          "installMethod": "homebrew",
+          "name": "syft",
+          "path": "/opt/homebrew/bin/syft",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "supplychain",
+          "installMethod": "homebrew",
+          "name": "grype",
+          "path": "/opt/homebrew/bin/grype",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "supplychain",
+          "installMethod": "homebrew",
+          "name": "osv_scanner",
+          "path": "/opt/homebrew/bin/osv-scanner",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "supplychain",
+          "installMethod": "uv",
+          "name": "semgrep",
+          "path": "/Users/eric/.local/bin/semgrep",
+          "status": "installed",
+          "version": "1.168.0"
+        },
+        {
+          "category": "supplychain",
+          "installMethod": "uv",
+          "name": "bandit",
+          "path": "/Users/eric/.local/bin/bandit",
+          "status": "installed",
+          "version": "1.9.4"
+        },
+        {
+          "category": "supplychain",
+          "installMethod": "homebrew",
+          "name": "trivy",
+          "path": "/opt/homebrew/bin/trivy",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "supplychain",
+          "installMethod": "uv",
+          "name": "checkov",
+          "path": "/Users/eric/.local/bin/checkov",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "exploit",
+          "installMethod": "homebrew",
+          "name": "metasploit",
+          "path": "/opt/homebrew/bin/msfconsole",
+          "status": "installed",
+          "version": "6.4.135"
+        },
+        {
+          "category": "exploit",
+          "installMethod": "uv",
+          "name": "pwncat",
+          "path": "/Users/eric/.local/bin/pwncat-cs",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "exploit",
+          "installMethod": "release",
+          "name": "sliver",
+          "path": "/Users/eric/.exploitbot/tools/sliver-client",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "post",
+          "installMethod": "uv",
+          "name": "impacket",
+          "path": "/Users/eric/.local/bin/secretsdump.py",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "post",
+          "installMethod": "script",
+          "name": "linpeas",
+          "path": "/Users/eric/.exploitbot/tools/linpeas.sh",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "osint",
+          "installMethod": "uv",
+          "name": "sherlock",
+          "path": "/Users/eric/.local/bin/sherlock",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "osint",
+          "installMethod": "uv",
+          "name": "holehe",
+          "path": "/Users/eric/.local/bin/holehe",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "osint",
+          "installMethod": "homebrew",
+          "name": "exiftool",
+          "path": "/opt/homebrew/bin/exiftool",
+          "status": "installed",
+          "version": ""
+        },
+        {
+          "category": "osint",
+          "installMethod": "go",
+          "name": "gowitness",
+          "path": "/Users/eric/.exploitbot/tools/gowitness",
+          "status": "installed",
+          "version": ""
+        }
+      ]
+    },
+    "toolSettingsActions": {
+      "installedCount": 0,
+      "lastAction": "",
+      "missingCount": 0,
+      "status": "idle",
+      "summary": "",
+      "toolName": ""
+    },
+    "tools": 6,
+    "vulns": 6,
+    "webAction": {
+      "cve": "",
+      "kind": "",
+      "prompt": "",
+      "source": "",
+      "status": "idle",
+      "target": "",
+      "title": ""
+    },
+    "webCVERows": [
+      {
+        "cve": "CVE-2019-20372",
+        "hasDetails": false,
+        "progressLabel": "CVE pending",
+        "status": "pending",
+        "target": "nginx@1.16",
+        "title": "CVE-2019-20372"
+      },
+      {
+        "cve": "CVE-2019-20372",
+        "hasDetails": false,
+        "progressLabel": "CVE pending",
+        "status": "pending",
+        "target": "Dockerfile nginx 1.16",
+        "title": "CVE-2019-20372"
+      }
+    ],
+    "webDirectActions": {
+      "actionLabels": [
+        "Create Finding",
+        "Stash",
+        "Copy",
+        "Search Related CVEs"
+      ],
+      "clipboardPreview": "",
+      "cve": "",
+      "findingPrefill": {
+        "cve": "",
+        "description": "",
+        "severity": "high",
+        "target": "",
+        "title": ""
+      },
+      "findingWizardVisible": false,
+      "lastAction": "",
+      "lastPrompt": "",
+      "lastStashPreview": "",
+      "source": "",
+      "stashCount": 0,
+      "status": "idle",
+      "summary": "",
+      "target": "",
+      "title": ""
+    },
+    "windowOverlayActions": {
+      "findingWizardVisible": false,
+      "lastAction": "",
+      "settingsVisible": false,
+      "status": "idle",
+      "summary": "",
+      "terminalVisible": false
+    }
+  },
+  "status": {
+    "blockDiskCache": "PASS",
+    "checkovEvidence": "PASS",
+    "containerSurfaceEvidence": "PASS",
+    "cveContextEvidence": "PASS",
+    "grypeEvidence": "PASS",
+    "hybridAsyncSSMReDerive": "PASS",
+    "hybridSSMTopology": "PASS",
+    "iacRiskProof": "PASS",
+    "memoryPreflight": "PASS",
+    "modelContinuedAfterTools": "PASS",
+    "modelReceivedContainerIacToolSchemas": "PASS",
+    "multiTurnModelLoop": "PASS",
+    "nativeD3MTPForMTPModel": "PASS",
+    "orderedToolSequence": "PASS",
+    "overall": "PASS",
+    "pagedCache": "PASS",
+    "prefixCache": "PASS",
+    "rawResultEvidence": "PASS",
+    "realQwenDroveContainerIac": "PASS",
+    "reportGeneratedFromEvidence": "PASS",
+    "safeLocalBoundary": "PASS",
+    "syftEvidence": "PASS",
+    "terminalTranscripts": "PASS",
+    "trivyEvidence": "PASS",
+    "turboQuantKV": "PASS",
+    "verboseToolTranscript": "PASS"
+  },
+  "toolSequence": [
+    "run_shell",
+    "syft",
+    "grype",
+    "trivy",
+    "checkov",
+    "search_cve"
+  ]
+}
