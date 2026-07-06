@@ -1,0 +1,310 @@
+{
+  "generatedAt": "2026-07-05T22:26:58-0700",
+  "notes": [
+    "Rows aggregate existing live artifacts; artifact generatedAt values show whether evidence is fresh or older.",
+    "Repo/codebase supply-chain row is the fresh 2026-07-06 app-backed scenario added for this matrix.",
+    "Real-Qwen rows are not rerun by this aggregator; rerun the Qwen proof scripts for fresh model evidence."
+  ],
+  "ok": true,
+  "proofLevel": "artifact-backed-scenario-coverage",
+  "proofType": "autonomous-scenario-matrix",
+  "requiredStages": [
+    "surface",
+    "probe",
+    "prove",
+    "exploit_or_validate",
+    "evidence",
+    "report"
+  ],
+  "rows": [
+    {
+      "artifacts": [
+        {
+          "artifact": "docs/live-proofs/2026-07-04-real-installed-tools-loopback.json",
+          "generatedAt": "2026-07-04T07:50:59-0700",
+          "proofType": "real-installed-tools-loopback",
+          "status": "PASS"
+        },
+        {
+          "artifact": "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-27b.json",
+          "generatedAt": "2026-07-04T07:30:36-0700",
+          "proofType": "real-qwen-real-installed-tools-loopback",
+          "status": "PASS"
+        },
+        {
+          "artifact": "docs/live-proofs/2026-07-04-real-qwen-real-tools-loopback-35b.json",
+          "generatedAt": "2026-07-04T07:39:27-0700",
+          "proofType": "real-qwen-real-installed-tools-loopback",
+          "status": "PASS"
+        }
+      ],
+      "cacheProof": {
+        "hybridSSM": true,
+        "paged": true,
+        "prefix": true,
+        "q4KV": true
+      },
+      "currentRunStatus": "NOT_REQUIRED",
+      "failures": [],
+      "label": "Local loopback webserver with real installed tools",
+      "modelRequired": true,
+      "observedTools": [],
+      "requiredTools": [
+        "nmap",
+        "httpx",
+        "nuclei",
+        "hydra",
+        "netexec",
+        "linpeas",
+        "run_shell"
+      ],
+      "scenarioId": "loopback_webserver_real_tools",
+      "stageEvidence": {
+        "evidence": [
+          "verbose chat tool cards",
+          "terminal transcripts",
+          "results raw output"
+        ],
+        "exploit_or_validate": [
+          "safe local validation only",
+          "no external target"
+        ],
+        "probe": [
+          "nuclei local template",
+          "hydra loopback credential probe"
+        ],
+        "prove": [
+          "curl/nc loopback proof marker",
+          "parsed app results"
+        ],
+        "report": [
+          "covered by report_generation_from_evidence scenario"
+        ],
+        "surface": [
+          "nmap loopback service discovery",
+          "httpx local lab host discovery"
+        ]
+      },
+      "stages": [
+        "surface",
+        "probe",
+        "prove",
+        "exploit_or_validate",
+        "evidence",
+        "report"
+      ],
+      "status": "PASS"
+    },
+    {
+      "artifacts": [
+        {
+          "artifact": "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-27b.json",
+          "generatedAt": "",
+          "proofType": "real-qwen-autonomous-phase",
+          "status": "PASS"
+        },
+        {
+          "artifact": "docs/live-proofs/2026-07-04-real-qwen-autonomous-phase-35b.json",
+          "generatedAt": "",
+          "proofType": "real-qwen-autonomous-phase",
+          "status": "PASS"
+        }
+      ],
+      "cacheProof": {
+        "hybridSSM": true,
+        "paged": true,
+        "prefix": true,
+        "q4KV": true
+      },
+      "currentRunStatus": "NOT_REQUIRED",
+      "failures": [],
+      "label": "Autonomous phase chain through safe exploit/post stages",
+      "modelRequired": true,
+      "observedTools": [],
+      "requiredTools": [
+        "nmap",
+        "netexec",
+        "sqlmap",
+        "hydra",
+        "metasploit",
+        "linpeas"
+      ],
+      "scenarioId": "phase_chain_safe_exploit",
+      "stageEvidence": {
+        "evidence": [
+          "ordered tool transcript and final assistant continuation"
+        ],
+        "exploit_or_validate": [
+          "safe metasploit fixture output",
+          "linpeas post fixture output"
+        ],
+        "probe": [
+          "netexec/sqlmap/hydra phase probes"
+        ],
+        "prove": [
+          "parsed SQL injection and credential evidence"
+        ],
+        "report": [
+          "covered by report_generation_from_evidence scenario"
+        ],
+        "surface": [
+          "nmap phase start"
+        ]
+      },
+      "stages": [
+        "surface",
+        "probe",
+        "prove",
+        "exploit_or_validate",
+        "evidence",
+        "report"
+      ],
+      "status": "PASS"
+    },
+    {
+      "artifacts": [
+        {
+          "artifact": "docs/live-proofs/2026-07-06-repo-codebase-supply-chain-scenario.json",
+          "generatedAt": "2026-07-05T22:26:54-0700",
+          "proofType": "repo-codebase-supply-chain-scenario-live",
+          "status": "PASS"
+        }
+      ],
+      "cacheProof": {
+        "hybridSSM": false,
+        "paged": false,
+        "prefix": false,
+        "q4KV": false
+      },
+      "currentRunStatus": "PASS",
+      "failures": [],
+      "label": "Synthetic repo/codebase supply-chain scenario",
+      "modelRequired": false,
+      "observedTools": [
+        "grype",
+        "osv_scanner",
+        "run_shell",
+        "search_cve",
+        "syft",
+        "trufflehog"
+      ],
+      "requiredTools": [
+        "run_shell",
+        "trufflehog",
+        "syft",
+        "grype",
+        "osv_scanner",
+        "search_cve"
+      ],
+      "scenarioId": "repo_codebase_supply_chain",
+      "stageEvidence": {
+        "evidence": [
+          "/messages",
+          "/results",
+          "/state terminal transcripts"
+        ],
+        "exploit_or_validate": [
+          "safe validation only; no exploitation"
+        ],
+        "probe": [
+          "trufflehog secret scan",
+          "syft SBOM inventory"
+        ],
+        "prove": [
+          "grype CVE evidence",
+          "osv_scanner GHSA evidence",
+          "search_cve callback"
+        ],
+        "report": [
+          "report finding action and report generate route"
+        ],
+        "surface": [
+          "run_shell file inventory over temp repo"
+        ]
+      },
+      "stages": [
+        "surface",
+        "probe",
+        "prove",
+        "exploit_or_validate",
+        "evidence",
+        "report"
+      ],
+      "status": "PASS"
+    },
+    {
+      "artifacts": [
+        {
+          "artifact": "docs/live-proofs/2026-07-05-report-finding-actions-current.json",
+          "generatedAt": "2026-07-05T16:26:07-0700",
+          "proofType": "report-finding-actions-live",
+          "status": "PASS"
+        },
+        {
+          "artifact": "docs/live-proofs/2026-07-05-report-generate-action-current.json",
+          "generatedAt": "2026-07-05T16:26:09-0700",
+          "proofType": "report-generate-action-live",
+          "status": "PASS"
+        },
+        {
+          "artifact": "docs/live-proofs/2026-07-05-report-export-current.json",
+          "generatedAt": "2026-07-05T16:26:11-0700",
+          "proofType": "report-export-live",
+          "status": "PASS"
+        }
+      ],
+      "cacheProof": {
+        "hybridSSM": false,
+        "paged": false,
+        "prefix": false,
+        "q4KV": false
+      },
+      "currentRunStatus": "NOT_REQUIRED",
+      "failures": [],
+      "label": "Report generation/export from confirmed findings",
+      "modelRequired": false,
+      "observedTools": [],
+      "requiredTools": [
+        "create_finding",
+        "generate_report",
+        "export_report"
+      ],
+      "scenarioId": "report_generation_from_evidence",
+      "stageEvidence": {
+        "evidence": [
+          "HTML/Markdown/JSON/PDF artifact checks"
+        ],
+        "exploit_or_validate": [
+          "report artifact export validation"
+        ],
+        "probe": [
+          "report finding wizard/action route"
+        ],
+        "prove": [
+          "generated HTML preview"
+        ],
+        "report": [
+          "full report generation and export"
+        ],
+        "surface": [
+          "confirmed finding state"
+        ]
+      },
+      "stages": [
+        "surface",
+        "probe",
+        "prove",
+        "exploit_or_validate",
+        "evidence",
+        "report"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "scenarioCount": 4,
+  "status": "PASS",
+  "statusCounts": {
+    "FAIL": 0,
+    "PASS": 4
+  }
+}
