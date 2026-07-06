@@ -1,77 +1,100 @@
 {
-  "baseUrl": "http://127.0.0.1:51664",
-  "engineLogTail": "INFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 289 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 290 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 291 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 292 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 293 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 294 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 295 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 296 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 297 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 298 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 299 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 300 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 301 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 302 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 303 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 304 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 305 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 306 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 307 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 308 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 309 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 310 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 311 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 312 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 313 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 314 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 315 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 316 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 317 (16 kv layers, cumulative=48, 52 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 114 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-6c551439: 64 layers, truncated to 7924 tokens\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 256, 'enable_thinking': False}\nINFO:     127.0.0.1:52291 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-4aa35056: 10 blocks, 640 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 16/64 layers (48 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-4aa35056: 640 cached (KV+SSM), 7855 remaining (incl. 7-token gen-prompt suffix)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-4aa35056 (48 layers, key=8448 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-4aa35056 (48 layers, key=8487 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-4aa35056 (48 layers, 8448-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-4aa35056 (48 layers, 8487-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-4aa35056 depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-4aa35056] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.250,d3=0.083]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-4aa35056] finish=stop cycles=154 accepted=91/178 (51.1%) emits[init=2,draft=91,bonus=81,verify=72]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-4aa35056] accept_by_depth[d1=87/154,d2=3/12,d3=1/12] forwards[seed_main=1,verify_main=154,replay_main=72,mtp=179]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-4aa35056] timings_ms[verify=1111.38 sample=12189.17 draft=4317.39 snapshot=7.21 restore=7.99 replay=175.80 materialize=0.98 avg_cycle=115.65]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=7847, num_new_blocks=123, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 16 positional layers (out of 64 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 318 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 319 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 320 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 321 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 322 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 323 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 324 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 325 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 326 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 327 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 328 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 329 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 330 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 331 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 332 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 333 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 334 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 335 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 336 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 337 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 338 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 339 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 340 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 341 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 342 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 343 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 344 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 345 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 346 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 347 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 348 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 349 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 350 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 351 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 352 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 353 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 354 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 355 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 356 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 357 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 358 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 359 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 360 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 361 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 362 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 363 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 364 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 365 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 366 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 367 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 368 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 369 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 370 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 371 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 372 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 373 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 374 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 375 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 376 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 377 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 378 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 379 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 380 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 381 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 382 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 383 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 384 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 385 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 386 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 387 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 388 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 389 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 390 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 391 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 392 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 393 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 394 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 395 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 396 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 397 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 398 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 399 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 400 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 401 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 402 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 403 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 404 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 405 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 406 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 407 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 408 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 409 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 410 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 411 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 412 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 413 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 414 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 415 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 416 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 417 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 418 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 419 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 420 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 421 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 422 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 423 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 424 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 425 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 426 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 427 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 428 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 429 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 430 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 431 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 432 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 433 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 434 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 435 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 436 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 437 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 438 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 439 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 440 (16 kv layers, cumulative=48, 39 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 123 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-4aa35056: 64 layers, truncated to 8487 tokens\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 256, 'enable_thinking': False}\nINFO:     127.0.0.1:52535 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-fea777c8: 10 blocks, 640 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 16/64 layers (48 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-fea777c8: 640 cached (KV+SSM), 8420 remaining (incl. 7-token gen-prompt suffix)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-fea777c8 (48 layers, key=9024 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-fea777c8 (48 layers, key=9052 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-fea777c8 (48 layers, 9024-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-fea777c8 (48 layers, 9052-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-fea777c8 depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-fea777c8] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.333,d3=0.250]\nINFO:__main__:Stream chat generation cancelled by client for chatcmpl-fea777c8\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 256, 'enable_thinking': False}\nINFO:     127.0.0.1:52734 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-006a532b: 10 blocks, 640 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 16/64 layers (48 cumulative layers deferred to _fix_hybrid_cache)",
+  "baseUrl": "http://127.0.0.1:57763",
+  "engineLogTail": "INFO:vmlx_engine.mllm_batch_generator:vmlx#91 RESUME for chatcmpl-93a090d2: trimmed KV to 640 tokens (block-aligned from checkpoint at 640), SSM state reused from checkpoint. Prefill tail: 5624 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 16/64 layers (48 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-93a090d2: 640 cached (KV+SSM), 5631 remaining (incl. 7-token gen-prompt suffix)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-93a090d2 (48 layers, key=896 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-93a090d2 (48 layers, key=6208 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-93a090d2 (48 layers, key=6263 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-93a090d2 (48 layers, 896-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-93a090d2 (48 layers, 6208-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-93a090d2 (48 layers, 6263-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-93a090d2 depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-93a090d2] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.083,d3=0.000]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-93a090d2] finish=stop cycles=63 accepted=26/87 (29.9%) emits[init=2,draft=26,bonus=17,verify=45]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-93a090d2] accept_by_depth[d1=25/63,d2=1/12,d3=0/12] forwards[seed_main=1,verify_main=63,replay_main=45,mtp=88]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-93a090d2] timings_ms[verify=532.76 sample=5684.85 draft=2758.64 snapshot=2.77 restore=5.04 replay=110.30 materialize=0.42 avg_cycle=144.36]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=5623, num_new_blocks=88, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 16 positional layers (out of 64 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 242 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 243 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 244 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 245 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 246 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 247 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 248 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 249 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 250 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 251 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 252 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 253 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 254 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 255 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 256 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 257 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 258 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 259 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 260 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 261 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 262 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 263 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 264 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 265 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 266 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 267 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 268 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 269 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 270 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 271 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 272 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 273 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 274 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 275 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 276 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 277 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 278 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 279 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 280 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 281 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 282 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 283 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 284 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 285 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 286 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 287 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 288 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 289 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 290 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 291 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 292 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 293 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 294 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 295 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 296 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 297 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 298 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 299 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 300 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 301 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 302 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 303 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 304 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 305 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 306 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 307 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 308 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 309 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 310 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 311 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 312 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 313 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 314 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 315 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 316 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 317 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 318 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 319 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 320 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 321 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 322 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 323 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 324 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 325 (16 kv layers, cumulative=48, 55 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 84 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-93a090d2: 64 layers, truncated to 6263 tokens\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 256, 'enable_thinking': False}\nINFO:     127.0.0.1:58625 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-cf5e6fb9: 10 blocks, 640 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 16/64 layers (48 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-cf5e6fb9: 640 cached (KV+SSM), 5978 remaining (incl. 7-token gen-prompt suffix)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-cf5e6fb9 (48 layers, key=6592 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-cf5e6fb9 (48 layers, key=6610 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-cf5e6fb9 (48 layers, 6592-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-cf5e6fb9 (48 layers, 6610-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-cf5e6fb9 depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-cf5e6fb9] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.083,d3=0.083]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-cf5e6fb9] finish=length cycles=157 accepted=97/181 (53.6%) emits[init=2,draft=97,bonus=92,verify=65]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-cf5e6fb9] accept_by_depth[d1=95/157,d2=1/12,d3=1/12] forwards[seed_main=1,verify_main=157,replay_main=65,mtp=182]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-cf5e6fb9] timings_ms[verify=1126.29 sample=13255.82 draft=3858.95 snapshot=7.04 restore=7.37 replay=159.16 materialize=1.00 avg_cycle=117.30]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=5970, num_new_blocks=94, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 16 positional layers (out of 64 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 326 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 327 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 328 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 329 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 330 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 331 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 332 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 333 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 334 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 335 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 336 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 337 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 338 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 339 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 340 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 341 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 342 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 343 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 344 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 345 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 346 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 347 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 348 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 349 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 350 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 351 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 352 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 353 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 354 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 355 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 356 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 357 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 358 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 359 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 360 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 361 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 362 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 363 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 364 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 365 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 366 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 367 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 368 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 369 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 370 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 371 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 372 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 373 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 374 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 375 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 376 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 377 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 378 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 379 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 380 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 381 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 382 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 383 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 384 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 385 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 386 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 387 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 388 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 389 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 390 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 391 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 392 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 393 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 394 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 395 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 396 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 397 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 398 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 399 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 400 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 401 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 402 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 403 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 404 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 405 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 406 (16 kv layers, 64 tokens)",
   "error": "StalledFinalAnswer: assistant stream made no observable progress for 45.0s",
   "finalAnswerAttempts": [
     {
       "attempt": 1,
-      "lastAssistantPreview": "",
+      "lastAssistantPreview": "*Processing tool results...*\n\n**Step 1: File Inventory (run_shell)**\n*   **Output:** `find ... | sort`\n*   **Expected:** `package.json`, `package-lock.json`, `src/app.js`, `README.md`, `.env` (potential secret).\n*   **Action:** Parse the list to identify manifest files (`package.json`, `Gemfile`, `requirements.txt`) for `syft` and `grype`.\n**Step 2: Secret Scan (trufflehog)**\n*   **Output:** JSON/Text report.\n*   **Expected:** `.env` file containing `API_KEY=...` or `DB_PASSWORD=...`.\n*   **Acti",
       "missingTools": [
+        "trufflehog",
+        "syft",
+        "grype",
         "osv_scanner",
         "search_cve"
       ],
-      "note": "assistant stream made no observable progress for 45.0s",
+      "note": "assistant stopped before all expected repo tools",
+      "specificToolChoiceFunctionName": null,
       "status": "stalled-final-answer",
       "toolSequence": [
-        "run_shell",
-        "trufflehog",
-        "syft",
-        "grype"
+        "run_shell"
       ]
     },
     {
       "attempt": 2,
-      "lastAssistantPreview": "",
+      "lastAssistantPreview": "<target/var/f/var/folders//var/folders/8x/var/folders/8x/q/var/folders/8x/q1/var/folders/8x/q1k/var/folders/8x/q1k_/var/folders/8x/q1k_20/var/folders/8x/q1k_20mj/var/folders/8x/q1k_20mj5/var/folders/8x/q1k_20mj5w/var/folders/8x/q1k_20mj5w3/var/folders/8x/q1k_20mj5w3bz/var/folders/8x/q1k_20mj5w3bzpx/var/folders/8x/q1k_20mj5w3bzpx5/var/folders/8x/q1k_20mj5w3bzpx5c/var/folders/8x/q1k_20mj5w3bzpx5c_p/var/folders/8x/q1k_20mj5w3bzpx5c_psg/var/folders/8x/q1k_20mj5w3bzpx5c_psg3/var/folders/8x/q1k_20mj5w",
       "missingTools": [
+        "syft",
+        "grype",
         "osv_scanner",
         "search_cve"
       ],
-      "note": "assistant stream made no observable progress for 45.0s",
+      "note": "assistant stopped before all expected repo tools",
+      "specificToolChoiceFunctionName": "trufflehog",
       "status": "stalled-final-answer",
       "toolSequence": [
         "run_shell",
-        "trufflehog",
-        "syft",
-        "grype"
+        "trufflehog"
       ]
     },
     {
       "attempt": 3,
-      "lastAssistantPreview": "",
+      "lastAssistantPreview": "REAL_QWEN_REPO_SUPPLY_CHAIN_FINAL\n# Supply Chain Proof: Synthetic Vulnerable Repo\n**Target:** `/var/.../synthetic-vulnerable-repo`\n**Agent:** exploitbot (vMLX)\n**Phase:** SCAN (Supply Chain)\n## 1. Executive Summary\nThe local synthetic repository contains a Node.js ecosystem with two primary dependencies: `lodash` and `minimist`. The scan reveals a **High** severity supply-chain risk via a leaked generic API key in `.env.example` and a **Medium/High** risk via an outdated `lodash` version (4.17.1",
       "missingTools": [
+        "grype",
         "osv_scanner",
         "search_cve"
       ],
       "note": "assistant stream made no observable progress for 45.0s",
+      "specificToolChoiceFunctionName": "syft",
       "status": "stalled-final-answer",
       "toolSequence": [
         "run_shell",
         "trufflehog",
-        "syft",
-        "grype"
+        "syft"
       ]
     },
     {
       "attempt": 4,
       "lastAssistantPreview": "",
       "missingTools": [
+        "grype",
         "osv_scanner",
         "search_cve"
       ],
       "note": "assistant stream made no observable progress for 45.0s",
+      "specificToolChoiceFunctionName": "grype",
+      "specificToolRetryCount": 1,
       "status": "stalled-final-answer",
       "toolSequence": [
         "run_shell",
         "trufflehog",
-        "syft",
-        "grype"
+        "syft"
+      ]
+    },
+    {
+      "attempt": 5,
+      "lastAssistantPreview": "",
+      "missingTools": [
+        "grype",
+        "osv_scanner",
+        "search_cve"
+      ],
+      "note": "assistant stream made no observable progress for 45.0s; repeated function-specific tool_choice retry did not produce grype",
+      "specificToolChoiceFunctionName": "grype",
+      "specificToolRetryCount": 2,
+      "status": "stalled-final-answer",
+      "toolSequence": [
+        "run_shell",
+        "trufflehog",
+        "syft"
       ]
     }
   ],
-  "finishedAt": "2026-07-05T23:35:31-0700",
+  "finishedAt": "2026-07-06T00:07:46-0700",
   "memoryPreflight": {
     "allowConcurrentModel": false,
-    "availableGB": 108.89335632324219,
+    "availableGB": 108.22441101074219,
     "enabled": true,
     "heavyModelProcessCount": 0,
     "heavyModelProcesses": [],
@@ -79,11 +102,11 @@
   },
   "messages": [
     {
-      "content": "Authorized local repo/codebase supply-chain proof. Reasoning is off. Use only this throwaway local repo path and do not touch external targets: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo. Surface files, probe secrets/SBOM/dependencies, prove known vulnerable packages, validate safely without exploitation, then summarize evidence for the report. Emit these exact Qwen XML tool calls now, with valid JSON. After tool results,",
+      "content": "Authorized local repo/codebase supply-chain proof. Reasoning is off. Use only this throwaway local repo path and do not touch external targets: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b0rwnkrc/synthetic-vulnerable-repo. Surface files, probe secrets/SBOM/dependencies, prove known vulnerable packages, validate safely without exploitation, then summarize evidence for the report. Emit these exact Qwen XML tool calls now, with valid JSON. After tool results,",
       "role": "user"
     },
     {
-      "content": "You are acting as **exploitbot**, a local vMLX agent. The goal is a supply-chain proof on a synthetic repo.\n\n**Phase:** SCAN (Supply Chain)\n**Target:** `/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo`\n\nHere are the exact tool calls to surface the file tree, hunt for secrets, build the SBOM, and map dependencies to known CVEs.\n\n\n<tool_call>\n<function=trufflehog>\n<parameter=source_type>\nfilesystem\n</parameter>\n<parameter=target",
+      "content": "You are acting as **exploitbot**, a local vMLX agent. The goal is a supply-chain proof on a synthetic repo.\n\n**Phase:** SCAN (Supply Chain Focus)\n**Target:** `/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b0rwnkrc/synthetic-vulnerable-repo`\n\nHere is the execution sequence.\n\n\n<tool_call>\n<function=trufflehog>\n<parameter>target>\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b",
       "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 0 of 0 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets: none yet.\nCVE assist: semantic embedding search is enabled when cve_embedder.py and stored CVE embeddings are available; oth",
       "contextSnippetCount": 0,
       "role": "assistant",
@@ -129,23 +152,15 @@
       ]
     },
     {
-      "content": "Tool request: run_shell\n$ /bin/zsh -c find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo -maxdepth 2 -type f | sort\nArguments:\n{\n  \"command\" : \"find \\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-b1dgflwn\\/synthetic-vulnerable-repo -maxdepth 2 -type f | sort\"\n}\n\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo/.env.example\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo/Dockerfile\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo/package-lock.json\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo/package.json\n",
+      "content": "Tool request: run_shell\n$ /bin/zsh -c \nArguments:\n{\n\n}\n\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "run_shell"
     },
     {
-      "content": "Continuing the supply-chain scan. We have the file tree. Now we need to ingest the SBOM, map dependencies, and hunt for secrets.\n\n**Phase:** SCAN (Supply Chain)\n**Target:** `.../synthetic-vulnerable-repo`\n\nHere are the exact tool calls to surface the file tree, hunt for secrets, build the SBOM, and map dependencies to known CVEs.",
-      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 1 of 1 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fi",
-      "contextSelections": [
-        {
-          "bodyHash": "ed7341f8459f1a40",
-          "source": "tool.output",
-          "tags": "tool,run_shell",
-          "title": "run_shell"
-        }
-      ],
-      "contextSnippetCount": 1,
+      "content": "*Processing tool results...*\n\n**Step 1: File Inventory (run_shell)**\n*   **Output:** `find ... | sort`\n*   **Expected:** `package.json`, `package-lock.json`, `src/app.js`, `README.md`, `.env` (potential secret).\n*   **Action:** Parse the list to identify manifest files (`package.json`, `Gemfile`, `requirements.txt`) for `syft` and `grype`.\n**Step 2: Secret Scan (trufflehog)**\n*   **Output:** JSON/Text report.\n*   **Expected:** `.env` file containing `API_KEY=...` or `DB_PASSWORD=...`.\n*   **Acti",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 0 of 0 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets: none yet.\nCVE assist: semantic embedding search is enabled when cve_embedder.py and stored CVE embeddings are available; oth",
+      "contextSnippetCount": 0,
       "role": "assistant",
       "toolSchemaCount": 37,
       "toolSchemas": [
@@ -189,21 +204,54 @@
       ]
     },
     {
-      "content": "Tool request: trufflehog\n$ trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo --json\nArguments:\n{\n  \"source_type\" : \"filesystem\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-b1dgflwn\\/synthetic-vulnerable-repo\",\n  \"verified_only\" : \"False\"\n}\n\n{\"DetectorName\": \"Generic API Key\", \"Raw\": \"EXPLOITBOT_FAKE_TOKEN_DO_NOT_USE\", \"SourceMetadata\": {\"Data\": {\"Git\": {\"file\": \".env.example\", \"repository\": \"synthetic-vulnerable-repo\"}}}}\n",
+      "content": "This is a function-specific tool_choice retry. The app request will constrain tool_choice to the single remaining function named below. The previous assistant stream stalled before the repo/codebase workflow finished. Do not repeat tools already present in the transcript. Emit only the remaining exact Qwen XML tool calls now, with no markdown, phase plan, or prose before the tool calls. Remaining tools: trufflehog.\n<tool_call>{\"name\":\"trufflehog\",\"arguments\":{\"source_type\":\"filesystem\",\"target\":",
+      "role": "user"
+    },
+    {
+      "content": "",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 0 of 0 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets: none yet.\nCVE assist: semantic embedding search is enabled when cve_embedder.py and stored CVE embeddings are available; oth",
+      "contextSnippetCount": 0,
+      "role": "assistant",
+      "toolSchemaCount": 26,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "run_shell",
+        "theharvester",
+        "gowitness",
+        "trufflehog",
+        "syft",
+        "nuclei",
+        "hashcat",
+        "grype",
+        "dnsx",
+        "httpx",
+        "wpscan",
+        "osv_scanner",
+        "jwt_tool",
+        "exiftool",
+        "subfinder",
+        "nmap",
+        "sqlmap",
+        "sherlock",
+        "masscan",
+        "ffuf",
+        "haiti",
+        "pwncat",
+        "sliver"
+      ]
+    },
+    {
+      "content": "Tool request: trufflehog\n$ trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b0rwnkrc/synthetic-vulnerable-repo --json\nArguments:\n{\n  \"source_type\" : \"filesystem\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-b0rwnkrc\\/synthetic-vulnerable-repo\",\n  \"verified_only\" : false\n}\n\n{\"DetectorName\": \"Generic API Key\", \"Raw\": \"EXPLOITBOT_FAKE_TOKEN_DO_NOT_USE\", \"SourceMetadata\": {\"Data\": {\"Git\": {\"file\": \".env.example\", \"repository\": \"synthetic-vulnerable-repo\"}}}}\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "trufflehog"
     },
     {
-      "content": "Excellent. The file tree is mapped, and `trufflehog` has already surfaced a \"Generic API Key\" in `.env.example`. Now we need to build the SBOM and map the dependency tree to known CVEs.\n\n**Phase:** SCAN (Supply Chain)\n**Target:** `.../synthetic-vulnerable-repo`\n\nHere are the exact tool calls to surface the file tree, hunt for secrets, build the SBOM, and map dependencies to known CVEs.",
-      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 3 of 3 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=1 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fi",
+      "content": "<target/var/f/var/folders//var/folders/8x/var/folders/8x/q/var/folders/8x/q1/var/folders/8x/q1k/var/folders/8x/q1k_/var/folders/8x/q1k_20/var/folders/8x/q1k_20mj/var/folders/8x/q1k_20mj5/var/folders/8x/q1k_20mj5w/var/folders/8x/q1k_20mj5w3/var/folders/8x/q1k_20mj5w3bz/var/folders/8x/q1k_20mj5w3bzpx/var/folders/8x/q1k_20mj5w3bzpx5/var/folders/8x/q1k_20mj5w3bzpx5c/var/folders/8x/q1k_20mj5w3bzpx5c_p/var/folders/8x/q1k_20mj5w3bzpx5c_psg/var/folders/8x/q1k_20mj5w3bzpx5c_psg3/var/folders/8x/q1k_20mj5w",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 2 of 2 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=1 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] trufflehog tags=tool,trufflehog: {\"DetectorName\": \"Generic API Key\", \"Raw\": \"EXPLOITBOT_FAKE_TOKEN_DO_NOT_US",
       "contextSelections": [
-        {
-          "bodyHash": "ed7341f8459f1a40",
-          "source": "tool.output",
-          "tags": "tool,run_shell",
-          "title": "run_shell"
-        },
         {
           "bodyHash": "ee9078b7e1d9a4d4",
           "source": "tool.output",
@@ -217,65 +265,70 @@
           "title": "HIGH Leaked Secret: Generic API Key"
         }
       ],
-      "contextSnippetCount": 3,
+      "contextSnippetCount": 2,
+      "role": "assistant"
+    },
+    {
+      "content": "This is a function-specific tool_choice retry. The app request will constrain tool_choice to the single remaining function named below. The previous assistant stream stalled before the repo/codebase workflow finished. Do not repeat tools already present in the transcript. Emit only the remaining exact Qwen XML tool calls now, with no markdown, phase plan, or prose before the tool calls. Remaining tools: syft.\n<tool_call>{\"name\":\"syft\",\"arguments\":{\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3",
+      "role": "user"
+    },
+    {
+      "content": "",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 2 of 2 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=1 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] trufflehog tags=tool,trufflehog: {\"DetectorName\": \"Generic API Key\", \"Raw\": \"EXPLOITBOT_FAKE_TOKEN_DO_NOT_US",
+      "contextSelections": [
+        {
+          "bodyHash": "ee9078b7e1d9a4d4",
+          "source": "tool.output",
+          "tags": "tool,trufflehog",
+          "title": "trufflehog"
+        },
+        {
+          "bodyHash": "f8bd31c12e5185a5",
+          "source": "finding",
+          "tags": "vuln,high,trufflehog,secret,leaked,generic api key",
+          "title": "HIGH Leaked Secret: Generic API Key"
+        }
+      ],
+      "contextSnippetCount": 2,
       "role": "assistant",
-      "toolSchemaCount": 37,
+      "toolSchemaCount": 24,
       "toolSchemas": [
         "search_cve",
         "lookup_cve",
         "search_context",
         "run_shell",
-        "trufflehog",
-        "gowitness",
-        "httpx",
         "theharvester",
+        "gowitness",
+        "syft",
+        "trufflehog",
+        "grype",
+        "dnsx",
+        "httpx",
+        "nuclei",
+        "hashcat",
+        "wpscan",
         "jwt_tool",
         "osv_scanner",
         "exiftool",
-        "nuclei",
-        "grype",
-        "syft",
-        "sherlock",
         "nmap",
         "sqlmap",
-        "hashcat",
-        "pwncat",
-        "linpeas",
-        "dnsx",
+        "sherlock",
         "masscan",
-        "wpscan",
-        "metasploit",
-        "feroxbuster",
-        "dalfox",
-        "graphqlmap",
-        "netexec",
-        "subfinder",
-        "katana",
         "ffuf",
-        "tshark",
-        "haiti",
-        "hydra",
-        "snmpwalk",
-        "chisel",
-        "impacket"
+        "pwncat",
+        "sliver"
       ]
     },
     {
-      "content": "Tool request: syft\n$ syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo -o json\nArguments:\n{\n  \"output\" : \"json\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-b1dgflwn\\/synthetic-vulnerable-repo\"\n}\n\n{\"artifacts\": [{\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, {\"name\": \"minimist\", \"version\": \"0.0.8\", \"type\": \"npm\"}], \"source\": {\"type\": \"directory\", \"target\": \"synthetic-vulnerable-repo\"}}\n",
+      "content": "Tool request: syft\n$ syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b0rwnkrc/synthetic-vulnerable-repo -o json\nArguments:\n{\n  \"output\" : \"json\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-b0rwnkrc\\/synthetic-vulnerable-repo\"\n}\n\n{\"artifacts\": [{\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, {\"name\": \"minimist\", \"version\": \"0.0.8\", \"type\": \"npm\"}], \"source\": {\"type\": \"directory\", \"target\": \"synthetic-vulnerable-repo\"}}\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "syft"
     },
     {
-      "content": "The SBOM is built. We have two high-signal artifacts:\n1.  **lodash 4.17.11** (Historically riddled with prototype pollution and RCEs)\n2.  **minimist 0.0.8** (Historically riddled with prototype pollution)\n\nNow werun `grype` and `osv_scanner` to map these to specific CVEs, and `search_cve` to enrich the local context.\n\n**Phase:** SCAN (Supply Chain)\n**Target:** `.../synthetic-vulnerable-repo`\n\nHere are the exact tool calls to surface the file tree, hunt for secrets, build the SBOM, and map depend",
-      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 6 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=3 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fi",
+      "content": "REAL_QWEN_REPO_SUPPLY_CHAIN_FINAL\n# Supply Chain Proof: Synthetic Vulnerable Repo\n**Target:** `/var/.../synthetic-vulnerable-repo`\n**Agent:** exploitbot (vMLX)\n**Phase:** SCAN (Supply Chain)\n## 1. Executive Summary\nThe local synthetic repository contains a Node.js ecosystem with two primary dependencies: `lodash` and `minimist`. The scan reveals a **High** severity supply-chain risk via a leaked generic API key in `.env.example` and a **Medium/High** risk via an outdated `lodash` version (4.17.1",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 5 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=3 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] trufflehog tags=tool,trufflehog: {\"DetectorName\": \"Generic API Key\", \"Raw\": \"EXPLOITBOT_FAKE_TOKEN_DO_NOT_US",
       "contextSelections": [
-        {
-          "bodyHash": "ed7341f8459f1a40",
-          "source": "tool.output",
-          "tags": "tool,run_shell",
-          "title": "run_shell"
-        },
         {
           "bodyHash": "ee9078b7e1d9a4d4",
           "source": "tool.output",
@@ -293,149 +346,25 @@
           "source": "finding",
           "tags": "vuln,high,trufflehog,secret,leaked,generic api key",
           "title": "HIGH Leaked Secret: Generic API Key"
-        }
-      ],
-      "contextSnippetCount": 4,
-      "role": "assistant",
-      "toolSchemaCount": 37,
-      "toolSchemas": [
-        "search_cve",
-        "lookup_cve",
-        "search_context",
-        "run_shell",
-        "trufflehog",
-        "gowitness",
-        "httpx",
-        "theharvester",
-        "jwt_tool",
-        "osv_scanner",
-        "exiftool",
-        "nuclei",
-        "grype",
-        "syft",
-        "sherlock",
-        "nmap",
-        "sqlmap",
-        "hashcat",
-        "pwncat",
-        "linpeas",
-        "dnsx",
-        "masscan",
-        "wpscan",
-        "metasploit",
-        "feroxbuster",
-        "dalfox",
-        "graphqlmap",
-        "netexec",
-        "subfinder",
-        "katana",
-        "ffuf",
-        "tshark",
-        "haiti",
-        "hydra",
-        "snmpwalk",
-        "chisel",
-        "impacket"
-      ]
-    },
-    {
-      "content": "Tool request: grype\n$ grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo -o json --fail-on critical\nArguments:\n{\n  \"fail_on\" : \"critical\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-b1dgflwn\\/synthetic-vulnerable-repo\"\n}\n\n{\"matches\": [{\"vulnerability\": {\"id\": \"CVE-2021-23337\", \"severity\": \"High\"}, \"artifact\": {\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, \"matchDetails\": [{\"type\": \"exact-direct-match\"}]}]}\n",
-      "role": "toolCall",
-      "status": "ok 0.0s",
-      "tool": "grype"
-    },
-    {
-      "content": "",
-      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 8 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=4 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fi",
-      "contextSelections": [
-        {
-          "bodyHash": "ed7341f8459f1a40",
-          "source": "tool.output",
-          "tags": "tool,run_shell",
-          "title": "run_shell"
         },
         {
-          "bodyHash": "c21d23076be48c0c",
+          "bodyHash": "9f06aa14328357f7",
           "source": "finding",
-          "tags": "vuln,high,grype,dependency,supply-chain,grype,CVE-2021-23337",
-          "title": "HIGH CVE-2021-23337"
-        },
-        {
-          "bodyHash": "ee9078b7e1d9a4d4",
-          "source": "tool.output",
-          "tags": "tool,trufflehog",
-          "title": "trufflehog"
-        },
-        {
-          "bodyHash": "b6ca138d4189fdff",
-          "source": "tool.output",
-          "tags": "tool,syft",
-          "title": "syft"
+          "tags": "vuln,info,syft,sbom,dependency,npm",
+          "title": "INFO SBOM Component: lodash"
         }
       ],
       "contextSnippetCount": 4,
-      "role": "assistant",
-      "toolSchemaCount": 37,
-      "toolSchemas": [
-        "search_cve",
-        "lookup_cve",
-        "search_context",
-        "run_shell",
-        "trufflehog",
-        "gowitness",
-        "httpx",
-        "theharvester",
-        "jwt_tool",
-        "osv_scanner",
-        "exiftool",
-        "nuclei",
-        "grype",
-        "syft",
-        "sherlock",
-        "nmap",
-        "sqlmap",
-        "hashcat",
-        "pwncat",
-        "linpeas",
-        "dnsx",
-        "masscan",
-        "wpscan",
-        "metasploit",
-        "feroxbuster",
-        "dalfox",
-        "graphqlmap",
-        "netexec",
-        "subfinder",
-        "katana",
-        "ffuf",
-        "tshark",
-        "haiti",
-        "hydra",
-        "snmpwalk",
-        "chisel",
-        "impacket"
-      ]
+      "role": "assistant"
     },
     {
-      "content": "The previous assistant stream stalled before the repo/codebase workflow finished. Do not repeat tools already present in the transcript. Emit only the remaining exact Qwen XML tool calls now, with no markdown, phase plan, or prose before the tool calls. Remaining tools: osv_scanner, search_cve.\n<tool_call>{\"name\":\"osv_scanner\",\"arguments\":{\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo\",\"format\":\"json\"}}</tool_call>",
+      "content": "This is a function-specific tool_choice retry. The app request will constrain tool_choice to the single remaining function named below. The previous assistant stream stalled before the repo/codebase workflow finished. Do not repeat tools already present in the transcript. Emit only the remaining exact Qwen XML tool calls now, with no markdown, phase plan, or prose before the tool calls. Remaining tools: grype.\n<tool_call>{\"name\":\"grype\",\"arguments\":{\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_ps",
       "role": "user"
     },
     {
       "content": "",
-      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 8 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=4 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fi",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 5 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=3 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] trufflehog tags=tool,trufflehog: {\"DetectorName\": \"Generic API Key\", \"Raw\": \"EXPLOITBOT_FAKE_TOKEN_DO_NOT_US",
       "contextSelections": [
-        {
-          "bodyHash": "ed7341f8459f1a40",
-          "source": "tool.output",
-          "tags": "tool,run_shell",
-          "title": "run_shell"
-        },
-        {
-          "bodyHash": "c21d23076be48c0c",
-          "source": "finding",
-          "tags": "vuln,high,grype,dependency,supply-chain,grype,CVE-2021-23337",
-          "title": "HIGH CVE-2021-23337"
-        },
         {
           "bodyHash": "ee9078b7e1d9a4d4",
           "source": "tool.output",
@@ -447,60 +376,58 @@
           "source": "tool.output",
           "tags": "tool,syft",
           "title": "syft"
+        },
+        {
+          "bodyHash": "f8bd31c12e5185a5",
+          "source": "finding",
+          "tags": "vuln,high,trufflehog,secret,leaked,generic api key",
+          "title": "HIGH Leaked Secret: Generic API Key"
+        },
+        {
+          "bodyHash": "9f06aa14328357f7",
+          "source": "finding",
+          "tags": "vuln,info,syft,sbom,dependency,npm",
+          "title": "INFO SBOM Component: lodash"
         }
       ],
       "contextSnippetCount": 4,
       "role": "assistant",
-      "toolSchemaCount": 26,
+      "toolSchemaCount": 24,
       "toolSchemas": [
         "search_cve",
         "lookup_cve",
         "search_context",
         "run_shell",
-        "osv_scanner",
-        "nuclei",
         "theharvester",
-        "trufflehog",
         "gowitness",
-        "syft",
-        "httpx",
-        "wpscan",
+        "trufflehog",
         "grype",
-        "jwt_tool",
-        "exiftool",
+        "nuclei",
+        "syft",
         "dnsx",
+        "httpx",
         "hashcat",
-        "sherlock",
+        "wpscan",
+        "jwt_tool",
+        "osv_scanner",
+        "exiftool",
         "nmap",
-        "masscan",
-        "dalfox",
-        "metasploit",
         "sqlmap",
+        "sherlock",
+        "masscan",
         "ffuf",
         "pwncat",
         "sliver"
       ]
     },
     {
-      "content": "The previous assistant stream stalled before the repo/codebase workflow finished. Do not repeat tools already present in the transcript. Emit only the remaining exact Qwen XML tool calls now, with no markdown, phase plan, or prose before the tool calls. Remaining tools: osv_scanner, search_cve.\n<tool_call>{\"name\":\"osv_scanner\",\"arguments\":{\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo\",\"format\":\"json\"}}</tool_call>",
+      "content": "This is a function-specific tool_choice retry. The app request will constrain tool_choice to the single remaining function named below. The previous assistant stream stalled before the repo/codebase workflow finished. Do not repeat tools already present in the transcript. Emit only the remaining exact Qwen XML tool calls now, with no markdown, phase plan, or prose before the tool calls. Remaining tools: grype.\n<tool_call>{\"name\":\"grype\",\"arguments\":{\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_ps",
       "role": "user"
     },
     {
       "content": "",
-      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 8 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=4 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fi",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 5 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=3 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] trufflehog tags=tool,trufflehog: {\"DetectorName\": \"Generic API Key\", \"Raw\": \"EXPLOITBOT_FAKE_TOKEN_DO_NOT_US",
       "contextSelections": [
-        {
-          "bodyHash": "ed7341f8459f1a40",
-          "source": "tool.output",
-          "tags": "tool,run_shell",
-          "title": "run_shell"
-        },
-        {
-          "bodyHash": "c21d23076be48c0c",
-          "source": "finding",
-          "tags": "vuln,high,grype,dependency,supply-chain,grype,CVE-2021-23337",
-          "title": "HIGH CVE-2021-23337"
-        },
         {
           "bodyHash": "ee9078b7e1d9a4d4",
           "source": "tool.output",
@@ -512,100 +439,45 @@
           "source": "tool.output",
           "tags": "tool,syft",
           "title": "syft"
-        }
-      ],
-      "contextSnippetCount": 4,
-      "role": "assistant",
-      "toolSchemaCount": 26,
-      "toolSchemas": [
-        "search_cve",
-        "lookup_cve",
-        "search_context",
-        "run_shell",
-        "osv_scanner",
-        "nuclei",
-        "theharvester",
-        "trufflehog",
-        "gowitness",
-        "syft",
-        "httpx",
-        "wpscan",
-        "grype",
-        "jwt_tool",
-        "exiftool",
-        "dnsx",
-        "hashcat",
-        "sherlock",
-        "nmap",
-        "masscan",
-        "dalfox",
-        "metasploit",
-        "sqlmap",
-        "ffuf",
-        "pwncat",
-        "sliver"
-      ]
-    },
-    {
-      "content": "The previous assistant stream stalled before the repo/codebase workflow finished. Do not repeat tools already present in the transcript. Emit only the remaining exact Qwen XML tool calls now, with no markdown, phase plan, or prose before the tool calls. Remaining tools: osv_scanner, search_cve.\n<tool_call>{\"name\":\"osv_scanner\",\"arguments\":{\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo\",\"format\":\"json\"}}</tool_call>",
-      "role": "user"
-    },
-    {
-      "content": "",
-      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 8 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=4 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fi",
-      "contextSelections": [
-        {
-          "bodyHash": "ed7341f8459f1a40",
-          "source": "tool.output",
-          "tags": "tool,run_shell",
-          "title": "run_shell"
         },
         {
-          "bodyHash": "c21d23076be48c0c",
+          "bodyHash": "f8bd31c12e5185a5",
           "source": "finding",
-          "tags": "vuln,high,grype,dependency,supply-chain,grype,CVE-2021-23337",
-          "title": "HIGH CVE-2021-23337"
+          "tags": "vuln,high,trufflehog,secret,leaked,generic api key",
+          "title": "HIGH Leaked Secret: Generic API Key"
         },
         {
-          "bodyHash": "ee9078b7e1d9a4d4",
-          "source": "tool.output",
-          "tags": "tool,trufflehog",
-          "title": "trufflehog"
-        },
-        {
-          "bodyHash": "b6ca138d4189fdff",
-          "source": "tool.output",
-          "tags": "tool,syft",
-          "title": "syft"
+          "bodyHash": "9f06aa14328357f7",
+          "source": "finding",
+          "tags": "vuln,info,syft,sbom,dependency,npm",
+          "title": "INFO SBOM Component: lodash"
         }
       ],
       "contextSnippetCount": 4,
       "role": "assistant",
-      "toolSchemaCount": 26,
+      "toolSchemaCount": 24,
       "toolSchemas": [
         "search_cve",
         "lookup_cve",
         "search_context",
         "run_shell",
-        "osv_scanner",
-        "nuclei",
         "theharvester",
-        "trufflehog",
         "gowitness",
-        "syft",
-        "httpx",
-        "wpscan",
+        "trufflehog",
         "grype",
-        "jwt_tool",
-        "exiftool",
+        "nuclei",
+        "syft",
         "dnsx",
+        "httpx",
         "hashcat",
-        "sherlock",
+        "wpscan",
+        "jwt_tool",
+        "osv_scanner",
+        "exiftool",
         "nmap",
-        "masscan",
-        "dalfox",
-        "metasploit",
         "sqlmap",
+        "sherlock",
+        "masscan",
         "ffuf",
         "pwncat",
         "sliver"
@@ -660,7 +532,7 @@
   },
   "proofLevel": "live-app-real-qwen-real-tool-loop-local-repo-fixture",
   "proofType": "real-qwen-repo-codebase-supply-chain",
-  "startedAt": "2026-07-05T23:29:08-0700",
+  "startedAt": "2026-07-06T00:01:33-0700",
   "state": {
     "activeSubtabs": {
       "creds": "Cracking",
@@ -702,7 +574,7 @@
         "highRiskToolCount": 24
       },
       "details": [],
-      "forceFinalAnswerAfterToolResults": false,
+      "forceFinalAnswerAfterToolResults": true,
       "includeUnavailableToolSchemas": false,
       "loopMaxIterations": 8,
       "maxConcurrentAgents": 5,
@@ -732,10 +604,10 @@
       "workingCount": 0
     },
     "catalogEmbeddings": {
-      "recordCount": 8,
+      "recordCount": 5,
       "sourceCounts": {
-        "finding": 4,
-        "tool.output": 4
+        "finding": 3,
+        "tool.output": 2
       },
       "sources": [
         "finding",
@@ -745,7 +617,7 @@
     },
     "chat": {
       "enableReasoning": false,
-      "forceFinalAnswerAfterToolResults": false,
+      "forceFinalAnswerAfterToolResults": true,
       "includeUnavailableToolSchemas": false,
       "maxIterations": 8,
       "toolSchemaMaxTools": 64
@@ -763,9 +635,9 @@
       "contextGeneration": 0,
       "contextInspectorVisible": false,
       "enableReasoning": false,
-      "lastAction": "send",
+      "lastAction": "stop",
       "status": "done",
-      "summary": "send chat message"
+      "summary": "stop chat generation"
     },
     "contextCatalog": {
       "cveMode": "semantic",
@@ -843,7 +715,7 @@
       "lastSync": "",
       "searchResultCount": 0,
       "topResults": [],
-      "totalCount": 1553
+      "totalCount": 1552
     },
     "cveImportListAudit": {
       "excludedIds": [],
@@ -858,7 +730,7 @@
       "error": "embedder returned invalid vector",
       "fallback": true,
       "importProgress": "",
-      "query": "The previous assistant stream stalled before the repo/codebase workflow finished. Do not repeat tools already present in the transcript. Emit only the remaining exact Qwen XML tool calls now, with no markdown, phase plan, or prose before the tool calls. Remaining tools: osv_scanner, search_cve.\n<tool_call>{\"name\":\"osv_scanner\",\"arguments\":{\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo\",\"format\":\"json\"}}</tool_call>\n<tool_call>{\"name\":\"search_cve\",\"arguments\":{\"query\":\"lodash 4.17.11 CVE\",\"product\":\"lodash\",\"max_results\":5}}</tool_call>",
+      "query": "This is a function-specific tool_choice retry. The app request will constrain tool_choice to the single remaining function named below. The previous assistant stream stalled before the repo/codebase workflow finished. Do not repeat tools already present in the transcript. Emit only the remaining exact Qwen XML tool calls now, with no markdown, phase plan, or prose before the tool calls. Remaining tools: grype.\n<tool_call>{\"name\":\"grype\",\"arguments\":{\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b0rwnkrc/synthetic-vulnerable-repo\",\"fail_on\":\"critical\"}}</tool_call>",
       "resultCount": 0,
       "usedEmbedding": false,
       "vectorDimensions": 0
@@ -895,7 +767,7 @@
     },
     "engineError": "",
     "engineMemoryPreflight": null,
-    "enginePort": 51664,
+    "enginePort": 57763,
     "engineRunning": true,
     "engineStaleCleanup": {
       "checked": false,
@@ -944,46 +816,52 @@
         "tool": ""
       }
     },
-    "feedEntries": 25,
+    "feedEntries": 23,
     "feedRecent": [
       {
-        "duration": 0.020874977111816406,
+        "duration": 0,
+        "icon": "OUT",
+        "text": "$ trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b0rwnkrc/synthetic-vulnerable-repo --json",
+        "tool": "trufflehog"
+      },
+      {
+        "duration": 0.021947026252746582,
+        "icon": "OK",
+        "text": "trufflehog: 1 lines output (0.0s)",
+        "tool": "trufflehog"
+      },
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "stop chat generation",
+        "tool": ""
+      },
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "send chat message",
+        "tool": ""
+      },
+      {
+        "duration": 0,
+        "icon": "RUN",
+        "text": "Running syft",
+        "tool": "syft"
+      },
+      {
+        "duration": 0,
+        "icon": "OUT",
+        "text": "$ syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b0rwnkrc/synthetic-vulnerable-repo -o json",
+        "tool": "syft"
+      },
+      {
+        "duration": 0.01978600025177002,
         "icon": "OK",
         "text": "syft: 1 lines output (0.0s)",
         "tool": "syft"
       },
       {
         "duration": 0,
-        "icon": "RUN",
-        "text": "Running grype",
-        "tool": "grype"
-      },
-      {
-        "duration": 0,
-        "icon": "OUT",
-        "text": "$ grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo -o json --fail-on critical",
-        "tool": "grype"
-      },
-      {
-        "duration": 0.021063923835754395,
-        "icon": "OK",
-        "text": "grype: 1 lines output (0.0s)",
-        "tool": "grype"
-      },
-      {
-        "duration": 0,
-        "icon": "INF",
-        "text": "Auto CVE lookup: CVE-2021-23337",
-        "tool": ""
-      },
-      {
-        "duration": 0,
-        "icon": "INF",
-        "text": "CVE enriched: CVE-2021-23337",
-        "tool": ""
-      },
-      {
-        "duration": 0,
         "icon": "INF",
         "text": "stop chat generation",
         "tool": ""
@@ -1010,12 +888,6 @@
         "duration": 0,
         "icon": "INF",
         "text": "stop chat generation",
-        "tool": ""
-      },
-      {
-        "duration": 0,
-        "icon": "INF",
-        "text": "send chat message",
         "tool": ""
       }
     ],
@@ -1029,8 +901,8 @@
       "status": "idle",
       "summary": ""
     },
-    "isStreaming": true,
-    "isWorking": true,
+    "isStreaming": false,
+    "isWorking": false,
     "metrics": {
       "cachedTokens": 0,
       "completionTokens": 0,
@@ -1350,13 +1222,12 @@
       "hasUnreadWhileUnlocked": null,
       "headerBadges": [
         "16 msgs",
-        "ctx 0",
-        "streaming"
+        "ctx 0"
       ],
       "mode": "",
       "newContextConfirm": {
         "isVisible": false,
-        "lastAction": "send"
+        "lastAction": "stop"
       },
       "newContextSessionBoundary": null,
       "reasoningBlock": {
@@ -1366,10 +1237,10 @@
       },
       "reasoningCollapsed": null,
       "toolOutputExpansion": {
-        "hiddenLineCount": 7,
+        "hiddenLineCount": 6,
         "isExpanded": false,
-        "toolName": "run_shell",
-        "totalLineCount": 12,
+        "toolName": "trufflehog",
+        "totalLineCount": 11,
         "visibleLineCount": 5
       }
     },
@@ -1557,34 +1428,32 @@
     },
     "requestContext": {
       "contextInjected": true,
-      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 8 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=4 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fi",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 5 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=3 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] trufflehog tags=tool,trufflehog: {\"DetectorName\": \"Generic API Key\", \"Raw\": \"EXPLOITBOT_FAKE_TOKEN_DO_NOT_US",
       "contextSnippetCount": 4,
       "streamWarnings": [],
-      "toolSchemaCount": 26,
+      "toolSchemaCount": 24,
       "toolSchemas": [
         "search_cve",
         "lookup_cve",
         "search_context",
         "run_shell",
-        "osv_scanner",
-        "nuclei",
         "theharvester",
-        "trufflehog",
         "gowitness",
-        "syft",
-        "httpx",
-        "wpscan",
+        "trufflehog",
         "grype",
-        "jwt_tool",
-        "exiftool",
+        "nuclei",
+        "syft",
         "dnsx",
+        "httpx",
         "hashcat",
-        "sherlock",
+        "wpscan",
+        "jwt_tool",
+        "osv_scanner",
+        "exiftool",
         "nmap",
-        "masscan",
-        "dalfox",
-        "metasploit",
         "sqlmap",
+        "sherlock",
+        "masscan",
         "ffuf",
         "pwncat",
         "sliver"
@@ -1748,7 +1617,7 @@
     },
     "stashRetrieval": {
       "candidateCount": 0,
-      "query": "The previous assistant stream stalled before the repo/codebase workflow finished. Do not repeat tools already present in the transcript. Emit only the remaining exact Qwen XML tool calls now, with no markdown, phase plan, or prose before the tool calls. Remaining tools: osv_scanner, search_cve.\n<tool_call>{\"name\":\"osv_scanner\",\"arguments\":{\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo\",\"format\":\"json\"}}</tool_call>\n<tool_call>{\"name\":\"search_cve\",\"arguments\":{\"query\":\"lodash 4.17.11 CVE\",\"product\":\"lodash\",\"max_results\":5}}</tool_call>",
+      "query": "This is a function-specific tool_choice retry. The app request will constrain tool_choice to the single remaining function named below. The previous assistant stream stalled before the repo/codebase workflow finished. Do not repeat tools already present in the transcript. Emit only the remaining exact Qwen XML tool calls now, with no markdown, phase plan, or prose before the tool calls. Remaining tools: grype.\n<tool_call>{\"name\":\"grype\",\"arguments\":{\"target\":\"/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b0rwnkrc/synthetic-vulnerable-repo\",\"fail_on\":\"critical\"}}</tool_call>",
       "returnedCount": 0,
       "topLabels": [],
       "topScore": 0
@@ -1770,19 +1639,19 @@
         "tool": ""
       },
       "dependency": {
-        "command": "grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo -o json --fail-on critical",
-        "status": "done",
-        "summary": "1 lines output",
-        "tool": "grype"
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
       },
       "sbom": {
-        "command": "syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo -o json",
+        "command": "syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b0rwnkrc/synthetic-vulnerable-repo -o json",
         "status": "done",
         "summary": "1 lines output",
         "tool": "syft"
       },
       "secrets": {
-        "command": "trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo --json",
+        "command": "trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b0rwnkrc/synthetic-vulnerable-repo --json",
         "status": "done",
         "summary": "1 lines output",
         "tool": "trufflehog"
@@ -1846,9 +1715,9 @@
         "summary": ""
       },
       "supplyChain": {
-        "command": "grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo -o json --fail-on critical",
-        "count": 4,
-        "lastTool": "grype",
+        "command": "syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b0rwnkrc/synthetic-vulnerable-repo -o json",
+        "count": 3,
+        "lastTool": "syft",
         "status": "done",
         "summary": "1 lines output"
       },
@@ -1882,23 +1751,23 @@
           "outputPreview": "Running run_shell",
           "source": "activityFeed",
           "status": "RUN",
-          "timestamp": 1783319401.528599,
+          "timestamp": 1783321351.011225,
           "tool": "run_shell"
         },
         {
-          "command": "/bin/zsh -c find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo -maxdepth 2 -type f | sort",
-          "outputPreview": "$ /bin/zsh -c find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo -maxdepth 2 -type f | sort",
+          "command": "/bin/zsh -c ",
+          "outputPreview": "$ /bin/zsh -c ",
           "source": "activityFeed",
           "status": "OUT",
-          "timestamp": 1783319401.5286,
+          "timestamp": 1783321351.0112262,
           "tool": "run_shell"
         },
         {
-          "command": "run_shell: 4 lines output (0.0s)",
-          "outputPreview": "run_shell: 4 lines output (0.0s)",
+          "command": "run_shell: 0 lines output (0.0s)",
+          "outputPreview": "run_shell: 0 lines output (0.0s)",
           "source": "activityFeed",
           "status": "OK",
-          "timestamp": 1783319401.536974,
+          "timestamp": 1783321351.017215,
           "tool": "run_shell"
         },
         {
@@ -1906,15 +1775,15 @@
           "outputPreview": "Running trufflehog",
           "source": "activityFeed",
           "status": "RUN",
-          "timestamp": 1783319447.142074,
+          "timestamp": 1783321420.71859,
           "tool": "trufflehog"
         },
         {
-          "command": "trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo --json",
-          "outputPreview": "$ trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo --json",
+          "command": "trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b0rwnkrc/synthetic-vulnerable-repo --json",
+          "outputPreview": "$ trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b0rwnkrc/synthetic-vulnerable-repo --json",
           "source": "activityFeed",
           "status": "OUT",
-          "timestamp": 1783319447.142076,
+          "timestamp": 1783321420.718591,
           "tool": "trufflehog"
         },
         {
@@ -1922,7 +1791,7 @@
           "outputPreview": "trufflehog: 1 lines output (0.0s)",
           "source": "activityFeed",
           "status": "OK",
-          "timestamp": 1783319447.168963,
+          "timestamp": 1783321420.7406368,
           "tool": "trufflehog"
         },
         {
@@ -1930,15 +1799,15 @@
           "outputPreview": "Running syft",
           "source": "activityFeed",
           "status": "RUN",
-          "timestamp": 1783319495.3976312,
+          "timestamp": 1783321492.900536,
           "tool": "syft"
         },
         {
-          "command": "syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo -o json",
-          "outputPreview": "$ syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo -o json",
+          "command": "syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b0rwnkrc/synthetic-vulnerable-repo -o json",
+          "outputPreview": "$ syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b0rwnkrc/synthetic-vulnerable-repo -o json",
           "source": "activityFeed",
           "status": "OUT",
-          "timestamp": 1783319495.3976321,
+          "timestamp": 1783321492.900537,
           "tool": "syft"
         },
         {
@@ -1946,47 +1815,15 @@
           "outputPreview": "syft: 1 lines output (0.0s)",
           "source": "activityFeed",
           "status": "OK",
-          "timestamp": 1783319495.418606,
+          "timestamp": 1783321492.920426,
           "tool": "syft"
-        },
-        {
-          "command": "Running grype",
-          "outputPreview": "Running grype",
-          "source": "activityFeed",
-          "status": "RUN",
-          "timestamp": 1783319549.853436,
-          "tool": "grype"
-        },
-        {
-          "command": "grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo -o json --fail-on critical",
-          "outputPreview": "$ grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo -o json --fail-on critical",
-          "source": "activityFeed",
-          "status": "OUT",
-          "timestamp": 1783319549.853437,
-          "tool": "grype"
-        },
-        {
-          "command": "grype: 1 lines output (0.0s)",
-          "outputPreview": "grype: 1 lines output (0.0s)",
-          "source": "activityFeed",
-          "status": "OK",
-          "timestamp": 1783319549.874615,
-          "tool": "grype"
-        },
-        {
-          "command": "run_shell",
-          "outputPreview": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo/.env.example\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo/Dockerfile\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo/package-lock.json\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo/package.json\n",
-          "source": "rawResults",
-          "status": "captured",
-          "timestamp": 1783319401.537005,
-          "tool": "run_shell"
         },
         {
           "command": "trufflehog",
           "outputPreview": "{\"DetectorName\": \"Generic API Key\", \"Raw\": \"EXPLOITBOT_FAKE_TOKEN_DO_NOT_USE\", \"SourceMetadata\": {\"Data\": {\"Git\": {\"file\": \".env.example\", \"repository\": \"synthetic-vulnerable-repo\"}}}}\n",
           "source": "rawResults",
           "status": "captured",
-          "timestamp": 1783319447.168997,
+          "timestamp": 1783321420.740684,
           "tool": "trufflehog"
         },
         {
@@ -1994,25 +1831,17 @@
           "outputPreview": "{\"artifacts\": [{\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, {\"name\": \"minimist\", \"version\": \"0.0.8\", \"type\": \"npm\"}], \"source\": {\"type\": \"directory\", \"target\": \"synthetic-vulnerable-repo\"}}\n",
           "source": "rawResults",
           "status": "captured",
-          "timestamp": 1783319495.418643,
+          "timestamp": 1783321492.920465,
           "tool": "syft"
         },
         {
-          "command": "grype",
-          "outputPreview": "{\"matches\": [{\"vulnerability\": {\"id\": \"CVE-2021-23337\", \"severity\": \"High\"}, \"artifact\": {\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, \"matchDetails\": [{\"type\": \"exact-direct-match\"}]}]}\n",
-          "source": "rawResults",
-          "status": "captured",
-          "timestamp": 1783319549.8746572,
-          "tool": "grype"
-        },
-        {
-          "command": "grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b1dgflwn/synthetic-vulnerable-repo -o json --fail-on critical",
+          "command": "syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-b0rwnkrc/synthetic-vulnerable-repo -o json",
           "outputPreview": "1 lines output",
           "source": "tabActivities",
           "status": "done",
           "tab": "supplyChain",
-          "timestamp": 1783319549.8746228,
-          "tool": "grype"
+          "timestamp": 1783321492.920434,
+          "tool": "syft"
         }
       ],
       "installedToolCount": 42,
@@ -2029,7 +1858,7 @@
       ]
     },
     "toolExecutor": {
-      "currentOutput": "{\"matches\": [{\"vulnerability\": {\"id\": \"CVE-2021-23337\", \"severity\": \"High\"}, \"artifact\": {\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, \"matchDetails\": [{\"type\": \"exact-direct-match\"}]}]}\n",
+      "currentOutput": "{\"artifacts\": [{\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, {\"name\": \"minimist\", \"version\": \"0.0.8\", \"type\": \"npm\"}], \"source\": {\"type\": \"directory\", \"target\": \"synthetic-vulnerable-repo\"}}\n",
       "currentTool": "",
       "isRunning": false
     },
@@ -2400,8 +2229,8 @@
       "summary": "",
       "toolName": ""
     },
-    "tools": 4,
-    "vulns": 4,
+    "tools": 3,
+    "vulns": 3,
     "webAction": {
       "cve": "",
       "kind": "",
@@ -2411,16 +2240,7 @@
       "target": "",
       "title": ""
     },
-    "webCVERows": [
-      {
-        "cve": "CVE-2021-23337",
-        "hasDetails": false,
-        "progressLabel": "CVE pending",
-        "status": "pending",
-        "target": "lodash@4.17.11",
-        "title": "CVE-2021-23337"
-      }
-    ],
+    "webCVERows": [],
     "webDirectActions": {
       "actionLabels": [
         "Create Finding",

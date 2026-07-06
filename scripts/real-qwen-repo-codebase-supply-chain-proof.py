@@ -300,6 +300,16 @@ def continue_remaining_tool_prompt(repo: Path, missing_tools: list[str]) -> str:
     )
 
 
+def next_missing_tool_prompt(repo: Path, missing_tools: list[str]) -> str:
+    next_tools = missing_tools[:1]
+    prompt = continue_remaining_tool_prompt(repo, next_tools)
+    return (
+        "This is a function-specific tool_choice retry. "
+        "The app request will constrain tool_choice to the single remaining function named below. "
+        f"{prompt}"
+    )
+
+
 def stop_stalled_app_stream() -> None:
     try:
         app_request("POST", "/stop", "", timeout=5.0)
@@ -422,11 +432,25 @@ def run() -> None:
 
             messages: list[dict[str, Any]] | None = None
             max_final_attempts = int(os.environ.get("EXPLOITBOT_REAL_QWEN_REPO_FINAL_ATTEMPTS", "4"))
+            max_specific_retries_per_tool = int(os.environ.get("EXPLOITBOT_REAL_QWEN_REPO_SPECIFIC_TOOL_RETRIES", "2"))
+            specific_retry_counts: dict[str, int] = {}
             for attempt in range(1, max_final_attempts + 1):
+                current_specific_tool: str | None = None
                 if attempt == 1:
                     app_request("POST", "/send", prompt, timeout=15.0)
                 elif messages and missing_expected_tools(messages):
-                    app_request("POST", "/send", continue_remaining_tool_prompt(repo, missing_expected_tools(messages)), timeout=15.0)
+                    missing_tools = missing_expected_tools(messages)
+                    current_specific_tool = missing_tools[0]
+                    app_request(
+                        "POST",
+                        "/qa/apply-app-settings",
+                        {
+                            "specificToolChoiceFunctionName": missing_tools[0],
+                            "forceFinalAnswerAfterToolResults": True,
+                        },
+                        timeout=15.0,
+                    )
+                    app_request("POST", "/send", next_missing_tool_prompt(repo, missing_tools), timeout=15.0)
                 else:
                     app_request("POST", "/send", final_followup_prompt(), timeout=15.0)
                 try:
@@ -475,6 +499,7 @@ def run() -> None:
                             "note": exc.note,
                             "toolSequence": repo_proof.tool_sequence(exc.messages),
                             "missingTools": missing_tools,
+                            "specificToolChoiceFunctionName": current_specific_tool,
                             "lastAssistantPreview": next(
                                 (
                                     str(item.get("content") or "")[:1000]
@@ -488,6 +513,14 @@ def run() -> None:
                     if attempt < max_final_attempts:
                         stop_stalled_app_stream()
                     if missing_tools and attempt < max_final_attempts:
+                        if current_specific_tool and current_specific_tool in missing_tools:
+                            specific_retry_counts[current_specific_tool] = specific_retry_counts.get(current_specific_tool, 0) + 1
+                            report["finalAnswerAttempts"][-1]["specificToolRetryCount"] = specific_retry_counts[current_specific_tool]
+                            if specific_retry_counts[current_specific_tool] >= max_specific_retries_per_tool:
+                                report["finalAnswerAttempts"][-1]["note"] += (
+                                    f"; repeated function-specific tool_choice retry did not produce {current_specific_tool}"
+                                )
+                                raise
                         continue
                     if not missing_tools and attempt < max_final_attempts:
                         report["finalAnswerAttempts"][-1]["note"] += "; all expected repo tools are complete, retrying final marker only"

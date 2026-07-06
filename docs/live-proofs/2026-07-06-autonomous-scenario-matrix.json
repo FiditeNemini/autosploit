@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-05T23:40:54-0700",
+  "generatedAt": "2026-07-06T00:08:58-0700",
   "notes": [
     "Rows aggregate existing live artifacts; artifact generatedAt values show whether evidence is fresh or older.",
     "Repo/codebase supply-chain row is the fresh 2026-07-06 app-backed scenario added for this matrix.",
@@ -165,7 +165,7 @@
       "artifacts": [
         {
           "artifact": "docs/live-proofs/2026-07-06-repo-codebase-supply-chain-scenario.json",
-          "generatedAt": "2026-07-05T23:40:48-0700",
+          "generatedAt": "2026-07-06T00:08:51-0700",
           "proofType": "repo-codebase-supply-chain-scenario-live",
           "status": "PASS"
         }
