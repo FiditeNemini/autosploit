@@ -52,6 +52,24 @@ SCENARIOS = [
         current_run_required=True,
     ),
     ScenarioSpec(
+        scenario_id="webserver_ssrf_file_read_chain",
+        label="Emulated web app SSRF and fixture file-read proof to report",
+        artifacts=("docs/live-proofs/2026-07-06-webserver-ssrf-fileread-scenario.json",),
+        required_tools=("run_shell", "httpx", "nuclei", "search_cve"),
+        stage_evidence={
+            "surface": ["run_shell route inventory", "httpx local web probe"],
+            "probe": ["nuclei local SSRF/file-read template", "bounded loopback curl probes"],
+            "prove": ["EXPLOITBOT_SSRF_CANARY_OK", "EXPLOITBOT_FILE_READ_CANARY_OK"],
+            "exploit_or_validate": ["safe local validation only; no cloud metadata or sensitive host file paths"],
+            "evidence": ["/messages", "/results", "/state terminal transcripts"],
+            "report": ["report finding action and report generate route"],
+        },
+        tool_choice_mode="scripted_mock_tool_sequence",
+        model_tool_choice_evidence="not_proven",
+        autonomy_boundary="Live app/tool/report wiring is proven against a loopback SSRF/file-read fixture, but no real Qwen artifact is attached to this row yet.",
+        current_run_required=True,
+    ),
+    ScenarioSpec(
         scenario_id="loopback_webserver_real_tools",
         label="Local loopback webserver with real installed tools",
         artifacts=(

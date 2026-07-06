@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-06T02:40:33-0700",
+  "generatedAt": "2026-07-06T03:39:47-0700",
   "notes": [
     "Rows aggregate existing live artifacts; artifact generatedAt values show whether evidence is fresh or older.",
     "Webserver SQLi and repo/codebase supply-chain rows are fresh 2026-07-06 app-backed scenarios added for this matrix.",
@@ -101,6 +101,76 @@
       ],
       "status": "PASS",
       "toolChoiceMode": "exact_tool_call_prompt_with_app_recovery"
+    },
+    {
+      "artifacts": [
+        {
+          "artifact": "docs/live-proofs/2026-07-06-webserver-ssrf-fileread-scenario.json",
+          "generatedAt": "2026-07-06T03:39:15-0700",
+          "proofType": "webserver-ssrf-fileread-scenario-live",
+          "status": "PASS"
+        }
+      ],
+      "autonomyBoundary": "Live app/tool/report wiring is proven against a loopback SSRF/file-read fixture, but no real Qwen artifact is attached to this row yet.",
+      "cacheProof": {
+        "hybridSSM": false,
+        "paged": false,
+        "prefix": false,
+        "q4KV": false
+      },
+      "currentRunStatus": "PASS",
+      "failures": [],
+      "label": "Emulated web app SSRF and fixture file-read proof to report",
+      "modelRequired": false,
+      "modelToolChoiceEvidence": "not_proven",
+      "observedTools": [
+        "httpx",
+        "nuclei",
+        "run_shell",
+        "search_cve"
+      ],
+      "requiredTools": [
+        "run_shell",
+        "httpx",
+        "nuclei",
+        "search_cve"
+      ],
+      "scenarioId": "webserver_ssrf_file_read_chain",
+      "stageEvidence": {
+        "evidence": [
+          "/messages",
+          "/results",
+          "/state terminal transcripts"
+        ],
+        "exploit_or_validate": [
+          "safe local validation only; no cloud metadata or sensitive host file paths"
+        ],
+        "probe": [
+          "nuclei local SSRF/file-read template",
+          "bounded loopback curl probes"
+        ],
+        "prove": [
+          "EXPLOITBOT_SSRF_CANARY_OK",
+          "EXPLOITBOT_FILE_READ_CANARY_OK"
+        ],
+        "report": [
+          "report finding action and report generate route"
+        ],
+        "surface": [
+          "run_shell route inventory",
+          "httpx local web probe"
+        ]
+      },
+      "stages": [
+        "surface",
+        "probe",
+        "prove",
+        "exploit_or_validate",
+        "evidence",
+        "report"
+      ],
+      "status": "PASS",
+      "toolChoiceMode": "scripted_mock_tool_sequence"
     },
     {
       "artifacts": [
@@ -479,10 +549,10 @@
       "toolChoiceMode": "direct_app_action_proof"
     }
   ],
-  "scenarioCount": 6,
+  "scenarioCount": 7,
   "status": "PASS",
   "statusCounts": {
     "FAIL": 0,
-    "PASS": 6
+    "PASS": 7
   }
 }
