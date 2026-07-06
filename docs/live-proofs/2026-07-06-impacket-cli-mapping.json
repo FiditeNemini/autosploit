@@ -1,0 +1,37 @@
+{
+  "boundary": "Runs help commands only; does not execute impacket against a target.",
+  "generatedAt": "2026-07-06T16:42:27-0700",
+  "moduleHelp": {
+    "cmd": [
+      "python3",
+      "-m",
+      "impacket.examples.secretsdump",
+      "-h"
+    ],
+    "returncode": 1,
+    "stderrPreview": "/opt/homebrew/opt/python@3.14/bin/python3.14: Error while finding module specification for 'impacket.examples.secretsdump' (ModuleNotFoundError: No module named 'impacket')\n",
+    "stdoutPreview": ""
+  },
+  "ok": true,
+  "proofLevel": "source-plus-current-machine-help-command",
+  "proofType": "impacket-cli-mapping",
+  "scriptHelp": {
+    "cmd": [
+      "/Users/eric/.local/bin/secretsdump.py",
+      "-h"
+    ],
+    "returncode": 0,
+    "stderrPreview": "",
+    "stdoutPreview": "Impacket v0.13.1 - Copyright Fortra, LLC and its affiliated companies \n\nusage: secretsdump.py [-h] [-ts] [-debug] [-system SYSTEM] [-bootkey BOOTKEY]\n                      [-security SECURITY] [-sam SAM] [-ntds NTDS]\n                      [-resumefile RESUMEFILE] [-skip-sam] [-skip-security]\n                      [-outputfile OUTPUTFILE] [-use-vss] [-rodcNo RODCNO]\n                      [-rodcKey RODCKEY] [-use-keylist]\n                      [-exec-method [{smbexec,wmiexec,mmcexec}]]\n                      [-use-remoteSSWMI] [-use-remoteSSWMI-NTDS]\n                      [-remoteSSWMI-remote-volume REMOTESSWMI_REMOTE_VOLUME]\n                      [-remoteSSWMI-local-path REMOTESSWMI_LOCAL_PATH]\n                      [-just-dc-user USERNAME] [-ldapfilter LDAPFILTER]\n                      [-just-dc] [-just-dc-ntlm] [-skip-user SKIP_USER]\n                      [-pwd-last-set] [-user-status] [-history]\n                      [-hashes LMHASH:NTHASH] [-no-pass] [-k]\n                      [-aesKey hex key] [-keytab KEYTAB] [-dc-ip ip address]\n                      [-target-ip ip address]\n                      target\n\nPerforms various techniques to dump secrets from the remote machine without\nexecuting any agent there.\n\npositional arguments:\n  target                [[domain/]username[:password]@]<targetName or address>\n                        or LOCAL (if you want to parse local files)\n\noptions:\n  -h, --help            show this help message and exit\n  -ts                   Adds timestamp to every logging output\n  -debug                Turn DEBUG output ON\n  -system SYSTEM        SYSTEM hive to parse (only binary REGF, as .reg text\n                        file lacks the metadata to compute the bootkey)\n  -bootkey BOOTKEY      bootkey for SYSTEM hive\n  -security SECURITY    SECURITY hive to parse\n  -sam SAM              SAM hive to parse\n  -ntds NTDS            NTDS.DIT file to parse\n  -resumefile RESUMEFILE\n                        resume file name to resume NTDS.DIT session du"
+  },
+  "scriptPath": "/Users/eric/.local/bin/secretsdump.py",
+  "source": "ExploitBot/Sources/ExploitBot/Services/ToolDefinitions.swift",
+  "status": {
+    "consoleScriptHelpRuns": "PASS",
+    "consoleScriptPresent": "PASS",
+    "overall": "PASS",
+    "pythonModulePathFailsHere": "PASS",
+    "sourceAvoidsPythonModulePath": "PASS",
+    "sourceUsesConsoleScript": "PASS"
+  }
+}
