@@ -179,7 +179,11 @@ SCENARIOS = [
     ScenarioSpec(
         scenario_id="network_service_credential_post_chain",
         label="Local network credential validation to post-check scenario",
-        artifacts=("docs/live-proofs/2026-07-06-network-credential-post-scenario.json",),
+        artifacts=(
+            "docs/live-proofs/2026-07-06-network-credential-post-scenario.json",
+            "docs/live-proofs/2026-07-06-real-qwen-network-credential-post-27b.json",
+            "docs/live-proofs/2026-07-06-real-qwen-network-credential-post-35b.json",
+        ),
         required_tools=("nmap", "httpx", "hydra", "netexec", "run_shell", "linpeas"),
         stage_evidence={
             "surface": ["nmap loopback service discovery", "httpx loopback web probe"],
@@ -189,9 +193,10 @@ SCENARIOS = [
             "evidence": ["/messages", "/results", "/state terminal transcripts"],
             "report": ["report finding action and report generate route"],
         },
-        tool_choice_mode="scripted_mock_tool_sequence",
-        model_tool_choice_evidence="not_proven",
-        autonomy_boundary="Live app/tool/report wiring is proven against a loopback network credential/post fixture, but no real Qwen artifact is attached to this row yet.",
+        tool_choice_mode="exact_tool_call_prompt_with_app_recovery",
+        model_tool_choice_evidence="prompt_specified_exact_calls",
+        autonomy_boundary="Real Qwen 27B/35B artifacts prove schema receipt, ordered network credential/post tool execution, cache/MTP, second turn, and report output, but the ordered tool plan was exact-prompt guided.",
+        model_required=True,
         current_run_required=True,
     ),
     ScenarioSpec(

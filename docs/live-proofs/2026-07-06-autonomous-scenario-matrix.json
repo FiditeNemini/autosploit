@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-06T13:35:22-0700",
+  "generatedAt": "2026-07-06T13:51:56-0700",
   "notes": [
     "Rows aggregate existing live artifacts; artifact generatedAt values show whether evidence is fresh or older.",
     "Webserver SQLi and repo/codebase supply-chain rows are fresh 2026-07-06 app-backed scenarios added for this matrix.",
@@ -573,20 +573,32 @@
           "generatedAt": "2026-07-06T04:07:55-0700",
           "proofType": "network-credential-post-scenario-live",
           "status": "PASS"
+        },
+        {
+          "artifact": "docs/live-proofs/2026-07-06-real-qwen-network-credential-post-27b.json",
+          "generatedAt": "2026-07-06T13:49:19-0700",
+          "proofType": "real-qwen-network-credential-post",
+          "status": "PASS"
+        },
+        {
+          "artifact": "docs/live-proofs/2026-07-06-real-qwen-network-credential-post-35b.json",
+          "generatedAt": "2026-07-06T13:50:32-0700",
+          "proofType": "real-qwen-network-credential-post",
+          "status": "PASS"
         }
       ],
-      "autonomyBoundary": "Live app/tool/report wiring is proven against a loopback network credential/post fixture, but no real Qwen artifact is attached to this row yet.",
+      "autonomyBoundary": "Real Qwen 27B/35B artifacts prove schema receipt, ordered network credential/post tool execution, cache/MTP, second turn, and report output, but the ordered tool plan was exact-prompt guided.",
       "cacheProof": {
-        "hybridSSM": false,
-        "paged": false,
-        "prefix": false,
-        "q4KV": false
+        "hybridSSM": true,
+        "paged": true,
+        "prefix": true,
+        "q4KV": true
       },
       "currentRunStatus": "PASS",
       "failures": [],
       "label": "Local network credential validation to post-check scenario",
-      "modelRequired": false,
-      "modelToolChoiceEvidence": "not_proven",
+      "modelRequired": true,
+      "modelToolChoiceEvidence": "prompt_specified_exact_calls",
       "observedTools": [
         "httpx",
         "hydra",
@@ -638,7 +650,7 @@
         "report"
       ],
       "status": "PASS",
-      "toolChoiceMode": "scripted_mock_tool_sequence"
+      "toolChoiceMode": "exact_tool_call_prompt_with_app_recovery"
     },
     {
       "artifacts": [
