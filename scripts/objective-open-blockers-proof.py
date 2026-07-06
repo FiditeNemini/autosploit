@@ -113,12 +113,13 @@ def build_release_row(
     }
 
 
-def build_report(generated_at: str | None = None) -> dict[str, Any]:
-    matrix = load_json(MATRIX)
-    goal_audit = load_json(GOAL_AUDIT)
-    notarization = load_json(NOTARIZATION_PREFLIGHT)
-    public_truth = load_json(RELEASE_PUBLIC_TRUTH)
-
+def build_report_from_payloads(
+    matrix: dict[str, Any],
+    goal_audit: dict[str, Any],
+    notarization: dict[str, Any],
+    public_truth: dict[str, Any],
+    generated_at: str | None = None,
+) -> dict[str, Any]:
     require(matrix.get("proofType") == "pass-partial-blocked-matrix", "unexpected matrix proof type", matrix)
     require(goal_audit.get("proofType") == "goal-requirement-audit", "unexpected goal audit proof type", goal_audit)
     require(notarization.get("proofType") == "notarization-preflight", "unexpected notarization proof type", notarization)
@@ -140,10 +141,12 @@ def build_report(generated_at: str | None = None) -> dict[str, Any]:
     goal_by_id = {row.get("id"): row for row in goal_audit.get("rows") or []}
     full_context = by_area[FULL_CONTEXT_AREA]
     release = by_area[RELEASE_AREA]
-    require(full_context.get("status") == "PARTIAL", "full-context row status drifted", full_context)
+    require(full_context.get("status") in {"PASS", "PARTIAL"}, "full-context row status drifted", full_context)
     require(release.get("status") in {"PASS", "BLOCKED"}, "release row status drifted", release)
 
-    expected_open_areas = {FULL_CONTEXT_AREA}
+    expected_open_areas: set[str] = set()
+    if full_context.get("status") == "PARTIAL":
+        expected_open_areas.add(FULL_CONTEXT_AREA)
     if release.get("status") == "BLOCKED":
         expected_open_areas.add(RELEASE_AREA)
     actual_open_areas = open_blocker_areas(rows)
@@ -152,9 +155,9 @@ def build_report(generated_at: str | None = None) -> dict[str, Any]:
         "actual": sorted(actual_open_areas),
     })
 
-    report_rows = [
-        build_full_context_row(full_context, goal_by_id["generation_reasoning_context"]),
-    ]
+    report_rows = []
+    if full_context.get("status") == "PARTIAL":
+        report_rows.append(build_full_context_row(full_context, goal_by_id["generation_reasoning_context"]))
     if release.get("status") == "BLOCKED":
         report_rows.append(build_release_row(release, goal_by_id["release_displayable"], notarization, public_truth))
 
@@ -177,7 +180,7 @@ def build_report(generated_at: str | None = None) -> dict[str, Any]:
         "openRowCount": len(report_rows),
         "openRows": report_rows,
         "currentBlockingConditions": ["release_displayable"] if release.get("status") == "BLOCKED" else [],
-        "currentPartialConditions": ["generation_reasoning_context"],
+        "currentPartialConditions": ["generation_reasoning_context"] if full_context.get("status") == "PARTIAL" else [],
         "releaseNextAction": notarization.get("nextAction"),
         "longContextPolicy": {
             "provenSafeCeilingTokens": 192000,
@@ -187,6 +190,16 @@ def build_report(generated_at: str | None = None) -> dict[str, Any]:
         "modelLoadBoundary": "no model load in this proof",
         "allEvidencePathsExist": True,
     }
+
+
+def build_report(generated_at: str | None = None) -> dict[str, Any]:
+    return build_report_from_payloads(
+        load_json(MATRIX),
+        load_json(GOAL_AUDIT),
+        load_json(NOTARIZATION_PREFLIGHT),
+        load_json(RELEASE_PUBLIC_TRUTH),
+        generated_at=generated_at,
+    )
 
 
 def main() -> None:

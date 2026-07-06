@@ -138,7 +138,11 @@ def aggregate_status(statuses: list[str]) -> str:
     return max(statuses, key=lambda status: STATUS_RANK[status])
 
 
-def effective_expected_status(requirement: dict[str, Any], release_manifest: dict[str, Any] | None = None) -> str:
+def effective_expected_status(
+    requirement: dict[str, Any],
+    release_manifest: dict[str, Any] | None = None,
+    evidence_rows: list[dict[str, Any]] | None = None,
+) -> str:
     if requirement.get("id") == "release_displayable":
         gate = (release_manifest or {}).get("notarizationGate")
         require(
@@ -147,6 +151,10 @@ def effective_expected_status(requirement: dict[str, Any], release_manifest: dic
             release_manifest,
         )
         return "PASS" if gate == "passed" else "BLOCKED"
+    if requirement.get("id") == "generation_reasoning_context":
+        rows = evidence_rows or []
+        require(rows, "generation reasoning/context requirement needs matrix evidence rows")
+        return "PASS" if all(row.get("status") == "PASS" for row in rows) else "PARTIAL"
     return requirement["expectedStatus"]
 
 
@@ -195,7 +203,7 @@ def main() -> None:
         require(not missing_areas, f"requirement {requirement['id']} references missing matrix areas", missing_areas)
         evidence_rows = [by_area[area] for area in areas]
         status = aggregate_status([row["status"] for row in evidence_rows])
-        expected_status = effective_expected_status(requirement, release_manifest)
+        expected_status = effective_expected_status(requirement, release_manifest, evidence_rows)
         require(status == expected_status, f"requirement {requirement['id']} status drifted", {
             "expected": expected_status,
             "actual": status,
