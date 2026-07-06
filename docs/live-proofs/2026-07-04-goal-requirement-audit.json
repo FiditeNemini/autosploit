@@ -6,7 +6,7 @@
   "currentPartialConditions": [
     "generation_reasoning_context"
   ],
-  "generatedAt": "2026-07-06T14:46:42-0700",
+  "generatedAt": "2026-07-06T14:55:59-0700",
   "matrixStatusCounts": {
     "BLOCKED": 1,
     "PARTIAL": 1,
@@ -350,10 +350,10 @@
       "missingEvidence": "Local package, Developer ID signature, hardened runtime, and visible release smoke are proven, but notarization/distribution flow remains unrun: no accepted notary credential input/default keychain profile is configured, Gatekeeper rejects the app without notarization context, and app/DMG stapled tickets are missing.",
       "releaseManifest": {
         "artifacts": {
-          "appBinarySha256": "8c3db8fb0d70e05527e5926076d5da18f9ccbac0af7fa25571c2dc1c2537ffa5",
+          "appBinarySha256": "37e77d2e5f7989d9c15fc90b7d2b10b985e099994d1e8d227e76581d826c9350",
           "appPath": "release/ExploitBot.app",
           "dmgPath": "release/ExploitBot-beta.dmg",
-          "dmgSha256": "98448fd821b6794737bbb3ecb7d8a43081e300087cbea251b2f09ac927ef0dfc"
+          "dmgSha256": "803311d6a51d8419417a5ab2a52794c3d5bcbc5b04322f0bb684345fb0266f2d"
         },
         "manifest": "release/release-manifest.json",
         "notarizationGate": "requires-notary-credentials",

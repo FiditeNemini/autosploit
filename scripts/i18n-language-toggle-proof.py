@@ -108,6 +108,15 @@ def build_report(started_at: str, snapshots: dict[str, dict[str, Any]], state_af
             and es.get("core", {}).get("chatApprove") == "Aprobar"
             and ja.get("core", {}).get("chatApprove") == "承認"
         ),
+        "onboardingLabelsChanged": passfail(
+            en.get("onboarding", {}).get("languageSubtitle", "").startswith("exploitbot will display")
+            and es.get("onboarding", {}).get("languageSubtitle", "").startswith("exploitbot mostrará")
+            and ja.get("onboarding", {}).get("languageSubtitle", "").startswith("exploitbot は")
+            and es.get("onboarding", {}).get("model") == "Selecciona un modelo"
+            and ja.get("onboarding", {}).get("model") == "モデルを選択"
+            and es.get("onboarding", {}).get("enforceScope") == "Aplicar alcance (bloquear objetivos fuera de alcance)"
+            and ja.get("onboarding", {}).get("enforceScope") == "スコープを強制（対象外ターゲットをブロック）"
+        ),
         "noModelLoaded": passfail(state_after.get("engineRunning") is False and not state_after.get("model")),
     }
     ok = all(value == "PASS" for value in checks.values())
@@ -123,7 +132,7 @@ def build_report(started_at: str, snapshots: dict[str, dict[str, Any]], state_af
         "stateAfter": state_after,
         "notes": [
             "This verifies the app language state and localized labels through live QA routes.",
-            "It does not prove every visible SwiftUI Text has been converted from hard-coded strings yet.",
+            "It covers tabs, representative tools, core controls, and primary onboarding labels; a full source-wide hard-coded Text replacement sweep remains separate.",
         ],
     }
 

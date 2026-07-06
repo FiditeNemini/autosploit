@@ -11,16 +11,16 @@
     "repoPublic": "PASS",
     "sourceRevisionMatchesPublished": "BLOCKED"
   },
-  "currentHead": "f3dadc73675a67406afb72f5deaddcd34d51ef63",
+  "currentHead": "a074b299a79e23202c69f9ef21803d32dbb4c683",
   "distributionStatus": "BLOCKED",
   "expectedReleaseTag": "v0.1.0-beta",
-  "finishedAt": "2026-07-06T14:41:05-0700",
-  "generatedAt": "2026-07-06T14:41:05-0700",
+  "finishedAt": "2026-07-06T14:55:39-0700",
+  "generatedAt": "2026-07-06T14:55:39-0700",
   "localArtifacts": {
     "dmgPath": "release/ExploitBot-beta.dmg",
-    "dmgSha256": "98448fd821b6794737bbb3ecb7d8a43081e300087cbea251b2f09ac927ef0dfc",
+    "dmgSha256": "803311d6a51d8419417a5ab2a52794c3d5bcbc5b04322f0bb684345fb0266f2d",
     "manifestPath": "release/release-manifest.json",
-    "manifestSha256": "dfe45b07bc14ef0bdb61eecf413bbb9519eede9bac283b101bbe4dd34c2f3f19"
+    "manifestSha256": "1c4899d0191432143057e6f6ab4cd81c499f7c8df3ec631fbc013b3e4340418e"
   },
   "localPackageStatus": "PASS",
   "nextAction": "notarize-staple-and-publish-current-release-assets",
@@ -60,5 +60,5 @@
     "visibility": "PUBLIC"
   },
   "secretsRead": false,
-  "startedAt": "2026-07-06T14:41:04-0700"
+  "startedAt": "2026-07-06T14:55:38-0700"
 }

@@ -4,14 +4,15 @@
     "languageToggleJapanese": "PASS",
     "languageToggleSpanish": "PASS",
     "noModelLoaded": "PASS",
+    "onboardingLabelsChanged": "PASS",
     "supportedLanguages": "PASS",
     "tabLabelsChanged": "PASS",
     "toolLabelsPresent": "PASS"
   },
-  "finishedAt": "2026-07-06T13:41:22-0700",
+  "finishedAt": "2026-07-06T14:51:18-0700",
   "notes": [
     "This verifies the app language state and localized labels through live QA routes.",
-    "It does not prove every visible SwiftUI Text has been converted from hard-coded strings yet."
+    "It covers tabs, representative tools, core controls, and primary onboarding labels; a full source-wide hard-coded Text replacement sweep remains separate."
   ],
   "ok": true,
   "proofLevel": "live-app-qa-route-language-toggle-no-model-load",
@@ -29,6 +30,19 @@
         "stashAdd": "Add"
       },
       "currentLanguage": "en",
+      "onboarding": {
+        "enforceScope": "Enforce scope (block out-of-scope targets)",
+        "firstOp": "Create your first Op",
+        "firstOpSubtitle": "An Op is a named workspace for a pentest engagement. All tools, findings, and context live inside it.",
+        "folderPrompt": "Select a model folder already on your Mac:",
+        "interactionMode": "Interaction Mode",
+        "language": "Choose your language",
+        "languageSubtitle": "exploitbot will display all menus, tools, and reports in your selected language.",
+        "model": "Select a model",
+        "modelSubtitle": "Choose a Qwen or MiniMax JANG/JANGTQ model folder on your Mac. The app reads config.json, jang_config.json, and generation_config.json automatically.",
+        "opName": "Op Name",
+        "scope": "Scope (optional)"
+      },
       "supportedLanguages": [
         "en",
         "ko",
@@ -70,6 +84,19 @@
         "stashAdd": "A\u00f1adir"
       },
       "currentLanguage": "es",
+      "onboarding": {
+        "enforceScope": "Aplicar alcance (bloquear objetivos fuera de alcance)",
+        "firstOp": "Crea tu primer Op",
+        "firstOpSubtitle": "Una Op es un espacio de trabajo con nombre para un pentest. Todas las herramientas, hallazgos y contexto viven ah\u00ed.",
+        "folderPrompt": "Selecciona una carpeta de modelo que ya est\u00e9 en tu Mac:",
+        "interactionMode": "Modo de interacci\u00f3n",
+        "language": "Elige tu idioma",
+        "languageSubtitle": "exploitbot mostrar\u00e1 todos los men\u00fas, herramientas e informes en el idioma elegido.",
+        "model": "Selecciona un modelo",
+        "modelSubtitle": "Elige una carpeta de modelo Qwen o MiniMax JANG/JANGTQ en tu Mac. La app lee config.json, jang_config.json y generation_config.json autom\u00e1ticamente.",
+        "opName": "Nombre de Op",
+        "scope": "Alcance (opcional)"
+      },
       "supportedLanguages": [
         "en",
         "ko",
@@ -111,6 +138,19 @@
         "stashAdd": "\u8ffd\u52a0"
       },
       "currentLanguage": "ja",
+      "onboarding": {
+        "enforceScope": "\u30b9\u30b3\u30fc\u30d7\u3092\u5f37\u5236\uff08\u5bfe\u8c61\u5916\u30bf\u30fc\u30b2\u30c3\u30c8\u3092\u30d6\u30ed\u30c3\u30af\uff09",
+        "firstOp": "\u6700\u521d\u306e Op \u3092\u4f5c\u6210",
+        "firstOpSubtitle": "Op \u306f\u30da\u30f3\u30c6\u30b9\u30c8\u6848\u4ef6\u7528\u306e\u540d\u524d\u4ed8\u304d\u30ef\u30fc\u30af\u30b9\u30da\u30fc\u30b9\u3067\u3059\u3002\u3059\u3079\u3066\u306e\u30c4\u30fc\u30eb\u3001\u691c\u51fa\u7d50\u679c\u3001\u30b3\u30f3\u30c6\u30ad\u30b9\u30c8\u304c\u305d\u3053\u306b\u4fdd\u5b58\u3055\u308c\u307e\u3059\u3002",
+        "folderPrompt": "Mac \u4e0a\u306b\u3042\u308b\u30e2\u30c7\u30eb\u30d5\u30a9\u30eb\u30c0\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044:",
+        "interactionMode": "\u64cd\u4f5c\u30e2\u30fc\u30c9",
+        "language": "\u8a00\u8a9e\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044",
+        "languageSubtitle": "exploitbot \u306f\u9078\u629e\u3057\u305f\u8a00\u8a9e\u3067\u3059\u3079\u3066\u306e\u30e1\u30cb\u30e5\u30fc\u3001\u30c4\u30fc\u30eb\u3001\u30ec\u30dd\u30fc\u30c8\u3092\u8868\u793a\u3057\u307e\u3059\u3002",
+        "model": "\u30e2\u30c7\u30eb\u3092\u9078\u629e",
+        "modelSubtitle": "Mac \u4e0a\u306e Qwen \u307e\u305f\u306f MiniMax JANG/JANGTQ \u30e2\u30c7\u30eb\u30d5\u30a9\u30eb\u30c0\u3092\u9078\u629e\u3057\u3066\u304f\u3060\u3055\u3044\u3002\u30a2\u30d7\u30ea\u306f config.json\u3001jang_config.json\u3001generation_config.json \u3092\u81ea\u52d5\u7684\u306b\u8aad\u307f\u53d6\u308a\u307e\u3059\u3002",
+        "opName": "Op \u540d",
+        "scope": "\u30b9\u30b3\u30fc\u30d7\uff08\u4efb\u610f\uff09"
+      },
       "supportedLanguages": [
         "en",
         "ko",
@@ -141,7 +181,7 @@
       }
     }
   },
-  "startedAt": "2026-07-06T13:41:20-0700",
+  "startedAt": "2026-07-06T14:51:01-0700",
   "stateAfter": {
     "activeSubtabs": {
       "creds": "Cracking",
