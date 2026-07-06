@@ -10,10 +10,9 @@
     "docs/live-proofs/2026-07-05-long-context-224k-safety-refusal.json": "intentional above-safe-ceiling refusal",
     "docs/live-proofs/2026-07-05-real-qwen-long-context-200k-27b.json": "partial 200k long-context attempt stopped by memory guard",
     "docs/live-proofs/2026-07-05-real-qwen-long-context-224k-27b.json": "partial 224k long-context attempt stopped by memory guard",
-    "docs/live-proofs/2026-07-05-release-app-computer-use-current-manual-sweep.json": "partial manual release UI sweep with notarization and loaded-model gates still open",
-    "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-27b.json": "partial independent natural-language Qwen 27B tool-choice attempt without stable final continuation/report proof"
+    "docs/live-proofs/2026-07-05-release-app-computer-use-current-manual-sweep.json": "partial manual release UI sweep with notarization and loaded-model gates still open"
   },
-  "failedLiveProofCount": 15,
+  "failedLiveProofCount": 14,
   "failedLiveProofs": [
     "docs/live-proofs/2026-07-04-live-batch-memory-preflight-blocked.json",
     "docs/live-proofs/2026-07-04-near-max-context-guard-refusal.json",
@@ -26,17 +25,16 @@
     "docs/live-proofs/2026-07-05-real-qwen-long-context-200k-27b.json",
     "docs/live-proofs/2026-07-05-real-qwen-long-context-224k-27b.json",
     "docs/live-proofs/2026-07-05-release-app-computer-use-current-manual-sweep.json",
-    "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-27b.json",
     "docs/live-proofs/checkpoint-485-qwen-mxfp-live-current.json",
     "docs/live-proofs/checkpoint-75-minimax-live.json",
     "docs/live-proofs/qwen27-mxfp4-mtp-live-cache-20260605.json"
   ],
-  "generatedAt": "2026-07-06T02:53:26-0700",
+  "generatedAt": "2026-07-06T03:06:47-0700",
   "knownFailedLiveProofs": [
     "docs/live-proofs/checkpoint-75-minimax-live.json"
   ],
-  "liveProofCount": 188,
-  "liveProofOkCount": 173,
+  "liveProofCount": 189,
+  "liveProofOkCount": 175,
   "liveProofStatus": {
     "docs/live-proofs/2026-06-03-minimax-current-metadata.json": true,
     "docs/live-proofs/2026-06-03-minimax-jang-k-current-metadata.json": true,
@@ -162,7 +160,8 @@
     "docs/live-proofs/2026-07-06-autonomous-scenario-matrix.json": true,
     "docs/live-proofs/2026-07-06-codebase-static-patch-scenario.json": true,
     "docs/live-proofs/2026-07-06-computer-use-tools-inventory-44-dist.json": true,
-    "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-27b.json": false,
+    "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-27b.json": true,
+    "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-35b.json": true,
     "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-27b.json": true,
     "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-35b.json": true,
     "docs/live-proofs/2026-07-06-real-qwen-webserver-auth-sqli-27b.json": true,
@@ -353,6 +352,7 @@
     "docs/live-proofs/2026-07-06-codebase-static-patch-scenario.json",
     "docs/live-proofs/2026-07-06-computer-use-tools-inventory-44-dist.json",
     "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-27b.json",
+    "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-35b.json",
     "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-27b.json",
     "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-35b.json",
     "docs/live-proofs/2026-07-06-real-qwen-webserver-auth-sqli-27b.json",
@@ -420,7 +420,7 @@
   "ok": true,
   "processEvidence": {
     "appRows": [
-      "39921 128416 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+      "44098 124672 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
     ],
     "engineProcessRows": []
   },

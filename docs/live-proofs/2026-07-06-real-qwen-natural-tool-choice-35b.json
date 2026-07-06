@@ -1,27 +1,27 @@
 {
-  "baseUrl": "http://127.0.0.1:64067",
+  "baseUrl": "http://127.0.0.1:64951",
   "cacheAfter": {
     "block_disk_cache": {
-      "blocks_on_disk": 277,
+      "blocks_on_disk": 266,
       "disk_evictions": 0,
       "disk_hits": 10,
-      "disk_misses": 12,
-      "disk_size_bytes": 3092895540,
-      "disk_size_gb": 2.88,
-      "disk_writes": 277,
+      "disk_misses": 10,
+      "disk_size_bytes": 954601782,
+      "disk_size_gb": 0.889,
+      "disk_writes": 266,
       "total_accesses": 10,
-      "total_cached_tokens": 17604,
-      "total_tokens_on_disk": 17604
+      "total_cached_tokens": 16858,
+      "total_tokens_on_disk": 16858
     },
     "cache_totals": {
-      "l2_block_tokens_on_disk": 17604,
+      "l2_block_tokens_on_disk": 16858,
       "l2_prompt_tokens_on_disk": 0,
-      "l2_ssm_tokens_on_disk": 50806,
-      "l2_tokens_on_disk": 68410,
+      "l2_ssm_tokens_on_disk": 38106,
+      "l2_tokens_on_disk": 54964,
       "l2_tokens_on_disk_note": "store_sum_across_prompt_block_ssm_l2; tiers_may_overlap",
-      "l2_tokens_on_disk_store_sum": 68410,
-      "ram_tokens_cached": 17604,
-      "ssm_tokens_on_disk": 50806
+      "l2_tokens_on_disk_store_sum": 54964,
+      "ram_tokens_cached": 16858,
+      "ssm_tokens_on_disk": 38106
     },
     "disk_cache": {
       "entries": 0,
@@ -41,9 +41,9 @@
       "group_size": 64
     },
     "memory": {
-      "active_mb": 29031.1,
-      "cache_mb": 1035.4,
-      "peak_mb": 52190.3
+      "active_mb": 36345.2,
+      "cache_mb": 453.4,
+      "peak_mb": 53000.3
     },
     "native_cache": {
       "attention_kv_storage_quantization": {
@@ -83,23 +83,23 @@
     },
     "scheduler_cache": {
       "active_requests": 0,
-      "allocated_blocks": 278,
+      "allocated_blocks": 267,
       "block_size": 64,
-      "cache_hit_rate": 0.2570694087403599,
-      "cache_hits": 100,
-      "cache_misses": 289,
+      "cache_hit_rate": 0.2247191011235955,
+      "cache_hits": 80,
+      "cache_misses": 276,
       "cow_copies": 0,
       "disk_hits": 0,
-      "disk_misses": 12,
+      "disk_misses": 10,
       "entries_by_type": {
-        "assistant": 5,
+        "assistant": 4,
         "system": 0,
         "user": 0
       },
       "evictions": 0,
-      "free_blocks": 722,
-      "hit_rate": 0.8333333333333334,
-      "hits": 5,
+      "free_blocks": 733,
+      "hit_rate": 0.8,
+      "hits": 4,
       "max_blocks": 1000,
       "misses": 1,
       "pixel_cache_hits": 0,
@@ -107,23 +107,23 @@
       "pixel_cache_size": 0,
       "pixel_hit_rate": 0.0,
       "shared_blocks": 10,
-      "tokens_saved": 3200,
+      "tokens_saved": 2560,
       "total_images_processed": 0,
       "total_time_saved": 0.0,
-      "total_tokens_cached": 17604,
-      "utilization": 0.278
+      "total_tokens_cached": 16858,
+      "utilization": 0.267
     },
     "scheduler_stats": {
       "batch_generator": {
-        "generation_time": 65.59565814412781,
-        "generation_tokens": 1004,
-        "generation_tps": 15.305891097151513,
+        "generation_time": 6.226015245745657,
+        "generation_tokens": 429,
+        "generation_tps": 68.9044249117673,
         "hybrid_kv_without_ssm_hits": 1,
         "hybrid_kv_without_ssm_tokens": 640,
         "last_hybrid_kv_without_ssm": {
           "cached_tokens": 640,
           "reason": "no_ssm_companion_state",
-          "request_id": "chatcmpl-fc9b8bd9",
+          "request_id": "chatcmpl-55b44406",
           "ssm_prefix_lookup": {
             "candidate_lengths": [],
             "matched": false,
@@ -133,64 +133,64 @@
           }
         },
         "last_native_mtp": {
-          "acceptance_rate": 0.5545454545454546,
+          "acceptance_rate": 0.46938775510204084,
           "accepted_by_depth": [
-            120,
-            2,
-            0
+            18,
+            3,
+            2
           ],
-          "accepted_tokens": 122,
-          "accepts": 116,
-          "bonus_emits": 116,
-          "cycles": 196,
+          "accepted_tokens": 23,
+          "accepts": 13,
+          "bonus_emits": 12,
+          "cycles": 25,
           "depth_acceptance_rates": {
-            "d1": 0.6122448979591837,
-            "d2": 0.16666666666666666,
-            "d3": 0.0
+            "d1": 0.72,
+            "d2": 0.25,
+            "d3": 0.16666666666666666
           },
-          "draft_emits": 122,
+          "draft_emits": 23,
           "drafted_by_depth": [
-            196,
+            25,
             12,
             12
           ],
-          "drafted_tokens": 220,
+          "drafted_tokens": 49,
           "fallback_reason": null,
           "final_depth": 1,
-          "finish_reason": "length",
+          "finish_reason": "stop",
           "forwards": {
-            "mtp": 221,
-            "replay_main": 80,
+            "mtp": 50,
+            "replay_main": 12,
             "seed_main": 1,
-            "verify_main": 196
+            "verify_main": 25
           },
           "init_emits": 2,
-          "rejects": 80,
-          "request_id": "chatcmpl-949b258d",
+          "rejects": 12,
+          "request_id": "chatcmpl-5bbf43ca",
           "timings_ms": {
-            "avg_cycle": 111.39451454697077,
-            "draft": 4721.827462839428,
-            "materialize": 1.2580830079969019,
-            "replay": 199.14496209821664,
-            "restore": 8.838916895911098,
-            "sample": 15493.824416946154,
-            "snapshot": 9.128253092058003,
-            "total": 21833.32485120627,
-            "verify": 1399.302756326506
+            "avg_cycle": 33.04420344415121,
+            "draft": 182.71112797083333,
+            "materialize": 0.1318739668931812,
+            "replay": 27.032625046558678,
+            "restore": 0.8757090545259416,
+            "sample": 524.3520400545094,
+            "snapshot": 0.7752100354991853,
+            "total": 826.1050861037802,
+            "verify": 90.22649997496046
           },
-          "verify_emits": 80
+          "verify_emits": 12
         },
         "num_images_processed": 0,
-        "peak_memory": 54.725545612,
-        "prompt_time": 95.92550970904995,
-        "prompt_tokens": 6867,
-        "prompt_tps": 71.58679709733295,
+        "peak_memory": 55.57479534,
+        "prompt_time": 27.495320332964184,
+        "prompt_tokens": 7169,
+        "prompt_tps": 260.73527833771317,
         "vision_encoding_time": 0
       },
-      "cache_hit_requests": 3,
-      "cache_hit_tokens": 1920,
+      "cache_hit_requests": 2,
+      "cache_hit_tokens": 1280,
       "cache_hit_tokens_by_detail": {
-        "paged+ssm": 1920
+        "paged+ssm": 1280
       },
       "cache_reuse_partial_downgrades": 0,
       "cache_reuse_partial_tokens": 0,
@@ -205,7 +205,7 @@
       "last_hybrid_kv_without_ssm": {
         "cached_tokens": 640,
         "reason": "no_ssm_companion_state",
-        "request_id": "chatcmpl-fc9b8bd9",
+        "request_id": "chatcmpl-55b44406",
         "ssm_prefix_lookup": {
           "candidate_lengths": [],
           "matched": false,
@@ -216,35 +216,35 @@
       },
       "max_running_observed": 1,
       "max_waiting_observed": 1,
-      "num_requests_processed": 5,
+      "num_requests_processed": 4,
       "num_running": 0,
       "num_waiting": 0,
       "single_active_decode": false,
-      "total_completion_tokens": 1002,
-      "total_prompt_tokens": 20169
+      "total_completion_tokens": 429,
+      "total_prompt_tokens": 18782
     },
     "ssm_companion": {
       "disk": {
         "budget_bytes": 10737418240,
         "budget_gb": 10.0,
-        "bytes": 2039796937,
-        "bytes_mb": 1945.3,
-        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-natural-cache-la0qstgj/block/ssm_companion",
+        "bytes": 592853453,
+        "bytes_mb": 565.39,
+        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-natural-cache-qbjal055/block/ssm_companion",
         "enabled": true,
-        "entries": 13,
+        "entries": 9,
         "hit_rate": 0.0,
         "hits": 0,
         "misses": 1,
-        "stores": 13,
-        "total_cached_tokens": 50806,
-        "total_tokens_on_disk": 50806
+        "stores": 9,
+        "total_cached_tokens": 38106,
+        "total_tokens_on_disk": 38106
       },
-      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-natural-cache-la0qstgj/block/ssm_companion",
+      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-natural-cache-qbjal055/block/ssm_companion",
       "disk_enabled": true,
       "entries": 8,
       "max_entries": 8,
-      "nbytes": 1255145472,
-      "nbytes_mb": 1197.0
+      "nbytes": 526909440,
+      "nbytes_mb": 502.5
     },
     "turboquant_kv_cache": {
       "enabled": false
@@ -291,9 +291,9 @@
       "group_size": 64
     },
     "memory": {
-      "active_mb": 27751.1,
+      "active_mb": 35792.0,
       "cache_mb": 0.1,
-      "peak_mb": 27751.2
+      "peak_mb": 35792.0
     },
     "native_cache": {
       "attention_kv_storage_quantization": {
@@ -388,7 +388,7 @@
         "budget_gb": 10.0,
         "bytes": 0,
         "bytes_mb": 0.0,
-        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-natural-cache-la0qstgj/block/ssm_companion",
+        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-natural-cache-qbjal055/block/ssm_companion",
         "enabled": true,
         "entries": 0,
         "hit_rate": 0.0,
@@ -398,7 +398,7 @@
         "total_cached_tokens": 0,
         "total_tokens_on_disk": 0
       },
-      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-natural-cache-la0qstgj/block/ssm_companion",
+      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-natural-cache-qbjal055/block/ssm_companion",
       "disk_enabled": true,
       "entries": 0,
       "max_bytes": null,
@@ -411,7 +411,7 @@
       "enabled": false
     }
   },
-  "engineLogTail": "INFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 148 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 149 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 150 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 151 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 152 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 153 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 154 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 155 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 156 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 157 (16 kv layers, cumulative=48, 52 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 59 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-6d12e613: 64 layers, truncated to 4404 tokens\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 320, 'enable_thinking': False}\nINFO:     127.0.0.1:64475 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-4b269c6c: 10 blocks, 640 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 16/64 layers (48 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-4b269c6c: 640 cached (KV+SSM), 4131 remaining (incl. 7-token gen-prompt suffix)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-4b269c6c (48 layers, key=4736 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-4b269c6c (48 layers, key=4763 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-4b269c6c (48 layers, 4736-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-4b269c6c (48 layers, 4763-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-4b269c6c depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-4b269c6c] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.417,d3=0.083]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-4b269c6c] finish=stop cycles=120 accepted=81/144 (56.2%) emits[init=2,draft=81,bonus=70,verify=50]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-4b269c6c] accept_by_depth[d1=75/120,d2=5/12,d3=1/12] forwards[seed_main=1,verify_main=120,replay_main=50,mtp=145]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-4b269c6c] timings_ms[verify=859.57 sample=9018.64 draft=2924.77 snapshot=5.53 restore=5.60 replay=123.01 materialize=0.67 avg_cycle=107.81]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=4123, num_new_blocks=65, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 16 positional layers (out of 64 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 158 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 159 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 160 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 161 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 162 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 163 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 164 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 165 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 166 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 167 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 168 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 169 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 170 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 171 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 172 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 173 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 174 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 175 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 176 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 177 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 178 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 179 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 180 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 181 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 182 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 183 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 184 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 185 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 186 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 187 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 188 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 189 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 190 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 191 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 192 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 193 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 194 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 195 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 196 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 197 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 198 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 199 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 200 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 201 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 202 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 203 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 204 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 205 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 206 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 207 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 208 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 209 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 210 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 211 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 212 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 213 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 214 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 215 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 216 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 217 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 218 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 219 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 220 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 221 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 222 (16 kv layers, cumulative=48, 27 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 65 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-4b269c6c: 64 layers, truncated to 4763 tokens\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 320, 'enable_thinking': False}\nINFO:     127.0.0.1:64625 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:__main__:Stream chat generation cancelled by client for chatcmpl-f15a8606\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-f15a8606: 10 blocks, 640 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 16/64 layers (48 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-f15a8606: 640 cached (KV+SSM), 4410 remaining (incl. 7-token gen-prompt suffix)\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 320, 'enable_thinking': False}\nINFO:     127.0.0.1:64631 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-f15a8606 (48 layers, key=4992 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-f15a8606 (48 layers, key=5042 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-f15a8606 (48 layers, 4992-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-f15a8606 (48 layers, 5042-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-f15a8606 depth=3\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-949b258d: 10 blocks, 640 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 16/64 layers (48 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-949b258d: 640 cached (KV+SSM), 3518 remaining (incl. 7-token gen-prompt suffix)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-949b258d (48 layers, key=4096 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-949b258d (48 layers, key=4150 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-949b258d (48 layers, 4096-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-949b258d (48 layers, 4150-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-949b258d depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-949b258d] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.167,d3=0.000]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-949b258d] finish=length cycles=196 accepted=122/220 (55.5%) emits[init=2,draft=122,bonus=116,verify=80]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-949b258d] accept_by_depth[d1=120/196,d2=2/12,d3=0/12] forwards[seed_main=1,verify_main=196,replay_main=80,mtp=221]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-949b258d] timings_ms[verify=1399.30 sample=15493.82 draft=4721.83 snapshot=9.13 restore=8.84 replay=199.14 materialize=1.26 avg_cycle=111.39]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=3510, num_new_blocks=55, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 16 positional layers (out of 64 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 223 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 224 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 225 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 226 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 227 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 228 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 229 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 230 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 231 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 232 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 233 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 234 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 235 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 236 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 237 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 238 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 239 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 240 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 241 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 242 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 243 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 244 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 245 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 246 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 247 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 248 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 249 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 250 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 251 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 252 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 253 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 254 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 255 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 256 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 257 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 258 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 259 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 260 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 261 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 262 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 263 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 264 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 265 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 266 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 267 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 268 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 269 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 270 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 271 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 272 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 273 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 274 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 275 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 276 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 277 (16 kv layers, cumulative=48, 54 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 55 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-949b258d: 64 layers, truncated to 4150 tokens\nINFO:     127.0.0.1:64895 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nINFO:     Shutting down\nINFO:     Waiting for application shutdown.\nINFO:vmlx_engine.mllm_scheduler:MLLM Scheduler stopped\nINFO:vmlx_engine.engine.batched:BatchedEngine stopped\nINFO:__main__:Engine stopped\nINFO:__main__:Caffeinate process terminated\nINFO:     Application shutdown complete.\nINFO:     Finished server process [41026]",
+  "engineLogTail": "INFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 117 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 118 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 119 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 120 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 121 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 122 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 123 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 124 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 125 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 126 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 127 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 128 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 129 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 130 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 131 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 132 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 133 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 134 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 135 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 136 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 137 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 138 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 139 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 140 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 141 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 142 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 143 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 144 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 145 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 146 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 147 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 148 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 149 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 150 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 151 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 152 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 153 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 154 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 155 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 156 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 157 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 158 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 159 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 160 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 161 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 162 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 163 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 164 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 165 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 166 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 167 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 168 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 169 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 170 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 171 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 172 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 173 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 174 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 175 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 176 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 177 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 178 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 179 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 180 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 181 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 182 (10 kv layers, cumulative=30, 43 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 79 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-94eeb100: 40 layers, truncated to 5675 tokens\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 320, 'enable_thinking': False}\nINFO:     127.0.0.1:65100 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-5bbf43ca: 10 blocks, 640 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 10/40 layers (30 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-5bbf43ca: 640 cached (KV+SSM), 5321 remaining (incl. 7-token gen-prompt suffix)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-5bbf43ca (30 layers, key=5952 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-5bbf43ca (30 layers, key=5953 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-5bbf43ca (30 layers, 5952-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-5bbf43ca (30 layers, 5953-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-5bbf43ca depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-5bbf43ca] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.250,d3=0.167]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-5bbf43ca] finish=stop cycles=25 accepted=23/49 (46.9%) emits[init=2,draft=23,bonus=12,verify=12]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-5bbf43ca] accept_by_depth[d1=18/25,d2=3/12,d3=2/12] forwards[seed_main=1,verify_main=25,replay_main=12,mtp=50]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-5bbf43ca] timings_ms[verify=90.23 sample=524.35 draft=182.71 snapshot=0.78 restore=0.88 replay=27.03 materialize=0.13 avg_cycle=33.04]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=5313, num_new_blocks=84, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 10 positional layers (out of 40 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 183 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 184 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 185 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 186 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 187 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 188 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 189 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 190 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 191 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 192 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 193 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 194 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 195 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 196 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 197 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 198 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 199 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 200 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 201 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 202 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 203 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 204 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 205 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 206 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 207 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 208 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 209 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 210 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 211 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 212 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 213 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 214 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 215 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 216 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 217 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 218 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 219 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 220 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 221 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 222 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 223 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 224 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 225 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 226 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 227 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 228 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 229 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 230 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 231 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 232 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 233 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 234 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 235 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 236 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 237 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 238 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 239 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 240 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 241 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 242 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 243 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 244 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 245 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 246 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 247 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 248 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 249 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 250 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 251 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 252 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 253 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 254 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 255 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 256 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 257 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 258 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 259 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 260 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 261 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 262 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 263 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 264 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 265 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 266 (10 kv layers, cumulative=30, 1 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 84 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-5bbf43ca: 40 layers, truncated to 5953 tokens\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 320, 'enable_thinking': False}\nINFO:     127.0.0.1:65144 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-6811f883: 10 blocks, 640 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 10/40 layers (30 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-6811f883: 640 cached (KV+SSM), 5581 remaining (incl. 7-token gen-prompt suffix)\nINFO:__main__:Stream chat generation cancelled by client for chatcmpl-6811f883\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 320, 'enable_thinking': False}\nINFO:     127.0.0.1:65152 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:__main__:Stream chat generation cancelled by client for chatcmpl-479b1496\nINFO:     127.0.0.1:65160 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nINFO:     Shutting down\nINFO:     Waiting for application shutdown.\nINFO:vmlx_engine.mllm_scheduler:MLLM Scheduler stopped\nINFO:vmlx_engine.engine.batched:BatchedEngine stopped\nINFO:__main__:Engine stopped\nINFO:__main__:Caffeinate process terminated\nINFO:     Application shutdown complete.\nINFO:     Finished server process [42190]",
   "exactToolCallBlocksPresent": false,
   "expectedToolSequence": [
     "httpx",
@@ -419,9 +419,9 @@
     "sqlmap",
     "search_cve|lookup_cve"
   ],
-  "finishedAt": "2026-07-06T03:00:07-0700",
+  "finishedAt": "2026-07-06T03:01:37-0700",
   "forcedSpecificToolRetry": "not_used",
-  "generatedAt": "2026-07-06T03:00:07-0700",
+  "generatedAt": "2026-07-06T03:01:37-0700",
   "health": {
     "acceleration": {
       "host": {
@@ -498,7 +498,7 @@
           "budget_gb": 10.0,
           "bytes": 0,
           "bytes_mb": 0.0,
-          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-natural-cache-la0qstgj/block/ssm_companion",
+          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-natural-cache-qbjal055/block/ssm_companion",
           "enabled": true,
           "entries": 0,
           "hit_rate": 0.0,
@@ -508,7 +508,7 @@
           "total_cached_tokens": 0,
           "total_tokens_on_disk": 0
         },
-        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-natural-cache-la0qstgj/block/ssm_companion",
+        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-natural-cache-qbjal055/block/ssm_companion",
         "disk_enabled": true,
         "entries": 0,
         "max_bytes": null,
@@ -532,12 +532,12 @@
       "cache": {
         "disk_cache": {
           "block_l2": {
-            "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-natural-cache-la0qstgj/block",
+            "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-natural-cache-qbjal055/block",
             "enabled": true,
             "max_gb": 10.0
           },
           "prompt_l2": {
-            "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-natural-cache-la0qstgj/prompt",
+            "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-natural-cache-qbjal055/prompt",
             "enabled": true,
             "max_gb": 10.0
           }
@@ -605,9 +605,9 @@
           "ssm_companion_required": true
         },
         "cache_type": "hybrid",
-        "family": "qwen3_5",
-        "name": "dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
-        "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "family": "qwen3_5_moe",
+        "name": "dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+        "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
         "served_name": null,
         "type": "text"
       },
@@ -643,12 +643,12 @@
     "last_request_time": null,
     "mcp": null,
     "memory": {
-      "active_mb": 27751.1,
+      "active_mb": 35792.0,
       "cache_mb": 0.1,
-      "peak_mb": 27751.2
+      "peak_mb": 35792.0
     },
     "model_loaded": true,
-    "model_name": "dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+    "model_name": "dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
     "model_type": "mllm",
     "mtp": {
       "artifact_available": true,
@@ -657,7 +657,7 @@
       "config_num_nextn_predict_layers": 1,
       "effective_depth": 3,
       "effective_depth_source": "default",
-      "family": "qwen3_5",
+      "family": "qwen3_5_moe",
       "has_vision_config": true,
       "has_vision_weights": true,
       "index_has_mtp_tensors": true,
@@ -665,7 +665,7 @@
       "issues": [],
       "jang_drop_mtp": null,
       "jang_mtp_layers": 1,
-      "mtp_tensor_count": 23,
+      "mtp_tensor_count": 31,
       "request_gate": "temperature=0,repetition_penalty=1.0",
       "request_policy": "compatible-only",
       "runtime_active": true,
@@ -724,7 +724,7 @@
       "passthrough_bit_widths_used": [
         16
       ],
-      "passthrough_tensor_count": 693,
+      "passthrough_tensor_count": 643,
       "profile": "MXFP8",
       "sidecar": {
         "jang_config": true,
@@ -734,17 +734,17 @@
       "target_bits": 8,
       "weight_format": "mxfp8",
       "weight_index": {
-        "index_file": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP/model.safetensors.index.json",
-        "mtp_tensor_count": 23,
+        "index_file": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP/model.safetensors.index.json",
+        "mtp_tensor_count": 31,
         "routed_layout_counts": {
-          "prestacked_switch": 0,
+          "prestacked_switch": 246,
           "split_expert": 0
         },
         "suffix_counts": {
-          "scales": 506,
-          "weight": 937
+          "scales": 443,
+          "weight": 860
         },
-        "total_tensors": 1705,
+        "total_tensors": 1529,
         "tq_target_counts": {}
       },
       "weight_matmul_dispatch": {
@@ -759,6 +759,14 @@
       "block_size": 64,
       "target_bits": null,
       "type": "jang"
+    },
+    "routing": {
+      "effective_active_experts": 8,
+      "effective_active_experts_source": "trained_default",
+      "n_routed_experts": 256,
+      "override_env": null,
+      "trained_active_experts": 8,
+      "trained_active_experts_source": "config.text_config.num_experts_per_tok"
     },
     "scheduler": {
       "batch_generator": {},
@@ -787,22 +795,22 @@
       "enabled": false
     }
   },
-  "labUrl": "http://127.0.0.1:64057",
+  "labUrl": "http://127.0.0.1:64942",
   "memoryPreflight": {
     "allowConcurrentModel": false,
-    "availableGB": 106.76033020019531,
+    "availableGB": 106.66741943359375,
     "enabled": true,
     "heavyModelProcessCount": 0,
     "heavyModelProcesses": [],
-    "requiredAvailableGB": 42.0
+    "requiredAvailableGB": 50.0
   },
   "messages": [
     {
-      "content": "Authorized local fixture only; this is a natural-language objective, not an exact call script. Target scope is only http://127.0.0.1:64057. Do not touch external hosts. choose the app tools you need from the provided schemas to complete this workflow end to end: surface the local web routes and live service, probe for a web vulnerability, prove whether the search q parameter has SQL injection in the local fixture, enrich the finding with relevant CVE context, and then write a concise evidence su",
+      "content": "Authorized local fixture only; this is a natural-language objective, not an exact call script. Target scope is only http://127.0.0.1:64942. Do not touch external hosts. choose the app tools you need from the provided schemas to complete this workflow end to end: surface the local web routes and live service, probe for a web vulnerability, prove whether the search q parameter has SQL injection in the local fixture, enrich the finding with relevant CVE context, and then write a concise evidence su",
       "role": "user"
     },
     {
-      "content": "Let's begin the SCAN phase for`http://127.0.0.1:64057`.\n\n**Step 1: Surface live service and tech stack.**\n**Step 2: Crawl for routes (specifically looking for search functionality).**\n**Step 3: Probe the `q` parameter for SQLi.**\n**Step 4: Enrich with CVE context.**",
+      "content": "",
       "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 0 of 0 indexed items for phase SCAN, tab web.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets: none yet.\nCVE assist: semantic embedding search is enabled when cve_embedder.py and stored CVE embeddings are available; otherwise C",
       "contextSnippetCount": 0,
       "role": "assistant",
@@ -823,58 +831,23 @@
       ]
     },
     {
-      "content": "Tool request: httpx\n$ /bin/sh -c echo 'http://127.0.0.1:64057' | tr ',' '\\n' | httpx -sc -title -tech-detect -json -silent -duc -timeout 5 2>/dev/null || curl -s -o /dev/null -w '{\"url\":\"http://127.0.0.1:64057\",\"status_code\":%{http_code},\"title\":\"\",\"webserver\":\"%{content_type}\"}' 'http://127.0.0.1:64057'\nTool arguments repaired from scoped local prompt target: http://127.0.0.1:64057\nArguments:\n{\n  \"status_code\" : true,\n  \"targets\" : \"http:\\/\\/127.0.0.1:64057\"\n}\n\n{\"timestamp\":\"2026-07-06T02:57:44.677249-07:00\",\"port\":\"64057\",\"url\":\"http://127.0.0.1:64057\",\"input\":\"http://127.0.0.1:64057\",\"title\":\"ExploitBot SQLi Lab\",\"scheme\":\"http\",\"webserver\":\"BaseHTTP/0.6 Python/3.14.6\",\"content_type\":\"text/html\",\"method\":\"GET\",\"host\":\"127.0.0.1\",\"host_ip\":\"127.0.0.1\",\"path\":\"/\",\"time\":\"371.041\u00b5s\",\"a\":[\"127.0.0.1\"],\"tech\":[\"Python:3.14.6\"],\"words\":3,\"lines\":1,\"status_code\":200,\"content_length\":72,\"failed\":false,\"knowledgebase\":{\"pHash\":0}}\n",
+      "content": "Tool request: httpx\n$ /bin/sh -c echo 'http://127.0.0.1:64942' | tr ',' '\\n' | httpx -sc -title -tech-detect -json -silent -duc -timeout 5 2>/dev/null || curl -s -o /dev/null -w '{\"url\":\"http://127.0.0.1:64942\",\"status_code\":%{http_code},\"title\":\"\",\"webserver\":\"%{content_type}\"}' 'http://127.0.0.1:64942'\nArguments:\n{\n  \"status_code\" : true,\n  \"target\" : \"http:\\/\\/127.0.0.1:64942\",\n  \"tech_detect\" : true,\n  \"title\" : true\n}\n\n{\"timestamp\":\"2026-07-06T03:01:07.401973-07:00\",\"port\":\"64942\",\"url\":\"http://127.0.0.1:64942\",\"input\":\"http://127.0.0.1:64942\",\"title\":\"ExploitBot SQLi Lab\",\"scheme\":\"http\",\"webserver\":\"BaseHTTP/0.6 Python/3.14.6\",\"content_type\":\"text/html\",\"method\":\"GET\",\"host\":\"127.0.0.1\",\"host_ip\":\"127.0.0.1\",\"path\":\"/\",\"time\":\"288.5\u00b5s\",\"a\":[\"127.0.0.1\"],\"tech\":[\"Python:3.14.6\"],\"words\":3,\"lines\":1,\"status_code\":200,\"content_length\":72,\"failed\":false,\"knowledgebase\":{\"pHash\":0}}\n",
       "role": "toolCall",
       "status": "ok 0.2s",
       "tool": "httpx"
     },
     {
-      "content": "Good. The service is live.\n*   **Target:** `http://127.0.0.1:64057`\n*   **Title:** ExploitBot SQLi Lab\n*   **Tech:** Python 3.14.6 (BaseHTTP/0.6)\n*   **Status:** 200\n\nNow, let's crawl the application to find the search endpoint (likely containing a `q` parameter).",
-      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 2 of 2 indexed items for phase SCAN, tab web.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=1 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] httpx tags=tool,httpx: {\"timestamp\":\"2026-07-06T02:57:44.677249-07:00\",\"port\":\"64057\",\"url\":\"http://127.0.0.1:64057\"",
-      "contextSelections": [
-        {
-          "bodyHash": "fe41ac89977c10a3",
-          "source": "tool.output",
-          "tags": "tool,httpx",
-          "title": "httpx"
-        },
-        {
-          "bodyHash": "b638b88442624ca1",
-          "source": "asset.web",
-          "tags": "web,BaseHTTP/0.6 Python/3.14.6,Python:3.14.6",
-          "title": "http://127.0.0.1:64057"
-        }
-      ],
-      "contextSnippetCount": 2,
-      "role": "assistant",
-      "toolSchemaCount": 12,
-      "toolSchemas": [
-        "search_cve",
-        "lookup_cve",
-        "search_context",
-        "wpscan",
-        "gowitness",
-        "httpx",
-        "nuclei",
-        "theharvester",
-        "sqlmap",
-        "dnsx",
-        "katana",
-        "hashcat"
-      ]
-    },
-    {
-      "content": "Tool request: katana\n$ katana -u http://127.0.0.1:64057 -jsonl -silent\nArguments:\n{\n  \"url\" : \"http:\\/\\/127.0.0.1:64057\"\n}\n\nhttp://127.0.0.1:64057\nhttp://127.0.0.1:64057/login\nhttp://127.0.0.1:64057/search?q=test\n",
+      "content": "Tool request: katana\n$ katana -u http://127.0.0.1:64942 -d 2 -jsonl -silent\nArguments:\n{\n  \"depth\" : 2,\n  \"url\" : \"http:\\/\\/127.0.0.1:64942\"\n}\n\nhttp://127.0.0.1:64942\nhttp://127.0.0.1:64942/login\nhttp://127.0.0.1:64942/search?q=test\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "katana"
     },
     {
-      "content": "Excellent. Katana surfaced three distinct routes:\n1.  `/` (Root)\n2.`/login` (Authentication)\n3.  `/search?q=test` (Search functionality with a `q` parameter)\n\nThe `search?q=test` endpoint is our primary target for SQL injection testing.\n\n### Phase 2: Probing the `q` Parameter\nWe will use `sqlmap` to probe the `q` parameter. Since this is a local fixture, we can be slightly more aggressive with the `--level` and `--risk` to ensure detection, but keep it methodical.",
-      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 6 indexed items for phase SCAN, tab web.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=4 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] httpx tags=tool,httpx: {\"timestamp\":\"2026-07-06T02:57:44.677249-07:00\",\"port\":\"64057\",\"url\":\"http://127.0.0.1:64057\"",
+      "content": "",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 6 indexed items for phase SCAN, tab web.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=4 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] httpx tags=tool,httpx: {\"timestamp\":\"2026-07-06T03:01:07.401973-07:00\",\"port\":\"64942\",\"url\":\"http://127.0.0.1:64942\"",
       "contextSelections": [
         {
-          "bodyHash": "fe41ac89977c10a3",
+          "bodyHash": "d28210070c7ac1d3",
           "source": "tool.output",
           "tags": "tool,httpx",
           "title": "httpx"
@@ -883,19 +856,19 @@
           "bodyHash": "b638b88442624ca1",
           "source": "asset.web",
           "tags": "web,BaseHTTP/0.6 Python/3.14.6,Python:3.14.6",
-          "title": "http://127.0.0.1:64057"
+          "title": "http://127.0.0.1:64942"
         },
         {
           "bodyHash": "2d5cdc60c5a0f056",
           "source": "asset.web",
           "tags": "web",
-          "title": "http://127.0.0.1:64057/search?q=test"
+          "title": "http://127.0.0.1:64942/search?q=test"
         },
         {
           "bodyHash": "2d5cdc60c5a0f056",
           "source": "asset.web",
           "tags": "web",
-          "title": "http://127.0.0.1:64057"
+          "title": "http://127.0.0.1:64942"
         }
       ],
       "contextSnippetCount": 4,
@@ -917,38 +890,97 @@
       ]
     },
     {
-      "content": "Tool request: sqlmap\n$ sqlmap -u http://127.0.0.1:64057/search?q=test --batch\nArguments:\n{\n  \"url\" : \"http:\\/\\/127.0.0.1:64057\\/search?q=test\"\n}\n\n[INFO] testing GET parameter 'q'\nParameter: q (GET)\n    Type: boolean-based blind\n    Title: OR boolean-based blind - WHERE or HAVING clause\nEXPLOITBOT_SQLI_PROOF_USER=alice\navailable databases [1]:\n[*] exploitbot_lab\n",
+      "content": "Tool request: httpx\n$ /bin/sh -c echo 'http://127.0.0.1:64942/login,http://127.0.0.1:64942/search' | tr ',' '\\n' | httpx -sc -title -tech-detect -json -silent -duc -timeout 5 2>/dev/null || curl -s -o /dev/null -w '{\"url\":\"http://127.0.0.1:64942/login,http://127.0.0.1:64942/search\",\"status_code\":%{http_code},\"title\":\"\",\"webserver\":\"%{content_type}\"}' 'http://127.0.0.1:64942/login,http://127.0.0.1:64942/search'\nArguments:\n{\n  \"status_code\" : true,\n  \"target\" : \"http:\\/\\/127.0.0.1:64942\\/login,http:\\/\\/127.0.0.1:64942\\/search\",\n  \"tech_detect\" : true,\n  \"title\" : true\n}\n\n{\"timestamp\":\"2026-07-06T03:01:17.086788-07:00\",\"port\":\"64942\",\"url\":\"http://127.0.0.1:64942/search\",\"input\":\"http://127.0.0.1:64942/search\",\"scheme\":\"http\",\"webserver\":\"BaseHTTP/0.6 Python/3.14.6\",\"content_type\":\"text/plain\",\"method\":\"GET\",\"host\":\"127.0.0.1\",\"host_ip\":\"127.0.0.1\",\"path\":\"/search\",\"time\":\"429.875\u00b5s\",\"a\":[\"127.0.0.1\"],\"tech\":[\"Python:3.14.6\"],\"words\":2,\"lines\":1,\"status_code\":200,\"content_length\":8,\"failed\":false,\"knowledgebase\":{\"pHash\":0}}\n{\"timestamp\":\"2026-07-06T03:01:17.087023-07:00\",\"port\":\"64942\",\"url\":\"http://127.0.0.1:64942/login\",\"input\":\"http://127.0.0.1:64942/login\",\"title\":\"ExploitBot SQLi Lab Login\",\"scheme\":\"http\",\"webserver\":\"BaseHTTP/0.6 Python/3.14.6\",\"content_type\":\"text/html\",\"method\":\"GET\",\"host\":\"127.0.0.1\",\"host_ip\":\"127.0.0.1\",\"path\":\"/login\",\"time\":\"374.875\u00b5s\",\"a\":[\"127.0.0.1\"],\"tech\":[\"Python:3.14.6\"],\"words\":4,\"lines\":1,\"status_code\":200,\"content_length\":72,\"failed\":false,\"knowledgebase\":{\"pHash\":0}}\n",
+      "role": "toolCall",
+      "status": "ok 0.2s",
+      "tool": "httpx"
+    },
+    {
+      "content": "Tool request: nuclei\n$ nuclei -u http://127.0.0.1:64942 -tags sqli,rce -severity high,critical -jsonl -silent\nArguments:\n{\n  \"severity\" : \"high,critical\",\n  \"tags\" : \"sqli,rce\",\n  \"target\" : \"http:\\/\\/127.0.0.1:64942\"\n}\n\n{\"template-id\": \"webserver-auth-sqli-local\", \"matched-at\": \"http://127.0.0.1:64942/search?q=1\", \"host\": \"http://127.0.0.1:64942\", \"info\": {\"name\": \"Local SQL injection proof\", \"severity\": \"high\", \"description\": \"Loopback SQL injection proof for q parameter.\", \"classification\": {\"cve-id\": \"CVE-2021-41773\"}, \"tags\": [\"sqli\", \"local-fixture\"]}}\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "nuclei"
+    },
+    {
+      "content": "",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 11 indexed items for phase SCAN, tab web.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=6 vulns=1 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [finding] HIGH webserver-auth-sqli-local tags=vuln,high,nuclei,sqli,local-fixture,CVE-2021-41773: target http://127.0.0.1:64942/s",
+      "contextSelections": [
+        {
+          "bodyHash": "47f19910d83046bf",
+          "source": "finding",
+          "tags": "vuln,high,nuclei,sqli,local-fixture,CVE-2021-41773",
+          "title": "HIGH webserver-auth-sqli-local"
+        },
+        {
+          "bodyHash": "bfdeac6c96a9aea9",
+          "source": "tool.output",
+          "tags": "tool,nuclei",
+          "title": "nuclei"
+        },
+        {
+          "bodyHash": "d7473455796785a7",
+          "source": "tool.output",
+          "tags": "tool,httpx",
+          "title": "httpx"
+        },
+        {
+          "bodyHash": "d28210070c7ac1d3",
+          "source": "tool.output",
+          "tags": "tool,httpx",
+          "title": "httpx"
+        }
+      ],
+      "contextSnippetCount": 4,
+      "role": "assistant",
+      "toolSchemaCount": 12,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "wpscan",
+        "gowitness",
+        "httpx",
+        "nuclei",
+        "theharvester",
+        "sqlmap",
+        "dnsx",
+        "katana",
+        "hashcat"
+      ]
+    },
+    {
+      "content": "Tool request: sqlmap\n$ sqlmap -u http://127.0.0.1:64942/search?q=test --batch --level 2 --risk 2\nArguments:\n{\n  \"dbs\" : false,\n  \"level\" : 2,\n  \"risk\" : 2,\n  \"url\" : \"http:\\/\\/127.0.0.1:64942\\/search?q=test\"\n}\n\n[INFO] testing GET parameter 'q'\nParameter: q (GET)\n    Type: boolean-based blind\n    Title: OR boolean-based blind - WHERE or HAVING clause\nEXPLOITBOT_SQLI_PROOF_USER=alice\navailable databases [1]:\n[*] exploitbot_lab\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "sqlmap"
     },
     {
-      "content": "The`q` parameter is confirmed vulnerable to **Boolean-based blind SQL injection**.\n*   **Proof Marker:** `EXPLOITBOT_SQLI_PROOF_USER=alice`\n*   **Database:** `exploitbot_lab`\n\nNow, let's enrich this finding with CVE context. Since the backend is a custom Python `BaseHTTP` server, specific \"off-the-shelf\" CVEs for the web server itself might be scarce (as it's a standard library module), but the *logic* vulnerability is the key. We will search for Python web framework SQLi CVEs to see if the loca",
-      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 7 indexed items for phase SCAN, tab web.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=4 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] httpx tags=tool,httpx: {\"timestamp\":\"2026-07-06T02:57:44.677249-07:00\",\"port\":\"64057\",\"url\":\"http://127.0.0.1:64057\"",
+      "content": "",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 12 indexed items for phase SCAN, tab web.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=6 vulns=1 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [finding] HIGH webserver-auth-sqli-local tags=vuln,high,nuclei,sqli,local-fixture,CVE-2021-41773: target http://127.0.0.1:64942/s",
       "contextSelections": [
         {
-          "bodyHash": "fe41ac89977c10a3",
+          "bodyHash": "47f19910d83046bf",
+          "source": "finding",
+          "tags": "vuln,high,nuclei,sqli,local-fixture,CVE-2021-41773",
+          "title": "HIGH webserver-auth-sqli-local"
+        },
+        {
+          "bodyHash": "bfdeac6c96a9aea9",
+          "source": "tool.output",
+          "tags": "tool,nuclei",
+          "title": "nuclei"
+        },
+        {
+          "bodyHash": "d7473455796785a7",
           "source": "tool.output",
           "tags": "tool,httpx",
           "title": "httpx"
         },
         {
-          "bodyHash": "324783f6435d4732",
+          "bodyHash": "d28210070c7ac1d3",
           "source": "tool.output",
-          "tags": "tool,sqlmap",
-          "title": "sqlmap"
-        },
-        {
-          "bodyHash": "b638b88442624ca1",
-          "source": "asset.web",
-          "tags": "web,BaseHTTP/0.6 Python/3.14.6,Python:3.14.6",
-          "title": "http://127.0.0.1:64057"
-        },
-        {
-          "bodyHash": "2d5cdc60c5a0f056",
-          "source": "asset.web",
-          "tags": "web",
-          "title": "http://127.0.0.1:64057/search?q=test"
+          "tags": "tool,httpx",
+          "title": "httpx"
         }
       ],
       "contextSnippetCount": 4,
@@ -970,35 +1002,35 @@
       ]
     },
     {
-      "content": "Tool request: search_cve\n$ echo handled by callback\nArguments:\n{\n  \"max_results\" : 5,\n  \"query\" : \"Python web framework SQL injection\",\n  \"tags\" : \"sqli,python\"\n}\n\nNo CVEs found for query: Python web framework SQL injection",
+      "content": "Tool request: search_cve\n$ echo handled by callback\nArguments:\n{\n  \"max_results\" : 1,\n  \"query\" : \"CVE-2021-41773\"\n}\n\nFound 1 CVEs:\n\nCVE-2021-41773 [CRITICAL] CVSS:9.8 | apache http_server\n  Tags: rce,lfi,kev,exploit-available\n  Sources: cisa-kev, nvd, references, tags\n  Exploit: YES (poc) | CISA KEV: YES\n  Affected: apache http_server from 2.4.49\n  Description: A flaw was found in a change made to path normalization in Apache HTTP Server 2.4.49. An attacker could use a path traversal attack to map URLs to files outside the directories configured by Alias-like directives. If files outside of these directories are not protected by the usual default configura\n  References: http://packetstormsecurity.com/files/164418/Apache-HTTP-Server-2.4.49-Path-Traversal-Remote-Code-Execution.html\n\n",
       "role": "toolCall",
       "status": "ok 0.1s",
       "tool": "search_cve"
     },
     {
       "content": "",
-      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 8 indexed items for phase SCAN, tab web.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=4 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] httpx tags=tool,httpx: {\"timestamp\":\"2026-07-06T02:57:44.677249-07:00\",\"port\":\"64057\",\"url\":\"http://127.0.0.1:64057\"",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 13 indexed items for phase SCAN, tab web.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=6 vulns=1 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [finding] HIGH webserver-auth-sqli-local tags=vuln,high,nuclei,sqli,local-fixture,CVE-2021-41773: target http://127.0.0.1:64942/s",
       "contextSelections": [
         {
-          "bodyHash": "fe41ac89977c10a3",
+          "bodyHash": "47f19910d83046bf",
+          "source": "finding",
+          "tags": "vuln,high,nuclei,sqli,local-fixture,CVE-2021-41773",
+          "title": "HIGH webserver-auth-sqli-local"
+        },
+        {
+          "bodyHash": "bfdeac6c96a9aea9",
+          "source": "tool.output",
+          "tags": "tool,nuclei",
+          "title": "nuclei"
+        },
+        {
+          "bodyHash": "d7473455796785a7",
           "source": "tool.output",
           "tags": "tool,httpx",
           "title": "httpx"
         },
         {
-          "bodyHash": "324783f6435d4732",
-          "source": "tool.output",
-          "tags": "tool,sqlmap",
-          "title": "sqlmap"
-        },
-        {
-          "bodyHash": "b638b88442624ca1",
-          "source": "asset.web",
-          "tags": "web,BaseHTTP/0.6 Python/3.14.6,Python:3.14.6",
-          "title": "http://127.0.0.1:64057"
-        },
-        {
-          "bodyHash": "8c55bf4b6ea2f477",
+          "bodyHash": "d856726da0c6c58e",
           "source": "tool.output",
           "tags": "tool,search_cve",
           "title": "search_cve"
@@ -1023,13 +1055,25 @@
       ]
     },
     {
-      "content": "Do not call more tools. Use only the existing local fixture transcript. Start with REAL_QWEN_NATURAL_TOOL_CHOICE_FINAL, then summarize evidence for http://127.0.0.1:64057, the route surface, web probe, nuclei finding, sqlmap q-parameter proof, EXPLOITBOT_SQLI_PROOF_USER=alice, and CVE-2021-41773 if present.",
+      "content": "Do not call more tools. Use only the existing local fixture transcript. Start with REAL_QWEN_NATURAL_TOOL_CHOICE_FINAL, then summarize evidence for http://127.0.0.1:64942, the route surface, web probe, nuclei finding, sqlmap q-parameter proof, EXPLOITBOT_SQLI_PROOF_USER=alice, and CVE-2021-41773 if present.",
       "role": "user"
     },
     {
-      "content": "REAL_QWEN_NATURAL_TOOL_CHOICE_FINAL\n\n# ExploitBot SQLi Lab: Evidence Summary\n**Target:** `http://127.0.0.1:64057`\n**Phase:** SCAN & DETECT (Local Fixture)\n\n### 1. Service & Route Surface\n*   **Service:**",
-      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 8 indexed items for phase SCAN, tab web.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=4 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] sqlmap tags=tool,sqlmap: [INFO] testing GET parameter 'q' Parameter: q (GET)     Type: boolean-based blind     Title",
+      "content": "",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 13 indexed items for phase SCAN, tab web.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=6 vulns=1 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [finding] HIGH webserver-auth-sqli-local tags=vuln,high,nuclei,sqli,local-fixture,CVE-2021-41773: target http://127.0.0.1:64942/s",
       "contextSelections": [
+        {
+          "bodyHash": "47f19910d83046bf",
+          "source": "finding",
+          "tags": "vuln,high,nuclei,sqli,local-fixture,CVE-2021-41773",
+          "title": "HIGH webserver-auth-sqli-local"
+        },
+        {
+          "bodyHash": "bfdeac6c96a9aea9",
+          "source": "tool.output",
+          "tags": "tool,nuclei",
+          "title": "nuclei"
+        },
         {
           "bodyHash": "324783f6435d4732",
           "source": "tool.output",
@@ -1037,22 +1081,10 @@
           "title": "sqlmap"
         },
         {
-          "bodyHash": "b638b88442624ca1",
-          "source": "asset.web",
-          "tags": "web,BaseHTTP/0.6 Python/3.14.6,Python:3.14.6",
-          "title": "http://127.0.0.1:64057"
-        },
-        {
-          "bodyHash": "fe41ac89977c10a3",
+          "bodyHash": "d856726da0c6c58e",
           "source": "tool.output",
-          "tags": "tool,httpx",
-          "title": "httpx"
-        },
-        {
-          "bodyHash": "2d5cdc60c5a0f056",
-          "source": "asset.web",
-          "tags": "web",
-          "title": "http://127.0.0.1:64057"
+          "tags": "tool,search_cve",
+          "title": "search_cve"
         }
       ],
       "contextSnippetCount": 4,
@@ -1066,12 +1098,14 @@
       ]
     }
   ],
-  "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+  "model": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
   "modelLoadAttempted": true,
   "modelToolChoiceEvidence": "model_selected_tool_sequence",
   "naturalTurnToolSequence": [
     "httpx",
     "katana",
+    "httpx",
+    "nuclei",
     "sqlmap",
     "search_cve"
   ],
@@ -1099,13 +1133,13 @@
       "hashcat"
     ]
   },
-  "prompt": "Authorized local fixture only; this is a natural-language objective, not an exact call script. Target scope is only http://127.0.0.1:64057. Do not touch external hosts. choose the app tools you need from the provided schemas to complete this workflow end to end: surface the local web routes and live service, probe for a web vulnerability, prove whether the search q parameter has SQL injection in the local fixture, enrich the finding with relevant CVE context, and then write a concise evidence summary that starts with REAL_QWEN_NATURAL_TOOL_CHOICE_FINAL. Only call tools that are present in the provided tool schemas; do not write raw shell commands in prose. If route discovery is needed, call the provided web crawler or fuzzer tool rather than describing a command. Use tool results instead of guessing. Keep actions bounded to the loopback lab and include the proof marker EXPLOITBOT_SQLI_PROOF_USER=alice if the vulnerability is confirmed.",
+  "prompt": "Authorized local fixture only; this is a natural-language objective, not an exact call script. Target scope is only http://127.0.0.1:64942. Do not touch external hosts. choose the app tools you need from the provided schemas to complete this workflow end to end: surface the local web routes and live service, probe for a web vulnerability, prove whether the search q parameter has SQL injection in the local fixture, enrich the finding with relevant CVE context, and then write a concise evidence summary that starts with REAL_QWEN_NATURAL_TOOL_CHOICE_FINAL. Only call tools that are present in the provided tool schemas; do not write raw shell commands in prose. If route discovery is needed, call the provided web crawler or fuzzer tool rather than describing a command. Use tool results instead of guessing. Keep actions bounded to the loopback lab and include the proof marker EXPLOITBOT_SQLI_PROOF_USER=alice if the vulnerability is confirmed.",
   "proofLevel": "live-app-real-qwen-natural-language-tool-selection-local-webserver-fixture",
   "proofType": "real-qwen-natural-tool-choice",
   "reportRenderActions": {
     "findingCount": 1,
     "htmlChars": 3273,
-    "htmlPreview": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n<style>\nbody { font-family: Georgia, serif; font-size: 13px; line-height: 1.7; color: #1a1a1a; max-width: 800px; margin: 40px auto; padding: 0 20px; }\nh1 { font-family: -apple-system, sans-serif; font-size: 22px; margin-bottom: 4px; }\nh2 { font-family: -apple-system, sans-serif; font-size: 16px; margin-top: 24px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }\nh3 { font-family: -apple-system, sans-serif; font-size: 14px; margin-top: 16px; }\n.confidential { text-align: center; font-family: monospace; font-size: 10px; letter-spacing: 3px; color: #999; text-transform: uppercase; margin-bottom: 30px; }\n.meta { font-size: 11px; color: #888; font-family: monospace; margin-bottom: 20px; }\ntable { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; }\nth { background: #f5f5f5; border-bottom: 2px solid #ddd; padding: 6px 10px; text-align: left; font-family: -apple-system, sans-serif; }\ntd { padding: 6px 10px; border-bottom: 1px solid #eee; }\n.finding { border: 1px solid #ddd; border-radius: 6px; padding: 12px; margin: 10px 0; }\n.finding.critical { border-left: 4px solid #ef4444; }\n.finding.high { border-left: 4px solid #f97316; }\n.finding.medium { border-left: 4px solid #f59e0b; }\n.finding.low { border-left: 4px solid #3b82f6; }\n.sev { font-family: monospace; font-size: 10px; font-weight: bold; padding: 1px 6px; border-radius: 3px; }\n.sev.critical { background: #fef2f2; color: #dc2626; }\n.sev.high { background: #fff7ed; color: #ea580c; }\n.sev.medium { background: #fffbeb; color: #d97706; }\n.sev.low { background: #eff6ff; color: #2563eb; }\ncode { font-family: monospace; font-size: 11px; background: #f0f0f0; padding: 1px 4px; border-radius: 2px; }\n@media print { body { margin: 0; } .finding { break-inside: avoid; } }\n</style>\n</head>\n<body>\n<div class=\"confidential\">CONFIDENTIAL</div>\n<h1>Penetration Test Report</h1>\n<div class=\"meta\">\nClient: Unknown<br>\nAssessment Date: July 6, 2026<br>\nAssessor: exploitbot (autonomous)<br>\nClassification: Confidential\n</div>\n\n<h2>1. Executive Summary</h2>\n<p>A penetration test was conducted against <strong>Unknown</strong>. The assessment identified <strong>1 vulnerabilities</strong> including 0 critical, 1 high, 0 medium, and 0 low severity findings.</p>\n\n<h2>2. Findings Summary</h2>\n<table>\n<tr><th>#</th><th>Finding</th><th>Severity</th><th>CVSS</th><th>Target</th><th>Status</th></tr>\n<tr><td>1</td><td>SQL injection in local search parameter</td><td><span class=\"sev high\">HIGH</span></td><td>8.1</td><td><code>http://127.0.0.1:64057/search?q=1</code></td><td>confirmed</td></tr>\n</table>\n\n<h2>3. Detailed Findings</h2>\n<div class=\"finding high\">\n<h3><span class=\"sev high\">HIGH</span> SQL injection in local search parameter</h3>\n<p><strong>Target:</strong> <code>http://127.0.0.1:64057/search?q=1</code></p>\n<p><strong>CVSS:</strong> 8.1</p>\n<p><strong>CVE:</strong> CVE-2021-41773</p>\n<p><strong>Description:</strong> The local fixture search endpoint exposes SQL injection evidence in the q parameter.</p>\n<h3>Impact</h3><p>An attacker could alter query logic and extract application data.</p>\n<h3>Remediation</h3><p>Use parameterized queries and add regression coverage for q input handling.</p>\n</div>\n\n</body>\n</html>",
+    "htmlPreview": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n<style>\nbody { font-family: Georgia, serif; font-size: 13px; line-height: 1.7; color: #1a1a1a; max-width: 800px; margin: 40px auto; padding: 0 20px; }\nh1 { font-family: -apple-system, sans-serif; font-size: 22px; margin-bottom: 4px; }\nh2 { font-family: -apple-system, sans-serif; font-size: 16px; margin-top: 24px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }\nh3 { font-family: -apple-system, sans-serif; font-size: 14px; margin-top: 16px; }\n.confidential { text-align: center; font-family: monospace; font-size: 10px; letter-spacing: 3px; color: #999; text-transform: uppercase; margin-bottom: 30px; }\n.meta { font-size: 11px; color: #888; font-family: monospace; margin-bottom: 20px; }\ntable { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; }\nth { background: #f5f5f5; border-bottom: 2px solid #ddd; padding: 6px 10px; text-align: left; font-family: -apple-system, sans-serif; }\ntd { padding: 6px 10px; border-bottom: 1px solid #eee; }\n.finding { border: 1px solid #ddd; border-radius: 6px; padding: 12px; margin: 10px 0; }\n.finding.critical { border-left: 4px solid #ef4444; }\n.finding.high { border-left: 4px solid #f97316; }\n.finding.medium { border-left: 4px solid #f59e0b; }\n.finding.low { border-left: 4px solid #3b82f6; }\n.sev { font-family: monospace; font-size: 10px; font-weight: bold; padding: 1px 6px; border-radius: 3px; }\n.sev.critical { background: #fef2f2; color: #dc2626; }\n.sev.high { background: #fff7ed; color: #ea580c; }\n.sev.medium { background: #fffbeb; color: #d97706; }\n.sev.low { background: #eff6ff; color: #2563eb; }\ncode { font-family: monospace; font-size: 11px; background: #f0f0f0; padding: 1px 4px; border-radius: 2px; }\n@media print { body { margin: 0; } .finding { break-inside: avoid; } }\n</style>\n</head>\n<body>\n<div class=\"confidential\">CONFIDENTIAL</div>\n<h1>Penetration Test Report</h1>\n<div class=\"meta\">\nClient: Unknown<br>\nAssessment Date: July 6, 2026<br>\nAssessor: exploitbot (autonomous)<br>\nClassification: Confidential\n</div>\n\n<h2>1. Executive Summary</h2>\n<p>A penetration test was conducted against <strong>Unknown</strong>. The assessment identified <strong>1 vulnerabilities</strong> including 0 critical, 1 high, 0 medium, and 0 low severity findings.</p>\n\n<h2>2. Findings Summary</h2>\n<table>\n<tr><th>#</th><th>Finding</th><th>Severity</th><th>CVSS</th><th>Target</th><th>Status</th></tr>\n<tr><td>1</td><td>SQL injection in local search parameter</td><td><span class=\"sev high\">HIGH</span></td><td>8.1</td><td><code>http://127.0.0.1:64942/search?q=1</code></td><td>confirmed</td></tr>\n</table>\n\n<h2>3. Detailed Findings</h2>\n<div class=\"finding high\">\n<h3><span class=\"sev high\">HIGH</span> SQL injection in local search parameter</h3>\n<p><strong>Target:</strong> <code>http://127.0.0.1:64942/search?q=1</code></p>\n<p><strong>CVSS:</strong> 8.1</p>\n<p><strong>CVE:</strong> CVE-2021-41773</p>\n<p><strong>Description:</strong> The local fixture search endpoint exposes SQL injection evidence in the q parameter.</p>\n<h3>Impact</h3><p>An attacker could alter query logic and extract application data.</p>\n<h3>Remediation</h3><p>Use parameterized queries and add regression coverage for q input handling.</p>\n</div>\n\n</body>\n</html>",
     "lastAction": "generate",
     "status": "done",
     "summary": "generateReport 1 findings",
@@ -1118,39 +1152,67 @@
     "postAttribution": [],
     "rawResults": [
       {
-        "outputPreview": "{\"timestamp\":\"2026-07-06T02:57:44.677249-07:00\",\"port\":\"64057\",\"url\":\"http://127.0.0.1:64057\",\"input\":\"http://127.0.0.1:64057\",\"title\":\"ExploitBot SQLi Lab\",\"scheme\":\"http\",\"webserver\":\"BaseHTTP/0.6 Python/3.14.6\",\"content_type\":\"text/html\",\"method\":\"GET\",\"host\":\"127.0.0.1\",\"host_ip\":\"127.0.0.1\",\"path\":\"/\",\"time\":\"371.041\u00b5s\",\"a\":[\"127.0.0.1\"],\"tech\":[\"Python:3.14.6\"],\"words\":3,\"lines\":1,\"status_code\":200,\"content_length\":72,\"failed\":false,\"knowledgebase\":{\"pHash\":0}}\n",
-        "timestamp": 1783331864.680552,
+        "outputPreview": "{\"timestamp\":\"2026-07-06T03:01:07.401973-07:00\",\"port\":\"64942\",\"url\":\"http://127.0.0.1:64942\",\"input\":\"http://127.0.0.1:64942\",\"title\":\"ExploitBot SQLi Lab\",\"scheme\":\"http\",\"webserver\":\"BaseHTTP/0.6 Python/3.14.6\",\"content_type\":\"text/html\",\"method\":\"GET\",\"host\":\"127.0.0.1\",\"host_ip\":\"127.0.0.1\",\"path\":\"/\",\"time\":\"288.5\u00b5s\",\"a\":[\"127.0.0.1\"],\"tech\":[\"Python:3.14.6\"],\"words\":3,\"lines\":1,\"status_code\":200,\"content_length\":72,\"failed\":false,\"knowledgebase\":{\"pHash\":0}}\n",
+        "timestamp": 1783332067.405565,
         "tool": "httpx"
       },
       {
-        "outputPreview": "http://127.0.0.1:64057\nhttp://127.0.0.1:64057/login\nhttp://127.0.0.1:64057/search?q=test\n",
-        "timestamp": 1783331891.263085,
+        "outputPreview": "http://127.0.0.1:64942\nhttp://127.0.0.1:64942/login\nhttp://127.0.0.1:64942/search?q=test\n",
+        "timestamp": 1783332067.421918,
         "tool": "katana"
       },
       {
+        "outputPreview": "{\"timestamp\":\"2026-07-06T03:01:17.086788-07:00\",\"port\":\"64942\",\"url\":\"http://127.0.0.1:64942/search\",\"input\":\"http://127.0.0.1:64942/search\",\"scheme\":\"http\",\"webserver\":\"BaseHTTP/0.6 Python/3.14.6\",\"content_type\":\"text/plain\",\"method\":\"GET\",\"host\":\"127.0.0.1\",\"host_ip\":\"127.0.0.1\",\"path\":\"/search\",\"time\":\"429.875\u00b5s\",\"a\":[\"127.0.0.1\"],\"tech\":[\"Python:3.14.6\"],\"words\":2,\"lines\":1,\"status_code\":200,\"content_length\":8,\"failed\":false,\"knowledgebase\":{\"pHash\":0}}\n{\"timestamp\":\"2026-07-06T03:01:17.087023-07:00\",\"port\":\"64942\",\"url\":\"http://127.0.0.1:64942/login\",\"input\":\"http://127.0.0.1:64942/login\",\"title\":\"ExploitBot SQLi Lab Login\",\"scheme\":\"http\",\"webserver\":\"BaseHTTP/0.6 Python/3.14.6\",\"content_type\":\"text/html\",\"method\":\"GET\",\"host\":\"127.0.0.1\",\"host_ip\":\"127.0.0.1\",\"path\":\"/login\",\"time\":\"374.875\u00b5s\",\"a\":[\"127.0.0.1\"],\"tech\":[\"Python:3.14.6\"],\"words\":4,\"lines\":1,\"status_code\":200,\"content_length\":72,\"failed\":false,\"knowledgebase\":{\"pHash\":0}}\n",
+        "timestamp": 1783332077.09063,
+        "tool": "httpx"
+      },
+      {
+        "outputPreview": "{\"template-id\": \"webserver-auth-sqli-local\", \"matched-at\": \"http://127.0.0.1:64942/search?q=1\", \"host\": \"http://127.0.0.1:64942\", \"info\": {\"name\": \"Local SQL injection proof\", \"severity\": \"high\", \"description\": \"Loopback SQL injection proof for q parameter.\", \"classification\": {\"cve-id\": \"CVE-2021-41773\"}, \"tags\": [\"sqli\", \"local-fixture\"]}}\n",
+        "timestamp": 1783332077.112104,
+        "tool": "nuclei"
+      },
+      {
         "outputPreview": "[INFO] testing GET parameter 'q'\nParameter: q (GET)\n    Type: boolean-based blind\n    Title: OR boolean-based blind - WHERE or HAVING clause\nEXPLOITBOT_SQLI_PROOF_USER=alice\navailable databases [1]:\n[*] exploitbot_lab\n",
-        "timestamp": 1783331919.3628678,
+        "timestamp": 1783332086.690983,
         "tool": "sqlmap"
       },
       {
-        "outputPreview": "No CVEs found for query: Python web framework SQL injection",
-        "timestamp": 1783331950.836201,
+        "outputPreview": "Found 1 CVEs:\n\nCVE-2021-41773 [CRITICAL] CVSS:9.8 | apache http_server\n  Tags: rce,lfi,kev,exploit-available\n  Sources: cisa-kev, nvd, references, tags\n  Exploit: YES (poc) | CISA KEV: YES\n  Affected: apache http_server from 2.4.49\n  Description: A flaw was found in a change made to path normalization in Apache HTTP Server 2.4.49. An attacker could use a path traversal attack to map URLs to files outside the directories configured by Alias-like directives. If files outside of these directories are not protected by the usual default configura\n  References: http://packetstormsecurity.com/files/164418/Apache-HTTP-Server-2.4.49-Path-Traversal-Remote-Code-Execution.html\n\n",
+        "timestamp": 1783332096.306954,
         "tool": "search_cve"
       }
     ],
     "subdomains": [],
-    "vulns": []
+    "vulns": [
+      {
+        "cve": "CVE-2021-41773",
+        "cvss": 0,
+        "description": "Loopback SQL injection proof for q parameter.",
+        "severity": "high",
+        "source": "nuclei",
+        "tags": [
+          "sqli",
+          "local-fixture"
+        ],
+        "target": "http://127.0.0.1:64942/search?q=1",
+        "title": "webserver-auth-sqli-local"
+      }
+    ]
   },
   "resultsSummary": {
-    "rawResultCount": 4,
+    "rawResultCount": 6,
     "rawTools": [
       "httpx",
       "katana",
+      "httpx",
+      "nuclei",
       "sqlmap",
       "search_cve"
     ],
-    "vulnCount": 0,
-    "vulnSources": [],
+    "vulnCount": 1,
+    "vulnSources": [
+      "nuclei"
+    ],
     "webHostCount": 0
   },
   "scenarioChecks": {
@@ -1176,7 +1238,7 @@
     "evidence",
     "report"
   ],
-  "startedAt": "2026-07-06T02:57:15-0700",
+  "startedAt": "2026-07-06T03:00:50-0700",
   "state": {
     "activeSubtabs": {
       "creds": "Cracking",
@@ -1251,13 +1313,15 @@
       "workingCount": 0
     },
     "catalogEmbeddings": {
-      "recordCount": 8,
+      "recordCount": 13,
       "sourceCounts": {
-        "asset.web": 4,
-        "tool.output": 4
+        "asset.web": 6,
+        "finding": 1,
+        "tool.output": 6
       },
       "sources": [
         "asset.web",
+        "finding",
         "tool.output"
       ],
       "vectorDimensions": 16
@@ -1285,9 +1349,9 @@
       "contextGeneration": 0,
       "contextInspectorVisible": false,
       "enableReasoning": false,
-      "lastAction": "send",
+      "lastAction": "stop",
       "status": "done",
-      "summary": "send chat message"
+      "summary": "stop chat generation"
     },
     "contextCatalog": {
       "cveMode": "semantic",
@@ -1380,7 +1444,7 @@
       "error": "embedder returned invalid vector",
       "fallback": true,
       "importProgress": "",
-      "query": "Do not call more tools. Use only the existing local fixture transcript. Start with REAL_QWEN_NATURAL_TOOL_CHOICE_FINAL, then summarize evidence for http://127.0.0.1:64057, the route surface, web probe, nuclei finding, sqlmap q-parameter proof, EXPLOITBOT_SQLI_PROOF_USER=alice, and CVE-2021-41773 if present.",
+      "query": "Do not call more tools. Use only the existing local fixture transcript. Start with REAL_QWEN_NATURAL_TOOL_CHOICE_FINAL, then summarize evidence for http://127.0.0.1:64942, the route surface, web probe, nuclei finding, sqlmap q-parameter proof, EXPLOITBOT_SQLI_PROOF_USER=alice, and CVE-2021-41773 if present.",
       "resultCount": 0,
       "usedEmbedding": false,
       "vectorDimensions": 0
@@ -1404,7 +1468,7 @@
       "kvCacheGroupSize": 64,
       "kvCacheQuantization": "turboquant-q4",
       "maxTokens": 320,
-      "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
       "pagedCache": true,
       "pagedCacheBlockSize": 64,
       "prefixCache": true,
@@ -1417,7 +1481,7 @@
     },
     "engineError": "",
     "engineMemoryPreflight": null,
-    "enginePort": 64067,
+    "enginePort": 64951,
     "engineRunning": true,
     "engineStaleCleanup": {
       "checked": false,
@@ -1468,31 +1532,25 @@
         "tool": ""
       }
     },
-    "feedEntries": 19,
+    "feedEntries": 28,
     "feedRecent": [
       {
-        "duration": 0.2313699722290039,
+        "duration": 0.02119600772857666,
         "icon": "OK",
-        "text": "httpx: 1 lines output (0.2s)",
-        "tool": "httpx"
+        "text": "nuclei: 1 lines output (0.0s)",
+        "tool": "nuclei"
       },
       {
         "duration": 0,
-        "icon": "RUN",
-        "text": "Running katana",
-        "tool": "katana"
+        "icon": "INF",
+        "text": "Auto CVE lookup: CVE-2021-41773",
+        "tool": ""
       },
       {
         "duration": 0,
-        "icon": "OUT",
-        "text": "$ katana -u http://127.0.0.1:64057 -jsonl -silent",
-        "tool": "katana"
-      },
-      {
-        "duration": 0.01973104476928711,
-        "icon": "OK",
-        "text": "katana: 3 lines output (0.0s)",
-        "tool": "katana"
+        "icon": "INF",
+        "text": "CVE enriched: CVE-2021-41773",
+        "tool": ""
       },
       {
         "duration": 0,
@@ -1503,11 +1561,11 @@
       {
         "duration": 0,
         "icon": "OUT",
-        "text": "$ sqlmap -u http://127.0.0.1:64057/search?q=test --batch",
+        "text": "$ sqlmap -u http://127.0.0.1:64942/search?q=test --batch --level 2 --risk 2",
         "tool": "sqlmap"
       },
       {
-        "duration": 0.018041014671325684,
+        "duration": 0.01685202121734619,
         "icon": "OK",
         "text": "sqlmap: 7 lines output (0.0s)",
         "tool": "sqlmap"
@@ -1527,7 +1585,7 @@
       {
         "duration": 0.1,
         "icon": "OK",
-        "text": "search_cve: 1 lines (0.1s)",
+        "text": "search_cve: 11 lines (0.1s)",
         "tool": "search_cve"
       },
       {
@@ -1540,6 +1598,12 @@
         "duration": 0,
         "icon": "INF",
         "text": "send chat message",
+        "tool": ""
+      },
+      {
+        "duration": 0,
+        "icon": "INF",
+        "text": "stop chat generation",
         "tool": ""
       }
     ],
@@ -1556,11 +1620,11 @@
     "isStreaming": false,
     "isWorking": false,
     "metrics": {
-      "cachedTokens": 640,
-      "completionTokens": 320,
-      "promptTokens": 4151,
-      "tokPerSec": 5.72599610293337,
-      "ttft": 33.753270983695984
+      "cachedTokens": 0,
+      "completionTokens": 0,
+      "promptTokens": 0,
+      "tokPerSec": 0,
+      "ttft": 0
     },
     "mode": "autopilot",
     "modeSelection": {
@@ -1595,8 +1659,8 @@
       "hasTokenizerConfig": true,
       "isMultimodal": true,
       "isSupported": true,
-      "modelType": "qwen3_5",
-      "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "modelType": "qwen3_5_moe",
+      "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
       "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
     },
     "modelFolderPicker": {
@@ -1749,7 +1813,7 @@
       "summary": "scanModelLibrary 14 models from 1 roots",
       "supportedCount": 6
     },
-    "msgs": 12,
+    "msgs": 14,
     "networkAction": {
       "command": "",
       "kind": "",
@@ -1873,13 +1937,13 @@
       "contextInspectorVisible": false,
       "hasUnreadWhileUnlocked": null,
       "headerBadges": [
-        "12 msgs",
+        "14 msgs",
         "ctx 0"
       ],
       "mode": "",
       "newContextConfirm": {
         "isVisible": false,
-        "lastAction": "send"
+        "lastAction": "stop"
       },
       "newContextSessionBoundary": null,
       "reasoningBlock": {
@@ -1889,10 +1953,10 @@
       },
       "reasoningCollapsed": null,
       "toolOutputExpansion": {
-        "hiddenLineCount": 6,
+        "hiddenLineCount": 7,
         "isExpanded": false,
         "toolName": "httpx",
-        "totalLineCount": 11,
+        "totalLineCount": 12,
         "visibleLineCount": 5
       }
     },
@@ -2080,7 +2144,7 @@
     },
     "requestContext": {
       "contextInjected": true,
-      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 8 indexed items for phase SCAN, tab web.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=4 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] sqlmap tags=tool,sqlmap: [INFO] testing GET parameter 'q' Parameter: q (GET)     Type: boolean-based blind     Title",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 13 indexed items for phase SCAN, tab web.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=6 vulns=1 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [finding] HIGH webserver-auth-sqli-local tags=vuln,high,nuclei,sqli,local-fixture,CVE-2021-41773: target http://127.0.0.1:64942/s",
       "contextSnippetCount": 4,
       "streamWarnings": [],
       "toolSchemaCount": 4,
@@ -2249,7 +2313,7 @@
     },
     "stashRetrieval": {
       "candidateCount": 0,
-      "query": "Do not call more tools. Use only the existing local fixture transcript. Start with REAL_QWEN_NATURAL_TOOL_CHOICE_FINAL, then summarize evidence for http://127.0.0.1:64057, the route surface, web probe, nuclei finding, sqlmap q-parameter proof, EXPLOITBOT_SQLI_PROOF_USER=alice, and CVE-2021-41773 if present.",
+      "query": "Do not call more tools. Use only the existing local fixture transcript. Start with REAL_QWEN_NATURAL_TOOL_CHOICE_FINAL, then summarize evidence for http://127.0.0.1:64942, the route surface, web probe, nuclei finding, sqlmap q-parameter proof, EXPLOITBOT_SQLI_PROOF_USER=alice, and CVE-2021-41773 if present.",
       "returnedCount": 0,
       "topLabels": [],
       "topScore": 0
@@ -2267,7 +2331,7 @@
       "cve": {
         "command": "echo handled by callback",
         "status": "done",
-        "summary": "1 lines",
+        "summary": "11 lines",
         "tool": "search_cve"
       },
       "dependency": {
@@ -2326,11 +2390,11 @@
         "summary": ""
       },
       "recon": {
-        "command": "katana -u http://127.0.0.1:64057 -jsonl -silent",
-        "count": 2,
-        "lastTool": "katana",
+        "command": "/bin/sh -c echo 'http://127.0.0.1:64942/login,http://127.0.0.1:64942/search' | tr ',' '\\n' | httpx -sc -title -tech-detect -json -silent -duc -timeout 5 2>/dev/null || curl -s -o /dev/null -w '{\"url\":\"http://127.0.0.1:64942/login,http://127.0.0.1:64942/search\",\"status_code\":%{http_code},\"title\":\"\",\"webserver\":\"%{content_type}\"}' 'http://127.0.0.1:64942/login,http://127.0.0.1:64942/search'",
+        "count": 3,
+        "lastTool": "httpx",
         "status": "done",
-        "summary": "3 lines output"
+        "summary": "2 lines output"
       },
       "report": {
         "command": "",
@@ -2351,11 +2415,11 @@
         "count": 1,
         "lastTool": "search_cve",
         "status": "done",
-        "summary": "1 lines"
+        "summary": "11 lines"
       },
       "web": {
-        "command": "sqlmap -u http://127.0.0.1:64057/search?q=test --batch",
-        "count": 1,
+        "command": "sqlmap -u http://127.0.0.1:64942/search?q=test --batch --level 2 --risk 2",
+        "count": 2,
         "lastTool": "sqlmap",
         "status": "done",
         "summary": "7 lines output"
@@ -2379,43 +2443,19 @@
       },
       "commandTranscripts": [
         {
-          "command": "Running httpx",
-          "outputPreview": "Running httpx",
-          "source": "activityFeed",
-          "status": "RUN",
-          "timestamp": 1783331864.448986,
-          "tool": "httpx"
-        },
-        {
-          "command": "/bin/sh -c echo 'http://127.0.0.1:64057' | tr ',' '\\n' | httpx -sc -title -tech-detect -json -silent -duc -timeout 5 2>/dev/null || curl -s -o /dev/null -w '{\"url\":\"http://127.0.0.1:64057\",\"status_code\":%{http_code},\"title\":\"\",\"webserver\":\"%{content_type}\"}' 'http://127.0.0.1:64057'",
-          "outputPreview": "$ /bin/sh -c echo 'http://127.0.0.1:64057' | tr ',' '\\n' | httpx -sc -title -tech-detect -json -silent -duc -timeout 5 2>/dev/null || curl -s -o /dev/null -w '{\"url\":\"http://127.0.0.1:64057\",\"status_code\":%{http_code},\"title\":\"\",\"webserver\":\"%{content_type}\"}' 'http://127.0.0.1:64057'",
-          "source": "activityFeed",
-          "status": "OUT",
-          "timestamp": 1783331864.448987,
-          "tool": "httpx"
-        },
-        {
-          "command": "httpx: 1 lines output (0.2s)",
-          "outputPreview": "httpx: 1 lines output (0.2s)",
-          "source": "activityFeed",
-          "status": "OK",
-          "timestamp": 1783331864.680533,
-          "tool": "httpx"
-        },
-        {
           "command": "Running katana",
           "outputPreview": "Running katana",
           "source": "activityFeed",
           "status": "RUN",
-          "timestamp": 1783331891.2432342,
+          "timestamp": 1783332067.4057589,
           "tool": "katana"
         },
         {
-          "command": "katana -u http://127.0.0.1:64057 -jsonl -silent",
-          "outputPreview": "$ katana -u http://127.0.0.1:64057 -jsonl -silent",
+          "command": "katana -u http://127.0.0.1:64942 -d 2 -jsonl -silent",
+          "outputPreview": "$ katana -u http://127.0.0.1:64942 -d 2 -jsonl -silent",
           "source": "activityFeed",
           "status": "OUT",
-          "timestamp": 1783331891.243235,
+          "timestamp": 1783332067.40576,
           "tool": "katana"
         },
         {
@@ -2423,23 +2463,71 @@
           "outputPreview": "katana: 3 lines output (0.0s)",
           "source": "activityFeed",
           "status": "OK",
-          "timestamp": 1783331891.263066,
+          "timestamp": 1783332067.421902,
           "tool": "katana"
+        },
+        {
+          "command": "Running httpx",
+          "outputPreview": "Running httpx",
+          "source": "activityFeed",
+          "status": "RUN",
+          "timestamp": 1783332076.86159,
+          "tool": "httpx"
+        },
+        {
+          "command": "/bin/sh -c echo 'http://127.0.0.1:64942/login,http://127.0.0.1:64942/search' | tr ',' '\\n' | httpx -sc -title -tech-detect -json -silent -duc -timeout 5 2>/dev/null || curl -s -o /dev/null -w '{\"url\":\"http://127.0.0.1:64942/login,http://127.0.0.1:64942/search\",\"status_code\":%{http_code},\"title\":\"\",\"webserver\":\"%{content_type}\"}' 'http://127.0.0.1:64942/login,http://127.0.0.1:64942/search'",
+          "outputPreview": "$ /bin/sh -c echo 'http://127.0.0.1:64942/login,http://127.0.0.1:64942/search' | tr ',' '\\n' | httpx -sc -title -tech-detect -json -silent -duc -timeout 5 2>/dev/null || curl -s -o /dev/null -w '{\"url\":\"http://127.0.0.1:64942/login,http://127.0.0.1:64942/search\",\"status_code\":%{http_code},\"title\":\"\",\"webserver\":\"%{content_type}\"}' 'http://127.0.0.1:64942/login,http://127.0.0.1:64942/search'",
+          "source": "activityFeed",
+          "status": "OUT",
+          "timestamp": 1783332076.8615909,
+          "tool": "httpx"
+        },
+        {
+          "command": "httpx: 2 lines output (0.2s)",
+          "outputPreview": "httpx: 2 lines output (0.2s)",
+          "source": "activityFeed",
+          "status": "OK",
+          "timestamp": 1783332077.090611,
+          "tool": "httpx"
+        },
+        {
+          "command": "Running nuclei",
+          "outputPreview": "Running nuclei",
+          "source": "activityFeed",
+          "status": "RUN",
+          "timestamp": 1783332077.090825,
+          "tool": "nuclei"
+        },
+        {
+          "command": "nuclei -u http://127.0.0.1:64942 -tags sqli,rce -severity high,critical -jsonl -silent",
+          "outputPreview": "$ nuclei -u http://127.0.0.1:64942 -tags sqli,rce -severity high,critical -jsonl -silent",
+          "source": "activityFeed",
+          "status": "OUT",
+          "timestamp": 1783332077.090825,
+          "tool": "nuclei"
+        },
+        {
+          "command": "nuclei: 1 lines output (0.0s)",
+          "outputPreview": "nuclei: 1 lines output (0.0s)",
+          "source": "activityFeed",
+          "status": "OK",
+          "timestamp": 1783332077.11209,
+          "tool": "nuclei"
         },
         {
           "command": "Running sqlmap",
           "outputPreview": "Running sqlmap",
           "source": "activityFeed",
           "status": "RUN",
-          "timestamp": 1783331919.3445702,
+          "timestamp": 1783332086.6740298,
           "tool": "sqlmap"
         },
         {
-          "command": "sqlmap -u http://127.0.0.1:64057/search?q=test --batch",
-          "outputPreview": "$ sqlmap -u http://127.0.0.1:64057/search?q=test --batch",
+          "command": "sqlmap -u http://127.0.0.1:64942/search?q=test --batch --level 2 --risk 2",
+          "outputPreview": "$ sqlmap -u http://127.0.0.1:64942/search?q=test --batch --level 2 --risk 2",
           "source": "activityFeed",
           "status": "OUT",
-          "timestamp": 1783331919.344573,
+          "timestamp": 1783332086.674031,
           "tool": "sqlmap"
         },
         {
@@ -2447,7 +2535,7 @@
           "outputPreview": "sqlmap: 7 lines output (0.0s)",
           "source": "activityFeed",
           "status": "OK",
-          "timestamp": 1783331919.362824,
+          "timestamp": 1783332086.6909661,
           "tool": "sqlmap"
         },
         {
@@ -2455,7 +2543,7 @@
           "outputPreview": "Running search_cve",
           "source": "activityFeed",
           "status": "RUN",
-          "timestamp": 1783331950.834845,
+          "timestamp": 1783332096.305097,
           "tool": "search_cve"
         },
         {
@@ -2463,74 +2551,90 @@
           "outputPreview": "$ echo handled by callback",
           "source": "activityFeed",
           "status": "OUT",
-          "timestamp": 1783331950.834848,
+          "timestamp": 1783332096.305098,
           "tool": "search_cve"
         },
         {
-          "command": "search_cve: 1 lines (0.1s)",
-          "outputPreview": "search_cve: 1 lines (0.1s)",
+          "command": "search_cve: 11 lines (0.1s)",
+          "outputPreview": "search_cve: 11 lines (0.1s)",
           "source": "activityFeed",
           "status": "OK",
-          "timestamp": 1783331950.836372,
+          "timestamp": 1783332096.307014,
           "tool": "search_cve"
         },
         {
           "command": "httpx",
-          "outputPreview": "{\"timestamp\":\"2026-07-06T02:57:44.677249-07:00\",\"port\":\"64057\",\"url\":\"http://127.0.0.1:64057\",\"input\":\"http://127.0.0.1:64057\",\"title\":\"ExploitBot SQLi Lab\",\"scheme\":\"http\",\"webserver\":\"BaseHTTP/0.6 Python/3.14.6\",\"content_type\":\"text/html\",\"method\":\"GET\",\"host\":\"127.0.0.1\",\"host_ip\":\"127.0.0.1\",\"path\":\"/\",\"time\":\"371.041\u00b5s\",\"a\":[\"127.0.0.1\"],\"tech\":[\"Python:3.14.6\"],\"words\":3,\"lines\":1,\"status_code\":200,\"content_length\":72,\"failed\":false,\"knowledgebase\":{\"pHash\":0}}\n",
+          "outputPreview": "{\"timestamp\":\"2026-07-06T03:01:07.401973-07:00\",\"port\":\"64942\",\"url\":\"http://127.0.0.1:64942\",\"input\":\"http://127.0.0.1:64942\",\"title\":\"ExploitBot SQLi Lab\",\"scheme\":\"http\",\"webserver\":\"BaseHTTP/0.6 Python/3.14.6\",\"content_type\":\"text/html\",\"method\":\"GET\",\"host\":\"127.0.0.1\",\"host_ip\":\"127.0.0.1\",\"path\":\"/\",\"time\":\"288.5\u00b5s\",\"a\":[\"127.0.0.1\"],\"tech\":[\"Python:3.14.6\"],\"words\":3,\"lines\":1,\"status_code\":200,\"content_length\":72,\"failed\":false,\"knowledgebase\":{\"pHash\":0}}\n",
           "source": "rawResults",
           "status": "captured",
-          "timestamp": 1783331864.680552,
+          "timestamp": 1783332067.405565,
           "tool": "httpx"
         },
         {
           "command": "katana",
-          "outputPreview": "http://127.0.0.1:64057\nhttp://127.0.0.1:64057/login\nhttp://127.0.0.1:64057/search?q=test\n",
+          "outputPreview": "http://127.0.0.1:64942\nhttp://127.0.0.1:64942/login\nhttp://127.0.0.1:64942/search?q=test\n",
           "source": "rawResults",
           "status": "captured",
-          "timestamp": 1783331891.263085,
+          "timestamp": 1783332067.421918,
           "tool": "katana"
+        },
+        {
+          "command": "httpx",
+          "outputPreview": "{\"timestamp\":\"2026-07-06T03:01:17.086788-07:00\",\"port\":\"64942\",\"url\":\"http://127.0.0.1:64942/search\",\"input\":\"http://127.0.0.1:64942/search\",\"scheme\":\"http\",\"webserver\":\"BaseHTTP/0.6 Python/3.14.6\",\"content_type\":\"text/plain\",\"method\":\"GET\",\"host\":\"127.0.0.1\",\"host_ip\":\"127.0.0.1\",\"path\":\"/search\",\"time\":\"429.875\u00b5s\",\"a\":[\"127.0.0.1\"],\"tech\":[\"Python:3.14.6\"],\"words\":2,\"lines\":1,\"status_code\":200,\"content_length\":8,\"failed\":false,\"knowledgebase\":{\"pHash\":0}}\n{\"timestamp\":\"2026-07-06T03:01:17.087023-07:00\",\"port\":\"64942\",\"url\":\"http://127.0.0.1:64942/login\",\"input\":\"http://127.0.0.1:64942/login\",\"title\":\"ExploitBot SQLi Lab Login\",\"scheme\":\"http\",\"webserver\":\"BaseHTTP/0.6 Python/3.14.6\",\"content_type\":\"text/html\",\"method\":\"GET\",\"host\":\"127.0.0.1\",\"host_ip\":\"127.0.0.1\",\"path\":\"/login\",\"time\":\"374.875\u00b5s\",\"a\":[\"127.0.0.1\"],\"tech\":[\"Python:3.14.6\"],\"words\":4,\"lines\":1,\"status_code\":200,\"content_length\":72,\"failed\":false,\"knowledgebase\":{\"pHash\":0}}\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783332077.09063,
+          "tool": "httpx"
+        },
+        {
+          "command": "nuclei",
+          "outputPreview": "{\"template-id\": \"webserver-auth-sqli-local\", \"matched-at\": \"http://127.0.0.1:64942/search?q=1\", \"host\": \"http://127.0.0.1:64942\", \"info\": {\"name\": \"Local SQL injection proof\", \"severity\": \"high\", \"description\": \"Loopback SQL injection proof for q parameter.\", \"classification\": {\"cve-id\": \"CVE-2021-41773\"}, \"tags\": [\"sqli\", \"local-fixture\"]}}\n",
+          "source": "rawResults",
+          "status": "captured",
+          "timestamp": 1783332077.112104,
+          "tool": "nuclei"
         },
         {
           "command": "sqlmap",
           "outputPreview": "[INFO] testing GET parameter 'q'\nParameter: q (GET)\n    Type: boolean-based blind\n    Title: OR boolean-based blind - WHERE or HAVING clause\nEXPLOITBOT_SQLI_PROOF_USER=alice\navailable databases [1]:\n[*] exploitbot_lab\n",
           "source": "rawResults",
           "status": "captured",
-          "timestamp": 1783331919.3628678,
+          "timestamp": 1783332086.690983,
           "tool": "sqlmap"
         },
         {
           "command": "search_cve",
-          "outputPreview": "No CVEs found for query: Python web framework SQL injection",
+          "outputPreview": "Found 1 CVEs:\n\nCVE-2021-41773 [CRITICAL] CVSS:9.8 | apache http_server\n  Tags: rce,lfi,kev,exploit-available\n  Sources: cisa-kev, nvd, references, tags\n  Exploit: YES (poc) | CISA KEV: YES\n  Affected: apache http_server from 2.4.49\n  Description: A flaw was found in a change made to path normalization in Apache HTTP Server 2.4.49. An attacker could use a path traversal attack to map URLs to files outside the directories configured by Alias-like directives. If files outside of these directories are not protected by the usual default configura\n  References: http://packetstormsecurity.com/files/164418/Apache-HTTP-Server-2.4.49-Path-Traversal-Remote-Code-Execution.html\n\n",
           "source": "rawResults",
           "status": "captured",
-          "timestamp": 1783331950.836201,
+          "timestamp": 1783332096.306954,
           "tool": "search_cve"
         },
         {
-          "command": "katana -u http://127.0.0.1:64057 -jsonl -silent",
-          "outputPreview": "3 lines output",
+          "command": "/bin/sh -c echo 'http://127.0.0.1:64942/login,http://127.0.0.1:64942/search' | tr ',' '\\n' | httpx -sc -title -tech-detect -json -silent -duc -timeout 5 2>/dev/null || curl -s -o /dev/null -w '{\"url\":\"http://127.0.0.1:64942/login,http://127.0.0.1:64942/search\",\"status_code\":%{http_code},\"title\":\"\",\"webserver\":\"%{content_type}\"}' 'http://127.0.0.1:64942/login,http://127.0.0.1:64942/search'",
+          "outputPreview": "2 lines output",
           "source": "tabActivities",
           "status": "done",
           "tab": "recon",
-          "timestamp": 1783331891.263074,
-          "tool": "katana"
+          "timestamp": 1783332077.090619,
+          "tool": "httpx"
         },
         {
-          "command": "sqlmap -u http://127.0.0.1:64057/search?q=test --batch",
+          "command": "sqlmap -u http://127.0.0.1:64942/search?q=test --batch --level 2 --risk 2",
           "outputPreview": "7 lines output",
           "source": "tabActivities",
           "status": "done",
           "tab": "web",
-          "timestamp": 1783331919.362845,
+          "timestamp": 1783332086.690973,
           "tool": "sqlmap"
         },
         {
           "command": "echo handled by callback",
-          "outputPreview": "1 lines",
+          "outputPreview": "11 lines",
           "source": "tabActivities",
           "status": "done",
           "tab": "supplyChain",
-          "timestamp": 1783331950.836388,
+          "timestamp": 1783332096.3070168,
           "tool": "search_cve"
         }
       ],
@@ -2935,8 +3039,8 @@
       "summary": "",
       "toolName": ""
     },
-    "tools": 4,
-    "vulns": 0,
+    "tools": 6,
+    "vulns": 1,
     "webAction": {
       "cve": "",
       "kind": "",
@@ -2946,7 +3050,16 @@
       "target": "",
       "title": ""
     },
-    "webCVERows": [],
+    "webCVERows": [
+      {
+        "cve": "CVE-2021-41773",
+        "hasDetails": false,
+        "progressLabel": "CVE pending",
+        "status": "pending",
+        "target": "http://127.0.0.1:64942/search?q=1",
+        "title": "webserver-auth-sqli-local"
+      }
+    ],
     "webDirectActions": {
       "actionLabels": [
         "Create Finding",
@@ -3017,6 +3130,8 @@
   "toolSequence": [
     "httpx",
     "katana",
+    "httpx",
+    "nuclei",
     "sqlmap",
     "search_cve"
   ]

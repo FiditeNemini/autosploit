@@ -117,7 +117,7 @@ def final_followup_prompt(lab_url: str) -> str:
     )
 
 
-def wait_for_quiet_messages(timeout: float = 360.0) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+def wait_for_quiet_messages(timeout: float = 360.0, return_after_evidence_ready: bool = False) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     deadline = time.time() + timeout
     last_state: dict[str, Any] = {}
     last_messages: list[dict[str, Any]] = []
@@ -134,6 +134,13 @@ def wait_for_quiet_messages(timeout: float = 360.0) -> tuple[list[dict[str, Any]
             time.sleep(0.5)
             continue
         if not state.get("isWorking") and not state.get("isStreaming"):
+            return messages, state
+        if return_after_evidence_ready and natural_evidence_ready_for_final(messages):
+            try:
+                app_request("POST", "/stop", "", timeout=5.0)
+            except Exception:
+                pass
+            state["naturalToolChoiceEvidenceCheckpoint"] = True
             return messages, state
         signature = json.dumps(
             {
@@ -182,6 +189,17 @@ def model_selected_expected_sequence(messages: list[dict[str, Any]]) -> bool:
 
 def has_cve_context_tool(sequence: list[str]) -> bool:
     return any(tool in sequence for tool in NATURAL_CVE_CONTEXT_TOOLS)
+
+
+def natural_evidence_ready_for_final(messages: list[dict[str, Any]]) -> bool:
+    text = json.dumps(messages, sort_keys=True)
+    sequence = web_proof.tool_sequence(messages)
+    return (
+        web_proof.ordered_subsequence(sequence, NATURAL_REQUIRED_ORDERED_TOOLS)
+        and has_cve_context_tool(sequence)
+        and "EXPLOITBOT_SQLI_PROOF_USER=alice" in text
+        and "Tool request: sqlmap" in text
+    )
 
 
 def build_natural_report(
@@ -375,7 +393,7 @@ def run() -> None:
             report["preflightToolCatalog"] = catalog
 
             app_request("POST", "/send", prompt, timeout=15.0)
-            messages, state = wait_for_quiet_messages(timeout=420.0)
+            messages, state = wait_for_quiet_messages(timeout=420.0, return_after_evidence_ready=True)
             natural_sequence = web_proof.tool_sequence(messages)
             report["naturalTurnToolSequence"] = natural_sequence
 

@@ -3,17 +3,16 @@
   "completionClaimAllowed": false,
   "counts": {
     "BLOCKED": 1,
-    "PARTIAL": 2,
-    "PASS": 24
+    "PARTIAL": 1,
+    "PASS": 25
   },
   "currentBlockingConditions": [
     "release_displayable"
   ],
   "currentPartialConditions": [
-    "generation_reasoning_context",
-    "independent_model_tool_choice"
+    "generation_reasoning_context"
   ],
-  "generatedAt": "2026-07-06T02:53:08-0700",
+  "generatedAt": "2026-07-06T03:06:44-0700",
   "longContextPolicy": {
     "aboveCeilingPolicy": "requires explicit high-risk override and fresh memory headroom",
     "modelLoadForAboveCeilingWithoutOverride": "refuse before model load",
@@ -23,7 +22,7 @@
   "noCompletionClaim": true,
   "objectiveComplete": false,
   "ok": true,
-  "openRowCount": 3,
+  "openRowCount": 2,
   "openRows": [
     {
       "area": "Full-context-length stress",
@@ -57,27 +56,6 @@
       "requiredNextEvidence": "Run an explicit high-risk long-context target above the 192k proven safe ceiling with fresh memory headroom, then capture final assistant output plus post-generation q4 TurboQuant KV, paged/prefix, block-L2, and SSM companion cache writes.",
       "requirementId": "generation_reasoning_context",
       "safeCeilingTokens": 192000,
-      "status": "PARTIAL"
-    },
-    {
-      "area": "Independent natural-language scenario tool selection",
-      "blockingCondition": "independent_model_tool_choice_not_proven",
-      "evidence": [
-        "docs/live-proofs/2026-07-06-autonomous-scenario-matrix.json",
-        "docs/live-proofs/2026-07-06-autonomous-scenario-catalog.json",
-        "docs/live-proofs/2026-07-06-tool-schema-profile-exclusion.json",
-        "docs/live-proofs/2026-07-06-tool-argument-repair.json",
-        "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-27b.json",
-        "docs/live-validation-2026-07-04.md"
-      ],
-      "missingEvidence": "Current scenario matrix labels real-Qwen webserver, loopback, phase, and repo/codebase rows as exact_tool_call_prompt_with_app_recovery. The tool-schema exclusion proof passes for hiding run_shell from a scenario-focused catalog and blocking it if emitted anyway. The local target argument-repair proof passes for the saved 27B failure mode where the model selected httpx but emitted empty arguments. The latest saved 27B natural-language fixture proof improved to httpx/katana/nuclei/sqlmap/lookup_cve with SQLi proof and raw/terminal evidence, but final assistant continuation/report proof is still missing and no 35B natural PASS exists.",
-      "requiredNextEvidence": [
-        "Run a local-fixture webserver/repo/codebase scenario with a natural-language objective only.",
-        "no exact tool-call blocks",
-        "Provide allowed tool schemas but no exact tool-call blocks or forced function-specific retry.",
-        "Prove the model-selected ordered tool chain, verbose transcripts, final answer, and cache/MTP evidence for 27B and 35B."
-      ],
-      "requirementId": "independent_model_tool_choice",
       "status": "PARTIAL"
     },
     {
