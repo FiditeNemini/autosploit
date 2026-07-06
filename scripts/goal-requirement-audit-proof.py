@@ -158,6 +158,17 @@ def effective_expected_status(
     return requirement["expectedStatus"]
 
 
+def completion_state(audit_rows: list[dict[str, Any]]) -> dict[str, Any]:
+    require(audit_rows, "completion state needs audit rows")
+    overall = aggregate_status([row["status"] for row in audit_rows])
+    complete = overall == "PASS" and all(row["status"] == "PASS" for row in audit_rows)
+    return {
+        "objectiveComplete": complete,
+        "completionClaimAllowed": complete,
+        "overallStatus": overall,
+    }
+
+
 def release_manifest_evidence() -> dict[str, Any]:
     require(RELEASE_MANIFEST.is_file(), "release manifest is missing", str(RELEASE_MANIFEST))
     manifest = json.loads(RELEASE_MANIFEST.read_text(encoding="utf-8"))
@@ -226,15 +237,16 @@ def main() -> None:
         audit_rows.append(audit_row)
 
     audit_counts = {status: sum(1 for row in audit_rows if row["status"] == status) for status in ("PASS", "PARTIAL", "BLOCKED")}
+    completion = completion_state(audit_rows)
     report = {
         "ok": True,
         "proofType": "goal-requirement-audit",
         "proofLevel": "current-goal-pass-partial-blocked-matrix-backed",
         "generatedAt": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
         "sourceMatrix": str(MATRIX.relative_to(ROOT)),
-        "objectiveComplete": False,
-        "completionClaimAllowed": False,
-        "overallStatus": aggregate_status([row["status"] for row in audit_rows]),
+        "objectiveComplete": completion["objectiveComplete"],
+        "completionClaimAllowed": completion["completionClaimAllowed"],
+        "overallStatus": completion["overallStatus"],
         "requirementCount": len(audit_rows),
         "statusCounts": audit_counts,
         "matrixStatusCounts": counts,

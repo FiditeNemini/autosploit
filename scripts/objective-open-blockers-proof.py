@@ -124,8 +124,8 @@ def build_report_from_payloads(
     require(goal_audit.get("proofType") == "goal-requirement-audit", "unexpected goal audit proof type", goal_audit)
     require(notarization.get("proofType") == "notarization-preflight", "unexpected notarization proof type", notarization)
     require(public_truth.get("proofType") == "release-public-truth", "unexpected public release proof type", public_truth)
-    require(goal_audit.get("objectiveComplete") is False, "goal audit must keep objective incomplete", goal_audit)
-    require(goal_audit.get("completionClaimAllowed") is False, "goal audit must block completion claims", goal_audit)
+    require(isinstance(goal_audit.get("objectiveComplete"), bool), "goal audit objectiveComplete must be boolean", goal_audit)
+    require(isinstance(goal_audit.get("completionClaimAllowed"), bool), "goal audit completionClaimAllowed must be boolean", goal_audit)
 
     rows = matrix.get("rows") or []
     counts = status_counts(rows)
@@ -164,6 +164,13 @@ def build_report_from_payloads(
     report_missing_evidence = validate_evidence_paths(report_rows)
     require(not report_missing_evidence, "open blockers report has missing evidence paths", report_missing_evidence)
     overall_status = aggregate_overall_status(rows)
+    objective_complete = (
+        overall_status == "PASS"
+        and not report_rows
+        and goal_audit.get("overallStatus") == "PASS"
+        and goal_audit.get("objectiveComplete") is True
+        and goal_audit.get("completionClaimAllowed") is True
+    )
 
     return {
         "ok": True,
@@ -173,9 +180,9 @@ def build_report_from_payloads(
         "sourceMatrix": str(MATRIX.relative_to(ROOT)),
         "sourceGoalAudit": str(GOAL_AUDIT.relative_to(ROOT)),
         "overallStatus": overall_status,
-        "objectiveComplete": False,
-        "completionClaimAllowed": False,
-        "noCompletionClaim": True,
+        "objectiveComplete": objective_complete,
+        "completionClaimAllowed": objective_complete,
+        "noCompletionClaim": not objective_complete,
         "counts": counts,
         "openRowCount": len(report_rows),
         "openRows": report_rows,
