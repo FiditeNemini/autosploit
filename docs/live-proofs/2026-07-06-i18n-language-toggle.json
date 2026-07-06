@@ -1,0 +1,1353 @@
+{
+  "checks": {
+    "coreLabelsChanged": "PASS",
+    "languageToggleJapanese": "PASS",
+    "languageToggleSpanish": "PASS",
+    "noModelLoaded": "PASS",
+    "supportedLanguages": "PASS",
+    "tabLabelsChanged": "PASS",
+    "toolLabelsPresent": "PASS"
+  },
+  "finishedAt": "2026-07-06T13:41:22-0700",
+  "notes": [
+    "This verifies the app language state and localized labels through live QA routes.",
+    "It does not prove every visible SwiftUI Text has been converted from hard-coded strings yet."
+  ],
+  "ok": true,
+  "proofLevel": "live-app-qa-route-language-toggle-no-model-load",
+  "proofType": "i18n-language-toggle-live-app",
+  "snapshots": {
+    "en": {
+      "core": {
+        "chatApprove": "Approve",
+        "chatReject": "Reject",
+        "chatToolRequest": "Tool Request",
+        "findingCreate": "Create Finding",
+        "reportGenerate": "Generate Report",
+        "settings": "Settings",
+        "settingsClose": "Close Settings",
+        "stashAdd": "Add"
+      },
+      "currentLanguage": "en",
+      "supportedLanguages": [
+        "en",
+        "ko",
+        "zh",
+        "es",
+        "ja"
+      ],
+      "tabs": {
+        "creds": "Creds",
+        "exploit": "Exploit",
+        "network": "Network",
+        "osint": "OSINT",
+        "post": "Post",
+        "recon": "Recon",
+        "report": "Report",
+        "stash": "Stash",
+        "supplyChain": "Supply",
+        "web": "Web"
+      },
+      "tools": {
+        "checkov": "checkov",
+        "httpx": "httpx",
+        "nmap": "nmap",
+        "run_shell": "Run shell",
+        "search_cve": "Search CVE",
+        "sqlmap": "sqlmap",
+        "trivy": "trivy"
+      }
+    },
+    "es": {
+      "core": {
+        "chatApprove": "Aprobar",
+        "chatReject": "Rechazar",
+        "chatToolRequest": "Solicitud de herramienta",
+        "findingCreate": "Crear hallazgo",
+        "reportGenerate": "Generar informe",
+        "settings": "Configuraci\u00f3n",
+        "settingsClose": "Cerrar configuraci\u00f3n",
+        "stashAdd": "A\u00f1adir"
+      },
+      "currentLanguage": "es",
+      "supportedLanguages": [
+        "en",
+        "ko",
+        "zh",
+        "es",
+        "ja"
+      ],
+      "tabs": {
+        "creds": "Creds",
+        "exploit": "Exploit",
+        "network": "Red",
+        "osint": "OSINT",
+        "post": "Post",
+        "recon": "Recon",
+        "report": "Informe",
+        "stash": "Alijo",
+        "supplyChain": "Suministro",
+        "web": "Web"
+      },
+      "tools": {
+        "checkov": "checkov",
+        "httpx": "httpx",
+        "nmap": "nmap",
+        "run_shell": "Ejecutar shell",
+        "search_cve": "Buscar CVE",
+        "sqlmap": "sqlmap",
+        "trivy": "trivy"
+      }
+    },
+    "ja": {
+      "core": {
+        "chatApprove": "\u627f\u8a8d",
+        "chatReject": "\u62d2\u5426",
+        "chatToolRequest": "\u30c4\u30fc\u30eb\u8981\u6c42",
+        "findingCreate": "\u691c\u51fa\u7d50\u679c\u3092\u4f5c\u6210",
+        "reportGenerate": "\u30ec\u30dd\u30fc\u30c8\u751f\u6210",
+        "settings": "\u8a2d\u5b9a",
+        "settingsClose": "\u8a2d\u5b9a\u3092\u9589\u3058\u308b",
+        "stashAdd": "\u8ffd\u52a0"
+      },
+      "currentLanguage": "ja",
+      "supportedLanguages": [
+        "en",
+        "ko",
+        "zh",
+        "es",
+        "ja"
+      ],
+      "tabs": {
+        "creds": "\u8a8d\u8a3c",
+        "exploit": "\u30a8\u30af\u30b9\u30d7\u30ed\u30a4\u30c8",
+        "network": "\u30cd\u30c3\u30c8\u30ef\u30fc\u30af",
+        "osint": "OSINT",
+        "post": "\u30dd\u30b9\u30c8",
+        "recon": "\u5075\u5bdf",
+        "report": "\u30ec\u30dd\u30fc\u30c8",
+        "stash": "\u30b9\u30bf\u30c3\u30b7\u30e5",
+        "supplyChain": "\u30b5\u30d7\u30e9\u30a4",
+        "web": "Web"
+      },
+      "tools": {
+        "checkov": "checkov",
+        "httpx": "httpx",
+        "nmap": "nmap",
+        "run_shell": "\u30b7\u30a7\u30eb\u5b9f\u884c",
+        "search_cve": "CVE\u691c\u7d22",
+        "sqlmap": "sqlmap",
+        "trivy": "trivy"
+      }
+    }
+  },
+  "startedAt": "2026-07-06T13:41:20-0700",
+  "stateAfter": {
+    "activeSubtabs": {
+      "creds": "Cracking",
+      "exploit": "Metasploit",
+      "network": "Protocols",
+      "osint": "Username",
+      "post": "PrivEsc",
+      "recon": "Subdomains",
+      "report": "Findings",
+      "supplyChain": "CVE Intel",
+      "web": "Vulns"
+    },
+    "activeTab": "recon",
+    "activityFeedActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "lastAction": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "agentActions": {
+      "agentCount": 0,
+      "agentId": "",
+      "agentName": "",
+      "agentType": "",
+      "deploySheetVisible": false,
+      "lastAction": "",
+      "messageCount": 0,
+      "status": "idle",
+      "stoppedGeneration": false,
+      "summary": "",
+      "taskSent": false
+    },
+    "agents": {
+      "activeAgents": 0,
+      "authorizationGuards": {
+        "explicitToolDeny": true,
+        "externalHighRiskRequiresScopeOrAuthorization": true,
+        "highRiskToolCount": 24
+      },
+      "details": [],
+      "forceFinalAnswerAfterToolResults": true,
+      "includeUnavailableToolSchemas": false,
+      "loopMaxIterations": 50,
+      "maxConcurrentAgents": 5,
+      "modePolicies": {
+        "autopilot": "execute",
+        "copilot": "approval",
+        "manual": "suggest"
+      },
+      "multiAgentEnabled": false,
+      "phaseRouting": {
+        "breach": [
+          "Credential Agent",
+          "Exploit Agent"
+        ],
+        "detect": [
+          "Web Vuln Agent",
+          "Network Agent",
+          "Supply Chain Agent"
+        ],
+        "scan": [
+          "Recon Agent",
+          "OSINT Agent"
+        ]
+      },
+      "streamingCount": 0,
+      "toolSchemaExcludedTools": [],
+      "toolSchemaMaxTools": 12,
+      "workingCount": 0
+    },
+    "catalogEmbeddings": {
+      "recordCount": 0,
+      "sourceCounts": {},
+      "sources": [],
+      "vectorDimensions": 0
+    },
+    "chat": {
+      "enableReasoning": true,
+      "forceFinalAnswerAfterToolResults": true,
+      "includeUnavailableToolSchemas": false,
+      "maxIterations": 50,
+      "toolSchemaExcludedTools": [],
+      "toolSchemaMaxTools": 12
+    },
+    "chatActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "lastAction": "",
+      "lastStashItemId": "",
+      "messageRole": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "chatControlActions": {
+      "contextGeneration": 0,
+      "contextInspectorVisible": false,
+      "enableReasoning": true,
+      "lastAction": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "contextCatalog": {
+      "cveMode": "semantic",
+      "enabled": true,
+      "includeAssets": true,
+      "includeFindings": true,
+      "includeRecentToolOutput": true,
+      "includeStash": true,
+      "maxSnippets": 4
+    },
+    "contextWindow": {
+      "blockL2Disk": true,
+      "cacheResponsesInferenceMethod": "prefix-cache-l2-turboquant",
+      "cacheResponsesMethod": "prefix-cache-l2-turboquant",
+      "declaredMaxContextTokens": 262144,
+      "engineSessionPreserved": false,
+      "generation": 0,
+      "highRiskOverrideEnv": "EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET",
+      "lastFailedTargets": [
+        200000,
+        224000,
+        258000
+      ],
+      "modelGenerationDefaults": true,
+      "newContextBehavior": "clear-chat-preserve-engine-cache",
+      "newModelSessionBehavior": "new-context-window-preserve-engine-cache-session",
+      "pagedCache": true,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "provenSafeTargetCeiling": 192000,
+      "sessionBoundaryMode": "new-context-window",
+      "turboQuantKV": true,
+      "unprovenTargetPolicy": "refuse-before-model-load"
+    },
+    "credsAction": {
+      "command": "",
+      "kind": "",
+      "resultCount": 0,
+      "status": "idle",
+      "summary": "",
+      "target": ""
+    },
+    "credsCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "credsLifecycle": {
+      "bruteforce": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "cracking": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "secrets": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "cveDatabase": {
+      "activeSettingsCategory": "",
+      "importProgress": "",
+      "isImporting": false,
+      "kevCount": 1552,
+      "lastSync": "",
+      "searchResultCount": 0,
+      "topResults": [],
+      "totalCount": 1552
+    },
+    "cveImportListAudit": {
+      "excludedIds": [],
+      "includeFilterMode": "none",
+      "includeIds": [],
+      "selectedIds": [],
+      "sourceIds": [],
+      "sourceMode": "none"
+    },
+    "cveSemantic": {
+      "candidateCount": 0,
+      "error": "",
+      "fallback": false,
+      "importProgress": "",
+      "query": "",
+      "resultCount": 0,
+      "usedEmbedding": false,
+      "vectorDimensions": 0
+    },
+    "cveSettingsActions": {
+      "addPanelVisible": false,
+      "kevCount": 0,
+      "lastAction": "",
+      "query": "",
+      "resultCount": 0,
+      "status": "idle",
+      "summary": "",
+      "totalCount": 0
+    },
+    "engineCacheStats": null,
+    "engineConfig": {
+      "blockDiskCacheMaxGB": 10,
+      "blockL2Disk": true,
+      "cacheMemoryPercent": 0.3,
+      "diskCacheMaxGB": 10,
+      "kvCacheGroupSize": 64,
+      "kvCacheQuantization": "turboquant-q4",
+      "maxTokens": 4096,
+      "modelPath": "",
+      "pagedCache": true,
+      "pagedCacheBlockSize": 64,
+      "prefixCache": true,
+      "promptL2Disk": true,
+      "reasoningParser": "auto",
+      "temperature": 0.3,
+      "toolCallParser": "auto",
+      "topP": 0.9,
+      "useModelGenerationDefaults": true
+    },
+    "engineError": "",
+    "engineMemoryPreflight": null,
+    "enginePort": 0,
+    "engineRunning": false,
+    "engineStaleCleanup": {
+      "checked": false,
+      "checkedAt": "",
+      "cleaned": false,
+      "foundCount": 0,
+      "foundProcesses": [],
+      "launchScript": "",
+      "noticeSeverity": "",
+      "noticeTitle": "",
+      "remainingCount": 0,
+      "remainingProcesses": [],
+      "warning": ""
+    },
+    "exploitAction": {
+      "command": "",
+      "kind": "",
+      "status": "idle",
+      "summary": "",
+      "target": "",
+      "tool": ""
+    },
+    "exploitActionHistory": [],
+    "exploitCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "exploitLifecycle": {
+      "implant": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "listener": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "script": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "feedEntries": 0,
+    "feedRecent": [],
+    "findings": 0,
+    "healthStatus": "stopped",
+    "inferenceLogActions": {
+      "clipboardPreview": "",
+      "engineLogChars": 0,
+      "isVisible": false,
+      "lastAction": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "isStreaming": false,
+    "isWorking": false,
+    "metrics": {
+      "cachedTokens": 0,
+      "completionTokens": 0,
+      "promptTokens": 0,
+      "tokPerSec": 0,
+      "ttft": 0
+    },
+    "mode": "manual",
+    "modeSelection": {
+      "activeOpMode": "manual",
+      "activeOpName": "QA i18n ja",
+      "availableLabels": [
+        "Autopilot",
+        "Copilot",
+        "Manual"
+      ],
+      "availableModes": [
+        "autopilot",
+        "copilot",
+        "manual"
+      ],
+      "currentLabel": "Manual",
+      "currentMode": "manual",
+      "lastAction": "complete-onboarding",
+      "pendingApprovalRejected": false,
+      "pendingApprovalVisible": false,
+      "showOnboarding": false,
+      "source": "onboarding"
+    },
+    "model": "",
+    "modelFolderInfo": {
+      "configSummary": "No recognized model config files found.",
+      "family": "Unknown",
+      "hasConfig": false,
+      "hasGenerationConfig": false,
+      "hasJangConfig": false,
+      "hasJangtqConfig": false,
+      "hasTokenizerConfig": false,
+      "isMultimodal": false,
+      "isSupported": false,
+      "modelType": "",
+      "path": "",
+      "supportMessage": "Select a model folder. Only Qwen and MiniMax model families are supported in this beta."
+    },
+    "modelFolderPicker": {
+      "configSummary": "No recognized model config files found.",
+      "family": "Unknown",
+      "isSupported": false,
+      "isVisible": false,
+      "lastAction": "select",
+      "selectedPath": "",
+      "source": "onboarding",
+      "status": "done",
+      "supportMessage": "Select a model folder. Only Qwen and MiniMax model families are supported in this beta."
+    },
+    "modelLibrary": {
+      "entries": [
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "MiniMax",
+          "isMultimodal": false,
+          "isSupported": true,
+          "name": "MiniMax-M2.7-JANG_K-CRACK",
+          "path": "/Users/eric/models/dealign.ai/MiniMax-M2.7-JANG_K-CRACK",
+          "supportMessage": "Supported MiniMax family. The app auto-detects config.json, jang_config.json, jangtq_config.json, generation_config.json, reasoning parser, tool parser, and full-KV cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-27B-JANG_4M-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-JANG_4M-CRACK",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-27B-MXFP4-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-27B-MXFP8-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP4-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Qwen",
+          "isMultimodal": true,
+          "isSupported": true,
+          "name": "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+          "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "DeepSeek-V4-Flash-JANG-CRACK",
+          "path": "/Users/eric/models/dealign.ai/DeepSeek-V4-Flash-JANG-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": true,
+          "isSupported": false,
+          "name": "Gemma-4-26B-A4B-it-JANG_4M-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Gemma-4-26B-A4B-it-JANG_4M-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "LFM2.5-8B-A1B-MXFP4-CRACK",
+          "path": "/Users/eric/models/dealign.ai/LFM2.5-8B-A1B-MXFP4-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "LFM2.5-8B-A1B-MXFP8-CRACK",
+          "path": "/Users/eric/models/dealign.ai/LFM2.5-8B-A1B-MXFP8-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "Nemotron-Omni-Nano-JANGTQ4-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Nemotron-Omni-Nano-JANGTQ4-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": false,
+          "isSupported": false,
+          "name": "Nemotron-Omni-Nano-MXFP4-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Nemotron-Omni-Nano-MXFP4-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": true,
+          "isSupported": false,
+          "name": "Step-3.7-Flash-JANG_2L-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Step-3.7-Flash-JANG_2L-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        },
+        {
+          "configSummary": "Detected: config.json, jang_config.json, generation_config.json, tokenizer_config.json",
+          "family": "Unsupported",
+          "isMultimodal": true,
+          "isSupported": false,
+          "name": "Step-3.7-Flash-JANG_K-CRACK",
+          "path": "/Users/eric/models/dealign.ai/Step-3.7-Flash-JANG_K-CRACK",
+          "supportMessage": "Only Qwen and MiniMax text/vision models are supported in this beta. Unsupported folders may fail to load or produce incorrect parser/cache behavior."
+        }
+      ],
+      "entryCount": 14,
+      "lastAction": "load",
+      "roots": [
+        "/Users/eric/models/dealign.ai"
+      ],
+      "selectedPath": "",
+      "status": "done",
+      "summary": "scanModelLibrary 14 models from 1 roots",
+      "supportedCount": 6
+    },
+    "msgs": 0,
+    "networkAction": {
+      "command": "",
+      "kind": "",
+      "protocol": "",
+      "status": "idle",
+      "summary": "",
+      "target": ""
+    },
+    "networkCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "networkLifecycle": {
+      "capture": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "mitm": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "tunnel": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "osintArtifactAction": {
+      "bytes": 0,
+      "history": [],
+      "lastAction": "",
+      "path": "",
+      "pathExists": false,
+      "status": "idle",
+      "summary": ""
+    },
+    "osintArtifacts": [],
+    "osintCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "osintLifecycle": {
+      "email": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "metadata": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "screenshot": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "username": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "phase": "scan",
+    "phaseActions": {
+      "fromPhase": "",
+      "lastAction": "",
+      "phaseGuidance": "",
+      "status": "idle",
+      "summary": "",
+      "toPhase": "",
+      "toolsRun": 0
+    },
+    "ports": 0,
+    "postAttribution": [],
+    "postCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "postLifecycle": {
+      "ad": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "lateral": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "privesc": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "qaChatVisual": {
+      "autoScrollLocked": null,
+      "cacheSessionIndicator": null,
+      "contextInspectorVisible": false,
+      "hasUnreadWhileUnlocked": null,
+      "headerBadges": [
+        "0 msgs",
+        "ctx 0"
+      ],
+      "mode": "",
+      "newContextConfirm": {
+        "isVisible": false,
+        "lastAction": ""
+      },
+      "newContextSessionBoundary": null,
+      "reasoningBlock": {
+        "isCollapsed": false,
+        "totalChars": 0,
+        "visibleChars": 0
+      },
+      "reasoningCollapsed": null,
+      "toolOutputExpansion": {
+        "hiddenLineCount": 0,
+        "isExpanded": false,
+        "toolName": "",
+        "totalLineCount": 0,
+        "visibleLineCount": 0
+      }
+    },
+    "qaCoverage": {
+      "contextHooks": [
+        "onContextUpdate",
+        "search_context",
+        "lastContextSummary",
+        "lastToolSchemaNames",
+        "context.catalog.maxSnippets"
+      ],
+      "stateRoutes": [
+        "/state",
+        "/messages",
+        "/results",
+        "/qa/subtab-coverage",
+        "/qa/subtab-lifecycle-matrix",
+        "/qa/endpoint-inventory",
+        "/qa/endpoint-route-matrix",
+        "/qa/action-state-inventory",
+        "/qa/view-inventory",
+        "/qa/function-flow-inventory",
+        "/qa/function-proof-matrix",
+        "/qa/service-inventory",
+        "/qa/service-function-matrix",
+        "/qa/model-state-inventory",
+        "/qa/model-state-function-matrix",
+        "/qa/theme-inventory",
+        "/qa/theme-token-matrix",
+        "/qa/python-runtime-inventory",
+        "/qa/engine-python-runtime",
+        "/qa/agent-flow-inventory",
+        "/qa/proof-suite-inventory",
+        "/qa/agent-loop-coverage",
+        "/qa/agent-loop-phase-matrix",
+        "/qa/agent-tool-authorization-coverage",
+        "/qa/tab-tool-function-flow",
+        "/qa/tab-proof-family-matrix",
+        "/qa/tool-execution-matrix",
+        "/qa/tool-flow-coverage",
+        "/qa/live-status-preview-flow",
+        "/qa/security-abuse-boundary-matrix",
+        "/qa/deep-runtime-flow-coverage",
+        "/qa/tool-engine-context-ops-matrix",
+        "/qa/engine-api-cache-proof-matrix",
+        "/qa/session-context-cache-flow",
+        "/qa/cache-artifact-matrix",
+        "/qa/chat-quality-evidence-matrix",
+        "/qa/turn-lifecycle-evidence",
+        "/qa/active-objective-audit",
+        "/qa/runtime-local-model-lane",
+        "/qa/continuous-batching-coverage",
+        "/qa/live-loaded-model-agent-stress",
+        "/qa/streaming-parser-reuse",
+        "/qa/startup-cache-defaults",
+        "/qa/runtime-coverage",
+        "/qa/context-coverage",
+        "/qa/context-budget-compaction",
+        "/qa/context-prompt-injection-boundary",
+        "/qa/context-flow-matrix",
+        "/qa/context-session-efficiency-matrix",
+        "/qa/context-efficiency-invariants",
+        "/qa/evidence-lifecycle-coverage",
+        "/qa/evidence-lifecycle-flow-matrix",
+        "/qa/cve-taxonomy-coverage",
+        "/qa/cve-taxonomy-matrix",
+        "/qa/cve-import-embedding-coverage",
+        "/qa/state-dependent-contract-matrix",
+        "/qa/settings-coverage",
+        "/qa/settings-surface-matrix",
+        "/qa/visual-coverage",
+        "/qa/visual-surface-matrix",
+        "/qa/session-coverage",
+        "/qa/session-workflow-matrix",
+        "/qa/tab-action-coverage",
+        "/qa/tab-action-surface-matrix",
+        "/qa/chat-coverage",
+        "/qa/recon-coverage",
+        "/qa/web-coverage",
+        "/qa/network-coverage",
+        "/qa/creds-coverage",
+        "/qa/exploit-coverage",
+        "/qa/post-coverage",
+        "/qa/supply-chain-coverage",
+        "/qa/osint-coverage",
+        "/qa/report-coverage",
+        "/qa/stash-coverage",
+        "/qa/coverage-index",
+        "/qa/coverage-false-flag-classification",
+        "/qa/proof-ledger",
+        "/qa/proof-category-matrix",
+        "/qa/artifact-ledger",
+        "/qa/artifact-manifest-matrix",
+        "/qa/result-parser-coverage",
+        "/qa/parser-tool-matrix",
+        "/qa/checkpoint-ledger",
+        "/qa/audit-ledger",
+        "/qa/gap-ledger",
+        "/qa/qwen-multimodal-promotion-readiness",
+        "/qa/release-readiness",
+        "/qa/beta-readiness-coverage",
+        "/qa/objective-runtime-coverage",
+        "/qa/objective-flow-requirement-matrix",
+        "/qa/objective-flow-execution-graph",
+        "/qa/per-turn-runtime-contract"
+      ],
+      "staticProfilesRemoved": true,
+      "subtabStateProofs": [
+        "recon-subtab-state-proof.py",
+        "web-subtab-state-proof.py",
+        "network-subtab-state-proof.py",
+        "creds-subtab-state-proof.py",
+        "exploit-subtab-state-proof.py",
+        "post-subtab-state-proof.py",
+        "supply-chain-cve-ui-proof.py",
+        "osint-subtab-state-proof.py",
+        "report-subtab-state-proof.py"
+      ],
+      "subtabStateTabs": [
+        "recon",
+        "web",
+        "network",
+        "creds",
+        "exploit",
+        "post",
+        "supplyChain",
+        "osint",
+        "report"
+      ],
+      "testServerSmoke": true
+    },
+    "qaSettingsVisual": {
+      "category": "",
+      "showSettings": false
+    },
+    "qaVisualSubtabs": {},
+    "reconAction": {
+      "command": "",
+      "kind": "",
+      "status": "idle",
+      "summary": "",
+      "target": ""
+    },
+    "reconCopyActions": {
+      "clipboardPreview": "",
+      "count": 0,
+      "kind": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "reportAction": {
+      "findingCount": 0,
+      "kind": "",
+      "prompt": "",
+      "status": "idle",
+      "summary": "",
+      "template": ""
+    },
+    "reportExport": {
+      "artifacts": [],
+      "error": "",
+      "findingCount": 0,
+      "status": "idle"
+    },
+    "reportFindingActions": {
+      "createLabel": "Create Finding",
+      "deleteLabel": "Delete finding",
+      "findingCount": 0,
+      "findings": [],
+      "lastAction": "",
+      "lastCreatedId": "",
+      "lastDeletedId": "",
+      "status": "idle",
+      "summary": "",
+      "wizardVisible": false
+    },
+    "reportRenderActions": {
+      "findingCount": 0,
+      "htmlChars": 0,
+      "htmlPreview": "",
+      "lastAction": "",
+      "status": "idle",
+      "summary": "",
+      "template": ""
+    },
+    "requestContext": {
+      "contextInjected": false,
+      "contextPreview": "",
+      "contextSnippetCount": 0,
+      "streamWarnings": [],
+      "toolSchemaCount": 0,
+      "toolSchemas": []
+    },
+    "settingsCategoryCoverage": {
+      "categories": [
+        {
+          "detail": "Watch the local engine, effective parser/cache metadata, and live cache counters.",
+          "id": "engine",
+          "pageSections": [
+            "engine status",
+            "effective runtime",
+            "live cache counters"
+          ],
+          "subtitle": "status, health, effective runtime",
+          "systemImage": "cpu",
+          "title": "Engine"
+        },
+        {
+          "detail": "Choose one model folder. Qwen and MiniMax are the supported beta families; config is picked up from that folder.",
+          "id": "model",
+          "pageSections": [
+            "model folder",
+            "supported family warning",
+            "generation config source"
+          ],
+          "subtitle": "folder selection and support checks",
+          "systemImage": "folder",
+          "title": "Model"
+        },
+        {
+          "detail": "Runtime defaults come from the model folder and engine registry, with only operational loop limits exposed here.",
+          "id": "runtime",
+          "pageSections": [
+            "model generation defaults",
+            "parser autodetect",
+            "tool-loop limits",
+            "autonomy"
+          ],
+          "subtitle": "generation, parsers, loop limits",
+          "systemImage": "slider.horizontal.3",
+          "title": "Runtime"
+        },
+        {
+          "detail": "Control the dynamic catalogue that decides which app facts are sent into each model turn.",
+          "id": "context",
+          "pageSections": [
+            "dynamic catalogue",
+            "retrieval sources",
+            "CVE assist mode",
+            "long-context safety"
+          ],
+          "subtitle": "catalogue and retrieval sources",
+          "systemImage": "square.stack.3d.up",
+          "title": "Context"
+        },
+        {
+          "detail": "Tune cache budgets while keeping the required prefix, paged, L2, and TurboQuant paths enabled.",
+          "id": "cache",
+          "pageSections": [
+            "prefix cache",
+            "prompt L2 disk",
+            "paged cache",
+            "block L2 disk",
+            "TurboQuant KV"
+          ],
+          "subtitle": "TurboQuant, prefix, L2 disk",
+          "systemImage": "internaldrive",
+          "title": "Cache"
+        },
+        {
+          "detail": "Configure full-auto and multi-agent behavior without mixing it into engine setup.",
+          "id": "agents",
+          "pageSections": [
+            "multi-agent mode",
+            "concurrency limit",
+            "agent defaults"
+          ],
+          "subtitle": "multi-agent controls",
+          "systemImage": "person.2",
+          "title": "Agents"
+        },
+        {
+          "detail": "Manage the local vulnerability knowledge base used by tools and context retrieval.",
+          "id": "cves",
+          "pageSections": [
+            "database import",
+            "CVE counts",
+            "search status"
+          ],
+          "subtitle": "local CVE data and search",
+          "systemImage": "cross.case",
+          "title": "CVE Database"
+        },
+        {
+          "detail": "Detect and install external command-line tools used by the agent loop.",
+          "id": "tools",
+          "pageSections": [
+            "installed tools",
+            "missing tools",
+            "install plan",
+            "install log"
+          ],
+          "subtitle": "tool install and detection",
+          "systemImage": "wrench.and.screwdriver",
+          "title": "Tools"
+        },
+        {
+          "detail": "Inspect engine logs separately from runtime controls.",
+          "id": "logs",
+          "pageSections": [
+            "engine log output",
+            "diagnostics"
+          ],
+          "subtitle": "engine output and diagnostics",
+          "systemImage": "doc.text.magnifyingglass",
+          "title": "Logs"
+        }
+      ],
+      "splitPages": true
+    },
+    "settingsEngineActions": {
+      "healthStatus": "",
+      "isRunning": false,
+      "lastAction": "",
+      "model": "",
+      "status": "idle",
+      "summary": "",
+      "wasRunning": false
+    },
+    "sidebarActions": {
+      "lastAction": "",
+      "opId": "",
+      "opName": "",
+      "opsCount": 0,
+      "status": "idle",
+      "stoppedGeneration": false,
+      "summary": ""
+    },
+    "stash": 0,
+    "stashActions": {
+      "actionLabels": [
+        "Add",
+        "Copy All",
+        "Copy",
+        "Send",
+        "Delete"
+      ],
+      "activeFilter": "all",
+      "addSheetVisible": false,
+      "clipboardPreview": "",
+      "filteredCount": 0,
+      "itemCount": 0,
+      "items": [],
+      "lastAction": "",
+      "lastDeletedId": "",
+      "lastItemId": "",
+      "status": "idle",
+      "summary": ""
+    },
+    "stashRetrieval": {
+      "candidateCount": 0,
+      "query": "",
+      "returnedCount": 0,
+      "topLabels": [],
+      "topScore": 0
+    },
+    "subdomains": 0,
+    "subtabActions": {
+      "lastAction": "",
+      "status": "idle",
+      "subtab": "",
+      "summary": "",
+      "tab": "",
+      "validSubtabs": []
+    },
+    "supplyChainLifecycle": {
+      "cve": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "dependency": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "sbom": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "secrets": {
+        "command": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      }
+    },
+    "tabActivities": {
+      "creds": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "exploit": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "network": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "osint": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "post": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "recon": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "report": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "stash": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "supplyChain": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      },
+      "web": {
+        "command": "",
+        "count": 0,
+        "lastTool": "",
+        "status": "idle",
+        "summary": ""
+      }
+    },
+    "tabSwitchActions": {
+      "followAgent": true,
+      "fromTab": "",
+      "lastAction": "",
+      "status": "idle",
+      "summary": "",
+      "toTab": ""
+    },
+    "terminal": {
+      "activeCommand": {
+        "command": "",
+        "source": "",
+        "status": "idle",
+        "summary": "",
+        "tool": ""
+      },
+      "commandTranscripts": [],
+      "installedToolCount": 0,
+      "isVisible": false,
+      "surfaceContract": "terminal-visibility-command-transcripts",
+      "toolPathCount": 4,
+      "toolPaths": [
+        "/opt/homebrew/bin",
+        "/usr/local/bin",
+        "/Users/eric/.exploitbot/tools",
+        "/Users/eric/.local/bin"
+      ]
+    },
+    "toolExecutor": {
+      "currentOutput": "",
+      "currentTool": "",
+      "isRunning": false
+    },
+    "toolSettings": {
+      "activeSettingsCategory": "",
+      "errorCount": 0,
+      "installCommands": [],
+      "installLog": "",
+      "installPlan": {
+        "commandCount": 0,
+        "installCommands": [],
+        "missingByCategory": {},
+        "missingByInstallMethod": {},
+        "missingCount": 0,
+        "requiresNetworkInstall": false
+      },
+      "installedCount": 0,
+      "installingCount": 0,
+      "isInstalling": false,
+      "missingByCategory": {},
+      "missingByInstallMethod": {},
+      "missingCount": 0,
+      "requiresNetworkInstall": false,
+      "tools": []
+    },
+    "toolSettingsActions": {
+      "installedCount": 0,
+      "lastAction": "",
+      "missingCount": 0,
+      "status": "idle",
+      "summary": "",
+      "toolName": ""
+    },
+    "tools": 0,
+    "vulns": 0,
+    "webAction": {
+      "cve": "",
+      "kind": "",
+      "prompt": "",
+      "source": "",
+      "status": "idle",
+      "target": "",
+      "title": ""
+    },
+    "webCVERows": [],
+    "webDirectActions": {
+      "actionLabels": [
+        "Create Finding",
+        "Stash",
+        "Copy",
+        "Search Related CVEs"
+      ],
+      "clipboardPreview": "",
+      "cve": "",
+      "findingPrefill": {
+        "cve": "",
+        "description": "",
+        "severity": "high",
+        "target": "",
+        "title": ""
+      },
+      "findingWizardVisible": false,
+      "lastAction": "",
+      "lastPrompt": "",
+      "lastStashPreview": "",
+      "source": "",
+      "stashCount": 0,
+      "status": "idle",
+      "summary": "",
+      "target": "",
+      "title": ""
+    },
+    "windowOverlayActions": {
+      "findingWizardVisible": false,
+      "lastAction": "",
+      "settingsVisible": false,
+      "status": "idle",
+      "summary": "",
+      "terminalVisible": false
+    }
+  },
+  "status": "PASS"
+}

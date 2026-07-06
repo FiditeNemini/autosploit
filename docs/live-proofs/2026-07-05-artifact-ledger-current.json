@@ -29,12 +29,12 @@
     "docs/live-proofs/checkpoint-75-minimax-live.json",
     "docs/live-proofs/qwen27-mxfp4-mtp-live-cache-20260605.json"
   ],
-  "generatedAt": "2026-07-06T13:35:25-0700",
+  "generatedAt": "2026-07-06T13:41:49-0700",
   "knownFailedLiveProofs": [
     "docs/live-proofs/checkpoint-75-minimax-live.json"
   ],
-  "liveProofCount": 198,
-  "liveProofOkCount": 184,
+  "liveProofCount": 199,
+  "liveProofOkCount": 185,
   "liveProofStatus": {
     "docs/live-proofs/2026-06-03-minimax-current-metadata.json": true,
     "docs/live-proofs/2026-06-03-minimax-jang-k-current-metadata.json": true,
@@ -165,6 +165,7 @@
     "docs/live-proofs/2026-07-06-codebase-static-patch-scenario.json": true,
     "docs/live-proofs/2026-07-06-computer-use-tools-inventory-44-dist.json": true,
     "docs/live-proofs/2026-07-06-container-iac-supply-chain-scenario.json": true,
+    "docs/live-proofs/2026-07-06-i18n-language-toggle.json": true,
     "docs/live-proofs/2026-07-06-network-credential-post-scenario.json": true,
     "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-27b.json": true,
     "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-35b.json": true,
@@ -365,6 +366,7 @@
     "docs/live-proofs/2026-07-06-codebase-static-patch-scenario.json",
     "docs/live-proofs/2026-07-06-computer-use-tools-inventory-44-dist.json",
     "docs/live-proofs/2026-07-06-container-iac-supply-chain-scenario.json",
+    "docs/live-proofs/2026-07-06-i18n-language-toggle.json",
     "docs/live-proofs/2026-07-06-network-credential-post-scenario.json",
     "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-27b.json",
     "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-35b.json",
@@ -438,7 +440,7 @@
   "ok": true,
   "processEvidence": {
     "appRows": [
-      "317 133760 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+      "3757 128768 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
     ],
     "engineProcessRows": []
   },
