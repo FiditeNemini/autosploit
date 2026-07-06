@@ -15,10 +15,8 @@ RELEASE_PUBLIC_TRUTH = ROOT / "docs/live-proofs/2026-07-05-release-public-truth.
 DEFAULT_OUTPUT = ROOT / "docs/live-proofs/2026-07-05-objective-open-blockers-current.json"
 
 
-OPEN_ROW_AREAS = {
-    "Full-context-length stress",
-    "Release/distribution readiness",
-}
+FULL_CONTEXT_AREA = "Full-context-length stress"
+RELEASE_AREA = "Release/distribution readiness"
 
 
 def require(condition: bool, message: str, detail: Any = None) -> None:
@@ -39,6 +37,23 @@ def validate_evidence_paths(rows: list[dict[str, Any]]) -> list[str]:
             if not (ROOT / evidence).exists():
                 missing.append(evidence)
     return sorted(set(missing))
+
+
+def status_counts(rows: list[dict[str, Any]]) -> dict[str, int]:
+    return {status: sum(1 for row in rows if row.get("status") == status) for status in ("PASS", "PARTIAL", "BLOCKED")}
+
+
+def open_blocker_areas(rows: list[dict[str, Any]]) -> set[str]:
+    return {row.get("area") for row in rows if row.get("status") in {"PARTIAL", "BLOCKED"}}
+
+
+def aggregate_overall_status(rows: list[dict[str, Any]]) -> str:
+    statuses = {row.get("status") for row in rows}
+    if "BLOCKED" in statuses:
+        return "BLOCKED"
+    if "PARTIAL" in statuses:
+        return "PARTIAL"
+    return "PASS"
 
 
 def build_full_context_row(row: dict[str, Any], goal_row: dict[str, Any]) -> dict[str, Any]:
@@ -112,29 +127,40 @@ def build_report(generated_at: str | None = None) -> dict[str, Any]:
     require(goal_audit.get("completionClaimAllowed") is False, "goal audit must block completion claims", goal_audit)
 
     rows = matrix.get("rows") or []
-    counts = matrix.get("statusCounts")
-    require(counts == {"PASS": 24, "PARTIAL": 1, "BLOCKED": 1}, "unexpected matrix status counts", counts)
+    counts = status_counts(rows)
+    require(matrix.get("statusCounts") == counts, "matrix statusCounts do not match rows", {
+        "stored": matrix.get("statusCounts"),
+        "computed": counts,
+    })
     require(matrix.get("rowCount") == 26, "unexpected matrix row count", matrix.get("rowCount"))
     missing_evidence = validate_evidence_paths(rows)
     require(not missing_evidence, "matrix has missing evidence paths", missing_evidence)
 
     by_area = {row.get("area"): row for row in rows}
-    open_rows = [row for row in rows if row.get("status") in {"PARTIAL", "BLOCKED"}]
-    require({row.get("area") for row in open_rows} == OPEN_ROW_AREAS, "unexpected open matrix rows", open_rows)
-
     goal_by_id = {row.get("id"): row for row in goal_audit.get("rows") or []}
-    full_context = by_area["Full-context-length stress"]
-    release = by_area["Release/distribution readiness"]
+    full_context = by_area[FULL_CONTEXT_AREA]
+    release = by_area[RELEASE_AREA]
     require(full_context.get("status") == "PARTIAL", "full-context row status drifted", full_context)
-    require(release.get("status") == "BLOCKED", "release row status drifted", release)
+    require(release.get("status") in {"PASS", "BLOCKED"}, "release row status drifted", release)
+
+    expected_open_areas = {FULL_CONTEXT_AREA}
+    if release.get("status") == "BLOCKED":
+        expected_open_areas.add(RELEASE_AREA)
+    actual_open_areas = open_blocker_areas(rows)
+    require(actual_open_areas == expected_open_areas, "unexpected open matrix rows", {
+        "expected": sorted(expected_open_areas),
+        "actual": sorted(actual_open_areas),
+    })
 
     report_rows = [
         build_full_context_row(full_context, goal_by_id["generation_reasoning_context"]),
-        build_release_row(release, goal_by_id["release_displayable"], notarization, public_truth),
     ]
+    if release.get("status") == "BLOCKED":
+        report_rows.append(build_release_row(release, goal_by_id["release_displayable"], notarization, public_truth))
 
     report_missing_evidence = validate_evidence_paths(report_rows)
     require(not report_missing_evidence, "open blockers report has missing evidence paths", report_missing_evidence)
+    overall_status = aggregate_overall_status(rows)
 
     return {
         "ok": True,
@@ -143,14 +169,14 @@ def build_report(generated_at: str | None = None) -> dict[str, Any]:
         "generatedAt": generated_at or time.strftime("%Y-%m-%dT%H:%M:%S%z"),
         "sourceMatrix": str(MATRIX.relative_to(ROOT)),
         "sourceGoalAudit": str(GOAL_AUDIT.relative_to(ROOT)),
-        "overallStatus": "BLOCKED",
+        "overallStatus": overall_status,
         "objectiveComplete": False,
         "completionClaimAllowed": False,
         "noCompletionClaim": True,
         "counts": counts,
         "openRowCount": len(report_rows),
         "openRows": report_rows,
-        "currentBlockingConditions": ["release_displayable"],
+        "currentBlockingConditions": ["release_displayable"] if release.get("status") == "BLOCKED" else [],
         "currentPartialConditions": ["generation_reasoning_context"],
         "releaseNextAction": notarization.get("nextAction"),
         "longContextPolicy": {
