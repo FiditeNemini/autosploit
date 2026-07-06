@@ -1,0 +1,1043 @@
+{
+  "appLoopEvidence": "not_claimed",
+  "baseUrl": "http://127.0.0.1:53956",
+  "cacheAfter": {
+    "block_disk_cache": {
+      "blocks_on_disk": 38,
+      "disk_evictions": 0,
+      "disk_hits": 20,
+      "disk_misses": 23,
+      "disk_size_bytes": 1834088748,
+      "disk_size_gb": 1.708,
+      "disk_writes": 38,
+      "total_accesses": 20,
+      "total_cached_tokens": 2021,
+      "total_tokens_on_disk": 2021
+    },
+    "cache_totals": {
+      "l2_block_tokens_on_disk": 2021,
+      "l2_prompt_tokens_on_disk": 0,
+      "l2_ssm_tokens_on_disk": 25765,
+      "l2_tokens_on_disk": 27786,
+      "l2_tokens_on_disk_note": "store_sum_across_prompt_block_ssm_l2; tiers_may_overlap",
+      "l2_tokens_on_disk_store_sum": 27786,
+      "ram_tokens_cached": 2021,
+      "ssm_tokens_on_disk": 25765
+    },
+    "disk_cache": {
+      "entries": 0,
+      "hit_rate": 0.0,
+      "hits": 0,
+      "max_size_gb": 10.0,
+      "misses": 1,
+      "pending_writes": 0,
+      "stores": 0,
+      "total_cached_tokens": 0,
+      "total_size_mb": 0.0,
+      "total_tokens_on_disk": 0
+    },
+    "kv_cache_quantization": {
+      "bits": 4,
+      "enabled": true,
+      "group_size": 64
+    },
+    "memory": {
+      "active_mb": 16085.6,
+      "cache_mb": 555.4,
+      "peak_mb": 22080.8
+    },
+    "native_cache": {
+      "attention_kv_storage_quantization": {
+        "applies_to": "attention_kv_layers_only",
+        "bits": 4,
+        "enabled": true,
+        "group_size": 64,
+        "mode": "storage_boundary",
+        "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+        "ssm_policy": "native_companion_state"
+      },
+      "block_disk_l2": true,
+      "cache_type": "hybrid_ssm_typed",
+      "components": [
+        "attention_kv",
+        "ssm_companion_state",
+        "async_rederive"
+      ],
+      "family": "hybrid",
+      "generic_turboquant_kv": {
+        "enabled": false,
+        "reason": "hybrid_ssm_state"
+      },
+      "kv_layer_indices": [],
+      "live_attention_tq_kv": {
+        "applies_to": "attention_kv_layers_only",
+        "attention_layers": [],
+        "companion_layers": [],
+        "enabled": false,
+        "mode": null,
+        "ssm_policy": "native_full_precision_companion_state"
+      },
+      "paged": true,
+      "prefix": true,
+      "schema": "hybrid_ssm_v1",
+      "ssm_entries": 0
+    },
+    "scheduler_cache": {
+      "active_requests": 0,
+      "allocated_blocks": 39,
+      "block_size": 64,
+      "cache_hit_rate": 0.86,
+      "cache_hits": 344,
+      "cache_misses": 56,
+      "cow_copies": 0,
+      "disk_hits": 0,
+      "disk_misses": 18,
+      "entries_by_type": {
+        "assistant": 10,
+        "system": 0,
+        "user": 0
+      },
+      "evictions": 0,
+      "free_blocks": 961,
+      "hit_rate": 0.9,
+      "hits": 9,
+      "max_blocks": 1000,
+      "misses": 1,
+      "pixel_cache_hits": 0,
+      "pixel_cache_misses": 0,
+      "pixel_cache_size": 0,
+      "pixel_hit_rate": 0.0,
+      "shared_blocks": 20,
+      "tokens_saved": 11008,
+      "total_images_processed": 0,
+      "total_time_saved": 0.0,
+      "total_tokens_cached": 2021,
+      "utilization": 0.039
+    },
+    "scheduler_stats": {
+      "batch_generator": {
+        "generation_time": 35.778396802110365,
+        "generation_tokens": 608,
+        "generation_tps": 16.993494799748476,
+        "hybrid_kv_without_ssm_hits": 1,
+        "hybrid_kv_without_ssm_tokens": 1216,
+        "last_hybrid_kv_without_ssm": {
+          "cached_tokens": 1216,
+          "reason": "no_ssm_companion_state",
+          "request_id": "chatcmpl-17d4b25c",
+          "ssm_prefix_lookup": {
+            "candidate_lengths": [],
+            "matched": false,
+            "max_len": 1216,
+            "reason": "no_candidate_lengths",
+            "store_size": 2
+          }
+        },
+        "last_native_mtp": {
+          "acceptance_rate": 0.543859649122807,
+          "accepted_by_depth": [
+            25,
+            4,
+            2
+          ],
+          "accepted_tokens": 31,
+          "accepts": 18,
+          "bonus_emits": 18,
+          "cycles": 33,
+          "depth_acceptance_rates": {
+            "d1": 0.7575757575757576,
+            "d2": 0.3333333333333333,
+            "d3": 0.16666666666666666
+          },
+          "draft_emits": 31,
+          "drafted_by_depth": [
+            33,
+            12,
+            12
+          ],
+          "drafted_tokens": 57,
+          "fallback_reason": null,
+          "final_depth": 1,
+          "finish_reason": "stop",
+          "forwards": {
+            "mtp": 58,
+            "replay_main": 15,
+            "seed_main": 1,
+            "verify_main": 33
+          },
+          "init_emits": 2,
+          "rejects": 15,
+          "request_id": "chatcmpl-15ab4601",
+          "timings_ms": {
+            "avg_cycle": 123.14982463475175,
+            "draft": 841.7966219421942,
+            "materialize": 0.3969999961555004,
+            "replay": 323.5078320140019,
+            "restore": 5.615289090201259,
+            "sample": 2275.6577520049177,
+            "snapshot": 4.214965971186757,
+            "total": 4063.944212946808,
+            "verify": 612.7547519281507
+          },
+          "verify_emits": 15
+        },
+        "num_images_processed": 0,
+        "peak_memory": 23.153367888,
+        "prompt_time": 24.959658958978252,
+        "prompt_tokens": 2638,
+        "prompt_tps": 105.69054666714841,
+        "vision_encoding_time": 0
+      },
+      "cache_hit_requests": 8,
+      "cache_hit_tokens": 9792,
+      "cache_hit_tokens_by_detail": {
+        "paged+ssm": 9792
+      },
+      "cache_reuse_partial_downgrades": 0,
+      "cache_reuse_partial_tokens": 0,
+      "cache_reuse_skip_tokens": 0,
+      "cache_reuse_skips": 0,
+      "engine_path": null,
+      "ewma_ttft_seconds": 0,
+      "hybrid_kv_without_ssm_hits": 1,
+      "hybrid_kv_without_ssm_tokens": 1216,
+      "last_cache_reuse_partial": null,
+      "last_cache_reuse_skip": null,
+      "last_hybrid_kv_without_ssm": {
+        "cached_tokens": 1216,
+        "reason": "no_ssm_companion_state",
+        "request_id": "chatcmpl-17d4b25c",
+        "ssm_prefix_lookup": {
+          "candidate_lengths": [],
+          "matched": false,
+          "max_len": 1216,
+          "reason": "no_candidate_lengths",
+          "store_size": 2
+        }
+      },
+      "max_running_observed": 1,
+      "max_waiting_observed": 1,
+      "num_requests_processed": 10,
+      "num_running": 0,
+      "num_waiting": 0,
+      "single_active_decode": false,
+      "total_completion_tokens": 608,
+      "total_prompt_tokens": 13039
+    },
+    "ssm_companion": {
+      "disk": {
+        "budget_bytes": 10737418240,
+        "budget_gb": 10.0,
+        "bytes": 3138149124,
+        "bytes_mb": 2992.77,
+        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-natural-breadth-cache-jsub1_u8/block/ssm_companion",
+        "enabled": true,
+        "entries": 20,
+        "hit_rate": 0.5,
+        "hits": 1,
+        "misses": 1,
+        "stores": 20,
+        "total_cached_tokens": 25765,
+        "total_tokens_on_disk": 25765
+      },
+      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-natural-breadth-cache-jsub1_u8/block/ssm_companion",
+      "disk_enabled": true,
+      "entries": 8,
+      "max_entries": 8,
+      "nbytes": 1255145472,
+      "nbytes_mb": 1197.0
+    },
+    "turboquant_kv_cache": {
+      "enabled": false
+    }
+  },
+  "cacheBefore": {
+    "block_disk_cache": {
+      "blocks_on_disk": 0,
+      "disk_evictions": 0,
+      "disk_hits": 0,
+      "disk_misses": 0,
+      "disk_size_bytes": 0,
+      "disk_size_gb": 0.0,
+      "disk_writes": 0,
+      "total_accesses": 0,
+      "total_cached_tokens": 0,
+      "total_tokens_on_disk": 0
+    },
+    "cache_totals": {
+      "l2_block_tokens_on_disk": 0,
+      "l2_prompt_tokens_on_disk": 0,
+      "l2_ssm_tokens_on_disk": 0,
+      "l2_tokens_on_disk": 0,
+      "l2_tokens_on_disk_note": "store_sum_across_prompt_block_ssm_l2; tiers_may_overlap",
+      "l2_tokens_on_disk_store_sum": 0,
+      "ram_tokens_cached": 0,
+      "ssm_tokens_on_disk": 0
+    },
+    "disk_cache": {
+      "entries": 0,
+      "hit_rate": 0.0,
+      "hits": 0,
+      "max_size_gb": 10.0,
+      "misses": 0,
+      "pending_writes": 0,
+      "stores": 0,
+      "total_cached_tokens": 0,
+      "total_size_mb": 0.0,
+      "total_tokens_on_disk": 0
+    },
+    "kv_cache_quantization": {
+      "bits": 4,
+      "enabled": true,
+      "group_size": 64
+    },
+    "memory": {
+      "active_mb": 14725.6,
+      "cache_mb": 0.1,
+      "peak_mb": 14725.7
+    },
+    "native_cache": {
+      "attention_kv_storage_quantization": {
+        "applies_to": "attention_kv_layers_only",
+        "bits": 4,
+        "enabled": true,
+        "group_size": 64,
+        "mode": "storage_boundary",
+        "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+        "ssm_policy": "native_companion_state"
+      },
+      "block_disk_l2": true,
+      "cache_type": "hybrid_ssm_typed",
+      "components": [
+        "attention_kv",
+        "ssm_companion_state",
+        "async_rederive"
+      ],
+      "family": "hybrid",
+      "generic_turboquant_kv": {
+        "enabled": false,
+        "reason": "hybrid_ssm_state"
+      },
+      "kv_layer_indices": [],
+      "live_attention_tq_kv": {
+        "applies_to": "attention_kv_layers_only",
+        "attention_layers": [],
+        "companion_layers": [],
+        "enabled": false,
+        "mode": null,
+        "ssm_policy": "native_full_precision_companion_state"
+      },
+      "paged": true,
+      "prefix": true,
+      "schema": "hybrid_ssm_v1",
+      "ssm_entries": 0
+    },
+    "scheduler_cache": {
+      "active_requests": 0,
+      "allocated_blocks": 1,
+      "block_size": 64,
+      "cache_hit_rate": 0,
+      "cache_hits": 0,
+      "cache_misses": 0,
+      "cow_copies": 0,
+      "disk_hits": 0,
+      "disk_misses": 0,
+      "entries_by_type": {
+        "assistant": 0,
+        "system": 0,
+        "user": 0
+      },
+      "evictions": 0,
+      "free_blocks": 999,
+      "hit_rate": 0,
+      "hits": 0,
+      "max_blocks": 1000,
+      "misses": 0,
+      "shared_blocks": 0,
+      "tokens_saved": 0,
+      "total_tokens_cached": 0,
+      "utilization": 0.001
+    },
+    "scheduler_stats": {
+      "batch_generator": {},
+      "cache_hit_requests": 0,
+      "cache_hit_tokens": 0,
+      "cache_hit_tokens_by_detail": {},
+      "cache_reuse_partial_downgrades": 0,
+      "cache_reuse_partial_tokens": 0,
+      "cache_reuse_skip_tokens": 0,
+      "cache_reuse_skips": 0,
+      "engine_path": null,
+      "ewma_ttft_seconds": 0,
+      "hybrid_kv_without_ssm_hits": 0,
+      "hybrid_kv_without_ssm_tokens": 0,
+      "last_cache_reuse_partial": null,
+      "last_cache_reuse_skip": null,
+      "last_hybrid_kv_without_ssm": null,
+      "max_running_observed": 0,
+      "max_waiting_observed": 0,
+      "num_requests_processed": 0,
+      "num_running": 0,
+      "num_waiting": 0,
+      "single_active_decode": false,
+      "total_completion_tokens": 0,
+      "total_prompt_tokens": 0
+    },
+    "ssm_companion": {
+      "disk": {
+        "budget_bytes": 10737418240,
+        "budget_gb": 10.0,
+        "bytes": 0,
+        "bytes_mb": 0.0,
+        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-natural-breadth-cache-jsub1_u8/block/ssm_companion",
+        "enabled": true,
+        "entries": 0,
+        "hit_rate": 0.0,
+        "hits": 0,
+        "misses": 0,
+        "stores": 0,
+        "total_cached_tokens": 0,
+        "total_tokens_on_disk": 0
+      },
+      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-natural-breadth-cache-jsub1_u8/block/ssm_companion",
+      "disk_enabled": true,
+      "entries": 0,
+      "max_bytes": null,
+      "max_bytes_mb": null,
+      "max_entries": 8,
+      "nbytes": 0,
+      "nbytes_mb": 0.0
+    },
+    "turboquant_kv_cache": {
+      "enabled": false
+    }
+  },
+  "engineLogTail": "WARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-6ea5b7e9: 19 blocks, 1216 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 16/64 layers (48 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-6ea5b7e9: 1216 cached (KV+SSM), 96 remaining (incl. 7-token gen-prompt suffix)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-6ea5b7e9 (48 layers, key=1280 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-6ea5b7e9 (48 layers, key=1304 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-6ea5b7e9 (48 layers, 1280-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-6ea5b7e9 (48 layers, 1304-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-6ea5b7e9 depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-6ea5b7e9] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.417,d3=0.083]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-6ea5b7e9] finish=stop cycles=30 accepted=26/54 (48.1%) emits[init=2,draft=26,bonus=10,verify=19]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-6ea5b7e9] accept_by_depth[d1=20/30,d2=5/12,d3=1/12] forwards[seed_main=1,verify_main=30,replay_main=19,mtp=55]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-6ea5b7e9] timings_ms[verify=294.36 sample=2017.90 draft=892.28 snapshot=2.41 restore=3.62 replay=99.03 materialize=0.30 avg_cycle=110.33]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=88, num_new_blocks=2, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 16 positional layers (out of 64 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 26 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 27 (16 kv layers, cumulative=48, 24 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 2 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-6ea5b7e9: 64 layers, truncated to 1304 tokens\nINFO:__main__:Chat completion: 57 tokens in 4.35s (13.1 tok/s)\nINFO:     127.0.0.1:54000 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 128, 'enable_thinking': False}\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-60dc7c3f: 19 blocks, 1216 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 16/64 layers (48 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-60dc7c3f: 1216 cached (KV+SSM), 95 remaining (incl. 7-token gen-prompt suffix)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-60dc7c3f (48 layers, key=1280 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-60dc7c3f (48 layers, key=1303 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-60dc7c3f (48 layers, 1280-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-60dc7c3f (48 layers, 1303-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-60dc7c3f depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-60dc7c3f] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.333,d3=0.167]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-60dc7c3f] finish=stop cycles=40 accepted=31/64 (48.4%) emits[init=2,draft=31,bonus=18,verify=22]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-60dc7c3f] accept_by_depth[d1=25/40,d2=4/12,d3=2/12] forwards[seed_main=1,verify_main=40,replay_main=22,mtp=65]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-60dc7c3f] timings_ms[verify=373.97 sample=2563.00 draft=947.76 snapshot=3.40 restore=3.97 replay=109.58 materialize=0.35 avg_cycle=100.05]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=87, num_new_blocks=2, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 16 positional layers (out of 64 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 28 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 29 (16 kv layers, cumulative=48, 23 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 2 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-60dc7c3f: 64 layers, truncated to 1303 tokens\nINFO:__main__:Chat completion: 73 tokens in 5.18s (14.1 tok/s)\nINFO:     127.0.0.1:54001 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 128, 'enable_thinking': False}\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-792ce9d5: 20 blocks, 1280 tokens\nINFO:vmlx_engine.utils.ssm_companion_cache:SSM fetch MISS: N=1280 hash=92aba4dc2d99 store_size=8 store_keys[:3]=['ce7e2aad58e7', 'f2fb05df4448', '6ba2f926ab44']\nINFO:vmlx_engine.utils.ssm_companion_cache:SSM disk HIT: N=1280 hash=92aba4dc2d99 states=48 complete=True\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 16/64 layers (48 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-792ce9d5: 1280 cached (KV+SSM), 31 remaining (incl. 7-token gen-prompt suffix)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-792ce9d5 (48 layers, key=1303 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-792ce9d5 (48 layers, 1303-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-792ce9d5 depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-792ce9d5] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.667,d3=0.333]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-792ce9d5] finish=stop cycles=29 accepted=32/53 (60.4%) emits[init=2,draft=32,bonus=14,verify=14]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-792ce9d5] accept_by_depth[d1=20/29,d2=8/12,d3=4/12] forwards[seed_main=1,verify_main=29,replay_main=14,mtp=54]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-792ce9d5] timings_ms[verify=418.89 sample=1946.53 draft=668.28 snapshot=3.22 restore=3.66 replay=107.30 materialize=0.33 avg_cycle=108.56]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=23, num_new_blocks=1, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 16 positional layers (out of 64 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 30 (16 kv layers, cumulative=48, 23 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 1 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-792ce9d5: 64 layers, truncated to 1303 tokens\nINFO:__main__:Chat completion: 62 tokens in 4.20s (14.8 tok/s)\nINFO:     127.0.0.1:54007 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 128, 'enable_thinking': False}\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-674042f2: 19 blocks, 1216 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 16/64 layers (48 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-674042f2: 1216 cached (KV+SSM), 89 remaining (incl. 7-token gen-prompt suffix)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-674042f2 (48 layers, key=1280 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-674042f2 (48 layers, key=1297 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-674042f2 (48 layers, 1280-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-674042f2 (48 layers, 1297-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-674042f2 depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-674042f2] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.333,d3=0.167]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-674042f2] finish=stop cycles=28 accepted=20/52 (38.5%) emits[init=2,draft=20,bonus=7,verify=20]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-674042f2] accept_by_depth[d1=14/28,d2=4/12,d3=2/12] forwards[seed_main=1,verify_main=28,replay_main=20,mtp=53]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-674042f2] timings_ms[verify=303.32 sample=1866.68 draft=857.41 snapshot=2.59 restore=4.22 replay=121.14 materialize=0.36 avg_cycle=112.70]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=81, num_new_blocks=2, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 16 positional layers (out of 64 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 31 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 32 (16 kv layers, cumulative=48, 17 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 2 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-674042f2: 64 layers, truncated to 1297 tokens\nINFO:__main__:Chat completion: 49 tokens in 4.20s (11.7 tok/s)\nINFO:     127.0.0.1:54014 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 128, 'enable_thinking': False}\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-8ec798c7: 19 blocks, 1216 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 16/64 layers (48 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-8ec798c7: 1216 cached (KV+SSM), 94 remaining (incl. 7-token gen-prompt suffix)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-8ec798c7 (48 layers, key=1280 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-8ec798c7 (48 layers, key=1302 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-8ec798c7 (48 layers, 1280-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-8ec798c7 (48 layers, 1302-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-8ec798c7 depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-8ec798c7] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.250,d3=0.000]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-8ec798c7] finish=stop cycles=27 accepted=20/51 (39.2%) emits[init=2,draft=20,bonus=10,verify=17]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-8ec798c7] accept_by_depth[d1=17/27,d2=3/12,d3=0/12] forwards[seed_main=1,verify_main=27,replay_main=17,mtp=52]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-8ec798c7] timings_ms[verify=288.10 sample=1842.33 draft=796.65 snapshot=2.66 restore=3.50 replay=106.81 materialize=0.27 avg_cycle=112.60]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=86, num_new_blocks=2, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 16 positional layers (out of 64 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 33 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 34 (16 kv layers, cumulative=48, 22 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 2 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-8ec798c7: 64 layers, truncated to 1302 tokens\nINFO:__main__:Chat completion: 49 tokens in 4.08s (12.0 tok/s)\nINFO:     127.0.0.1:54015 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 128, 'enable_thinking': False}\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-5c6645f0: 19 blocks, 1216 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 16/64 layers (48 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-5c6645f0: 1216 cached (KV+SSM), 95 remaining (incl. 7-token gen-prompt suffix)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-5c6645f0 (48 layers, key=1280 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-5c6645f0 (48 layers, key=1303 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-5c6645f0 (48 layers, 1280-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-5c6645f0 (48 layers, 1303-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-5c6645f0 depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-5c6645f0] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.500,d3=0.167]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-5c6645f0] finish=stop cycles=31 accepted=31/55 (56.4%) emits[init=2,draft=31,bonus=14,verify=16]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-5c6645f0] accept_by_depth[d1=23/31,d2=6/12,d3=2/12] forwards[seed_main=1,verify_main=31,replay_main=16,mtp=56]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-5c6645f0] timings_ms[verify=355.41 sample=2084.59 draft=776.88 snapshot=3.07 restore=3.40 replay=106.07 materialize=0.30 avg_cycle=107.41]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=87, num_new_blocks=2, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 16 positional layers (out of 64 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 35 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 36 (16 kv layers, cumulative=48, 23 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 2 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-5c6645f0: 64 layers, truncated to 1303 tokens\nINFO:__main__:Chat completion: 63 tokens in 4.46s (14.1 tok/s)\nINFO:     127.0.0.1:54016 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 128, 'enable_thinking': False}\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-15ab4601: 19 blocks, 1216 tokens\nINFO:vmlx_engine.prefix_cache:Partial hybrid reconstruction: 16/64 layers (48 cumulative layers deferred to _fix_hybrid_cache)\nINFO:vmlx_engine.mllm_batch_generator:VLM HYBRID cache HIT for chatcmpl-15ab4601: 1216 cached (KV+SSM), 96 remaining (incl. 7-token gen-prompt suffix)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-15ab4601 (48 layers, key=1280 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-15ab4601 (48 layers, key=1304 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-15ab4601 (48 layers, 1280-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-15ab4601 (48 layers, 1304-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-15ab4601 depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-15ab4601] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.333,d3=0.167]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-15ab4601] finish=stop cycles=33 accepted=31/57 (54.4%) emits[init=2,draft=31,bonus=18,verify=15]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-15ab4601] accept_by_depth[d1=25/33,d2=4/12,d3=2/12] forwards[seed_main=1,verify_main=33,replay_main=15,mtp=58]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-15ab4601] timings_ms[verify=612.75 sample=2275.66 draft=841.80 snapshot=4.21 restore=5.62 replay=323.51 materialize=0.40 avg_cycle=123.15]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=88, num_new_blocks=2, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 16 positional layers (out of 64 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 37 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 38 (16 kv layers, cumulative=48, 24 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 2 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-15ab4601: 64 layers, truncated to 1304 tokens\nINFO:__main__:Chat completion: 66 tokens in 5.53s (11.9 tok/s)\nINFO:     127.0.0.1:54018 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nINFO:     127.0.0.1:54019 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nINFO:     Shutting down\nINFO:     Waiting for application shutdown.\nINFO:vmlx_engine.mllm_scheduler:MLLM Scheduler stopped\nINFO:vmlx_engine.engine.batched:BatchedEngine stopped\nINFO:__main__:Engine stopped\nINFO:__main__:Caffeinate process terminated\nINFO:     Application shutdown complete.\nINFO:     Finished server process [24490]",
+  "expectedToolSequence": [
+    "subfinder",
+    "nmap",
+    "wpscan",
+    "hydra",
+    "syft",
+    "nuclei",
+    "trufflehog",
+    "sherlock",
+    "httpx",
+    "checkov"
+  ],
+  "finishedAt": "2026-07-06T16:38:46-0700",
+  "generatedAt": "2026-07-06T16:38:46-0700",
+  "health": {
+    "acceleration": {
+      "host": {
+        "brand": "Apple M5 Max",
+        "reason": null,
+        "supported": true
+      },
+      "kernel_type": "affine_quantized_matmul",
+      "metal_na_active_on_host": true,
+      "metal_na_capable": true,
+      "metal_na_symbols": {
+        "affine_gather_qmm_symbols": 3456,
+        "affine_qmm_symbols": 4212,
+        "available": true,
+        "nax_symbols": 4668,
+        "naxtile_symbols": 4154
+      },
+      "reason": null
+    },
+    "cache": {
+      "block_disk_cache": {
+        "blocks_on_disk": 0,
+        "disk_evictions": 0,
+        "disk_hits": 0,
+        "disk_misses": 0,
+        "disk_size_bytes": 0,
+        "disk_size_gb": 0.0,
+        "disk_writes": 0,
+        "total_accesses": 0,
+        "total_cached_tokens": 0,
+        "total_tokens_on_disk": 0
+      },
+      "disk_cache": {
+        "entries": 0,
+        "hit_rate": 0.0,
+        "hits": 0,
+        "max_size_gb": 10.0,
+        "misses": 0,
+        "pending_writes": 0,
+        "stores": 0,
+        "total_cached_tokens": 0,
+        "total_size_mb": 0.0,
+        "total_tokens_on_disk": 0
+      },
+      "scheduler_cache": {
+        "active_requests": 0,
+        "allocated_blocks": 1,
+        "block_size": 64,
+        "cache_hit_rate": 0,
+        "cache_hits": 0,
+        "cache_misses": 0,
+        "cow_copies": 0,
+        "disk_hits": 0,
+        "disk_misses": 0,
+        "entries_by_type": {
+          "assistant": 0,
+          "system": 0,
+          "user": 0
+        },
+        "evictions": 0,
+        "free_blocks": 999,
+        "hit_rate": 0,
+        "hits": 0,
+        "max_blocks": 1000,
+        "misses": 0,
+        "shared_blocks": 0,
+        "tokens_saved": 0,
+        "total_tokens_cached": 0,
+        "utilization": 0.001
+      },
+      "ssm_companion": {
+        "disk": {
+          "budget_bytes": 10737418240,
+          "budget_gb": 10.0,
+          "bytes": 0,
+          "bytes_mb": 0.0,
+          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-natural-breadth-cache-jsub1_u8/block/ssm_companion",
+          "enabled": true,
+          "entries": 0,
+          "hit_rate": 0.0,
+          "hits": 0,
+          "misses": 0,
+          "stores": 0,
+          "total_cached_tokens": 0,
+          "total_tokens_on_disk": 0
+        },
+        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-natural-breadth-cache-jsub1_u8/block/ssm_companion",
+        "disk_enabled": true,
+        "entries": 0,
+        "max_bytes": null,
+        "max_bytes_mb": null,
+        "max_entries": 8,
+        "nbytes": 0,
+        "nbytes_mb": 0.0
+      },
+      "totals": {
+        "l2_block_tokens_on_disk": 0,
+        "l2_prompt_tokens_on_disk": 0,
+        "l2_ssm_tokens_on_disk": 0,
+        "l2_tokens_on_disk": 0,
+        "l2_tokens_on_disk_note": "store_sum_across_prompt_block_ssm_l2; tiers_may_overlap",
+        "l2_tokens_on_disk_store_sum": 0,
+        "ram_tokens_cached": 0,
+        "ssm_tokens_on_disk": 0
+      }
+    },
+    "effective_config": {
+      "cache": {
+        "disk_cache": {
+          "block_l2": {
+            "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-natural-breadth-cache-jsub1_u8/block",
+            "enabled": true,
+            "max_gb": 10.0
+          },
+          "prompt_l2": {
+            "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-natural-breadth-cache-jsub1_u8/prompt",
+            "enabled": true,
+            "max_gb": 10.0
+          }
+        },
+        "kv_cache_quantization": {
+          "enabled": true,
+          "group_size": 64,
+          "mode": "turboquant-q4"
+        },
+        "paged_cache": {
+          "block_size": 64,
+          "enabled": true
+        },
+        "prefix_cache": {
+          "enabled": true,
+          "memory_percent": 0.2
+        },
+        "responses": {
+          "clears_conversation_state_only": true,
+          "method": "prefix-cache-l2-turboquant",
+          "new_context_preserves_engine_session": true,
+          "prefix_cache_required": true
+        },
+        "ssm_companion": {
+          "disk_l2_enabled": true,
+          "enabled": true,
+          "max_entries": 8,
+          "max_mb": null
+        },
+        "topology": {
+          "block_l2_active": true,
+          "cache_type": "hybrid",
+          "expected_components": [
+            "kv_cache",
+            "prefix_cache",
+            "prompt_l2",
+            "paged_cache",
+            "block_l2",
+            "kv_quantization",
+            "ssm_companion",
+            "ssm_l2"
+          ],
+          "kv_quantization_active": true,
+          "name": "hybrid_ssm_attention",
+          "prompt_l2_active": true,
+          "ssm_companion_required": true,
+          "warnings": []
+        }
+      },
+      "generation": {
+        "chat_template_kwargs": null,
+        "custom_chat_template": false,
+        "enable_thinking": true,
+        "max_tokens": 128,
+        "min_p": null,
+        "repetition_penalty": null,
+        "stop": null,
+        "temperature": 1.0,
+        "top_k": 20,
+        "top_p": 0.95
+      },
+      "model": {
+        "architecture_hints": {
+          "cache_topology": "hybrid_ssm_attention",
+          "ssm_companion_required": true
+        },
+        "cache_type": "hybrid",
+        "family": "qwen3_5",
+        "name": "dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP",
+        "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP",
+        "served_name": null,
+        "type": "text"
+      },
+      "parsers": {
+        "auto_tool_choice": true,
+        "reasoning": "qwen3",
+        "tool_call": "qwen"
+      },
+      "sources": {
+        "generation": {
+          "chat_template_kwargs": "unset",
+          "enable_thinking": "launcher_default",
+          "max_tokens": "cli",
+          "min_p": "unset",
+          "repetition_penalty": "unset",
+          "stop": "unset",
+          "temperature": "generation_config",
+          "top_k": "generation_config",
+          "top_p": "generation_config"
+        },
+        "parsers": {
+          "reasoning": "cli",
+          "tool_call": "cli"
+        }
+      }
+    },
+    "engine_type": "batched",
+    "kv_cache_quantization": {
+      "bits": 4,
+      "enabled": true,
+      "group_size": 64
+    },
+    "last_request_time": null,
+    "mcp": null,
+    "memory": {
+      "active_mb": 14725.6,
+      "cache_mb": 0.1,
+      "peak_mb": 14725.7
+    },
+    "model_loaded": true,
+    "model_name": "dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP",
+    "model_type": "mllm",
+    "mtp": {
+      "artifact_available": true,
+      "cache_type": "hybrid",
+      "config_mtp_layer_source": "config.text_config.mtp_num_hidden_layers",
+      "config_num_nextn_predict_layers": 1,
+      "effective_depth": 3,
+      "effective_depth_source": "default",
+      "family": "qwen3_5",
+      "has_vision_config": true,
+      "has_vision_weights": true,
+      "index_has_mtp_tensors": true,
+      "index_mtp_layer_count": 1,
+      "issues": [],
+      "jang_drop_mtp": null,
+      "jang_mtp_layers": 1,
+      "mtp_tensor_count": 23,
+      "request_gate": "temperature=0,repetition_penalty=1.0",
+      "request_policy": "compatible-only",
+      "runtime_active": true,
+      "runtime_available": true,
+      "runtime_bundle_has_mtp": true,
+      "runtime_mtp_mode": "preserved_enabled",
+      "runtime_reason": "native MTP runtime is active for text+vl",
+      "runtime_scope": "text+vl",
+      "runtime_supported": true,
+      "runtime_validation_blocked": false,
+      "status": "native_runtime_active",
+      "vision_tensor_count": 333,
+      "vl_runtime_available": true
+    },
+    "native_cache": {
+      "attention_kv_storage_quantization": {
+        "applies_to": "attention_kv_layers_only",
+        "bits": 4,
+        "enabled": true,
+        "group_size": 64,
+        "mode": "storage_boundary",
+        "rederive": "async_clean_prefill_on_miss_or_warm_pass",
+        "ssm_policy": "native_companion_state"
+      },
+      "block_disk_l2": true,
+      "cache_type": "hybrid_ssm_typed",
+      "components": [
+        "attention_kv",
+        "ssm_companion_state",
+        "async_rederive"
+      ],
+      "family": "hybrid",
+      "generic_turboquant_kv": {
+        "enabled": false,
+        "reason": "hybrid_ssm_state"
+      },
+      "kv_layer_indices": [],
+      "live_attention_tq_kv": {
+        "applies_to": "attention_kv_layers_only",
+        "attention_layers": [],
+        "companion_layers": [],
+        "enabled": false,
+        "mode": null,
+        "ssm_policy": "native_full_precision_companion_state"
+      },
+      "paged": true,
+      "prefix": true,
+      "schema": "hybrid_ssm_v1",
+      "ssm_entries": 0
+    },
+    "quantization": {
+      "backend": "mx.quantize",
+      "codec": "affine_quantized_matmul",
+      "config_bits": 4,
+      "group_size": 32,
+      "passthrough_bit_widths_used": [
+        16
+      ],
+      "passthrough_tensor_count": 693,
+      "profile": "MXFP4",
+      "sidecar": {
+        "jang_config": true,
+        "jangtq_runtime": false,
+        "prestacked_bundle": false
+      },
+      "target_bits": 4,
+      "weight_format": "mxfp4",
+      "weight_index": {
+        "index_file": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP/model.safetensors.index.json",
+        "mtp_tensor_count": 23,
+        "routed_layout_counts": {
+          "prestacked_switch": 0,
+          "split_expert": 0
+        },
+        "suffix_counts": {
+          "scales": 506,
+          "weight": 937
+        },
+        "total_tensors": 1705,
+        "tq_target_counts": {}
+      },
+      "weight_matmul_dispatch": {
+        "metal_na_eligible": true,
+        "primary": "mlx_affine_quantized_matmul",
+        "reason": null,
+        "uses_mlx_quantized_matmul": true
+      }
+    },
+    "quantization_format": {
+      "actual_bits": null,
+      "block_size": 64,
+      "target_bits": null,
+      "type": "jang"
+    },
+    "scheduler": {
+      "batch_generator": {},
+      "cache_hit_requests": 0,
+      "cache_hit_tokens": 0,
+      "cache_hit_tokens_by_detail": {},
+      "cache_reuse_partial_downgrades": 0,
+      "cache_reuse_partial_tokens": 0,
+      "cache_reuse_skip_tokens": 0,
+      "cache_reuse_skips": 0,
+      "engine_path": null,
+      "ewma_ttft_seconds": 0,
+      "hybrid_kv_without_ssm_hits": 0,
+      "hybrid_kv_without_ssm_tokens": 0,
+      "last_cache_reuse_partial": null,
+      "last_cache_reuse_skip": null,
+      "last_hybrid_kv_without_ssm": null,
+      "max_running_observed": 0,
+      "max_waiting_observed": 0,
+      "num_running": 0,
+      "num_waiting": 0,
+      "single_active_decode": false
+    },
+    "status": "healthy",
+    "turboquant_kv_cache": {
+      "enabled": false
+    }
+  },
+  "memoryPreflight": {
+    "allowConcurrentModel": false,
+    "availableGB": 91.70697021484375,
+    "enabled": true,
+    "heavyModelProcessCount": 0,
+    "heavyModelProcesses": [],
+    "requiredAvailableGB": 42.0
+  },
+  "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP",
+  "modelToolChoiceEvidence": "model_selected_tool_sequence",
+  "notes": [
+    "This is direct-engine breadth evidence, not a Swift app-loop proof.",
+    "The model received natural objectives plus OpenAI tool schemas; prompts contain no serialized tool-call blocks.",
+    "No tools were executed by this proof; it validates autonomous first-tool selection only."
+  ],
+  "ok": true,
+  "proofLevel": "direct-engine-real-qwen-natural-language-tool-selection",
+  "proofType": "real-qwen-natural-breadth-tool-choice",
+  "rows": [
+    {
+      "category": "recon",
+      "expectedTool": "subfinder",
+      "finishReason": "tool_calls",
+      "latencySeconds": 13.707,
+      "promptExactToolCallBlocksPresent": false,
+      "responseId": "chatcmpl-60ccd5d6",
+      "safetyBoundary": "local_fixture_or_synthetic_objective_only",
+      "scenarioId": "subdomain_recon",
+      "selectedTool": "subfinder",
+      "status": "PASS",
+      "usage": {
+        "completion_tokens": 53,
+        "prompt_tokens": 1304,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 1357
+      }
+    },
+    {
+      "category": "network",
+      "expectedTool": "nmap",
+      "finishReason": "tool_calls",
+      "latencySeconds": 13.828,
+      "promptExactToolCallBlocksPresent": false,
+      "responseId": "chatcmpl-17d4b25c",
+      "safetyBoundary": "local_fixture_or_synthetic_objective_only",
+      "scenarioId": "network_service_enum",
+      "selectedTool": "nmap",
+      "status": "PASS",
+      "usage": {
+        "completion_tokens": 67,
+        "prompt_tokens": 1312,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 1379
+      }
+    },
+    {
+      "category": "web",
+      "expectedTool": "wpscan",
+      "finishReason": "tool_calls",
+      "latencySeconds": 4.897,
+      "promptExactToolCallBlocksPresent": false,
+      "responseId": "chatcmpl-222bb673",
+      "safetyBoundary": "local_fixture_or_synthetic_objective_only",
+      "scenarioId": "wordpress_web_risk",
+      "selectedTool": "wpscan",
+      "status": "PASS",
+      "usage": {
+        "completion_tokens": 69,
+        "prompt_tokens": 1300,
+        "prompt_tokens_details": {
+          "cached_tokens": 1216
+        },
+        "total_tokens": 1369
+      }
+    },
+    {
+      "category": "creds",
+      "expectedTool": "hydra",
+      "finishReason": "tool_calls",
+      "latencySeconds": 4.35,
+      "promptExactToolCallBlocksPresent": false,
+      "responseId": "chatcmpl-6ea5b7e9",
+      "safetyBoundary": "local_fixture_or_synthetic_objective_only",
+      "scenarioId": "ssh_credential_validation",
+      "selectedTool": "hydra",
+      "status": "PASS",
+      "usage": {
+        "completion_tokens": 57,
+        "prompt_tokens": 1305,
+        "prompt_tokens_details": {
+          "cached_tokens": 1216
+        },
+        "total_tokens": 1362
+      }
+    },
+    {
+      "category": "supply",
+      "expectedTool": "syft",
+      "finishReason": "tool_calls",
+      "latencySeconds": 5.182,
+      "promptExactToolCallBlocksPresent": false,
+      "responseId": "chatcmpl-60dc7c3f",
+      "safetyBoundary": "local_fixture_or_synthetic_objective_only",
+      "scenarioId": "container_supply_chain",
+      "selectedTool": "syft",
+      "status": "PASS",
+      "usage": {
+        "completion_tokens": 73,
+        "prompt_tokens": 1304,
+        "prompt_tokens_details": {
+          "cached_tokens": 1216
+        },
+        "total_tokens": 1377
+      }
+    },
+    {
+      "category": "web",
+      "expectedTool": "nuclei",
+      "finishReason": "tool_calls",
+      "latencySeconds": 4.203,
+      "promptExactToolCallBlocksPresent": false,
+      "responseId": "chatcmpl-792ce9d5",
+      "safetyBoundary": "local_fixture_or_synthetic_objective_only",
+      "scenarioId": "web_template_vuln",
+      "selectedTool": "nuclei",
+      "status": "PASS",
+      "usage": {
+        "completion_tokens": 62,
+        "prompt_tokens": 1304,
+        "prompt_tokens_details": {
+          "cached_tokens": 1280
+        },
+        "total_tokens": 1366
+      }
+    },
+    {
+      "category": "supply",
+      "expectedTool": "trufflehog",
+      "finishReason": "tool_calls",
+      "latencySeconds": 4.199,
+      "promptExactToolCallBlocksPresent": false,
+      "responseId": "chatcmpl-674042f2",
+      "safetyBoundary": "local_fixture_or_synthetic_objective_only",
+      "scenarioId": "secret_discovery",
+      "selectedTool": "trufflehog",
+      "status": "PASS",
+      "usage": {
+        "completion_tokens": 49,
+        "prompt_tokens": 1298,
+        "prompt_tokens_details": {
+          "cached_tokens": 1216
+        },
+        "total_tokens": 1347
+      }
+    },
+    {
+      "category": "osint",
+      "expectedTool": "sherlock",
+      "finishReason": "tool_calls",
+      "latencySeconds": 4.085,
+      "promptExactToolCallBlocksPresent": false,
+      "responseId": "chatcmpl-8ec798c7",
+      "safetyBoundary": "local_fixture_or_synthetic_objective_only",
+      "scenarioId": "osint_username",
+      "selectedTool": "sherlock",
+      "status": "PASS",
+      "usage": {
+        "completion_tokens": 49,
+        "prompt_tokens": 1303,
+        "prompt_tokens_details": {
+          "cached_tokens": 1216
+        },
+        "total_tokens": 1352
+      }
+    },
+    {
+      "category": "web",
+      "expectedTool": "httpx",
+      "finishReason": "tool_calls",
+      "latencySeconds": 4.469,
+      "promptExactToolCallBlocksPresent": false,
+      "responseId": "chatcmpl-5c6645f0",
+      "safetyBoundary": "local_fixture_or_synthetic_objective_only",
+      "scenarioId": "ssrf_web_probe",
+      "selectedTool": "httpx",
+      "status": "PASS",
+      "usage": {
+        "completion_tokens": 63,
+        "prompt_tokens": 1304,
+        "prompt_tokens_details": {
+          "cached_tokens": 1216
+        },
+        "total_tokens": 1367
+      }
+    },
+    {
+      "category": "supply",
+      "expectedTool": "checkov",
+      "finishReason": "tool_calls",
+      "latencySeconds": 5.54,
+      "promptExactToolCallBlocksPresent": false,
+      "responseId": "chatcmpl-15ab4601",
+      "safetyBoundary": "local_fixture_or_synthetic_objective_only",
+      "scenarioId": "iac_policy_check",
+      "selectedTool": "checkov",
+      "status": "PASS",
+      "usage": {
+        "completion_tokens": 66,
+        "prompt_tokens": 1305,
+        "prompt_tokens_details": {
+          "cached_tokens": 1216
+        },
+        "total_tokens": 1371
+      }
+    }
+  ],
+  "safeBoundary": "local_fixture_or_synthetic_objective_only",
+  "scenarioCount": 10,
+  "scenarioPassCount": 10,
+  "selectedToolSequence": [
+    "subfinder",
+    "nmap",
+    "wpscan",
+    "hydra",
+    "syft",
+    "nuclei",
+    "trufflehog",
+    "sherlock",
+    "httpx",
+    "checkov"
+  ],
+  "startedAt": "2026-07-06T16:37:36-0700",
+  "status": {
+    "blockDiskCache": "PASS",
+    "memoryPreflight": "PASS",
+    "modelSelectedExpectedTools": "PASS",
+    "nativeMTPD3": "PASS",
+    "naturalPrompts": "PASS",
+    "overall": "PASS",
+    "pagedCache": "PASS",
+    "prefixCache": "PASS",
+    "q4TurboQuantKV": "PASS"
+  },
+  "toolChoiceMode": "model_selected_tool_sequence"
+}
