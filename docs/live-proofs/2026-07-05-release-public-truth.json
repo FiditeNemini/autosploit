@@ -11,11 +11,11 @@
     "repoPublic": "PASS",
     "sourceRevisionMatchesPublished": "BLOCKED"
   },
-  "currentHead": "fc0a32f3ea34408a10cde69e863667ea9568f35c",
+  "currentHead": "644b258062181c1b58dd7aafc535be7fe83d7be3",
   "distributionStatus": "BLOCKED",
   "expectedReleaseTag": "v0.1.0-beta",
-  "finishedAt": "2026-07-05T18:24:33-0700",
-  "generatedAt": "2026-07-05T18:24:33-0700",
+  "finishedAt": "2026-07-05T18:42:45-0700",
+  "generatedAt": "2026-07-05T18:42:45-0700",
   "localArtifacts": {
     "dmgPath": "release/ExploitBot-beta.dmg",
     "dmgSha256": "150feff5f76da1a406ec868170f7b5abfba5d8f28c9e308735c9ad60032cb7fb",
@@ -60,5 +60,5 @@
     "visibility": "PUBLIC"
   },
   "secretsRead": false,
-  "startedAt": "2026-07-05T18:24:32-0700"
+  "startedAt": "2026-07-05T18:42:44-0700"
 }
