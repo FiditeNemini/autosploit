@@ -172,6 +172,24 @@ SCENARIOS = [
         current_run_required=True,
     ),
     ScenarioSpec(
+        scenario_id="network_service_credential_post_chain",
+        label="Local network credential validation to post-check scenario",
+        artifacts=("docs/live-proofs/2026-07-06-network-credential-post-scenario.json",),
+        required_tools=("nmap", "httpx", "hydra", "netexec", "run_shell", "linpeas"),
+        stage_evidence={
+            "surface": ["nmap loopback service discovery", "httpx loopback web probe"],
+            "probe": ["hydra seeded credential validation", "netexec local network host parser evidence"],
+            "prove": ["EXPLOITBOT_NETWORK_LOGIN_OK", "QA-NETWORK host evidence"],
+            "exploit_or_validate": ["run_shell post-check and linpeas fixture output only"],
+            "evidence": ["/messages", "/results", "/state terminal transcripts"],
+            "report": ["report finding action and report generate route"],
+        },
+        tool_choice_mode="scripted_mock_tool_sequence",
+        model_tool_choice_evidence="not_proven",
+        autonomy_boundary="Live app/tool/report wiring is proven against a loopback network credential/post fixture, but no real Qwen artifact is attached to this row yet.",
+        current_run_required=True,
+    ),
+    ScenarioSpec(
         scenario_id="report_generation_from_evidence",
         label="Report generation/export from confirmed findings",
         artifacts=(

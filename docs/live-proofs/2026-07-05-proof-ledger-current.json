@@ -7,7 +7,7 @@
     "release": 21,
     "runtime": 58,
     "settings": 13,
-    "tabs": 60,
+    "tabs": 61,
     "tools": 27,
     "visual": 44
   },
@@ -23,15 +23,15 @@
     "tools",
     "visual"
   ],
-  "generatedAt": "2026-07-06T04:03:20-0700",
+  "generatedAt": "2026-07-06T04:08:07-0700",
   "ok": true,
   "processEvidence": {
     "appRows": [
-      "66834 124512 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+      "68743 124512 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
     ],
     "engineProcessRows": []
   },
-  "proofCount": 283,
+  "proofCount": 284,
   "proofType": "proof-ledger-current-live-route",
   "sourceRoute": "/qa/proof-ledger",
   "stateEvidence": {
@@ -68,11 +68,12 @@
       ]
     },
     "network": {
-      "count": 4,
+      "count": 5,
       "proofFileParity": true,
       "proofs": [
         "network-copy-actions-proof.py",
         "network-coverage-proof.py",
+        "network-credential-post-scenario-proof.py",
         "network-protocol-action-proof.py",
         "network-subtab-state-proof.py"
       ]
