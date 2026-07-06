@@ -15,8 +15,8 @@
     "pdfArtifact": "PASS",
     "seedReportState": "PASS"
   },
-  "finishedAt": "2026-07-05T16:26:11-0700",
-  "generatedAt": "2026-07-05T16:26:11-0700",
+  "finishedAt": "2026-07-06T15:37:09-0700",
+  "generatedAt": "2026-07-06T15:37:09-0700",
   "noModelLoaded": true,
   "ok": true,
   "proofType": "report-export-live",
@@ -41,7 +41,7 @@
         "path": "QA-Report-Proof.json"
       },
       {
-        "bytes": 973,
+        "bytes": 1010,
         "exists": true,
         "format": "pdf",
         "path": "QA-Report-Proof.pdf"
@@ -55,6 +55,6 @@
     "/qa/seed-report-export",
     "/qa/report-export-action"
   ],
-  "startedAt": "2026-07-05T16:26:09-0700",
+  "startedAt": "2026-07-06T15:37:07-0700",
   "status": "PASS"
 }
