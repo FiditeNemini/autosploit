@@ -6,7 +6,7 @@
   "currentPartialConditions": [
     "generation_reasoning_context"
   ],
-  "generatedAt": "2026-07-06T04:01:49-0700",
+  "generatedAt": "2026-07-06T14:30:07-0700",
   "matrixStatusCounts": {
     "BLOCKED": 1,
     "PARTIAL": 1,
@@ -162,10 +162,11 @@
         "docs/live-proofs/2026-07-05-proof-ledger-per-turn-runtime-refresh.json",
         "docs/live-proofs/2026-07-05-real-qwen-long-context-200k-27b.json",
         "docs/live-proofs/2026-07-05-real-qwen-long-context-224k-27b.json",
+        "docs/live-proofs/2026-07-06-real-qwen-long-context-196k-27b.json",
         "docs/live-validation-2026-07-04.md"
       ],
       "id": "generation_reasoning_context",
-      "missingEvidence": "Reasoning-on final content and low-cap recovery are proven. 8k, 64k, 128k, 160k, and 192k long-context live Qwen completions are proven with post-generation cache writes. The 200k incremental retry and 224k graduated retry both reached live Qwen chunked prefill but failed safely after swapouts appeared; follow-up no-override proofs refuse above the 192k proven safe ceiling before model load unless an explicit high-risk override is set. Near-max resource preflight, target-token RAM refusal guard, exact-token route preflight, and 258k chunked-prefill entry are proven, but near-max final assistant output plus post-generation cache write proof are still missing.",
+      "missingEvidence": "Reasoning-on final content and low-cap recovery are proven. 8k, 64k, 128k, 160k, and 192k long-context live Qwen completions are proven with post-generation cache writes. A 196k explicit above-ceiling retry reached live Qwen chunked prefill at seq_len=196019 but stalled without final output/cache writes and was interrupted for cleanup. The 200k incremental retry and 224k graduated retry both reached live Qwen chunked prefill but failed safely after swapouts appeared; follow-up no-override proofs refuse above the 192k proven safe ceiling before model load unless an explicit high-risk override is set. Near-max resource preflight, target-token RAM refusal guard, exact-token route preflight, and 258k chunked-prefill entry are proven, but near-max final assistant output plus post-generation cache write proof are still missing.",
       "requirement": "Generation parameters, reasoning toggles, context budget, and full-context behavior are applied and verified.",
       "status": "PARTIAL"
     },

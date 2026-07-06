@@ -67,8 +67,9 @@ def build_full_context_row(row: dict[str, Any], goal_row: dict[str, Any]) -> dic
         "safeCeilingTokens": 192000,
         "missingEvidence": (
             "192k live Qwen completion is proven with final assistant output and post-generation "
-            "cache write evidence, but true near-max final assistant output plus post-generation "
-            "cache write proof above that ceiling is still missing."
+            "cache write evidence. The explicit 196k above-ceiling retry reached chunked prefill "
+            "but stalled without final output/cache writes, and true near-max final assistant output "
+            "plus post-generation cache write proof above that ceiling is still missing."
         ),
         "requiredNextEvidence": (
             "Run an explicit high-risk long-context target above the 192k proven safe ceiling with "

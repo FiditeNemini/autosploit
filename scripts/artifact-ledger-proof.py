@@ -25,6 +25,7 @@ EXPECTED_NON_PASSING_LIVE_PROOFS = {
     "docs/live-proofs/2026-07-04-real-qwen-near-max-context-27b.json": "partial near-max long-context attempt without final generation",
     "docs/live-proofs/2026-07-05-long-context-200k-safety-refusal.json": "intentional above-safe-ceiling refusal",
     "docs/live-proofs/2026-07-05-long-context-224k-safety-refusal.json": "intentional above-safe-ceiling refusal",
+    "docs/live-proofs/2026-07-06-real-qwen-long-context-196k-27b.json": "partial 196k above-ceiling long-context attempt interrupted after stalled chunked prefill",
     "docs/live-proofs/2026-07-05-real-qwen-long-context-200k-27b.json": "partial 200k long-context attempt stopped by memory guard",
     "docs/live-proofs/2026-07-05-real-qwen-long-context-224k-27b.json": "partial 224k long-context attempt stopped by memory guard",
     "docs/live-proofs/2026-07-05-release-app-computer-use-current-manual-sweep.json": "partial manual release UI sweep with notarization and loaded-model gates still open",

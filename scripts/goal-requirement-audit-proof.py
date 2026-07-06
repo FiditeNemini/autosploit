@@ -61,7 +61,7 @@ REQUIREMENTS = [
             "Full-context-length stress",
         ],
         "expectedStatus": "PARTIAL",
-        "missingEvidence": "Reasoning-on final content and low-cap recovery are proven. 8k, 64k, 128k, 160k, and 192k long-context live Qwen completions are proven with post-generation cache writes. The 200k incremental retry and 224k graduated retry both reached live Qwen chunked prefill but failed safely after swapouts appeared; follow-up no-override proofs refuse above the 192k proven safe ceiling before model load unless an explicit high-risk override is set. Near-max resource preflight, target-token RAM refusal guard, exact-token route preflight, and 258k chunked-prefill entry are proven, but near-max final assistant output plus post-generation cache write proof are still missing.",
+        "missingEvidence": "Reasoning-on final content and low-cap recovery are proven. 8k, 64k, 128k, 160k, and 192k long-context live Qwen completions are proven with post-generation cache writes. A 196k explicit above-ceiling retry reached live Qwen chunked prefill at seq_len=196019 but stalled without final output/cache writes and was interrupted for cleanup. The 200k incremental retry and 224k graduated retry both reached live Qwen chunked prefill but failed safely after swapouts appeared; follow-up no-override proofs refuse above the 192k proven safe ceiling before model load unless an explicit high-risk override is set. Near-max resource preflight, target-token RAM refusal guard, exact-token route preflight, and 258k chunked-prefill entry are proven, but near-max final assistant output plus post-generation cache write proof are still missing.",
     },
     {
         "id": "verbose_tools_terminal_tabs",
