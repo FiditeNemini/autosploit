@@ -22,11 +22,11 @@
     "osv_scanner",
     "search_cve"
   ],
-  "finishedAt": "2026-07-06T00:08:51-0700",
-  "generatedAt": "2026-07-06T00:08:51-0700",
+  "finishedAt": "2026-07-06T00:42:49-0700",
+  "generatedAt": "2026-07-06T00:42:49-0700",
   "messages": [
     {
-      "content": "Authorized local lab only. Use run_shell and supply-chain tools against this local repo path: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-pew7nrdx/synthetic-vulnerable-repo. Surface files, probe for secrets and dependencies, prove vulnerable packages with scanner evidence, validate safely without external exploitation, then summarize evidence with REPO_SUPPLY_CHAIN_FINAL.",
+      "content": "Authorized local lab only. Use run_shell and supply-chain tools against this local repo path: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-qy4sr9ay/synthetic-vulnerable-repo. Surface files, probe for secrets and dependencies, prove vulnerable packages with scanner evidence, validate safely without external exploitation, then summarize evidence with REPO_SUPPLY_CHAIN_FINAL.",
       "role": "user"
     },
     {
@@ -74,31 +74,31 @@
       ]
     },
     {
-      "content": "Tool request: run_shell\n$ /bin/zsh -c find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-pew7nrdx/synthetic-vulnerable-repo -maxdepth 2 -type f | sort\nArguments:\n{\n  \"command\" : \"find \\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-pew7nrdx\\/synthetic-vulnerable-repo -maxdepth 2 -type f | sort\"\n}\n\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-pew7nrdx/synthetic-vulnerable-repo/.env.example\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-pew7nrdx/synthetic-vulnerable-repo/Dockerfile\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-pew7nrdx/synthetic-vulnerable-repo/package-lock.json\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-pew7nrdx/synthetic-vulnerable-repo/package.json\n",
+      "content": "Tool request: run_shell\n$ /bin/zsh -c find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-qy4sr9ay/synthetic-vulnerable-repo -maxdepth 2 -type f | sort\nArguments:\n{\n  \"command\" : \"find \\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-qy4sr9ay\\/synthetic-vulnerable-repo -maxdepth 2 -type f | sort\"\n}\n\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-qy4sr9ay/synthetic-vulnerable-repo/.env.example\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-qy4sr9ay/synthetic-vulnerable-repo/Dockerfile\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-qy4sr9ay/synthetic-vulnerable-repo/package-lock.json\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-qy4sr9ay/synthetic-vulnerable-repo/package.json\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "run_shell"
     },
     {
-      "content": "Tool request: trufflehog\n$ trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-pew7nrdx/synthetic-vulnerable-repo --json\nArguments:\n{\n  \"source_type\" : \"filesystem\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-pew7nrdx\\/synthetic-vulnerable-repo\",\n  \"verified_only\" : false\n}\n\n{\"DetectorName\": \"Generic API Key\", \"Raw\": \"EXPLOITBOT_FAKE_TOKEN_DO_NOT_USE\", \"SourceMetadata\": {\"Data\": {\"Git\": {\"file\": \".env.example\", \"repository\": \"synthetic-vulnerable-repo\"}}}}\n",
+      "content": "Tool request: trufflehog\n$ trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-qy4sr9ay/synthetic-vulnerable-repo --json\nArguments:\n{\n  \"source_type\" : \"filesystem\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-qy4sr9ay\\/synthetic-vulnerable-repo\",\n  \"verified_only\" : false\n}\n\n{\"DetectorName\": \"Generic API Key\", \"Raw\": \"EXPLOITBOT_FAKE_TOKEN_DO_NOT_USE\", \"SourceMetadata\": {\"Data\": {\"Git\": {\"file\": \".env.example\", \"repository\": \"synthetic-vulnerable-repo\"}}}}\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "trufflehog"
     },
     {
-      "content": "Tool request: syft\n$ syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-pew7nrdx/synthetic-vulnerable-repo -o json\nArguments:\n{\n  \"output\" : \"json\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-pew7nrdx\\/synthetic-vulnerable-repo\"\n}\n\n{\"artifacts\": [{\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, {\"name\": \"minimist\", \"version\": \"0.0.8\", \"type\": \"npm\"}], \"source\": {\"type\": \"directory\", \"target\": \"synthetic-vulnerable-repo\"}}\n",
+      "content": "Tool request: syft\n$ syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-qy4sr9ay/synthetic-vulnerable-repo -o json\nArguments:\n{\n  \"output\" : \"json\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-qy4sr9ay\\/synthetic-vulnerable-repo\"\n}\n\n{\"artifacts\": [{\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, {\"name\": \"minimist\", \"version\": \"0.0.8\", \"type\": \"npm\"}], \"source\": {\"type\": \"directory\", \"target\": \"synthetic-vulnerable-repo\"}}\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "syft"
     },
     {
-      "content": "Tool request: grype\n$ grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-pew7nrdx/synthetic-vulnerable-repo -o json --fail-on critical\nArguments:\n{\n  \"fail_on\" : \"critical\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-pew7nrdx\\/synthetic-vulnerable-repo\"\n}\n\n{\"matches\": [{\"vulnerability\": {\"id\": \"CVE-2021-23337\", \"severity\": \"High\"}, \"artifact\": {\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, \"matchDetails\": [{\"type\": \"exact-direct-match\"}]}]}\n",
+      "content": "Tool request: grype\n$ grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-qy4sr9ay/synthetic-vulnerable-repo -o json --fail-on critical\nArguments:\n{\n  \"fail_on\" : \"critical\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-qy4sr9ay\\/synthetic-vulnerable-repo\"\n}\n\n{\"matches\": [{\"vulnerability\": {\"id\": \"CVE-2021-23337\", \"severity\": \"High\"}, \"artifact\": {\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, \"matchDetails\": [{\"type\": \"exact-direct-match\"}]}]}\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "grype"
     },
     {
-      "content": "Tool request: osv_scanner\n$ osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-pew7nrdx/synthetic-vulnerable-repo --format json\nArguments:\n{\n  \"format\" : \"json\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-pew7nrdx\\/synthetic-vulnerable-repo\"\n}\n\n{\"results\": [{\"packageSource\": {\"path\": \"package-lock.json\"}, \"packages\": [{\"package\": {\"name\": \"lodash\", \"ecosystem\": \"npm\"}, \"vulnerabilities\": [{\"id\": \"GHSA-35jh-r3h4-6jhm\"}]}]}]}\n",
+      "content": "Tool request: osv_scanner\n$ osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-qy4sr9ay/synthetic-vulnerable-repo --format json\nArguments:\n{\n  \"format\" : \"json\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-qy4sr9ay\\/synthetic-vulnerable-repo\"\n}\n\n{\"results\": [{\"packageSource\": {\"path\": \"package-lock.json\"}, \"packages\": [{\"package\": {\"name\": \"lodash\", \"ecosystem\": \"npm\"}, \"vulnerabilities\": [{\"id\": \"GHSA-35jh-r3h4-6jhm\"}]}]}]}\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "osv_scanner"
@@ -111,10 +111,10 @@
     },
     {
       "content": "REPO_SUPPLY_CHAIN_FINAL: surfaced repo files, probed secrets/SBOM/dependencies, validated vulnerable lodash and fake leaked token evidence, then queued report evidence.",
-      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 11 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=5 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-pe",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 11 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=5 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-qy",
       "contextSelections": [
         {
-          "bodyHash": "f7de0dcbdbf4494e",
+          "bodyHash": "06da20c6f68568a4",
           "source": "tool.output",
           "tags": "tool,run_shell",
           "title": "run_shell"
@@ -150,7 +150,7 @@
   "ok": true,
   "proofLevel": "live-app-mock-engine-real-tool-executor-fake-local-scanners",
   "proofType": "repo-codebase-supply-chain-scenario-live",
-  "repoPath": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-pew7nrdx/synthetic-vulnerable-repo",
+  "repoPath": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-qy4sr9ay/synthetic-vulnerable-repo",
   "reportRenderActions": {
     "findingCount": 1,
     "htmlChars": 3262,
@@ -220,7 +220,7 @@
     "evidence",
     "report"
   ],
-  "startedAt": "2026-07-06T00:08:47-0700",
+  "startedAt": "2026-07-06T00:42:46-0700",
   "status": "PASS",
   "supplyChainLifecycle": {
     "cve": {
@@ -230,19 +230,19 @@
       "tool": "search_cve"
     },
     "dependency": {
-      "command": "osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-pew7nrdx/synthetic-vulnerable-repo --format json",
+      "command": "osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-qy4sr9ay/synthetic-vulnerable-repo --format json",
       "status": "done",
       "summary": "1 lines output",
       "tool": "osv_scanner"
     },
     "sbom": {
-      "command": "syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-pew7nrdx/synthetic-vulnerable-repo -o json",
+      "command": "syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-qy4sr9ay/synthetic-vulnerable-repo -o json",
       "status": "done",
       "summary": "1 lines output",
       "tool": "syft"
     },
     "secrets": {
-      "command": "trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-pew7nrdx/synthetic-vulnerable-repo --json",
+      "command": "trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-qy4sr9ay/synthetic-vulnerable-repo --json",
       "status": "done",
       "summary": "1 lines output",
       "tool": "trufflehog"

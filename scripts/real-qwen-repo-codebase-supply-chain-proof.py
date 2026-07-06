@@ -22,6 +22,7 @@ APP_BINARY = ROOT / "dist" / "ExploitBot.app" / "Contents" / "MacOS" / "ExploitB
 MODEL_27B = Path("/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP")
 MODEL_35B = Path("/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP")
 FINAL_MARKER = "REAL_QWEN_REPO_SUPPLY_CHAIN_FINAL"
+SECOND_TURN_MARKER = "REAL_QWEN_REPO_SUPPLY_CHAIN_SECOND_TURN"
 DEFAULT_OUTPUT_27B = ROOT / "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-27b.json"
 DEFAULT_OUTPUT_35B = ROOT / "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-35b.json"
 
@@ -198,7 +199,12 @@ def synthesize_model_requests_from_messages(messages: list[dict[str, Any]]) -> l
     schema_names: list[str] = []
     for message in messages:
         for schema in message.get("toolSchemas") or []:
-            name = ((schema.get("function") or {}).get("name") or "").strip()
+            if isinstance(schema, str):
+                name = schema.strip()
+            elif isinstance(schema, dict):
+                name = ((schema.get("function") or {}).get("name") or schema.get("name") or "").strip()
+            else:
+                name = ""
             if name and name not in schema_names:
                 schema_names.append(name)
     if not schema_names:
@@ -269,6 +275,14 @@ def final_followup_prompt() -> str:
         "Do not call more tools. Start the first line with this exact marker and then give a concise evidence summary: "
         f"{FINAL_MARKER}. Mention package.json, .env.example, EXPLOITBOT_FAKE_TOKEN_DO_NOT_USE, "
         "CVE-2021-23337, and GHSA-35jh-r3h4-6jhm."
+    )
+
+
+def second_turn_prompt() -> str:
+    return (
+        "Do not call tools. Use only the existing transcript evidence. "
+        "Reply in one concise sentence that starts with this exact marker: "
+        f"{SECOND_TURN_MARKER}. Mention CVE-2021-23337 and the fake local repo evidence."
     )
 
 
@@ -399,7 +413,7 @@ def run() -> None:
                     "maxIterations": 8,
                     "toolSchemaMaxTools": 64,
                     "includeUnavailableToolSchemas": False,
-                    "forceFinalAnswerAfterToolResults": False,
+                    "forceFinalAnswerAfterToolResults": True,
                     "engine": {
                         "modelPath": str(model),
                         "useModelGenerationDefaults": False,
@@ -447,11 +461,21 @@ def run() -> None:
                         {
                             "specificToolChoiceFunctionName": missing_tools[0],
                             "forceFinalAnswerAfterToolResults": True,
+                            "toolSchemaMaxTools": 64,
                         },
                         timeout=15.0,
                     )
                     app_request("POST", "/send", next_missing_tool_prompt(repo, missing_tools), timeout=15.0)
                 else:
+                    app_request(
+                        "POST",
+                        "/qa/apply-app-settings",
+                        {
+                            "toolSchemaMaxTools": 0,
+                            "forceFinalAnswerAfterToolResults": True,
+                        },
+                        timeout=15.0,
+                    )
                     app_request("POST", "/send", final_followup_prompt(), timeout=15.0)
                 try:
                     messages = wait_for_final_marker(base_url, FINAL_MARKER)
@@ -527,6 +551,25 @@ def run() -> None:
                         continue
                     raise
             require(messages is not None, "real Qwen repo final answer missing after attempts", report["finalAnswerAttempts"])
+            app_request(
+                "POST",
+                "/qa/apply-app-settings",
+                {
+                    "toolSchemaMaxTools": 0,
+                    "forceFinalAnswerAfterToolResults": True,
+                },
+                timeout=15.0,
+            )
+            app_request("POST", "/send", second_turn_prompt(), timeout=15.0)
+            messages = wait_for_final_marker(base_url, SECOND_TURN_MARKER, timeout=180.0)
+            report["finalAnswerAttempts"].append(
+                {"attempt": "second-model-turn", "status": "success", "note": "assistant second marker reached"}
+            )
+            require(
+                repo_proof.tool_sequence(messages) == repo_proof.EXPECTED_TOOLS,
+                "second model turn must not add duplicate repo tools",
+                repo_proof.tool_sequence(messages),
+            )
             state = app_request("GET", "/state", timeout=10.0)
             results = app_request("GET", "/results", timeout=10.0)
             submit_report_from_results(repo, results)

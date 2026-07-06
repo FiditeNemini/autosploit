@@ -13,7 +13,7 @@
     "docs/live-proofs/2026-07-05-release-app-computer-use-current-manual-sweep.json": "partial manual release UI sweep with notarization and loaded-model gates still open",
     "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-27b.json": "partial real-Qwen repo/codebase supply-chain attempt stalled before full tool sequence and final marker"
   },
-  "failedLiveProofCount": 15,
+  "failedLiveProofCount": 14,
   "failedLiveProofs": [
     "docs/live-proofs/2026-07-04-live-batch-memory-preflight-blocked.json",
     "docs/live-proofs/2026-07-04-near-max-context-guard-refusal.json",
@@ -26,17 +26,16 @@
     "docs/live-proofs/2026-07-05-real-qwen-long-context-200k-27b.json",
     "docs/live-proofs/2026-07-05-real-qwen-long-context-224k-27b.json",
     "docs/live-proofs/2026-07-05-release-app-computer-use-current-manual-sweep.json",
-    "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-27b.json",
     "docs/live-proofs/checkpoint-485-qwen-mxfp-live-current.json",
     "docs/live-proofs/checkpoint-75-minimax-live.json",
     "docs/live-proofs/qwen27-mxfp4-mtp-live-cache-20260605.json"
   ],
-  "generatedAt": "2026-07-06T00:09:01-0700",
+  "generatedAt": "2026-07-06T00:45:19-0700",
   "knownFailedLiveProofs": [
     "docs/live-proofs/checkpoint-75-minimax-live.json"
   ],
-  "liveProofCount": 178,
-  "liveProofOkCount": 163,
+  "liveProofCount": 179,
+  "liveProofOkCount": 165,
   "liveProofStatus": {
     "docs/live-proofs/2026-06-03-minimax-current-metadata.json": true,
     "docs/live-proofs/2026-06-03-minimax-jang-k-current-metadata.json": true,
@@ -160,7 +159,8 @@
     "docs/live-proofs/2026-07-05-tool-settings-install-plan-live.json": true,
     "docs/live-proofs/2026-07-06-autonomous-scenario-catalog.json": true,
     "docs/live-proofs/2026-07-06-autonomous-scenario-matrix.json": true,
-    "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-27b.json": false,
+    "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-27b.json": true,
+    "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-35b.json": true,
     "docs/live-proofs/2026-07-06-repo-codebase-supply-chain-scenario.json": true,
     "docs/live-proofs/beta-small-qwen-live-smoke.json": true,
     "docs/live-proofs/checkpoint-102-block-l2-partial-proof.json": true,
@@ -341,6 +341,7 @@
     "docs/live-proofs/2026-07-06-autonomous-scenario-catalog.json",
     "docs/live-proofs/2026-07-06-autonomous-scenario-matrix.json",
     "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-27b.json",
+    "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-35b.json",
     "docs/live-proofs/2026-07-06-repo-codebase-supply-chain-scenario.json",
     "docs/live-proofs/beta-small-qwen-live-smoke.json",
     "docs/live-proofs/checkpoint-102-block-l2-partial-proof.json",
@@ -400,7 +401,7 @@
   "ok": true,
   "processEvidence": {
     "appRows": [
-      "81019 131952 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+      "91457 132432 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
     ],
     "engineProcessRows": []
   },

@@ -1,27 +1,27 @@
 {
-  "baseUrl": "http://127.0.0.1:49297",
+  "baseUrl": "http://127.0.0.1:49721",
   "cacheAfter": {
     "block_disk_cache": {
-      "blocks_on_disk": 131,
+      "blocks_on_disk": 133,
       "disk_evictions": 0,
       "disk_hits": 0,
       "disk_misses": 4,
-      "disk_size_bytes": 1406495679,
-      "disk_size_gb": 1.31,
-      "disk_writes": 131,
+      "disk_size_bytes": 477669521,
+      "disk_size_gb": 0.445,
+      "disk_writes": 133,
       "total_accesses": 0,
-      "total_cached_tokens": 8333,
-      "total_tokens_on_disk": 8333
+      "total_cached_tokens": 8438,
+      "total_tokens_on_disk": 8438
     },
     "cache_totals": {
-      "l2_block_tokens_on_disk": 8333,
+      "l2_block_tokens_on_disk": 8438,
       "l2_prompt_tokens_on_disk": 0,
-      "l2_ssm_tokens_on_disk": 18893,
-      "l2_tokens_on_disk": 27226,
+      "l2_ssm_tokens_on_disk": 19126,
+      "l2_tokens_on_disk": 27564,
       "l2_tokens_on_disk_note": "store_sum_across_prompt_block_ssm_l2; tiers_may_overlap",
-      "l2_tokens_on_disk_store_sum": 27226,
-      "ram_tokens_cached": 8333,
-      "ssm_tokens_on_disk": 18893
+      "l2_tokens_on_disk_store_sum": 27564,
+      "ram_tokens_cached": 8438,
+      "ssm_tokens_on_disk": 19126
     },
     "disk_cache": {
       "entries": 0,
@@ -41,9 +41,9 @@
       "group_size": 64
     },
     "memory": {
-      "active_mb": 28501.1,
-      "cache_mb": 1145.0,
-      "peak_mb": 52762.2
+      "active_mb": 36106.1,
+      "cache_mb": 417.1,
+      "peak_mb": 50950.1
     },
     "native_cache": {
       "attention_kv_storage_quantization": {
@@ -83,11 +83,11 @@
     },
     "scheduler_cache": {
       "active_requests": 0,
-      "allocated_blocks": 132,
+      "allocated_blocks": 134,
       "block_size": 64,
-      "cache_hit_rate": 0.1509433962264151,
+      "cache_hit_rate": 0.14906832298136646,
       "cache_hits": 24,
-      "cache_misses": 135,
+      "cache_misses": 137,
       "cow_copies": 0,
       "disk_hits": 0,
       "disk_misses": 4,
@@ -97,7 +97,7 @@
         "user": 0
       },
       "evictions": 0,
-      "free_blocks": 868,
+      "free_blocks": 866,
       "hit_rate": 0.5,
       "hits": 1,
       "max_blocks": 1000,
@@ -110,20 +110,20 @@
       "tokens_saved": 768,
       "total_images_processed": 0,
       "total_time_saved": 0.0,
-      "total_tokens_cached": 8333,
-      "utilization": 0.132
+      "total_tokens_cached": 8438,
+      "utilization": 0.134
     },
     "scheduler_stats": {
       "batch_generator": {
-        "generation_time": 22.60822991671739,
-        "generation_tokens": 350,
-        "generation_tps": 15.481088138669211,
+        "generation_time": 6.6253442337037995,
+        "generation_tokens": 359,
+        "generation_tps": 54.185863758403755,
         "hybrid_kv_without_ssm_hits": 1,
         "hybrid_kv_without_ssm_tokens": 768,
         "last_hybrid_kv_without_ssm": {
           "cached_tokens": 768,
           "reason": "no_ssm_companion_state",
-          "request_id": "chatcmpl-175e013e",
+          "request_id": "chatcmpl-d1643ed7",
           "ssm_prefix_lookup": {
             "candidate_lengths": [],
             "matched": false,
@@ -133,58 +133,58 @@
           }
         },
         "last_native_mtp": {
-          "acceptance_rate": 0.36470588235294116,
+          "acceptance_rate": 0.3548387096774194,
           "accepted_by_depth": [
-            31,
+            33,
             0,
             0
           ],
-          "accepted_tokens": 31,
-          "accepts": 29,
-          "bonus_emits": 29,
-          "cycles": 61,
+          "accepted_tokens": 33,
+          "accepts": 32,
+          "bonus_emits": 31,
+          "cycles": 69,
           "depth_acceptance_rates": {
-            "d1": 0.5081967213114754,
+            "d1": 0.4782608695652174,
             "d2": 0.0,
             "d3": 0.0
           },
-          "draft_emits": 31,
+          "draft_emits": 33,
           "drafted_by_depth": [
-            61,
+            69,
             12,
             12
           ],
-          "drafted_tokens": 85,
+          "drafted_tokens": 93,
           "fallback_reason": null,
           "final_depth": 1,
           "finish_reason": "stop",
           "forwards": {
-            "mtp": 86,
-            "replay_main": 32,
+            "mtp": 94,
+            "replay_main": 37,
             "seed_main": 1,
-            "verify_main": 61
+            "verify_main": 69
           },
           "init_emits": 2,
-          "rejects": 32,
-          "request_id": "chatcmpl-175e013e",
+          "rejects": 37,
+          "request_id": "chatcmpl-d1643ed7",
           "timings_ms": {
-            "avg_cycle": 114.94399719112019,
-            "draft": 1768.283958779648,
-            "materialize": 0.3722459077835083,
-            "replay": 77.58874792489223,
-            "restore": 3.5865821118932217,
-            "sample": 4690.3954988811165,
-            "snapshot": 2.8673319902736694,
-            "total": 7011.583828658331,
-            "verify": 468.4894630627241
+            "avg_cycle": 30.36373082853759,
+            "draft": 471.2654209579341,
+            "materialize": 0.37149799754843116,
+            "replay": 79.63079001638107,
+            "restore": 2.771875006146729,
+            "sample": 1308.100918045966,
+            "snapshot": 2.277002000482753,
+            "total": 2095.097427169094,
+            "verify": 230.6799231446348
           },
-          "verify_emits": 32
+          "verify_emits": 37
         },
         "num_images_processed": 0,
-        "peak_memory": 55.325181672,
-        "prompt_time": 36.962759124988224,
-        "prompt_tokens": 9117,
-        "prompt_tps": 246.65366481899244,
+        "peak_memory": 53.425033124,
+        "prompt_time": 14.630549166991841,
+        "prompt_tokens": 9222,
+        "prompt_tps": 630.3249382330682,
         "vision_encoding_time": 0
       },
       "cache_hit_requests": 0,
@@ -203,7 +203,7 @@
       "last_hybrid_kv_without_ssm": {
         "cached_tokens": 768,
         "reason": "no_ssm_companion_state",
-        "request_id": "chatcmpl-175e013e",
+        "request_id": "chatcmpl-d1643ed7",
         "ssm_prefix_lookup": {
           "candidate_lengths": [],
           "matched": false,
@@ -218,31 +218,31 @@
       "num_running": 0,
       "num_waiting": 0,
       "single_active_decode": false,
-      "total_completion_tokens": 350,
-      "total_prompt_tokens": 9103
+      "total_completion_tokens": 359,
+      "total_prompt_tokens": 9208
     },
     "ssm_companion": {
       "disk": {
         "budget_bytes": 10737418240,
         "budget_gb": 10.0,
-        "bytes": 784537282,
-        "bytes_mb": 748.19,
-        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-v_lfbwrk/block/ssm_companion",
+        "bytes": 329363026,
+        "bytes_mb": 314.11,
+        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-6xdq2qmq/block/ssm_companion",
         "enabled": true,
         "entries": 5,
         "hit_rate": 0.0,
         "hits": 0,
         "misses": 1,
         "stores": 5,
-        "total_cached_tokens": 18893,
-        "total_tokens_on_disk": 18893
+        "total_cached_tokens": 19126,
+        "total_tokens_on_disk": 19126
       },
-      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-v_lfbwrk/block/ssm_companion",
+      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-6xdq2qmq/block/ssm_companion",
       "disk_enabled": true,
       "entries": 5,
       "max_entries": 8,
-      "nbytes": 784465920,
-      "nbytes_mb": 748.12
+      "nbytes": 329318400,
+      "nbytes_mb": 314.06
     },
     "turboquant_kv_cache": {
       "enabled": false
@@ -289,9 +289,9 @@
       "group_size": 64
     },
     "memory": {
-      "active_mb": 27751.1,
+      "active_mb": 35792.0,
       "cache_mb": 0.1,
-      "peak_mb": 27751.2
+      "peak_mb": 35792.0
     },
     "native_cache": {
       "attention_kv_storage_quantization": {
@@ -386,7 +386,7 @@
         "budget_gb": 10.0,
         "bytes": 0,
         "bytes_mb": 0.0,
-        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-v_lfbwrk/block/ssm_companion",
+        "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-6xdq2qmq/block/ssm_companion",
         "enabled": true,
         "entries": 0,
         "hit_rate": 0.0,
@@ -396,7 +396,7 @@
         "total_cached_tokens": 0,
         "total_tokens_on_disk": 0
       },
-      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-v_lfbwrk/block/ssm_companion",
+      "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-6xdq2qmq/block/ssm_companion",
       "disk_enabled": true,
       "entries": 0,
       "max_bytes": null,
@@ -409,7 +409,7 @@
       "enabled": false
     }
   },
-  "engineLogTail": "INFO:vmlx_engine.mllm_scheduler:VLM Paged cache enabled: block_size=64, max_blocks=1000\nINFO:vmlx_engine.disk_cache:Disk cache initialized: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-v_lfbwrk/prompt/Qwen3.6-27B-MXFP8-CRACK-MTP_1b0f3dc1837a, max_size=10.0GB, entries=0\nINFO:vmlx_engine.mllm_scheduler:VLM disk cache (L2) enabled: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-v_lfbwrk/prompt/Qwen3.6-27B-MXFP8-CRACK-MTP_1b0f3dc1837a\nINFO:vmlx_engine.mllm_scheduler:VLM KV quant round-trip test passed: bits=4, group_size=64\nINFO:vmlx_engine.mllm_scheduler:VLM KV cache quantization enabled: turboquant-q4 (bits=4, group_size=64)\nINFO:vmlx_engine.mllm_scheduler:Runtime cache layout: model_type=qwen3_5 layers=64 layout=0:ArraysCache;1:ArraysCache;2:ArraysCache;3:KVCache;4:ArraysCache;5:ArraysCache;6:ArraysCache;7:KVCache;8:ArraysCache;9:ArraysCache;10:ArraysCache;11:KVCache;12:ArraysCache;13:ArraysCache;14:ArraysCache;15:KVCache;16:ArraysCache;17:ArraysCache;18:ArraysCache;19:KVCache;20:ArraysCache;21:ArraysCache;22:ArraysCache;23:KVCache;24:ArraysCache;25:ArraysCache;26:ArraysCache;27:KVCache;28:ArraysCache;29:ArraysCache;30:ArraysCache;31:KVCache;32:ArraysCache;33:ArraysCache;34:ArraysCache;35:KVCache;36:ArraysCache;37:ArraysCache;38:ArraysCache;39:KVCache;40:ArraysCache;41:ArraysCache;42:ArraysCache;43:KVCache;44:ArraysCache;45:ArraysCache;46:ArraysCache;47:KVCache;48:ArraysCache;49:ArraysCache;50:ArraysCache;51:KVCache;52:ArraysCache;53:ArraysCache;54:ArraysCache;55:KVCache;56:ArraysCache;57:ArraysCache;58:ArraysCache;59:KVCache;60:ArraysCache;61:ArraysCache;62:ArraysCache;63:KVCache\nINFO:vmlx_engine.mllm_scheduler:MLLM Scheduler initialized: cache_mode=paged, hybrid=True, zaya_cca=False, kv_quant=turboquant-q4, prompt_l2=True, block_l2=True, max_seqs=1\nINFO:vmlx_engine.mllm_scheduler:MLLM Scheduler started with max_num_seqs=1\nINFO:vmlx_engine.engine.batched:MLLM Scheduler started with continuous batching: max_num_seqs=1, prefill_batch=512, completion_batch=512\nINFO:vmlx_engine.engine.batched:BatchedEngine loaded: /Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP (mllm=True)\nERROR:__main__:Failed to discover MCP config \u2014 continuing without MCP: No module named 'vmlx_engine.mcp'\nINFO:     Application startup complete.\nINFO:     Uvicorn running on http://127.0.0.1:49297 (Press CTRL+C to quit)\nINFO:     127.0.0.1:49303 - \"GET /health HTTP/1.1\" 200 OK\nWARNING:__main__:SECURITY WARNING: Server running without API key authentication. Anyone can access the API. Use --api-key to enable authentication.\nINFO:     127.0.0.1:49304 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nINFO:__main__:Request model 'mock-qwen-jang' differs from served model 'dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP' \u2014 using loaded model (single-model server). This is expected when routing tools like Claude Code, opencode, or CCSwitch at vMLX \u2014 they send their own model alias.\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 256, 'enable_thinking': False}\nINFO:     127.0.0.1:49314 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nINFO:vmlx_engine.mllm_batch_generator:MLLMBatchGenerator: Using VLM's language_model for batched generation\nINFO:vmlx_engine.mllm_batch_generator:MLLMBatchGenerator: Vision cache enabled (size=16)\nINFO:vmlx_engine.mllm_batch_generator:Metal cache limit set to 26.88GB (max_ws=107.5GB, active=27.1GB, free=80.4GB; base=26.88GB safety=40.21GB; mlxstudio#78)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-d47f8e1d (48 layers, key=4096 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-d47f8e1d (48 layers, key=4115 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-d47f8e1d (48 layers, 4096-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-d47f8e1d (48 layers, 4115-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-d47f8e1d depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-d47f8e1d] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.083,d3=0.000]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-d47f8e1d] finish=length cycles=154 accepted=100/178 (56.2%) emits[init=2,draft=100,bonus=94,verify=60]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-d47f8e1d] accept_by_depth[d1=99/154,d2=1/12,d3=0/12] forwards[seed_main=1,verify_main=154,replay_main=60,mtp=179]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-d47f8e1d] timings_ms[verify=1051.78 sample=11037.15 draft=3325.97 snapshot=6.76 restore=6.43 replay=145.05 materialize=0.90 avg_cycle=101.13]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=4115, num_new_blocks=65, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 16 positional layers (out of 64 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 1 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 3 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 4 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 5 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 6 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 7 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 8 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 9 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 10 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 11 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 12 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 13 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 14 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 15 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 16 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 17 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 18 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 19 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 20 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 21 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 22 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 23 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 24 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 25 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 26 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 27 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 28 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 29 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 30 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 31 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 32 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 33 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 34 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 35 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 36 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 37 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 38 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 39 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 40 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 41 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 42 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 43 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 44 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 45 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 46 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 47 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 48 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 49 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 50 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 51 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 52 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 53 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 54 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 55 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 56 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 57 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 58 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 59 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 60 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 61 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 62 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 63 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 64 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 65 (16 kv layers, cumulative=48, 19 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 65 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-d47f8e1d: 64 layers, truncated to 4115 tokens\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 256, 'enable_thinking': False}\nINFO:     127.0.0.1:49467 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-175e013e: 12 blocks, 768 tokens\nINFO:vmlx_engine.utils.ssm_companion_cache:SSM fetch MISS: N=768 hash=6de389ea023c store_size=2 store_keys[:3]=['2ad402ebd352', '8a2e74d96ef1']\nINFO:vmlx_engine.mllm_batch_generator:VLM prefix cache MISS for chatcmpl-175e013e: 768 KV blocks found but no SSM companion state \u2014 full prefill required\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-175e013e (48 layers, key=768 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-175e013e (48 layers, key=4928 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-175e013e (48 layers, key=4986 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-175e013e (48 layers, 768-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-175e013e (48 layers, 4928-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-175e013e (48 layers, 4986-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-175e013e depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-175e013e] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.000,d3=0.000]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-175e013e] finish=stop cycles=61 accepted=31/85 (36.5%) emits[init=2,draft=31,bonus=29,verify=32]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-175e013e] accept_by_depth[d1=31/61,d2=0/12,d3=0/12] forwards[seed_main=1,verify_main=61,replay_main=32,mtp=86]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-175e013e] timings_ms[verify=468.49 sample=4690.40 draft=1768.28 snapshot=2.87 restore=3.59 replay=77.59 materialize=0.37 avg_cycle=114.94]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=4218, num_new_blocks=66, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 16 positional layers (out of 64 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 66 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 67 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 68 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 69 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 70 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 71 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 72 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 73 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 74 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 75 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 76 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 77 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 78 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 79 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 80 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 81 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 82 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 83 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 84 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 85 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 86 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 87 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 88 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 89 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 90 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 91 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 92 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 93 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 94 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 95 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 96 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 97 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 98 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 99 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 100 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 101 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 102 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 103 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 104 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 105 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 106 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 107 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 108 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 109 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 110 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 111 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 112 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 113 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 114 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 115 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 116 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 117 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 118 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 119 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 120 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 121 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 122 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 123 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 124 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 125 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 126 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 127 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 128 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 129 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 130 (16 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 131 (16 kv layers, cumulative=48, 58 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 66 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-175e013e: 64 layers, truncated to 4986 tokens\nINFO:     127.0.0.1:49597 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nINFO:     Shutting down\nINFO:     Waiting for application shutdown.\nINFO:vmlx_engine.mllm_scheduler:MLLM Scheduler stopped\nINFO:vmlx_engine.engine.batched:BatchedEngine stopped\nINFO:__main__:Engine stopped\nINFO:__main__:Caffeinate process terminated\nINFO:     Application shutdown complete.\nINFO:     Finished server process [89842]",
+  "engineLogTail": "INFO:vmlx_engine.mllm_scheduler:VLM disk cache (L2) enabled: dir=/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-6xdq2qmq/prompt/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP_55fd681f4e4c\nINFO:vmlx_engine.mllm_scheduler:VLM KV quant round-trip test passed: bits=4, group_size=64\nINFO:vmlx_engine.mllm_scheduler:VLM KV cache quantization enabled: turboquant-q4 (bits=4, group_size=64)\nINFO:vmlx_engine.mllm_scheduler:Runtime cache layout: model_type=qwen3_5_moe layers=40 layout=0:ArraysCache;1:ArraysCache;2:ArraysCache;3:KVCache;4:ArraysCache;5:ArraysCache;6:ArraysCache;7:KVCache;8:ArraysCache;9:ArraysCache;10:ArraysCache;11:KVCache;12:ArraysCache;13:ArraysCache;14:ArraysCache;15:KVCache;16:ArraysCache;17:ArraysCache;18:ArraysCache;19:KVCache;20:ArraysCache;21:ArraysCache;22:ArraysCache;23:KVCache;24:ArraysCache;25:ArraysCache;26:ArraysCache;27:KVCache;28:ArraysCache;29:ArraysCache;30:ArraysCache;31:KVCache;32:ArraysCache;33:ArraysCache;34:ArraysCache;35:KVCache;36:ArraysCache;37:ArraysCache;38:ArraysCache;39:KVCache\nINFO:vmlx_engine.mllm_scheduler:MLLM Scheduler initialized: cache_mode=paged, hybrid=True, zaya_cca=False, kv_quant=turboquant-q4, prompt_l2=True, block_l2=True, max_seqs=1\nINFO:vmlx_engine.mllm_scheduler:MLLM Scheduler started with max_num_seqs=1\nINFO:vmlx_engine.engine.batched:MLLM Scheduler started with continuous batching: max_num_seqs=1, prefill_batch=512, completion_batch=512\nINFO:vmlx_engine.engine.batched:BatchedEngine loaded: /Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP (mllm=True)\nERROR:__main__:Failed to discover MCP config \u2014 continuing without MCP: No module named 'vmlx_engine.mcp'\nINFO:     Application startup complete.\nINFO:     Uvicorn running on http://127.0.0.1:49721 (Press CTRL+C to quit)\nINFO:     127.0.0.1:49729 - \"GET /health HTTP/1.1\" 200 OK\nWARNING:__main__:SECURITY WARNING: Server running without API key authentication. Anyone can access the API. Use --api-key to enable authentication.\nINFO:     127.0.0.1:49730 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nINFO:__main__:Request model 'mock-qwen-jang' differs from served model 'dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP' \u2014 using loaded model (single-model server). This is expected when routing tools like Claude Code, opencode, or CCSwitch at vMLX \u2014 they send their own model alias.\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 256, 'enable_thinking': False}\nINFO:     127.0.0.1:49740 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nINFO:vmlx_engine.mllm_batch_generator:MLLMBatchGenerator: Using VLM's language_model for batched generation\nINFO:vmlx_engine.mllm_batch_generator:MLLMBatchGenerator: Vision cache enabled (size=16)\nINFO:vmlx_engine.mllm_batch_generator:Metal cache limit set to 26.88GB (max_ws=107.5GB, active=35.0GB, free=72.6GB; base=26.88GB safety=36.28GB; mlxstudio#78)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-28f4ba23 (30 layers, key=4160 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-28f4ba23 (30 layers, key=4169 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-28f4ba23 (30 layers, 4160-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-28f4ba23 (30 layers, 4169-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-28f4ba23 depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-28f4ba23] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.083,d3=0.083]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-28f4ba23] finish=length cycles=162 accepted=92/186 (49.5%) emits[init=2,draft=92,bonus=87,verify=75]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-28f4ba23] accept_by_depth[d1=90/162,d2=1/12,d3=1/12] forwards[seed_main=1,verify_main=162,replay_main=75,mtp=187]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-28f4ba23] timings_ms[verify=508.31 sample=2907.34 draft=925.66 snapshot=4.93 restore=5.19 replay=158.95 materialize=0.81 avg_cycle=27.85]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=4169, num_new_blocks=66, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 10 positional layers (out of 40 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 1 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 2 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 3 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 4 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 5 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 6 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 7 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 8 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 9 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 10 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 11 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 12 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 13 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 14 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 15 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 16 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 17 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 18 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 19 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 20 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 21 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 22 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 23 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 24 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 25 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 26 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 27 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 28 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 29 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 30 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 31 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 32 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 33 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 34 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 35 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 36 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 37 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 38 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 39 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 40 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 41 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 42 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 43 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 44 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 45 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 46 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 47 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 48 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 49 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 50 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 51 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 52 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 53 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 54 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 55 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 56 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 57 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 58 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 59 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 60 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 61 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 62 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 63 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 64 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 65 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 66 (10 kv layers, cumulative=30, 9 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 66 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-28f4ba23: 40 layers, truncated to 4169 tokens\nWARNING:__main__:Omni multimodal dispatch failed (No module named 'vmlx_engine.omni_multimodal'); falling back to standard path\nINFO:__main__:Resolved sampling kwargs route=/v1/chat/completions model=/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP kwargs={'temperature': 0.0, 'top_p': 1.0, 'top_k': 20, 'max_tokens': 256, 'enable_thinking': False}\nINFO:     127.0.0.1:49796 - \"POST /v1/chat/completions HTTP/1.1\" 200 OK\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nWARNING:vmlx_engine.api.tool_calling:Chat template needs fallback tool schema injection.\nINFO:vmlx_engine.prefix_cache:Paged cache hit for chatcmpl-d1643ed7: 12 blocks, 768 tokens\nINFO:vmlx_engine.utils.ssm_companion_cache:SSM fetch MISS: N=768 hash=8a7b56623712 store_size=2 store_keys[:3]=['c4e0672c767d', 'bc78afef9732']\nINFO:vmlx_engine.mllm_batch_generator:VLM prefix cache MISS for chatcmpl-d1643ed7: 768 KV blocks found but no SSM companion state \u2014 full prefill required\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-d1643ed7 (30 layers, key=768 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-d1643ed7 (30 layers, key=4992 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: captured clean SSM at prefill boundary for chatcmpl-d1643ed7 (30 layers, key=5037 tokens, is_complete=True \u2014 no re-derive needed)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-d1643ed7 (30 layers, 768-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-d1643ed7 (30 layers, 4992-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:vmlx#109: stored inline-captured SSM for chatcmpl-d1643ed7 (30 layers, 5037-token key, no re-derive)\nINFO:vmlx_engine.mllm_batch_generator:MLLM native MTP path activated for request=chatcmpl-d1643ed7 depth=3\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-d1643ed7] adaptive depth D3 -> D1 after cycles=12 acceptance[d2=0.000,d3=0.000]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-d1643ed7] finish=stop cycles=69 accepted=33/93 (35.5%) emits[init=2,draft=33,bonus=31,verify=37]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-d1643ed7] accept_by_depth[d1=33/69,d2=0/12,d3=0/12] forwards[seed_main=1,verify_main=69,replay_main=37,mtp=94]\nINFO:vmlx_engine.mllm_batch_generator:MLLM MTP[chatcmpl-d1643ed7] timings_ms[verify=230.68 sample=1308.10 draft=471.27 snapshot=2.28 restore=2.77 replay=79.63 materialize=0.37 avg_cycle=30.36]\nINFO:vmlx_engine.prefix_cache:Block disk write-through: disk_store=present, is_tensor_data=True, new_tokens=4269, num_new_blocks=67, frugal=True\nINFO:vmlx_engine.prefix_cache:Block disk: np_sources has 10 positional layers (out of 40 total)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 67 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 68 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 69 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 70 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 71 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 72 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 73 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 74 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 75 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 76 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 77 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 78 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 79 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 80 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 81 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 82 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 83 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 84 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 85 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 86 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 87 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 88 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 89 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 90 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 91 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 92 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 93 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 94 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 95 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 96 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 97 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 98 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 99 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 100 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 101 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 102 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 103 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 104 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 105 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 106 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 107 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 108 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 109 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 110 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 111 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 112 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 113 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 114 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 115 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 116 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 117 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 118 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 119 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 120 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 121 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 122 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 123 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 124 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 125 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 126 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 127 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 128 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 129 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 130 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 131 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 132 (10 kv layers, 64 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: queuing write for block 133 (10 kv layers, cumulative=30, 45 tokens)\nINFO:vmlx_engine.prefix_cache:Block disk: writing 67 blocks to SSD\nINFO:vmlx_engine.mllm_scheduler:VLM Scheduler stored paged Prefix Cache for chatcmpl-d1643ed7: 40 layers, truncated to 5037 tokens\nINFO:     127.0.0.1:49847 - \"GET /v1/cache/stats HTTP/1.1\" 200 OK\nINFO:     Shutting down\nINFO:     Waiting for application shutdown.\nINFO:vmlx_engine.mllm_scheduler:MLLM Scheduler stopped\nINFO:vmlx_engine.engine.batched:BatchedEngine stopped\nINFO:__main__:Engine stopped\nINFO:__main__:Caffeinate process terminated\nINFO:     Application shutdown complete.\nINFO:     Finished server process [91015]",
   "expectedToolSequence": [
     "run_shell",
     "trufflehog",
@@ -430,8 +430,8 @@
       "status": "success"
     }
   ],
-  "finishedAt": "2026-07-06T00:41:54-0700",
-  "generatedAt": "2026-07-06T00:41:54-0700",
+  "finishedAt": "2026-07-06T00:44:11-0700",
+  "generatedAt": "2026-07-06T00:44:11-0700",
   "health": {
     "acceleration": {
       "host": {
@@ -508,7 +508,7 @@
           "budget_gb": 10.0,
           "bytes": 0,
           "bytes_mb": 0.0,
-          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-v_lfbwrk/block/ssm_companion",
+          "directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-6xdq2qmq/block/ssm_companion",
           "enabled": true,
           "entries": 0,
           "hit_rate": 0.0,
@@ -518,7 +518,7 @@
           "total_cached_tokens": 0,
           "total_tokens_on_disk": 0
         },
-        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-v_lfbwrk/block/ssm_companion",
+        "disk_directory": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-6xdq2qmq/block/ssm_companion",
         "disk_enabled": true,
         "entries": 0,
         "max_bytes": null,
@@ -542,12 +542,12 @@
       "cache": {
         "disk_cache": {
           "block_l2": {
-            "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-v_lfbwrk/block",
+            "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-6xdq2qmq/block",
             "enabled": true,
             "max_gb": 10.0
           },
           "prompt_l2": {
-            "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-v_lfbwrk/prompt",
+            "dir": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-cache-6xdq2qmq/prompt",
             "enabled": true,
             "max_gb": 10.0
           }
@@ -615,9 +615,9 @@
           "ssm_companion_required": true
         },
         "cache_type": "hybrid",
-        "family": "qwen3_5",
-        "name": "dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
-        "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+        "family": "qwen3_5_moe",
+        "name": "dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+        "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
         "served_name": null,
         "type": "text"
       },
@@ -653,12 +653,12 @@
     "last_request_time": null,
     "mcp": null,
     "memory": {
-      "active_mb": 27751.1,
+      "active_mb": 35792.0,
       "cache_mb": 0.1,
-      "peak_mb": 27751.2
+      "peak_mb": 35792.0
     },
     "model_loaded": true,
-    "model_name": "dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+    "model_name": "dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
     "model_type": "mllm",
     "mtp": {
       "artifact_available": true,
@@ -667,7 +667,7 @@
       "config_num_nextn_predict_layers": 1,
       "effective_depth": 3,
       "effective_depth_source": "default",
-      "family": "qwen3_5",
+      "family": "qwen3_5_moe",
       "has_vision_config": true,
       "has_vision_weights": true,
       "index_has_mtp_tensors": true,
@@ -675,7 +675,7 @@
       "issues": [],
       "jang_drop_mtp": null,
       "jang_mtp_layers": 1,
-      "mtp_tensor_count": 23,
+      "mtp_tensor_count": 31,
       "request_gate": "temperature=0,repetition_penalty=1.0",
       "request_policy": "compatible-only",
       "runtime_active": true,
@@ -734,7 +734,7 @@
       "passthrough_bit_widths_used": [
         16
       ],
-      "passthrough_tensor_count": 693,
+      "passthrough_tensor_count": 643,
       "profile": "MXFP8",
       "sidecar": {
         "jang_config": true,
@@ -744,17 +744,17 @@
       "target_bits": 8,
       "weight_format": "mxfp8",
       "weight_index": {
-        "index_file": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP/model.safetensors.index.json",
-        "mtp_tensor_count": 23,
+        "index_file": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP/model.safetensors.index.json",
+        "mtp_tensor_count": 31,
         "routed_layout_counts": {
-          "prestacked_switch": 0,
+          "prestacked_switch": 246,
           "split_expert": 0
         },
         "suffix_counts": {
-          "scales": 506,
-          "weight": 937
+          "scales": 443,
+          "weight": 860
         },
-        "total_tensors": 1705,
+        "total_tensors": 1529,
         "tq_target_counts": {}
       },
       "weight_matmul_dispatch": {
@@ -769,6 +769,14 @@
       "block_size": 64,
       "target_bits": null,
       "type": "jang"
+    },
+    "routing": {
+      "effective_active_experts": 8,
+      "effective_active_experts_source": "trained_default",
+      "n_routed_experts": 256,
+      "override_env": null,
+      "trained_active_experts": 8,
+      "trained_active_experts_source": "config.text_config.num_experts_per_tok"
     },
     "scheduler": {
       "batch_generator": {},
@@ -799,15 +807,15 @@
   },
   "memoryPreflight": {
     "allowConcurrentModel": false,
-    "availableGB": 112.56155395507812,
+    "availableGB": 111.64212036132812,
     "enabled": true,
     "heavyModelProcessCount": 0,
     "heavyModelProcesses": [],
-    "requiredAvailableGB": 42.0
+    "requiredAvailableGB": 50.0
   },
   "messages": [
     {
-      "content": "Authorized local repo/codebase supply-chain proof. Reasoning is off. Use only this throwaway local repo path and do not touch external targets: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo. Surface files, probe secrets/SBOM/dependencies, prove known vulnerable packages, validate safely without exploitation, then summarize evidence for the report. Emit these exact Qwen XML tool calls now, with valid JSON. After tool results,",
+      "content": "Authorized local repo/codebase supply-chain proof. Reasoning is off. Use only this throwaway local repo path and do not touch external targets: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo. Surface files, probe secrets/SBOM/dependencies, prove known vulnerable packages, validate safely without exploitation, then summarize evidence for the report. Emit these exact Qwen XML tool calls now, with valid JSON. After tool results,",
       "role": "user"
     },
     {
@@ -857,31 +865,31 @@
       ]
     },
     {
-      "content": "Tool request: run_shell\n$ /bin/zsh -c find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo -maxdepth 2 -type f | sort\nArguments:\n{\n  \"command\" : \"find \\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-cemyfba8\\/synthetic-vulnerable-repo -maxdepth 2 -type f | sort\"\n}\n\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo/.env.example\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo/Dockerfile\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo/package-lock.json\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo/package.json\n",
+      "content": "Tool request: run_shell\n$ /bin/zsh -c find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo -maxdepth 2 -type f | sort\nArguments:\n{\n  \"command\" : \"find \\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-0z3lddb2\\/synthetic-vulnerable-repo -maxdepth 2 -type f | sort\"\n}\n\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo/.env.example\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo/Dockerfile\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo/package-lock.json\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo/package.json\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "run_shell"
     },
     {
-      "content": "Tool request: trufflehog\n$ trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo --json\nArguments:\n{\n  \"source_type\" : \"filesystem\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-cemyfba8\\/synthetic-vulnerable-repo\",\n  \"verified_only\" : false\n}\n\n{\"DetectorName\": \"Generic API Key\", \"Raw\": \"EXPLOITBOT_FAKE_TOKEN_DO_NOT_USE\", \"SourceMetadata\": {\"Data\": {\"Git\": {\"file\": \".env.example\", \"repository\": \"synthetic-vulnerable-repo\"}}}}\n",
+      "content": "Tool request: trufflehog\n$ trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo --json\nArguments:\n{\n  \"source_type\" : \"filesystem\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-0z3lddb2\\/synthetic-vulnerable-repo\",\n  \"verified_only\" : false\n}\n\n{\"DetectorName\": \"Generic API Key\", \"Raw\": \"EXPLOITBOT_FAKE_TOKEN_DO_NOT_USE\", \"SourceMetadata\": {\"Data\": {\"Git\": {\"file\": \".env.example\", \"repository\": \"synthetic-vulnerable-repo\"}}}}\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "trufflehog"
     },
     {
-      "content": "Tool request: syft\n$ syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo -o json\nArguments:\n{\n  \"output\" : \"json\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-cemyfba8\\/synthetic-vulnerable-repo\"\n}\n\n{\"artifacts\": [{\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, {\"name\": \"minimist\", \"version\": \"0.0.8\", \"type\": \"npm\"}], \"source\": {\"type\": \"directory\", \"target\": \"synthetic-vulnerable-repo\"}}\n",
+      "content": "Tool request: syft\n$ syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo -o json\nArguments:\n{\n  \"output\" : \"json\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-0z3lddb2\\/synthetic-vulnerable-repo\"\n}\n\n{\"artifacts\": [{\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, {\"name\": \"minimist\", \"version\": \"0.0.8\", \"type\": \"npm\"}], \"source\": {\"type\": \"directory\", \"target\": \"synthetic-vulnerable-repo\"}}\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "syft"
     },
     {
-      "content": "Tool request: grype\n$ grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo -o json --fail-on critical\nArguments:\n{\n  \"fail_on\" : \"critical\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-cemyfba8\\/synthetic-vulnerable-repo\"\n}\n\n{\"matches\": [{\"vulnerability\": {\"id\": \"CVE-2021-23337\", \"severity\": \"High\"}, \"artifact\": {\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, \"matchDetails\": [{\"type\": \"exact-direct-match\"}]}]}\n",
+      "content": "Tool request: grype\n$ grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo -o json --fail-on critical\nArguments:\n{\n  \"fail_on\" : \"critical\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-0z3lddb2\\/synthetic-vulnerable-repo\"\n}\n\n{\"matches\": [{\"vulnerability\": {\"id\": \"CVE-2021-23337\", \"severity\": \"High\"}, \"artifact\": {\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, \"matchDetails\": [{\"type\": \"exact-direct-match\"}]}]}\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "grype"
     },
     {
-      "content": "Tool request: osv_scanner\n$ osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo --format json\nArguments:\n{\n  \"format\" : \"json\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-cemyfba8\\/synthetic-vulnerable-repo\"\n}\n\n{\"results\": [{\"packageSource\": {\"path\": \"package-lock.json\"}, \"packages\": [{\"package\": {\"name\": \"lodash\", \"ecosystem\": \"npm\"}, \"vulnerabilities\": [{\"id\": \"GHSA-35jh-r3h4-6jhm\"}]}]}]}\n",
+      "content": "Tool request: osv_scanner\n$ osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo --format json\nArguments:\n{\n  \"format\" : \"json\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-real-qwen-repo-fixture-0z3lddb2\\/synthetic-vulnerable-repo\"\n}\n\n{\"results\": [{\"packageSource\": {\"path\": \"package-lock.json\"}, \"packages\": [{\"package\": {\"name\": \"lodash\", \"ecosystem\": \"npm\"}, \"vulnerabilities\": [{\"id\": \"GHSA-35jh-r3h4-6jhm\"}]}]}]}\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "osv_scanner"
@@ -893,11 +901,11 @@
       "tool": "search_cve"
     },
     {
-      "content": "REAL_QWEN_REPO_SUPPLY_CHAIN_FINAL\n### Phase: SCAN (Supply-Chain / Local Repo)\n**Target:** `.../synthetic-vulnerable-repo`\n**Scope:** File inventory, SBOM generation, dependency auditing, secret scanning.\n---\n### 1. File Inventory (`run_shell`)\nMinimal surface area. 4 files detected:\n- `.env.example` (High signal for secrets)\n- `Dockerfile` (Container build context)\n- `package.json` (Manifest)\n- `package-lock.json` (Lockfile/Dependency tree)\n### 2. SBOM & Inventory (`syft`)\nTwo distinct npm packa",
+      "content": "REAL_QWEN_REPO_SUPPLY_CHAIN_FINAL\n**Supply Chain Audit Summary**\n**1. Asset Inventory**\nThe target repository (`synthetic-vulnerable-repo`) is minimal, containing only configuration and dependency manifests:\n- `.env.example`\n- `Dockerfile`\n- `package.json`\n- `package-lock.json`\n**2. Dependency Analysis (SBOM)**\n`syft` identified two npm artifacts:\n- `lodash@4.17.11`\n- `minimist@0.0.8`\n**3. Vulnerability Findings**\nTwo distinct scanners flagged `lodash` with high severity:\n- **Grype**: Detected *",
       "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 11 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=5 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-f",
       "contextSelections": [
         {
-          "bodyHash": "692da240c3e7c33c",
+          "bodyHash": "83d240a6cbaf72fc",
           "source": "tool.output",
           "tags": "tool,run_shell",
           "title": "run_shell"
@@ -929,7 +937,7 @@
       "role": "user"
     },
     {
-      "content": "REAL_QWEN_REPO_SUPPLY_CHAIN_SECOND_TURN\nThe local synthetic repo scan confirms a **High** severity supply-chain risk via **CVE-2021-23337** (lodash 4.17.11) and a \"Generic API Key\" leak in `.env.example`, validatedby `syft` (SBOM), `grype` (vuln match), and `trufflehog` (secret detection).",
+      "content": "REAL_QWEN_REPO_SUPPLY_CHAIN_SECOND_TURN | Leveraging the previous transcript, the local fixture at `/var/folders/.../synthetic-vulnerable-repo` confirms a **High** severity **CVE-2021-23337** (Command Injection) in `lodash@4.17.11` via `grype`, alongside a generic API key leak in `.env.example` via `trufflehog`, proving the supply chain posture without external network access.",
       "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 11 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=5 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [finding] HIGH CVE-2021-23337 tags=vuln,high,grype,dependency,supply-chain,grype,CVE-2021-23337: target lodash@4.17.11 cv",
       "contextSelections": [
         {
@@ -968,7 +976,7 @@
       ]
     }
   ],
-  "model": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+  "model": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
   "modelLoadAttempted": true,
   "notes": [
     "This proof uses a throwaway local repo and fake local scanner binaries on isolated PATH.",
@@ -1022,7 +1030,7 @@
   },
   "proofLevel": "live-app-real-qwen-real-tool-loop-local-repo-fixture",
   "proofType": "real-qwen-repo-codebase-supply-chain",
-  "repoPath": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo",
+  "repoPath": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo",
   "reportRenderActions": {
     "findingCount": 1,
     "htmlChars": 3262,
@@ -1049,33 +1057,33 @@
     "postAttribution": [],
     "rawResults": [
       {
-        "outputPreview": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo/.env.example\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo/Dockerfile\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo/package-lock.json\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo/package.json\n",
-        "timestamp": 1783323652.779897,
+        "outputPreview": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo/.env.example\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo/Dockerfile\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo/package-lock.json\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo/package.json\n",
+        "timestamp": 1783323829.137457,
         "tool": "run_shell"
       },
       {
         "outputPreview": "{\"DetectorName\": \"Generic API Key\", \"Raw\": \"EXPLOITBOT_FAKE_TOKEN_DO_NOT_USE\", \"SourceMetadata\": {\"Data\": {\"Git\": {\"file\": \".env.example\", \"repository\": \"synthetic-vulnerable-repo\"}}}}\n",
-        "timestamp": 1783323652.799212,
+        "timestamp": 1783323829.156985,
         "tool": "trufflehog"
       },
       {
         "outputPreview": "{\"artifacts\": [{\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, {\"name\": \"minimist\", \"version\": \"0.0.8\", \"type\": \"npm\"}], \"source\": {\"type\": \"directory\", \"target\": \"synthetic-vulnerable-repo\"}}\n",
-        "timestamp": 1783323652.818314,
+        "timestamp": 1783323829.176022,
         "tool": "syft"
       },
       {
         "outputPreview": "{\"matches\": [{\"vulnerability\": {\"id\": \"CVE-2021-23337\", \"severity\": \"High\"}, \"artifact\": {\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, \"matchDetails\": [{\"type\": \"exact-direct-match\"}]}]}\n",
-        "timestamp": 1783323652.837106,
+        "timestamp": 1783323829.194993,
         "tool": "grype"
       },
       {
         "outputPreview": "{\"results\": [{\"packageSource\": {\"path\": \"package-lock.json\"}, \"packages\": [{\"package\": {\"name\": \"lodash\", \"ecosystem\": \"npm\"}, \"vulnerabilities\": [{\"id\": \"GHSA-35jh-r3h4-6jhm\"}]}]}]}\n",
-        "timestamp": 1783323652.8565102,
+        "timestamp": 1783323829.214361,
         "tool": "osv_scanner"
       },
       {
         "outputPreview": "No CVEs found for query: lodash 4.17.11 CVE",
-        "timestamp": 1783323652.857925,
+        "timestamp": 1783323829.2156692,
         "tool": "search_cve"
       }
     ],
@@ -1178,7 +1186,7 @@
     "evidence",
     "report"
   ],
-  "startedAt": "2026-07-06T00:40:45-0700",
+  "startedAt": "2026-07-06T00:43:38-0700",
   "state": {
     "activeSubtabs": {
       "creds": "Cracking",
@@ -1400,7 +1408,7 @@
       "kvCacheGroupSize": 64,
       "kvCacheQuantization": "turboquant-q4",
       "maxTokens": 256,
-      "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
       "pagedCache": true,
       "pagedCacheBlockSize": 64,
       "prefixCache": true,
@@ -1413,7 +1421,7 @@
     },
     "engineError": "",
     "engineMemoryPreflight": null,
-    "enginePort": 49297,
+    "enginePort": 49721,
     "engineRunning": true,
     "engineStaleCleanup": {
       "checked": false,
@@ -1473,11 +1481,11 @@
       {
         "duration": 0,
         "icon": "OUT",
-        "text": "$ grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo -o json --fail-on critical",
+        "text": "$ grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo -o json --fail-on critical",
         "tool": "grype"
       },
       {
-        "duration": 0.018417000770568848,
+        "duration": 0.018603086471557617,
         "icon": "OK",
         "text": "grype: 1 lines output (0.0s)",
         "tool": "grype"
@@ -1497,11 +1505,11 @@
       {
         "duration": 0,
         "icon": "OUT",
-        "text": "$ osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo --format json",
+        "text": "$ osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo --format json",
         "tool": "osv_scanner"
       },
       {
-        "duration": 0.018831968307495117,
+        "duration": 0.018800020217895508,
         "icon": "OK",
         "text": "osv_scanner: 1 lines output (0.0s)",
         "tool": "osv_scanner"
@@ -1551,10 +1559,10 @@
     "isWorking": false,
     "metrics": {
       "cachedTokens": 0,
-      "completionTokens": 94,
-      "promptTokens": 4987,
-      "tokPerSec": 3.339180099869427,
-      "ttft": 20.81510901451111
+      "completionTokens": 103,
+      "promptTokens": 5038,
+      "tokPerSec": 9.875519528901028,
+      "ttft": 8.134267091751099
     },
     "mode": "autopilot",
     "modeSelection": {
@@ -1589,8 +1597,8 @@
       "hasTokenizerConfig": true,
       "isMultimodal": true,
       "isSupported": true,
-      "modelType": "qwen3_5",
-      "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+      "modelType": "qwen3_5_moe",
+      "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
       "supportMessage": "Supported Qwen multimodal/VL family. The app routes text/image context through the hybrid vision runtime with tool/parser auto-detection and cache topology."
     },
     "modelFolderPicker": {
@@ -2265,19 +2273,19 @@
         "tool": "search_cve"
       },
       "dependency": {
-        "command": "osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo --format json",
+        "command": "osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo --format json",
         "status": "done",
         "summary": "1 lines output",
         "tool": "osv_scanner"
       },
       "sbom": {
-        "command": "syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo -o json",
+        "command": "syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo -o json",
         "status": "done",
         "summary": "1 lines output",
         "tool": "syft"
       },
       "secrets": {
-        "command": "trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo --json",
+        "command": "trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo --json",
         "status": "done",
         "summary": "1 lines output",
         "tool": "trufflehog"
@@ -2373,11 +2381,11 @@
       },
       "commandTranscripts": [
         {
-          "command": "/bin/zsh -c find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo -maxdepth 2 -type f | sort",
-          "outputPreview": "$ /bin/zsh -c find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo -maxdepth 2 -type f | sort",
+          "command": "/bin/zsh -c find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo -maxdepth 2 -type f | sort",
+          "outputPreview": "$ /bin/zsh -c find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo -maxdepth 2 -type f | sort",
           "source": "activityFeed",
           "status": "OUT",
-          "timestamp": 1783323652.77265,
+          "timestamp": 1783323829.129947,
           "tool": "run_shell"
         },
         {
@@ -2385,7 +2393,7 @@
           "outputPreview": "run_shell: 4 lines output (0.0s)",
           "source": "activityFeed",
           "status": "OK",
-          "timestamp": 1783323652.779866,
+          "timestamp": 1783323829.1374269,
           "tool": "run_shell"
         },
         {
@@ -2393,15 +2401,15 @@
           "outputPreview": "Running trufflehog",
           "source": "activityFeed",
           "status": "RUN",
-          "timestamp": 1783323652.780168,
+          "timestamp": 1783323829.13771,
           "tool": "trufflehog"
         },
         {
-          "command": "trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo --json",
-          "outputPreview": "$ trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo --json",
+          "command": "trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo --json",
+          "outputPreview": "$ trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo --json",
           "source": "activityFeed",
           "status": "OUT",
-          "timestamp": 1783323652.780169,
+          "timestamp": 1783323829.137711,
           "tool": "trufflehog"
         },
         {
@@ -2409,7 +2417,7 @@
           "outputPreview": "trufflehog: 1 lines output (0.0s)",
           "source": "activityFeed",
           "status": "OK",
-          "timestamp": 1783323652.79918,
+          "timestamp": 1783323829.1569529,
           "tool": "trufflehog"
         },
         {
@@ -2417,15 +2425,15 @@
           "outputPreview": "Running syft",
           "source": "activityFeed",
           "status": "RUN",
-          "timestamp": 1783323652.799448,
+          "timestamp": 1783323829.157206,
           "tool": "syft"
         },
         {
-          "command": "syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo -o json",
-          "outputPreview": "$ syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo -o json",
+          "command": "syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo -o json",
+          "outputPreview": "$ syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo -o json",
           "source": "activityFeed",
           "status": "OUT",
-          "timestamp": 1783323652.799448,
+          "timestamp": 1783323829.157207,
           "tool": "syft"
         },
         {
@@ -2433,7 +2441,7 @@
           "outputPreview": "syft: 1 lines output (0.0s)",
           "source": "activityFeed",
           "status": "OK",
-          "timestamp": 1783323652.8182778,
+          "timestamp": 1783323829.175988,
           "tool": "syft"
         },
         {
@@ -2441,15 +2449,15 @@
           "outputPreview": "Running grype",
           "source": "activityFeed",
           "status": "RUN",
-          "timestamp": 1783323652.81854,
+          "timestamp": 1783323829.1762462,
           "tool": "grype"
         },
         {
-          "command": "grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo -o json --fail-on critical",
-          "outputPreview": "$ grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo -o json --fail-on critical",
+          "command": "grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo -o json --fail-on critical",
+          "outputPreview": "$ grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo -o json --fail-on critical",
           "source": "activityFeed",
           "status": "OUT",
-          "timestamp": 1783323652.81854,
+          "timestamp": 1783323829.1762462,
           "tool": "grype"
         },
         {
@@ -2457,7 +2465,7 @@
           "outputPreview": "grype: 1 lines output (0.0s)",
           "source": "activityFeed",
           "status": "OK",
-          "timestamp": 1783323652.837062,
+          "timestamp": 1783323829.1949492,
           "tool": "grype"
         },
         {
@@ -2465,15 +2473,15 @@
           "outputPreview": "Running osv_scanner",
           "source": "activityFeed",
           "status": "RUN",
-          "timestamp": 1783323652.837522,
+          "timestamp": 1783323829.19541,
           "tool": "osv_scanner"
         },
         {
-          "command": "osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo --format json",
-          "outputPreview": "$ osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo --format json",
+          "command": "osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo --format json",
+          "outputPreview": "$ osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo --format json",
           "source": "activityFeed",
           "status": "OUT",
-          "timestamp": 1783323652.837523,
+          "timestamp": 1783323829.195411,
           "tool": "osv_scanner"
         },
         {
@@ -2481,7 +2489,7 @@
           "outputPreview": "osv_scanner: 1 lines output (0.0s)",
           "source": "activityFeed",
           "status": "OK",
-          "timestamp": 1783323652.8564591,
+          "timestamp": 1783323829.214315,
           "tool": "osv_scanner"
         },
         {
@@ -2489,7 +2497,7 @@
           "outputPreview": "Running search_cve",
           "source": "activityFeed",
           "status": "RUN",
-          "timestamp": 1783323652.85693,
+          "timestamp": 1783323829.214714,
           "tool": "search_cve"
         },
         {
@@ -2497,7 +2505,7 @@
           "outputPreview": "$ echo handled by callback",
           "source": "activityFeed",
           "status": "OUT",
-          "timestamp": 1783323652.85693,
+          "timestamp": 1783323829.214715,
           "tool": "search_cve"
         },
         {
@@ -2505,15 +2513,15 @@
           "outputPreview": "search_cve: 1 lines (0.1s)",
           "source": "activityFeed",
           "status": "OK",
-          "timestamp": 1783323652.857935,
+          "timestamp": 1783323829.2156792,
           "tool": "search_cve"
         },
         {
           "command": "run_shell",
-          "outputPreview": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo/.env.example\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo/Dockerfile\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo/package-lock.json\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-cemyfba8/synthetic-vulnerable-repo/package.json\n",
+          "outputPreview": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo/.env.example\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo/Dockerfile\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo/package-lock.json\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-real-qwen-repo-fixture-0z3lddb2/synthetic-vulnerable-repo/package.json\n",
           "source": "rawResults",
           "status": "captured",
-          "timestamp": 1783323652.779897,
+          "timestamp": 1783323829.137457,
           "tool": "run_shell"
         },
         {
@@ -2521,7 +2529,7 @@
           "outputPreview": "{\"DetectorName\": \"Generic API Key\", \"Raw\": \"EXPLOITBOT_FAKE_TOKEN_DO_NOT_USE\", \"SourceMetadata\": {\"Data\": {\"Git\": {\"file\": \".env.example\", \"repository\": \"synthetic-vulnerable-repo\"}}}}\n",
           "source": "rawResults",
           "status": "captured",
-          "timestamp": 1783323652.799212,
+          "timestamp": 1783323829.156985,
           "tool": "trufflehog"
         },
         {
@@ -2529,7 +2537,7 @@
           "outputPreview": "{\"artifacts\": [{\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, {\"name\": \"minimist\", \"version\": \"0.0.8\", \"type\": \"npm\"}], \"source\": {\"type\": \"directory\", \"target\": \"synthetic-vulnerable-repo\"}}\n",
           "source": "rawResults",
           "status": "captured",
-          "timestamp": 1783323652.818314,
+          "timestamp": 1783323829.176022,
           "tool": "syft"
         },
         {
@@ -2537,7 +2545,7 @@
           "outputPreview": "{\"matches\": [{\"vulnerability\": {\"id\": \"CVE-2021-23337\", \"severity\": \"High\"}, \"artifact\": {\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, \"matchDetails\": [{\"type\": \"exact-direct-match\"}]}]}\n",
           "source": "rawResults",
           "status": "captured",
-          "timestamp": 1783323652.837106,
+          "timestamp": 1783323829.194993,
           "tool": "grype"
         },
         {
@@ -2545,7 +2553,7 @@
           "outputPreview": "{\"results\": [{\"packageSource\": {\"path\": \"package-lock.json\"}, \"packages\": [{\"package\": {\"name\": \"lodash\", \"ecosystem\": \"npm\"}, \"vulnerabilities\": [{\"id\": \"GHSA-35jh-r3h4-6jhm\"}]}]}]}\n",
           "source": "rawResults",
           "status": "captured",
-          "timestamp": 1783323652.8565102,
+          "timestamp": 1783323829.214361,
           "tool": "osv_scanner"
         },
         {
@@ -2553,7 +2561,7 @@
           "outputPreview": "No CVEs found for query: lodash 4.17.11 CVE",
           "source": "rawResults",
           "status": "captured",
-          "timestamp": 1783323652.857925,
+          "timestamp": 1783323829.2156692,
           "tool": "search_cve"
         },
         {
@@ -2562,7 +2570,7 @@
           "source": "tabActivities",
           "status": "done",
           "tab": "supplyChain",
-          "timestamp": 1783323652.857938,
+          "timestamp": 1783323829.215682,
           "tool": "search_cve"
         }
       ],
