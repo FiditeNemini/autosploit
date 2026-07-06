@@ -23,11 +23,11 @@
     "tools",
     "visual"
   ],
-  "generatedAt": "2026-07-05T17:20:29-0700",
+  "generatedAt": "2026-07-05T17:35:45-0700",
   "ok": true,
   "processEvidence": {
     "appRows": [
-      "2102 124640 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+      "10368 124816 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
     ],
     "engineProcessRows": []
   },
