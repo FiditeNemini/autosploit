@@ -165,6 +165,9 @@ def wait_for_final_marker(base_url: str, marker: str, timeout: float = 360.0) ->
             assistant_messages = [item for item in messages if item.get("role") == "assistant"]
             last_is_assistant = (messages[-1].get("role") if messages else "") == "assistant"
             last_assistant_text = str(assistant_messages[-1].get("content") or "").strip() if assistant_messages else ""
+            missing_tools = missing_expected_tools(messages)
+            if missing_tools and assistant_messages and last_is_assistant:
+                raise StalledFinalAnswer(messages, state, "assistant stopped before all expected repo tools")
             if (
                 repo_proof.ordered_subsequence(sequence, repo_proof.EXPECTED_TOOLS)
                 and assistant_messages
@@ -266,6 +269,51 @@ def final_followup_prompt() -> str:
         "Do not call more tools. Start the first line with this exact marker and then give a concise evidence summary: "
         f"{FINAL_MARKER}. Mention package.json, .env.example, EXPLOITBOT_FAKE_TOKEN_DO_NOT_USE, "
         "CVE-2021-23337, and GHSA-35jh-r3h4-6jhm."
+    )
+
+
+def missing_expected_tools(messages: list[dict[str, Any]]) -> list[str]:
+    observed = repo_proof.tool_sequence(messages)
+    return [tool for tool in repo_proof.EXPECTED_TOOLS if tool not in observed]
+
+
+def continue_remaining_tool_prompt(repo: Path, missing_tools: list[str]) -> str:
+    call_args: dict[str, dict[str, Any]] = {
+        "run_shell": {"command": f"find {repo} -maxdepth 2 -type f | sort"},
+        "trufflehog": {"source_type": "filesystem", "target": str(repo), "verified_only": False},
+        "syft": {"target": str(repo), "output": "json"},
+        "grype": {"target": str(repo), "fail_on": "critical"},
+        "osv_scanner": {"target": str(repo), "format": "json"},
+        "search_cve": {"query": "lodash 4.17.11 CVE", "product": "lodash", "max_results": 5},
+    }
+    serialized = "\n".join(
+        f"<tool_call>{json.dumps({'name': name, 'arguments': call_args[name]}, separators=(',', ':'))}</tool_call>"
+        for name in missing_tools
+        if name in call_args
+    )
+    return (
+        "The previous assistant stream stalled before the repo/codebase workflow finished. "
+        "Do not repeat tools already present in the transcript. Emit only the remaining exact Qwen XML tool calls now, "
+        "with no markdown, phase plan, or prose before the tool calls. "
+        f"Remaining tools: {', '.join(missing_tools)}.\n"
+        f"{serialized}"
+    )
+
+
+def stop_stalled_app_stream() -> None:
+    try:
+        app_request("POST", "/stop", "", timeout=5.0)
+    except Exception:
+        return
+    real_qwen.wait_until(
+        lambda: (
+            state
+            if not (state := app_request("GET", "/state", timeout=2.0)).get("isWorking")
+            and not state.get("isStreaming")
+            else None
+        ),
+        "app stream stop after stalled exact-tool turn",
+        timeout=15.0,
     )
 
 
@@ -373,10 +421,12 @@ def run() -> None:
             report["preflightToolCatalog"] = catalog
 
             messages: list[dict[str, Any]] | None = None
-            max_final_attempts = int(os.environ.get("EXPLOITBOT_REAL_QWEN_REPO_FINAL_ATTEMPTS", "3"))
+            max_final_attempts = int(os.environ.get("EXPLOITBOT_REAL_QWEN_REPO_FINAL_ATTEMPTS", "4"))
             for attempt in range(1, max_final_attempts + 1):
                 if attempt == 1:
                     app_request("POST", "/send", prompt, timeout=15.0)
+                elif messages and missing_expected_tools(messages):
+                    app_request("POST", "/send", continue_remaining_tool_prompt(repo, missing_expected_tools(messages)), timeout=15.0)
                 else:
                     app_request("POST", "/send", final_followup_prompt(), timeout=15.0)
                 try:
@@ -416,12 +466,15 @@ def run() -> None:
                     if attempt == max_final_attempts:
                         raise
                 except StalledFinalAnswer as exc:
+                    messages = exc.messages
+                    missing_tools = missing_expected_tools(exc.messages)
                     report["finalAnswerAttempts"].append(
                         {
                             "attempt": attempt,
                             "status": "stalled-final-answer",
                             "note": exc.note,
                             "toolSequence": repo_proof.tool_sequence(exc.messages),
+                            "missingTools": missing_tools,
                             "lastAssistantPreview": next(
                                 (
                                     str(item.get("content") or "")[:1000]
@@ -432,6 +485,13 @@ def run() -> None:
                             ),
                         }
                     )
+                    if attempt < max_final_attempts:
+                        stop_stalled_app_stream()
+                    if missing_tools and attempt < max_final_attempts:
+                        continue
+                    if not missing_tools and attempt < max_final_attempts:
+                        report["finalAnswerAttempts"][-1]["note"] += "; all expected repo tools are complete, retrying final marker only"
+                        continue
                     raise
             require(messages is not None, "real Qwen repo final answer missing after attempts", report["finalAnswerAttempts"])
             state = app_request("GET", "/state", timeout=10.0)
