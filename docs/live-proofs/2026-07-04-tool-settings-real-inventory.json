@@ -1,7 +1,7 @@
 {
   "errorPentestTools": [],
-  "finishedAt": "2026-07-06T01:19:53-0700",
-  "installedCount": 44,
+  "finishedAt": "2026-07-06T03:50:05-0700",
+  "installedCount": 46,
   "installedLoopbackTools": {
     "curl": {
       "category": "system",
@@ -32,7 +32,7 @@
   "missingPentestTools": [],
   "ok": true,
   "proofType": "tool-settings-real-current-machine-inventory",
-  "startedAt": "2026-07-06T01:19:48-0700",
+  "startedAt": "2026-07-06T03:49:58-0700",
   "status": {
     "fullPentestToolchainInstalled": "PASS",
     "settingsCurrentMachineDetection": "PASS"
@@ -50,7 +50,7 @@
       "missingCount": 0,
       "requiresNetworkInstall": false
     },
-    "installedCount": 44,
+    "installedCount": 46,
     "installingCount": 0,
     "isInstalling": false,
     "missingByCategory": {},
@@ -339,6 +339,22 @@
         "version": "1.9.4"
       },
       {
+        "category": "supplychain",
+        "installMethod": "homebrew",
+        "name": "trivy",
+        "path": "/opt/homebrew/bin/trivy",
+        "status": "installed",
+        "version": ""
+      },
+      {
+        "category": "supplychain",
+        "installMethod": "uv",
+        "name": "checkov",
+        "path": "/Users/eric/.local/bin/checkov",
+        "status": "installed",
+        "version": ""
+      },
+      {
         "category": "exploit",
         "installMethod": "homebrew",
         "name": "metasploit",
@@ -413,7 +429,7 @@
     ]
   },
   "toolSettingsActions": {
-    "installedCount": 44,
+    "installedCount": 46,
     "lastAction": "detectCurrentMachine",
     "missingCount": 0,
     "status": "done",

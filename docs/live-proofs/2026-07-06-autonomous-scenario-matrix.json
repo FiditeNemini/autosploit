@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-06T03:39:47-0700",
+  "generatedAt": "2026-07-06T03:53:28-0700",
   "notes": [
     "Rows aggregate existing live artifacts; artifact generatedAt values show whether evidence is fresh or older.",
     "Webserver SQLi and repo/codebase supply-chain rows are fresh 2026-07-06 app-backed scenarios added for this matrix.",
@@ -480,6 +480,83 @@
     {
       "artifacts": [
         {
+          "artifact": "docs/live-proofs/2026-07-06-container-iac-supply-chain-scenario.json",
+          "generatedAt": "2026-07-06T03:48:32-0700",
+          "proofType": "container-iac-supply-chain-scenario-live",
+          "status": "PASS"
+        }
+      ],
+      "autonomyBoundary": "Live app/tool/report wiring is proven against a local container/IaC fixture, but no real Qwen artifact is attached to this row yet.",
+      "cacheProof": {
+        "hybridSSM": false,
+        "paged": false,
+        "prefix": false,
+        "q4KV": false
+      },
+      "currentRunStatus": "PASS",
+      "failures": [],
+      "label": "Local container and IaC supply-chain scenario",
+      "modelRequired": false,
+      "modelToolChoiceEvidence": "not_proven",
+      "observedTools": [
+        "checkov",
+        "grype",
+        "run_shell",
+        "search_cve",
+        "syft",
+        "trivy"
+      ],
+      "requiredTools": [
+        "run_shell",
+        "syft",
+        "grype",
+        "trivy",
+        "checkov",
+        "search_cve"
+      ],
+      "scenarioId": "container_iac_supply_chain_chain",
+      "stageEvidence": {
+        "evidence": [
+          "/messages",
+          "/results",
+          "/state terminal transcripts"
+        ],
+        "exploit_or_validate": [
+          "configuration validation only; no container execution or privilege escalation"
+        ],
+        "probe": [
+          "syft SBOM",
+          "grype vulnerability scan",
+          "trivy vuln/config scan",
+          "checkov IaC scan"
+        ],
+        "prove": [
+          "nginx:1.16",
+          "CVE-2019-20372",
+          "CKV_K8S_20",
+          "allowPrivilegeEscalation: true"
+        ],
+        "report": [
+          "report finding action and report generate route"
+        ],
+        "surface": [
+          "run_shell Dockerfile/compose/Kubernetes manifest inventory"
+        ]
+      },
+      "stages": [
+        "surface",
+        "probe",
+        "prove",
+        "exploit_or_validate",
+        "evidence",
+        "report"
+      ],
+      "status": "PASS",
+      "toolChoiceMode": "scripted_mock_tool_sequence"
+    },
+    {
+      "artifacts": [
+        {
           "artifact": "docs/live-proofs/2026-07-05-report-finding-actions-current.json",
           "generatedAt": "2026-07-05T16:26:07-0700",
           "proofType": "report-finding-actions-live",
@@ -549,10 +626,10 @@
       "toolChoiceMode": "direct_app_action_proof"
     }
   ],
-  "scenarioCount": 7,
+  "scenarioCount": 8,
   "status": "PASS",
   "statusCounts": {
     "FAIL": 0,
-    "PASS": 7
+    "PASS": 8
   }
 }

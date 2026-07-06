@@ -154,6 +154,24 @@ SCENARIOS = [
         current_run_required=True,
     ),
     ScenarioSpec(
+        scenario_id="container_iac_supply_chain_chain",
+        label="Local container and IaC supply-chain scenario",
+        artifacts=("docs/live-proofs/2026-07-06-container-iac-supply-chain-scenario.json",),
+        required_tools=("run_shell", "syft", "grype", "trivy", "checkov", "search_cve"),
+        stage_evidence={
+            "surface": ["run_shell Dockerfile/compose/Kubernetes manifest inventory"],
+            "probe": ["syft SBOM", "grype vulnerability scan", "trivy vuln/config scan", "checkov IaC scan"],
+            "prove": ["nginx:1.16", "CVE-2019-20372", "CKV_K8S_20", "allowPrivilegeEscalation: true"],
+            "exploit_or_validate": ["configuration validation only; no container execution or privilege escalation"],
+            "evidence": ["/messages", "/results", "/state terminal transcripts"],
+            "report": ["report finding action and report generate route"],
+        },
+        tool_choice_mode="scripted_mock_tool_sequence",
+        model_tool_choice_evidence="not_proven",
+        autonomy_boundary="Live app/tool/report wiring is proven against a local container/IaC fixture, but no real Qwen artifact is attached to this row yet.",
+        current_run_required=True,
+    ),
+    ScenarioSpec(
         scenario_id="report_generation_from_evidence",
         label="Report generation/export from confirmed findings",
         artifacts=(

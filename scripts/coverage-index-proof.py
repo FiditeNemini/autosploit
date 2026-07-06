@@ -225,6 +225,7 @@ EXPECTED_FAMILY_FANOUT_TOOLS = {
 EXPECTED_RESULT_PARSER_STRUCTURED_TOOLS = [
     "arjun",
     "bandit",
+    "checkov",
     "dalfox",
     "dnsx",
     "exiftool",
@@ -256,6 +257,7 @@ EXPECTED_RESULT_PARSER_STRUCTURED_TOOLS = [
     "syft",
     "testssl",
     "theharvester",
+    "trivy",
     "trufflehog",
     "wpscan",
 ]

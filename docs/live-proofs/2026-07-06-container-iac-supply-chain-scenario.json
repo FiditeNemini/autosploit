@@ -1,0 +1,264 @@
+{
+  "checks": {
+    "checkovEvidence": "PASS",
+    "containerSurfaceEvidence": "PASS",
+    "cveContextEvidence": "PASS",
+    "grypeEvidence": "PASS",
+    "iacRiskProof": "PASS",
+    "modelContinuedAfterTools": "PASS",
+    "modelReceivedContainerIacToolSchemas": "PASS",
+    "orderedToolSequence": "PASS",
+    "rawResultEvidence": "PASS",
+    "reportGeneratedFromEvidence": "PASS",
+    "safeLocalBoundary": "PASS",
+    "syftEvidence": "PASS",
+    "terminalTranscripts": "PASS",
+    "trivyEvidence": "PASS",
+    "verboseToolTranscript": "PASS"
+  },
+  "expectedToolSequence": [
+    "run_shell",
+    "syft",
+    "grype",
+    "trivy",
+    "checkov",
+    "search_cve"
+  ],
+  "finishedAt": "2026-07-06T03:48:32-0700",
+  "fixturePath": "/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac",
+  "generatedAt": "2026-07-06T03:48:32-0700",
+  "messages": [
+    {
+      "content": "Authorized local container/IaC lab only. Use run_shell, syft, grype, trivy, checkov, and search_cve against this throwaway local fixture only: /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac. Surface Dockerfile and Kubernetes files, prove EXPLOITBOT_CONTAINER_IAC_PROOF, nginx:1.16, CVE-2019-20372, CKV_K8S_20, and allowPrivilegeEscalation: true, then summarize with CONTAINER_IAC_SUPPLY_CHAIN_FINAL.",
+      "role": "user"
+    },
+    {
+      "content": "Starting local container and IaC validation workflow.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 0 of 0 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets: none yet.\nCVE assist: semantic embedding search is enabled when cve_embedder.py and stored CVE embeddings are available; oth",
+      "contextSnippetCount": 0,
+      "role": "assistant",
+      "toolSchemaCount": 33,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "run_shell",
+        "trivy",
+        "checkov",
+        "osv_scanner",
+        "semgrep",
+        "bandit",
+        "syft",
+        "nuclei",
+        "grype",
+        "trufflehog",
+        "nmap",
+        "sqlmap",
+        "metasploit",
+        "pwncat",
+        "linpeas",
+        "dnsx",
+        "feroxbuster",
+        "dalfox",
+        "graphqlmap",
+        "netexec",
+        "tshark",
+        "hashcat",
+        "sherlock",
+        "httpx",
+        "katana",
+        "hydra",
+        "masscan",
+        "ffuf",
+        "wpscan",
+        "exiftool"
+      ]
+    },
+    {
+      "content": "Tool request: run_shell\n$ /bin/zsh -c find /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -maxdepth 3 -type f | sort && grep -R \"EXPLOITBOT_CONTAINER_IAC_PROOF\\|nginx:1.16\\|allowPrivilegeEscalation: true\" -n /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac\nArguments:\n{\n  \"command\" : \"find \\/tmp\\/exploitbot-autonomous-scenario-fixtures\\/synthetic-container-iac -maxdepth 3 -type f | sort && grep -R \\\"EXPLOITBOT_CONTAINER_IAC_PROOF\\\\|nginx:1.16\\\\|allowPrivilegeEscalation: true\\\" -n \\/tmp\\/exploitbot-autonomous-scenario-fixtures\\/synthetic-container-iac\"\n}\n\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/Dockerfile\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/docker-compose.yml\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/k8s/deployment.yaml\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/Dockerfile:1:FROM nginx:1.16\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/Dockerfile:2:LABEL proof=EXPLOITBOT_CONTAINER_IAC_PROOF\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/k8s/deployment.yaml:10:          image: nginx:1.16\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/k8s/deployment.yaml:12:            allowPrivilegeEscalation: true\n/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/docker-compose.yml:3:    image: nginx:1.16\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "run_shell"
+    },
+    {
+      "content": "Tool request: syft\n$ syft /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -o json\nArguments:\n{\n  \"output\" : \"json\",\n  \"target\" : \"\\/tmp\\/exploitbot-autonomous-scenario-fixtures\\/synthetic-container-iac\"\n}\n\n{\"source\": {\"target\": \"synthetic-container-iac\"}, \"artifacts\": [{\"name\": \"nginx\", \"version\": \"1.16\", \"type\": \"deb\"}, {\"name\": \"openssl\", \"version\": \"1.1.1\", \"type\": \"deb\"}]}\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "syft"
+    },
+    {
+      "content": "Tool request: grype\n$ grype /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -o json --fail-on high\nArguments:\n{\n  \"fail_on\" : \"high\",\n  \"target\" : \"\\/tmp\\/exploitbot-autonomous-scenario-fixtures\\/synthetic-container-iac\"\n}\n\n{\"matches\": [{\"vulnerability\": {\"id\": \"CVE-2019-20372\", \"severity\": \"High\"}, \"artifact\": {\"name\": \"nginx\", \"version\": \"1.16\"}}]}\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "grype"
+    },
+    {
+      "content": "Tool request: trivy\n$ trivy fs --format json --quiet --severity HIGH,CRITICAL /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac\nArguments:\n{\n  \"scan_type\" : \"fs\",\n  \"severity\" : \"HIGH,CRITICAL\",\n  \"target\" : \"\\/tmp\\/exploitbot-autonomous-scenario-fixtures\\/synthetic-container-iac\"\n}\n\n{\"Results\": [{\"Target\": \"Dockerfile\", \"Vulnerabilities\": [{\"VulnerabilityID\": \"CVE-2019-20372\", \"PkgName\": \"nginx\", \"InstalledVersion\": \"1.16\", \"Severity\": \"HIGH\", \"Title\": \"nginx vulnerable image package\", \"Description\": \"nginx:1.16 package evidence for EXPLOITBOT_CONTAINER_IAC_PROOF\"}]}, {\"Target\": \"k8s/deployment.yaml\", \"Misconfigurations\": [{\"ID\": \"AVD-KSV-0012\", \"Title\": \"Container allows privilege escalation\", \"Severity\": \"HIGH\", \"Message\": \"allowPrivilegeEscalation: true is present in the local Kubernetes fixture\"}]}]}\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "trivy"
+    },
+    {
+      "content": "Tool request: checkov\n$ checkov -d /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac -o json --quiet --framework kubernetes\nArguments:\n{\n  \"framework\" : \"kubernetes\",\n  \"target\" : \"\\/tmp\\/exploitbot-autonomous-scenario-fixtures\\/synthetic-container-iac\"\n}\n\n{\"results\": {\"failed_checks\": [{\"check_id\": \"CKV_K8S_20\", \"check_name\": \"Containers should not run with allowPrivilegeEscalation\", \"file_path\": \"/k8s/deployment.yaml\", \"resource\": \"Deployment.exploitbot-container-iac-proof.web\", \"severity\": \"HIGH\", \"guideline\": \"Set securityContext.allowPrivilegeEscalation to false for the local fixture workload.\"}]}}\n",
+      "role": "toolCall",
+      "status": "ok 0.0s",
+      "tool": "checkov"
+    },
+    {
+      "content": "Tool request: search_cve\n$ echo handled by callback\nArguments:\n{\n  \"max_results\" : 5,\n  \"query\" : \"CVE-2019-20372 nginx 1.16 container\",\n  \"tags\" : \"container,nginx,cve\"\n}\n\nNo CVEs found for query: CVE-2019-20372 nginx 1.16 container",
+      "role": "toolCall",
+      "status": "ok 0.1s",
+      "tool": "search_cve"
+    },
+    {
+      "content": "CONTAINER_IAC_SUPPLY_CHAIN_FINAL: inventoried the local Dockerfile and Kubernetes manifest, proved nginx:1.16 with CVE-2019-20372 through SBOM/vulnerability scanner evidence, proved allowPrivilegeEscalation: true with Trivy/Checkov IaC evidence, and queued a report.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 12 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=6 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/Dockerf",
+      "contextSelections": [
+        {
+          "bodyHash": "0737b9c415ce27b1",
+          "source": "tool.output",
+          "tags": "tool,run_shell",
+          "title": "run_shell"
+        },
+        {
+          "bodyHash": "a96a1fb5cdcdbff9",
+          "source": "finding",
+          "tags": "vuln,high,checkov,iac,policy,checkov,ckv_k8s_20",
+          "title": "HIGH CKV_K8S_20 Containers should not run with allowPrivilegeEscalation"
+        },
+        {
+          "bodyHash": "a80450e75459f0bd",
+          "source": "tool.output",
+          "tags": "tool,trivy",
+          "title": "trivy"
+        },
+        {
+          "bodyHash": "0f5f33b24fd5c5d0",
+          "source": "finding",
+          "tags": "vuln,high,trivy,container,supply-chain,trivy,nginx,CVE-2019-20372",
+          "title": "HIGH CVE-2019-20372"
+        }
+      ],
+      "contextSnippetCount": 4,
+      "role": "assistant"
+    }
+  ],
+  "notes": [
+    "Scenario uses a throwaway local container/IaC fixture and deterministic scanner shims on isolated PATH.",
+    "No Docker daemon, privileged container, external registry, or external target is used.",
+    "This proves app orchestration, verbose transcript, parser/raw result ingestion, CVE context callback, and report route wiring."
+  ],
+  "ok": true,
+  "proofLevel": "live-app-mock-engine-real-tool-executor-fake-local-container-iac-scanners",
+  "proofType": "container-iac-supply-chain-scenario-live",
+  "reportRenderActions": {
+    "findingCount": 1,
+    "htmlChars": 3559,
+    "htmlPreview": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n<style>\nbody { font-family: Georgia, serif; font-size: 13px; line-height: 1.7; color: #1a1a1a; max-width: 800px; margin: 40px auto; padding: 0 20px; }\nh1 { font-family: -apple-system, sans-serif; font-size: 22px; margin-bottom: 4px; }\nh2 { font-family: -apple-system, sans-serif; font-size: 16px; margin-top: 24px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }\nh3 { font-family: -apple-system, sans-serif; font-size: 14px; margin-top: 16px; }\n.confidential { text-align: center; font-family: monospace; font-size: 10px; letter-spacing: 3px; color: #999; text-transform: uppercase; margin-bottom: 30px; }\n.meta { font-size: 11px; color: #888; font-family: monospace; margin-bottom: 20px; }\ntable { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; }\nth { background: #f5f5f5; border-bottom: 2px solid #ddd; padding: 6px 10px; text-align: left; font-family: -apple-system, sans-serif; }\ntd { padding: 6px 10px; border-bottom: 1px solid #eee; }\n.finding { border: 1px solid #ddd; border-radius: 6px; padding: 12px; margin: 10px 0; }\n.finding.critical { border-left: 4px solid #ef4444; }\n.finding.high { border-left: 4px solid #f97316; }\n.finding.medium { border-left: 4px solid #f59e0b; }\n.finding.low { border-left: 4px solid #3b82f6; }\n.sev { font-family: monospace; font-size: 10px; font-weight: bold; padding: 1px 6px; border-radius: 3px; }\n.sev.critical { background: #fef2f2; color: #dc2626; }\n.sev.high { background: #fff7ed; color: #ea580c; }\n.sev.medium { background: #fffbeb; color: #d97706; }\n.sev.low { background: #eff6ff; color: #2563eb; }\ncode { font-family: monospace; font-size: 11px; background: #f0f0f0; padding: 1px 4px; border-radius: 2px; }\n@media print { body { margin: 0; } .finding { break-inside: avoid; } }\n</style>\n</head>\n<body>\n<div class=\"confidential\">CONFIDENTIAL</div>\n<h1>Penetration Test Report</h1>\n<div class=\"meta\">\nClient: Unknown<br>\nAssessment Date: July 6, 2026<br>\nAssessor: exploitbot (autonomous)<br>\nClassification: Confidential\n</div>\n\n<h2>1. Executive Summary</h2>\n<p>A penetration test was conducted against <strong>Unknown</strong>. The assessment identified <strong>1 vulnerabilities</strong> including 0 critical, 1 high, 0 medium, and 0 low severity findings.</p>\n\n<h2>2. Findings Summary</h2>\n<table>\n<tr><th>#</th><th>Finding</th><th>Severity</th><th>CVSS</th><th>Target</th><th>Status</th></tr>\n<tr><td>1</td><td>Container and Kubernetes IaC risk in local fixture</td><td><span class=\"sev high\">HIGH</span></td><td>8.0</td><td><code>/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/Dockerfile and k8s/deployment.yaml</code></td><td>confirmed</td></tr>\n</table>\n\n<h2>3. Detailed Findings</h2>\n<div class=\"finding high\">\n<h3><span class=\"sev high\">HIGH</span> Container and Kubernetes IaC risk in local fixture</h3>\n<p><strong>Target:</strong> <code>/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac/Dockerfile and k8s/deployment.yaml</code></p>\n<p><strong>CVSS:</strong> 8.0</p>\n<p><strong>CVE:</strong> CVE-2019-20372</p>\n<p><strong>Description:</strong> The local fixture uses nginx:1.16 and permits allowPrivilegeEscalation: true. EXPLOITBOT_CONTAINER_IAC_PROOF</p>\n<h3>Impact</h3><p>A vulnerable image tag combined with permissive container security context increases exploit blast radius.</p>\n<h3>Remediation</h3><p>Use a patched image tag, pin digest provenance, set allowPrivilegeEscalation false, and enforce least-privilege pod security controls.</p>\n</div>\n\n</body>\n</html>",
+    "lastAction": "generate",
+    "status": "done",
+    "summary": "generateReport 1 findings",
+    "template": "Full Pentest Report"
+  },
+  "resultsSummary": {
+    "rawResultCount": 6,
+    "rawTools": [
+      "run_shell",
+      "syft",
+      "grype",
+      "trivy",
+      "checkov",
+      "search_cve"
+    ],
+    "vulnCount": 6,
+    "vulnSources": [
+      "checkov",
+      "grype",
+      "syft",
+      "trivy"
+    ]
+  },
+  "scenarioId": "container_iac_supply_chain_chain",
+  "stageEvidence": {
+    "evidence": [
+      "/messages tool cards",
+      "/results rawResults/vulns",
+      "/state terminal transcripts"
+    ],
+    "exploit_or_validate": [
+      "configuration validation only; no container execution or privilege escalation"
+    ],
+    "probe": [
+      "syft SBOM",
+      "grype vulnerability scan",
+      "trivy vuln/config scan",
+      "checkov IaC scan"
+    ],
+    "prove": [
+      "nginx:1.16",
+      "CVE-2019-20372",
+      "CKV_K8S_20",
+      "allowPrivilegeEscalation: true"
+    ],
+    "report": [
+      "/qa/finding-wizard-submit",
+      "/qa/report-generate-action"
+    ],
+    "surface": [
+      "run_shell Dockerfile/compose/Kubernetes manifest inventory"
+    ]
+  },
+  "stages": [
+    "surface",
+    "probe",
+    "prove",
+    "exploit_or_validate",
+    "evidence",
+    "report"
+  ],
+  "startedAt": "2026-07-06T03:48:29-0700",
+  "status": "PASS",
+  "toolSchemaNames": [
+    "bandit",
+    "checkov",
+    "dalfox",
+    "dnsx",
+    "exiftool",
+    "feroxbuster",
+    "ffuf",
+    "graphqlmap",
+    "grype",
+    "hashcat",
+    "httpx",
+    "hydra",
+    "katana",
+    "linpeas",
+    "lookup_cve",
+    "masscan",
+    "metasploit",
+    "netexec",
+    "nmap",
+    "nuclei",
+    "osv_scanner",
+    "pwncat",
+    "run_shell",
+    "search_context",
+    "search_cve",
+    "semgrep",
+    "sherlock",
+    "sqlmap",
+    "syft",
+    "trivy",
+    "trufflehog",
+    "tshark",
+    "wpscan"
+  ],
+  "toolSequence": [
+    "run_shell",
+    "syft",
+    "grype",
+    "trivy",
+    "checkov",
+    "search_cve"
+  ]
+}

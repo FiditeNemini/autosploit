@@ -7,10 +7,12 @@
     "allToolsHaveSourceHooks": true,
     "allToolsInOrderedWorkflows": true,
     "authorizationPolicyCount": 3,
-    "coveredToolCount": 42,
+    "coveredToolCount": 46,
     "coveredTools": [
       "arjun",
+      "bandit",
       "bettercap",
+      "checkov",
       "chisel",
       "dalfox",
       "dnsx",
@@ -40,6 +42,7 @@
       "run_shell",
       "search_context",
       "search_cve",
+      "semgrep",
       "sherlock",
       "sliver",
       "snmpwalk",
@@ -48,25 +51,32 @@
       "syft",
       "testssl",
       "theharvester",
+      "trivy",
       "trufflehog",
       "tshark",
       "wpscan"
     ],
     "executionCounts": {
       "callback": 3,
-      "subprocess": 39
+      "subprocess": 43
     },
     "missingAuthorizationPolicies": [],
     "missingExecutionOwners": [],
     "missingSourceHooks": [],
     "missingWorkflowTools": [],
-    "toolCount": 42,
+    "toolCount": 46,
     "toolTabs": {
       "arjun": [
         "web"
       ],
+      "bandit": [
+        "supplyChain"
+      ],
       "bettercap": [
         "network"
+      ],
+      "checkov": [
+        "supplyChain"
       ],
       "chisel": [
         "network",
@@ -170,6 +180,9 @@
         "stash",
         "supplyChain"
       ],
+      "semgrep": [
+        "supplyChain"
+      ],
       "sherlock": [
         "osint"
       ],
@@ -196,6 +209,9 @@
         "osint",
         "recon"
       ],
+      "trivy": [
+        "supplyChain"
+      ],
       "trufflehog": [
         "creds",
         "supplyChain"
@@ -208,7 +224,7 @@
       ]
     }
   },
-  "generatedAt": "2026-07-05T15:12:40-0700",
+  "generatedAt": "2026-07-06T03:51:52-0700",
   "modelChainEvidence": {
     "artifact": "docs/live-proofs/2026-07-04-chained-tool-workflow.json",
     "hasQwen27": true,
@@ -307,7 +323,7 @@
   },
   "processEvidence": {
     "appRows": [
-      "30482 698992 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+      "61654 865840 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
     ],
     "engineProcessRows": []
   },
@@ -327,10 +343,10 @@
       "tabCount": 10
     },
     "toolExecutionMatrix": {
-      "coverageIndexMirror": 42,
+      "coverageIndexMirror": 46,
       "proofFileParity": true,
       "route": "/qa/tool-execution-matrix",
-      "toolCount": 42
+      "toolCount": 46
     }
   },
   "stateEvidence": {
@@ -700,8 +716,10 @@
           ],
           "subtabCount": 4,
           "tab": "supplyChain",
-          "toolCount": 9,
+          "toolCount": 13,
           "tools": [
+            "bandit",
+            "checkov",
             "grype",
             "lookup_cve",
             "nuclei",
@@ -709,7 +727,9 @@
             "run_shell",
             "search_context",
             "search_cve",
+            "semgrep",
             "syft",
+            "trivy",
             "trufflehog"
           ],
           "view": "SupplyChainTabView"
@@ -853,7 +873,7 @@
         "haiti",
         "impacket",
         "chisel",
-        "grype",
+        "bandit",
         "exiftool",
         "lookup_cve",
         "lookup_cve"
@@ -1033,8 +1053,10 @@
           ],
           "subtabCount": 4,
           "tab": "supplyChain",
-          "toolCount": 9,
+          "toolCount": 13,
           "tools": [
+            "bandit",
+            "checkov",
             "grype",
             "lookup_cve",
             "nuclei",
@@ -1042,7 +1064,9 @@
             "run_shell",
             "search_context",
             "search_cve",
+            "semgrep",
             "syft",
+            "trivy",
             "trufflehog"
           ],
           "view": "SupplyChainTabView"
@@ -1214,7 +1238,7 @@
       "toolSequence": [
         "dnsx",
         "arjun",
-        "grype",
+        "bandit",
         "impacket",
         "chisel",
         "lookup_cve",
@@ -2064,8 +2088,10 @@
           ],
           "subtabCount": 4,
           "tab": "supplyChain",
-          "toolCount": 9,
+          "toolCount": 13,
           "tools": [
+            "bandit",
+            "checkov",
             "grype",
             "lookup_cve",
             "nuclei",
@@ -2073,7 +2099,9 @@
             "run_shell",
             "search_context",
             "search_cve",
+            "semgrep",
             "syft",
+            "trivy",
             "trufflehog"
           ],
           "view": "SupplyChainTabView"
@@ -2322,7 +2350,7 @@
         "lookup_cve",
         "lookup_cve",
         "exiftool",
-        "grype",
+        "bandit",
         "chisel",
         "impacket",
         "haiti",
@@ -2414,8 +2442,10 @@
           ],
           "subtabCount": 4,
           "tab": "supplyChain",
-          "toolCount": 9,
+          "toolCount": 13,
           "tools": [
+            "bandit",
+            "checkov",
             "grype",
             "lookup_cve",
             "nuclei",
@@ -2423,7 +2453,9 @@
             "run_shell",
             "search_context",
             "search_cve",
+            "semgrep",
             "syft",
+            "trivy",
             "trufflehog"
           ],
           "view": "SupplyChainTabView"
@@ -2640,7 +2672,7 @@
         "stash"
       ],
       "toolSequence": [
-        "grype",
+        "bandit",
         "arjun",
         "dnsx",
         "bettercap",
@@ -2882,8 +2914,10 @@
           ],
           "subtabCount": 4,
           "tab": "supplyChain",
-          "toolCount": 9,
+          "toolCount": 13,
           "tools": [
+            "bandit",
+            "checkov",
             "grype",
             "lookup_cve",
             "nuclei",
@@ -2891,7 +2925,9 @@
             "run_shell",
             "search_context",
             "search_cve",
+            "semgrep",
             "syft",
+            "trivy",
             "trufflehog"
           ],
           "view": "SupplyChainTabView"
@@ -2993,7 +3029,7 @@
         "lookup_cve",
         "dnsx",
         "exiftool",
-        "grype",
+        "bandit",
         "lookup_cve",
         "lookup_cve"
       ]
@@ -3482,8 +3518,10 @@
           ],
           "subtabCount": 4,
           "tab": "supplyChain",
-          "toolCount": 9,
+          "toolCount": 13,
           "tools": [
+            "bandit",
+            "checkov",
             "grype",
             "lookup_cve",
             "nuclei",
@@ -3491,7 +3529,9 @@
             "run_shell",
             "search_context",
             "search_cve",
+            "semgrep",
             "syft",
+            "trivy",
             "trufflehog"
           ],
           "view": "SupplyChainTabView"
@@ -3672,7 +3712,7 @@
       ],
       "toolSequence": [
         "exiftool",
-        "grype",
+        "bandit",
         "arjun",
         "dnsx",
         "lookup_cve",

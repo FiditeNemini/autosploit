@@ -1927,12 +1927,12 @@ def assert_testserver_smoke() -> None:
     if tools_parsers_group.get("familyFanoutTools") != expected_family_fanout_tools:
         raise AssertionError(f"/qa/coverage-index family fanout tool map mismatch: {coverage_index}")
     expected_structured_parser_tools = [
-        "arjun", "bandit", "dalfox", "dnsx", "exiftool", "feroxbuster", "ffuf",
+        "arjun", "bandit", "checkov", "dalfox", "dnsx", "exiftool", "feroxbuster", "ffuf",
         "grype", "gowitness", "graphqlmap", "haiti", "hashcat", "holehe", "httpx",
         "hydra", "impacket", "jwt_tool", "katana", "linpeas", "masscan",
         "metasploit", "netexec", "nmap", "nuclei", "osv_scanner", "semgrep",
         "sherlock", "snmpwalk", "sqlmap", "subfinder", "syft", "testssl",
-        "theharvester", "trufflehog", "wpscan",
+        "theharvester", "trivy", "trufflehog", "wpscan",
     ]
     if tools_parsers_group.get("resultParserStructuredTools") != expected_structured_parser_tools:
         raise AssertionError(f"/qa/coverage-index structured parser tool set mismatch: {coverage_index}")
