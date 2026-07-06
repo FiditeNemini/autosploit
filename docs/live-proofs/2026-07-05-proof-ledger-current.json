@@ -5,7 +5,7 @@
     "context": 22,
     "other": 14,
     "release": 21,
-    "runtime": 58,
+    "runtime": 59,
     "settings": 13,
     "tabs": 61,
     "tools": 27,
@@ -23,15 +23,15 @@
     "tools",
     "visual"
   ],
-  "generatedAt": "2026-07-06T04:08:07-0700",
+  "generatedAt": "2026-07-06T13:35:27-0700",
   "ok": true,
   "processEvidence": {
     "appRows": [
-      "68743 124512 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+      "641 124816 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
     ],
     "engineProcessRows": []
   },
-  "proofCount": 284,
+  "proofCount": 285,
   "proofType": "proof-ledger-current-live-route",
   "sourceRoute": "/qa/proof-ledger",
   "stateEvidence": {

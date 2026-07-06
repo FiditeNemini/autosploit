@@ -54,7 +54,11 @@ SCENARIOS = [
     ScenarioSpec(
         scenario_id="webserver_ssrf_file_read_chain",
         label="Emulated web app SSRF and fixture file-read proof to report",
-        artifacts=("docs/live-proofs/2026-07-06-webserver-ssrf-fileread-scenario.json",),
+        artifacts=(
+            "docs/live-proofs/2026-07-06-webserver-ssrf-fileread-scenario.json",
+            "docs/live-proofs/2026-07-06-real-qwen-webserver-ssrf-fileread-27b.json",
+            "docs/live-proofs/2026-07-06-real-qwen-webserver-ssrf-fileread-35b.json",
+        ),
         required_tools=("run_shell", "httpx", "nuclei", "search_cve"),
         stage_evidence={
             "surface": ["run_shell route inventory", "httpx local web probe"],
@@ -64,9 +68,10 @@ SCENARIOS = [
             "evidence": ["/messages", "/results", "/state terminal transcripts"],
             "report": ["report finding action and report generate route"],
         },
-        tool_choice_mode="scripted_mock_tool_sequence",
-        model_tool_choice_evidence="not_proven",
-        autonomy_boundary="Live app/tool/report wiring is proven against a loopback SSRF/file-read fixture, but no real Qwen artifact is attached to this row yet.",
+        tool_choice_mode="exact_tool_call_prompt_with_app_recovery",
+        model_tool_choice_evidence="prompt_specified_exact_calls",
+        autonomy_boundary="Real Qwen 27B/35B received schemas and completed the SSRF/file-read loop, but tool order came from exact prompt blocks with app-side exact-call recovery; not independent tool selection.",
+        model_required=True,
         current_run_required=True,
     ),
     ScenarioSpec(

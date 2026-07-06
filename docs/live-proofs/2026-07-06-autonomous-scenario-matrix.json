@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-06T04:08:02-0700",
+  "generatedAt": "2026-07-06T13:35:22-0700",
   "notes": [
     "Rows aggregate existing live artifacts; artifact generatedAt values show whether evidence is fresh or older.",
     "Webserver SQLi and repo/codebase supply-chain rows are fresh 2026-07-06 app-backed scenarios added for this matrix.",
@@ -109,20 +109,32 @@
           "generatedAt": "2026-07-06T03:39:15-0700",
           "proofType": "webserver-ssrf-fileread-scenario-live",
           "status": "PASS"
+        },
+        {
+          "artifact": "docs/live-proofs/2026-07-06-real-qwen-webserver-ssrf-fileread-27b.json",
+          "generatedAt": "2026-07-06T13:32:56-0700",
+          "proofType": "real-qwen-webserver-ssrf-fileread",
+          "status": "PASS"
+        },
+        {
+          "artifact": "docs/live-proofs/2026-07-06-real-qwen-webserver-ssrf-fileread-35b.json",
+          "generatedAt": "2026-07-06T13:34:09-0700",
+          "proofType": "real-qwen-webserver-ssrf-fileread",
+          "status": "PASS"
         }
       ],
-      "autonomyBoundary": "Live app/tool/report wiring is proven against a loopback SSRF/file-read fixture, but no real Qwen artifact is attached to this row yet.",
+      "autonomyBoundary": "Real Qwen 27B/35B received schemas and completed the SSRF/file-read loop, but tool order came from exact prompt blocks with app-side exact-call recovery; not independent tool selection.",
       "cacheProof": {
-        "hybridSSM": false,
-        "paged": false,
-        "prefix": false,
-        "q4KV": false
+        "hybridSSM": true,
+        "paged": true,
+        "prefix": true,
+        "q4KV": true
       },
       "currentRunStatus": "PASS",
       "failures": [],
       "label": "Emulated web app SSRF and fixture file-read proof to report",
-      "modelRequired": false,
-      "modelToolChoiceEvidence": "not_proven",
+      "modelRequired": true,
+      "modelToolChoiceEvidence": "prompt_specified_exact_calls",
       "observedTools": [
         "httpx",
         "nuclei",
@@ -170,7 +182,7 @@
         "report"
       ],
       "status": "PASS",
-      "toolChoiceMode": "scripted_mock_tool_sequence"
+      "toolChoiceMode": "exact_tool_call_prompt_with_app_recovery"
     },
     {
       "artifacts": [
