@@ -132,6 +132,8 @@ def main() -> None:
         app_proc = subprocess.Popen([str(APP_BINARY)], cwd=ROOT, env=env, text=True)
         state = wait_for_state()
         cleanup = state.get("engineStaleCleanup") or {}
+        notice_title = str(cleanup.get("noticeTitle") or "")
+        notice_severity = str(cleanup.get("noticeSeverity") or "")
         runtime = request_json("/qa/engine-python-runtime", timeout=5.0)
         after_launch_rows = process_rows_containing(str(ENGINE_LAUNCH))
         after_pid_row = pid_file_process_row(pid_file)
@@ -141,6 +143,11 @@ def main() -> None:
                 "ok": True,
                 "state": state,
                 "engineStaleCleanup": cleanup,
+                "userVisibleCleanupNotice": {
+                    "title": notice_title,
+                    "severity": notice_severity,
+                    "expectedSettingsTitle": "Stale engine cleanup ran",
+                },
                 "runtime": runtime,
                 "afterLaunchRows": after_launch_rows,
                 "afterPidFileProcessRow": after_pid_row,
@@ -152,6 +159,7 @@ def main() -> None:
                     "pidFileServerCleanup": "PASS" if after_pid_row is None else "FAIL",
                     "bundledEnginePath": "PASS" if str(ENGINE_LAUNCH) in str(cleanup.get("launchScript") or "") else "FAIL",
                     "bundledRuntimeSelected": "PASS" if (runtime.get("selected") or {}).get("source") == "app-bundled-vmlx-python" else "FAIL",
+                    "userVisibleCleanupNotice": "PASS" if notice_title == "Stale engine cleanup ran" and notice_severity == "warning" else "FAIL",
                     "modelLoaded": "NO",
                 },
             }
@@ -164,6 +172,8 @@ def main() -> None:
             raise AssertionError(f"release cleanup did not find both dummy processes: {cleanup}")
         if int(cleanup.get("remainingCount") or 0) != 0:
             raise AssertionError(f"release cleanup left stale processes: {cleanup}")
+        if notice_title != "Stale engine cleanup ran" or notice_severity != "warning":
+            raise AssertionError(f"release cleanup did not expose the user-visible Settings notice: {cleanup}")
         if after_launch_rows:
             raise AssertionError(f"release bundled launch dummy still visible: {after_launch_rows}")
         if after_pid_row is not None:

@@ -3,37 +3,39 @@
   "afterPidFileProcessRow": null,
   "app": "/Users/eric/exploitbot/release/ExploitBot.app",
   "beforeLaunchRows": [
-    "43667 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/Resources/Python.app/Contents/MacOS/Python -c import time; time.sleep(120) /Users/eric/exploitbot/release/ExploitBot.app/Contents/Resources/ExploitBotEngine/launch.py"
+    "15076 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/Resources/Python.app/Contents/MacOS/Python -c import time; time.sleep(120) /Users/eric/exploitbot/release/ExploitBot.app/Contents/Resources/ExploitBotEngine/launch.py"
   ],
-  "beforePidFileProcessRow": "43668 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/Resources/Python.app/Contents/MacOS/Python -c import time; time.sleep(120) -m vmlx_engine.server --model dummy",
+  "beforePidFileProcessRow": "15077 /Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/Resources/Python.app/Contents/MacOS/Python -c import time; time.sleep(120) -m vmlx_engine.server --model dummy",
   "dummyLaunchReturnCode": -15,
   "dummyServerReturnCode": -15,
   "engineLaunch": "/Users/eric/exploitbot/release/ExploitBot.app/Contents/Resources/ExploitBotEngine/launch.py",
   "engineStaleCleanup": {
     "checked": true,
-    "checkedAt": "2026-07-04T12:38:41Z",
+    "checkedAt": "2026-07-06T08:36:13Z",
     "cleaned": true,
     "foundCount": 2,
     "foundProcesses": [
       {
         "command": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/Resources/Python.app/Contents/MacOS/Python -c import time; time.sleep(120) /Users/eric/exploitbot/release/ExploitBot.app/Contents/Resources/ExploitBotEngine/launch.py",
-        "pid": 43667,
-        "ppid": 43665,
+        "pid": 15076,
+        "ppid": 15074,
         "rssMB": 8.296875
       },
       {
         "command": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/Resources/Python.app/Contents/MacOS/Python -c import time; time.sleep(120) -m vmlx_engine.server --model dummy",
-        "pid": 43668,
-        "ppid": 43665,
-        "rssMB": 8.28125
+        "pid": 15077,
+        "ppid": 15074,
+        "rssMB": 8.3125
       }
     ],
     "launchScript": "/Users/eric/exploitbot/release/ExploitBot.app/Contents/Resources/ExploitBotEngine/launch.py",
+    "noticeSeverity": "warning",
+    "noticeTitle": "Stale engine cleanup ran",
     "remainingCount": 0,
     "remainingProcesses": [],
     "warning": ""
   },
-  "finishedAt": "2026-07-04T05:38:41-0700",
+  "finishedAt": "2026-07-06T01:36:13-0700",
   "ok": true,
   "proofType": "release-engine-stale-cleanup-no-model-load",
   "runtime": {
@@ -106,22 +108,21 @@
         "version": "3.12.12"
       },
       {
-        "error": "not executable",
-        "executable": false,
-        "missingModuleCount": 7,
+        "error": "missing modules: fastapi, uvicorn, mlx, mlx_lm, transformers, numpy",
+        "executable": true,
+        "missingModuleCount": 6,
         "missingModules": [
           "fastapi",
           "uvicorn",
           "mlx",
           "mlx_lm",
           "transformers",
-          "numpy",
-          "vmlx_engine"
+          "numpy"
         ],
         "path": "/opt/homebrew/bin/python3",
         "source": "homebrew-python",
         "valid": false,
-        "version": ""
+        "version": "3.14.6"
       },
       {
         "error": "not executable",
@@ -181,7 +182,7 @@
       "version": "3.12.12"
     }
   },
-  "startedAt": "2026-07-04T05:38:35-0700",
+  "startedAt": "2026-07-06T01:36:07-0700",
   "state": {
     "activeSubtabs": {
       "creds": "Cracking",
@@ -217,10 +218,39 @@
     },
     "agents": {
       "activeAgents": 0,
+      "authorizationGuards": {
+        "explicitToolDeny": true,
+        "externalHighRiskRequiresScopeOrAuthorization": true,
+        "highRiskToolCount": 24
+      },
       "details": [],
+      "forceFinalAnswerAfterToolResults": true,
+      "includeUnavailableToolSchemas": false,
+      "loopMaxIterations": 50,
       "maxConcurrentAgents": 5,
+      "modePolicies": {
+        "autopilot": "execute",
+        "copilot": "approval",
+        "manual": "suggest"
+      },
       "multiAgentEnabled": false,
+      "phaseRouting": {
+        "breach": [
+          "Credential Agent",
+          "Exploit Agent"
+        ],
+        "detect": [
+          "Web Vuln Agent",
+          "Network Agent",
+          "Supply Chain Agent"
+        ],
+        "scan": [
+          "Recon Agent",
+          "OSINT Agent"
+        ]
+      },
       "streamingCount": 0,
+      "toolSchemaMaxTools": 12,
       "workingCount": 0
     },
     "catalogEmbeddings": {
@@ -232,7 +262,9 @@
     "chat": {
       "enableReasoning": true,
       "forceFinalAnswerAfterToolResults": true,
-      "maxIterations": 50
+      "includeUnavailableToolSchemas": false,
+      "maxIterations": 50,
+      "toolSchemaMaxTools": 12
     },
     "chatActions": {
       "clipboardPreview": "",
@@ -264,16 +296,25 @@
       "blockL2Disk": true,
       "cacheResponsesInferenceMethod": "prefix-cache-l2-turboquant",
       "cacheResponsesMethod": "prefix-cache-l2-turboquant",
+      "declaredMaxContextTokens": 262144,
       "engineSessionPreserved": false,
       "generation": 0,
+      "highRiskOverrideEnv": "EXPLOITBOT_LONG_CONTEXT_ALLOW_UNPROVEN_TARGET",
+      "lastFailedTargets": [
+        200000,
+        224000,
+        258000
+      ],
       "modelGenerationDefaults": true,
       "newContextBehavior": "clear-chat-preserve-engine-cache",
       "newModelSessionBehavior": "new-context-window-preserve-engine-cache-session",
       "pagedCache": true,
       "prefixCache": true,
       "promptL2Disk": true,
+      "provenSafeTargetCeiling": 192000,
       "sessionBoundaryMode": "new-context-window",
-      "turboQuantKV": true
+      "turboQuantKV": true,
+      "unprovenTargetPolicy": "refuse-before-model-load"
     },
     "credsAction": {
       "command": "",
@@ -317,6 +358,7 @@
       "kevCount": 1552,
       "lastSync": "",
       "searchResultCount": 0,
+      "topResults": [],
       "totalCount": 1552
     },
     "cveImportListAudit": {
@@ -373,24 +415,26 @@
     "engineRunning": false,
     "engineStaleCleanup": {
       "checked": true,
-      "checkedAt": "2026-07-04T12:38:41Z",
+      "checkedAt": "2026-07-06T08:36:13Z",
       "cleaned": true,
       "foundCount": 2,
       "foundProcesses": [
         {
           "command": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/Resources/Python.app/Contents/MacOS/Python -c import time; time.sleep(120) /Users/eric/exploitbot/release/ExploitBot.app/Contents/Resources/ExploitBotEngine/launch.py",
-          "pid": 43667,
-          "ppid": 43665,
+          "pid": 15076,
+          "ppid": 15074,
           "rssMB": 8.296875
         },
         {
           "command": "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/Resources/Python.app/Contents/MacOS/Python -c import time; time.sleep(120) -m vmlx_engine.server --model dummy",
-          "pid": 43668,
-          "ppid": 43665,
-          "rssMB": 8.28125
+          "pid": 15077,
+          "ppid": 15074,
+          "rssMB": 8.3125
         }
       ],
       "launchScript": "/Users/eric/exploitbot/release/ExploitBot.app/Contents/Resources/ExploitBotEngine/launch.py",
+      "noticeSeverity": "warning",
+      "noticeTitle": "Stale engine cleanup ran",
       "remainingCount": 0,
       "remainingProcesses": [],
       "warning": ""
@@ -1028,7 +1072,8 @@
           "pageSections": [
             "dynamic catalogue",
             "retrieval sources",
-            "CVE assist mode"
+            "CVE assist mode",
+            "long-context safety"
           ],
           "subtitle": "catalogue and retrieval sources",
           "systemImage": "square.stack.3d.up",
@@ -1078,6 +1123,7 @@
           "pageSections": [
             "installed tools",
             "missing tools",
+            "install plan",
             "install log"
           ],
           "subtitle": "tool install and detection",
@@ -1268,17 +1314,15 @@
         "tool": ""
       },
       "commandTranscripts": [],
-      "installedToolCount": 5,
+      "installedToolCount": 0,
       "isVisible": false,
       "surfaceContract": "terminal-visibility-command-transcripts",
-      "toolPathCount": 6,
+      "toolPathCount": 4,
       "toolPaths": [
         "/opt/homebrew/bin",
         "/usr/local/bin",
         "/Users/eric/.exploitbot/tools",
-        "/Users/eric/.local/bin",
-        "/usr/bin",
-        "/bin"
+        "/Users/eric/.local/bin"
       ]
     },
     "toolExecutor": {
@@ -1289,349 +1333,24 @@
     "toolSettings": {
       "activeSettingsCategory": "",
       "errorCount": 0,
+      "installCommands": [],
       "installLog": "",
-      "installedCount": 5,
+      "installPlan": {
+        "commandCount": 0,
+        "installCommands": [],
+        "missingByCategory": {},
+        "missingByInstallMethod": {},
+        "missingCount": 0,
+        "requiresNetworkInstall": false
+      },
+      "installedCount": 0,
       "installingCount": 0,
       "isInstalling": false,
-      "missingCount": 37,
-      "tools": [
-        {
-          "category": "system",
-          "installMethod": "system",
-          "name": "curl",
-          "path": "/usr/bin/curl",
-          "status": "installed",
-          "version": "8.7.1"
-        },
-        {
-          "category": "system",
-          "installMethod": "system",
-          "name": "nc",
-          "path": "/usr/bin/nc",
-          "status": "installed",
-          "version": ""
-        },
-        {
-          "category": "system",
-          "installMethod": "system",
-          "name": "python3",
-          "path": "/usr/bin/python3",
-          "status": "installed",
-          "version": "3.9.6"
-        },
-        {
-          "category": "system",
-          "installMethod": "system",
-          "name": "zsh",
-          "path": "/bin/zsh",
-          "status": "installed",
-          "version": "5.9"
-        },
-        {
-          "category": "recon",
-          "installMethod": "go",
-          "name": "subfinder",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "recon",
-          "installMethod": "go",
-          "name": "dnsx",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "recon",
-          "installMethod": "homebrew",
-          "name": "nmap",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "recon",
-          "installMethod": "homebrew",
-          "name": "masscan",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "recon",
-          "installMethod": "go",
-          "name": "httpx",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "recon",
-          "installMethod": "go",
-          "name": "katana",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "recon",
-          "installMethod": "pip",
-          "name": "theHarvester",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "web",
-          "installMethod": "go",
-          "name": "nuclei",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "web",
-          "installMethod": "pip",
-          "name": "sqlmap",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "web",
-          "installMethod": "go",
-          "name": "dalfox",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "web",
-          "installMethod": "homebrew",
-          "name": "feroxbuster",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "web",
-          "installMethod": "go",
-          "name": "ffuf",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "web",
-          "installMethod": "pip",
-          "name": "arjun",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "web",
-          "installMethod": "homebrew",
-          "name": "wpscan",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "web",
-          "installMethod": "homebrew",
-          "name": "testssl",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "web",
-          "installMethod": "pip",
-          "name": "graphqlmap",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "web",
-          "installMethod": "pip",
-          "name": "jwt_tool",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "network",
-          "installMethod": "pip",
-          "name": "netexec",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "network",
-          "installMethod": "homebrew",
-          "name": "snmpwalk",
-          "path": "/usr/bin/snmpwalk",
-          "status": "installed",
-          "version": "5.6.2.1"
-        },
-        {
-          "category": "network",
-          "installMethod": "homebrew",
-          "name": "tshark",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "network",
-          "installMethod": "homebrew",
-          "name": "bettercap",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "network",
-          "installMethod": "go",
-          "name": "chisel",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "credentials",
-          "installMethod": "homebrew",
-          "name": "hashcat",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "credentials",
-          "installMethod": "homebrew",
-          "name": "hydra",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "credentials",
-          "installMethod": "pip",
-          "name": "haiti",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "credentials",
-          "installMethod": "homebrew",
-          "name": "trufflehog",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "supplychain",
-          "installMethod": "homebrew",
-          "name": "syft",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "supplychain",
-          "installMethod": "homebrew",
-          "name": "grype",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "supplychain",
-          "installMethod": "homebrew",
-          "name": "osv_scanner",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "exploit",
-          "installMethod": "homebrew",
-          "name": "metasploit",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "exploit",
-          "installMethod": "pip",
-          "name": "pwncat",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "exploit",
-          "installMethod": "homebrew",
-          "name": "sliver",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "post",
-          "installMethod": "pip",
-          "name": "impacket",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "post",
-          "installMethod": "script",
-          "name": "linpeas",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "osint",
-          "installMethod": "pip",
-          "name": "sherlock",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "osint",
-          "installMethod": "pip",
-          "name": "holehe",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "osint",
-          "installMethod": "homebrew",
-          "name": "exiftool",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        },
-        {
-          "category": "osint",
-          "installMethod": "go",
-          "name": "gowitness",
-          "path": "",
-          "status": "missing",
-          "version": ""
-        }
-      ]
+      "missingByCategory": {},
+      "missingByInstallMethod": {},
+      "missingCount": 0,
+      "requiresNetworkInstall": false,
+      "tools": []
     },
     "toolSettingsActions": {
       "installedCount": 0,
@@ -1695,6 +1414,12 @@
     "bundledRuntimeSelected": "PASS",
     "modelLoaded": "NO",
     "pidFileServerCleanup": "PASS",
-    "releaseAppLaunched": "PASS"
+    "releaseAppLaunched": "PASS",
+    "userVisibleCleanupNotice": "PASS"
+  },
+  "userVisibleCleanupNotice": {
+    "expectedSettingsTitle": "Stale engine cleanup ran",
+    "severity": "warning",
+    "title": "Stale engine cleanup ran"
   }
 }
