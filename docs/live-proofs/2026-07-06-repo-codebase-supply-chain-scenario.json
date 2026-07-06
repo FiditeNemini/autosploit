@@ -1,6 +1,7 @@
 {
   "checks": {
     "dependencyEvidence": "PASS",
+    "dependencyStructuredFindings": "PASS",
     "modelContinuedAfterTools": "PASS",
     "modelReceivedSupplyChainToolSchemas": "PASS",
     "orderedToolSequence": "PASS",
@@ -21,11 +22,11 @@
     "osv_scanner",
     "search_cve"
   ],
-  "finishedAt": "2026-07-05T22:26:54-0700",
-  "generatedAt": "2026-07-05T22:26:54-0700",
+  "finishedAt": "2026-07-05T22:37:24-0700",
+  "generatedAt": "2026-07-05T22:37:24-0700",
   "messages": [
     {
-      "content": "Authorized local lab only. Use run_shell and supply-chain tools against this local repo path: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-1lxrm62g/synthetic-vulnerable-repo. Surface files, probe for secrets and dependencies, prove vulnerable packages with scanner evidence, validate safely without external exploitation, then summarize evidence with REPO_SUPPLY_CHAIN_FINAL.",
+      "content": "Authorized local lab only. Use run_shell and supply-chain tools against this local repo path: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-r6qzxa_y/synthetic-vulnerable-repo. Surface files, probe for secrets and dependencies, prove vulnerable packages with scanner evidence, validate safely without external exploitation, then summarize evidence with REPO_SUPPLY_CHAIN_FINAL.",
       "role": "user"
     },
     {
@@ -73,31 +74,31 @@
       ]
     },
     {
-      "content": "Tool request: run_shell\n$ /bin/zsh -c find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-1lxrm62g/synthetic-vulnerable-repo -maxdepth 2 -type f | sort\nArguments:\n{\n  \"command\" : \"find \\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-1lxrm62g\\/synthetic-vulnerable-repo -maxdepth 2 -type f | sort\"\n}\n\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-1lxrm62g/synthetic-vulnerable-repo/.env.example\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-1lxrm62g/synthetic-vulnerable-repo/Dockerfile\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-1lxrm62g/synthetic-vulnerable-repo/package-lock.json\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-1lxrm62g/synthetic-vulnerable-repo/package.json\n",
+      "content": "Tool request: run_shell\n$ /bin/zsh -c find /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-r6qzxa_y/synthetic-vulnerable-repo -maxdepth 2 -type f | sort\nArguments:\n{\n  \"command\" : \"find \\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-r6qzxa_y\\/synthetic-vulnerable-repo -maxdepth 2 -type f | sort\"\n}\n\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-r6qzxa_y/synthetic-vulnerable-repo/.env.example\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-r6qzxa_y/synthetic-vulnerable-repo/Dockerfile\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-r6qzxa_y/synthetic-vulnerable-repo/package-lock.json\n/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-r6qzxa_y/synthetic-vulnerable-repo/package.json\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "run_shell"
     },
     {
-      "content": "Tool request: trufflehog\n$ trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-1lxrm62g/synthetic-vulnerable-repo --json\nArguments:\n{\n  \"source_type\" : \"filesystem\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-1lxrm62g\\/synthetic-vulnerable-repo\",\n  \"verified_only\" : false\n}\n\n{\"DetectorName\": \"Generic API Key\", \"Raw\": \"EXPLOITBOT_FAKE_TOKEN_DO_NOT_USE\", \"SourceMetadata\": {\"Data\": {\"Git\": {\"file\": \".env.example\", \"repository\": \"synthetic-vulnerable-repo\"}}}}\n",
+      "content": "Tool request: trufflehog\n$ trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-r6qzxa_y/synthetic-vulnerable-repo --json\nArguments:\n{\n  \"source_type\" : \"filesystem\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-r6qzxa_y\\/synthetic-vulnerable-repo\",\n  \"verified_only\" : false\n}\n\n{\"DetectorName\": \"Generic API Key\", \"Raw\": \"EXPLOITBOT_FAKE_TOKEN_DO_NOT_USE\", \"SourceMetadata\": {\"Data\": {\"Git\": {\"file\": \".env.example\", \"repository\": \"synthetic-vulnerable-repo\"}}}}\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "trufflehog"
     },
     {
-      "content": "Tool request: syft\n$ syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-1lxrm62g/synthetic-vulnerable-repo -o json\nArguments:\n{\n  \"output\" : \"json\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-1lxrm62g\\/synthetic-vulnerable-repo\"\n}\n\n{\"artifacts\": [{\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, {\"name\": \"minimist\", \"version\": \"0.0.8\", \"type\": \"npm\"}], \"source\": {\"type\": \"directory\", \"target\": \"synthetic-vulnerable-repo\"}}\n",
+      "content": "Tool request: syft\n$ syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-r6qzxa_y/synthetic-vulnerable-repo -o json\nArguments:\n{\n  \"output\" : \"json\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-r6qzxa_y\\/synthetic-vulnerable-repo\"\n}\n\n{\"artifacts\": [{\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, {\"name\": \"minimist\", \"version\": \"0.0.8\", \"type\": \"npm\"}], \"source\": {\"type\": \"directory\", \"target\": \"synthetic-vulnerable-repo\"}}\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "syft"
     },
     {
-      "content": "Tool request: grype\n$ grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-1lxrm62g/synthetic-vulnerable-repo -o json --fail-on critical\nArguments:\n{\n  \"fail_on\" : \"critical\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-1lxrm62g\\/synthetic-vulnerable-repo\"\n}\n\n{\"matches\": [{\"vulnerability\": {\"id\": \"CVE-2021-23337\", \"severity\": \"High\"}, \"artifact\": {\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, \"matchDetails\": [{\"type\": \"exact-direct-match\"}]}]}\n",
+      "content": "Tool request: grype\n$ grype /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-r6qzxa_y/synthetic-vulnerable-repo -o json --fail-on critical\nArguments:\n{\n  \"fail_on\" : \"critical\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-r6qzxa_y\\/synthetic-vulnerable-repo\"\n}\n\n{\"matches\": [{\"vulnerability\": {\"id\": \"CVE-2021-23337\", \"severity\": \"High\"}, \"artifact\": {\"name\": \"lodash\", \"version\": \"4.17.11\", \"type\": \"npm\"}, \"matchDetails\": [{\"type\": \"exact-direct-match\"}]}]}\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "grype"
     },
     {
-      "content": "Tool request: osv_scanner\n$ osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-1lxrm62g/synthetic-vulnerable-repo --format json\nArguments:\n{\n  \"format\" : \"json\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-1lxrm62g\\/synthetic-vulnerable-repo\"\n}\n\n{\"results\": [{\"packageSource\": {\"path\": \"package-lock.json\"}, \"packages\": [{\"package\": {\"name\": \"lodash\", \"ecosystem\": \"npm\"}, \"vulnerabilities\": [{\"id\": \"GHSA-35jh-r3h4-6jhm\"}]}]}]}\n",
+      "content": "Tool request: osv_scanner\n$ osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-r6qzxa_y/synthetic-vulnerable-repo --format json\nArguments:\n{\n  \"format\" : \"json\",\n  \"target\" : \"\\/var\\/folders\\/8x\\/q1k_20mj5w3bzpx5c_psg3800000gn\\/T\\/exploitbot-repo-scenario-r6qzxa_y\\/synthetic-vulnerable-repo\"\n}\n\n{\"results\": [{\"packageSource\": {\"path\": \"package-lock.json\"}, \"packages\": [{\"package\": {\"name\": \"lodash\", \"ecosystem\": \"npm\"}, \"vulnerabilities\": [{\"id\": \"GHSA-35jh-r3h4-6jhm\"}]}]}]}\n",
       "role": "toolCall",
       "status": "ok 0.0s",
       "tool": "osv_scanner"
@@ -110,13 +111,19 @@
     },
     {
       "content": "REPO_SUPPLY_CHAIN_FINAL: surfaced repo files, probed secrets/SBOM/dependencies, validated vulnerable lodash and fake leaked token evidence, then queued report evidence.",
-      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 7 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=1 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-1lx",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 4 of 11 indexed items for phase SCAN, tab supplyChain.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=5 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] run_shell tags=tool,run_shell: /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-r6",
       "contextSelections": [
         {
-          "bodyHash": "809710ad6e736126",
+          "bodyHash": "c1c9a3db07bb2c20",
           "source": "tool.output",
           "tags": "tool,run_shell",
           "title": "run_shell"
+        },
+        {
+          "bodyHash": "c21d23076be48c0c",
+          "source": "finding",
+          "tags": "vuln,high,grype,dependency,supply-chain,grype,CVE-2021-23337",
+          "title": "HIGH CVE-2021-23337"
         },
         {
           "bodyHash": "f8bd31c12e5185a5",
@@ -125,16 +132,10 @@
           "title": "HIGH Leaked Secret: Generic API Key"
         },
         {
-          "bodyHash": "ee9078b7e1d9a4d4",
-          "source": "tool.output",
-          "tags": "tool,trufflehog",
-          "title": "trufflehog"
-        },
-        {
-          "bodyHash": "b6ca138d4189fdff",
-          "source": "tool.output",
-          "tags": "tool,syft",
-          "title": "syft"
+          "bodyHash": "0bccb143415f6577",
+          "source": "finding",
+          "tags": "vuln,info,osv_scanner,dependency,supply-chain,osv,npm",
+          "title": "INFO GHSA-35jh-r3h4-6jhm"
         }
       ],
       "contextSnippetCount": 4,
@@ -149,11 +150,11 @@
   "ok": true,
   "proofLevel": "live-app-mock-engine-real-tool-executor-fake-local-scanners",
   "proofType": "repo-codebase-supply-chain-scenario-live",
-  "repoPath": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-1lxrm62g/synthetic-vulnerable-repo",
+  "repoPath": "/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-r6qzxa_y/synthetic-vulnerable-repo",
   "reportRenderActions": {
     "findingCount": 1,
-    "htmlChars": 3341,
-    "htmlPreview": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n<style>\nbody { font-family: Georgia, serif; font-size: 13px; line-height: 1.7; color: #1a1a1a; max-width: 800px; margin: 40px auto; padding: 0 20px; }\nh1 { font-family: -apple-system, sans-serif; font-size: 22px; margin-bottom: 4px; }\nh2 { font-family: -apple-system, sans-serif; font-size: 16px; margin-top: 24px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }\nh3 { font-family: -apple-system, sans-serif; font-size: 14px; margin-top: 16px; }\n.confidential { text-align: center; font-family: monospace; font-size: 10px; letter-spacing: 3px; color: #999; text-transform: uppercase; margin-bottom: 30px; }\n.meta { font-size: 11px; color: #888; font-family: monospace; margin-bottom: 20px; }\ntable { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; }\nth { background: #f5f5f5; border-bottom: 2px solid #ddd; padding: 6px 10px; text-align: left; font-family: -apple-system, sans-serif; }\ntd { padding: 6px 10px; border-bottom: 1px solid #eee; }\n.finding { border: 1px solid #ddd; border-radius: 6px; padding: 12px; margin: 10px 0; }\n.finding.critical { border-left: 4px solid #ef4444; }\n.finding.high { border-left: 4px solid #f97316; }\n.finding.medium { border-left: 4px solid #f59e0b; }\n.finding.low { border-left: 4px solid #3b82f6; }\n.sev { font-family: monospace; font-size: 10px; font-weight: bold; padding: 1px 6px; border-radius: 3px; }\n.sev.critical { background: #fef2f2; color: #dc2626; }\n.sev.high { background: #fff7ed; color: #ea580c; }\n.sev.medium { background: #fffbeb; color: #d97706; }\n.sev.low { background: #eff6ff; color: #2563eb; }\ncode { font-family: monospace; font-size: 11px; background: #f0f0f0; padding: 1px 4px; border-radius: 2px; }\n@media print { body { margin: 0; } .finding { break-inside: avoid; } }\n</style>\n</head>\n<body>\n<div class=\"confidential\">CONFIDENTIAL</div>\n<h1>Penetration Test Report</h1>\n<div class=\"meta\">\nClient: Unknown<br>\nAssessment Date: July 5, 2026<br>\nAssessor: exploitbot (autonomous)<br>\nClassification: Confidential\n</div>\n\n<h2>1. Executive Summary</h2>\n<p>A penetration test was conducted against <strong>Unknown</strong>. The assessment identified <strong>1 vulnerabilities</strong> including 0 critical, 1 high, 0 medium, and 0 low severity findings.</p>\n\n<h2>2. Findings Summary</h2>\n<table>\n<tr><th>#</th><th>Finding</th><th>Severity</th><th>CVSS</th><th>Target</th><th>Status</th></tr>\n<tr><td>1</td><td>Repo Supply Chain Proof</td><td><span class=\"sev high\">HIGH</span></td><td>8.1</td><td><code>/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-1lxrm62g/synthetic-vulnerable-repo</code></td><td>confirmed</td></tr>\n</table>\n\n<h2>3. Detailed Findings</h2>\n<div class=\"finding high\">\n<h3><span class=\"sev high\">HIGH</span> Repo Supply Chain Proof</h3>\n<p><strong>Target:</strong> <code>/var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-1lxrm62g/synthetic-vulnerable-repo</code></p>\n<p><strong>CVSS:</strong> 8.1</p>\n<p><strong>CVE:</strong> CVE-2021-23337</p>\n<p><strong>Description:</strong> Deterministic finding created through the Report finding action flow.</p>\n<h3>Impact</h3><p>Confirmed issue is available for report generation.</p>\n<h3>Remediation</h3><p>Document remediation guidance in the generated report.</p>\n</div>\n\n</body>\n</html>",
+    "htmlChars": 3262,
+    "htmlPreview": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n<style>\nbody { font-family: Georgia, serif; font-size: 13px; line-height: 1.7; color: #1a1a1a; max-width: 800px; margin: 40px auto; padding: 0 20px; }\nh1 { font-family: -apple-system, sans-serif; font-size: 22px; margin-bottom: 4px; }\nh2 { font-family: -apple-system, sans-serif; font-size: 16px; margin-top: 24px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }\nh3 { font-family: -apple-system, sans-serif; font-size: 14px; margin-top: 16px; }\n.confidential { text-align: center; font-family: monospace; font-size: 10px; letter-spacing: 3px; color: #999; text-transform: uppercase; margin-bottom: 30px; }\n.meta { font-size: 11px; color: #888; font-family: monospace; margin-bottom: 20px; }\ntable { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; }\nth { background: #f5f5f5; border-bottom: 2px solid #ddd; padding: 6px 10px; text-align: left; font-family: -apple-system, sans-serif; }\ntd { padding: 6px 10px; border-bottom: 1px solid #eee; }\n.finding { border: 1px solid #ddd; border-radius: 6px; padding: 12px; margin: 10px 0; }\n.finding.critical { border-left: 4px solid #ef4444; }\n.finding.high { border-left: 4px solid #f97316; }\n.finding.medium { border-left: 4px solid #f59e0b; }\n.finding.low { border-left: 4px solid #3b82f6; }\n.sev { font-family: monospace; font-size: 10px; font-weight: bold; padding: 1px 6px; border-radius: 3px; }\n.sev.critical { background: #fef2f2; color: #dc2626; }\n.sev.high { background: #fff7ed; color: #ea580c; }\n.sev.medium { background: #fffbeb; color: #d97706; }\n.sev.low { background: #eff6ff; color: #2563eb; }\ncode { font-family: monospace; font-size: 11px; background: #f0f0f0; padding: 1px 4px; border-radius: 2px; }\n@media print { body { margin: 0; } .finding { break-inside: avoid; } }\n</style>\n</head>\n<body>\n<div class=\"confidential\">CONFIDENTIAL</div>\n<h1>Penetration Test Report</h1>\n<div class=\"meta\">\nClient: Unknown<br>\nAssessment Date: July 5, 2026<br>\nAssessor: exploitbot (autonomous)<br>\nClassification: Confidential\n</div>\n\n<h2>1. Executive Summary</h2>\n<p>A penetration test was conducted against <strong>Unknown</strong>. The assessment identified <strong>1 vulnerabilities</strong> including 0 critical, 1 high, 0 medium, and 0 low severity findings.</p>\n\n<h2>2. Findings Summary</h2>\n<table>\n<tr><th>#</th><th>Finding</th><th>Severity</th><th>CVSS</th><th>Target</th><th>Status</th></tr>\n<tr><td>1</td><td>CVE-2021-23337 vulnerable lodash dependency</td><td><span class=\"sev high\">HIGH</span></td><td>8.1</td><td><code>lodash@4.17.11</code></td><td>confirmed</td></tr>\n</table>\n\n<h2>3. Detailed Findings</h2>\n<div class=\"finding high\">\n<h3><span class=\"sev high\">HIGH</span> CVE-2021-23337 vulnerable lodash dependency</h3>\n<p><strong>Target:</strong> <code>lodash@4.17.11</code></p>\n<p><strong>CVSS:</strong> 8.1</p>\n<p><strong>CVE:</strong> CVE-2021-23337</p>\n<p><strong>Description:</strong> Vulnerable dependency lodash 4.17.11 reported by grype as CVE-2021-23337.</p>\n<h3>Impact</h3><p>A vulnerable dependency can expose application code to known supply-chain attack paths.</p>\n<h3>Remediation</h3><p>Upgrade lodash and rerun grype/osv-scanner until no vulnerable version is reported.</p>\n</div>\n\n</body>\n</html>",
     "lastAction": "generate",
     "status": "done",
     "summary": "generateReport 1 findings",
@@ -169,7 +170,20 @@
       "osv_scanner",
       "search_cve"
     ],
-    "vulnCount": 1
+    "vulnCount": 5,
+    "vulnSources": [
+      "grype",
+      "osv_scanner",
+      "syft",
+      "trufflehog"
+    ],
+    "vulnTitles": [
+      "Leaked Secret: Generic API Key",
+      "SBOM Component: lodash",
+      "SBOM Component: minimist",
+      "CVE-2021-23337",
+      "GHSA-35jh-r3h4-6jhm"
+    ]
   },
   "scenarioId": "repo_codebase_supply_chain",
   "stageEvidence": {
@@ -206,7 +220,7 @@
     "evidence",
     "report"
   ],
-  "startedAt": "2026-07-05T22:26:51-0700",
+  "startedAt": "2026-07-05T22:37:20-0700",
   "status": "PASS",
   "supplyChainLifecycle": {
     "cve": {
@@ -216,19 +230,19 @@
       "tool": "search_cve"
     },
     "dependency": {
-      "command": "osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-1lxrm62g/synthetic-vulnerable-repo --format json",
+      "command": "osv-scanner scan --recursive /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-r6qzxa_y/synthetic-vulnerable-repo --format json",
       "status": "done",
       "summary": "1 lines output",
       "tool": "osv_scanner"
     },
     "sbom": {
-      "command": "syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-1lxrm62g/synthetic-vulnerable-repo -o json",
+      "command": "syft /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-r6qzxa_y/synthetic-vulnerable-repo -o json",
       "status": "done",
       "summary": "1 lines output",
       "tool": "syft"
     },
     "secrets": {
-      "command": "trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-1lxrm62g/synthetic-vulnerable-repo --json",
+      "command": "trufflehog filesystem /var/folders/8x/q1k_20mj5w3bzpx5c_psg3800000gn/T/exploitbot-repo-scenario-r6qzxa_y/synthetic-vulnerable-repo --json",
       "status": "done",
       "summary": "1 lines output",
       "tool": "trufflehog"

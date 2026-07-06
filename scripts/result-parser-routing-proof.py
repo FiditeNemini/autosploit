@@ -90,7 +90,7 @@ def run() -> None:
                 "trufflehog", "holehe", "exiftool", "masscan", "netexec",
                 "hydra", "wpscan", "testssl", "theharvester", "arjun",
                 "jwt_tool", "hashcat", "snmpwalk", "metasploit", "impacket",
-                "linpeas", "gowitness", "graphqlmap",
+                "linpeas", "gowitness", "graphqlmap", "syft", "grype", "osv_scanner",
             ):
                 if name not in parsed_tools:
                     raise AssertionError(f"structured parser did not emit tab state for {name}: {coverage}")
@@ -104,6 +104,11 @@ def run() -> None:
             require_contains(coverage.get("webUrls") or [], "https://qa.example.test/login", "web hosts")
             require_contains(coverage.get("vulnSources") or [], "nuclei", "vuln sources")
             require_contains(coverage.get("vulnSources") or [], "hashcat", "vuln sources")
+            require_contains(coverage.get("vulnSources") or [], "grype", "vuln sources")
+            require_contains(coverage.get("vulnSources") or [], "osv_scanner", "vuln sources")
+            require_contains(coverage.get("vulnTitles") or [], "SBOM Component: lodash", "vuln titles")
+            require_contains(coverage.get("vulnTitles") or [], "CVE-2021-23337", "vuln titles")
+            require_contains(coverage.get("vulnTitles") or [], "GHSA-35jh-r3h4-6jhm", "vuln titles")
             require_contains(coverage.get("networkHosts") or [], "10.0.0.10", "network hosts")
             require_contains(coverage.get("osintPlatforms") or [], "Screenshot", "osint platforms")
             require_contains(coverage.get("postLabels") or [], "impacket-secretsdump", "post labels")

@@ -36,7 +36,7 @@ EXPECTED_PROOFS = {
     "visual-context-inspector-proof.py",
     "chat-tool-output-expand-proof.py",
 }
-EXPECTED_FAMILIES = {"recon", "web", "network", "creds", "exploit", "post", "osint"}
+EXPECTED_FAMILIES = {"recon", "web", "network", "creds", "exploit", "post", "supplyChain", "osint", "report", "stash"}
 EXPECTED_FLOW_DOMAINS = [
     "toolRegistry",
     "toolExecution",

@@ -365,6 +365,9 @@ def build_report(
     lifecycle = state.get("supplyChainLifecycle") or {}
     terminal = ((state.get("terminal") or {}).get("commandTranscripts") or [])
     terminal_text = json.dumps(terminal, sort_keys=True)
+    vulns = results.get("vulns") or []
+    vuln_sources = {row.get("source") for row in vulns if isinstance(row, dict)}
+    vuln_titles = [str(row.get("title") or "") for row in vulns if isinstance(row, dict)]
     checks = {
         "modelReceivedSupplyChainToolSchemas": passfail(all(tool in tool_schema_names for tool in ["run_shell", "trufflehog", "syft", "grype", "osv_scanner", "search_cve"])),
         "orderedToolSequence": passfail(ordered_subsequence(sequence, EXPECTED_TOOLS)),
@@ -374,10 +377,20 @@ def build_report(
         "secretEvidence": passfail("EXPLOITBOT_FAKE_TOKEN_DO_NOT_USE" in results_text and "trufflehog" in results_text),
         "sbomEvidence": passfail("lodash" in results_text and "syft" in results_text),
         "dependencyEvidence": passfail("CVE-2021-23337" in results_text and "GHSA-35jh-r3h4-6jhm" in results_text),
+        "dependencyStructuredFindings": passfail(
+            {"grype", "osv_scanner"}.issubset(vuln_sources)
+            and any("CVE-2021-23337" in title for title in vuln_titles)
+            and any("GHSA-35jh-r3h4-6jhm" in title for title in vuln_titles)
+        ),
         "rawResultEvidence": passfail(all(tool in results_text for tool in ["trufflehog", "syft", "grype", "osv_scanner"])),
         "supplyChainLifecycle": passfail(all((lifecycle.get(key) or {}).get("status") == "done" for key in ["secrets", "sbom", "dependency", "cve"])),
         "terminalTranscripts": passfail(all(tool in terminal_text for tool in ["trufflehog", "syft", "grype", "osv-scanner"])),
-        "reportGeneratedFromEvidence": passfail("reportRenderActions" in report_text and "done" in report_text and "Repo Supply Chain Proof" in report_text),
+        "reportGeneratedFromEvidence": passfail(
+            "reportRenderActions" in report_text
+            and "done" in report_text
+            and "CVE-2021-23337 vulnerable lodash dependency" in report_text
+            and "GHSA-35jh-r3h4-6jhm" in report_text
+        ),
     }
     ok = all(value == "PASS" for value in checks.values())
     return {
@@ -406,6 +419,8 @@ def build_report(
         "messages": messages,
         "resultsSummary": {
             "vulnCount": len(results.get("vulns") or []),
+            "vulnSources": sorted(source for source in vuln_sources if source),
+            "vulnTitles": vuln_titles,
             "rawResultCount": len(results.get("rawResults") or []),
             "rawTools": [row.get("tool") for row in results.get("rawResults") or [] if isinstance(row, dict)],
         },
@@ -474,16 +489,37 @@ def run() -> None:
             state = request("GET", "/state")
             results = request("GET", "/results")
 
-            request("POST", "/qa/seed-report-finding-actions")
-            request("POST", "/qa/report-create-finding")
+            grype_vuln = next(
+                (
+                    row for row in results.get("vulns") or []
+                    if isinstance(row, dict) and row.get("source") == "grype"
+                ),
+                {},
+            )
+            osv_vuln = next(
+                (
+                    row for row in results.get("vulns") or []
+                    if isinstance(row, dict) and row.get("source") == "osv_scanner"
+                ),
+                {},
+            )
             created = request(
                 "POST",
-                "/qa/report-submit-finding",
+                "/qa/finding-wizard-submit",
                 {
-                    "title": "Repo Supply Chain Proof",
-                    "target": str(repo),
+                    "title": "CVE-2021-23337 vulnerable lodash dependency",
+                    "vulnType": "supply_chain_dependency",
+                    "target": grype_vuln.get("target") or str(repo),
                     "severity": "high",
-                    "cve": "CVE-2021-23337",
+                    "cvss": 8.1,
+                    "description": grype_vuln.get("description") or "grype reported lodash 4.17.11 as CVE-2021-23337.",
+                    "impact": "A vulnerable dependency can expose application code to known supply-chain attack paths.",
+                    "remediation": "Upgrade lodash and rerun grype/osv-scanner until no vulnerable version is reported.",
+                    "cveId": "CVE-2021-23337",
+                    "evidence": [
+                        grype_vuln.get("description") or "grype CVE-2021-23337 lodash evidence",
+                        osv_vuln.get("description") or "osv_scanner GHSA-35jh-r3h4-6jhm lodash evidence",
+                    ],
                 },
             )
             if created.get("ok") is not True:
