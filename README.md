@@ -92,11 +92,11 @@ Latest local beta package sanity build, not yet uploaded to the GitHub release:
 - **Security abuse-boundary matrix**: `/qa/security-abuse-boundary-matrix` ties authorized pentest tooling, destructive shell blocklists, manual/copilot/autopilot authorization modes, supply-chain/CVE include-only guardrails, bounded prompt/context policy, and audit/tool-status logging into one app-visible QA contract.
 - **Runtime packaging path**: release packaging bundles the vMLX Python engine, signs the app/DMG, records manifest evidence, and exposes live signature checks through `/qa/release-readiness`; `/qa/beta-readiness-coverage` reports local `packageReady=true`, while notarization and known gaps still block distribution readiness.
 - **Qwen + MiniMax cache proofs**: live/release harnesses cover Qwen MXFP4-MTP hybrid SSM attention, MiniMax full-KV attention, TurboQuant KV cache, prefix cache, paged/block L2 cache, and repeat-prompt cache hits.
-- **Local low-RAM Qwen lane**: `/qa/runtime-local-model-lane` pins the active small local Qwen beta target to `/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP`, verifies the release-app live chat/cache artifact, enforces a sub-20 GB active-memory ceiling for the Qwen smoke and batching artifacts, and keeps active beta families to Qwen/MiniMax only.
+- **Local low-RAM Qwen lane**: `/qa/runtime-local-model-lane` pins the active small local Qwen beta target to `/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP`, verifies the release-app live chat/cache artifact, enforces a sub-20 GB active-memory ceiling for the Qwen smoke and batching artifacts, and keeps active beta families to Qwen/MiniMax only.
 - **Parallel/session + batching gates**: `scripts/parallel-agent-session-proof.py` drives two autonomous agents against a delayed mock Qwen engine and proves overlapping app requests (`max_in_flight=2`) plus live `workingCount`/status-line state; `/qa/continuous-batching-coverage` source-checks the vMLX server, launcher `--max-num-seqs` path, BatchedEngine, LLM scheduler, MLLM scheduler, MLLM batch generator, BatchKV/BatchMamba cache, TurboQuant KV, L2 disk cache, and hybrid SSM companion contracts.
-- **Qwen live continuous batching**: `scripts/prove-live-continuous-batching.py` live-loads `/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP` with `--max-num-seqs 2`, sends two concurrent chat completions, and records `max_running_observed=2`, `max_waiting_observed=2`, `num_requests_processed=2`, TurboQuant q4 KV, block L2 disk writes, and SSM companion async rederive completion in `docs/live-proofs/checkpoint-452-qwen-continuous-batching-live.json`.
+- **Qwen live continuous batching**: `scripts/prove-live-continuous-batching.py` live-loads `/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP` with `--max-num-seqs 2`, sends two concurrent chat completions, and records `max_running_observed=2`, `max_waiting_observed=2`, `num_requests_processed=2`, TurboQuant q4 KV, block L2 disk writes, and SSM companion async rederive completion in `docs/live-proofs/checkpoint-452-qwen-continuous-batching-live.json`.
 - **Qwen 4-way batching stress**: `scripts/prove-live-qwen-continuous-batching-4.py` live-loads the same smallest Qwen MXFP4-MTP target with `--max-num-seqs 4`, sends four concurrent chat completions, and records `max_running_observed=4`, `max_waiting_observed=4`, `num_requests_processed=4`, TurboQuant q4 KV, block L2 disk writes, SSM async rederive completion, and sub-20 GB active memory in `docs/live-proofs/checkpoint-465-qwen-continuous-batching-4-live.json`.
-- **Live loaded-model agent stress**: `scripts/prove-live-loaded-model-agent-stress.py` launches the smallest Qwen MXFP4-MTP target, points two app agents at the loaded engine, and records `appMaxWorkingObserved=2`, `max_running_observed=2`, `num_requests_processed=2`, TurboQuant q4 KV, block L2 disk writes, SSM async rederive completion, and sub-20 GB active memory in `docs/live-proofs/checkpoint-466-qwen-live-agent-stress.json`.
+- **Live loaded-model agent stress**: `scripts/prove-live-loaded-model-agent-stress.py` launches the smallest Qwen MXFP4-MTP target, points two app agents at the loaded engine, and records `appMaxWorkingObserved=2`, `max_running_observed=2`, `num_requests_processed=2`, TurboQuant q4 KV, block L2 disk writes, SSM companion L2 tokens, zero SSM rederive failures, and sub-20 GB active memory in `docs/live-proofs/checkpoint-466-qwen-live-agent-stress.json`.
 - **MiniMax live continuous batching**: `scripts/prove-live-minimax-continuous-batching.py` live-loads `/Users/eric/models/JANGQ/MiniMax-M2.7-Small-JANGTQ` with `--max-num-seqs 2`, proves overlapping requests, records `max_running_observed=2`, `max_waiting_observed=2`, `num_requests_processed=2`, TurboQuant q4 KV, and four block-L2 disk writes in `docs/live-proofs/checkpoint-464-minimax-continuous-batching-live.json`.
 - **Startup cache/defaults gate**: `/qa/startup-cache-defaults` proves the app starts from required parser/cache defaults, Settings apply re-forces them, engine launch paths carry parser, TurboQuant, prefix/L2/paged/block cache, and `--max-num-seqs` flags, and settings/runtime coverage mirror the same contract.
 - **Context budget + compaction gate**: `/qa/context-budget-compaction` proves bounded automatic context injection, a hard 6,000-character/8-snippet `/qa/context-packet` budget, single-line catalog snippet compaction, max-token/max-iteration forwarding, cache-preserving new-context behavior, and on-demand stash/CVE retrieval under the prompt-injection policy `search-on-demand-not-force-injected`.
@@ -205,18 +205,20 @@ Use local folders from:
 
 ```bash
 export EXPLOITBOT_MODELS=/Users/eric/models
-export EXPLOITBOT_RELEASE_QWEN_MODEL=${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-MXFP4-MTP
+export EXPLOITBOT_RELEASE_QWEN_MODEL=${EXPLOITBOT_MODELS}/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP
 
 # Smallest local Qwen smoke target (lower RAM)
-${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-MXFP4-MTP
+${EXPLOITBOT_MODELS}/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP
 
 # Larger MXFP4 variant
-${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-35B-A3B-MXFP4-MTP
+${EXPLOITBOT_MODELS}/dealign.ai/Qwen3.6-35B-A3B-MXFP4-CRACK-MTP
 
 # MiniMax low-RAM proof target and full JANG metadata target
 ${EXPLOITBOT_MODELS}/JANGQ/MiniMax-M2.7-Small-JANGTQ
 ${EXPLOITBOT_MODELS}/dealign.ai/MiniMax-M2.7-JANG_K-CRACK
 ```
+
+Current local Qwen folders verified on this workstation include `/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP`, `/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP`, and `/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP4-CRACK-MTP`.
 
 For runtime checks, start with the smallest Qwen target first to keep RAM pressure low.
 The command examples below also default to this model.
@@ -265,11 +267,11 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 
 - `swift build --package-path ExploitBot -c debug`
 - `python3 scripts/release-readiness-proof.py`
-- `python3 scripts/verify-live-models.py --qwen ${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-MXFP4-MTP --metadata-only`
+- `python3 scripts/verify-live-models.py --qwen ${EXPLOITBOT_MODELS}/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP --metadata-only`
 - `python3 scripts/verify-live-models.py --qwen ${EXPLOITBOT_RELEASE_QWEN_MODEL} --restart-replay --require-ssm-companion-hit`
 - `python3 scripts/release-app-live-qwen-proof.py`
 - `EXPLOITBOT_RELEASE_QWEN_MODEL=${EXPLOITBOT_RELEASE_QWEN_MODEL} python3 scripts/release-app-qwen-cross-restart-cache-proof.py`
-- `EXPLOITBOT_LIVE_BATCH_QWEN_MODEL=${EXPLOITBOT_MODELS}/JANGQ/Qwen3.6-27B-MXFP4-MTP python3 scripts/prove-live-continuous-batching.py`
+- `EXPLOITBOT_LIVE_BATCH_QWEN_MODEL=${EXPLOITBOT_MODELS}/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP python3 scripts/prove-live-continuous-batching.py`
 - `EXPLOITBOT_LIVE_BATCH_MINIMAX_MODEL=${EXPLOITBOT_MODELS}/JANGQ/MiniMax-M2.7-Small-JANGTQ python3 scripts/prove-live-minimax-continuous-batching.py`
 - `python3 scripts/minimax-continuous-batching-readiness-proof.py`
 - `python3 scripts/startup-cache-defaults-proof.py`

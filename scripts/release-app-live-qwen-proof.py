@@ -17,7 +17,7 @@ APP = ROOT / "release" / "ExploitBot.app"
 APP_BINARY = APP / "Contents" / "MacOS" / "ExploitBot"
 ENGINE_LAUNCH = APP / "Contents" / "Resources" / "ExploitBotEngine" / "launch.py"
 APP_API = "http://127.0.0.1:9999"
-DEFAULT_QWEN = Path("/Users/eric/models/JANGQ/Qwen3.6-27B-JANG_4M-MTP")
+DEFAULT_QWEN = Path("/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP")
 DEFAULT_OUTPUT = ROOT / "docs" / "live-proofs" / "checkpoint-454-release-app-qwen-live.json"
 HEAVY_MODEL_MARKERS = (
     "ExploitBotEngine/launch.py",

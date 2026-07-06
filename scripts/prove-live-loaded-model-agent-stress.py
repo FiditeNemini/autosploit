@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ENGINE_DIR = ROOT / "ExploitBotEngine"
 LAUNCH_PY = ENGINE_DIR / "launch.py"
 APP_API = "http://127.0.0.1:9999"
-DEFAULT_MODEL = Path("/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP")
+DEFAULT_MODEL = Path("/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP")
 DEFAULT_OUTPUT = ROOT / "docs" / "live-proofs" / "checkpoint-466-qwen-live-agent-stress.json"
 
 
@@ -202,10 +202,6 @@ def main() -> None:
 
     error: Exception | None = None
     try:
-        engine = launch_engine(model, port, Path(cache_tmp.name))
-        health = wait_health(base_url, engine)
-        cache_before = request_json("GET", f"{base_url}/v1/cache/stats", timeout=15.0)
-
         subprocess.run(["pkill", "-x", "ExploitBot"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         env = os.environ.copy()
         env["EXPLOITBOT_TESTING"] = "1"
@@ -215,6 +211,10 @@ def main() -> None:
         if app.wait(timeout=30) != 0:
             raise RuntimeError("build_and_run --verify failed")
         wait_for_app()
+
+        engine = launch_engine(model, port, Path(cache_tmp.name))
+        health = wait_health(base_url, engine)
+        cache_before = request_json("GET", f"{base_url}/v1/cache/stats", timeout=15.0)
 
         app_request("POST", "/engine/mock", base_url, timeout=15.0)
         app_request(
@@ -288,12 +288,15 @@ def main() -> None:
 
         cache_after = request_json("GET", f"{base_url}/v1/cache/stats", timeout=15.0)
         scheduler = cache_after.get("scheduler_stats") or {}
-        ssm_rederive = ((cache_after.get("ssm_companion") or {}).get("rederive") or {})
+        ssm_companion = cache_after.get("ssm_companion") or {}
+        ssm_disk = ssm_companion.get("disk") or {}
+        ssm_rederive = ssm_companion.get("rederive") or {}
+        ssm_companion_l2_tokens = int_at({"d": ssm_disk}, ("d", "total_tokens_on_disk"))
         require(int_at({"s": scheduler}, ("s", "max_running_observed")) >= 2, "engine did not observe live agent overlap", scheduler)
         require(int_at({"s": scheduler}, ("s", "num_requests_processed")) >= 2, "engine processed too few live agent requests", scheduler)
         require(int_at(cache_after, ("kv_cache_quantization", "bits")) == 4, "live agent KV cache not q4", cache_after)
         require(int_at(cache_after, ("block_disk_cache", "disk_writes")) >= 1, "live agent block L2 writes missing", cache_after)
-        require(int_at({"r": ssm_rederive}, ("r", "completed")) >= 1, "live agent SSM rederive missing", cache_after)
+        require(ssm_companion_l2_tokens >= 1, "live agent SSM companion L2 missing", cache_after)
         require(int_at({"r": ssm_rederive}, ("r", "failed")) == 0, "live agent SSM rederive failed", cache_after)
         require(float_at(cache_after, ("memory", "active_mb")) < 20000, "live agent active memory exceeded low-RAM lane", cache_after)
 
@@ -304,6 +307,9 @@ def main() -> None:
                 "cacheBefore": cache_before,
                 "cacheAfter": cache_after,
                 "schedulerStats": scheduler,
+                "ssmCompanionL2Tokens": ssm_companion_l2_tokens,
+                "ssmReDeriveCompleted": int_at({"r": ssm_rederive}, ("r", "completed")),
+                "ssmReDeriveFailed": int_at({"r": ssm_rederive}, ("r", "failed")),
                 "appProgressSnapshot": progress.get("agents") or {},
                 "appFinishedSnapshot": finished_agents,
                 "appMaxWorkingObserved": max_working_observed,

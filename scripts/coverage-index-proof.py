@@ -1231,6 +1231,7 @@ def assert_coverage_index() -> None:
         "qwenLiveAgentStressEngineRequestsProcessed",
         "qwenLiveAgentStressKVBits",
         "qwenLiveAgentStressBlockL2DiskWrites",
+        "qwenLiveAgentStressSSMCompanionL2Tokens",
         "qwenLiveAgentStressSSMReDeriveCompleted",
         "qwenLiveAgentStressSSMReDeriveFailed",
         "qwenLiveAgentStressActiveMemoryMB",
@@ -1254,6 +1255,8 @@ def assert_coverage_index() -> None:
             expected = live_agent_stress.get("kvBits")
         elif key == "qwenLiveAgentStressBlockL2DiskWrites":
             expected = live_agent_stress.get("blockL2DiskWrites")
+        elif key == "qwenLiveAgentStressSSMCompanionL2Tokens":
+            expected = live_agent_stress.get("ssmCompanionL2Tokens")
         elif key == "qwenLiveAgentStressSSMReDeriveCompleted":
             expected = live_agent_stress.get("ssmReDeriveCompleted")
         elif key == "qwenLiveAgentStressSSMReDeriveFailed":

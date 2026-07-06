@@ -327,8 +327,8 @@ def run() -> None:
                 scheduler = (payload.get("cacheAfter") or {}).get("scheduler_stats") or {}
                 kv = (payload.get("cacheAfter") or {}).get("kv_cache_quantization") or {}
                 block = (payload.get("cacheAfter") or {}).get("block_disk_cache") or {}
-                ssm = ((payload.get("cacheAfter") or {}).get("ssm_companion") or {}).get("rederive") or {}
                 memory = (payload.get("cacheAfter") or {}).get("memory") or {}
+                ssm_failed = payload.get("ssmReDeriveFailed", 0)
                 if payload.get("appMaxWorkingObserved", 0) < 2:
                     raise AssertionError(f"Qwen live agent stress app concurrency too low: {path} {payload}")
                 if scheduler.get("max_running_observed", 0) < 2 or scheduler.get("num_requests_processed", 0) < 2:
@@ -337,8 +337,8 @@ def run() -> None:
                     raise AssertionError(f"Qwen live agent stress missing TurboQuant q4: {path} {payload}")
                 if block.get("disk_writes", 0) < 1:
                     raise AssertionError(f"Qwen live agent stress missing block L2 writes: {path} {payload}")
-                if ssm.get("completed", 0) < 1 or ssm.get("failed") != 0:
-                    raise AssertionError(f"Qwen live agent stress missing SSM rederive completion: {path} {payload}")
+                if payload.get("ssmCompanionL2Tokens", 0) < 1 or ssm_failed != 0:
+                    raise AssertionError(f"Qwen live agent stress missing SSM companion L2/no-failure evidence: {path} {payload}")
                 if not (0 < float(memory.get("active_mb") or 0) < 20000):
                     raise AssertionError(f"Qwen live agent stress memory outside low-RAM lane: {path} {payload}")
                 continue

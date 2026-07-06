@@ -75,7 +75,7 @@ def assert_persisted_state() -> None:
         raise AssertionError(f"reasoning toggle did not persist: {state}")
     engine = state.get("engineConfig") or {}
     expected_engine = {
-        "modelPath": "/Users/eric/models/JANGQ/Qwen3.6-27B-JANG_4M-MTP",
+        "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
         "reasoningParser": "qwen3",
         "toolCallParser": "qwen",
         "kvCacheQuantization": "none",
@@ -123,7 +123,7 @@ def run() -> None:
                 "maxIterations": 9,
                 "chat": {"enableReasoning": False},
                 "engine": {
-                    "modelPath": "/Users/eric/models/JANGQ/Qwen3.6-27B-JANG_4M-MTP",
+                    "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
                     "reasoningParser": "qwen3",
                     "toolCallParser": "qwen",
                     "kvCacheQuantization": "none",

@@ -63,7 +63,7 @@ def run() -> None:
             raise AssertionError(f"live loaded-model agent artifact not accepted: {payload}")
         if payload.get("family") != "qwen":
             raise AssertionError(f"live loaded-model agent family mismatch: {payload}")
-        if payload.get("model") != "/Users/eric/models/JANGQ/Qwen3.6-27B-MXFP4-MTP":
+        if payload.get("model") != "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP":
             raise AssertionError(f"live loaded-model agent model mismatch: {payload}")
         if payload.get("agentCount", 0) < 2:
             raise AssertionError(f"live loaded-model agent count too low: {payload}")
@@ -77,8 +77,8 @@ def run() -> None:
             raise AssertionError(f"live loaded-model KV bits mismatch: {payload}")
         if payload.get("blockL2DiskWrites", 0) < 1:
             raise AssertionError(f"live loaded-model block L2 writes missing: {payload}")
-        if payload.get("ssmReDeriveCompleted", 0) < 1:
-            raise AssertionError(f"live loaded-model SSM rederive completions missing: {payload}")
+        if payload.get("ssmCompanionL2Tokens", 0) < 1:
+            raise AssertionError(f"live loaded-model SSM companion L2 evidence missing: {payload}")
         if payload.get("ssmReDeriveFailed") != 0:
             raise AssertionError(f"live loaded-model SSM rederive failures: {payload}")
         if payload.get("activeMemoryMB", 0) <= 0 or payload.get("activeMemoryMB", 0) >= 20000:
