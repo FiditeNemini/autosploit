@@ -1,7 +1,7 @@
 {
-  "finishedAt": "2026-07-06T03:29:18-0700",
+  "finishedAt": "2026-07-06T03:34:40-0700",
   "fixtureRoot": "/tmp/exploitbot-autonomous-scenario-fixtures",
-  "generatedAt": "2026-07-06T03:29:18-0700",
+  "generatedAt": "2026-07-06T03:34:40-0700",
   "notes": [
     "No model inference is started by this proof.",
     "All targets are loopback services or local files under /tmp; fake credentials and tokens are canaries only."
@@ -25,7 +25,7 @@
       ],
       "scenarioId": "webserver_auth_sqli_report_chain",
       "setupMode": "loopback_http_server",
-      "target": "http://127.0.0.1:50358"
+      "target": "http://127.0.0.1:50780"
     },
     {
       "checks": {
@@ -40,7 +40,7 @@
       ],
       "scenarioId": "webserver_ssrf_file_read_chain",
       "setupMode": "loopback_http_server",
-      "target": "http://127.0.0.1:50361"
+      "target": "http://127.0.0.1:50783"
     },
     {
       "checks": {
@@ -104,10 +104,10 @@
       ],
       "scenarioId": "network_service_credential_post_chain",
       "setupMode": "loopback_network_service",
-      "target": "http://127.0.0.1:50364"
+      "target": "http://127.0.0.1:50786"
     }
   ],
   "serverLifecycle": "loopback HTTP services are proof-run-only and are stopped before artifact write",
-  "startedAt": "2026-07-06T03:29:17-0700",
+  "startedAt": "2026-07-06T03:34:39-0700",
   "status": "PASS"
 }

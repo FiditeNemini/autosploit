@@ -1,0 +1,130 @@
+{
+  "checks": {
+    "allPromptsContainLiveTargets": "PASS",
+    "allScenariosPrepared": "PASS",
+    "isWorkingFalse": "PASS",
+    "noModelLoaded": "PASS",
+    "servicesAliveDuringPrepare": "PASS",
+    "tabsSelected": "PASS"
+  },
+  "finishedAt": "2026-07-06T03:34:33-0700",
+  "fixtureSource": "scripts/autonomous-scenario-fixture-setup-proof.py::build_fixture_session",
+  "generatedAt": "2026-07-06T03:34:33-0700",
+  "noModelLoaded": true,
+  "notes": [
+    "No model inference is started by this proof.",
+    "This proof bridges fixture materialization to app prompt preparation for all autonomous scenarios."
+  ],
+  "ok": true,
+  "preparedRows": [
+    {
+      "checks": {
+        "fixtureSetupInPrompt": "PASS",
+        "fixtureSetupInResponse": "PASS",
+        "prepareOk": "PASS",
+        "promptDrafted": "PASS",
+        "scenarioInPrompt": "PASS",
+        "sendToChatFalse": "PASS",
+        "servicesAliveDuringPrepare": "PASS",
+        "tabSelected": "PASS",
+        "targetInPrompt": "PASS"
+      },
+      "expectedTab": "web",
+      "scenarioId": "webserver_auth_sqli_report_chain",
+      "selectedTab": "web",
+      "target": "http://127.0.0.1:50725"
+    },
+    {
+      "checks": {
+        "fixtureSetupInPrompt": "PASS",
+        "fixtureSetupInResponse": "PASS",
+        "prepareOk": "PASS",
+        "promptDrafted": "PASS",
+        "scenarioInPrompt": "PASS",
+        "sendToChatFalse": "PASS",
+        "servicesAliveDuringPrepare": "PASS",
+        "tabSelected": "PASS",
+        "targetInPrompt": "PASS"
+      },
+      "expectedTab": "web",
+      "scenarioId": "webserver_ssrf_file_read_chain",
+      "selectedTab": "web",
+      "target": "http://127.0.0.1:50728"
+    },
+    {
+      "checks": {
+        "fixtureSetupInPrompt": "PASS",
+        "fixtureSetupInResponse": "PASS",
+        "prepareOk": "PASS",
+        "promptDrafted": "PASS",
+        "scenarioInPrompt": "PASS",
+        "sendToChatFalse": "PASS",
+        "servicesAliveDuringPrepare": "PASS",
+        "tabSelected": "PASS",
+        "targetInPrompt": "PASS"
+      },
+      "expectedTab": "supplyChain",
+      "scenarioId": "github_repo_secret_dependency_chain",
+      "selectedTab": "supplyChain",
+      "target": "/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-vulnerable-repo"
+    },
+    {
+      "checks": {
+        "fixtureSetupInPrompt": "PASS",
+        "fixtureSetupInResponse": "PASS",
+        "prepareOk": "PASS",
+        "promptDrafted": "PASS",
+        "scenarioInPrompt": "PASS",
+        "sendToChatFalse": "PASS",
+        "servicesAliveDuringPrepare": "PASS",
+        "tabSelected": "PASS",
+        "targetInPrompt": "PASS"
+      },
+      "expectedTab": "supplyChain",
+      "scenarioId": "codebase_static_to_patch_review_chain",
+      "selectedTab": "supplyChain",
+      "target": "/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-codebase-review"
+    },
+    {
+      "checks": {
+        "fixtureSetupInPrompt": "PASS",
+        "fixtureSetupInResponse": "PASS",
+        "prepareOk": "PASS",
+        "promptDrafted": "PASS",
+        "scenarioInPrompt": "PASS",
+        "sendToChatFalse": "PASS",
+        "servicesAliveDuringPrepare": "PASS",
+        "tabSelected": "PASS",
+        "targetInPrompt": "PASS"
+      },
+      "expectedTab": "supplyChain",
+      "scenarioId": "container_iac_supply_chain_chain",
+      "selectedTab": "supplyChain",
+      "target": "/tmp/exploitbot-autonomous-scenario-fixtures/synthetic-container-iac"
+    },
+    {
+      "checks": {
+        "fixtureSetupInPrompt": "PASS",
+        "fixtureSetupInResponse": "PASS",
+        "prepareOk": "PASS",
+        "promptDrafted": "PASS",
+        "scenarioInPrompt": "PASS",
+        "sendToChatFalse": "PASS",
+        "servicesAliveDuringPrepare": "PASS",
+        "tabSelected": "PASS",
+        "targetInPrompt": "PASS"
+      },
+      "expectedTab": "network",
+      "scenarioId": "network_service_credential_post_chain",
+      "selectedTab": "network",
+      "target": "http://127.0.0.1:50731"
+    }
+  ],
+  "proofLevel": "live-debug-app-route-all-scenarios-no-model-load",
+  "proofType": "app-autonomous-scenario-fixture-session-prepare-live",
+  "scenarioCount": 6,
+  "serverLifecycle": "loopback services stay alive through all prepare calls and are stopped before artifact write",
+  "sourceRoute": "/qa/autonomous-scenario-prepare",
+  "startedAt": "2026-07-06T03:34:31-0700",
+  "status": "PASS"
+}

@@ -3,7 +3,7 @@
     "agent": 12,
     "chat": 12,
     "context": 22,
-    "other": 11,
+    "other": 12,
     "release": 21,
     "runtime": 58,
     "settings": 13,
@@ -11,7 +11,7 @@
     "tools": 27,
     "visual": 44
   },
-  "categoryOtherCount": 11,
+  "categoryOtherCount": 12,
   "categorySurfaces": [
     "agent",
     "chat",
@@ -23,15 +23,15 @@
     "tools",
     "visual"
   ],
-  "generatedAt": "2026-07-06T03:30:33-0700",
+  "generatedAt": "2026-07-06T03:35:31-0700",
   "ok": true,
   "processEvidence": {
     "appRows": [
-      "52485 121072 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+      "54246 114848 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
     ],
     "engineProcessRows": []
   },
-  "proofCount": 280,
+  "proofCount": 281,
   "proofType": "proof-ledger-current-live-route",
   "sourceRoute": "/qa/proof-ledger",
   "stateEvidence": {

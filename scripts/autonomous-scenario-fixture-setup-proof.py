@@ -9,6 +9,7 @@ import threading
 import time
 import urllib.parse
 import urllib.request
+from dataclasses import dataclass
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
@@ -259,19 +260,41 @@ def row(scenario_id: str, setup_mode: str, target: str, markers: list[str], chec
     }
 
 
-def run() -> None:
-    started = timestamp()
-    if FIXTURE_ROOT.exists():
-        shutil.rmtree(FIXTURE_ROOT)
-    FIXTURE_ROOT.mkdir(parents=True)
-    servers: list[ThreadingHTTPServer] = []
-    rows: list[dict[str, Any]] = []
+@dataclass
+class FixtureSession:
+    root: Path
+    servers: list[ThreadingHTTPServer]
+    rows: list[dict[str, Any]]
+
+    def close(self) -> None:
+        for server in self.servers:
+            server.shutdown()
+            server.server_close()
+
+    def target_for(self, scenario_id: str) -> str:
+        for item in self.rows:
+            if item.get("scenarioId") == scenario_id:
+                return str(item.get("target") or "")
+        raise KeyError(scenario_id)
+
+    def row_for(self, scenario_id: str) -> dict[str, Any]:
+        for item in self.rows:
+            if item.get("scenarioId") == scenario_id:
+                return item
+        raise KeyError(scenario_id)
+
+
+def build_fixture_session(root: Path = FIXTURE_ROOT, *, reset: bool = True) -> FixtureSession:
+    if reset and root.exists():
+        shutil.rmtree(root)
+    root.mkdir(parents=True, exist_ok=True)
+    session = FixtureSession(root=root, servers=[], rows=[])
     try:
         sqli_server, sqli_url = start_server(SQLiHandler)
-        servers.append(sqli_server)
+        session.servers.append(sqli_server)
         sqli_root = read_url(f"{sqli_url}/")
         sqli_search = read_url(f"{sqli_url}/search?q=1%27%20OR%201%3D1--")
-        rows.append(
+        session.rows.append(
             row(
                 "webserver_auth_sqli_report_chain",
                 "loopback_http_server",
@@ -286,10 +309,10 @@ def run() -> None:
         )
 
         ssrf_server, ssrf_url = start_server(SSRFHandler)
-        servers.append(ssrf_server)
+        session.servers.append(ssrf_server)
         ssrf_fetch = read_url(f"{ssrf_url}/fetch?url={urllib.parse.quote(ssrf_url + '/canary', safe=':/?=&')}")
         ssrf_file = read_url(f"{ssrf_url}/download?path=fixture-note.txt")
-        rows.append(
+        session.rows.append(
             row(
                 "webserver_ssrf_file_read_chain",
                 "loopback_http_server",
@@ -303,8 +326,8 @@ def run() -> None:
             )
         )
 
-        repo = create_repo_fixture(FIXTURE_ROOT)
-        rows.append(
+        repo = create_repo_fixture(root)
+        session.rows.append(
             row(
                 "github_repo_secret_dependency_chain",
                 "local_git_repo",
@@ -319,8 +342,8 @@ def run() -> None:
             )
         )
 
-        codebase = create_codebase_fixture(FIXTURE_ROOT)
-        rows.append(
+        codebase = create_codebase_fixture(root)
+        session.rows.append(
             row(
                 "codebase_static_to_patch_review_chain",
                 "local_codebase",
@@ -334,8 +357,8 @@ def run() -> None:
             )
         )
 
-        container = create_container_iac_fixture(FIXTURE_ROOT)
-        rows.append(
+        container = create_container_iac_fixture(root)
+        session.rows.append(
             row(
                 "container_iac_supply_chain_chain",
                 "local_container_iac_repo",
@@ -350,10 +373,10 @@ def run() -> None:
         )
 
         network_server, network_url = start_server(NetworkHandler)
-        servers.append(network_server)
+        session.servers.append(network_server)
         login = read_url(f"{network_url}/login?user=demo&pass=demo")
         post_check = read_url(f"{network_url}/post-check")
-        rows.append(
+        session.rows.append(
             row(
                 "network_service_credential_post_chain",
                 "loopback_network_service",
@@ -366,10 +389,21 @@ def run() -> None:
                 },
             )
         )
+        return session
+    except Exception:
+        session.close()
+        raise
+
+
+def run() -> None:
+    started = timestamp()
+    session: FixtureSession | None = None
+    try:
+        session = build_fixture_session()
+        rows = session.rows
     finally:
-        for server in servers:
-            server.shutdown()
-            server.server_close()
+        if session is not None:
+            session.close()
 
     ok = all(item["ok"] for item in rows) and len(rows) == 6
     report = {
