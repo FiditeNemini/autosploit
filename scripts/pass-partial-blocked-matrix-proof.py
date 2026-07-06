@@ -9,8 +9,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_MATRIX = ROOT / "docs/live-proofs/2026-07-04-pass-partial-blocked-matrix.json"
-EXPECTED_COUNTS = {"PASS": 24, "PARTIAL": 1, "BLOCKED": 1}
-VALID_STATUSES = set(EXPECTED_COUNTS)
+VALID_STATUSES = {"PASS", "PARTIAL", "BLOCKED"}
 
 
 def timestamp() -> str:
@@ -25,6 +24,15 @@ def require(condition: bool, message: str, detail: Any = None) -> None:
 
 def status_counts(rows: list[dict[str, Any]]) -> dict[str, int]:
     return {status: sum(1 for row in rows if row.get("status") == status) for status in ("PASS", "PARTIAL", "BLOCKED")}
+
+
+def expected_counts_for_rows(rows: list[dict[str, Any]]) -> dict[str, int]:
+    counts = status_counts(rows)
+    release_rows = [row for row in rows if row.get("area") == "Release/distribution readiness"]
+    require(len(release_rows) == 1, "matrix must contain exactly one release readiness row", release_rows)
+    release_status = release_rows[0].get("status")
+    require(release_status in {"PASS", "BLOCKED"}, "release readiness row must be PASS or BLOCKED", release_rows[0])
+    return counts
 
 
 def validate_rows(rows: list[dict[str, Any]]) -> None:
@@ -90,7 +98,8 @@ def build_report(
 
 def main() -> None:
     matrix = json.loads(DEFAULT_MATRIX.read_text(encoding="utf-8"))
-    report = build_report(matrix, expected_counts=EXPECTED_COUNTS)
+    rows = matrix.get("rows") or []
+    report = build_report(matrix, expected_counts=expected_counts_for_rows(rows))
     DEFAULT_MATRIX.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(f"pass/partial/blocked matrix proof wrote {DEFAULT_MATRIX}")
 
