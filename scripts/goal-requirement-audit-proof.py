@@ -91,7 +91,7 @@ REQUIREMENTS = [
         "requirement": "Real models can choose scenario tool order from a natural-language objective without exact tool-call blocks or app-side exact-call recovery.",
         "areas": ["Independent natural-language scenario tool selection"],
         "expectedStatus": "PARTIAL",
-        "missingEvidence": "Current scenario matrix labels real-Qwen webserver, loopback, phase, and repo/codebase rows as exact_tool_call_prompt_with_app_recovery. The tool-schema exclusion proof passes for hiding run_shell from a scenario-focused catalog and blocking it if emitted anyway. The latest saved 27B natural-language fixture proof has no exact tool-call blocks and receives web schemas with run_shell excluded, but loops on httpx before the required katana/sqlmap/search_cve chain, SQLi proof, final marker, or report proof; 27B and 35B PASS artifacts are still missing.",
+        "missingEvidence": "Current scenario matrix labels real-Qwen webserver, loopback, phase, and repo/codebase rows as exact_tool_call_prompt_with_app_recovery. The tool-schema exclusion proof passes for hiding run_shell from a scenario-focused catalog and blocking it if emitted anyway. The local target argument-repair proof passes for the saved 27B failure mode where the model selected httpx but emitted empty arguments. The latest saved 27B natural-language fixture proof improved to httpx/katana/nuclei/sqlmap/lookup_cve with SQLi proof and raw/terminal evidence, but final assistant continuation/report proof is still missing and no 35B natural PASS exists.",
     },
     {
         "id": "individual_toolchain_per_tool",

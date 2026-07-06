@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-06T02:41:16-0700",
+  "generatedAt": "2026-07-06T02:53:07-0700",
   "ok": true,
   "proofType": "pass-partial-blocked-matrix",
   "rowCount": 27,
@@ -244,10 +244,11 @@
         "docs/live-proofs/2026-07-06-autonomous-scenario-matrix.json",
         "docs/live-proofs/2026-07-06-autonomous-scenario-catalog.json",
         "docs/live-proofs/2026-07-06-tool-schema-profile-exclusion.json",
+        "docs/live-proofs/2026-07-06-tool-argument-repair.json",
         "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-27b.json",
         "docs/live-validation-2026-07-04.md"
       ],
-      "notes": "Scenario matrix now labels toolChoiceMode per row. Current real-Qwen webserver, loopback, phase, and repo/codebase scenario rows are exact_tool_call_prompt_with_app_recovery, proving prompt/schema receipt, ordered tool execution, cache/MTP, verbose transcripts, and reports, but not independent natural-language tool selection. The scenario tool-schema exclusion proof now passes for hiding run_shell from a scenario-focused catalog and blocking it if a model emits it anyway. The latest saved 27B natural-language artifact has no exact tool-call blocks and receives the web schemas with run_shell excluded, but loops on httpx before the required katana/sqlmap/search_cve chain, SQLi proof, final marker, or report proof. A PASS here requires fresh 27B and 35B local-fixture proofs where the prompt gives a natural-language objective and allowed schemas only, with no exact tool-call blocks or forced function-specific retry.",
+      "notes": "Scenario matrix now labels toolChoiceMode per row. Current real-Qwen webserver, loopback, phase, and repo/codebase scenario rows are exact_tool_call_prompt_with_app_recovery, proving prompt/schema receipt, ordered tool execution, cache/MTP, verbose transcripts, and reports, but not independent natural-language tool selection. The scenario tool-schema exclusion proof now passes for hiding run_shell from a scenario-focused catalog and blocking it if a model emits it anyway. The local target argument-repair proof now passes for the saved 27B failure mode where the model selected httpx but emitted empty arguments; the app repairs missing local-safe target arguments from the scoped prompt and shows that repair in the verbose tool transcript. The latest saved 27B natural-language artifact improved to real model-selected httpx/katana/nuclei/sqlmap/lookup_cve with SQLi proof, raw results, terminal transcripts, and cache/MTP proof, but remains non-passing because final assistant continuation/report proof and stable 27B/35B PASS artifacts are missing. A PASS here requires fresh 27B and 35B local-fixture proofs where the prompt gives a natural-language objective and allowed schemas only, with no exact tool-call blocks or forced function-specific retry.",
       "status": "PARTIAL"
     },
     {

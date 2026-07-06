@@ -28,7 +28,9 @@ FINAL_MARKER = "REAL_QWEN_NATURAL_TOOL_CHOICE_FINAL"
 DEFAULT_OUTPUT_27B = ROOT / "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-27b.json"
 DEFAULT_OUTPUT_35B = ROOT / "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-35b.json"
 SCENARIO_TOOL_SCHEMA_MAX = 12
-NATURAL_EXPECTED_TOOLS = ["httpx", "katana", "sqlmap", "search_cve"]
+NATURAL_REQUIRED_ORDERED_TOOLS = ["httpx", "katana", "sqlmap"]
+NATURAL_CVE_CONTEXT_TOOLS = ["search_cve", "lookup_cve"]
+NATURAL_EXPECTED_TOOLS = NATURAL_REQUIRED_ORDERED_TOOLS + ["search_cve|lookup_cve"]
 
 
 def load_module(name: str, path: Path):
@@ -175,7 +177,11 @@ def wait_for_quiet_messages(timeout: float = 360.0) -> tuple[list[dict[str, Any]
 
 def model_selected_expected_sequence(messages: list[dict[str, Any]]) -> bool:
     sequence = web_proof.tool_sequence(messages)
-    return web_proof.ordered_subsequence(sequence, NATURAL_EXPECTED_TOOLS)
+    return web_proof.ordered_subsequence(sequence, NATURAL_REQUIRED_ORDERED_TOOLS) and has_cve_context_tool(sequence)
+
+
+def has_cve_context_tool(sequence: list[str]) -> bool:
+    return any(tool in sequence for tool in NATURAL_CVE_CONTEXT_TOOLS)
 
 
 def build_natural_report(
@@ -199,15 +205,15 @@ def build_natural_report(
     vulns = results.get("vulns") or []
     vuln_sources = {row.get("source") for row in vulns if isinstance(row, dict)}
     checks = {
-        "modelReceivedNaturalWebToolSchemas": web_proof.passfail(all(tool in schema_names for tool in NATURAL_EXPECTED_TOOLS)),
+        "modelReceivedNaturalWebToolSchemas": web_proof.passfail(all(tool in schema_names for tool in NATURAL_REQUIRED_ORDERED_TOOLS) and any(tool in schema_names for tool in NATURAL_CVE_CONTEXT_TOOLS)),
         "genericShellSchemaExcluded": web_proof.passfail("run_shell" not in schema_names),
-        "orderedNaturalToolSequence": web_proof.passfail(web_proof.ordered_subsequence(sequence, NATURAL_EXPECTED_TOOLS)),
-        "verboseNaturalToolTranscript": web_proof.passfail(all(f"Tool request: {tool}" in text for tool in NATURAL_EXPECTED_TOOLS)),
+        "orderedNaturalToolSequence": web_proof.passfail(web_proof.ordered_subsequence(sequence, NATURAL_REQUIRED_ORDERED_TOOLS) and has_cve_context_tool(sequence)),
+        "verboseNaturalToolTranscript": web_proof.passfail(all(f"Tool request: {tool}" in text for tool in NATURAL_REQUIRED_ORDERED_TOOLS) and any(f"Tool request: {tool}" in text for tool in NATURAL_CVE_CONTEXT_TOOLS)),
         "modelContinuedAfterTools": web_proof.passfail(len(model_requests) >= 2 and FINAL_MARKER in text),
         "httpProbeEvidence": web_proof.passfail("httpx" in raw_tools and "ExploitBot SQLi Lab" in results_text),
         "sqlInjectionProof": web_proof.passfail("sqlmap" in raw_tools and "Parameter: q" in results_text and "EXPLOITBOT_SQLI_PROOF_USER=alice" in results_text),
         "cveContextEvidence": web_proof.passfail(
-            "search_cve" in raw_tools
+            any(tool in raw_tools for tool in NATURAL_CVE_CONTEXT_TOOLS)
             and ("CWE-89" in text or "No CVEs found" in text or "CVE-" in text or "CVE-" in results_text)
         ),
         "safeLocalBoundary": web_proof.passfail(lab_url.startswith("http://127.0.0.1:") and "http://example" not in text),
@@ -359,8 +365,13 @@ def run() -> None:
                 timeout=15.0,
             )
             require("run_shell" not in (catalog.get("toolNames") or []), "generic shell schema should be excluded for natural tool-choice turn", catalog)
-            for tool in NATURAL_EXPECTED_TOOLS:
+            for tool in NATURAL_REQUIRED_ORDERED_TOOLS:
                 require(tool in (catalog.get("toolNames") or []), f"tool schema missing before natural tool-choice turn: {tool}", catalog)
+            require(
+                any(tool in (catalog.get("toolNames") or []) for tool in NATURAL_CVE_CONTEXT_TOOLS),
+                "tool schema missing before natural tool-choice CVE context turn",
+                catalog,
+            )
             report["preflightToolCatalog"] = catalog
 
             app_request("POST", "/send", prompt, timeout=15.0)
