@@ -46,10 +46,12 @@ Fresh evidence:
 - Cache UI/state: PASS. The live Cache panel showed `TurboQuant Q4` selected and `/state` reported `kvCacheQuantization=turboquant-q4`, `prefixCache=true`, `pagedCache=true`, `promptL2Disk=true`, and `blockL2Disk=true`.
 - CVE/tool inventory state: PASS for current feed/library coverage and current-machine tool installation. The refreshed live CVE proof shows `cveDatabase.totalCount=1641` and `kevCount=1631` after importing all current CISA KEV rows plus bounded recent NVD critical rows; the latest tool inventory rerun reports `installedCount=42`, `missingCount=0`, `fullPentestToolchainInstalled=PASS`, and `settingsCurrentMachineDetection=PASS`.
 - Process/RAM guard for this checkpoint: PASS. `ps` showed only the packaged app process for this check; no `launch.py`, `Qwen3.6`, or `vmlx` model process was running.
+- Fresh 17:39 Computer Use retry: PASS for current Computer Use namespace exposure and release-app UI navigation. `mcp__computer_use.list_apps` returned `/Users/eric/exploitbot/release/ExploitBot.app`, `mcp__computer_use.get_app_state(app="/Users/eric/exploitbot/release/ExploitBot.app")` returned CUA app version `857`, PID `11094`, accessibility tree, and inline screenshot. A current click sweep reached Web, Network, Creds, Exploit, Post, Supply, OSINT, Report, and Stash; `/state` then reported `activeTab=stash`, ordered `manualTabSwitch` feed entries from `recon -> web` through `report -> stash`, selected model `/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP`, visible/supported 27B and 35B MXFP8 MTP model entries, `kvCacheQuantization=turboquant-q4`, `prefixCache=true`, `pagedCache=true`, `promptL2Disk=true`, `blockL2Disk=true`, `installedCount=42`, `missingCount=0`, `cveDatabase.totalCount=1644`, `kevCount=1631`, and `engineRunning=false`/`enginePort=0`. Screenshot files: `docs/live-proofs/2026-07-05-release-app-computer-use-retry-current.png` and `docs/live-proofs/2026-07-05-release-app-computer-use-retry-current-final.png`. Artifact: `docs/live-proofs/2026-07-05-release-app-computer-use-retry-current.json`.
 
 Artifact:
 
 - `docs/live-proofs/2026-07-05-release-computer-use-settings-cache-model.json`
+- `docs/live-proofs/2026-07-05-release-app-computer-use-retry-current.json`
 
 ### Static/build gates
 

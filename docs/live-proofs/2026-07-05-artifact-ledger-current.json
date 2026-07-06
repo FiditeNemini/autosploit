@@ -29,12 +29,12 @@
     "docs/live-proofs/checkpoint-75-minimax-live.json",
     "docs/live-proofs/qwen27-mxfp4-mtp-live-cache-20260605.json"
   ],
-  "generatedAt": "2026-07-05T17:35:48-0700",
+  "generatedAt": "2026-07-05T17:40:24-0700",
   "knownFailedLiveProofs": [
     "docs/live-proofs/checkpoint-75-minimax-live.json"
   ],
-  "liveProofCount": 171,
-  "liveProofOkCount": 157,
+  "liveProofCount": 172,
+  "liveProofOkCount": 158,
   "liveProofStatus": {
     "docs/live-proofs/2026-06-03-minimax-current-metadata.json": true,
     "docs/live-proofs/2026-06-03-minimax-jang-k-current-metadata.json": true,
@@ -132,6 +132,7 @@
     "docs/live-proofs/2026-07-05-release-app-computer-use-current-manual-sweep.json": false,
     "docs/live-proofs/2026-07-05-release-app-computer-use-current-refresh.json": true,
     "docs/live-proofs/2026-07-05-release-app-computer-use-full-ui-current.json": true,
+    "docs/live-proofs/2026-07-05-release-app-computer-use-retry-current.json": true,
     "docs/live-proofs/2026-07-05-release-app-computer-use-settings-agents.json": true,
     "docs/live-proofs/2026-07-05-release-app-json-framing-live.json": true,
     "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-current.json": true,
@@ -305,6 +306,7 @@
     "docs/live-proofs/2026-07-05-release-app-computer-use-current-manual-sweep.json",
     "docs/live-proofs/2026-07-05-release-app-computer-use-current-refresh.json",
     "docs/live-proofs/2026-07-05-release-app-computer-use-full-ui-current.json",
+    "docs/live-proofs/2026-07-05-release-app-computer-use-retry-current.json",
     "docs/live-proofs/2026-07-05-release-app-computer-use-settings-agents.json",
     "docs/live-proofs/2026-07-05-release-app-json-framing-live.json",
     "docs/live-proofs/2026-07-05-release-app-live-qwen-27b-current.json",
@@ -384,7 +386,7 @@
   "ok": true,
   "processEvidence": {
     "appRows": [
-      "10459 132144 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+      "12021 132176 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
     ],
     "engineProcessRows": []
   },

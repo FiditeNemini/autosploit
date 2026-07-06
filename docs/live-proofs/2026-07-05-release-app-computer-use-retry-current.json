@@ -1,0 +1,228 @@
+{
+  "ok": true,
+  "status": {
+    "computerUseNamespaceExposed": "PASS",
+    "listAppsReturnedReleaseApp": "PASS",
+    "getAppStateReturnedScreenshotAndAccessibilityTree": "PASS",
+    "sameProcessStateApi": "PASS",
+    "allPrimaryTabsClicked": "PASS",
+    "modelLibraryQwen27b35bMxfp8MtpVisible": "PASS",
+    "turboQuantCacheDefault": "PASS",
+    "toolInventoryInstalled": "PASS",
+    "cveLibraryLoaded": "PASS",
+    "modelInferenceNotStarted": "PASS",
+    "releaseDistribution": "BLOCKED"
+  },
+  "proofType": "release-app-computer-use-retry-current",
+  "generatedAt": "2026-07-05T17:39:00-0700",
+  "computerUse": {
+    "toolNamespace": "mcp__computer_use",
+    "cuaAppVersion": "857",
+    "app": "/Users/eric/exploitbot/release/ExploitBot.app/",
+    "bundleID": "ai.jangq.ExploitBot",
+    "pid": 11094,
+    "listAppsObserved": "ExploitBot — /Users/eric/exploitbot/release/ExploitBot.app/ — ai.jangq.ExploitBot [frontmost, running, last-used=2026-07-05, uses=1]",
+    "initialFocusedElement": "Target domain or IP text field",
+    "initialVisibleControls": [
+      "Recon",
+      "Web",
+      "Network",
+      "Creds",
+      "Exploit",
+      "Post",
+      "Supply",
+      "OSINT",
+      "Report",
+      "Stash",
+      "Terminal",
+      "Settings",
+      "Enable Reasoning",
+      "Show Engine Logs",
+      "Start New Context",
+      "Deploy Agent"
+    ],
+    "screenshots": [
+      "docs/live-proofs/2026-07-05-release-app-computer-use-retry-current.png",
+      "docs/live-proofs/2026-07-05-release-app-computer-use-retry-current-final.png"
+    ]
+  },
+  "visibleTabSweep": {
+    "clicked": [
+      "web",
+      "network",
+      "creds",
+      "exploit",
+      "post",
+      "supplyChain",
+      "osint",
+      "report",
+      "stash"
+    ],
+    "finalActiveTab": "stash",
+    "activityFeed": [
+      "scanModelLibrary 14 models from 1 roots",
+      "manualTabSwitch recon -> web",
+      "manualTabSwitch web -> network",
+      "manualTabSwitch network -> creds",
+      "manualTabSwitch creds -> exploit",
+      "manualTabSwitch exploit -> post",
+      "manualTabSwitch post -> supplyChain",
+      "manualTabSwitch supplyChain -> osint",
+      "manualTabSwitch osint -> report",
+      "manualTabSwitch report -> stash"
+    ],
+    "observedPanelControls": {
+      "web": [
+        "Vulns",
+        "SQLi",
+        "XSS",
+        "Dirs",
+        "Params",
+        "SSL",
+        "JWT"
+      ],
+      "network": [
+        "Protocols",
+        "SNMP",
+        "Capture",
+        "MITM",
+        "Tunnels",
+        "SMB",
+        "WinRM",
+        "LDAP",
+        "RDP",
+        "SSH",
+        "MSSQL"
+      ],
+      "creds": [
+        "Cracking",
+        "Online Brute",
+        "Secrets",
+        "Vault"
+      ],
+      "exploit": [
+        "Metasploit",
+        "Reverse Shells",
+        "Custom",
+        "C2 (Sliver)"
+      ],
+      "post": [
+        "PrivEsc",
+        "AD Attacks",
+        "Lateral"
+      ],
+      "supplyChain": [
+        "CVE Intel",
+        "Secrets",
+        "SBOM",
+        "Dependencies",
+        "Search CVEs",
+        "Import",
+        "Include-only IDs"
+      ],
+      "osint": [
+        "Username",
+        "Email",
+        "Metadata",
+        "Screenshots"
+      ],
+      "report": [
+        "Findings",
+        "Preview",
+        "Full Pentest Report",
+        "Bug Bounty Submission",
+        "Executive Brief",
+        "Technical Writeup",
+        "Generate disabled with no findings",
+        "PDF disabled with no findings",
+        "MD disabled with no findings"
+      ],
+      "stash": [
+        "All",
+        "Creds",
+        "Hosts",
+        "Vulns",
+        "Code",
+        "Raw",
+        "Search stash",
+        "+ Add",
+        "Apache 2.4.49 test note"
+      ]
+    }
+  },
+  "stateApi": {
+    "url": "http://127.0.0.1:9999/state",
+    "activeTab": "stash",
+    "engineRunning": false,
+    "enginePort": 0,
+    "isStreaming": false,
+    "isWorking": false,
+    "mode": "autopilot",
+    "modelLibrary": {
+      "selectedPath": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "entryCount": 14,
+      "supportedCount": 6,
+      "roots": [
+        "/Users/eric/models/dealign.ai"
+      ],
+      "qwenMtp": [
+        {
+          "name": "Qwen3.6-27B-MXFP8-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP8-CRACK-MTP",
+          "isSupported": true
+        },
+        {
+          "name": "Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+          "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+          "isSupported": true
+        }
+      ]
+    },
+    "modelFolderInfo": {
+      "path": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "family": "Qwen",
+      "isSupported": true,
+      "isMultimodal": true,
+      "modelType": "qwen3_5_moe"
+    },
+    "engineConfig": {
+      "modelPath": "/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP",
+      "kvCacheQuantization": "turboquant-q4",
+      "prefixCache": true,
+      "pagedCache": true,
+      "promptL2Disk": true,
+      "blockL2Disk": true,
+      "reasoningParser": "qwen3",
+      "toolCallParser": "qwen",
+      "maxTokens": 256
+    },
+    "toolSettings": {
+      "installedCount": 42,
+      "missingCount": 0
+    },
+    "cveDatabase": {
+      "totalCount": 1644,
+      "kevCount": 1631,
+      "lastSync": "2026-07-05T22:37:31Z"
+    },
+    "stashCount": 1
+  },
+  "processAndMemory": {
+    "releaseAppProcess": "11094     1 128096 /Users/eric/exploitbot/release/ExploitBot.app/Contents/MacOS/ExploitBot",
+    "modelProcessRows": [],
+    "unrelatedRows": [
+      "51195  9929   2720 /bin/zsh -c ... cd /Users/eric/mlx/vllm-mlx ..."
+    ],
+    "vmStat": {
+      "pagesFree": 440489,
+      "pagesWiredDown": 285952,
+      "pagesOccupiedByCompressor": 155220,
+      "swapins": 464,
+      "swapouts": 1988
+    }
+  },
+  "limitations": [
+    "This current retry did not start model inference and does not replace the separate live Qwen model/tool-loop artifacts.",
+    "Release distribution remains blocked by the existing notarization/signing gate."
+  ]
+}
