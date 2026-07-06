@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-06T01:00:33-0700",
+  "generatedAt": "2026-07-06T01:12:19-0700",
   "notes": [
     "Rows aggregate existing live artifacts; artifact generatedAt values show whether evidence is fresh or older.",
     "Webserver SQLi and repo/codebase supply-chain rows are fresh 2026-07-06 app-backed scenarios added for this matrix.",
@@ -316,6 +316,72 @@
     {
       "artifacts": [
         {
+          "artifact": "docs/live-proofs/2026-07-06-codebase-static-patch-scenario.json",
+          "generatedAt": "2026-07-06T01:12:10-0700",
+          "proofType": "codebase-static-patch-scenario-live",
+          "status": "PASS"
+        }
+      ],
+      "cacheProof": {
+        "hybridSSM": false,
+        "paged": false,
+        "prefix": false,
+        "q4KV": false
+      },
+      "currentRunStatus": "PASS",
+      "failures": [],
+      "label": "Local codebase static analysis to proof to patch report",
+      "modelRequired": false,
+      "observedTools": [
+        "bandit",
+        "run_shell",
+        "search_context",
+        "semgrep"
+      ],
+      "requiredTools": [
+        "run_shell",
+        "semgrep",
+        "bandit",
+        "search_context"
+      ],
+      "scenarioId": "codebase_static_to_patch_review_chain",
+      "stageEvidence": {
+        "evidence": [
+          "/messages",
+          "/results",
+          "/state terminal transcripts"
+        ],
+        "exploit_or_validate": [
+          "bounded local validation only; no host sensitive file read"
+        ],
+        "probe": [
+          "semgrep static analysis",
+          "bandit Python security analysis"
+        ],
+        "prove": [
+          "app.py:17 file:line evidence",
+          "EXPLOITBOT_PATH_TRAVERSAL_PROOF marker"
+        ],
+        "report": [
+          "report finding action and report generate route"
+        ],
+        "surface": [
+          "run_shell file inventory and vulnerable sink grep"
+        ]
+      },
+      "stages": [
+        "surface",
+        "probe",
+        "prove",
+        "exploit_or_validate",
+        "evidence",
+        "report"
+      ],
+      "status": "PASS"
+    },
+    {
+      "artifacts": [
+        {
           "artifact": "docs/live-proofs/2026-07-05-report-finding-actions-current.json",
           "generatedAt": "2026-07-05T16:26:07-0700",
           "proofType": "report-finding-actions-live",
@@ -382,10 +448,10 @@
       "status": "PASS"
     }
   ],
-  "scenarioCount": 5,
+  "scenarioCount": 6,
   "status": "PASS",
   "statusCounts": {
     "FAIL": 0,
-    "PASS": 5
+    "PASS": 6
   }
 }

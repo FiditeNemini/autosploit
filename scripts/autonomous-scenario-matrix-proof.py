@@ -98,6 +98,21 @@ SCENARIOS = [
         current_run_required=True,
     ),
     ScenarioSpec(
+        scenario_id="codebase_static_to_patch_review_chain",
+        label="Local codebase static analysis to proof to patch report",
+        artifacts=("docs/live-proofs/2026-07-06-codebase-static-patch-scenario.json",),
+        required_tools=("run_shell", "semgrep", "bandit", "search_context"),
+        stage_evidence={
+            "surface": ["run_shell file inventory and vulnerable sink grep"],
+            "probe": ["semgrep static analysis", "bandit Python security analysis"],
+            "prove": ["app.py:17 file:line evidence", "EXPLOITBOT_PATH_TRAVERSAL_PROOF marker"],
+            "exploit_or_validate": ["bounded local validation only; no host sensitive file read"],
+            "evidence": ["/messages", "/results", "/state terminal transcripts"],
+            "report": ["report finding action and report generate route"],
+        },
+        current_run_required=True,
+    ),
+    ScenarioSpec(
         scenario_id="report_generation_from_evidence",
         label="Report generation/export from confirmed findings",
         artifacts=(

@@ -56,7 +56,7 @@ def run() -> None:
         failures = coverage.get("failures", [])
         if failures:
             raise AssertionError(f"tool coverage failures: {failures}")
-        if coverage.get("toolCount") != 42:
+        if coverage.get("toolCount") != 44:
             raise AssertionError(f"unexpected model tool count: {coverage}")
         if coverage.get("callbackCount") != 3:
             raise AssertionError(f"unexpected callback count: {coverage}")
