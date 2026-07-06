@@ -34,10 +34,7 @@ cleanup_stale_engines() {
     fi
   fi
   if [[ -f "$ENGINE_LAUNCH" ]] && pgrep -f "$ENGINE_LAUNCH" >/dev/null 2>&1; then
-    echo "Stopping stale ExploitBot engine processes..."
-    pkill -TERM -f "$ENGINE_LAUNCH" >/dev/null 2>&1 || true
-    sleep 2
-    pkill -KILL -f "$ENGINE_LAUNCH" >/dev/null 2>&1 || true
+    echo "Skipping untracked ExploitBot engine processes; only $ENGINE_PID_FILE is app-owned."
   fi
 }
 
