@@ -1,6 +1,6 @@
 {
   "externalTargetExecution": "not-started",
-  "generatedAt": "2026-07-05T17:35:07-0700",
+  "generatedAt": "2026-07-06T01:20:06-0700",
   "inventoryEvidence": "docs/live-proofs/2026-07-04-tool-settings-real-inventory.json",
   "modelDrivenEvidence": "not-claimed",
   "ok": true,
@@ -361,7 +361,7 @@
       "inventoryStatus": "installed",
       "modelDrivenEvidence": "not-claimed",
       "outputMarkerMatched": true,
-      "outputPreview": "\n\u001b[1m\n#####################################################################\u001b[m\n  \u001b[1mtestssl.sh\u001b[m version \u001b[1m3.2.3\u001b[m from \u001b[1mhttps://testssl.sh/\u001b[m\n  \u001b[1m(\u001b[m\u001b[0;37mc8e9dd4 2026-07-05 17:21:03\u001b[m\u001b[1m)\u001b[m\n\u001b[1m\n  This program is free software. Distribution and modification under\n  GPLv2 permitted. USAGE w/o ANY WARRANTY. USE IT AT YOUR OWN RISK!\u001b[m\n\n  Please file bugs @ \u001b[1mhttps://testssl.sh/bugs/\u001b[m\n\u001b[1m#####################################################################\u001b[m\n\n  Using \u001b[3mOpenSSL 4.0.1 (Jun 9 2026)\u001b[m  [~96 ciphers]\n  on erics-m5-max2:/opt/homebrew/opt/openssl@4/bin/openssl\n  built: \u001b[3mTue Jun 9 11:36:41 2026\u001b[m, platform: \u001b[3mdarwin64-arm64-cc\u001b[m\n  Using \u001b[3mbash 3.2.57\u001b[m\n\n",
+      "outputPreview": "\n\u001b[1m\n#####################################################################\u001b[m\n  \u001b[1mtestssl.sh\u001b[m version \u001b[1m3.2.3\u001b[m from \u001b[1mhttps://testssl.sh/\u001b[m\n  \u001b[1m(\u001b[m\u001b[0;37m55afe93 2026-07-06 01:17:17\u001b[m\u001b[1m)\u001b[m\n\u001b[1m\n  This program is free software. Distribution and modification under\n  GPLv2 permitted. USAGE w/o ANY WARRANTY. USE IT AT YOUR OWN RISK!\u001b[m\n\n  Please file bugs @ \u001b[1mhttps://testssl.sh/bugs/\u001b[m\n\u001b[1m#####################################################################\u001b[m\n\n  Using \u001b[3mOpenSSL 4.0.1 (Jun 9 2026)\u001b[m  [~96 ciphers]\n  on erics-m5-max2:/opt/homebrew/opt/openssl@4/bin/openssl\n  built: \u001b[3mTue Jun 9 11:36:41 2026\u001b[m, platform: \u001b[3mdarwin64-arm64-cc\u001b[m\n  Using \u001b[3mbash 3.2.57\u001b[m\n\n",
       "path": "/opt/homebrew/bin/testssl.sh",
       "safeSmokeOnly": true,
       "status": "PASS",
@@ -636,6 +636,44 @@
     },
     {
       "args": [
+        "--version"
+      ],
+      "category": "supplychain",
+      "exitCode": 0,
+      "externalTargetExecution": "not-started",
+      "failureMarker": null,
+      "installMethod": "uv",
+      "inventoryStatus": "installed",
+      "modelDrivenEvidence": "not-claimed",
+      "outputMarkerMatched": false,
+      "outputPreview": "1.168.0\n",
+      "path": "/Users/eric/.local/bin/semgrep",
+      "safeSmokeOnly": true,
+      "status": "PASS",
+      "timeoutSeconds": 12,
+      "tool": "semgrep"
+    },
+    {
+      "args": [
+        "--version"
+      ],
+      "category": "supplychain",
+      "exitCode": 0,
+      "externalTargetExecution": "not-started",
+      "failureMarker": null,
+      "installMethod": "uv",
+      "inventoryStatus": "installed",
+      "modelDrivenEvidence": "not-claimed",
+      "outputMarkerMatched": true,
+      "outputPreview": "bandit 1.9.4\n  python version = 3.13.13 (main, May  4 2026, 21:02:24) [Clang 22.1.3 ]\n",
+      "path": "/Users/eric/.local/bin/bandit",
+      "safeSmokeOnly": true,
+      "status": "PASS",
+      "timeoutSeconds": 12,
+      "tool": "bandit"
+    },
+    {
+      "args": [
         "-q",
         "-x",
         "version; exit"
@@ -811,7 +849,7 @@
   "safeSmokeOnly": true,
   "statusCounts": {
     "FAIL": 0,
-    "PASS": 42
+    "PASS": 44
   },
-  "toolCount": 42
+  "toolCount": 44
 }

@@ -1,0 +1,69 @@
+{
+  "boundary": {
+    "currentDistDisplayableApp": "PASS",
+    "externalTargetExecution": "not-started",
+    "modelInference": "not-claimed",
+    "packagedReleaseApp": "PARTIAL: Computer Use observed release/ExploitBot.app still displayed 42 installed / 0 missing before switching to dist; release packaging was not refreshed in this proof."
+  },
+  "bundleHashes": {
+    "distAppBinarySha256": "66a6567da974593f9470f84bb2555e162ae663a21699a8092cb9ed701e495409",
+    "releaseAppBinarySha256": "cd0c6a874c7a249c05be90757be3e62828de20bf782ee91786577381b9c80cff"
+  },
+  "checks": {
+    "apiToolSettings44Installed0Missing": "PASS",
+    "banditInstalledVisibleAndApi": "PASS",
+    "computerUseAttachedToDistApp": "PASS",
+    "installAllMissingDisabledNoQueuedCommands": "PASS",
+    "releaseBundleStale42Observed": "PARTIAL",
+    "sameProcessOwnsPort9999": "PASS",
+    "semgrepInstalledVisibleAndApi": "PASS",
+    "visibleToolsPanel44Installed0Missing": "PASS"
+  },
+  "computerUse": {
+    "appPath": "/Users/eric/exploitbot/dist/ExploitBot.app",
+    "bundleID": "ai.jangq.ExploitBot",
+    "cuaAppVersion": 857,
+    "observedAccessibilityText": "Tools Detect and install external command-line tools used by the agent loop. TOOL INSTALLER 44 installed 0 missing",
+    "observedInstallAllMissing": "disabled",
+    "pid": 3617,
+    "screenshot": "docs/live-proofs/2026-07-06-computer-use-tools-inventory-44-dist.png",
+    "screenshotSha256": "f0af7199ed99231e7dfef3fc6a5e1b22f7c4a7f2a308a17e559ac39a7ad0e7a7"
+  },
+  "generatedAt": "2026-07-06T01:22:12-0700",
+  "ok": true,
+  "proofType": "computer-use-tools-inventory-current-dist-44",
+  "sameProcessApi": {
+    "bandit": {
+      "category": "supplychain",
+      "installMethod": "uv",
+      "name": "bandit",
+      "path": "/Users/eric/.local/bin/bandit",
+      "status": "installed",
+      "version": "1.9.4"
+    },
+    "enginePort": 0,
+    "engineRunning": false,
+    "errorCount": 0,
+    "installPlan": {
+      "commandCount": 0,
+      "installCommands": [],
+      "missingByCategory": {},
+      "missingByInstallMethod": {},
+      "missingCount": 0,
+      "requiresNetworkInstall": false
+    },
+    "installedCount": 44,
+    "lsofPort9999": "COMMAND    PID USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME\nExploitBo 3617 eric   18u  IPv6 0x6eaaefb582fd282b      0t0  TCP *:9999 (LISTEN)\n",
+    "missingCount": 0,
+    "semgrep": {
+      "category": "supplychain",
+      "installMethod": "uv",
+      "name": "semgrep",
+      "path": "/Users/eric/.local/bin/semgrep",
+      "status": "installed",
+      "version": "1.168.0"
+    },
+    "toolCount": 44
+  },
+  "status": "PASS"
+}

@@ -30,12 +30,12 @@
     "docs/live-proofs/checkpoint-75-minimax-live.json",
     "docs/live-proofs/qwen27-mxfp4-mtp-live-cache-20260605.json"
   ],
-  "generatedAt": "2026-07-06T01:12:22-0700",
+  "generatedAt": "2026-07-06T01:22:43-0700",
   "knownFailedLiveProofs": [
     "docs/live-proofs/checkpoint-75-minimax-live.json"
   ],
-  "liveProofCount": 183,
-  "liveProofOkCount": 169,
+  "liveProofCount": 184,
+  "liveProofOkCount": 170,
   "liveProofStatus": {
     "docs/live-proofs/2026-06-03-minimax-current-metadata.json": true,
     "docs/live-proofs/2026-06-03-minimax-jang-k-current-metadata.json": true,
@@ -160,6 +160,7 @@
     "docs/live-proofs/2026-07-06-autonomous-scenario-catalog.json": true,
     "docs/live-proofs/2026-07-06-autonomous-scenario-matrix.json": true,
     "docs/live-proofs/2026-07-06-codebase-static-patch-scenario.json": true,
+    "docs/live-proofs/2026-07-06-computer-use-tools-inventory-44-dist.json": true,
     "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-27b.json": true,
     "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-35b.json": true,
     "docs/live-proofs/2026-07-06-real-qwen-webserver-auth-sqli-27b.json": true,
@@ -345,6 +346,7 @@
     "docs/live-proofs/2026-07-06-autonomous-scenario-catalog.json",
     "docs/live-proofs/2026-07-06-autonomous-scenario-matrix.json",
     "docs/live-proofs/2026-07-06-codebase-static-patch-scenario.json",
+    "docs/live-proofs/2026-07-06-computer-use-tools-inventory-44-dist.json",
     "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-27b.json",
     "docs/live-proofs/2026-07-06-real-qwen-repo-codebase-supply-chain-35b.json",
     "docs/live-proofs/2026-07-06-real-qwen-webserver-auth-sqli-27b.json",
@@ -409,7 +411,7 @@
   "ok": true,
   "processEvidence": {
     "appRows": [
-      "99785 122352 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
+      "4264 126896 /Users/eric/expl /Users/eric/exploitbot/dist/ExploitBot.app/Contents/MacOS/ExploitBot"
     ],
     "engineProcessRows": []
   },

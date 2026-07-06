@@ -1,7 +1,7 @@
 {
   "errorPentestTools": [],
-  "finishedAt": "2026-07-05T18:40:32-0700",
-  "installedCount": 42,
+  "finishedAt": "2026-07-06T01:19:53-0700",
+  "installedCount": 44,
   "installedLoopbackTools": {
     "curl": {
       "category": "system",
@@ -32,7 +32,7 @@
   "missingPentestTools": [],
   "ok": true,
   "proofType": "tool-settings-real-current-machine-inventory",
-  "startedAt": "2026-07-05T18:40:27-0700",
+  "startedAt": "2026-07-06T01:19:48-0700",
   "status": {
     "fullPentestToolchainInstalled": "PASS",
     "settingsCurrentMachineDetection": "PASS"
@@ -50,7 +50,7 @@
       "missingCount": 0,
       "requiresNetworkInstall": false
     },
-    "installedCount": 42,
+    "installedCount": 44,
     "installingCount": 0,
     "isInstalling": false,
     "missingByCategory": {},
@@ -323,6 +323,22 @@
         "version": ""
       },
       {
+        "category": "supplychain",
+        "installMethod": "uv",
+        "name": "semgrep",
+        "path": "/Users/eric/.local/bin/semgrep",
+        "status": "installed",
+        "version": "1.168.0"
+      },
+      {
+        "category": "supplychain",
+        "installMethod": "uv",
+        "name": "bandit",
+        "path": "/Users/eric/.local/bin/bandit",
+        "status": "installed",
+        "version": "1.9.4"
+      },
+      {
         "category": "exploit",
         "installMethod": "homebrew",
         "name": "metasploit",
@@ -397,7 +413,7 @@
     ]
   },
   "toolSettingsActions": {
-    "installedCount": 42,
+    "installedCount": 44,
     "lastAction": "detectCurrentMachine",
     "missingCount": 0,
     "status": "done",

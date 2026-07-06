@@ -201,11 +201,15 @@ def smoke_tool(row: dict[str, Any]) -> dict[str, Any]:
 def main() -> None:
     inventory = json.loads(DEFAULT_INVENTORY.read_text(encoding="utf-8"))
     rows = tool_rows(inventory)
-    if len(rows) != 42:
-        raise AssertionError(f"expected 42 installed-tool rows from inventory, got {len(rows)}")
-    missing_configs = sorted({str(row.get("name") or "") for row in rows} - set(SAFE_SMOKE_ARGS))
-    if missing_configs:
-        raise AssertionError(f"missing safe smoke configs: {missing_configs}")
+    row_names = {str(row.get("name") or "") for row in rows}
+    expected_names = set(SAFE_SMOKE_ARGS)
+    missing_inventory_rows = sorted(expected_names - row_names)
+    missing_configs = sorted(row_names - expected_names)
+    if missing_inventory_rows or missing_configs:
+        raise AssertionError(
+            "installed-tool smoke registry mismatch: "
+            f"missingInventoryRows={missing_inventory_rows} missingSmokeConfigs={missing_configs}"
+        )
 
     smoke_rows = [smoke_tool(row) for row in rows]
     status_counts = {
