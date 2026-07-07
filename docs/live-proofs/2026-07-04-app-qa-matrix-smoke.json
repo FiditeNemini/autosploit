@@ -1,7 +1,7 @@
 {
   "appApi": "http://127.0.0.1:9999",
-  "finishedAt": "2026-07-06T17:21:28-0700",
-  "generatedAt": "2026-07-06T17:21:28-0700",
+  "finishedAt": "2026-07-06T17:33:51-0700",
+  "generatedAt": "2026-07-06T17:33:51-0700",
   "noModelLoaded": true,
   "notes": "Runs the Swift debug app in EXPLOITBOT_TESTING mode and exercises broad QA routes without loading a local model.",
   "ok": true,
@@ -32,5 +32,5 @@
     "artifacts",
     "ledgers"
   ],
-  "startedAt": "2026-07-06T17:19:36-0700"
+  "startedAt": "2026-07-06T17:31:59-0700"
 }

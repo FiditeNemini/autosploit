@@ -111,11 +111,11 @@ def run() -> None:
             raise AssertionError(f"context prompt-injection stash retrieval mode mismatch: {payload}")
 
         callback_tools = set(payload.get("callbackTools") or [])
-        for name in ("search_context", "search_cve", "lookup_cve", "create_finding"):
+        for name in ("search_context", "search_cve", "lookup_cve", "create_finding", "generate_report", "export_report"):
             if name not in callback_tools:
                 raise AssertionError(f"context prompt-injection callback tool missing {name}: {payload}")
         always_visible = set(payload.get("alwaysVisibleTools") or [])
-        for name in ("search_context", "search_cve", "lookup_cve", "create_finding", "run_shell"):
+        for name in ("search_context", "search_cve", "lookup_cve", "create_finding", "generate_report", "export_report", "run_shell"):
             if name not in always_visible:
                 raise AssertionError(f"context prompt-injection always-visible tool missing {name}: {payload}")
 

@@ -69,7 +69,7 @@ PHASE_TOKENS = {
     "manualSuggestion": ["interactionMode == .manual", "suggested"],
     "copilotApproval": ["interactionMode == .copilot", "PendingApproval", "approveToolCall"],
     "scopeEnforcement": ["ScopeChecker.extractTarget", "ScopeChecker.isInScope", "outside Op scope"],
-    "builtinCallbackExecution": ["onSearchCVE", "onLookupCVE", "onSearchContext", "onCreateFinding"],
+    "builtinCallbackExecution": ["onSearchCVE", "onLookupCVE", "onSearchContext", "onCreateFinding", "onGenerateReport", "onExportReport"],
     "subprocessExecution": ["toolExecutor.execute", "Process()", "buildEnvironment"],
     "resultIngestion": ["onToolResult", "resultsStore.ingest", "func ingest"],
     "activityTelemetry": ["onToolStart", "onToolComplete", "ActivityFeed"],

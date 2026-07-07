@@ -151,7 +151,7 @@ def run() -> None:
                 raise AssertionError(f"tool flow domain {domain} names missing proof files {missing_domain_files}: {coverage}")
         if coverage.get("toolCount", 0) < 39:
             raise AssertionError(f"tool flow did not expose registry count: {coverage}")
-        if coverage.get("callbackCount") != 4:
+        if coverage.get("callbackCount") != 6:
             raise AssertionError(f"tool flow did not expose callback count: {coverage}")
         if coverage.get("toolSchemaCap") != 12:
             raise AssertionError(f"tool flow did not expose schema cap: {coverage}")

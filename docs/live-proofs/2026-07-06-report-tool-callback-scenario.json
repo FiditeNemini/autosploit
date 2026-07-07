@@ -1,0 +1,189 @@
+{
+  "checks": {
+    "createFindingCallbackResult": "PASS",
+    "exportReportCallbackResult": "PASS",
+    "generateReportCallbackResult": "PASS",
+    "modelInferenceStarted": "PASS",
+    "modelReceivedReportToolSchemas": "PASS",
+    "reportArtifactsPresent": "PASS",
+    "reportContainsEvidence": "PASS",
+    "reportToolSequence": "PASS",
+    "verboseToolTranscript": "PASS"
+  },
+  "expectedTools": [
+    "create_finding",
+    "generate_report",
+    "export_report"
+  ],
+  "finishedAt": "2026-07-06T18:19:54-0700",
+  "generatedAt": "2026-07-06T18:19:54-0700",
+  "messages": [
+    {
+      "content": "Authorized local report callback test only. Use create_finding with the provided proof, then generate_report, then export_report. End with REPORT_TOOL_CALLBACK_FINAL.",
+      "role": "user"
+    },
+    {
+      "content": "Recording confirmed finding and generating report.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 0 of 0 indexed items for phase SCAN, tab report.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets: none yet.\nCVE assist: semantic embedding search is enabled when cve_embedder.py and stored CVE embeddings are available; otherwis",
+      "contextSnippetCount": 0,
+      "role": "assistant",
+      "toolSchemaCount": 16,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "create_finding",
+        "generate_report",
+        "export_report",
+        "run_shell",
+        "hashcat",
+        "semgrep",
+        "bandit",
+        "checkov",
+        "nmap",
+        "httpx",
+        "nuclei",
+        "sqlmap",
+        "masscan"
+      ]
+    },
+    {
+      "content": "Tool request: create_finding\n$ echo handled by callback\nArguments:\n{\n  \"attack_chain\" : \"Discover \\/search?q=1; Run sqlmap; Confirm EXPLOITBOT_SQLI_PROOF_USER=alice\",\n  \"cve\" : \"CVE-2021-41773\",\n  \"cvss\" : 8.0999999999999996,\n  \"description\" : \"Confirmed SQL injection in q parameter using local fixture evidence.\",\n  \"evidence\" : \"Parameter: q (GET)\\nEXPLOITBOT_SQLI_PROOF_USER=alice\",\n  \"impact\" : \"An attacker can alter query logic and extract application data.\",\n  \"remediation\" : \"Use parameterized queries and add regression coverage.\",\n  \"severity\" : \"high\",\n  \"target\" : \"http:\\/\\/127.0.0.1:19032\\/search?q=1\",\n  \"title\" : \"SQL injection in local search parameter\",\n  \"vuln_type\" : \"sql_injection\"\n}\n\nFinding recorded: [HIGH] SQL injection in local search parameter on http://127.0.0.1:19032/search?q=1 (id F79E0907, 1 evidence item(s), 3 step(s)). It will be included in the generated report.",
+      "role": "toolCall",
+      "status": "ok 0.1s",
+      "tool": "create_finding"
+    },
+    {
+      "content": "Tool request: generate_report\n$ echo handled by callback\nArguments:\n{\n  \"template\" : \"Full Report\"\n}\n\nReport generated: Full Pentest Report, 1 finding(s), 3786 HTML chars.",
+      "role": "toolCall",
+      "status": "ok 0.1s",
+      "tool": "generate_report"
+    },
+    {
+      "content": "Tool request: export_report\n$ echo handled by callback\nArguments:\n{\n  \"action\" : \"export_report\",\n  \"template\" : \"Full Report\"\n}\n\nReport exported: 4 artifact(s).\nhtml=/Users/eric/.exploitbot/reports/ExploitBot-Report.html\nmarkdown=/Users/eric/.exploitbot/reports/ExploitBot-Report.md\njson=/Users/eric/.exploitbot/reports/ExploitBot-Report.json\npdf=/Users/eric/.exploitbot/reports/ExploitBot-Report.pdf",
+      "role": "toolCall",
+      "status": "ok 0.1s",
+      "tool": "export_report"
+    },
+    {
+      "content": "REPORT_TOOL_CALLBACK_FINAL: create_finding recorded the proof-bearing SQLi finding, generate_report rendered it, and export_report produced report artifacts.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 3 of 3 indexed items for phase SCAN, tab report.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] create_finding tags=tool,create_finding: Finding recorded: [HIGH] SQL injection in local search parameter on http",
+      "contextSelections": [
+        {
+          "bodyHash": "2ff14014c84be7d0",
+          "source": "tool.output",
+          "tags": "tool,create_finding",
+          "title": "create_finding"
+        },
+        {
+          "bodyHash": "cf068c58b3b03574",
+          "source": "tool.output",
+          "tags": "tool,generate_report",
+          "title": "generate_report"
+        },
+        {
+          "bodyHash": "97da2624f5750642",
+          "source": "tool.output",
+          "tags": "tool,export_report",
+          "title": "export_report"
+        }
+      ],
+      "contextSnippetCount": 3,
+      "role": "assistant"
+    }
+  ],
+  "notes": [
+    "Mock engine is deterministic; this proves the real Swift app chat loop, callback handlers, FindingService, ReportService preview, and ReportService export path.",
+    "No local model is loaded in this proof; real-Qwen natural report-tool selection is a separate live proof boundary."
+  ],
+  "ok": true,
+  "proofLevel": "live-app-mock-engine-chat-callbacks-report-service",
+  "proofType": "report-tool-callback-scenario-live",
+  "reportExport": {
+    "artifacts": [
+      {
+        "bytes": 3806,
+        "exists": true,
+        "format": "html",
+        "path": "/Users/eric/.exploitbot/reports/ExploitBot-Report.html"
+      },
+      {
+        "bytes": 931,
+        "exists": true,
+        "format": "markdown",
+        "path": "/Users/eric/.exploitbot/reports/ExploitBot-Report.md"
+      },
+      {
+        "bytes": 740,
+        "exists": true,
+        "format": "json",
+        "path": "/Users/eric/.exploitbot/reports/ExploitBot-Report.json"
+      },
+      {
+        "bytes": 1299,
+        "exists": true,
+        "format": "pdf",
+        "path": "/Users/eric/.exploitbot/reports/ExploitBot-Report.pdf"
+      }
+    ],
+    "error": "",
+    "findingCount": 1,
+    "status": "done"
+  },
+  "reportFindingActions": {
+    "createLabel": "Create Finding",
+    "deleteLabel": "Delete finding",
+    "findingCount": 1,
+    "findings": [
+      {
+        "cve": "CVE-2021-41773",
+        "deleteLabel": "Delete finding",
+        "id": "F79E0907-2EC5-443D-A5A7-EC916C6EE678",
+        "severity": "high",
+        "status": "confirmed",
+        "target": "http://127.0.0.1:19032/search?q=1",
+        "title": "SQL injection in local search parameter"
+      }
+    ],
+    "lastAction": "",
+    "lastCreatedId": "",
+    "lastDeletedId": "",
+    "status": "idle",
+    "summary": "",
+    "wizardVisible": false
+  },
+  "reportRenderActions": {
+    "findingCount": 1,
+    "htmlChars": 3786,
+    "htmlPreview": "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-8\">\n<style>\nbody { font-family: Georgia, serif; font-size: 13px; line-height: 1.7; color: #1a1a1a; max-width: 800px; margin: 40px auto; padding: 0 20px; }\nh1 { font-family: -apple-system, sans-serif; font-size: 22px; margin-bottom: 4px; }\nh2 { font-family: -apple-system, sans-serif; font-size: 16px; margin-top: 24px; border-bottom: 1px solid #ddd; padding-bottom: 4px; }\nh3 { font-family: -apple-system, sans-serif; font-size: 14px; margin-top: 16px; }\n.confidential { text-align: center; font-family: monospace; font-size: 10px; letter-spacing: 3px; color: #999; text-transform: uppercase; margin-bottom: 30px; }\n.meta { font-size: 11px; color: #888; font-family: monospace; margin-bottom: 20px; }\ntable { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; }\nth { background: #f5f5f5; border-bottom: 2px solid #ddd; padding: 6px 10px; text-align: left; font-family: -apple-system, sans-serif; }\ntd { padding: 6px 10px; border-bottom: 1px solid #eee; }\n.finding { border: 1px solid #ddd; border-radius: 6px; padding: 12px; margin: 10px 0; }\n.finding.critical { border-left: 4px solid #ef4444; }\n.finding.high { border-left: 4px solid #f97316; }\n.finding.medium { border-left: 4px solid #f59e0b; }\n.finding.low { border-left: 4px solid #3b82f6; }\n.sev { font-family: monospace; font-size: 10px; font-weight: bold; padding: 1px 6px; border-radius: 3px; }\n.sev.critical { background: #fef2f2; color: #dc2626; }\n.sev.high { background: #fff7ed; color: #ea580c; }\n.sev.medium { background: #fffbeb; color: #d97706; }\n.sev.low { background: #eff6ff; color: #2563eb; }\ncode { font-family: monospace; font-size: 11px; background: #f0f0f0; padding: 1px 4px; border-radius: 2px; }\npre { background: #f6f8fa; border: 1px solid #e1e4e8; border-radius: 4px; padding: 8px; font-family: monospace; font-size: 10px; line-height: 1.45; white-space: pre-wrap; word-break: break-word; overflow-x: auto; margin: 6px 0; }\nol { margin: 6px 0 6px 18px; padding: 0; font-size: 12px; }\nol li { margin: 2px 0; }\n@media print { body { margin: 0; } .finding { break-inside: avoid; } pre { break-inside: avoid; } }\n</style>\n</head>\n<body>\n<div class=\"confidential\">CONFIDENTIAL</div>\n<h1>Penetration Test Report</h1>\n<div class=\"meta\">\nClient: Unknown<br>\nAssessment Date: July 6, 2026<br>\nAssessor: exploitbot (autonomous)<br>\nClassification: Confidential\n</div>\n\n<h2>1. Executive Summary</h2>\n<p>A penetration test was conducted against <strong>Unknown</strong>. The assessment identified <strong>1 vulnerabilities</strong> including 0 critical, 1 high, 0 medium, and 0 low severity findings.</p>\n\n<h2>2. Findings Summary</h2>\n<table>\n<tr><th>#</th><th>Finding</th><th>Severity</th><th>CVSS</th><th>Target</th><th>Status</th></tr>\n<tr><td>1</td><td>SQL injection in local search parameter</td><td><span class=\"sev high\">HIGH</span></td><td>8.1</td><td><code>http://127.0.0.1:19032/search?q=1</code></td><td>confirmed</td></tr>\n</table>\n\n<h2>3. Detailed Findings</h2>\n<div class=\"finding high\">\n<h3><span class=\"sev high\">HIGH</span> SQL injection in local search parameter</h3>\n<p><strong>Target:</strong> <code>http://127.0.0.1:19032/search?q=1</code></p>\n<p><strong>CVSS:</strong> 8.1</p>\n<p><strong>CVE:</strong> CVE-2021-41773</p>\n<p><strong>Description:</strong> Confirmed SQL injection in q parameter using local fixture evidence.</p>\n<h3>Attack Chain</h3><ol><li>Discover /search?q=1</li><li>Run sqlmap</li><li>Confirm EXPLOITBOT_SQLI_PROOF_USER=alice</li></ol>\n<h3>Evidence</h3><pre>Parameter: q (GET)\nEXPLOITBOT_SQLI_PROOF_USER=alice</pre>\n<h3>Impact</h3><p>An attacker can alter query logic and extract application data.</p>\n<h3>Remediation</h3><p>Use parameterized queries and add regression coverage.</p>\n</div>\n\n</body>\n</html>",
+    "lastAction": "generate",
+    "status": "done",
+    "summary": "generateReport 1 findings",
+    "template": "Full Pentest Report"
+  },
+  "startedAt": "2026-07-06T18:19:52-0700",
+  "status": "PASS",
+  "toolSchemaNames": [
+    "bandit",
+    "checkov",
+    "create_finding",
+    "export_report",
+    "generate_report",
+    "hashcat",
+    "httpx",
+    "lookup_cve",
+    "masscan",
+    "nmap",
+    "nuclei",
+    "run_shell",
+    "search_context",
+    "search_cve",
+    "semgrep",
+    "sqlmap"
+  ],
+  "toolSequence": [
+    "create_finding",
+    "generate_report",
+    "export_report"
+  ]
+}

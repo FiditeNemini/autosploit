@@ -56,9 +56,9 @@ def run() -> None:
         failures = coverage.get("failures", [])
         if failures:
             raise AssertionError(f"tool coverage failures: {failures}")
-        if coverage.get("toolCount") != 47:
+        if coverage.get("toolCount") != 49:
             raise AssertionError(f"unexpected model tool count: {coverage}")
-        if coverage.get("callbackCount") != 4:
+        if coverage.get("callbackCount") != 6:
             raise AssertionError(f"unexpected callback count: {coverage}")
         if coverage.get("boundedCatalogueLimit") != 12:
             raise AssertionError(f"tool catalogue limit changed: {coverage}")
@@ -67,7 +67,7 @@ def run() -> None:
             raise AssertionError(f"tab coverage mismatch: {coverage}")
 
         tools = {tool["name"]: tool for tool in coverage.get("tools", [])}
-        for name in ("create_finding", "search_context", "search_cve", "lookup_cve"):
+        for name in ("create_finding", "export_report", "generate_report", "search_context", "search_cve", "lookup_cve"):
             if tools.get(name, {}).get("execution") != "callback":
                 raise AssertionError(f"callback tool not marked correctly: {name} {tools.get(name)}")
         for name in ("nmap", "nuclei", "netexec", "hashcat", "metasploit", "impacket", "linpeas", "gowitness", "syft", "grype", "osv_scanner", "run_shell"):

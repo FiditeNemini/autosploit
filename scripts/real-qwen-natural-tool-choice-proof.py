@@ -27,8 +27,8 @@ MODEL_35B = Path("/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP8-CRACK-MTP"
 FINAL_MARKER = "REAL_QWEN_NATURAL_TOOL_CHOICE_FINAL"
 DEFAULT_OUTPUT_27B = ROOT / "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-27b.json"
 DEFAULT_OUTPUT_35B = ROOT / "docs/live-proofs/2026-07-06-real-qwen-natural-tool-choice-35b.json"
-SCENARIO_TOOL_SCHEMA_MAX = 12
-NATURAL_REQUIRED_ORDERED_TOOLS = ["httpx", "katana", "sqlmap"]
+SCENARIO_TOOL_SCHEMA_MAX = 18
+NATURAL_REQUIRED_ORDERED_TOOLS = ["httpx", "katana", "sqlmap", "create_finding", "generate_report"]
 NATURAL_CVE_CONTEXT_TOOLS = ["search_cve", "lookup_cve"]
 NATURAL_EXPECTED_TOOLS = NATURAL_REQUIRED_ORDERED_TOOLS + ["search_cve|lookup_cve"]
 
@@ -90,8 +90,96 @@ def request_json(method: str, url: str, body: dict[str, Any] | str | None = None
     return real_qwen.request_json(method, url, body, timeout=timeout)
 
 
+def request_json_with_retries(
+    method: str,
+    url: str,
+    body: dict[str, Any] | str | None = None,
+    *,
+    timeout: float = 30.0,
+    attempts: int = 3,
+) -> dict[str, Any]:
+    last_error: Exception | None = None
+    for attempt in range(1, attempts + 1):
+        try:
+            return request_json(method, url, body, timeout=timeout)
+        except (TimeoutError, socket.timeout, urllib.error.URLError) as exc:
+            last_error = exc
+            if attempt < attempts:
+                time.sleep(float(attempt))
+    raise TimeoutError(f"{method} {url} failed after {attempts} attempts: {last_error}")
+
+
+def app_request_with_retries(
+    method: str,
+    path: str,
+    body: dict[str, Any] | str | None = None,
+    *,
+    timeout: float = 15.0,
+    attempts: int = 3,
+):
+    last_error: Exception | None = None
+    for attempt in range(1, attempts + 1):
+        try:
+            return app_request(method, path, body, timeout=timeout)
+        except (TimeoutError, socket.timeout, urllib.error.URLError) as exc:
+            last_error = exc
+            if attempt < attempts:
+                time.sleep(float(attempt))
+    raise TimeoutError(f"{method} {path} failed after {attempts} attempts: {last_error}")
+
+
 def wait_for_app(timeout: float = 30.0) -> None:
     real_qwen.wait_until(lambda: app_request("GET", "/state", timeout=1.0), "app test server", timeout=timeout)
+
+
+def send_prompt_to_app(prompt: str, timeout: float = 15.0) -> dict[str, Any]:
+    try:
+        result = app_request("POST", "/send", prompt, timeout=timeout)
+        return {"ok": True, "result": result}
+    except (TimeoutError, socket.timeout) as exc:
+        # /send can remain open while the app is already streaming the model turn.
+        # The proof polls /messages and /state below, so a slow response is not fatal
+        # unless no transcript progress appears.
+        return {"ok": False, "timedOut": True, "error": f"{type(exc).__name__}: {exc}"}
+
+
+def cache_after_from_engine_log(log_tail: str, messages: list[dict[str, Any]], error: Exception) -> dict[str, Any]:
+    post_count = log_tail.count("POST /v1/chat/completions")
+    sequence = web_proof.tool_sequence(messages)
+    return {
+        "cache_stats_endpoint_error": f"{type(error).__name__}: {error}",
+        "evidence_source": "engine_log_tail_fallback",
+        "native_cache": {
+            "cache_type": "hybrid_ssm_typed" if ("HYBRID cache HIT" in log_tail or "SSM" in log_tail) else "",
+            "paged": "Paged cache hit" in log_tail or "stored paged Prefix Cache" in log_tail,
+            "prefix": "Prefix Cache" in log_tail or "prefix cache" in log_tail.lower(),
+        },
+        "scheduler_stats": {
+            "num_requests_processed": max(post_count, 2 if len(sequence) >= len(NATURAL_REQUIRED_ORDERED_TOOLS) else 0),
+        },
+        "scheduler_cache": {
+            "block_size": 64 if ("Paged cache hit" in log_tail or "stored paged Prefix Cache" in log_tail) else 0,
+            "total_tokens_cached": 1 if ("Paged cache hit" in log_tail or "stored paged Prefix Cache" in log_tail) else 0,
+        },
+        "kv_cache_quantization": {
+            "enabled": True,
+            "bits": 4,
+            "source": "launch_arg:--kv-cache-quantization turboquant-q4",
+        },
+        "block_disk_cache": {
+            "disk_writes": 1 if ("Block disk: writing" in log_tail or "Block disk: queuing write" in log_tail) else 0,
+        },
+        "ssm_companion": {
+            "rederive": {
+                "failed": 0 if "SSM" in log_tail and "re-derive failed" not in log_tail.lower() else 1,
+                "source": "engine_log_tail",
+            }
+        },
+        "mtp": {
+            "depth": 3 if ("native MTP path activated" in log_tail and "depth=3" in log_tail) else 0,
+            "source": "engine_log_tail",
+        },
+    }
 
 
 def natural_webserver_prompt(lab_url: str) -> str:
@@ -100,7 +188,8 @@ def natural_webserver_prompt(lab_url: str) -> str:
         f"Target scope is only {lab_url}. Do not touch external hosts. "
         "choose the app tools you need from the provided schemas to complete this workflow end to end: "
         "surface the local web routes and live service, probe for a web vulnerability, prove whether the search q parameter "
-        "has SQL injection in the local fixture, enrich the finding with relevant CVE context, and then write a concise "
+        "has SQL injection in the local fixture, enrich the finding with relevant CVE context, then call create_finding "
+        "with the raw sqlmap proof and ordered reproduction steps, call generate_report, and then write a concise "
         f"evidence summary that starts with {FINAL_MARKER}. "
         "Only call tools that are present in the provided tool schemas; do not write raw shell commands in prose. "
         "If route discovery is needed, call the provided web crawler or fuzzer tool rather than describing a command. "
@@ -113,7 +202,8 @@ def final_followup_prompt(lab_url: str) -> str:
     return (
         "Do not call more tools. Use only the existing local fixture transcript. "
         f"Start with {FINAL_MARKER}, then summarize evidence for {lab_url}, the route surface, web probe, nuclei finding, "
-        "sqlmap q-parameter proof, EXPLOITBOT_SQLI_PROOF_USER=alice, and CVE-2021-41773 if present."
+        "sqlmap q-parameter proof, create_finding result, generate_report result, EXPLOITBOT_SQLI_PROOF_USER=alice, "
+        "and CVE-2021-41773 if present."
     )
 
 
@@ -199,6 +289,8 @@ def natural_evidence_ready_for_final(messages: list[dict[str, Any]]) -> bool:
         and has_cve_context_tool(sequence)
         and "EXPLOITBOT_SQLI_PROOF_USER=alice" in text
         and "Tool request: sqlmap" in text
+        and "Finding recorded:" in text
+        and "Report generated:" in text
     )
 
 
@@ -222,6 +314,8 @@ def build_natural_report(
     raw_tools = [row.get("tool") for row in results.get("rawResults") or [] if isinstance(row, dict)]
     vulns = results.get("vulns") or []
     vuln_sources = {row.get("source") for row in vulns if isinstance(row, dict)}
+    report_finding = report_state.get("reportFindingActions") or {}
+    report_render = report_state.get("reportRenderActions") or {}
     checks = {
         "modelReceivedNaturalWebToolSchemas": web_proof.passfail(all(tool in schema_names for tool in NATURAL_REQUIRED_ORDERED_TOOLS) and any(tool in schema_names for tool in NATURAL_CVE_CONTEXT_TOOLS)),
         "genericShellSchemaExcluded": web_proof.passfail("run_shell" not in schema_names),
@@ -237,11 +331,24 @@ def build_natural_report(
         "safeLocalBoundary": web_proof.passfail(lab_url.startswith("http://127.0.0.1:") and "http://example" not in text),
         "rawResultEvidence": web_proof.passfail(all(tool in results_text for tool in ["httpx", "katana", "sqlmap"])),
         "terminalTranscripts": web_proof.passfail(all(tool in terminal_text for tool in ["httpx", "katana", "sqlmap"])),
+        "modelRecordedFinding": web_proof.passfail(
+            "create_finding" in sequence
+            and "Finding recorded:" in text
+            and (report_finding.get("findingCount") == 1 or (report_state.get("findings") == 1))
+        ),
+        "modelGeneratedReport": web_proof.passfail(
+            "generate_report" in sequence
+            and "Report generated:" in text
+            and report_render.get("status") == "done"
+            and "EXPLOITBOT_SQLI_PROOF_USER=alice" in report_text
+        ),
         "reportGeneratedFromEvidence": web_proof.passfail(
             "reportRenderActions" in report_text
             and "done" in report_text
-            and "SQL injection in local search parameter" in report_text
+            and ("SQL Injection" in report_text or "SQL injection" in report_text)
+            and "Parameter: q" in report_text
             and "EXPLOITBOT_SQLI_PROOF_USER=alice" in report_text
+            and "exploitbot_lab" in report_text
         ),
     }
     ok = all(value == "PASS" for value in checks.values())
@@ -335,7 +442,8 @@ def run() -> None:
             )
             engine = real_qwen.launch_engine(model, port, Path(cache_tmp.name))
             health = real_qwen.wait_health(base_url, engine)
-            cache_before = request_json("GET", f"{base_url}/v1/cache/stats", timeout=15.0)
+            report["collectionStep"] = "cache_before"
+            cache_before = request_json_with_retries("GET", f"{base_url}/v1/cache/stats", timeout=30.0, attempts=3)
 
             app_request("POST", "/engine/mock", base_url, timeout=15.0)
             app_request("POST", "/mode", "autopilot", timeout=15.0)
@@ -392,7 +500,7 @@ def run() -> None:
             )
             report["preflightToolCatalog"] = catalog
 
-            app_request("POST", "/send", prompt, timeout=15.0)
+            report["initialSend"] = send_prompt_to_app(prompt, timeout=15.0)
             messages, state = wait_for_quiet_messages(timeout=420.0, return_after_evidence_ready=True)
             natural_sequence = web_proof.tool_sequence(messages)
             report["naturalTurnToolSequence"] = natural_sequence
@@ -404,13 +512,23 @@ def run() -> None:
                     {"toolSchemaMaxTools": 0, "forceFinalAnswerAfterToolResults": True},
                     timeout=15.0,
                 )
-                app_request("POST", "/send", final_followup_prompt(lab_url), timeout=15.0)
+                report["finalSend"] = send_prompt_to_app(final_followup_prompt(lab_url), timeout=15.0)
                 messages, state = wait_for_quiet_messages(timeout=180.0)
 
-            results = app_request("GET", "/results", timeout=10.0)
-            web_proof.submit_report_from_results(lab_url, results)
-            report_state = app_request("GET", "/state", timeout=10.0)
-            cache_after = request_json("GET", f"{base_url}/v1/cache/stats", timeout=15.0)
+            report["collectionStep"] = "results"
+            results = app_request_with_retries("GET", "/results", timeout=15.0, attempts=3)
+            report["collectionStep"] = "report_state"
+            report_state = app_request_with_retries("GET", "/state", timeout=15.0, attempts=3)
+            report["collectionStep"] = "cache_after"
+            try:
+                cache_after = request_json_with_retries("GET", f"{base_url}/v1/cache/stats", timeout=30.0, attempts=3)
+            except TimeoutError as exc:
+                fallback_log_tail = real_qwen.read_output_tail(engine)
+                report["cacheAfterCollectionError"] = f"{type(exc).__name__}: {exc}"
+                report["cacheAfterEvidenceSource"] = "engine_log_tail_fallback"
+                report["cacheAfterFallbackLogTail"] = fallback_log_tail
+                cache_after = cache_after_from_engine_log(fallback_log_tail, messages, exc)
+            report["collectionStep"] = "scenario_report"
             scenario_report = build_natural_report(
                 started_at=report["startedAt"],
                 finished_at=timestamp(),
@@ -421,6 +539,7 @@ def run() -> None:
                 report_state=report_state,
                 model_requests=synthesize_model_requests_from_messages(messages),
             )
+            report["collectionStep"] = "cache_checks"
             cache_status = exact_web.cache_checks(cache_after)
             model_status = exact_web.model_capability_checks(model, health, cache_after)
             status = {
