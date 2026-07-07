@@ -527,8 +527,10 @@ def run() -> None:
                 require(tool not in (catalog.get("toolNames") or []), f"excluded tool schema still visible before natural network turn: {tool}", catalog)
             report["preflightToolCatalog"] = catalog
 
+            tool_choice_timeout = float(os.environ.get("EXPLOITBOT_REAL_QWEN_NATURAL_NETWORK_POST_TOOL_TIMEOUT", "420"))
+            final_marker_timeout = float(os.environ.get("EXPLOITBOT_REAL_QWEN_NATURAL_NETWORK_POST_FINAL_TIMEOUT", "180"))
             report["initialSend"] = send_prompt_to_app(prompt, timeout=15.0)
-            messages, state = wait_for_quiet_messages(timeout=420.0, return_after_evidence_ready=True)
+            messages, state = wait_for_quiet_messages(timeout=tool_choice_timeout, return_after_evidence_ready=True)
             report["naturalTurnToolSequence"] = network_proof.tool_sequence(messages)
             require(model_selected_expected_sequence(messages), "model did not select the required network/post tool sequence", report["naturalTurnToolSequence"])
 
@@ -541,7 +543,7 @@ def run() -> None:
                     timeout=15.0,
                 )
                 report["finalSend"] = send_prompt_to_app(final_followup_prompt(lab_url), timeout=15.0)
-                messages, state = wait_for_quiet_messages(timeout=180.0, return_after_final_marker=True)
+                messages, state = wait_for_quiet_messages(timeout=final_marker_timeout, return_after_final_marker=True)
 
             results = app_request_with_retries("GET", "/results", timeout=15.0, attempts=3)
             report_state = app_request_with_retries("GET", "/state", timeout=15.0, attempts=3)
