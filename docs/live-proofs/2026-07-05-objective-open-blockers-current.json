@@ -12,7 +12,7 @@
   "currentPartialConditions": [
     "generation_reasoning_context"
   ],
-  "generatedAt": "2026-07-06T14:55:59-0700",
+  "generatedAt": "2026-07-06T17:09:59-0700",
   "longContextPolicy": {
     "aboveCeilingPolicy": "requires explicit high-risk override and fresh memory headroom",
     "modelLoadForAboveCeilingWithoutOverride": "refuse before model load",

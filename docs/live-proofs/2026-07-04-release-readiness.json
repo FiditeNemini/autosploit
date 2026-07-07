@@ -1,9 +1,9 @@
 {
   "artifacts": {
-    "appBinarySha256": "37e77d2e5f7989d9c15fc90b7d2b10b985e099994d1e8d227e76581d826c9350",
+    "appBinarySha256": "ad079f5fa0388539ece9c5b35344055d1d36d529adad2fd45a23ba2a47bf5bb1",
     "appPath": "release/ExploitBot.app",
     "dmgPath": "release/ExploitBot-beta.dmg",
-    "dmgSha256": "803311d6a51d8419417a5ab2a52794c3d5bcbc5b04322f0bb684345fb0266f2d"
+    "dmgSha256": "8ef98f55f60997b2e1279930ee04f797086d0830526c0e6bb24b389047853aba"
   },
   "checks": {
     "appCodesign": "PASS",
@@ -12,8 +12,8 @@
     "notarization": "BLOCKED"
   },
   "distributionStatus": "BLOCKED",
-  "finishedAt": "2026-07-06T14:55:31-0700",
-  "generatedAt": "2026-07-06T14:55:31-0700",
+  "finishedAt": "2026-07-06T17:09:42-0700",
+  "generatedAt": "2026-07-06T17:09:42-0700",
   "hasNotaryCredentials": false,
   "localPackageStatus": "PASS",
   "notarizationGate": "requires-notary-credentials",
@@ -22,5 +22,5 @@
   "ok": true,
   "proofLevel": "local-package-signature-runtime-and-notarization-gate",
   "proofType": "release-readiness",
-  "startedAt": "2026-07-06T14:51:28-0700"
+  "startedAt": "2026-07-06T17:05:19-0700"
 }
