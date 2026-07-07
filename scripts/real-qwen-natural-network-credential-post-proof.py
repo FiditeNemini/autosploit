@@ -182,6 +182,7 @@ def natural_network_prompt(lab_url: str) -> str:
         f"then write a concise evidence summary that starts with {FINAL_MARKER}. "
         "The relevant schemas for this network/post fixture include nmap, httpx, hydra, netexec, run_shell, and linpeas. "
         "The seeded login check is exposed at /login?user=demo&pass=demo and the harmless post-check endpoint is /post-check. "
+        "Use hydra for seeded demo/demo credential validation; do not use run_shell for the credential check. "
         "Use netexec for local network host evidence before post-check and capture the QA-NETWORK marker. "
         "Use the linpeas schema for linpeas; use run_shell only for a local curl-style request to the post-check endpoint. "
         "Use tool results instead of guessing. Keep actions bounded to the loopback lab. "
