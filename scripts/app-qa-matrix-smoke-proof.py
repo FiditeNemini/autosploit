@@ -461,7 +461,7 @@ def assert_testserver_smoke() -> None:
         raise AssertionError(f"/qa/tool-execution-matrix proof-file parity mismatch: {tool_execution_matrix}")
     if tool_flow_coverage.get("ok") is not True:
         raise AssertionError(f"/qa/tool-flow-coverage failed: {tool_flow_coverage}")
-    if tool_flow_coverage.get("toolCount") != tool_coverage.get("toolCount") or tool_flow_coverage.get("callbackCount") != 3:
+    if tool_flow_coverage.get("toolCount") != tool_coverage.get("toolCount") or tool_flow_coverage.get("callbackCount") != tool_coverage.get("callbackCount"):
         raise AssertionError(f"/qa/tool-flow-coverage registry counters mismatch: {tool_flow_coverage}")
     if tool_flow_coverage.get("toolSchemaCap") != 12:
         raise AssertionError(f"/qa/tool-flow-coverage schema cap mismatch: {tool_flow_coverage}")

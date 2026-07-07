@@ -16,8 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
 
 EXPECTED_TABS = ["creds", "exploit", "network", "osint", "post", "recon", "report", "stash", "supplyChain", "web"]
-EXPECTED_CALLBACKS = ["lookup_cve", "search_context", "search_cve"]
-EXPECTED_ALWAYS_VISIBLE = ["lookup_cve", "run_shell", "search_context", "search_cve"]
+EXPECTED_CALLBACKS = ["create_finding", "lookup_cve", "search_context", "search_cve"]
+EXPECTED_ALWAYS_VISIBLE = ["create_finding", "lookup_cve", "run_shell", "search_context", "search_cve"]
 
 
 def request(method: str, path: str, body: dict | str | None = None, timeout: float = 45.0):
