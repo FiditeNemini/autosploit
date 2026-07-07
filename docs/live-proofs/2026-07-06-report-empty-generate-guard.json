@@ -1,0 +1,117 @@
+{
+  "checks": {
+    "createFindingInstructionReturned": "PASS",
+    "emptyReportRefused": "PASS",
+    "finalAssistantReturned": "PASS",
+    "generateReportToolCalled": "PASS",
+    "modelInferenceStarted": "PASS",
+    "modelReceivedGenerateReportSchema": "PASS",
+    "noFindingRecorded": "PASS",
+    "reportPreviewNotRendered": "PASS",
+    "verboseToolTranscript": "PASS"
+  },
+  "finishedAt": "2026-07-06T21:00:56-0700",
+  "generatedAt": "2026-07-06T21:00:56-0700",
+  "messages": [
+    {
+      "content": "Authorized local report callback guard test only. Try generate_report before any finding exists, then explain the refusal and end with REPORT_EMPTY_GENERATE_GUARD_FINAL.",
+      "role": "user"
+    },
+    {
+      "content": "Attempting to render a report before evidence exists.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 0 of 0 indexed items for phase SCAN, tab report.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets: none yet.\nCVE assist: semantic embedding search is enabled when cve_embedder.py and stored CVE embeddings are available; otherwis",
+      "contextSnippetCount": 0,
+      "role": "assistant",
+      "toolSchemaCount": 16,
+      "toolSchemas": [
+        "search_cve",
+        "lookup_cve",
+        "search_context",
+        "create_finding",
+        "generate_report",
+        "export_report",
+        "run_shell",
+        "syft",
+        "graphqlmap",
+        "semgrep",
+        "bandit",
+        "checkov",
+        "dnsx",
+        "nmap",
+        "nuclei",
+        "sqlmap"
+      ]
+    },
+    {
+      "content": "Tool request: generate_report\n$ echo handled by callback\nArguments:\n{\n  \"template\" : \"Full Report\"\n}\n\nReport not generated: no confirmed findings recorded. call create_finding first with the proof-bearing evidence, then call generate_report again.",
+      "role": "toolCall",
+      "status": "ok 0.1s",
+      "tool": "generate_report"
+    },
+    {
+      "content": "REPORT_EMPTY_GENERATE_GUARD_FINAL: generate_report was refused because no confirmed findings existed.",
+      "contextPreview": "## Dynamic Context Catalogue\nPolicy: selected 1 of 1 indexed items for phase SCAN, tab report.\nBudget: max 6000 chars, max 8 selected snippets.\nUse search_context for more targeted notes, assets, findings, tool output, or CVEs instead of requesting all context in the prompt.\nCounts: ports=0 subdomains=0 web=0 vulns=0 network=0 osint=0 stash=0 cves=0\nSelected snippets:\n- [tool.output] generate_report tags=tool,generate_report: Report not generated: no confirmed findings recorded. call create_find",
+      "contextSelections": [
+        {
+          "bodyHash": "0e1bf599e966ecf5",
+          "source": "tool.output",
+          "tags": "tool,generate_report",
+          "title": "generate_report"
+        }
+      ],
+      "contextSnippetCount": 1,
+      "role": "assistant"
+    }
+  ],
+  "notes": [
+    "Mock engine is deterministic; this proves the real Swift app chat loop refuses generate_report when no FindingService findings exist.",
+    "No local model is loaded in this proof; real-Qwen natural tool choice remains a separate live proof boundary."
+  ],
+  "ok": true,
+  "proofLevel": "live-app-mock-engine-chat-callbacks-report-service",
+  "proofType": "report-empty-generate-guard-live",
+  "reportFindingActions": {
+    "createLabel": "Create Finding",
+    "deleteLabel": "Delete finding",
+    "findingCount": 0,
+    "findings": [],
+    "lastAction": "",
+    "lastCreatedId": "",
+    "lastDeletedId": "",
+    "status": "idle",
+    "summary": "",
+    "wizardVisible": false
+  },
+  "reportRenderActions": {
+    "findingCount": 0,
+    "htmlChars": 0,
+    "htmlPreview": "",
+    "lastAction": "",
+    "status": "idle",
+    "summary": "",
+    "template": ""
+  },
+  "startedAt": "2026-07-06T21:00:53-0700",
+  "status": "PASS",
+  "toolSchemaNames": [
+    "bandit",
+    "checkov",
+    "create_finding",
+    "dnsx",
+    "export_report",
+    "generate_report",
+    "graphqlmap",
+    "lookup_cve",
+    "nmap",
+    "nuclei",
+    "run_shell",
+    "search_context",
+    "search_cve",
+    "semgrep",
+    "sqlmap",
+    "syft"
+  ],
+  "toolSequence": [
+    "generate_report"
+  ]
+}

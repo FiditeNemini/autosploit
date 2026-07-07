@@ -265,7 +265,7 @@ def wait_for_quiet_messages(
     last_messages: list[dict[str, Any]] = []
     last_signature = ""
     last_progress_at = time.time()
-    stall_seconds = float(os.environ.get("EXPLOITBOT_REAL_QWEN_NATURAL_NETWORK_POST_STALL_SECONDS", "90"))
+    stall_seconds = float(os.environ.get("EXPLOITBOT_REAL_QWEN_NATURAL_NETWORK_POST_STALL_SECONDS", "150"))
     while time.time() < deadline:
         try:
             messages = app_request("GET", "/messages", timeout=5.0)
