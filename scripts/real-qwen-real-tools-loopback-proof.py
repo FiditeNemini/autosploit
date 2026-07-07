@@ -151,10 +151,26 @@ def launch_engine(model: Path, port: int, cache_root: Path) -> subprocess.Popen[
 def read_output_tail(proc: subprocess.Popen[str] | None, max_lines: int = 200) -> str:
     if proc is None or proc.stdout is None:
         return ""
+    fd = proc.stdout.fileno()
+    chunks: list[bytes] = []
     try:
-        text = proc.stdout.read()
+        os.set_blocking(fd, False)
+        while True:
+            try:
+                chunk = os.read(fd, 65536)
+            except BlockingIOError:
+                break
+            if not chunk:
+                break
+            chunks.append(chunk)
     except Exception as exc:
         return f"<unable to read process output: {exc}>"
+    finally:
+        try:
+            os.set_blocking(fd, True)
+        except Exception:
+            pass
+    text = b"".join(chunks).decode("utf-8", errors="replace")
     return "\n".join(text.splitlines()[-max_lines:])
 
 
