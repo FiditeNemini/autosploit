@@ -72,3 +72,7 @@ ExploitBot/Resources/tools/
 
 # Z005: Bundled Swift resources are canonical; do not recreate the dead engine prompt copies.
 /ExploitBotEngine/prompts/tabs/
+
+# SQLite WAL/SHM sidecars from starter-cves.db opens
+*.db-shm
+*.db-wal
