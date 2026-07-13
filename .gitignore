@@ -69,3 +69,6 @@ ExploitBot/Resources/tools/
 .agent-coordination/
 /CLAUDE.md
 /AGENTS.md
+
+# Z005: Bundled Swift resources are canonical; do not recreate the dead engine prompt copies.
+/ExploitBotEngine/prompts/tabs/

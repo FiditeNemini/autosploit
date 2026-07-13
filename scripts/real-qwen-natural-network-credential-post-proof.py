@@ -23,7 +23,9 @@ MODEL_27B = Path("/Users/eric/models/dealign.ai/Qwen3.6-27B-MXFP4-CRACK-MTP")
 MODEL_35B = Path("/Users/eric/models/dealign.ai/Qwen3.6-35B-A3B-MXFP4-CRACK-MTP")
 FINAL_MARKER = "REAL_QWEN_NATURAL_NETWORK_CREDENTIAL_POST_FINAL"
 DEFAULT_OUTPUT_27B = ROOT / "docs/live-proofs/2026-07-06-real-qwen-natural-network-credential-post-27b.json"
+DEFAULT_OUTPUT_27B_MXFP8 = ROOT / "docs/live-proofs/2026-07-06-real-qwen-natural-network-credential-post-27b-mxfp8.json"
 DEFAULT_OUTPUT_35B = ROOT / "docs/live-proofs/2026-07-06-real-qwen-natural-network-credential-post-35b.json"
+DEFAULT_OUTPUT_35B_MXFP8 = ROOT / "docs/live-proofs/2026-07-06-real-qwen-natural-network-credential-post-35b-mxfp8.json"
 SCENARIO_TOOL_SCHEMA_MAX = 64
 EXPECTED_NETWORK_TOOLS = ["nmap", "httpx", "hydra", "netexec", "run_shell", "linpeas"]
 EXCLUDED_SCHEMA_TOOLS = [
@@ -107,7 +109,12 @@ def output_path_for_model(model: Path) -> Path:
     override = os.environ.get("EXPLOITBOT_REAL_QWEN_NATURAL_NETWORK_POST_OUTPUT")
     if override:
         return Path(override).expanduser()
-    if "35b" in str(model).lower():
+    model_text = str(model).lower()
+    if "35b" in model_text and "mxfp8" in model_text:
+        return DEFAULT_OUTPUT_35B_MXFP8
+    if "27b" in model_text and "mxfp8" in model_text:
+        return DEFAULT_OUTPUT_27B_MXFP8
+    if "35b" in model_text:
         return DEFAULT_OUTPUT_35B
     return DEFAULT_OUTPUT_27B
 
