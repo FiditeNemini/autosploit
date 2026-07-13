@@ -48,6 +48,10 @@ release/
 # Internal dev docs (not for public repo)
 docs/plans/
 tests/
+
+# Claude Code local rules + internal notes (never commit)
+.claude/hookify.*.local.md
+.claude/internal/
 # Screenshots with test data
 assets/creds.png
 assets/exploit.png
@@ -60,3 +64,8 @@ assets/stash.png
 assets/web.png
 # Bundled tool binaries (too large for git, distributed via DMG)
 ExploitBot/Resources/tools/
+
+# Local multi-agent coordination (never commit to public repo)
+.agent-coordination/
+/CLAUDE.md
+/AGENTS.md
