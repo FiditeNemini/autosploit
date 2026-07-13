@@ -47,7 +47,10 @@ release/
 
 # Internal dev docs (not for public repo)
 docs/plans/
-tests/
+# NOTE: only exclude legacy lowercase `tests/` sibling dirs — the Swift
+# XCTest target lives at `ExploitBot/Tests/ExploitBotTests/` and MUST
+# be tracked so `swift test` works across clones.
+/tests/
 
 # Claude Code local rules + internal notes (never commit)
 .claude/hookify.*.local.md
