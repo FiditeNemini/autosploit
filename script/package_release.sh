@@ -4,7 +4,7 @@ set -euo pipefail
 APP_NAME="ExploitBot"
 BUNDLE_ID="ai.jangq.ExploitBot"
 MIN_SYSTEM_VERSION="14.0"
-VERSION="${EXPLOITBOT_RELEASE_VERSION:-0.1.0-beta}"
+VERSION="${EXPLOITBOT_RELEASE_VERSION:-1.0.0}"
 IDENTITY="${EXPLOITBOT_SIGN_IDENTITY:-Developer ID Application: ShieldStack LLC (55KGF2S5AY)}"
 NOTARY_PROFILE="${EXPLOITBOT_NOTARY_PROFILE:-}"
 NOTARIZE_APPLE_ID="${NOTARIZE_APPLE_ID:-}"
@@ -21,7 +21,7 @@ APP_MACOS="$APP_CONTENTS/MacOS"
 APP_RESOURCES="$APP_CONTENTS/Resources"
 APP_BINARY="$APP_MACOS/$APP_NAME"
 INFO_PLIST="$APP_CONTENTS/Info.plist"
-DMG_PATH="$RELEASE_DIR/$APP_NAME-beta.dmg"
+DMG_PATH="$RELEASE_DIR/$APP_NAME.dmg"
 MANIFEST_PATH="$RELEASE_DIR/release-manifest.json"
 ENTITLEMENTS="$PACKAGE_DIR/ExploitBot.entitlements"
 ENGINE_SOURCE_DIR="$ROOT_DIR/ExploitBotEngine"
@@ -202,7 +202,7 @@ if [[ "$DO_NOTARIZE" == "1" ]]; then
     echo "--notarize requires --notary-profile/EXPLOITBOT_NOTARY_PROFILE or NOTARIZE_APPLE_ID, NOTARIZE_TEAM_ID, and NOTARIZE_PASSWORD" >&2
     exit 1
   fi
-  APP_ZIP="$RELEASE_DIR/$APP_NAME-beta-app.zip"
+  APP_ZIP="$RELEASE_DIR/$APP_NAME-app.zip"
   rm -f "$APP_ZIP"
   /usr/bin/ditto -c -k --keepParent "$APP_BUNDLE" "$APP_ZIP"
   xcrun notarytool submit "$APP_ZIP" "${notary_args[@]}" --wait
@@ -215,7 +215,7 @@ fi
 cp -R "$APP_BUNDLE" "$RELEASE_DIR/dmg-root/"
 ln -s /Applications "$RELEASE_DIR/dmg-root/Applications"
 hdiutil create \
-  -volname "$APP_NAME Beta" \
+  -volname "$APP_NAME" \
   -srcfolder "$RELEASE_DIR/dmg-root" \
   -ov \
   -format UDZO \
@@ -276,7 +276,7 @@ manifest = {
     "notarizationGateReason": "Notarization completed for the app and DMG." if os.environ["NOTARIZATION_STATUS"] == "submitted-and-stapled" else "Run with EXPLOITBOT_NOTARY_PROFILE or NOTARIZE_APPLE_ID/NOTARIZE_TEAM_ID/NOTARIZE_PASSWORD.",
     "artifacts": {
         "appPath": "release/ExploitBot.app",
-        "dmgPath": "release/ExploitBot-beta.dmg",
+        "dmgPath": "release/ExploitBot.dmg",
         "appBinarySha256": os.environ["APP_BINARY_SHA"],
         "dmgSha256": os.environ["DMG_SHA"],
     },
@@ -292,9 +292,9 @@ manifest = {
         "notarizeWithProfile": "EXPLOITBOT_NOTARY_PROFILE=<profile-name> ./script/package_release.sh --notarize",
         "notarizeWithEnv": "source /path/to/.env.signing && ./script/package_release.sh --notarize",
         "verifyAppSignature": "codesign --verify --deep --strict --verbose=2 release/ExploitBot.app",
-        "verifyDmgSignature": "codesign --verify --verbose=2 release/ExploitBot-beta.dmg",
+        "verifyDmgSignature": "codesign --verify --verbose=2 release/ExploitBot.dmg",
         "validateStapledApp": "xcrun stapler validate release/ExploitBot.app",
-        "validateStapledDmg": "xcrun stapler validate release/ExploitBot-beta.dmg",
+        "validateStapledDmg": "xcrun stapler validate release/ExploitBot.dmg",
     },
 }
 
