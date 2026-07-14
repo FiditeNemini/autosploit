@@ -118,6 +118,18 @@ build_dist_app() {
     rsync -a --delete "$PACKAGE_DIR/Resources/" "$APP_RESOURCES/"
   fi
 
+  # Iter36 P0: copy the SPM-generated resource bundle
+  # (`ExploitBot_ExploitBot.bundle` — contains prompts/tabs/*.md exposed
+  # via Bundle.module) into the .app. Without this, ChatService's
+  # tabPromptContext() gets nil from Bundle.module.url and used to hit
+  # fatalError (fixed 2026-07-13 to degrade to nil), which crashed the
+  # app every autopilot chain the moment a tab-scoped prompt was needed.
+  BIN_DIR="$(swift build --package-path "$PACKAGE_DIR" --show-bin-path)"
+  SPM_BUNDLE="$BIN_DIR/ExploitBot_ExploitBot.bundle"
+  if [[ -d "$SPM_BUNDLE" ]]; then
+    rsync -a --delete "$SPM_BUNDLE" "$APP_RESOURCES/"
+  fi
+
   cat >"$INFO_PLIST" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">

@@ -94,6 +94,17 @@ if [[ -d "$PACKAGE_DIR/Resources" ]]; then
   rsync -a --delete "$PACKAGE_DIR/Resources/" "$APP_RESOURCES/"
 fi
 
+# Iter36 P0: copy the SPM-generated resource bundle
+# (`ExploitBot_ExploitBot.bundle` — contains prompts/tabs/*.md exposed
+# via Bundle.module) into the .app. Without this every autopilot chain
+# that touched a tab-scoped prompt crashed the app via fatalError in
+# ChatService.tabPromptContext (Bundle.module.url returned nil).
+BIN_DIR="$(swift build --package-path "$PACKAGE_DIR" -c release --show-bin-path)"
+SPM_BUNDLE="$BIN_DIR/ExploitBot_ExploitBot.bundle"
+if [[ -d "$SPM_BUNDLE" ]]; then
+  rsync -a --delete "$SPM_BUNDLE" "$APP_RESOURCES/"
+fi
+
 if [[ -d "$ENGINE_SOURCE_DIR" ]]; then
   mkdir -p "$ENGINE_BUNDLE_DIR"
   rsync -a --delete \
