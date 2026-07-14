@@ -147,9 +147,24 @@ build_dist_app() {
   <string>$MIN_SYSTEM_VERSION</string>
   <key>NSPrincipalClass</key>
   <string>NSApplication</string>
+  <key>NSHighResolutionCapable</key>
+  <true/>
 </dict>
 </plist>
 PLIST
+
+  # Iter36 fix: register the bundled AppIcon.icns via CFBundleIconFile so the
+  # dev app shows the real icon instead of the generic app-shape placeholder.
+  # package_release.sh already does this; build_and_run.sh had been silently
+  # missing this key (icon file was in Resources but nothing referenced it).
+  if [[ -f "$APP_RESOURCES/AppIcon.icns" ]]; then
+    /usr/libexec/PlistBuddy -c "Add :CFBundleIconFile string AppIcon" "$INFO_PLIST" 2>/dev/null || \
+      /usr/libexec/PlistBuddy -c "Set :CFBundleIconFile AppIcon" "$INFO_PLIST"
+  fi
+
+  # Force Finder to re-read the bundle so icon caches don't hold onto stale
+  # blank-icon state after the plist change.
+  /usr/bin/touch "$APP_BUNDLE" 2>/dev/null || true
 }
 
 run_selected_mode() {
