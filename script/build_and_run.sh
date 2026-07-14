@@ -118,28 +118,25 @@ build_dist_app() {
     rsync -a --delete "$PACKAGE_DIR/Resources/" "$APP_RESOURCES/"
   fi
 
-  # Iter37 P0 fix (Codex adversarial review F1): the SPM-generated
-  # resource bundle (`ExploitBot_ExploitBot.bundle`) MUST land at the
-  # `.app` root (next to `Contents/`), NOT inside `Contents/Resources/`.
-  # SPM's generated accessor uses
-  #   Bundle.main.bundleURL.appendingPathComponent("ExploitBot_ExploitBot.bundle")
-  # which for a macOS `.app` resolves to `<.app>/ExploitBot_ExploitBot.bundle`.
-  # If it's inside `Contents/Resources/` (Apple convention but SPM's
-  # generator doesn't honor it here), the accessor falls through to the
-  # hard-coded `.build/...` path — which exists on the build machine but
-  # is missing on any other Mac or after a `.build` clean, at which
-  # point `Swift.fatalError` fires and the app crashes on first tab-
-  # scoped chat message.
-  # This defect was masked by the .build fallback until Codex's iter37
-  # review caught it. The bundle MUST live at `$APP_BUNDLE/ExploitBot_ExploitBot.bundle`.
-  BIN_DIR="$(swift build --package-path "$PACKAGE_DIR" --show-bin-path)"
-  SPM_BUNDLE="$BIN_DIR/ExploitBot_ExploitBot.bundle"
-  if [[ ! -d "$SPM_BUNDLE" ]]; then
-    echo "FATAL: SPM-generated resource bundle missing at $SPM_BUNDLE" >&2
-    echo "       (contains prompts/tabs/*.md — Bundle.module.url will hit fatalError on any tab-scoped chat)" >&2
+  # Iter37 P0 (Codex review F1 root fix v2): SPM's generated
+  # `Bundle.module` accessor is unusable for a macOS `.app` — it looks at
+  # `<.app>/ExploitBot_ExploitBot.bundle` (which codesign rejects as
+  # "unsealed content in the bundle root"), then falls back to a hard-
+  # coded `.build/...` path that only exists on the build machine and
+  # otherwise `fatalError`s. Rather than fight SPM's macOS-hostile
+  # generator, ChatService now reads tab prompts from
+  # `Contents/Resources/prompts/tabs/*.md` via `Bundle.main`, the
+  # standard Apple location. This copy places the sources there.
+  # The `.copy("Resources/prompts")` line in Package.swift is retained
+  # so the SPM build still succeeds (bundle lands in `.build/` but goes
+  # unused at app runtime).
+  PROMPT_SRC="$PACKAGE_DIR/Sources/ExploitBot/Resources/prompts"
+  if [[ ! -d "$PROMPT_SRC" ]]; then
+    echo "FATAL: tab prompt source directory missing at $PROMPT_SRC" >&2
+    echo "       (Contents/Resources/prompts/tabs/*.md is now the load path via Bundle.main)" >&2
     exit 1
   fi
-  rsync -a --delete "$SPM_BUNDLE" "$APP_BUNDLE/"
+  rsync -a --delete "$PROMPT_SRC" "$APP_RESOURCES/"
 
   cat >"$INFO_PLIST" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
