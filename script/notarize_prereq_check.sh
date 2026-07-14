@@ -48,7 +48,7 @@ echo "== notary credentials =="
 if [[ -n "$NOTARY_PROFILE" ]]; then
   ok "EXPLOITBOT_NOTARY_PROFILE set: $NOTARY_PROFILE"
   # Try to read the profile without doing a real submission.
-  if xcrun notarytool history --keychain-profile "$NOTARY_PROFILE" --limit 1 >/dev/null 2>&1; then
+  if xcrun notarytool history --keychain-profile "$NOTARY_PROFILE" >/dev/null 2>&1; then
     ok "notary profile reachable (history call succeeded)"
   else
     bad "notary profile FAILED — check keychain access + credential validity"
@@ -58,8 +58,7 @@ elif [[ -n "$NOTARIZE_APPLE_ID" && -n "$NOTARIZE_TEAM_ID" && -n "$NOTARIZE_PASSW
   if xcrun notarytool history \
       --apple-id "$NOTARIZE_APPLE_ID" \
       --team-id "$NOTARIZE_TEAM_ID" \
-      --password "$NOTARIZE_PASSWORD" \
-      --limit 1 >/dev/null 2>&1; then
+      --password "$NOTARIZE_PASSWORD" >/dev/null 2>&1; then
     ok "notary credentials reachable (history call succeeded)"
   else
     bad "notary credentials FAILED — Apple rejected the auth"
