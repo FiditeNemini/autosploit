@@ -118,17 +118,28 @@ build_dist_app() {
     rsync -a --delete "$PACKAGE_DIR/Resources/" "$APP_RESOURCES/"
   fi
 
-  # Iter36 P0: copy the SPM-generated resource bundle
-  # (`ExploitBot_ExploitBot.bundle` — contains prompts/tabs/*.md exposed
-  # via Bundle.module) into the .app. Without this, ChatService's
-  # tabPromptContext() gets nil from Bundle.module.url and used to hit
-  # fatalError (fixed 2026-07-13 to degrade to nil), which crashed the
-  # app every autopilot chain the moment a tab-scoped prompt was needed.
+  # Iter37 P0 fix (Codex adversarial review F1): the SPM-generated
+  # resource bundle (`ExploitBot_ExploitBot.bundle`) MUST land at the
+  # `.app` root (next to `Contents/`), NOT inside `Contents/Resources/`.
+  # SPM's generated accessor uses
+  #   Bundle.main.bundleURL.appendingPathComponent("ExploitBot_ExploitBot.bundle")
+  # which for a macOS `.app` resolves to `<.app>/ExploitBot_ExploitBot.bundle`.
+  # If it's inside `Contents/Resources/` (Apple convention but SPM's
+  # generator doesn't honor it here), the accessor falls through to the
+  # hard-coded `.build/...` path — which exists on the build machine but
+  # is missing on any other Mac or after a `.build` clean, at which
+  # point `Swift.fatalError` fires and the app crashes on first tab-
+  # scoped chat message.
+  # This defect was masked by the .build fallback until Codex's iter37
+  # review caught it. The bundle MUST live at `$APP_BUNDLE/ExploitBot_ExploitBot.bundle`.
   BIN_DIR="$(swift build --package-path "$PACKAGE_DIR" --show-bin-path)"
   SPM_BUNDLE="$BIN_DIR/ExploitBot_ExploitBot.bundle"
-  if [[ -d "$SPM_BUNDLE" ]]; then
-    rsync -a --delete "$SPM_BUNDLE" "$APP_RESOURCES/"
+  if [[ ! -d "$SPM_BUNDLE" ]]; then
+    echo "FATAL: SPM-generated resource bundle missing at $SPM_BUNDLE" >&2
+    echo "       (contains prompts/tabs/*.md — Bundle.module.url will hit fatalError on any tab-scoped chat)" >&2
+    exit 1
   fi
+  rsync -a --delete "$SPM_BUNDLE" "$APP_BUNDLE/"
 
   cat >"$INFO_PLIST" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>

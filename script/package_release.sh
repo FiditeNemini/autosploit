@@ -94,16 +94,28 @@ if [[ -d "$PACKAGE_DIR/Resources" ]]; then
   rsync -a --delete "$PACKAGE_DIR/Resources/" "$APP_RESOURCES/"
 fi
 
-# Iter36 P0: copy the SPM-generated resource bundle
-# (`ExploitBot_ExploitBot.bundle` — contains prompts/tabs/*.md exposed
-# via Bundle.module) into the .app. Without this every autopilot chain
-# that touched a tab-scoped prompt crashed the app via fatalError in
-# ChatService.tabPromptContext (Bundle.module.url returned nil).
+# Iter37 P0 fix (Codex adversarial review F1): the SPM-generated
+# resource bundle (`ExploitBot_ExploitBot.bundle`) MUST land at the
+# `.app` root (next to `Contents/`), NOT inside `Contents/Resources/`.
+# SPM's generated accessor uses
+#   Bundle.main.bundleURL.appendingPathComponent("ExploitBot_ExploitBot.bundle")
+# which for a macOS `.app` resolves to `<.app>/ExploitBot_ExploitBot.bundle`.
+# Putting it in `Contents/Resources/` (as we did in iter36) works ONLY
+# on the build machine because the generated accessor falls back to a
+# hard-coded `.build/...` path — on any other Mac / after a `.build`
+# clean, that fallback is missing and `Swift.fatalError` fires on the
+# first tab-scoped chat message.
 BIN_DIR="$(swift build --package-path "$PACKAGE_DIR" -c release --show-bin-path)"
 SPM_BUNDLE="$BIN_DIR/ExploitBot_ExploitBot.bundle"
-if [[ -d "$SPM_BUNDLE" ]]; then
-  rsync -a --delete "$SPM_BUNDLE" "$APP_RESOURCES/"
+if [[ ! -d "$SPM_BUNDLE" ]]; then
+  echo "FATAL: SPM-generated resource bundle missing at $SPM_BUNDLE" >&2
+  echo "       (contains prompts/tabs/*.md — Bundle.module.url will hit fatalError on any tab-scoped chat)" >&2
+  exit 1
 fi
+rsync -a --delete "$SPM_BUNDLE" "$APP_BUNDLE/"
+# Clean up the wrong-place copy iter36 left in Contents/Resources/ if
+# present (so upgrades from a stale build don't ship two copies).
+rm -rf "$APP_RESOURCES/ExploitBot_ExploitBot.bundle"
 
 if [[ -d "$ENGINE_SOURCE_DIR" ]]; then
   mkdir -p "$ENGINE_BUNDLE_DIR"
