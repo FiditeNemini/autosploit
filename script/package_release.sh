@@ -4,7 +4,7 @@ set -euo pipefail
 APP_NAME="ExploitBot"
 BUNDLE_ID="ai.jangq.ExploitBot"
 MIN_SYSTEM_VERSION="14.0"
-VERSION="${EXPLOITBOT_RELEASE_VERSION:-1.5.2}"
+VERSION="${EXPLOITBOT_RELEASE_VERSION:-1.5.3}"
 IDENTITY="${EXPLOITBOT_SIGN_IDENTITY:-Developer ID Application: ShieldStack LLC (55KGF2S5AY)}"
 NOTARY_PROFILE="${EXPLOITBOT_NOTARY_PROFILE:-}"
 NOTARIZE_APPLE_ID="${NOTARIZE_APPLE_ID:-}"
@@ -225,7 +225,7 @@ if [[ "$DO_NOTARIZE" == "1" ]]; then
   APP_ZIP="$RELEASE_DIR/$APP_NAME-app.zip"
   rm -f "$APP_ZIP"
   /usr/bin/ditto -c -k --keepParent "$APP_BUNDLE" "$APP_ZIP"
-  xcrun notarytool submit "$APP_ZIP" "${notary_args[@]}" --wait
+  xcrun notarytool submit "$APP_ZIP" "${notary_args[@]}" --no-s3-acceleration --wait
   xcrun stapler staple "$APP_BUNDLE"
   xcrun stapler validate "$APP_BUNDLE"
   rm -f "$APP_ZIP"
@@ -245,7 +245,7 @@ codesign --force --timestamp --sign "$IDENTITY" "$DMG_PATH"
 codesign --verify --verbose=2 "$DMG_PATH"
 
 if [[ "$DO_NOTARIZE" == "1" ]]; then
-  xcrun notarytool submit "$DMG_PATH" "${notary_args[@]}" --wait
+  xcrun notarytool submit "$DMG_PATH" "${notary_args[@]}" --no-s3-acceleration --wait
   xcrun stapler staple "$DMG_PATH"
   xcrun stapler validate "$DMG_PATH"
   NOTARIZATION_STATUS="submitted-and-stapled"

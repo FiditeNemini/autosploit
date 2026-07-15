@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/jjang-ai/exploitbot/releases/download/v1.5.2/ExploitBot.dmg">
+  <a href="https://github.com/jjang-ai/exploitbot/releases/download/v1.5.3/ExploitBot.dmg">
     <img src="https://img.shields.io/badge/Download-ExploitBot.dmg-blue?style=for-the-badge&logo=apple" alt="Download ExploitBot DMG">
   </a>
 </p>
@@ -66,8 +66,8 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 
 ## Current Release
 
-- Release: [ExploitBot v1.5.2](https://github.com/jjang-ai/exploitbot/releases/tag/v1.5.2)
-- Download: [ExploitBot.dmg](https://github.com/jjang-ai/exploitbot/releases/download/v1.5.2/ExploitBot.dmg)
+- Release: [ExploitBot v1.5.3](https://github.com/jjang-ai/exploitbot/releases/tag/v1.5.3)
+- Download: [ExploitBot.dmg](https://github.com/jjang-ai/exploitbot/releases/download/v1.5.3/ExploitBot.dmg)
 - Distribution: Developer ID signed, hardened runtime, Apple notarized, and stapled
 - Manifest: the release includes `release-manifest.json` with source version and artifact SHA-256 values
 
@@ -151,7 +151,7 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 
 ### Download
 
-Download the current DMG from [Releases](https://github.com/jjang-ai/exploitbot/releases/tag/v1.5.2). Release artifacts are Developer ID signed, notarized, stapled, and validated before publishing.
+Download the current DMG from [Releases](https://github.com/jjang-ai/exploitbot/releases/tag/v1.5.3). Release artifacts are Developer ID signed, notarized, stapled, and validated before publishing.
 
 Requires **macOS 14+** and **Apple Silicon** (M1/M2/M3/M4).
 
@@ -165,7 +165,7 @@ cd exploitbot
 ./script/build_and_run.sh --verify
 
 # Package a local unsigned/not-submitted DMG
-EXPLOITBOT_RELEASE_VERSION=1.5.2 ./script/package_release.sh --skip-notarize
+EXPLOITBOT_RELEASE_VERSION=1.5.3 ./script/package_release.sh --skip-notarize
 
 # Notarized DMG using a keychain profile
 EXPLOITBOT_NOTARY_PROFILE=<profile> ./script/package_release.sh --notarize
