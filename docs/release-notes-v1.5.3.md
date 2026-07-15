@@ -14,6 +14,9 @@ drive.
 - Renders bounded live and completed previews for long reasoning and assistant
   responses. The full transcript remains available to Copy and Stash without
   repeatedly laying out the entire growing string.
+- Keeps the full capability inventory in its visible tool card while sending
+  only the grounded callback outcome to the bounded final request, preventing
+  raw inventory copying and unwanted count narration.
 - Uses Apple's non-accelerated notary upload path to avoid the transient S3
   acceleration failure observed during the previous release.
 
