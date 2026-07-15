@@ -201,7 +201,7 @@ def main() -> None:
                 "releaseReadinessGeneratedAt": release_readiness.get("generatedAt"),
                 "app": {
                     "path": "release/ExploitBot.app",
-                    "dmgPath": "release/ExploitBot-beta.dmg",
+                    "dmgPath": "release/ExploitBot.dmg",
                     "localPackageStatus": release_readiness.get("localPackageStatus"),
                     "distributionStatus": release_readiness.get("distributionStatus"),
                     "binarySha256": artifacts.get("appBinarySha256"),

@@ -175,7 +175,7 @@ def run() -> None:
 
             if rows["toolRegistryExecution"].get("toolCount") != tool_flow.get("toolCount"):
                 raise AssertionError(f"tool registry row drifted: {rows['toolRegistryExecution']}")
-            if rows["toolRegistryExecution"].get("toolSchemaCap") != 12:
+            if rows["toolRegistryExecution"].get("toolSchemaCap") != 8:
                 raise AssertionError(f"tool schema cap missing: {rows['toolRegistryExecution']}")
             if rows["liveToolProgressTelemetry"].get("statusCount") != tool_flow.get("tabActivityStatusCount"):
                 raise AssertionError(f"tool status row drifted: {rows['liveToolProgressTelemetry']}")

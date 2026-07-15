@@ -215,7 +215,7 @@ def run() -> None:
             raise AssertionError(f"deep runtime flow proof-file parity mismatch: {coverage}")
         assert_file_proofs_exist(EXPECTED_PROOFS, "deep runtime flow")
 
-        if coverage.get("toolSchemaCap") != 12:
+        if coverage.get("toolSchemaCap") != 8:
             raise AssertionError(f"bounded per-turn tool schema cap missing: {coverage}")
         if coverage.get("agentToolSchemaMaxTools") != coverage.get("fullToolSchemaCount"):
             raise AssertionError(f"agent full-tool schema contract mismatch: {coverage}")

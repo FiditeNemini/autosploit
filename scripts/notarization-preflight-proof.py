@@ -253,7 +253,7 @@ def build_report(
             "notarizeWithEnv": "source /path/to/.env.signing && ./script/package_release.sh --notarize",
             "postNotarizeVerification": [
                 "xcrun stapler validate release/ExploitBot.app",
-                "xcrun stapler validate release/ExploitBot-beta.dmg",
+                "xcrun stapler validate release/ExploitBot.dmg",
                 "python3 scripts/notarization-preflight-proof.py",
                 "python3 scripts/release-readiness-proof.py",
                 "python3 scripts/goal-requirement-audit-proof.py",
@@ -288,7 +288,7 @@ def main() -> None:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     manifest_artifacts = manifest.get("artifacts") or {}
     app_path = ROOT / str(manifest_artifacts.get("appPath", "release/ExploitBot.app"))
-    dmg_path = ROOT / str(manifest_artifacts.get("dmgPath", "release/ExploitBot-beta.dmg"))
+    dmg_path = ROOT / str(manifest_artifacts.get("dmgPath", "release/ExploitBot.dmg"))
     notarytool = run(["xcrun", "notarytool", "--help"])
     report = build_report(
         notarytool_available=notarytool.returncode == 0,

@@ -56,18 +56,18 @@ def run() -> None:
         failures = coverage.get("failures", [])
         if failures:
             raise AssertionError(f"tool coverage failures: {failures}")
-        if coverage.get("toolCount") != 49:
+        if coverage.get("toolCount") != 50:
             raise AssertionError(f"unexpected model tool count: {coverage}")
-        if coverage.get("callbackCount") != 6:
+        if coverage.get("callbackCount") != 7:
             raise AssertionError(f"unexpected callback count: {coverage}")
-        if coverage.get("boundedCatalogueLimit") != 12:
+        if coverage.get("boundedCatalogueLimit") != 8:
             raise AssertionError(f"tool catalogue limit changed: {coverage}")
         required_tabs = {"recon", "web", "network", "creds", "exploit", "post", "supplyChain", "osint", "report", "stash"}
         if set(coverage.get("tabs", [])) != required_tabs:
             raise AssertionError(f"tab coverage mismatch: {coverage}")
 
         tools = {tool["name"]: tool for tool in coverage.get("tools", [])}
-        for name in ("create_finding", "export_report", "generate_report", "search_context", "search_cve", "lookup_cve"):
+        for name in ("discover_capabilities", "create_finding", "export_report", "generate_report", "search_context", "search_cve", "lookup_cve"):
             if tools.get(name, {}).get("execution") != "callback":
                 raise AssertionError(f"callback tool not marked correctly: {name} {tools.get(name)}")
         for name in ("nmap", "nuclei", "netexec", "hashcat", "metasploit", "impacket", "linpeas", "gowitness", "syft", "grype", "osv_scanner", "run_shell"):

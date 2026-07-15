@@ -14,11 +14,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "script" / "package_release.sh"
 APP = ROOT / "release" / "ExploitBot.app"
-DMG = ROOT / "release" / "ExploitBot-beta.dmg"
+DMG = ROOT / "release" / "ExploitBot.dmg"
 MANIFEST = ROOT / "release" / "release-manifest.json"
 ENTITLEMENTS = ROOT / "ExploitBot" / "ExploitBot.entitlements"
 APP_API = "http://127.0.0.1:9999"
 DEFAULT_OUTPUT = ROOT / "docs/live-proofs/2026-07-04-release-readiness.json"
+EXPECTED_VERSION = os.environ.get("EXPLOITBOT_RELEASE_VERSION", "1.5.2")
 
 
 def run(cmd: list[str]) -> subprocess.CompletedProcess[str]:
@@ -180,7 +181,7 @@ def main() -> None:
 
     manifest = json.loads(MANIFEST.read_text())
     require(manifest.get("bundleIdentifier") == "ai.jangq.ExploitBot", "manifest bundle identifier mismatch", str(manifest))
-    require(manifest.get("version") == "0.1.0-beta", "manifest version mismatch", str(manifest))
+    require(manifest.get("version") == EXPECTED_VERSION, "manifest version mismatch", str(manifest))
     require("Developer ID Application: ShieldStack LLC" in manifest.get("identity", ""), "manifest signing identity mismatch", str(manifest))
     require(manifest.get("teamIdentifier") == "55KGF2S5AY", "manifest team identifier mismatch", str(manifest))
     require(manifest.get("hardenedRuntime") is True, "manifest hardened runtime flag missing", str(manifest))
@@ -203,7 +204,7 @@ def main() -> None:
     require(manifest.get("notaryProfileRequired") is False, "manifest notary profile requirement mismatch", str(manifest))
     artifacts = manifest.get("artifacts", {})
     require(artifacts.get("appPath") == "release/ExploitBot.app", "manifest app path mismatch", str(manifest))
-    require(artifacts.get("dmgPath") == "release/ExploitBot-beta.dmg", "manifest DMG path mismatch", str(manifest))
+    require(artifacts.get("dmgPath") == "release/ExploitBot.dmg", "manifest DMG path mismatch", str(manifest))
     require(len(artifacts.get("appBinarySha256", "")) == 64, "manifest app binary hash missing", str(manifest))
     require(len(artifacts.get("dmgSha256", "")) == 64, "manifest DMG hash missing", str(manifest))
     resources = manifest.get("resources", {})
@@ -217,9 +218,9 @@ def main() -> None:
     require(commands.get("notarizeWithProfile") == "EXPLOITBOT_NOTARY_PROFILE=<profile-name> ./script/package_release.sh --notarize", "manifest profile notarize command mismatch", str(manifest))
     require(commands.get("notarizeWithEnv") == "source /path/to/.env.signing && ./script/package_release.sh --notarize", "manifest env notarize command mismatch", str(manifest))
     require(commands.get("verifyAppSignature") == "codesign --verify --deep --strict --verbose=2 release/ExploitBot.app", "manifest app signature command mismatch", str(manifest))
-    require(commands.get("verifyDmgSignature") == "codesign --verify --verbose=2 release/ExploitBot-beta.dmg", "manifest dmg signature command mismatch", str(manifest))
+    require(commands.get("verifyDmgSignature") == "codesign --verify --verbose=2 release/ExploitBot.dmg", "manifest dmg signature command mismatch", str(manifest))
     require(commands.get("validateStapledApp") == "xcrun stapler validate release/ExploitBot.app", "manifest app stapler command mismatch", str(manifest))
-    require(commands.get("validateStapledDmg") == "xcrun stapler validate release/ExploitBot-beta.dmg", "manifest dmg stapler command mismatch", str(manifest))
+    require(commands.get("validateStapledDmg") == "xcrun stapler validate release/ExploitBot.dmg", "manifest dmg stapler command mismatch", str(manifest))
 
     write_report(
         build_report(

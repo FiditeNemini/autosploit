@@ -78,7 +78,7 @@ def build_report(
     local_dmg_sha256 = str(artifacts.get("dmgSha256") or "")
     notarization_gate = manifest.get("notarizationGate")
 
-    dmg_asset = find_asset(published or {}, "ExploitBot-beta.dmg")
+    dmg_asset = find_asset(published or {}, "ExploitBot.dmg")
     manifest_asset = find_asset(published or {}, "release-manifest.json")
     published_dmg_sha256 = normalize_digest((dmg_asset or {}).get("digest"))
     published_manifest_sha256 = normalize_digest((manifest_asset or {}).get("digest"))

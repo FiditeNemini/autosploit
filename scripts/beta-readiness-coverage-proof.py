@@ -15,7 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
 APP = ROOT / "release" / "ExploitBot.app"
-DMG = ROOT / "release" / "ExploitBot-beta.dmg"
+DMG = ROOT / "release" / "ExploitBot.dmg"
 
 EXPECTED_GATES = [
     "sourceProofMatrix",
@@ -108,7 +108,7 @@ def assert_payload(payload: dict) -> None:
     unknown_status = sorted(
         status
         for status in gate_status.values()
-        if status not in {"ready", "ready-with-known-gaps", "blocked", "blocked-requires-profile"}
+        if status not in {"ready", "ready-with-known-gaps", "blocked", "blocked-requires-credentials"}
     )
     if unknown_status:
         raise AssertionError(f"beta readiness gate status value mismatch: {payload}")

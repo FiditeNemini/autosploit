@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 APP_API = "http://127.0.0.1:9999"
 
 EXPECTED_TABS = ["creds", "exploit", "network", "osint", "post", "recon", "report", "stash", "supplyChain", "web"]
-EXPECTED_CALLBACKS = ["create_finding", "export_report", "generate_report", "lookup_cve", "search_context", "search_cve"]
+EXPECTED_CALLBACKS = ["create_finding", "discover_capabilities", "export_report", "generate_report", "lookup_cve", "search_context", "search_cve"]
 EXPECTED_ALWAYS_VISIBLE = ["create_finding", "export_report", "generate_report", "lookup_cve", "run_shell", "search_context", "search_cve"]
 
 

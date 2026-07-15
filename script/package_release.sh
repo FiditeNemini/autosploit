@@ -4,7 +4,7 @@ set -euo pipefail
 APP_NAME="ExploitBot"
 BUNDLE_ID="ai.jangq.ExploitBot"
 MIN_SYSTEM_VERSION="14.0"
-VERSION="${EXPLOITBOT_RELEASE_VERSION:-1.0.0}"
+VERSION="${EXPLOITBOT_RELEASE_VERSION:-1.5.2}"
 IDENTITY="${EXPLOITBOT_SIGN_IDENTITY:-Developer ID Application: ShieldStack LLC (55KGF2S5AY)}"
 NOTARY_PROFILE="${EXPLOITBOT_NOTARY_PROFILE:-}"
 NOTARIZE_APPLE_ID="${NOTARIZE_APPLE_ID:-}"
@@ -168,6 +168,26 @@ cat >"$INFO_PLIST" <<PLIST
   <true/>
   <key>NSPrincipalClass</key>
   <string>NSApplication</string>
+  <key>NSLocalNetworkUsageDescription</key>
+  <string>ExploitBot discovers authorized devices and services on your local network for engagement inventory.</string>
+  <key>NSBonjourServices</key>
+  <array>
+    <string>_services._dns-sd._udp</string>
+    <string>_http._tcp</string>
+    <string>_https._tcp</string>
+    <string>_ssh._tcp</string>
+    <string>_smb._tcp</string>
+    <string>_airplay._tcp</string>
+    <string>_workstation._tcp</string>
+  </array>
+  <key>NSBluetoothAlwaysUsageDescription</key>
+  <string>ExploitBot discovers nearby Bluetooth Low Energy advertisements for authorized asset inventory without connecting to devices.</string>
+  <key>NSBluetoothPeripheralUsageDescription</key>
+  <string>ExploitBot discovers nearby Bluetooth Low Energy advertisements for authorized asset inventory without connecting to devices.</string>
+  <key>NSLocationUsageDescription</key>
+  <string>ExploitBot uses location permission only because macOS requires it to show nearby Wi-Fi network metadata during authorized discovery.</string>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>ExploitBot uses location permission only because macOS requires it to show nearby Wi-Fi network metadata during authorized discovery.</string>
 </dict>
 </plist>
 PLIST

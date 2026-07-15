@@ -15,6 +15,7 @@ APP_MACOS="$APP_CONTENTS/MacOS"
 APP_RESOURCES="$APP_CONTENTS/Resources"
 APP_BINARY="$APP_MACOS/$APP_NAME"
 INFO_PLIST="$APP_CONTENTS/Info.plist"
+ENTITLEMENTS="$PACKAGE_DIR/ExploitBot.entitlements"
 ENGINE_LAUNCH="$ROOT_DIR/ExploitBotEngine/launch.py"
 ENGINE_PID_FILE="$HOME/.exploitbot/engine.pid"
 APP_PROOF_LOCK_DIR="$ROOT_DIR/.proof-locks"
@@ -157,6 +158,26 @@ build_dist_app() {
   <string>NSApplication</string>
   <key>NSHighResolutionCapable</key>
   <true/>
+  <key>NSLocalNetworkUsageDescription</key>
+  <string>ExploitBot discovers authorized devices and services on your local network for engagement inventory.</string>
+  <key>NSBonjourServices</key>
+  <array>
+    <string>_services._dns-sd._udp</string>
+    <string>_http._tcp</string>
+    <string>_https._tcp</string>
+    <string>_ssh._tcp</string>
+    <string>_smb._tcp</string>
+    <string>_airplay._tcp</string>
+    <string>_workstation._tcp</string>
+  </array>
+  <key>NSBluetoothAlwaysUsageDescription</key>
+  <string>ExploitBot discovers nearby Bluetooth Low Energy advertisements for authorized asset inventory without connecting to devices.</string>
+  <key>NSBluetoothPeripheralUsageDescription</key>
+  <string>ExploitBot discovers nearby Bluetooth Low Energy advertisements for authorized asset inventory without connecting to devices.</string>
+  <key>NSLocationUsageDescription</key>
+  <string>ExploitBot uses location permission only because macOS requires it to show nearby Wi-Fi network metadata during authorized discovery.</string>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>ExploitBot uses location permission only because macOS requires it to show nearby Wi-Fi network metadata during authorized discovery.</string>
 </dict>
 </plist>
 PLIST
@@ -173,6 +194,10 @@ PLIST
   # Force Finder to re-read the bundle so icon caches don't hold onto stale
   # blank-icon state after the plist change.
   /usr/bin/touch "$APP_BUNDLE" 2>/dev/null || true
+
+  # Apply the same native-discovery entitlements used by release packaging so
+  # local builds exercise Bluetooth/location permission behavior truthfully.
+  /usr/bin/codesign --force --sign - --entitlements "$ENTITLEMENTS" "$APP_BUNDLE"
 }
 
 run_selected_mode() {

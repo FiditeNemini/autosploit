@@ -16,8 +16,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/jjang-ai/exploitbot/releases/download/v0.1.0-beta/ExploitBot-beta.dmg">
-    <img src="https://img.shields.io/badge/Download-DMG--beta-blue?style=for-the-badge&logo=apple" alt="Download DMG">
+  <a href="https://github.com/jjang-ai/exploitbot/releases/download/v1.5.2/ExploitBot.dmg">
+    <img src="https://img.shields.io/badge/Download-ExploitBot.dmg-blue?style=for-the-badge&logo=apple" alt="Download ExploitBot DMG">
   </a>
 </p>
 
@@ -50,7 +50,7 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 - **Copilot** — AI suggests tools, you approve. Each action explained with risk level.
 - **Manual** — You drive, AI advises. Full tool controls with chat-based guidance.
 
-**42 integrated tool schemas** — from recon and web to exploit, OSINT, report, and supply-chain workflows. Callback tools (`search_cve`, `lookup_cve`, `search_context`) and `run_shell` are part of the same tool surface so you can mix operator-invoked and context tools per tab.
+**50 registered capabilities, capped at 8 per model turn** — intent-ranked packs cover recon, web, network, credentials, exploit, post-exploit, OSINT, reporting, and supply-chain workflows without stuffing the full catalogue into every prompt. Built-in discovery reports availability, risk, privilege, expected duration, noise, and evidence types before execution.
 
 **Stash** — Cross-op artifact sharing. Drop credentials, hosts, payloads from any engagement, pull them into any other.
 
@@ -64,25 +64,14 @@ exploitbot runs local models on Apple Silicon via [MLX](https://github.com/ml-ex
 
 **Live Tool Telemetry** — Tool execution status updates are emitted per button/tab (queued, running, done, error), written to logs, and tracked in chat/panel history with CVE and stash workflow visibility.
 
-## Beta Release Status (June 3, 2026)
+## Current Release
 
-The current beta DMG is published as a GitHub prerelease:
+- Release: [ExploitBot v1.5.2](https://github.com/jjang-ai/exploitbot/releases/tag/v1.5.2)
+- Download: [ExploitBot.dmg](https://github.com/jjang-ai/exploitbot/releases/download/v1.5.2/ExploitBot.dmg)
+- Distribution: Developer ID signed, hardened runtime, Apple notarized, and stapled
+- Manifest: the release includes `release-manifest.json` with source version and artifact SHA-256 values
 
-- Release: [ExploitBot 0.1.0 Beta](https://github.com/jjang-ai/exploitbot/releases/tag/v0.1.0-beta)
-- Download: [ExploitBot-beta.dmg](https://github.com/jjang-ai/exploitbot/releases/download/v0.1.0-beta/ExploitBot-beta.dmg)
-- DMG SHA256: `647bfa9e662c21e37b0cb79473fcf415a6ce058c15097c321dfa23440660175e`
-- Signing: Developer ID Application, hardened runtime
-- Notarization: app and DMG submitted, stapled, and validated
-
-Latest local beta package sanity build, not yet uploaded to the GitHub release:
-
-- Built: June 3, 2026
-- Command: `./script/package_release.sh --skip-notarize`
-- Local DMG: `release/ExploitBot-beta.dmg`
-- Local DMG SHA256: `9e0106cd6c315ba342f0eb7e6d8c13838217ba7295f759859bbb57f485e00575`
-- Current local status as of July 4, 2026: app and DMG signatures verify locally after refreshing `release/` with `./script/package_release.sh --skip-notarize`. `/qa/release-readiness` reports `appCodeSignatureValid=true`, `dmgCodeSignatureValid=true`, and `signatureParity=true`; notarization still requires `EXPLOITBOT_NOTARY_PROFILE` or local notary environment variables before replacing the published release asset.
-
-### Done in the current beta lane
+### Current architecture and verification surfaces
 
 - **Autonomous agent loop**: deployed agents run in autopilot mode, inherit model/settings state, expose live tool status, and can request the full registered tool schema set instead of only the active tab subset.
 - **Broad tool surface**: the in-app model tool catalogue covers recon, web, network, credentials, exploit, post-exploit, OSINT, supply-chain, CVE, context, and shell execution.
@@ -162,7 +151,7 @@ Latest local beta package sanity build, not yet uploaded to the GitHub release:
 
 ### Download
 
-Download the beta DMG from [Releases](https://github.com/jjang-ai/exploitbot/releases/tag/v0.1.0-beta). Release builds should be signed, notarized, stapled, and verified before publishing.
+Download the current DMG from [Releases](https://github.com/jjang-ai/exploitbot/releases/tag/v1.5.2). Release artifacts are Developer ID signed, notarized, stapled, and validated before publishing.
 
 Requires **macOS 14+** and **Apple Silicon** (M1/M2/M3/M4).
 
@@ -175,8 +164,8 @@ cd exploitbot
 # Build and run local verification app
 ./script/build_and_run.sh --verify
 
-# Package unsigned DMG for beta distribution
-./script/package_release.sh --skip-notarize
+# Package a local unsigned/not-submitted DMG
+EXPLOITBOT_RELEASE_VERSION=1.5.2 ./script/package_release.sh --skip-notarize
 
 # Notarized DMG using a keychain profile
 EXPLOITBOT_NOTARY_PROFILE=<profile> ./script/package_release.sh --notarize
@@ -226,7 +215,7 @@ The command examples below also default to this model.
 <a name="tools"></a>
 ## Tools
 
-42 tool definitions across 8 operational areas:
+50 registered tool and callback definitions across the operational areas below; ordinary model turns receive at most 8 intent-ranked schemas:
 
 | Category | Tools |
 |----------|-------|
@@ -258,7 +247,7 @@ Lightweight tools are bundled in the app. Heavy tools are installed on first use
 - [Design Document](docs/plans/2026-03-23-exploitbot-design.md) — Product and UX design
 - [Technical Specification](docs/plans/2026-03-23-technical-spec.md) — 29 technical decisions with rationale
 - [Feature Matrix](docs/plans/2026-03-23-exhaustive-feature-matrix.md) — 1,307 checkable items for QA
-- [Tool Definitions](ExploitBot/Sources/ExploitBot/Services/ToolDefinitions.swift) — 42 tool schemas in-app
+- [Tool Definitions](ExploitBot/Sources/ExploitBot/Services/ToolDefinitions.swift) — 50 registered schemas, capped at 8 per ordinary model turn
 - [Tool Registry](ExploitBotEngine/tools/registry.json) — external CLI mappings for supported binaries (39 entries)
 - [System Prompts](ExploitBotEngine/prompts/) — Base + per-tab LLM instruction templates
 - [Beta Release and Website Ops](docs/beta-release-and-website-ops.md) — safe release, notarization, verification, and website update checklist

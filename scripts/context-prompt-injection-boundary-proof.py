@@ -99,7 +99,7 @@ def run() -> None:
             raise AssertionError(f"context prompt-injection context cap mismatch: {payload}")
         if not 1 <= payload.get("currentInjectedContextLimit", 0) <= 4:
             raise AssertionError(f"context prompt-injection current context limit not bounded: {payload}")
-        if payload.get("toolSchemaCap") != 12:
+        if payload.get("toolSchemaCap") != 8:
             raise AssertionError(f"context prompt-injection tool schema cap mismatch: {payload}")
         if payload.get("toolSchemaPolicy") != "prompt-tab-ranked-installed-cap":
             raise AssertionError(f"context prompt-injection tool schema policy mismatch: {payload}")

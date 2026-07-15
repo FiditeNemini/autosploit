@@ -8,5 +8,5 @@
   <rect x="100" width="4" height="28" fill="#dc2626"/>
 
   <text x="50" y="18" text-anchor="middle" font-family="SF Mono, Menlo, monospace" font-size="12" font-weight="600" fill="#d4d4d8">exploitbot</text>
-  <text x="150" y="18" text-anchor="middle" font-family="SF Mono, Menlo, monospace" font-size="12" font-weight="600" fill="#fafafa">v1.0.0</text>
+  <text x="150" y="18" text-anchor="middle" font-family="SF Mono, Menlo, monospace" font-size="12" font-weight="600" fill="#fafafa">v1.5.2</text>
 </svg>
